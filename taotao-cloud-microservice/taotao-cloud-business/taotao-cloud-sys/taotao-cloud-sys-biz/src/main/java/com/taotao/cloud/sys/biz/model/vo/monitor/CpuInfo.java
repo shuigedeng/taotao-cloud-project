@@ -1,6 +1,8 @@
 package com.taotao.cloud.sys.biz.model.vo.monitor;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 import org.dromara.hutool.core.math.NumberUtil;
 
 import java.math.BigDecimal;

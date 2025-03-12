@@ -18,6 +18,8 @@ package com.taotao.cloud.sys.biz.model.vo.setting;
 
 import java.io.Serializable;
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 快递设置 */
 @Data

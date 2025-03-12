@@ -18,6 +18,7 @@ package com.taotao.cloud.workflow.biz.common.model.engine.flowengine;
 
 import com.taotao.boot.common.model.PageQuery;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)

@@ -40,6 +40,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 数据库基础模型表 */
 @Data

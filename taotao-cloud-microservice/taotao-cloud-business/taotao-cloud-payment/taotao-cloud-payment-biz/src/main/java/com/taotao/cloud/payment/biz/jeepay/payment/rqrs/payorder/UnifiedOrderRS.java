@@ -20,6 +20,7 @@ import com.jeequan.jeepay.core.constants.CS;
 import com.jeequan.jeepay.pay.rqrs.AbstractRS;
 import com.jeequan.jeepay.pay.rqrs.msg.ChannelRetMsg;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /*
 * 创建订单(统一订单) 响应参数

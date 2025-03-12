@@ -26,6 +26,7 @@ import com.github.niefy.common.utils.Json;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 
 /**

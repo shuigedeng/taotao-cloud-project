@@ -23,6 +23,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.boot.data.mybatis.base.entity.MpSuperEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 
 /**

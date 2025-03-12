@@ -17,6 +17,7 @@
 package com.taotao.cloud.workflow.biz.common.model.form.batchtable;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 行文呈批表

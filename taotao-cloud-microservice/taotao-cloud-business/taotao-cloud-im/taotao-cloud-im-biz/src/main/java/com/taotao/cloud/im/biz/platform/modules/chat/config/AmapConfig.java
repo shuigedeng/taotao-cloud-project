@@ -17,6 +17,8 @@
 package com.taotao.cloud.im.biz.platform.modules.chat.config;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

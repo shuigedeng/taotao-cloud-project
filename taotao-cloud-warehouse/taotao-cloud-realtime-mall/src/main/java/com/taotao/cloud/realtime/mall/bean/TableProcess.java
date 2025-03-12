@@ -1,6 +1,7 @@
 package com.taotao.cloud.realtime.mall.bean;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  *

@@ -18,6 +18,7 @@ package com.taotao.cloud.workflow.biz.common.model.form.outboundorder;
 
 import java.math.BigDecimal;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 出库单 */
 @Data

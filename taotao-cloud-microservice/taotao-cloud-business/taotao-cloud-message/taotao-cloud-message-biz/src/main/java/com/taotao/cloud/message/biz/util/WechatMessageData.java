@@ -18,6 +18,7 @@ package com.taotao.cloud.message.biz.util; // package com.taotao.cloud.message.b
 //
 // import org.dromara.hutooljson.JSONUtil;
 // import lombok.Data;
+import lombok.experimental.Accessors;
 //
 // import java.util.HashMap;
 // import java.util.LinkedHashMap;

@@ -17,6 +17,7 @@
 package com.taotao.cloud.workflow.biz.common.model.form.outgoingapply;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 外出申请单 */
 @Data

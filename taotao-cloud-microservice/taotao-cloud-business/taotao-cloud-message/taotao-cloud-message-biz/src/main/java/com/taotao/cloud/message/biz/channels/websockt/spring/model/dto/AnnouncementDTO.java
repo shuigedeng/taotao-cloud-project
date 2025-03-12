@@ -3,6 +3,7 @@ package com.taotao.cloud.message.biz.channels.websockt.spring.model.dto;
 import com.hccake.ballcat.notify.enums.NotifyChannelEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

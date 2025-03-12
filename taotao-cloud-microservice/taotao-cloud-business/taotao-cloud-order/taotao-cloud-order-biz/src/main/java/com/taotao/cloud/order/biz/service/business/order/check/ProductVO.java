@@ -19,6 +19,7 @@ package com.taotao.cloud.order.biz.service.business.order.check;
 import java.math.BigDecimal;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 商品对象 */
 @Data

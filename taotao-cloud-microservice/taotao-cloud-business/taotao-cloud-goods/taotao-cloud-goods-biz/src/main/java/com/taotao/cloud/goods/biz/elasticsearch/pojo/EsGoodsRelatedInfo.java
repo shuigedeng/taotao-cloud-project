@@ -18,6 +18,7 @@ package com.taotao.cloud.goods.biz.elasticsearch.pojo;
 
 import java.util.List;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 搜索相关商品品牌名称，分类名称及属性

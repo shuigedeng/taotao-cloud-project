@@ -25,6 +25,7 @@ import com.platform.modules.chat.enums.ApplyTypeEnum;
 import java.util.Date;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 好友申请表实体类 q3z3 */
 @Data

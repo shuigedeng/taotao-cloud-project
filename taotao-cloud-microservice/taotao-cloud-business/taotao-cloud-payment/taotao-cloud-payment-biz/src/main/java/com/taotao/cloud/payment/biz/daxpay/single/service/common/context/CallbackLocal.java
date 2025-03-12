@@ -7,6 +7,7 @@ import com.taotao.cloud.payment.biz.daxpay.core.enums.TradeTypeEnum;
 import com.taotao.cloud.payment.biz.daxpay.core.enums.TransferStatusEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

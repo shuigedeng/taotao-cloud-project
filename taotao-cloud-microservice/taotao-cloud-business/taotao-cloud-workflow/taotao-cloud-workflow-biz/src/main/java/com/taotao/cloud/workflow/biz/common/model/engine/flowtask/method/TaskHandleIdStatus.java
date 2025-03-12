@@ -21,6 +21,7 @@ import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.shuntjson.no
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskNodeEntity;
 import java.util.List;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
 public class TaskHandleIdStatus {

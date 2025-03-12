@@ -17,6 +17,7 @@
 package com.taotao.cloud.workflow.biz.common.util;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** Minio */
 @Data

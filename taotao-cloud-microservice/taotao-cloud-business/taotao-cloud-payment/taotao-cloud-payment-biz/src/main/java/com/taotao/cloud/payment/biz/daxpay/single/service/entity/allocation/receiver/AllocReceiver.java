@@ -9,6 +9,7 @@ import com.taotao.cloud.payment.biz.daxpay.service.common.entity.MchAppBaseEntit
 import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import com.taotao.cloud.payment.biz.daxpay.service.convert.allocation.AllocReceiverConvert;

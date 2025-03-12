@@ -19,6 +19,7 @@ package com.taotao.cloud.payment.biz.pay.dto;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * @program: XHuiCloud

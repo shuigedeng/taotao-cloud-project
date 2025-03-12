@@ -18,6 +18,8 @@ package com.taotao.cloud.sys.api.model.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 定时任务 */
 @Data

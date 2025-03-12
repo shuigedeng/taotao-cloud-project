@@ -2,6 +2,7 @@ package com.taotao.cloud.iot.biz.communication.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * tcp通讯数据包

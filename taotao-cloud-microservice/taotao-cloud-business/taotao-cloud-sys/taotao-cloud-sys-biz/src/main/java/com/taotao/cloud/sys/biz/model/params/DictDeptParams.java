@@ -18,6 +18,8 @@ package com.taotao.cloud.sys.biz.model.params;
 
 import java.util.List;
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 @Data
 public class DictDeptParams {

@@ -17,6 +17,7 @@ package com.taotao.cloud.payment.biz.jeepay.payment.rqrs.msg;
 
 import com.taotao.cloud.payment.biz.jeepay.pay.rqrs.msg.ChannelRetMsg;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Map;

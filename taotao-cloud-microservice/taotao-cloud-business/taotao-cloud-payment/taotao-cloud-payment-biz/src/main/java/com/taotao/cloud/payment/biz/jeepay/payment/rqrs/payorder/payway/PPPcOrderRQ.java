@@ -3,6 +3,7 @@ package com.taotao.cloud.payment.biz.jeepay.payment.rqrs.payorder.payway;
 import com.jeequan.jeepay.core.constants.CS;
 import com.jeequan.jeepay.pay.rqrs.payorder.CommonPayDataRQ;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
 

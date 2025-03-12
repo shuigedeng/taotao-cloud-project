@@ -18,6 +18,7 @@ package com.taotao.cloud.workflow.biz.common.model.form.incomerecognition;
 
 import java.math.BigDecimal;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 收入确认分析表 */
 @Data

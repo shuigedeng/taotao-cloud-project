@@ -19,6 +19,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.jeequan.jeepay.pay.rqrs.AbstractRS;
 import com.jeequan.jeepay.pay.rqrs.msg.ChannelRetMsg;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /*
  * 关闭订单 响应参数

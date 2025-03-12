@@ -9,6 +9,7 @@ import com.taotao.cloud.payment.biz.daxpay.core.enums.ChannelEnum;
 import com.taotao.cloud.payment.biz.daxpay.service.entity.config.ChannelConfig;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 

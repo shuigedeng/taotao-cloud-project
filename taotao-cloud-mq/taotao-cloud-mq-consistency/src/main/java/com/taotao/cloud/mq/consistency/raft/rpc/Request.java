@@ -22,6 +22,7 @@ import com.taotao.cloud.mq.consistency.raft.entity.RvoteParam;
 import java.io.Serializable;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * @author shuigedeng

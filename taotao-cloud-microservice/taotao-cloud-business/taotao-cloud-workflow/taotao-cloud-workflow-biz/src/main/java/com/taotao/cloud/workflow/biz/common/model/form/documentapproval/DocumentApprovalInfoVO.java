@@ -17,6 +17,7 @@
 package com.taotao.cloud.workflow.biz.common.model.form.documentapproval;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 文件签批意见表 */
 @Data

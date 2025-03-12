@@ -17,6 +17,7 @@
 package com.taotao.cloud.workflow.biz.common.model.form.batchpack;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 批包装指令 */
 @Data

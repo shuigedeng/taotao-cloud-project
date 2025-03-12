@@ -21,6 +21,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
 import java.util.Map;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 流程任务

@@ -18,6 +18,7 @@ package com.taotao.cloud.wechat.biz.weixin.entity;
 
 import java.io.Serializable;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
 public class ThirdSession implements Serializable {

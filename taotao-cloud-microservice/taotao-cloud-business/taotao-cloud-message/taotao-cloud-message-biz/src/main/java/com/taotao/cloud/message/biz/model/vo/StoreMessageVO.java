@@ -18,6 +18,7 @@ package com.taotao.cloud.message.biz.model.vo;
 
 import com.taotao.cloud.message.api.enums.MessageStatusEnum;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 店铺消息表 */
 @Data

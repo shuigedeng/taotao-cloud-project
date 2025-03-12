@@ -21,6 +21,7 @@ import com.taotao.cloud.workflow.biz.common.database.sql.SqlBase;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** MySQL SQL语句模板 */
 @Data

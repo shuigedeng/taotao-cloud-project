@@ -19,6 +19,7 @@ package com.taotao.cloud.stock.api.model.dto;
 import java.io.Serializable;
 import java.util.List;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 权限DTO

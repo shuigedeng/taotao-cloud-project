@@ -1,6 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.sdk.model.trade.pay;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 发起支付后响应对象

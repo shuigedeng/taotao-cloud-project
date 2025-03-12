@@ -18,6 +18,7 @@ package com.taotao.cloud.sys.biz.model.vo.setting;
 
 import java.time.LocalDateTime;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 /** 配置表 */
 @Data

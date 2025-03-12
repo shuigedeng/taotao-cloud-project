@@ -19,6 +19,7 @@ import cn.hutool.core.util.URLUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.jeequan.jeepay.core.utils.JeepayKit;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 

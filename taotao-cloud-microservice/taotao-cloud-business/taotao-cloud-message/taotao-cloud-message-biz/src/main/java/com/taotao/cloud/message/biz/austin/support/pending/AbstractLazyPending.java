@@ -5,6 +5,7 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.Lists;
 import com.taotao.cloud.message.biz.austin.support.config.SupportThreadPoolConfig;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.PostConstruct;

@@ -19,6 +19,7 @@ package com.taotao.cloud.workflow.biz.flowable.bpm.framework.bpm.core.event;
 import com.taotao.cloud.flowable.biz.bpm.dal.dataobject.task.BpmProcessInstanceExtDO;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.context.ApplicationEvent;
 
 /**

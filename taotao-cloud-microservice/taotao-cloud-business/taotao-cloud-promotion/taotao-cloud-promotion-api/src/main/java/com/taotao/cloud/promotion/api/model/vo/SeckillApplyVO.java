@@ -24,6 +24,7 @@ import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 
 /** 秒杀活动申请视图对象 */

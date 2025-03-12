@@ -20,6 +20,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Date;
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 平台pv统计 */
 @Data

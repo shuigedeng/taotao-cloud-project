@@ -25,6 +25,7 @@ import cn.bootx.starter.wecom.param.robot.WecomRobotConfigParam;
 import org.dromara.hutoolcore.util.StrUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 

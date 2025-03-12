@@ -3,6 +3,7 @@ package com.taotao.cloud.message.biz.austin.api.domain;
 import com.taotao.cloud.message.biz.austin.common.domain.SimpleTaskInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 

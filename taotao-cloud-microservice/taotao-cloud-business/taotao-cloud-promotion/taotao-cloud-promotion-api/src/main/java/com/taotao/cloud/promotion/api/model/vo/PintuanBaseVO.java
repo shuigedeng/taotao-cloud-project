@@ -21,6 +21,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 

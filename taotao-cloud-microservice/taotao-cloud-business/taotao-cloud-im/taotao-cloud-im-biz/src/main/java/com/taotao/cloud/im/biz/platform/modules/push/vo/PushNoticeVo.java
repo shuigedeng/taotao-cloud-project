@@ -18,6 +18,7 @@ package com.taotao.cloud.im.biz.platform.modules.push.vo;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 推送对象 */
 @Data

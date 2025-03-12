@@ -19,6 +19,7 @@ package com.taotao.cloud.wechat.biz.weixin.config;
 import com.joolun.weixin.utils.JsonUtils;
 import java.util.List;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**

@@ -19,6 +19,8 @@ package com.taotao.cloud.sys.api.feign.response.setting;
 import java.io.Serial;
 import java.io.Serializable;
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 订单设置 */
 @Data

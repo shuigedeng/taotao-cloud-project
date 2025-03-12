@@ -21,6 +21,7 @@ import com.platform.modules.topic.enums.TopicTypeEnum;
 import java.util.Date;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true) // 链式调用

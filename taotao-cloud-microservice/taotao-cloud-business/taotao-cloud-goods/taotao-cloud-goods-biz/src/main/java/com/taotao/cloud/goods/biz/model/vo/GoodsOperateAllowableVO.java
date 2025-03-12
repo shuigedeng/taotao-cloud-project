@@ -22,6 +22,7 @@ import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 
 /** 商品操作允许的范围 */

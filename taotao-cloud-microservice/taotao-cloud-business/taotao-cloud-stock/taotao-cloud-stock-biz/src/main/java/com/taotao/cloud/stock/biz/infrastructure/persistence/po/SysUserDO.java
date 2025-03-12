@@ -19,6 +19,7 @@ package com.taotao.cloud.stock.biz.infrastructure.persistence.po;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 用户DO

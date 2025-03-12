@@ -1,6 +1,7 @@
 package com.taotao.cloud.netty.itcast.server.session;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.Collections;
 import java.util.Set;

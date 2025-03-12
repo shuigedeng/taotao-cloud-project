@@ -18,6 +18,7 @@ package com.taotao.cloud.wechat.biz.mp.mq.message;
 
 import cn.iocoder.yudao.framework.mq.core.pubsub.AbstractChannelMessage;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 
 /**

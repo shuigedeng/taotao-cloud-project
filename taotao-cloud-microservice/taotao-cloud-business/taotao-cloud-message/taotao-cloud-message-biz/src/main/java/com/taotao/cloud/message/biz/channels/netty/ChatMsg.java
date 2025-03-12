@@ -2,6 +2,7 @@ package com.taotao.cloud.message.biz.channels.netty;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;

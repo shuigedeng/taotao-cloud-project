@@ -17,6 +17,7 @@ package com.taotao.cloud.payment.biz.jeepay.payment.rqrs.payorder.payway;
 
 import com.jeequan.jeepay.pay.rqrs.payorder.CommonPayDataRS;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /*
  * 支付方式： ALI_WAP

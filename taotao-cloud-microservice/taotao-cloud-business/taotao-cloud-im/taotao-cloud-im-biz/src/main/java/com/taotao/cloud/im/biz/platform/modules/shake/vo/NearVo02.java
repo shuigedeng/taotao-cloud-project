@@ -19,6 +19,7 @@ package com.taotao.cloud.im.biz.platform.modules.shake.vo;
 import com.platform.common.enums.GenderEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true) // 链式调用

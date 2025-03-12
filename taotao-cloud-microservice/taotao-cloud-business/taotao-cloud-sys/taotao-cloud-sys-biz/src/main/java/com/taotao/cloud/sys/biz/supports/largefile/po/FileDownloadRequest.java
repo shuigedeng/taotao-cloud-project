@@ -18,6 +18,8 @@ package com.taotao.cloud.sys.biz.supports.largefile.po;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 
 @Data

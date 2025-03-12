@@ -18,6 +18,7 @@ package com.taotao.cloud.workflow.biz.flowable.bpm.controller.admin.definition.v
 
 import java.time.LocalDateTime;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 @ApiModel("管理后台 - 用户组 Response VO")
 @Data

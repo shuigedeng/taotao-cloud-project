@@ -6,6 +6,7 @@ import cn.daxpay.single.sdk.model.trade.refund.RefundOrderModel;
 import cn.daxpay.single.sdk.util.JsonUtil;
 import cn.hutool.core.lang.TypeReference;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 
 /**

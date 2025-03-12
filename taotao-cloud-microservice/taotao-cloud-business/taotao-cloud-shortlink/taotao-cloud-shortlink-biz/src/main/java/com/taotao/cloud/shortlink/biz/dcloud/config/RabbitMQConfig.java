@@ -1,6 +1,7 @@
 package com.taotao.cloud.shortlink.biz.dcloud.config;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.Exchange;
 import org.springframework.amqp.core.Queue;

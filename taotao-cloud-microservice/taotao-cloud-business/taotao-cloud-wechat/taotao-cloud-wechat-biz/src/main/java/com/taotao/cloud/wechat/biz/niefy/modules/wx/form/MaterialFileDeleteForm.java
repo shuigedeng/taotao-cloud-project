@@ -18,6 +18,7 @@ package com.taotao.cloud.wechat.biz.niefy.modules.wx.form;
 
 import com.github.niefy.common.utils.Json;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
 public class MaterialFileDeleteForm {

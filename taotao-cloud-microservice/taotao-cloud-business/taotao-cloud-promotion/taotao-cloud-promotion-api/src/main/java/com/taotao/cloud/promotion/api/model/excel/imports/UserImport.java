@@ -20,6 +20,7 @@ package com.taotao.cloud.promotion.api.model.excel.imports;
 // import java.io.Serial;
 // import java.io.Serializable;
 // import lombok.Data;
+import lombok.experimental.Accessors;
 //
 // @Data
 // public class UserImport implements Serializable {

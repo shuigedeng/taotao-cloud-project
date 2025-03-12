@@ -20,6 +20,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.platform.common.web.domain.BaseEntity;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 版本实体类 q3z3 */
 @Data

@@ -17,6 +17,7 @@
 package com.taotao.cloud.stock.biz.domain.user.model.vo;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.apache.commons.lang3.StringUtils;
 
 /**

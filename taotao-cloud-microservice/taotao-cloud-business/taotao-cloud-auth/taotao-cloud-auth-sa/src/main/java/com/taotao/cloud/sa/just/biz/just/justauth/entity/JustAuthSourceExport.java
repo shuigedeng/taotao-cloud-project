@@ -23,6 +23,7 @@ import com.alibaba.excel.annotation.write.style.HeadRowHeight;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 租户第三方登录信息配置表

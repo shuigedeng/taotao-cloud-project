@@ -18,6 +18,7 @@ package com.taotao.cloud.member.biz.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 
 @Data

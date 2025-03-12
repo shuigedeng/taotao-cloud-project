@@ -19,6 +19,7 @@ package com.taotao.cloud.promotion.api.model.dto;
 import java.io.Serial;
 import java.io.Serializable;
 import lombok.*;
+import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
 
 /** 砍价活动商品DTO */

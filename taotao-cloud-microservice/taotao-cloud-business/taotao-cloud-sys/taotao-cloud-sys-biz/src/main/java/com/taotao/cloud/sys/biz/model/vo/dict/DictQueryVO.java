@@ -21,6 +21,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 /**
  * 字典查询对象

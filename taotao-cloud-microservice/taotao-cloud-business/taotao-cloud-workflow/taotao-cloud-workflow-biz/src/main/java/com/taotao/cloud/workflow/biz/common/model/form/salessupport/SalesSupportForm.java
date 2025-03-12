@@ -21,6 +21,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Map;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 销售支持表 */
 @Data

@@ -16,6 +16,7 @@
 package com.taotao.cloud.payment.biz.jeepay.payment.rqrs.msg;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 

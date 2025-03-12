@@ -3,6 +3,7 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.entity.allocation.rec
 import cn.bootx.platform.common.mybatisplus.function.ToResult;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import com.taotao.cloud.payment.biz.daxpay.service.bo.allocation.AllocGroupReceiverResultBo;

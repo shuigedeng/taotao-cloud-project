@@ -18,6 +18,7 @@ package com.taotao.cloud.wechat.biz.niefy.modules.wx.form;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.Length;
 
 @Data

@@ -2,6 +2,7 @@ package com.taotao.cloud.payment.biz.daxpay.sdk.model.trade.transfer;
 
 import cn.daxpay.single.sdk.code.TransferStatusEnum;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 转账结果

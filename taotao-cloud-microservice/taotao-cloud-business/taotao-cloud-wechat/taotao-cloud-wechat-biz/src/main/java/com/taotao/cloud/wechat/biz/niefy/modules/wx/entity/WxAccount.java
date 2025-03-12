@@ -22,6 +22,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import jakarta.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import me.chanjar.weixin.mp.config.impl.WxMpDefaultConfigImpl;
 
 /**

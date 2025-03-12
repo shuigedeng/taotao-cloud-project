@@ -1,6 +1,7 @@
 package com.taotao.cloud.order.biz.statemachine.cola.audit.pojo.context;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 

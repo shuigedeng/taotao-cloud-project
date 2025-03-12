@@ -2,6 +2,7 @@ package com.taotao.cloud.message.biz.austin.handler.domain.alipay;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.Map;
 import java.util.Set;

@@ -18,6 +18,7 @@ package com.taotao.cloud.workflow.biz.app.model;
 
 import taotao.cloud.workflow.biz.util.treeutil.SumTree;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * @author 

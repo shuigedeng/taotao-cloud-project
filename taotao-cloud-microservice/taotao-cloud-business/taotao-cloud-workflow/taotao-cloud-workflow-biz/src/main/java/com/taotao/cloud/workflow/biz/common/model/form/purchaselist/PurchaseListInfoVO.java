@@ -21,6 +21,7 @@ import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.List;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 日常物品采购清单 */
 @Data

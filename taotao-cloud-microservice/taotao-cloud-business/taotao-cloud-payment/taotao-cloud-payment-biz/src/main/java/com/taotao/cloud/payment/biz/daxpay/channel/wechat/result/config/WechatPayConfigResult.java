@@ -5,6 +5,7 @@ import com.taotao.cloud.payment.biz.daxpay.channel.wechat.code.WechatPayCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 

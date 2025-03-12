@@ -17,6 +17,7 @@ package com.taotao.cloud.payment.biz.jeepay.core.model.params.ysf;
 
 import com.jeequan.jeepay.core.model.params.IsvsubMchParams;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /*
  * 云闪付 配置信息

@@ -3,6 +3,7 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.bo.trade;
 import com.taotao.cloud.payment.biz.daxpay.core.enums.RefundStatusEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 

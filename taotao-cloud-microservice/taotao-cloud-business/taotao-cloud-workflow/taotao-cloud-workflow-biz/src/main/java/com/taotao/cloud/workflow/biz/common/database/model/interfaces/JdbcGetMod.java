@@ -19,6 +19,7 @@ package com.taotao.cloud.workflow.biz.common.database.model.interfaces;
 import com.taotao.cloud.workflow.biz.common.database.model.dto.ModelDTO;
 import java.sql.SQLException;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 数据模板接口 */
 @Data

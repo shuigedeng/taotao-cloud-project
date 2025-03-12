@@ -2,6 +2,7 @@ package com.taotao.cloud.realtime.mall.bean;
 
 import java.math.BigDecimal;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  *

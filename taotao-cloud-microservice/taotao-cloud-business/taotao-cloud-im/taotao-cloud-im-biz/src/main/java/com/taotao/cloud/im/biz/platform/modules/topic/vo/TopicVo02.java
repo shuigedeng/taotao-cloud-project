@@ -19,6 +19,7 @@ package com.taotao.cloud.im.biz.platform.modules.topic.vo;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
 public class TopicVo02 {

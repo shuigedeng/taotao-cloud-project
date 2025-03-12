@@ -20,6 +20,8 @@ import com.platform.modules.sms.enums.SmsTypeEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 用户登录对象 */
 @Data

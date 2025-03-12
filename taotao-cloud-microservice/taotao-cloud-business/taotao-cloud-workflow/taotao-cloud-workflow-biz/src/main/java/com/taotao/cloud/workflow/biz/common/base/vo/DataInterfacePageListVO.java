@@ -17,6 +17,7 @@
 package com.taotao.cloud.workflow.biz.common.base.vo;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 数据接口弹窗选择 */
 @Data

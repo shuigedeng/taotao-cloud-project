@@ -3,6 +3,7 @@ package com.taotao.cloud.payment.biz.daxpay.channel.wechat.param.transfer;
 import com.github.binarywang.wxpay.bean.merchanttransfer.TransferCreateRequest;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 

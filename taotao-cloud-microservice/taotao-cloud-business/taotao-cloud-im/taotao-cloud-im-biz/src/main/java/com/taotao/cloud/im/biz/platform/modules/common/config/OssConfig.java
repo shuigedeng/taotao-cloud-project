@@ -17,6 +17,7 @@
 package com.taotao.cloud.im.biz.platform.modules.common.config;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

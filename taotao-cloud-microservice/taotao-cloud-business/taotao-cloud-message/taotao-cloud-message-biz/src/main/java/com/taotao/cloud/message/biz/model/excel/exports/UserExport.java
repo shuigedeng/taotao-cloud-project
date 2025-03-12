@@ -20,6 +20,7 @@ package com.taotao.cloud.message.biz.model.excel.exports; // package
 // import cn.afterturn.easypoi.excel.annotation.Excel;
 // import java.io.Serializable;
 // import lombok.Data;
+import lombok.experimental.Accessors;
 //
 // @Data
 // public class UserExport implements Serializable {

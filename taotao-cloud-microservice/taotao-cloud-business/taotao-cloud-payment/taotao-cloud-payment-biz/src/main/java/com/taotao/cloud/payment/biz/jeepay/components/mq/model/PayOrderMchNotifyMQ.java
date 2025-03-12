@@ -20,6 +20,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.jeequan.jeepay.components.mq.constant.MQSendTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 
 /**

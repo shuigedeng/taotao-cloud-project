@@ -17,6 +17,8 @@
 package com.taotao.cloud.im.biz.platform.common.shiro;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 import org.apache.shiro.authc.AuthenticationToken;
 
 /** token */

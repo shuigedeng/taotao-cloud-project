@@ -17,6 +17,8 @@
 package com.taotao.cloud.im.biz.platform.modules.chat.vo;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 @Data
 public class FriendVo08 {

@@ -19,6 +19,7 @@ package com.taotao.cloud.workflow.biz.common.model.engine;
 import java.util.List;
 import java.util.Map;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** */
 @Data

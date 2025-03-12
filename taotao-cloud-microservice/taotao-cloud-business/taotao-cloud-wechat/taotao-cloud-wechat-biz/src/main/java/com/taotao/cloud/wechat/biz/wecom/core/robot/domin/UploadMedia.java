@@ -20,6 +20,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.InputStream;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /**
  * 企微文件上传

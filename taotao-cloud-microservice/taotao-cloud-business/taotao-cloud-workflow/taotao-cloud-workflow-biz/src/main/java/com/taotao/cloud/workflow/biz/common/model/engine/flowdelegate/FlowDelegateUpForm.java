@@ -17,6 +17,7 @@
 package com.taotao.cloud.workflow.biz.common.model.engine.flowdelegate;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** */
 @Data

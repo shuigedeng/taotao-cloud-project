@@ -18,6 +18,7 @@ package com.taotao.cloud.workflow.biz.flowable.bpm.service.definition.dto;
 
 import cn.iocoder.yudao.module.bpm.enums.definition.BpmModelFormTypeEnum;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * BPM 流程 MetaInfo Response DTO 主要用于 { Model#setMetaInfo(String)} 的存储

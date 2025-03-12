@@ -19,6 +19,8 @@ package com.taotao.cloud.sys.api.feign.response.setting;
 import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 秒杀活动设置 */
 @Data

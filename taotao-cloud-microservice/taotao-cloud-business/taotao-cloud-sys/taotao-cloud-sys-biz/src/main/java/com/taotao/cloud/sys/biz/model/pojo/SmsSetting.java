@@ -18,6 +18,8 @@ package com.taotao.cloud.sys.biz.model.pojo;
 
 import java.io.Serializable;
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 短信配置 这里在前台不做调整，方便客户直接把服务商的内容配置在我们平台 */
 @Data

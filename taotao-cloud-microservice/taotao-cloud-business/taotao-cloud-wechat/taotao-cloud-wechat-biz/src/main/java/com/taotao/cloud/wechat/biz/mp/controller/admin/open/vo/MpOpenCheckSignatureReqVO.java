@@ -20,6 +20,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @ApiModel("管理后台 - 公众号校验签名 Request VO")
 @Data

@@ -26,6 +26,7 @@ import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 自动回复规则

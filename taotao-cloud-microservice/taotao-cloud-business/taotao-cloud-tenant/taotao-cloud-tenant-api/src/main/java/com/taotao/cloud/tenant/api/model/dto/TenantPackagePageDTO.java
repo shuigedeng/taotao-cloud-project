@@ -20,6 +20,7 @@ import com.taotao.boot.common.model.PageQuery;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 
 /**

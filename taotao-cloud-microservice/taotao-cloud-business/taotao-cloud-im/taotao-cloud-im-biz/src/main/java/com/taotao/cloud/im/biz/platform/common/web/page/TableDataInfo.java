@@ -20,6 +20,8 @@ import java.io.Serializable;
 import java.util.List;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 表格分页数据对象 */
 @Data

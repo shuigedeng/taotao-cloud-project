@@ -19,6 +19,7 @@ package com.taotao.cloud.promotion.api.model.dto;
 import com.taotao.cloud.promotion.api.enums.CouponActivitySendTypeEnum;
 import com.taotao.cloud.promotion.api.enums.CouponActivityTypeEnum;
 import lombok.*;
+import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
 
 /**

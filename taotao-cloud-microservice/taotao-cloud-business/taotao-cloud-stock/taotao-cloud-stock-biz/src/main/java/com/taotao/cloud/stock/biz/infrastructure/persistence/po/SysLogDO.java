@@ -18,6 +18,7 @@ package com.taotao.cloud.stock.biz.infrastructure.persistence.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 日志DO

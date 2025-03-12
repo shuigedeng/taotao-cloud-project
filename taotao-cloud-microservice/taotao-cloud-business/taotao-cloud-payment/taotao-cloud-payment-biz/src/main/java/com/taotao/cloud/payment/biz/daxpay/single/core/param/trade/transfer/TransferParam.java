@@ -3,6 +3,7 @@ package com.taotao.cloud.payment.biz.daxpay.single.core.param.trade.transfer;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import com.taotao.cloud.payment.biz.daxpay.core.enums.ChannelEnum;

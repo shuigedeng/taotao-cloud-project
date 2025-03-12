@@ -18,6 +18,8 @@ package com.taotao.cloud.sys.biz.model.pojo.payment;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 支付宝支付设置 */
 @Data

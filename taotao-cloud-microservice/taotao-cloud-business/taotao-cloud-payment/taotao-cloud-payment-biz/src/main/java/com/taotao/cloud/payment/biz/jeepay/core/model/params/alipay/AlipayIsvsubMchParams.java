@@ -17,6 +17,7 @@ package com.taotao.cloud.payment.biz.jeepay.core.model.params.alipay;
 
 import com.jeequan.jeepay.core.model.params.IsvsubMchParams;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /*
  * 支付宝 特约商户参数定义

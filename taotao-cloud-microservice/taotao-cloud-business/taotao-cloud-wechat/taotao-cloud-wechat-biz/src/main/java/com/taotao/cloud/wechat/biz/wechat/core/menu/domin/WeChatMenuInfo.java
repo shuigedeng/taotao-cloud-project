@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 import me.chanjar.weixin.common.bean.menu.WxMenu;
 import me.chanjar.weixin.common.bean.menu.WxMenuButton;
 import me.chanjar.weixin.mp.bean.menu.WxMpMenu;

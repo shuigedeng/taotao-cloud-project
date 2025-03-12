@@ -17,6 +17,7 @@
 package com.taotao.cloud.stock.biz.interfaces.command;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 密码Command

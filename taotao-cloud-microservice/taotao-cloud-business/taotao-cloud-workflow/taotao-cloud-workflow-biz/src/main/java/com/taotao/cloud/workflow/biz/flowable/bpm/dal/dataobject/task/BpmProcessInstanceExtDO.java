@@ -26,6 +26,7 @@ import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import java.time.LocalDateTime;
 import java.util.Map;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

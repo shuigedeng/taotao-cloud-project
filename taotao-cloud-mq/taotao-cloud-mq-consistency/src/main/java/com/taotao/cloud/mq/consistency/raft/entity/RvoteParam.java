@@ -20,6 +20,7 @@ import com.taotao.cloud.mq.consistency.raft.Consensus;
 import java.io.Serializable;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.Getter;
 import lombok.Setter;
 

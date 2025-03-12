@@ -22,6 +22,7 @@ import com.taotao.boot.cache.redis.delay.config.RedissonQueue;
 import com.taotao.boot.cache.redis.delay.message.*;
 import com.taotao.boot.common.utils.common.JsonUtils;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.handler.annotation.Header;

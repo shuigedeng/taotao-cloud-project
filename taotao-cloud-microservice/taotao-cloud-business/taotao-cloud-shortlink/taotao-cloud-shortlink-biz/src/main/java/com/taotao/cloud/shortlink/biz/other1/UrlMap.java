@@ -3,6 +3,7 @@ package com.taotao.cloud.shortlink.biz.other1;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 

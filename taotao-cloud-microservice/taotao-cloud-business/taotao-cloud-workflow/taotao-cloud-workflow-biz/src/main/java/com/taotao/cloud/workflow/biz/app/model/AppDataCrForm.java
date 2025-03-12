@@ -19,6 +19,7 @@ package com.taotao.cloud.workflow.biz.app.model;
 import io.swagger.annotations.ApiModelProperty;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * app常用数据

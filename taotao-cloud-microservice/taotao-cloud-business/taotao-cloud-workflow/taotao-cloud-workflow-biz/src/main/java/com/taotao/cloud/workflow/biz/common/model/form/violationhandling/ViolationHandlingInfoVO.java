@@ -18,6 +18,7 @@ package com.taotao.cloud.workflow.biz.common.model.form.violationhandling;
 
 import java.math.BigDecimal;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 违章处理申请表 */
 @Data

@@ -21,6 +21,7 @@ import io.swagger.annotations.ApiModelProperty;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @ApiModel("管理后台 - 流程任务的更新负责人的 Request VO")
 @Data

@@ -18,6 +18,8 @@ package com.taotao.cloud.sys.biz.model.vo.setting.payment.dto;
 
 import java.util.List;
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 支持的支付方式属性 */
 @Data

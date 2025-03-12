@@ -18,6 +18,7 @@ package com.taotao.cloud.wechat.biz.niefy.modules.sys.form;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 登录表单

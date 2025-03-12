@@ -2,6 +2,8 @@ package com.taotao.cloud.sys.biz.model.vo.monitor;
 
 import com.taotao.boot.common.constant.CommonConstant;
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 import org.dromara.hutool.core.math.NumberUtil;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.CentralProcessor.TickType;

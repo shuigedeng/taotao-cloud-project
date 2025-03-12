@@ -17,6 +17,7 @@
 package com.taotao.cloud.shorlink.api.model.dto;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import java.sql.Timestamp;
 import java.util.List;

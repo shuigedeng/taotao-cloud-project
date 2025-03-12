@@ -3,6 +3,7 @@ package com.taotao.cloud.payment.biz.daxpay.single.core.result.trade.pay;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /**
  * 统一支付响应参数

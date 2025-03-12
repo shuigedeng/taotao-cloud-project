@@ -4,6 +4,7 @@ import com.taotao.cloud.message.biz.austin.common.constant.OfficialAccountParamC
 import com.taotao.cloud.message.biz.austin.common.dto.account.WeChatOfficialAccount;
 import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.mp.api.WxMpMessageHandler;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;

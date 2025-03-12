@@ -18,6 +18,7 @@ package com.taotao.cloud.workflow.biz.flowable.flowable.domain.dto;
 
 import java.io.Serializable;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * @author Tony

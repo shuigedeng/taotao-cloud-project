@@ -18,6 +18,7 @@ package com.taotao.cloud.payment.biz.jeepay.payment.rqrs.payorder;
 import com.jeequan.jeepay.core.entity.PayOrder;
 import com.jeequan.jeepay.pay.rqrs.AbstractRS;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.beans.BeanUtils;
 
 /*

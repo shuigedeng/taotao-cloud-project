@@ -5,6 +5,7 @@ import cn.daxpay.single.sdk.code.PayAllocStatusEnum;
 import cn.daxpay.single.sdk.code.PayRefundStatusEnum;
 import cn.daxpay.single.sdk.code.PayStatusEnum;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 

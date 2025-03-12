@@ -25,6 +25,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Set;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 /**
  * Bpm 任务分配的规则表，用于自定义配置每个任务的负责人、候选人的分配规则。 也就是说，废弃 BPMN 原本的 UserTask 设置的 assignee、candidateUsers

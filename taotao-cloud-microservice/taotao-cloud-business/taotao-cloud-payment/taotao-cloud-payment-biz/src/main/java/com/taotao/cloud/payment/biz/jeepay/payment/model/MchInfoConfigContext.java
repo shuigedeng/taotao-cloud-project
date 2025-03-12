@@ -18,6 +18,7 @@ package com.taotao.cloud.payment.biz.jeepay.payment.model;
 import com.jeequan.jeepay.core.entity.MchApp;
 import com.jeequan.jeepay.core.entity.MchInfo;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

@@ -26,6 +26,7 @@ import jakarta.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** cms文章 */
 @Data

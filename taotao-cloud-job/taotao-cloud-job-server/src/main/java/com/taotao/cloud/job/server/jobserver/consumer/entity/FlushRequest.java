@@ -20,6 +20,7 @@ import com.taotao.cloud.remote.protos.MqCausa;
 import java.util.concurrent.CompletableFuture;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor

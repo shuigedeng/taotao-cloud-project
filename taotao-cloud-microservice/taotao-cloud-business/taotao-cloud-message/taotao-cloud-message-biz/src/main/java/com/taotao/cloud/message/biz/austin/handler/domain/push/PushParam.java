@@ -5,6 +5,7 @@ import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 
 /**

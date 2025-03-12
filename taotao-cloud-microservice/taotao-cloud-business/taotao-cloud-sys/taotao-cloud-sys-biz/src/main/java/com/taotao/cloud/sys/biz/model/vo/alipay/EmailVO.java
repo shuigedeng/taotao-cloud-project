@@ -18,6 +18,7 @@ package com.taotao.cloud.sys.biz.model.vo.alipay;
 
 import java.util.List;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 /**
  * EmailVo

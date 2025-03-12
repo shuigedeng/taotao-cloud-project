@@ -22,6 +22,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 支付参数 */
 @Data

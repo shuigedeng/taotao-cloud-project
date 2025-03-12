@@ -13,6 +13,7 @@ import com.paypal.http.serializer.Json;
 import com.paypal.orders.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;

@@ -17,6 +17,7 @@ package com.taotao.cloud.payment.biz.jeepay.payment.rqrs.refund;
 
 import com.jeequan.jeepay.pay.rqrs.AbstractMchAppRQ;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;

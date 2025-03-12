@@ -24,6 +24,7 @@ import com.platform.modules.topic.enums.TopicReplyTypeEnum;
 import java.util.Date;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 帖子回复表实体类 q3z3 */
 @Data

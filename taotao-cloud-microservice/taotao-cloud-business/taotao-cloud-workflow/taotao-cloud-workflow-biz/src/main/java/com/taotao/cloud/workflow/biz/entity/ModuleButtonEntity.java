@@ -22,6 +22,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
 @TableName("base_modulebutton")

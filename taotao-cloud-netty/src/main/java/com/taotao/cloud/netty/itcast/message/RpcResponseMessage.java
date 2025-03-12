@@ -1,6 +1,7 @@
 package com.taotao.cloud.netty.itcast.message;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.ToString;
 
 /**

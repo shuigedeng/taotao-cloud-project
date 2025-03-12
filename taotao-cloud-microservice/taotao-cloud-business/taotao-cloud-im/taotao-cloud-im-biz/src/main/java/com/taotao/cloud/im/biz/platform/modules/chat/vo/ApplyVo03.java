@@ -21,6 +21,8 @@ import com.platform.modules.chat.enums.ApplySourceEnum;
 import com.platform.modules.chat.enums.ApplyStatusEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true) // 链式调用

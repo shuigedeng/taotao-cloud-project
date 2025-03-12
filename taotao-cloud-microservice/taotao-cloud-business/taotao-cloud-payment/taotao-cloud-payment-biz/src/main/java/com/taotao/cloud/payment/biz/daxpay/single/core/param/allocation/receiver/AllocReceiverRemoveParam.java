@@ -3,6 +3,7 @@ package com.taotao.cloud.payment.biz.daxpay.single.core.param.allocation.receive
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 

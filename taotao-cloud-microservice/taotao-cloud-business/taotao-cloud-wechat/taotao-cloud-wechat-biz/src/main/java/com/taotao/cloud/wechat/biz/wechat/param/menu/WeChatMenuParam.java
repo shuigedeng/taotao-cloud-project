@@ -20,6 +20,7 @@ import cn.bootx.starter.wechat.core.menu.domin.WeChatMenuInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /**
  * 微信自定义菜单

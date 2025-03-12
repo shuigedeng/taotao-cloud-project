@@ -20,6 +20,7 @@ import io.swagger.annotations.ApiModel;
 import jakarta.validation.constraints.NotBlank;
 import java.util.List;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 用户Command

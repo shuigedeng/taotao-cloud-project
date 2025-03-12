@@ -23,6 +23,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import me.chanjar.weixin.common.api.WxConsts;
 
 @ApiModel("管理后台 - 公众号消息 Response VO")

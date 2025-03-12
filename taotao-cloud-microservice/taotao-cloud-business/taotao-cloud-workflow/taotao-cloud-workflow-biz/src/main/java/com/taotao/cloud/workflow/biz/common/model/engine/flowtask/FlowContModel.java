@@ -19,6 +19,7 @@ package com.taotao.cloud.workflow.biz.common.model.engine.flowtask;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 
 @Data

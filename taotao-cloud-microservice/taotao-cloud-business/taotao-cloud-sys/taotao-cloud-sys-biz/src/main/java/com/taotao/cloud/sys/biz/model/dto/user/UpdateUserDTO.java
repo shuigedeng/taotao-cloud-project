@@ -25,6 +25,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 /**
  * 用户更新DTO

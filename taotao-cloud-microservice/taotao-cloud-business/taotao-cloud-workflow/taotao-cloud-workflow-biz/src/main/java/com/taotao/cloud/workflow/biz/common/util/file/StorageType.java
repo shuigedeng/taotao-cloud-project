@@ -17,6 +17,7 @@
 package com.taotao.cloud.workflow.biz.common.util.file;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 文件储存类型常量类 */
 @Data

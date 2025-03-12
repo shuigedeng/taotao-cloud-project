@@ -20,6 +20,7 @@ import com.taotao.cloud.promotion.api.model.vo.KanjiaActivityBaseVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
 

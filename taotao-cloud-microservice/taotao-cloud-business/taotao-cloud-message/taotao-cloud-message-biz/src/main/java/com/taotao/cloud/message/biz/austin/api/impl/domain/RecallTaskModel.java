@@ -5,6 +5,7 @@ import com.taotao.cloud.message.biz.austin.common.pipeline.ProcessModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 
 import java.util.List;

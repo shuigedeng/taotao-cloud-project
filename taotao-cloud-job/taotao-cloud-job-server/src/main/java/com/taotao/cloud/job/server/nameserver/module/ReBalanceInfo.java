@@ -18,6 +18,7 @@ package com.taotao.cloud.job.server.nameserver.module;
 
 import java.util.List;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
 public class ReBalanceInfo {

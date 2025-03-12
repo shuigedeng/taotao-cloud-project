@@ -17,6 +17,7 @@ package com.taotao.cloud.payment.biz.jeepay.core.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /*
 * 返回原始数据

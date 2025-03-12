@@ -19,6 +19,7 @@ package com.taotao.cloud.promotion.biz.model.bo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;

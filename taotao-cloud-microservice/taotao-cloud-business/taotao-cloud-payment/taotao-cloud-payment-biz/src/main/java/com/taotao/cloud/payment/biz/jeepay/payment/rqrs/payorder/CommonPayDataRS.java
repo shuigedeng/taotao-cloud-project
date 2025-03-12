@@ -18,6 +18,7 @@ package com.taotao.cloud.payment.biz.jeepay.payment.rqrs.payorder;
 import com.jeequan.jeepay.core.constants.CS;
 import com.taotao.cloud.payment.biz.jeepay.pay.rqrs.payorder.UnifiedOrderRS;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.apache.commons.lang3.StringUtils;
 
 /*

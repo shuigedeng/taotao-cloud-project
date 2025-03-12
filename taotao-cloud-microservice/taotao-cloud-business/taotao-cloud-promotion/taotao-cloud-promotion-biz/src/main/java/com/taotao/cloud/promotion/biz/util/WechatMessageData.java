@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.promotion.biz.util; // package com.taotao.cloud.message.biz.util;
 // import lombok.Data;
+import lombok.experimental.Accessors;
 //
 // import java.util.HashMap;
 // import java.util.LinkedHashMap;

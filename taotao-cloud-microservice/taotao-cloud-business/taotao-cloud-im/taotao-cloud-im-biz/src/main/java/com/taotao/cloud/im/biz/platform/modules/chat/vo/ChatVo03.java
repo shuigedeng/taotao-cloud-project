@@ -19,6 +19,8 @@ package com.taotao.cloud.im.biz.platform.modules.chat.vo;
 import com.platform.modules.chat.enums.MsgStatusEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true) // 链式调用

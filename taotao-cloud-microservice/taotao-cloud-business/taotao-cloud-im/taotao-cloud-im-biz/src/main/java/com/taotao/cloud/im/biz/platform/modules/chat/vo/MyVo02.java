@@ -19,6 +19,8 @@ package com.taotao.cloud.im.biz.platform.modules.chat.vo;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 @Data
 public class MyVo02 {

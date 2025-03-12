@@ -17,6 +17,7 @@ package com.taotao.cloud.payment.biz.jeepay.payment.rqrs;
 
 import com.taotao.cloud.payment.biz.jeepay.pay.rqrs.AbstractRQ;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
 

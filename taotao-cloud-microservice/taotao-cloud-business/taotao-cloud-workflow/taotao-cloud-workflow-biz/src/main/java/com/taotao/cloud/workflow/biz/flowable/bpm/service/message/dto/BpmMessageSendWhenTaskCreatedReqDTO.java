@@ -19,6 +19,7 @@ package com.taotao.cloud.workflow.biz.flowable.bpm.service.message.dto;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** BPM 发送任务被分配 Request DTO */
 @Data

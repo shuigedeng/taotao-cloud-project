@@ -22,6 +22,7 @@ import com.platform.common.web.domain.BaseEntity;
 import java.util.Date;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 群组实体类 q3z3 */
 @Data

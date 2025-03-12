@@ -1,6 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.sdk.model.reconcile;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 对账单文件下载链接

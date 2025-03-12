@@ -6,6 +6,7 @@ import cn.daxpay.single.sdk.code.PayRefundStatusEnum;
 import cn.daxpay.single.sdk.code.PayStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

@@ -19,6 +19,8 @@ package com.taotao.cloud.im.biz.platform.modules.chat.vo;
 import com.platform.common.enums.YesOrNoEnum;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 @Data
 public class GroupVo05 {

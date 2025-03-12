@@ -18,6 +18,7 @@ package com.taotao.cloud.workflow.biz.app.model;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * app应用

@@ -21,6 +21,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /**
  * 登录日志

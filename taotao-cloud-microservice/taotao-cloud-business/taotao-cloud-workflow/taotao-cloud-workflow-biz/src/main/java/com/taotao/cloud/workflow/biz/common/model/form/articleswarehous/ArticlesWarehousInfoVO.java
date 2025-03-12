@@ -17,6 +17,7 @@
 package com.taotao.cloud.workflow.biz.common.model.form.articleswarehous;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 用品入库申请表 */
 @Data

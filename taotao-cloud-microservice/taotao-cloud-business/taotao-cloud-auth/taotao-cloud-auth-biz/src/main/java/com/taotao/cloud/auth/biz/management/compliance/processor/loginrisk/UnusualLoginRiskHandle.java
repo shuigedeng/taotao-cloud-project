@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.dromara.hutool.core.map.MapUtil;
 import org.dromara.hutool.json.JSONUtil;
 import org.springframework.stereotype.Component;

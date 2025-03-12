@@ -20,6 +20,7 @@ import com.platform.common.enums.YesOrNoEnum;
 import com.platform.modules.chat.enums.FriendTypeEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 消息发送人 */
 @Data

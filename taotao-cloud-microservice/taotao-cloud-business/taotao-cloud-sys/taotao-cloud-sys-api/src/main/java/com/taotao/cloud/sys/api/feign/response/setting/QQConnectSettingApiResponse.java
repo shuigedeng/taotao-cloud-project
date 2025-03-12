@@ -18,6 +18,8 @@ package com.taotao.cloud.sys.api.feign.response.setting;
 
 import java.util.List;
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** QQ联合登录设置 */
 @Data

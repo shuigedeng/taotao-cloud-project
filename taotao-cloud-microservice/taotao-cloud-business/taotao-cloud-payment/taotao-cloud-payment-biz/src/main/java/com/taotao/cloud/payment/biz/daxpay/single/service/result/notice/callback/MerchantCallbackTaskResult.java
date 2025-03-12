@@ -7,6 +7,7 @@ import com.taotao.cloud.payment.biz.daxpay.core.result.trade.refund.RefundOrderR
 import com.taotao.cloud.payment.biz.daxpay.core.result.trade.transfer.TransferOrderResult;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 

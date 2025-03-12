@@ -21,6 +21,7 @@ import com.taotao.cloud.job.common.module.LifeCycle;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 
 @Builder

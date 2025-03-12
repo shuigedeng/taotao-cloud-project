@@ -26,6 +26,7 @@ import com.joolun.framework.config.typehandler.JsonTypeHandler;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 import org.apache.ibatis.type.JdbcType;
 

@@ -29,6 +29,8 @@ import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import java.util.Map;
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.handler.annotation.Header;

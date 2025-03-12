@@ -3,6 +3,7 @@ package com.taotao.cloud.shortlink.biz.dcloud.vo;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;

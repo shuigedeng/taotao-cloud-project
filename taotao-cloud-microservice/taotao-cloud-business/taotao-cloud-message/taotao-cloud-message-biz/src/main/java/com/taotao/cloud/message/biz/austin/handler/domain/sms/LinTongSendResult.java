@@ -3,6 +3,7 @@ package com.taotao.cloud.message.biz.austin.handler.domain.sms;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 
 import java.util.List;

@@ -2,6 +2,7 @@ package com.taotao.cloud.message.biz.austin.handler.domain.sms;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.Set;
 

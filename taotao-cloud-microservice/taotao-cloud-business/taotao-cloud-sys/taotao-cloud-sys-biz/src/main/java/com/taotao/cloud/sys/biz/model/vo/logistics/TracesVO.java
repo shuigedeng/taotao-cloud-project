@@ -21,6 +21,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 /** 物流信息 */
 @Data

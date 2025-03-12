@@ -19,6 +19,7 @@ package com.taotao.cloud.stock.biz.interfaces.command;
 import io.swagger.annotations.ApiModel;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 权限Command

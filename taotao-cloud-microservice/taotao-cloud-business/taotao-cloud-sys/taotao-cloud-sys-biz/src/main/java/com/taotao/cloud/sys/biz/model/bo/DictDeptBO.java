@@ -17,6 +17,8 @@
 package com.taotao.cloud.sys.biz.model.bo;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 @Data
 public class DictDeptBO {

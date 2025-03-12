@@ -18,6 +18,7 @@ package com.taotao.cloud.goods.biz.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 

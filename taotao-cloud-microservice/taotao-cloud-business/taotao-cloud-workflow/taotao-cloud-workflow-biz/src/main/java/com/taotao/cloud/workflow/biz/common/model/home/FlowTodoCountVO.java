@@ -17,6 +17,7 @@
 package com.taotao.cloud.workflow.biz.common.model.home;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** */
 @Data

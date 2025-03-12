@@ -17,6 +17,7 @@
 package com.taotao.cloud.workflow.api.vo;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
 public class RoleEntity extends PermissionEntityBase {

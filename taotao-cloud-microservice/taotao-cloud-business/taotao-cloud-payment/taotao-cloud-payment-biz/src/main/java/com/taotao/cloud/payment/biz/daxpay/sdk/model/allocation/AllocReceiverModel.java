@@ -5,6 +5,7 @@ import cn.daxpay.single.sdk.code.AllocRelationTypeEnum;
 import cn.daxpay.single.sdk.code.ChannelEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 import java.util.List;
 

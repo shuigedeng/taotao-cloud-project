@@ -3,6 +3,7 @@ package com.taotao.cloud.payment.biz.daxpay.sdk.model.notice;
 import cn.daxpay.single.sdk.code.ChannelEnum;
 import cn.daxpay.single.sdk.code.RefundStatusEnum;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 

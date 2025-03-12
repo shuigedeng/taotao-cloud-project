@@ -22,6 +22,7 @@ import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 

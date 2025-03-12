@@ -3,6 +3,7 @@ package com.taotao.cloud.payment.biz.daxpay.channel.wechat.param.pay;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /**
  * 微信支付参数

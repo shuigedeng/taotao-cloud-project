@@ -2,6 +2,7 @@ package com.taotao.cloud.payment.biz.daxpay.channel.wechat.param.pay;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 

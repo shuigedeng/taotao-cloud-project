@@ -11,6 +11,7 @@ import com.hccake.ballcat.notify.enums.NotifyRecipientFilterTypeEnum;
 import com.hccake.extend.mybatis.plus.alias.TableAlias;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;

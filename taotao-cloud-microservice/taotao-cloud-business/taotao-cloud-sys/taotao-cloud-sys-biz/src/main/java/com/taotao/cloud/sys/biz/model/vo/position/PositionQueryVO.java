@@ -20,6 +20,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 /**
  * 岗位查询对象

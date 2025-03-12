@@ -19,6 +19,7 @@ package com.taotao.cloud.wechat.biz.mp.controller.admin.account.vo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @ApiModel("管理后台 - 公众号账号精简信息 Response VO")
 @Data

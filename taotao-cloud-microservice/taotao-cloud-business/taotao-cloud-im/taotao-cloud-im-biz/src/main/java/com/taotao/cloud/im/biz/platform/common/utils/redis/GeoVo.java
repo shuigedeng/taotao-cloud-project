@@ -17,6 +17,8 @@
 package com.taotao.cloud.im.biz.platform.common.utils.redis;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 @Data
 public class GeoVo {

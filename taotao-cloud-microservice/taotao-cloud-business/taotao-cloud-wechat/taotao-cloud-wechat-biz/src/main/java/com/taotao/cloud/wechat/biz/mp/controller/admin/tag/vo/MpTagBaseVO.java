@@ -19,6 +19,7 @@ package com.taotao.cloud.wechat.biz.mp.controller.admin.tag.vo;
 import io.swagger.annotations.ApiModelProperty;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 公众号标签 Base VO，提供给添加、修改、详细的子 VO 使用 如果子 VO 存在差异的字段，请不要添加到这里，影响 Swagger 文档生成

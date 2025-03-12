@@ -9,6 +9,7 @@ import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
 import com.taotao.cloud.message.biz.austin.handler.config.TaskPipelineConfig;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

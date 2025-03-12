@@ -17,6 +17,7 @@ package com.taotao.cloud.payment.biz.jeepay.payment.rqrs.transfer;
 
 import com.jeequan.jeepay.pay.rqrs.AbstractMchAppRQ;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /*
 * 查询转账单请求参数对象

@@ -1,6 +1,7 @@
 package com.taotao.cloud.job.common.module;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * Class for system metrics.

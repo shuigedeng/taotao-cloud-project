@@ -4,6 +4,7 @@ package com.taotao.cloud.message.biz.austin.web.vo.amis;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 
 import java.util.List;

@@ -25,6 +25,8 @@ import com.platform.modules.push.vo.PushParamVo;
 import java.util.Date;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 用户表实体类 q3z3 */
 @Data

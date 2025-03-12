@@ -19,6 +19,7 @@ package com.taotao.cloud.promotion.api.model.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import lombok.*;
+import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
 
 /** 促销商品数据传输对象 */

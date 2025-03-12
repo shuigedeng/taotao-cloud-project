@@ -22,6 +22,8 @@ import com.platform.modules.chat.enums.ApplySourceEnum;
 import com.platform.modules.chat.enums.FriendTypeEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 好友详情 */
 @Data

@@ -20,6 +20,7 @@ import cn.bootx.common.core.rest.dto.BaseDto;
 import cn.bootx.starter.wechat.core.menu.domin.WeChatMenuInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 

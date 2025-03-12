@@ -22,6 +22,7 @@ package com.taotao.cloud.auth.biz.controller;
 // import com.markix.security.oauth2login.WebAttributes;
 // import lombok.AllArgsConstructor;
 // import lombok.Data;
+import lombok.experimental.Accessors;
 // import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.security.core.context.SecurityContextHolder;
 // import org.springframework.security.oauth2.client.registration.ClientRegistration;

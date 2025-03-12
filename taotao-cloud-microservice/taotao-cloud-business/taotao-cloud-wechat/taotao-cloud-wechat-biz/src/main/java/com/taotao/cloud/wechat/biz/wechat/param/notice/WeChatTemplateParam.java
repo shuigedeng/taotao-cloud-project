@@ -19,6 +19,7 @@ package com.taotao.cloud.wechat.biz.wechat.param.notice;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /**
  * 微信消息模板

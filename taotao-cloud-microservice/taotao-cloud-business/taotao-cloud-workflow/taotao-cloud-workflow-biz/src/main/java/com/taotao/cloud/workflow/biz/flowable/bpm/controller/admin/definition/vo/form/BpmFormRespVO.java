@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

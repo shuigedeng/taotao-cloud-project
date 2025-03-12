@@ -18,6 +18,7 @@ package com.taotao.cloud.order.biz.service.business.order.check;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 处理器配置类 */
 @AllArgsConstructor

@@ -16,6 +16,7 @@
 package com.taotao.cloud.payment.biz.jeepay.core.model.params.alipay;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /*
 * 支付宝， 通用配置信息

@@ -23,6 +23,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.workflow.biz.common.database.util.DataSourceUtil;
 import java.util.Date;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 数据连接 */
 @Data

@@ -22,6 +22,7 @@ import java.io.Serial;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 

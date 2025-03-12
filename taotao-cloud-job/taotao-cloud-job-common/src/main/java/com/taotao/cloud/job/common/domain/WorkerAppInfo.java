@@ -1,6 +1,7 @@
 package com.taotao.cloud.job.common.domain;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;

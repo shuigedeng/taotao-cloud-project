@@ -18,6 +18,7 @@ package com.taotao.cloud.workflow.biz.common.model;
 
 import com.taotao.cloud.workflow.api.common.base.Pagination;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** */
 @Data

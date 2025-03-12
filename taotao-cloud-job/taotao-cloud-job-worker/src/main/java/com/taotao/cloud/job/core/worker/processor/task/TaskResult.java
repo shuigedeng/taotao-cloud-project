@@ -1,6 +1,7 @@
 package com.taotao.cloud.job.core.worker.processor.task;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * Task执行结果

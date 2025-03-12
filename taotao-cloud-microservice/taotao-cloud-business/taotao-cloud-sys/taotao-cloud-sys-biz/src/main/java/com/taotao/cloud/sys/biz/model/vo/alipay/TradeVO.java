@@ -19,6 +19,7 @@ package com.taotao.cloud.sys.biz.model.vo.alipay;
 import java.sql.Date;
 import java.sql.Timestamp;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 /**
  * 交易详情，按需应该存入数据库

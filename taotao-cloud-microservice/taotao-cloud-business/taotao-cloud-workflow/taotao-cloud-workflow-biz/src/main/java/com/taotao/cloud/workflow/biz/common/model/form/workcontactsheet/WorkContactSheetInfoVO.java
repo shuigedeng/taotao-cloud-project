@@ -17,6 +17,7 @@
 package com.taotao.cloud.workflow.biz.common.model.form.workcontactsheet;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 工作联系单 */
 @Data

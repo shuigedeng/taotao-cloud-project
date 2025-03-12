@@ -4,6 +4,7 @@ import com.taotao.cloud.order.biz.statemachine.cola.order.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 
 

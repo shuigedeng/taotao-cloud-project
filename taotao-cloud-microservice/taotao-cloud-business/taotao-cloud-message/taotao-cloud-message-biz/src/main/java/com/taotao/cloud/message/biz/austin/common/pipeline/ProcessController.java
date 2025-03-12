@@ -4,6 +4,7 @@ package com.taotao.cloud.message.biz.austin.common.pipeline;
 import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
 import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.List;
 import java.util.Map;

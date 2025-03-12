@@ -17,6 +17,7 @@
 package com.taotao.cloud.auth.biz.management.compliance.processor.loginrisk;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
 public class RiskRule {

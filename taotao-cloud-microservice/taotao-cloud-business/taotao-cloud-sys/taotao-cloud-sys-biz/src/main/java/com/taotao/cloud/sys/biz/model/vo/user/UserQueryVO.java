@@ -22,6 +22,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 /**
  * 用户查询VO

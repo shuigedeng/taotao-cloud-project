@@ -2,6 +2,7 @@ package com.taotao.cloud.job.common.module;
 
 import com.taotao.cloud.job.common.utils.JsonUtils;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.boot.json.JsonParser;
 
 /**

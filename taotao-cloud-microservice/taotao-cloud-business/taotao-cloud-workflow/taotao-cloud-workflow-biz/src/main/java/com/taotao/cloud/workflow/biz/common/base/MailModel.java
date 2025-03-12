@@ -19,6 +19,7 @@ package com.taotao.cloud.workflow.biz.common.base;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** */
 @Data

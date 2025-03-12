@@ -2,6 +2,7 @@ package com.taotao.cloud.job.common.domain;
 
 import com.taotao.cloud.job.common.module.SystemMetrics;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.List;
 

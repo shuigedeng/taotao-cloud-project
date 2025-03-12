@@ -17,6 +17,7 @@
 package com.taotao.cloud.workflow.biz.common.model.form.archivalborrow;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 档案借阅申请 */
 @Data

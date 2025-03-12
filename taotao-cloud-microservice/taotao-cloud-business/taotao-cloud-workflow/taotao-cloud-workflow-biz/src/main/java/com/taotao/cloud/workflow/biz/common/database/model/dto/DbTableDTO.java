@@ -19,6 +19,7 @@ package com.taotao.cloud.workflow.biz.common.database.model.dto;
 import java.sql.Connection;
 import java.util.List;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 表数据传输对象 */
 @Data

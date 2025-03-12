@@ -18,6 +18,7 @@ package com.taotao.cloud.workflow.biz.common.model.form.procurementmaterial;
 
 import java.math.BigDecimal;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 采购原材料 */
 @Data

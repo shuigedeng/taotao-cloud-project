@@ -4,6 +4,7 @@ import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 

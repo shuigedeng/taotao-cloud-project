@@ -18,6 +18,8 @@ package com.taotao.cloud.sys.biz.model.vo.setting;
 
 import java.io.Serializable;
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 积分签到设置 */
 @Data

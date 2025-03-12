@@ -19,6 +19,7 @@ package com.taotao.cloud.workflow.biz.common.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** */
 @Data

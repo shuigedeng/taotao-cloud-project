@@ -18,6 +18,7 @@ package com.taotao.cloud.workflow.biz.common.model.form.contractapprovalsheet;
 
 import java.math.BigDecimal;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 合同申请单表 */
 @Data

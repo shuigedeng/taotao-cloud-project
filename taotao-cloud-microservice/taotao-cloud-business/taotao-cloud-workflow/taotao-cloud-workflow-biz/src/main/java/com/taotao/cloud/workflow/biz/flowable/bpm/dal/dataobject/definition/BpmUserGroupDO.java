@@ -24,6 +24,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Set;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 /**
  * Bpm 用户组

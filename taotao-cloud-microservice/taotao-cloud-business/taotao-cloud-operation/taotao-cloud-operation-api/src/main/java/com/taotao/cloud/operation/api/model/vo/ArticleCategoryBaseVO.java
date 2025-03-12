@@ -19,6 +19,7 @@ package com.taotao.cloud.operation.api.model.vo;
 import com.taotao.cloud.operation.api.enums.ArticleCategoryEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 

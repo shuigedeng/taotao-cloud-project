@@ -19,6 +19,7 @@ package com.taotao.cloud.im.biz.platform.modules.push.vo;
 import com.platform.common.enums.YesOrNoEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 普通消息 */
 @Data

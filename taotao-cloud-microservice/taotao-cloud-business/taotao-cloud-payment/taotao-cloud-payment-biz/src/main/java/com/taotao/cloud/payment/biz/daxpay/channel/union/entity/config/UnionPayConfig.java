@@ -5,6 +5,7 @@ import cn.bootx.platform.core.annotation.BigField;
 import cn.bootx.platform.core.util.JsonUtil;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 import com.taotao.cloud.payment.biz.daxpay.channel.union.code.UnionPayCode;
 import com.taotao.cloud.payment.biz.daxpay.channel.union.convert.UnionPayConfigConvert;
 import com.taotao.cloud.payment.biz.daxpay.channel.union.result.UnionPayConfigResult;

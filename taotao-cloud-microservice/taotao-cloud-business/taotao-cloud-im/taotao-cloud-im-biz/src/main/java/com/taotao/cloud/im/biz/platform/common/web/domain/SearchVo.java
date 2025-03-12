@@ -17,6 +17,8 @@
 package com.taotao.cloud.im.biz.platform.common.web.domain;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 动态查询器 */
 @Data

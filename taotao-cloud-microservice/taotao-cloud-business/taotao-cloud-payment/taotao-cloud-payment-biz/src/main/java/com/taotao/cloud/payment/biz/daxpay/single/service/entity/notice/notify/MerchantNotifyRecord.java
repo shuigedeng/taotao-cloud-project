@@ -7,6 +7,7 @@ import com.taotao.cloud.payment.biz.daxpay.service.enums.NoticeSendTypeEnum;
 import com.taotao.cloud.payment.biz.daxpay.service.result.notice.notify.MerchantNotifyRecordResult;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 

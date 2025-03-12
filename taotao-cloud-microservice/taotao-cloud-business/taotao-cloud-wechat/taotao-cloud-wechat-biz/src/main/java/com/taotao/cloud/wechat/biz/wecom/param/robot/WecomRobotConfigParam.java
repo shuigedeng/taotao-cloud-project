@@ -19,6 +19,7 @@ package com.taotao.cloud.wechat.biz.wecom.param.robot;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /**
  * 企业微信机器人配置

@@ -19,6 +19,7 @@ package com.taotao.cloud.workflow.biz.flowable.bpm.controller.admin.oa.vo;
 import io.swagger.annotations.ApiModel;
 import jakarta.validation.constraints.AssertTrue;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

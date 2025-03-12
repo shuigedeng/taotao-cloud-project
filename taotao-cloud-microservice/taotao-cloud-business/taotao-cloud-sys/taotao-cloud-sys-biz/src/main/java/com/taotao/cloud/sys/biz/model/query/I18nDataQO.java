@@ -3,6 +3,8 @@ package com.taotao.cloud.sys.biz.model.query;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /**
  * 国际化信息 查询对象

@@ -21,6 +21,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @ApiModel("管理后台 - 公众号粉丝更新 Request VO")
 @Data

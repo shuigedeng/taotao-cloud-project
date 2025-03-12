@@ -18,6 +18,7 @@ package com.taotao.cloud.goods.biz.model.page;
 
 import java.io.Serial;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 
 /**

@@ -17,6 +17,7 @@
 package com.taotao.cloud.workflow.biz.common.model.form.staffovertime;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 员工加班申请表 */
 @Data

@@ -4,6 +4,7 @@ import com.taotao.cloud.payment.biz.daxpay.core.param.PaymentCommonParam;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 

@@ -8,6 +8,7 @@ import com.taotao.cloud.payment.biz.daxpay.service.convert.config.ChannelConfigC
 import com.taotao.cloud.payment.biz.daxpay.service.result.config.ChannelConfigResult;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 

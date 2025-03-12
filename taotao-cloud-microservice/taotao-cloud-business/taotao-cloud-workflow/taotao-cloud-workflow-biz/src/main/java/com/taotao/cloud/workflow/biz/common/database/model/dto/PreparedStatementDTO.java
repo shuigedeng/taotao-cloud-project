@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** SQL参数传输对象 */
 @Data

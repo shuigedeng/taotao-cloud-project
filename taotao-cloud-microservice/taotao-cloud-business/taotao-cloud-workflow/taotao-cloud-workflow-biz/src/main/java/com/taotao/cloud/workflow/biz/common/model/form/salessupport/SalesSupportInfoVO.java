@@ -17,6 +17,7 @@
 package com.taotao.cloud.workflow.biz.common.model.form.salessupport;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 销售支持表 */
 @Data

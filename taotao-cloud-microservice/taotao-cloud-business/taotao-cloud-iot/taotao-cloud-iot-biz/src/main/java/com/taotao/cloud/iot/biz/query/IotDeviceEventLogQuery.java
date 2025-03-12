@@ -2,6 +2,7 @@ package com.taotao.cloud.iot.biz.query;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 
 /**

@@ -16,6 +16,7 @@
 package com.taotao.cloud.hadoop.hdfs.configuration;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 

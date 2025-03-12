@@ -18,6 +18,7 @@ package com.taotao.cloud.workflow.biz.common.config;
 
 import java.io.File;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

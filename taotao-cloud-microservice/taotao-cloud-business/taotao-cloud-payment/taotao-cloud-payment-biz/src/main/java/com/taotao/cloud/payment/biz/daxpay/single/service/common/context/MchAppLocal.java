@@ -4,6 +4,7 @@ import com.taotao.cloud.payment.biz.daxpay.core.enums.MerchantNotifyTypeEnum;
 import com.taotao.cloud.payment.biz.daxpay.service.enums.MchAppStautsEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 

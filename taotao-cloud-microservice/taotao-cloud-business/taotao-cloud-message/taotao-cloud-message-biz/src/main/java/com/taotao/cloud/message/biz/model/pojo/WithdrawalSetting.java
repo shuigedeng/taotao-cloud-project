@@ -18,6 +18,7 @@ package com.taotao.cloud.message.biz.model.pojo;
 
 import java.io.Serializable;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 提现配置 */
 @Data

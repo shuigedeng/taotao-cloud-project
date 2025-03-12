@@ -21,6 +21,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.web.util.HtmlUtils;
 
 /** SQL语句模板基类 */

@@ -19,6 +19,8 @@ package com.taotao.cloud.sys.api.feign.response.setting;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 基础设置 */
 @Data

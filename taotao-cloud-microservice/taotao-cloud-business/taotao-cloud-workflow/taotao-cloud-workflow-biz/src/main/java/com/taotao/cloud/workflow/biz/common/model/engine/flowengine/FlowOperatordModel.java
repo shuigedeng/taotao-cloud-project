@@ -18,6 +18,7 @@ package com.taotao.cloud.workflow.biz.common.model.engine.flowengine;
 
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** */
 @Data

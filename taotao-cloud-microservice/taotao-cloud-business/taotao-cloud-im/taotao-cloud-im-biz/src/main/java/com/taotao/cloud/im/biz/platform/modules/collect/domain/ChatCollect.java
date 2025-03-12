@@ -23,6 +23,7 @@ import com.platform.modules.collect.enums.CollectTypeEnum;
 import java.util.Date;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.experimental.Accessors;
 
 /** 收藏表实体类 q3z3 */
 @Data

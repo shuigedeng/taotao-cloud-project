@@ -23,6 +23,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.time.LocalDateTime;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @ApiModel("管理后台 - 获得统计数据 Request VO")

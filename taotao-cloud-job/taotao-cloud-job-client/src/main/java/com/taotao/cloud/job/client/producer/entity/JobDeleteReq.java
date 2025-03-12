@@ -19,6 +19,7 @@ package com.taotao.cloud.job.client.producer.entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 
 @Builder

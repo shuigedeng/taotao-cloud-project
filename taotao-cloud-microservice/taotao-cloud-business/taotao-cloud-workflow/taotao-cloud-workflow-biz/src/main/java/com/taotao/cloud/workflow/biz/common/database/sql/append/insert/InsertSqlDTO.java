@@ -19,6 +19,7 @@ package com.taotao.cloud.workflow.biz.common.database.sql.append.insert;
 import com.taotao.cloud.workflow.biz.common.database.source.DbBase;
 import java.util.List;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /** 类功能 */
 @Data

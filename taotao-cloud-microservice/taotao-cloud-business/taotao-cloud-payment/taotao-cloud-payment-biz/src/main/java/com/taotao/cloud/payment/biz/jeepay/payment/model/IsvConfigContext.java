@@ -20,6 +20,7 @@ import com.jeequan.jeepay.core.model.params.IsvParams;
 import com.taotao.cloud.payment.biz.jeepay.pay.model.AlipayClientWrapper;
 import com.taotao.cloud.payment.biz.jeepay.pay.model.WxServiceWrapper;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.HashMap;
 import java.util.Map;
