@@ -24,7 +24,6 @@ import lombok.experimental.SuperBuilder;
 /** 砍价活动参与实体类 */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "砍价活动参与记录对象")

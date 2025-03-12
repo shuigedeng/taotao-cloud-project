@@ -27,7 +27,6 @@ import lombok.experimental.SuperBuilder;
 /** 店铺运费模板 */
 @Setter
 @Getter
-@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "店铺运费模板")

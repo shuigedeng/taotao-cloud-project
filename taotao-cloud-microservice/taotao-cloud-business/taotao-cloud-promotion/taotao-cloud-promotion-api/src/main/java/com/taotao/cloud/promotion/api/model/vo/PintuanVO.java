@@ -28,7 +28,6 @@ import lombok.experimental.SuperBuilder;
 /** 拼团视图对象 */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class PintuanVO extends PintuanBaseVO {

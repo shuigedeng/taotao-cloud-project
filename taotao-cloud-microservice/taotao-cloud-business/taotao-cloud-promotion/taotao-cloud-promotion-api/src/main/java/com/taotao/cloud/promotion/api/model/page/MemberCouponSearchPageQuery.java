@@ -29,6 +29,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /** 会员优惠券查询通用类 */
 @Setter
@@ -52,11 +53,6 @@ public class MemberCouponSearchPageQuery extends BasePromotionsSearchQuery imple
      */
     @Schema(description = "活动类型")
     private String couponType;
-    /**
-     * @see PromotionsScopeTypeEnum
-     */
-    @Schema(description = "关联范围类型")
-    private String scopeType;
 
     @Schema(description = "范围关联的id")
     private String scopeId;

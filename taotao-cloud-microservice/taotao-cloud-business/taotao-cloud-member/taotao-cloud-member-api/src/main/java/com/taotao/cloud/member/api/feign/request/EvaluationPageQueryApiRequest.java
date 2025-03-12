@@ -24,7 +24,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+import lombok.experimental.Accessors;
 /**
  * 评价查询条件
  *

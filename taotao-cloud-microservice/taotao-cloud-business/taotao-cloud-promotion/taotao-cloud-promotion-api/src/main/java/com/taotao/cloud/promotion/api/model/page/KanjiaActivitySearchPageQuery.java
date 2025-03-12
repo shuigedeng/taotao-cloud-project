@@ -22,6 +22,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /** 砍价活动搜索参数 */
 @Getter
@@ -31,8 +32,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class KanjiaActivitySearchPageQuery extends BasePromotionsSearchQuery {
 
-    @Schema(description = "砍价活动ID")
-    private String id;
 
     @Schema(description = "砍价商品SkuID")
     private String kanjiaActivityGoodsId;

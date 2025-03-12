@@ -25,7 +25,6 @@ import lombok.experimental.SuperBuilder;
 /** 促销商品数据传输对象 */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class PromotionGoodsDTO extends PromotionGoodsBaseDTO {

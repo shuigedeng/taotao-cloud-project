@@ -26,6 +26,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /** 砍价活动商品查询通用类 */
 @Getter

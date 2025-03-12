@@ -29,7 +29,6 @@ import lombok.experimental.SuperBuilder;
 /** 优惠券活动VO */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class CouponActivityVO extends CouponActivityBaseVO {

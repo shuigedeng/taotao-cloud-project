@@ -22,7 +22,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
+import lombok.experimental.Accessors;
 /** 店铺-物流公司设置 */
 @Getter
 @Setter
