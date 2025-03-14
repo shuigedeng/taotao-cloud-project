@@ -62,7 +62,7 @@ jar {
 
 shadowJar {
     mergeServiceFiles()
-    archiveClassifier = null
+    archiveClassifier = ""
 
     //transform(Log4j2PluginsCacheFileTransformer)
     //version = 1.0

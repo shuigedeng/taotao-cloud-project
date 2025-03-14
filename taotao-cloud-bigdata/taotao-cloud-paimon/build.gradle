@@ -249,7 +249,7 @@ mainClassName = "com.taotao.cloud.flink.JStreamWordCount"
 shadowJar {
     zip64 true
     mergeServiceFiles()
-    archiveClassifier = null
+    archiveClassifier = ""
 
     //transform(Log4j2PluginsCacheFileTransformer)
     //version = 1.0
