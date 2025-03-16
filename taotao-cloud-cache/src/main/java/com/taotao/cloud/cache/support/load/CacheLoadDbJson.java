@@ -1,10 +1,16 @@
 package com.taotao.cloud.cache.support.load;
 
+import com.alibaba.fastjson2.JSON;
+import com.taotao.boot.common.utils.common.StringUtil;
+import com.taotao.boot.common.utils.io.FileUtils;
+import com.taotao.boot.common.utils.lang.ObjectUtils;
 import com.taotao.cloud.cache.api.ICache;
 import com.taotao.cloud.cache.api.ICacheLoad;
 import com.taotao.cloud.cache.model.PersistRdbEntry;
 
 import java.util.List;
+
+import com.xkzhangsan.time.utils.CollectionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
@@ -14,7 +20,7 @@ import org.slf4j.LoggerFactory;
  */
 public class CacheLoadDbJson<K,V> implements ICacheLoad<K,V> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CacheLoadDbJson.class);
+    private static final Logger log = LoggerFactory.getLogger(CacheLoadDbJson.class);
 
     /**
      * 文件路径
@@ -28,7 +34,7 @@ public class CacheLoadDbJson<K,V> implements ICacheLoad<K,V> {
 
     @Override
     public void load(ICache<K, V> cache) {
-        List<String> lines = FileUtil.readAllLines(dbPath);
+        List<String> lines = FileUtils.readAllLines(dbPath);
         log.info("[load] 开始处理 path: {}", dbPath);
         if(CollectionUtil.isEmpty(lines)) {
             log.info("[load] path: {} 文件内容为空，直接返回", dbPath);
@@ -49,7 +55,7 @@ public class CacheLoadDbJson<K,V> implements ICacheLoad<K,V> {
             Long expire = entry.getExpire();
 
             cache.put(key, value);
-            if(ObjectUtil.isNotNull(expire)) {
+            if(ObjectUtils.isNotNull(expire)) {
                 cache.expireAt(key, expire);
             }
         }

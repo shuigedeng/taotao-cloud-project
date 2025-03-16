@@ -1,5 +1,6 @@
 package com.taotao.cloud.cache.support.listener.slow;
 
+import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.cache.api.ICacheSlowListener;
 import com.taotao.cloud.cache.api.ICacheSlowListenerContext;
 import com.taotao.cloud.cache.support.interceptor.common.CacheInterceptorCost;
@@ -12,7 +13,7 @@ import org.slf4j.LoggerFactory;
  */
 public class CacheSlowListener implements ICacheSlowListener {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CacheInterceptorCost.class);
+    private static final Logger log = LoggerFactory.getLogger(CacheInterceptorCost.class);
 
     @Override
     public void listen(ICacheSlowListenerContext context) {

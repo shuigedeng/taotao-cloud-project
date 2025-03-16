@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  */
 public class CacheInterceptorRefresh<K,V> implements ICacheInterceptor<K, V> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CacheInterceptorRefresh.class);
+    private static final Logger log = LoggerFactory.getLogger(CacheInterceptorRefresh.class);
 
     @Override
     public void before(ICacheInterceptorContext<K,V> context) {

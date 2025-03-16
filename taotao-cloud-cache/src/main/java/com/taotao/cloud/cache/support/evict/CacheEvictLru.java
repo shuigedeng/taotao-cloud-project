@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
  */
 public class CacheEvictLru<K,V> extends AbstractCacheEvict<K,V> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CacheEvictLru.class);
+    private static final Logger log = LoggerFactory.getLogger(CacheEvictLru.class);
 
     /**
      * list 信息

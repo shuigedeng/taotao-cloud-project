@@ -13,6 +13,9 @@ import java.util.Map;
 import java.util.Queue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.dromara.hutool.core.lang.Validator.isNotNull;
+
 /**
  * 淘汰策略-LRU 最近最少使用
  *
@@ -22,7 +25,7 @@ import org.slf4j.LoggerFactory;
  */
 public class CacheEvictLru2Q<K,V> extends AbstractCacheEvict<K,V> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CacheEvictLru2Q.class);
+    private static final Logger log = LoggerFactory.getLogger(CacheEvictLru2Q.class);
 
     /**
      * 队列大小限制
@@ -116,7 +119,7 @@ public class CacheEvictLru2Q<K,V> extends AbstractCacheEvict<K,V> {
         //1.1 是否在 LRU MAP 中
         //1.2 是否在 firstQueue 中
         DoubleListNode<K,V> node = lruIndexMap.get(key);
-        if(ObjectUtil.isNotNull(node)
+        if(isNotNull(node)
             || firstQueue.contains(key)) {
             //1.3 删除信息
             this.removeKey(key);
@@ -172,7 +175,7 @@ public class CacheEvictLru2Q<K,V> extends AbstractCacheEvict<K,V> {
         DoubleListNode<K,V> node = lruIndexMap.get(key);
 
         //1. LRU 删除逻辑
-        if(ObjectUtil.isNotNull(node)) {
+        if(isNotNull(node)) {
             // A<->B<->C
             // 删除 B，需要变成： A<->C
             DoubleListNode<K,V> pre = node.pre();

@@ -1,5 +1,6 @@
 package com.taotao.cloud.cache.support.struct.lru.impl;
 
+import com.taotao.boot.common.utils.lang.ObjectUtils;
 import com.taotao.cloud.cache.api.ICacheEntry;
 import com.taotao.cloud.cache.exception.CacheRuntimeException;
 import com.taotao.cloud.cache.model.CacheEntry;
@@ -10,6 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.dromara.hutool.core.lang.Validator.isNotNull;
+
 /**
  * 基于循环列表的实现
  * @author shuigedeng
@@ -102,7 +106,7 @@ public class LruMapCircleList<K,V> implements ILruMap<K,V> {
         CircleListNode<K,V> node = indexMap.get(key);
 
         // 存在
-        if(ObjectUtil.isNotNull(node)) {
+        if(isNotNull(node)) {
             node.accessFlag(true);
             LOG.debug("节点已存在，设置节点访问标识为 true, key: {}", key);
         } else {
@@ -137,7 +141,7 @@ public class LruMapCircleList<K,V> implements ILruMap<K,V> {
     @Override
     public void removeKey(final K key) {
         CircleListNode<K,V> node = indexMap.get(key);
-        if(ObjectUtil.isNull(node)) {
+        if(ObjectUtils.isNull(node)) {
 			LOG.warn("对应的删除信息不存在：{}", key);
             return;
         }

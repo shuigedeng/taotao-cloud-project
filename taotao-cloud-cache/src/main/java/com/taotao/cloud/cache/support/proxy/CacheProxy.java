@@ -8,6 +8,8 @@ import com.taotao.cloud.cache.support.proxy.none.NoneProxy;
 
 import java.lang.reflect.Proxy;
 
+import static java.util.Objects.isNull;
+
 /**
  * <p> 代理信息 </p>
  *
@@ -27,7 +29,7 @@ public final class CacheProxy {
      */
     @SuppressWarnings("all")
     public static <K,V> ICache<K,V> getProxy(final ICache<K,V> cache) {
-        if(ObjectUtil.isNull(cache)) {
+        if(isNull(cache)) {
             return (ICache<K,V>) new NoneProxy(cache).proxy();
         }
 

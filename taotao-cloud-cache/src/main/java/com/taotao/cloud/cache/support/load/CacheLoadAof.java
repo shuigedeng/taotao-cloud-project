@@ -1,5 +1,7 @@
 package com.taotao.cloud.cache.support.load;
 
+import com.alibaba.fastjson2.JSON;
+import com.taotao.boot.common.utils.common.StringUtil;
 import com.taotao.cloud.cache.annotation.CacheInterceptor;
 import com.taotao.cloud.cache.api.ICache;
 import com.taotao.cloud.cache.api.ICacheLoad;
@@ -10,8 +12,14 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.xkzhangsan.time.utils.CollectionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static com.taotao.boot.common.utils.io.PathUtils.readAllLines;
+import static org.dromara.hutool.core.reflect.method.MethodUtil.invoke;
+
 /**
  * 加载策略-AOF文件模式
  * @author shuigedeng
@@ -19,7 +27,7 @@ import org.slf4j.LoggerFactory;
  */
 public class CacheLoadAof<K,V> implements ICacheLoad<K,V> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CacheLoadAof.class);
+    private static final Logger log = LoggerFactory.getLogger(CacheLoadAof.class);
 
     /**
      * 方法缓存
@@ -59,7 +67,7 @@ public class CacheLoadAof<K,V> implements ICacheLoad<K,V> {
 
     @Override
     public void load(ICache<K, V> cache) {
-        List<String> lines = FileUtil.readAllLines(dbPath);
+        List<String> lines = readAllLines(dbPath);
         log.info("[load] 开始处理 path: {}", dbPath);
         if(CollectionUtil.isEmpty(lines)) {
             log.info("[load] path: {} 文件内容为空，直接返回", dbPath);
@@ -80,7 +88,7 @@ public class CacheLoadAof<K,V> implements ICacheLoad<K,V> {
 
             final Method method = METHOD_MAP.get(methodName);
             // 反射调用
-            ReflectMethodUtil.invoke(cache, method, objects);
+            invoke(cache, method, objects);
         }
     }
 

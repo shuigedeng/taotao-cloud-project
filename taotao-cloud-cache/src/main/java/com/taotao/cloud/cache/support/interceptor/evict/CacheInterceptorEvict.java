@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
  */
 public class CacheInterceptorEvict<K,V> implements ICacheInterceptor<K, V> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CacheInterceptorEvict.class);
+    private static final Logger log = LoggerFactory.getLogger(CacheInterceptorEvict.class);
 
     @Override
     public void before(ICacheInterceptorContext<K,V> context) {

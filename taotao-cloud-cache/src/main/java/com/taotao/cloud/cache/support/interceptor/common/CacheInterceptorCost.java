@@ -6,6 +6,8 @@ import com.taotao.cloud.cache.api.ICacheSlowListener;
 import com.taotao.cloud.cache.support.listener.slow.CacheSlowListenerContext;
 
 import java.util.List;
+
+import com.xkzhangsan.time.utils.CollectionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
@@ -20,7 +22,7 @@ import org.slf4j.LoggerFactory;
  */
 public class CacheInterceptorCost<K,V> implements ICacheInterceptor<K,V> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CacheInterceptorCost.class);
+    private static final Logger log = LoggerFactory.getLogger(CacheInterceptorCost.class);
 
     @Override
     public void before(ICacheInterceptorContext<K,V> context) {

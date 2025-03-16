@@ -1,5 +1,6 @@
 package com.taotao.cloud.cache.bs;
 
+import com.taotao.boot.common.utils.common.ArgUtils;
 import com.taotao.cloud.cache.api.*;
 import com.taotao.cloud.cache.core.Cache;
 import com.taotao.cloud.cache.support.evict.CacheEvicts;
@@ -75,7 +76,7 @@ public final class CacheBs<K,V> {
      * @since 2024.06
      */
     public CacheBs<K, V> map(Map<K, V> map) {
-        ArgUtil.notNull(map, "map");
+		ArgUtils.notNull(map, "map");
 
         this.map = map;
         return this;
@@ -88,7 +89,7 @@ public final class CacheBs<K,V> {
      * @since 2024.06
      */
     public CacheBs<K, V> size(int size) {
-        ArgUtil.notNegative(size, "size");
+		ArgUtils.notNegative(size, "size");
 
         this.size = size;
         return this;
@@ -101,7 +102,7 @@ public final class CacheBs<K,V> {
      * @since 2024.06
      */
     public CacheBs<K, V> evict(ICacheEvict<K, V> evict) {
-        ArgUtil.notNull(evict, "evict");
+		ArgUtils.notNull(evict, "evict");
 
         this.evict = evict;
         return this;
@@ -114,7 +115,7 @@ public final class CacheBs<K,V> {
      * @since 2024.06
      */
     public CacheBs<K, V> load(ICacheLoad<K, V> load) {
-        ArgUtil.notNull(load, "load");
+		ArgUtils.notNull(load, "load");
 
         this.load = load;
         return this;
@@ -127,7 +128,7 @@ public final class CacheBs<K,V> {
      * @since 2024.06
      */
     public CacheBs<K, V> addRemoveListener(ICacheRemoveListener<K,V> removeListener) {
-        ArgUtil.notNull(removeListener, "removeListener");
+		ArgUtils.notNull(removeListener, "removeListener");
 
         this.removeListeners.add(removeListener);
         return this;
@@ -140,7 +141,7 @@ public final class CacheBs<K,V> {
      * @since 2024.06
      */
     public CacheBs<K, V> addSlowListener(ICacheSlowListener slowListener) {
-        ArgUtil.notNull(slowListener, "slowListener");
+        ArgUtils.notNull(slowListener, "slowListener");
 
         this.slowListeners.add(slowListener);
         return this;

@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
  */
 public class InnerCachePersist<K,V> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(InnerCachePersist.class);
+    private static final Logger log = LoggerFactory.getLogger(InnerCachePersist.class);
 
     /**
      * 缓存信息

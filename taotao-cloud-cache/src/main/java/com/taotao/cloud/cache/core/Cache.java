@@ -1,5 +1,6 @@
 package com.taotao.cloud.cache.core;
 
+import com.taotao.boot.common.utils.lang.ObjectUtils;
 import com.taotao.cloud.cache.annotation.CacheInterceptor;
 import com.taotao.cloud.cache.api.*;
 import com.taotao.cloud.cache.constant.enums.CacheRemoveType;
@@ -257,7 +258,7 @@ public class Cache<K,V> implements ICache<K,V> {
         ICacheEntry<K,V> evictEntry = evict.evict(context);
 
         // 添加拦截器调用
-        if(ObjectUtil.isNotNull(evictEntry)) {
+        if(ObjectUtils.isNotNull(evictEntry)) {
             // 执行淘汰监听器
             ICacheRemoveListenerContext<K,V> removeListenerContext = CacheRemoveListenerContext.<K,V>newInstance().key(evictEntry.key())
                     .value(evictEntry.value())

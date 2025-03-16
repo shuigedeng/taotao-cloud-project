@@ -14,6 +14,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
+
+import com.xkzhangsan.time.utils.CollectionUtil;
+import org.dromara.hutool.core.map.MapUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
@@ -26,7 +29,7 @@ import org.slf4j.LoggerFactory;
  */
 public class CacheExpireRandom<K,V> implements ICacheExpire<K,V> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CacheExpireRandom.class);
+    private static final Logger log = LoggerFactory.getLogger(CacheExpireRandom.class);
 
     /**
      * 单次清空的数量限制

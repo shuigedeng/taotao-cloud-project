@@ -11,6 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static java.util.Objects.isNull;
+
 /**
  * 丢弃策略-LRU 最近最少使用
  *
@@ -20,7 +23,7 @@ import org.slf4j.LoggerFactory;
  */
 public class CacheEvictLruDoubleListMap<K,V> extends AbstractCacheEvict<K,V> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CacheEvictLruDoubleListMap.class);
+    private static final Logger log = LoggerFactory.getLogger(CacheEvictLruDoubleListMap.class);
 
 
     /**
@@ -120,7 +123,7 @@ public class CacheEvictLruDoubleListMap<K,V> extends AbstractCacheEvict<K,V> {
     public void removeKey(final K key) {
         DoubleListNode<K,V> node = indexMap.get(key);
 
-        if(ObjectUtil.isNull(node)) {
+        if(isNull(node)) {
             return;
         }
 

@@ -1,12 +1,20 @@
 package com.taotao.cloud.cache.support.persist;
 
+import com.taotao.boot.common.utils.common.StringUtil;
+import com.taotao.boot.common.utils.io.FileUtils;
 import com.taotao.cloud.cache.api.ICache;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import org.dromara.hutool.core.io.file.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static com.taotao.boot.common.utils.io.FileUtils.createFile;
+import static com.taotao.boot.common.utils.io.FileUtils.exists;
+
 /**
  * 缓存持久化-AOF 持久化模式
  * @author shuigedeng
@@ -14,7 +22,7 @@ import org.slf4j.LoggerFactory;
  */
 public class CachePersistAof<K,V> extends CachePersistAdaptor<K,V> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CachePersistAof.class);
+    private static final Logger log = LoggerFactory.getLogger(CachePersistAof.class);
 
     /**
      * 缓存列表
@@ -42,11 +50,11 @@ public class CachePersistAof<K,V> extends CachePersistAdaptor<K,V> {
     public void persist(ICache<K, V> cache) {
         log.info("开始 AOF 持久化到文件");
         // 1. 创建文件
-        if(!FileUtil.exists(dbPath)) {
-            FileUtil.createFile(dbPath);
+        if(!exists(dbPath)) {
+            createFile(dbPath);
         }
         // 2. 持久化追加到文件中
-        FileUtil.append(dbPath, bufferList);
+        FileUtils.append(dbPath, bufferList);
 
         // 3. 清空 buffer 列表
         bufferList.clear();

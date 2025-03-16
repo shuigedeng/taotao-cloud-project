@@ -1,5 +1,6 @@
 package com.taotao.cloud.cache.support.evict;
 
+import com.taotao.boot.common.utils.lang.ObjectUtils;
 import com.taotao.cloud.cache.api.ICache;
 import com.taotao.cloud.cache.api.ICacheEntry;
 import com.taotao.cloud.cache.api.ICacheEvictContext;
@@ -8,6 +9,8 @@ import com.taotao.cloud.cache.model.CacheEntry;
 import com.taotao.cloud.cache.model.FreqNode;
 
 import java.util.*;
+
+import com.xkzhangsan.time.utils.CollectionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
@@ -17,7 +20,7 @@ import org.slf4j.LoggerFactory;
  */
 public class CacheEvictLfu<K,V> extends AbstractCacheEvict<K,V> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CacheEvictLfu.class);
+    private static final Logger log = LoggerFactory.getLogger(CacheEvictLfu.class);
 
     /**
      * key 映射信息
@@ -89,7 +92,7 @@ public class CacheEvictLfu<K,V> extends AbstractCacheEvict<K,V> {
         FreqNode<K,V> freqNode = keyMap.get(key);
 
         //1. 已经存在
-        if(ObjectUtil.isNotNull(freqNode)) {
+        if(ObjectUtils.isNotNull(freqNode)) {
             //1.1 移除原始的节点信息
             int frequency = freqNode.frequency();
             LinkedHashSet<FreqNode<K,V>> oldSet = freqMap.get(frequency);

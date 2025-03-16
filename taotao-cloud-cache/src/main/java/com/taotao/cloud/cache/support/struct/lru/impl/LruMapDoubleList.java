@@ -1,5 +1,6 @@
 package com.taotao.cloud.cache.support.struct.lru.impl;
 
+import com.taotao.boot.common.utils.lang.ObjectUtils;
 import com.taotao.cloud.cache.api.ICacheEntry;
 import com.taotao.cloud.cache.exception.CacheRuntimeException;
 import com.taotao.cloud.cache.model.CacheEntry;
@@ -17,7 +18,7 @@ import org.slf4j.LoggerFactory;
  */
 public class LruMapDoubleList<K,V> implements ILruMap<K,V> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LruMapDoubleList.class);
+    private static final Logger log = LoggerFactory.getLogger(LruMapDoubleList.class);
 
     /**
      * 头结点
@@ -54,7 +55,7 @@ public class LruMapDoubleList<K,V> implements ILruMap<K,V> {
         // 获取尾巴节点的前一个元素
         DoubleListNode<K,V> tailPre = this.tail.pre();
         if(tailPre == this.head) {
-            LOG.error("当前列表为空，无法进行删除");
+			log.error("当前列表为空，无法进行删除");
             throw new CacheRuntimeException("不可删除头结点!");
         }
 
@@ -112,7 +113,7 @@ public class LruMapDoubleList<K,V> implements ILruMap<K,V> {
     public void removeKey(final K key) {
         DoubleListNode<K,V> node = indexMap.get(key);
 
-        if(ObjectUtil.isNull(node)) {
+        if(ObjectUtils.isNull(node)) {
             return;
         }
 
@@ -127,7 +128,7 @@ public class LruMapDoubleList<K,V> implements ILruMap<K,V> {
 
         // 删除 map 中对应信息
         this.indexMap.remove(key);
-        LOG.debug("从 LruMapDoubleList 中移除 key: {}", key);
+		log.debug("从 LruMapDoubleList 中移除 key: {}", key);
     }
 
     @Override

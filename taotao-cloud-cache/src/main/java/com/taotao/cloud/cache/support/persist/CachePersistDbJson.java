@@ -1,5 +1,6 @@
 package com.taotao.cloud.cache.support.persist;
 
+import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.cache.api.ICache;
 import com.taotao.cloud.cache.model.PersistRdbEntry;
 
@@ -7,6 +8,10 @@ import java.nio.file.StandardOpenOption;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
+import static com.taotao.boot.common.utils.io.FileUtils.createFile;
+import static com.taotao.boot.common.utils.io.FileUtils.truncate;
+import static com.taotao.boot.common.utils.io.FileUtils.write;
 
 /**
  * 缓存持久化-db-基于 JSON
@@ -36,9 +41,9 @@ public class CachePersistDbJson<K,V> extends CachePersistAdaptor<K,V> {
         Set<Map.Entry<K,V>> entrySet = cache.entrySet();
 
         // 创建文件
-        FileUtil.createFile(dbPath);
+        createFile(dbPath);
         // 清空文件
-        FileUtil.truncate(dbPath);
+        truncate(dbPath);
 
         for(Map.Entry<K,V> entry : entrySet) {
             K key = entry.getKey();
@@ -49,7 +54,7 @@ public class CachePersistDbJson<K,V> extends CachePersistAdaptor<K,V> {
             persistRdbEntry.setExpire(expireTime);
 
             String line = JSON.toJSONString(persistRdbEntry);
-            FileUtil.write(dbPath, line, StandardOpenOption.APPEND);
+            write(dbPath, line, StandardOpenOption.APPEND);
         }
     }
 

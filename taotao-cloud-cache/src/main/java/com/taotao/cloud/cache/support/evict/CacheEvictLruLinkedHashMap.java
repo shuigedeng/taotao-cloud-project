@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 public class CacheEvictLruLinkedHashMap<K,V> extends LinkedHashMap<K,V>
     implements ICacheEvict<K,V> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CacheEvictLruDoubleListMap.class);
+    private static final Logger log = LoggerFactory.getLogger(CacheEvictLruDoubleListMap.class);
 
     /**
      * 是否移除标识
