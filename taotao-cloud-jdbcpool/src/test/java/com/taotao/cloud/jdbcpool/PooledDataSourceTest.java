@@ -15,7 +15,7 @@ public class PooledDataSourceTest {
     @Test
     public void simpleTest() throws SQLException {
         PooledDataSource source = new PooledDataSource();
-        source.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC");
+        source.setJdbcUrl("jdbc:mysql://192.168.218.2:3306/taotao-cloud-sys?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC");
         source.setUser("root");
         source.setPassword("123456");
         source.setMinSize(1);
@@ -72,7 +72,7 @@ public class PooledDataSourceTest {
     @Test
     public void waitTest() throws SQLException, InterruptedException {
         PooledDataSource source = new PooledDataSource();
-        source.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true");
+		source.setJdbcUrl("jdbc:mysql://192.168.218.2:3306/taotao-cloud-sys?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC");
         source.setUser("root");
         source.setPassword("123456");
         source.setMinSize(1);
