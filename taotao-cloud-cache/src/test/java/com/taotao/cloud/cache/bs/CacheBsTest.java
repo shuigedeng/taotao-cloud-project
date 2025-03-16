@@ -2,6 +2,7 @@ package com.taotao.cloud.cache.bs;
 
 
 import com.taotao.cloud.cache.api.ICache;
+import com.taotao.cloud.cache.api.ICacheRemoveListener;
 import com.taotao.cloud.cache.listener.MyRemoveListener;
 import com.taotao.cloud.cache.listener.MySlowListener;
 import com.taotao.cloud.cache.load.MyCacheLoad;
@@ -9,6 +10,9 @@ import com.taotao.cloud.cache.support.evict.CacheEvicts;
 import com.taotao.cloud.cache.support.load.CacheLoads;
 import com.taotao.cloud.cache.support.map.Maps;
 import com.taotao.cloud.cache.support.persist.CachePersists;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import java.util.concurrent.TimeUnit;
 
 /**

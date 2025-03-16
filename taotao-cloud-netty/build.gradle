@@ -69,8 +69,8 @@ apply plugin: "com.google.protobuf"
 
 dependencies {
     implementation "io.netty:netty-all:4.1.119.Final"
-    implementation "com.google.protobuf:protobuf-java:4.29.3"
-    implementation "com.google.protobuf:protobuf-java-util:4.29.3"
+    implementation "com.google.protobuf:protobuf-java:4.30.1"
+    implementation "com.google.protobuf:protobuf-java-util:4.30.1"
     implementation "org.apache.thrift:libthrift:0.21.0"
     implementation "io.grpc:grpc-api:1.71.0"
     implementation "io.grpc:grpc-context:1.71.0"
@@ -91,10 +91,10 @@ dependencies {
     implementation 'ch.qos.logback:logback-access:1.5.17'
     implementation 'ch.qos.logback:logback-classic:1.5.17'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.12.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.12.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.12.0'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.12.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.12.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.12.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.12.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.12.1'
     testImplementation "org.assertj:assertj-core:3.27.3"
 
     compileOnly "org.projectlombok:lombok:1.18.36"
@@ -109,7 +109,7 @@ protobuf {
     protoc {
         //https://repo1.maven.org/maven2/com/google/protobuf/protoc/
         //直接使用Maven Central上已经编译好的protoc编译器，
-        artifact = "com.google.protobuf:protoc:4.29.3"
+        artifact = "com.google.protobuf:protoc:4.30.1"
         //指定本地已经安装的protoc编译器
         //path = '/usr/local/bin/protoc'
     }
@@ -136,7 +136,7 @@ protobuf {
 
 //protobuf {
 //    protoc {
-//        artifact = "com.google.protobuf:protoc:4.29.3"
+//        artifact = "com.google.protobuf:protoc:4.30.1"
 //    }
 //
 //    plugins {

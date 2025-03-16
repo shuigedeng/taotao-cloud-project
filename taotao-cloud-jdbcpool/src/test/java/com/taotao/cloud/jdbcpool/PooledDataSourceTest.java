@@ -31,9 +31,9 @@ public class PooledDataSourceTest {
     }
 
     @Test
-    public void notWaitTest() throws SQLException {
+    public void notWaitTest() throws SQLException, InterruptedException {
         PooledDataSource source = new PooledDataSource();
-        source.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC");
+        source.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true");
         source.setUser("root");
         source.setPassword("123456");
         source.setMinSize(1);
@@ -49,7 +49,7 @@ public class PooledDataSourceTest {
         // 新的线程执行
         newThreadExec(source);
 
-        DateUtil.sleep(100);
+		Thread.sleep(100);
     }
 
     private void newThreadExec(final  PooledDataSource source) {
@@ -70,9 +70,9 @@ public class PooledDataSourceTest {
     }
 
     @Test
-    public void waitTest() throws SQLException {
+    public void waitTest() throws SQLException, InterruptedException {
         PooledDataSource source = new PooledDataSource();
-        source.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC");
+        source.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true");
         source.setUser("root");
         source.setPassword("123456");
         source.setMinSize(1);
@@ -88,17 +88,17 @@ public class PooledDataSourceTest {
         // 新的线程执行
         newThreadExec(source);
 
-        DateUtil.sleep(10);
+		Thread.sleep(10);
         connection.close();
         System.out.println("释放第一个线程的资源。。。");
 
-        DateUtil.sleep(100);
+		Thread.sleep(100);
     }
 
     @Test
-    public void testOnIdleTest() throws SQLException {
+    public void testOnIdleTest() throws SQLException, InterruptedException {
         PooledDataSource source = new PooledDataSource();
-        source.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC");
+        source.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true");
         source.setUser("root");
         source.setPassword("123456");
         source.setTestOnIdleIntervalSeconds(5);
@@ -109,7 +109,7 @@ public class PooledDataSourceTest {
         Connection connection = source.getConnection();
         System.out.println(connection.getCatalog());
 
-        DateUtil.sleep(30 * 1000);
+		Thread.sleep(30 * 1000);
 
         connection.close();
     }

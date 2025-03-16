@@ -1,6 +1,7 @@
 package com.taotao.cloud.jdbcpool.util;
 
 import com.taotao.cloud.jdbcpool.exception.JdbcPoolException;
+import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -51,7 +52,23 @@ public final class DriverClassUtil {
         DRIVER_CLASS_MAP.put("jdbc:JTurbo", "com.newatlanta.jturbo.driver.Driver");
         DRIVER_CLASS_MAP.put("jdbc:mimer:multi1", "com.mimer.jdbc.Driver");
     }
+	public static String trim(final String original) {
+		if (StringUtils.isEmpty(original)) {
+			return original;
+		}
+		return original.trim();
+	}
+	public static boolean isEmptyTrim(final String string) {
+		if (isEmpty(string)) {
+			return true;
+		}
 
+		String trim = trim(string);
+		return isEmpty(trim);
+	}
+	public static boolean isEmpty(String str) {
+		return str == null || str.isEmpty();
+	}
     /**
      * 加载驱动类信息
      * @param driverClass 驱动类
@@ -60,7 +77,7 @@ public final class DriverClassUtil {
      */
     public static void loadDriverClass(String driverClass, final String url) {
 
-        if(StrUtil.isEmptyTrim(driverClass)) {
+        if(isEmptyTrim(driverClass)) {
             driverClass = getDriverClassByUrl(url);
         }
 
