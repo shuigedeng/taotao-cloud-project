@@ -161,6 +161,18 @@
 <!--	</actions>-->
 
 	<actions>
+		<!-- Add your actions here -->
+		<group id="groupid" text="Ptg Menu" description="decription1">
+			<add-to-group group-id="EditorPopupMenu" anchor="last"/>
+			<action class="com.taotao.cloud.idea.plugin.aaa.GenerateJavaBeanAction" id="getterandsetter"
+					text="Ptg To JavaBean" description="generate contructor getter/setter toString">
+				<keyboard-shortcut keymap="$default" first-keystroke="alt D"/>
+			</action>
+
+			<!--			<action class="com.taotao.cloud.idea.plugin.ptg.action.GenerateSQLAction" id="sql" text="Ptg To MySQL"-->
+			<!--					description="Show MySQL Language"/>-->
+		</group>
+
 		<!-- 定义 id, 对应类和显示的文本 -->
 		<action id="genCopyMethod" class="com.taotao.cloud.idea.plugin.actions.BeanConvertAction" text="genCopyMethod" description="genCopyMethod">
 			<!-- 添加到编辑器菜单的第一项 -->

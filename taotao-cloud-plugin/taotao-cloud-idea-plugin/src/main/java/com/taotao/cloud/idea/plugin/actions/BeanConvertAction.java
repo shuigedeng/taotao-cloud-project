@@ -32,7 +32,6 @@ public class BeanConvertAction extends AnAction {
 	private void beanConvertMethod(final PsiMethod psiMethod) {
 		WriteCommandAction.runWriteCommandAction(psiMethod.getProject(), () -> {
 			beanConvert(psiMethod);
-
 		});
 	}
 
