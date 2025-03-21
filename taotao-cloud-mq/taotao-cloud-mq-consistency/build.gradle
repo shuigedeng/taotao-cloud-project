@@ -11,6 +11,6 @@ dependencies {
     api 'com.alibaba:fastjson:2.0.56'
     api 'com.alipay.sofa:hessian:3.5.5'
     api "redis.clients:jedis:5.2.0"
-    api 'com.google.guava:guava:33.4.0-jre'
+    api 'com.google.guava:guava:33.4.5-jre'
     api 'org.rocksdb:rocksdbjni:9.4.0'
 }

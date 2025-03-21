@@ -120,8 +120,20 @@ dependencies {
     implementation 'org.springframework.ai:spring-ai-redis-store-spring-boot-starter'
     //使用PGVector作为向量数据库
     implementation 'org.springframework.ai:spring-ai-pgvector-store-spring-boot-starter'
+    //transformers
+    implementation 'org.springframework.ai:spring-ai-transformers-spring-boot-starter'
     //引入PDF解析器
     implementation 'org.springframework.ai:spring-ai-pdf-document-reader'
+
+    //mcp
+    implementation 'org.springframework.ai:spring-ai-mcp-server-webmvc-spring-boot-starter'
+    implementation 'org.springframework.ai:spring-ai-mcp-server-webflux-spring-boot-starter'
+    implementation 'org.springframework.ai:spring-ai-mcp-client-webflux-spring-boot-starter'
+    implementation 'org.springframework.ai:spring-ai-mcp-server-spring-boot-starter'
+    implementation 'org.springframework.ai:spring-ai-mcp-client-spring-boot-starter'
+
+    implementation 'org.springframework.ai:spring-ai-spring-boot-testcontainers'
+
     //implementation 'org.springframework.ai:spring-ai-azure-openai-spring-boot-starter'
     //implementation 'org.springframework.ai:spring-ai-azure-vector-store-spring-boot-starter'
     //implementation 'org.springframework.ai:spring-ai-bedrock-ai-spring-boot-starter'
