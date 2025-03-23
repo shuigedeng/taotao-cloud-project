@@ -1,51 +1,51 @@
 dependencies {
     // flinksql本地运行需要的依赖
-    implementation "org.apache.flink:flink-core:1.20.1"
-    implementation "org.apache.flink:flink-clients:1.20.1"
-    implementation "org.apache.flink:flink-java:1.20.1"
-    implementation "org.apache.flink:flink-streaming-java:1.20.1"
-    implementation "org.apache.flink:flink-scala_2.12:1.20.1"
-    implementation "org.apache.flink:flink-streaming-scala_2.12:1.20.1"
+    implementation "org.apache.flink:flink-core:2.0.0"
+    implementation "org.apache.flink:flink-clients:2.0.0"
+    //implementation "org.apache.flink:flink-java:2.0.0"
+    implementation "org.apache.flink:flink-streaming-java:2.0.0"
+    //implementation "org.apache.flink:flink-scala_2.12:2.0.0"
+    //implementation "org.apache.flink:flink-streaming-scala_2.12:2.0.0"
     //状态后端管理器
-    implementation "org.apache.flink:flink-statebackend-rocksdb:1.20.1"
+    implementation "org.apache.flink:flink-statebackend-rocksdb:2.0.0"
     //flink本地运行时 提供的web功能
-    implementation "org.apache.flink:flink-runtime-web:1.20.1"
+    implementation "org.apache.flink:flink-runtime-web:2.0.0"
 
     //flink sql
-    implementation 'org.apache.flink:flink-table-api-java:1.20.1'
-    implementation 'org.apache.flink:flink-table-runtime:1.20.1'
-    implementation 'org.apache.flink:flink-table-api-java-bridge:1.20.1'
-    implementation "org.apache.flink:flink-table-planner_2.12:1.20.1"
-    implementation "org.apache.flink:flink-table-planner-loader:1.20.1"
-    implementation 'org.apache.flink:flink-sql-gateway-api:1.20.1'
+    implementation 'org.apache.flink:flink-table-api-java:2.0.0'
+    implementation 'org.apache.flink:flink-table-runtime:2.0.0'
+    implementation 'org.apache.flink:flink-table-api-java-bridge:2.0.0'
+    implementation "org.apache.flink:flink-table-planner_2.12:2.0.0"
+    implementation "org.apache.flink:flink-table-planner-loader:2.0.0"
+    implementation 'org.apache.flink:flink-sql-gateway-api:2.0.0'
 
     //使用alibaba 动态cep
-    implementation 'org.apache.flink:flink-cep:1.20.1'
-    implementation "org.apache.flink:flink-csv:1.20.1"
-    implementation 'org.apache.flink:flink-parquet:1.20.1'
-    implementation 'org.apache.parquet:parquet-avro:1.15.0'
-    implementation 'org.apache.flink:flink-avro:1.20.1'
-    implementation 'org.apache.flink:flink-json:1.20.1'
-    implementation 'org.apache.flink:flink-format-common:1.20.1'
-    implementation 'org.apache.flink:flink-compress:1.20.1'
+    implementation 'org.apache.flink:flink-cep:2.0.0'
+    implementation "org.apache.flink:flink-csv:2.0.0"
+    implementation 'org.apache.flink:flink-parquet:2.0.0'
+    implementation 'org.apache.parquet:parquet-avro:1.15.1'
+    implementation 'org.apache.flink:flink-avro:2.0.0'
+    implementation 'org.apache.flink:flink-json:2.0.0'
+    implementation 'org.apache.flink:flink-format-common:2.0.0'
+    implementation 'org.apache.flink:flink-compress:2.0.0'
 
     //flink连接器
-    implementation 'org.apache.flink:flink-connector-datagen:1.20.1'
-    implementation 'org.apache.flink:flink-connector-files:1.20.1'
+    implementation 'org.apache.flink:flink-connector-datagen:2.0.0'
+    implementation 'org.apache.flink:flink-connector-files:2.0.0'
     implementation "org.apache.flink:flink-connector-kafka:3.4.0-1.20"
     //implementation 'org.apache.flink:flink-connector-hbase-2.2:3.0.0-1.17'
     implementation 'org.apache.flink:flink-connector-jdbc:3.2.0-1.19'
-    implementation 'org.apache.flink:flink-connector-hive_2.12:1.20.1'
-    implementation 'org.apache.flink:flink-connector-mongodb:1.2.0-1.19'
+    implementation 'org.apache.flink:flink-connector-hive_2.12:3.0.0-1.20'
+    implementation 'org.apache.flink:flink-connector-mongodb:2.0.0-1.20.0'
     implementation 'org.apache.flink:flink-connector-pulsar:4.1.0-1.18'
     implementation 'org.apache.doris:flink-doris-connector-1.20:25.0.0'
     //implementation "org.apache.flink:flink-connector-elasticsearch7:3.0.0-1.16"
     //implementation "org.apache.flink:flink-connector-redis_2.11:1.1.5"
 
-    implementation 'org.apache.flink:flink-sql-connector-hive-3.1.3_2.12:1.20.0'
+    implementation 'org.apache.flink:flink-sql-connector-hive-3.1.3_2.12:3.0.0-1.20'
     implementation 'org.apache.flink:flink-sql-connector-kafka:3.3.0-1.20'
     //implementation 'org.apache.flink:flink-sql-connector-hbase-2.2:3.0.0-1.17'
-    implementation 'org.apache.flink:flink-sql-connector-mongodb:1.2.0-1.19'
+    implementation 'org.apache.flink:flink-sql-connector-mongodb:2.0.0-1.20.0'
     implementation 'org.apache.flink:flink-sql-connector-pulsar:4.1.0-1.18'
 
     //flink cdc

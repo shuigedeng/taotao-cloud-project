@@ -73,7 +73,7 @@ dependencies {
     //    exclude group: "cn.dev33", module: "sa-token-jakarta-servlet"
     //}
     ////https://search.maven.org/artifact/cn.dev33/sa-token-reactor-spring-boot-starter
-    //implementation 'cn.dev33:sa-token-reactor-spring-boot3-starter:1.40.0'
+    //implementation 'cn.dev33:sa-token-reactor-spring-boot3-starter:1.41.0'
 }
 
 configurations {
