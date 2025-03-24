@@ -13,7 +13,7 @@
   <img src="https://img.shields.io/badge/netty-4.1.117.Final-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_security-6.4.2-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/elasticsearch-8.17.1-green" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/mybatis_plus-3.5.10.1-yellow" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/mybatis_plus-3.5.11-yellow" alt="Downloads"/>
   <img src="https://img.shields.io/badge/knife4j-4.5.0-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/swagger-3.0.0-red" alt="Downloads"/>
   <img src="https://img.shields.io/badge/redisson-3.44.0-lightgrey" alt="Downloads"/>
@@ -22,7 +22,7 @@
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-**taotao-cloud** (taotao云平台) 基于gradle8.12、jdk21, 支持graalvm21, 采用最新的spring 6.2.2、SpringBoot 3.4.4、SpringCloud 2024.0.0、SpringSecurity 6.4.2、Nacos 2.4.3、Mybatis-Plus 3.5.10.1、Redis 7.4.0等框架，开发的一款企业级微服务架构的云服务平台， 
+**taotao-cloud** (taotao云平台) 基于gradle8.12、jdk21, 支持graalvm21, 采用最新的spring 6.2.2、SpringBoot 3.4.4、SpringCloud 2024.0.0、SpringSecurity 6.4.2、Nacos 2.4.3、Mybatis-Plus 3.5.11、Redis 7.4.0等框架，开发的一款企业级微服务架构的云服务平台， 
 
 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
 
@@ -162,7 +162,7 @@ CLOUD:
 | Spring-kafka         | 3.3.2            |
 | Roketmq              | 5.2.1            |
 | Spring Security      | 6.4.2            |
-| Mybatis Plus         | 3.5.10.1         |
+| Mybatis Plus         | 3.5.11         |
 | Hutool               | 6.0.0-M19        |
 | Mysql                | 9.2.0            |
 | Querydsl             | 5.1.0            |
