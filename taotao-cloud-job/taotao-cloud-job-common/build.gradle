@@ -85,7 +85,7 @@ dependencies {
     api "io.grpc:grpc-services:1.71.0"
     testImplementation("io.grpc:grpc-testing:1.71.0")
     api 'com.google.code.gson:gson:2.11.0'
-    api 'com.google.guava:guava:33.4.5-jre'
+    api 'com.google.guava:guava:33.4.6-jre'
     api 'javax.annotation:javax.annotation-api:1.3.2'
     api 'javax.xml.ws:jaxws-api:2.3.1'
 }
