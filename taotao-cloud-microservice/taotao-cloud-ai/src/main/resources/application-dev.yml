@@ -104,6 +104,32 @@ arthas:
 
 spring:
   ai:
+    #Spring AI会自动创建一个ChatModel类型的bean，使我们能够与指定的模型进行交互。
+    anthropic:
+      api-key: ${ANTHROPIC_API_KEY} #使用${}属性占位符从环境变量中加载API密钥的值。
+      chat:
+        options:
+          model: claude-3-7-sonnet-20250219 #模型使用claude-3-7-sonnet-20250219, 你也可以根据需要使用其他模型。
+    mcp:
+      client:
+        stdio:
+          connections:
+            author-tools-server:
+              url: http://localhost:8081
+            filesystem:
+              command: npx
+              args:
+                - "-y"
+                - "@modelcontextprotocol/server-filesystem"
+                - "./"
+            brave-search:
+              command: npx
+              args:
+                  - "-y"
+                  - "@modelcontextprotocol/server-brave-search"
+              env:
+                  BRAVE_API_KEY: ${BRAVE_API_KEY}
+          
     ollama:
       chat:
         options:
