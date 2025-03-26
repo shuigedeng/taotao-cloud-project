@@ -100,7 +100,7 @@ public class SensitiveWordsConfig {
             return;
         }
         // 为直接路径，添加前缀
-        Resource resource = resourceLoader.getResource(dictPath.startsWith(CommonConstant.SLASH) ? FILE_PREFIX + dictPath : dictPath);
+        Resource resource = resourceLoader.getResource(dictPath.startsWith(CommonConstants.SLASH) ? FILE_PREFIX + dictPath : dictPath);
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8))) {
             sensitiveWords = reader.lines().map(String::trim).collect(Collectors.toSet());
         } catch (IOException e) {

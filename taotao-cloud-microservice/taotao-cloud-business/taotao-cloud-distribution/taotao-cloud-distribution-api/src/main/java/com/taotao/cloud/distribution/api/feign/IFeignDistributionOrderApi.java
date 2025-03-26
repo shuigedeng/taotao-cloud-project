@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.distribution.api.feign;
 
-import com.taotao.boot.common.constant.ServiceName;
+ import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.cloud.distribution.api.feign.fallback.FeignDistributionOrderServiceFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 
@@ -30,7 +30,7 @@ import java.time.LocalDateTime;
  */
 @FeignClient(
         contextId = "IFeignDistributionOrderService",
-        value = ServiceName.TAOTAO_CLOUD_GOODS,
+        value = ServiceNameConstants.TAOTAO_CLOUD_GOODS,
         fallbackFactory = FeignDistributionOrderServiceFallback.class)
 public interface IFeignDistributionOrderApi {
 

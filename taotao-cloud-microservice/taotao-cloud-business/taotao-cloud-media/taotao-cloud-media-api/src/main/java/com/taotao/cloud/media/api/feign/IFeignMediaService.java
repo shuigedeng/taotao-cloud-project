@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.media.api.feign;
 
-import com.taotao.boot.common.constant.ServiceName;
+ import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.media.api.feign.fallback.FeignMediaFallback;
 import com.taotao.cloud.media.api.model.vo.FileVO;
@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  */
 @FeignClient(
         contextId = "remoteChatbotService",
-        value = ServiceName.TAOTAO_CLOUD_FILE,
+        value = ServiceNameConstants.TAOTAO_CLOUD_FILE,
         fallbackFactory = FeignMediaFallback.class)
 public interface IFeignMediaService {
 

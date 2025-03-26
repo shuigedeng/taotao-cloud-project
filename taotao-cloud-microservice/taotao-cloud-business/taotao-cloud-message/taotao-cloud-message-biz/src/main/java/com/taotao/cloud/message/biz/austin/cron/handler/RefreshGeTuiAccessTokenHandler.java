@@ -46,7 +46,7 @@ public class RefreshGeTuiAccessTokenHandler {
     public void execute() {
         log.info("refreshGeTuiAccessTokenJob#execute!");
         SupportThreadPoolConfig.getPendingSingleThreadPool().execute(() -> {
-            List<ChannelAccount> accountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(CommonConstant.FALSE, ChannelType.PUSH.getCode());
+            List<ChannelAccount> accountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(CommonConstants.FALSE, ChannelType.PUSH.getCode());
             for (ChannelAccount channelAccount : accountList) {
                 GeTuiAccount account = JSON.parseObject(channelAccount.getAccountConfig(), GeTuiAccount.class);
                 String accessToken = accessTokenUtils.getAccessToken(ChannelType.PUSH.getCode(), channelAccount.getId().intValue(), account, true);

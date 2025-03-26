@@ -40,9 +40,9 @@ public class AustinFileUtils {
             URL url = new URL(remoteUrl);
             String protocol = url.getProtocol();
             // 防止SSRF攻击
-            if (!CommonConstant.HTTP.equalsIgnoreCase(protocol)
-                    && !CommonConstant.HTTPS.equalsIgnoreCase(protocol)
-                    && !CommonConstant.OSS.equalsIgnoreCase(protocol)) {
+            if (!CommonConstants.HTTP.equalsIgnoreCase(protocol)
+                    && !CommonConstants.HTTPS.equalsIgnoreCase(protocol)
+                    && !CommonConstants.OSS.equalsIgnoreCase(protocol)) {
                 log.error("AustinFileUtils#getRemoteUrl2File fail:{}, remoteUrl:{}",
                         "The remoteUrl is invalid, it can only be of the types http, https, and oss.", remoteUrl);
                 return null;

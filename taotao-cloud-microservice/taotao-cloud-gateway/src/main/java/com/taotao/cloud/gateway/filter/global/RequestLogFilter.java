@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.gateway.filter.global;
 
-import static com.taotao.boot.common.constant.CommonConstant.TTC_TRACE_ID;
+import static com.taotao.boot.common.constant.CommonConstants.TTC_TRACE_ID;
 
-import com.taotao.boot.common.constant.CommonConstant;
+import com.taotao.boot.common.constant.CommonConstants.
 import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.common.utils.servlet.TraceUtils;
@@ -52,7 +52,7 @@ public class RequestLogFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String requestUrl = exchange.getRequest().getURI().getRawPath();
-        String traceId = exchange.getRequest().getHeaders().getFirst(CommonConstant.TTC_TRACE_ID);
+        String traceId = exchange.getRequest().getHeaders().getFirst(CommonConstants.TTC_TRACE_ID);
         if (StrUtil.isBlank(traceId)) {
             traceId = TraceUtils.getTraceId();
         }

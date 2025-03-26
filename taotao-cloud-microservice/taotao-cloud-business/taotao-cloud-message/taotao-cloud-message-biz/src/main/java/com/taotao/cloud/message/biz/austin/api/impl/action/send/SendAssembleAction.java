@@ -85,7 +85,7 @@ public class SendAssembleAction implements BusinessProcess<SendTaskModel> {
 
         try {
             Optional<MessageTemplate> messageTemplate = messageTemplateDao.findById(messageTemplateId);
-            if (!messageTemplate.isPresent() || messageTemplate.get().getIsDeleted().equals(CommonConstant.TRUE)) {
+            if (!messageTemplate.isPresent() || messageTemplate.get().getIsDeleted().equals(CommonConstants.TRUE)) {
                 context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.TEMPLATE_NOT_FOUND));
                 return;
             }

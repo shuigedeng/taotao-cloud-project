@@ -33,7 +33,7 @@ public class DiscardAction implements BusinessProcess<TaskInfo> {
     public void process(ProcessContext<TaskInfo> context) {
         TaskInfo taskInfo = context.getProcessModel();
         // 配置示例:	["1","2"]
-        JSONArray array = JSON.parseArray(config.getProperty(DISCARD_MESSAGE_KEY, CommonConstant.EMPTY_VALUE_JSON_ARRAY));
+        JSONArray array = JSON.parseArray(config.getProperty(DISCARD_MESSAGE_KEY, CommonConstants.EMPTY_VALUE_JSON_ARRAY));
         if (array.contains(String.valueOf(taskInfo.getMessageTemplateId()))) {
             logUtils.print(AnchorInfo.builder().bizId(taskInfo.getBizId()).messageId(taskInfo.getMessageId()).businessId(taskInfo.getBusinessId()).ids(taskInfo.getReceiver()).state(AnchorState.DISCARD.getCode()).build());
             context.setNeedBreak(true);

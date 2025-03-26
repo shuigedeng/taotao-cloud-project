@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.common.flowable.feign;
 
-import com.taotao.boot.common.constant.ServiceName;
+ import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.flowable.api.feign.fallback.FeignChatbotFallback;
 import com.taotao.cloud.flowable.api.model.vo.ChatbotVO;
@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  */
 @FeignClient(
         contextId = "remoteChatbotService",
-        value = ServiceName.TAOTAO_CLOUD_FLOWABLE,
+        value = ServiceNameConstants.TAOTAO_CLOUD_FLOWABLE,
         fallbackFactory = FeignChatbotFallback.class)
 public interface IFeignChatbotService {
 

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.api.feign;
 
-import com.taotao.boot.common.constant.ServiceName;
+ import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.feign.fallback.FeignOrderItemApiFallback;
 import com.taotao.cloud.order.api.feign.request.OrderItemSaveApiRequest;
@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(value = ServiceName.TAOTAO_CLOUD_ORDER, fallbackFactory = FeignOrderItemApiFallback.class)
+@FeignClient(value = ServiceNameConstants.TAOTAO_CLOUD_ORDER, fallbackFactory = FeignOrderItemApiFallback.class)
 public interface OrderItemApi {
 
     @PostMapping(value = "/order/item")

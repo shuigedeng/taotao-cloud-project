@@ -45,8 +45,8 @@ public class XxlJobUtils {
 
         String scheduleConf = messageTemplate.getExpectPushTime();
         // 如果没有指定cron表达式，说明立即执行(给到xxl-job延迟5秒的cron表达式)
-        if (messageTemplate.getExpectPushTime().equals(String.valueOf(CommonConstant.FALSE))) {
-            scheduleConf = DateUtil.format(DateUtil.offsetSecond(new Date(), XxlJobConstant.DELAY_TIME), CommonConstant.CRON_FORMAT);
+        if (messageTemplate.getExpectPushTime().equals(String.valueOf(CommonConstants.FALSE))) {
+            scheduleConf = DateUtil.format(DateUtil.offsetSecond(new Date(), XxlJobConstant.DELAY_TIME), CommonConstants.CRON_FORMAT);
         }
 
         XxlJobInfo xxlJobInfo = XxlJobInfo.builder()
@@ -62,7 +62,7 @@ public class XxlJobUtils {
                 .executorTimeout(XxlJobConstant.TIME_OUT)
                 .executorFailRetryCount(XxlJobConstant.RETRY_COUNT)
                 .glueType(GlueTypeEnum.BEAN.name())
-                .triggerStatus(CommonConstant.FALSE)
+                .triggerStatus(CommonConstants.FALSE)
                 .glueRemark(CharSequenceUtil.EMPTY)
                 .glueSource(CharSequenceUtil.EMPTY)
                 .alarmEmail(CharSequenceUtil.EMPTY)
@@ -82,7 +82,7 @@ public class XxlJobUtils {
     private Integer queryJobGroupId() {
         BasicResultVO<Integer> basicResultVO = cronTaskService.getGroupId(appName, jobHandlerName);
         if (Objects.isNull(basicResultVO.getData())) {
-            XxlJobGroup xxlJobGroup = XxlJobGroup.builder().appname(appName).title(jobHandlerName).addressType(CommonConstant.FALSE).build();
+            XxlJobGroup xxlJobGroup = XxlJobGroup.builder().appname(appName).title(jobHandlerName).addressType(CommonConstants.FALSE).build();
             if (RespStatusEnum.SUCCESS.getCode().equals(cronTaskService.createGroup(xxlJobGroup).getStatus())) {
                 return (Integer) cronTaskService.getGroupId(appName, jobHandlerName).getData();
             }

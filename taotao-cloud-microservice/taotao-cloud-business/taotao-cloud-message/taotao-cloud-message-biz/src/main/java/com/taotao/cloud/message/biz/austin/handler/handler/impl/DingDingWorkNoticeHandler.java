@@ -71,7 +71,7 @@ public class DingDingWorkNoticeHandler extends BaseHandler{
 
             // 发送成功后记录TaskId，用于消息撤回(支持24小时之内)
             if (response.isSuccess()) {
-                saveRecallInfo(DING_DING_RECALL_KEY_PREFIX, taskInfo.getMessageTemplateId(), String.valueOf(response.getTaskId()), CommonConstant.ONE_DAY_SECOND);
+                saveRecallInfo(DING_DING_RECALL_KEY_PREFIX, taskInfo.getMessageTemplateId(), String.valueOf(response.getTaskId()), CommonConstants.ONE_DAY_SECOND);
                 return true;
             }
             log.error("DingDingWorkNoticeHandler#handler fail!result:{},params:{}", JSON.toJSONString(response), JSON.toJSONString(taskInfo));

@@ -93,7 +93,7 @@ public class AccessTokenUtils {
             OapiGettokenRequest req = new OapiGettokenRequest();
             req.setAppkey(dingWorkNoticeAccount.getAppKey());
             req.setAppsecret(dingWorkNoticeAccount.getAppSecret());
-            req.setHttpMethod(CommonConstant.REQUEST_METHOD_GET);
+            req.setHttpMethod(CommonConstants.REQUEST_METHOD_GET);
             OapiGettokenResponse rsp = client.execute(req);
             accessToken = rsp.getAccessToken();
         } catch (Exception e) {

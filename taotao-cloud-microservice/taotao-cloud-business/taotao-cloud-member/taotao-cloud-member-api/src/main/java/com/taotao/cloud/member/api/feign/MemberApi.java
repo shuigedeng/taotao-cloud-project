@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.api.feign;
 
-import com.taotao.boot.common.constant.ServiceName;
+ import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.boot.common.model.BaseSecurityUser;
 import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.member.api.feign.fallback.MemberApiFallback;
@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @version 2022.04
  * @since 2022-04-25 16:37:54
  */
-@FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER, fallbackFactory = MemberApiFallback.class)
+@FeignClient(value = ServiceNameConstants.TAOTAO_CLOUD_MEMBER, fallbackFactory = MemberApiFallback.class)
 public interface MemberApi {
 
     /**

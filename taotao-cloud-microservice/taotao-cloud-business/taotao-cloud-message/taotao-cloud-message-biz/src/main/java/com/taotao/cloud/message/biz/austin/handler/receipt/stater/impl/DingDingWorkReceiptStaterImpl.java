@@ -25,7 +25,7 @@ public class DingDingWorkReceiptStaterImpl implements ReceiptMessageStater {
 
     @Override
     public void start() {
-        List<ChannelAccount> accountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(CommonConstant.FALSE, ChannelType.DING_DING_WORK_NOTICE.getCode());
+        List<ChannelAccount> accountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(CommonConstants.FALSE, ChannelType.DING_DING_WORK_NOTICE.getCode());
         for (ChannelAccount channelAccount : accountList) {
             workNoticeHandler.pull(channelAccount.getId());
         }

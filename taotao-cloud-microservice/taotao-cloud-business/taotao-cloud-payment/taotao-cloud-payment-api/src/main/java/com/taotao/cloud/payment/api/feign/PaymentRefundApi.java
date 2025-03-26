@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.api.feign;
 
-import com.taotao.boot.common.constant.ServiceName;
+ import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.cloud.payment.api.feign.fallback.RefundLogApiFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 
@@ -26,5 +26,5 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(value = ServiceName.TAOTAO_CLOUD_PAYMENT, fallbackFactory = RefundLogApiFallback.class)
+@FeignClient(value = ServiceNameConstants.TAOTAO_CLOUD_PAYMENT, fallbackFactory = RefundLogApiFallback.class)
 public interface PaymentRefundApi {}

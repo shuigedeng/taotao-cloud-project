@@ -32,7 +32,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.Objects;
 
-import static com.taotao.boot.common.constant.CommonConstant.TTC_TRACE_ID;
+import static com.taotao.boot.common.constant.CommonConstants.TTC_TRACE_ID;
 
 /**
  * 最后执行 生成日志链路追踪id

@@ -78,7 +78,7 @@ public class FlowControlFactory implements ApplicationContextAware {
      * @param channelCode
      */
     private Double getRateLimitConfig(Integer channelCode) {
-        String flowControlConfig = config.getProperty(FLOW_CONTROL_KEY, CommonConstant.EMPTY_JSON_OBJECT);
+        String flowControlConfig = config.getProperty(FLOW_CONTROL_KEY, CommonConstants.EMPTY_JSON_OBJECT);
         JSONObject jsonObject = JSON.parseObject(flowControlConfig);
         if (Objects.isNull(jsonObject.getDouble(FLOW_CONTROL_PREFIX + channelCode))) {
             return null;

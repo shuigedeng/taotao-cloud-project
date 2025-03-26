@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.api.feign;
 
-import com.taotao.boot.common.constant.ServiceName;
+ import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.cloud.member.api.feign.fallback.MemberRechargeApiFallback;
 import com.taotao.cloud.member.api.feign.response.MemberRechargeApiResponse;
 import java.math.BigDecimal;
@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @version 2022.04
  * @since 2022-04-25 16:37:54
  */
-@FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER, fallbackFactory = MemberRechargeApiFallback.class)
+@FeignClient(value = ServiceNameConstants.TAOTAO_CLOUD_MEMBER, fallbackFactory = MemberRechargeApiFallback.class)
 public interface MemberRechargeApi {
 
     @GetMapping(value = "/member/feign/recharge/paySuccess")

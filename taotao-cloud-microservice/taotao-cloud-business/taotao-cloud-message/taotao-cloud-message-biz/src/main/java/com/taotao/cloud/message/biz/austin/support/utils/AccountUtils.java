@@ -93,7 +93,7 @@ public class AccountUtils {
      */
     public <T> T getSmsAccountByScriptName(String scriptName, Class<T> clazz) {
         try {
-            List<ChannelAccount> channelAccountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(CommonConstant.FALSE, ChannelType.SMS.getCode());
+            List<ChannelAccount> channelAccountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(CommonConstants.FALSE, ChannelType.SMS.getCode());
             for (ChannelAccount channelAccount : channelAccountList) {
                 try {
                     SmsAccount smsAccount = JSON.parseObject(channelAccount.getAccountConfig(), SmsAccount.class);

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.api.feign;
 
-import com.taotao.boot.common.constant.ServiceName;
+ import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.cloud.order.api.feign.fallback.FeignTradeApiFallback;
 import com.taotao.cloud.order.api.feign.response.TradeApiResponse;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(value = ServiceName.TAOTAO_CLOUD_ORDER, fallbackFactory = FeignTradeApiFallback.class)
+@FeignClient(value = ServiceNameConstants.TAOTAO_CLOUD_ORDER, fallbackFactory = FeignTradeApiFallback.class)
 public interface TradeApi {
 
 	@GetMapping(value = "/trade")

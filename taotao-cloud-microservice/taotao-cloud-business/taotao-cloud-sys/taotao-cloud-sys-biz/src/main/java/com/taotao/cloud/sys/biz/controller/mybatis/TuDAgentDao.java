@@ -36,7 +36,7 @@ package com.taotao.cloud.sys.biz.controller.mybatis;
 ////    @Select("select * from tu_d_agent")//测试用
 //    @Select("select * from tu_d_agent t where AGENT_STATUS = 'Active' and lcd >= #{startTime} and
 // lcd <= #{endTime}")
-//    @Options(resultSetType = ResultSetType.FORWARD_ONLY, fetchSize = CommonConstant.BATCH_SIZE)
+//    @Options(resultSetType = ResultSetType.FORWARD_ONLY, fetchSize = CommonConstants.BATCH_SIZE)
 //    @ResultType(TuDAgent.class)
 //    void getUserListByLcdBigData(@Param("startTime") Date startTime, @Param("endTime") Date
 // endTime, @Param("handler") ResultHandler<TuDAgent> handler);
@@ -44,7 +44,7 @@ package com.taotao.cloud.sys.biz.controller.mybatis;
 //    //流式批量查询处理数据
 ////    @Select("select * from tu_d_agent t where lcd <= #{date} LIMIT 10")//测试用
 //    @Select("select * from tu_d_agent where AGENT_STATUS = 'Active'")
-//    @Options(resultSetType = ResultSetType.FORWARD_ONLY, fetchSize = CommonConstant.BATCH_SIZE)
+//    @Options(resultSetType = ResultSetType.FORWARD_ONLY, fetchSize = CommonConstants.BATCH_SIZE)
 //    @ResultType(TuDAgent.class)
 //    void getUserListBigData(@Param("handler") ResultHandler<TuDAgent> handler);
 // }

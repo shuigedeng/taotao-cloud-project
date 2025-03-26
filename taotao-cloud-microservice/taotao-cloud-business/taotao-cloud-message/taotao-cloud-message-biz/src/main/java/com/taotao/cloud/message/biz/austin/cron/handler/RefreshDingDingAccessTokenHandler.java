@@ -46,7 +46,7 @@ public class RefreshDingDingAccessTokenHandler {
     public void execute() {
         log.info("refreshAccessTokenJob#execute!");
         SupportThreadPoolConfig.getPendingSingleThreadPool().execute(() -> {
-            List<ChannelAccount> accountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(CommonConstant.FALSE, ChannelType.DING_DING_WORK_NOTICE.getCode());
+            List<ChannelAccount> accountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(CommonConstants.FALSE, ChannelType.DING_DING_WORK_NOTICE.getCode());
             for (ChannelAccount channelAccount : accountList) {
                 DingDingWorkNoticeAccount account = JSON.parseObject(channelAccount.getAccountConfig(), DingDingWorkNoticeAccount.class);
                 String accessToken = accessTokenUtils.getAccessToken(ChannelType.DING_DING_WORK_NOTICE.getCode(), channelAccount.getId().intValue(), account, true);

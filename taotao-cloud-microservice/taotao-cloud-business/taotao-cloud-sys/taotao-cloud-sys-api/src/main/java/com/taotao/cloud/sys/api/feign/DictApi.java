@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.api.feign;
 
-import com.taotao.boot.common.constant.ServiceName;
+ import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.boot.common.support.info.ApiInfo;
 import com.taotao.boot.common.support.info.Create;
 import com.taotao.boot.common.support.info.Update;
@@ -39,7 +39,7 @@ import static com.taotao.boot.common.support.info.ApiVersionEnum.V2022_08;
  * @since 2020/5/2 16:42
  */
 @FeignClient(
-	name = ServiceName.TAOTAO_CLOUD_SYS,
+	name = ServiceNameConstants.TAOTAO_CLOUD_SYS,
 	fallbackFactory = DictApiFallback.class)
 public interface DictApi {
 

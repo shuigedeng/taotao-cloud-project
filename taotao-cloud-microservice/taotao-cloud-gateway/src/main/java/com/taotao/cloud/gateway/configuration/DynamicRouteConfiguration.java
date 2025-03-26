@@ -21,7 +21,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
-import com.taotao.boot.common.constant.CommonConstant;
+import com.taotao.boot.common.constant.CommonConstants.
 import com.taotao.boot.common.utils.common.PropertyUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.properties.DynamicRouteProperties;
@@ -113,7 +113,7 @@ public class DynamicRouteConfiguration {
 			catch (NacosException e) {
 				LogUtils.error(
 					e,
-					PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY)
+					PropertyUtils.getProperty(CommonConstants.SPRING_APP_NAME_KEY)
 						+ "get route definitions from nacos error info: {}",
 					e.getErrMsg());
 			}

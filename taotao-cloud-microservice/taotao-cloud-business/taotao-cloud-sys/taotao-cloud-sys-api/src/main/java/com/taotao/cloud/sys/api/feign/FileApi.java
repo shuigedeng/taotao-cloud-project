@@ -20,7 +20,7 @@ package com.taotao.cloud.sys.api.feign;
 import static com.taotao.boot.common.support.info.ApiVersionEnum.V2022_07;
 import static com.taotao.boot.common.support.info.ApiVersionEnum.V2022_08;
 
-import com.taotao.boot.common.constant.ServiceName;
+ import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.boot.common.support.info.ApiInfo;
 import com.taotao.boot.common.support.info.Create;
 import com.taotao.boot.common.support.info.Update;
@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @since 2020/5/2 16:42
  */
 @FeignClient(
-        name = ServiceName.TAOTAO_CLOUD_FILE,
+        name = ServiceNameConstants.TAOTAO_CLOUD_FILE,
         contextId = "feignDictApi",
         fallbackFactory = FileApiFallback.class)
 public interface FileApi {

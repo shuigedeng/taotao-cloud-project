@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.controller.business.tools;
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.boot.common.constant.CommonConstant;
+import com.taotao.boot.common.constant.CommonConstants.
 import com.taotao.boot.common.enums.AliPayStatusEnum;
 import com.taotao.boot.common.model.Result;
 import com.taotao.boot.security.spring.annotation.NotAuth;
@@ -59,7 +59,7 @@ public class AliPayController {
     private final AlipayUtils alipayUtils;
     private final IAlipayConfigService alipayService;
 
-    @Operation(summary = "查询阿里支付配置信息", description = "查询阿里支付配置信息", method = CommonConstant.GET)
+    @Operation(summary = "查询阿里支付配置信息", description = "查询阿里支付配置信息", method = CommonConstants.GET)
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
     @GetMapping

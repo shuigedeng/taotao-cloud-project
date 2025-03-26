@@ -178,7 +178,7 @@ public class RedisUtils {
             if (Objects.isNull(execute)) {
                 return false;
             }
-            return CommonConstant.TRUE.equals(execute.intValue());
+            return CommonConstants.TRUE.equals(execute.intValue());
         } catch (Exception e) {
             log.error("redis execLimitLua fail! e:{}", Throwables.getStackTraceAsString(e));
         }

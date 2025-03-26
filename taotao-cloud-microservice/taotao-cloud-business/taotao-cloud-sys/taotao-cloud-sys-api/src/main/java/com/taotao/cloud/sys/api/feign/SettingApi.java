@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.api.feign;
 
-import com.taotao.boot.common.constant.ServiceName;
+ import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.sys.api.feign.fallback.SettingApiFallback;
 import com.taotao.cloud.sys.api.feign.response.setting.AlipayPaymentSettingApiResponse;
@@ -42,7 +42,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @since 2022-03-25 14:09:48
  */
 @FeignClient(
-        name = ServiceName.TAOTAO_CLOUD_SYS,
+        name = ServiceNameConstants.TAOTAO_CLOUD_SYS,
         contextId = "IFeignSettingApi",
         fallbackFactory = SettingApiFallback.class)
 public interface SettingApi {

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.tenant.api.feign;
 
-import com.taotao.boot.common.constant.ServiceName;
+ import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.cloud.tenant.api.feign.fallback.FeignTenantFallbackImpl;
 import com.taotao.cloud.tenant.api.model.dto.TenantDTO;
 import org.springframework.cloud.openfeign.FeignAutoConfiguration;
@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(value = ServiceName.TAOTAO_CLOUD_TENANT, fallbackFactory = FeignTenantFallbackImpl.class)
+@FeignClient(value = ServiceNameConstants.TAOTAO_CLOUD_TENANT, fallbackFactory = FeignTenantFallbackImpl.class)
 public interface TenantServiceApi {
 
 	/**

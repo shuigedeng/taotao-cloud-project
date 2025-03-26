@@ -49,7 +49,7 @@ public class LoginUtils {
      */
     public boolean needLogin() {
         try {
-            if (CommonConstant.ENV_TEST.equals(env)) {
+            if (CommonConstants.ENV_TEST.equals(env)) {
                 WeChatLoginConfig bean = applicationContext.getBean(OfficialAccountParamConstant.WE_CHAT_LOGIN_CONFIG, WeChatLoginConfig.class);
                 if (Objects.nonNull(bean)) {
                     return true;

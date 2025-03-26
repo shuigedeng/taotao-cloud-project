@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.report.api.feign;
 
-import com.taotao.boot.common.constant.ServiceName;
+ import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.cloud.report.api.feign.fallback.FeignMemberStatisticsFallbackImpl;
 import com.taotao.cloud.report.api.model.dto.MemberStatisticsDTO;
 import com.taotao.cloud.report.api.model.vo.MemberStatisticsVO;
@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @FeignClient(
         contextId = "RemoteProductService",
-        value = ServiceName.TAOTAO_CLOUD_GOODS,
+        value = ServiceNameConstants.TAOTAO_CLOUD_GOODS,
         fallbackFactory = FeignMemberStatisticsFallbackImpl.class)
 public interface IFeignMemberStatisticsApi {
     @PostMapping(value = "/order")

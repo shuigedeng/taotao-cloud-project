@@ -58,10 +58,10 @@ public class TaskInfoUtils {
     public static String generateUrl(String url, Long templateId, Integer templateType) {
         url = url.trim();
         Long businessId = generateBusinessId(templateId, templateType);
-        if (url.indexOf(CommonConstant.QM) == -1) {
-            return url + CommonConstant.QM_STRING + CODE + CommonConstant.EQUAL_STRING + businessId;
+        if (url.indexOf(CommonConstants.QM) == -1) {
+            return url + CommonConstants.QM_STRING + CODE + CommonConstants.EQUAL_STRING + businessId;
         } else {
-            return url + CommonConstant.AND_STRING + CODE + CommonConstant.EQUAL_STRING + businessId;
+            return url + CommonConstants.AND_STRING + CODE + CommonConstants.EQUAL_STRING + businessId;
         }
     }
 

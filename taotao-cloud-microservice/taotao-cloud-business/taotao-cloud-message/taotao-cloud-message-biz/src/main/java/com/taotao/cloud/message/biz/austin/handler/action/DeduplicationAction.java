@@ -40,7 +40,7 @@ public class DeduplicationAction implements BusinessProcess<TaskInfo> {
         TaskInfo taskInfo = context.getProcessModel();
 
         // 配置样例{"deduplication_10":{"num":1,"time":300},"deduplication_20":{"num":5}}
-        String deduplicationConfig = config.getProperty(DEDUPLICATION_RULE_KEY, CommonConstant.EMPTY_JSON_OBJECT);
+        String deduplicationConfig = config.getProperty(DEDUPLICATION_RULE_KEY, CommonConstants.EMPTY_JSON_OBJECT);
 
         // 去重
         List<Integer> deduplicationList = EnumUtil.getCodeList(DeduplicationType.class);

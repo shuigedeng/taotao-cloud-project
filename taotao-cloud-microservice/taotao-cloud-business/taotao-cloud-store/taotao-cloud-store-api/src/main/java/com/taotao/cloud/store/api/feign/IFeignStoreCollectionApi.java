@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.store.api.feign;
 
-import com.taotao.boot.common.constant.ServiceName;
+ import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.boot.common.model.PageQuery;
 import com.taotao.boot.common.model.PageResult;
 import com.taotao.cloud.store.api.feign.fallback.FeignStoreApiFallback;
@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @FeignClient(
         contextId = "IFeignFreightTemplateService",
-        value = ServiceName.TAOTAO_CLOUD_GOODS,
+        value = ServiceNameConstants.TAOTAO_CLOUD_GOODS,
         fallbackFactory = FeignStoreApiFallback.class)
 public interface IFeignStoreCollectionApi {
 

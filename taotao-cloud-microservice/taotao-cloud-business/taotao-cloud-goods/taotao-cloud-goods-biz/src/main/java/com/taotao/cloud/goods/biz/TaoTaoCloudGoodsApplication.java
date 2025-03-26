@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz;
 
-import com.taotao.boot.common.constant.ServiceName;
+ import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.boot.common.constant.StarterName;
 import com.taotao.boot.common.utils.common.PropertyUtils;
 import com.taotao.boot.core.startup.StartupSpringApplication;

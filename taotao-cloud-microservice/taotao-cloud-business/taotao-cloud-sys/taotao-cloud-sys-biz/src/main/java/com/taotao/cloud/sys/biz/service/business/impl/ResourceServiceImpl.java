@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.service.business.impl;
 
-import com.taotao.boot.common.constant.CommonConstant;
+import com.taotao.boot.common.constant.CommonConstants.
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRpcRequest;
 import com.taotao.cloud.sys.biz.model.vo.menu.MenuQueryVO;
@@ -126,10 +126,10 @@ public class ResourceServiceImpl
 	public List<MenuTreeVO> findMenuTree(boolean lazy, Long parentId) {
 		if (!lazy) {
 			List<MenuBO> bos = findAllMenus();
-			return TreeUtil.buildTree(bos, CommonConstant.MENU_TREE_ROOT_ID);
+			return TreeUtil.buildTree(bos, CommonConstants.MENU_TREE_ROOT_ID);
 		}
 
-		Long parent = parentId == null ? CommonConstant.MENU_TREE_ROOT_ID : parentId;
+		Long parent = parentId == null ? CommonConstants.MENU_TREE_ROOT_ID : parentId;
 		List<MenuBO> bos = findMenuByParentId(parent);
 		return TreeUtil.buildTree(bos, parent);
 	}
@@ -149,7 +149,7 @@ public class ResourceServiceImpl
 		//	.sorted(Comparator.comparingInt(MenuTreeVO::getSort))
 		//	.toList();
 
-		// Long parent = parentId == null ? CommonConstant.MENU_TREE_ROOT_ID : parentId;
+		// Long parent = parentId == null ? CommonConstants.MENU_TREE_ROOT_ID : parentId;
 		// return TreeUtil.build(menuTreeList, parent);
 		return null;
 		// return ForestNodeMerger.merge(TreeUtil.buildTree(menus));

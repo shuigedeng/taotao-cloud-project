@@ -119,7 +119,7 @@ public class NacosInstancesChangeEventListenerConfiguration {
 			}
 
 			String serviceName = instancesChangeEvent.getServiceName();
-			if (serviceName.contains("gateway")) {
+			if (ServiceNameConstants.contains("gateway")) {
 				return;
 			}
 

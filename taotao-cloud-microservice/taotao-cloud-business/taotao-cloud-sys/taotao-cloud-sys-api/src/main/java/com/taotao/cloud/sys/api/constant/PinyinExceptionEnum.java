@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.api.constant;
 
-import com.taotao.boot.common.constant.RuleConstant;
+import com.taotao.boot.common.constant.RuleConstants;
 
 /**
  * 拼音工具相关异常
@@ -29,7 +29,7 @@ public enum PinyinExceptionEnum {
 
     /** 字符不能转成汉语拼音 */
     PARSE_ERROR(
-            RuleConstant.THIRD_ERROR_TYPE_CODE + PinyinConstants.PINYIN_EXCEPTION_STEP_CODE + "01", "拼音转化异常，具体信息：{}");
+            RuleConstants.THIRD_ERROR_TYPE_CODE + PinyinConstants.PINYIN_EXCEPTION_STEP_CODE + "01", "拼音转化异常，具体信息：{}");
 
     /** 错误编码 */
     private final String errorCode;

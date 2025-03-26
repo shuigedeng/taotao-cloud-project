@@ -19,7 +19,7 @@ package com.taotao.cloud.gateway.service.impl;
 import com.alibaba.csp.sentinel.util.StringUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Stopwatch;
-import com.taotao.boot.common.constant.CommonConstant;
+import com.taotao.boot.common.constant.CommonConstants.
 import com.taotao.boot.common.utils.date.DateUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.common.utils.servlet.RequestUtils;
@@ -113,9 +113,9 @@ public class SafeRuleServiceImpl implements ISafeRuleService {
 						&& StringUtil.isNotBlank(blackList.getEndTime())) {
 						if (DateUtils.between(
 							DateUtils.parseLocalTime(blackList.getStartTime(),
-								CommonConstant.DATETIME_FORMAT),
+								CommonConstants.DATETIME_FORMAT),
 							DateUtils.parseLocalTime(blackList.getEndTime(),
-								CommonConstant.DATETIME_FORMAT))) {
+								CommonConstants.DATETIME_FORMAT))) {
 							forbid.set(Boolean.TRUE);
 						}
 					}

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.gateway.filter.global;
 
-import com.taotao.boot.common.constant.CommonConstant;
+import com.taotao.boot.common.constant.CommonConstants.
 import com.taotao.boot.common.utils.common.IdGeneratorUtils;
 import com.taotao.boot.common.utils.servlet.TraceUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;
@@ -52,17 +52,17 @@ public class TraceLogFilter implements GlobalFilter, Ordered {
         TraceUtils.setTraceId(traceId);
 
         HttpHeaders headers = exchange.getRequest().getHeaders();
-        String version = headers.getFirst(CommonConstant.TTC_REQUEST_VERSION);
-        String tenantId = headers.getFirst(CommonConstant.TTC_TENANT_ID);
+        String version = headers.getFirst(CommonConstants.TTC_REQUEST_VERSION);
+        String tenantId = headers.getFirst(CommonConstants.TTC_TENANT_ID);
 
         ServerHttpRequest.Builder builder = exchange.getRequest()
                 .mutate()
-                .headers(h -> h.add(CommonConstant.TTC_TRACE_ID, traceId));
+                .headers(h -> h.add(CommonConstants.TTC_TRACE_ID, traceId));
         if (StrUtil.isEmpty(version)) {
-            builder.headers(h -> h.add(CommonConstant.TTC_REQUEST_VERSION, ttcVersion));
+            builder.headers(h -> h.add(CommonConstants.TTC_REQUEST_VERSION, ttcVersion));
         }
         if (StrUtil.isEmpty(tenantId)) {
-            builder.headers(h -> h.add(CommonConstant.TTC_TENANT_ID, CommonConstant.TTC_TENANT_ID_DEFAULT));
+            builder.headers(h -> h.add(CommonConstants.TTC_TENANT_ID, CommonConstants.TTC_TENANT_ID_DEFAULT));
         }
         ServerHttpRequest serverHttpRequest = builder.build();
 

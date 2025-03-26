@@ -17,7 +17,7 @@
 package com.taotao.cloud.gateway.authentication;
 
 import com.alibaba.fastjson.JSON;
-import com.taotao.boot.common.constant.CommonConstant;
+import com.taotao.boot.common.constant.CommonConstants.
 import com.taotao.boot.security.spring.core.userdetails.TtcUser;
 import org.dromara.hutool.core.collection.CollUtil;
 import org.springframework.http.ResponseEntity;
@@ -61,16 +61,16 @@ public class GatewayServerAuthenticationSuccessHandler implements ServerAuthenti
 
         if (principal instanceof TtcUser) {
 			TtcUser user = (TtcUser) authentication.getPrincipal();
-            headerValues.add(CommonConstant.TTC_USER_ID_HEADER, String.valueOf(user.getUserId()));
-            headerValues.add(CommonConstant.TTC_USER_HEADER, JSON.toJSONString(user));
-            headerValues.add(CommonConstant.TTC_USER_NAME_HEADER, user.getUsername());
+            headerValues.add(CommonConstants.TTC_USER_ID_HEADER, String.valueOf(user.getUserId()));
+            headerValues.add(CommonConstants.TTC_USER_HEADER, JSON.toJSONString(user));
+            headerValues.add(CommonConstants.TTC_USER_NAME_HEADER, user.getUsername());
         }
 
         //        OAuth2Authentication oauth2Authentication = (OAuth2Authentication) authentication;
         //        String clientId = oauth2Authentication.getOAuth2Request().getClientId();
-        //        headerValues.add(CommonConstant.TTC_TENANT_ID, clientId);
+        //        headerValues.add(CommonConstants.TTC_TENANT_ID, clientId);
         headerValues.add(
-                CommonConstant.TTC_USER_ROLE_HEADER,
+                CommonConstants.TTC_USER_ROLE_HEADER,
                 CollUtil.join(authentication.getAuthorities(), ","));
 
         ServerWebExchange exchange = webFilterExchange.getExchange();

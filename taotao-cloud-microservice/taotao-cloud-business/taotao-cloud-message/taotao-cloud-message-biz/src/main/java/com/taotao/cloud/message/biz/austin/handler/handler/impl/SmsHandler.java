@@ -122,7 +122,7 @@ public class SmsHandler extends BaseHandler{
         /**
          * 读取流量配置
          */
-        String property = config.getProperty(FLOW_KEY, CommonConstant.EMPTY_VALUE_JSON_ARRAY);
+        String property = config.getProperty(FLOW_KEY, CommonConstants.EMPTY_VALUE_JSON_ARRAY);
         JSONArray jsonArray = JSON.parseArray(property);
         for (int i = 0; i < jsonArray.size(); i++) {
             JSONArray array = jsonArray.getJSONObject(i).getJSONArray(FLOW_KEY_PREFIX + taskInfo.getMsgType());

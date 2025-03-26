@@ -116,7 +116,7 @@ public class OfficialAccountController {
      *
      * @return
      */
-    @RequestMapping(value = "/receipt", produces = {CommonConstant.CONTENT_TYPE_XML})
+    @RequestMapping(value = "/receipt", produces = {CommonConstants.CONTENT_TYPE_XML})
     @ApiOperation("/接收微信的事件消息")
     public String receiptMessage(HttpServletRequest request) {
         try {

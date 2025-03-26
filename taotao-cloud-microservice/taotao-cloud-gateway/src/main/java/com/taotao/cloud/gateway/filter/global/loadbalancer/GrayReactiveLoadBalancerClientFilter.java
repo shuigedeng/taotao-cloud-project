@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.gateway.filter.global.loadbalancer;
 
-import com.taotao.boot.common.constant.CommonConstant;
+import com.taotao.boot.common.constant.CommonConstants.
 import com.taotao.boot.common.utils.log.LogUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.dromara.hutool.core.text.StrUtil;
@@ -211,7 +211,7 @@ public class GrayReactiveLoadBalancerClientFilter extends ReactiveLoadBalancerCl
 
         private Response<ServiceInstance> getServiceInstanceResponseWithGray(List<ServiceInstance> instances,
                                                                              HttpHeaders headers) {
-            String reqVersion = headers.getFirst(CommonConstant.TTC_REQUEST_VERSION);
+            String reqVersion = headers.getFirst(CommonConstants.TTC_REQUEST_VERSION);
             if (instances.isEmpty()) {
                 return getServiceInstanceEmptyResponse();
             }

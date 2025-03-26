@@ -57,7 +57,7 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
             if (CharSequenceUtil.isNotBlank(param.getKeywords())) {
                 predicateList.add(cb.like(root.get("name").as(String.class), "%" + param.getKeywords() + "%"));
             }
-            predicateList.add(cb.equal(root.get("isDeleted").as(Integer.class), CommonConstant.FALSE));
+            predicateList.add(cb.equal(root.get("isDeleted").as(Integer.class), CommonConstants.FALSE));
             predicateList.add(cb.equal(root.get("creator").as(String.class), creator));
             Predicate[] p = new Predicate[predicateList.size()];
             // 查询
@@ -70,7 +70,7 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
 
     @Override
     public Long count() {
-        return messageTemplateDao.countByIsDeletedEquals(CommonConstant.FALSE);
+        return messageTemplateDao.countByIsDeletedEquals(CommonConstants.FALSE);
     }
 
     @Override
@@ -89,7 +89,7 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
     @Override
     public void deleteByIds(List<Long> ids) {
         Iterable<MessageTemplate> messageTemplates = messageTemplateDao.findAllById(ids);
-        messageTemplates.forEach(messageTemplate -> messageTemplate.setIsDeleted(CommonConstant.TRUE));
+        messageTemplates.forEach(messageTemplate -> messageTemplate.setIsDeleted(CommonConstants.TRUE));
         for (MessageTemplate messageTemplate : messageTemplates) {
             if (Objects.nonNull(messageTemplate.getCronTaskId()) && messageTemplate.getCronTaskId() > 0) {
                 cronTaskService.deleteCronTask(messageTemplate.getCronTaskId());
@@ -168,7 +168,7 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
                 .setTeam(CharSequenceUtil.isBlank(messageTemplate.getTeam()) ? AustinConstant.DEFAULT_TEAM : messageTemplate.getTeam())
                 .setAuditor(CharSequenceUtil.isBlank(messageTemplate.getAuditor()) ? AustinConstant.DEFAULT_AUDITOR : messageTemplate.getAuditor())
                 .setCreated(Math.toIntExact(DateUtil.currentSeconds()))
-                .setIsDeleted(CommonConstant.FALSE);
+                .setIsDeleted(CommonConstants.FALSE);
 
     }
 

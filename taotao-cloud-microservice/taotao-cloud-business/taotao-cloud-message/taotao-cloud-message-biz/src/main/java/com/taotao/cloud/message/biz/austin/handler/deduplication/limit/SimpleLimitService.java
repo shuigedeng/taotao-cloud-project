@@ -68,7 +68,7 @@ public class SimpleLimitService extends AbstractLimitService {
             if (Objects.nonNull(inRedisValue.get(key))) {
                 keyValues.put(key, String.valueOf(Integer.parseInt(inRedisValue.get(key)) + 1));
             } else {
-                keyValues.put(key, String.valueOf(CommonConstant.TRUE));
+                keyValues.put(key, String.valueOf(CommonConstants.TRUE));
             }
         }
         if (CollUtil.isNotEmpty(keyValues)) {

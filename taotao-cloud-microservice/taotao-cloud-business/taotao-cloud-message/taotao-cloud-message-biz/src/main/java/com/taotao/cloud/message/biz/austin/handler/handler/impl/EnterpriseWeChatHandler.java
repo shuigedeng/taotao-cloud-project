@@ -64,7 +64,7 @@ public class EnterpriseWeChatHandler extends BaseHandler{
 
             // 发送成功后记录TaskId，用于消息撤回(支持24小时之内)
             if (Integer.valueOf(WxCpErrorMsgEnum.CODE_0.getCode()).equals(result.getErrCode())) {
-                saveRecallInfo(WE_CHAT_RECALL_KEY_PREFIX, taskInfo.getMessageTemplateId(), String.valueOf(result.getMsgId()), CommonConstant.ONE_DAY_SECOND);
+                saveRecallInfo(WE_CHAT_RECALL_KEY_PREFIX, taskInfo.getMessageTemplateId(), String.valueOf(result.getMsgId()), CommonConstants.ONE_DAY_SECOND);
                 return true;
             }
             logUtils.print(AnchorInfo.builder().bizId(taskInfo.getBizId()).messageId(taskInfo.getMessageId()).businessId(taskInfo.getBusinessId()).ids(taskInfo.getReceiver()).state(result.getErrCode()).build());
@@ -100,7 +100,7 @@ public class EnterpriseWeChatHandler extends BaseHandler{
         if (AustinConstant.SEND_ALL.equals(CollUtil.getFirst(taskInfo.getReceiver()))) {
             userId = CollUtil.getFirst(taskInfo.getReceiver());
         } else {
-            userId = StringUtils.join(taskInfo.getReceiver(), CommonConstant.RADICAL);
+            userId = StringUtils.join(taskInfo.getReceiver(), CommonConstants.RADICAL);
         }
         EnterpriseWeChatContentModel contentModel = (EnterpriseWeChatContentModel) taskInfo.getContentModel();
 

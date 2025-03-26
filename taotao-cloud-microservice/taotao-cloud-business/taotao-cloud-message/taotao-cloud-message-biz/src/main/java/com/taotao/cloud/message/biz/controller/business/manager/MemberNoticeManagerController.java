@@ -21,7 +21,7 @@ package com.taotao.cloud.message.biz.controller.business.manager; // package
 // import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 // import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 // import com.baomidou.mybatisplus.core.metadata.IPage;
-// import com.taotao.boot.common.constant.CommonConstant;
+// import com.taotao.boot.common.constant.CommonConstants.
 // import com.taotao.boot.common.model.Result;
 // import com.taotao.boot.logger.annotation.RequestLogger;
 // import io.swagger.v3.oas.annotations.Operation;

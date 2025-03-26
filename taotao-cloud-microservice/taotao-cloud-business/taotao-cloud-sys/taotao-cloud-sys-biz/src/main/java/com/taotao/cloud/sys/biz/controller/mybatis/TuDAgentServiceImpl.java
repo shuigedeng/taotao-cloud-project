@@ -90,7 +90,7 @@ package com.taotao.cloud.sys.biz.controller.mybatis;
 //                    Optional.ofNullable(resultContext.getResultObject())
 //                            .ifPresent(this.tuDAgentServiceImplQueue1::add);
 //                    size1++;
-//                    if (size1 >= CommonConstant.BATCH_SIZE) {
+//                    if (size1 >= CommonConstants.BATCH_SIZE) {
 //                        this.handle1(staratDateTime);
 //                    }
 //                });
@@ -106,7 +106,7 @@ package com.taotao.cloud.sys.biz.controller.mybatis;
 //        try {
 //            // 在这里可以对你获取到的批量结果数据进行需要的业务处理
 //            List<TuDAgent> tuDAgents1 = new ArrayList<>();
-//            this.tuDAgentServiceImplQueue1.drainTo(tuDAgents1, CommonConstant.BATCH_SIZE);
+//            this.tuDAgentServiceImplQueue1.drainTo(tuDAgents1, CommonConstants.BATCH_SIZE);
 //            if (CollectionUtils.isEmpty(tuDAgents1)) {
 //                return;
 //            }
@@ -148,7 +148,7 @@ package com.taotao.cloud.sys.biz.controller.mybatis;
 //                    FateGoals one = this.fateGoalsService.getOne(new QueryWrapper<FateGoals>()
 //                            .lambda()
 //                            .eq(FateGoals::getAgentCode, to.getAgentCode())
-//                            .last(CommonConstant.LIMIT1)
+//                            .last(CommonConstants.LIMIT1)
 //                    );
 //                    Optional.ofNullable(one).ifPresent(itemFateGoals -> {
 //                        //目标达成-APE
@@ -180,7 +180,7 @@ package com.taotao.cloud.sys.biz.controller.mybatis;
 //            Optional.ofNullable(resultContext.getResultObject())
 //                    .ifPresent(this.tuDAgentServiceImplQueue2::add);
 //            size2++;
-//            if (size2 >= CommonConstant.BATCH_SIZE) {
+//            if (size2 >= CommonConstants.BATCH_SIZE) {
 //                this.handle2(staratDateTime);
 //            }
 //        });
@@ -196,7 +196,7 @@ package com.taotao.cloud.sys.biz.controller.mybatis;
 //        try {
 //            // 在这里可以对你获取到的批量结果数据进行需要的业务处理
 //            List<TuDAgent> tuDAgents2 = new ArrayList<>();
-//            this.tuDAgentServiceImplQueue1.drainTo(tuDAgents2, CommonConstant.BATCH_SIZE);
+//            this.tuDAgentServiceImplQueue1.drainTo(tuDAgents2, CommonConstants.BATCH_SIZE);
 //            if (CollectionUtils.isEmpty(tuDAgents2)) {
 //                return;
 //            }

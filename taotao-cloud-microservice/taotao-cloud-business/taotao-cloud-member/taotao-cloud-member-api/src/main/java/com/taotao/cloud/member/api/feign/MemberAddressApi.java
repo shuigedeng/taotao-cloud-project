@@ -16,14 +16,14 @@
 
 package com.taotao.cloud.member.api.feign;
 
-import com.taotao.boot.common.constant.ServiceName;
+ import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.cloud.member.api.feign.fallback.MemberAddressApiFallback;
 import com.taotao.cloud.member.api.feign.response.MemberAddressApiResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(value = ServiceName.TAOTAO_CLOUD_MEMBER, fallbackFactory = MemberAddressApiFallback.class)
+@FeignClient(value = ServiceNameConstants.TAOTAO_CLOUD_MEMBER, fallbackFactory = MemberAddressApiFallback.class)
 public interface MemberAddressApi {
 
 	@GetMapping(value = "/member/feign/address/shippingAddressId")

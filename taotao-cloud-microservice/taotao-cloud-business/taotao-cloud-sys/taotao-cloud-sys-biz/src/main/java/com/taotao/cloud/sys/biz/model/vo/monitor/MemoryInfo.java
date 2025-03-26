@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.model.vo.monitor;
 
-import com.taotao.boot.common.constant.CommonConstant;
+import com.taotao.boot.common.constant.CommonConstants.
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.experimental.Accessors;
@@ -30,15 +30,15 @@ public class MemoryInfo {
     private double free;
 
     public BigDecimal getTotal() {
-        return NumberUtil.div(total, CommonConstant.GB, 2);
+        return NumberUtil.div(total, CommonConstants.GB, 2);
     }
 
     public BigDecimal getUsed() {
-        return NumberUtil.div(used, CommonConstant.GB, 2);
+        return NumberUtil.div(used, CommonConstants.GB, 2);
     }
 
     public BigDecimal getFree() {
-        return NumberUtil.div(free, CommonConstant.GB, 2);
+        return NumberUtil.div(free, CommonConstants.GB, 2);
     }
 
     public BigDecimal getUsage() {
