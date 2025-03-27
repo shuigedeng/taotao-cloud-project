@@ -19,7 +19,7 @@ package com.taotao.cloud.gateway.service.impl;
 import com.alibaba.csp.sentinel.util.StringUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Stopwatch;
-import com.taotao.boot.common.constant.CommonConstants.
+import com.taotao.boot.common.constant.CommonConstants;
 import com.taotao.boot.common.utils.date.DateUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.common.utils.servlet.RequestUtils;

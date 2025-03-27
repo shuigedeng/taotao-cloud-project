@@ -17,8 +17,8 @@
 package com.taotao.cloud.gateway.filter.gateway;
 
 import com.taotao.boot.cache.redis.repository.RedisRepository;
-import com.taotao.boot.common.constant.RedisConstant;
-import com.taotao.boot.common.constant.SecurityConstant;
+import com.taotao.boot.common.constant.RedisConstants;
+import com.taotao.boot.common.constant.SecurityConstants;
 import com.taotao.boot.common.exception.BaseException;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -55,7 +55,7 @@ public class ValidateCodeGatewayFilterFactory extends AbstractGatewayFilterFacto
     public GatewayFilter apply(Object config) {
         return (exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
-            if (!StrUtil.containsAnyIgnoreCase(request.getURI().getPath(), SecurityConstant.OAUTH_TOKEN_URL)) {
+            if (!StrUtil.containsAnyIgnoreCase(request.getURI().getPath(), SecurityConstants.OAUTH_TOKEN_URL)) {
                 return chain.filter(exchange);
             }
             validateCode(request);
@@ -70,7 +70,7 @@ public class ValidateCodeGatewayFilterFactory extends AbstractGatewayFilterFacto
         if (StrUtil.isBlank(code)) {
             throw new BaseException(NOT_CODE_NULL);
         }
-        String key = RedisConstant.CAPTCHA_KEY_PREFIX + t;
+        String key = RedisConstants.CAPTCHA_KEY_PREFIX + t;
         if (!redisRepository.exists(key)) {
             throw new BaseException(NOT_LEGAL);
         }

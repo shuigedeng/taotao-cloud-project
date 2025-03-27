@@ -18,7 +18,7 @@ package com.taotao.cloud.gateway.filter.global;
 
 import static com.taotao.boot.common.constant.CommonConstants.TTC_TRACE_ID;
 
-import com.taotao.boot.common.constant.CommonConstants.
+import com.taotao.boot.common.constant.CommonConstants;
 import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.common.utils.servlet.TraceUtils;

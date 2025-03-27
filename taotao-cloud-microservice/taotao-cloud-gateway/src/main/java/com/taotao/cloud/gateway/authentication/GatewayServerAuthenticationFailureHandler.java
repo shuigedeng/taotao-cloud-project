@@ -17,7 +17,7 @@
 package com.taotao.cloud.gateway.authentication;
 
 import com.alibaba.fastjson.JSON;
-import com.taotao.boot.common.constant.CommonConstants.
+import com.taotao.boot.common.constant.CommonConstants;
 import com.taotao.boot.common.utils.log.LogUtils;
 import org.dromara.hutool.core.collection.CollUtil;
 import org.springframework.http.HttpStatus;

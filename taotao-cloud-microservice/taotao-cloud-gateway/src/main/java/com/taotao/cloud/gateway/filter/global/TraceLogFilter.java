@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.gateway.filter.global;
 
-import com.taotao.boot.common.constant.CommonConstants.
+import com.taotao.boot.common.constant.CommonConstants;
 import com.taotao.boot.common.utils.common.IdGeneratorUtils;
 import com.taotao.boot.common.utils.servlet.TraceUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;

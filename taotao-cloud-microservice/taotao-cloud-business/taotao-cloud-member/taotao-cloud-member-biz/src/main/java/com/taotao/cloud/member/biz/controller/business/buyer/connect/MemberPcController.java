@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.biz.controller.business.buyer.connect; // package
                                                                        // com.taotao.cloud.member.biz.controller.buyer.connect;
 //
-// import com.taotao.boot.common.constant.CommonConstants.
+// import com.taotao.boot.common.constant.CommonConstants;
 // import com.taotao.boot.common.enums.ResultEnum;
 // import com.taotao.boot.common.enums.UserEnum;
 // import com.taotao.boot.common.exception.BusinessException;

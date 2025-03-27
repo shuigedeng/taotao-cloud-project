@@ -20,7 +20,7 @@ import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.G
 
 import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.boot.captcha.util.CaptchaUtils;
-import com.taotao.boot.common.constant.RedisConstant;
+import com.taotao.boot.common.constant.RedisConstants;
 import com.taotao.boot.common.model.Result;
 import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.common.utils.context.ContextUtils;
@@ -254,7 +254,7 @@ public class RouterFunctionConfiguration {
 				MultiValueMap<String, String> params = request.queryParams();
 				String t = params.getFirst(PARAM_T);
 
-				redisRepository.setExpire(RedisConstant.CAPTCHA_KEY_PREFIX + t, text.toLowerCase(),
+				redisRepository.setExpire(RedisConstants.CAPTCHA_KEY_PREFIX + t, text.toLowerCase(),
 					120);
 
 				return ServerResponse.status(HttpStatus.HTTP_OK)

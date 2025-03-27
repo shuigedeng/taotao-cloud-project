@@ -17,7 +17,7 @@
 package com.taotao.cloud.gateway.authentication;
 
 import com.taotao.boot.cache.redis.repository.RedisRepository;
-import com.taotao.boot.common.constant.RedisConstant;
+import com.taotao.boot.common.constant.RedisConstants;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.exception.InvalidTokenException;
 import com.taotao.boot.security.spring.access.security.SecurityConfigAttribute;
@@ -119,7 +119,7 @@ public class GatewayReactiveAuthorizationManager implements
 
 					// 判断kid是否存在 存在表示令牌不能使用 即:用户已退出
 					Boolean hasKey = redisRepository.exists(
-						RedisConstant.LOGOUT_JWT_KEY_PREFIX + kid);
+						RedisConstants.LOGOUT_JWT_KEY_PREFIX + kid);
 					if (hasKey) {
 						throw new InvalidTokenException("无效的token");
 					}

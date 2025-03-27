@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.model.vo.monitor;
 
 import com.taotao.boot.common.constant.CommonConstants;
-import com.taotao.boot.common.constant.CommonConstants.
+import com.taotao.boot.common.constant.CommonConstants;
 import lombok.Data;
 import lombok.experimental.*;
 import lombok.experimental.*;
