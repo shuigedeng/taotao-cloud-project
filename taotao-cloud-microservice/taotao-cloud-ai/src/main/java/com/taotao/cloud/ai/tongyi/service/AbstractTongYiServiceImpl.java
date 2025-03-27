@@ -17,12 +17,12 @@
 package com.taotao.cloud.ai.tongyi.service;
 
 import com.taotao.cloud.ai.tongyi.models.ActorsFilms;
-import java.util.List;
-import java.util.Map;
-
 import com.taotao.cloud.ai.tongyi.models.Completion;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.image.ImageResponse;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author yuluo
@@ -45,63 +45,63 @@ public abstract class AbstractTongYiServiceImpl implements TongYiService {
 	public Map<String, String> streamCompletion(String message) {
 
 		throw new RuntimeException(INFO_PREFIX + Thread.currentThread()
-				.getStackTrace()[2].getMethodName() + INFO_SUFFIX);
+			.getStackTrace()[2].getMethodName() + INFO_SUFFIX);
 	}
 
 	@Override
 	public ActorsFilms genOutputParse(String actor) {
 
 		throw new RuntimeException(INFO_PREFIX + Thread.currentThread()
-				.getStackTrace()[2].getMethodName() + INFO_SUFFIX);
+			.getStackTrace()[2].getMethodName() + INFO_SUFFIX);
 	}
 
 	@Override
 	public AssistantMessage genPromptTemplates(String adjective, String topic) {
 
 		throw new RuntimeException(INFO_PREFIX + Thread.currentThread()
-				.getStackTrace()[2].getMethodName() + INFO_SUFFIX);
+			.getStackTrace()[2].getMethodName() + INFO_SUFFIX);
 	}
 
 	@Override
 	public AssistantMessage genRole(String message, String name, String voice) {
 
 		throw new RuntimeException(INFO_PREFIX + Thread.currentThread()
-				.getStackTrace()[2].getMethodName() + INFO_SUFFIX);
+			.getStackTrace()[2].getMethodName() + INFO_SUFFIX);
 	}
 
 	@Override
 	public Completion stuffCompletion(String message, boolean stuffit) {
 
 		throw new RuntimeException(INFO_PREFIX + Thread.currentThread()
-				.getStackTrace()[2].getMethodName() + INFO_SUFFIX);
+			.getStackTrace()[2].getMethodName() + INFO_SUFFIX);
 	}
 
 	@Override
 	public ImageResponse genImg(String imgPrompt) {
 
 		throw new RuntimeException(INFO_PREFIX + Thread.currentThread()
-				.getStackTrace()[2].getMethodName() + INFO_SUFFIX);
+			.getStackTrace()[2].getMethodName() + INFO_SUFFIX);
 	}
 
 	@Override
 	public String genAudio(String text) {
 
 		throw new RuntimeException(INFO_PREFIX + Thread.currentThread()
-				.getStackTrace()[2].getMethodName() + INFO_SUFFIX);
+			.getStackTrace()[2].getMethodName() + INFO_SUFFIX);
 	}
 
 	@Override
 	public List<Double> textEmbedding(String text) {
 
 		throw new RuntimeException(INFO_PREFIX + Thread.currentThread()
-				.getStackTrace()[2].getMethodName() + INFO_SUFFIX);
+			.getStackTrace()[2].getMethodName() + INFO_SUFFIX);
 	}
 
 	@Override
 	public String audioTranscription(String url) {
 
 		throw new RuntimeException(INFO_PREFIX + Thread.currentThread()
-				.getStackTrace()[2].getMethodName() + INFO_SUFFIX);
+			.getStackTrace()[2].getMethodName() + INFO_SUFFIX);
 	}
 
 }

@@ -1,13 +1,13 @@
 dependencies {
-    implementation 'org.apache.seatunnel:seatunnel-transforms-v2:2.3.9'
-    implementation 'org.apache.seatunnel:seatunnel-api:2.3.9'
-    implementation 'org.apache.seatunnel:seatunnel-starter:2.3.9'
+    implementation 'org.apache.seatunnel:seatunnel-transforms-v2:2.3.10'
+    implementation 'org.apache.seatunnel:seatunnel-api:2.3.10'
+    implementation 'org.apache.seatunnel:seatunnel-starter:2.3.10'
 
-    implementation 'org.apache.seatunnel:connector-fake:2.3.9'
-    implementation 'org.apache.seatunnel:connector-console:2.3.9'
-    implementation 'org.apache.seatunnel:connector-assert:2.3.9'
+    implementation 'org.apache.seatunnel:connector-fake:2.3.10'
+    implementation 'org.apache.seatunnel:connector-console:2.3.10'
+    implementation 'org.apache.seatunnel:connector-assert:2.3.10'
 
-    implementation 'org.apache.seatunnel:seatunnel-flink-15-starter:2.3.9'
+    implementation 'org.apache.seatunnel:seatunnel-flink-15-starter:2.3.10'
 
     // flinksql本地运行需要的依赖
     implementation "org.apache.flink:flink-core:2.0.0"
@@ -65,4 +65,16 @@ dependencies {
     compileOnly 'com.google.auto.service:auto-service-annotations:1.1.1'
     //https://search.maven.org/artifact/com.google.auto.service/auto-service
     annotationProcessor "com.google.auto.service:auto-service:1.1.1"
+}
+
+
+configurations {
+    configureEach {
+        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
+
+        resolutionStrategy {
+            force "org.glassfish:javax.el:3.0.0"
+        }
+    }
 }

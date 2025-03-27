@@ -19,11 +19,7 @@ package com.taotao.cloud.ai.tongyirag.controller;
 
 import com.taotao.cloud.ai.tongyirag.service.RAGService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
@@ -35,11 +31,11 @@ public class RAGController {
 
 	@GetMapping("/chat")
 	public String chatMessage(@RequestParam(value = "prompt",
-			defaultValue = "What ber pairs well with smoked meats?") String prompt) {
+		defaultValue = "What ber pairs well with smoked meats?") String prompt) {
 
 		return ragService.retrieve(prompt)
-						.getOutput()
-						.getContent();
+			.getOutput()
+			.getContent();
 	}
 
 }

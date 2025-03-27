@@ -177,3 +177,14 @@ dependencies {
     //implementation 'org.slf4j:slf4j-api:2.0.17'
     //implementation 'org.slf4j:slf4j-reload4j:2.0.17'
 }
+
+configurations {
+    configureEach {
+        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
+
+        resolutionStrategy {
+            force "org.glassfish:javax.el:3.0.0"
+        }
+    }
+}

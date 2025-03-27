@@ -16,21 +16,17 @@
 
 package com.taotao.cloud.ai.tongyi.controller;
 
-import java.util.List;
-import java.util.Map;
-
-import com.alibaba.dashscope.audio.asr.transcription.TranscriptionParam;
-
+import com.taotao.cloud.ai.tongyi.models.ActorsFilms;
+import com.taotao.cloud.ai.tongyi.service.TongYiService;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.image.ImageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.Resource;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * TongYi models Spring Cloud Alibaba Controller.
@@ -51,8 +47,8 @@ public class TongYiController {
 
 	@GetMapping("/example")
 	public String completion(
-			@RequestParam(value = "message", defaultValue = "Tell me a joke")
-			String message
+		@RequestParam(value = "message", defaultValue = "Tell me a joke")
+		String message
 	) {
 
 		return tongYiSimpleService.completion(message);
@@ -60,8 +56,8 @@ public class TongYiController {
 
 	@GetMapping("/stream")
 	public Map<String, String> streamCompletion(
-			@RequestParam(value = "message", defaultValue = "请告诉我西红柿炖牛腩怎么做？")
-			String message
+		@RequestParam(value = "message", defaultValue = "请告诉我西红柿炖牛腩怎么做？")
+		String message
 	) {
 
 		return tongYiSimpleService.streamCompletion(message);
@@ -73,7 +69,7 @@ public class TongYiController {
 
 	@GetMapping("/output")
 	public ActorsFilms generate(
-			@RequestParam(value = "actor", defaultValue = "Jeff Bridges") String actor
+		@RequestParam(value = "actor", defaultValue = "Jeff Bridges") String actor
 	) {
 
 		return tongYiOutputService.genOutputParse(actor);
@@ -85,7 +81,7 @@ public class TongYiController {
 
 	@GetMapping("/prompt-tmpl")
 	public AssistantMessage completion(@RequestParam(value = "adjective", defaultValue = "funny") String adjective,
-			@RequestParam(value = "topic", defaultValue = "cows") String topic) {
+									   @RequestParam(value = "topic", defaultValue = "cows") String topic) {
 
 		return tongYiPromptTemplateService.genPromptTemplates(adjective, topic);
 	}
@@ -96,9 +92,9 @@ public class TongYiController {
 
 	@GetMapping("/roles")
 	public AssistantMessage generate(
-			@RequestParam(value = "message", defaultValue = "Tell me about three famous pirates from the Golden Age of Piracy and why they did.  Write at least a sentence for each pirate.") String message,
-			@RequestParam(value = "name", defaultValue = "bot") String name,
-			@RequestParam(value = "voice", defaultValue = "pirate") String voice) {
+		@RequestParam(value = "message", defaultValue = "Tell me about three famous pirates from the Golden Age of Piracy and why they did.  Write at least a sentence for each pirate.") String message,
+		@RequestParam(value = "name", defaultValue = "bot") String name,
+		@RequestParam(value = "voice", defaultValue = "pirate") String voice) {
 
 		return tongYiRolesService.genRole(message, name, voice);
 	}
@@ -109,8 +105,8 @@ public class TongYiController {
 
 	@GetMapping("/stuff")
 	public Completion completion(@RequestParam(value = "message",
-			defaultValue = "Which athletes won the mixed doubles gold medal in curling at the 2022 Winter Olympics?") String message,
-			@RequestParam(value = "stuffit", defaultValue = "false") boolean stuffit) {
+									 defaultValue = "Which athletes won the mixed doubles gold medal in curling at the 2022 Winter Olympics?") String message,
+								 @RequestParam(value = "stuffit", defaultValue = "false") boolean stuffit) {
 
 		return tongYiStuffService.stuffCompletion(message, stuffit);
 	}
@@ -121,7 +117,7 @@ public class TongYiController {
 
 	@GetMapping("/img")
 	public ImageResponse genImg(@RequestParam(value = "prompt",
-			defaultValue = "Painting a picture of blue water and blue sky.") String imgPrompt) {
+		defaultValue = "Painting a picture of blue water and blue sky.") String imgPrompt) {
 
 		return tongYiImgService.genImg(imgPrompt);
 	}
@@ -132,7 +128,7 @@ public class TongYiController {
 
 	@GetMapping("/audio/speech")
 	public String genAudio(@RequestParam(value = "prompt",
-			defaultValue = "你好，Spring Cloud Alibaba AI 框架！") String prompt) {
+		defaultValue = "你好，Spring Cloud Alibaba AI 框架！") String prompt) {
 
 		return tongYiAudioService.genAudio(prompt);
 	}
@@ -145,12 +141,13 @@ public class TongYiController {
 	 * audio transcription. Support urls audio resource.
 	 * {@link Resource}
 	 * {@link TranscriptionParam}
+	 *
 	 * @param url audio url.
 	 * @return transcription result, is String type.
 	 */
 	@GetMapping("/audio/transcription")
 	public String audioTranscription(@RequestParam(value = "audioUrls",
-			defaultValue = "https://dashscope.oss-cn-beijing.aliyuncs.com/samples/audio/paraformer/realtime_asr_example.wav") String url) {
+		defaultValue = "https://dashscope.oss-cn-beijing.aliyuncs.com/samples/audio/paraformer/realtime_asr_example.wav") String url) {
 
 		return tongYiAudioTranscriptionService.audioTranscription(url);
 	}
@@ -161,7 +158,7 @@ public class TongYiController {
 
 	@GetMapping("/textEmbedding")
 	public List<Double> textEmbedding(@RequestParam(value = "text",
-			defaultValue = "Spring Cloud Alibaba AI 框架！") String text) {
+		defaultValue = "Spring Cloud Alibaba AI 框架！") String text) {
 
 		return tongYiTextEmbeddingService.textEmbedding(text);
 	}

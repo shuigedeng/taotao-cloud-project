@@ -1,8 +1,5 @@
 package com.taotao.cloud.ai.config;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.reader.ExtractedTextFormatter;
 import org.springframework.ai.reader.pdf.PagePdfDocumentReader;
@@ -15,6 +12,10 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 @Service
 @RequiredArgsConstructor
@@ -108,8 +109,7 @@ public class PdfStoreService {
 			PagePdfDocumentReader pagePdfDocumentReader = new PagePdfDocumentReader(fileResource,
 				loadConfig);
 			vectorStore.accept(tokenTextSplitter.apply(pagePdfDocumentReader.get()));
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 

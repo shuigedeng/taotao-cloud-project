@@ -53,7 +53,7 @@ dependencies {
     implementation "commons-fileupload:commons-fileupload:1.5"
     implementation "commons-io:commons-io:2.18.0"
 
-    implementation "org.webjars:webjars-locator-lite:1.0.1"
+    implementation "org.webjars:webjars-locator-lite:1.1.0"
 
     implementation "io.grpc:grpc-api:1.71.0"
     implementation "io.grpc:grpc-context:1.71.0"

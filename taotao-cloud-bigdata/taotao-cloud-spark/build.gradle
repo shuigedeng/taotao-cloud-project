@@ -80,3 +80,15 @@ shadowJar {
     //    exclude(dependency{ it.moduleGroup == "xml-apis" })
     //}
 }
+
+
+configurations {
+    configureEach {
+        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
+
+        resolutionStrategy {
+            force "org.glassfish:javax.el:3.0.0"
+        }
+    }
+}

@@ -56,7 +56,7 @@ public class RAGService {
 
 	public Generation retrieve(String message) {
 
-		SearchRequest request = SearchRequest.query(message).withTopK(topK);
+		SearchRequest request = SearchRequest.builder().query(message).topK(topK).build();
 		List<Document> docs = store.similaritySearch(request);
 
 		Message systemMessage = getSystemMessage(docs);
@@ -71,7 +71,7 @@ public class RAGService {
 	private Message getSystemMessage(List<Document> similarDocuments) {
 
 		String documents = similarDocuments.stream()
-				.map(Document::getContent)
+				.map(Document::getText)
 				.collect(Collectors.joining("\n"));
 		SystemPromptTemplate systemPromptTemplate = new SystemPromptTemplate(systemBeerPrompt);
 

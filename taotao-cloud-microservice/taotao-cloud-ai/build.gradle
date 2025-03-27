@@ -165,9 +165,27 @@ archivesBaseName = 'taotao-cloud-ai'
 
 configurations {
     configureEach {
+        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
+
+        resolutionStrategy {
+            force "org.bouncycastle:bcprov-jdk15on:1.70"
+            force "org.springframework.ai:spring-ai-bedrock:1.0.0-M6"
+            force "org.springframework.ai:spring-ai-azure-openai:1.0.0-M6"
+            force "org.springframework.ai:spring-ai-core:1.0.0-M6"
+            force "org.springframework.ai:spring-ai-ollama:1.0.0-M6"
+            force "org.springframework.ai:spring-ai-openai:1.0.0-M6"
+            force "org.springframework.ai:spring-ai-retry:1.0.0-M6"
+            force "org.springframework.ai:spring-ai-transformers:1.0.0-M6"
+            force "org.springframework.ai:spring-ai-zhipuai:1.0.0-M6"
+            force "org.springframework.ai:spring-ai-minimax:1.0.0-M6"
+            force "org.springframework.ai:spring-ai-mistral-ai:1.0.0-M6"
+        }
+
         exclude group: "org.springframework.boot", module: "spring-boot-starter-data-jpa"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "com.querydsl", module: "querydsl-apt"
         exclude group: "commons-logging", module: "commons-logging"
+        exclude group: "com.redis.om", module: "redis-om-spring"
     }
 }

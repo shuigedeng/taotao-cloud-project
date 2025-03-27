@@ -16,16 +16,11 @@
 
 package com.taotao.cloud.ai.tongyirag.loader;
 
-import java.util.Map;
-import java.util.Objects;
-import java.util.zip.GZIPInputStream;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.ai.autoconfigure.vectorstore.redis.RedisVectorStoreProperties;
 import org.springframework.ai.reader.JsonReader;
-import org.springframework.ai.vectorstore.RedisVectorStore;
+import org.springframework.ai.vectorstore.redis.RedisVectorStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -33,13 +28,17 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
+import java.util.Objects;
+import java.util.zip.GZIPInputStream;
+
 
 @Component
 public class RAGDataLoader implements ApplicationRunner {
 
 	private static final Logger logger = LoggerFactory.getLogger(RAGDataLoader.class);
 
-	private static final String[] KEYS = { "name", "abv", "ibu", "description" };
+	private static final String[] KEYS = {"name", "abv", "ibu", "description"};
 
 	@Value("classpath:/data/beers.json.gz")
 	private Resource data;

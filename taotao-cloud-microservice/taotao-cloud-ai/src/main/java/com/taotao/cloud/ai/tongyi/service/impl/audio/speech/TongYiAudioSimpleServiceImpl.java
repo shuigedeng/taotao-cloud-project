@@ -16,21 +16,20 @@
 
 package com.taotao.cloud.ai.tongyi.service.impl.audio.speech;
 
+import com.alibaba.cloud.ai.tongyi.audio.speech.api.SpeechModel;
+import com.alibaba.dashscope.audio.tts.SpeechSynthesisAudioFormat;
 import com.taotao.cloud.ai.tongyi.service.AbstractTongYiServiceImpl;
 import com.taotao.cloud.ai.tongyi.service.TongYiService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-import com.alibaba.cloud.ai.tongyi.audio.speech.api.SpeechModel;
-import com.alibaba.dashscope.audio.tts.SpeechSynthesisAudioFormat;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * @author yuluo
@@ -71,8 +70,7 @@ public class TongYiAudioSimpleServiceImpl extends AbstractTongYiServiceImpl {
 
 		try (FileOutputStream fos = new FileOutputStream(file)) {
 			fos.write(audio.array());
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 

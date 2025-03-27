@@ -16,14 +16,14 @@
 
 package com.taotao.cloud.ai.tongyi.service;
 
-import java.util.List;
-import java.util.Map;
-
 import com.taotao.cloud.ai.tongyi.models.ActorsFilms;
 import com.taotao.cloud.ai.tongyi.models.Completion;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.embedding.EmbeddingResponse;
 import org.springframework.ai.image.ImageResponse;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author yuluo
@@ -61,7 +61,7 @@ public interface TongYiService {
 	 * Prompt template.
 	 *
 	 * @param adjective params1.
-	 * @param topic params2.
+	 * @param topic     params2.
 	 * @return AI answer.
 	 */
 	AssistantMessage genPromptTemplates(String adjective, String topic);
@@ -70,8 +70,8 @@ public interface TongYiService {
 	 * AI role example.
 	 *
 	 * @param message question content,
-	 * @param name params1.
-	 * @param voice params2.
+	 * @param name    params1.
+	 * @param voice   params2.
 	 * @return AI answer.
 	 */
 	AssistantMessage genRole(String message, String name, String voice);
@@ -87,6 +87,7 @@ public interface TongYiService {
 
 	/**
 	 * Gen images.
+	 *
 	 * @param imgPrompt prompt info.
 	 * @return {@link ImageResponse}
 	 */
@@ -94,6 +95,7 @@ public interface TongYiService {
 
 	/**
 	 * Gen audio.
+	 *
 	 * @param text prompt info.
 	 * @return ByteBuffer object.
 	 */
@@ -101,6 +103,7 @@ public interface TongYiService {
 
 	/**
 	 * Audio Transcription.
+	 *
 	 * @param audioUrls url of the audio file to be transcribed.
 	 * @return the result file Path.
 	 */
@@ -108,6 +111,7 @@ public interface TongYiService {
 
 	/**
 	 * TongYI LLM Text embedding.
+	 *
 	 * @param text input text.
 	 * @return {@link EmbeddingResponse}
 	 */
