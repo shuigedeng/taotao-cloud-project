@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Service
-public class GeneratorServiceImpl implements GeneratorService {
+public class TtcGeneratorServiceImpl implements TtcGeneratorService {
 
     String templateCpnfig = null;
 

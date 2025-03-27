@@ -10,7 +10,7 @@ import java.util.Map;
  *
  * @author zhengkai.blog.csdn.net
  */
-public interface GeneratorService {
+public interface TtcGeneratorService {
 
     String getTemplateConfig() throws IOException;
 

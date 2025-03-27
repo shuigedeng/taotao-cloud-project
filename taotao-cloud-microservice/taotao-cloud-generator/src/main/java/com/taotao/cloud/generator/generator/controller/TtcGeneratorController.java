@@ -3,7 +3,7 @@ package com.taotao.cloud.generator.generator.controller;
 import com.taotao.cloud.generator.generator.entity.ClassInfo;
 import com.taotao.cloud.generator.generator.entity.ParamInfo;
 import com.taotao.cloud.generator.generator.entity.ReturnT;
-import com.taotao.cloud.generator.generator.service.GeneratorService;
+import com.taotao.cloud.generator.generator.service.TtcGeneratorService;
 import com.taotao.cloud.generator.generator.util.MapUtil;
 import com.taotao.cloud.generator.generator.util.TableParseUtil;
 import com.taotao.cloud.generator.generator.util.ValueUtil;
@@ -23,12 +23,12 @@ import java.util.Map;
  */
 @Controller
 @Slf4j
-public class GeneratorController {
+public class TtcGeneratorController {
     @Autowired
     private ValueUtil valueUtil;
 
     @Autowired
-    private GeneratorService generatorService;
+    private TtcGeneratorService ttcGeneratorService;
 
     @GetMapping("/")
     public ModelAndView defaultPage() {
@@ -46,7 +46,7 @@ public class GeneratorController {
     @RequestMapping("/template/all")
     @ResponseBody
     public ReturnT getAllTemplates() throws Exception {
-        String templates = generatorService.getTemplateConfig();
+        String templates = ttcGeneratorService.getTemplateConfig();
         return ReturnT.ok().put("templates",templates);
     }
     @PostMapping("/code/generate")
@@ -83,7 +83,7 @@ public class GeneratorController {
         //log.info("generated table :{} , size :{}",classInfo.getTableName(),(classInfo.getFieldList() == null ? "" : classInfo.getFieldList().size()));
 
         //3.generate the code by freemarker templates with parameters . Freemarker根据参数和模板生成代码
-        Map<String, String> result = generatorService.getResultByParams(paramInfo.getOptions());
+        Map<String, String> result = ttcGeneratorService.getResultByParams(paramInfo.getOptions());
 //        log.info("result {}",result);
         log.info("table:{} - time:{} ", MapUtil.getString(result,"tableName"),new Date());
         return ReturnT.ok().put("outputJson",result);
