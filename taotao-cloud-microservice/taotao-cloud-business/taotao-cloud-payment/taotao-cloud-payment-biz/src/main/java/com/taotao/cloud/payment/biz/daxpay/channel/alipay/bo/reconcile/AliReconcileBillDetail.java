@@ -3,7 +3,7 @@ package com.taotao.cloud.payment.biz.daxpay.channel.alipay.bo.reconcile;
 import cn.bootx.platform.common.mybatisplus.base.MpIdEntity;
 import cn.hutool.core.annotation.Alias;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
 
 /**

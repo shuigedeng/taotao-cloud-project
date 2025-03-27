@@ -2,7 +2,7 @@ package com.taotao.cloud.payment.biz.daxpay.sdk.model.trade.refund;
 
 import cn.daxpay.single.sdk.code.RefundSyncStatusEnum;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 交易同步结果

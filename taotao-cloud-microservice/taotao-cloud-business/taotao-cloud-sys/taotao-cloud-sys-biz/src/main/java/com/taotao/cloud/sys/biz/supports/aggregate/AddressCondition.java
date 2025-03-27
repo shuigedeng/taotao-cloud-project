@@ -1,8 +1,8 @@
 package com.taotao.cloud.sys.biz.supports.aggregate;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /**
  * 地址基本条件查询对象

@@ -19,7 +19,7 @@ package com.taotao.cloud.wechat.biz.mp.controller.admin.account.vo;
 import cn.iocoder.yudao.framework.common.pojo.PageParam;
 import io.swagger.annotations.*;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 @ApiModel("管理后台 - 公众号账号分页 Request VO")
 @Data

@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.flowable.flowable.domain.vo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 可退回节点

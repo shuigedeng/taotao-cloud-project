@@ -2,7 +2,7 @@ package com.taotao.cloud.iot.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;

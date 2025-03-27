@@ -18,7 +18,7 @@ package com.taotao.cloud.sa.just.biz.just.justauth.dto;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
 

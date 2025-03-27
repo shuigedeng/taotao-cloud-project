@@ -1,10 +1,10 @@
 package com.taotao.cloud.message.biz.austin.web.vo.amis;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
 import java.util.List;

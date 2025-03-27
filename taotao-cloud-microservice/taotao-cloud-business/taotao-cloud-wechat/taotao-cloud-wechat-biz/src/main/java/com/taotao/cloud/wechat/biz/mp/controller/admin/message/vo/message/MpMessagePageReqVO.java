@@ -23,7 +23,7 @@ import io.swagger.annotations.*;
 import java.time.LocalDateTime;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @ApiModel("管理后台 - 公众号消息分页 Request VO")

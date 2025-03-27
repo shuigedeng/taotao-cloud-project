@@ -17,7 +17,7 @@ package com.taotao.cloud.payment.biz.jeepay.payment.rqrs;
 
 import com.alibaba.fastjson.JSON;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 import java.io.Serializable;
 

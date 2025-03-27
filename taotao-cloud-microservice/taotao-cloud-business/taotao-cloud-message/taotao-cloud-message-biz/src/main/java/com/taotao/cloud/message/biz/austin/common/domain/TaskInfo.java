@@ -2,10 +2,10 @@ package com.taotao.cloud.message.biz.austin.common.domain;
 
 import com.taotao.cloud.message.biz.austin.common.dto.model.ContentModel;
 import com.taotao.cloud.message.biz.austin.common.pipeline.ProcessModel;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;

@@ -57,7 +57,7 @@ import com.taotao.cloud.store.api.model.vo.FreightTemplateVO;
 import com.taotao.cloud.sys.api.feign.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.GoodsSettingVO;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.dromara.hutool.core.math.NumberUtil;
 import org.dromara.hutool.core.text.StrUtil;

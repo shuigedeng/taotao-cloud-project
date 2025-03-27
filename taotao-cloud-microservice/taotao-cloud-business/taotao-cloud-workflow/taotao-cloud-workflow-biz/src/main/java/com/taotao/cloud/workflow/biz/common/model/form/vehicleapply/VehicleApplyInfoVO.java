@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.biz.common.model.form.vehicleapply;
 
 import java.math.BigDecimal;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 车辆申请 */
 @Data

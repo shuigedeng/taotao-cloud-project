@@ -17,7 +17,7 @@ package com.taotao.cloud.payment.biz.jeepay.payment.rqrs.payorder;
 
 import com.taotao.cloud.payment.biz.jeepay.pay.rqrs.payorder.UnifiedOrderRQ;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /*
 * 通用支付数据RQ

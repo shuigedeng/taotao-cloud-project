@@ -1,12 +1,12 @@
 package com.taotao.cloud.message.biz.austin.support.pending;
 
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;

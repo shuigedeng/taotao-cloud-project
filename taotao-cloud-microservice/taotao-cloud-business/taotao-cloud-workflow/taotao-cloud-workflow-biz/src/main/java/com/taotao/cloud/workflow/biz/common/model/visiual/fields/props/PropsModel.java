@@ -17,7 +17,7 @@
 package com.taotao.cloud.workflow.biz.common.model.visiual.fields.props;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** */
 @Data

@@ -4,7 +4,7 @@ import com.github.binarywang.wxpay.bean.notify.OriginNotifyResponse;
 import com.github.binarywang.wxpay.bean.notify.WxPayBaseNotifyV3Result;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
 import java.io.Serial;

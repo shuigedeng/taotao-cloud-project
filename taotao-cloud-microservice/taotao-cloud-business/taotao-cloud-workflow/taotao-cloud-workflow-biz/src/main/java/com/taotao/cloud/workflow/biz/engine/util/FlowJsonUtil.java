@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import org.apache.commons.lang3.StringUtils;
 
 /** 在线工作流开发 */

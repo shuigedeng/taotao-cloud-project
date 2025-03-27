@@ -18,7 +18,7 @@ package com.taotao.cloud.payment.biz.jeepay.core.jwt;
 import com.alibaba.fastjson.JSONObject;
 import com.jeequan.jeepay.core.model.security.JeeUserDetails;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 import java.util.Map;
 

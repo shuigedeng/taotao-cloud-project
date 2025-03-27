@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.common.vo;
 
 import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;

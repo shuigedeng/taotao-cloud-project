@@ -2,9 +2,9 @@ package com.taotao.cloud.payment.biz.daxpay.channel.wechat.param.clode;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 import java.io.Serial;
 import java.io.Serializable;

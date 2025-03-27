@@ -19,7 +19,7 @@ package com.taotao.cloud.wechat.biz.niefy.modules.wx.form;
 import com.github.niefy.common.utils.Json;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 @Data
 public class WxH5OuthrizeForm {

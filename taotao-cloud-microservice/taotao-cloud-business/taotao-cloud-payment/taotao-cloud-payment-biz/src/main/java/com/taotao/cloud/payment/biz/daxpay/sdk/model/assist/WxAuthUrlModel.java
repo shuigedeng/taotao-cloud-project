@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.sdk.model.assist;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 微信oauth2授权的url连接

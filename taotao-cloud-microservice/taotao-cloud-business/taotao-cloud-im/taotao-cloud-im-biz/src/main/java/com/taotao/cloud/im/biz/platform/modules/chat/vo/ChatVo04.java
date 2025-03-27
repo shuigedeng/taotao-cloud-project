@@ -17,9 +17,9 @@
 package com.taotao.cloud.im.biz.platform.modules.chat.vo;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 @Data
 @Accessors(chain = true) // 链式调用

@@ -22,7 +22,7 @@ import com.baomidou.mybatisplus.annotation.KeySequence;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import me.chanjar.weixin.common.api.WxConsts;
 
 /**

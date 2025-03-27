@@ -19,7 +19,7 @@ package com.taotao.cloud.gateway.configuration;
 import com.taotao.cloud.gateway.properties.HttpsProperties;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.embedded.netty.NettyReactiveWebServerFactory;
 import org.springframework.boot.web.server.WebServer;

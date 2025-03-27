@@ -22,7 +22,7 @@ import com.taotao.cloud.goods.biz.repository.cls.GoodsRepository;
 import com.taotao.cloud.goods.biz.repository.inf.IGoodsRepository;
 import com.taotao.cloud.goods.biz.service.feign.IFeignGoodsService;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Service;
 
 /**

@@ -17,7 +17,7 @@
 package com.taotao.cloud.workflow.biz.common.model.form.documentsigning;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 文件签阅表 */
 @Data

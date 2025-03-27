@@ -30,7 +30,7 @@ import java.io.Serializable;
 import java.util.List;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.mp.builder.kefu.NewsBuilder;
 

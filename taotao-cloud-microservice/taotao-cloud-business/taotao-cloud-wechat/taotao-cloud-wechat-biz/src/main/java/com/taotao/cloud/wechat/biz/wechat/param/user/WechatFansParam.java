@@ -19,8 +19,8 @@ package com.taotao.cloud.wechat.biz.wechat.param.user;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /**
  * 微信公众号粉丝

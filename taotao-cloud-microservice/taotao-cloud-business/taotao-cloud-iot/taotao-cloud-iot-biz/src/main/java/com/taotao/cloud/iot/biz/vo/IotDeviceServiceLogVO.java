@@ -3,7 +3,7 @@ package com.taotao.cloud.iot.biz.vo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import com.taotao.cloud.iot.biz.enums.DeviceCommandEnum;
 
 import java.io.Serializable;

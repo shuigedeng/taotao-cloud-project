@@ -34,7 +34,7 @@ import com.taotao.cloud.goods.biz.service.business.ISpecificationService;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

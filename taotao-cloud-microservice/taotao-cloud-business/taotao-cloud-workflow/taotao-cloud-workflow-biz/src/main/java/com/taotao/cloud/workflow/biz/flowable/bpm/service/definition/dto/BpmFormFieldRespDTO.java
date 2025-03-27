@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.biz.flowable.bpm.service.definition.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * Bpm 表单的 Field 表单项 Response DTO 字段的定义，可见 https://github.com/JakHuang/form-generator/issues/46 文档

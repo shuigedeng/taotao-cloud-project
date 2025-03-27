@@ -23,7 +23,7 @@
 //import com.taotao.cloud.sys.biz.service.business.IUserService;
 //import com.taotao.cloud.sys.biz.service.feign.IFeignUserService;
 //import com.taotao.boot.webagg.controller.BaseFeignController;
-//import lombok.AllArgsConstructor;
+//import lombok.*;
 //import org.springframework.validation.annotation.Validated;
 //import org.springframework.web.bind.annotation.RestController;
 //

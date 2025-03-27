@@ -18,7 +18,7 @@ package com.taotao.cloud.shorlink.api.dubbo.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 import java.io.Serial;
 import java.io.Serializable;

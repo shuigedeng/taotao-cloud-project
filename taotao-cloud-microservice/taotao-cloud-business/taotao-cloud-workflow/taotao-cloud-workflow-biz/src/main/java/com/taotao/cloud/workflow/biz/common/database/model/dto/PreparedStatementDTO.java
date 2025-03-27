@@ -20,9 +20,9 @@ import com.taotao.cloud.workflow.api.common.base.NoDataSourceBind;
 import java.sql.Connection;
 import java.util.Arrays;
 import java.util.LinkedList;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** SQL参数传输对象 */
 @Data

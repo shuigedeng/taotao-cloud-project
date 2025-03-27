@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.biz.module.mp.controller;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;
 import me.chanjar.weixin.mp.api.WxMpService;

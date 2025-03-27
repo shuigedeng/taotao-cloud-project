@@ -20,9 +20,9 @@ import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 

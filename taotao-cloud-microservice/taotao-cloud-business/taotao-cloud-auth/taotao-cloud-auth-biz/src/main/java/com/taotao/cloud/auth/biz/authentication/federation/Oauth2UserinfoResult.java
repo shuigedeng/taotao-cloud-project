@@ -1,7 +1,7 @@
 package com.taotao.cloud.auth.biz.authentication.federation;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 import java.time.LocalDateTime;
 import java.util.Collection;

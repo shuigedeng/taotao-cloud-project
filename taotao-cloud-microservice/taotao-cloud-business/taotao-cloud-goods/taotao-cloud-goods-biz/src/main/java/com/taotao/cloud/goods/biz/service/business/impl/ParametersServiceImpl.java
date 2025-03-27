@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.dromara.hutool.core.convert.ConvertUtil;
 import org.dromara.hutool.core.text.CharSequenceUtil;

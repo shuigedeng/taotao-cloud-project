@@ -1,8 +1,8 @@
 package com.taotao.cloud.message.biz.channels.netty;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;

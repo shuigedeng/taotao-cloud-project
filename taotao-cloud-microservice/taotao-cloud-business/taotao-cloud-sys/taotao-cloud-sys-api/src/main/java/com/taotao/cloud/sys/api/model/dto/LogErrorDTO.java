@@ -18,11 +18,11 @@ package com.taotao.cloud.sys.api.model.dto;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 

@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.sdk.model.allocation;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 分账接收方添加返回结果

@@ -19,7 +19,7 @@ import com.jeequan.jeepay.core.constants.CS;
 import com.jeequan.jeepay.core.utils.JsonKit;
 import com.jeequan.jeepay.pay.rqrs.payorder.UnifiedOrderRS;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /*
  * 支付方式： UP_JSAPI

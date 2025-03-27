@@ -17,9 +17,9 @@
 package com.taotao.cloud.sys.api.feign.response.setting;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /** 微信支付设置 */
 @Data

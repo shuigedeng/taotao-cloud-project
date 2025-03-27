@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.flowable.bpm.controller.admin.definition.v
 import java.util.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 用户组 Base VO，提供给添加、修改、详细的子 VO 使用 如果子 VO 存在差异的字段，请不要添加到这里，影响 Swagger 文档生成 */
 @Data

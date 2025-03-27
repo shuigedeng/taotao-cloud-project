@@ -7,9 +7,9 @@ import com.taotao.cloud.payment.biz.daxpay.core.enums.PayStatusEnum;
 import com.taotao.cloud.payment.biz.daxpay.core.result.MchAppResult;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

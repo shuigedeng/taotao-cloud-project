@@ -3,7 +3,7 @@ package com.taotao.cloud.message.biz.channels.websockt.spring.model.qo;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import org.springdoc.api.annotations.ParameterObject;
 
 /**

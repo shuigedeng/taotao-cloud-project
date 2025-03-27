@@ -32,7 +32,7 @@ import com.taotao.cloud.sys.biz.service.business.IResourceService;
 import com.taotao.cloud.sys.biz.service.business.IRoleService;
 import com.taotao.cloud.sys.biz.utils.TreeUtil;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.dromara.hutool.core.collection.CollUtil;
 import org.springframework.stereotype.Service;
 

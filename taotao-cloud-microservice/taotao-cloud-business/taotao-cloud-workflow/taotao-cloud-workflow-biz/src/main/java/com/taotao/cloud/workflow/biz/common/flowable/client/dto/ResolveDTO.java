@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.common.flowable.client.dto;
 import jakarta.validation.constraints.NotBlank;
 import java.io.Serializable;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 

@@ -6,9 +6,9 @@ import com.taotao.cloud.payment.biz.daxpay.core.enums.TradeTypeEnum;
 import com.taotao.cloud.payment.biz.daxpay.service.common.param.MchAppQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 交易同步记录查询参数

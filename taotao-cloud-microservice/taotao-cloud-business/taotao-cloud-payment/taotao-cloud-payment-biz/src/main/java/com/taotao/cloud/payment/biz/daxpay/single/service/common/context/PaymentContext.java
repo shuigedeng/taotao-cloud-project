@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.common.context;
 
 import lombok.Getter;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 支付上下文

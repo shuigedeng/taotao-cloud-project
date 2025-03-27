@@ -17,7 +17,7 @@ package com.taotao.cloud.payment.biz.jeepay.payment.rqrs.division;
 
 import com.jeequan.jeepay.pay.rqrs.AbstractRS;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
 * 发起订单分账 响应参数

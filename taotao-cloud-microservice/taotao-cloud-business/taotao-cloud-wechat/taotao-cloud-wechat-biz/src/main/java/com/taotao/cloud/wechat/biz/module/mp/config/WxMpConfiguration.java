@@ -36,7 +36,7 @@ import com.taotao.cloud.wechat.biz.module.mp.handler.SubscribeHandler;
 import com.taotao.cloud.wechat.biz.module.mp.handler.UnsubscribeHandler;
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import me.chanjar.weixin.common.redis.JedisWxRedisOps;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;
 import me.chanjar.weixin.mp.api.WxMpService;

@@ -20,8 +20,8 @@ import com.platform.modules.topic.enums.TopicNoticeTypeEnum;
 import com.platform.modules.topic.enums.TopicTypeEnum;
 import java.util.Date;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 @Data
 @Accessors(chain = true) // 链式调用

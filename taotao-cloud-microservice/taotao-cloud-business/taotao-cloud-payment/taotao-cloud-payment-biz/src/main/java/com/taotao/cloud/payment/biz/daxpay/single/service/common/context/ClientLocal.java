@@ -1,8 +1,8 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.common.context;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /**
  * 支付请求相关信息

@@ -19,7 +19,7 @@ package com.taotao.cloud.wechat.biz.niefy.modules.wx.form;
 import com.github.niefy.common.exception.RRException;
 import com.github.niefy.common.utils.Json;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 @Data
 public class TemplateMsgForm {

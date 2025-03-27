@@ -22,9 +22,9 @@ import com.platform.common.enums.YesOrNoEnum;
 import com.platform.common.web.domain.BaseEntity;
 import java.util.Date;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 实体类 q3z3 */
 @Data

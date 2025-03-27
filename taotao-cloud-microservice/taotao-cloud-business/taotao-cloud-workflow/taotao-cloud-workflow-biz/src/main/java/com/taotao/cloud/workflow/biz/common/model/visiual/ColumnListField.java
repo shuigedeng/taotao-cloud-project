@@ -17,7 +17,7 @@
 package com.taotao.cloud.workflow.biz.common.model.visiual;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 @Data
 public class ColumnListField {

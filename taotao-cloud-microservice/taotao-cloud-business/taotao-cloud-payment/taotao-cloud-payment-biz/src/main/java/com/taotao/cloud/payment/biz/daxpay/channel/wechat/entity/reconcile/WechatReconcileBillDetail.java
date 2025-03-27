@@ -2,8 +2,8 @@ package com.taotao.cloud.payment.biz.daxpay.channel.wechat.entity.reconcile;
 
 import cn.hutool.core.annotation.Alias;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 import lombok.extern.slf4j.Slf4j;
 
 /**

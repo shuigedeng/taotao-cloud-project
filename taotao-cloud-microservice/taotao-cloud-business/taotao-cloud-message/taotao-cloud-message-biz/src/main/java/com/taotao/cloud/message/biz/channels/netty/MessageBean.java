@@ -1,9 +1,9 @@
 package com.taotao.cloud.message.biz.channels.netty;
 
 import org.dromara.hutooljson.JSONUtil;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
 import java.nio.charset.StandardCharsets;

@@ -18,7 +18,7 @@ package com.taotao.cloud.stock.api.model.dto;
 
 import java.io.Serializable;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 租户DTO */
 @Data

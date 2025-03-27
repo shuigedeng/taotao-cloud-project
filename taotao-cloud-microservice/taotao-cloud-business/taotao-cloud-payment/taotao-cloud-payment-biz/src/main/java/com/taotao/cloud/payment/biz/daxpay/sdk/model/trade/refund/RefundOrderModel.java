@@ -4,7 +4,7 @@ import cn.daxpay.single.sdk.code.ChannelEnum;
 import cn.daxpay.single.sdk.code.RefundStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

@@ -19,7 +19,7 @@
 //import com.taotao.boot.common.model.Result;
 //import com.taotao.boot.security.spring.annotation.NotAuth;
 //import io.swagger.v3.oas.annotations.tags.Tag;
-//import lombok.AllArgsConstructor;
+//import lombok.*;
 //import org.apache.pulsar.shade.io.swagger.annotations.ApiOperation;
 //import org.springframework.validation.annotation.Validated;
 //import org.springframework.web.bind.annotation.GetMapping;

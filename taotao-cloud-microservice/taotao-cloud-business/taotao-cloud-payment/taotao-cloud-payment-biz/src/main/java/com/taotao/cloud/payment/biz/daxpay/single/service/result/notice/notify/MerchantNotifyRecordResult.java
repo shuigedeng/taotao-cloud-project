@@ -4,9 +4,9 @@ import com.taotao.cloud.payment.biz.daxpay.core.result.MchAppResult;
 import com.taotao.cloud.payment.biz.daxpay.service.enums.NoticeSendTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 客户订阅通知发送记录

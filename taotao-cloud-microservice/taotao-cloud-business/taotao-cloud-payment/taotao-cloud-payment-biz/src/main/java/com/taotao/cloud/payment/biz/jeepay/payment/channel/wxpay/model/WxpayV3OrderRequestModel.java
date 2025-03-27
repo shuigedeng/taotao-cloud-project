@@ -17,8 +17,8 @@ package com.taotao.cloud.payment.biz.jeepay.payment.channel.wxpay.model;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /**
 *

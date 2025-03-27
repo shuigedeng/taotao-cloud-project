@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.aop;
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;

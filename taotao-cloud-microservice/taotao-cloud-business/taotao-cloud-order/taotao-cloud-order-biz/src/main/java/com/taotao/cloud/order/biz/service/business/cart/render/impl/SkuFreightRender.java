@@ -27,7 +27,7 @@ import com.taotao.cloud.store.api.model.vo.FreightTemplateInfoVO;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Service;
 
 /**

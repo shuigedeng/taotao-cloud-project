@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 @ApiModel("管理后台 - 通过流程任务的 Request VO")
 @Data

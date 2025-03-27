@@ -22,7 +22,7 @@ import com.taotao.cloud.gateway.model.BlackList;
 import com.taotao.cloud.gateway.model.RuleConstant;
 import com.taotao.cloud.gateway.service.IRuleCacheService;
 import java.util.Set;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

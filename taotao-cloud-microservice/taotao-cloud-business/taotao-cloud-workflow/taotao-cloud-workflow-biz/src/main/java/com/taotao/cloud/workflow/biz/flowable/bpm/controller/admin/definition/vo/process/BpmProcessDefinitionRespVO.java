@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 @ApiModel("管理后台 - 流程定义 Response VO")
 @Data

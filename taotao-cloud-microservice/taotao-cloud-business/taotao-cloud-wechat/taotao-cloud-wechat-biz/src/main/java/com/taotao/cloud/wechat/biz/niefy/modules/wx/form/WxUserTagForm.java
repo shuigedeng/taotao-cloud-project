@@ -19,7 +19,7 @@ package com.taotao.cloud.wechat.biz.niefy.modules.wx.form;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 @Data
 public class WxUserTagForm {

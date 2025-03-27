@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.channels.websockt.spring.event;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Getter;
 import lombok.ToString;
 

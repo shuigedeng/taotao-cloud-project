@@ -16,13 +16,13 @@
 
 package com.taotao.cloud.store.api.model.vo;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 /** 店铺-物流公司设置 */
 @Getter
 @Setter

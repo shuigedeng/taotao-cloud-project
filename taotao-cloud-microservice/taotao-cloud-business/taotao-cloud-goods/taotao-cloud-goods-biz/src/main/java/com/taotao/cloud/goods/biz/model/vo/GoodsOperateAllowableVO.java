@@ -19,10 +19,10 @@ package com.taotao.cloud.goods.biz.model.vo;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import java.io.Serializable;
 import java.util.Objects;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
 /** 商品操作允许的范围 */

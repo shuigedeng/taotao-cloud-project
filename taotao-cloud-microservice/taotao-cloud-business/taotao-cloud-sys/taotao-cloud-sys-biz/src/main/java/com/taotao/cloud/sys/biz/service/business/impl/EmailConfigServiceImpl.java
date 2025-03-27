@@ -21,7 +21,7 @@ import com.taotao.cloud.sys.biz.model.vo.alipay.EmailVO;
 import com.taotao.cloud.sys.biz.mapper.IEmailConfigMapper;
 import com.taotao.cloud.sys.biz.model.entity.config.EmailConfig;
 import com.taotao.cloud.sys.biz.service.business.IEmailConfigService;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;

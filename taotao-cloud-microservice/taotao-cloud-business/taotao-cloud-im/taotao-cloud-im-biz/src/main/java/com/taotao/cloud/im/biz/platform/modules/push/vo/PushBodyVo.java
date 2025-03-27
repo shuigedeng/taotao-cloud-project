@@ -18,9 +18,9 @@ package com.taotao.cloud.im.biz.platform.modules.push.vo;
 
 import com.platform.modules.push.enums.PushBodyTypeEnum;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 推送消息体 */
 @Data

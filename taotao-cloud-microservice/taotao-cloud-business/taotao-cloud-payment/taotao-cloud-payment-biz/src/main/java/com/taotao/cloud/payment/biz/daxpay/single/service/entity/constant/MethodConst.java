@@ -6,9 +6,9 @@ import com.taotao.cloud.payment.biz.daxpay.service.convert.constant.MethodConstC
 import com.taotao.cloud.payment.biz.daxpay.service.result.constant.MethodConstResult;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 支付方式常量

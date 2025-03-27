@@ -17,8 +17,8 @@
 package com.taotao.cloud.sys.api.model.query;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 @Data
 public class FileQuery {

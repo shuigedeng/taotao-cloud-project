@@ -18,9 +18,9 @@ package com.taotao.cloud.workflow.biz.flowable.bpm.controller.admin.definition.v
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
 @ApiModel("管理后台 - 用户组精简信息 Response VO")

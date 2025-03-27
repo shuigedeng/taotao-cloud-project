@@ -2,8 +2,8 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.param.order.allocatio
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /**
  * 分账订单查询参数

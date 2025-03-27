@@ -25,9 +25,9 @@ import cn.bootx.starter.wecom.param.robot.WecomRobotConfigParam;
 import org.dromara.hutoolcore.util.StrUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 企业微信机器人配置

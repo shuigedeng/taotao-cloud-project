@@ -23,7 +23,7 @@ import com.taotao.cloud.order.sys.model.page.order.OrderComplaintCommunicationPa
 import com.taotao.cloud.order.biz.mapper.order.IOrderComplainCommunicationMapper;
 import com.taotao.cloud.order.biz.model.entity.order.OrderComplaintCommunication;
 import com.taotao.cloud.order.biz.service.business.order.IOrderComplaintCommunicationService;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Service;
 
 /**

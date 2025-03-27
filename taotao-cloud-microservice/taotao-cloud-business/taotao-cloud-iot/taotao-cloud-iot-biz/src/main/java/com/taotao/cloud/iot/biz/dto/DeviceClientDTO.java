@@ -4,7 +4,7 @@ import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import com.taotao.cloud.iot.biz.entity.IotDeviceEntity;
 import com.taotao.cloud.iot.biz.enums.DeviceTypeEnum;
 

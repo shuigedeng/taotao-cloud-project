@@ -3,8 +3,8 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.param.allocation.grou
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 import jakarta.validation.constraints.NotNull;
 import java.util.List;

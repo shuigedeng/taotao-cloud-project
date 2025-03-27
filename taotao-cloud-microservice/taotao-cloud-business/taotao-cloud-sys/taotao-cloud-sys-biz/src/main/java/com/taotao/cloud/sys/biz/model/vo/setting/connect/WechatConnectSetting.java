@@ -19,8 +19,8 @@ package com.taotao.cloud.sys.biz.model.vo.setting.connect;
 import com.taotao.cloud.sys.biz.model.vo.setting.connect.dto.WechatConnectSettingItem;
 import java.util.List;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /** 微信设置 */
 @Data

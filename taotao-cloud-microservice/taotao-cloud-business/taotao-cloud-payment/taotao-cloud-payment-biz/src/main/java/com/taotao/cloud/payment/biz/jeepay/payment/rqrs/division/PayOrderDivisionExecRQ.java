@@ -17,7 +17,7 @@ package com.taotao.cloud.payment.biz.jeepay.payment.rqrs.division;
 
 import com.jeequan.jeepay.pay.rqrs.AbstractMchAppRQ;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 import javax.validation.constraints.NotNull;
 

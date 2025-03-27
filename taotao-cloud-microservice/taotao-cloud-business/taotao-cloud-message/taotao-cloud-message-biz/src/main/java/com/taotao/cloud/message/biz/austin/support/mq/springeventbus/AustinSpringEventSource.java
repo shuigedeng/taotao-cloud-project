@@ -2,7 +2,7 @@ package com.taotao.cloud.message.biz.austin.support.mq.springeventbus;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 import java.io.Serializable;
 

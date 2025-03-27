@@ -1,7 +1,7 @@
 package com.taotao.cloud.shortlink.biz.dcloud.vo;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;

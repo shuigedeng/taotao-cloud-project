@@ -24,7 +24,7 @@ import com.joolun.weixin.mapper.WxMenuMapper;
 import com.joolun.weixin.service.WxMenuService;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import org.apache.commons.lang3.StringUtils;

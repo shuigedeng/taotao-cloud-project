@@ -16,7 +16,7 @@
 package com.taotao.cloud.payment.biz.jeepay.core.model.params.ysf;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /*
  * 云闪付 通用配置信息

@@ -17,7 +17,7 @@
 package com.taotao.cloud.wechat.biz.niefy.modules.sys.form;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 密码表单

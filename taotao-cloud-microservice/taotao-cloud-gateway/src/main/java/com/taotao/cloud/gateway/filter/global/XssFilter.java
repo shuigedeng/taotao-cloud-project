@@ -24,7 +24,7 @@ import io.netty.buffer.ByteBufAllocator;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.dromara.hutool.core.collection.CollUtil;
 import org.dromara.hutool.core.text.StrUtil;
 import org.dromara.hutool.http.html.HtmlUtil;

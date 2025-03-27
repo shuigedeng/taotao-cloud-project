@@ -22,7 +22,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import org.hibernate.Hibernate;
 
 import java.util.Objects;

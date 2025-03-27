@@ -17,11 +17,11 @@
 package com.taotao.cloud.sys.biz.model.dto.elasticsearch;
 
 import com.alibaba.fastjson2.JSONObject;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
 @Data

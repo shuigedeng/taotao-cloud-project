@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.generator.util;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Getter;
 
 /**

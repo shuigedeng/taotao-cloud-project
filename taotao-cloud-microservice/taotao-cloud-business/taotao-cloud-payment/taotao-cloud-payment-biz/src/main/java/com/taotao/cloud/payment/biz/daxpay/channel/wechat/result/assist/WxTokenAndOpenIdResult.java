@@ -2,8 +2,8 @@ package com.taotao.cloud.payment.biz.daxpay.channel.wechat.result.assist;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /**
  * 微信AccessToken和OpenId

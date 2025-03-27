@@ -2,7 +2,7 @@ package com.taotao.cloud.shortlink.biz.dcloud.model;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 import java.io.Serializable;
 import java.util.Date;

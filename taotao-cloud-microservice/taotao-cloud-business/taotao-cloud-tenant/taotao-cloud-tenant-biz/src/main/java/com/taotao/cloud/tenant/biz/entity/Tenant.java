@@ -21,7 +21,7 @@ import com.taotao.boot.common.enums.GlobalStatusEnum;
 import com.taotao.boot.webagg.entity.BaseSuperEntity;
 import java.time.LocalDateTime;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 @TableName("tenant")
 @Data

@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.biz.common.model.form.warehousereceipt;
 
 import java.math.BigDecimal;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 入库申请单 */
 @Data

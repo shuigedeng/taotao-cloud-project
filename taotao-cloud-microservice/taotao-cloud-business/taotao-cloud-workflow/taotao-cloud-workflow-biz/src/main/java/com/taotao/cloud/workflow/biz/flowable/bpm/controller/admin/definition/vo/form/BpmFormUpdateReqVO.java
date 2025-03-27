@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.flowable.bpm.controller.admin.definition.v
 import java.util.List;
 import jakarta.validation.constraints.*;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 @ApiModel("管理后台 - 动态表单更新 Request VO")
 @Data

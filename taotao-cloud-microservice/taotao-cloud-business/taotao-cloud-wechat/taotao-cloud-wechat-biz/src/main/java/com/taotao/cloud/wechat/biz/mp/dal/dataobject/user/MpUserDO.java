@@ -28,7 +28,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 微信公众号粉丝 DO

@@ -23,7 +23,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import java.util.List;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 工作流的表单定义 用于工作流的申请表单，需要动态配置的场景

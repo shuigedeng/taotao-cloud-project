@@ -24,7 +24,7 @@ import com.taotao.cloud.sys.biz.model.entity.SysLogLogin;
 import com.taotao.cloud.sys.biz.service.SysLogLoginService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Arrays;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

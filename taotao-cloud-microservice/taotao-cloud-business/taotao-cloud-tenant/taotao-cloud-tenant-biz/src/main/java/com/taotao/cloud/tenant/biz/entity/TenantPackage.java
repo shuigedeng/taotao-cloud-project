@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.boot.common.enums.GlobalStatusEnum;
 import com.taotao.boot.webagg.entity.BaseSuperEntity;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 @Data
 @TableName("tenant_package")

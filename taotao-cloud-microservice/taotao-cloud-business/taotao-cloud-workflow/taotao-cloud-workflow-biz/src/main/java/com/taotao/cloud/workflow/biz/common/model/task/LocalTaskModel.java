@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.biz.common.model.task;
 
 import java.io.Serializable;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 本地任务 */
 @Data

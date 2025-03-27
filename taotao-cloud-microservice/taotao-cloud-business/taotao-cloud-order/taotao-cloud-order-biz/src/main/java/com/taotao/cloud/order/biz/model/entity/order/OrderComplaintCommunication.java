@@ -23,7 +23,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import java.io.Serial;
 import java.util.Objects;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

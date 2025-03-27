@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.common.model.form.applybanquet;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 宴请申请 */
 @Data

@@ -5,7 +5,7 @@ import cn.daxpay.single.sdk.code.TransferPayeeTypeEnum;
 import cn.daxpay.single.sdk.code.TransferStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

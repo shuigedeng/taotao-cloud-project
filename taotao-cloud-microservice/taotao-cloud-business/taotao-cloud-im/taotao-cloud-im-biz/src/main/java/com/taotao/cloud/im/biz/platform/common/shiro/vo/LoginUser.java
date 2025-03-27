@@ -19,8 +19,8 @@ package com.taotao.cloud.im.biz.platform.common.shiro.vo;
 import com.platform.modules.chat.domain.ChatUser;
 import java.util.List;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
 /** 登录用户身份权限 */

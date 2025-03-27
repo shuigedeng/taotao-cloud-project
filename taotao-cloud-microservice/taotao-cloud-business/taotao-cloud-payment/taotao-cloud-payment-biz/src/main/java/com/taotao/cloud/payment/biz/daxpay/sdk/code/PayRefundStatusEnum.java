@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.sdk.code;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Getter;
 
 import java.util.Arrays;

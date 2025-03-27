@@ -18,7 +18,7 @@ package com.taotao.cloud.shortlink.biz.other.server.application.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 @Data
 public class UrlRequest {

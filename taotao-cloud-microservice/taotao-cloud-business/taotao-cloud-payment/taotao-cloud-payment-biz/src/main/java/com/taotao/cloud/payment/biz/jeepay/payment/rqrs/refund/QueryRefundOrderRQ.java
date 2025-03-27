@@ -17,7 +17,7 @@ package com.taotao.cloud.payment.biz.jeepay.payment.rqrs.refund;
 
 import com.jeequan.jeepay.pay.rqrs.AbstractMchAppRQ;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /*
 * 查询退款单请求参数对象

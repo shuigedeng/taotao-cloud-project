@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.recommend.dto;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

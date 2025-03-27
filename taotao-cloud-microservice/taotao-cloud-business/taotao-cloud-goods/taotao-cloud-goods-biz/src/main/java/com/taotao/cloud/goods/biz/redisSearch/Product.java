@@ -7,7 +7,7 @@ import com.redis.om.spring.annotations.Indexed;
 import com.redis.om.spring.annotations.SchemaFieldType;
 import com.redis.om.spring.annotations.Vectorize;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

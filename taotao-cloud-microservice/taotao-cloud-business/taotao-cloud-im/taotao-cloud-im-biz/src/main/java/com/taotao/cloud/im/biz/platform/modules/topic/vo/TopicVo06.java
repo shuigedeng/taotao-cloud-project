@@ -20,8 +20,8 @@ import com.platform.common.enums.YesOrNoEnum;
 import com.platform.modules.topic.enums.TopicReplyTypeEnum;
 import java.util.Date;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 @Data
 @Accessors(chain = true) // 链式调用

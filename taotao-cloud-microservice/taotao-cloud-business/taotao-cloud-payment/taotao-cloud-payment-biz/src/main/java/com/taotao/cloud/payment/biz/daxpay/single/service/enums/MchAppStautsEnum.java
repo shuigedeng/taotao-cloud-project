@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.enums;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Getter;
 
 /**

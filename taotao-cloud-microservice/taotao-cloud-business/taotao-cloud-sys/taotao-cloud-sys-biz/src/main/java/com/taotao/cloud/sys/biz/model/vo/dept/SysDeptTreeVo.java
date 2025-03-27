@@ -22,7 +22,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * @author shuigedeng

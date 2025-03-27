@@ -17,7 +17,7 @@
 package com.taotao.cloud.wechat.biz.weixin.config;
 
 import com.joolun.weixin.interceptor.ThirdSessionInterceptor;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

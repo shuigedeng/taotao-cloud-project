@@ -18,9 +18,9 @@ package com.taotao.cloud.goods.biz.model.vo;
 
 import java.io.Serial;
 import java.io.Serializable;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
 /**

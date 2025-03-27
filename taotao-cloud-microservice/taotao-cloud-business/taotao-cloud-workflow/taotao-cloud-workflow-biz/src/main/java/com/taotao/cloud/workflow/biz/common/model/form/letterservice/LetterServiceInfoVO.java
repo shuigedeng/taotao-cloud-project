@@ -17,7 +17,7 @@
 package com.taotao.cloud.workflow.biz.common.model.form.letterservice;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 发文单 */
 @Data

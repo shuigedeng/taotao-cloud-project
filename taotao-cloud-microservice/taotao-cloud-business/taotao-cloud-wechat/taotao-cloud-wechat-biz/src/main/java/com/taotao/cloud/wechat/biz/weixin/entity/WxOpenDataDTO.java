@@ -17,7 +17,7 @@
 package com.taotao.cloud.wechat.biz.weixin.entity;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 微信开发数据 */
 @Data

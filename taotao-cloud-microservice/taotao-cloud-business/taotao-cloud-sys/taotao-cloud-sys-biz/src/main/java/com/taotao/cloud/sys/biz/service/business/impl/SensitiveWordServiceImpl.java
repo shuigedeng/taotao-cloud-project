@@ -26,7 +26,7 @@ import com.taotao.cloud.sys.biz.service.business.ISensitiveWordService;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Service;
 
 /** 敏感词业务层实现 */

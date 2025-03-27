@@ -22,7 +22,7 @@ import com.github.niefy.modules.wx.form.WxQrCodeForm;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 公众号带参二维码

@@ -17,12 +17,12 @@
 package com.taotao.cloud.distribution.api.model.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 分销佣金查询信息 */
 @Getter

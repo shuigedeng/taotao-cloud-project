@@ -24,9 +24,9 @@ import cn.bootx.starter.wechat.dto.notice.WeChatTemplateDto;
 import cn.bootx.starter.wechat.param.notice.WeChatTemplateParam;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.experimental.FieldNameConstants;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplate;
 

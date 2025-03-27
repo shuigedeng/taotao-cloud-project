@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.biz.service.feign.impl;
 
 import com.taotao.cloud.member.biz.service.feign.IFeignMemberService;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Service;
 
 /**

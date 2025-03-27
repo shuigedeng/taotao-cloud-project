@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.biz.module.mp.controller;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
 import me.chanjar.weixin.common.error.WxErrorException;

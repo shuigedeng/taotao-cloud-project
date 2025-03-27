@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.channels.websockt.spring.enums;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Getter;
 
 /**

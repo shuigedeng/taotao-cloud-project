@@ -2,7 +2,7 @@ package com.taotao.cloud.payment.biz.daxpay.channel.wechat.enums;
 
 import com.taotao.cloud.payment.biz.daxpay.core.enums.RefundStatusEnum;
 import com.taotao.cloud.payment.biz.daxpay.core.exception.ConfigNotExistException;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Getter;
 
 import java.util.Arrays;

@@ -3,10 +3,10 @@ package com.taotao.cloud.message.biz.austin.api.impl.domain;
 import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
 import com.taotao.cloud.message.biz.austin.common.pipeline.ProcessModel;
 import com.taotao.cloud.message.biz.austin.service.api.domain.MessageParam;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
 import java.util.List;

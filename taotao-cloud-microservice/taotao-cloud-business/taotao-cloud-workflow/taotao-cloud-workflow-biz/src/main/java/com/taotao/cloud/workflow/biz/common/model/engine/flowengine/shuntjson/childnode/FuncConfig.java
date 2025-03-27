@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.common.model.engine.flowengine.shuntjson.c
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** */
 @Data

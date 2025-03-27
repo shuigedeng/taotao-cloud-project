@@ -21,7 +21,7 @@ import cn.iocoder.yudao.module.bpm.enums.task.BpmProcessInstanceResultEnum;
 import com.baomidou.mybatisplus.annotation.*;
 import java.time.LocalDateTime;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * OA 请假申请 DO

@@ -20,7 +20,7 @@ import com.taotao.cloud.flowable.biz.bpm.framework.flowable.core.behavior.BpmPar
 import com.taotao.cloud.flowable.biz.bpm.framework.flowable.core.behavior.BpmUserTaskActivityBehavior;
 import com.taotao.cloud.flowable.biz.bpm.service.definition.BpmTaskAssignRuleService;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
 import lombok.Setter;
 import lombok.ToString;

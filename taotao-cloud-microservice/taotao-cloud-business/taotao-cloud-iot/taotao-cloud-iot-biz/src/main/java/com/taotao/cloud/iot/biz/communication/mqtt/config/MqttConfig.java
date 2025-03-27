@@ -3,7 +3,7 @@ package com.taotao.cloud.iot.biz.communication.mqtt.config;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.extern.slf4j.Slf4j;
 import com.taotao.cloud.iot.biz.communication.mqtt.factory.MqttMessageHandlerFactory;
 import com.taotao.cloud.iot.biz.enums.DeviceTopicEnum;

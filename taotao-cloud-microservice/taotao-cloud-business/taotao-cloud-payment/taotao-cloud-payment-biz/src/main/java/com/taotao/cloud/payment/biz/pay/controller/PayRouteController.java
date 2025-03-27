@@ -30,7 +30,7 @@ import com.xhuicloud.pay.utils.UserAgentUtil;
 import com.xhuicloud.upms.vo.TenantVo;
 import io.swagger.annotations.Api;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.SneakyThrows;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;

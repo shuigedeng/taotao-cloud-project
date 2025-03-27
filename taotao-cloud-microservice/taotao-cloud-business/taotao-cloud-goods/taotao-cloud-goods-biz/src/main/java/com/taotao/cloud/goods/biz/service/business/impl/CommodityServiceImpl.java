@@ -39,7 +39,7 @@ import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
 import com.taotao.cloud.goods.biz.util.WechatLivePlayerUtil;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

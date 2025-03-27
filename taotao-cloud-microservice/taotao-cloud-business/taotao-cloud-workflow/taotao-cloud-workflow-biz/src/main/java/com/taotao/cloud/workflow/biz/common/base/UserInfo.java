@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.common.base;
 import java.util.Date;
 import java.util.List;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 登录者信息 */
 @Data

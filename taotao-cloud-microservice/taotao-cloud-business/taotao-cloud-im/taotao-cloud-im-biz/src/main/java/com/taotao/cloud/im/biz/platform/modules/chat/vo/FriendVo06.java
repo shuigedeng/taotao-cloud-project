@@ -18,9 +18,9 @@ package com.taotao.cloud.im.biz.platform.modules.chat.vo;
 
 import com.platform.modules.chat.enums.FriendTypeEnum;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /** 好友对象 */
 @Data

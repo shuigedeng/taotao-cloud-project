@@ -3,7 +3,7 @@ package com.taotao.cloud.message.biz.channels.websockt.netty;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 import java.time.LocalDateTime;
 

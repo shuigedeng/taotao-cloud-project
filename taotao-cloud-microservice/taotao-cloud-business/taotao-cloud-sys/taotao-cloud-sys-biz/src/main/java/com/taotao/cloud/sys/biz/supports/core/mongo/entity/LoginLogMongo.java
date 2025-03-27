@@ -20,9 +20,9 @@ import com.taotao.cloud.log.biz.log.core.mongo.convert.LogConvert;
 import com.taotao.cloud.log.biz.log.dto.LoginLogDto;
 import java.time.LocalDateTime;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
+import lombok.experimental.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

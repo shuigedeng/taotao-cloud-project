@@ -24,7 +24,7 @@ import com.taotao.cloud.payment.biz.jeepay.pay.model.IsvConfigContext;
 import com.taotao.cloud.payment.biz.jeepay.pay.model.PaypalWrapper;
 import com.taotao.cloud.payment.biz.jeepay.pay.model.WxServiceWrapper;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 import java.util.HashMap;
 import java.util.Map;

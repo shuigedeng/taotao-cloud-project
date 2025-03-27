@@ -61,7 +61,7 @@ import com.taotao.cloud.store.api.model.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.sys.api.feign.LogisticsApi;
 import com.taotao.cloud.sys.api.model.vo.logistics.LogisticsVO;
 import com.taotao.cloud.sys.api.model.vo.logistics.TracesVO;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.dromara.hutool.core.text.CharSequenceUtil;
 import org.dromara.hutool.json.JSONUtil;

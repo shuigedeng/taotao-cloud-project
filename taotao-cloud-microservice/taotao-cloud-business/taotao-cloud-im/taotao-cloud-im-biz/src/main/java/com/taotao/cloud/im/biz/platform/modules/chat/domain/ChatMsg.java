@@ -25,9 +25,9 @@ import com.platform.modules.push.enums.PushMsgTypeEnum;
 import com.platform.modules.push.enums.PushTalkEnum;
 import java.util.Date;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /** 聊天消息实体类 q3z3 */
 @Data

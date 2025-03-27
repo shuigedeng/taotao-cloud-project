@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.biz.module.mp.controller;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import me.chanjar.weixin.common.bean.WxJsapiSignature;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;

@@ -26,7 +26,7 @@ import com.taotao.cloud.sys.biz.repository.cls.ResourceRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IResourceRepository;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 

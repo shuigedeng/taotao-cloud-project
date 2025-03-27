@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
 import com.taotao.cloud.payment.biz.daxpay.core.enums.ChannelEnum;
 import com.taotao.cloud.payment.biz.daxpay.core.param.PaymentCommonParam;

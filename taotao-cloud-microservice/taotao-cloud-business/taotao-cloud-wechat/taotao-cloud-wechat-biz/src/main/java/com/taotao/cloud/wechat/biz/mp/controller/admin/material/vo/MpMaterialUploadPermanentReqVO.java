@@ -24,7 +24,7 @@ import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import me.chanjar.weixin.common.api.WxConsts;
 import org.springframework.web.multipart.MultipartFile;
 

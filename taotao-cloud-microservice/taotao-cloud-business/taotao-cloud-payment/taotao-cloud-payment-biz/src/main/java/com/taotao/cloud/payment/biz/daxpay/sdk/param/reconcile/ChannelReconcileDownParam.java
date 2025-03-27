@@ -7,7 +7,7 @@ import cn.daxpay.single.sdk.util.JsonUtil;
 import cn.hutool.core.lang.TypeReference;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDate;

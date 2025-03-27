@@ -20,7 +20,7 @@ import com.taotao.boot.web.annotation.FeignApi;
 import com.taotao.cloud.sys.api.feign.QuartzJobApi;
 import com.taotao.cloud.sys.api.model.dto.QuartzJobDTO;
 import com.taotao.cloud.sys.biz.task.job.quartz.service.QuartzJobService;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

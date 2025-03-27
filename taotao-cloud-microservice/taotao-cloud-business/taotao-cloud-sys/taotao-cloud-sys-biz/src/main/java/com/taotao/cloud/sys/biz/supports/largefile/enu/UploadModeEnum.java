@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.supports.largefile.enu;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Getter;
 
 @AllArgsConstructor

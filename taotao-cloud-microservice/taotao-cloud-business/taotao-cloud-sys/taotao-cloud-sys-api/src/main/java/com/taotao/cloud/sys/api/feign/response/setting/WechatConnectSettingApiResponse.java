@@ -18,8 +18,8 @@ package com.taotao.cloud.sys.api.feign.response.setting;
 
 import java.util.List;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /** 微信设置 */
 @Data

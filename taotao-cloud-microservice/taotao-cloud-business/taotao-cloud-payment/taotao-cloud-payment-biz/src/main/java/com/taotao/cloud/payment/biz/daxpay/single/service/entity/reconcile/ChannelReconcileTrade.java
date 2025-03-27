@@ -5,9 +5,9 @@ import com.taotao.cloud.payment.biz.daxpay.core.enums.TradeTypeEnum;
 import com.taotao.cloud.payment.biz.daxpay.service.common.entity.MchAppRecordEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

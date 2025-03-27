@@ -19,7 +19,7 @@ package com.taotao.cloud.sys.biz.model.vo.logistics;
 import java.io.Serial;
 import java.io.Serializable;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * LogisticsVO

@@ -4,7 +4,7 @@ import com.redis.om.spring.annotations.Document;
 import com.redis.om.spring.annotations.Indexed;
 import com.redis.om.spring.annotations.Searchable;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.geo.Point;
 

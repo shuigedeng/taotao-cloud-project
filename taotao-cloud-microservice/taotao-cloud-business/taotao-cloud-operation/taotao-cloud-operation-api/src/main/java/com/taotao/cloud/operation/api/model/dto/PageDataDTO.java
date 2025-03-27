@@ -19,10 +19,10 @@ package com.taotao.cloud.operation.api.model.dto;
 import com.taotao.boot.common.enums.ClientTypeEnum;
 import com.taotao.cloud.operation.api.enums.PageEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
 /**

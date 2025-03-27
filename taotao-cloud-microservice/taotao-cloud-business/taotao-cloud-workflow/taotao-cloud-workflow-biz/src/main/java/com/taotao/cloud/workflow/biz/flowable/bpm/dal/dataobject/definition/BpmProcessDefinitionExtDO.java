@@ -24,7 +24,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import java.util.List;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * Bpm 流程定义的拓展表 主要解决 Activiti {@link ProcessDefinition} 不支持拓展字段，所以新建拓展表

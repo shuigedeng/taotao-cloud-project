@@ -20,7 +20,7 @@ import com.taotao.boot.common.enums.GlobalStatusEnum;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * @author

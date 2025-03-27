@@ -1,11 +1,11 @@
 package com.taotao.cloud.message.biz.austin.api.domain;
 
 import com.taotao.cloud.message.biz.austin.common.domain.SimpleAnchorInfo;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 import java.util.List;
 

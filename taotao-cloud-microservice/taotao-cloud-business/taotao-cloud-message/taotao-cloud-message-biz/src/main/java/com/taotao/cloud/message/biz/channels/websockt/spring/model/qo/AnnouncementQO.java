@@ -4,7 +4,7 @@ import com.hccake.ballcat.notify.enums.NotifyRecipientFilterTypeEnum;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import org.springdoc.api.annotations.ParameterObject;
 
 /**

@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.enums;
 
 import com.taotao.cloud.payment.biz.daxpay.core.exception.ConfigNotExistException;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Getter;
 
 import java.util.Arrays;

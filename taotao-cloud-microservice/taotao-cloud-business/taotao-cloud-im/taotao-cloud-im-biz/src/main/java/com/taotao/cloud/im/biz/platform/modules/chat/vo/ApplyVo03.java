@@ -20,9 +20,9 @@ import com.platform.common.enums.GenderEnum;
 import com.platform.modules.chat.enums.ApplySourceEnum;
 import com.platform.modules.chat.enums.ApplyStatusEnum;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 @Data
 @Accessors(chain = true) // 链式调用

@@ -18,7 +18,7 @@ package com.taotao.cloud.wechat.biz.mp.controller.admin.account.vo;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

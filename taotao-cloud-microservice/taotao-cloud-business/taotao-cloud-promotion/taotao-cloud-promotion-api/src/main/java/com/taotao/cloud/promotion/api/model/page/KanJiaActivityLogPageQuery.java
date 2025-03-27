@@ -23,7 +23,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 砍价活动参与实体类

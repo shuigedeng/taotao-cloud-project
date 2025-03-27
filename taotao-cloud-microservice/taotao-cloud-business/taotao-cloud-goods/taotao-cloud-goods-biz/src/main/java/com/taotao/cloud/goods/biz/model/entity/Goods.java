@@ -31,7 +31,7 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Objects;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

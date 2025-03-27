@@ -46,7 +46,7 @@ import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -28,7 +28,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.List;
 import java.util.Set;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import me.chanjar.weixin.common.api.WxConsts.XmlMsgType;

@@ -18,9 +18,9 @@ package com.taotao.cloud.store.api.model.vo;
 
 import com.taotao.cloud.store.api.enums.FreightTemplateEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 

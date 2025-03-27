@@ -20,7 +20,7 @@ import com.taotao.cloud.flowable.biz.bpm.controller.admin.definition.vo.rule.Bpm
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

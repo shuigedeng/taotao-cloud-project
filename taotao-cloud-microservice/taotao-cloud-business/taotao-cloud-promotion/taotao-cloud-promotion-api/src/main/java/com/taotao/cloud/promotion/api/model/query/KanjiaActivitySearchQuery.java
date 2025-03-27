@@ -18,13 +18,13 @@ package com.taotao.cloud.promotion.api.model.query;
 
 import com.taotao.cloud.promotion.api.model.page.BasePromotionsSearchQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 砍价活动搜索参数 */
 @Getter

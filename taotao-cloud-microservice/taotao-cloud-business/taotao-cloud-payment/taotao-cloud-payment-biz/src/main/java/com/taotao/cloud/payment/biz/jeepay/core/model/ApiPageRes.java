@@ -20,7 +20,7 @@ import com.jeequan.jeepay.core.constants.ApiCodeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 import java.util.List;
 

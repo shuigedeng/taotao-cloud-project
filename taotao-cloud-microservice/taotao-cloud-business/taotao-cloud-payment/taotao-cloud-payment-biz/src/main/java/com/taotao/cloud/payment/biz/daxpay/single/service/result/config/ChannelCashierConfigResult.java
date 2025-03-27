@@ -6,9 +6,9 @@ import com.taotao.cloud.payment.biz.daxpay.core.enums.PayMethodEnum;
 import com.taotao.cloud.payment.biz.daxpay.core.result.MchAppResult;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 通道收银台配置

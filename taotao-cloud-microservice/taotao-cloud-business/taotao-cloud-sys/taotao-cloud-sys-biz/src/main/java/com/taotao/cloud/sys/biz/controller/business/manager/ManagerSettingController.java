@@ -25,7 +25,7 @@ import com.taotao.cloud.sys.biz.model.entity.setting.Setting;
 import com.taotao.cloud.sys.biz.service.business.ISettingService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

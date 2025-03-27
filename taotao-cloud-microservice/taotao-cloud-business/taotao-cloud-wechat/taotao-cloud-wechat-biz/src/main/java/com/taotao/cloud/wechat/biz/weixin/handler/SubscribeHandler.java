@@ -27,7 +27,7 @@ import com.joolun.weixin.service.WxMsgService;
 import com.joolun.weixin.utils.LocalDateTimeUtils;
 import java.util.List;
 import java.util.Map;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;

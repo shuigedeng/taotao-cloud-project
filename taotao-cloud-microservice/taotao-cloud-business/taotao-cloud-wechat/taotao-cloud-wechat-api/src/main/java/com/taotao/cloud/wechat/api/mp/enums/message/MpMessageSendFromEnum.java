@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.api.mp.enums.message;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Getter;
 
 /** 微信公众号消息的发送来源 */

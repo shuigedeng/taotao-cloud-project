@@ -19,12 +19,12 @@ package com.taotao.cloud.store.api.model.vo;
 import com.taotao.cloud.store.api.enums.BillStatusEnum;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 /** 结算单 */
 @Setter
 @Getter

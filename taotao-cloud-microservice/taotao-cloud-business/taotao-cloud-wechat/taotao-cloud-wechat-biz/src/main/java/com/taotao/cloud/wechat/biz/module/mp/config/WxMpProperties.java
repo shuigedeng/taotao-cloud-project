@@ -19,7 +19,7 @@ package com.taotao.cloud.wechat.biz.module.mp.config;
 import com.taotao.cloud.wechat.biz.module.mp.utils.JsonUtils;
 import java.util.List;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**

@@ -8,7 +8,7 @@ import cn.bootx.platform.core.util.ValidationUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import com.taotao.cloud.payment.biz.daxpay.channel.wechat.param.config.WechatPayConfigParam;
 import com.taotao.cloud.payment.biz.daxpay.channel.wechat.result.config.WechatPayConfigResult;
 import com.taotao.cloud.payment.biz.daxpay.channel.wechat.service.config.WechatPayConfigService;

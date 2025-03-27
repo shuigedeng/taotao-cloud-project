@@ -1,11 +1,11 @@
 package com.taotao.cloud.message.biz.austin.cron.xxl.entity;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.biz.common.flowable.bpm.api.task.dto;
 
 import java.util.Map;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 流程实例的创建 Request DTO

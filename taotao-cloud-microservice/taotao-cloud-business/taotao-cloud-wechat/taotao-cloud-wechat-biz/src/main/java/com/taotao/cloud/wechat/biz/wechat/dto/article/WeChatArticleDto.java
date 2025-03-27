@@ -22,8 +22,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 import me.chanjar.weixin.mp.bean.freepublish.WxMpFreePublishArticles;
 import me.chanjar.weixin.mp.bean.freepublish.WxMpFreePublishItem;
 

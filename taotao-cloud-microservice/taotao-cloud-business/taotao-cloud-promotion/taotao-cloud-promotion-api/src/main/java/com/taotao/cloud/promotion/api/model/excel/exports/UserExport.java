@@ -19,7 +19,7 @@ package com.taotao.cloud.promotion.api.model.excel.exports;
 // import cn.afterturn.easypoi.excel.annotation.Excel;
 // import java.io.Serializable;
 // import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 //
 // @Data
 // public class UserExport implements Serializable {

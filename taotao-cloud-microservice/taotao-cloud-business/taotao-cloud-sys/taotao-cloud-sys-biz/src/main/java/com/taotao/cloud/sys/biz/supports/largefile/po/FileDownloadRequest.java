@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.sys.biz.supports.largefile.po;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
 @Data

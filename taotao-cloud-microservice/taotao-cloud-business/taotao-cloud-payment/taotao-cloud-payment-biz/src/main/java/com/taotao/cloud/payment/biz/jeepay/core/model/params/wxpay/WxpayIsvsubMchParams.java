@@ -17,7 +17,7 @@ package com.taotao.cloud.payment.biz.jeepay.core.model.params.wxpay;
 
 import com.jeequan.jeepay.core.model.params.IsvsubMchParams;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /*
  * 微信官方支付 配置参数

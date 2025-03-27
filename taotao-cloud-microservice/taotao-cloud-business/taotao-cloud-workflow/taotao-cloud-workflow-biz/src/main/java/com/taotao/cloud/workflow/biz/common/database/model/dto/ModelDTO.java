@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.biz.common.database.model.dto;
 
 import java.sql.ResultSet;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 自定义模板参数对象 */
 @Data

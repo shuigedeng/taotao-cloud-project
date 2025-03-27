@@ -1,9 +1,9 @@
 package com.taotao.cloud.shortlink.biz.dcloud.controller.request;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
 /**

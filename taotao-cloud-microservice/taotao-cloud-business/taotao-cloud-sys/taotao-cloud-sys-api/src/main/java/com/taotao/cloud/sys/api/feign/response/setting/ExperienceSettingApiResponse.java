@@ -20,8 +20,8 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /** 经验值设置 */
 @Data

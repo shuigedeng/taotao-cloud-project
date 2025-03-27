@@ -21,7 +21,7 @@ import com.taotao.cloud.workflow.biz.common.database.sql.SqlBase;
 import java.sql.Connection;
 import java.util.List;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import org.springframework.web.util.HtmlUtils;
 
 /** MySQL SQL语句模板 */

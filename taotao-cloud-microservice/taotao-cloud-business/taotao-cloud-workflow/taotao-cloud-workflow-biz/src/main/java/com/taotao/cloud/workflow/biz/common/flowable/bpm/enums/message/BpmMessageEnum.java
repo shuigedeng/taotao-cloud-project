@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.common.flowable.bpm.enums.message;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Getter;
 
 /**

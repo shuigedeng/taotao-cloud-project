@@ -45,7 +45,7 @@ import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import org.apache.seata.spring.annotation.GlobalTransactional;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;

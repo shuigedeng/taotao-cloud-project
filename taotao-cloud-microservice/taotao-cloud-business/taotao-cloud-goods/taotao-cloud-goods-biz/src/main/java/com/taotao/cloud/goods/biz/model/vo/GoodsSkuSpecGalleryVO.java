@@ -19,7 +19,7 @@ package com.taotao.cloud.goods.biz.model.vo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

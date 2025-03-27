@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.biz.flowable.bpm.controller.admin.definition.v
 
 import com.taotao.cloud.flowable.biz.bpm.controller.admin.definition.vo.group.BpmUserGroupBaseVO;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 @ApiModel("管理后台 - 用户组创建 Request VO")
 @Data

@@ -2,8 +2,8 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.bo.sync;
 
 import com.taotao.cloud.payment.biz.daxpay.core.enums.TransferStatusEnum;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

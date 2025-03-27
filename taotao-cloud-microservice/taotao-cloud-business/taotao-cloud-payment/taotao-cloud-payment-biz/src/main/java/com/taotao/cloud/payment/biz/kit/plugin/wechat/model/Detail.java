@@ -18,8 +18,8 @@ package com.taotao.cloud.payment.biz.kit.plugin.wechat.model;
 
 import java.util.List;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /** 统一下单-优惠功能 */
 @Data

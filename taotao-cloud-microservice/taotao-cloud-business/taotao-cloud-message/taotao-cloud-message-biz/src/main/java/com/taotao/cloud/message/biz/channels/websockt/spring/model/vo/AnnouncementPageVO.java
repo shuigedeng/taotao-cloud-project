@@ -7,7 +7,7 @@ import com.hccake.ballcat.notify.enums.NotifyChannelEnum;
 import com.hccake.ballcat.notify.enums.NotifyRecipientFilterTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 import java.time.LocalDateTime;
 import java.util.List;

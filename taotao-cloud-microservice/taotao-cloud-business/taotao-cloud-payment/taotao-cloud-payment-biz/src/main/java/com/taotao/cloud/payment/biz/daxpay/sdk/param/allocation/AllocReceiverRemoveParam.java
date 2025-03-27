@@ -6,9 +6,9 @@ import cn.daxpay.single.sdk.model.allocation.AllocReceiverRemoveModel;
 import cn.daxpay.single.sdk.util.JsonUtil;
 import cn.hutool.core.lang.TypeReference;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 分账接收者删除参数

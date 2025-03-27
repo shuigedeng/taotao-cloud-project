@@ -26,7 +26,7 @@ import com.joolun.common.sensitive.SensitiveTypeEnum;
 import com.joolun.framework.config.typehandler.ArrayLongTypeHandler;
 import java.time.LocalDateTime;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
 import org.apache.ibatis.type.JdbcType;
 

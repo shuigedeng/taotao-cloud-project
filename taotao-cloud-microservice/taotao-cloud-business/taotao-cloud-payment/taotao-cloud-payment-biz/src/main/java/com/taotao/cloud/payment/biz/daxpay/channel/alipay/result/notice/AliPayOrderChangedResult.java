@@ -2,8 +2,8 @@ package com.taotao.cloud.payment.biz.daxpay.channel.alipay.result.notice;
 
 import cn.hutool.core.annotation.Alias;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /**
  * 资金单据状态变更通知

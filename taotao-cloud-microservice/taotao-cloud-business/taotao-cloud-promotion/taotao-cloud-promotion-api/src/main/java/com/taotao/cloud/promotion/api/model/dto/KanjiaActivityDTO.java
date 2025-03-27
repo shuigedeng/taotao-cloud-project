@@ -18,7 +18,7 @@ package com.taotao.cloud.promotion.api.model.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.experimental.SuperBuilder;
 
 /** 砍价活动参与实体类 */

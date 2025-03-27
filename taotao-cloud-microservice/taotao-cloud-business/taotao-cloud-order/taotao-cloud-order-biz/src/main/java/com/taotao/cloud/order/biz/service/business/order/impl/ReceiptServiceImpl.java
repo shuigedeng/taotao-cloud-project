@@ -27,7 +27,7 @@ import com.taotao.cloud.order.sys.model.page.order.ReceiptPageQuery;
 import com.taotao.cloud.order.biz.mapper.order.IReceiptMapper;
 import com.taotao.cloud.order.biz.model.entity.order.Receipt;
 import com.taotao.cloud.order.biz.service.business.order.IReceiptService;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Service;
 
 /**

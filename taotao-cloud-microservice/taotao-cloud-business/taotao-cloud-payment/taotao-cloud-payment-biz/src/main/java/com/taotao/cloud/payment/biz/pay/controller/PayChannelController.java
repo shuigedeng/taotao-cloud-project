@@ -22,7 +22,7 @@ import com.xhuicloud.common.log.annotation.SysLog;
 import com.xhuicloud.pay.entity.PayChannel;
 import com.xhuicloud.pay.service.PayChannelService;
 import io.swagger.annotations.Api;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

@@ -30,7 +30,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;

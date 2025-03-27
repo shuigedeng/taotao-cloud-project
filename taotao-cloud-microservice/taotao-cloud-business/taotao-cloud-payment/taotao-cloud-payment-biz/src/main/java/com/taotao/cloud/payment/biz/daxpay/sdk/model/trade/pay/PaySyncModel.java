@@ -2,7 +2,7 @@ package com.taotao.cloud.payment.biz.daxpay.sdk.model.trade.pay;
 
 import cn.daxpay.single.sdk.code.PaySyncStatusEnum;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 交易同步结果

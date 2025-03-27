@@ -18,10 +18,11 @@ package com.taotao.cloud.shorlink.api.api.request;
 
 import com.taotao.cloud.shorlink.api.api.common.PageRequest;
 import com.taotao.cloud.shorlink.api.api.common.Range;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 

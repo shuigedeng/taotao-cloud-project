@@ -31,7 +31,7 @@ import com.taotao.cloud.tenant.api.feign.TenantServiceApi;
 import com.taotao.cloud.tenant.api.model.dto.TenantDTO;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import org.apache.seata.spring.annotation.GlobalTransactional;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;

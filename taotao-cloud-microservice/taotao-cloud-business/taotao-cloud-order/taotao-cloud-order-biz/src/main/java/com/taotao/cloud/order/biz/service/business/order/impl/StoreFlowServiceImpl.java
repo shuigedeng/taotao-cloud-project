@@ -46,7 +46,7 @@ import com.taotao.cloud.store.api.model.vo.BillVO;
 import com.taotao.cloud.store.api.model.vo.StoreFlowPayDownloadVO;
 import com.taotao.cloud.store.api.model.vo.StoreFlowRefundDownloadVO;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

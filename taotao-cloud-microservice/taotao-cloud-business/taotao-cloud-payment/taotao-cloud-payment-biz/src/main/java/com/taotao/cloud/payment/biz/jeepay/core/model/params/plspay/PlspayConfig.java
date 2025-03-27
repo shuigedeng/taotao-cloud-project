@@ -16,7 +16,7 @@
 package com.taotao.cloud.payment.biz.jeepay.core.model.params.plspay;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /*
  * 计全支付plus， 通用配置信息

@@ -19,11 +19,12 @@ package com.taotao.cloud.media.api.model.query;
 import com.taotao.boot.common.enums.SwitchEnum;
 import com.taotao.boot.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * 会员搜索DTO

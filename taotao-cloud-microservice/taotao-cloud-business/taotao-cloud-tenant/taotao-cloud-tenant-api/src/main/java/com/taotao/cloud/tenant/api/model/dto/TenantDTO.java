@@ -19,7 +19,7 @@ package com.taotao.cloud.tenant.api.model.dto;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * @author

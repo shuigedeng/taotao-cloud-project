@@ -20,12 +20,12 @@ import com.taotao.cloud.promotion.api.model.page.BasePromotionsSearchQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 满优惠查询通用类 */
 @Setter

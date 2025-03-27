@@ -4,8 +4,8 @@ import cn.daxpay.single.sdk.code.AllocReceiverTypeEnum;
 import cn.daxpay.single.sdk.code.AllocRelationTypeEnum;
 import cn.daxpay.single.sdk.code.ChannelEnum;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 import java.util.List;
 

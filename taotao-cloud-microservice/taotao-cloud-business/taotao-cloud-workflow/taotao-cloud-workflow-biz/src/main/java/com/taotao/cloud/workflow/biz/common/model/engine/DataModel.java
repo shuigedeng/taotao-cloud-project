@@ -21,10 +21,10 @@ import com.taotao.cloud.workflow.biz.common.model.visiual.TableModel;
 import com.taotao.cloud.workflow.biz.common.model.visiual.fields.FieLdsModel;
 import java.util.List;
 import java.util.Map;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
 @Data

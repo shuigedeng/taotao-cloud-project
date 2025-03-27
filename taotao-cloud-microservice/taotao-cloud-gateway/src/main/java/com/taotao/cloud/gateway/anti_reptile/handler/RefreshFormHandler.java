@@ -18,7 +18,7 @@ package com.taotao.cloud.gateway.anti_reptile.handler;
 
 import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.gateway.anti_reptile.ValidateFormService;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.dromara.hutool.http.meta.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.BodyInserters;

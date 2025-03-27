@@ -18,9 +18,9 @@ package com.taotao.cloud.promotion.api.model.vo;
 
 import com.taotao.cloud.promotion.api.model.vo.KanjiaActivityBaseVO;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
 

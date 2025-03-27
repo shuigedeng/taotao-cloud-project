@@ -22,7 +22,7 @@ import io.swagger.annotations.ApiModelProperty;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @ApiModel("管理后台 - 公众号素材上传临时 Request VO")

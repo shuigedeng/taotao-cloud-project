@@ -1,12 +1,12 @@
 package com.taotao.cloud.message.biz.austin.cron.xxl.entity;
 
 import cn.hutool.core.text.StrPool;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 import java.util.*;
 

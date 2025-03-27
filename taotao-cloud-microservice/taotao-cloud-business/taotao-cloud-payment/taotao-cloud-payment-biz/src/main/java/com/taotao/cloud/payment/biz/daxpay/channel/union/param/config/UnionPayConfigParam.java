@@ -4,8 +4,8 @@ import com.taotao.cloud.payment.biz.daxpay.channel.union.code.UnionPayCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /**
  * 云闪付支付配置参数

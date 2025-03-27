@@ -25,7 +25,7 @@ import com.taotao.boot.webagg.entity.SuperEntity;
 import java.util.Date;
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 流程引擎 */
 @Data

@@ -20,7 +20,7 @@ import com.taotao.boot.web.annotation.FeignApi;
 import com.taotao.cloud.tenant.api.feign.TenantServiceApi;
 import com.taotao.cloud.tenant.api.model.dto.TenantDTO;
 import com.taotao.cloud.tenant.biz.service.TenantService;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

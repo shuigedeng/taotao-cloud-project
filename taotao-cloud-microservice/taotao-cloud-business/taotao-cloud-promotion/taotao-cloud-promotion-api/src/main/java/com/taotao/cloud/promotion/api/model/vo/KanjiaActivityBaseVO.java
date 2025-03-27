@@ -19,7 +19,7 @@ package com.taotao.cloud.promotion.api.model.vo;
 import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

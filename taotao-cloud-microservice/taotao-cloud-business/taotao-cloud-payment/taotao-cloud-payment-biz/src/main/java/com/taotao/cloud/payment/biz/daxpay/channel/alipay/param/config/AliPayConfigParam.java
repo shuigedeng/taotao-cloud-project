@@ -4,8 +4,8 @@ import com.taotao.cloud.payment.biz.daxpay.channel.alipay.code.AliPayCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 import java.math.BigDecimal;
 

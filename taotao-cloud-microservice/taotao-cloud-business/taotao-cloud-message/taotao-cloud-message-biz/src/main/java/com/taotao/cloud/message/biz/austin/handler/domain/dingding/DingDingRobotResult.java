@@ -1,9 +1,9 @@
 package com.taotao.cloud.message.biz.austin.handler.domain.dingding;
 
 import com.google.gson.annotations.SerializedName;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
 

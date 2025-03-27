@@ -17,9 +17,9 @@
 package com.taotao.cloud.im.biz.platform.modules.push.vo;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 大消息 */
 @Data

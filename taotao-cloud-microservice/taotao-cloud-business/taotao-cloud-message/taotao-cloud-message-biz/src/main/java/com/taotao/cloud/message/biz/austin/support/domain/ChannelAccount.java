@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.support.domain;
 
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

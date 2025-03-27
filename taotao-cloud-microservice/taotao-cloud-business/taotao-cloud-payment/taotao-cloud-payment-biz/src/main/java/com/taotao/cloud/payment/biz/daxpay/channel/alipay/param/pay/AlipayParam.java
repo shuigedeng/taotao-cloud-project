@@ -2,7 +2,7 @@ package com.taotao.cloud.payment.biz.daxpay.channel.alipay.param.pay;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 支付宝支付参数

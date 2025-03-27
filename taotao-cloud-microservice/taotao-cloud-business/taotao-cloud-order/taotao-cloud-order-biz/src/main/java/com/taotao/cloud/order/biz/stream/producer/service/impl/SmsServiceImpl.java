@@ -18,7 +18,7 @@ package com.taotao.cloud.order.biz.stream.producer.service.impl;
 
 import com.taotao.cloud.mq.pulsar.constant.MessageConstant;
 import com.taotao.cloud.order.biz.stream.producer.service.ISmsService;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 

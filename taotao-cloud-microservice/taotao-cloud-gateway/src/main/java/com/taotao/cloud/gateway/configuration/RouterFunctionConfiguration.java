@@ -39,7 +39,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.apache.commons.io.IOUtils;
 import org.dromara.hutool.http.meta.HttpStatus;
 import org.springframework.beans.factory.ObjectProvider;

@@ -17,10 +17,10 @@
 package com.taotao.cloud.wechat.api.model.query;
 
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 

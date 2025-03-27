@@ -22,7 +22,7 @@ import com.taotao.cloud.sys.biz.repository.cls.UserRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IUserRepository;
 import com.taotao.boot.web.annotation.Manager;
 import com.taotao.boot.webagg.manager.BaseSuperManager;
-import lombok.AllArgsConstructor;
+import lombok.*;
 
 /**
  * 用户管理器

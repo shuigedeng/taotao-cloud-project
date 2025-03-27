@@ -3,7 +3,7 @@ package com.taotao.cloud.iot.biz.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import com.taotao.cloud.iot.biz.convert.IotDeviceServiceLogConvert;
 import com.taotao.cloud.iot.biz.entity.IotDeviceServiceLogEntity;
 import com.taotao.cloud.iot.biz.query.IotDeviceServiceLogQuery;

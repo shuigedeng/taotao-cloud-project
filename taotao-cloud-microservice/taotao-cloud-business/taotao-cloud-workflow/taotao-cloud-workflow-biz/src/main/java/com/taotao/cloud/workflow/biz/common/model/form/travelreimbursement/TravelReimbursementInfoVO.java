@@ -17,7 +17,7 @@
 package com.taotao.cloud.workflow.biz.common.model.form.travelreimbursement;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 差旅报销申请表 */
 @Data

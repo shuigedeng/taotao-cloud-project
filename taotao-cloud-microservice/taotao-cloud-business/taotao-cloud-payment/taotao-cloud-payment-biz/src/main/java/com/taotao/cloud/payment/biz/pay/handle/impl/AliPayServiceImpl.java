@@ -33,7 +33,7 @@ import com.xhuicloud.pay.properties.PayProperties;
 import com.xhuicloud.pay.service.PayOrderAllService;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

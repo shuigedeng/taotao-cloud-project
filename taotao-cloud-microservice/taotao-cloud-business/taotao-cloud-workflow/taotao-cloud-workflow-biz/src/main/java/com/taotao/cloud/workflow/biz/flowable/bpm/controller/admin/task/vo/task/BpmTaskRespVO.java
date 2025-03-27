@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.flowable.bpm.controller.admin.task.vo.task
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

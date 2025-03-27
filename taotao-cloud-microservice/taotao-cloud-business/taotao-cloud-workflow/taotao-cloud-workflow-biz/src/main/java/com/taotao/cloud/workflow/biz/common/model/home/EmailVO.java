@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.biz.common.model.home;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** */
 @Data

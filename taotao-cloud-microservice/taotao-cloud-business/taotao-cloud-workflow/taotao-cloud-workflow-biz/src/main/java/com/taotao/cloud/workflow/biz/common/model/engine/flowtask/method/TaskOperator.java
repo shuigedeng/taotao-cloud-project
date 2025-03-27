@@ -20,7 +20,7 @@ import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.FlowModel;
 import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.shuntjson.nodejson.ChildNodeList;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** */
 @Data

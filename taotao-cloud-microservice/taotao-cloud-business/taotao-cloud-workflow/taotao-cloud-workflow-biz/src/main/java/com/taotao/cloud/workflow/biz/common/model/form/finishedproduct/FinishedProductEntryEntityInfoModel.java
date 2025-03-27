@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.biz.common.model.form.finishedproduct;
 
 import java.math.BigDecimal;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 成品入库单 */
 @Data

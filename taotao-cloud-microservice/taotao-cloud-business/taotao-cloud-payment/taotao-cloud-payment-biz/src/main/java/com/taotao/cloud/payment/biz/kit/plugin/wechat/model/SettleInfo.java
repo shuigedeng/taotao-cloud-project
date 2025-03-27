@@ -17,8 +17,8 @@
 package com.taotao.cloud.payment.biz.kit.plugin.wechat.model;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /** 统一下单-结算信息 */
 @Data

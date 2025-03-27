@@ -22,8 +22,8 @@ import com.platform.common.web.domain.BaseEntity;
 import com.platform.modules.topic.enums.TopicTypeEnum;
 import java.util.Date;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /** 主题实体类 q3z3 */
 @Data

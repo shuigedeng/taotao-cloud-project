@@ -21,7 +21,7 @@ import com.taotao.cloud.flowable.biz.bpm.controller.admin.definition.vo.form.Bpm
 import java.util.List;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 @ApiModel("管理后台 - 动态表单创建 Request VO")
 @Data

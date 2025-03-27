@@ -9,9 +9,9 @@ import cn.daxpay.single.sdk.model.allocation.AllocReceiverAddModel;
 import cn.daxpay.single.sdk.util.JsonUtil;
 import cn.hutool.core.lang.TypeReference;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 分账接收者添加参数

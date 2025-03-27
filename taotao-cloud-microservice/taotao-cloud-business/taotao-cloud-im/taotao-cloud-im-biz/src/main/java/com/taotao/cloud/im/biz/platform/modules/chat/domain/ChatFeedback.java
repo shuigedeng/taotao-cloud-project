@@ -21,8 +21,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.platform.common.web.domain.BaseEntity;
 import java.util.Date;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /** 建议反馈实体类 q3z3 */
 @Data

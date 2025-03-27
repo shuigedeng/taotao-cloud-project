@@ -4,7 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import com.taotao.cloud.iot.biz.convert.IotDeviceServiceLogConvert;
 import com.taotao.cloud.iot.biz.dao.IotDeviceServiceLogDao;
 import com.taotao.cloud.iot.biz.entity.IotDeviceServiceLogEntity;

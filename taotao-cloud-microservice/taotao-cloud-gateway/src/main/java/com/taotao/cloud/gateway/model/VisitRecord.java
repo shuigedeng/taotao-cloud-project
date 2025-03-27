@@ -1,7 +1,7 @@
 package com.taotao.cloud.gateway.model;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.ToString;
 import org.dromara.hutool.core.net.Ipv4Util;
 

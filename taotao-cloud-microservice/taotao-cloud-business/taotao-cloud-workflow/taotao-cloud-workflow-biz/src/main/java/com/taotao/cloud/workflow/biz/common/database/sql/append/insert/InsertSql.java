@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.biz.common.database.sql.append.insert;
 
 import java.util.List;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /** 插入数据SQL模板 */

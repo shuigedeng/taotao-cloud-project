@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.taotao.cloud.workflow.biz.common.database.model.dto.DataSourceDTO;
 import com.taotao.cloud.workflow.biz.common.database.model.interfaces.DataSourceMod;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

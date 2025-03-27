@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.biz.common.model.form.rewardpunishment;
 
 import java.math.BigDecimal;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 行政赏罚单 */
 @Data

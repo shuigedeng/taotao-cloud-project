@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 @ApiModel("管理后台 - 公众号粉丝 Response VO")
 @Data

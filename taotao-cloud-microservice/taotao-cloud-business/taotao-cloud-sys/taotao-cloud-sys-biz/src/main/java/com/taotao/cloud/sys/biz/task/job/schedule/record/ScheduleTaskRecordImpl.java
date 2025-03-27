@@ -22,7 +22,7 @@ import com.taotao.boot.job.biz.schedule.service.ScheduledJobService;
 import com.taotao.boot.job.schedule.model.ScheduledTask;
 import com.taotao.boot.job.schedule.task.ScheduleTaskRecord;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.dromara.hutool.core.bean.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

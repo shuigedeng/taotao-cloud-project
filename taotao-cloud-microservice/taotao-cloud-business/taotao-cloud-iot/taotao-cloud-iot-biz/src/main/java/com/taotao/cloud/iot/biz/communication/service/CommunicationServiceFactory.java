@@ -1,6 +1,6 @@
 package com.taotao.cloud.iot.biz.communication.service;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Service;
 
 /**

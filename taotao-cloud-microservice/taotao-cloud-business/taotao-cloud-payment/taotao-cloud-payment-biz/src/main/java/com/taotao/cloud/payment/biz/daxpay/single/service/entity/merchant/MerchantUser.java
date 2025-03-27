@@ -2,12 +2,12 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.entity.merchant;
 
 import cn.bootx.platform.common.mybatisplus.base.MpCreateEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 用户商户关联关系

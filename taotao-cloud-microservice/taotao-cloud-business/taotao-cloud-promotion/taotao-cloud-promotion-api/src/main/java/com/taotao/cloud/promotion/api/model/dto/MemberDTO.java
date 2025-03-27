@@ -17,10 +17,10 @@
 package com.taotao.cloud.promotion.api.model.dto;
 
 import java.io.Serializable;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
 /** 会员dto */

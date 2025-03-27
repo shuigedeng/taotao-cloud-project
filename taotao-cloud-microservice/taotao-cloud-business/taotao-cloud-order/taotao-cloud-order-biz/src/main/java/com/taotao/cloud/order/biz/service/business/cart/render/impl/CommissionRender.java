@@ -26,7 +26,7 @@ import com.taotao.cloud.order.biz.service.business.cart.render.ICartRenderStep;
 import com.taotao.cloud.promotion.api.model.vo.PointsGoodsVO;
 import java.math.BigDecimal;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Service;
 
 /**

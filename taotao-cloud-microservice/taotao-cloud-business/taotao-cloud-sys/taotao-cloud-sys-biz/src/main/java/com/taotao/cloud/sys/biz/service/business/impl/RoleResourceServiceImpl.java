@@ -26,7 +26,7 @@ import com.taotao.cloud.sys.biz.service.business.IRoleResourceService;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.util.List;
 import java.util.Set;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.dromara.hutool.core.collection.CollUtil;
 import org.springframework.stereotype.Service;
 

@@ -20,7 +20,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.jeequan.jeepay.core.model.params.IsvParams;
 import com.jeequan.jeepay.core.utils.StringKit;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import org.apache.commons.lang3.StringUtils;
 
 /*

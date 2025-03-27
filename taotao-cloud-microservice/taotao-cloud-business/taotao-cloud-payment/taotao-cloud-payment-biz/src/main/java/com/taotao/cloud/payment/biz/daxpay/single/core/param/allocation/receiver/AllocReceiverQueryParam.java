@@ -4,9 +4,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import com.taotao.cloud.payment.biz.daxpay.core.enums.ChannelEnum;
 import com.taotao.cloud.payment.biz.daxpay.core.param.PaymentCommonParam;
 

@@ -21,8 +21,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.platform.common.enums.YesOrNoEnum;
 import com.platform.common.web.domain.BaseEntity;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /** 帖子点赞实体类 q3z3 */
 @Data

@@ -20,7 +20,7 @@ import com.taotao.boot.common.model.PageQuery;
 import com.taotao.cloud.order.api.enums.aftersale.ComplaintStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -20,7 +20,7 @@ import cn.iocoder.yudao.framework.mybatis.core.dataobject.BaseDO;
 import cn.iocoder.yudao.module.mp.dal.dataobject.account.MpAccountDO;
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import me.chanjar.weixin.mp.bean.tag.WxUserTag;
 
 /**

@@ -21,7 +21,7 @@ import jakarta.validation.constraints.NotBlank;
 import java.io.Serial;
 import java.io.Serializable;
 import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import org.hibernate.validator.constraints.Length;
 
 /**

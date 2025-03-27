@@ -17,7 +17,7 @@
 package com.taotao.cloud.workflow.biz.common.database.model.dto;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 数据源参数传输对象 -- 注意：这里的参数dataSourceUtil是spring托管的全局唯一变量，此数据传输对象防止数据源互串 */
 @Data

@@ -1,8 +1,8 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.bo.reconcile;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /**
  * 对账单汇总导出对象

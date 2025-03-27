@@ -1,8 +1,8 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.bo.trade;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 import java.time.LocalDateTime;
 

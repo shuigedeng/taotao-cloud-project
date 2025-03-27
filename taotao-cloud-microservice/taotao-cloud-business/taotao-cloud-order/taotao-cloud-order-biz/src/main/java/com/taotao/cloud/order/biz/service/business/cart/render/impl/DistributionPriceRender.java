@@ -25,7 +25,7 @@ import com.taotao.cloud.order.sys.model.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.biz.service.business.cart.render.ICartRenderStep;
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Service;
 
 /**

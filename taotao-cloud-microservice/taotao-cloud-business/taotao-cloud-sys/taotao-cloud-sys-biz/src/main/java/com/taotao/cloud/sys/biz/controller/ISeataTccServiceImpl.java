@@ -7,7 +7,7 @@ import com.taotao.cloud.sys.api.model.dto.QuartzJobDTO;
 import com.taotao.cloud.sys.biz.task.job.quartz.entity.QuartzJob;
 import com.taotao.cloud.sys.biz.task.job.quartz.mapper.QuartzJobMapper;
 import org.apache.seata.core.context.RootContext;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.apache.seata.rm.tcc.api.BusinessActionContext;
 import org.apache.seata.rm.tcc.api.BusinessActionContextParameter;
 import org.dromara.hutool.core.bean.BeanUtil;

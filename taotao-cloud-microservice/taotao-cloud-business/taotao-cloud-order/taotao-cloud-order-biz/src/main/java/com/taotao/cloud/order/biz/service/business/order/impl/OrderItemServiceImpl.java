@@ -29,7 +29,7 @@ import com.taotao.cloud.order.biz.mapper.order.IOrderItemMapper;
 import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
 import com.taotao.cloud.order.biz.service.business.order.IOrderItemService;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

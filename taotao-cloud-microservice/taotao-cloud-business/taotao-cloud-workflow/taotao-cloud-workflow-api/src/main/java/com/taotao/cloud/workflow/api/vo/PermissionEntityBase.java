@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.api.vo;
 
 import java.util.Date;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 @Data
 public class PermissionEntityBase {

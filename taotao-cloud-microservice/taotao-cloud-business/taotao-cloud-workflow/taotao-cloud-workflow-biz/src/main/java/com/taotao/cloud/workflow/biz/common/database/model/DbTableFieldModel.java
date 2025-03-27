@@ -19,8 +19,8 @@ package com.taotao.cloud.workflow.biz.common.database.model;
 import com.taotao.cloud.workflow.biz.common.database.model.interfaces.JdbcGetMod;
 import java.sql.ResultSet;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /** 表字段模型 */
 @Data

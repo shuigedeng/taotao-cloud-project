@@ -2,8 +2,8 @@ package com.taotao.cloud.payment.biz.daxpay.channel.wechat.result.pay;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /**
  * 微信V3撤销支付订单返回结果

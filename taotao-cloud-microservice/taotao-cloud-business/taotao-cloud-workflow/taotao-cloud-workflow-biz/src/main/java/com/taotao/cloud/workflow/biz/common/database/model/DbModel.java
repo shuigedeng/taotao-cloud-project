@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.common.database.model;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 类功能 */
 @Data

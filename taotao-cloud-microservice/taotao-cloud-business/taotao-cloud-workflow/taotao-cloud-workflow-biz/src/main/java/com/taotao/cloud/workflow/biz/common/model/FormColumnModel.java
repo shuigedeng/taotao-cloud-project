@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.biz.common.model;
 
 import com.taotao.cloud.workflow.biz.common.model.visiual.fields.FieLdsModel;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 解析引擎 */
 @Data

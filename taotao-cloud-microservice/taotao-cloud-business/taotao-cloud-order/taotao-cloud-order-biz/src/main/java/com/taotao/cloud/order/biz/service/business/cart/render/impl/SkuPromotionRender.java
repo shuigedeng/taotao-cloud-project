@@ -27,7 +27,7 @@ import com.taotao.cloud.order.biz.service.business.cart.render.ICartRenderStep;
 import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
 import com.taotao.cloud.promotion.api.model.vo.PromotionSkuVO;
 import com.taotao.cloud.promotion.api.model.vo.KanjiaActivityVO;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.stereotype.Service;
 

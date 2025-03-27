@@ -18,7 +18,7 @@ package com.taotao.cloud.payment.biz.jeepay.payment.rqrs.division;
 import com.jeequan.jeepay.core.entity.MchDivisionReceiver;
 import com.jeequan.jeepay.pay.rqrs.AbstractRS;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import org.springframework.beans.BeanUtils;
 
 import java.math.BigDecimal;

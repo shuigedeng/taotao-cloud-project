@@ -17,7 +17,7 @@
 package com.taotao.cloud.workflow.biz.engine.util;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 在线工作流开发 */
 @Data

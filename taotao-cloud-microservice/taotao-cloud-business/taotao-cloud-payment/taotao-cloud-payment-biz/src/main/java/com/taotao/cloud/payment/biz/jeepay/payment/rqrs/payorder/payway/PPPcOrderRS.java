@@ -2,7 +2,7 @@ package com.taotao.cloud.payment.biz.jeepay.payment.rqrs.payorder.payway;
 
 import com.jeequan.jeepay.pay.rqrs.payorder.CommonPayDataRS;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * none.

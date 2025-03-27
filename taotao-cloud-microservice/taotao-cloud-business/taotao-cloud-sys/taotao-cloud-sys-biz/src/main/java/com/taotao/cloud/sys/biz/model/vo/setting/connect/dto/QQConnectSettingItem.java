@@ -17,8 +17,8 @@
 package com.taotao.cloud.sys.biz.model.vo.setting.connect.dto;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /** QQ联合登录具体配置 */
 @Data

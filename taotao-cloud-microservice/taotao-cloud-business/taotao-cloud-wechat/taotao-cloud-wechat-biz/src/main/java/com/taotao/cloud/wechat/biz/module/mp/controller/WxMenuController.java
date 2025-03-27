@@ -21,7 +21,7 @@ import static me.chanjar.weixin.common.api.WxConsts.MenuButtonType;
 import jakarta.servlet.http.HttpServletRequest;
 import java.net.MalformedURLException;
 import java.net.URL;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.bean.menu.WxMenu;
 import me.chanjar.weixin.common.bean.menu.WxMenuButton;

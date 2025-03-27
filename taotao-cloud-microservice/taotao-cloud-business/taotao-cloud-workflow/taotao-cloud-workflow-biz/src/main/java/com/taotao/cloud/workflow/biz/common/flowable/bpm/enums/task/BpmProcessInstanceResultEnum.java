@@ -17,7 +17,7 @@
 package com.taotao.cloud.workflow.biz.common.flowable.bpm.enums.task;
 
 import cn.iocoder.yudao.framework.common.util.object.ObjectUtils;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Getter;
 
 /**

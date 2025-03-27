@@ -3,9 +3,9 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.bo.allocation;
 import cn.bootx.platform.common.jackson.sensitive.SensitiveInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import com.taotao.cloud.payment.biz.daxpay.core.enums.AllocRelationTypeEnum;
 import com.taotao.cloud.payment.biz.daxpay.core.result.MchAppResult;
 

@@ -1,6 +1,6 @@
 package com.taotao.cloud.generator.generator.entity;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 
 /**
  * String 包装类

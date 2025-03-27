@@ -20,7 +20,7 @@ import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.shuntjson.ch
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 解析引擎 */
 @Data

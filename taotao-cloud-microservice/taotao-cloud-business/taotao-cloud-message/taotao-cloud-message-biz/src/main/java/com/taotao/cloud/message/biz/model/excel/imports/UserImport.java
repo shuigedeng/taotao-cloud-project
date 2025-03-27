@@ -21,7 +21,7 @@ package com.taotao.cloud.message.biz.model.excel.imports; // package
 // import java.io.Serial;
 // import java.io.Serializable;
 // import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 //
 // @Data
 // public class UserImport implements Serializable {

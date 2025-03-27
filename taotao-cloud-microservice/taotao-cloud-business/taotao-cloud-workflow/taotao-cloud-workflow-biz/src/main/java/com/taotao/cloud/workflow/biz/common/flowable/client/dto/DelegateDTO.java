@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.biz.common.flowable.client.dto;
 
 import java.io.Serial;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 

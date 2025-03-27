@@ -21,7 +21,7 @@ import com.taotao.cloud.workflow.biz.common.model.visiual.fields.props.PropsMode
 import com.taotao.cloud.workflow.biz.common.model.visiual.fields.slot.SlotModel;
 import java.util.List;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** */
 @Data

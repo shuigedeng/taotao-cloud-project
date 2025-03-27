@@ -21,7 +21,7 @@ import com.taotao.boot.webagg.manager.BaseManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.dromara.hutool.json.JSONUtil;
 

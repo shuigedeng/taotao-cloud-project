@@ -19,9 +19,9 @@ package com.taotao.cloud.message.biz.model.dto;
 import com.taotao.cloud.message.api.enums.NoticeMessageNodeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Map;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 

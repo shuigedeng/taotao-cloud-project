@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.biz.model.vo;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

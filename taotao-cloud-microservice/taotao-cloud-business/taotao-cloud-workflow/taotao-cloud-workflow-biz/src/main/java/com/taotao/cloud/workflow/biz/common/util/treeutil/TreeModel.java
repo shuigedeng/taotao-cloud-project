@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.common.util.treeutil;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 需要实现树的类可以继承该类，手写set方法，在设定本身属性值时同时设置该类中的相关属性 */
 @Data

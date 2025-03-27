@@ -16,9 +16,9 @@
 package com.taotao.cloud.payment.biz.jeepay.components.oss.model;
 
 import com.jeequan.jeepay.components.oss.constant.OssSavePlaceEnum;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;

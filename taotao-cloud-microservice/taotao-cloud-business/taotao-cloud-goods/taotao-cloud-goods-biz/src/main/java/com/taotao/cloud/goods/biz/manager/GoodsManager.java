@@ -9,7 +9,7 @@ import com.taotao.boot.web.annotation.Manager;
 import com.taotao.boot.webagg.manager.BaseManager;
 import java.util.List;
 import java.util.Objects;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.transaction.annotation.Transactional;
 

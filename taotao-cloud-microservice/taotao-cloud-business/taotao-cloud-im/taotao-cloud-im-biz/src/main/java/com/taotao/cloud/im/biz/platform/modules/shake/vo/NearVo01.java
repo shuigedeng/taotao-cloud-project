@@ -18,7 +18,7 @@ package com.taotao.cloud.im.biz.platform.modules.shake.vo;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 @Data
 public class NearVo01 {

@@ -23,7 +23,7 @@ import com.taotao.cloud.order.biz.mapper.aftersale.IAfterSaleLogMapper;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
 import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleLogService;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

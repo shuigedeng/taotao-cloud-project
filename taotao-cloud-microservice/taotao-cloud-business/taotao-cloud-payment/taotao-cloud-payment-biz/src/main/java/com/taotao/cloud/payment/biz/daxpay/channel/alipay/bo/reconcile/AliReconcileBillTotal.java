@@ -4,7 +4,7 @@ import cn.bootx.platform.common.mybatisplus.base.MpIdEntity;
 import cn.hutool.core.annotation.Alias;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
 
 /**

@@ -18,8 +18,8 @@ package com.taotao.cloud.im.biz.platform.modules.chat.vo;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 @Data
 public class ApplyVo01 {

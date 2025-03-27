@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.model.vo.order;
 
 import com.taotao.boot.common.enums.UserEnum;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

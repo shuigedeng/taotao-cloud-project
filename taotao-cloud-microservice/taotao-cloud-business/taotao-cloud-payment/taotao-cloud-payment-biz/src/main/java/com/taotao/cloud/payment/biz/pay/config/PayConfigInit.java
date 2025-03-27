@@ -35,7 +35,7 @@ import com.xhuicloud.upms.vo.TenantVo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.web.context.WebServerInitializedEvent;

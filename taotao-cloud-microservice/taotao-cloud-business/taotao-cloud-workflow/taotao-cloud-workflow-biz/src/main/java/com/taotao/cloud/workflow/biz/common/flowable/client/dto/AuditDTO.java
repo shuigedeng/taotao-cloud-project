@@ -22,7 +22,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Map;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /**
  * 

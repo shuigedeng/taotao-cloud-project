@@ -23,9 +23,9 @@ import com.jeequan.jeepay.core.model.params.alipay.AlipayNormalMchParams;
 import com.jeequan.jeepay.core.utils.SpringBeansUtil;
 import com.jeequan.jeepay.pay.exception.ChannelException;
 import com.jeequan.jeepay.pay.util.ChannelCertConfigKitBean;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.extern.slf4j.Slf4j;
 
 /*

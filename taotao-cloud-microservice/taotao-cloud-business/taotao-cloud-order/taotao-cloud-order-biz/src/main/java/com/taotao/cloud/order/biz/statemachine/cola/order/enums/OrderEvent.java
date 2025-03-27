@@ -1,6 +1,6 @@
 package com.taotao.cloud.order.biz.statemachine.cola.order.enums;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Getter;
 
 /**

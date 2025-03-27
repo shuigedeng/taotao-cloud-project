@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.biz.common.model;
 
 import javax.websocket.Session;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** */
 @Data

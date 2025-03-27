@@ -19,8 +19,8 @@ package com.taotao.cloud.im.biz.platform.modules.collect.vo;
 import com.platform.modules.collect.enums.CollectTypeEnum;
 import java.util.Date;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 @Data
 @Accessors(chain = true) // 链式调用

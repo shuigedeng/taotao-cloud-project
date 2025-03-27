@@ -17,7 +17,7 @@
 package com.taotao.cloud.operation.api.model.vo;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 
 /** 店铺消息表 */
 @Data

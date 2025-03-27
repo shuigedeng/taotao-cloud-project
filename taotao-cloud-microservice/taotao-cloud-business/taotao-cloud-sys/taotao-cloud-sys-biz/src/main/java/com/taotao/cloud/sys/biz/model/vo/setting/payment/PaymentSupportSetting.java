@@ -22,9 +22,9 @@ import com.taotao.cloud.sys.biz.model.vo.setting.payment.dto.PaymentSupportItem;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
+import lombok.experimental.*;
+import lombok.experimental.*;
 
 /** 支持的支付方式 */
 @Data

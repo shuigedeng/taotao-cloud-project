@@ -22,7 +22,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.sys.biz.task.job.schedule.entity.ScheduledJobLog;
 import com.taotao.cloud.sys.biz.task.job.schedule.mapper.ScheduledJobLogMapper;
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;

@@ -17,7 +17,7 @@ package com.taotao.cloud.payment.biz.jeepay.core.model.security;
 
 import com.jeequan.jeepay.core.entity.SysUser;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

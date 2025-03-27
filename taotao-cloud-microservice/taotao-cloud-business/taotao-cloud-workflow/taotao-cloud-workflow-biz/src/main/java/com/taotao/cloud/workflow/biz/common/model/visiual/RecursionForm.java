@@ -18,10 +18,10 @@ package com.taotao.cloud.workflow.biz.common.model.visiual;
 
 import com.taotao.cloud.workflow.biz.common.model.visiual.fields.FieLdsModel;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
 @Data

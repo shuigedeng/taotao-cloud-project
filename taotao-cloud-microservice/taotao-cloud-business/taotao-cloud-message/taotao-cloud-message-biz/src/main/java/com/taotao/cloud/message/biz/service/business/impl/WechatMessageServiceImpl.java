@@ -30,9 +30,9 @@ package com.taotao.cloud.message.biz.service.business.impl; // package
 // import com.taotao.cloud.message.biz.service.WechatMessageService;
 // import com.taotao.cloud.message.biz.util.WechatAccessTokenUtil;
 // import com.taotao.cloud.message.biz.util.WechatMessageUtil;
-// import lombok.AllArgsConstructor;
+// import lombok.*;
 // import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.experimental.*;
 // import lombok.NoArgsConstructor;
 // import lombok.extern.slf4j.Slf4j;
 // import org.springframework.beans.factory.annotation.Autowired;

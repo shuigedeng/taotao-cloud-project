@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.api.mp.enums.message;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.Getter;
 
 /** 公众号消息自动回复的匹配模式 */

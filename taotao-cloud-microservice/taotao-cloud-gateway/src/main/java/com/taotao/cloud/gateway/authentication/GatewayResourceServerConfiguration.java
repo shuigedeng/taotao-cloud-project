@@ -22,7 +22,7 @@ import com.taotao.boot.security.spring.enums.Target;
 import com.taotao.boot.security.spring.properties.OAuth2AuthorizationProperties;
 import com.taotao.boot.security.spring.properties.OAuth2EndpointProperties;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.boot.actuate.autoconfigure.security.reactive.EndpointRequest;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
