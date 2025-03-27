@@ -16,8 +16,21 @@
 
 package com.taotao.cloud.ai.tongyi.service.impl.audio.transcription;
 
+import com.alibaba.cloud.ai.dashscope.audio.transcription.AudioTranscriptionModel;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.taotao.cloud.ai.tongyi.service.AbstractTongYiServiceImpl;
 import com.taotao.cloud.ai.tongyi.service.TongYiService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.ai.audio.transcription.AudioTranscription;
+import org.springframework.ai.audio.transcription.AudioTranscriptionPrompt;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,20 +40,6 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
-import com.alibaba.cloud.ai.tongyi.audio.transcription.TongYiAudioTranscriptionModel;
-import com.alibaba.cloud.ai.tongyi.audio.transcription.api.AudioTranscriptionPrompt;
-import com.alibaba.cloud.ai.tongyi.audio.transcription.api.AudioTranscriptionResult;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.stereotype.Service;
 
 /**
  * @author xYLiu
@@ -53,10 +52,10 @@ public class TongYiAudioTranscriptionServiceImpl extends AbstractTongYiServiceIm
 
 	private static final Logger logger = LoggerFactory.getLogger(TongYiService.class);
 
-	private final TongYiAudioTranscriptionModel audioTranscriptionModel;
+	private final AudioTranscriptionModel audioTranscriptionModel;
 
 	@Autowired
-	public TongYiAudioTranscriptionServiceImpl(final TongYiAudioTranscriptionModel transcriptionModel) {
+	public TongYiAudioTranscriptionServiceImpl(final AudioTranscriptionModel transcriptionModel) {
 
 		this.audioTranscriptionModel = transcriptionModel;
 	}
@@ -68,8 +67,7 @@ public class TongYiAudioTranscriptionServiceImpl extends AbstractTongYiServiceIm
 
 		try {
 			resource = new UrlResource(audioUrls);
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			logger.error("Failed to create resource.");
 			throw new RuntimeException(e);
 		}
@@ -78,11 +76,11 @@ public class TongYiAudioTranscriptionServiceImpl extends AbstractTongYiServiceIm
 		return save(audioTranscriptionModel.call(audioTranscriptionPrompt).getResults());
 	}
 
-	private String save(List<AudioTranscriptionResult> resultList) {
+	private String save(List<AudioTranscription> resultList) {
 		String currentPath = System.getProperty("user.dir");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-HH-mm-ss");
 		StringBuilder retPaths = new StringBuilder();
-		for (AudioTranscriptionResult audioTranscriptionResult : resultList) {
+		for (AudioTranscription audioTranscriptionResult : resultList) {
 			String tUrl = audioTranscriptionResult.getOutput();
 			LocalDateTime now = LocalDateTime.now();
 			String fileName = currentPath + File.separator + now.format(formatter) + ".txt";
@@ -110,14 +108,12 @@ public class TongYiAudioTranscriptionServiceImpl extends AbstractTongYiServiceIm
 						}
 						logger.info("File downloaded successfully：{}\n", fileName);
 					}
-				}
-				else {
+				} else {
 					logger.error("The download failed, and the response code：{}",
-							responseCode);
+						responseCode);
 				}
 				connection.disconnect();
-			}
-			catch (IOException e) {
+			} catch (IOException e) {
 				logger.error("An error occurred during the file download process.");
 			}
 		}

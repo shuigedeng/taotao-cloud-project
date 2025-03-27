@@ -40,7 +40,7 @@ public class TongYiTextEmbeddingServiceImpl extends AbstractTongYiServiceImpl {
 	}
 
 	@Override
-	public List<Double> textEmbedding(String text) {
+	public float[] textEmbedding(String text) {
 
 		return embeddingModel.embed(text);
 	}

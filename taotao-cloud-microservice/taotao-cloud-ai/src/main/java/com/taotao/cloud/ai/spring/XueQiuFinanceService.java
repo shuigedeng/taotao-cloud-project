@@ -3,8 +3,9 @@ package com.taotao.cloud.ai.spring;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.taotao.cloud.ai.spring.XueQiuFinanceService.FinanceRequest;
-import java.util.function.Function;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.function.Function;
 
 public class XueQiuFinanceService implements Function<FinanceRequest, String> {
 

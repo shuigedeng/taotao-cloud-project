@@ -24,7 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.*;
-
+import com.taotao.cloud.ai.tongyi.models.Completion;
 import java.util.List;
 import java.util.Map;
 
@@ -157,7 +157,7 @@ public class TongYiController {
 	private TongYiService tongYiTextEmbeddingService;
 
 	@GetMapping("/textEmbedding")
-	public List<Double> textEmbedding(@RequestParam(value = "text",
+	public float[] textEmbedding(@RequestParam(value = "text",
 		defaultValue = "Spring Cloud Alibaba AI 框架！") String text) {
 
 		return tongYiTextEmbeddingService.textEmbedding(text);

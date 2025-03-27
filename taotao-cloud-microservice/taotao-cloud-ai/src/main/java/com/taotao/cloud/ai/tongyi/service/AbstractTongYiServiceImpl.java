@@ -21,7 +21,6 @@ import com.taotao.cloud.ai.tongyi.models.Completion;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.image.ImageResponse;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -91,7 +90,7 @@ public abstract class AbstractTongYiServiceImpl implements TongYiService {
 	}
 
 	@Override
-	public List<Double> textEmbedding(String text) {
+	public float[] textEmbedding(String text) {
 
 		throw new RuntimeException(INFO_PREFIX + Thread.currentThread()
 			.getStackTrace()[2].getMethodName() + INFO_SUFFIX);

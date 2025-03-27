@@ -71,6 +71,6 @@ public class TongYiStuffServiceImpl extends AbstractTongYiServiceImpl {
 
 		Prompt prompt = promptTemplate.create(map);
 		Generation generation = chatModel.call(prompt).getResult();
-		return new Completion(generation.getOutput().getContent());
+		return new Completion(generation.getOutput().getText());
 	}
 }

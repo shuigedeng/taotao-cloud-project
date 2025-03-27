@@ -61,7 +61,7 @@ public class TongYiSimpleServiceImpl extends AbstractTongYiServiceImpl {
 
 		Prompt prompt = new Prompt(new UserMessage(message));
 
-		return chatModel.call(prompt).getResult().getOutput().getContent();
+		return chatModel.call(prompt).getResult().getOutput().getText();
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class TongYiSimpleServiceImpl extends AbstractTongYiServiceImpl {
 
 		streamingChatModel.stream(new Prompt(message))
 				.flatMap(chatResponse -> Flux.fromIterable(chatResponse.getResults()))
-				.map(content -> content.getOutput().getContent())
+				.map(content -> content.getOutput().getText())
 				.doOnNext(fullContent::append)
 				.last()
 				.map(lastContent -> Map.of(message, fullContent.toString()))

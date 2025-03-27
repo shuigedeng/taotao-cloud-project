@@ -22,7 +22,6 @@ import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.embedding.EmbeddingResponse;
 import org.springframework.ai.image.ImageResponse;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -115,6 +114,6 @@ public interface TongYiService {
 	 * @param text input text.
 	 * @return {@link EmbeddingResponse}
 	 */
-	List<Double> textEmbedding(String text);
+	float[] textEmbedding(String text);
 
 }

@@ -58,7 +58,7 @@ public class ChatMsgService {
 				resp.getResult().getOutput()
 		);
 
-		return resp.getResult().getOutput().getContent();
+		return resp.getResult().getOutput().getText();
 
 	}
 

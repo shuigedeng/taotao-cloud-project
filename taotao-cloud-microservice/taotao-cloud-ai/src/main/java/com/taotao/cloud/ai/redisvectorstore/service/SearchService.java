@@ -18,12 +18,11 @@ public class SearchService {
 	private int topK;
 
 	@Autowired
-	private  VectorStore vectorStore;
-
+	private VectorStore vectorStore;
 
 
 	public List<Document> retrieve(String message) {
-		SearchRequest request = SearchRequest.query(message).withTopK(topK);
+		SearchRequest request = SearchRequest.builder().query(message).topK(topK).build();
 		// Query Redis for the top K documents most relevant to the input message
 		List<Document> docs = vectorStore.similaritySearch(request);
 

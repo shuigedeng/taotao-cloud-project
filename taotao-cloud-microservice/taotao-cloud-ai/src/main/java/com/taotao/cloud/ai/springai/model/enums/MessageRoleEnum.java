@@ -11,7 +11,7 @@ import lombok.Getter;
  */
 @AllArgsConstructor
 @Getter
-public enum MessageRoleEnum implements IBaseEnum<String> {
+public enum MessageRoleEnum{
 
     USER("user", "用户发送的消息"),
     /**

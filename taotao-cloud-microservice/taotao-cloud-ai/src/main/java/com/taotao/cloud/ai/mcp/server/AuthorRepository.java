@@ -4,7 +4,7 @@ import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.method.MethodToolCallbackProvider;
 import org.springframework.context.annotation.Bean;
-
+import java.util.List;
 public class AuthorRepository {
 	//MCP Server注册我们的作者工具
 	@Bean

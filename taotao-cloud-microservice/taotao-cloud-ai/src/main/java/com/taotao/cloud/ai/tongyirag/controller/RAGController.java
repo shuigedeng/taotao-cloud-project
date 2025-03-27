@@ -35,7 +35,7 @@ public class RAGController {
 
 		return ragService.retrieve(prompt)
 			.getOutput()
-			.getContent();
+			.getText();
 	}
 
 }

@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.autoconfigure.vectorstore.redis.RedisVectorStoreProperties;
 import org.springframework.ai.reader.JsonReader;
-import org.springframework.ai.vectorstore.RedisVectorStore;
+import org.springframework.ai.vectorstore.redis.RedisVectorStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -20,7 +20,7 @@ public class DataLoader implements ApplicationRunner {
 
 	private static final Logger logger = LoggerFactory.getLogger(DataLoader.class);
 
-	private static final String[] KEYS = { "name", "abv", "ibu", "description" };
+	private static final String[] KEYS = {"name", "abv", "ibu", "description"};
 
 	@Value("classpath:/data/beers.json.gz")
 	private Resource data;
@@ -37,8 +37,8 @@ public class DataLoader implements ApplicationRunner {
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		Map<String, Object> indexInfo = vectorStore.getJedis().ftInfo(properties.getIndex());
-		Long sss= (Long) indexInfo.getOrDefault("num_docs", "0");
-		int numDocs=sss.intValue();
+		Long sss = (Long) indexInfo.getOrDefault("num_docs", "0");
+		int numDocs = sss.intValue();
 		if (numDocs > 20000) {
 			logger.info("Embeddings already loaded. Skipping");
 			return;

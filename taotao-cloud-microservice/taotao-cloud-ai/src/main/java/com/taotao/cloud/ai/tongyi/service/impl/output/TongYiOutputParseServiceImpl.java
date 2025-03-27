@@ -68,10 +68,10 @@ public class TongYiOutputParseServiceImpl extends AbstractTongYiServiceImpl {
 
 		// {@link BeanOutputParser#getFormat}
 		// simple solve.
-		String content = generation.getOutput().getContent()
+		String content = generation.getOutput().getText()
 				.replace("```json", "")
 				.replace("```", "");
 
-		return outputParser.parse(content);
+		return outputParser.convert(content);
 	}
 }

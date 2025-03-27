@@ -16,12 +16,11 @@
 
 package com.taotao.cloud.ai.tongyi.service.impl.audio.speech;
 
-import com.alibaba.cloud.ai.tongyi.audio.speech.api.SpeechModel;
-import com.alibaba.dashscope.audio.tts.SpeechSynthesisAudioFormat;
 import com.taotao.cloud.ai.tongyi.service.AbstractTongYiServiceImpl;
 import com.taotao.cloud.ai.tongyi.service.TongYiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.ai.openai.audio.speech.SpeechModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +29,8 @@ import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import static com.alibaba.cloud.ai.dashscope.audio.DashScopeAudioTranscriptionOptions.AudioFormat.WAV;
 
 /**
  * @author yuluo
@@ -55,9 +56,9 @@ public class TongYiAudioSimpleServiceImpl extends AbstractTongYiServiceImpl {
 
 		logger.info("gen audio prompt is: {}", text);
 
-		var resWAV = speechClient.call(text);
+		byte[] resWAV = speechClient.call(text);
 
-		return save(resWAV, SpeechSynthesisAudioFormat.WAV.getValue());
+		return save(ByteBuffer.wrap(resWAV), WAV.getValue());
 	}
 
 	private String save(ByteBuffer audio, String type) {
