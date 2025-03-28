@@ -23,6 +23,7 @@ import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 import net.maku.generator.autoconfigure.GeneratorAutoConfiguration;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 
 /**
@@ -33,7 +34,8 @@ import org.springframework.context.annotation.Import;
  * @since 2023-05-11 13:55:49
  */
 @Import(GeneratorAutoConfiguration.class)
-@MapperScan(basePackages = {"net.maku.generator.dao"})
+@MapperScan(basePackages = {"net.maku.generator.dao", "com.taotao.cloud.generator.mapper"})
+@ComponentScan(basePackages = {"net.maku.generator.dao", "com.taotao.cloud.generator.mapper"})
 @TaoTaoBootApplication
 @TaoTaoCloudApplication
 public class TaoTaoCloudGeneratorApplication {
