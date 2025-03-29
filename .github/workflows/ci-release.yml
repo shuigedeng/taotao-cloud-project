@@ -57,10 +57,10 @@ jobs:
           gradle-version: "8.13"
 
       - name: release taotao-cloud-cache
-        run: gradle taotao-cloud-cache jar
+        run: gradle -p taotao-cloud-cache jar
 
       - name: release taotao-cloud-jdbcpool
-        run: gradle taotao-cloud-jdbcpool jar
+        run: gradle -p taotao-cloud-jdbcpool jar
 
       - name: release taotao-cloud-tx
         run: gradle -p taotao-cloud-tx/taotao-cloud-tx-distribution  releaseTarGz
