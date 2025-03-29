@@ -1,7 +1,7 @@
 package com.taotao.cloud.cache.support.load;
 
 import com.alibaba.fastjson2.JSON;
-import com.taotao.boot.common.utils.common.StringUtil;
+import com.taotao.boot.common.utils.common.StringUtils;
 import com.taotao.cloud.cache.annotation.CacheInterceptor;
 import com.taotao.cloud.cache.api.ICache;
 import com.taotao.cloud.cache.api.ICacheLoad;
@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.xkzhangsan.time.utils.CollectionUtil;
+import com.xkzhangsan.time.utils.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -56,6 +56,12 @@ jobs:
         with:
           gradle-version: "8.13"
 
+      - name: release taotao-cloud-cache
+        run: gradle taotao-cloud-cache jar
+
+      - name: release taotao-cloud-jdbcpool
+        run: gradle taotao-cloud-jdbcpool jar
+
       - name: release taotao-cloud-tx
         run: gradle -p taotao-cloud-tx/taotao-cloud-tx-distribution  releaseTarGz
 
@@ -81,7 +87,9 @@ jobs:
                       taotao-cloud-rpc/taotao-cloud-rpc-distribution/build/distributions/taotao-cloud-rpc-distribution-2025.04.zip,
                       taotao-cloud-rpc/taotao-cloud-rpc-distribution/build/distributions/taotao-cloud-rpc-distribution-2025.04.tar.gz,
                       taotao-cloud-job/taotao-cloud-job-distribution/build/distributions/taotao-cloud-job-distribution-2025.04.zip,
-                      taotao-cloud-job/taotao-cloud-job-distribution/build/distributions/taotao-cloud-job-distribution-2025.04.tar.gz"
+                      taotao-cloud-job/taotao-cloud-job-distribution/build/distributions/taotao-cloud-job-distribution-2025.04.tar.gz,
+                      taotao-cloud-cache/build/libs/taotao-cloud-cache-2025.04.jar,
+                      taotao-cloud-jdbcpool/build/libs/taotao-cloud-jdbcpool-2025.04.jar"
           #body: "sdfsa"
           bodyFile: "doc/release/2025-04.md"
           draft: false

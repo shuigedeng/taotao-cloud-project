@@ -1,6 +1,6 @@
 package com.taotao.cloud.cache.support.persist;
 
-import com.taotao.boot.common.utils.common.StringUtil;
+import com.taotao.boot.common.utils.common.StringUtils;
 import com.taotao.boot.common.utils.io.FileUtils;
 import com.taotao.cloud.cache.api.ICache;
 
@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import com.xkzhangsan.time.utils.StringUtil;
 import org.dromara.hutool.core.io.file.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
