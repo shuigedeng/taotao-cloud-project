@@ -5,7 +5,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/license-Apache%202-green" alt="License"/>
   <img src="https://img.shields.io/badge/taotao--cloud--project-2025.04-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring-6.2.4-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring-6.2.5-red" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_boot-3.4.4-orange" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud-2024.0.1-yellowgree" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud_alibaba-2023.0.3.2-blue" alt="Downloads"/>
