@@ -1,6 +1,8 @@
 package com.taotao.cloud.mq.example.broker;
 
 
+import com.taotao.cloud.mq.broker.core.MqBroker;
+
 /**
  * @author shuigedeng
  * @since 2024.05

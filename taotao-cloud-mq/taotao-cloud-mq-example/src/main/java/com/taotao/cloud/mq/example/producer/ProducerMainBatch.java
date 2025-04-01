@@ -5,6 +5,7 @@ import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.mq.client.producer.core.MqProducer;
 import com.taotao.cloud.mq.client.producer.dto.SendBatchResult;
 import com.taotao.cloud.mq.common.dto.req.MqMessage;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

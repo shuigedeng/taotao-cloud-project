@@ -1,96 +1,68 @@
 package com.taotao.cloud.rpc.client;
 
-import com.taotao.cloud.rpc.common.common.RpcDecoder;
-import com.taotao.cloud.rpc.common.common.RpcEncoder;
-import com.taotao.cloud.rpc.common.common.RpcReponse;
+
+import com.taotao.cloud.rpc.client.handler.RpcClientHandler;
+import com.taotao.cloud.rpc.common.common.support.invoke.impl.DefaultInvokeManager;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import com.taotao.cloud.rpc.common.common.RpcReponse;
-import com.taotao.cloud.rpc.common.common.RpcRequest;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
- * client<br>
- *
- * @author shuigedeng
- * @version v1.0.0
+ * <p> rpc 客户端 </p>
  */
-public class RpcClient extends SimpleChannelInboundHandler<RpcReponse> {
+public class RpcClient extends Thread {
 
-	private RpcReponse response;
-	private final Object object = new Object();
-	private String ip;
-	private int port;
+	private static final Logger LOG = LoggerFactory.getLogger(RpcClient.class);
 
-	public RpcClient(String ip, int port) {
-		this.ip = ip;
+
+	/**
+	 * 监听端口号
+	 */
+	private final int port;
+
+	public RpcClient(int port) {
 		this.port = port;
 	}
 
-	/**
-	 * 发送数据
-	 *
-	 * @param request request
-	 * @return com.taotao.rpc.common.RpcReponse
-	 * @author shuigedeng
-	 * @since 2024.06
-	 */
-	public RpcReponse send(RpcRequest request) throws Exception {
-		EventLoopGroup group = new NioEventLoopGroup();
+	public RpcClient() {
+		this(9527);
+	}
+
+	@Override
+	public void run() {
+		// 启动服务端
+		LOG.info("RPC 服务开始启动客户端");
+
+		EventLoopGroup workerGroup = new NioEventLoopGroup();
 
 		try {
 			Bootstrap bootstrap = new Bootstrap();
-			bootstrap
-				.group(group)
+			ChannelFuture channelFuture = bootstrap.group(workerGroup)
 				.channel(NioSocketChannel.class)
-				.handler(new ChannelInitializer<SocketChannel>() {
+				.option(ChannelOption.SO_KEEPALIVE, true)
+				.handler(new ChannelInitializer<Channel>() {
 					@Override
-					protected void initChannel(SocketChannel ch) throws Exception {
+					protected void initChannel(Channel ch) throws Exception {
 						ch.pipeline()
-							.addLast(new RpcEncoder(RpcRequest.class))
-							.addLast(new RpcDecoder(RpcReponse.class))
-							.addLast(RpcClient.this);
+							.addLast(new LoggingHandler(LogLevel.INFO))
+							.addLast(new RpcClientHandler(new DefaultInvokeManager()));
 					}
 				})
-				.option(ChannelOption.SO_KEEPALIVE, true);
+				.connect("localhost", port)
+				.syncUninterruptibly();
 
-			ChannelFuture channelFuture = bootstrap.connect(ip, port).sync();
-			// 发送request请求
-			channelFuture.channel().writeAndFlush(request).sync();
-
-			// 等待讲数据读取完毕 阻塞线程
-			synchronized (object) {
-				object.wait();
-			}
-
-			if (null != response) {
-				channelFuture.channel().closeFuture().sync();
-			}
-
-			return response;
+			LOG.info("RPC 服务启动客户端完成，监听端口：" + port);
+			channelFuture.channel().closeFuture().syncUninterruptibly();
+			LOG.info("RPC 服务开始客户端已关闭");
+		} catch (Exception e) {
+			LOG.error("RPC 客户端遇到异常", e);
+		} finally {
+			workerGroup.shutdownGracefully();
 		}
-		finally {
-			group.shutdownGracefully();
-		}
-	}
-
-	@Override
-	protected void channelRead0(ChannelHandlerContext ctx, RpcReponse response) throws Exception {
-		this.response = response;
-		// 当数据获取完毕 通知主线程释放
-		synchronized (object) {
-			object.notifyAll();
-		}
-	}
-
-	@Override
-	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-		ctx.close();
 	}
 }
