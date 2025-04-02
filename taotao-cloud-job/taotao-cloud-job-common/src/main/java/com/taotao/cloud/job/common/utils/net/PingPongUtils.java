@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * socket 连通性助手
  *
- * @author shuigedeng
+ * @author tjq
  * @since 2024/2/8
  */
 @Slf4j
@@ -45,7 +45,7 @@ public class PingPongUtils {
         } catch (IOException e) {
             log.warn("[SocketConnectivityUtils] IOException: {}:{}, msg: {}", targetIp, targetPort, ExceptionUtils.getMessage(e));
         } catch (Exception e) {
-            log.error("[SocketConnectivityUtils] unknown TtcJobException for check ip: {}:{}", targetIp, targetPort, e);
+            log.error("[SocketConnectivityUtils] unknown KJobException for check ip: {}:{}", targetIp, targetPort, e);
         }
 
         return false;

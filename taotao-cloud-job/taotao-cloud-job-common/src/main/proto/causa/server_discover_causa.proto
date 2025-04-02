@@ -4,7 +4,7 @@ syntax = "proto3";
 //生成多个java文件
 //option java_multiple_files = true;
 //把生成的文件放到哪个包下
-option java_package = "com.taotao.cloud.remote.protos";
+option java_package = "com.taotao.cloud.job.remote.protos";
 //输出的类名
 //option java_outer_classname = "GrpcParams";
 

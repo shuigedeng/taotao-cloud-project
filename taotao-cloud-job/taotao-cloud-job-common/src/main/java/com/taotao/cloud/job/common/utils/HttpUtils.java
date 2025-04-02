@@ -1,7 +1,7 @@
-package com.taotao.cloud.job.common.utils;//package com.taotao.cloud.common.utils;
+package com.taotao.cloud.job.common.utils;//package com.taotao.cloud.job.common.utils;
 //
 //import okhttp3.*;
-//import tech.powerjob.common.TtcJobException.PowerJobException;
+//import tech.powerjob.common.KJobException.PowerJobException;
 //
 //import java.io.IOException;
 //import java.util.concurrent.TimeUnit;
@@ -9,7 +9,7 @@ package com.taotao.cloud.job.common.utils;//package com.taotao.cloud.common.util
 ///**
 // * 封装 OkHttpClient
 // *
-// * @author shuigedeng
+// * @author tjq
 // * @since 2020/4/6
 // */
 //public class HttpUtils {

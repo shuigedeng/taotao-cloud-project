@@ -1,7 +1,7 @@
 package com.taotao.cloud.job.common.utils.net;
 
-import com.taotao.cloud.job.common.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.job.common.utils.CommonUtils;
 
 
 import java.io.IOException;
@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * 简易服务器
  *
- * @author shuigedeng
+ * @author tjq
  * @since 2024/2/8
  */
 @Slf4j

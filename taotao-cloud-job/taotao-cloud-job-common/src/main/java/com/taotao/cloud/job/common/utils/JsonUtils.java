@@ -7,10 +7,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.taotao.cloud.job.common.exception.TtcJobException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import com.taotao.cloud.job.common.exception.KJobException;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -19,7 +19,7 @@ import java.util.Map;
 /**
  * JSON工具类
  *
- * @author shuigedeng
+ * @author tjq
  * @since 2020/4/16
  */
 @Slf4j
@@ -64,7 +64,7 @@ public class JsonUtils {
         try {
             return JSON_MAPPER.writeValueAsString(obj);
         }catch (Exception e) {
-            throw new TtcJobException(e);
+            throw new KJobException(e);
         }
     }
 
@@ -72,7 +72,7 @@ public class JsonUtils {
         try {
             return JSON_MAPPER.writeValueAsBytes(obj);
         }catch (Exception e) {
-            log.error("[TtcJob] serialize failed", e);
+            log.error("[KJob] serialize failed", e);
         }
         return null;
     }
@@ -90,7 +90,7 @@ public class JsonUtils {
         } catch (Exception e) {
             ExceptionUtils.rethrow(e);
         }
-        throw new TtcJobException();
+        throw new KJobException();
     }
 
     public static <T> T parseObject(byte[] b, Class<T> clz) throws IOException {
@@ -124,6 +124,6 @@ public class JsonUtils {
         }catch (Exception e) {
             ExceptionUtils.rethrow(e);
         }
-        throw new TtcJobException("impossible");
+        throw new KJobException("impossible");
     }
 }

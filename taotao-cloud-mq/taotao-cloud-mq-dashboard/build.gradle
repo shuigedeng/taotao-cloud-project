@@ -1,29 +1,31 @@
 dependencies {
     api project(":taotao-cloud-mq:taotao-cloud-mq-common")
+    api project(":taotao-cloud-mq:taotao-cloud-mq-broker")
     api project(":taotao-cloud-mq:taotao-cloud-mq-cluster")
     api project(":taotao-cloud-mq:taotao-cloud-mq-consistency")
     api project(":taotao-cloud-mq:taotao-cloud-mq-metrics")
     api project(":taotao-cloud-mq:taotao-cloud-mq-plugin")
     api project(":taotao-cloud-mq:taotao-cloud-mq-proxy")
     api project(":taotao-cloud-mq:taotao-cloud-mq-client")
+    api project(":taotao-cloud-mq:taotao-cloud-mq-nameserver")
 }
 
 jar {
-    from(project(":taotao-cloud-mq:taotao-cloud-mq-broker").jar) { into("lib/") }
-    from(project(":taotao-cloud-mq:taotao-cloud-mq-client").jar) { into("lib/") }
-    from(project(":taotao-cloud-mq:taotao-cloud-mq-cluster").jar) { into("lib/") }
     from(project(":taotao-cloud-mq:taotao-cloud-mq-common").jar) { into("lib/") }
+    from(project(":taotao-cloud-mq:taotao-cloud-mq-cluster").jar) { into("lib/") }
     from(project(":taotao-cloud-mq:taotao-cloud-mq-consistency").jar) { into("lib/") }
     from(project(":taotao-cloud-mq:taotao-cloud-mq-metrics").jar) { into("lib/") }
+    from(project(":taotao-cloud-mq:taotao-cloud-mq-broker").jar) { into("lib/") }
     from(project(":taotao-cloud-mq:taotao-cloud-mq-plugin").jar) { into("lib/") }
     from(project(":taotao-cloud-mq:taotao-cloud-mq-proxy").jar) { into("lib/") }
-    from(project(":taotao-cloud-mq:taotao-cloud-mq-raft").jar) { into("lib/") }
+    from(project(":taotao-cloud-mq:taotao-cloud-mq-client").jar) { into("lib/") }
+    from(project(":taotao-cloud-mq:taotao-cloud-mq-nameserver").jar) { into("lib/") }
 
     //详细信息参考 https://docs.gradle.org/current/dsl/org.gradle.api.tasks.bundling.Jar.html
     //基本的文件名
     //archivesBaseName = 'Example'
     //文件夹大于65535个，需要开启zip64
-    zip64=true
+    zip64 = true
 
     manifest {
         attributes 'Main-Class': "com.taotao.cloud.tx.server.NettyServer"
@@ -104,8 +106,8 @@ tasks.register("releaseTarGz", Tar) {
         into "conf"
     }
 
-    from "${project.parent.projectDir}/taotao-cloud-mq-distribution/LICENSE-BIN" rename {String filename -> filename.replace("-BIN", "")}
-    from "${project.parent.projectDir}/taotao-cloud-mq-distribution/NOTICE-BIN" rename {String filename -> filename.replace("-BIN", "")}
+    from "${project.parent.projectDir}/taotao-cloud-mq-distribution/LICENSE-BIN" rename { String filename -> filename.replace("-BIN", "") }
+    from "${project.parent.projectDir}/taotao-cloud-mq-distribution/NOTICE-BIN" rename { String filename -> filename.replace("-BIN", "") }
 
     from('build/libs') {
         include '*.jar'

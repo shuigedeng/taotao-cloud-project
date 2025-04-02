@@ -1,28 +1,11 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.job.client.producer.entity;
 
-import com.taotao.cloud.job.common.enums.TimeExpressionType;
-import com.taotao.cloud.job.common.module.LifeCycle;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
+import org.kjob.common.enums.TimeExpressionType;
+import org.kjob.common.module.LifeCycle;
 
 @Builder
 @Data
@@ -33,7 +16,6 @@ public class JobUpdateReq {
      * 以appName为分组，被该app下的某个subApp所调度
      */
     private String appName;
-
     private Long jobId;
 
     private String jobName;
@@ -46,4 +28,6 @@ public class JobUpdateReq {
 
     private String processorInfo;
     private int maxInstanceNum;
+
+
 }

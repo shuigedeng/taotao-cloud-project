@@ -1,0 +1,1 @@
+import{s as t}from"./index-D6a9aOBY.js";const s=e=>t.get("/gen/fieldtype/"+e),p=()=>t.get("/gen/fieldtype/list"),n=e=>e.id?t.put("/gen/fieldtype",e):t.post("/gen/fieldtype",e);export{s as a,n as b,p as u};

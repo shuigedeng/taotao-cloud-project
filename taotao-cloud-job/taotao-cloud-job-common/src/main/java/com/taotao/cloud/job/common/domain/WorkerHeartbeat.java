@@ -2,7 +2,6 @@ package com.taotao.cloud.job.common.domain;
 
 import com.taotao.cloud.job.common.module.SystemMetrics;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 import java.util.List;
 
@@ -10,7 +9,7 @@ import java.util.List;
 /**
  * Worker 上报健康信息（worker定时发送的heartbeat）
  *
- * @author shuigedeng
+ * @author tjq
  * @since 2020/3/25
  */
 @Data

@@ -1,0 +1,12 @@
+dependencies {
+    api project(":taotao-cloud-job:taotao-cloud-job-common")
+    api project(":taotao-cloud-job:taotao-cloud-job-worker")
+    api project(":taotao-cloud-job:taotao-cloud-job-retry")
+    api project(":taotao-cloud-job:taotao-cloud-job-api")
+    api project(":taotao-cloud-job:taotao-cloud-job-dag")
+    api project(":taotao-cloud-job:taotao-cloud-job-consistency")
+
+    api "org.springframework.boot:spring-boot-starter-web"
+    api "com.mysql:mysql-connector-j:9.2.0"
+    api "net.devh:grpc-server-spring-boot-starter:3.1.0.RELEASE"
+}

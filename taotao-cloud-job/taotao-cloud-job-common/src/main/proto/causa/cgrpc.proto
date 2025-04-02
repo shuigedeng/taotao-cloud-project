@@ -7,6 +7,7 @@ import "causa/common_causa.proto";
 import "google/protobuf/empty.proto";
 import "causa/register_causa.proto";
 import "causa/mq_causa.proto";
+import "causa/distro_causa.proto";
 
 //生成多个java文件
 //option java_multiple_files = true;
@@ -43,4 +44,9 @@ service Mq {
   rpc createJob(CreateJobReq) returns(Response){};
 }
 
+service Distro {
+  rpc syncNodeInfo(SyncNodeInfoReq) returns(Response){};
+  rpc redirectSyncInfo(SyncNodeInfoReq) returns(Response){};
+  rpc clusterDataCheck(DataCheckReq) returns(Response){};
+}
 

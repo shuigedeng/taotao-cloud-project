@@ -19,7 +19,7 @@ jar {
     from(project(":taotao-cloud-rpc:taotao-cloud-rpc-filter").jar) { into("lib/") }
     from(project(":taotao-cloud-rpc:taotao-cloud-rpc-metrics").jar) { into("lib/") }
     from(project(":taotao-cloud-rpc:taotao-cloud-rpc-plugin").jar) { into("lib/") }
-    from(project(":taotao-cloud-rpc:taotao-cloud-rpc-raft").jar) { into("lib/") }
+    from(project(":taotao-cloud-rpc:taotao-cloud-rpc-consistency").jar) { into("lib/") }
     from(project(":taotao-cloud-rpc:taotao-cloud-rpc-registry").jar) { into("lib/") }
     from(project(":taotao-cloud-rpc:taotao-cloud-rpc-serialization").jar) { into("lib/") }
     from(project(":taotao-cloud-rpc:taotao-cloud-rpc-server").jar) { into("lib/") }

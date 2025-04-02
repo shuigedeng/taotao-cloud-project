@@ -1,17 +1,19 @@
 //使用proto3语法
 syntax = "proto3";
-option java_package = "com.taotao.cloud.remote.protos";
+option java_package = "com.taotao.cloud.job.remote.protos";
 
 
 // req
 message ServerRegisterReporter{
   string serverIpAddress = 1;
+  int64 registerTimestamp = 2;
 }
 message WorkerSubscribeReq{
   string workerIpAddress = 1;
   string appName = 2;
   int64 scheduleTime = 3;
   string serverIpAddress = 4;
+  int64 subscribeTimestamp = 5;
 }
 message FetchServerAddressListReq{
 

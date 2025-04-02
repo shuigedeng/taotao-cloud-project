@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
-import com.taotao.cloud.remote.protos.MqCausa;
+import com.taotao.cloud.job.remote.protos.MqCausa;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -13,9 +13,12 @@ import java.util.List;
 /**
  * Scheduling time strategies
  *
- * @author shuigedeng
+ * @author tjq
  * @since 2020/3/30
  */
+@Getter
+@AllArgsConstructor
+@ToString
 public enum TimeExpressionType {
 
     CRON(0),
@@ -52,12 +55,4 @@ public enum TimeExpressionType {
         }
         throw new IllegalArgumentException("unknown TimeExpressionType of " + v);
     }
-
-	TimeExpressionType(int v) {
-		this.v = v;
-	}
-
-	public int getV() {
-		return v;
-	}
 }

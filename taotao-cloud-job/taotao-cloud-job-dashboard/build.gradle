@@ -5,8 +5,9 @@ dependencies {
     api project(":taotao-cloud-job:taotao-cloud-job-dag")
     api project(":taotao-cloud-job:taotao-cloud-job-api")
     api project(":taotao-cloud-job:taotao-cloud-job-server")
+    api project(":taotao-cloud-job:taotao-cloud-job-nameserver")
     api project(":taotao-cloud-job:taotao-cloud-job-client")
-    api project(":taotao-cloud-job:taotao-cloud-job-raft")
+    api project(":taotao-cloud-job:taotao-cloud-job-consistency")
     api project(":taotao-cloud-job:taotao-cloud-job-datasource")
     api project(":taotao-cloud-job:taotao-cloud-job-retry")
 }
@@ -17,8 +18,9 @@ jar {
     from(project(":taotao-cloud-job:taotao-cloud-job-client").jar) { into("lib/") }
     from(project(":taotao-cloud-job:taotao-cloud-job-dag").jar) { into("lib/") }
     from(project(":taotao-cloud-job:taotao-cloud-job-datasource").jar) { into("lib/") }
-    from(project(":taotao-cloud-job:taotao-cloud-job-raft").jar) { into("lib/") }
+    from(project(":taotao-cloud-job:taotao-cloud-job-consistency").jar) { into("lib/") }
     from(project(":taotao-cloud-job:taotao-cloud-job-retry").jar) { into("lib/") }
+    from(project(":taotao-cloud-job:taotao-cloud-job-nameserver").jar) { into("lib/") }
     from(project(":taotao-cloud-job:taotao-cloud-job-server").jar) { into("lib/") }
     from(project(":taotao-cloud-job:taotao-cloud-job-worker").jar) { into("lib/") }
 

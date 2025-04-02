@@ -6,7 +6,7 @@ import lombok.Getter;
 /**
  * DispatchStrategy
  *
- * @author shuigedeng
+ * @author tjq
  * @since 2021/2/22
  */
 @Getter

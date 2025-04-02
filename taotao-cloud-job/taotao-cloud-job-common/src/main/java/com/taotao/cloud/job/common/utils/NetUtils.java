@@ -1,4 +1,4 @@
-package com.taotao.cloud.job.common.utils;//package com.taotao.cloud.common.utils;
+package com.taotao.cloud.job.common.utils;//package com.taotao.cloud.job.common.utils;
 ///*
 //Copyright [2020] [PowerJob]
 //
@@ -31,6 +31,7 @@ package com.taotao.cloud.job.common.utils;//package com.taotao.cloud.common.util
 ///**
 // * IP and Port Helper for RPC
 // *
+// * @author from dubbo, optimize by tjq
 // * @since 2020/8/8
 // */
 //@Slf4j

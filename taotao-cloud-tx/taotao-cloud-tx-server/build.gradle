@@ -3,11 +3,12 @@ apply plugin: 'application'
 dependencies {
     api project(":taotao-cloud-tx:taotao-cloud-tx-tm")
     api project(":taotao-cloud-tx:taotao-cloud-tx-rm")
+    api project(":taotao-cloud-tx:taotao-cloud-tx-consistency")
 }
 
 jar {
     from(project(':taotao-cloud-tx:taotao-cloud-tx-common').jar) { into("lib/") }
-    from(project(':taotao-cloud-tx:taotao-cloud-tx-raft').jar) { into("lib/") }
+    from(project(':taotao-cloud-tx:taotao-cloud-tx-consistency').jar) { into("lib/") }
     from(project(':taotao-cloud-tx:taotao-cloud-tx-rm').jar) { into("lib/") }
     from(project(':taotao-cloud-tx:taotao-cloud-tx-tm').jar) { into("lib/") }
 

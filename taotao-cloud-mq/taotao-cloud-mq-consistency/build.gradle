@@ -13,4 +13,13 @@ dependencies {
     api "redis.clients:jedis:5.2.0"
     api 'com.google.guava:guava:33.4.6-jre'
     api 'org.rocksdb:rocksdbjni:9.4.0'
+
+    api ("com.alipay.sofa:jraft-core:1.3.14") {
+        exclude group: "com.alipay.sofa", module: "bolt"
+        exclude group: "org.apache.logging.log4j", module: "log4j-api"
+        exclude group: "org.apache.logging.log4j", module: "log4j-core"
+        exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
+        exclude group: "org.apache.logging.log4j", module: "log4j-jcl"
+    }
+    api ("com.alipay.sofa:rpc-grpc-impl:1.3.14")
 }

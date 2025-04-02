@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 /**
  * 公共工具类
  *
- * @author shuigedeng
+ * @author tjq
  * @since 2020/3/18
  */
 @Slf4j

@@ -1,5 +1,5 @@
 syntax = "proto3";
-option java_package = "com.taotao.cloud.remote.protos";
+option java_package = "com.taotao.cloud.job.remote.protos";
 // req
   message Message{
     MessageType messageType = 1;

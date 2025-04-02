@@ -6,7 +6,7 @@ import lombok.Getter;
 /**
  * Task Processor Type
  *
- * @author shuigedeng
+ * @author tjq
  * @since 2020/3/23
  */
 @Getter

@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Status of the job instance
  *
- * @author shuigedeng
+ * @author tjq
  * @since 2020/3/17
  */
 @Getter

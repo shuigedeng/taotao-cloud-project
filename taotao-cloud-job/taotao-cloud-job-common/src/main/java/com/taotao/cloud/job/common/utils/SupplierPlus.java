@@ -11,7 +11,7 @@ package com.taotao.cloud.job.common.utils;
  *
  * @param <T> the type of results supplied by this supplier
  *
- * @author shuigedeng
+ * @author tjq
  * @since 2020/3/26
  */
 @FunctionalInterface
