@@ -5,7 +5,7 @@ import com.taotao.cloud.job.server.common.module.WorkerInfo;
 import com.taotao.cloud.job.server.persistence.domain.JobInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.taotao.cloud.job.server.persistence.domain.InstanceInfo;
 import java.util.List;
 import java.util.Map;
 

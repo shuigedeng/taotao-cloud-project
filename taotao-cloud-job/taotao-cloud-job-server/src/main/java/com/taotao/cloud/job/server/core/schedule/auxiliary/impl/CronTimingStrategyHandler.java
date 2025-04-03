@@ -6,6 +6,7 @@ import com.cronutils.model.definition.CronDefinition;
 import com.cronutils.model.definition.CronDefinitionBuilder;
 import com.cronutils.model.time.ExecutionTime;
 import com.cronutils.parser.CronParser;
+import com.taotao.cloud.job.common.enums.TimeExpressionType;
 import com.taotao.cloud.job.server.core.schedule.auxiliary.TimingStrategyHandler;
 import org.springframework.stereotype.Component;
 

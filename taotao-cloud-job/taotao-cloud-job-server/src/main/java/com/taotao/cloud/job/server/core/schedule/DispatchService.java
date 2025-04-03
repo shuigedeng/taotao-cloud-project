@@ -2,6 +2,18 @@ package com.taotao.cloud.job.server.core.schedule;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.taotao.cloud.job.common.SystemInstanceResult;
+import com.taotao.cloud.job.common.enums.TimeExpressionType;
+import com.taotao.cloud.job.remote.protos.ScheduleCausa;
+import com.taotao.cloud.job.server.common.Holder;
+import com.taotao.cloud.job.server.common.grpc.ServerScheduleJobRpcClient;
+import com.taotao.cloud.job.server.common.module.WorkerInfo;
+import com.taotao.cloud.job.server.extension.lock.LockService;
+import com.taotao.cloud.job.server.persistence.domain.InstanceInfo;
+import com.taotao.cloud.job.server.persistence.domain.JobInfo;
+import com.taotao.cloud.job.server.persistence.mapper.InstanceInfoMapper;
+import com.taotao.cloud.job.server.remote.worker.WorkerClusterQueryService;
+import com.taotao.cloud.job.server.remote.worker.selector.TaskTrackerSelectorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -10,6 +22,7 @@ import org.springframework.util.CollectionUtils;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.taotao.cloud.job.common.enums.InstanceStatus.*;
 
 
 /**
@@ -88,7 +101,7 @@ public class DispatchService {
 		if (maxInstanceNum > 0) {
 			// 不统计 WAITING_DISPATCH 的状态：使用 OpenAPI 触发的延迟任务不应该统计进去（比如 delay 是 1 天）
 			// 由于不统计 WAITING_DISPATCH，所以这个 runningInstanceCount 不包含本任务自身
-			Integer runningInstanceCount = instanceInfoMapper.selectCount(new QueryWrapper<InstanceInfo>()
+			Long runningInstanceCount = instanceInfoMapper.selectCount(new QueryWrapper<InstanceInfo>()
 				.lambda().eq(InstanceInfo::getStatus, WAITING_WORKER_RECEIVE.getV())
 				.or().eq(InstanceInfo::getStatus, RUNNING.getV()));
 			// 超出最大同时运行限制，不执行调度

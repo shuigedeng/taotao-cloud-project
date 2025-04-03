@@ -2,6 +2,7 @@ package com.taotao.cloud.job.server.core.instance;
 
 import com.taotao.cloud.job.common.enums.InstanceStatus;
 import com.taotao.cloud.job.server.core.uid.IdGenerateService;
+import com.taotao.cloud.job.server.persistence.domain.InstanceInfo;
 import com.taotao.cloud.job.server.persistence.mapper.InstanceInfoMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

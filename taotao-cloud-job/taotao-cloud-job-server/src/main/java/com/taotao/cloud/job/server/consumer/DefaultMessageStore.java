@@ -2,6 +2,9 @@ package com.taotao.cloud.job.server.consumer;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.taotao.cloud.job.remote.protos.MqCausa;
+import com.taotao.cloud.job.server.consumer.entity.FlushRequest;
+import com.taotao.cloud.job.server.consumer.entity.Response;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;

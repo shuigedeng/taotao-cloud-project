@@ -1,5 +1,6 @@
 package com.taotao.cloud.job.server.service.handler;
 
+import com.taotao.cloud.job.common.domain.WorkerHeartbeat;
 import com.taotao.cloud.job.remote.protos.CommonCausa;
 import com.taotao.cloud.job.server.remote.worker.WorkerClusterManagerService;
 import io.grpc.stub.StreamObserver;

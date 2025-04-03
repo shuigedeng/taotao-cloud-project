@@ -1,6 +1,11 @@
 package com.taotao.cloud.job.server.remote.worker.selector.impl;
 
 import com.google.common.collect.Lists;
+import com.taotao.cloud.job.common.enums.DispatchStrategy;
+import com.taotao.cloud.job.server.common.module.WorkerInfo;
+import com.taotao.cloud.job.server.persistence.domain.InstanceInfo;
+import com.taotao.cloud.job.server.persistence.domain.JobInfo;
+import com.taotao.cloud.job.server.remote.worker.selector.TaskTrackerSelector;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,15 +19,15 @@ import java.util.List;
 @Component
 public class HealthFirstTaskTrackerSelector implements TaskTrackerSelector {
 
-    @Override
-    public DispatchStrategy strategy() {
-        return DispatchStrategy.HEALTH_FIRST;
-    }
+	@Override
+	public DispatchStrategy strategy() {
+		return DispatchStrategy.HEALTH_FIRST;
+	}
 
-    @Override
-    public WorkerInfo select(JobInfo jobInfoDO, InstanceInfo instanceInfoDO, List<WorkerInfo> availableWorkers) {
-        List<WorkerInfo> workers = Lists.newArrayList(availableWorkers);
-        workers.sort((o1, o2) -> o2.getSystemMetrics().calculateScore() - o1.getSystemMetrics().calculateScore());
-        return workers.get(0);
-    }
+	@Override
+	public WorkerInfo select(JobInfo jobInfoDO, InstanceInfo instanceInfoDO, List<WorkerInfo> availableWorkers) {
+		List<WorkerInfo> workers = Lists.newArrayList(availableWorkers);
+		workers.sort((o1, o2) -> o2.getSystemMetrics().calculateScore() - o1.getSystemMetrics().calculateScore());
+		return workers.get(0);
+	}
 }

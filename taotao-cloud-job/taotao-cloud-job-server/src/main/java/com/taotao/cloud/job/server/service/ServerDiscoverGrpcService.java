@@ -3,6 +3,7 @@ package com.taotao.cloud.job.server.service;
 import com.taotao.cloud.job.remote.protos.CommonCausa;
 import com.taotao.cloud.job.remote.protos.ServerDiscoverCausa;
 import com.taotao.cloud.job.server.service.handler.AppInfoHandler;
+import com.taotao.cloud.job.server.service.handler.HeartbeatHandler;
 import com.taotao.cloud.job.server.service.handler.PongHandler;
 import com.taotao.cloud.job.server.service.handler.ServerChangeHandler;
 import com.taotao.cloud.remote.api.ServerDiscoverGrpc;

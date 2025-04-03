@@ -1,5 +1,7 @@
 package com.taotao.cloud.job.server.common.module;
 
+import com.taotao.cloud.job.common.domain.WorkerHeartbeat;
+import com.taotao.cloud.job.common.module.SystemMetrics;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 

@@ -2,6 +2,7 @@ package com.taotao.cloud.job.server.consumer;
 
 import com.taotao.cloud.job.remote.protos.CommonCausa;
 import com.taotao.cloud.job.remote.protos.MqCausa;
+import com.taotao.cloud.job.server.consumer.entity.Response;
 import com.taotao.cloud.job.server.consumer.entity.ResponseEnum;
 import com.taotao.cloud.remote.api.MqGrpc;
 import io.grpc.stub.StreamObserver;

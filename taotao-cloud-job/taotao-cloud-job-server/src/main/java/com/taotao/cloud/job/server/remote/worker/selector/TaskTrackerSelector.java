@@ -4,7 +4,7 @@ package com.taotao.cloud.job.server.remote.worker.selector;
 import com.taotao.cloud.job.common.enums.DispatchStrategy;
 import com.taotao.cloud.job.server.common.module.WorkerInfo;
 import com.taotao.cloud.job.server.persistence.domain.JobInfo;
-
+import com.taotao.cloud.job.server.persistence.domain.InstanceInfo;
 import java.util.List;
 
 /**

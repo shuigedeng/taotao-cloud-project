@@ -1,5 +1,6 @@
 package com.taotao.cloud.job.server.consumer.entity;
 
+import com.taotao.cloud.job.remote.protos.MqCausa;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
