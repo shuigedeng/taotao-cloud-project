@@ -4,9 +4,9 @@ dependencies {
     implementation "org.dromara.hutool:hutool-all:6.0.0-M21"
 
     implementation 'org.slf4j:slf4j-api:2.0.17'
-    implementation 'ch.qos.logback:logback-core:1.5.17'
-    implementation 'ch.qos.logback:logback-access:1.5.17'
-    implementation 'ch.qos.logback:logback-classic:1.5.17'
+    implementation 'ch.qos.logback:logback-core:1.5.18'
+    implementation 'ch.qos.logback:logback-access:1.5.18'
+    implementation 'ch.qos.logback:logback-classic:1.5.18'
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.12.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.12.1'
