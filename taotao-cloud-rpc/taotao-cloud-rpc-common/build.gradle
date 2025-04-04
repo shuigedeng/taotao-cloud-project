@@ -26,8 +26,8 @@ dependencies {
 
     api 'io.netty:netty-all:4.1.119.Final'
 
-    api "org.projectlombok:lombok:1.18.36"
-    annotationProcessor "org.projectlombok:lombok:1.18.36"
+    api "org.projectlombok:lombok:1.18.38"
+    annotationProcessor "org.projectlombok:lombok:1.18.38"
 
     api 'org.springframework.boot:spring-boot-starter-web'
     api 'org.springframework.boot:spring-boot-starter-aop'
