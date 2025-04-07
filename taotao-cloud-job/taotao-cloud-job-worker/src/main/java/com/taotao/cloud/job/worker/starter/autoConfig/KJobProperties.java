@@ -5,7 +5,7 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
-@ConfigurationProperties(prefix = "kjob")
+@ConfigurationProperties(prefix = "ttcjob")
 public class KJobProperties {
 	private final Worker worker = new Worker();
 
@@ -14,7 +14,7 @@ public class KJobProperties {
 	}
 
 	@Deprecated
-	@DeprecatedConfigurationProperty(replacement = "kjob.worker.app-name")
+	@DeprecatedConfigurationProperty(replacement = "ttcjob.worker.app-name")
 	public String getAppName() {
 		return getWorker().appName;
 	}
@@ -25,7 +25,7 @@ public class KJobProperties {
 	}
 
 
-	@DeprecatedConfigurationProperty(replacement = "kjob.worker.grpc-port")
+	@DeprecatedConfigurationProperty(replacement = "ttcjob.worker.grpc-port")
 	public int getGrpcPort() {
 		return getWorker().getPort();
 	}
@@ -36,7 +36,7 @@ public class KJobProperties {
 	}
 
 	@Deprecated
-	@DeprecatedConfigurationProperty(replacement = "kjob.worker.server-address")
+	@DeprecatedConfigurationProperty(replacement = "ttcjob.worker.server-address")
 	public String getServerAddress() {
 		return getWorker().serverAddress;
 	}
@@ -48,7 +48,7 @@ public class KJobProperties {
 
 
 	@Deprecated
-	@DeprecatedConfigurationProperty(replacement = "kjob.worker.name-server-address")
+	@DeprecatedConfigurationProperty(replacement = "ttcjob.worker.name-server-address")
 	public String getNameServerAddress() {
 		return getWorker().nameServerAddress;
 	}
@@ -60,7 +60,7 @@ public class KJobProperties {
 	}
 
 	@Deprecated
-	@DeprecatedConfigurationProperty(replacement = "kjob.worker.server-port")
+	@DeprecatedConfigurationProperty(replacement = "ttcjob.worker.server-port")
 	public int getServerPort() {
 		return getWorker().serverPort;
 	}

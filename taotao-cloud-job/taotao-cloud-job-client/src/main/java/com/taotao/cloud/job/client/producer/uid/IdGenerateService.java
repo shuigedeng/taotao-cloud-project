@@ -1,7 +1,7 @@
 package com.taotao.cloud.job.client.producer.uid;
 
+import com.taotao.cloud.job.common.utils.net.MyNetUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.kjob.common.utils.net.MyNetUtil;
 import org.springframework.stereotype.Service;
 
 /**

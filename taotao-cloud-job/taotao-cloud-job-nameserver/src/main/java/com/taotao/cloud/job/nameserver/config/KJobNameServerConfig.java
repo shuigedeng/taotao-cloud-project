@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "kjob.name-server")
+@ConfigurationProperties(prefix = "ttcjob.name-server")
 public class KJobNameServerConfig {
     private Integer maxWorkerNum = 2;
     private List<String> serverAddressList;

@@ -1,8 +1,8 @@
 package com.taotao.cloud.job.client.producer.entity;
 
+import com.taotao.cloud.job.client.producer.InvokeCallback;
 import lombok.Getter;
 import lombok.Setter;
-import org.kjob.producer.InvokeCallback;
 
 @Getter
 public class ResponseFuture {

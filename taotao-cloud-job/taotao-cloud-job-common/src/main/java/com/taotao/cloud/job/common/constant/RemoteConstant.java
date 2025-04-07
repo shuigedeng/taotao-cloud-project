@@ -25,7 +25,7 @@ public class RemoteConstant {
 
     // when kjobserver register
     public static final String INCREMENTAL_ADD_SERVER = "INCREMENTAL_ADD_SERVER";
-    // when kjobworker subscribe
+    //
     public static final String INCREMENTAL_ADD_WORKER = "INCREMENTAL_ADD_WORKER";
 
     // when client shutdown or timeout

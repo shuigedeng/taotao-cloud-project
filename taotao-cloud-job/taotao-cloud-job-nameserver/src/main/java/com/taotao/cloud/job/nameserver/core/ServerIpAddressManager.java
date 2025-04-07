@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class ServerIpAddressManager {
-    @Value("${kjob.name-server.max-worker-num}")
+    @Value("${ttcjob.name-server.max-worker-num}")
     private int maxWorkerNum;
     @Getter
     private Set<String> serverAddressSet = new HashSet<>();

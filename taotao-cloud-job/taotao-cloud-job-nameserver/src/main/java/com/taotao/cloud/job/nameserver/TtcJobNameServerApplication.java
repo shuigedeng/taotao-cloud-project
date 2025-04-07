@@ -17,11 +17,14 @@
 package com.taotao.cloud.job.nameserver;
 
 import com.taotao.boot.core.startup.StartupSpringApplication;
+import com.taotao.cloud.job.nameserver.config.KJobNameServerConfig;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
+@EnableConfigurationProperties(KJobNameServerConfig.class)
 public class TtcJobNameServerApplication extends SpringBootServletInitializer {
 
 	@Override

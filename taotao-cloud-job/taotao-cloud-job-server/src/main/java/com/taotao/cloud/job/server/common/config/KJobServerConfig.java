@@ -10,7 +10,7 @@ import javax.annotation.PostConstruct;
 
 
 @Getter
-@ConfigurationProperties(prefix = "kjob.server")
+@ConfigurationProperties(prefix = "ttcjob.server")
 public class KJobServerConfig {
 
 

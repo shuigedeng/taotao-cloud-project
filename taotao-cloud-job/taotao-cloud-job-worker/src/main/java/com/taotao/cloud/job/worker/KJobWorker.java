@@ -16,65 +16,68 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
 /**
  * 客户端启动类
- *
  */
 @Slf4j
 public class KJobWorker {
 
-    KJobWorkerConfig config;
-    public KJobWorker(KJobWorkerConfig config) {
-        this.config = config;
-    }
-    public void init() {
-        log.info("[KJob] starting ...");
+	KJobWorkerConfig config;
 
-        // init rpc
-        RpcInitializer rpcInitializer = new RpcInitializer(config.getServerPort(),config.getPort(),config.getServerAddress(),config.getNameServerAddress());
-        rpcInitializer.initRpcStrategies();
-        rpcInitializer.initRpcServer(config);
+	public KJobWorker(KJobWorkerConfig config) {
+		this.config = config;
+	}
 
-        KJobServerDiscoverService kJobServerDiscoverService = new KJobServerDiscoverService(config);
+	public void init() {
+		log.info("[KJob] starting ...");
 
-        try{
-            // subscribe to nameServer
-            WorkerSubscribeStarter.start(config.getAppName());
+		// init rpc
+		RpcInitializer rpcInitializer = new RpcInitializer(config.getServerPort(), config.getPort(),
+			config.getServerAddress(), config.getNameServerAddress());
+		rpcInitializer.initRpcStrategies();
+		rpcInitializer.initRpcServer(config);
 
-            // get appId
-            kJobServerDiscoverService.assertApp();
+		KJobServerDiscoverService kJobServerDiscoverService = new KJobServerDiscoverService(config);
 
-            // init ThreadPool
-            ExecutorManager.initExecutorManager();
+		try {
+			// subscribe to nameServer
+			WorkerSubscribeStarter.start(config.getAppName());
 
-            // init processorLoader for handler task
-            ProcessorLoader processorLoader = buildProcessorLoader();
-            KJobWorkerConfig.setProcessorLoader(processorLoader);
+			// get appId
+			kJobServerDiscoverService.assertApp();
 
-            // connect server
-            kJobServerDiscoverService.heartbeatCheck(ExecutorManager.getHeartbeatExecutor());
+			// init ThreadPool
+			ExecutorManager.initExecutorManager();
 
-            // init health reporter
-            ExecutorManager.getHealthReportExecutor().scheduleAtFixedRate(new WorkerHealthReporter(kJobServerDiscoverService, config), 0, config.getHealthReportInterval(), TimeUnit.SECONDS);
+			// init processorLoader for handler task
+			ProcessorLoader processorLoader = buildProcessorLoader();
+			KJobWorkerConfig.setProcessorLoader(processorLoader);
 
-        } catch (Exception e){
-            log.error("[kJob] start error");
-        }
+			// connect server
+			kJobServerDiscoverService.heartbeatCheck(ExecutorManager.getHeartbeatExecutor());
+
+			// init health reporter
+			ExecutorManager.getHealthReportExecutor().scheduleAtFixedRate(new WorkerHealthReporter(kJobServerDiscoverService, config), 0, config.getHealthReportInterval(), TimeUnit.SECONDS);
+
+		} catch (Exception e) {
+			log.error("[kJob] start error");
+		}
 
 
-    }
-    private ProcessorLoader buildProcessorLoader() {
-        List<ProcessorFactory> customPF = Optional.ofNullable(config.getProcessorFactoryList()).orElse(Collections.emptyList());
-        List<ProcessorFactory> finalPF = Lists.newArrayList(customPF);
+	}
 
-        finalPF.add(new BuiltInDefaultProcessorFactory());
+	private ProcessorLoader buildProcessorLoader() {
+		List<ProcessorFactory> customPF = Optional.ofNullable(config.getProcessorFactoryList()).orElse(Collections.emptyList());
+		List<ProcessorFactory> finalPF = Lists.newArrayList(customPF);
 
-        return new KJobProcessorLoader(finalPF);
-    }
+		finalPF.add(new BuiltInDefaultProcessorFactory());
 
-    public void destroy() {
-        ExecutorManager.shutdown();
-    }
+		return new KJobProcessorLoader(finalPF);
+	}
+
+	public void destroy() {
+		ExecutorManager.shutdown();
+	}
 }

@@ -16,7 +16,7 @@ import java.util.List;
 
 @Configuration
 @EnableConfigurationProperties(KJobProperties.class)
-@ConditionalOnProperty(prefix = "kjob.worker", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "ttcjob.worker", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class KJobAutoConfiguration {
 
 	@Autowired

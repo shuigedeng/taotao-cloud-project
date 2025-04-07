@@ -59,7 +59,7 @@ public class RpcInitializer {
 			ip2ChannelsMap.put(server, channel);
 		}
 
-		Reflections reflections = new Reflections("org.kjob.worker.common.grpc.strategies.strategy");
+		Reflections reflections = new Reflections("com.taotao.cloud.job.worker.common.grpc.strategies.strategy");
 		Set<Class<? extends GrpcStrategy>> strategyClasses = reflections.getSubTypesOf(GrpcStrategy.class);
 
 		for (Class<? extends GrpcStrategy> strategyClass : strategyClasses) {

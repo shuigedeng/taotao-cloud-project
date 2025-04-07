@@ -17,6 +17,7 @@
 package com.taotao.cloud.job.server;
 
 import com.taotao.boot.core.startup.StartupSpringApplication;
+import com.taotao.cloud.job.server.common.config.KJobServerConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -24,6 +25,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
+@EnableConfigurationProperties(KJobServerConfig.class)
 public class TtcJobServerApplication  extends SpringBootServletInitializer {
 
 	@Override
