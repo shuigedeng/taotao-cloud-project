@@ -22,7 +22,7 @@ import cn.iocoder.yudao.module.bpm.enums.definition.BpmTaskRuleScriptEnum;
 import com.taotao.cloud.flowable.biz.bpm.framework.flowable.core.behavior.script.BpmTaskAssignScript;
 import com.taotao.cloud.flowable.biz.bpm.service.task.BpmProcessInstanceService;
 import java.util.Set;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import org.flowable.engine.delegate.DelegateExecution;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.springframework.context.annotation.Lazy;

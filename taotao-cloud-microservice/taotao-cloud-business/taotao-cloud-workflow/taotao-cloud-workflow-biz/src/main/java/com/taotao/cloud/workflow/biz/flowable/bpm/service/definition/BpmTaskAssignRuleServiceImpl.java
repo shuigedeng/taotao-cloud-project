@@ -50,7 +50,7 @@ import com.taotao.cloud.flowable.biz.bpm.service.definition.BpmProcessDefinition
 import com.taotao.cloud.flowable.biz.bpm.service.definition.BpmTaskAssignRuleService;
 import com.taotao.cloud.flowable.biz.flowable.core.util.FlowableUtils;
 import java.util.*;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.bpmn.model.BpmnModel;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.flowable.flowable.factory;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

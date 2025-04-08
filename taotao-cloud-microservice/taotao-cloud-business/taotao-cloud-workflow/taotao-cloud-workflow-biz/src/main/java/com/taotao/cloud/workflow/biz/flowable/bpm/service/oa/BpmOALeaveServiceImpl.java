@@ -30,7 +30,7 @@ import com.taotao.cloud.flowable.biz.bpm.dal.dataobject.oa.BpmOALeaveDO;
 import com.taotao.cloud.flowable.biz.bpm.dal.mysql.oa.BpmOALeaveMapper;
 import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;

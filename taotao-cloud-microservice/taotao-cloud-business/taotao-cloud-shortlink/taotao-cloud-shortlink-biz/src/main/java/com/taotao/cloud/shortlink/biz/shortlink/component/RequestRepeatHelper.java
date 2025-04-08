@@ -22,7 +22,7 @@ package com.taotao.cloud.shortlink.biz.shortlink.component; // package com.zc.sh
 // import org.springframework.data.redis.core.StringRedisTemplate;
 // import org.springframework.stereotype.Component;
 //
-// import javax.annotation.Resource;
+// import jakarta.annotation.Resource;
 // import java.util.Collection;
 // import java.util.Optional;
 // import java.util.concurrent.TimeUnit;

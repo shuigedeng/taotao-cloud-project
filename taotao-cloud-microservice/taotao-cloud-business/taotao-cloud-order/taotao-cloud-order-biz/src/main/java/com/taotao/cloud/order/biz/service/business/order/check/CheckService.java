@@ -21,7 +21,7 @@ import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.order.biz.service.business.order.check.handler.AbstractCheckHandler;
 import java.util.Map;
 import java.util.Objects;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

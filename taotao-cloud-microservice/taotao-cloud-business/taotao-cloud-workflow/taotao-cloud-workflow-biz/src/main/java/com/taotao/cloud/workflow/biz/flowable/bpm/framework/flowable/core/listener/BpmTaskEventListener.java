@@ -22,7 +22,7 @@ import com.taotao.cloud.flowable.biz.bpm.service.task.BpmActivityService;
 import com.taotao.cloud.flowable.biz.bpm.service.task.BpmTaskService;
 import java.util.List;
 import java.util.Set;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.common.engine.api.delegate.event.FlowableEngineEntityEvent;
 import org.flowable.common.engine.api.delegate.event.FlowableEngineEventType;

@@ -30,7 +30,7 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import javax.imageio.ImageIO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

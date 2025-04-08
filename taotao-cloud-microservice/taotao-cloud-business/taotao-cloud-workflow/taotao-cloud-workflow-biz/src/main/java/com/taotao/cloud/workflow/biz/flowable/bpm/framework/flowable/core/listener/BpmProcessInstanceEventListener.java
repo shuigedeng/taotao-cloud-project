@@ -20,7 +20,7 @@ import com.google.common.collect.ImmutableSet;
 import com.taotao.cloud.flowable.biz.bpm.dal.dataobject.task.BpmProcessInstanceExtDO;
 import com.taotao.cloud.flowable.biz.bpm.service.task.BpmProcessInstanceService;
 import java.util.Set;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import org.flowable.common.engine.api.delegate.event.FlowableEngineEntityEvent;
 import org.flowable.common.engine.api.delegate.event.FlowableEngineEventType;
 import org.flowable.engine.delegate.event.AbstractFlowableEngineEventListener;

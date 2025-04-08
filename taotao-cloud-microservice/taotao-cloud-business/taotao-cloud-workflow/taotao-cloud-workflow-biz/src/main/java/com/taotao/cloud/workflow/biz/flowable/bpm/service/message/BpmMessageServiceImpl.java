@@ -26,7 +26,7 @@ import com.taotao.cloud.flowable.biz.bpm.service.message.dto.BpmMessageSendWhenP
 import com.taotao.cloud.flowable.biz.bpm.service.message.dto.BpmMessageSendWhenTaskCreatedReqDTO;
 import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;

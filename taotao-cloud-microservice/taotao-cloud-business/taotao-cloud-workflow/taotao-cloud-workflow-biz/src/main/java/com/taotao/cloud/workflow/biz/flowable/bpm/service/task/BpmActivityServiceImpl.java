@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.flowable.bpm.service.task;
 import com.taotao.cloud.flowable.biz.bpm.controller.admin.task.vo.activity.BpmActivityRespVO;
 import com.taotao.cloud.flowable.biz.bpm.convert.task.BpmActivityConvert;
 import java.util.List;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import com.taotao.cloud.flowable.biz.bpm.service.task.BpmActivityService;
 import lombok.extern.slf4j.Slf4j;

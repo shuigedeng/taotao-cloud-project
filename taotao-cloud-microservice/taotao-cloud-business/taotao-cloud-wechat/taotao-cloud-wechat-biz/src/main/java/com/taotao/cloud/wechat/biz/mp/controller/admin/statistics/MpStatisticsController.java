@@ -25,7 +25,7 @@ import cn.iocoder.yudao.module.mp.service.statistics.MpStatisticsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import me.chanjar.weixin.mp.bean.datacube.WxDataCubeInterfaceResult;
 import me.chanjar.weixin.mp.bean.datacube.WxDataCubeMsgResult;
 import me.chanjar.weixin.mp.bean.datacube.WxDataCubeUserCumulate;

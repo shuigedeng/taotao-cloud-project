@@ -28,7 +28,7 @@ import cn.iocoder.yudao.module.mp.dal.dataobject.message.MpMessageDO;
 import cn.iocoder.yudao.module.mp.service.message.MpMessageService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;

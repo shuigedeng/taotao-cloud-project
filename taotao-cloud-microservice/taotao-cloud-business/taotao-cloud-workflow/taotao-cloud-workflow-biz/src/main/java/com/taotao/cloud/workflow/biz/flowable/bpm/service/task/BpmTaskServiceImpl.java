@@ -38,7 +38,7 @@ import com.taotao.cloud.flowable.biz.bpm.dal.mysql.task.BpmTaskExtMapper;
 import com.taotao.cloud.flowable.biz.bpm.service.message.BpmMessageService;
 import java.time.LocalDateTime;
 import java.util.*;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import com.taotao.cloud.flowable.biz.bpm.service.task.BpmProcessInstanceService;
 import com.taotao.cloud.flowable.biz.bpm.service.task.BpmTaskService;

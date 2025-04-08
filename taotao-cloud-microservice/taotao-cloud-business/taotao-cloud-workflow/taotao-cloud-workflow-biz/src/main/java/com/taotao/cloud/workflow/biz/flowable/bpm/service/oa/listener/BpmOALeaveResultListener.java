@@ -20,7 +20,7 @@ import com.taotao.cloud.flowable.biz.bpm.framework.bpm.core.event.BpmProcessInst
 import com.taotao.cloud.flowable.biz.bpm.framework.bpm.core.event.BpmProcessInstanceResultEventListener;
 import com.taotao.cloud.flowable.biz.bpm.service.oa.BpmOALeaveService;
 import com.taotao.cloud.flowable.biz.bpm.service.oa.BpmOALeaveServiceImpl;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 /**

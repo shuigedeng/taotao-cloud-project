@@ -23,7 +23,7 @@ import org.dromara.hutoolcore.date.DateUtil;
 import cn.iocoder.yudao.module.mp.framework.mp.core.MpServiceFactory;
 import java.time.LocalDateTime;
 import java.util.List;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.datacube.WxDataCubeInterfaceResult;

@@ -22,7 +22,7 @@ import org.redisson.api.RAtomicLong;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * 短链生成器 - 发号器方式生成短链

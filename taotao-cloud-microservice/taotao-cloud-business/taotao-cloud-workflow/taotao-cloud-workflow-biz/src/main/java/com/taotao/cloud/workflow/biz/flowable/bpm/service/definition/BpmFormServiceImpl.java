@@ -34,7 +34,7 @@ import com.taotao.cloud.flowable.biz.bpm.service.definition.BpmFormService;
 import com.taotao.cloud.flowable.biz.bpm.service.definition.dto.BpmFormFieldRespDTO;
 import com.taotao.cloud.flowable.biz.bpm.service.definition.dto.BpmModelMetaInfoRespDTO;
 import java.util.*;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
