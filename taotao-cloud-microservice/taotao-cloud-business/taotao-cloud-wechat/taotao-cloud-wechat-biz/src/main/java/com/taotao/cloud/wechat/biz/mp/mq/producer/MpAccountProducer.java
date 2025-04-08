@@ -18,7 +18,7 @@ package com.taotao.cloud.wechat.biz.mp.mq.producer;
 
 import cn.iocoder.yudao.framework.mq.core.RedisMQTemplate;
 import cn.iocoder.yudao.module.mp.mq.message.MpAccountRefreshMessage;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 /**

@@ -19,7 +19,7 @@ import com.taotao.cloud.payment.biz.jeepay.pay.rqrs.AbstractMchAppRQ;
 import lombok.Data;
 import lombok.experimental.*;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 /*
 * 商户获取渠道用户ID 请求参数对象

@@ -3,10 +3,10 @@ package com.taotao.cloud.message.biz.austin.support.domain;
 import lombok.*;
 import lombok.experimental.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 /**
  * @author shuigedeng

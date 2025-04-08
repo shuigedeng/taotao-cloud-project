@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.common.util;
 import com.taotao.cloud.workflow.api.common.database.data.DataSourceContextHolder;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import lombok.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

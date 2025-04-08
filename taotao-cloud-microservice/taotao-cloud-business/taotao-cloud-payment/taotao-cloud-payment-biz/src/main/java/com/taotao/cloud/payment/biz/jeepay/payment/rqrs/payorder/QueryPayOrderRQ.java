@@ -19,7 +19,7 @@ import com.jeequan.jeepay.pay.rqrs.AbstractMchAppRQ;
 import lombok.Data;
 import lombok.experimental.*;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 /*
 * 查询订单请求参数对象

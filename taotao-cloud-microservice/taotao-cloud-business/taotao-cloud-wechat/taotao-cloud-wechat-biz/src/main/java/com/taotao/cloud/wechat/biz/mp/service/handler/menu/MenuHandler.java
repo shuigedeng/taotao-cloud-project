@@ -19,7 +19,7 @@ package com.taotao.cloud.wechat.biz.mp.service.handler.menu;
 import cn.iocoder.yudao.module.mp.framework.mp.core.context.MpContextHolder;
 import cn.iocoder.yudao.module.mp.service.menu.MpMenuService;
 import java.util.Map;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpMessageHandler;
 import me.chanjar.weixin.mp.api.WxMpService;

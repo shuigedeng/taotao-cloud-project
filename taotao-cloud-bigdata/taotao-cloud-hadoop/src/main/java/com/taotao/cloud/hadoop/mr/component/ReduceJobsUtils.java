@@ -16,7 +16,7 @@
 package com.taotao.cloud.hadoop.mr.component;
 
 import java.io.IOException;
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;

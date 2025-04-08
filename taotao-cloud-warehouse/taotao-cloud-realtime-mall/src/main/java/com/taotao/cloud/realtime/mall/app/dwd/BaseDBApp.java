@@ -6,7 +6,7 @@ import com.taotao.cloud.realtime.mall.app.func.DimSink;
 import com.taotao.cloud.realtime.mall.app.func.TableProcessFunction;
 import com.taotao.cloud.realtime.mall.bean.TableProcess;
 import com.taotao.cloud.realtime.mall.utils.MyKafkaUtil;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.apache.flink.api.common.serialization.SerializationSchema;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;

@@ -20,7 +20,7 @@ import com.jeequan.jeepay.pay.rqrs.payorder.UnifiedOrderRQ;
 import lombok.Data;
 import lombok.experimental.*;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 /*
  *  支付方式： WX_APP

@@ -18,7 +18,7 @@ package com.taotao.cloud.payment.biz.jeepay.payment.channel.ysfpay.utils;
 import com.alibaba.fastjson.JSON;
 import com.jeequan.jeepay.core.constants.CS;
 
-import javax.activation.MimetypesFileTypeMap;
+import jakarta.activation.MimetypesFileTypeMap;
 import javax.net.ssl.*;
 import java.io.BufferedReader;
 import java.io.InputStream;

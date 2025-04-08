@@ -30,7 +30,7 @@ import com.taotao.cloud.tenant.biz.service.TenantService;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.dromara.hutool.core.collection.CollUtil;

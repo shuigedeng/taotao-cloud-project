@@ -19,7 +19,7 @@ package com.taotao.cloud.wechat.biz.mp.mq.consumer;
 import cn.iocoder.yudao.framework.mq.core.pubsub.AbstractChannelMessageListener;
 import cn.iocoder.yudao.module.mp.mq.message.MpAccountRefreshMessage;
 import cn.iocoder.yudao.module.mp.service.account.MpAccountService;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
