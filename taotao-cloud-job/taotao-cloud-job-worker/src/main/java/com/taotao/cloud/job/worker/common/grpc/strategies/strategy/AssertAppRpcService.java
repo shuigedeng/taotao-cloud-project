@@ -1,7 +1,7 @@
 package com.taotao.cloud.job.worker.common.grpc.strategies.strategy;
 
 import com.taotao.cloud.job.common.constant.RemoteConstant;
-import com.taotao.cloud.job.common.exception.KJobException;
+import com.taotao.cloud.job.common.exception.TtcJobException;
 import com.taotao.cloud.job.common.utils.CommonUtils;
 import com.taotao.cloud.job.remote.protos.CommonCausa;
 import com.taotao.cloud.job.remote.protos.ServerDiscoverCausa;
@@ -52,15 +52,15 @@ public class AssertAppRpcService implements GrpcStrategy<TransportTypeEnum> {
 				if (response.getCode() == RemoteConstant.SUCCESS) {
 					return response.getWorkInfo();
 				} else {
-					log.error("[KJobWorker] assert appName failed, this appName is invalid, please register the appName  first.");
-					throw new KJobException(response.getMessage());
+					log.error("[TtcJobWorker] assert appName failed, this appName is invalid, please register the appName  first.");
+					throw new TtcJobException(response.getMessage());
 				}
 			} catch (Exception e) {
-				log.error("[KJobWorker] grpc error");
+				log.error("[TtcJobWorker] grpc error");
 			}
 		}
-		log.error("[KJobWorker] no available server");
-		throw new KJobException("no server available");
+		log.error("[TtcJobWorker] no available server");
+		throw new TtcJobException("no server available");
 
 	}
 

@@ -1,7 +1,7 @@
 package com.taotao.cloud.job.worker;
 
 import com.google.common.collect.Lists;
-import com.taotao.cloud.job.worker.common.KJobWorkerConfig;
+import com.taotao.cloud.job.worker.common.TtcJobWorkerConfig;
 import com.taotao.cloud.job.worker.processor.factory.BuildInSpringMethodProcessorFactory;
 import com.taotao.cloud.job.worker.processor.factory.BuiltInSpringProcessorFactory;
 import com.taotao.cloud.job.worker.processor.factory.ProcessorFactory;
@@ -19,23 +19,23 @@ import java.util.Optional;
  * 能够获取到由 Spring IOC 容器管理的 processor
  *
  */
-public class KJobSpringWorker implements InitializingBean, DisposableBean, ApplicationContextAware{
+public class TtcJobSpringWorker implements InitializingBean, DisposableBean, ApplicationContextAware{
 
     /**
      * 组合优于继承，持有 kJobWorker，设置ProcessFactoryList，这里可以自定义工厂
      */
-    private KJobWorker kJobWorker;
-    private final KJobWorkerConfig config;
+    private TtcJobWorker ttcJobWorker;
+    private final TtcJobWorkerConfig config;
 
 
-    public KJobSpringWorker(KJobWorkerConfig config) {
+    public TtcJobSpringWorker(TtcJobWorkerConfig config) {
         this.config = config;
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        kJobWorker = new KJobWorker(config);
-        kJobWorker.init();
+        ttcJobWorker = new TtcJobWorker(config);
+        ttcJobWorker.init();
     }
 
     @Override
@@ -54,6 +54,6 @@ public class KJobSpringWorker implements InitializingBean, DisposableBean, Appli
 
     @Override
     public void destroy() throws Exception {
-        kJobWorker.destroy();
+        ttcJobWorker.destroy();
     }
 }

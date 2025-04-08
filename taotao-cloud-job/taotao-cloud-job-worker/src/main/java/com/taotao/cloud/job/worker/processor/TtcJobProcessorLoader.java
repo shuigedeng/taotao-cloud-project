@@ -1,13 +1,11 @@
 package com.taotao.cloud.job.worker.processor;
 
-import com.taotao.cloud.job.common.exception.KJobException;
+import com.taotao.cloud.job.common.exception.TtcJobException;
 import com.taotao.cloud.job.worker.processor.factory.ProcessorFactory;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -17,12 +15,12 @@ import java.util.concurrent.ConcurrentHashMap;
  * @since 2023/1/17
  */
 @Slf4j
-public class KJobProcessorLoader implements ProcessorLoader {
+public class TtcJobProcessorLoader implements ProcessorLoader {
 
     private final List<ProcessorFactory> processorFactoryList;
     private final Map<ProcessorDefinition, ProcessorBean> def2Bean = new ConcurrentHashMap<>(128);
 
-    public KJobProcessorLoader(List<ProcessorFactory> processorFactoryList) {
+    public TtcJobProcessorLoader(List<ProcessorFactory> processorFactoryList) {
         this.processorFactoryList = processorFactoryList;
     }
 
@@ -58,6 +56,6 @@ public class KJobProcessorLoader implements ProcessorLoader {
                 log.error("[ProcessorFactory] [{}] load processor failed: {}", pfName, definition, t);
             }
         }
-        throw new KJobException("fetch Processor failed, please check your processorType and processorInfo config");
+        throw new TtcJobException("fetch Processor failed, please check your processorType and processorInfo config");
     }
 }

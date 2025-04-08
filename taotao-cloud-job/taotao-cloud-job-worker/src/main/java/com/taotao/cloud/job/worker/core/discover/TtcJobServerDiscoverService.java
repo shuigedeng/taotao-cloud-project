@@ -1,9 +1,9 @@
 package com.taotao.cloud.job.worker.core.discover;
 
 import com.taotao.cloud.job.common.domain.WorkerAppInfo;
-import com.taotao.cloud.job.common.exception.KJobException;
+import com.taotao.cloud.job.common.exception.TtcJobException;
 import com.taotao.cloud.job.remote.protos.ServerDiscoverCausa;
-import com.taotao.cloud.job.worker.common.KJobWorkerConfig;
+import com.taotao.cloud.job.worker.common.TtcJobWorkerConfig;
 import com.taotao.cloud.job.worker.common.constant.TransportTypeEnum;
 import com.taotao.cloud.job.worker.common.grpc.strategies.StrategyCaller;
 import com.taotao.cloud.job.worker.subscribe.WorkerSubscribeManager;
@@ -22,9 +22,9 @@ import java.util.concurrent.TimeUnit;
  */
 
 @Slf4j
-public class KJobServerDiscoverService implements ServerDiscoverService {
+public class TtcJobServerDiscoverService implements ServerDiscoverService {
 
-	private final KJobWorkerConfig config;
+	private final TtcJobWorkerConfig config;
 
 	// only ip address ,no port
 	private String currentIpAddress;
@@ -36,7 +36,7 @@ public class KJobServerDiscoverService implements ServerDiscoverService {
 	private Long appId;
 
 
-	public KJobServerDiscoverService(KJobWorkerConfig config) {
+	public TtcJobServerDiscoverService(TtcJobWorkerConfig config) {
 		this.config = config;
 	}
 
@@ -69,15 +69,15 @@ public class KJobServerDiscoverService implements ServerDiscoverService {
 		// each discovery connect no more than MAX_FAILED_COUNT
 		setCurrentIpAddress(discovery());
 		if (StringUtils.isEmpty(this.currentIpAddress)) {
-			throw new KJobException("can't find any available server, this worker has been quarantined.");
+			throw new TtcJobException("can't find any available server, this worker has been quarantined.");
 		}
 		// check server and update currentIpAddress, asserting already success , so scheduleAtFixedRate here
 		heartbeatCheckExecutor.scheduleAtFixedRate(() -> {
 				try {
 					setCurrentIpAddress(discovery());
-					log.info("[KJObServerDiscovery] jump ip :{}", currentIpAddress);
+					log.info("[TtcJobServerDiscovery] jump ip :{}", currentIpAddress);
 				} catch (Exception e) {
-					log.error("[KJObServerDiscovery] fail to discovery server!", e);
+					log.error("[TtcJobServerDiscovery] fail to discovery server!", e);
 				}
 			}
 			, 5, 5, TimeUnit.SECONDS);
@@ -104,7 +104,7 @@ public class KJobServerDiscoverService implements ServerDiscoverService {
 			}
 		}
 		if (StringUtils.isEmpty(result)) {
-			log.warn("[KJObServerDiscovery] can't find any available server, this worker has been quarantined.");
+			log.warn("[TtcJobServerDiscovery] can't find any available server, this worker has been quarantined.");
 
 			if (FAILED_COUNT++ > MAX_FAILED_COUNT) {
 				// todo frequent job
@@ -114,7 +114,7 @@ public class KJobServerDiscoverService implements ServerDiscoverService {
 		} else {
 			// 重置失败次数
 			FAILED_COUNT = 0;
-			log.debug("[KJObServerDiscovery] current server is {}.", result);
+			log.debug("[TtcJobServerDiscovery] current server is {}.", result);
 			return result;
 		}
 	}

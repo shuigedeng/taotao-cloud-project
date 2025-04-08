@@ -1,7 +1,7 @@
 package com.taotao.cloud.job.server.extension.singletonpool;
 
 import com.taotao.cloud.job.common.constant.RemoteConstant;
-import com.taotao.cloud.job.server.common.config.KJobServerConfig;
+import com.taotao.cloud.job.server.common.config.TtcJobServerConfig;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class GrpcStubSingletonPool {
     @Autowired
-    static KJobServerConfig config;
+    static TtcJobServerConfig config;
 
     // 通过 ConcurrentHashMap（线程安全） 实现单例注册表
     private static final Map<String, Object> stubSingletons = new ConcurrentHashMap<String, Object>(64);
@@ -62,13 +62,13 @@ public class GrpcStubSingletonPool {
         int port = 0;
         switch (type){
             case RemoteConstant.SERVER:
-                port = KJobServerConfig.staticServerPort;
+                port = TtcJobServerConfig.staticServerPort;
                 break;
             case RemoteConstant.WORKER:
-                port = KJobServerConfig.staticWorkerPort;
+                port = TtcJobServerConfig.staticWorkerPort;
                 break;
             case RemoteConstant.NAMESERVER:
-                port = Integer.parseInt(KJobServerConfig.staticNameServerAddress.split(":")[1]);
+                port = Integer.parseInt(TtcJobServerConfig.staticNameServerAddress.split(":")[1]);
         }
 //        int port = type.equals(RemoteConstant.SERVER) ? RemoteConstant.DEFAULT_SERVER_GRPC_PORT : RemoteConstant.DEFAULT_WORKER_GRPC_PORT;
         // 通过 computeIfAbsent 来确保线程安全地创建和存储单例对象

@@ -99,7 +99,7 @@ public class DefaultMessageStore {
 
         // 消费者线程池
         final int availableProcessors = Runtime.getRuntime().availableProcessors();
-        ThreadFactory consumerThreadPoolFactory = new ThreadFactoryBuilder().setNameFormat("kjob-consumer-%d").build();
+        ThreadFactory consumerThreadPoolFactory = new ThreadFactoryBuilder().setNameFormat("ttcjob-consumer-%d").build();
         consumerthreadPoolExecutor = new ThreadPoolExecutor(availableProcessors * 10, availableProcessors * 10, 120L, TimeUnit.SECONDS,
                 new ArrayBlockingQueue<>((1024 * 2), true), consumerThreadPoolFactory, new ThreadPoolExecutor.AbortPolicy());
 
@@ -219,7 +219,7 @@ public class DefaultMessageStore {
          public SyncFlushService() {
              // 回调线程池
              final int availableProcessors = Runtime.getRuntime().availableProcessors();
-             ThreadFactory callbackThreadPoolFactory = new ThreadFactoryBuilder().setNameFormat("kjob-callback-%d").build();
+             ThreadFactory callbackThreadPoolFactory = new ThreadFactoryBuilder().setNameFormat("ttcjob-callback-%d").build();
              remoteCallbackExecutor = new ThreadPoolExecutor(availableProcessors * 10, availableProcessors * 10, 120L, TimeUnit.SECONDS,
                      new ArrayBlockingQueue<>((1024 * 2), true), callbackThreadPoolFactory, new ThreadPoolExecutor.AbortPolicy());
          }

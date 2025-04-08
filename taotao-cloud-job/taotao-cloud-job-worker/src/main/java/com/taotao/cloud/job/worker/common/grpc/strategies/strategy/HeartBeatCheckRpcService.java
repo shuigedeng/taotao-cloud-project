@@ -1,7 +1,7 @@
 package com.taotao.cloud.job.worker.common.grpc.strategies.strategy;
 
 import com.taotao.cloud.job.common.constant.RemoteConstant;
-import com.taotao.cloud.job.common.exception.KJobException;
+import com.taotao.cloud.job.common.exception.TtcJobException;
 import com.taotao.cloud.job.remote.protos.CommonCausa;
 import com.taotao.cloud.job.remote.protos.ServerDiscoverCausa;
 import com.taotao.cloud.job.worker.common.constant.TransportTypeEnum;
@@ -35,11 +35,11 @@ public class HeartBeatCheckRpcService implements GrpcStrategy<TransportTypeEnum>
 			if (response.getCode() == RemoteConstant.SUCCESS) {
 				return response.getAvailableServer();
 			} else {
-				log.error("[KJobWorker] heartbeat error");
-				throw new KJobException(response.getMessage());
+				log.error("[TtcJobWorker] heartbeat error");
+				throw new TtcJobException(response.getMessage());
 			}
 		} catch (Exception e) {
-			log.error("[KJobWorker] grpc error");
+			log.error("[TtcJobWorker] grpc error");
 
 		}
 		return null;

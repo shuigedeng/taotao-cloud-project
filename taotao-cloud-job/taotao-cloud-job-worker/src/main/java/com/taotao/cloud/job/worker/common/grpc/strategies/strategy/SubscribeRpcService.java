@@ -65,7 +65,7 @@ public class SubscribeRpcService implements GrpcStrategy<TransportTypeEnum> {
 		}
 
 		WorkerSubscribeManager.setServerIpList(response.getWorkerSubscribeResponse().getServerAddressIpListsList());
-		log.info("[KJobSubscribeService] subscribe success, schedule :{} Times in this interval", WorkerSubscribeManager.getScheduleTimes());
+		log.info("[TtcJobSubscribeService] subscribe success, schedule :{} Times in this interval", WorkerSubscribeManager.getScheduleTimes());
 
 
 		// 重置调度时间

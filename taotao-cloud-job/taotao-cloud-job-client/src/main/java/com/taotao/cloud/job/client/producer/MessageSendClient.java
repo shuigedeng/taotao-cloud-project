@@ -38,13 +38,13 @@ public class MessageSendClient {
 			@Override
 			public void operationComplete(ResponseFuture responseFuture) {
 				if (responseFuture.isTimeout()) {
-					log.error("[KJobProducer] send message timeout");
+					log.error("[TtcJobProducer] send message timeout");
 					onExceptionImpl(retryTime, curTryTimes, msg);
 				} else if (!responseFuture.isSendResponseOK()) {
-					log.error("[KJobProducer] send message error");
+					log.error("[TtcJobProducer] send message error");
 					onExceptionImpl(retryTime, curTryTimes, msg);
 				} else {
-					log.error("[KJobProducer] send message error for unknownReason");
+					log.error("[TtcJobProducer] send message error for unknownReason");
 					onExceptionImpl(retryTime, curTryTimes, msg);
 				}
 			}
@@ -56,7 +56,7 @@ public class MessageSendClient {
 		curRetryTimes.incrementAndGet();
 		if (curRetryTimes.get() < retryTime) {
 			try {
-				log.info("[KJobProducer] send message retry times:{}", curRetryTimes);
+				log.info("[TtcJobProducer] send message retry times:{}", curRetryTimes);
 				sendMessageAsync(curRetryTimes, msg);
 			} catch (Exception ignored) {
 			}

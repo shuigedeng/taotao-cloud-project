@@ -5,7 +5,7 @@ import com.taotao.cloud.job.common.enhance.SafeRunnable;
 import com.taotao.cloud.job.common.module.SystemMetrics;
 import com.taotao.cloud.job.common.utils.net.MyNetUtil;
 import com.taotao.cloud.job.remote.protos.ScheduleCausa;
-import com.taotao.cloud.job.worker.common.KJobWorkerConfig;
+import com.taotao.cloud.job.worker.common.TtcJobWorkerConfig;
 import com.taotao.cloud.job.worker.common.constant.TransportTypeEnum;
 import com.taotao.cloud.job.worker.common.grpc.strategies.StrategyCaller;
 import com.taotao.cloud.job.worker.common.utils.SystemInfoUtils;
@@ -26,7 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 public class WorkerHealthReporter extends SafeRunnable {
 
 	private final ServerDiscoverService serverDiscoverService;
-	private final KJobWorkerConfig config;
+	private final TtcJobWorkerConfig config;
 
 	@Override
 	public void run0() {

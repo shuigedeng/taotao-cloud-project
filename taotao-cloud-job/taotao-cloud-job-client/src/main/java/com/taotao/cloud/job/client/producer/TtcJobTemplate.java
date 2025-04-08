@@ -9,14 +9,14 @@ import com.taotao.cloud.job.remote.protos.MqCausa;
 import com.taotao.cloud.job.common.utils.JsonUtils;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class KJobTemplate {
+public class TtcJobTemplate {
 	MessageSendClient messageSendClient;
 	IdGenerateService idGenerateService;
 
 	/**
 	 * @param nameServerAddress 127.0.0.1:9083,127.0.0.2:9083...
 	 */
-	public KJobTemplate(String nameServerAddress) {
+	public TtcJobTemplate(String nameServerAddress) {
 		messageSendClient = new MessageSendClient(nameServerAddress);
 		idGenerateService = new IdGenerateService();
 	}
@@ -72,7 +72,7 @@ public class KJobTemplate {
 
 
 	public static void main(String[] args) {
-		KJobTemplate kJobTemplate = new KJobTemplate("127.0.0.1:9083");
+		TtcJobTemplate ttcJobTemplate = new TtcJobTemplate("127.0.0.1:9083");
 		JobUpdateReq build = JobUpdateReq.builder()
 			.appName("root")
 			.jobDescription("hahah")
@@ -83,6 +83,6 @@ public class KJobTemplate {
 			.maxInstanceNum(5)
 			.jobParams("ewew")
 			.timeExpressionType(TimeExpressionType.CRON).build();
-		kJobTemplate.createJob(build);
+		ttcJobTemplate.createJob(build);
 	}
 }

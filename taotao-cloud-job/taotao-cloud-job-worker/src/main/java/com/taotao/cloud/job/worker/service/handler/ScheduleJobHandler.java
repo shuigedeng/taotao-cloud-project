@@ -2,16 +2,16 @@ package com.taotao.cloud.job.worker.service.handler;
 
 import com.taotao.cloud.job.remote.protos.CommonCausa;
 import com.taotao.cloud.job.remote.protos.ScheduleCausa;
-import com.taotao.cloud.job.worker.common.KJobWorkerConfig;
+import com.taotao.cloud.job.worker.common.TtcJobWorkerConfig;
 import com.taotao.cloud.job.worker.core.schedule.tracker.manager.LightTaskTrackerManager;
 import com.taotao.cloud.job.worker.core.schedule.tracker.task.light.LightTaskTracker;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ScheduleJobHandler implements RpcHandler{
-    KJobWorkerConfig config;
-    public ScheduleJobHandler(KJobWorkerConfig kJobWorkerConfig) {
-        config = kJobWorkerConfig;
+    TtcJobWorkerConfig config;
+    public ScheduleJobHandler(TtcJobWorkerConfig ttcJobWorkerConfig) {
+        config = ttcJobWorkerConfig;
     }
 
     public void handle(Object req, StreamObserver<CommonCausa.Response> responseObserver) {

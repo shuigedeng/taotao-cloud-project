@@ -1,12 +1,12 @@
 package com.taotao.cloud.job.worker;
 
 import com.google.common.collect.Lists;
-import com.taotao.cloud.job.worker.common.KJobWorkerConfig;
+import com.taotao.cloud.job.worker.common.TtcJobWorkerConfig;
 import com.taotao.cloud.job.worker.common.executor.ExecutorManager;
 import com.taotao.cloud.job.worker.common.grpc.RpcInitializer;
-import com.taotao.cloud.job.worker.core.discover.KJobServerDiscoverService;
+import com.taotao.cloud.job.worker.core.discover.TtcJobServerDiscoverService;
 import com.taotao.cloud.job.worker.core.schedule.WorkerHealthReporter;
-import com.taotao.cloud.job.worker.processor.KJobProcessorLoader;
+import com.taotao.cloud.job.worker.processor.TtcJobProcessorLoader;
 import com.taotao.cloud.job.worker.processor.ProcessorLoader;
 import com.taotao.cloud.job.worker.processor.factory.BuiltInDefaultProcessorFactory;
 import com.taotao.cloud.job.worker.processor.factory.ProcessorFactory;
@@ -22,16 +22,16 @@ import java.util.concurrent.TimeUnit;
  * 客户端启动类
  */
 @Slf4j
-public class KJobWorker {
+public class TtcJobWorker {
 
-	KJobWorkerConfig config;
+	TtcJobWorkerConfig config;
 
-	public KJobWorker(KJobWorkerConfig config) {
+	public TtcJobWorker(TtcJobWorkerConfig config) {
 		this.config = config;
 	}
 
 	public void init() {
-		log.info("[KJob] starting ...");
+		log.info("[TtcJob] starting ...");
 
 		// init rpc
 		RpcInitializer rpcInitializer = new RpcInitializer(config.getServerPort(), config.getPort(),
@@ -39,30 +39,30 @@ public class KJobWorker {
 		rpcInitializer.initRpcStrategies();
 		rpcInitializer.initRpcServer(config);
 
-		KJobServerDiscoverService kJobServerDiscoverService = new KJobServerDiscoverService(config);
+		TtcJobServerDiscoverService ttcJobServerDiscoverService = new TtcJobServerDiscoverService(config);
 
 		try {
 			// subscribe to nameServer
 			WorkerSubscribeStarter.start(config.getAppName());
 
 			// get appId
-			kJobServerDiscoverService.assertApp();
+			ttcJobServerDiscoverService.assertApp();
 
 			// init ThreadPool
 			ExecutorManager.initExecutorManager();
 
 			// init processorLoader for handler task
 			ProcessorLoader processorLoader = buildProcessorLoader();
-			KJobWorkerConfig.setProcessorLoader(processorLoader);
+			TtcJobWorkerConfig.setProcessorLoader(processorLoader);
 
 			// connect server
-			kJobServerDiscoverService.heartbeatCheck(ExecutorManager.getHeartbeatExecutor());
+			ttcJobServerDiscoverService.heartbeatCheck(ExecutorManager.getHeartbeatExecutor());
 
 			// init health reporter
-			ExecutorManager.getHealthReportExecutor().scheduleAtFixedRate(new WorkerHealthReporter(kJobServerDiscoverService, config), 0, config.getHealthReportInterval(), TimeUnit.SECONDS);
+			ExecutorManager.getHealthReportExecutor().scheduleAtFixedRate(new WorkerHealthReporter(ttcJobServerDiscoverService, config), 0, config.getHealthReportInterval(), TimeUnit.SECONDS);
 
 		} catch (Exception e) {
-			log.error("[kJob] start error");
+			log.error("[TtcJob] start error");
 		}
 
 
@@ -74,7 +74,7 @@ public class KJobWorker {
 
 		finalPF.add(new BuiltInDefaultProcessorFactory());
 
-		return new KJobProcessorLoader(finalPF);
+		return new TtcJobProcessorLoader(finalPF);
 	}
 
 	public void destroy() {

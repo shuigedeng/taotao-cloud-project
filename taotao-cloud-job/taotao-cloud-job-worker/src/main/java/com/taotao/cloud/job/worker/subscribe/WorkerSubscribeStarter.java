@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class WorkerSubscribeStarter {
 
     public static void start(String appName){
-        ThreadFactory registerThreadFactory = new ThreadFactoryBuilder().setNameFormat("kjob-server-register-%d").build();
+        ThreadFactory registerThreadFactory = new ThreadFactoryBuilder().setNameFormat("TtcJob-server-register-%d").build();
         ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(3, registerThreadFactory);
         RegisterCausa.WorkerSubscribeReq build = RegisterCausa.WorkerSubscribeReq.newBuilder()
                 .setAppName(appName)

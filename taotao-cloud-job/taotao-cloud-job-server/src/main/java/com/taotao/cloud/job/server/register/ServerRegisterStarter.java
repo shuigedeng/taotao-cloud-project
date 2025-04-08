@@ -4,7 +4,7 @@ import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.taotao.cloud.job.common.constant.RemoteConstant;
 import com.taotao.cloud.job.remote.protos.CommonCausa;
 import com.taotao.cloud.job.remote.protos.RegisterCausa;
-import com.taotao.cloud.job.server.common.config.KJobServerConfig;
+import com.taotao.cloud.job.server.common.config.TtcJobServerConfig;
 import com.taotao.cloud.job.server.extension.singletonpool.GrpcStubSingletonPool;
 import com.taotao.cloud.remote.api.RegisterToNameServerGrpc;
 import lombok.extern.slf4j.Slf4j;
@@ -21,22 +21,22 @@ import java.util.concurrent.TimeUnit;
 public class ServerRegisterStarter implements InitializingBean {
 
 	@Autowired
-	KJobServerConfig kJobServerConfig;
+    TtcJobServerConfig ttcJobServerConfig;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		ThreadFactory registerThreadFactory = new ThreadFactoryBuilder().setNameFormat("kjob-server-register-%d").build();
+		ThreadFactory registerThreadFactory = new ThreadFactoryBuilder().setNameFormat("TtcJob-server-register-%d").build();
 		ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(3, registerThreadFactory);
 
 		// get stub
-		String s = kJobServerConfig.getNameServerAddress().split(":")[0];
+		String s = ttcJobServerConfig.getNameServerAddress().split(":")[0];
 		RegisterToNameServerGrpc.RegisterToNameServerBlockingStub stubSingleton = GrpcStubSingletonPool.getStubSingleton(s, RegisterToNameServerGrpc.class, RegisterToNameServerGrpc.RegisterToNameServerBlockingStub.class, RemoteConstant.NAMESERVER);
 		scheduledThreadPoolExecutor.scheduleAtFixedRate(new Runnable() {
 			@Override
 			public void run() {
 				try {
 					RegisterCausa.ServerRegisterReporter build = RegisterCausa.ServerRegisterReporter.newBuilder()
-						.setServerIpAddress(kJobServerConfig.getAddress() + ":" + kJobServerConfig.getServerPort())
+						.setServerIpAddress(ttcJobServerConfig.getAddress() + ":" + ttcJobServerConfig.getServerPort())
 						.setRegisterTimestamp(System.currentTimeMillis())
 						.build();
 					CommonCausa.Response response = stubSingleton.serverRegister(build);

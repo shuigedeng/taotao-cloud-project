@@ -2,8 +2,8 @@ package com.taotao.cloud.job.worker.starter.autoConfig;
 
 //import org.kjob.common.utils.NetUtils;
 
-import com.taotao.cloud.job.worker.KJobSpringWorker;
-import com.taotao.cloud.job.worker.common.KJobWorkerConfig;
+import com.taotao.cloud.job.worker.TtcJobSpringWorker;
+import com.taotao.cloud.job.worker.common.TtcJobWorkerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -15,22 +15,22 @@ import java.util.Arrays;
 import java.util.List;
 
 @Configuration
-@EnableConfigurationProperties(KJobProperties.class)
+@EnableConfigurationProperties(TtcJobProperties.class)
 @ConditionalOnProperty(prefix = "ttcjob.worker", name = "enabled", havingValue = "true", matchIfMissing = true)
-public class KJobAutoConfiguration {
+public class TtcJobAutoConfiguration {
 
 	@Autowired
-	KJobProperties properties;
+	TtcJobProperties properties;
 
 	@Bean
 	@ConditionalOnMissingBean
-	public KJobSpringWorker initKJobWorker() {
+	public TtcJobSpringWorker initKJobWorker() {
 
-		KJobProperties.Worker worker = properties.getWorker();
+		TtcJobProperties.Worker worker = properties.getWorker();
 
 		List<String> serverAddress = Arrays.asList(worker.getServerAddress().split(","));
 
-		KJobWorkerConfig config = new KJobWorkerConfig();
+		TtcJobWorkerConfig config = new TtcJobWorkerConfig();
 
 		if (worker.getPort() != null) {
 			config.setPort(worker.getPort());
@@ -45,7 +45,7 @@ public class KJobAutoConfiguration {
 		config.setMaxHeavyweightTaskNum(worker.getMaxHeavyweightTaskNum());
 		config.setMaxLightweightTaskNum(worker.getMaxLightweightTaskNum());
 		config.setHealthReportInterval(worker.getHealthReportInterval());
-		return new KJobSpringWorker(config);
+		return new TtcJobSpringWorker(config);
 	}
 
 

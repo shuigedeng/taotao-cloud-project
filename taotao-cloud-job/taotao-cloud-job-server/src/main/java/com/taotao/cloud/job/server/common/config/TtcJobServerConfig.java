@@ -3,7 +3,6 @@ package com.taotao.cloud.job.server.common.config;
 import com.taotao.cloud.job.common.constant.RemoteConstant;
 import com.taotao.cloud.job.common.utils.net.MyNetUtil;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import jakarta.annotation.PostConstruct;
@@ -11,7 +10,7 @@ import jakarta.annotation.PostConstruct;
 
 @Getter
 @ConfigurationProperties(prefix = "ttcjob.server")
-public class KJobServerConfig {
+public class TtcJobServerConfig {
 
 
     private  String address = MyNetUtil.address;

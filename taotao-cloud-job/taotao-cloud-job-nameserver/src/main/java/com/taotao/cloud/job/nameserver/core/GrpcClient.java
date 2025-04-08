@@ -2,7 +2,7 @@ package com.taotao.cloud.job.nameserver.core;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.taotao.cloud.job.common.constant.RemoteConstant;
-import com.taotao.cloud.job.nameserver.config.KJobNameServerConfig;
+import com.taotao.cloud.job.nameserver.config.TtcJobNameServerConfig;
 import com.taotao.cloud.job.nameserver.module.sync.*;
 import com.taotao.cloud.job.remote.protos.CommonCausa;
 import com.taotao.cloud.job.remote.protos.DistroCausa;
@@ -28,8 +28,8 @@ public class GrpcClient {
 
 	private final int RETRY_TIMES = 3;
 
-	public GrpcClient(KJobNameServerConfig kJobNameServerConfig) {
-		for (String ip : kJobNameServerConfig.getServerAddressList()) {
+	public GrpcClient(TtcJobNameServerConfig ttcJobNameServerConfig) {
+		for (String ip : ttcJobNameServerConfig.getServerAddressList()) {
 			String[] split = ip.split(":");
 			ManagedChannel channel = ManagedChannelBuilder.
 				forAddress(split[0], Integer.parseInt(split[1])).

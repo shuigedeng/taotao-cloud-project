@@ -1,6 +1,6 @@
 package com.taotao.cloud.job.worker.processor.factory;
 
-import com.taotao.cloud.job.worker.annotation.KJobHandler;
+import com.taotao.cloud.job.worker.annotation.TtcJobHandler;
 import com.taotao.cloud.job.worker.processor.ProcessorBean;
 import com.taotao.cloud.job.worker.processor.ProcessorDefinition;
 import lombok.extern.slf4j.Slf4j;
@@ -51,11 +51,11 @@ public class BuildInSpringMethodProcessorFactory extends AbstractBuildInSpringPr
 			Object bean = getBean(className, applicationContext);
 			Method[] methods = bean.getClass().getDeclaredMethods();
 			for (Method method : methods) {
-				KJobHandler powerJob = method.getAnnotation(KJobHandler.class);
+				TtcJobHandler powerJob = method.getAnnotation(TtcJobHandler.class);
 
 				// CGLib代理对象拿不到该注解, 通过 AnnotationUtils.findAnnotation()可以获取到注解 by GitHub@zhangxiang0907 https://github.com/PowerJob/PowerJob/issues/770
 				if (powerJob == null) {
-					powerJob = AnnotationUtils.findAnnotation(method, KJobHandler.class);
+					powerJob = AnnotationUtils.findAnnotation(method, TtcJobHandler.class);
 				}
 
 				if (powerJob == null) {

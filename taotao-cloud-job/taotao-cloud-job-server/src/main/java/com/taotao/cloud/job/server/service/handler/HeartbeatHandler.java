@@ -3,10 +3,10 @@ package com.taotao.cloud.job.server.service.handler;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.google.common.collect.Sets;
 import com.taotao.cloud.job.common.constant.RemoteConstant;
-import com.taotao.cloud.job.common.exception.KJobException;
+import com.taotao.cloud.job.common.exception.TtcJobException;
 import com.taotao.cloud.job.remote.protos.CommonCausa;
 import com.taotao.cloud.job.remote.protos.ServerDiscoverCausa;
-import com.taotao.cloud.job.server.common.config.KJobServerConfig;
+import com.taotao.cloud.job.server.common.config.TtcJobServerConfig;
 import com.taotao.cloud.job.server.common.grpc.PingServerRpcClient;
 import com.taotao.cloud.job.server.extension.lock.LockService;
 import com.taotao.cloud.job.server.persistence.domain.AppInfo;
@@ -34,7 +34,7 @@ public class HeartbeatHandler implements RpcHandler {
 	@Autowired
 	PingServerRpcClient pingServerRpcService;
 	@Autowired
-	KJobServerConfig kJobServerConfig;
+	TtcJobServerConfig ttcJobServerConfig;
 
 	@Override
 	public void handle(Object req, StreamObserver<CommonCausa.Response> responseObserver) {
@@ -57,7 +57,7 @@ public class HeartbeatHandler implements RpcHandler {
 			AppInfo appInfo = appInfoMapper.selectOne(new QueryWrapper<AppInfo>()
 				.lambda().eq(AppInfo::getId, appId));
 			if (appInfo == null) {
-				throw new KJobException(appId + " is not registered!");
+				throw new TtcJobException(appId + " is not registered!");
 			}
 			String appName = appInfo.getAppName();
 			String originServer = appInfo.getCurrentServer();
@@ -104,7 +104,7 @@ public class HeartbeatHandler implements RpcHandler {
 				lockService.unlock(lockName);
 			}
 		}
-		throw new KJobException("server elect failed for app " + appId);
+		throw new TtcJobException("server elect failed for app " + appId);
 	}
 
 	private String activeAddress(String serverAddress, Set<String> downServerCache) {
@@ -142,7 +142,7 @@ public class HeartbeatHandler implements RpcHandler {
 
 	private boolean checkLocalServer(String currentServer) {
 		// 获取本机的InetAddress对象
-		ownerIp = kJobServerConfig.getAddress();
+		ownerIp = ttcJobServerConfig.getAddress();
 		return Objects.equals(ownerIp, currentServer);
 	}
 }

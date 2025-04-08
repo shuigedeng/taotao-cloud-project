@@ -1,7 +1,7 @@
 package com.taotao.cloud.job.worker.common.grpc;
 
 
-import com.taotao.cloud.job.worker.common.KJobWorkerConfig;
+import com.taotao.cloud.job.worker.common.TtcJobWorkerConfig;
 import com.taotao.cloud.job.worker.common.constant.TransportTypeEnum;
 import com.taotao.cloud.job.worker.common.grpc.strategies.GrpcStrategy;
 import com.taotao.cloud.job.worker.common.grpc.strategies.StrategyManager;
@@ -75,7 +75,7 @@ public class RpcInitializer {
 
 	}
 
-	public void initRpcServer(KJobWorkerConfig config) {
+	public void initRpcServer(TtcJobWorkerConfig config) {
 		new Thread(() -> {
 			try {
 				WorkerScheduleGrpcService myService = new WorkerScheduleGrpcService(config);

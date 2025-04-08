@@ -1,7 +1,7 @@
 package com.taotao.cloud.job.worker.core.schedule.tracker.task;
 
 import com.taotao.cloud.job.remote.protos.ScheduleCausa;
-import com.taotao.cloud.job.worker.common.KJobWorkerConfig;
+import com.taotao.cloud.job.worker.common.TtcJobWorkerConfig;
 import com.taotao.cloud.job.worker.common.module.InstanceInfo;
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,7 +31,7 @@ public abstract class TaskTracker {
 	/**
 	 * worker 运行时元数据
 	 */
-	protected final KJobWorkerConfig config;
+	protected final TtcJobWorkerConfig config;
 	/**
 	 * 是否结束
 	 */
@@ -43,7 +43,7 @@ public abstract class TaskTracker {
 
 	protected static final int MAX_REPORT_FAILED_THRESHOLD = 5;
 
-	protected TaskTracker(ScheduleCausa.ServerScheduleJobReq req, KJobWorkerConfig config) {
+	protected TaskTracker(ScheduleCausa.ServerScheduleJobReq req, TtcJobWorkerConfig config) {
 		this.createTime = System.currentTimeMillis();
 		this.config = config;
 		this.instanceId = req.getInstanceId();

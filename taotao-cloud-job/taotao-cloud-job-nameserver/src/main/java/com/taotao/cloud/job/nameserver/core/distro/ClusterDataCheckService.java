@@ -2,7 +2,7 @@ package com.taotao.cloud.job.nameserver.core.distro;
 
 import com.taotao.cloud.job.common.constant.RemoteConstant;
 import com.taotao.cloud.job.common.utils.net.MyNetUtil;
-import com.taotao.cloud.job.nameserver.config.KJobNameServerConfig;
+import com.taotao.cloud.job.nameserver.config.TtcJobNameServerConfig;
 import com.taotao.cloud.job.nameserver.core.GrpcClient;
 import com.taotao.cloud.job.nameserver.core.ServerIpAddressManager;
 import com.taotao.cloud.job.nameserver.module.sync.FullSyncInfo;
@@ -26,11 +26,11 @@ public class ClusterDataCheckService {
     private final Executor executor = Executors.newFixedThreadPool(10);
 
     public ClusterDataCheckService(ServerIpAddressManager serverIpAddressManager,
-                                   KJobNameServerConfig kJobNameServerConfig,
+                                   TtcJobNameServerConfig ttcJobNameServerConfig,
                                    GrpcClient grpcClient) {
         this.curServerIp = MyNetUtil.address;
         this.grpcClient = grpcClient;
-        this.clusterNodes = kJobNameServerConfig.getServerAddressList();
+        this.clusterNodes = ttcJobNameServerConfig.getServerAddressList();
         this.serverIpAddressManager = serverIpAddressManager;
 
         // 启动定时心跳任务

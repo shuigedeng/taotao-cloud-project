@@ -1,7 +1,7 @@
 package com.taotao.cloud.job.common.utils;//package com.taotao.cloud.job.common.utils;
 //
 //import okhttp3.*;
-//import tech.powerjob.common.KJobException.PowerJobException;
+//import tech.powerjob.common.TtcJobException.PowerJobException;
 //
 //import java.io.IOException;
 //import java.util.concurrent.TimeUnit;

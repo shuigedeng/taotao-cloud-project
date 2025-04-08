@@ -16,14 +16,14 @@ import java.util.List;
 public class CoreScheduleTaskManager implements InitializingBean, DisposableBean {
     private final List<Thread> coreThreadContainer = new ArrayList<>();
     @Autowired
-    KJobScheduleService kJobScheduleService;
+	TtcJobScheduleService ttcJobScheduleService;
 
     @SuppressWarnings("AlibabaAvoidManuallyCreateThread")
     @Override
     public void afterPropertiesSet() {
         // 定时调度
-        coreThreadContainer.add(new Thread(new LoopRunnable("ScheduleCronJob", KJobScheduleService.SCHEDULE_RATE, () -> kJobScheduleService.scheduleNormalJob(TimeExpressionType.CRON)), "Thread-ScheduleCronJob"));
-        coreThreadContainer.add(new Thread(new LoopRunnable("ScheduleDailyTimeIntervalJob", KJobScheduleService.SCHEDULE_RATE, () -> kJobScheduleService.scheduleNormalJob(TimeExpressionType.DAILY_TIME_INTERVAL)), "Thread-ScheduleDailyTimeIntervalJob"));
+        coreThreadContainer.add(new Thread(new LoopRunnable("ScheduleCronJob", TtcJobScheduleService.SCHEDULE_RATE, () -> ttcJobScheduleService.scheduleNormalJob(TimeExpressionType.CRON)), "Thread-ScheduleCronJob"));
+        coreThreadContainer.add(new Thread(new LoopRunnable("ScheduleDailyTimeIntervalJob", TtcJobScheduleService.SCHEDULE_RATE, () -> ttcJobScheduleService.scheduleNormalJob(TimeExpressionType.DAILY_TIME_INTERVAL)), "Thread-ScheduleDailyTimeIntervalJob"));
         coreThreadContainer.forEach(Thread::start);
 
     }

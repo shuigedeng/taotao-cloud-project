@@ -1,6 +1,6 @@
 package com.taotao.cloud.job.worker.common.grpc.strategies;
 
-import com.taotao.cloud.job.common.exception.KJobException;
+import com.taotao.cloud.job.common.exception.TtcJobException;
 import com.taotao.cloud.job.worker.common.constant.TransportTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,7 +20,7 @@ public class StrategyManager {
     public static <T> GrpcStrategy<T> match(TransportTypeEnum ruleType) {
 
         if (!strategyMap.containsKey(ruleType)) {
-            throw new KJobException("There's no strategy defined for this type: \"");
+            throw new TtcJobException("There's no strategy defined for this type: \"");
         }
 
         return (GrpcStrategy<T>) strategyMap.get(ruleType);

@@ -2,7 +2,7 @@ package com.taotao.cloud.job.nameserver.core.distro;
 
 import com.taotao.cloud.job.common.constant.RemoteConstant;
 import com.taotao.cloud.job.common.utils.net.MyNetUtil;
-import com.taotao.cloud.job.nameserver.config.KJobNameServerConfig;
+import com.taotao.cloud.job.nameserver.config.TtcJobNameServerConfig;
 import com.taotao.cloud.job.nameserver.core.GrpcClient;
 import com.taotao.cloud.job.nameserver.module.sync.SyncInfo;
 import com.taotao.cloud.job.remote.protos.DistroCausa;
@@ -23,9 +23,9 @@ public class DistroClientDataProcessor {
     private final GrpcClient grpcClient;
 
 
-    public DistroClientDataProcessor(KJobNameServerConfig kJobNameServerConfig, GrpcClient grpcClient) {
+    public DistroClientDataProcessor(TtcJobNameServerConfig ttcJobNameServerConfig, GrpcClient grpcClient) {
         this.curServerIp = MyNetUtil.address;
-        this.clusterNodes = kJobNameServerConfig.getServerAddressList();
+        this.clusterNodes = ttcJobNameServerConfig.getServerAddressList();
         this.grpcClient = grpcClient;
     }
 

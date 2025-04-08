@@ -2,7 +2,7 @@ package com.taotao.cloud.job.worker.core.schedule.tracker.task.light;
 
 import com.taotao.cloud.job.common.SystemInstanceResult;
 import com.taotao.cloud.job.remote.protos.ScheduleCausa;
-import com.taotao.cloud.job.worker.common.KJobWorkerConfig;
+import com.taotao.cloud.job.worker.common.TtcJobWorkerConfig;
 import com.taotao.cloud.job.worker.common.executor.ExecutorManager;
 import com.taotao.cloud.job.worker.core.schedule.tracker.manager.LightTaskTrackerManager;
 import com.taotao.cloud.job.worker.core.schedule.tracker.task.TaskTracker;
@@ -73,14 +73,14 @@ public class LightTaskTracker extends TaskTracker {
 	protected final AtomicBoolean destroyFlag = new AtomicBoolean(false);
 
 
-	public LightTaskTracker(ScheduleCausa.ServerScheduleJobReq req, KJobWorkerConfig config) {
+	public LightTaskTracker(ScheduleCausa.ServerScheduleJobReq req, TtcJobWorkerConfig config) {
 		super(req, config);
 		try {
 			taskContext = constructTaskContext(req);
 			// 等待处理
 			status = TaskStatus.WORKER_RECEIVED;
 			// 加载 Processor
-			processorBean = KJobWorkerConfig.getProcessorLoader().load(new ProcessorDefinition().setProcessorType(req.getProcessorType()).setProcessorInfo(req.getProcessorInfo()));
+			processorBean = TtcJobWorkerConfig.getProcessorLoader().load(new ProcessorDefinition().setProcessorType(req.getProcessorType()).setProcessorInfo(req.getProcessorInfo()));
 			executeThread = new AtomicReference<>();
 //            long delay = Integer.parseInt(System.getProperty(PowerJobDKey.WORKER_STATUS_CHECK_PERIOD, "15")) * 1000L;
 //            // 初始延迟加入随机值，避免在高并发场景下所有请求集中在一个时间段
@@ -106,7 +106,7 @@ public class LightTaskTracker extends TaskTracker {
 	 */
 
 
-	public static LightTaskTracker create(ScheduleCausa.ServerScheduleJobReq req, KJobWorkerConfig config) {
+	public static LightTaskTracker create(ScheduleCausa.ServerScheduleJobReq req, TtcJobWorkerConfig config) {
 		try {
 			return new LightTaskTracker(req, config);
 		} catch (Exception e) {

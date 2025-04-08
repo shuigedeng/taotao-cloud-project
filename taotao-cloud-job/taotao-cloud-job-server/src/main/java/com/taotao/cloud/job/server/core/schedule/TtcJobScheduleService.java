@@ -6,7 +6,7 @@ import com.google.common.collect.Maps;
 import com.taotao.cloud.job.common.enums.SwitchableStatus;
 import com.taotao.cloud.job.common.enums.TimeExpressionType;
 import com.taotao.cloud.job.common.module.LifeCycle;
-import com.taotao.cloud.job.server.common.config.KJobServerConfig;
+import com.taotao.cloud.job.server.common.config.TtcJobServerConfig;
 import com.taotao.cloud.job.server.core.instance.InstanceService;
 import com.taotao.cloud.job.server.core.timewheel.holder.InstanceTimeWheelService;
 import com.taotao.cloud.job.server.extension.lock.LockService;
@@ -25,13 +25,13 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-public class KJobScheduleService {
+public class TtcJobScheduleService {
 	private static final int MAX_APP_NUM = 10;
 	public static final long SCHEDULE_RATE = 10000;
 	@Autowired
 	AppInfoMapper appInfoMapper;
 	@Autowired
-	KJobServerConfig kJobServerConfig;
+    TtcJobServerConfig ttcJobServerConfig;
 	@Autowired
 	JobInfoMapper jobInfoMapper;
 	@Autowired
@@ -48,7 +48,7 @@ public class KJobScheduleService {
 		// 调度 CRON 表达式 JOB
 		try {
 			Map<Long, String> allAppInfos = appInfoMapper.selectList(new QueryWrapper<AppInfo>().lambda()
-					.eq(AppInfo::getCurrentServer, kJobServerConfig.getAddress()))
+					.eq(AppInfo::getCurrentServer, ttcJobServerConfig.getAddress()))
 				.stream().collect(Collectors.toMap(AppInfo::getId, AppInfo::getAppName));
 			if (CollectionUtils.isEmpty(allAppInfos)) {
 				log.info("[NormalScheduler] current server has no app's job to schedule.");

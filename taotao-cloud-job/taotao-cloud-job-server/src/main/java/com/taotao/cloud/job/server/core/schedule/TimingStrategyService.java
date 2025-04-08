@@ -1,7 +1,7 @@
 package com.taotao.cloud.job.server.core.schedule;
 
 import com.taotao.cloud.job.common.enums.TimeExpressionType;
-import com.taotao.cloud.job.common.exception.KJobException;
+import com.taotao.cloud.job.common.exception.TtcJobException;
 import com.taotao.cloud.job.server.core.schedule.auxiliary.TimingStrategyHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -56,7 +56,7 @@ public class TimingStrategyService {
 	private TimingStrategyHandler getHandler(TimeExpressionType timeExpressionType) {
 		TimingStrategyHandler timingStrategyHandler = strategyContainer.get(timeExpressionType);
 		if (timingStrategyHandler == null) {
-			throw new KJobException("No matching TimingStrategyHandler for this TimeExpressionType:" + timeExpressionType);
+			throw new TtcJobException("No matching TimingStrategyHandler for this TimeExpressionType:" + timeExpressionType);
 		}
 		return timingStrategyHandler;
 	}

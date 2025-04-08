@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 @ConfigurationProperties(prefix = "ttcjob")
-public class KJobProperties {
+public class TtcJobProperties {
 	private final Worker worker = new Worker();
 
 	public Worker getWorker() {

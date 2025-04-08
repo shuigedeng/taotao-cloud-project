@@ -24,7 +24,7 @@ public class ServerChangeHandler implements RpcHandler{
         AppInfo appInfo = AppInfo.builder().currentServer(serverChangeReq.getTargetServer()).build();
         appInfoMapper.update(appInfo, new QueryWrapper<AppInfo>().lambda()
                 .eq(AppInfo::getAppName, serverChangeReq.getAppName()));
-        log.info("[KJobServerChange] app :{} change to new server :{}", serverChangeReq.getAppName(), serverChangeReq.getTargetServer());
+        log.info("[TtcJobServerChange] app :{} change to new server :{}", serverChangeReq.getAppName(), serverChangeReq.getTargetServer());
         CommonCausa.Response build = CommonCausa.Response.newBuilder().setCode(200).build();
         responseObserver.onNext(build);
         responseObserver.onCompleted();

@@ -12,7 +12,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class KJobWorkerConfig {
+public class TtcJobWorkerConfig {
 	/**
 	 * AppName, recommend to use the name of this project
 	 * Applications should be registered by powerjob-console in advance to prevent error.
