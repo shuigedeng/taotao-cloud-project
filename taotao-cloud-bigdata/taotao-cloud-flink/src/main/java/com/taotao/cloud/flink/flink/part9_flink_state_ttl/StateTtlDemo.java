@@ -18,7 +18,7 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.sink.SinkFunction;
 import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
-import com.taotao.cloud.flink.flink.part6_flink_state.OperatorStateDemo;
+import org.bigdatatechcir.learn_flink.part6_flink_state.OperatorStateDemo;
 
 import java.time.Duration;
 import java.util.ArrayList;

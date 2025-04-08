@@ -7,7 +7,10 @@ dependencies {
     api project(":taotao-cloud-job:taotao-cloud-job-consistency")
 
     api "com.baomidou:mybatis-plus-spring-boot3-starter:3.5.11"
-    api "org.springframework.boot:spring-boot-starter-web"
+    api("org.springframework.boot:spring-boot-starter-web") {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    }
+    api "org.springframework.boot:spring-boot-starter-undertow"
     api "com.mysql:mysql-connector-j:9.2.0"
     api "net.devh:grpc-server-spring-boot-starter:3.1.0.RELEASE"
     api "com.cronutils:cron-utils:9.2.1"
