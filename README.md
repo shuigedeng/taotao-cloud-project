@@ -289,12 +289,11 @@ taotao-cloud-project -- 父项目
 │  ├─taotao-cloud-job -- 分布式任务调度中间件
 │  ├─taotao-cloud-rpc -- 分布式rpc中间件
 │  ├─taotao-cloud-tx -- 分布式事务中间件
+│  ├─taotao-cloud-ccsr -- 配置中心&服务注册中心 Configuration Center & Service Registry
 │  ├─taotao-cloud-warehouse -- 数仓模块
 │  │  ├─taotao-cloud-offline-warehouse  -- 离线仓库模块
 │  │  ├─taotao-cloud-offline-weblog -- 离线日志分析模块
 │  │  ├─taotao-cloud-realtime-datalake  -- 实时数据湖模块
-│  │  ├─taotao-cloud-realtime-mall -- 实时商城数据分析模块
-│  │  ├─taotao-cloud-realtime-recommend -- 实时推荐模块
 │  │  ├─taotao-cloud-realtime-warehouse -- 实时数仓模块
 ```
 
