@@ -2,8 +2,38 @@ apply from: rootProject.file('gradle/shadow.gradle')
 
 apply plugin: 'application'
 
+
+tasks.register("generateMd5ForZip", Exec) {
+    def archives = [[file("${buildDir}/distributions/taotao-cloud-ccsr-distribution-2025.05.zip"),
+                     file("${buildDir}/distributions/taotao-cloud-ccsr-distribution-2025.05.zip.md5")],
+                    [file("${buildDir}/distributions/taotao-cloud-ccsr-distribution-2025.05.tar.gz"),
+                     file("${buildDir}/distributions/taotao-cloud-ccsr-distribution-2025.05.tar.gz.md5")]]
+
+    archives.each { archive ->
+        if (archive[0].exists()) {
+
+            def zipFile = archive[0]
+            def md5File = archive[1]
+
+            inputs.file zipFile
+            outputs.file md5File
+
+            def osName = System.getProperty("os.name").toLowerCase()
+            if (osName.contains("win")) {
+                commandLine 'cmd', '/c', "certutil -hashfile ${zipFile.absolutePath} MD5 | findstr /v \"MD5\" | findstr /v \"certutil\" > ${md5File.absolutePath}"
+            }else{
+                commandLine 'bash', '-c', "md5sum ${zipFile.absolutePath} | awk '{print \$1}' > ${md5File.absolutePath}"
+            }
+
+        } else {
+            println "Archive file not found: ${archive.name}"
+        }
+    }
+
+}
+
 tasks.register('releaseTarZip', Zip) {
-//    dependsOn(':taotao-cloud-tx:taotao-cloud-tx-server:jar')
+    dependsOn(':taotao-cloud-ccsr:taotao-cloud-ccsr-server:jar')
 
     archiveFileName = "${project.name}-${project.version}.zip"
 
@@ -28,6 +58,7 @@ tasks.register('releaseTarZip', Zip) {
         into "target"
     }
 
+    finalizedBy("generateMd5ForZip")
 }
 
 tasks.register("releaseTarGz", Tar) {
@@ -59,5 +90,7 @@ tasks.register("releaseTarGz", Tar) {
         into "target"
     }
 
-    duplicatesStrategy 'exclude'
+    duplicatesStrategy DuplicatesStrategy.EXCLUDE
+
+    finalizedBy("generateMd5ForZip")
 }
