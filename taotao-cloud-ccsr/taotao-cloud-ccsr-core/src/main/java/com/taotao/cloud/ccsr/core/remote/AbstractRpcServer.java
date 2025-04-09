@@ -1,8 +1,8 @@
 package com.taotao.cloud.ccsr.core.remote;
 
 
-import org.ohara.msc.common.config.OHaraMcsConfig;
-import org.ohara.msc.common.log.Log;
+import com.taotao.cloud.ccsr.common.config.OHaraMcsConfig;
+import com.taotao.cloud.ccsr.common.log.Log;
 
 import javax.annotation.PreDestroy;
 import java.io.IOException;

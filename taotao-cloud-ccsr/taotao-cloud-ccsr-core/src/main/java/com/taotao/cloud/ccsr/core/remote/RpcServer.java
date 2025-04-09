@@ -1,6 +1,6 @@
 package com.taotao.cloud.ccsr.core.remote;
 
-import org.ohara.msc.common.config.OHaraMcsConfig;
+import com.taotao.cloud.ccsr.common.config.OHaraMcsConfig;
 import com.taotao.cloud.ccsr.spi.SPI;
 
 @SPI

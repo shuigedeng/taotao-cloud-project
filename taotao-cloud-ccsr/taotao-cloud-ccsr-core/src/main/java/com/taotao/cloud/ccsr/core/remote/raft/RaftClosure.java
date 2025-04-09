@@ -5,7 +5,7 @@ import com.alipay.sofa.jraft.Status;
 import com.alipay.sofa.jraft.error.RaftError;
 import com.google.protobuf.Message;
 import com.taotao.cloud.ccsr.api.grpc.auto.Response;
-import org.ohara.msc.common.log.Log;
+import com.taotao.cloud.ccsr.common.log.Log;
 
 /**
  * @author SpringCat

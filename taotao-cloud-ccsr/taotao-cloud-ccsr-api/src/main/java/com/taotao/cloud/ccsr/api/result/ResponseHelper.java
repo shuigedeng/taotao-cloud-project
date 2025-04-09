@@ -3,7 +3,7 @@ package com.taotao.cloud.ccsr.api.result;
 import com.google.protobuf.Any;
 import com.google.protobuf.Empty;
 import com.taotao.cloud.ccsr.api.grpc.auto.Response;
-import org.ohara.msc.common.enums.ResponseCode;
+import com.taotao.cloud.ccsr.common.enums.ResponseCode;
 
 public class ResponseHelper {
 

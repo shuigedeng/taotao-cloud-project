@@ -7,8 +7,8 @@ import com.alipay.sofa.jraft.util.Endpoint;
 import com.google.protobuf.Message;
 import com.taotao.cloud.ccsr.api.grpc.auto.MetadataSubscribeRequest;
 import com.taotao.cloud.ccsr.api.grpc.auto.Response;
-import org.ohara.msc.common.exception.OHaraMcsException;
-import org.ohara.msc.common.log.Log;
+import com.taotao.cloud.ccsr.common.exception.OHaraMcsException;
+import com.taotao.cloud.ccsr.common.log.Log;
 
 /**
  * @author SpringCat

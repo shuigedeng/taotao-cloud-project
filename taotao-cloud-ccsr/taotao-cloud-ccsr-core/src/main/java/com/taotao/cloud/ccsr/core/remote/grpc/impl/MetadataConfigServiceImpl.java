@@ -19,9 +19,9 @@ import com.taotao.cloud.ccsr.api.event.EventType;
 import com.taotao.cloud.ccsr.api.event.MetadataChangeEvent;
 import com.taotao.cloud.ccsr.core.remote.grpc.GrpcService;
 import com.taotao.cloud.ccsr.spi.Join;
-import org.ohara.msc.common.enums.RaftGroup;
-import org.ohara.msc.common.enums.ResponseCode;
-import org.ohara.msc.common.log.Log;
+import com.taotao.cloud.ccsr.common.enums.RaftGroup;
+import com.taotao.cloud.ccsr.common.enums.ResponseCode;
+import com.taotao.cloud.ccsr.common.log.Log;
 
 import java.util.Iterator;
 import java.util.List;

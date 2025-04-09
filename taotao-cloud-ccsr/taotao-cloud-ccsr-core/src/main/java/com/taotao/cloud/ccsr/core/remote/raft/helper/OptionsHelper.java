@@ -2,7 +2,7 @@ package com.taotao.cloud.ccsr.core.remote.raft.helper;
 
 import com.alipay.sofa.jraft.option.*;
 import org.apache.commons.lang3.StringUtils;
-import org.ohara.msc.common.config.OHaraMcsConfig;
+import com.taotao.cloud.ccsr.common.config.OHaraMcsConfig;
 
 /**
  * @author SpringCat

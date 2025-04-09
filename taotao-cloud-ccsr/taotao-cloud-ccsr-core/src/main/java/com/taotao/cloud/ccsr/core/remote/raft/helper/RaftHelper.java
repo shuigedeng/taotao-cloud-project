@@ -22,7 +22,7 @@ import com.taotao.cloud.ccsr.core.remote.raft.processor.DeleteRequestRpcProcesso
 import com.taotao.cloud.ccsr.core.remote.raft.processor.ReadRequestRpcProcessor;
 import com.taotao.cloud.ccsr.core.remote.raft.processor.WriteRequestRpcProcessor;
 import com.taotao.cloud.ccsr.core.serializer.SerializeFactory;
-import org.ohara.msc.common.log.Log;
+import com.taotao.cloud.ccsr.common.log.Log;
 
 import java.io.File;
 import java.nio.file.Paths;

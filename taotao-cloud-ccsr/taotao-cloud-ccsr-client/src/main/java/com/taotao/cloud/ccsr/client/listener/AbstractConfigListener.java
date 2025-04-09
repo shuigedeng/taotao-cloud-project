@@ -1,6 +1,6 @@
 package com.taotao.cloud.ccsr.client.listener;
 
-import org.ohara.msc.common.exception.OHaraMcsClientException;
+import com.taotao.cloud.ccsr.common.exception.OHaraMcsClientException;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

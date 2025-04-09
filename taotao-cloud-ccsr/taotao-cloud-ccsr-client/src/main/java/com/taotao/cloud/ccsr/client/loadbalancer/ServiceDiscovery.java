@@ -1,7 +1,7 @@
 package com.taotao.cloud.ccsr.client.loadbalancer;
 
 import com.taotao.cloud.ccsr.spi.SpiExtensionFactory;
-import org.ohara.msc.dto.ServerAddress;
+import com.taotao.cloud.ccsr.dto.ServerAddress;
 
 import java.util.ArrayList;
 import java.util.List;

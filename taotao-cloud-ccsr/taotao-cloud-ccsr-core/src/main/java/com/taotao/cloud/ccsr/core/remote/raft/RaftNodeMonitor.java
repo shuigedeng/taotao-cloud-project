@@ -3,7 +3,7 @@ package com.taotao.cloud.ccsr.core.remote.raft;
 import com.alipay.sofa.jraft.Node;
 import com.alipay.sofa.jraft.conf.Configuration;
 import com.alipay.sofa.jraft.entity.PeerId;
-import org.ohara.msc.common.log.Log;
+import com.taotao.cloud.ccsr.common.log.Log;
 
 import java.util.List;
 import java.util.Map;

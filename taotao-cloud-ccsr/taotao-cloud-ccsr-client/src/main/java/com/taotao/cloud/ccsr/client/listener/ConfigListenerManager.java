@@ -2,9 +2,9 @@ package com.taotao.cloud.ccsr.client.listener;
 
 import com.taotao.cloud.ccsr.api.event.EventType;
 import com.taotao.cloud.ccsr.api.grpc.auto.Metadata;
-import org.ohara.msc.common.exception.OHaraMcsClientException;
-import org.ohara.msc.common.log.Log;
-import org.ohara.msc.common.utils.GsonUtils;
+import com.taotao.cloud.ccsr.common.exception.OHaraMcsClientException;
+import com.taotao.cloud.ccsr.common.log.Log;
+import com.taotao.cloud.ccsr.common.utils.GsonUtils;
 import java.util.*;
 
 public class ConfigListenerManager {

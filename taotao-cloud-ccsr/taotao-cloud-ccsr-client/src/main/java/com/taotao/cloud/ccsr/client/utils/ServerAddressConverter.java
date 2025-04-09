@@ -1,6 +1,5 @@
 package com.taotao.cloud.ccsr.client.utils;
 
-import org.ohara.msc.dto.ServerAddress;
 
 import java.util.ArrayList;
 import java.util.List;

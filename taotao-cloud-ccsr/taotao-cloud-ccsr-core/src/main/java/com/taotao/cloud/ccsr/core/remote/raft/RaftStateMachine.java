@@ -22,8 +22,8 @@ import com.taotao.cloud.ccsr.core.serializer.Serializer;
 import com.taotao.cloud.ccsr.core.storage.MetadaStorage;
 import com.taotao.cloud.ccsr.core.utils.ProtoMessageUtils;
 import com.taotao.cloud.ccsr.core.utils.StorageHolder;
-import org.ohara.msc.common.enums.ResponseCode;
-import org.ohara.msc.common.log.Log;
+import com.taotao.cloud.ccsr.common.enums.ResponseCode;
+import com.taotao.cloud.ccsr.common.log.Log;
 
 import java.io.*;
 import java.nio.ByteBuffer;

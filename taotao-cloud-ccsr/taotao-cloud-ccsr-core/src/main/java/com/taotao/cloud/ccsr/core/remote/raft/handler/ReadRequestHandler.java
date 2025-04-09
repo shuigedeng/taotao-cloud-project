@@ -7,7 +7,7 @@ import com.taotao.cloud.ccsr.api.grpc.auto.MetadataReadRequest;
 import com.taotao.cloud.ccsr.api.grpc.auto.Response;
 import com.taotao.cloud.ccsr.api.result.ResponseHelper;
 import com.taotao.cloud.ccsr.spi.Join;
-import org.ohara.msc.common.enums.ResponseCode;
+import com.taotao.cloud.ccsr.common.enums.ResponseCode;
 
 /**
  * @author SpringCat

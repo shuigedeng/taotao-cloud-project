@@ -9,8 +9,8 @@ import com.taotao.cloud.ccsr.api.event.MetadataChangeEvent;
 import com.taotao.cloud.ccsr.api.result.ResponseHelper;
 import com.taotao.cloud.ccsr.spi.Join;
 import com.taotao.cloud.ccsr.api.event.EventType;
-import org.ohara.msc.common.enums.ResponseCode;
-import org.ohara.msc.common.log.Log;
+import com.taotao.cloud.ccsr.common.enums.ResponseCode;
+import com.taotao.cloud.ccsr.common.log.Log;
 
 /**
  * @author SpringCat

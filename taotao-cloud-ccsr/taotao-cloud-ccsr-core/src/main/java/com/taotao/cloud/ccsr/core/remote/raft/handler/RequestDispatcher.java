@@ -2,7 +2,7 @@ package com.taotao.cloud.ccsr.core.remote.raft.handler;
 
 import com.google.protobuf.Message;
 import com.taotao.cloud.ccsr.api.grpc.auto.Response;
-import org.ohara.msc.common.log.Log;
+import com.taotao.cloud.ccsr.common.log.Log;
 
 public class RequestDispatcher {
 

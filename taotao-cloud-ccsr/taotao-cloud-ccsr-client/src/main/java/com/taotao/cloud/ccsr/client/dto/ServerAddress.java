@@ -4,7 +4,7 @@ package com.taotao.cloud.ccsr.client.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.ohara.msc.listener.ConfigData;
+import com.taotao.cloud.ccsr.listener.ConfigData;
 
 import java.lang.annotation.Annotation;
 

@@ -7,8 +7,8 @@ import lombok.EqualsAndHashCode;
 import org.apache.commons.collections4.CollectionUtils;
 import com.taotao.cloud.ccsr.api.event.Event;
 import com.taotao.cloud.ccsr.api.event.EventType;
-import org.ohara.msc.dto.ServerAddress;
-import org.ohara.msc.utils.ServerAddressConverter;
+import com.taotao.cloud.ccsr.dto.ServerAddress;
+import com.taotao.cloud.ccsr.utils.ServerAddressConverter;
 
 import java.util.ArrayList;
 import java.util.List;

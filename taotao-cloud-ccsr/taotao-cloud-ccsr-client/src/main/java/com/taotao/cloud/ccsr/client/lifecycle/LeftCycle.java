@@ -1,6 +1,6 @@
 package com.taotao.cloud.ccsr.client.lifecycle;
 
-import org.ohara.msc.common.exception.OHaraMcsClientException;
+import com.taotao.cloud.ccsr.common.exception.OHaraMcsClientException;
 
 import java.util.concurrent.TimeUnit;
 

@@ -4,7 +4,7 @@ import io.grpc.CompressorRegistry;
 import io.grpc.DecompressorRegistry;
 import io.grpc.Server;
 import io.grpc.netty.shaded.io.grpc.netty.NettyServerBuilder;
-import org.ohara.msc.common.config.OHaraMcsConfig;
+import com.taotao.cloud.ccsr.common.config.OHaraMcsConfig;
 import com.taotao.cloud.ccsr.core.remote.AbstractRpcServer;
 import com.taotao.cloud.ccsr.spi.Join;
 import com.taotao.cloud.ccsr.spi.SpiExtensionFactory;

@@ -7,7 +7,7 @@ import com.taotao.cloud.ccsr.api.event.GlobalEventBus;
 import com.taotao.cloud.ccsr.core.event.LeaderRefreshEvent;
 import com.taotao.cloud.ccsr.api.listener.Listener;
 import com.taotao.cloud.ccsr.core.remote.raft.helper.RaftHelper;
-import org.ohara.msc.common.log.Log;
+import com.taotao.cloud.ccsr.common.log.Log;
 
 /**
  * @author SpringCat

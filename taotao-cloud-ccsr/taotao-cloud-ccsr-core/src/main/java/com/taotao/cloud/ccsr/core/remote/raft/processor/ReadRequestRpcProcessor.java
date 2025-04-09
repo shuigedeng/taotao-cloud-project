@@ -5,7 +5,7 @@ import com.taotao.cloud.ccsr.api.grpc.auto.MetadataReadRequest;
 import com.taotao.cloud.ccsr.api.grpc.auto.MetadataWriteRequest;
 import com.taotao.cloud.ccsr.core.remote.raft.RaftServer;
 import com.taotao.cloud.ccsr.core.serializer.Serializer;
-import org.ohara.msc.common.enums.RaftGroup;
+import com.taotao.cloud.ccsr.common.enums.RaftGroup;
 
 public class ReadRequestRpcProcessor extends AbstractRpcProcessor<MetadataReadRequest> {
 

@@ -1,6 +1,6 @@
 package com.taotao.cloud.ccsr.server.starter;
 
-import org.ohara.msc.common.config.OHaraMcsConfig;
+import com.taotao.cloud.ccsr.common.config.OHaraMcsConfig;
 import com.taotao.cloud.ccsr.core.remote.RpcServer;
 import com.taotao.cloud.ccsr.core.remote.raft.RaftServer;
 import com.taotao.cloud.ccsr.server.utils.BannerUtils;

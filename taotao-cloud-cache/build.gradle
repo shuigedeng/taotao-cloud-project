@@ -27,3 +27,20 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
 }
 
+tasks.register("generateMd5ForZip", Exec) {
+    def zipFile = file("${buildDir}/distributions/taotao-cloud-cache-2025.05.jar")
+    def md5File = file("${buildDir}/distributions/taotao-cloud-cache-2025.05.jar.md5")
+
+    inputs.file zipFile
+    outputs.file md5File
+
+    if (System.getProperty("os.name").toLowerCase().contains("win")) {
+        // Windows 系统使用 cmd 执行命令并将结果重定向到文件
+        commandLine 'cmd', '/c', "certutil -hashfile ${zipFile.absolutePath} MD5 | findstr /v \"MD5\" | findstr /v \"certutil\" > ${md5File.absolutePath}"
+    } else {
+        // Unix/Linux 系统使用 md5sum 命令
+        commandLine 'bash', '-c', "md5sum ${zipFile.absolutePath} | awk '{print \$1}' > ${md5File.absolutePath}"
+    }
+}
+
+jar.finalizedBy("generateMd5ForZip")

@@ -3,10 +3,10 @@ package com.taotao.cloud.ccsr.client.starter;
 import com.taotao.cloud.ccsr.api.event.EventType;
 import com.taotao.cloud.ccsr.api.grpc.auto.Response;
 import com.taotao.cloud.ccsr.spi.SpiExtensionFactory;
-import org.ohara.msc.client.OHaraMcsClient;
-import org.ohara.msc.common.log.Log;
-import org.ohara.msc.listener.ConfigListener;
-import org.ohara.msc.request.Payload;
+import com.taotao.cloud.ccsr.client.OHaraMcsClient;
+import com.taotao.cloud.ccsr.common.log.Log;
+import com.taotao.cloud.ccsr.listener.ConfigListener;
+import com.taotao.cloud.ccsr.request.Payload;
 import org.springframework.beans.factory.DisposableBean;
 
 import java.util.ServiceLoader;
