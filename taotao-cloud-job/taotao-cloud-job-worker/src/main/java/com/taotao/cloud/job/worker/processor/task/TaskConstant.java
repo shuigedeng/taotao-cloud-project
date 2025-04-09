@@ -3,7 +3,7 @@ package com.taotao.cloud.job.worker.processor.task;
 /**
  * task 常量
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2020/3/17
  */
 public class TaskConstant {

@@ -7,7 +7,7 @@ import com.taotao.cloud.job.server.persistence.service.JobInfoService;
 import org.springframework.stereotype.Service;
 
 /**
- * @author liushizhan
+ * @author shuigedeng
  * @description 针对表【job_info】的数据库操作Service实现
  * @createDate 2024-10-20 19:56:42
  */

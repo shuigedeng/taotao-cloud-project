@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * 简易服务器
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2024/2/8
  */
 @Slf4j

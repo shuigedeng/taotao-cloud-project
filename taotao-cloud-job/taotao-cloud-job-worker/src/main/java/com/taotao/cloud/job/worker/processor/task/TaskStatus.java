@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * 任务状态，task_info 表中 status 字段的枚举值
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2020/3/17
  */
 @Getter

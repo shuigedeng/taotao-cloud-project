@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Worker 上报健康信息（worker定时发送的heartbeat）
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2020/3/25
  */
 @Data

@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * PropertyUtils
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2023/7/15
  */
 public class PropertyUtils {

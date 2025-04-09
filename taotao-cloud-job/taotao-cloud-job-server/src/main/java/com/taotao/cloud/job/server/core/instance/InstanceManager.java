@@ -38,7 +38,7 @@ package com.taotao.cloud.job.server.core.instance;//package org.kjob.server.core
 ///**
 // * 管理被调度的任务实例（状态更新相关）
 // *
-// * @author tjq
+// * @author shuigedeng
 // * @since 2020/4/7
 // */
 //@Slf4j

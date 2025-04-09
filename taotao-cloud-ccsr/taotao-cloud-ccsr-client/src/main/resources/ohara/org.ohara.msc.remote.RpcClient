@@ -1,0 +1,1 @@
+grpc=org.ohara.msc.remote.grpc.GrpcClient

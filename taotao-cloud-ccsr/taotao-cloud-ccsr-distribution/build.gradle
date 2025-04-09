@@ -1,0 +1,63 @@
+apply from: rootProject.file('gradle/shadow.gradle')
+
+apply plugin: 'application'
+
+tasks.register('releaseTarZip', Zip) {
+//    dependsOn(':taotao-cloud-tx:taotao-cloud-tx-server:jar')
+
+    archiveFileName = "${project.name}-${project.version}.zip"
+
+    from("${project.projectDir}/bin") {
+        include '**'
+
+        into "bin"
+    }
+
+    from("${project.projectDir}/conf") {
+        include '**'
+
+        into "conf"
+    }
+
+    from "${project.projectDir}/LICENSE-BIN" rename { String filename -> filename.replace("-BIN", "") }
+    from "${project.projectDir}/NOTICE-BIN" rename { String filename -> filename.replace("-BIN", "") }
+
+    from("${project.parent.projectDir}/taotao-cloud-tx-server/build/libs") {
+        include '*.jar'
+
+        into "target"
+    }
+
+}
+
+tasks.register("releaseTarGz", Tar) {
+    dependsOn('releaseTarZip')
+
+    into "${project.name}"
+    compression = Compression.GZIP
+    //archiveVersion = ""
+    archiveExtension = 'tar.gz'
+
+    from("${project.projectDir}/bin") {
+        include '**'
+
+        into "bin"
+    }
+
+    from("${project.projectDir}/conf") {
+        include '**'
+
+        into "conf"
+    }
+
+    from "${project.projectDir}/LICENSE-BIN" rename {String filename -> filename.replace("-BIN", "")}
+    from "${project.projectDir}/NOTICE-BIN" rename {String filename -> filename.replace("-BIN", "")}
+
+    from("${project.parent.projectDir}/taotao-cloud-tx-server/build/libs") {
+        include '*.jar'
+
+        into "target"
+    }
+
+    duplicatesStrategy 'exclude'
+}

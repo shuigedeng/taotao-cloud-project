@@ -1,0 +1,2 @@
+random=org.ohara.msc.loadbalancer.RandomLoadBalancer
+round_robin=org.ohara.msc.loadbalancer.RoundRobinLoadBalancer

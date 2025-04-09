@@ -3,7 +3,7 @@ package com.taotao.cloud.job.server.core.uid;
 /**
  * Twitter SnowFlake（Scala -> Java）
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2020/4/6
  */
 public class SnowFlakeIdGenerator {

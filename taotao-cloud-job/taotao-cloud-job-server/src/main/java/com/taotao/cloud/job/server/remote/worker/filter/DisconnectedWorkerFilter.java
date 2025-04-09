@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 /**
  * filter disconnected worker
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2021/2/19
  */
 @Slf4j

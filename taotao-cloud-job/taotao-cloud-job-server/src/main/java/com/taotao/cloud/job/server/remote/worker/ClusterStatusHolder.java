@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * 管理Worker集群状态
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2020/4/5
  */
 @Slf4j

@@ -15,8 +15,8 @@ import lombok.extern.slf4j.Slf4j;
  * <p>
  * 2021/02/04 移除 fetchUpstreamTaskResult 方法
  *
- * @author tjq
- * @author Echo009
+ * @author shuigedeng
+ * @author shuigedeng
  * @since 2020/3/18
  */
 @Getter

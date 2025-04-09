@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * socket 连通性助手
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2024/2/8
  */
 @Slf4j

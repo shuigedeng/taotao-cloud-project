@@ -7,7 +7,7 @@ import com.taotao.cloud.job.server.persistence.domain.JobInfo;
 /**
  * filter worker by system metrics or other info
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2021/2/16
  */
 public interface WorkerFilter {

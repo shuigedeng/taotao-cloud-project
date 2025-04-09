@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Scheduling time strategies
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2020/3/30
  */
 @Getter

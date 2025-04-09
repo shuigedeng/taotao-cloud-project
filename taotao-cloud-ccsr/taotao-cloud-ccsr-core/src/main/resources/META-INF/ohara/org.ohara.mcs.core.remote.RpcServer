@@ -1,0 +1,2 @@
+grpc=com.taotao.cloud.ccsr.core.remote.grpc.GrpcServer
+raft=com.taotao.cloud.ccsr.core.remote.raft.RaftServer

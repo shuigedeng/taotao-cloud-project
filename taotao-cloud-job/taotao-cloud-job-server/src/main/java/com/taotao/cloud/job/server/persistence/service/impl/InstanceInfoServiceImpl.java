@@ -6,7 +6,7 @@ import com.taotao.cloud.job.server.persistence.service.InstanceInfoService;
 import org.springframework.stereotype.Service;
 import com.taotao.cloud.job.server.persistence.domain.InstanceInfo;
 /**
- * @author liushizhan
+ * @author shuigedeng
  * @description 针对表【instance_info】的数据库操作Service实现
  * @createDate 2024-10-20 20:12:43
  */

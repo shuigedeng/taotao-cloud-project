@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * TaskTrackerSelectorService
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2024/2/24
  */
 @Service

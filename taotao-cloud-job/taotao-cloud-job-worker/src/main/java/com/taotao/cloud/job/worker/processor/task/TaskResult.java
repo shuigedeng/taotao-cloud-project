@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * Task执行结果
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2020/4/17
  */
 @Data

@@ -2,7 +2,7 @@ package com.taotao.cloud.job.server.common;
 
 
 /**
- * @author Echo009
+ * @author shuigedeng
  * @since 2022/10/2
  */
 public class Holder<T> {

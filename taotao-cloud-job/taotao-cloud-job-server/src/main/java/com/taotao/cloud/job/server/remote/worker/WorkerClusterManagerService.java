@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * 管理 worker 集群信息
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2020/4/5
  */
 @Slf4j

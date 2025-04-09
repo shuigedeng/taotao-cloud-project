@@ -1,0 +1,2 @@
+参考gRPC实现，基于Nacos实现服务注册和发现、配置同步
+基于SPI机制，实现 com.taotao.cloud.ccsr.core.remote.RpcServer 接口

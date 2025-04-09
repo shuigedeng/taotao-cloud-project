@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * Class for system metrics.
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2020/3/25
  */
 @Data

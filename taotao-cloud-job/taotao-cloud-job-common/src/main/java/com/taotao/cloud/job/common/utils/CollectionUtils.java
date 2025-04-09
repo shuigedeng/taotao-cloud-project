@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * CollectionUtils
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2023/1/20
  */
 public class CollectionUtils {

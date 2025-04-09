@@ -10,7 +10,7 @@ import org.springframework.context.ApplicationContext;
 /**
  * 内建的 SpringBean 处理器工厂，用于加载 Spring 相关的Bean，非核心依赖
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2023/1/17
  */
 @Slf4j

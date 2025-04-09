@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * worker info
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2021/2/7
  */
 @Data

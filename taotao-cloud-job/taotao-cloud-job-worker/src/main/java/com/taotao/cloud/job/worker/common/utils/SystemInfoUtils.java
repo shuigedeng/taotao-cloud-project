@@ -12,7 +12,7 @@ import java.text.NumberFormat;
 /**
  * 系统信息工具，用于采集监控指标
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2020/3/25
  */
 public class SystemInfoUtils {

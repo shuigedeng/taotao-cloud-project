@@ -10,7 +10,7 @@ package com.taotao.cloud.job.server.remote.worker.utils;//package org.kjob.serve
 ///**
 // * 指定工具
 // *
-// * @author tjq
+// * @author shuigedeng
 // * @since 2024/2/24
 // */
 //public class SpecifyUtils {

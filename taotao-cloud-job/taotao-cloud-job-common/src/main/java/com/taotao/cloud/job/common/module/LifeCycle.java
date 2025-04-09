@@ -5,7 +5,7 @@ import com.taotao.cloud.job.common.utils.JsonUtils;
 import org.springframework.boot.json.JsonParser;
 
 /**
- * @author Echo009
+ * @author shuigedeng
  * @since 2022/3/22
  */
 @Data

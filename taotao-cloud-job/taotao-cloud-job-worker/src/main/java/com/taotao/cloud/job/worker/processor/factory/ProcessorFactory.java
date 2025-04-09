@@ -13,7 +13,7 @@ import java.util.Set;
  * 考虑到当前是一个百花齐放的生态，各种 IOC 框架层出不穷。PowerJob 决定在 4.3.0 剥离对 Spring 的强依赖，并允许开发者自定义 Bean 的初始化逻辑
  * 不知道怎么用的话，可以看看官方提供的 3 个默认实现，比如对接第三方 IOC 框架就类似于 BuiltInSpringProcessorFactory
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2023/1/17
  */
 public interface ProcessorFactory {

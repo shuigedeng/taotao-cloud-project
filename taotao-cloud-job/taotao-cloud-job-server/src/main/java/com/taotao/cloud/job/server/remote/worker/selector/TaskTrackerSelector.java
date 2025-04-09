@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 主节点选择方式
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2024/2/24
  */
 public interface TaskTrackerSelector {

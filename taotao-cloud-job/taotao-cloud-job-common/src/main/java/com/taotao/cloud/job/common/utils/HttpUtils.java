@@ -9,7 +9,7 @@ package com.taotao.cloud.job.common.utils;//package com.taotao.cloud.job.common.
 ///**
 // * 封装 OkHttpClient
 // *
-// * @author tjq
+// * @author shuigedeng
 // * @since 2020/4/6
 // */
 //public class HttpUtils {

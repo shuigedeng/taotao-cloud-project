@@ -3,7 +3,7 @@ package com.taotao.cloud.job.common;
 /**
  * 系统生成的任务实例运行结果
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2020/4/11
  */
 public class SystemInstanceResult {

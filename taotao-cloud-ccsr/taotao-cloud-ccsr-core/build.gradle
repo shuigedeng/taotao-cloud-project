@@ -1,0 +1,7 @@
+dependencies {
+    api project(":taotao-cloud-ccsr:taotao-cloud-ccsr-api")
+    api project(":taotao-cloud-ccsr:taotao-cloud-ccsr-spi")
+    api project(":taotao-cloud-ccsr:taotao-cloud-ccsr-common")
+
+    api "org.rocksdb:rocksdbjni:9.10.0"
+}

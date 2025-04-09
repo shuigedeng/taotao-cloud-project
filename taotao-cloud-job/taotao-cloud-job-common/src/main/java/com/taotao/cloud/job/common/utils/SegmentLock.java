@@ -8,7 +8,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * 分段锁
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2020/6/3
  */
 @Slf4j

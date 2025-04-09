@@ -5,7 +5,7 @@ import java.io.Closeable;
 /**
  * socket 服务器，用于进行连通性测试
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2024/2/8
  */
 public interface PingPongServer extends Closeable {

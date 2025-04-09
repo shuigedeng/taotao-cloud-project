@@ -1,0 +1,4 @@
+dependencies {
+    api project(":taotao-cloud-ccsr:taotao-cloud-ccsr-common")
+    api project(":taotao-cloud-ccsr:taotao-cloud-ccsr-spi")
+}

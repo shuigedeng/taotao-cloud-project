@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 服务发现
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2023/9/2
  */
 

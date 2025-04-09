@@ -7,7 +7,7 @@ import com.taotao.cloud.job.worker.processor.task.TaskContext;
 /**
  * 基础的处理器，适用于单机执行
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2020/3/18
  */
 public interface BasicProcessor {

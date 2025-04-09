@@ -14,7 +14,7 @@ import java.util.jar.JarFile;
 /**
  * Java 语言相关的工具
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2022/10/23
  */
 @Slf4j

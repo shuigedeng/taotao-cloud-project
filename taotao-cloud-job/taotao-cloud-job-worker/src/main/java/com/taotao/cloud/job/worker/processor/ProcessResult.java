@@ -5,7 +5,7 @@ import lombok.*;
 /**
  * processor执行结果
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2020/3/18
  */
 @Getter

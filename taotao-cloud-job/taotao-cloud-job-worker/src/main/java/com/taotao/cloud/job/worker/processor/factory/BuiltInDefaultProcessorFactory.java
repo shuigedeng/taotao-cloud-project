@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * 内建的默认处理器工厂，通过全限定类名加载处理器，但无法享受 IOC 框架的 DI 功能
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2023/1/17
  */
 @Slf4j

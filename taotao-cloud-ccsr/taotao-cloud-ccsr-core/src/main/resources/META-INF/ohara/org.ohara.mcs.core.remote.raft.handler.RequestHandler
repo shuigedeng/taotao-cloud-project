@@ -1,0 +1,3 @@
+read=com.taotao.cloud.ccsr.core.remote.raft.handler.ReadRequestHandler
+write=com.taotao.cloud.ccsr.core.remote.raft.handler.WriteRequestHandler
+delete=com.taotao.cloud.ccsr.core.remote.raft.handler.DeleteRequestHandler

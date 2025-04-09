@@ -28,8 +28,8 @@ import static com.taotao.cloud.job.common.enums.InstanceStatus.*;
 /**
  * 派送服务（将任务从Server派发到Worker）
  *
- * @author tjq
- * @author Echo009
+ * @author shuigedeng
+ * @author shuigedeng
  * @since 2020/4/5
  */
 @Slf4j

@@ -1,5 +1,34 @@
 apply from: rootProject.file('gradle/shadow.gradle')
 
+tasks.register("generateMd5ForZip", Exec) {
+    def archives = [[file("${buildDir}/distributions/taotao-cloud-job-distribution-2025.05.zip"),
+                    file("${buildDir}/distributions/taotao-cloud-job-distribution-2025.05.zip.md5")],
+                    [file("${buildDir}/distributions/taotao-cloud-job-distribution-2025.05.tar.gz"),
+                    file("${buildDir}/distributions/taotao-cloud-job-distribution-2025.05.tar.gz.md5")]]
+
+    archives.each { archive ->
+        if (archive[0].exists()) {
+
+            def zipFile = archive[0]
+            def md5File = archive[1]
+
+            inputs.file zipFile
+            outputs.file md5File
+
+            def osName = System.getProperty("os.name").toLowerCase()
+            if (osName.contains("win")) {
+                commandLine 'cmd', '/c', "certutil -hashfile ${zipFile.absolutePath} MD5 | findstr /v \"MD5\" | findstr /v \"certutil\" > ${md5File.absolutePath}"
+            }else{
+                commandLine 'bash', '-c', "md5sum ${zipFile.absolutePath} | awk '{print \$1}' > ${md5File.absolutePath}"
+            }
+
+        } else {
+            println "Archive file not found: ${archive.name}"
+        }
+    }
+
+}
+
 tasks.register('releaseTarZip', Zip) {
     dependsOn(':taotao-cloud-job:taotao-cloud-job-dashboard:jar')
 
@@ -26,6 +55,7 @@ tasks.register('releaseTarZip', Zip) {
         into "target"
     }
 
+    finalizedBy("generateMd5ForZip")
 }
 
 tasks.register("releaseTarGz", Tar) {
@@ -56,5 +86,34 @@ tasks.register("releaseTarGz", Tar) {
         into "target"
     }
 
-    duplicatesStrategy 'exclude'
+    duplicatesStrategy DuplicatesStrategy.EXCLUDE
+
+    finalizedBy("generateMd5ForZip")
 }
+
+//// 计算 MD5 并保存到文件的通用任务
+//task calculateMd5AndSave {
+//    doLast {
+//        def archives = [createZip.archiveFile.get().asFile, createTar.archiveFile.get().asFile]
+//        archives.each { archive ->
+//            if (archive.exists()) {
+//                def digest = MessageDigest.getInstance("MD5")
+//                def inputStream = archive.newInputStream()
+//                def buffer = new byte[8192]
+//                int bytesRead
+//                while ((bytesRead = inputStream.read(buffer)) != -1) {
+//                    digest.update(buffer, 0, bytesRead)
+//                }
+//                inputStream.close()
+//                def md5Bytes = digest.digest()
+//                def md5Hex = md5Bytes.encodeHex().toString()
+//
+//                def md5File = new File("${archive.parentFile}/${archive.name}.md5")
+//                md5File.text = md5Hex
+//                println "MD5 hash for ${archive.name} saved to ${md5File.name}"
+//            } else {
+//                println "Archive file not found: ${archive.name}"
+//            }
+//        }
+//    }
+//}

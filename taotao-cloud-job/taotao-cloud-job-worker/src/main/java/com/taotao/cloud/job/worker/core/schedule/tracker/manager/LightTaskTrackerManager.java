@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 /**
- * @author Echo009
+ * @author shuigedeng
  * @since 2022/9/23
  */
 public class LightTaskTrackerManager {

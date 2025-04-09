@@ -6,7 +6,7 @@ import lombok.Getter;
 /**
  * 支持开/关的状态，如 任务状态（JobStatus）和工作流状态（WorkflowStatus）
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2020/4/6
  */
 @Getter

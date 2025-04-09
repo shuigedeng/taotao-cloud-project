@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 定时调度任务实例
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2020/7/25
  */
 public class InstanceTimeWheelService {

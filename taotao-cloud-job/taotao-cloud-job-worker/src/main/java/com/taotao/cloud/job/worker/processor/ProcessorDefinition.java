@@ -12,7 +12,7 @@ import java.util.Objects;
  * 处理器定义
  * 对外暴露的对象尽量不要直接使用构造器等不方便后续扩展的 API，Getter & Setter 保兼容
  *
- * @author Echo009
+ * @author shuigedeng
  * @since 2023/1/17
  */
 @Getter

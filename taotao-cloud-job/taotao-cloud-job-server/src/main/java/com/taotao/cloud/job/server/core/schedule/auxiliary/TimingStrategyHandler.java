@@ -4,7 +4,7 @@ package com.taotao.cloud.job.server.core.schedule.auxiliary;
 import com.taotao.cloud.job.common.enums.TimeExpressionType;
 
 /**
- * @author Echo009
+ * @author shuigedeng
  * @since 2022/2/24
  */
 public interface TimingStrategyHandler {

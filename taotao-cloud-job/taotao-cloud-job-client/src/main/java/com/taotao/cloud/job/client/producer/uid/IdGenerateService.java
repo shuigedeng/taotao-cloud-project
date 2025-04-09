@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
  * 机房ID：固定为0，占用2位
  * 机器ID：由 ServerIdProvider 提供
  *
- * @author tjq
+ * @author shuigedeng
  * @since 2020/4/6
  */
 @Slf4j

@@ -1,0 +1,136 @@
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+option java_package = "com.taotao.cloud.ccsr.api.grpc.auto";
+
+// 配置元数据服务
+service MetadataService {
+  // 获取配置元数据
+  rpc Get (MetadataReadRequest) returns (Response);
+  // 写入/更新配置
+  rpc Put (MetadataWriteRequest) returns (Response);
+  // 删除配置
+  rpc Delete (MetadataDeleteRequest) returns (Response);
+  // 订阅配置
+  rpc Subscribe(MetadataSubscribeRequest) returns (stream MetadataSubscribeResponse);
+  // 服务发现
+  rpc Discovery(ServiceSubscribeRequest) returns (stream Response);
+}
+
+// 配置类型枚举
+enum MetadataType {
+  TEXT = 0; // TODO
+  JSON = 1;
+  XML = 2; // TODO
+  YAML = 3; // TODO
+  PROPERTIES = 4; // TODO
+}
+
+// 配置元数据主体
+message Metadata {
+  // 命名空间（租户隔离）
+  string namespace = 1;
+
+  // 配置分组（业务维度隔离）
+  string group = 2;
+
+  // 标签
+  string tag = 3;
+
+  // 配置唯一ID
+  string data_id = 4;
+
+  // 内容校验码（防止内容篡改, 更新对比）
+  string md5 = 5;
+
+  // 配置内容（实际存储的配置数据）
+  string content = 6;
+
+  // 配置类型（JSON/YAML等）
+  MetadataType type = 7;
+
+  // 创建时间（UTC时间戳）
+  google.protobuf.Timestamp gmt_create = 8;
+
+  // 最后修改时间（UTC时间戳）
+  google.protobuf.Timestamp gmt_modified = 9;
+
+  // 扩展字段（KV格式）
+  map<string, string> ext = 10;
+
+  // 数据key
+  string data_key = 11;
+}
+
+message ServiceSubscribeRequest {
+  string namespace = 1;
+  string raft_group = 2;
+}
+
+message ServiceSubscribeResponse {
+  repeated ServiceInstance instances = 1;
+}
+
+message MetadataSubscribeRequest {
+  string namespace = 1;
+  string raft_group = 2;
+}
+
+message MetadataSubscribeResponse {
+  string namespace = 1;
+  string msg = 2;
+  string opType = 3; // 操作类型：PUT/DELETE
+  Metadata metadata = 4;
+  string raft_group = 5;
+  bool success = 6;
+}
+
+// 配置写入请求
+message MetadataWriteRequest {
+  string namespace = 1;
+  string group = 2;
+  string tag = 3;
+  string data_id = 4;
+  Metadata metadata = 5;
+  string raft_group = 6;
+}
+
+// 配置读取请求
+message MetadataReadRequest {
+  string namespace = 1;
+  string group = 2;
+  string tag = 3;
+  string data_id = 4;
+  string raft_group = 5;
+}
+
+// 配置删除请求
+message MetadataDeleteRequest {
+  string namespace = 1;
+  string group = 2;
+  string tag = 3;
+  string data_id = 4;
+  string raft_group = 5;
+}
+
+// 相应结果
+message Response {
+  bool success = 1;   // 是否成功，true 或 false
+  int32 code = 2;     // 错误码
+  string msg = 3;     // 提示信息
+  google.protobuf.Any data = 4;    // 结果数据
+}
+
+// 节点实例信息
+// TODO 定期推送存活的服务地址给客户端
+message ServiceInstance {
+  string namespace = 1;
+  string raft_group = 2;        // 分组
+  string tag = 3;
+  string host = 4;         // 主机地址，例如 "127.0.0.1"
+  int32 port = 5;          // 端口号，例如 8080
+  string address = 6;
+}
