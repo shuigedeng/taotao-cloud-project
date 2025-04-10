@@ -1,8 +1,8 @@
 package com.taotao.cloud.ccsr.client.listener;
 
 import com.taotao.cloud.ccsr.api.event.EventType;
+import com.taotao.cloud.ccsr.client.dto.ServerAddress;
 import com.taotao.cloud.ccsr.common.log.Log;
-import com.taotao.cloud.ccsr.dto.ServerAddress;
 
 public class ServerAddressConfigListener extends AbstractConfigListener<ServerAddress> {
     @Override

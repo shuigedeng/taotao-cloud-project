@@ -28,7 +28,8 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-import static org.ohara.msc.common.enums.ResponseCode.SYSTEM_ERROR;
+import static com.taotao.cloud.ccsr.common.enums.ResponseCode.SYSTEM_ERROR;
+
 
 public abstract class AbstractRpcProcessor<T extends Message> implements RpcProcessor<T> {
 

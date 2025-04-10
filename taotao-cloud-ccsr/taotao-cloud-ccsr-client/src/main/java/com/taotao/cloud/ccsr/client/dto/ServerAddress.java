@@ -1,10 +1,10 @@
 package com.taotao.cloud.ccsr.client.dto;
 
 
+import com.taotao.cloud.ccsr.client.listener.ConfigData;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import com.taotao.cloud.ccsr.listener.ConfigData;
 
 import java.lang.annotation.Annotation;
 

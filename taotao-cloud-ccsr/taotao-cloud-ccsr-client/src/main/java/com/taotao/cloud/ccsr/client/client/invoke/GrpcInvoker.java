@@ -2,114 +2,109 @@ package com.taotao.cloud.ccsr.client.client.invoke;
 
 import com.google.protobuf.Message;
 import com.google.protobuf.Timestamp;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import com.taotao.cloud.ccsr.api.event.EventType;
 import com.taotao.cloud.ccsr.api.grpc.auto.*;
-import com.taotao.cloud.ccsr.spi.SpiExtensionFactory;
-import com.taotao.cloud.ccsr.client.OHaraMcsClient;
+import com.taotao.cloud.ccsr.client.client.OHaraMcsClient;
+import com.taotao.cloud.ccsr.client.context.OHaraMcsContext;
+import com.taotao.cloud.ccsr.client.option.GrpcOption;
+import com.taotao.cloud.ccsr.client.remote.RpcClient;
+import com.taotao.cloud.ccsr.client.request.Payload;
 import com.taotao.cloud.ccsr.common.enums.RaftGroup;
 import com.taotao.cloud.ccsr.common.exception.InitializationException;
 import com.taotao.cloud.ccsr.common.exception.OHaraMcsClientException;
-import com.taotao.cloud.ccsr.context.OHaraMcsContext;
-import com.taotao.cloud.ccsr.lifecycle.Closeable;
-import com.taotao.cloud.ccsr.option.GrpcOption;
-import com.taotao.cloud.ccsr.option.RequestOption;
-import com.taotao.cloud.ccsr.remote.RpcClient;
-import com.taotao.cloud.ccsr.remote.grpc.GrpcClient;
-import com.taotao.cloud.ccsr.request.Payload;
+import com.taotao.cloud.ccsr.spi.SpiExtensionFactory;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import com.taotao.cloud.ccsr.client.remote.grpc.GrpcClient;
+public class GrpcInvoker extends AbstractInvoker<Message, GrpcOption> {
 
-import java.util.Map;
+	private final GrpcClient grpcClient;
 
-public class GrpcInvoker extends AbstractInvoker<Message, GrpcOption>  {
+	public GrpcInvoker(OHaraMcsClient client) {
+		super(client);
+		GrpcOption grpcOption = (GrpcOption) client.getOption();
+		if (grpcOption == null) {
+			throw new InitializationException("Init Grpc Invoker fail, GrpcOption is empty.");
+		}
+		if (StringUtils.isBlank(client.getNamespace())) {
+			throw new IllegalArgumentException("Init Grpc Invoker fail, Namespace is null.");
+		}
+		if (CollectionUtils.isEmpty(grpcOption.getServerAddresses())) {
+			throw new IllegalArgumentException("Init Grpc Invoker fail, ServerAddresses is empty.");
+		}
+		grpcClient = (GrpcClient) SpiExtensionFactory.getExtension(protocol(), RpcClient.class);
+		grpcClient.init(client.getNamespace(), grpcOption.getServerAddresses());
+	}
 
-    private final GrpcClient grpcClient;
+	public Response innerInvoke(Message request, EventType eventType) {
+		return switch (eventType) {
+			case PUT -> grpcClient.put((MetadataWriteRequest) request);
+			case DELETE -> grpcClient.delete((MetadataDeleteRequest) request);
+			case GET -> grpcClient.get((MetadataReadRequest) request);
+			default -> throw new IllegalArgumentException("Unsupported event type: " + eventType);
+		};
+	}
 
-    public GrpcInvoker(OHaraMcsClient client) {
-        super(client);
-        GrpcOption grpcOption = (GrpcOption) client.getOption();
-        if (grpcOption == null) {
-            throw new InitializationException("Init Grpc Invoker fail, GrpcOption is empty.");
-        }
-        if (StringUtils.isBlank(client.getNamespace())) {
-            throw new IllegalArgumentException("Init Grpc Invoker fail, Namespace is null.");
-        }
-        if (CollectionUtils.isEmpty(grpcOption.getServerAddresses())) {
-            throw new IllegalArgumentException("Init Grpc Invoker fail, ServerAddresses is empty.");
-        }
-        grpcClient = (GrpcClient) SpiExtensionFactory.getExtension(protocol(), RpcClient.class);
-        grpcClient.init(client.getNamespace(), grpcOption.getServerAddresses());
-    }
+	@Override
+	public Response invoke(OHaraMcsContext context, Payload request) {
+		GrpcOption option = getOption();
+		Message message = convert(context, option, request);
+		return innerInvoke(message, request.getEventType());
+	}
 
-    public Response innerInvoke(Message request, EventType eventType) {
-        return switch (eventType) {
-            case PUT -> grpcClient.put((MetadataWriteRequest) request);
-            case DELETE -> grpcClient.delete((MetadataDeleteRequest) request);
-            case GET -> grpcClient.get((MetadataReadRequest) request);
-            default -> throw new IllegalArgumentException("Unsupported event type: " + eventType);
-        };
-    }
+	@Override
+	public String protocol() {
+		return "grpc";
+	}
 
-    @Override
-    public Response invoke(OHaraMcsContext context, Payload request) {
-        GrpcOption option = getOption();
-        Message message = convert(context, option, request);
-        return innerInvoke(message, request.getEventType());
-    }
+	@Override
+	public Message convert(OHaraMcsContext context, GrpcOption option, Payload request) {
+		return switch (request.getEventType()) {
+			case PUT -> MetadataWriteRequest.newBuilder()
+				.setRaftGroup(RaftGroup.CONFIG_CENTER_GROUP.getName())
+				.setNamespace(context.getNamespace())
+				.setGroup(request.getGroup())
+				.setTag(request.getTag())
+				.setDataId(request.getDataId())
+				.setMetadata(buildMetadata(context, option, request))
+				.build();
+			case DELETE -> MetadataDeleteRequest.newBuilder()
+				.setRaftGroup(RaftGroup.CONFIG_CENTER_GROUP.getName())
+				.setNamespace(context.getNamespace())
+				.setGroup(request.getGroup())
+				.setTag(request.getTag())
+				.setDataId(request.getDataId())
+				.build();
+			case GET -> MetadataReadRequest.newBuilder()
+				.setRaftGroup(RaftGroup.CONFIG_CENTER_GROUP.getName())
+				.setNamespace(context.getNamespace())
+				.setGroup(request.getGroup())
+				.setTag(request.getTag())
+				.setDataId(request.getDataId())
+				.build();
+			default -> throw new IllegalArgumentException("Unsupported event type: " + request.getEventType());
+		};
 
-    @Override
-    public String protocol() {
-        return "grpc";
-    }
+	}
 
-    @Override
-    public Message convert(OHaraMcsContext context, GrpcOption option, Payload request) {
-        return switch (request.getEventType()) {
-            case PUT -> MetadataWriteRequest.newBuilder()
-                    .setRaftGroup(RaftGroup.CONFIG_CENTER_GROUP.getName())
-                    .setNamespace(context.getNamespace())
-                    .setGroup(request.getGroup())
-                    .setTag(request.getTag())
-                    .setDataId(request.getDataId())
-                    .setMetadata(buildMetadata(context, option, request))
-                    .build();
-            case DELETE -> MetadataDeleteRequest.newBuilder()
-                    .setRaftGroup(RaftGroup.CONFIG_CENTER_GROUP.getName())
-                    .setNamespace(context.getNamespace())
-                    .setGroup(request.getGroup())
-                    .setTag(request.getTag())
-                    .setDataId(request.getDataId())
-                    .build();
-            case GET -> MetadataReadRequest.newBuilder()
-                    .setRaftGroup(RaftGroup.CONFIG_CENTER_GROUP.getName())
-                    .setNamespace(context.getNamespace())
-                    .setGroup(request.getGroup())
-                    .setTag(request.getTag())
-                    .setDataId(request.getDataId())
-                    .build();
-            default -> throw new IllegalArgumentException("Unsupported event type: " + request.getEventType());
-        };
-
-    }
-
-    private Metadata buildMetadata(OHaraMcsContext context, GrpcOption option, Payload request) {
-        return Metadata.newBuilder()
-                .setNamespace(context.getNamespace())
-                .setGroup(request.getGroup())
-                .setTag(request.getTag())
-                .setDataId(request.getDataId())
-                .setDataKey(request.getConfigData().key())
-                .setType(request.getType())
-                .setContent(context.getConfigDataString())
-                .setMd5(context.getMd5())
-                .setGmtCreate(Timestamp.newBuilder().setSeconds(request.getGmtCreate()))
-                .setGmtModified(Timestamp.newBuilder().setSeconds(request.getGmtModified()))
+	private Metadata buildMetadata(OHaraMcsContext context, GrpcOption option, Payload request) {
+		return Metadata.newBuilder()
+			.setNamespace(context.getNamespace())
+			.setGroup(request.getGroup())
+			.setTag(request.getTag())
+			.setDataId(request.getDataId())
+			.setDataKey(request.getConfigData().key())
+			.setType(request.getType())
+			.setContent(context.getConfigDataString())
+			.setMd5(context.getMd5())
+			.setGmtCreate(Timestamp.newBuilder().setSeconds(request.getGmtCreate()))
+			.setGmtModified(Timestamp.newBuilder().setSeconds(request.getGmtModified()))
 //                .putAllExt(request.getExt())
-                .build();
-    }
+			.build();
+	}
 
-    @Override
-    public void shutdown() throws OHaraMcsClientException {
-        grpcClient.shutdown();
-    }
+	@Override
+	public void shutdown() throws OHaraMcsClientException {
+		grpcClient.shutdown();
+	}
 }

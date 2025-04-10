@@ -3,8 +3,8 @@ package com.taotao.cloud.ccsr.core.remote;
 
 import com.taotao.cloud.ccsr.common.config.OHaraMcsConfig;
 import com.taotao.cloud.ccsr.common.log.Log;
+import jakarta.annotation.PreDestroy;
 
-import javax.annotation.PreDestroy;
 import java.io.IOException;
 
 /**

@@ -1,6 +1,6 @@
 package com.taotao.cloud.ccsr.server.starter;
 
-import com.taotao.cloud.ccsr.server.annotation.EnableOHaraMcsServer;
+import com.taotao.cloud.ccsr.server.starter.annotation.EnableOHaraMcsServer;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;

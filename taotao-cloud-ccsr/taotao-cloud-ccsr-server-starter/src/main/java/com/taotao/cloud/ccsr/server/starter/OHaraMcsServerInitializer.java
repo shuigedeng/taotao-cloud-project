@@ -3,7 +3,7 @@ package com.taotao.cloud.ccsr.server.starter;
 import com.taotao.cloud.ccsr.common.config.OHaraMcsConfig;
 import com.taotao.cloud.ccsr.core.remote.RpcServer;
 import com.taotao.cloud.ccsr.core.remote.raft.RaftServer;
-import com.taotao.cloud.ccsr.server.utils.BannerUtils;
+import com.taotao.cloud.ccsr.server.starter.utils.BannerUtils;
 import com.taotao.cloud.ccsr.spi.SpiExtensionFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
@@ -11,7 +11,6 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.annotation.Resource;
 
 
 public class OHaraMcsServerInitializer implements ApplicationListener<ContextRefreshedEvent>, DisposableBean {

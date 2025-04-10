@@ -1,7 +1,7 @@
 package com.taotao.cloud.ccsr.client.loadbalancer;
 
+import com.taotao.cloud.ccsr.client.dto.ServerAddress;
 import com.taotao.cloud.ccsr.spi.Join;
-import com.taotao.cloud.ccsr.dto.ServerAddress;
 
 import java.util.List;
 import java.util.Random;

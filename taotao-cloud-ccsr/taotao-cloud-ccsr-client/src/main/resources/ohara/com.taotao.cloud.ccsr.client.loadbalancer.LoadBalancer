@@ -1,0 +1,2 @@
+random=com.taotao.cloud.ccsr.client.loadbalancer.RandomLoadBalancer
+round_robin=com.taotao.cloud.ccsr.client.loadbalancer.RoundRobinLoadBalancer

@@ -2,7 +2,7 @@ package com.taotao.cloud.ccsr.server.starter;
 
 import com.taotao.cloud.ccsr.common.config.OHaraMcsConfig;
 import com.taotao.cloud.ccsr.core.remote.RpcServer;
-import com.taotao.cloud.ccsr.server.utils.BannerUtils;
+import com.taotao.cloud.ccsr.server.starter.utils.BannerUtils;
 import com.taotao.cloud.ccsr.spi.SpiExtensionFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;

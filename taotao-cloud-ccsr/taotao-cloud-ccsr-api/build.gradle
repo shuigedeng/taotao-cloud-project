@@ -5,7 +5,7 @@ dependencies {
     api "io.github.shuigedeng:taotao-boot-starter-common"
     api project(":taotao-cloud-ccsr:taotao-cloud-ccsr-common")
 
-    api "com.caucho:hessian:4.0.66"
+    api "com.caucho:hessian:4.0.63"
     api "com.google.api.grpc:proto-google-common-protos:2.54.1"
     api "io.netty:netty-all:4.2.0.Final"
     api "com.google.protobuf:protobuf-java:4.30.2"

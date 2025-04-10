@@ -1,5 +1,9 @@
 package com.taotao.cloud.ccsr.client.remote.grpc;
 
+import com.taotao.cloud.ccsr.client.dto.ServerAddress;
+import com.taotao.cloud.ccsr.client.lifecycle.Closeable;
+import com.taotao.cloud.ccsr.client.listener.ConfigListenerManager;
+import com.taotao.cloud.ccsr.client.loadbalancer.ServiceDiscovery;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
@@ -11,10 +15,6 @@ import com.taotao.cloud.ccsr.common.config.OHaraMcsConfig;
 import com.taotao.cloud.ccsr.common.enums.RaftGroup;
 import com.taotao.cloud.ccsr.common.exception.OHaraMcsClientException;
 import com.taotao.cloud.ccsr.common.log.Log;
-import com.taotao.cloud.ccsr.dto.ServerAddress;
-import com.taotao.cloud.ccsr.lifecycle.Closeable;
-import com.taotao.cloud.ccsr.listener.ConfigListenerManager;
-import com.taotao.cloud.ccsr.loadbalancer.ServiceDiscovery;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

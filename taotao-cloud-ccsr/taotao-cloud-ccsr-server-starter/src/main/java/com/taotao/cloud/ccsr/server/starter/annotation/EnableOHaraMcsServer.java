@@ -1,6 +1,6 @@
 package com.taotao.cloud.ccsr.server.starter.annotation;
 
-import com.taotao.cloud.ccsr.server.OHaraMcsServerAutoConfiguration;
+import com.taotao.cloud.ccsr.server.starter.OHaraMcsServerAutoConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
