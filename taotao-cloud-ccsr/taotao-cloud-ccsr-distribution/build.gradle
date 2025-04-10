@@ -52,7 +52,7 @@ tasks.register('releaseTarZip', Zip) {
     from "${project.projectDir}/LICENSE-BIN" rename { String filename -> filename.replace("-BIN", "") }
     from "${project.projectDir}/NOTICE-BIN" rename { String filename -> filename.replace("-BIN", "") }
 
-    from("${project.parent.projectDir}/taotao-cloud-tx-server/build/libs") {
+    from("${project.parent.projectDir}/taotao-cloud-ccsr-server/build/libs") {
         include '*.jar'
 
         into "target"
@@ -84,7 +84,7 @@ tasks.register("releaseTarGz", Tar) {
     from "${project.projectDir}/LICENSE-BIN" rename {String filename -> filename.replace("-BIN", "")}
     from "${project.projectDir}/NOTICE-BIN" rename {String filename -> filename.replace("-BIN", "")}
 
-    from("${project.parent.projectDir}/taotao-cloud-tx-server/build/libs") {
+    from("${project.parent.projectDir}/taotao-cloud-ccsr-server/build/libs") {
         include '*.jar'
 
         into "target"
