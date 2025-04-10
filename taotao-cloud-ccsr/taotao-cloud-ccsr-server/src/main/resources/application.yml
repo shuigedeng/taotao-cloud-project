@@ -1,6 +1,6 @@
 spring:
   application:
-    name: xxx
+    name: ccsr-server
 
 ohara-mcs:
   local-mode: true # 开启本机测试模式，用于本地开发调试使用
@@ -18,12 +18,12 @@ ohara-mcs:
     single-node: false # 是否为单节点模式，用于单机测试使用
   cluster-address:
     - 127.0.0.1:9011 # Raft集群实例地址，为了单机测试方便这里通过端口作区分
-#    - 127.0.0.1:9101
-#    - 127.0.0.1:9201
+    - 127.0.0.1:9012
+    - 127.0.0.1:9013
 #    - 127.0.0.1:9301
-  port: 8010 # gRPC服务默认端口8000，用于客户端与服务端节点通信
+  port: 8012 # gRPC服务默认端口8000，用于客户端与服务端节点通信
 
 # HTTP 端口
 server:
-  port: 7100
+  port: 7102
 

@@ -1,6 +1,6 @@
 package com.taotao.cloud.ccsr.client.client;
 
-
+import com.taotao.cloud.ccsr.client.client.filter.Filter;
 import com.taotao.cloud.ccsr.api.grpc.auto.Response;
 import com.taotao.cloud.ccsr.client.client.filter.ConvertFilter;
 import com.taotao.cloud.ccsr.client.client.filter.InvokerFilter;

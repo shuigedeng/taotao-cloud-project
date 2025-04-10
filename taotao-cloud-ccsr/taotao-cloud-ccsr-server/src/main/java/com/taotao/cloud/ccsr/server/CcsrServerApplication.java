@@ -33,6 +33,8 @@ public class CcsrServerApplication extends SpringBootServletInitializer {
 	}
 
 	public static void main(String[] args) {
+		System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
+
 		new StartupSpringApplication(CcsrServerApplication.class)
 			.setTtcBanner()
 			.setTtcProfileIfNotExists("dev")
