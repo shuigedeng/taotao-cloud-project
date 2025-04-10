@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import com.taotao.cloud.ccsr.api.event.EventType;
 
 /**
- * @author SpringCat
+ * @author shuigedeng
  */
 @Data
 @NoArgsConstructor

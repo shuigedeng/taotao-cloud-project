@@ -8,7 +8,7 @@ import com.taotao.cloud.ccsr.api.grpc.auto.Response;
 import com.taotao.cloud.ccsr.common.log.Log;
 
 /**
- * @author SpringCat
+ * @author shuigedeng
  */
 public class RaftClosure implements Closure {
 

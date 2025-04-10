@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.taotao.cloud.ccsr.common.config.OHaraMcsConfig;
 
 /**
- * @author SpringCat
+ * @author shuigedeng
  */
 public class OptionsHelper {
 

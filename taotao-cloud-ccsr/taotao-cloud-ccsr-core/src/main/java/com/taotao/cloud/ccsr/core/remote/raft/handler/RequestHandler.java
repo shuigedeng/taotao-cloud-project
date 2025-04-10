@@ -6,7 +6,7 @@ import com.taotao.cloud.ccsr.spi.SPI;
 
 /**
  * 用于Raft接收请求后的处理逻辑，不是RPC服务哈～
- * @author SpringCat
+ * @author shuigedeng
  */
 @SPI
 public interface RequestHandler<T extends Message> {

@@ -11,7 +11,7 @@ import com.taotao.cloud.ccsr.common.enums.ResponseCode;
 import com.taotao.cloud.ccsr.common.exception.OHaraMcsException;
 
 /**
- * @author SpringCat
+ * @author shuigedeng
  */
 public abstract class AbstractConfigRequestHandler<T extends Message> implements RequestHandler<T> {
 

@@ -29,7 +29,7 @@ import java.util.*;
 import java.util.concurrent.*;
 
 /**
- * @author SpringCat
+ * @author shuigedeng
  */
 @Join(order = 2, isSingleton = true)
 public class RaftServer extends AbstractRpcServer {

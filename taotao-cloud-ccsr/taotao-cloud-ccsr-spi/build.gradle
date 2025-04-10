@@ -1,3 +1,5 @@
 dependencies {
-    api "io.github.shuigedeng:taotao-boot-starter-common"
+    api ("io.github.shuigedeng:taotao-boot-starter-common") {
+        exclude group: "com.caucho", module: "hessian"
+    }
 }

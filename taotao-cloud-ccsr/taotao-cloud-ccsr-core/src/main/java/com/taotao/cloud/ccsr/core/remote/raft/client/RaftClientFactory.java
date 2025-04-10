@@ -10,7 +10,7 @@ import com.taotao.cloud.ccsr.core.remote.raft.helper.RaftHelper;
 import com.taotao.cloud.ccsr.common.log.Log;
 
 /**
- * @author SpringCat
+ * @author shuigedeng
  */
 public class RaftClientFactory {
 

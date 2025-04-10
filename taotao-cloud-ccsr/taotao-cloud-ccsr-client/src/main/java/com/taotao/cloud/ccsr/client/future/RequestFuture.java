@@ -3,7 +3,7 @@ package com.taotao.cloud.ccsr.client.future;
 import com.taotao.cloud.ccsr.api.grpc.auto.Response;
 
 /**
- * @author SpringCat
+ * @author shuigedeng
  * @date 2025-03-26 16:30
  */
 public interface RequestFuture<S> {

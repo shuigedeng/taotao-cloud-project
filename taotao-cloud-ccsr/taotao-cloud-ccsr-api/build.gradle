@@ -2,25 +2,27 @@
 apply plugin: "com.google.protobuf"
 
 dependencies {
-    api "io.github.shuigedeng:taotao-boot-starter-common"
+    api ("io.github.shuigedeng:taotao-boot-starter-common") {
+        exclude group: "com.caucho", module: "hessian"
+    }
     api project(":taotao-cloud-ccsr:taotao-cloud-ccsr-common")
 
     api "com.caucho:hessian:4.0.63"
-    api "com.google.api.grpc:proto-google-common-protos:2.54.1"
+    api "com.google.api.grpc:proto-google-common-protos:2.17.0"
     api "io.netty:netty-all:4.2.0.Final"
-    api "com.google.protobuf:protobuf-java:4.30.2"
-    api "com.google.protobuf:protobuf-java-util:4.30.2"
+    api "com.google.protobuf:protobuf-java:3.25.5"
+    api "com.google.protobuf:protobuf-java-util:3.25.5"
     api "org.apache.thrift:libthrift:0.21.0"
-    api "io.grpc:grpc-api:1.71.0"
-    api "io.grpc:grpc-context:1.71.0"
-    api "io.grpc:grpc-core:1.71.0"
-    api "io.grpc:grpc-netty:1.71.0"
-    api "io.grpc:grpc-netty-shaded:1.71.0"
-    api "io.grpc:grpc-protobuf:1.71.0"
-    api "io.grpc:grpc-protobuf-lite:1.71.0"
-    api "io.grpc:grpc-stub:1.71.0"
-    api "io.grpc:grpc-services:1.71.0"
-    testImplementation("io.grpc:grpc-testing:1.71.0")
+    api "io.grpc:grpc-api:1.64.2"
+    api "io.grpc:grpc-context:1.64.2"
+    api "io.grpc:grpc-core:1.64.2"
+    api "io.grpc:grpc-netty:1.64.2"
+    api "io.grpc:grpc-netty-shaded:1.64.2"
+    api "io.grpc:grpc-protobuf:1.64.2"
+    api "io.grpc:grpc-protobuf-lite:1.64.2"
+    api "io.grpc:grpc-stub:1.64.2"
+    api "io.grpc:grpc-services:1.64.2"
+    testImplementation("io.grpc:grpc-testing:1.64.2")
     api 'com.google.code.gson:gson:2.12.1'
     api 'com.google.guava:guava:33.4.6-jre'
     api 'org.reflections:reflections:0.10.2'
@@ -39,7 +41,7 @@ protobuf {
     protoc {
         //https://repo1.maven.org/maven2/com/google/protobuf/protoc/
         //直接使用Maven Central上已经编译好的protoc编译器，
-        artifact = "com.google.protobuf:protoc:4.30.2"
+        artifact = "com.google.protobuf:protoc:3.25.5"
         //指定本地已经安装的protoc编译器
         //path = '/usr/local/bin/protoc'
     }
@@ -50,7 +52,7 @@ protobuf {
     //指定protoc运行插件
     plugins {
         grpc {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.71.0"
+            artifact = "io.grpc:protoc-gen-grpc-java:1.64.2"
         }
         //javalite {
         //    // The codegen for lite comes as a separate artifact

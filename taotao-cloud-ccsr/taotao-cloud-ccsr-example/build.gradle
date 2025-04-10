@@ -8,3 +8,15 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-undertow"
 }
 
+configurations {
+    configureEach {
+        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
+
+        resolutionStrategy {
+            force "com.caucho:hessian:4.0.63"
+            force "com.alipay.sofa:hessian:3.3.6"
+        }
+    }
+}
+

@@ -57,7 +57,7 @@ public class OHaraMcsServerInitializer implements ApplicationListener<ContextRef
     private void startRaftNode() {
         raftServer.init(config);
         raftServer.start();
-        bannerUtils.print();
+        //bannerUtils.print();
     }
 
 }

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author SpringCat
+ * @author shuigedeng
  */
 public abstract class AbstractStorage<T> implements Storage<T> {
 

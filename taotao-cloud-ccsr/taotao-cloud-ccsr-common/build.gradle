@@ -1,8 +1,9 @@
 dependencies {
-    api "io.github.shuigedeng:taotao-boot-starter-common"
+    api ("io.github.shuigedeng:taotao-boot-starter-common") {
+        exclude group: "com.caucho", module: "hessian"
+    }
 
     api ("com.alipay.sofa:jraft-core:1.3.14") {
-        exclude group: "com.alipay.sofa", module: "bolt"
         exclude group: "org.apache.logging.log4j", module: "log4j-api"
         exclude group: "org.apache.logging.log4j", module: "log4j-core"
         exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"

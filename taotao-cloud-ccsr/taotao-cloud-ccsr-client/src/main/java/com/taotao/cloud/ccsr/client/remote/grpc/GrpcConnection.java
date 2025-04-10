@@ -26,7 +26,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author SpringCat
+ * @author shuigedeng
  * @date 2025-03-26 11:50
  */
 public abstract class GrpcConnection implements Closeable {

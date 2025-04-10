@@ -32,7 +32,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * @author SpringCat
+ * @author shuigedeng
  */
 public class RaftStateMachine extends StateMachineAdapter {
 

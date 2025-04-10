@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author SpringCat
+ * @author shuigedeng
  */
 @Join(order = 1, isSingleton = true)
 public class GrpcServer extends AbstractRpcServer {
