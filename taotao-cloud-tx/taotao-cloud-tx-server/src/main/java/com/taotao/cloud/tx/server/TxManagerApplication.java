@@ -16,12 +16,33 @@
 
 package com.taotao.cloud.tx.server;
 
+import com.taotao.boot.core.startup.StartupSpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class TxManagerApplication {
+public class TxManagerApplication extends SpringBootServletInitializer {
 
-    public static void main(String[] args) {
-        //		SpringApplication.run(TxManagerApplication.class, args);
-    }
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return builder.sources(TxManagerApplication.class);
+	}
+
+	public static void main(String[] args) {
+		System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
+
+		new StartupSpringApplication(TxManagerApplication.class)
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-job-nameserver")
+			.setTtcAllowBeanDefinitionOverriding(true)
+			.run(args);
+
+		// 这个是自定义的一个服务端
+		NettyServer nettyServer = new NettyServer();
+		// 为其绑定IP和端口号
+		nettyServer.start("localhost", 8080);
+		System.out.println("\n>>>>>>事务管理者启动成功<<<<<<\n");
+	}
 }

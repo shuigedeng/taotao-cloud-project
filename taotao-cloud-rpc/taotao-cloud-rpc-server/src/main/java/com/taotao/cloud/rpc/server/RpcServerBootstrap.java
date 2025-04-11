@@ -1,6 +1,4 @@
-package com.taotao.cloud.rpc.dashboard;
-
-import com.taotao.cloud.rpc.server.RpcServer;
+package com.taotao.cloud.rpc.server;
 
 public class RpcServerBootstrap {
 

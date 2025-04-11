@@ -17,16 +17,19 @@
 package com.taotao.cloud.tx.server;
 
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
+import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
 
-public class MyChannelInitializer extends ChannelInitializer<SocketChannel> {
-
+// NIO的通道处理器
+public class ServerInitializer extends ChannelInitializer<SocketChannel> {
     @Override
-    protected void initChannel(SocketChannel channel) {
-        System.out.println("链接报告开始");
-        System.out.println("链接报告信息：有一客户端链接到本服务端");
-        System.out.println("链接报告IP:" + channel.localAddress().getHostString());
-        System.out.println("链接报告Port:" + channel.localAddress().getPort());
-        System.out.println("链接报告完毕");
+    protected void initChannel(SocketChannel socketChannel) throws Exception {
+        // 设置编码器、解码器、处理器
+        ChannelPipeline pipeline = socketChannel.pipeline();
+        pipeline.addLast("decoder", new StringDecoder());
+        pipeline.addLast("encoder", new StringEncoder());
+        pipeline.addLast("handler", new NettyServerHandler());
     }
 }

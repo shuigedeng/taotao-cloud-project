@@ -1,6 +1,4 @@
-package com.taotao.cloud.rpc.dashboard;
-
-import com.taotao.cloud.rpc.client.RpcClient;
+package com.taotao.cloud.rpc.client;
 
 public class RpcClientBootstrap {
 

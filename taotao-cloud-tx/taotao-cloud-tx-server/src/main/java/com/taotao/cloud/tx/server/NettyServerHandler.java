@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.tx.server.nettyTxManager;
+package com.taotao.cloud.tx.server;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;

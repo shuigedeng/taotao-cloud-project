@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: tx-server
+
+# HTTP 端口
+server:
+  port: 7102
+

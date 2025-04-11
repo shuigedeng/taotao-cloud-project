@@ -14,31 +14,30 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.job.nameserver;
+package com.taotao.cloud.mq.nameserver;
 
 import com.taotao.boot.core.startup.StartupSpringApplication;
-import com.taotao.cloud.job.nameserver.config.TtcJobNameServerConfig;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-@EnableConfigurationProperties(TtcJobNameServerConfig.class)
-public class TtcJobNameServerApplication extends SpringBootServletInitializer {
+public class RpcNameServerApplication extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(TtcJobNameServerApplication.class);
+		return builder.sources(RpcNameServerApplication.class);
 	}
 
 	public static void main(String[] args) {
-		new StartupSpringApplication(TtcJobNameServerApplication.class)
+		System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
+
+		new StartupSpringApplication(RpcNameServerApplication.class)
 			.setTtcBanner()
 			.setTtcProfileIfNotExists("dev")
 			.setTtcApplicationProperty("taotao-cloud-job-nameserver")
 			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
-	}
 
+	}
 }

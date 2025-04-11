@@ -9,6 +9,14 @@ dependencies {
     api project(":taotao-cloud-rpc:taotao-cloud-rpc-registry")
     api project(":taotao-cloud-rpc:taotao-cloud-rpc-serialization")
     api project(":taotao-cloud-rpc:taotao-cloud-rpc-server")
+
+    api "io.github.shuigedeng:taotao-boot-starter-core"
+
+    api("org.springframework.boot:spring-boot-starter-web") {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    }
+    api "org.springframework.boot:spring-boot-starter-undertow"
+    api 'org.springframework.boot:spring-boot-starter-aop'
 }
 
 jar {

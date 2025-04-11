@@ -14,32 +14,30 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.ccsr.example;
+package com.taotao.cloud.mq.dashboard;
 
 import com.taotao.boot.core.startup.StartupSpringApplication;
-import com.taotao.cloud.ccsr.client.starter.annotation.EnableOHaraMcsClient;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-@EnableOHaraMcsClient(enable = true)
-public class CcsrExampleApplication extends SpringBootServletInitializer {
+public class MqDashboardApplication extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(CcsrExampleApplication.class);
+		return builder.sources(MqDashboardApplication.class);
 	}
 
 	public static void main(String[] args) {
 		System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
 
-		new StartupSpringApplication(CcsrExampleApplication.class)
+		new StartupSpringApplication(MqDashboardApplication.class)
 			.setTtcBanner()
 			.setTtcProfileIfNotExists("dev")
-			.setTtcApplicationProperty("taotao-cloud-ccsr-example")
+			.setTtcApplicationProperty("taotao-cloud-job-nameserver")
 			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
-	}
 
+	}
 }

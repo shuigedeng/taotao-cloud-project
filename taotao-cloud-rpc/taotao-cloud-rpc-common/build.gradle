@@ -26,9 +26,6 @@ dependencies {
 
     api 'io.netty:netty-all:4.2.0.Final'
 
-    api "org.projectlombok:lombok:1.18.38"
-    annotationProcessor "org.projectlombok:lombok:1.18.38"
-
     api("org.springframework.boot:spring-boot-starter-web") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
     }

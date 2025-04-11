@@ -17,38 +17,40 @@
 package com.taotao.cloud.tx.server;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
+// Netty服务端 - 事务管理者
 public class NettyServer {
-    public static void main(String[] args) {
-        new NettyServer().bing(8888);
+    // 启动类
+    private ServerBootstrap bootstrap = new ServerBootstrap();
+    // NIO事件循环组
+    private NioEventLoopGroup nioEventLoopGroup = new NioEventLoopGroup();
+
+    // 启动方法
+    public void start(String host, int port) {
+        try {
+            // 调用下面的初始化方法
+            init();
+            // 绑定端口和IP
+            bootstrap.bind(host, port).sync();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void bing(int port) {
-        // 配置服务端NIO线程组
-        EventLoopGroup parentGroup =
-                new NioEventLoopGroup(); // NioEventLoopGroup extends MultithreadEventLoopGroup Math.max(1,
-        // SystemPropertyUtil.getInt("io.netty.eventLoopThreads",
-        // NettyRuntime.availableProcessors() * 2));
-        EventLoopGroup childGroup = new NioEventLoopGroup();
-        try {
-            ServerBootstrap b = new ServerBootstrap();
-            b.group(parentGroup, childGroup)
-                    .channel(NioServerSocketChannel.class) // 非阻塞模式
-                    .option(ChannelOption.SO_BACKLOG, 128)
-                    .childHandler(new MyChannelInitializer());
-            ChannelFuture f = b.bind(port).sync();
-            System.out.println("com.lm.netty02 server start done. {关注明哥，获取源码}");
-            f.channel().closeFuture().sync();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            childGroup.shutdownGracefully();
-            parentGroup.shutdownGracefully();
-        }
+    // 初始化方法
+    private void init() {
+        bootstrap
+                .group(nioEventLoopGroup)
+                .channel(NioServerSocketChannel.class)
+                // 添加一个自定义的处理器
+                .childHandler(new ServerInitializer());
+    }
+
+    // 关闭方法
+    public void close() {
+        nioEventLoopGroup.shutdownGracefully();
+        bootstrap.clone();
     }
 }

@@ -1,9 +1,19 @@
 apply plugin: 'application'
 
 dependencies {
+    api "io.github.shuigedeng:taotao-boot-starter-core"
+
     api project(":taotao-cloud-tx:taotao-cloud-tx-tm")
     api project(":taotao-cloud-tx:taotao-cloud-tx-rm")
     api project(":taotao-cloud-tx:taotao-cloud-tx-consistency")
+
+    api("org.springframework.boot:spring-boot-starter-web") {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    }
+    api "org.springframework.boot:spring-boot-starter-undertow"
+    api 'org.springframework.boot:spring-boot-starter-aop'
+
+    api "com.mysql:mysql-connector-j:9.2.0"
 }
 
 jar {
@@ -19,7 +29,7 @@ jar {
     zip64=true
 
     manifest {
-        attributes 'Main-Class': "com.taotao.cloud.tx.server.NettyServer"
+        attributes 'Main-Class': "com.taotao.cloud.tx.server.TxManagerApplication"
         attributes 'Class-Path': configurations.compileClasspath.files.collect { "lib/$it.name" }.join(' ')
     }
 
