@@ -38,7 +38,7 @@ public class CcsrServerApplication extends SpringBootServletInitializer {
 		new StartupSpringApplication(CcsrServerApplication.class)
 			.setTtcBanner()
 			.setTtcProfileIfNotExists("dev")
-			.setTtcApplicationProperty("taotao-cloud-job-nameserver")
+			.setTtcApplicationProperty("taotao-cloud-ccsr-server")
 			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 	}
