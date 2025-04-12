@@ -58,7 +58,7 @@ repositories {
 }
 
 dependencies {
-    implementation platform("org.springframework.ai:spring-ai-bom:1.0.0-M6")
+    implementation platform("org.springframework.ai:spring-ai-bom:1.0.0-M7")
 
     //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
@@ -170,16 +170,16 @@ configurations {
 
         resolutionStrategy {
             force "org.bouncycastle:bcprov-jdk15on:1.70"
-            force "org.springframework.ai:spring-ai-bedrock:1.0.0-M6"
-            force "org.springframework.ai:spring-ai-azure-openai:1.0.0-M6"
-            force "org.springframework.ai:spring-ai-core:1.0.0-M6"
-            force "org.springframework.ai:spring-ai-ollama:1.0.0-M6"
-            force "org.springframework.ai:spring-ai-openai:1.0.0-M6"
-            force "org.springframework.ai:spring-ai-retry:1.0.0-M6"
-            force "org.springframework.ai:spring-ai-transformers:1.0.0-M6"
-            force "org.springframework.ai:spring-ai-zhipuai:1.0.0-M6"
-            force "org.springframework.ai:spring-ai-minimax:1.0.0-M6"
-            force "org.springframework.ai:spring-ai-mistral-ai:1.0.0-M6"
+            force "org.springframework.ai:spring-ai-bedrock:1.0.0-M7"
+            force "org.springframework.ai:spring-ai-azure-openai:1.0.0-M7"
+            force "org.springframework.ai:spring-ai-core:1.0.0-M7"
+            force "org.springframework.ai:spring-ai-ollama:1.0.0-M7"
+            force "org.springframework.ai:spring-ai-openai:1.0.0-M7"
+            force "org.springframework.ai:spring-ai-retry:1.0.0-M7"
+            force "org.springframework.ai:spring-ai-transformers:1.0.0-M7"
+            force "org.springframework.ai:spring-ai-zhipuai:1.0.0-M7"
+            force "org.springframework.ai:spring-ai-minimax:1.0.0-M7"
+            force "org.springframework.ai:spring-ai-mistral-ai:1.0.0-M7"
         }
 
         exclude group: "org.springframework.boot", module: "spring-boot-starter-data-jpa"

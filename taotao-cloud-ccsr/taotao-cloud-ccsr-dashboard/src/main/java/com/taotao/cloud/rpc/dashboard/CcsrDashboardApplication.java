@@ -22,20 +22,20 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class RpcDashboardApplication extends SpringBootServletInitializer {
+public class CcsrDashboardApplication extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(RpcDashboardApplication.class);
+		return builder.sources(CcsrDashboardApplication.class);
 	}
 
 	public static void main(String[] args) {
 		System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
 
-		new StartupSpringApplication(RpcDashboardApplication.class)
+		new StartupSpringApplication(CcsrDashboardApplication.class)
 			.setTtcBanner()
 			.setTtcProfileIfNotExists("dev")
-			.setTtcApplicationProperty("taotao-cloud-rpc-dashboard")
+			.setTtcApplicationProperty("taotao-cloud-ccsr-dashboard")
 			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 

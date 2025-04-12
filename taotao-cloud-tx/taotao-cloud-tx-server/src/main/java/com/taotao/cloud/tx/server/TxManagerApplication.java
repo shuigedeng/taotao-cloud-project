@@ -35,7 +35,7 @@ public class TxManagerApplication extends SpringBootServletInitializer {
 		new StartupSpringApplication(TxManagerApplication.class)
 			.setTtcBanner()
 			.setTtcProfileIfNotExists("dev")
-			.setTtcApplicationProperty("taotao-cloud-job-nameserver")
+			.setTtcApplicationProperty("taotao-cloud-tx-server")
 			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 

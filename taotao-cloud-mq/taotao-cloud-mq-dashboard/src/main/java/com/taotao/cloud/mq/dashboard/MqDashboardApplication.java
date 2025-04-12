@@ -35,7 +35,7 @@ public class MqDashboardApplication extends SpringBootServletInitializer {
 		new StartupSpringApplication(MqDashboardApplication.class)
 			.setTtcBanner()
 			.setTtcProfileIfNotExists("dev")
-			.setTtcApplicationProperty("taotao-cloud-job-nameserver")
+			.setTtcApplicationProperty("taotao-cloud-mq-dashboard")
 			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 

@@ -19,6 +19,15 @@ dependencies {
     api 'org.springframework.boot:spring-boot-starter-aop'
 }
 
+configurations {
+    configureEach {
+        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
+
+        exclude group: "commons-logging", module: "commons-logging"
+    }
+}
+
 jar {
     from(project(":taotao-cloud-rpc:taotao-cloud-rpc-client").jar) { into("lib/") }
     from(project(":taotao-cloud-rpc:taotao-cloud-rpc-cluster").jar) { into("lib/") }
@@ -167,3 +176,5 @@ tasks.register("releaseTarGz",  Tar) {
 //    from(project(':tools:tools-api').configurations.runtimeClasspath) { into("libs/") }
     duplicatesStrategy DuplicatesStrategy.EXCLUDE
 }
+
+

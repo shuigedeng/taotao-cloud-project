@@ -1,34 +1,5 @@
 apply from: rootProject.file('gradle/shadow.gradle')
 
-tasks.register("generateMd5ForZip", Exec) {
-    def archives = [[file("${buildDir}/distributions/taotao-cloud-rpc-distribution-2025.05.zip"),
-                     file("${buildDir}/distributions/taotao-cloud-rpc-distribution-2025.05.zip.md5")],
-                    [file("${buildDir}/distributions/taotao-cloud-rpc-distribution-2025.05.tar.gz"),
-                     file("${buildDir}/distributions/taotao-cloud-rpc-distribution-2025.05.tar.gz.md5")]]
-
-    archives.each { archive ->
-        if (archive[0].exists()) {
-
-            def zipFile = archive[0]
-            def md5File = archive[1]
-
-            inputs.file zipFile
-            outputs.file md5File
-
-            def osName = System.getProperty("os.name").toLowerCase()
-            if (osName.contains("win")) {
-                commandLine 'cmd', '/c', "certutil -hashfile ${zipFile.absolutePath} MD5 | findstr /v \"MD5\" | findstr /v \"certutil\" > ${md5File.absolutePath}"
-            }else{
-                commandLine 'bash', '-c', "md5sum ${zipFile.absolutePath} | awk '{print \$1}' > ${md5File.absolutePath}"
-            }
-
-        } else {
-            println "Archive file not found: ${archive.name}"
-        }
-    }
-
-}
-
 tasks.register('releaseTarZip', Zip) {
     dependsOn(':taotao-cloud-rpc:taotao-cloud-rpc-dashboard:jar')
 
@@ -88,5 +59,37 @@ tasks.register("releaseTarGz", Tar) {
 
     duplicatesStrategy DuplicatesStrategy.EXCLUDE
 
-    finalizedBy("generateMd5ForZip")
+    finalizedBy("generateMd5ForTarGz")
+}
+
+tasks.register("generateMd5ForZip", Exec) {
+    def zipFile = file("${buildDir}/distributions/taotao-cloud-rpc-distribution-2025.05.zip")
+    def md5File = file("${buildDir}/distributions/taotao-cloud-rpc-distribution-2025.05.zip.md5")
+
+    inputs.file zipFile
+    outputs.file md5File
+
+    if (System.getProperty("os.name").toLowerCase().contains("win")) {
+        // Windows 系统使用 cmd 执行命令并将结果重定向到文件
+        commandLine 'cmd', '/c', "certutil -hashfile ${zipFile.absolutePath} MD5 | findstr /v \"MD5\" | findstr /v \"certutil\" > ${md5File.absolutePath}"
+    } else {
+        // Unix/Linux 系统使用 md5sum 命令
+        commandLine 'bash', '-c', "md5sum ${zipFile.absolutePath} | awk '{print \$1}' > ${md5File.absolutePath}"
+    }
+}
+
+tasks.register("generateMd5ForTarGz", Exec) {
+    def zipFile = file("${buildDir}/distributions/taotao-cloud-rpc-distribution-2025.05.tar.gz")
+    def md5File = file("${buildDir}/distributions/taotao-cloud-rpc-distribution-2025.05.tar.gz.md5")
+
+    inputs.file zipFile
+    outputs.file md5File
+
+    if (System.getProperty("os.name").toLowerCase().contains("win")) {
+        // Windows 系统使用 cmd 执行命令并将结果重定向到文件
+        commandLine 'cmd', '/c', "certutil -hashfile ${zipFile.absolutePath} MD5 | findstr /v \"MD5\" | findstr /v \"certutil\" > ${md5File.absolutePath}"
+    } else {
+        // Unix/Linux 系统使用 md5sum 命令
+        commandLine 'bash', '-c', "md5sum ${zipFile.absolutePath} | awk '{print \$1}' > ${md5File.absolutePath}"
+    }
 }

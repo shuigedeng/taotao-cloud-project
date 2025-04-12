@@ -24,6 +24,16 @@ dependencies {
     api "com.mysql:mysql-connector-j:9.2.0"
 }
 
+configurations {
+    configureEach {
+        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
+
+        exclude group: "commons-logging", module: "commons-logging"
+    }
+}
+
+
 jar {
     from(project(":taotao-cloud-mq:taotao-cloud-mq-common").jar) { into("lib/") }
     from(project(":taotao-cloud-mq:taotao-cloud-mq-cluster").jar) { into("lib/") }

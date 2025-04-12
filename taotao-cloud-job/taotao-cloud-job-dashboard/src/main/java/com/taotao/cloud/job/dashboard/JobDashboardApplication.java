@@ -35,7 +35,7 @@ public class JobDashboardApplication extends SpringBootServletInitializer {
 		new StartupSpringApplication(JobDashboardApplication.class)
 			.setTtcBanner()
 			.setTtcProfileIfNotExists("dev")
-			.setTtcApplicationProperty("taotao-cloud-job-nameserver")
+			.setTtcApplicationProperty("taotao-cloud-job-dashboard")
 			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 

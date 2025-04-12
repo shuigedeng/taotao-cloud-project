@@ -35,7 +35,7 @@ public class MqNameServerApplication extends SpringBootServletInitializer {
 		new StartupSpringApplication(MqNameServerApplication.class)
 			.setTtcBanner()
 			.setTtcProfileIfNotExists("dev")
-			.setTtcApplicationProperty("taotao-cloud-job-nameserver")
+			.setTtcApplicationProperty("taotao-cloud-mq-nameserver")
 			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 

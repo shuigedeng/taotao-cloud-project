@@ -1,15 +1,13 @@
+apply from: rootProject.file('gradle/springboot.gradle')
+
 dependencies {
-    api project(":taotao-cloud-job:taotao-cloud-job-common")
-    api project(":taotao-cloud-job:taotao-cloud-job-worker")
-    api project(":taotao-cloud-job:taotao-cloud-job-retry")
-    api project(":taotao-cloud-job:taotao-cloud-job-dag")
-    api project(":taotao-cloud-job:taotao-cloud-job-api")
-    api project(":taotao-cloud-job:taotao-cloud-job-server")
-    api project(":taotao-cloud-job:taotao-cloud-job-nameserver")
-    api project(":taotao-cloud-job:taotao-cloud-job-client")
-    api project(":taotao-cloud-job:taotao-cloud-job-consistency")
-    api project(":taotao-cloud-job:taotao-cloud-job-datasource")
-    api project(":taotao-cloud-job:taotao-cloud-job-retry")
+    api "io.github.shuigedeng:taotao-boot-starter-core"
+    api project(":taotao-cloud-ccsr:taotao-cloud-ccsr-server")
+
+    implementation("org.springframework.boot:spring-boot-starter-web") {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    }
+    implementation "org.springframework.boot:spring-boot-starter-undertow"
 }
 
 configurations {
@@ -17,22 +15,21 @@ configurations {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
+        resolutionStrategy {
+            force "com.caucho:hessian:4.0.63"
+            force "com.alipay.sofa:hessian:3.3.6"
+        }
+
         exclude group: "commons-logging", module: "commons-logging"
     }
 }
 
-
 jar {
-    from(project(":taotao-cloud-job:taotao-cloud-job-api").jar) { into("lib/") }
-    from(project(":taotao-cloud-job:taotao-cloud-job-common").jar) { into("lib/") }
-    from(project(":taotao-cloud-job:taotao-cloud-job-client").jar) { into("lib/") }
-    from(project(":taotao-cloud-job:taotao-cloud-job-dag").jar) { into("lib/") }
-    from(project(":taotao-cloud-job:taotao-cloud-job-datasource").jar) { into("lib/") }
-    from(project(":taotao-cloud-job:taotao-cloud-job-consistency").jar) { into("lib/") }
-    from(project(":taotao-cloud-job:taotao-cloud-job-retry").jar) { into("lib/") }
-    from(project(":taotao-cloud-job:taotao-cloud-job-nameserver").jar) { into("lib/") }
-    from(project(":taotao-cloud-job:taotao-cloud-job-server").jar) { into("lib/") }
-    from(project(":taotao-cloud-job:taotao-cloud-job-worker").jar) { into("lib/") }
+    from(project(":taotao-cloud-ccsr:taotao-cloud-ccsr-server").jar) { into("lib/") }
+    from(project(":taotao-cloud-ccsr:taotao-cloud-ccsr-core").jar) { into("lib/") }
+    from(project(":taotao-cloud-ccsr:taotao-cloud-ccsr-api").jar) { into("lib/") }
+    from(project(":taotao-cloud-ccsr:taotao-cloud-ccsr-spi").jar) { into("lib/") }
+    from(project(":taotao-cloud-ccsr:taotao-cloud-ccsr-common").jar) { into("lib/") }
 
     //详细信息参考 https://docs.gradle.org/current/dsl/org.gradle.api.tasks.bundling.Jar.html
     //基本的文件名
@@ -70,4 +67,6 @@ jar {
     //    from configurations.compile
     //}
 }
+
+
 

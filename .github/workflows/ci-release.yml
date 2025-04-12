@@ -74,6 +74,9 @@ jobs:
       - name: release taotao-cloud-job
         run: gradle -p taotao-cloud-job/taotao-cloud-job-distribution releaseTarGz
 
+      - name: release taotao-cloud-ccsr
+        run: gradle -p taotao-cloud-ccsr/taotao-cloud-ccsr-distribution releaseTarGz
+
       #https://github.com/ncipollo/release-action/tree/main
       #https://github.com/marketplace/actions/create-release
       - uses: ncipollo/release-action@v1.16.0
@@ -96,6 +99,10 @@ jobs:
                       taotao-cloud-job/taotao-cloud-job-distribution/build/distributions/taotao-cloud-job-distribution-2025.05.zip.md5,
                       taotao-cloud-job/taotao-cloud-job-distribution/build/distributions/taotao-cloud-job-distribution-2025.05.tar.gz,
                       taotao-cloud-job/taotao-cloud-job-distribution/build/distributions/taotao-cloud-job-distribution-2025.05.tar.gz.md5,
+                      taotao-cloud-ccsr/taotao-cloud-ccsr-distribution/build/distributions/taotao-cloud-ccsr-distribution-2025.05.zip,
+                      taotao-cloud-ccsr/taotao-cloud-ccsr-distribution/build/distributions/taotao-cloud-ccsr-distribution-2025.05.zip.md5,
+                      taotao-cloud-ccsr/taotao-cloud-ccsr-distribution/build/distributions/taotao-cloud-ccsr-distribution-2025.05.tar.gz,
+                      taotao-cloud-ccsr/taotao-cloud-ccsr-distribution/build/distributions/taotao-cloud-ccsr-distribution-2025.05.tar.gz.md5,
                       taotao-cloud-cache/build/libs/taotao-cloud-cache-2025.05.jar,
                       taotao-cloud-cache/build/libs/taotao-cloud-cache-2025.05.jar.md5,
                       taotao-cloud-jdbcpool/build/libs/taotao-cloud-jdbcpool-2025.05.jar,

@@ -27,6 +27,12 @@
         </encoder>
     </appender>
 
+	<!-- 设置 Logback 内部日志级别为 ERROR，减少初始化日志输出 -->
+	<statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+
+	<!-- 或者手动设置 LoggerContext 和 ContextInitializer 的日志级别 -->
+	<logger name="ch.qos.logback" level="WARN" />
+
     <!-- 日志级别设置 -->
     <root level="info">
         <appender-ref ref="CONSOLE"/>
