@@ -110,28 +110,26 @@ dependencies {
     //spring ai
     // https://repo.spring.io/milestone
     // https://repo.spring.io/snapshot
-    implementation 'org.springframework.ai:spring-ai-anthropic-spring-boot-starter'
+    implementation 'org.springframework.ai:spring-ai-starter-model-anthropic'
     //使用OpenAI
-    implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter'
+    implementation 'org.springframework.ai:spring-ai-starter-model-openai'
     //使用transformers
-    implementation 'org.springframework.ai:spring-ai-transformers-spring-boot-starter'
+    implementation 'org.springframework.ai:spring-ai-starter-model-transformers'
     //使用ollama
-    implementation 'org.springframework.ai:spring-ai-ollama-spring-boot-starter'
+    implementation 'org.springframework.ai:spring-ai-starter-model-ollama'
     //redis
-    implementation 'org.springframework.ai:spring-ai-redis-store-spring-boot-starter'
+    implementation 'org.springframework.ai:spring-ai-starter-vector-store-redis'
     //使用PGVector作为向量数据库
-    implementation 'org.springframework.ai:spring-ai-pgvector-store-spring-boot-starter'
-    //transformers
-    implementation 'org.springframework.ai:spring-ai-transformers-spring-boot-starter'
+    implementation 'org.springframework.ai:spring-ai-starter-vector-store-pgvector'
     //引入PDF解析器
     implementation 'org.springframework.ai:spring-ai-pdf-document-reader'
 
     //mcp
-    implementation 'org.springframework.ai:spring-ai-mcp-server-webmvc-spring-boot-starter'
-    implementation 'org.springframework.ai:spring-ai-mcp-server-webflux-spring-boot-starter'
-    implementation 'org.springframework.ai:spring-ai-mcp-client-webflux-spring-boot-starter'
-    implementation 'org.springframework.ai:spring-ai-mcp-server-spring-boot-starter'
-    implementation 'org.springframework.ai:spring-ai-mcp-client-spring-boot-starter'
+    implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webmvc'
+    implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webflux'
+    implementation 'org.springframework.ai:spring-ai-starter-mcp-client-webflux'
+    implementation 'org.springframework.ai:spring-ai-starter-mcp-server'
+    implementation 'org.springframework.ai:spring-ai-starter-mcp-client'
 
     implementation 'org.springframework.ai:spring-ai-spring-boot-testcontainers'
 
@@ -172,7 +170,6 @@ configurations {
             force "org.bouncycastle:bcprov-jdk15on:1.70"
             force "org.springframework.ai:spring-ai-bedrock:1.0.0-M7"
             force "org.springframework.ai:spring-ai-azure-openai:1.0.0-M7"
-            force "org.springframework.ai:spring-ai-core:1.0.0-M7"
             force "org.springframework.ai:spring-ai-ollama:1.0.0-M7"
             force "org.springframework.ai:spring-ai-openai:1.0.0-M7"
             force "org.springframework.ai:spring-ai-retry:1.0.0-M7"
