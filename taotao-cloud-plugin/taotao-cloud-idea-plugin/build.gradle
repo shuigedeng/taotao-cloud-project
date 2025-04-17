@@ -76,9 +76,9 @@ dependencies {
     implementation "com.google.zxing:core:3.5.3"
     implementation "com.google.zxing:javase:3.5.3"
 
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.12.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.12.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.12.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.12.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.12.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.12.2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.12.1'
     testImplementation "org.assertj:assertj-core:3.27.3"
 }
@@ -95,7 +95,7 @@ intellij {
     //sandboxDir = "${rootProject.rootDir}/idea-sandbox"
 
     // IDEA 的版本
-    version = "2024.3"
+    version = "2025.1"
     // 这里 IU 是指付费版, 也可以选择 IC 对应社区版
     type = "IU"
 
@@ -131,9 +131,9 @@ patchPluginXml {
 
     //最低支持的版本 当前插件的起止 IDE 版本支持
     //版本参考：https://plugins.jetbrains.com/docs/intellij/build-number-ranges.html?from=jetbrains.org#intellij-platform-based-products-of-recent-ide-versions
-    sinceBuild.set("243")
+    sinceBuild.set("251")
     //最高支持的版本，不能不设置，不设置是默认为 project.version
-    untilBuild.set("243.*")
+    untilBuild.set("251.*")
 }
 
 // https://plugins.jetbrains.com/docs/intellij/plugin-signing.html

@@ -8,16 +8,16 @@ dependencies {
     api "com.google.protobuf:protobuf-java:4.30.2"
     api "com.google.protobuf:protobuf-java-util:4.30.2"
     api "org.apache.thrift:libthrift:0.21.0"
-    api "io.grpc:grpc-api:1.71.0"
-    api "io.grpc:grpc-context:1.71.0"
-    api "io.grpc:grpc-core:1.71.0"
-    api "io.grpc:grpc-netty:1.71.0"
-    api "io.grpc:grpc-netty-shaded:1.71.0"
-    api "io.grpc:grpc-protobuf:1.71.0"
-    api "io.grpc:grpc-protobuf-lite:1.71.0"
-    api "io.grpc:grpc-stub:1.71.0"
-    api "io.grpc:grpc-services:1.71.0"
-    testImplementation("io.grpc:grpc-testing:1.71.0")
+    api "io.grpc:grpc-api:1.72.0"
+    api "io.grpc:grpc-context:1.72.0"
+    api "io.grpc:grpc-core:1.72.0"
+    api "io.grpc:grpc-netty:1.72.0"
+    api "io.grpc:grpc-netty-shaded:1.72.0"
+    api "io.grpc:grpc-protobuf:1.72.0"
+    api "io.grpc:grpc-protobuf-lite:1.72.0"
+    api "io.grpc:grpc-stub:1.72.0"
+    api "io.grpc:grpc-services:1.72.0"
+    testImplementation("io.grpc:grpc-testing:1.72.0")
     api 'com.google.code.gson:gson:2.13.0'
     api 'com.google.guava:guava:33.4.7-jre'
     api 'org.reflections:reflections:0.10.2'
@@ -47,7 +47,7 @@ protobuf {
     //指定protoc运行插件
     plugins {
         grpc {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.71.0"
+            artifact = "io.grpc:protoc-gen-grpc-java:1.72.0"
         }
         //javalite {
         //    // The codegen for lite comes as a separate artifact

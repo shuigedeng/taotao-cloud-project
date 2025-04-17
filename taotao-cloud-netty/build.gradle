@@ -72,16 +72,16 @@ dependencies {
     implementation "com.google.protobuf:protobuf-java:4.30.2"
     implementation "com.google.protobuf:protobuf-java-util:4.30.2"
     implementation "org.apache.thrift:libthrift:0.21.0"
-    implementation "io.grpc:grpc-api:1.71.0"
-    implementation "io.grpc:grpc-context:1.71.0"
-    implementation "io.grpc:grpc-core:1.71.0"
-    implementation "io.grpc:grpc-netty:1.71.0"
-    implementation "io.grpc:grpc-netty-shaded:1.71.0"
-    implementation "io.grpc:grpc-protobuf:1.71.0"
-    implementation "io.grpc:grpc-protobuf-lite:1.71.0"
-    implementation "io.grpc:grpc-stub:1.71.0"
-    implementation "io.grpc:grpc-services:1.71.0"
-    testImplementation("io.grpc:grpc-testing:1.71.0")
+    implementation "io.grpc:grpc-api:1.72.0"
+    implementation "io.grpc:grpc-context:1.72.0"
+    implementation "io.grpc:grpc-core:1.72.0"
+    implementation "io.grpc:grpc-netty:1.72.0"
+    implementation "io.grpc:grpc-netty-shaded:1.72.0"
+    implementation "io.grpc:grpc-protobuf:1.72.0"
+    implementation "io.grpc:grpc-protobuf-lite:1.72.0"
+    implementation "io.grpc:grpc-stub:1.72.0"
+    implementation "io.grpc:grpc-services:1.72.0"
+    testImplementation("io.grpc:grpc-testing:1.72.0")
     implementation 'com.google.code.gson:gson:2.13.0'
     implementation 'com.google.guava:guava:33.4.7-jre'
 
@@ -97,9 +97,9 @@ dependencies {
     implementation 'ch.qos.logback:logback-access:1.5.18'
     implementation 'ch.qos.logback:logback-classic:1.5.18'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.12.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.12.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.12.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.12.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.12.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.12.2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.12.1'
     testImplementation "org.assertj:assertj-core:3.27.3"
 
@@ -126,7 +126,7 @@ protobuf {
     //指定protoc运行插件
     plugins {
         grpc {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.71.0"
+            artifact = "io.grpc:protoc-gen-grpc-java:1.72.0"
         }
         //javalite {
         //    // The codegen for lite comes as a separate artifact
@@ -150,7 +150,7 @@ protobuf {
 //
 //    plugins {
 //        grpc {
-//            artifact = "io.grpc:protoc-gen-grpc-java:1.71.0"
+//            artifact = "io.grpc:protoc-gen-grpc-java:1.72.0"
 //        }
 //    }
 //

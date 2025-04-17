@@ -3,7 +3,7 @@ spring:
     name: ccsr-server
 
 ohara-mcs:
-  local-mode: true # 开启本机测试模式，用于本地开发调试使用
+  local-mode: false # 开启本机测试模式，用于本地开发调试使用
   namespace: default # 命名空间，ohara-mcs通过命名空间实现配置租户隔离
   rpc-type: grpc # 客户端与服务端通信协议类型，当前仅实现了grpc，后续可以扩展http、websocket、nacos等
   grpc-config:
@@ -17,7 +17,7 @@ ohara-mcs:
     port-offset: 1001 # Raft服务端口偏移，默认1001
     single-node: false # 是否为单节点模式，用于单机测试使用
   cluster-address:
-    - 127.0.0.1:9006 # Raft集群实例地址，为了单机测试方便这里通过端口作区分
+    - 10.12.100.39:9006 # Raft集群实例地址，为了单机测试方便这里通过端口作区分
 #    - 127.0.0.1:9022
 #    - 127.0.0.1:9013
 #    - 127.0.0.1:9301
