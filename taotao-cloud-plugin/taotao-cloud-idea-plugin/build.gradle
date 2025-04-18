@@ -58,6 +58,12 @@ buildscript {
 
         maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
     }
+
+    dependencies {
+        //https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html#configuration-intellij-extension
+        //https://plugins.gradle.org/plugin/org.jetbrains.intellij
+        classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:1.17.4"
+    }
 }
 
 plugins {

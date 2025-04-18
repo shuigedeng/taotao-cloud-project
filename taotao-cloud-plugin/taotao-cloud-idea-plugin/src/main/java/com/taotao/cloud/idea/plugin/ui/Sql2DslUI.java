@@ -1,6 +1,6 @@
 package com.taotao.cloud.idea.plugin.ui;
 
-import com.intellij.json.JsonLanguage;
+import com.intellij.lang.java.JavaLanguage;
 import com.intellij.openapi.editor.EditorSettings;
 import com.intellij.openapi.fileTypes.PlainTextLanguage;
 import com.intellij.openapi.project.Project;
@@ -36,7 +36,7 @@ public class Sql2DslUI {
 		// TODO: place custom component creation code here
 		this.sqlTextField = new LanguageTextField(PlainTextLanguage.INSTANCE, project, "", false);
 		this.sqlTextField.addSettingsProvider(getSqlEditorSettingsProvider());
-		this.dslTextField = new LanguageTextField(JsonLanguage.INSTANCE, project, "", false);
+		this.dslTextField = new LanguageTextField(JavaLanguage.INSTANCE, project, "", false);
 		this.dslTextField.addSettingsProvider(getDslEditorSettingsProvider());
 	}
 

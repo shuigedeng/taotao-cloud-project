@@ -1,6 +1,6 @@
 package com.taotao.cloud.idea.plugin.ui;
 
-import com.intellij.json.JsonLanguage;
+import com.intellij.lang.java.JavaLanguage;
 import com.intellij.openapi.editor.EditorSettings;
 import com.intellij.openapi.project.Project;
 import com.intellij.ui.LanguageTextField;
@@ -30,7 +30,7 @@ public class JsonFormatterUI {
     }
 
     private void createUIComponents() {
-        this.textField = new LanguageTextField(JsonLanguage.INSTANCE, project, "", false);
+        this.textField = new LanguageTextField(JavaLanguage.INSTANCE, project, "", false);
         this.textField.addSettingsProvider(editor -> {
             EditorSettings settings = editor.getSettings();
             settings.setFoldingOutlineShown(true);

@@ -96,10 +96,6 @@ buildscript {
         //https://github.com/Guardsquare/proguard
         //https://www.guardsquare.com/manual/quickstart
         classpath "com.guardsquare:proguard-gradle:7.7.0"
-
-        //https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html#configuration-intellij-extension
-        //https://plugins.gradle.org/plugin/org.jetbrains.intellij
-        classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:1.17.4"
     }
 }
 
