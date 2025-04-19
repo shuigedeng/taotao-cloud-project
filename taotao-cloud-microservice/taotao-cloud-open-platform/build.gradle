@@ -24,6 +24,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-openapi"
     implementation "io.github.shuigedeng:taotao-boot-starter-web"
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
+    implementation "io.github.shuigedeng:taotao-boot-starter-cache-redis"
 
     //https://central.sonatype.com/artifact/org.apache.pdfbox/pdfbox
     implementation "org.apache.pdfbox:pdfbox:3.0.4"

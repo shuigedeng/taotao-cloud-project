@@ -38,6 +38,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-tracer"
     implementation "io.github.shuigedeng:taotao-boot-starter-skywalking"
     implementation "io.github.shuigedeng:taotao-boot-starter-cache-caffeine"
+    implementation "io.github.shuigedeng:taotao-boot-starter-cache-redis"
 
     implementation "org.springframework.boot:spring-boot-starter-webflux"
 

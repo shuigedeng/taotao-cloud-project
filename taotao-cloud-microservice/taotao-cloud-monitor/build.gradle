@@ -17,6 +17,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-mail"
     implementation "io.github.shuigedeng:taotao-boot-starter-tracer"
     implementation "io.github.shuigedeng:taotao-boot-starter-skywalking"
+    implementation "io.github.shuigedeng:taotao-boot-starter-cache-redis"
 
     implementation "de.codecentric:spring-boot-admin-starter-server"
 
