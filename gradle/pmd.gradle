@@ -17,7 +17,7 @@ pmd {
     reportsDir = file("${project.layout.buildDirectory.asFile.get()}/code-analysis/pmdReportsDir")
     //https://github.com/pmd/pmd/releases
     // 要使用的PMD版本
-    toolVersion = "7.11.0"
+    toolVersion = "7.12.0"
     //要使用的自定义规则集文件路径，可以在files()中填多个路径。
     ruleSetFiles = files(rootProject.file('code-analysis/pmd/pmd.xml'))
     //跟ruleSetFiles的作用一样，不过只能填一个文件路径。

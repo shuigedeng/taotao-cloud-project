@@ -1,10 +1,10 @@
 apply plugin: 'checkstyle'
 
 checkstyle {
-    project.ext.checkstyleVersion = '10.21.3'
+    project.ext.checkstyleVersion = '10.23.0'
     // The version of the code quality tool to be used.
     // The most recent version of Checkstyle can be found at https://github.com/checkstyle/checkstyle/releases
-    toolVersion = "10.21.3"
+    toolVersion = "10.23.0"
 
     //https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml
     //configFile = file("${rootDir}/checkstyle/google_checks.xml")

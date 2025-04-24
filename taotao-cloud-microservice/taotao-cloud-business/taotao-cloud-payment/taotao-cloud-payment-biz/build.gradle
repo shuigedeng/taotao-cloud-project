@@ -40,7 +40,7 @@ dependencies {
     }
 
     //https://search.maven.org/artifact/com.github.javen205/IJPay-All
-    implementation "com.github.javen205:IJPay-All:2.9.12-17"
+    implementation "com.github.javen205:IJPay-All:2.9.12.1-17"
 
     //https://search.maven.org/artifact/com.github.binarywang/weixin-java-pay
     implementation "com.github.binarywang:weixin-java-pay:4.7.4.B"
