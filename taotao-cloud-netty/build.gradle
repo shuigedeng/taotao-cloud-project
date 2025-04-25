@@ -82,7 +82,7 @@ dependencies {
     implementation "io.grpc:grpc-stub:1.72.0"
     implementation "io.grpc:grpc-services:1.72.0"
     testImplementation("io.grpc:grpc-testing:1.72.0")
-    implementation 'com.google.code.gson:gson:2.13.0'
+    implementation 'com.google.code.gson:gson:2.13.1'
     implementation 'com.google.guava:guava:33.4.8-jre'
 
     api "jakarta.servlet:jakarta.servlet-api:6.1.0"

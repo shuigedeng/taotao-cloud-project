@@ -6,7 +6,7 @@ http://127.0.0.1:8081/actuator/arthas 登陆用户名是arthas
  <dependency>
         <groupId>com.taobao.arthas</groupId>
         <artifactId>arthas-spring-boot-starter</artifactId>
-        <version>3.4.4</version>
+        <version>3.4.5</version>
     </dependency>
 
 
