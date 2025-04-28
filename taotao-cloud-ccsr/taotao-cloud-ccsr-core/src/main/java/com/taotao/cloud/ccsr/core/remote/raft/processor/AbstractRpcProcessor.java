@@ -20,13 +20,12 @@ import com.taotao.cloud.ccsr.core.remote.raft.handler.RequestDispatcher;
 import com.taotao.cloud.ccsr.api.result.ResponseHelper;
 import com.taotao.cloud.ccsr.core.serializer.Serializer;
 import com.taotao.cloud.ccsr.common.enums.ResponseCode;
-import com.taotao.cloud.ccsr.common.exception.OHaraMcsException;
+import com.taotao.cloud.ccsr.common.exception.CcsrException;
 import com.taotao.cloud.ccsr.common.log.Log;
 
 import java.nio.ByteBuffer;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 import static com.taotao.cloud.ccsr.common.enums.ResponseCode.SYSTEM_ERROR;
 
@@ -171,7 +170,7 @@ public abstract class AbstractRpcProcessor<T extends Message> implements RpcProc
                         Response response = dispatcher.dispatch(request, request.getClass());
                         future.complete(response);
                     } catch (Throwable t) {
-                        future.completeExceptionally(new OHaraMcsException("The conformance protocol is temporarily unavailable for reading", t));
+                        future.completeExceptionally(new CcsrException("The conformance protocol is temporarily unavailable for reading", t));
                     }
                     return;
                 }

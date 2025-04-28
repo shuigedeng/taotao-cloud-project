@@ -3,7 +3,7 @@ package com.taotao.cloud.ccsr.client.client.filter;
 import com.taotao.cloud.ccsr.api.grpc.auto.Response;
 import com.taotao.cloud.ccsr.api.result.ResponseHelper;
 import com.taotao.cloud.ccsr.client.client.AbstractClient;
-import com.taotao.cloud.ccsr.client.context.OHaraMcsContext;
+import com.taotao.cloud.ccsr.client.context.CcsrContext;
 import com.taotao.cloud.ccsr.client.option.RequestOption;
 import com.taotao.cloud.ccsr.common.enums.ResponseCode;
 import com.taotao.cloud.ccsr.common.utils.GsonUtils;
@@ -16,7 +16,7 @@ public class ConvertFilter<OPTION extends RequestOption> extends AbstractFilter<
 	}
 
 	@Override
-	protected Response doPreFilter(OHaraMcsContext context, OPTION option, Payload request) {
+	protected Response doPreFilter(CcsrContext context, OPTION option, Payload request) {
 
 		try {
 			String configDataString = GsonUtils.getInstance().toJson(request.getConfigData());
@@ -32,7 +32,7 @@ public class ConvertFilter<OPTION extends RequestOption> extends AbstractFilter<
 	}
 
 	@Override
-	protected Response doPostFilter(OHaraMcsContext context, OPTION option, Payload request, Response response) {
+	protected Response doPostFilter(CcsrContext context, OPTION option, Payload request, Response response) {
 		// TODO
 		return response;
 	}

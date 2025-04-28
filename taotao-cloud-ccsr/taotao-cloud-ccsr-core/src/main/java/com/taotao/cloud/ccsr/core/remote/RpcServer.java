@@ -1,12 +1,12 @@
 package com.taotao.cloud.ccsr.core.remote;
 
-import com.taotao.cloud.ccsr.common.config.OHaraMcsConfig;
+import com.taotao.cloud.ccsr.common.config.CcsrConfig;
 import com.taotao.cloud.ccsr.spi.SPI;
 
 @SPI
 public interface RpcServer {
 
-    void init(OHaraMcsConfig config);
+    void init(CcsrConfig config);
 
     int port();
 

@@ -5,11 +5,11 @@ import com.taotao.cloud.ccsr.api.grpc.auto.Response;
 import com.taotao.cloud.ccsr.api.result.ResponseHelper;
 import com.taotao.cloud.ccsr.client.client.AbstractClient;
 import com.taotao.cloud.ccsr.client.client.invoke.AbstractInvoker;
-import com.taotao.cloud.ccsr.client.context.OHaraMcsContext;
+import com.taotao.cloud.ccsr.client.context.CcsrContext;
 import com.taotao.cloud.ccsr.client.option.RequestOption;
 import com.taotao.cloud.ccsr.client.request.Payload;
 import com.taotao.cloud.ccsr.common.enums.ResponseCode;
-import com.taotao.cloud.ccsr.common.exception.OHaraMcsClientException;
+import com.taotao.cloud.ccsr.common.exception.CcsrClientException;
 import com.taotao.cloud.ccsr.common.log.Log;
 
 import java.text.MessageFormat;
@@ -24,7 +24,7 @@ public class AbstractInvokerFilter<OPTION extends RequestOption> extends Abstrac
 	}
 
 	@Override
-	protected Response doPreFilter(OHaraMcsContext context, OPTION option, Payload request) {
+	protected Response doPreFilter(CcsrContext context, OPTION option, Payload request) {
 		try {
 
 			return getInvoker(option.protocol()).invoke(context, request);
@@ -37,14 +37,14 @@ public class AbstractInvokerFilter<OPTION extends RequestOption> extends Abstrac
 	}
 
 	@Override
-	protected Response doPostFilter(OHaraMcsContext context, OPTION option, Payload request, Response response) {
+	protected Response doPostFilter(CcsrContext context, OPTION option, Payload request, Response response) {
 		return response;
 	}
 
 	protected AbstractInvoker<?, OPTION> getInvoker(String protocol) {
 		AbstractInvoker<?, OPTION> invoker = this.invokers.get(protocol);
 		if (invoker == null) {
-			throw new OHaraMcsClientException(MessageFormat.format("Unidentified protocol {0}", protocol));
+			throw new CcsrClientException(MessageFormat.format("Unidentified protocol {0}", protocol));
 		}
 		return invoker;
 	}

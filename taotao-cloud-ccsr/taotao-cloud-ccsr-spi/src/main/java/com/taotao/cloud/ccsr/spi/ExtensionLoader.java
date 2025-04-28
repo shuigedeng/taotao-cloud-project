@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  */
 public final class ExtensionLoader<T> {
 
-	private static final String OHARA_DIRECTORY = "META-INF/ohara/";
+	private static final String CCSR_DIRECTORY = "META-INF/ccsr/";
 
 	private static final Map<Class<?>, ExtensionLoader<?>> LOADERS = new ConcurrentHashMap<>();
 
@@ -258,12 +258,12 @@ public final class ExtensionLoader<T> {
 	}
 
 	/**
-	 * 加载目录中的配置文件，并且加载文件中的实现类，目标目录：META-INF/ohara/
-	 * Load files under OHARA_DIRECTORY.
+	 * 加载目录中的配置文件，并且加载文件中的实现类，目标目录：META-INF/ccsr/
+	 * Load files under CCSR_DIRECTORY.
 	 */
 	private void loadDirectory(final Map<String, ClassEntity> classes) {
-		// 文件名 => META-INF/ohara/$className
-		String fileName = OHARA_DIRECTORY + clazz.getName();
+		// 文件名 => META-INF/ccsr/$className
+		String fileName = CCSR_DIRECTORY + clazz.getName();
 		try {
 			// 这里使用类加载器加载文件资源，如果传入的类加载器为空会使用系统类加载器
 			Enumeration<URL> urls = Objects.nonNull(this.classLoader) ? classLoader.getResources(fileName)

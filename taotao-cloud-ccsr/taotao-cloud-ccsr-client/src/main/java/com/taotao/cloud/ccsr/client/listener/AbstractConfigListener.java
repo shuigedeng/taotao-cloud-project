@@ -1,6 +1,6 @@
 package com.taotao.cloud.ccsr.client.listener;
 
-import com.taotao.cloud.ccsr.common.exception.OHaraMcsClientException;
+import com.taotao.cloud.ccsr.common.exception.CcsrClientException;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -15,7 +15,7 @@ public abstract class AbstractConfigListener<T extends ConfigData> implements Co
         if (superClass instanceof ParameterizedType) {
             this.type = (Class<T>) ((ParameterizedType) superClass).getActualTypeArguments()[0];
         } else {
-            throw new OHaraMcsClientException("Unable to determine generic type for listener.");
+            throw new CcsrClientException("Unable to determine generic type for listener.");
         }
     }
 

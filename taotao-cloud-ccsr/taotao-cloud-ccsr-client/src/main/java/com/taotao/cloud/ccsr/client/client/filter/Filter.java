@@ -1,6 +1,6 @@
 package com.taotao.cloud.ccsr.client.client.filter;
 
-import com.taotao.cloud.ccsr.client.context.OHaraMcsContext;
+import com.taotao.cloud.ccsr.client.context.CcsrContext;
 import com.taotao.cloud.ccsr.client.lifecycle.LeftCycle;
 import  com.taotao.cloud.ccsr.client.request.Payload;
 public interface Filter<S, OPTION> extends LeftCycle {
@@ -13,8 +13,8 @@ public interface Filter<S, OPTION> extends LeftCycle {
 
 	Filter<S, OPTION> pre();
 
-	S preFilter(OHaraMcsContext context, OPTION option, Payload request);
+	S preFilter(CcsrContext context, OPTION option, Payload request);
 
-	S postFilter(OHaraMcsContext context, OPTION option, Payload request, S response);
+	S postFilter(CcsrContext context, OPTION option, Payload request, S response);
 
 }

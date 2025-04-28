@@ -5,7 +5,16 @@
 <!--    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"/>-->
     <property name="LOG_PATTERN"
               value="%red(%d{yyyy-MM-dd HH:mm:ss}) %green([%thread]) %highlight(%-5level) %boldMagenta(%logger) - %cyan(%msg%n)"/>
+	<property name="LOG_PATH" value="${user.home}"/>
 
+	<springProperty name="APP_NAME"
+					scope="context"
+					source="spring.application.name"
+					defaultValue="taotao-cloud-ccsr-dashboard"/>
+	<springProperty name="LOG_FILE"
+					scope="context"
+					source="logging.file.path"
+					defaultValue="${LOG_PATH}/logs/${APP_NAME}"/>
     <!-- 控制台输出 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -15,10 +24,10 @@
 
     <!-- 文件输出 -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/ohara-mcc.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <file>${LOG_FILE}/${APP_NAME}.all.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!-- 每天生成一个新的日志文件 -->
-            <fileNamePattern>logs/app-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_FILE}/history/${APP_NAME:-}.all.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
             <!-- 保留最近 30 天的日志 -->
             <maxHistory>30</maxHistory>
         </rollingPolicy>

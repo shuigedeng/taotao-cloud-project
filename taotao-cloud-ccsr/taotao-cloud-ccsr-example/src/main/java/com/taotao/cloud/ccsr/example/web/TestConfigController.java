@@ -1,16 +1,15 @@
-package com.taotao.cloud.ccsr.example.web;//package org.ohara.mcs.web;
+package com.taotao.cloud.ccsr.example.web;
 //
 //import com.google.protobuf.Any;
 //import com.google.protobuf.InvalidProtocolBufferException;
 //import lombok.Getter;
-//import org.ohara.mcs.OHaraMcsService;
-//import org.ohara.mcs.api.event.EventType;
-//import org.ohara.mcs.api.grpc.auto.Metadata;
-//import org.ohara.mcs.api.grpc.auto.MetadataReadRequest;
-//import org.ohara.mcs.api.grpc.auto.Response;
-//import org.ohara.msc.common.utils.GsonUtils;
-//import org.ohara.msc.dto.ServerAddress;
-//import org.ohara.msc.request.Payload;
+//import org.ccsr.api.event.EventType;
+//import org.ccsr.api.grpc.auto.Metadata;
+//import org.ccsr.api.grpc.auto.MetadataReadRequest;
+//import org.ccsr.api.grpc.auto.Response;
+//import org.ccsr.common.utils.GsonUtils;
+//import org.ccsr.dto.ServerAddress;
+//import org.ccsr.request.Payload;
 //import org.springframework.web.bind.annotation.*;
 //
 //import javax.annotation.Resource;
@@ -20,7 +19,7 @@ package com.taotao.cloud.ccsr.example.web;//package org.ohara.mcs.web;
 //public class TestConfigController {
 //
 //    @Resource
-//    private OHaraMcsService oHaraMcsService;
+//    private CcsrService ccsrService;
 //
 //    @GetMapping("/get")
 //    public String get() {
@@ -29,7 +28,7 @@ package com.taotao.cloud.ccsr.example.web;//package org.ohara.mcs.web;
 //        payload.setNamespace("default");
 //        payload.setGroup("default_group");
 //        payload.setDataId("default_data_id");
-//        Response response = oHaraMcsService.request(payload, EventType.GET);
+//        Response response = ccsrService.request(payload, EventType.GET);
 //        Any data = response.getData();
 //        try {
 //            Metadata metadata = data.unpack(Metadata.class);
@@ -46,7 +45,7 @@ package com.taotao.cloud.ccsr.example.web;//package org.ohara.mcs.web;
 //        payload.setNamespace("default");
 //        payload.setGroup("default_group");
 //        payload.setDataId("default_data_id");
-//        Response response = oHaraMcsService.request(payload, EventType.PUT);
+//        Response response = ccsrService.request(payload, EventType.PUT);
 //        Any data = response.getData();
 //        try {
 //            Metadata metadata = data.unpack(Metadata.class);
@@ -63,7 +62,7 @@ package com.taotao.cloud.ccsr.example.web;//package org.ohara.mcs.web;
 //        payload.setNamespace("default");
 //        payload.setGroup("default_group");
 //        payload.setDataId("default_data_id");
-//        Response response = oHaraMcsService.request(payload, EventType.DELETE);
+//        Response response = ccsrService.request(payload, EventType.DELETE);
 //        Any data = response.getData();
 //        try {
 //            Metadata metadata = data.unpack(Metadata.class);

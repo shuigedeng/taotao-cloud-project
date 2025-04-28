@@ -1,6 +1,6 @@
 package com.taotao.cloud.ccsr.server.starter;
 
-import com.taotao.cloud.ccsr.common.config.OHaraMcsConfig;
+import com.taotao.cloud.ccsr.common.config.CcsrConfig;
 import com.taotao.cloud.ccsr.core.remote.RpcServer;
 import com.taotao.cloud.ccsr.core.remote.raft.RaftServer;
 import com.taotao.cloud.ccsr.server.starter.utils.BannerUtils;
@@ -13,7 +13,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 
 
-public class OHaraMcsServerInitializer implements ApplicationListener<ContextRefreshedEvent>, DisposableBean {
+public class CcsrServerInitializer implements ApplicationListener<ContextRefreshedEvent>, DisposableBean {
 
     private final RpcServer rpcServer;
 
@@ -21,13 +21,13 @@ public class OHaraMcsServerInitializer implements ApplicationListener<ContextRef
 
     private final BannerUtils bannerUtils;
 
-    private final OHaraMcsConfig config;
+    private final CcsrConfig config;
 
-    public OHaraMcsServerInitializer(RpcServer rpcServer, OHaraMcsConfig config, BannerUtils bannerUtils) {
+    public CcsrServerInitializer(RpcServer rpcServer, CcsrConfig config, BannerUtils bannerUtils) {
         this.config = config;
         this.rpcServer = rpcServer;
         this.bannerUtils = bannerUtils;
-        this.raftServer = (RaftServer) SpiExtensionFactory.getExtension(OHaraMcsConfig.RpcType.RAFT.getType(), RpcServer.class);
+        this.raftServer = (RaftServer) SpiExtensionFactory.getExtension(CcsrConfig.RpcType.RAFT.getType(), RpcServer.class);
     }
 
     @Override

@@ -10,7 +10,7 @@ import com.alipay.sofa.jraft.option.NodeOptions;
 import com.alipay.sofa.jraft.rpc.RpcServer;
 import com.alipay.sofa.jraft.rpc.impl.cli.CliClientServiceImpl;
 import org.apache.commons.collections4.CollectionUtils;
-import com.taotao.cloud.ccsr.common.config.OHaraMcsConfig;
+import com.taotao.cloud.ccsr.common.config.CcsrConfig;
 import com.taotao.cloud.ccsr.api.event.GlobalEventBus;
 import com.taotao.cloud.ccsr.core.event.LeaderRefreshEvent;
 import com.taotao.cloud.ccsr.core.remote.AbstractRpcServer;
@@ -20,7 +20,7 @@ import com.taotao.cloud.ccsr.core.serializer.SerializeFactory;
 import com.taotao.cloud.ccsr.core.serializer.Serializer;
 import com.taotao.cloud.ccsr.spi.Join;
 import com.taotao.cloud.ccsr.common.enums.RaftGroup;
-import com.taotao.cloud.ccsr.common.exception.OHaraMcsException;
+import com.taotao.cloud.ccsr.common.exception.CcsrException;
 import com.taotao.cloud.ccsr.common.log.Log;
 
 import java.io.IOException;
@@ -63,7 +63,7 @@ public class RaftServer extends AbstractRpcServer {
         // 必须要有，用于SPI加载初始化
     }
 
-    public RaftServer(OHaraMcsConfig config) {
+    public RaftServer(CcsrConfig config) {
         init(config);
     }
 
@@ -73,7 +73,7 @@ public class RaftServer extends AbstractRpcServer {
     }
 
     @Override
-    public void init(OHaraMcsConfig config) {
+    public void init(CcsrConfig config) {
         try {
             checkConfig(config);
 
@@ -88,7 +88,7 @@ public class RaftServer extends AbstractRpcServer {
             initCliServices(config);
         } catch (Exception e) {
             Log.error("Raft server initialization failed", e);
-            throw new OHaraMcsException("Raft initialization failure", e);
+            throw new CcsrException("Raft initialization failure", e);
         }
     }
 
@@ -154,7 +154,7 @@ public class RaftServer extends AbstractRpcServer {
     }
 
     private RaftGroupTuple createRaftGroup(String groupId) {
-        OHaraMcsConfig.RaftConfig raftConfig = config.getRaftConfig();
+        CcsrConfig.RaftConfig raftConfig = config.getRaftConfig();
 
         // 深拷贝配置
         Configuration groupConf = new Configuration(conf);
@@ -296,12 +296,12 @@ public class RaftServer extends AbstractRpcServer {
         nodeMonitor.shutdown();
     }
 
-    private void checkConfig(OHaraMcsConfig config) {
+    private void checkConfig(CcsrConfig config) {
         if (config.getRaftConfig() == null) {
-            throw new OHaraMcsException("RaftConfig cannot be null");
+            throw new CcsrException("RaftConfig cannot be null");
         }
         if (CollectionUtils.isEmpty(config.getClusterAddress())) {
-            throw new OHaraMcsException("Cluster address must be configured");
+            throw new CcsrException("Cluster address must be configured");
         }
     }
 
@@ -335,7 +335,7 @@ public class RaftServer extends AbstractRpcServer {
     private Configuration initConfiguration() {
         conf = new Configuration();
         if (CollectionUtils.isEmpty(config.getClusterAddress())) {
-            throw new OHaraMcsException("The cluster address cannot be empty");
+            throw new CcsrException("The cluster address cannot be empty");
         }
 
         // init raft group node
@@ -349,7 +349,7 @@ public class RaftServer extends AbstractRpcServer {
         return conf;
     }
 
-    private void initCliServices(OHaraMcsConfig config) {
+    private void initCliServices(CcsrConfig config) {
         CliOptions cliOptions = OptionsHelper.initCliOptions(config.getRaftConfig());
         this.cliService = RaftServiceFactory.createAndInitCliService(cliOptions);
         this.cliClientService = (CliClientServiceImpl) ((CliServiceImpl) this.cliService).getCliClientService();

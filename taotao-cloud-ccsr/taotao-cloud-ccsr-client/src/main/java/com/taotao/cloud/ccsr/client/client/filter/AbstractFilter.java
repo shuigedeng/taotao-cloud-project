@@ -2,7 +2,7 @@ package com.taotao.cloud.ccsr.client.client.filter;
 import  com.taotao.cloud.ccsr.client.request.Payload;
 import com.taotao.cloud.ccsr.api.grpc.auto.Response;
 import com.taotao.cloud.ccsr.client.client.AbstractClient;
-import com.taotao.cloud.ccsr.client.context.OHaraMcsContext;
+import com.taotao.cloud.ccsr.client.context.CcsrContext;
 import com.taotao.cloud.ccsr.client.option.RequestOption;
 import com.taotao.cloud.ccsr.common.exception.InitializationException;
 import com.taotao.cloud.ccsr.common.log.Log;
@@ -43,7 +43,7 @@ public abstract class AbstractFilter<OPTION extends RequestOption> implements Fi
 	}
 
 	@Override
-	public Response preFilter(OHaraMcsContext context, OPTION option, Payload request) {
+	public Response preFilter(CcsrContext context, OPTION option, Payload request) {
 		Response response = doPreFilter(context, option, request);
 		return this.next() == null || response != null
 			// End: execute post filter
@@ -53,7 +53,7 @@ public abstract class AbstractFilter<OPTION extends RequestOption> implements Fi
 	}
 
 	@Override
-	public Response postFilter(OHaraMcsContext context, OPTION option, Payload request, Response response) {
+	public Response postFilter(CcsrContext context, OPTION option, Payload request, Response response) {
 		Response resp = doPostFilter(context, option, request, response);
 		return this.pre() == null
 			// End: return response.
@@ -110,7 +110,7 @@ public abstract class AbstractFilter<OPTION extends RequestOption> implements Fi
 	protected void doDestroy(Integer timeout, TimeUnit unit) {
 	}
 
-	protected abstract Response doPreFilter(OHaraMcsContext context, OPTION option, Payload request);
+	protected abstract Response doPreFilter(CcsrContext context, OPTION option, Payload request);
 
-	protected abstract Response doPostFilter(OHaraMcsContext context, OPTION option, Payload request, Response response);
+	protected abstract Response doPostFilter(CcsrContext context, OPTION option, Payload request, Response response);
 }

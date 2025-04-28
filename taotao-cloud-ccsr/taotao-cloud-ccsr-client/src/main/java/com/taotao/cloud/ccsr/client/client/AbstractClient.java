@@ -1,7 +1,7 @@
 package com.taotao.cloud.ccsr.client.client;
 
 import com.taotao.cloud.ccsr.api.grpc.auto.Response;
-import com.taotao.cloud.ccsr.client.context.OHaraMcsContext;
+import com.taotao.cloud.ccsr.client.context.CcsrContext;
 import com.taotao.cloud.ccsr.client.lifecycle.LeftCycle;
 import com.taotao.cloud.ccsr.client.option.RequestOption;
 import com.taotao.cloud.ccsr.client.request.Payload;
@@ -119,7 +119,7 @@ public abstract class AbstractClient<OPTION extends RequestOption> implements Le
 
 		Log.info("[Client-Execute-Begin] Execute sync request.");
 
-		Response response = this.filterChain.preFilter(new OHaraMcsContext(), option, request);
+		Response response = this.filterChain.preFilter(new CcsrContext(), option, request);
 
 		Log.info("[Client-Execute-End] Finished sync request.");
 

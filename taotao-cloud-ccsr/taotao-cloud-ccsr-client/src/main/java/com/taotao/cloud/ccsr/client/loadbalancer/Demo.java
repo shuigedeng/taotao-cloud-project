@@ -1,4 +1,4 @@
-package com.taotao.cloud.ccsr.client.loadbalancer;//package org.ohara.msc.loadbalancer;
+package com.taotao.cloud.ccsr.client.loadbalancer;
 //
 //import com.taotao.cloud.ccsr.dto.ServerAddress;
 //

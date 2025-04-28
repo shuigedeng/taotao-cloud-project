@@ -11,7 +11,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @EqualsAndHashCode
-public class OHaraMcsConfig implements Serializable {
+public class CcsrConfig implements Serializable {
 
     String namespace = "default";
 
@@ -78,7 +78,7 @@ public class OHaraMcsConfig implements Serializable {
         /**
          * raft 日志根目录
          */
-        private String rootPath = System.getProperty("user.dir");
+        private String rootPath = System.getProperty("user.home");
 
         /**
          * 选举超时时间

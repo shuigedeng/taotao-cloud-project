@@ -1,11 +1,10 @@
 package com.taotao.cloud.ccsr.client.client.filter;
 
-import com.taotao.cloud.ccsr.api.event.EventType;
 import com.taotao.cloud.ccsr.api.grpc.auto.MetadataType;
 import com.taotao.cloud.ccsr.api.grpc.auto.Response;
 import com.taotao.cloud.ccsr.api.result.ResponseHelper;
 import com.taotao.cloud.ccsr.client.client.AbstractClient;
-import com.taotao.cloud.ccsr.client.context.OHaraMcsContext;
+import com.taotao.cloud.ccsr.client.context.CcsrContext;
 import com.taotao.cloud.ccsr.client.option.RequestOption;
 import com.taotao.cloud.ccsr.common.enums.ResponseCode;
 import  com.taotao.cloud.ccsr.client.request.Payload;
@@ -16,7 +15,7 @@ public class ValidationFilter<OPTION extends RequestOption> extends AbstractFilt
     }
 
     @Override
-    protected Response doPreFilter(OHaraMcsContext context, OPTION option, Payload request) {
+    protected Response doPreFilter(CcsrContext context, OPTION option, Payload request) {
         try {
             validate(request);
         } catch (Exception e) {
@@ -26,7 +25,7 @@ public class ValidationFilter<OPTION extends RequestOption> extends AbstractFilt
     }
 
     @Override
-    protected Response doPostFilter(OHaraMcsContext context, OPTION option, Payload request, Response response) {
+    protected Response doPostFilter(CcsrContext context, OPTION option, Payload request, Response response) {
         try {
             validate(response);
         } catch (Exception e) {

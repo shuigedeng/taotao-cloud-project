@@ -1,7 +1,7 @@
 package com.taotao.cloud.ccsr.core.remote;
 
 
-import com.taotao.cloud.ccsr.common.config.OHaraMcsConfig;
+import com.taotao.cloud.ccsr.common.config.CcsrConfig;
 import com.taotao.cloud.ccsr.common.log.Log;
 import jakarta.annotation.PreDestroy;
 
@@ -16,10 +16,10 @@ public abstract class AbstractRpcServer implements RpcServer {
 
     protected volatile boolean isShutdown = false;
 
-    protected OHaraMcsConfig config;
+    protected CcsrConfig config;
 
     @Override
-    public void init(OHaraMcsConfig config) {
+    public void init(CcsrConfig config) {
         // do nothing
     }
 
@@ -44,21 +44,21 @@ public abstract class AbstractRpcServer implements RpcServer {
         try {
             this.startPreProcessor();
 
-            Log.info("OHaraMcs {} Rpc server starting at port {}", clz, port());
+            Log.info("Ccsr {} Rpc server starting at port {}", clz, port());
             this.startServer();
             this.isStarted = true;
-            Log.info("OHaraMcs {} Rpc server started at port {}", clz, port());
+            Log.info("Ccsr {} Rpc server started at port {}", clz, port());
 
             this.startPostProcessor();
 
         } catch (Exception e) {
-            Log.error("OHaraMcs {} Rpc server start fail...", clz, e);
+            Log.error("Ccsr {} Rpc server start fail...", clz, e);
         }
 
 //        try {
 //            this.await();
 //        } catch (Exception e) {
-//            PrintLog.error("OHaraMcs {} Rpc server await interrupted...", clz);
+//            PrintLog.error("Ccsr {} Rpc server await interrupted...", clz);
 //        }
 
         Runtime.getRuntime().addShutdownHook(new Thread(this::stop));
@@ -81,13 +81,13 @@ public abstract class AbstractRpcServer implements RpcServer {
         String clz = getClass().getSimpleName();
         try {
             this.stopPreProcessor();
-            Log.info("OHaraMcs {} Rpc server stopping...", clz);
+            Log.info("Ccsr {} Rpc server stopping...", clz);
             this.stopServer();
             this.isShutdown = true;
-            Log.info("OHaraMcs {} Rpc server stopped successfully...", clz);
+            Log.info("Ccsr {} Rpc server stopped successfully...", clz);
             this.stopPostProcessor();
         } catch (Exception e) {
-            Log.error("OHaraMcs {} Rpc server stopped fail...", clz, e);
+            Log.error("Ccsr {} Rpc server stopped fail...", clz, e);
         }
     }
 

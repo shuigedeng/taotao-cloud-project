@@ -223,7 +223,7 @@ public class RaftStateMachine extends StateMachineAdapter {
     }
 
 //    public static void main(String[] args) {
-//        String snapshotFilePath = "/Users/caoshipeng/IdeaProjects/ohara-mcs/raft/config_center_group/127.0.0.1_9001/snapshot/snapshot_13/metadata_config.data";
+//        String snapshotFilePath = "/Users/caoshipeng/IdeaProjects/ccsr/raft/config_center_group/127.0.0.1_9001/snapshot/snapshot_13/metadata_config.data";
 //        File snapshotFile = new File(snapshotFilePath);
 //        try (FileInputStream fis = new FileInputStream(snapshotFile)) {
 //            // 1. 读取快照数据

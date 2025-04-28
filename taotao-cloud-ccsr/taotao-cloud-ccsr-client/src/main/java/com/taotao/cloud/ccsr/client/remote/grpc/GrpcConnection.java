@@ -7,13 +7,10 @@ import com.taotao.cloud.ccsr.client.loadbalancer.ServiceDiscovery;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
-import com.taotao.cloud.ccsr.api.event.GlobalEventBus;
-import com.taotao.cloud.ccsr.api.event.MetadataChangeEvent;
 import com.taotao.cloud.ccsr.api.grpc.auto.*;
 import com.taotao.cloud.ccsr.api.event.EventType;
-import com.taotao.cloud.ccsr.common.config.OHaraMcsConfig;
 import com.taotao.cloud.ccsr.common.enums.RaftGroup;
-import com.taotao.cloud.ccsr.common.exception.OHaraMcsClientException;
+import com.taotao.cloud.ccsr.common.exception.CcsrClientException;
 import com.taotao.cloud.ccsr.common.log.Log;
 
 import java.io.IOException;
@@ -111,7 +108,7 @@ public abstract class GrpcConnection implements Closeable {
     }
 
     @Override
-    public void shutdown() throws OHaraMcsClientException {
+    public void shutdown() throws CcsrClientException {
 
         // 关闭健康检查调度器
         if (healthCheckScheduler != null) {
@@ -128,7 +125,7 @@ public abstract class GrpcConnection implements Closeable {
         try {
             channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
-            throw new OHaraMcsClientException(e);
+            throw new CcsrClientException(e);
         }
     }
 

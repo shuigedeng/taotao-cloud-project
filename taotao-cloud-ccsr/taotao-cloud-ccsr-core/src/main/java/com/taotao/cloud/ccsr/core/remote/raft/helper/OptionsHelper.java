@@ -2,7 +2,7 @@ package com.taotao.cloud.ccsr.core.remote.raft.helper;
 
 import com.alipay.sofa.jraft.option.*;
 import org.apache.commons.lang3.StringUtils;
-import com.taotao.cloud.ccsr.common.config.OHaraMcsConfig;
+import com.taotao.cloud.ccsr.common.config.CcsrConfig;
 
 /**
  * @author shuigedeng
@@ -13,7 +13,7 @@ public class OptionsHelper {
     private static final RaftOptions raftOptions = new RaftOptions();
     private static final NodeOptions nodeOptions = new NodeOptions();
 
-    public static NodeOptions initNodeOptions(OHaraMcsConfig.RaftConfig config) {
+    public static NodeOptions initNodeOptions(CcsrConfig.RaftConfig config) {
         // 启用共享选举定时器
         nodeOptions.setSharedElectionTimer(true);
         // 用共享投票定时器
@@ -47,7 +47,7 @@ public class OptionsHelper {
         return nodeOptions;
     }
 
-    public static RaftOptions initRaftOptions(OHaraMcsConfig.RaftConfig config) {
+    public static RaftOptions initRaftOptions(CcsrConfig.RaftConfig config) {
         raftOptions.setReadOnlyOptions(mathReadOnlyOption(config));
         raftOptions.setMaxByteCountPerRpc(config.getMaxByteCountPerRpc());
         raftOptions.setMaxEntriesSize(config.getMaxEntriesSize());
@@ -67,13 +67,13 @@ public class OptionsHelper {
         return raftOptions;
     }
 
-    public static CliOptions initCliOptions(OHaraMcsConfig.RaftConfig config) {
+    public static CliOptions initCliOptions(CcsrConfig.RaftConfig config) {
         cliOptions.setTimeoutMs(5000);
         cliOptions.setMaxRetry(3);
         return cliOptions;
     }
 
-    private static ReadOnlyOption mathReadOnlyOption(OHaraMcsConfig.RaftConfig config) {
+    private static ReadOnlyOption mathReadOnlyOption(CcsrConfig.RaftConfig config) {
         String safe = "read_only_safe";
         String leaseBased = "read_only_lease_based";
 

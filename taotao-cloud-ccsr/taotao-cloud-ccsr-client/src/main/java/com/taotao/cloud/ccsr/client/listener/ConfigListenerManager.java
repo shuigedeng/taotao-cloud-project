@@ -2,8 +2,7 @@ package com.taotao.cloud.ccsr.client.listener;
 
 import com.taotao.cloud.ccsr.api.event.EventType;
 import com.taotao.cloud.ccsr.api.grpc.auto.Metadata;
-import com.taotao.cloud.ccsr.common.exception.OHaraMcsClientException;
-import com.taotao.cloud.ccsr.common.log.Log;
+import com.taotao.cloud.ccsr.common.exception.CcsrClientException;
 import com.taotao.cloud.ccsr.common.utils.GsonUtils;
 import java.util.*;
 
@@ -16,7 +15,7 @@ public class ConfigListenerManager {
             T instance = dataClass.getDeclaredConstructor().newInstance();
             listenerMap.put(instance.key(), new ConfigListenerWrapper(dataClass, listener));
         } catch (Exception e) {
-            throw new OHaraMcsClientException("Failed to register listener", e);
+            throw new CcsrClientException("Failed to register listener", e);
         }
     }
 
@@ -33,7 +32,7 @@ public class ConfigListenerManager {
 
             listener.receive(content, configData, eventType);
         } else {
-            throw new OHaraMcsClientException("No listener registered for key: " + dataKey);
+            throw new CcsrClientException("No listener registered for key: " + dataKey);
         }
     }
 

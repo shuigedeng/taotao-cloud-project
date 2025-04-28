@@ -8,7 +8,7 @@ import com.taotao.cloud.ccsr.core.storage.MetadaStorage;
 import com.taotao.cloud.ccsr.core.utils.StorageHolder;
 import com.taotao.cloud.ccsr.common.enums.RaftGroup;
 import com.taotao.cloud.ccsr.common.enums.ResponseCode;
-import com.taotao.cloud.ccsr.common.exception.OHaraMcsException;
+import com.taotao.cloud.ccsr.common.exception.CcsrException;
 
 /**
  * @author shuigedeng
@@ -43,7 +43,7 @@ public abstract class AbstractConfigRequestHandler<T extends Message> implements
 
     @Override
     public void onError(Throwable error) {
-        throw new OHaraMcsException(error);
+        throw new CcsrException(error);
     }
 
     public abstract Response handle(Message request);

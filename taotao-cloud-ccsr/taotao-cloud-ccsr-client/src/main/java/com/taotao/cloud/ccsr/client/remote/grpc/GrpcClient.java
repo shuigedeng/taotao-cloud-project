@@ -9,8 +9,8 @@ import com.taotao.cloud.ccsr.api.grpc.auto.Response;
 import com.taotao.cloud.ccsr.client.dto.ServerAddress;
 import com.taotao.cloud.ccsr.client.future.RequestFuture;
 import com.taotao.cloud.ccsr.client.remote.RpcClient;
-import com.taotao.cloud.ccsr.common.exception.OHaraMcsClientException;
-import com.taotao.cloud.ccsr.common.exception.OHaraMcsException;
+import com.taotao.cloud.ccsr.common.exception.CcsrClientException;
+import com.taotao.cloud.ccsr.common.exception.CcsrException;
 import com.taotao.cloud.ccsr.spi.Join;
 
 import java.util.List;
@@ -40,7 +40,7 @@ public class GrpcClient extends GrpcConnection implements RpcClient<Message, Res
 		} else if (request instanceof MetadataReadRequest) {
 			return get((MetadataReadRequest) request);
 		}
-		throw new OHaraMcsClientException("GrpcClient unsupported request type: " + request.getClass().getName());
+		throw new CcsrClientException("GrpcClient unsupported request type: " + request.getClass().getName());
 	}
 
 	@Override
@@ -67,17 +67,17 @@ public class GrpcClient extends GrpcConnection implements RpcClient<Message, Res
 		return blockingStub.get(request);
 	}
 
-	public RequestFuture<Response> deleteAsync(MetadataDeleteRequest request) throws OHaraMcsException {
+	public RequestFuture<Response> deleteAsync(MetadataDeleteRequest request) throws CcsrException {
 		ListenableFuture<Response> future = futureStub.delete(request);
 		return createRequestFuture(future);
 	}
 
-	public RequestFuture<Response> getAsync(MetadataReadRequest request) throws OHaraMcsException {
+	public RequestFuture<Response> getAsync(MetadataReadRequest request) throws CcsrException {
 		ListenableFuture<Response> future = futureStub.get(request);
 		return createRequestFuture(future);
 	}
 
-	public RequestFuture<Response> putAsync(MetadataWriteRequest request) throws OHaraMcsException {
+	public RequestFuture<Response> putAsync(MetadataWriteRequest request) throws CcsrException {
 		ListenableFuture<Response> future = futureStub.put(request);
 		return createRequestFuture(future);
 	}
@@ -105,9 +105,9 @@ public class GrpcClient extends GrpcConnection implements RpcClient<Message, Res
 		};
 	}
 
-	private void handleResponse(Response response) throws OHaraMcsException {
+	private void handleResponse(Response response) throws CcsrException {
 		if (!response.getSuccess()) {
-			throw new OHaraMcsException(response.getMsg());
+			throw new CcsrException(response.getMsg());
 		}
 	}
 }

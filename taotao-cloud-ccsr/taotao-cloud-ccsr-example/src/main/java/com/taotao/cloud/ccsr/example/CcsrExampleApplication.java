@@ -17,13 +17,13 @@
 package com.taotao.cloud.ccsr.example;
 
 import com.taotao.boot.core.startup.StartupSpringApplication;
-import com.taotao.cloud.ccsr.client.starter.annotation.EnableOHaraMcsClient;
+import com.taotao.cloud.ccsr.client.starter.annotation.EnableCcsrClient;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-@EnableOHaraMcsClient(enable = true)
+@EnableCcsrClient(enable = true)
 public class CcsrExampleApplication extends SpringBootServletInitializer {
 
 	@Override

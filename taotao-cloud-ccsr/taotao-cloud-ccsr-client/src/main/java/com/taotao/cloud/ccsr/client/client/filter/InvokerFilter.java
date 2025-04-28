@@ -1,7 +1,7 @@
 package com.taotao.cloud.ccsr.client.client.filter;
 
 
-import com.taotao.cloud.ccsr.client.client.OHaraMcsClient;
+import com.taotao.cloud.ccsr.client.client.CcsrClient;
 import com.taotao.cloud.ccsr.client.client.invoke.GrpcInvoker;
 import com.taotao.cloud.ccsr.client.option.RequestOption;
 
@@ -9,9 +9,9 @@ import java.util.concurrent.TimeUnit;
 
 public class InvokerFilter extends AbstractInvokerFilter<RequestOption> {
 
-	private final OHaraMcsClient client;
+	private final CcsrClient client;
 
-	public InvokerFilter(OHaraMcsClient client) {
+	public InvokerFilter(CcsrClient client) {
 		super(client);
 		this.client = client;
 	}

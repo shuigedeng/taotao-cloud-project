@@ -1,6 +1,5 @@
 package com.taotao.cloud.ccsr.client.client;
 
-import com.taotao.cloud.ccsr.client.client.filter.Filter;
 import com.taotao.cloud.ccsr.api.grpc.auto.Response;
 import com.taotao.cloud.ccsr.client.client.filter.ConvertFilter;
 import com.taotao.cloud.ccsr.client.client.filter.InvokerFilter;
@@ -16,9 +15,9 @@ import java.util.List;
 import java.util.ServiceLoader;
 import java.util.concurrent.TimeUnit;
 
-public class OHaraMcsClient extends AbstractClient<RequestOption> {
+public class CcsrClient extends AbstractClient<RequestOption> {
 
-	protected OHaraMcsClient(String namespace) {
+	protected CcsrClient(String namespace) {
 		super(namespace);
 	}
 
@@ -35,15 +34,15 @@ public class OHaraMcsClient extends AbstractClient<RequestOption> {
 		return new Builder(namespace, option);
 	}
 
-	public static class Builder extends AbstractBuilder<Builder, OHaraMcsClient> {
+	public static class Builder extends AbstractBuilder<Builder, CcsrClient> {
 
 		protected Builder(String namespace, RequestOption option) {
 			super(namespace, option);
 		}
 
 		@Override
-		protected OHaraMcsClient create(String namespace) {
-			return new OHaraMcsClient(namespace);
+		protected CcsrClient create(String namespace) {
+			return new CcsrClient(namespace);
 		}
 
 	}
@@ -58,7 +57,7 @@ public class OHaraMcsClient extends AbstractClient<RequestOption> {
 			new ServerAddress("127.0.0.1", 8100, true),
 			new ServerAddress("127.0.0.1", 8300, true)
 		));
-		OHaraMcsClient mcsClient = OHaraMcsClient.builder("default", option).build();
+		CcsrClient mcsClient = CcsrClient.builder("default", option).build();
 
 		Payload payload = Payload.builder().build();
 		payload.setConfigData(new ServerAddress("127.0.0.3", 8000, true));

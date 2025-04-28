@@ -5,9 +5,7 @@ import com.alipay.sofa.jraft.error.RemotingException;
 import com.alipay.sofa.jraft.rpc.RpcClient;
 import com.alipay.sofa.jraft.util.Endpoint;
 import com.google.protobuf.Message;
-import com.taotao.cloud.ccsr.api.grpc.auto.MetadataSubscribeRequest;
 import com.taotao.cloud.ccsr.api.grpc.auto.Response;
-import com.taotao.cloud.ccsr.common.exception.OHaraMcsException;
 import com.taotao.cloud.ccsr.common.log.Log;
 
 /**

@@ -4,7 +4,7 @@ import io.grpc.CompressorRegistry;
 import io.grpc.DecompressorRegistry;
 import io.grpc.Server;
 import io.grpc.netty.shaded.io.grpc.netty.NettyServerBuilder;
-import com.taotao.cloud.ccsr.common.config.OHaraMcsConfig;
+import com.taotao.cloud.ccsr.common.config.CcsrConfig;
 import com.taotao.cloud.ccsr.core.remote.AbstractRpcServer;
 import com.taotao.cloud.ccsr.spi.Join;
 import com.taotao.cloud.ccsr.spi.SpiExtensionFactory;
@@ -21,18 +21,18 @@ public class GrpcServer extends AbstractRpcServer {
 
     private Server server;
 
-    private OHaraMcsConfig config;
+    private CcsrConfig config;
 
     public GrpcServer() {
         // 必须要有，用于SPI加载初始化
     }
 
-    public GrpcServer(OHaraMcsConfig config) {
+    public GrpcServer(CcsrConfig config) {
         init(config);
     }
 
     @Override
-    public void init(OHaraMcsConfig config) {
+    public void init(CcsrConfig config) {
         this.config = config;
     }
 
@@ -43,9 +43,9 @@ public class GrpcServer extends AbstractRpcServer {
 
     @Override
     public synchronized void startServer() throws IOException {
-        OHaraMcsConfig.GrpcConfig grpcConfig = config.getGrpcConfig();
+        CcsrConfig.GrpcConfig grpcConfig = config.getGrpcConfig();
         if (grpcConfig == null) {
-            throw new IllegalArgumentException("OHaraMcs gRPC server config can't be null");
+            throw new IllegalArgumentException("Ccsr gRPC server config can't be null");
         }
 
         List<GrpcService> services = SpiExtensionFactory.getExtensions(GrpcService.class);

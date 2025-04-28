@@ -1,12 +1,12 @@
 package com.taotao.cloud.ccsr.client.starter;
 
-import com.taotao.cloud.ccsr.client.starter.annotation.EnableOHaraMcsClient;
+import com.taotao.cloud.ccsr.client.starter.annotation.EnableCcsrClient;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
-public class EnableOHaraMcsCondition implements Condition {
+public class EnableCcsrCondition implements Condition {
 
 	@Override
 	public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
@@ -23,7 +23,7 @@ public class EnableOHaraMcsCondition implements Condition {
 				}
 
 				// 检查主启动类是否有目标注解
-				EnableOHaraMcsClient annotation = mainClass.getAnnotation(EnableOHaraMcsClient.class);
+				EnableCcsrClient annotation = mainClass.getAnnotation(EnableCcsrClient.class);
 				if (annotation != null && annotation.enable()) {
 					return true;
 				}

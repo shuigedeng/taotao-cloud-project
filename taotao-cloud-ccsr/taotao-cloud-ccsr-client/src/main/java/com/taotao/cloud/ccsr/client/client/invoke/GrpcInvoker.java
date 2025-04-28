@@ -3,15 +3,14 @@ package com.taotao.cloud.ccsr.client.client.invoke;
 import com.google.protobuf.Message;
 import com.google.protobuf.Timestamp;
 import com.taotao.cloud.ccsr.api.event.EventType;
-import com.taotao.cloud.ccsr.api.grpc.auto.*;
-import com.taotao.cloud.ccsr.client.client.OHaraMcsClient;
-import com.taotao.cloud.ccsr.client.context.OHaraMcsContext;
+import com.taotao.cloud.ccsr.client.client.CcsrClient;
+import com.taotao.cloud.ccsr.client.context.CcsrContext;
 import com.taotao.cloud.ccsr.client.option.GrpcOption;
 import com.taotao.cloud.ccsr.client.remote.RpcClient;
 import com.taotao.cloud.ccsr.client.request.Payload;
 import com.taotao.cloud.ccsr.common.enums.RaftGroup;
 import com.taotao.cloud.ccsr.common.exception.InitializationException;
-import com.taotao.cloud.ccsr.common.exception.OHaraMcsClientException;
+import com.taotao.cloud.ccsr.common.exception.CcsrClientException;
 import com.taotao.cloud.ccsr.spi.SpiExtensionFactory;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -20,7 +19,7 @@ public class GrpcInvoker extends AbstractInvoker<Message, GrpcOption> {
 
 	private final GrpcClient grpcClient;
 
-	public GrpcInvoker(OHaraMcsClient client) {
+	public GrpcInvoker(CcsrClient client) {
 		super(client);
 		GrpcOption grpcOption = (GrpcOption) client.getOption();
 		if (grpcOption == null) {
@@ -46,7 +45,7 @@ public class GrpcInvoker extends AbstractInvoker<Message, GrpcOption> {
 	}
 
 	@Override
-	public Response invoke(OHaraMcsContext context, Payload request) {
+	public Response invoke(CcsrContext context, Payload request) {
 		GrpcOption option = getOption();
 		Message message = convert(context, option, request);
 		return innerInvoke(message, request.getEventType());
@@ -58,7 +57,7 @@ public class GrpcInvoker extends AbstractInvoker<Message, GrpcOption> {
 	}
 
 	@Override
-	public Message convert(OHaraMcsContext context, GrpcOption option, Payload request) {
+	public Message convert(CcsrContext context, GrpcOption option, Payload request) {
 		return switch (request.getEventType()) {
 			case PUT -> MetadataWriteRequest.newBuilder()
 				.setRaftGroup(RaftGroup.CONFIG_CENTER_GROUP.getName())
@@ -87,7 +86,7 @@ public class GrpcInvoker extends AbstractInvoker<Message, GrpcOption> {
 
 	}
 
-	private Metadata buildMetadata(OHaraMcsContext context, GrpcOption option, Payload request) {
+	private Metadata buildMetadata(CcsrContext context, GrpcOption option, Payload request) {
 		return Metadata.newBuilder()
 			.setNamespace(context.getNamespace())
 			.setGroup(request.getGroup())
@@ -104,7 +103,7 @@ public class GrpcInvoker extends AbstractInvoker<Message, GrpcOption> {
 	}
 
 	@Override
-	public void shutdown() throws OHaraMcsClientException {
+	public void shutdown() throws CcsrClientException {
 		grpcClient.shutdown();
 	}
 }

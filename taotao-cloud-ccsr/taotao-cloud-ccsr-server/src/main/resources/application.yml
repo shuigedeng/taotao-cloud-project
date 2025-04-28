@@ -2,9 +2,9 @@ spring:
   application:
     name: ccsr-server
 
-ohara-mcs:
+ccsr:
   local-mode: true # 开启本机测试模式，用于本地开发调试使用
-  namespace: default # 命名空间，ohara-mcs通过命名空间实现配置租户隔离
+  namespace: default # 命名空间，ccsr-mcs通过命名空间实现配置租户隔离
   rpc-type: grpc # 客户端与服务端通信协议类型，当前仅实现了grpc，后续可以扩展http、websocket、nacos等
   grpc-config:
     keep-alive-time: 3000
@@ -18,12 +18,12 @@ ohara-mcs:
     single-node: false # 是否为单节点模式，用于单机测试使用
   cluster-address:
     - 127.0.0.1:9006 # Raft集群实例地址，为了单机测试方便这里通过端口作区分
-    - 127.0.0.1:9007
-    - 127.0.0.1:9008
+#    - 127.0.0.1:9007
+#    - 127.0.0.1:9008
 #    - 127.0.0.1:9301
-  port: 8007 # gRPC服务默认端口8000，用于客户端与服务端节点通信
+  port: 8005 # gRPC服务默认端口8000，用于客户端与服务端节点通信
 
 # HTTP 端口
 server:
-  port: 7102
+  port: 7100
 

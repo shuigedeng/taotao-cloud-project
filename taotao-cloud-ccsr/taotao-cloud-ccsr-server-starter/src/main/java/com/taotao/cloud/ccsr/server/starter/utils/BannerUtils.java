@@ -17,7 +17,7 @@ public class BannerUtils {
 
     public void print() {
         // Load the default banner from resources
-        Resource defaultBannerResource = resourceLoader.getResource("classpath:ohara_mcs_banner.txt");
+        Resource defaultBannerResource = resourceLoader.getResource("classpath:ccsr_banner.txt");
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(defaultBannerResource.getInputStream()))) {
             String line;
             while ((line = reader.readLine()) != null) {
