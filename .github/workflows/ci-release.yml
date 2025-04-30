@@ -79,41 +79,41 @@ jobs:
 
       #https://github.com/ncipollo/release-action/tree/main
       #https://github.com/marketplace/actions/create-release
-      - uses: ncipollo/release-action@v1.16.0
-        with:
-          allowUpdates: true
-          artifactErrorsFailBuild: true
-          artifacts: "taotao-cloud-tx/taotao-cloud-tx-distribution/build/distributions/taotao-cloud-tx-distribution-2025.05.zip,
-                      taotao-cloud-tx/taotao-cloud-tx-distribution/build/distributions/taotao-cloud-tx-distribution-2025.05.zip.md5,
-                      taotao-cloud-tx/taotao-cloud-tx-distribution/build/distributions/taotao-cloud-tx-distribution-2025.05.tar.gz,
-                      taotao-cloud-tx/taotao-cloud-tx-distribution/build/distributions/taotao-cloud-tx-distribution-2025.05.tar.gz.md5,
-                      taotao-cloud-mq/taotao-cloud-mq-distribution/build/distributions/taotao-cloud-mq-distribution-2025.05.zip,
-                      taotao-cloud-mq/taotao-cloud-mq-distribution/build/distributions/taotao-cloud-mq-distribution-2025.05.zip.md5,
-                      taotao-cloud-mq/taotao-cloud-mq-distribution/build/distributions/taotao-cloud-mq-distribution-2025.05.tar.gz,
-                      taotao-cloud-mq/taotao-cloud-mq-distribution/build/distributions/taotao-cloud-mq-distribution-2025.05.tar.gz.md5,
-                      taotao-cloud-rpc/taotao-cloud-rpc-distribution/build/distributions/taotao-cloud-rpc-distribution-2025.05.zip,
-                      taotao-cloud-rpc/taotao-cloud-rpc-distribution/build/distributions/taotao-cloud-rpc-distribution-2025.05.zip.md5,
-                      taotao-cloud-rpc/taotao-cloud-rpc-distribution/build/distributions/taotao-cloud-rpc-distribution-2025.05.tar.gz,
-                      taotao-cloud-rpc/taotao-cloud-rpc-distribution/build/distributions/taotao-cloud-rpc-distribution-2025.05.tar.gz.md5,
-                      taotao-cloud-job/taotao-cloud-job-distribution/build/distributions/taotao-cloud-job-distribution-2025.05.zip,
-                      taotao-cloud-job/taotao-cloud-job-distribution/build/distributions/taotao-cloud-job-distribution-2025.05.zip.md5,
-                      taotao-cloud-job/taotao-cloud-job-distribution/build/distributions/taotao-cloud-job-distribution-2025.05.tar.gz,
-                      taotao-cloud-job/taotao-cloud-job-distribution/build/distributions/taotao-cloud-job-distribution-2025.05.tar.gz.md5,
-                      taotao-cloud-ccsr/taotao-cloud-ccsr-distribution/build/distributions/taotao-cloud-ccsr-distribution-2025.05.zip,
-                      taotao-cloud-ccsr/taotao-cloud-ccsr-distribution/build/distributions/taotao-cloud-ccsr-distribution-2025.05.zip.md5,
-                      taotao-cloud-ccsr/taotao-cloud-ccsr-distribution/build/distributions/taotao-cloud-ccsr-distribution-2025.05.tar.gz,
-                      taotao-cloud-ccsr/taotao-cloud-ccsr-distribution/build/distributions/taotao-cloud-ccsr-distribution-2025.05.tar.gz.md5,
-                      taotao-cloud-cache/build/libs/taotao-cloud-cache-2025.05.jar,
-                      taotao-cloud-cache/build/libs/taotao-cloud-cache-2025.05.jar.md5,
-                      taotao-cloud-jdbcpool/build/libs/taotao-cloud-jdbcpool-2025.05.jar,
-                      taotao-cloud-jdbcpool/build/libs/taotao-cloud-jdbcpool-2025.05.jar.md5"
-          #body: "sdfsa"
-          bodyFile: "doc/release/2025-05.md"
-          draft: false
-          generateReleaseNotes: false
-          prerelease: false
-          replacesArtifacts: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+#      - uses: ncipollo/release-action@v1.16.0
+#        with:
+#          allowUpdates: true
+#          artifactErrorsFailBuild: true
+#          artifacts: "taotao-cloud-tx/taotao-cloud-tx-distribution/build/distributions/taotao-cloud-tx-distribution-2025.05.zip,
+#                      taotao-cloud-tx/taotao-cloud-tx-distribution/build/distributions/taotao-cloud-tx-distribution-2025.05.zip.md5,
+#                      taotao-cloud-tx/taotao-cloud-tx-distribution/build/distributions/taotao-cloud-tx-distribution-2025.05.tar.gz,
+#                      taotao-cloud-tx/taotao-cloud-tx-distribution/build/distributions/taotao-cloud-tx-distribution-2025.05.tar.gz.md5,
+#                      taotao-cloud-mq/taotao-cloud-mq-distribution/build/distributions/taotao-cloud-mq-distribution-2025.05.zip,
+#                      taotao-cloud-mq/taotao-cloud-mq-distribution/build/distributions/taotao-cloud-mq-distribution-2025.05.zip.md5,
+#                      taotao-cloud-mq/taotao-cloud-mq-distribution/build/distributions/taotao-cloud-mq-distribution-2025.05.tar.gz,
+#                      taotao-cloud-mq/taotao-cloud-mq-distribution/build/distributions/taotao-cloud-mq-distribution-2025.05.tar.gz.md5,
+#                      taotao-cloud-rpc/taotao-cloud-rpc-distribution/build/distributions/taotao-cloud-rpc-distribution-2025.05.zip,
+#                      taotao-cloud-rpc/taotao-cloud-rpc-distribution/build/distributions/taotao-cloud-rpc-distribution-2025.05.zip.md5,
+#                      taotao-cloud-rpc/taotao-cloud-rpc-distribution/build/distributions/taotao-cloud-rpc-distribution-2025.05.tar.gz,
+#                      taotao-cloud-rpc/taotao-cloud-rpc-distribution/build/distributions/taotao-cloud-rpc-distribution-2025.05.tar.gz.md5,
+#                      taotao-cloud-job/taotao-cloud-job-distribution/build/distributions/taotao-cloud-job-distribution-2025.05.zip,
+#                      taotao-cloud-job/taotao-cloud-job-distribution/build/distributions/taotao-cloud-job-distribution-2025.05.zip.md5,
+#                      taotao-cloud-job/taotao-cloud-job-distribution/build/distributions/taotao-cloud-job-distribution-2025.05.tar.gz,
+#                      taotao-cloud-job/taotao-cloud-job-distribution/build/distributions/taotao-cloud-job-distribution-2025.05.tar.gz.md5,
+#                      taotao-cloud-ccsr/taotao-cloud-ccsr-distribution/build/distributions/taotao-cloud-ccsr-distribution-2025.05.zip,
+#                      taotao-cloud-ccsr/taotao-cloud-ccsr-distribution/build/distributions/taotao-cloud-ccsr-distribution-2025.05.zip.md5,
+#                      taotao-cloud-ccsr/taotao-cloud-ccsr-distribution/build/distributions/taotao-cloud-ccsr-distribution-2025.05.tar.gz,
+#                      taotao-cloud-ccsr/taotao-cloud-ccsr-distribution/build/distributions/taotao-cloud-ccsr-distribution-2025.05.tar.gz.md5,
+#                      taotao-cloud-cache/build/libs/taotao-cloud-cache-2025.05.jar,
+#                      taotao-cloud-cache/build/libs/taotao-cloud-cache-2025.05.jar.md5,
+#                      taotao-cloud-jdbcpool/build/libs/taotao-cloud-jdbcpool-2025.05.jar,
+#                      taotao-cloud-jdbcpool/build/libs/taotao-cloud-jdbcpool-2025.05.jar.md5"
+#          #body: "sdfsa"
+#          bodyFile: "doc/release/2025-05.md"
+#          draft: false
+#          generateReleaseNotes: false
+#          prerelease: false
+#          replacesArtifacts: true
+#          token: ${{ secrets.GITHUB_TOKEN }}
 
       #- name: Create Release
       #  id: create_release
