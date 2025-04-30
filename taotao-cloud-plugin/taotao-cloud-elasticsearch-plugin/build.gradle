@@ -75,15 +75,15 @@ apply plugin: "idea"
 //apply plugin: 'elasticsearch.yaml-rest-test'
 
 dependencies {
-    implementation 'org.elasticsearch:elasticsearch:8.18.0'
+    implementation 'org.elasticsearch:elasticsearch:9.0.0'
 
-    compileOnly "org.elasticsearch.plugin:elasticsearch-plugin-api:8.18.0"
-    compileOnly "org.elasticsearch.plugin:elasticsearch-plugin-analysis-api:8.18.0"
-    compileOnly "org.apache.lucene:lucene-analysis-common:10.1.0"
+    compileOnly "org.elasticsearch.plugin:elasticsearch-plugin-api:9.0.0"
+    compileOnly "org.elasticsearch.plugin:elasticsearch-plugin-analysis-api:9.0.0"
+    compileOnly "org.apache.lucene:lucene-analysis-common:10.2.0"
 
-    testImplementation "org.elasticsearch.plugin:elasticsearch-plugin-api:8.18.0"
-    testImplementation "org.elasticsearch.plugin:elasticsearch-plugin-analysis-api:8.18.0"
-    testImplementation "org.apache.lucene:lucene-analysis-common:10.1.0"
+    testImplementation "org.elasticsearch.plugin:elasticsearch-plugin-api:9.0.0"
+    testImplementation "org.elasticsearch.plugin:elasticsearch-plugin-analysis-api:9.0.0"
+    testImplementation "org.apache.lucene:lucene-analysis-common:10.2.0"
 
     testImplementation 'org.mockito:mockito-core:5.17.0'
     testImplementation 'org.hamcrest:hamcrest:3.0'
