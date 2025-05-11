@@ -43,8 +43,8 @@ dependencies {
     implementation 'org.springframework.session:spring-session-data-redis:3.4.3'
 
     //https://central.sonatype.com/artifact/com.github.binarywang/weixin-java-pay?smo=true
-    implementation 'com.github.binarywang:weixin-java-mp:4.7.4.B'
-    implementation 'com.github.binarywang:weixin-java-miniapp:4.7.4.B'
+    implementation 'com.github.binarywang:weixin-java-mp:4.7.5.B'
+    implementation 'com.github.binarywang:weixin-java-miniapp:4.7.5.B'
 
     //implementation 'top.dcenter:justAuth-spring-security-starter:1.1.25'
 
