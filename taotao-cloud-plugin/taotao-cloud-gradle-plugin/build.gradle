@@ -5,12 +5,12 @@ buildscript {
         gradlePluginPortal()
 
         maven {
-            url "https://repo1.maven.org/maven2"
+            url = "https://repo1.maven.org/maven2"
         }
 
         maven {
             allowInsecureProtocol = true
-            url 'https://maven.aliyun.com/repository/public'
+            url = 'https://maven.aliyun.com/repository/public'
         }
         maven {
             allowInsecureProtocol = true
@@ -19,7 +19,7 @@ buildscript {
                 username = findProperty("mavenUsername") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
                 password = findProperty("mavenPassword") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
             }
-            url 'https://repo.rdc.aliyun.com/repository/136936-release-reey0l/'
+            url = 'https://repo.rdc.aliyun.com/repository/136936-release-reey0l/'
         }
         //阿里云新的仓库
         maven {
@@ -27,36 +27,36 @@ buildscript {
                 username = findProperty("mavenUsernameNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME_NEW")
                 password = findProperty("mavenPasswordNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD_NEW")
             }
-            url 'https://packages.aliyun.com/60516c4824e1e6fbecd22990/maven/2085441-release-8v0qbs'
+            url = 'https://packages.aliyun.com/60516c4824e1e6fbecd22990/maven/2085441-release-8v0qbs'
         }
 
         maven {
             allowInsecureProtocol = true
-            url "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/"
+            url = "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/"
         }
 
         maven {
             allowInsecureProtocol = true
-            url "https://mirrors.huaweicloud.com/repository/maven/"
+            url = "https://mirrors.huaweicloud.com/repository/maven/"
         }
 
-        maven { url "https://repo.spring.io/snapshot" }
-        maven { url "https://repo.spring.io/milestone" }
-        maven { url 'https://repo.spring.io/release' }
+        maven { url ="https://repo.spring.io/snapshot" }
+        maven { url ="https://repo.spring.io/milestone" }
+        maven { url ='https://repo.spring.io/release' }
 
-        maven { url "https://maven.aliyun.com/repository/central" }
-        maven { url "https://maven.aliyun.com/repository/public" }
-        maven { url "https://maven.aliyun.com/repository/google" }
-        maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
-        maven { url "https://maven.aliyun.com/repository/spring" }
-        maven { url "https://maven.aliyun.com/repository/spring-plugin" }
-        maven { url "https://maven.aliyun.com/repository/grails-core" }
-        maven { url "https://maven.aliyun.com/repository/apache-snapshots" }
+        maven { url ="https://maven.aliyun.com/repository/central" }
+        maven { url ="https://maven.aliyun.com/repository/public" }
+        maven { url ="https://maven.aliyun.com/repository/google" }
+        maven { url ="https://maven.aliyun.com/repository/gradle-plugin" }
+        maven { url ="https://maven.aliyun.com/repository/spring" }
+        maven { url ="https://maven.aliyun.com/repository/spring-plugin" }
+        maven { url ="https://maven.aliyun.com/repository/grails-core" }
+        maven { url ="https://maven.aliyun.com/repository/apache-snapshots" }
 
-        maven { url "https://repository.aspose.com/repo/" }
-        maven { url "https://repo.e-iceblue.cn/repository/maven-public/" }
+        maven { url ="https://repository.aspose.com/repo/" }
+        maven { url ="https://repo.e-iceblue.cn/repository/maven-public/" }
 
-        maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url = "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
     }
 }
 

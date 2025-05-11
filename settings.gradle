@@ -18,14 +18,14 @@ pluginManagement {
         mavenLocal()
         mavenCentral()
         gradlePluginPortal()
-        maven { url 'https://repo.spring.io/release' }
-        maven { url "https://plugins.gradle.org/m2/" }
-        maven { url 'https://jetbrains.bintray.com/intellij-plugin-service' }
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
-        maven { url "https://maven.aliyun.com/repository/public" }
-        maven { url 'https://repo.spring.io/plugins-release' }
-        maven { url "https://repo.spring.io/snapshot" }
-        maven { url "https://repo.spring.io/milestone" }
+        maven { url = 'https://repo.spring.io/release' }
+        maven { url = "https://plugins.gradle.org/m2/" }
+        maven { url = 'https://jetbrains.bintray.com/intellij-plugin-service' }
+        maven { url = 'https://oss.sonatype.org/content/repositories/snapshots/' }
+        maven { url = "https://maven.aliyun.com/repository/public" }
+        maven { url = 'https://repo.spring.io/plugins-release' }
+        maven { url = "https://repo.spring.io/snapshot" }
+        maven { url = "https://repo.spring.io/milestone" }
     }
 }
 
@@ -100,13 +100,13 @@ dependencyResolutionManagement {
     //}
     // 统一依赖库定义
     versionCatalogs {
-        create("projectLibs"){
+        create("projectLibs") {
             from(files("./gradle/libs.versions.toml"))
         }
     }
 }
 
-def oneLayerProjects = ['scala', 'python', 'design-patterns','cache','jdbcpool', 'netty']
+def oneLayerProjects = ['scala', 'python', 'design-patterns', 'cache', 'jdbcpool', 'netty']
 for (project in oneLayerProjects) {
     include "taotao-cloud-${project}"
 }
@@ -123,7 +123,7 @@ for (project in twoLayerProjects) {
     }
 }
 
-def excludedName(file){
+def excludedName(file) {
     return file.name != "build"
             && file.name != "src"
             && file.name != "out"

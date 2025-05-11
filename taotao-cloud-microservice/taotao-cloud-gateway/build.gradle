@@ -84,7 +84,7 @@ configurations {
             force 'org.antlr:antlr4:4.13.2'
             force 'net.minidev:json-smart:2.5.2'
             //todo 临时使用
-            force "io.opentelemetry:opentelemetry-api-incubator:1.49.0-alpha"
+            force "io.opentelemetry:opentelemetry-api-incubator:1.50.0-alpha"
         }
 
         exclude group: "org.springframework", module: "spring-webmvc"
