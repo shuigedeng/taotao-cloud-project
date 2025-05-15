@@ -69,8 +69,8 @@ apply plugin: "com.google.protobuf"
 
 dependencies {
     implementation "io.netty:netty-all:4.2.1.Final"
-    implementation "com.google.protobuf:protobuf-java:4.30.2"
-    implementation "com.google.protobuf:protobuf-java-util:4.30.2"
+    implementation "com.google.protobuf:protobuf-java:4.31.0"
+    implementation "com.google.protobuf:protobuf-java-util:4.31.0"
     implementation "org.apache.thrift:libthrift:0.21.0"
     implementation "io.grpc:grpc-api:1.72.0"
     implementation "io.grpc:grpc-context:1.72.0"
@@ -115,7 +115,7 @@ protobuf {
     protoc {
         //https://repo1.maven.org/maven2/com/google/protobuf/protoc/
         //直接使用Maven Central上已经编译好的protoc编译器，
-        artifact = "com.google.protobuf:protoc:4.30.2"
+        artifact = "com.google.protobuf:protoc:4.31.0"
         //指定本地已经安装的protoc编译器
         //path = '/usr/local/bin/protoc'
     }
@@ -145,7 +145,7 @@ protobuf {
 
 //protobuf {
 //    protoc {
-//        artifact = "com.google.protobuf:protoc:4.30.2"
+//        artifact = "com.google.protobuf:protoc:4.31.0"
 //    }
 //
 //    plugins {
