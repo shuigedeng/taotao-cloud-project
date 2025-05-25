@@ -1,5 +1,5 @@
 server:
-  port: 7100
+  port: 8080
   shutdown: graceful
   http2:
     enabled: true
@@ -51,7 +51,7 @@ spring:
     register-shutdown-hook: true
     web-application-type: servlet
   application:
-    name: taotao-cloud-ccsr-server
+    name: taotao-cloud-ccsr-dashboard
     admin:
       enabled: true
   jackson:
@@ -300,25 +300,3 @@ knife4j:
     enableDebug: true
     enableOpenApi: true
     enableGroup: true
-
-ccsr:
-  local-mode: true # 开启本机测试模式，用于本地开发调试使用
-  namespace: default # 命名空间，ccsr-mcs通过命名空间实现配置租户隔离
-  rpc-type: grpc # 客户端与服务端通信协议类型，当前仅实现了grpc，后续可以扩展http、websocket、nacos等
-  grpc-config:
-    keep-alive-time: 3000
-    keep-alive-timeout: 3000
-    permit-keep-alive-time: 3000
-    max-inbound-message-size: 10240
-  raft-config:
-    election-timeout: 1000 # Leader选举超时时间，默认1000
-    read-only-option: read_only_lease_based # 读写模式，默认read_only_safe
-    port-offset: 1001 # Raft服务端口偏移，默认1001
-    single-node: false # 是否为单节点模式，用于单机测试使用
-  cluster-address:
-    - 127.0.0.1:9006 # Raft集群实例地址，为了单机测试方便这里通过端口作区分
-#    - 127.0.0.1:9007
-#    - 127.0.0.1:9008
-#    - 127.0.0.1:9301
-  port: 8005 # gRPC服务默认端口8000，用于客户端与服务端节点通信
-
