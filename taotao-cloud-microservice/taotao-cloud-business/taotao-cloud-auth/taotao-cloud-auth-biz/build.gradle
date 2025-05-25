@@ -40,7 +40,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-flowengine"
 
     //https://central.sonatype.com/artifact/org.springframework.session/spring-session-data-redis
-    implementation 'org.springframework.session:spring-session-data-redis:3.4.3'
+    implementation 'org.springframework.session:spring-session-data-redis:3.5.0'
 
     //https://central.sonatype.com/artifact/com.github.binarywang/weixin-java-pay?smo=true
     implementation 'com.github.binarywang:weixin-java-mp:4.7.5.B'
@@ -51,7 +51,7 @@ dependencies {
     //https://search.maven.org/artifact/org.webjars/jquery
     implementation "org.webjars:jquery:3.7.1"
     //https://search.maven.org/artifact/org.webjars/bootstrap
-    implementation "org.webjars:bootstrap:5.3.3"
+    implementation "org.webjars:bootstrap:5.3.5"
     //https://search.maven.org/artifact/org.webjars/webjars-locator-lite
     implementation "org.webjars:webjars-locator-lite:1.1.0"
     implementation 'org.webjars:font-awesome:6.5.1'
@@ -90,7 +90,7 @@ dependencies {
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
     implementation "com.nimbusds:nimbus-jose-jwt:10.3"
     //https://search.maven.org/artifact/com.nimbusds/oauth2-oidc-sdk
-    implementation 'com.nimbusds:oauth2-oidc-sdk:11.23.1'
+    implementation 'com.nimbusds:oauth2-oidc-sdk:11.25'
 
     implementation "org.apache.commons:commons-collections4"
 
