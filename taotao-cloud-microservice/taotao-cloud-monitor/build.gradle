@@ -32,6 +32,9 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-autoconfigure"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+
+    implementation "com.google.protobuf:protobuf-java:3.25.5"
+    implementation "com.google.protobuf:protobuf-java-util:3.25.5"
 }
 
 mainClassName = "com.taotao.boot.monitor.TaoTaoCloudMonitorApplication"
@@ -44,6 +47,12 @@ configurations {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "com.querydsl", module: "querydsl-apt"
         exclude group: "commons-logging", module: "commons-logging"
+
+        resolutionStrategy {
+            force "com.google.protobuf:protobuf-java:3.25.5"
+            force "com.google.protobuf:protobuf-java-util:3.25.5"
+        }
+
     }
 }
 
