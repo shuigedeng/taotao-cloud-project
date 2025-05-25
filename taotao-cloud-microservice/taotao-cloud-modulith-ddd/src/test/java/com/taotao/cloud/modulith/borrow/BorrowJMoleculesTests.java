@@ -7,7 +7,7 @@ import org.jmolecules.archunit.JMoleculesArchitectureRules;
 import org.jmolecules.archunit.JMoleculesDddRules;
 
 @SuppressWarnings("unused")
-@AnalyzeClasses(packages = "example.borrow")
+@AnalyzeClasses(packages = "com.taotao.cloud.modulith.borrow")
 public class BorrowJMoleculesTests {
 
     @ArchTest

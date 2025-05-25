@@ -7,7 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @TaoTaoBootApplication
-@TaoTaoCloudApplication
 public class TaoTaoCloudModulithApplication {
 
 	public static void main(String[] args) {
@@ -18,5 +17,6 @@ public class TaoTaoCloudModulithApplication {
 			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 	}
+
 
 }
