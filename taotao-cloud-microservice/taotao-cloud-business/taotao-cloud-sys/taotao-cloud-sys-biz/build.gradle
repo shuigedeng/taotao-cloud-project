@@ -82,13 +82,13 @@ dependencies {
     //https://search.maven.org/artifact/org.freemarker/freemarker
     implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 
-    implementation 'org.zalando:logbook-spring-boot-starter:3.12.0'
-    implementation 'org.zalando:logbook-httpclient5:3.12.0'
-    implementation 'org.zalando:logbook-netty:3.12.0'
-    implementation 'org.zalando:logbook-okhttp:3.12.0'
-    implementation 'org.zalando:logbook-okhttp2:3.12.0'
-    implementation 'org.zalando:logbook-openfeign:3.12.0'
-    implementation 'org.zalando:logbook-spring-webflux:3.12.0'
+    implementation 'org.zalando:logbook-spring-boot-starter:3.12.1'
+    implementation 'org.zalando:logbook-httpclient5:3.12.1'
+    implementation 'org.zalando:logbook-netty:3.12.1'
+    implementation 'org.zalando:logbook-okhttp:3.12.1'
+    implementation 'org.zalando:logbook-okhttp2:3.12.1'
+    implementation 'org.zalando:logbook-openfeign:3.12.1'
+    implementation 'org.zalando:logbook-spring-webflux:3.12.1'
 
     //implementation "io.github.shuigedeng:taotao-boot-starter-apt")
     //annotationProcessor "io.github.shuigedeng:taotao-boot-starter-apt")
@@ -124,7 +124,7 @@ dependencies {
     //implementation "org.apache.lucene:lucene-analyzers-common:4.2.0"
     //implementation "commons-dbutils:commons-dbutils:1.5"
     //implementation "com.github.jsqlparser:jsqlparser:4.9"
-    //implementation "com.alibaba:druid:1.2.24"
+    //implementation "com.alibaba:druid:1.2.25"
     //implementation("org.springframework.boot:spring-boot-starter-freemarker") {
     //    exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
     //}
