@@ -112,7 +112,7 @@ bootBuildImage {
     environment = [
             "BPL_SPRING_CLOUD_BINDINGS_ENABLED": "true",
 
-            "BP_IMAGE_LABELS"                  : "application_name=taotao-cloud-monitor application_version=2025.06",
+            "BP_IMAGE_LABELS"                  : "application_name=taotao-cloud-monitor application_version=2025.07",
             "BP_OCI_AUTHORS"                   : "981376577@qq.com",
             //"BP_OCI_CREATED": " ",
             //"BP_OCI_DESCRIPTION": " ",
@@ -127,7 +127,7 @@ bootBuildImage {
             //"BP_OCI_VERSION": " ",
 
             "BPE_APPLICATION_NAME"             : "taotao-cloud-monitor",
-            "BPE_APPLICATION_VERSION"          : "2025.06",
+            "BPE_APPLICATION_VERSION"          : "2025.07",
             "BPE_JMX_ENABLED"                  : "true",
             "BPE_LANG"                         : "zh_CN.UTF-8",
             "BPE_JMX_PORT"                     : "5000",
