@@ -108,7 +108,7 @@ jobs:
                       taotao-cloud-jdbcpool/build/libs/taotao-cloud-jdbcpool-2025.07.jar,
                       taotao-cloud-jdbcpool/build/libs/taotao-cloud-jdbcpool-2025.07.jar.md5"
           #body: "sdfsa"
-          bodyFile: "doc/release/2025-06.md"
+          bodyFile: "doc/release/2025-07.md"
           draft: false
           generateReleaseNotes: false
           prerelease: false
