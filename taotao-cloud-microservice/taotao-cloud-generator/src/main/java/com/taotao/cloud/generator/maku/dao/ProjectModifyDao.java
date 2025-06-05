@@ -1,8 +1,8 @@
 package com.taotao.cloud.generator.maku.dao;
 
 import com.baomidou.mybatisplus.annotation.InterceptorIgnore;
-import net.maku.generator.common.dao.BaseDao;
-import net.maku.generator.entity.ProjectModifyEntity;
+import com.taotao.cloud.generator.maku.common.dao.BaseDao;
+import com.taotao.cloud.generator.maku.entity.ProjectModifyEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

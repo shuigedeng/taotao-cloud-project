@@ -2,10 +2,10 @@ package com.taotao.cloud.generator.maku.config;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import net.maku.generator.config.DbType;
-import net.maku.generator.config.query.*;
-import net.maku.generator.entity.DataSourceEntity;
-import net.maku.generator.utils.DbUtils;
+import com.taotao.cloud.generator.maku.config.DbType;
+import com.taotao.cloud.generator.maku.config.query.*;
+import com.taotao.cloud.generator.maku.entity.DataSourceEntity;
+import com.taotao.cloud.generator.maku.utils.DbUtils;
 
 import java.sql.Connection;
 import java.sql.SQLException;

@@ -1,10 +1,10 @@
 package com.taotao.cloud.generator.maku.service;
 
-import net.maku.generator.common.page.PageResult;
-import net.maku.generator.common.query.Query;
-import net.maku.generator.common.service.BaseService;
-import net.maku.generator.config.GenDataSource;
-import net.maku.generator.entity.DataSourceEntity;
+import com.taotao.cloud.generator.maku.common.page.PageResult;
+import com.taotao.cloud.generator.maku.common.query.Query;
+import com.taotao.cloud.generator.maku.common.service.BaseService;
+import com.taotao.cloud.generator.maku.config.GenDataSource;
+import com.taotao.cloud.generator.maku.entity.DataSourceEntity;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
 package com.taotao.cloud.generator.maku.common.aspect;
 
 import lombok.extern.slf4j.Slf4j;
-import net.maku.generator.common.annotation.EncryptParameter;
-import net.maku.generator.common.page.PageResult;
-import net.maku.generator.common.utils.EncryptUtils;
-import net.maku.generator.common.utils.Result;
+import com.taotao.cloud.generator.maku.common.annotation.EncryptParameter;
+import com.taotao.cloud.generator.maku.common.page.PageResult;
+import com.taotao.cloud.generator.maku.common.utils.EncryptUtils;
+import com.taotao.cloud.generator.maku.common.utils.Result;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

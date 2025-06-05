@@ -1,7 +1,7 @@
 package com.taotao.cloud.generator.maku.config.query;
 
 
-import net.maku.generator.config.DbType;
+import com.taotao.cloud.generator.maku.config.DbType;
 
 /**
  * Query

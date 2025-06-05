@@ -2,7 +2,7 @@ package com.taotao.cloud.generator.maku.dao;
 
 import com.baomidou.mybatisplus.annotation.InterceptorIgnore;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import net.maku.generator.entity.BaseClassEntity;
+import com.taotao.cloud.generator.maku.entity.BaseClassEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

@@ -1,7 +1,7 @@
 package com.taotao.cloud.generator.maku.service;
 
-import net.maku.generator.common.service.BaseService;
-import net.maku.generator.entity.TableFieldEntity;
+import com.taotao.cloud.generator.maku.common.service.BaseService;
+import com.taotao.cloud.generator.maku.entity.TableFieldEntity;
 
 import java.util.List;
 

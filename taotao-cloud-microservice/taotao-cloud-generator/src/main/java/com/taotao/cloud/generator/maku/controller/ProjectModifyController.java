@@ -2,11 +2,11 @@ package com.taotao.cloud.generator.maku.controller;
 
 import cn.hutool.core.io.IoUtil;
 import lombok.AllArgsConstructor;
-import net.maku.generator.common.page.PageResult;
-import net.maku.generator.common.query.Query;
-import net.maku.generator.common.utils.Result;
-import net.maku.generator.entity.ProjectModifyEntity;
-import net.maku.generator.service.ProjectModifyService;
+import com.taotao.cloud.generator.maku.common.page.PageResult;
+import com.taotao.cloud.generator.maku.common.query.Query;
+import com.taotao.cloud.generator.maku.common.utils.Result;
+import com.taotao.cloud.generator.maku.entity.ProjectModifyEntity;
+import com.taotao.cloud.generator.maku.service.ProjectModifyService;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.HttpServletResponse;

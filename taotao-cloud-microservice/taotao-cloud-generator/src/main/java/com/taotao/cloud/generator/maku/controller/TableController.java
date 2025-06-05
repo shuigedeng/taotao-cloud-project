@@ -1,13 +1,13 @@
 package com.taotao.cloud.generator.maku.controller;
 
 import lombok.AllArgsConstructor;
-import net.maku.generator.common.page.PageResult;
-import net.maku.generator.common.query.Query;
-import net.maku.generator.common.utils.Result;
-import net.maku.generator.entity.TableEntity;
-import net.maku.generator.entity.TableFieldEntity;
-import net.maku.generator.service.TableFieldService;
-import net.maku.generator.service.TableService;
+import com.taotao.cloud.generator.maku.common.page.PageResult;
+import com.taotao.cloud.generator.maku.common.query.Query;
+import com.taotao.cloud.generator.maku.common.utils.Result;
+import com.taotao.cloud.generator.maku.entity.TableEntity;
+import com.taotao.cloud.generator.maku.entity.TableFieldEntity;
+import com.taotao.cloud.generator.maku.service.TableFieldService;
+import com.taotao.cloud.generator.maku.service.TableService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

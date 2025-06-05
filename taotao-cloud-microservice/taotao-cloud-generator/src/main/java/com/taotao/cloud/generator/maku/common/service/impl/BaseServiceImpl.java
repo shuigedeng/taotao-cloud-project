@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import net.maku.generator.common.query.Query;
-import net.maku.generator.common.service.BaseService;
+import com.taotao.cloud.generator.maku.common.query.Query;
+import com.taotao.cloud.generator.maku.common.service.BaseService;
 
 
 /**

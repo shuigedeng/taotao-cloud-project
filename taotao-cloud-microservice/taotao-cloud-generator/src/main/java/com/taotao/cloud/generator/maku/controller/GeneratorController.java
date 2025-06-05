@@ -3,9 +3,9 @@ package com.taotao.cloud.generator.maku.controller;
 import cn.hutool.core.io.IoUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
-import net.maku.generator.common.utils.Result;
-import net.maku.generator.service.GeneratorService;
-import net.maku.generator.vo.PreviewVO;
+import com.taotao.cloud.generator.maku.common.utils.Result;
+import com.taotao.cloud.generator.maku.service.GeneratorService;
+import com.taotao.cloud.generator.maku.vo.PreviewVO;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayOutputStream;

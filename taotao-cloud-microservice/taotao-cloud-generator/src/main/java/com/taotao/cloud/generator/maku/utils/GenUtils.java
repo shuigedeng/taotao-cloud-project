@@ -4,12 +4,12 @@ import cn.hutool.core.text.NamingCase;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import lombok.extern.slf4j.Slf4j;
-import net.maku.generator.common.exception.ServerException;
-import net.maku.generator.config.DbType;
-import net.maku.generator.config.GenDataSource;
-import net.maku.generator.config.query.AbstractQuery;
-import net.maku.generator.entity.TableEntity;
-import net.maku.generator.entity.TableFieldEntity;
+import com.taotao.cloud.generator.maku.common.exception.ServerException;
+import com.taotao.cloud.generator.maku.config.DbType;
+import com.taotao.cloud.generator.maku.config.GenDataSource;
+import com.taotao.cloud.generator.maku.config.query.AbstractQuery;
+import com.taotao.cloud.generator.maku.entity.TableEntity;
+import com.taotao.cloud.generator.maku.entity.TableFieldEntity;
 
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;

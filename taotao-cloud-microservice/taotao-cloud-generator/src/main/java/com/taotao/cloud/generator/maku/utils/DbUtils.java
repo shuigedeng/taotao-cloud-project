@@ -1,7 +1,7 @@
 package com.taotao.cloud.generator.maku.utils;
 
-import net.maku.generator.config.DbType;
-import net.maku.generator.config.GenDataSource;
+import com.taotao.cloud.generator.maku.config.DbType;
+import com.taotao.cloud.generator.maku.config.GenDataSource;
 import oracle.jdbc.OracleConnection;
 
 import java.sql.Connection;

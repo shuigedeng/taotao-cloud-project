@@ -3,7 +3,7 @@ package com.taotao.cloud.generator.maku.entity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import net.maku.generator.common.annotation.EncryptParameter;
+import com.taotao.cloud.generator.maku.common.annotation.EncryptParameter;
 
 import java.util.Date;
 

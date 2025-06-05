@@ -1,10 +1,10 @@
 package com.taotao.cloud.generator.maku.config.template;
 
 import cn.hutool.core.util.StrUtil;
-import net.maku.generator.common.exception.ServerException;
-import net.maku.generator.common.utils.JsonUtils;
-import net.maku.generator.config.template.GeneratorInfo;
-import net.maku.generator.config.template.TemplateInfo;
+import com.taotao.cloud.generator.maku.common.exception.ServerException;
+import com.taotao.cloud.generator.maku.common.utils.JsonUtils;
+import com.taotao.cloud.generator.maku.config.template.GeneratorInfo;
+import com.taotao.cloud.generator.maku.config.template.TemplateInfo;
 import org.springframework.util.StreamUtils;
 
 import java.io.IOException;

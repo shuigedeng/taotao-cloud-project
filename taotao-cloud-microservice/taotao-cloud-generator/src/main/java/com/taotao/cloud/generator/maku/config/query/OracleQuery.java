@@ -2,8 +2,8 @@ package com.taotao.cloud.generator.maku.config.query;
 
 
 import cn.hutool.core.util.StrUtil;
-import net.maku.generator.config.DbType;
-import net.maku.generator.config.query.AbstractQuery;
+import com.taotao.cloud.generator.maku.config.DbType;
+import com.taotao.cloud.generator.maku.config.query.AbstractQuery;
 
 /**
  * Oracle查询

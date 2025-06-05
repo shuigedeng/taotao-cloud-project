@@ -2,13 +2,13 @@ package com.taotao.cloud.generator.maku.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import lombok.AllArgsConstructor;
-import net.maku.generator.common.service.impl.BaseServiceImpl;
-import net.maku.generator.dao.TableFieldDao;
-import net.maku.generator.entity.FieldTypeEntity;
-import net.maku.generator.entity.TableFieldEntity;
-import net.maku.generator.enums.AutoFillEnum;
-import net.maku.generator.service.FieldTypeService;
-import net.maku.generator.service.TableFieldService;
+import com.taotao.cloud.generator.maku.common.service.impl.BaseServiceImpl;
+import com.taotao.cloud.generator.maku.dao.TableFieldDao;
+import com.taotao.cloud.generator.maku.entity.FieldTypeEntity;
+import com.taotao.cloud.generator.maku.entity.TableFieldEntity;
+import com.taotao.cloud.generator.maku.enums.AutoFillEnum;
+import com.taotao.cloud.generator.maku.service.FieldTypeService;
+import com.taotao.cloud.generator.maku.service.TableFieldService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

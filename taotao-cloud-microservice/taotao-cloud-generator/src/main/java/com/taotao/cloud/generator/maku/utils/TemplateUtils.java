@@ -3,7 +3,7 @@ package com.taotao.cloud.generator.maku.utils;
 import cn.hutool.core.io.IoUtil;
 import freemarker.template.Template;
 import lombok.extern.slf4j.Slf4j;
-import net.maku.generator.common.exception.ServerException;
+import com.taotao.cloud.generator.maku.common.exception.ServerException;
 
 import java.io.StringReader;
 import java.io.StringWriter;

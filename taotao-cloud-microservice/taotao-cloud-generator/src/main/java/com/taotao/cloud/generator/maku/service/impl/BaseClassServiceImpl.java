@@ -1,12 +1,12 @@
 package com.taotao.cloud.generator.maku.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import net.maku.generator.common.page.PageResult;
-import net.maku.generator.common.query.Query;
-import net.maku.generator.common.service.impl.BaseServiceImpl;
-import net.maku.generator.dao.BaseClassDao;
-import net.maku.generator.entity.BaseClassEntity;
-import net.maku.generator.service.BaseClassService;
+import com.taotao.cloud.generator.maku.common.page.PageResult;
+import com.taotao.cloud.generator.maku.common.query.Query;
+import com.taotao.cloud.generator.maku.common.service.impl.BaseServiceImpl;
+import com.taotao.cloud.generator.maku.dao.BaseClassDao;
+import com.taotao.cloud.generator.maku.entity.BaseClassEntity;
+import com.taotao.cloud.generator.maku.service.BaseClassService;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

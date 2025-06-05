@@ -1,7 +1,7 @@
 package com.taotao.cloud.generator.maku.common.utils;
 
 import lombok.Data;
-import net.maku.generator.common.exception.ErrorCode;
+import com.taotao.cloud.generator.maku.common.exception.ErrorCode;
 
 /**
  * 响应数据

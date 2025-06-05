@@ -1,6 +1,6 @@
 package com.taotao.cloud.generator.maku.service;
 
-import net.maku.generator.vo.PreviewVO;
+import com.taotao.cloud.generator.maku.vo.PreviewVO;
 
 import java.util.List;
 import java.util.zip.ZipOutputStream;

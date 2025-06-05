@@ -17,6 +17,6 @@ dependencies {
 repositories {
     maven {
         allowInsecureProtocol = true
-        url 'https://build.shibboleth.net/nexus/content/groups/public'
+        url = 'https://build.shibboleth.net/nexus/content/groups/public'
     }
 }
