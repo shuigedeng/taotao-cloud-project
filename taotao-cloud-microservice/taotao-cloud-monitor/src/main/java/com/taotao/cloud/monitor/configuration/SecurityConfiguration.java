@@ -28,7 +28,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 /**
@@ -95,8 +95,8 @@ public class SecurityConfiguration {
 
     public RequestMatcher[] toRequestMatchers(List<String> paths) {
         if (CollectionUtils.isNotEmpty(paths)) {
-            List<AntPathRequestMatcher> matchers =
-                    paths.stream().map(AntPathRequestMatcher::new).toList();
+            List<PathPatternRequestMatcher> matchers =
+                    paths.stream().map(PathPatternRequestMatcher.withDefaults()::matcher).toList();
             RequestMatcher[] result = new RequestMatcher[matchers.size()];
             return matchers.toArray(result);
         } else {

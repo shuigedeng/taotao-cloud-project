@@ -5,11 +5,12 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AccessTokenResponse;
 import org.springframework.security.oauth2.core.http.converter.OAuth2AccessTokenResponseHttpMessageConverter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -29,8 +30,8 @@ public class ExtensionAndOauth2LoginRefreshTokenFilter extends OncePerRequestFil
 	private final HttpMessageConverter<OAuth2AccessTokenResponse> accessTokenHttpResponseConverter =
 		new OAuth2AccessTokenResponseHttpMessageConverter();
 
-	private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER =
-		new AntPathRequestMatcher("/login/token/refresh_token", "POST");
+	private static final PathPatternRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER =
+		PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.POST, "/login/token/refresh_token");
 
 	public ExtensionAndOauth2LoginRefreshTokenFilter(OAuth2AccessTokenStore oAuth2AccessTokenStore) {
 		this.oAuth2AccessTokenStore = oAuth2AccessTokenStore;
