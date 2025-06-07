@@ -17,6 +17,6 @@ public class AuthorizationDeniedEventListener {
 
 	@EventListener(AuthorizationDeniedEvent.class)
 	public void authorizationDeniedEvent(AuthorizationDeniedEvent<?> event) {
-		LogUtils.error("AuthorizationDeniedEvent", event.getAuthorizationDecision());
+		LogUtils.error("AuthorizationDeniedEvent", event.getAuthorizationResult());
 	}
 }
