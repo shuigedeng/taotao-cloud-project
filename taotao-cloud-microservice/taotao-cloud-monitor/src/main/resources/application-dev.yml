@@ -263,6 +263,8 @@ taotao:
           secret: ${DINGDING_SECRET:xxx}
     core:
       enabled: true
+      async:
+        enabled: false
 
 management:
   info:

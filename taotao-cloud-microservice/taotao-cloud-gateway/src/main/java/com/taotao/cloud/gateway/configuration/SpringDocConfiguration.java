@@ -36,6 +36,7 @@ import java.util.Set;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springdoc.core.properties.AbstractSwaggerUiConfigProperties.SwaggerUrl;
 import org.springdoc.core.properties.SwaggerUiConfigParameters;
+import org.springdoc.core.properties.SwaggerUiConfigProperties;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
@@ -60,7 +61,7 @@ public class SpringDocConfiguration {
 
     @Bean
     public List<GroupedOpenApi> apis(
-            SwaggerUiConfigParameters swaggerUiConfigParameters, RouteDefinitionLocator locator) {
+		SwaggerUiConfigProperties swaggerUiConfigParameters, RouteDefinitionLocator locator) {
         List<GroupedOpenApi> groups = new ArrayList<>();
         List<RouteDefinition> definitions =
                 locator.getRouteDefinitions().collectList().block();

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.config.redis;
 
-import com.taotao.boot.common.constant.RedisConstant;
+import com.taotao.boot.common.constant.RedisConstants;
 import com.taotao.boot.common.support.thread.MDCThreadPoolExecutor;
 import com.taotao.boot.common.support.thread.ThreadPoolFactory;
 import com.taotao.boot.common.utils.log.LogUtils;
@@ -72,12 +72,12 @@ public class RedisListenerConfig {
         MessageListenerAdapter requestLogMessageListenerAdapter =
                 new MessageListenerAdapter(requestLogTopicMessageDelegate, "handleRequestLog");
         requestLogMessageListenerAdapter.afterPropertiesSet();
-        listeners.put(requestLogMessageListenerAdapter, List.of(ChannelTopic.of(RedisConstant.REQUEST_LOG_TOPIC)));
+        listeners.put(requestLogMessageListenerAdapter, List.of(ChannelTopic.of(RedisConstants.REQUEST_LOG_TOPIC)));
 
         MessageListenerAdapter dataVersionLogListenerAdapter =
                 new MessageListenerAdapter(dataVersionLogTopicMessageDelegate, "handleRequestLog");
         dataVersionLogListenerAdapter.afterPropertiesSet();
-        listeners.put(dataVersionLogListenerAdapter, List.of(ChannelTopic.of(RedisConstant.DATA_VERSION_LOG_TOPIC)));
+        listeners.put(dataVersionLogListenerAdapter, List.of(ChannelTopic.of(RedisConstants.DATA_VERSION_LOG_TOPIC)));
 
         container.setMessageListeners(listeners);
         return container;

@@ -998,6 +998,9 @@ taotao:
         - /sys/**
         - /file/**
         - /job/**
+    core:
+      async:
+        enabled: false
   cloud:
     gateway:
       anti:
