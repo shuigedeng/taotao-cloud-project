@@ -50,15 +50,11 @@ repositories {
     maven { url = "https://maven.aliyun.com/repository/spring-plugin" }
     maven { url = "https://maven.aliyun.com/repository/grails-core" }
     maven { url = "https://maven.aliyun.com/repository/apache-snapshots" }
-
-    maven { url = "https://repository.aspose.com/repo/" }
-    maven { url = "https://repo.e-iceblue.cn/repository/maven-public/" }
-
-    maven { url = "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
 }
 
 dependencies {
     implementation platform("org.springframework.ai:spring-ai-bom:1.0.0")
+    implementation platform("com.alibaba.cloud.ai:spring-ai-alibaba-bom:1.0.0.2")
 
     //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
@@ -81,31 +77,79 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-web"
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
 
-    //AVIATOR——轻量级JAVA表达式求值引擎 https://blog.csdn.net/ZhangQingmu/article/details/125087255
-    //https://code.google.com/p/aviator/
-    //http://code.google.com/p/aviator/wiki/User_Guide_zh
-    //https://search.maven.org/artifact/com.googlecode.aviator/aviator
-    implementation "com.googlecode.aviator:aviator:5.4.3"
 
-    //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
-    implementation "com.google.protobuf:protobuf-java:4.31.1"
-    //https://search.maven.org/artifact/com.google.protobuf/protobuf-java-util
-    implementation "com.google.protobuf:protobuf-java-util:4.31.1"
-    //https://search.maven.org/artifact/com.googlecode.protobuf-java-format/protobuf-java-format
-    //implementation "com.googlecode.protobuf-java-format:protobuf-java-format:1.4"
+	//alibaba ai
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-dashscope"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-arms-observation"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-memory"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-nacos2-mcp-client"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-nacos2-mcp-server"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-nacos-mcp-client"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-nacos-mcp-server"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-nacos-prompt"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-nl2sql"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-common"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-alitranslate"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-amap"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-baidumap"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-baidusearch"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-baidutranslate"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-bingsearch"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-crawler"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-dingtalk"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-duckduckgo"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-githubtoolkit"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-googletranslate"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-jsonprocessor"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-kuaidi100"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-larksuite"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-microsofttranslate"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-regex"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-sensitivefilter"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-serpapi"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-sinanews"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-time"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-toutiaonews"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-weather"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-youdaotranslate"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-tavilysearch"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-store-analyticdb"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-store-oceanbase"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-store-opensearch"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-store-tair"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-memory-jdbc"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-memory-redis"
 
-    //https://search.maven.org/artifact/io.protostuff/protostuff-core
-    implementation "io.protostuff:protostuff-core:1.8.0"
-    //https://search.maven.org/artifact/io.protostuff/protostuff-runtime
-    implementation "io.protostuff:protostuff-runtime:1.8.0"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-parser-apache-pdfbox"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-parser-bibtex"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-parser-bshtml"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-parser-directory"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-parser-markdown"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-parser-multi-modality"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-parser-pdf-tables"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-parser-tika"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-parser-yaml"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-arxiv"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-bilibili"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-chatgpt-data"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-elasticsearch"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-email"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-github"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-gitbook"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-gpt-repo"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-huggingface-fs"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-larksuite"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-mbox"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-mongodb"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-mysql"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-notion"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-obsidian"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-onenote"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-poi"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-tencent-cos"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-youtube"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-yuque"
 
-    //https://search.maven.org/artifact/org.apache.velocity/velocity-engine-core
-    implementation 'org.apache.velocity:velocity-engine-core:2.4.1'
-
-    //https://search.maven.org/artifact/org.freemarker/freemarker
-    implementation 'org.springframework.boot:spring-boot-starter-freemarker'
-
-    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter:1.0.0-M6.1"
 
     //spring ai
     // https://repo.spring.io/milestone
@@ -148,6 +192,30 @@ dependencies {
     //implementation 'org.springframework.ai:spring-ai-vertex-ai-gemini-spring-boot-starter'
     //implementation 'org.springframework.ai:spring-ai-vertex-ai-palm2-spring-boot-starter'
     //implementation 'org.springframework.ai:spring-ai-weaviate-store-spring-boot-starter'
+
+    //AVIATOR——轻量级JAVA表达式求值引擎 https://blog.csdn.net/ZhangQingmu/article/details/125087255
+    //https://code.google.com/p/aviator/
+    //http://code.google.com/p/aviator/wiki/User_Guide_zh
+    //https://search.maven.org/artifact/com.googlecode.aviator/aviator
+    implementation "com.googlecode.aviator:aviator:5.4.3"
+
+    //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
+    implementation "com.google.protobuf:protobuf-java:4.31.1"
+    //https://search.maven.org/artifact/com.google.protobuf/protobuf-java-util
+    implementation "com.google.protobuf:protobuf-java-util:4.31.1"
+    //https://search.maven.org/artifact/com.googlecode.protobuf-java-format/protobuf-java-format
+    //implementation "com.googlecode.protobuf-java-format:protobuf-java-format:1.4"
+
+    //https://search.maven.org/artifact/io.protostuff/protostuff-core
+    implementation "io.protostuff:protostuff-core:1.8.0"
+    //https://search.maven.org/artifact/io.protostuff/protostuff-runtime
+    implementation "io.protostuff:protostuff-runtime:1.8.0"
+
+    //https://search.maven.org/artifact/org.apache.velocity/velocity-engine-core
+    implementation 'org.apache.velocity:velocity-engine-core:2.4.1'
+
+    //https://search.maven.org/artifact/org.freemarker/freemarker
+    implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"
