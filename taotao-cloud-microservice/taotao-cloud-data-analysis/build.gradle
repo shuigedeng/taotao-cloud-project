@@ -18,20 +18,20 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-web"
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
     //https://search.maven.org/artifact/com.clickhouse/clickhouse-jdbc
-    implementation "com.clickhouse:clickhouse-jdbc:0.8.6"
+    implementation "com.clickhouse:clickhouse-jdbc:0.9.0"
 
     //implementation "org.hibernate.common:hibernate-commons-annotations:6.0.5.Final"
     //implementation "jakarta.xml.bind:jakarta.xml.bind-api:4.0.0"
     //implementation "org.antlr:antlr4-runtime:4.11.1"
 
     //https://search.maven.org/artifact/io.airlift/slice
-    implementation "io.airlift:slice:2.3"
+    implementation "io.airlift:slice:2.4"
     //https://search.maven.org/artifact/io.airlift/units
     implementation "io.airlift:units:1.10"
     //https://search.maven.org/artifact/com.google.guava/guava
     implementation "com.google.guava:guava:33.4.8-jre"
     //https://search.maven.org/artifact/com.fasterxml.jackson.core/jackson-annotations
-    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.19.0'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.19.1'
 
     //https://search.maven.org/artifact/org.apache.hbase/hbase-client
     //implementation 'org.apache.hbase:hbase-client:2.5.9-hadoop3'

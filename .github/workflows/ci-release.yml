@@ -115,6 +115,36 @@ jobs:
           replacesArtifacts: true
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: build success
+        if: ${{ success() }}
+        uses: zcong1993/actions-ding@master
+        with:
+          dingToken: ${{ secrets.DING_TOKEN }}
+          secret: ${{ secrets.DING_SECRET }}
+          # body 内容 https://blog.csdn.net/lxw1844912514/article/details/125747327
+          body: |
+            {
+              "msgtype": "text",
+              "text": {
+                  "content": "taotao github action [taotao-cloud-project] ci release success"
+              }
+            }
+
+      - name: build failure
+        if: ${{ failure() }}
+        uses: zcong1993/actions-ding@master
+        with:
+          dingToken: ${{ secrets.DING_TOKEN }}
+          secret: ${{ secrets.DING_SECRET }}
+          # body 内容 https://blog.csdn.net/lxw1844912514/article/details/125747327
+          body: |
+            {
+              "msgtype": "text",
+              "text": {
+                  "content": "taotao github action [taotao-cloud-project] ci release failure"
+              }
+            }
+
       #- name: Create Release
       #  id: create_release
       #  # 只有上一步获取到tag_name才继续

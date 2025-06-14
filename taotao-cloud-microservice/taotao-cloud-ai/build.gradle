@@ -236,15 +236,6 @@ configurations {
 
         resolutionStrategy {
             force "org.bouncycastle:bcprov-jdk15on:1.70"
-            force "org.springframework.ai:spring-ai-bedrock:1.0.0"
-            force "org.springframework.ai:spring-ai-azure-openai:1.0.0"
-            force "org.springframework.ai:spring-ai-ollama:1.0.0"
-            force "org.springframework.ai:spring-ai-openai:1.0.0"
-            force "org.springframework.ai:spring-ai-retry:1.0.0"
-            force "org.springframework.ai:spring-ai-transformers:1.0.0"
-            force "org.springframework.ai:spring-ai-zhipuai:1.0.0"
-            force "org.springframework.ai:spring-ai-minimax:1.0.0"
-            force "org.springframework.ai:spring-ai-mistral-ai:1.0.0"
         }
 
         exclude group: "org.springframework.boot", module: "spring-boot-starter-data-jpa"
