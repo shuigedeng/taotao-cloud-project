@@ -32,6 +32,7 @@ import org.apache.flink.streaming.api.windowing.assigners.SessionWindowTimeGapEx
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
+
 /**
  * JBatchWordCount
  *
@@ -44,7 +45,7 @@ public class JBatchWordCount {
 	public static void main(String[] args) throws Exception {
 		Configuration conf = new Configuration();
 
-		conf.setBoolean(ConfigConstants.LOCAL_START_WEBSERVER, true);
+		conf.setBoolean(LOCAL_START_WEBSERVER, true);
 		conf.setInteger(RestOptions.PORT, 8050);
 
 		StreamExecutionEnvironment env = StreamExecutionEnvironment

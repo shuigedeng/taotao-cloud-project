@@ -7,10 +7,10 @@ import java.util.Collection;
 import java.util.List;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.typeutils.TypeSerializer;
+import org.apache.flink.streaming.api.windowing.assigners.WindowAssigner;
 import org.apache.flink.streaming.api.windowing.assigners.WindowAssigner.WindowAssignerContext;
 import org.apache.flink.table.data.RowData;
 import org.apache.flink.table.runtime.operators.window.TimeWindow;
-import org.apache.flink.table.runtime.operators.window.assigners.WindowAssigner;
 
 public class SlidingEventTimeWindows extends WindowAssigner<Object, TimeWindow> {
 

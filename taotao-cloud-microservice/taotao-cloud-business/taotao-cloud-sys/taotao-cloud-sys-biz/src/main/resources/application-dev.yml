@@ -516,6 +516,16 @@ elasticjob:
         script.command.line: "echo Manual SCRIPT Job: "
 
 spring:
+  task:
+    execution:
+      mode: FORCE
+      thread-name-prefix: ttc-task-
+      pool:
+        core-size: 16
+        max-size: 200
+        queue-capacity: 500
+        allow-core-thread-timeout: true
+        keep-alive: 60s
   file-storage: #文件存储配置，不使用的情况下可以不写
     default-platform: minio #默认使用的存储平台
     thumbnail-suffix: ".min.jpg" #缩略图后缀，例如【.min.jpg】【.png】

@@ -103,6 +103,16 @@ arthas:
   tunnel-server: ws://192.168.218.2:7777/ws
 
 spring:
+  task:
+    execution:
+      mode: FORCE
+      thread-name-prefix: ttc-task-
+      pool:
+        core-size: 16
+        max-size: 200
+        queue-capacity: 500
+        allow-core-thread-timeout: true
+        keep-alive: 60s
   config:
     activate:
       on-profile: dev
