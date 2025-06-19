@@ -5,7 +5,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/license-Apache%202-green" alt="License"/>
   <img src="https://img.shields.io/badge/taotao--cloud--project-2025.07-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring-6.2.7-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring-6.2.8-red" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_boot-3.5.0-orange" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud-2025.0.0-yellowgree" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud_alibaba-2023.0.3.3-blue" alt="Downloads"/>
@@ -22,7 +22,7 @@
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-**taotao-cloud** (taotao云平台) 基于gradle8.14.2、jdk21, 支持graalvm21, 采用最新的spring 6.2.7、SpringBoot 3.5.0、SpringCloud 2025.0.0、SpringSecurity 6.5.0、Nacos 3.0.1、Mybatis-Plus 3.5.12、Redis 7.4.0等框架，开发的一款企业级微服务架构的云服务平台， 
+**taotao-cloud** (taotao云平台) 基于gradle8.14.2、jdk21, 支持graalvm21, 采用最新的spring 6.2.8、SpringBoot 3.5.0、SpringCloud 2025.0.0、SpringSecurity 6.5.0、Nacos 3.0.1、Mybatis-Plus 3.5.12、Redis 7.4.0等框架，开发的一款企业级微服务架构的云服务平台， 
 
 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
 
@@ -231,7 +231,7 @@ CLOUD:
 
 | 依赖                   | 版本               |
 |----------------------|------------------|
-| Spring               | 6.2.7            |
+| Spring               | 6.2.8            |
 | Spring Boot          | 3.5.0            |
 | Spring Cloud         | 2025.0.0         |
 | Spring Cloud Alibaba | 2023.0.3.3       |
