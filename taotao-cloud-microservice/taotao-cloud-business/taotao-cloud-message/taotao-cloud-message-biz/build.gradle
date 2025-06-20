@@ -81,7 +81,7 @@ configurations {
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
         resolutionStrategy {
-            //force "org.codehaus.groovy:groovy:3.0.24"
+            //force "org.codehaus.groovy:groovy:3.0.25"
             force 'org.antlr:antlr4:4.13.2'
         }
 

@@ -215,7 +215,7 @@ configurations {
         //implementation 'com.alibaba:fastjson:2.0.57!!'
 
         resolutionStrategy {
-            force "org.codehaus.groovy:groovy:3.0.24"
+            force "org.codehaus.groovy:groovy:3.0.25"
             force 'org.antlr:antlr4:4.13.2'
             force 'net.minidev:json-smart:2.5.2'
             //todo 临时使用

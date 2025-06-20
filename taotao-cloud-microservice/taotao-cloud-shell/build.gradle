@@ -35,8 +35,8 @@ dependencies {
     implementation "com.github.whvcse:easy-captcha:1.6.2"
     implementation "jakarta.servlet:jakarta.servlet-api"
 
-    implementation "org.eclipse.jgit:org.eclipse.jgit:7.2.1.202505142326-r"
-    implementation "org.eclipse.jgit:org.eclipse.jgit.archive:7.2.1.202505142326-r"
+    implementation "org.eclipse.jgit:org.eclipse.jgit:7.3.0.202506031305-r"
+    implementation "org.eclipse.jgit:org.eclipse.jgit.archive:7.3.0.202506031305-r"
 
     implementation "org.springframework.boot:spring-boot-autoconfigure"
 
@@ -70,7 +70,7 @@ configurations {
         //implementation 'com.alibaba:fastjson:2.0.57!!'
 
         resolutionStrategy {
-            force "org.codehaus.groovy:groovy:3.0.24"
+            force "org.codehaus.groovy:groovy:3.0.25"
             force 'org.antlr:antlr4:4.13.2'
             force 'net.minidev:json-smart:2.5.2'
             //todo 临时使用
