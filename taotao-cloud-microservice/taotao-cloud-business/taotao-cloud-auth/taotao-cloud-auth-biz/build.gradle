@@ -40,7 +40,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-flowengine"
 
     //https://central.sonatype.com/artifact/org.springframework.session/spring-session-data-redis
-    implementation 'org.springframework.session:spring-session-data-redis:3.5.0'
+    implementation 'org.springframework.session:spring-session-data-redis:3.5.1'
 
     //https://central.sonatype.com/artifact/com.github.binarywang/weixin-java-pay?smo=true
     implementation 'com.github.binarywang:weixin-java-mp:4.7.5-20250529.111829'
@@ -129,9 +129,9 @@ configurations {
             force "org.codehaus.groovy:groovy:3.0.24"
             force 'org.antlr:antlr4:4.13.2'
             force 'net.minidev:json-smart:2.5.2'
-            force 'org.bouncycastle:bcprov-jdk18on:1.80'
-            force 'org.bouncycastle:bcpkix-jdk18on:1.80'
-            force 'org.bouncycastle:bcutil-jdk18on:1.80'
+            force 'org.bouncycastle:bcprov-jdk18on:1.81'
+            force 'org.bouncycastle:bcpkix-jdk18on:1.81'
+            force 'org.bouncycastle:bcutil-jdk18on:1.81'
             force 'org.webjars.npm:csstype:3.1.3'
             force 'org.webjars.npm:postcss:8.4.39'
             force 'org.webjars.npm:nanoid:4.0.2'
