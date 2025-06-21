@@ -63,12 +63,6 @@ buildscript {
 
         maven { url = "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
     }
-
-//    dependencies {
-//        //https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html#configuration-intellij-extension
-//        //https://plugins.gradle.org/plugin/org.jetbrains.intellij
-//        classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:1.17.4"
-//    }
 }
 
 plugins {
@@ -90,7 +84,6 @@ repositories {
 }
 
 apply plugin: "java"
-//apply plugin: "org.jetbrains.intellij"
 
 dependencies {
     intellijPlatform {
@@ -283,6 +276,7 @@ intellijPlatform {
 //    testIdePerformance
 //}
 
+//老版本的配置
 ////version "3.2022.15"
 //
 //// 配置开发过程中运行的 IDEA 沙盒信息
