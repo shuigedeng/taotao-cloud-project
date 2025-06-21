@@ -122,7 +122,7 @@ dependencies {
 intellijPlatform {
     buildSearchableOptions = true
     //instrumentCode = true
-    projectName = project.name
+    projectName = "TaoTaoToolKit"
     //sandboxContainer = '...'
 
     pluginConfiguration {

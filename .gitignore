@@ -16,6 +16,7 @@ target/
 .settings
 .gradle
 .springBeans
+.intellijPlatform
 *.log
 *.hprof
 
