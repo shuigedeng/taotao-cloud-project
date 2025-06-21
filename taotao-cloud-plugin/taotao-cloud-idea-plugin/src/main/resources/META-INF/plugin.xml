@@ -1,16 +1,16 @@
 <!--https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html?from=jetbrains.org-->
-<idea-plugin>
+<idea-plugin require-restart="false" >
 
 	<!-- 插件唯一id，不能和其他插件项目重复，所以推荐使用com.xxx.xxx的格式 插件不同版本之间不能更改，若没有指定，则与插件名称相同 -->
 	<id>com.taotao.cloud.idea.plugin</id>
 	<!-- 插件名称，别人在官方插件库搜索你的插件时使用的名称 -->
 	<name>TaoTaoToolKit</name>
 	<!-- 供应商主页和email-->
-	<vendor
-		email="981376577@qq.com"
-		url="https://taotaocloud.top">
+	<vendor email="981376577@qq.com" url="https://taotaocloud.top">
 		taotao cloud
 	</vendor>
+
+	<!--<resource-bundle>messages.MyBundle</resource-bundle>-->
 
 	<!-- 插件的描述 -->
 	<description><![CDATA[
@@ -57,15 +57,15 @@
 	<depends>com.intellij.modules.lang</depends>
 	<depends>com.intellij.modules.platform</depends>
 	<depends>com.intellij.java</depends>
-	<depends>com.intellij.database</depends>
+	<depends>com.intellij.gradle</depends>
+	<depends>org.intellij.groovy</depends>
+	<depends>com.intellij.copyright</depends>
 	<depends>com.intellij.spring</depends>
 	<depends>com.intellij.spring.boot</depends>
-	<depends>org.jetbrains.plugins.yaml</depends>
 	<depends>org.intellij.intelliLang</depends>
-	<!--<depends>com.intellij.properties</depends>-->
-	<!--<depends>org.jetbrains.plugins.yaml</depends>-->
-	<!--<depends>org.intellij.intelliLang</depends>-->
-
+	<depends>com.intellij.modules.json</depends>
+	<depends>org.jetbrains.plugins.yaml</depends>
+	<depends>org.intellij.plugins.markdown</depends>
 
 	<!-- application components -->
 <!--	<application-components>-->
