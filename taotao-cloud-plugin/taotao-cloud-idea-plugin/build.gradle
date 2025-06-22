@@ -126,7 +126,7 @@ intellijPlatform {
     //sandboxContainer = '...'
 
     pluginConfiguration {
-        id = 'TaoTaoToolKit'
+        id = 'com.taotao.cloud.idea.plugin'
         name = 'TaoTaoToolKit'
         version = '2025.07'
         description =
