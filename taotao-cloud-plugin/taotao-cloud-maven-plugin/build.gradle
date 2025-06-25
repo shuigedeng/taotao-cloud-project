@@ -1,3 +1,6 @@
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 buildscript {
     repositories {
         mavenLocal()
@@ -63,21 +66,33 @@ buildscript {
 plugins {
     id "java-library"
 
+    //https://docs.freefair.io/gradle-plugins/8.14/reference/
+    //https://github.com/freefair/gradle-plugins
     //https://github.com/freefair/gradle-plugins/tree/master/examples/test-maven-plugin
     //https://plugins.gradle.org/plugin/io.freefair.maven-plugin
-    id "io.freefair.maven-plugin" version "8.13.1"
+    id "io.freefair.maven-plugin" version "8.14"
 
-//    //https://github.com/britter/maven-plugin-development/blob/main/sample/gradle-producer-build
-//    //https://plugins.gradle.org/plugin/de.benediktritter.maven-plugin-development
-//    id "de.benediktritter.maven-plugin-development" version "0.4.3"
-//    id "maven-publish"
+    //https://gradlex.org/maven-plugin-development/
+    ////https://github.com/gradlex-org/maven-plugin-development
+    ////https://plugins.gradle.org/plugin/org.gradlex.maven-plugin-development
+    //id "org.gradlex.maven-plugin-development" version "1.0.3"
+    //id "maven-publish"
 
-//    //https://github.com/liferay/liferay-portal/blob/master/modules/sdk/gradle-plugins-maven-plugin-builder
-//    //https://plugins.gradle.org/plugin/com.liferay.maven.plugin.builder
-//    id "com.liferay.maven.plugin.builder" version "2.0.3"
+    ////https://github.com/liferay/liferay-portal/blob/master/modules/sdk/gradle-plugins-maven-plugin-builder
+    ////https://plugins.gradle.org/plugin/com.liferay.maven.plugin.builder
+    //id "com.liferay.maven.plugin.builder" version "2.0.3"
+
+    //https://github.com/vanniktech/gradle-maven-publish-plugin
+    //https://vanniktech.github.io/gradle-maven-publish-plugin/central/v
+    //https://vanniktech.github.io/gradle-maven-publish-plugin/other/
+    id "com.vanniktech.maven.publish" version "0.32.0"
 }
 
+import com.vanniktech.maven.publish.SonatypeHost
+import com.vanniktech.maven.publish.JavaPlatform
+
 apply plugin: "io.freefair.maven-plugin"
+apply plugin: 'com.vanniktech.maven.publish'
 
 description = "Maven插件模块"
 
@@ -97,7 +112,234 @@ dependencies {
     testImplementation "org.assertj:assertj-core:3.27.3"
 }
 
-//apply plugin: "de.benediktritter.maven-plugin-development"
+
+// 执行
+def enablePreview = '--enable-preview'
+tasks.withType(JavaExec).configureEach {
+    jvmArgs += enablePreview
+}
+
+// 测试
+tasks.withType(Test).configureEach {
+    jvmArgs += enablePreview
+}
+
+javadoc {
+    failOnError false
+
+    options {
+        author true
+        version true
+        title project.name
+        links "https://docs.oracle.com/en/java/javase/21/docs/api"
+    }
+
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+    options.addBooleanOption('-enable-preview', true)
+    options.addStringOption('-release', '21')
+
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
+
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile).configureEach {
+        options.compilerArgs += "--enable-preview"
+    }
+    tasks.withType(JavaExec).configureEach {
+        jvmArgs += "--enable-preview"
+    }
+
+    tasks.withType(JavaCompile) {
+        options.compilerArgs += [
+                '-Xlint:unchecked',
+                '-Xlint:deprecation',
+                '--enable-preview',
+                '--add-exports=java.desktop/sun.font=ALL-UNNAMED',
+                '--add-exports=java.base/sun.reflect.generics.tree=ALL-UNNAMED',
+                '--add-exports=java.base/sun.net.www.protocol.ftp=ALL-UNNAMED',
+                '--add-exports=java.desktop/sun.awt=ALL-UNNAMED',
+                '--add-exports=java.desktop/sun.font=ALL-UNNAMED',
+                '--add-exports=java.base/sun.security.action=ALL-UNNAMED',
+                '--add-exports=java.base/java.lang=ALL-UNNAMED',
+                '--add-exports=java.base/java.lang.reflect=ALL-UNNAMED',
+                '--add-exports=java.base/java.lang.invoke=ALL-UNNAMED',
+                '--add-exports=java.base/java.util=ALL-UNNAMED',
+                '--add-exports=java.base/sun.net=ALL-UNNAMED',
+                '--add-exports=java.base/java.math=ALL-UNNAMED',
+                '--add-exports=java.base/sun.reflect.annotation=ALL-UNNAMED',
+                '--add-exports=java.base/sun.net=ALL-UNNAMED',
+                '--add-exports=java.desktop/sun.awt=ALL-UNNAMED',
+                '--add-exports=java.desktop/sun.font=ALL-UNNAMED',
+                '--add-exports=jdk.management/com.sun.management.internal=ALL-UNNAMED',
+                '--add-exports=java.base/sun.security.action=ALL-UNNAMED',
+                '--add-exports=java.base/java.lang=ALL-UNNAMED',
+                '--add-exports=java.base/java.math=ALL-UNNAMED',
+                '--add-exports=java.base/java.util=ALL-UNNAMED',
+                '--add-exports=java.base/sun.util.calendar=ALL-UNNAMED',
+                '--add-exports=java.base/java.util.concurrent=ALL-UNNAMED',
+                '--add-exports=java.base/java.util.concurrent.locks=ALL-UNNAMED',
+                '--add-exports=java.base/java.security=ALL-UNNAMED',
+                '--add-exports=java.base/jdk.internal.loader=ALL-UNNAMED',
+                '--add-exports=java.management/com.sun.jmx.mbeanserver=ALL-UNNAMED',
+                '--add-exports=java.base/java.net=ALL-UNNAMED',
+                '--add-exports=java.base/sun.nio.ch=ALL-UNNAMED',
+                '--add-exports=java.management/java.lang.management=ALL-UNNAMED',
+                '--add-exports=jdk.management/com.sun.management.internal=ALL-UNNAMED',
+                '--add-exports=java.management/sun.management=ALL-UNNAMED',
+                '--add-exports=java.base/sun.security.action=ALL-UNNAMED',
+                '--add-exports=java.management/java.lang.management=ALL-UNNAMED',
+                '--add-exports=jdk.management/com.sun.management.internal=ALL-UNNAMED',
+                '--add-exports=java.management/sun.management=ALL-UNNAMED',
+                '--add-exports=java.base/java.time=ALL-UNNAMED',
+                '--add-exports=java.base/java.util.concurrent=ALL-UNNAMED',
+                '--add-exports=java.base/java.util.concurrent.locks=ALL-UNNAMED',
+                '--add-exports=java.base/java.security=ALL-UNNAMED',
+                '--add-exports=java.base/jdk.internal.loader=ALL-UNNAMED',
+                '--add-exports=java.management/com.sun.jmx.mbeanserver=ALL-UNNAMED',
+                '--add-exports=java.base/java.net=ALL-UNNAMED',
+                '--add-exports=java.base/sun.nio.ch=ALL-UNNAMED',
+                '--add-exports=java.base/java.lang=ALL-UNNAMED',
+                '--add-exports=java.base/java.math=ALL-UNNAMED',
+                '--add-exports=java.base/java.util=ALL-UNNAMED',
+                '--add-exports=java.base/sun.util.calendar=ALL-UNNAMED',
+                '--add-exports=java.base/sun.net.util=ALL-UNNAMED',
+                '--add-exports=java.base/sun.net.util=ALL-UNNAMED'
+        ]
+    }
+}
+
+jar {
+    enabled = true
+    archiveClassifier = ""
+
+    manifest {
+        attributes(
+                'Implementation-Title': project.name,
+                'Implementation-Version': project.version,
+                'Implementation-Vendor': 'Apache Software Foundation',
+                'Implementation-Vendor-Id': project.group,
+                'Specification-Version': LocalDateTime.now().getYear(),
+                'Specification-Vendor': 'Apache Software Foundation',
+                'Specification-Title': project.name,
+                'Built-By': 'shuigedeng',
+                'Automatic-Module-Name': project.name.replace("-", "."),
+                'Implementation-URL': "https://github.com/shuigedeng/taotao-cloud-project",
+                'Build-Jdk-Spec': JavaVersion.VERSION_21.toString(),
+                'Bundle-DocURL': 'https://github.com/shuigedeng/taotao-cloud-project',
+                'Built-Gradle': gradle.gradleVersion,
+                'Build-OS': System.getProperty("os.name"),
+                'Build-Jdk': System.getProperty("java.version"),
+                'Build-Timestamp': LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+        )
+    }
+}
+
+
+tasks.register('sourcesJar', Jar) {
+    dependsOn classes
+    //from sourceSets.main.allJava
+    from sourceSets.main.allSource
+
+    archiveClassifier = 'sources'
+}
+
+tasks.register('javadocJar', Jar) {
+    dependsOn javadoc
+    from javadoc
+    archiveClassifier = 'javadoc'
+}
+
+mavenPublishing {
+    publishing {
+        repositories {
+            maven {
+                name = "AliyunNew"
+                if (project.version.endsWith("-SNAPSHOT")) {
+                    url = "https://packages.aliyun.com/60516c4824e1e6fbecd22990/maven/2085441-snapshot-djviiu"
+                } else {
+                    url = "https://packages.aliyun.com/60516c4824e1e6fbecd22990/maven/2085441-release-8v0qbs"
+                }
+                // username and password (a personal Github access token) should be specified as
+                // `githubPackagesUsername` and `githubPackagesPassword` Gradle properties or alternatively
+                // as `ORG_GRADLE_PROJECT_githubPackagesUsername` and `ORG_GRADLE_PROJECT_githubPackagesPassword`
+                // environment variables
+                allowInsecureProtocol = true
+                credentials {
+                    username = findProperty("mavenUsernameNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME_NEW")
+                    password = findProperty("mavenPasswordNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD_NEW")
+                }
+            }
+
+            maven {
+                name = "GitHub"
+                url = uri("https://maven.pkg.github.com/shuigedeng/taotao-cloud-project")
+                credentials {
+                    username = findProperty("githubUsername") ?: System.getenv("TAOTAO_CLOUD_GITHUB_USERNAME")
+                    password = findProperty("githubPassword") ?: System.getenv("TAOTAO_CLOUD_GITHUB_TOKEN")
+                }
+            }
+        }
+    }
+
+    // 配置坐标,参数一要和命名空间一致，参二为项目名(GroupId),参三为版本号 "1.0.0"
+    coordinates(project.group.toString(), project.name, project.version.toString())
+
+    // 配置 pom 文件信息
+    pom {
+        // 项目名
+        name = project.name
+        // 项目描述
+        description = project.name
+        // 项目主页
+        url = "https://github.com/shuigedeng/taotao-cloud-project.git"
+
+        properties = [
+                "java.version": JavaVersion.VERSION_21.toString(),
+                "maven.compiler.source": JavaVersion.VERSION_21.toString(),
+                "maven.compiler.target": JavaVersion.VERSION_21.toString(),
+                "project.build.sourceEncoding": "UTF-8",
+                "project.reporting.outputEncoding": "UTF-8",
+                "spring-boot-dependencies.version"   : "3.5.3",
+                "taotao-cloud-dependencies.version"   : rootProject.version,
+                "taotao-boot-dependencies.version"   : rootProject.version
+        ]
+
+        //开源许可
+        licenses {
+            license {
+                name = "The Apache License, Version 2.0"
+                url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+                distribution = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+            }
+        }
+        //开发者信息
+        developers {
+            developer {
+                name = "shuigedeng"
+                url = "https://github.com/shuigedeng"
+                email = "981376577@qq.com"
+            }
+        }
+        //照着仓库地址填写
+        scm {
+            connection = "scm:git:git@github.com:shuigedeng/taotao-cloud-project.git"
+            developerConnection = "scm:git:ssh://git@github.com:shuigedeng/taotao-cloud-project.git"
+            url = "https://github.com/shuigedeng/taotao-cloud-project.git"
+        }
+    }
+
+    // 发布到 Sonatype, 参数为 sonatype host,还可以是 SonatypeHost.DEFAULT,SonatypeHost.S0
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+
+    //进行签名
+    //signAllPublications()
+}
+
+//apply plugin: "org.gradlex.maven-plugin-development"
 //mavenPlugin {
 //    helpMojoPackage = 'org.example.help'
 //    mojos {
