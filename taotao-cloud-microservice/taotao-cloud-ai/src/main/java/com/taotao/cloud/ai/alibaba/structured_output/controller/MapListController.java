@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.structured;
+package com.taotao.cloud.ai.alibaba.structured_output.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

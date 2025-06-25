@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.graph.human;
+package com.taotao.cloud.ai.alibaba.graph.human_node.config;
 
 import com.alibaba.cloud.ai.graph.GraphRepresentation;
 import com.alibaba.cloud.ai.graph.KeyStrategy;

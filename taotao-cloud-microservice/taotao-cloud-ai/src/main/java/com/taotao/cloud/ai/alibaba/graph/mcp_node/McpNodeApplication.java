@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.graph.mcp;
+package com.taotao.cloud.ai.alibaba.graph.mcp_node;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

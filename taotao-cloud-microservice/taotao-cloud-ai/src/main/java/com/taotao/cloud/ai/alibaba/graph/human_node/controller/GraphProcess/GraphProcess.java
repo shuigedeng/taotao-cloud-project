@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.graph.human;
+package com.taotao.cloud.ai.alibaba.graph.human_node.controller.GraphProcess;
 
 import com.alibaba.cloud.ai.graph.CompiledGraph;
 import com.alibaba.cloud.ai.graph.NodeOutput;

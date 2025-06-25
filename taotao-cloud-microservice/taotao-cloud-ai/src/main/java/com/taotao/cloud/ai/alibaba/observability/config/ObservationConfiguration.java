@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.observability.src.main.java.com.spring.ai.tutorial.observability.config;
+package com.taotao.cloud.ai.alibaba.observability.config;
 
 import io.micrometer.observation.Observation;
 import io.micrometer.observation.ObservationHandler;

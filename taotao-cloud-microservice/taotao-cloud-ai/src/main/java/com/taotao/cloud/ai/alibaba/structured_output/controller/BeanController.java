@@ -1,6 +1,6 @@
-package com.taotao.cloud.ai.alibaba.structured;
+package com.taotao.cloud.ai.alibaba.structured_output.controller;
 
-import com.spring.ai.tutorial.outparser.model.entity.BeanEntity;
+import com.taotao.cloud.ai.alibaba.structured_output.entity.BeanEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;

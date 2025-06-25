@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.chat.deepseek;
+package com.taotao.cloud.ai.alibaba.chat.deepseek_chat.controller;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.http.MediaType;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.structured;
+package com.taotao.cloud.ai.alibaba.structured_output.entity;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 

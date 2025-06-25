@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.graph.stream;
+package com.taotao.cloud.ai.alibaba.graph.stream_node.controller;
 
 import com.alibaba.cloud.ai.graph.CompiledGraph;
 import com.alibaba.cloud.ai.graph.NodeOutput;

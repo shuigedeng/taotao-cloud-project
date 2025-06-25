@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.graph.parallel;
+package com.taotao.cloud.ai.alibaba.graph.parallel_node.controller;
 
 import com.alibaba.cloud.ai.graph.CompiledGraph;
 import com.alibaba.cloud.ai.graph.OverAllState;

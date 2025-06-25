@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.tool;
+package com.taotao.cloud.ai.alibaba.tool_calling.component.time.function;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.graph.mcp;
+package com.taotao.cloud.ai.alibaba.graph.mcp_node.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

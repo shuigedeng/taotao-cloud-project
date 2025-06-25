@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.graph.stream;
+package com.taotao.cloud.ai.alibaba.graph.stream_node;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

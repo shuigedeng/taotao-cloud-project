@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.vector.vector;
+package com.taotao.cloud.ai.alibaba.vector.vector_elasticsearch.config;
 
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;

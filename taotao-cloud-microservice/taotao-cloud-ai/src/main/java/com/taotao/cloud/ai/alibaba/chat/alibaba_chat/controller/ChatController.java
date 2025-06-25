@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.chat.alibaba;
+package com.taotao.cloud.ai.alibaba.chat.alibaba_chat.controller;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.ai.chat.client.ChatClient;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.observability.src.main.java.com.spring.ai.tutorial.observability.controller;
+package com.taotao.cloud.ai.alibaba.observability.controller;
 
 import com.spring.ai.tutorial.observability.tools.TimeTools;
 import org.springframework.ai.chat.client.ChatClient;

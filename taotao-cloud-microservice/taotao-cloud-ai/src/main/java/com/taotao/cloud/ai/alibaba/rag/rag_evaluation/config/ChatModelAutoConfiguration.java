@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.rag.rag;
+package com.taotao.cloud.ai.alibaba.rag.rag_evaluation.config;
 
 import com.alibaba.cloud.ai.autoconfigure.dashscope.DashScopeChatProperties;
 import com.alibaba.cloud.ai.autoconfigure.dashscope.DashScopeConnectionProperties;

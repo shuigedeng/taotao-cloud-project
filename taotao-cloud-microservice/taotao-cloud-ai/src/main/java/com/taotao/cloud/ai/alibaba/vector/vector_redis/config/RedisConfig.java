@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.vector.vector;
+package com.taotao.cloud.ai.alibaba.vector.vector_redis.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

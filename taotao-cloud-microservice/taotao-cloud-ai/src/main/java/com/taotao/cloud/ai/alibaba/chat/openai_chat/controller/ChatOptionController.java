@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.chat.openai;
+package com.taotao.cloud.ai.alibaba.chat.openai_chat.controller;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.openai.OpenAiChatOptions;

@@ -1,6 +1,5 @@
-package com.taotao.cloud.ai.alibaba.mcp.server.mcp;
+package com.taotao.cloud.ai.alibaba.mcp.server.mcp_stdio_server;
 
-import com.spring.ai.tutorial.mcp.server.service.TimeService;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.method.MethodToolCallbackProvider;
 import org.springframework.boot.SpringApplication;

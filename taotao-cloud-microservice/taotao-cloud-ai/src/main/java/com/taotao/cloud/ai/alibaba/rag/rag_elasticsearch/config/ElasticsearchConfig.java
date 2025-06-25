@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.rag.rag;
+package com.taotao.cloud.ai.alibaba.rag.rag_elasticsearch.config;
 
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;

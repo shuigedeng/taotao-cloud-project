@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.rag.rag;
+package com.taotao.cloud.ai.alibaba.rag.rag_etl_pipeline.controller;
 
 import com.spring.ai.tutorial.rag.model.Constant;
 import org.slf4j.Logger;

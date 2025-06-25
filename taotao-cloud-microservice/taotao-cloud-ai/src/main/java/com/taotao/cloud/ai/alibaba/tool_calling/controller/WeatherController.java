@@ -1,7 +1,5 @@
-package com.taotao.cloud.ai.alibaba.tool;
+package com.taotao.cloud.ai.alibaba.tool_calling.controller;
 
-import com.spring.ai.tutorial.toolcall.component.weather.WeatherProperties;
-import com.spring.ai.tutorial.toolcall.component.weather.method.WeatherTools;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

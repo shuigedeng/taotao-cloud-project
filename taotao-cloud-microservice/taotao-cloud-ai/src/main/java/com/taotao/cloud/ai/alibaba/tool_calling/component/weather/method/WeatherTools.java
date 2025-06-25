@@ -1,9 +1,7 @@
-package com.taotao.cloud.ai.alibaba.tool;
+package com.taotao.cloud.ai.alibaba.tool_calling.component.weather.method;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spring.ai.tutorial.toolcall.component.weather.WeatherProperties;
-import com.spring.ai.tutorial.toolcall.component.weather.WeatherUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.tool.annotation.Tool;

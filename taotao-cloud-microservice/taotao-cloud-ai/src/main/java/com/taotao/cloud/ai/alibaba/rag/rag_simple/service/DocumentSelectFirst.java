@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.rag.rag;
+package com.taotao.cloud.ai.alibaba.rag.rag_simple.service;
 
 import org.springframework.ai.document.Document;
 import org.springframework.ai.rag.Query;

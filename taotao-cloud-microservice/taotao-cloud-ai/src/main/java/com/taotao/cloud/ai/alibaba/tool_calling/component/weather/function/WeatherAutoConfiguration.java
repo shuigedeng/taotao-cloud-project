@@ -1,6 +1,5 @@
-package com.taotao.cloud.ai.alibaba.tool;
+package com.taotao.cloud.ai.alibaba.tool_calling.component.weather.function;
 
-import com.spring.ai.tutorial.toolcall.component.weather.WeatherProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

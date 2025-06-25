@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.tool;
+package com.taotao.cloud.ai.alibaba.tool_calling.component.weather;
 
 import cn.hutool.extra.pinyin.PinyinUtil;
 

@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.rag.rag;
+package com.taotao.cloud.ai.alibaba.rag.rag_etl_pipeline.model;
 
 /**
  * @author yingzi

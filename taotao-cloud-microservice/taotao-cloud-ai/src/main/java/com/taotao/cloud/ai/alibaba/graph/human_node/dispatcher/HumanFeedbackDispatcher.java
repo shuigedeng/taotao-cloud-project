@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.graph.human;
+package com.taotao.cloud.ai.alibaba.graph.human_node.dispatcher;
 
 import com.alibaba.cloud.ai.graph.OverAllState;
 import com.alibaba.cloud.ai.graph.StateGraph;

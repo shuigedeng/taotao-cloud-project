@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.graph.human;
+package com.taotao.cloud.ai.alibaba.graph.human_node;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

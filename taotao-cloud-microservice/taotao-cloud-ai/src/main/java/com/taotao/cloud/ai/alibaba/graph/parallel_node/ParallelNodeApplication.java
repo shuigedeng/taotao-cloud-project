@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.graph.parallel;
+package com.taotao.cloud.ai.alibaba.graph.parallel_node;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.graph.simple.src.main.java.com.spring.ai.tutorial.graph.controller;
+package com.taotao.cloud.ai.alibaba.graph.simple.controller;
 
 import com.alibaba.cloud.ai.graph.CompiledGraph;
 import com.alibaba.cloud.ai.graph.OverAllState;

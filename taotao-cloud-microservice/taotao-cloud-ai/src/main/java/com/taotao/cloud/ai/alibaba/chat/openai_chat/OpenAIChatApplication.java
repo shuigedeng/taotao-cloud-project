@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.chat.openai;
+package com.taotao.cloud.ai.alibaba.chat.openai_chat;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

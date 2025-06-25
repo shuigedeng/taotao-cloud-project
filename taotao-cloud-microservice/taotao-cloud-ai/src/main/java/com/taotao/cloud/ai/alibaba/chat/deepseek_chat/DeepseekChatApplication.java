@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.chat.deepseek;
+package com.taotao.cloud.ai.alibaba.chat.deepseek_chat;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

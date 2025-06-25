@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.rag.rag;
+package com.taotao.cloud.ai.alibaba.rag.rag_simple.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

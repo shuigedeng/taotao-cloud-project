@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.rag.rag;
+package com.taotao.cloud.ai.alibaba.rag.rag_evaluation.controller;
 
 import com.alibaba.cloud.ai.dashscope.chat.DashScopeChatModel;
 import org.slf4j.Logger;

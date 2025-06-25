@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.mcp.client.mcp;
+package com.taotao.cloud.ai.alibaba.mcp.client.mcp_nacos3_client;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.tool.ToolCallbackProvider;

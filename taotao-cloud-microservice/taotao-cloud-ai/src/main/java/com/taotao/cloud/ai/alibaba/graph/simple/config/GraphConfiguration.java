@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.graph.simple.src.main.java.com.spring.ai.tutorial.graph.config;
+package com.taotao.cloud.ai.alibaba.graph.simple.config;
 
 import com.alibaba.cloud.ai.graph.GraphRepresentation;
 import com.alibaba.cloud.ai.graph.KeyStrategy;

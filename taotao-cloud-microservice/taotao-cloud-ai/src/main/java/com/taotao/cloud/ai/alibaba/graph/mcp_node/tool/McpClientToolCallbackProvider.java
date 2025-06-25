@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.graph.mcp;
+package com.taotao.cloud.ai.alibaba.graph.mcp_node.tool;
 
 import com.spring.ai.tutorial.graph.mcp.config.McpNodeProperties;
 import org.apache.commons.compress.utils.Lists;

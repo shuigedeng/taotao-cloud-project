@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.rag.rag;
+package com.taotao.cloud.ai.alibaba.rag.rag_simple.controller;
 
 import com.spring.ai.tutorial.rag.service.DocumentSelectFirst;
 import org.slf4j.Logger;

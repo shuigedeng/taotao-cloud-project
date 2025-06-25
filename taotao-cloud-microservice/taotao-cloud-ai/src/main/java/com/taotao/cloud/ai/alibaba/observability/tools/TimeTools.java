@@ -1,4 +1,4 @@
-package com.taotao.cloud.ai.alibaba.observability.src.main.java.com.spring.ai.tutorial.observability.tools;
+package com.taotao.cloud.ai.alibaba.observability.tools;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
