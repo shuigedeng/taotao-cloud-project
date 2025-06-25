@@ -102,51 +102,52 @@ gradlePlugin {
     vcsUrl = 'https://github.com/shuigedeng/taotao-cloud-project.git'
     description = 'taotao-cloud-gradle-plugin'
 
+    //tags里面不允许有gradle plugin
     plugins {
         greetingsPlugin {
-            id = 'io.github.shuigedeng'
+            id = 'com.taotao.cloud.gradle.plugin'
             implementationClass = 'com.taotao.cloud.gradle.plugin.MyPlugin'
             displayName = "taotao-cloud-plugin gradle plugin"
             description = 'taotao-cloud-plugin gradle plugin Please use!'
             tags = ['taotao', 'cloud']
         }
         bomPlugin {
-            id = "io.github.shuigedeng.bom"
+            id = "com.taotao.cloud.gradle.plugin.bom"
             implementationClass = "com.taotao.cloud.gradle.springboot.plugin.BomPlugin"
             displayName = 'springboot bom plugin'
             description = 'springboot bom plugin'
             tags = ['taotao', 'cloud', 'bom']
         }
         modulePlugin {
-            id = "io.github.shuigedeng.module"
+            id = "com.taotao.cloud.gradle.plugin.module"
             implementationClass = "com.taotao.cloud.gradle.springboot.plugin.ModulePlugin"
             displayName = 'springboot module plugin'
             description = 'springboot module plugin'
             tags = ['taotao', 'cloud', 'module']
         }
         commonPlugin {
-            id = "io.github.shuigedeng.common"
+            id = "com.taotao.cloud.gradle.plugin.common"
             implementationClass = "com.taotao.cloud.gradle.springboot.plugin.CommonPlugin"
             displayName = 'springboot common plugin'
             description = 'springboot common plugin'
             tags = ['taotao', 'cloud', 'common']
         }
         rootProjectPlugin {
-            id = "io.github.shuigedeng.root"
+            id = "com.taotao.cloud.gradle.plugin.root"
             implementationClass = "com.taotao.cloud.gradle.springboot.plugin.RootPlugin"
             displayName = 'springboot root plugin'
             description = 'springboot root plugin'
             tags = ['taotao', 'cloud', 'root']
         }
         servicePlugin {
-            id = "io.github.shuigedeng.service"
+            id = "com.taotao.cloud.gradle.plugin.service"
             implementationClass = "com.taotao.cloud.gradle.springboot.plugin.ServicePlugin"
             displayName = 'springboot service plugin'
             description = 'springboot service plugin'
             tags = ['taotao', 'cloud', 'service']
         }
         //deployedPlugin {
-        //    id = "io.github.shuigedeng.deployed"
+        //    id = "com.taotao.cloud.gradle.plugin.deployed"
         //    implementationClass = "com.taotao.cloud.gradle.springboot.plugin.DeployedPlugin"
         //    displayName = 'springboot deployed plugin'
         //    description = 'springboot deployed plugin'

@@ -22,15 +22,15 @@
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-**taotao-cloud** (taotao云平台) 基于gradle8.14.2、jdk21, 支持graalvm21, 采用最新的spring 6.2.8、SpringBoot 3.5.3、SpringCloud 2025.0.0、SpringSecurity 6.5.0、Nacos 3.0.1、Mybatis-Plus 3.5.12、Redis 7.4.0等框架，开发的一款企业级微服务架构的云服务平台， 
+**taotao-cloud(taotao云平台)**  基于**gradle8.14.2** 、**jdk21**, 支持**graalvm21**, 采用最新的**spring 6.2.8**、**SpringBoot 3.5.3**、**SpringCloud 2025.0.0**、**SpringSecurity 6.5.0**、**Nacos 3.0.1**、**Mybatis-Plus 3.5.12**、**Redis 7.4.0**等框架，开发的一款企业级微服务架构的云服务平台， 
 
-具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
+具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循**SpringBoot**编程思想，高度模块化和可配置化。
 
 具备服务注册&发现、配置中心、服务限流、熔断降级、监控报警、多数据源、工作流、高亮搜索、定时任务、分布式缓存、分布式事务、分布式存储等功能，用于快速构建微服务项目。
 
-目前支持Shell、Docker、Docker-compose、K8s、Github/Genkins CI/CD等多种部署方式，实现RBAC权限。 
+目前支持**Shell**、**Docker**、**Docker-Compose**、**K8s**、**Github/Genkins CI/CD**等多种部署方式，实现**RBAC**权限。 
 
-遵循阿里代码规范，采用restful设计风格及DDD(领域驱动设计)思想，代码简洁、架构清晰，非常适合作为基础框架使用。基于DDD（领域驱动设计）的轻量级快速开发框架，致力于企业技术架构的可沉淀和可传承，解决复杂业务场景的扩展问题
+遵循阿里代码规范，采用**restful**设计风格及**DDD**(领域驱动设计)思想，代码简洁、架构清晰，非常适合作为基础框架使用。基于**DDD**（领域驱动设计）的轻量级快速开发框架，致力于企业技术架构的可沉淀和可传承，解决复杂业务场景的扩展问题
 
 **仓库的目的**: 工作以来的技术总结和技术沉淀(业余时间进行开发) **仓库代码中不涉及公司任何业务代码**
 
@@ -41,7 +41,7 @@
   提供高性能,更方便的基础服务接口及工具，完全可以在实际工作中使用
 
 
-- **SASS商城模块** 基于**微服务模块**构建的前后端分离的B2B2C商城系统, 支持商家入驻支, 持分布式部署,
+- **SASS商城模块** 基于**微服务模块**构建的前后端分离的**B2B2C**商城系统, 支持商家入驻支, 持分布式部署,
   使用**github action CI/CD**持续集成, 前后端均使用**kubernetes**部署，
   各个API独立, 管理前端使用**vue3 ant-design-vue**开发, 移动端使用**taro taro-ui**开发, **
   系统全端全部代码开源**
@@ -59,11 +59,11 @@
 
   > 数据源模块：业务数据写入 **MySQL** 数据库,生成的日志数据被写入 **Kafka**, **rocketmq** 消息队列
 
-  > 数据采集模块：**Dinky**开发**FlinkSQL**，消费**Kafka**中的日志数据，并将其写入**Doris**、**Paimon** 、**Hudi**的在线数据存储（ODS）层。使用**DolphinScheduler**配置**SeaTunnel**任务，同步**MySQL**中的业务数据到**Doris**的ODS层。**FlinkSQL/CDC**从**Kafka**和**MySQL**采集数据，分别写入**Paimon** 、**Hudi**的ODS层。
+  > 数据采集模块：**Dinky**开发**FlinkSQL**，消费**Kafka**中的日志数据，并将其写入**Doris**、**Paimon** 、**Hudi**的在线数据存储（**ODS**）层。使用**DolphinScheduler**配置**SeaTunnel**任务，同步**MySQL**中的业务数据到**Doris**的**ODS**层。**FlinkSQL/CDC**从**Kafka**和**MySQL**采集数据，分别写入**Paimon** 、**Hudi**的**OD**S层。
 
-  > 数仓模块：遵循标准的ODS(数据存储)->DWD(数据仓库明细层)/DIM(维度数据层)->DWS(数据服务层)->ADS(应用数据存储)的四级数据分层架构。数据在**Doris** 、**Paimon**、**Hudi**中通过批量和实时两种调度方式流转。  
+  > 数仓模块：遵循标准的**ODS**(数据存储)->**DWD**(数据仓库明细层)/**DIM**(维度数据层)->**DWS**(数据服务层)->**ADS**(应用数据存储)的四级数据分层架构。数据在**Doris** 、**Paimon**、**Hudi**中通过批量和实时两种调度方式流转。  
 
-  > 数据可视化：ADS层和DWS层的数据可以利用**SuperSet**和**DataRT**工具进行报表和数据大屏的制作、展示
+  > 数据可视化：**ADS**层和**DWS**层的数据可以利用**SuperSet**和**DataRT**工具进行报表和数据大屏的制作、展示
 
 
 - **python模块** 主要是集成了基于**django**的web开发, 基于**scrapy**爬虫开发, **homeassistant**
@@ -87,20 +87,18 @@ Requires:
 ```
 JAVA_VERSION >= 21 (推荐使用graalvm-jdk-21)
 GRALE_VERSION >= 8.14.2
-IDEA_VERSION >= 2025.1
+IDEA_VERSION >= 2025.1.3
 ```
 
 Gradle:
 
-```
-BOOT: 
+```groovy
 dependencyManagement{
   imports {
     mavenBom "io.github.shuigedeng:taotao-boot-dependencies:2025.07"
   }
 }
 
-CLOUD:
 dependencyManagement{
   imports {
     mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2025.07"
@@ -112,8 +110,7 @@ api "io.github.shuigedeng:taotao-boot-starter-web"
 
 Maven:
 
-```
-BOOT:
+```xml
 <dependencyManagement>
   <dependencies>
     <dependency>
@@ -126,7 +123,6 @@ BOOT:
   </dependencies>
 </dependencyManagement>
 
-CLOUD:
 <dependencyManagement>
   <dependencies>
     <dependency>
@@ -167,13 +163,41 @@ CLOUD:
 
 * **taotao-cloud-sys**: [https://github.com/shuigedeng/taotao-cloud-sys](https://github.com/shuigedeng/taotao-cloud-sys)
 
-## 6. 演示地址 (云服务器已到期)
+
+## 6.基于taotao-cloud-project构建的插件
+
+* **idea插件地址**: [TaoTaoToolKit](https://plugins.jetbrains.com/plugin/20538-taotaotoolkit)
+
+
+* **gradle插件地址**: 
+
+1. [https://plugins.gradle.org/plugin/io.github.shuigedeng.bom](https://plugins.gradle.org/plugin/io.github.shuigedeng.bom)
+2. [https://plugins.gradle.org/plugin/io.github.shuigedeng.module](https://plugins.gradle.org/plugin/io.github.shuigedeng.module)
+3. [https://plugins.gradle.org/plugin/io.github.shuigedeng.common](https://plugins.gradle.org/plugin/io.github.shuigedeng.common)
+4. [https://plugins.gradle.org/plugin/io.github.shuigedeng.root](https://plugins.gradle.org/plugin/io.github.shuigedeng.root)
+5. [https://plugins.gradle.org/plugin/io.github.shuigedeng.service](https://plugins.gradle.org/plugin/io.github.shuigedeng.service)
+
+
+* **maven插件地址**: 
+```xml
+<build>
+	<plugins>
+		<plugin>
+			<groupId>io.github.shuigedeng</groupId>
+			<artifactId>taotao-cloud-maven-plugin</artifactId>
+			<version>2025.07</version>
+		</plugin>
+	</plugins>
+</build>
+```
+
+
+## 7. 演示地址 (云服务器已到期)
 
 * TaotaoCloud脚手架：[https://start.taotaocloud.top/](https://start.taotaocloud.top/)
 * 文档地址：[https://docs.taotaocloud.top](https://docs.taotaocloud.top)
 * 博客地址: [https://blog.taotaocloud.top](https://blog.taotaocloud.top)
-* 代码质量检测结果地址: [https://qodana.taotaocloud.top](https://qodana.taotaocloud.top) (带宽有限,
-  需多刷新几次)
+* 代码质量检测结果地址: [https://qodana.taotaocloud.top](https://qodana.taotaocloud.top) (带宽有限, 需多刷新几次)
 * 商城首页地址: [https://taotaocloud.top](https://taotaocloud.top)
   源码地址: [taotao-cloud-front](https://github.com/shuigedeng/taotao-cloud-ui/tree/main/taotao-cloud-vue3-front)
 * 大屏展示地址: [https://datav.taotaocloud.top](https://datav.taotaocloud.top)
@@ -194,7 +218,7 @@ CLOUD:
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------|---------------------------------------------------|
 | 安卓：[滔滔商城.apk](https://github.com/wuba/Taro-Mortgage-Calculator/raw/e0c432bdc6096a08d9020542e7ce401861026bfa/app-arm64-v8a-release.apk.1.zip) <br> IOS：[滔滔商城.app](https://github.com/wuba/Taro-Mortgage-Calculator/raw/a67459bc6667b0478978621482d33103d04e7538/taroDemo.app.zip)(目前暂不可用) | ![](doc/snapshot/qrcode.png) | ![](doc/snapshot/h5.png)<br>https://m.taotaocloud.top |
 
-## 7. 功能特点
+## 8. 功能特点
 
 * **微服务技术架构**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的 **非功能性需求** 简化开发工作、提高生产率、解决通用问题
 * **主体框架**：采用最新的`Spring Boot 3.5.3`、`Spring Cloud 2025.0.0`、`Spring Cloud Alibaba 2023.0.3.3` 版本进行设计
@@ -227,7 +251,7 @@ CLOUD:
 * **组件化**: 引入组件化的思想实现高内聚低耦合并且高度可配置化
 * **代码规范**: 注重代码规范，严格控制包依赖
 
-## 8. 核心依赖
+## 9. 核心依赖
 
 | 依赖                   | 版本               |
 |----------------------|------------------|
@@ -235,8 +259,6 @@ CLOUD:
 | Spring Boot          | 3.5.3            |
 | Spring Cloud         | 2025.0.0         |
 | Spring Cloud Alibaba | 2023.0.3.3       |
-| Spring Cloud Tencent | 2.0.1.0-2023.0.3 |
-| Spring Cloud huawei  | 1.11.11-2024.0.x |
 | Seata                | 2.3.0            |
 | Sentinel             | 1.8.8            |
 | Spring-kafka         | 3.3.6            |
@@ -258,10 +280,7 @@ CLOUD:
 | Netty                | 4.2.1.Final      |
 
 
-> PS: 借鉴了其他开源项目
-
-
-## 9. 模块说明
+## 10. 模块说明
 
 ```
 taotao-cloud-project -- 父项目
@@ -297,31 +316,29 @@ taotao-cloud-project -- 父项目
 │  │  ├─taotao-cloud-realtime-warehouse -- 实时数仓模块
 ```
 
-## 10.开源共建
+## 11.开源共建
 
-1. 欢迎提交 [pull request](https://github.com/shuigedeng/taotao-cloud-project)
-   ，注意对应提交对应 `dev` 分支
-
-
-2. 欢迎提交 [issue](https://github.com/shuigedeng/taotao-cloud-project/issues)
-   ，请写清楚遇到问题的原因、开发环境、复显步骤。
+1. 欢迎提交 [pull request](https://github.com/shuigedeng/taotao-cloud-project)，注意对应提交对应 `dev` 分支
 
 
-3. 不接受`功能请求`的 [issue](https://github.com/shuigedeng/taotao-cloud-project/issues)
-   ，功能请求可能会被直接关闭。
+2. 欢迎提交 [issue](https://github.com/shuigedeng/taotao-cloud-project/issues)，请写清楚遇到问题的原因、开发环境、复显步骤。
+
+
+3. 不接受`功能请求`的 [issue](https://github.com/shuigedeng/taotao-cloud-project/issues)，功能请求可能会被直接关闭。
 
 
 4. mail: <a href="981376577@qq.com">981376577@qq.com</a>
    | <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=3130998334&site=qq&menu=yes"> QQ:
    981376577</a>
 
-## 11.参与贡献
-
+## 12.参与贡献
 
 > 开发: 目前个人独立开放
 
+> PS: 借鉴了其他开源项目
 
-## 12.项目截图
+
+## 13.项目截图
 
 <table>
     <tr>
@@ -366,7 +383,7 @@ taotao-cloud-project -- 父项目
 [comment]: <> (    </tr>)
 </table>
 
-## 13.基础组件taotao-cloud-starter项目模块 (暂未开源)
+## 14.基础组件taotao-cloud-starter项目模块 (暂未开源)
 
 ```
 +--- Project ':taotao-boot-demo'

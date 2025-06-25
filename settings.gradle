@@ -71,9 +71,9 @@ develocity {
         //    value "Disk usage (output dir)", buildDir.directorySize().toString()
         //}
 
-//        buildScanPublished { PublishedBuildScan scan ->
-//            file("scan-journal.log") << "${new Date()} - ${scan.buildScanId} - ${scan.buildScanUri}\n"
-//        }
+        //buildScanPublished { PublishedBuildScan scan ->
+        //    file("scan-journal.log") << "${new Date()} - ${scan.buildScanId} - ${scan.buildScanUri}\n"
+        //}
 
         background {
             def commitId = "git rev-parse --verify HEAD".execute().text.trim()
