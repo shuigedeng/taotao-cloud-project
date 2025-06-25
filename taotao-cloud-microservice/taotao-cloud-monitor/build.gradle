@@ -37,7 +37,7 @@ dependencies {
     implementation "com.google.protobuf:protobuf-java-util:3.25.5"
 }
 
-mainClassName = "com.taotao.boot.monitor.TaoTaoCloudMonitorApplication"
+mainClassName = "com.taotao.cloud.monitor.TaoTaoCloudMonitorApplication"
 description = "监控中心"
 archivesBaseName = 'taotao-cloud-monitor'
 

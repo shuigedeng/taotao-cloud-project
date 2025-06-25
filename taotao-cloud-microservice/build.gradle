@@ -24,8 +24,8 @@ configure(subprojects){ project ->
             project.name.endsWith("-infrastructure")  ||
             project.name.endsWith("-integration"))){
         //apply from: rootProject.file('gradle/sonar.gradle')
-        apply from: rootProject.file('gradle/shadow.gradle')
-        apply from: rootProject.file('gradle/graalvm.gradle')
+        //apply from: rootProject.file('gradle/shadow.gradle')
+        //apply from: rootProject.file('gradle/graalvm.gradle')
         apply from: rootProject.file('gradle/swagger.gradle')
         apply from: rootProject.file('gradle/smart-doc.gradle')
         apply from: rootProject.file('gradle/springdoc-openapi.gradle')
