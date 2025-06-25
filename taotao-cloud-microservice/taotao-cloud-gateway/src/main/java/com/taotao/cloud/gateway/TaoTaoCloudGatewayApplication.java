@@ -42,6 +42,7 @@ import reactor.netty.ReactorNetty;
 public class TaoTaoCloudGatewayApplication {
 
 	public static void main(String[] args) {
+		System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
 
 		//可以减少connection timed错误 可以提升20%左右的qpc
 		System.setProperty(ReactorNetty.IO_SELECT_COUNT, "1");
@@ -49,7 +50,6 @@ public class TaoTaoCloudGatewayApplication {
 
 		//要想查看Reactor Netty访问时的日志信息，你必须设置如下系统属性：
 		//-Dreactor.netty.http.server.accessLogEnabled=true
-
 		//SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
 		new StartupSpringApplication(TaoTaoCloudGatewayApplication.class)
 			.setTtcBanner()

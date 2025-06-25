@@ -22,8 +22,7 @@ import java.util.Arrays;
  */
 
 @Component
-public class XxlJobAdminConfig implements InitializingBean, DisposableBean,
-	ApplicationEventPublisherAware {
+public class XxlJobAdminConfig implements InitializingBean, DisposableBean, ApplicationEventPublisherAware {
 
     private static XxlJobAdminConfig adminConfig = null;
     public static XxlJobAdminConfig getAdminConfig() {
@@ -127,8 +126,8 @@ public class XxlJobAdminConfig implements InitializingBean, DisposableBean,
     }
 
     public int getLogretentiondays() {
-        if (logretentiondays < 7) {
-            return -1;  // Limit greater than or equal to 7, otherwise close
+        if (logretentiondays < 3) {
+            return -1;  // Limit greater than or equal to 3, otherwise close
         }
         return logretentiondays;
     }
@@ -166,12 +165,13 @@ public class XxlJobAdminConfig implements InitializingBean, DisposableBean,
     }
 
 	private ApplicationEventPublisher applicationEventPublisher;
-	@Override
-	public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
-		this.applicationEventPublisher = applicationEventPublisher;
-	}
 
 	public ApplicationEventPublisher getApplicationEventPublisher() {
 		return applicationEventPublisher;
+	}
+
+	@Override
+	public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+		this.applicationEventPublisher = applicationEventPublisher;
 	}
 }

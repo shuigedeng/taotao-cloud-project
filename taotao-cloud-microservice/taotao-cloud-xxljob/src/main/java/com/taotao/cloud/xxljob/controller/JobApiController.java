@@ -1,7 +1,7 @@
 package com.taotao.cloud.xxljob.controller;
 
-import com.taotao.cloud.xxljob.controller.annotation.PermissionLimit;
 import com.taotao.cloud.xxljob.core.conf.XxlJobAdminConfig;
+import com.taotao.cloud.xxljob.controller.annotation.PermissionLimit;
 import com.xxl.job.core.biz.AdminBiz;
 import com.xxl.job.core.biz.model.HandleCallbackParam;
 import com.xxl.job.core.biz.model.RegistryParam;

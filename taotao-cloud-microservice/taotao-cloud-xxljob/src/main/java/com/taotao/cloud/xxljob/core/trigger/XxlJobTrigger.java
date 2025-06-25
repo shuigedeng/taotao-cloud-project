@@ -1,5 +1,6 @@
 package com.taotao.cloud.xxljob.core.trigger;
 
+import com.google.common.base.Stopwatch;
 import com.taotao.cloud.xxljob.core.conf.XxlJobAdminConfig;
 import com.taotao.cloud.xxljob.core.model.XxlJobGroup;
 import com.taotao.cloud.xxljob.core.model.XxlJobInfo;
@@ -14,11 +15,12 @@ import com.xxl.job.core.biz.model.TriggerParam;
 import com.xxl.job.core.enums.ExecutorBlockStrategyEnum;
 import com.xxl.job.core.util.IpUtil;
 import com.xxl.job.core.util.ThrowableUtil;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.google.common.base.Stopwatch;
+
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 /**
  * xxl-job trigger
  * Created by xuxueli on 17/7/13.
@@ -199,9 +201,8 @@ public class XxlJobTrigger {
         XxlJobAdminConfig.getAdminConfig().getXxlJobLogDao().updateTriggerInfo(jobLog);
 
         XxlJobAdminConfig.getAdminConfig().getApplicationEventPublisher()
-            .publishEvent(new ProcessTriggerEvent(group, jobInfo, jobLog, stopwatch.elapsed(
-                TimeUnit.MILLISECONDS)));
-
+                .publishEvent(new ProcessTriggerEvent(group, jobInfo, jobLog, stopwatch.elapsed(
+                        TimeUnit.MILLISECONDS)));
 
         logger.debug(">>>>>>>>>>> xxl-job trigger end, jobId:{}", jobLog.getId());
     }

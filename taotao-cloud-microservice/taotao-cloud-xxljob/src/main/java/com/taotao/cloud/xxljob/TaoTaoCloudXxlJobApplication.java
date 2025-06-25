@@ -36,7 +36,11 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableDiscoveryClient
 @SpringBootApplication
 public class TaoTaoCloudXxlJobApplication {
+
 	public static void main(String[] args) {
+
+		System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
+
 		new StartupSpringApplication(TaoTaoCloudXxlJobApplication.class)
 			.setTtcBanner()
 			.setTtcProfileIfNotExists("dev")
@@ -44,4 +48,5 @@ public class TaoTaoCloudXxlJobApplication {
 			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 	}
+
 }

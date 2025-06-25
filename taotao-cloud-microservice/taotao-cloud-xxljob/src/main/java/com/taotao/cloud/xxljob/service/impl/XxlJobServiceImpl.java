@@ -155,6 +155,8 @@ public class XxlJobServiceImpl implements XxlJobService {
 		jobInfo.setAddTime(new Date());
 		jobInfo.setUpdateTime(new Date());
 		jobInfo.setGlueUpdatetime(new Date());
+		// remove the whitespace
+		jobInfo.setExecutorHandler(jobInfo.getExecutorHandler().trim());
 		xxlJobInfoDao.save(jobInfo);
 		if (jobInfo.getId() < 1) {
 			return new ReturnT<String>(ReturnT.FAIL_CODE, (I18nUtil.getString("jobinfo_field_add")+I18nUtil.getString("system_fail")) );
@@ -290,7 +292,8 @@ public class XxlJobServiceImpl implements XxlJobService {
 		exists_jobInfo.setScheduleConf(jobInfo.getScheduleConf());
 		exists_jobInfo.setMisfireStrategy(jobInfo.getMisfireStrategy());
 		exists_jobInfo.setExecutorRouteStrategy(jobInfo.getExecutorRouteStrategy());
-		exists_jobInfo.setExecutorHandler(jobInfo.getExecutorHandler());
+		// remove the whitespace
+		exists_jobInfo.setExecutorHandler(jobInfo.getExecutorHandler().trim());
 		exists_jobInfo.setExecutorParam(jobInfo.getExecutorParam());
 		exists_jobInfo.setExecutorBlockStrategy(jobInfo.getExecutorBlockStrategy());
 		exists_jobInfo.setExecutorTimeout(jobInfo.getExecutorTimeout());
@@ -320,7 +323,11 @@ public class XxlJobServiceImpl implements XxlJobService {
 
 	@Override
 	public ReturnT<String> start(int id) {
+		// load and valid
 		XxlJobInfo xxlJobInfo = xxlJobInfoDao.loadById(id);
+		if (xxlJobInfo == null) {
+			return new ReturnT<String>(ReturnT.FAIL.getCode(), I18nUtil.getString("jobinfo_glue_jobid_unvalid"));
+		}
 
 		// valid
 		ScheduleTypeEnum scheduleTypeEnum = ScheduleTypeEnum.match(xxlJobInfo.getScheduleType(), ScheduleTypeEnum.NONE);
@@ -352,8 +359,13 @@ public class XxlJobServiceImpl implements XxlJobService {
 
 	@Override
 	public ReturnT<String> stop(int id) {
+		// load and valid
         XxlJobInfo xxlJobInfo = xxlJobInfoDao.loadById(id);
+		if (xxlJobInfo == null) {
+			return new ReturnT<String>(ReturnT.FAIL.getCode(), I18nUtil.getString("jobinfo_glue_jobid_unvalid"));
+		}
 
+		// stop
 		xxlJobInfo.setTriggerStatus(0);
 		xxlJobInfo.setTriggerLastTime(0);
 		xxlJobInfo.setTriggerNextTime(0);

@@ -32,13 +32,13 @@ decorator:
       json-format: false
       count-query: false
 
-#jasypt:
-#  encryptor:
-#    password: ${TAOTAO_CLOUD_ENCRYPTOR_PASSWORD:taotao-cloud}
-#    algorithm: PBEWITHHMACSHA512ANDAES_256
-#    property:
-#      prefix: "ENC@["
-#      suffix: "]"
+jasypt:
+  encryptor:
+    password: ${TAOTAO_CLOUD_ENCRYPTOR_PASSWORD:taotao-cloud}
+    algorithm: PBEWITHHMACSHA512ANDAES_256
+    property:
+      prefix: "ENC@["
+      suffix: "]"
 
 arthas:
   # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
@@ -135,6 +135,8 @@ redisson:
   #  scanInterval: 1000
 
 spring:
+  autoconfigure:
+    exclude: org.springframework.cloud.function.web.mvc.ReactorAutoConfiguration
   config:
     activate:
       on-profile: dev
@@ -294,7 +296,7 @@ spring:
             class: javax.net.ssl.SSLSocketFactory
   web:
     resources:
-      static-locati ons: classpath:/static/
+      static-locations: classpath:/static/
   mvc:
     servlet:
       load-on-startup: 0
