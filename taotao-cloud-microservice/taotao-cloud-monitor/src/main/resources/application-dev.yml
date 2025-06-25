@@ -103,6 +103,8 @@ arthas:
   tunnel-server: ws://192.168.218.2:7777/ws
 
 spring:
+  autoconfigure:
+    exclude: org.springframework.cloud.function.web.mvc.ReactorAutoConfiguration
   task:
     execution:
       mode: FORCE

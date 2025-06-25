@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.payment.biz.demo.test;
 
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.yungouos.pay.black.PayBlack;
 
 /**

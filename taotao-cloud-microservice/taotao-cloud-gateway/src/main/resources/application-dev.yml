@@ -106,6 +106,8 @@ redisson:
   #  scanInterval: 1000
 
 spring:
+  autoconfigure:
+    exclude: org.springframework.cloud.function.web.flux.ReactorAutoConfiguration
   config:
     activate:
       on-profile: dev
