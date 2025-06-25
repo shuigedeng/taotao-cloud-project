@@ -96,6 +96,7 @@ dependencies {
     testImplementation "org.assertj:assertj-core:3.27.3"
 }
 
+group = "com.taotao.cloud.gradle"
 
 gradlePlugin {
     website = 'https://github.com/shuigedeng/taotao-cloud-project'

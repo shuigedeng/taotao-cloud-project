@@ -171,11 +171,11 @@ Maven:
 
 * **gradle插件地址**: 
 
-1. [https://plugins.gradle.org/plugin/io.github.shuigedeng.bom](https://plugins.gradle.org/plugin/io.github.shuigedeng.bom)
-2. [https://plugins.gradle.org/plugin/io.github.shuigedeng.module](https://plugins.gradle.org/plugin/io.github.shuigedeng.module)
-3. [https://plugins.gradle.org/plugin/io.github.shuigedeng.common](https://plugins.gradle.org/plugin/io.github.shuigedeng.common)
-4. [https://plugins.gradle.org/plugin/io.github.shuigedeng.root](https://plugins.gradle.org/plugin/io.github.shuigedeng.root)
-5. [https://plugins.gradle.org/plugin/io.github.shuigedeng.service](https://plugins.gradle.org/plugin/io.github.shuigedeng.service)
+1. [https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.bom](https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.bom)
+2. [https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.module](https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.module)
+3. [https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.common](https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.common)
+4. [https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.root](https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.root)
+5. [https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.service](https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.service)
 
 
 * **maven插件地址**: 
@@ -253,31 +253,31 @@ Maven:
 
 ## 9. 核心依赖
 
-| 依赖                   | 版本               |
-|----------------------|------------------|
-| Spring               | 6.2.8            |
-| Spring Boot          | 3.5.3            |
-| Spring Cloud         | 2025.0.0         |
-| Spring Cloud Alibaba | 2023.0.3.3       |
-| Seata                | 2.3.0            |
-| Sentinel             | 1.8.8            |
-| Spring-kafka         | 3.3.6            |
-| Roketmq              | 5.2.1            |
-| Spring Security      | 6.5.0            |
-| Mybatis Plus         | 3.5.12           |
-| Hutool               | 6.0.0-M22        |
-| Mysql                | 9.3.0            |
-| Querydsl             | 5.1.0            |
-| Swagger              | 3.0.0            |
-| Knife4j              | 4.5.0            |
-| Redisson             | 3.48.0           |
-| Lettuce              | 6.5.3.RELEASE    |
-| Elasticsearch        | 9.0.0            |
-| Xxl-job              | 3.1.0            |
-| Guava                | 33.5.8-jre       |
-| Grpc                 | 1.73.0           |
-| Arthas               | 4.0.3            |
-| Netty                | 4.2.1.Final      |
+| 依赖                   | 版本            |
+|----------------------|---------------|
+| Spring               | 6.2.8         |
+| Spring Boot          | 3.5.3         |
+| Spring Cloud         | 2025.0.0      |
+| Spring Cloud Alibaba | 2023.0.3.3    |
+| Seata                | 2.3.0         |
+| Sentinel             | 1.8.8         |
+| Spring-kafka         | 3.3.6         |
+| Roketmq              | 5.2.4         |
+| Spring Security      | 6.5.1         |
+| Mybatis Plus         | 3.5.12        |
+| Hutool               | 6.0.0-M22     |
+| Mysql                | 9.3.0         |
+| Querydsl             | 5.1.0         |
+| Swagger              | 3.0.0         |
+| Knife4j              | 4.5.0         |
+| Redisson             | 3.50.0        |
+| Lettuce              | 6.5.3.RELEASE |
+| Elasticsearch        | 9.0.0         |
+| Xxl-job              | 3.1.1         |
+| Guava                | 33.5.8-jre    |
+| Grpc                 | 1.73.0        |
+| Arthas               | 4.0.3         |
+| Netty                | 4.2.2.Final   |
 
 
 ## 10. 模块说明
