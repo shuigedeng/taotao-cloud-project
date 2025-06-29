@@ -1,0 +1,124 @@
+# This workflow will build a package using Gradle and then publish it to GitHub packages when a release is created
+# For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#Publishing-using-gradle
+
+name: Microservice Starters Publish sonatype
+
+on:
+#  push:
+#    branches: [ dev ]
+  release:
+    types: [ created ]
+
+env:
+  DING_SECRET: ${{ secrets.DING_SECRET }}
+  DING_TOKEN: ${{ secrets.DING_TOKEN }}
+  TAOTAO_CLOUD_OSSRH_USERNAME: ${{ secrets.TAOTAO_CLOUD_OSSRH_USERNAME }}
+  TAOTAO_CLOUD_OSSRH_PASSWORD: ${{ secrets.TAOTAO_CLOUD_OSSRH_PASSWORD }}
+  MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+  MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+  TAOTAO_CLOUD_MAVEN_USERNAME: ${{ secrets.TAOTAO_CLOUD_MAVEN_USERNAME }}
+  TAOTAO_CLOUD_MAVEN_USERNAME_NEW: ${{ secrets.TAOTAO_CLOUD_MAVEN_USERNAME_NEW }}
+  TAOTAO_CLOUD_MAVEN_PASSWORD: ${{ secrets.TAOTAO_CLOUD_MAVEN_PASSWORD }}
+  TAOTAO_CLOUD_MAVEN_PASSWORD_NEW: ${{ secrets.TAOTAO_CLOUD_MAVEN_PASSWORD_NEW }}
+  TAOTAO_CLOUD_GITHUB_USERNAME: ${{ secrets.TAOTAO_CLOUD_GITHUB_USERNAME }}
+  TAOTAO_CLOUD_GITHUB_TOKEN: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
+  TAOTAO_CLOUD_REGISTRY_USERNAME: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
+  TAOTAO_CLOUD_REGISTRY_PASSWORD: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      #https://github.com/marketplace/actions/checkout
+      - name: Checkout Project
+        uses: actions/checkout@v4.2.2
+        #with:
+        #  ref: springboot3
+
+      ##https://github.com/marketplace/actions/setup-java-jdk
+      #- name: Setup Jdk v21
+      #  uses: actions/setup-java@v4.2.1
+      #  with:
+      #    java-version: '21'
+      #    distribution: 'adopt'
+      #    server-id: github
+
+      #https://github.com/marketplace/actions/github-action-for-graalvm
+      - uses: graalvm/setup-graalvm@v1.3.3
+        with:
+          java-version: '21'
+          distribution: 'graalvm'
+          github-token: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
+          native-image-job-reports: 'true'
+
+      - name: Example step
+        run: |
+          echo "GRAALVM_HOME: $GRAALVM_HOME"
+          echo "JAVA_HOME: $JAVA_HOME"
+          java --version
+          native-image --version
+
+      #https://github.com/marketplace/actions/cache
+      - name: Cache Gradle Packages
+        uses: actions/cache@v4.2.3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle
+
+      # base64 secring.gpg > secring.gpg.b64  SIGNING_SECRET_KEY_RING_FILE -> secring.gpg.b64
+      - name: Decode Signing Secret Key Ring File
+        run: |
+          echo "${{ secrets.TAOTAO_CLOUD_SIGNING_SECRET_KEY_RING_FILE }}" > ~/secring.gpg.b64 && base64 -d ~/secring.gpg.b64 > ~/secring.gpg
+          echo "signing.keyId=${{ secrets.TAOTAO_CLOUD_SIGNING_KEY_ID }}" >> gradle.properties
+          echo "signing.password=${{ secrets.TAOTAO_CLOUD_SIGNING_PASSWORD }}" >> gradle.properties
+          echo "signing.secretKeyRingFile=$HOME/secring.gpg" >> gradle.properties
+
+      - name: write secrets maven username password
+        run: |
+          echo "mavenUsernameNew=${{ secrets.TAOTAO_CLOUD_MAVEN_USERNAME_NEW }}" >> gradle.properties
+          echo "mavenPasswordNew=${{ secrets.TAOTAO_CLOUD_MAVEN_PASSWORD_NEW }}" >> gradle.properties
+          echo "mavenCentralUsername=${{ secrets.MAVEN_CENTRAL_USERNAME }}" >> gradle.properties
+          echo "mavenCentralPassword=${{ secrets.MAVEN_CENTRAL_PASSWORD }}" >> gradle.properties
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.5.0
+        with:
+          gradle-version: "8.14.2"
+
+      #https://github.com/marketplace/actions/gradle-build-action
+      - name: Publish Maven Plugin To Sonatype Repository
+        run: gradle -p taotao-cloud-plugin/taotao-cloud-maven-plugin publishMavenPublicationToMavenCentralRepository
+
+      - name: build success
+        if: ${{ success() }}
+        uses: zcong1993/actions-ding@master
+        with:
+          dingToken: ${{ secrets.DING_TOKEN }}
+          secret: ${{ secrets.DING_SECRET }}
+          # body 内容 https://blog.csdn.net/lxw1844912514/article/details/125747327
+          body: |
+            {
+              "msgtype": "text",
+              "text": {
+                  "content": "taotao github action [taotao-cloud-maven-plugin] publish to maven-central starter success"
+              }
+            }
+
+      - name: build failure
+        if: ${{ failure() }}
+        uses: zcong1993/actions-ding@master
+        with:
+          dingToken: ${{ secrets.DING_TOKEN }}
+          secret: ${{ secrets.DING_SECRET }}
+          # body 内容 https://blog.csdn.net/lxw1844912514/article/details/125747327
+          body: |
+            {
+              "msgtype": "text",
+              "text": {
+                  "content": "taotao github action [taotao-cloud-maven-plugin] publish to maven-central starter failure"
+              }
+            }
