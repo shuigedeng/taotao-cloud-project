@@ -73,7 +73,7 @@ spark-shell \
   --executor-memory 1g \
   --executor-cores 2 \
   --queue default \
-  /opt/bigdata/spark-3.0.0-bin-hadoop3.2/jar/taotao-cloud-spark-2025.07.jar \
+  /opt/bigdata/spark-3.0.0-bin-hadoop3.2/jar/taotao-cloud-spark-2025.08.jar \
   /opt/spark/input /opt/spark/output
 
 ################################################

@@ -336,7 +336,7 @@ mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
     //进行签名
-    signAllPublications()
+    //signAllPublications()
 }
 
 //apply plugin: "org.gradlex.maven-plugin-development"
