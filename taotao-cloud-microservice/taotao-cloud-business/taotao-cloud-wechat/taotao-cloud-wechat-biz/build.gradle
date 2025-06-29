@@ -30,19 +30,19 @@ dependencies {
 
     // 小程序开发
     //https://search.maven.org/artifact/com.github.binarywang/wx-java-miniapp-spring-boot-starter
-    implementation "com.github.binarywang:wx-java-miniapp-spring-boot-starter:4.7.5-20250529.111829"
+    implementation "com.github.binarywang:wx-java-miniapp-spring-boot-starter:4.7.6.B"
     // 公众号开发
     //https://search.maven.org/artifact/com.github.binarywang/wx-java-mp-spring-boot-starter
-    implementation "com.github.binarywang:wx-java-mp-spring-boot-starter:4.7.5-20250529.111829"
+    implementation "com.github.binarywang:wx-java-mp-spring-boot-starter:4.7.6.B"
     // 微信开放平台
     //https://search.maven.org/artifact/com.github.binarywang/wx-java-mp-spring-boot-starter
-    implementation "com.github.binarywang:wx-java-open-spring-boot-starter:4.7.5-20250529.111829"
+    implementation "com.github.binarywang:wx-java-open-spring-boot-starter:4.7.6.B"
     // 微信企业号开发
     //https://search.maven.org/artifact/com.github.binarywang/wx-java-cp-spring-boot-starter
-    implementation "com.github.binarywang:wx-java-cp-spring-boot-starter:4.7.5-20250529.111829"
+    implementation "com.github.binarywang:wx-java-cp-spring-boot-starter:4.7.6.B"
     // 腾讯企点开发
     //https://search.maven.org/artifact/com.github.binarywang/wx-java-qidian-spring-boot-starter
-    implementation "com.github.binarywang:wx-java-qidian-spring-boot-starter:4.7.5-20250529.111829"
+    implementation "com.github.binarywang:wx-java-qidian-spring-boot-starter:4.7.6.B"
 
     //https://github.com/lcy19930619/wechat-spring-boot-starter
     //implementation 'net.jlxxw:wechat-spring-boot-starter:2.0.1.20240302'

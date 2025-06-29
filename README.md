@@ -10,14 +10,14 @@
   <img src="https://img.shields.io/badge/spring_cloud-2025.0.0-yellowgree" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud_alibaba-2023.0.3.3-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud_tencent-2.0.1.0--2023.0.3-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/netty-4.2.1.Final-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_security-6.5.0-brightgreen" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/elasticsearch-9.0.0-green" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/netty-4.2.2.Final-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_security-6.5.1-brightgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/elasticsearch-9.0.3-green" alt="Downloads"/>
   <img src="https://img.shields.io/badge/mybatis_plus-3.5.12-yellow" alt="Downloads"/>
   <img src="https://img.shields.io/badge/knife4j-4.5.0-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/swagger-3.0.0-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/redisson-3.48.0-lightgrey" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/hutool-6.0.0--M21-gree" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/redisson-3.50.0-lightgrey" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/hutool-6.0.0--M22-gree" alt="Downloads"/>
 </p>
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
@@ -171,11 +171,11 @@ Maven:
 
 * **gradle插件地址**: 
 
-1. [https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.bom](https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.bom)
-2. [https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.module](https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.module)
-3. [https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.common](https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.common)
-4. [https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.root](https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.root)
-5. [https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.service](https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.service)
+1. [https://plugins.gradle.org/plugin/io.github.shuigedeng.bom](https://plugins.gradle.org/plugin/io.github.shuigedeng.bom)
+2. [https://plugins.gradle.org/plugin/io.github.shuigedeng.module](https://plugins.gradle.org/plugin/io.github.shuigedeng.module)
+3. [https://plugins.gradle.org/plugin/io.github.shuigedeng.common](https://plugins.gradle.org/plugin/io.github.shuigedeng.common)
+4. [https://plugins.gradle.org/plugin/io.github.shuigedeng.root](https://plugins.gradle.org/plugin/io.github.shuigedeng.root)
+5. [https://plugins.gradle.org/plugin/io.github.shuigedeng.service](https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.service)
 
 
 * **maven插件地址**: 
@@ -259,7 +259,7 @@ Maven:
 | Spring Boot          | 3.5.3         |
 | Spring Cloud         | 2025.0.0      |
 | Spring Cloud Alibaba | 2023.0.3.3    |
-| Seata                | 2.3.0         |
+| Seata                | 2.4.0         |
 | Sentinel             | 1.8.8         |
 | Spring-kafka         | 3.3.6         |
 | Roketmq              | 5.2.4         |

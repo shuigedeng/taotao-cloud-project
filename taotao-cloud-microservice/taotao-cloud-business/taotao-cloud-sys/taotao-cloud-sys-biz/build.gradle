@@ -82,13 +82,13 @@ dependencies {
     //https://search.maven.org/artifact/org.freemarker/freemarker
     implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 
-    implementation 'org.zalando:logbook-spring-boot-starter:3.12.1'
-    implementation 'org.zalando:logbook-httpclient5:3.12.1'
-    implementation 'org.zalando:logbook-netty:3.12.1'
-    implementation 'org.zalando:logbook-okhttp:3.12.1'
-    implementation 'org.zalando:logbook-okhttp2:3.12.1'
-    implementation 'org.zalando:logbook-openfeign:3.12.1'
-    implementation 'org.zalando:logbook-spring-webflux:3.12.1'
+    implementation 'org.zalando:logbook-spring-boot-starter:3.12.2'
+    implementation 'org.zalando:logbook-httpclient5:3.12.2'
+    implementation 'org.zalando:logbook-netty:3.12.2'
+    implementation 'org.zalando:logbook-okhttp:3.12.2'
+    implementation 'org.zalando:logbook-okhttp2:3.12.2'
+    implementation 'org.zalando:logbook-openfeign:3.12.2'
+    implementation 'org.zalando:logbook-spring-webflux:3.12.2'
 
     //implementation "io.github.shuigedeng:taotao-boot-starter-apt")
     //annotationProcessor "io.github.shuigedeng:taotao-boot-starter-apt")
@@ -114,7 +114,7 @@ dependencies {
     //implementation "com.jianggujin:IKAnalyzer-lucene:8.0.0"
     //implementation "org.lionsoul:jcseg-core:1.9.9"
     //implementation "org.apache.lucene:lucene-analyzers-common:4.2.0"
-    //implementation "org.mongodb:mongo-java-driver:3.12.11"
+    //implementation "org.mongodb:mongo-java-driver:3.12.21"
     //implementation "org.apache.maven:maven-core:3.8.6"
     //implementation "org.eclipse.aether:aether-connector-basic:1.1.0"
     //implementation "org.eclipse.aether:aether-transport-file:1.1.0"

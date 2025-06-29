@@ -75,23 +75,23 @@ apply plugin: "idea"
 //apply plugin: 'elasticsearch.yaml-rest-test'
 
 dependencies {
-    implementation 'org.elasticsearch:elasticsearch:9.0.2'
+    implementation 'org.elasticsearch:elasticsearch:9.0.3'
 
-    compileOnly "org.elasticsearch.plugin:elasticsearch-plugin-api:9.0.2"
-    compileOnly "org.elasticsearch.plugin:elasticsearch-plugin-analysis-api:9.0.2"
-    compileOnly "org.apache.lucene:lucene-analysis-common:10.2.1"
+    compileOnly "org.elasticsearch.plugin:elasticsearch-plugin-api:9.0.3"
+    compileOnly "org.elasticsearch.plugin:elasticsearch-plugin-analysis-api:9.0.3"
+    compileOnly "org.apache.lucene:lucene-analysis-common:10.2.2"
 
-    testImplementation "org.elasticsearch.plugin:elasticsearch-plugin-api:9.0.2"
-    testImplementation "org.elasticsearch.plugin:elasticsearch-plugin-analysis-api:9.0.2"
-    testImplementation "org.apache.lucene:lucene-analysis-common:10.2.1"
+    testImplementation "org.elasticsearch.plugin:elasticsearch-plugin-api:9.0.3"
+    testImplementation "org.elasticsearch.plugin:elasticsearch-plugin-analysis-api:9.0.3"
+    testImplementation "org.apache.lucene:lucene-analysis-common:10.2.2"
 
     testImplementation 'org.mockito:mockito-core:5.18.0'
     testImplementation 'org.hamcrest:hamcrest:3.0'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.13.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.13.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.13.1'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.13.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.13.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.13.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.2'
     testImplementation "org.assertj:assertj-core:3.27.3"
 }
 
