@@ -133,6 +133,9 @@ redisson:
   #  scanInterval: 1000
 
 spring:
+  shell:
+    interactive:
+      enabled: true
   config:
     activate:
       on-profile: dev

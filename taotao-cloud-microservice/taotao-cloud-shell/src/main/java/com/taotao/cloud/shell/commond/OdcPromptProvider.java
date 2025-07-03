@@ -13,6 +13,6 @@ public class OdcPromptProvider implements PromptProvider {
 	@Override
 	public AttributedString getPrompt() {
 		// 定制命令提示符为红色的“odc-shell:>”
-		return new AttributedString("odc-shell:>", AttributedStyle.DEFAULT.foreground(AttributedStyle.RED));
+		return new AttributedString("ttc-shell:>", AttributedStyle.DEFAULT.foreground(AttributedStyle.RED));
 	}
 }
