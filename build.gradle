@@ -618,7 +618,7 @@ configure(subprojects.findAll { (!excludeSubProjects.contains(it.name)) }) { pro
         }
 
         // 发布到 Sonatype, 参数为 sonatype host,还可以是 SonatypeHost.DEFAULT,SonatypeHost.S0
-        publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+        publishToMavenCentral()
 
         //进行签名
         //signAllPublications()
