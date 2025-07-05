@@ -8,6 +8,7 @@ checkstyle {
 
     //https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml
     //configFile = file("${rootDir}/checkstyle/google_checks.xml")
+    //配置文件路径
     configFile = rootProject.file('code-analysis/checkstyle/google_checks.xml')
 
     // The source sets to be analyzed as part of the check and build tasks.
@@ -15,13 +16,20 @@ checkstyle {
     // sourceSets = [project.sourceSets.main, project.sourceSets.test]
 
     // Whether or not to allow the build to continue if there are warnings.
+    // 是否忽略失败
     ignoreFailures = true
 
     // Whether or not rule violations are to be displayed on the console.
+    // 是否显示违规
     showViolations = true
 
     reportsDir = file("${project.layout.buildDirectory.asFile.get()}/code-analysis/checkstyleReportsDir")
 }
+
+//dependencies {
+//    //使用spring javaformat
+//    checkstyle("io.spring.javaformat:spring-javaformat-checkstyle:0.0.42")
+//}
 
 tasks.withType(Checkstyle).configureEach {
     reports {
@@ -31,7 +39,3 @@ tasks.withType(Checkstyle).configureEach {
         html.stylesheet = resources.text.fromFile("${rootDir}/code-analysis/checkstyle/reports/checkstyle-noframes.xsl")
     }
 }
-
-//tasks.withType(io.spring.javaformat.gradle.tasks.CheckFormat) {
-//    exclude "package/to/exclude"
-//}
