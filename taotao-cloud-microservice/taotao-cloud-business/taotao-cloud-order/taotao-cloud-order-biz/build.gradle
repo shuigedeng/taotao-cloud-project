@@ -23,7 +23,6 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-apollo"
     implementation "io.github.shuigedeng:taotao-boot-starter-dubbo"
     implementation "io.github.shuigedeng:taotao-boot-starter-eventbus"
-    implementation "io.github.shuigedeng:taotao-boot-starter-mq-pulsar"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-rocketmq"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
     implementation "io.github.shuigedeng:taotao-boot-starter-job-xxl"

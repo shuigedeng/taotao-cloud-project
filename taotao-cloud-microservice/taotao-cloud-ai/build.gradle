@@ -64,7 +64,6 @@ dependencies {
 
     //boot
     implementation "io.github.shuigedeng:taotao-boot-starter-eventbus"
-    implementation "io.github.shuigedeng:taotao-boot-starter-mq-pulsar"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-rocketmq"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
     implementation "io.github.shuigedeng:taotao-boot-starter-grpc"
