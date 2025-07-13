@@ -43,7 +43,7 @@ GET http://127.0.0.1:33338/order/order/xxxx
 GET http://127.0.0.1:33338/order/order/xxxx?memberId=1&code='1221'
 
 ###
-POST http://127.0.0.1:33333/api/v2025.08/orde♡r/excel/export
+POST http://127.0.0.1:33333/api/v2025.08/order/excel/export
 Content-Type: application/json
 
 {

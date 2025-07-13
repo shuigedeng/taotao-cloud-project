@@ -107,7 +107,10 @@ redisson:
 
 spring:
   autoconfigure:
-    exclude: org.springframework.cloud.function.web.flux.ReactorAutoConfiguration
+    exclude:
+      - org.springframework.cloud.function.web.flux.ReactorAutoConfiguration
+      - org.springdoc.webflux.core.configuration.SpringDocWebFluxConfiguration
+      - org.springdoc.webflux.core.configuration.MultipleOpenApiSupportConfiguration
   config:
     activate:
       on-profile: dev
@@ -714,7 +717,7 @@ spring:
               predicates:
                 - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
               filters:
-                - RewritePath=/sys/(?<path>.*), /sys/$\{path}
+                - RewritePath=/sys/(?<path>.*), /$\{path}
                 - StripPrefix=2
                 - RequestTime=true
                 - PreserveHostHeader
@@ -1000,6 +1003,8 @@ taotao:
         - /sys/**
         - /file/**
         - /job/**
+        - /sys/**
+        - /api/v2025.08/sys/**
     core:
       async:
         enabled: false
@@ -1046,6 +1051,21 @@ taotao:
         prefix: /api
         version: v${ttcVersion}
         base-uri: ${taotao.cloud.gateway.api.prefix}/${taotao.cloud.gateway.api.version}
+      security:
+        enabled: true
+        ignore-url:
+          - /auth/captcha/code
+          - /auth/qrcode/code
+          - /auth/sms/phone
+          - /auth/oauth2/token
+          - /auth/oauth2/authorize
+          - /*/health/**
+          - /*/request/gateway/test
+          - /health/**
+          - /sys/**
+          - /file/**
+          - /job/**
+          - /sys/**
 
 tlog:
   pattern: "$preApp:$preIp:$spanId:$traceId"

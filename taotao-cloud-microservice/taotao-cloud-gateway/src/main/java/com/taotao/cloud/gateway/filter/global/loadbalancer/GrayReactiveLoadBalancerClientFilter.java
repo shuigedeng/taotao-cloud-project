@@ -216,19 +216,19 @@ public class GrayReactiveLoadBalancerClientFilter extends ReactiveLoadBalancerCl
                 return getServiceInstanceEmptyResponse();
             }
 
-            // 根据版本进行分发
-            if (StrUtil.isNotBlank(reqVersion)) {
-                Map<String, String> versionMap = new HashMap<>();
-                versionMap.put("version", reqVersion);
-
-                final Set<Map.Entry<String, String>> attributes = Collections.unmodifiableSet(versionMap.entrySet());
-                for (ServiceInstance instance : instances) {
-                    Map<String, String> metadata = instance.getMetadata();
-                    if (!metadata.entrySet().containsAll(attributes)) {
-                        instances.remove(instance);
-                    }
-                }
-            }
+            // 根据版本进行分发 todo 需要修改
+//            if (StrUtil.isNotBlank(reqVersion)) {
+//                Map<String, String> versionMap = new HashMap<>();
+//                versionMap.put("version", reqVersion);
+//
+//                final Set<Map.Entry<String, String>> attributes = Collections.unmodifiableSet(versionMap.entrySet());
+//                for (ServiceInstance instance : instances) {
+//                    Map<String, String> metadata = instance.getMetadata();
+//                    if (!metadata.entrySet().containsAll(attributes)) {
+//                        instances.remove(instance);
+//                    }
+//                }
+//            }
 
             String weight = headers.getFirst("taotao-cloud-weight");
             if (StrUtil.isNotBlank(weight)) {
