@@ -19,16 +19,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class CirculationDesk {
 
-	private final BookRepository books;
-	private final HoldRepository holds;
-	private final HoldEventPublisher eventPublisher;
+	private BookRepository books;
+	private HoldRepository holds;
+	private HoldEventPublisher eventPublisher;
 
-	public CirculationDesk(
-		BookRepository books, HoldRepository holds, HoldEventPublisher eventPublisher) {
-		this.books = books;
-		this.holds = holds;
-		this.eventPublisher = eventPublisher;
-	}
+//	public CirculationDesk(
+//		BookRepository books, HoldRepository holds, HoldEventPublisher eventPublisher) {
+//		this.books = books;
+//		this.holds = holds;
+//		this.eventPublisher = eventPublisher;
+//	}
 
 	public HoldDto placeHold(Hold.PlaceHold command) {
 		books.findAvailableBook(command.inventoryNumber())
