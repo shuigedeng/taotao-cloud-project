@@ -18,11 +18,11 @@ public class ServerException extends RuntimeException {
 
     public ServerException(String msg) {
         super(msg);
-        this.code = net.maku.generator.common.exception.ErrorCode.INTERNAL_SERVER_ERROR.getCode();
+        this.code = ErrorCode.INTERNAL_SERVER_ERROR.getCode();
         this.msg = msg;
     }
 
-    public ServerException(net.maku.generator.common.exception.ErrorCode errorCode) {
+    public ServerException(ErrorCode errorCode) {
         super(errorCode.getMsg());
         this.code = errorCode.getCode();
         this.msg = errorCode.getMsg();

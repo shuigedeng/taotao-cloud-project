@@ -2,7 +2,7 @@ package com.taotao.cloud.generator.maku.utils;
 
 import com.taotao.cloud.generator.maku.config.DbType;
 import com.taotao.cloud.generator.maku.config.GenDataSource;
-import oracle.jdbc.OracleConnection;
+//import oracle.jdbc.OracleConnection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,9 +25,9 @@ public class DbUtils {
         Class.forName(dataSource.getDbType().getDriverClass());
 
         Connection connection = DriverManager.getConnection(dataSource.getConnUrl(), dataSource.getUsername(), dataSource.getPassword());
-        if (dataSource.getDbType() == DbType.Oracle) {
-            ((OracleConnection) connection).setRemarksReporting(true);
-        }
+//        if (dataSource.getDbType() == DbType.Oracle) {
+//            ((OracleConnection) connection).setRemarksReporting(true);
+//        }
 
         return connection;
     }

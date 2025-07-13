@@ -1,13 +1,13 @@
 dependencies {
     //cloud
-    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-ttc"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-ttc"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
 
     //boot
     implementation "io.github.shuigedeng:taotao-boot-starter-eventbus"
-    implementation "io.github.shuigedeng:taotao-boot-starter-mq-rocketmq"
-    implementation "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
+    //implementation "io.github.shuigedeng:taotao-boot-starter-mq-rocketmq"
+    //implementation "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
     implementation "io.github.shuigedeng:taotao-boot-starter-lock"
     implementation "io.github.shuigedeng:taotao-boot-starter-web"
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
@@ -26,7 +26,7 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
-mainClassName = "com.taotao.cloud.generator.biz.TaoTaoCloudGeneratorApplication"
+mainClassName = "com.taotao.cloud.generator.TaoTaoCloudGeneratorApplication"
 description = "代码生成器中心biz"
 archivesBaseName = 'taotao-cloud-generator'
 

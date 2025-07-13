@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="net.maku.generator.dao.TableFieldDao">
+<mapper namespace="com.taotao.cloud.generator.maku.dao.TableFieldDao">
 
-    <select id="getByTableId" resultType="net.maku.generator.entity.TableFieldEntity">
+    <select id="getByTableId" resultType="com.taotao.cloud.generator.maku.entity.TableFieldEntity">
         select *
         from gen_table_field
         where table_id = #{value}

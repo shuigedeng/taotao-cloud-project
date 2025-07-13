@@ -26,7 +26,7 @@ public class GenDataSource {
     /**
      * 数据库类型
      */
-    private net.maku.generator.config.DbType dbType;
+    private DbType dbType;
     /**
      * 数据库URL
      */
@@ -46,24 +46,24 @@ public class GenDataSource {
 
     public GenDataSource(DataSourceEntity entity) {
         this.id = entity.getId();
-        this.dbType = net.maku.generator.config.DbType.getValue(entity.getDbType());
+        this.dbType = DbType.getValue(entity.getDbType());
         this.connUrl = entity.getConnUrl();
         this.username = entity.getUsername();
         this.password = entity.getPassword();
 
-        if (dbType == net.maku.generator.config.DbType.MySQL) {
+        if (dbType == DbType.MySQL) {
             this.dbQuery = new MySqlQuery();
-        } else if (dbType == net.maku.generator.config.DbType.Oracle) {
+        } else if (dbType == DbType.Oracle) {
             this.dbQuery = new OracleQuery();
-        } else if (dbType == net.maku.generator.config.DbType.PostgreSQL) {
+        } else if (dbType == DbType.PostgreSQL) {
             this.dbQuery = new PostgreSqlQuery();
-        } else if (dbType == net.maku.generator.config.DbType.SQLServer) {
+        } else if (dbType == DbType.SQLServer) {
             this.dbQuery = new SQLServerQuery();
-        } else if (dbType == net.maku.generator.config.DbType.DM) {
+        } else if (dbType == DbType.DM) {
             this.dbQuery = new DmQuery();
-        } else if (dbType == net.maku.generator.config.DbType.Clickhouse) {
+        } else if (dbType == DbType.Clickhouse) {
             this.dbQuery = new ClickHouseQuery();
-        }else if (dbType == net.maku.generator.config.DbType.KingBase) {
+        }else if (dbType == DbType.KingBase) {
             this.dbQuery = new KingBaseSqlQuery();
         }
 
@@ -76,19 +76,19 @@ public class GenDataSource {
 
     public GenDataSource(Connection connection) throws SQLException {
         this.id = 0L;
-        this.dbType = net.maku.generator.config.DbType.getValue(connection.getMetaData().getDatabaseProductName());
+        this.dbType = DbType.getValue(connection.getMetaData().getDatabaseProductName());
 
-        if (dbType == net.maku.generator.config.DbType.MySQL) {
+        if (dbType == DbType.MySQL) {
             this.dbQuery = new MySqlQuery();
-        } else if (dbType == net.maku.generator.config.DbType.Oracle) {
+        } else if (dbType == DbType.Oracle) {
             this.dbQuery = new OracleQuery();
-        } else if (dbType == net.maku.generator.config.DbType.PostgreSQL) {
+        } else if (dbType == DbType.PostgreSQL) {
             this.dbQuery = new PostgreSqlQuery();
-        } else if (dbType == net.maku.generator.config.DbType.SQLServer) {
+        } else if (dbType == DbType.SQLServer) {
             this.dbQuery = new SQLServerQuery();
-        } else if (dbType == net.maku.generator.config.DbType.DM) {
+        } else if (dbType == DbType.DM) {
             this.dbQuery = new DmQuery();
-        } else if (dbType == net.maku.generator.config.DbType.Clickhouse) {
+        } else if (dbType == DbType.Clickhouse) {
             this.dbQuery = new ClickHouseQuery();
         }else if (dbType == DbType.KingBase) {
             this.dbQuery = new KingBaseSqlQuery();

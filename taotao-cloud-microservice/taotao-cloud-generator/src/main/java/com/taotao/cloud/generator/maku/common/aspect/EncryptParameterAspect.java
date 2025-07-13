@@ -33,7 +33,7 @@ public class EncryptParameterAspect {
      * @return
      * @throws Throwable
      */
-    @Around("execution(* net.maku.generator.controller.DataSourceController.*(..))")
+    @Around("execution(* com.taotao.cloud.generator.maku.controller.DataSourceController.*(..))")
     public Object doProcess(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 
         // 处理请求入参
@@ -93,7 +93,7 @@ public class EncryptParameterAspect {
     private void handleItem(Object item, boolean isDecrypt) {
 
         // 只处理在entity包下面的对象
-        if (Objects.isNull(item.getClass().getPackage()) || !item.getClass().getPackage().getName().startsWith("net.maku.generator.entity")) {
+        if (Objects.isNull(item.getClass().getPackage()) || !item.getClass().getPackage().getName().startsWith("com.taotao.cloud.generator.maku.entity")) {
             return;
         }
 

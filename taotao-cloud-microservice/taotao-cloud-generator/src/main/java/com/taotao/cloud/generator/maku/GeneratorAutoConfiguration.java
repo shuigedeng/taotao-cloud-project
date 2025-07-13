@@ -1,7 +1,6 @@
 package com.taotao.cloud.generator.maku;
 
 import lombok.AllArgsConstructor;
-import com.taotao.cloud.generator.maku.autoconfigure.GeneratorProperties;
 import com.taotao.cloud.generator.maku.config.template.GeneratorConfig;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @AllArgsConstructor
-@ComponentScan(basePackages = {"net.maku.generator"})
+@ComponentScan(basePackages = {"com.taotao.cloud.generator.maku"})
 @EnableConfigurationProperties(GeneratorProperties.class)
 public class GeneratorAutoConfiguration {
     private final GeneratorProperties properties;

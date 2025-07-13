@@ -24,7 +24,7 @@ public class GeneratorConfig {
         this.template = template;
     }
 
-    public net.maku.generator.config.template.GeneratorInfo getGeneratorConfig() {
+    public GeneratorInfo getGeneratorConfig() {
         // 模板路径，如果不是以/结尾，则添加/
         if (!StrUtil.endWith(template, '/')) {
             template = template + "/";
@@ -39,7 +39,7 @@ public class GeneratorConfig {
         try {
             // 读取模板配置文件
             String configContent = StreamUtils.copyToString(isConfig, StandardCharsets.UTF_8);
-            net.maku.generator.config.template.GeneratorInfo generator = JsonUtils.parseObject(configContent, GeneratorInfo.class);
+            GeneratorInfo generator = JsonUtils.parseObject(configContent, GeneratorInfo.class);
             for (TemplateInfo templateInfo : generator.getTemplates()) {
                 // 模板文件
                 InputStream isTemplate = this.getClass().getResourceAsStream(template + templateInfo.getTemplateName());
