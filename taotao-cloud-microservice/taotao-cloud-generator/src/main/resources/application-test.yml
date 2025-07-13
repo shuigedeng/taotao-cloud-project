@@ -7,7 +7,7 @@ dubbo:
   consumer:
     check: false
   metadata-report:
-    address: zookeeper://127.0.0.1:2181
+    address: zookeeper://192.168.218.2:2181
     cycle-report: true
     password: ''
     retry-period: 3000
@@ -17,7 +17,7 @@ dubbo:
     name: dubbo
     port: -1
   registry:
-    address: zookeeper://127.0.0.1:2181
+    address: zookeeper://192.168.218.2:2181
     file: ${user.home}/dubbo-cache/${spring.application.name}/dubbo.cache
 #  scan:
 #    basePackages: com.practice.springboot.dubbo.provider.service
@@ -28,11 +28,11 @@ spring:
   rabbitmq:
     first:
       virtual-host: vir_host_1
-    host: 127.0.0.1
+    host: 192.168.218.2
     password: Zc123456
     port: 5672
   redis:
-    host: 127.0.0.1
+    host: 192.168.218.2
     password: Zc123456
     #    pool:
     #      max-active: 20
@@ -45,7 +45,7 @@ xxl:
   job:
     accessToken: ''
     admin:
-      addresses: http://127.0.0.1:9001/xxl-job-admin
+      addresses: http://192.168.218.2:9001/xxl-job-admin
     executor:
       address: ''
       appname: short-link-platform
@@ -63,7 +63,7 @@ dubbo:
   consumer:
     check: false
   metadata-report:
-    address: zookeeper://127.0.0.1:2181
+    address: zookeeper://192.168.218.2:2181
     cycle-report: true
     password: ''
     retry-period: 3000
@@ -73,7 +73,7 @@ dubbo:
     name: dubbo
     port: -1
   registry:
-    address: zookeeper://127.0.0.1:2181
+    address: zookeeper://192.168.218.2:2181
     file: ${user.home}/dubbo-cache/${spring.application.name}/dubbo.cache
 #  scan:
 #    basePackages: com.practice.springboot.dubbo.provider.service
@@ -91,16 +91,16 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     name: defaultDataSource
     password: Zc123456
-    url: jdbc:mysql://127.0.0.1:3306/Test?serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://192.168.218.2:3306/Test?serverTimezone=UTC&useSSL=false
     username: root
   rabbitmq:
     first:
       virtual-host: vir_host_1
-    host: 127.0.0.1
+    host: 192.168.218.2
     password: Zc123456
     port: 5672
   redis:
-    host: 127.0.0.1
+    host: 192.168.218.2
     password: Zc123456
     connectionMinimumIdleSize: 20
     idleConnectionTimeout: 60000
@@ -116,7 +116,7 @@ xxl:
   job:
     accessToken: ''
     admin:
-      addresses: http://127.0.0.1:9001/xxl-job-admin
+      addresses: http://192.168.218.2:9001/xxl-job-admin
     executor:
       address: ''
       appname: short-link-platform

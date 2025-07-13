@@ -44,7 +44,7 @@ RestConnectorMasterTable:
     FROM "object" FK "__FK_object")
     FROM JSON (wrap on) "root" PK "__KEY_root"
 //    WITH CONNECTION (
-//    Url "https://127.0.0.1:8080/${classInfo.tableName}_api",
+//    Url "https://192.168.218.2:8080/${classInfo.tableName}_api",
 //    QUERY "page" "1",
 //    QUERY "size" "100",
 //    HTTPHEADER "token" "123456",
@@ -73,7 +73,7 @@ SQL SELECT
 </#list>
 FROM JSON(wrap off) "${classInfo.className}"
 //    WITH CONNECTION (
-//    Url "https://127.0.0.1:8080/${classInfo.tableName}_api",
+//    Url "https://192.168.218.2:8080/${classInfo.tableName}_api",
 //    QUERY "page" "1",
 //    QUERY "size" "100",
 //    HTTPHEADER "token" "123456",
