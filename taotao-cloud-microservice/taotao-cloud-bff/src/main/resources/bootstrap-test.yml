@@ -25,7 +25,7 @@ spring:
       enabled: true
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: 192.168.218.2:8848
         metadata:
           version: ${ttcVersion}
           user.name: "admin"
@@ -38,7 +38,7 @@ spring:
         naming-load-cache-at-start: false
       config:
         enabled: true
-        server-addr: 127.0.0.1:8848
+        server-addr: 192.168.218.2:8848
         namespace: 343852d5-6e0d-4e27-8719-7866452e5ab0
         username: nacos
         password: nacos
@@ -58,7 +58,7 @@ spring:
       #        #流控 名称随意
       #        flow:
       #          nacos:
-      #            server-addr: 127.0.0.1:8848
+      #            server-addr: 192.168.218.2:8848
       #            dataId: ${spring.application.name}-flow-rules.json
       #            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
       #            username: nacos
@@ -70,7 +70,7 @@ spring:
       #        #熔断降级 名称随意
       #        degrade:
       #          nacos:
-      #            server-addr: 127.0.0.1:8848
+      #            server-addr: 192.168.218.2:8848
       #            dataId: ${spring.application.name}-degrade-rules.json
       #            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
       #            username: nacos
@@ -81,7 +81,7 @@ spring:
       #        #系统规则 名称随意
       #        system:
       #          nacos:
-      #            server-addr: 127.0.0.1:8848
+      #            server-addr: 192.168.218.2:8848
       #            dataId: ${spring.application.name}-system-rules.json
       #            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
       #            username: nacos
@@ -92,7 +92,7 @@ spring:
       #        #授权规则 名称随意
       #        authority:
       #          nacos:
-      #            server-addr: 127.0.0.1:8848
+      #            server-addr: 192.168.218.2:8848
       #            dataId: ${spring.application.name}-authority-rules.json
       #            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
       #            username: nacos
@@ -103,7 +103,7 @@ spring:
       #        #参数规则 名称随意
       #        param-flow:
       #          nacos:
-      #            server-addr: 127.0.0.1:8848
+      #            server-addr: 192.168.218.2:8848
       #            dataId: ${spring.application.name}-param-flow-rules.json
       #            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
       #            username: nacos
@@ -112,7 +112,7 @@ spring:
       #            data-type: json
       #            rule-type: param-flow
       transport:
-        dashboard: 127.0.0.1:8858
+        dashboard: 192.168.218.2:8858
         port: 8712
       metric:
         file-single-size: 1024 * 1024 * 50

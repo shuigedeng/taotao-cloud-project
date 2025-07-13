@@ -2,18 +2,17 @@
 //    id 'com.netflix.dgs.codegen' version '6.1.1'
 //}
 
-def apiProjects = project.parent.findProject("taotao-cloud-business").subprojects
-        .findAll {it -> it.name.endsWith("-api")}
+//def apiProjects = project.parent.findProject("taotao-cloud-business").subprojects
+//        .findAll {it -> it.name.endsWith("-api")}
 
 dependencies {
-    implementation apiProjects
+//    implementation apiProjects
 
     //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
     implementation "io.github.shuigedeng:taotao-cloud-starter-ttc"
     implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-seata"
     implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
 
     //boot

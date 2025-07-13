@@ -46,11 +46,11 @@ arthas:
   # ~/logs/arthas/arthas.log (用户目录下面)里可以找到具体端口日志
   telnetPort: -1
   httpPort: -1
-  # 127.0.0.1只能本地访问，0.0.0.0则可网络访问，但是存在安全问题
+  # 192.168.218.2只能本地访问，0.0.0.0则可网络访问，但是存在安全问题
   ip: 0.0.0.0
   agent-id: ${spring.application.name}
   app-name: ${spring.application.name}
-  tunnel-server: ws://127.0.0.1:7777/ws
+  tunnel-server: ws://192.168.218.2:7777/ws
 
 redisson:
   client-name: ${spring.application.name}   #在Redis节点里显示的客户端名称。
@@ -85,7 +85,7 @@ redisson:
   attemptTimeout: 10000   #等待获取锁超时时间,-1则是一直等待
   dataValidTime: 1800000
   single_server_config:
-    address: "127.0.0.1:6379"     #服务器地址,必填ip:port
+    address: "192.168.218.2:6379"     #服务器地址,必填ip:port
     subscription_connection_minimum_idle_size: 1     #用于发布和订阅连接的最小保持连接数（长连接）。Redisson内部经常通过发布和订阅来实现许多功能。长期保持一定数量的发布订阅连接是必须的。
     connection_minimum_idle_size: 24     #最小保持连接数（长连接）。长期保持一定数量的连接有利于提高瞬时写入反应速度。
     connection_pool_size: 64     #连接池最大容量。连接池的连接数量自动弹性伸缩。
@@ -117,16 +117,16 @@ redisson:
   #  #监测DNS的变化情况的时间间隔。
   #  dnsMonitoringInterval: 5000
   #  #服务器节点地址.必填
-  #  #redisson.multiple-server-config.node-addresses[0]=127.0.0.1:6379
-  #  #redisson.multiple-server-config.node-addresses[1]=127.0.0.1:6380
-  #  #redisson.multiple-server-config.node-addresses[2]=127.0.0.1:6381
+  #  #redisson.multiple-server-config.node-addresses[0]=192.168.218.2:6379
+  #  #redisson.multiple-server-config.node-addresses[1]=192.168.218.2:6380
+  #  #redisson.multiple-server-config.node-addresses[2]=192.168.218.2:6381
   #  nodeAddresses:
-  #    - "127.0.0.1:6381"
-  #    - "127.0.0.1:6382"
-  #    - "127.0.0.1:6383"
-  #    - "127.0.0.1:6384"
-  #    - "127.0.0.1:6385"
-  #    - "127.0.0.1:6386"
+  #    - "192.168.218.2:6381"
+  #    - "192.168.218.2:6382"
+  #    - "192.168.218.2:6383"
+  #    - "192.168.218.2:6384"
+  #    - "192.168.218.2:6385"
+  #    - "192.168.218.2:6386"
   #  #(哨兵模式,云托管,主从模式特有)尝试连接的数据库编号。
   #  database: 1
   #  #(哨兵模式特有)主服务器的名称是哨兵进程中用来监测主从服务切换情况的。
@@ -149,7 +149,7 @@ spring:
     name: taotao-cloud-bff
   data:
     redis:
-      host: 127.0.0.1
+      host: 192.168.218.2
       port: 6379
       #sentinel:
       #  master:
@@ -158,7 +158,7 @@ spring:
       #password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
       connect-timeout: 60000
       #cluster:
-      #  nodes: 127.0.0.1:6381,127.0.0.1:6382,127.0.0.1:6383,127.0.0.1:6384,127.0.0.1:6385,127.0.0.1:6386
+      #  nodes: 192.168.218.2:6381,192.168.218.2:6382,192.168.218.2:6383,192.168.218.2:6384,192.168.218.2:6385,192.168.218.2:6386
       #  max-redirects: 3
       client-type: lettuce
       lettuce:
@@ -188,7 +188,7 @@ spring:
             # 客户端名称
             clientName: "taotao-cloud-redis-client"
             # 节点地址
-            address: "redis://127.0.0.1:6379"
+            address: "redis://192.168.218.2:6379"
             # 发布和订阅连接的最小空闲连接数
             subscriptionConnectionMinimumIdleSize: 1
             # 发布和订阅连接池大小
@@ -213,9 +213,9 @@ spring:
           lockWatchdogTimeout: 10000
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    #url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:127.0.0.1}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true
+    #url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.218.2}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true
     #driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:p6spy:mysql://127.0.0.1:3306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true
+    url: jdbc:p6spy:mysql://192.168.218.2:3306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     username: root
     password: 123456
@@ -236,7 +236,7 @@ spring:
         prepStmtCacheSize: 250
   kafka:
     enabled: true
-    bootstrap-servers: 127.0.0.1:9092
+    bootstrap-servers: 192.168.218.2:9092
     producer:
       retries: 1
       batch-size: 16384
@@ -395,7 +395,7 @@ management:
     tracing:
       connect-timeout: 1
       read-timeout: 10
-      endpoint: http://127.0.0.1:9411/api/v2/spans
+      endpoint: http://192.168.218.2:9411/api/v2/spans
   tracing:
     enabled: true
     sampling:
