@@ -3,7 +3,7 @@ package com.taotao.cloud.rpc.registry.apiregistry.rpcclient;
 import com.taotao.cloud.rpc.registry.apiregistry.RequestInfo;
 import com.taotao.cloud.rpc.registry.apiregistry.base.ApiRegistryException;
 import java.lang.reflect.Type;
-import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.hc.client5.http.classic.methods.HttpUriRequest;
 
 /**
  * httpClient实现

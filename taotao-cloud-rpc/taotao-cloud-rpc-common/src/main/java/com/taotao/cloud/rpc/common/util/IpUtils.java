@@ -14,12 +14,13 @@ import java.util.Enumeration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.StatusLine;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
+import org.apache.hc.core5.http.message.StatusLine;
 
 @Slf4j
 public class IpUtils {
@@ -158,8 +159,7 @@ public class IpUtils {
 		String result = "127.0.0.1";
 		try {
 			CloseableHttpResponse response = client.execute(httpPost);
-			StatusLine statusLine = response.getStatusLine();
-			int statusCode = statusLine.getStatusCode();
+			int statusCode = response.getCode();
 			if (statusCode != 200) {
 				log.error("statusCode={}", statusCode);
 				log.error("responseEntity={}", response.getEntity());
@@ -169,6 +169,8 @@ public class IpUtils {
 			result = EntityUtils.toString(response.getEntity(), "utf-8");
 		} catch (IOException e) {
 			throw new RuntimeException("get public IP address error");
+		} catch (ParseException e) {
+			throw new RuntimeException(e);
 		}
 		return result;
 	}
