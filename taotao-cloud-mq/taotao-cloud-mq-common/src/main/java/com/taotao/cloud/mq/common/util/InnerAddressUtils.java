@@ -1,6 +1,7 @@
 package com.taotao.cloud.mq.common.util;
 
 
+import com.taotao.boot.common.utils.common.ArgUtils;
 import com.taotao.cloud.mq.common.rpc.RpcAddress;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public final class InnerAddressUtils {
 	 * @since 2024.05
 	 */
 	public static List<RpcAddress> initAddressList(String address) {
-		//ArgUtil.notEmpty(address, "address");
+		ArgUtils.notEmpty(address, "address");
 
 		String[] strings = address.split(",");
 		List<RpcAddress> list = new ArrayList<>();

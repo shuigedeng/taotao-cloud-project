@@ -4,6 +4,7 @@ import com.taotao.cloud.mq.common.resp.MqCommonRespCode;
 import com.taotao.cloud.mq.common.resp.MqException;
 import com.taotao.cloud.mq.common.rpc.RpcAddress;
 import com.taotao.cloud.mq.common.rpc.RpcChannelFuture;
+import com.xkzhangsan.time.utils.CollectionUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -81,11 +82,11 @@ public class ChannelFutureUtils {
 			}
 		}
 
-//		if (check
-//			&& CollectionUtil.isEmpty(list)) {
-//			log.error("check=true 且可用列表为空，启动失败。");
-//			throw new MqException(MqCommonRespCode.REGISTER_TO_BROKER_FAILED);
-//		}
+		if (check
+			&& CollectionUtil.isEmpty(list)) {
+			LOG.error("check=true 且可用列表为空，启动失败。");
+			throw new MqException(MqCommonRespCode.REGISTER_TO_BROKER_FAILED);
+		}
 		return list;
 	}
 

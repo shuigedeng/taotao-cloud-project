@@ -2,6 +2,7 @@ package com.taotao.cloud.mq.client.consumer.core;
 
 
 import com.alibaba.fastjson2.JSON;
+import com.taotao.boot.common.utils.collection.CollectionUtils;
 import com.taotao.cloud.mq.client.consumer.api.IMqConsumerListenerContext;
 import com.taotao.cloud.mq.client.consumer.dto.MqTopicTagDto;
 import com.taotao.cloud.mq.client.consumer.support.listener.MqConsumerListenerContext;
@@ -17,6 +18,8 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import com.xkzhangsan.time.utils.CollectionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -103,10 +106,10 @@ public class MqConsumerPull extends MqConsumerPush {
 		scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
 			@Override
 			public void run() {
-//				if (CollectionUtil.isEmpty(subscribeList)) {
-//					log.warn("订阅列表为空，忽略处理。");
-//					return;
-//				}
+				if (CollectionUtils.isEmpty(subscribeList)) {
+					LOG.warn("订阅列表为空，忽略处理。");
+					return;
+				}
 
 				for (MqTopicTagDto tagDto : subscribeList) {
 					final String topicName = tagDto.getTopicName();
@@ -116,45 +119,45 @@ public class MqConsumerPull extends MqConsumerPush {
 
 					if (MqCommonRespCode.SUCCESS.getCode().equals(resp.getRespCode())) {
 						List<MqMessage> mqMessageList = resp.getList();
-//						if (CollectionUtil.isNotEmpty(mqMessageList)) {
-//							List<MqConsumerUpdateStatusDto> statusDtoList = new ArrayList<>(
-//								mqMessageList.size());
-//							for (MqMessage mqMessage : mqMessageList) {
-//								IMqConsumerListenerContext context = new MqConsumerListenerContext();
-//								final String messageId = mqMessage.getTraceId();
-//								ConsumerStatus consumerStatus = mqListenerService.consumer(
-//									mqMessage, context);
-////								log.info("消息：{} 消费结果 {}", messageId, consumerStatus);
-//
-//								// 状态同步更新
-//								if (!ackBatchFlag) {
-//									MqCommonResp ackResp = consumerBrokerService.consumerStatusAck(
-//										messageId, consumerStatus);
-////									log.info("消息：{} 状态回执结果 {}", messageId,
-////										JSON.toJSON(ackResp));
-//								}
-//								else {
-//									// 批量
-//									MqConsumerUpdateStatusDto statusDto = new MqConsumerUpdateStatusDto();
-//									statusDto.setMessageId(messageId);
-//									statusDto.setMessageStatus(consumerStatus.getCode());
-//									statusDto.setConsumerGroupName(groupName);
-//									statusDtoList.add(statusDto);
-//								}
-//							}
-//
-//							// 批量执行
-//							if (ackBatchFlag) {
-//								MqCommonResp ackResp = consumerBrokerService.consumerStatusAckBatch(
-//									statusDtoList);
-////								log.info("消息：{} 状态批量回执结果 {}", statusDtoList,
-////									JSON.toJSON(ackResp));
-//								statusDtoList = null;
-//							}
-//						}
+						if (CollectionUtil.isNotEmpty(mqMessageList)) {
+							List<MqConsumerUpdateStatusDto> statusDtoList = new ArrayList<>(
+								mqMessageList.size());
+							for (MqMessage mqMessage : mqMessageList) {
+								IMqConsumerListenerContext context = new MqConsumerListenerContext();
+								final String messageId = mqMessage.getTraceId();
+								ConsumerStatus consumerStatus = mqListenerService.consumer(
+									mqMessage, context);
+								LOG.info("消息：{} 消费结果 {}", messageId, consumerStatus);
+
+								// 状态同步更新
+								if (!ackBatchFlag) {
+									MqCommonResp ackResp = consumerBrokerService.consumerStatusAck(
+										messageId, consumerStatus);
+									LOG.info("消息：{} 状态回执结果 {}", messageId,
+										JSON.toJSON(ackResp));
+								}
+								else {
+									// 批量
+									MqConsumerUpdateStatusDto statusDto = new MqConsumerUpdateStatusDto();
+									statusDto.setMessageId(messageId);
+									statusDto.setMessageStatus(consumerStatus.getCode());
+									statusDto.setConsumerGroupName(groupName);
+									statusDtoList.add(statusDto);
+								}
+							}
+
+							// 批量执行
+							if (ackBatchFlag) {
+								MqCommonResp ackResp = consumerBrokerService.consumerStatusAckBatch(
+									statusDtoList);
+								LOG.info("消息：{} 状态批量回执结果 {}", statusDtoList,
+									JSON.toJSON(ackResp));
+								statusDtoList = null;
+							}
+						}
 					}
 					else {
-//						log.error("拉取消息失败: {}", JSON.toJSON(resp));
+						LOG.error("拉取消息失败: {}", JSON.toJSON(resp));
 					}
 				}
 			}

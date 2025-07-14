@@ -1,6 +1,7 @@
 package com.taotao.cloud.mq.client.consumer.handler;
 
 import com.alibaba.fastjson2.JSON;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import com.taotao.cloud.mq.client.consumer.api.IMqConsumerListenerContext;
 import com.taotao.cloud.mq.client.consumer.support.listener.IMqListenerService;
 import com.taotao.cloud.mq.client.consumer.support.listener.MqConsumerListenerContext;
@@ -58,7 +59,7 @@ public class MqConsumerHandler extends SimpleChannelInboundHandler {
         try {
             rpcMessageDto = JSON.parseObject(bytes, RpcMessageDto.class);
         } catch (Exception exception) {
-//            log.error("RpcMessageDto json 格式转换异常 {}", new String(bytes));
+            log.error("RpcMessageDto json 格式转换异常 {}", new String(bytes));
             return;
         }
 
@@ -75,10 +76,10 @@ public class MqConsumerHandler extends SimpleChannelInboundHandler {
             final String traceId = rpcMessageDto.getTraceId();
 
             // 丢弃掉 traceId 为空的信息
-//            if(StringUtil.isBlank(traceId)) {
-//                log.debug("[Server Response] response traceId 为空，直接丢弃", JSON.toJSON(rpcMessageDto));
-//                return;
-//            }
+            if(StringUtils.isBlank(traceId)) {
+                log.debug("[Server Response] response traceId 为空，直接丢弃", JSON.toJSON(rpcMessageDto));
+                return;
+            }
 
             // 添加消息
             invokeService.addResponse(traceId, rpcMessageDto);
@@ -97,13 +98,13 @@ public class MqConsumerHandler extends SimpleChannelInboundHandler {
         final String json = rpcMessageDto.getJson();
 
         String channelId = ChannelUtil.getChannelId(ctx);
-//        log.debug("channelId: {} 接收到 method: {} 内容：{}", channelId,
-//                methodType, json);
+        log.debug("channelId: {} 接收到 method: {} 内容：{}", channelId,
+                methodType, json);
 
         // 消息发送
         if(MethodType.B_MESSAGE_PUSH.equals(methodType)) {
             // 日志输出
-//            log.info("收到服务端消息: {}", json);
+            log.info("收到服务端消息: {}", json);
             return this.consumer(json);
         }
 
@@ -167,7 +168,7 @@ public class MqConsumerHandler extends SimpleChannelInboundHandler {
         // 回写到 client 端
         ByteBuf byteBuf = DelimiterUtil.getMessageDelimiterBuffer(rpcMessageDto);
         ctx.writeAndFlush(byteBuf);
-//        log.debug("[Server] channel {} response {}", id, JSON.toJSON(rpcMessageDto));
+        log.debug("[Server] channel {} response {}", id, JSON.toJSON(rpcMessageDto));
     }
 
 

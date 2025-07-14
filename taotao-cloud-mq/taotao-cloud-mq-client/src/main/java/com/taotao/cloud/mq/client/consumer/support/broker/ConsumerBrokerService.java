@@ -21,6 +21,7 @@ import com.taotao.cloud.mq.common.dto.resp.MqConsumerPullResp;
 import com.taotao.cloud.mq.common.resp.ConsumerStatus;
 import com.taotao.cloud.mq.common.resp.MqCommonRespCode;
 import com.taotao.cloud.mq.common.resp.MqException;
+import com.taotao.cloud.mq.common.retry.core.core.Retryer;
 import com.taotao.cloud.mq.common.rpc.RpcChannelFuture;
 import com.taotao.cloud.mq.common.rpc.RpcMessageDto;
 import com.taotao.cloud.mq.common.support.invoke.IInvokeService;
@@ -40,6 +41,9 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import org.dromara.hutool.core.net.NetUtil;
+import org.dromara.hutool.core.util.RandomUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -220,14 +224,14 @@ public class ConsumerBrokerService implements IConsumerBrokerService {
 			BrokerRegisterReq brokerRegisterReq = new BrokerRegisterReq();
 			brokerRegisterReq.setServiceEntry(serviceEntry);
 			brokerRegisterReq.setMethodType(MethodType.C_REGISTER);
-//			brokerRegisterReq.setTraceId(IdHelper.uuid32());
+			brokerRegisterReq.setTraceId(RandomUtil.randomString(32));
 			brokerRegisterReq.setAppKey(appKey);
 			brokerRegisterReq.setAppSecret(appSecret);
 
-//			log.info("[Register] 开始注册到 broker：{}", JSON.toJSON(brokerRegisterReq));
+			log.info("[Register] 开始注册到 broker：{}", JSON.toJSON(brokerRegisterReq));
 			final Channel channel = channelFuture.getChannelFuture().channel();
 			MqCommonResp resp = callServer(channel, brokerRegisterReq, MqCommonResp.class);
-//			log.info("[Register] 完成注册到 broker：{}", JSON.toJSON(resp));
+			log.info("[Register] 完成注册到 broker：{}", JSON.toJSON(resp));
 
 			if (MqCommonRespCode.SUCCESS.getCode().equals(resp.getRespCode())) {
 				successCount++;
@@ -265,8 +269,8 @@ public class ConsumerBrokerService implements IConsumerBrokerService {
 		channel.writeAndFlush(byteBuf);
 
 		String channelId = ChannelUtil.getChannelId(channel);
-//		log.debug("[Client] channelId {} 发送消息 {}", channelId, JSON.toJSON(rpcMessageDto));
-//        channel.closeFuture().syncUninterruptibly();
+		log.debug("[Client] channelId {} 发送消息 {}", channelId, JSON.toJSON(rpcMessageDto));
+        channel.closeFuture().syncUninterruptibly();
 
 		if (respClass == null) {
 			log.debug("[Client] 当前消息为 one-way 消息，忽略响应");
@@ -294,7 +298,11 @@ public class ConsumerBrokerService implements IConsumerBrokerService {
 			}
 
 			log.debug("等待初始化完成...");
-//			DateUtil.sleep(100);
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				throw new RuntimeException(e);
+			}
 		}
 
 		RpcChannelFuture rpcChannelFuture = RandomUtils.loadBalance(loadBalance,
@@ -306,8 +314,7 @@ public class ConsumerBrokerService implements IConsumerBrokerService {
 	public void subscribe(String topicName, String tagRegex, String consumerType) {
 		final ConsumerSubscribeReq req = new ConsumerSubscribeReq();
 
-//		String messageId = IdHelper.uuid32();
-		String messageId = "sdf";
+		String messageId = RandomUtil.randomString(32);
 		req.setTraceId(messageId);
 		req.setMethodType(MethodType.C_SUBSCRIBE);
 		req.setTopicName(topicName);
@@ -316,27 +323,26 @@ public class ConsumerBrokerService implements IConsumerBrokerService {
 		req.setConsumerType(consumerType);
 
 		// 重试订阅
-//		Retryer.<String>newInstance()
-//			.maxAttempt(subscribeMaxAttempt)
-//			.callable(new Callable<String>() {
-//				@Override
-//				public String call() throws Exception {
-//					Channel channel = getChannel(null);
-//					MqCommonResp resp = callServer(channel, req, MqCommonResp.class);
-//					if (!MqCommonRespCode.SUCCESS.getCode().equals(resp.getRespCode())) {
-//						throw new MqException(ConsumerRespCode.SUBSCRIBE_FAILED);
-//					}
-//					return resp.getRespCode();
-//				}
-//			}).retryCall();
+		Retryer.<String>newInstance()
+			.maxAttempt(subscribeMaxAttempt)
+			.callable(new Callable<String>() {
+				@Override
+				public String call() throws Exception {
+					Channel channel = getChannel(null);
+					MqCommonResp resp = callServer(channel, req, MqCommonResp.class);
+					if (!MqCommonRespCode.SUCCESS.getCode().equals(resp.getRespCode())) {
+						throw new MqException(ConsumerRespCode.SUBSCRIBE_FAILED);
+					}
+					return resp.getRespCode();
+				}
+			}).retryCall();
 	}
 
 	@Override
 	public void unSubscribe(String topicName, String tagRegex, String consumerType) {
 		final ConsumerUnSubscribeReq req = new ConsumerUnSubscribeReq();
 
-//		String messageId = IdHelper.uuid32();
-		String messageId = "xx";
+		String messageId =  RandomUtil.randomString(32);
 		req.setTraceId(messageId);
 		req.setMethodType(MethodType.C_UN_SUBSCRIBE);
 		req.setTopicName(topicName);
@@ -345,32 +351,32 @@ public class ConsumerBrokerService implements IConsumerBrokerService {
 		req.setConsumerType(consumerType);
 
 		// 重试取消订阅
-//		Retryer.<String>newInstance()
-//			.maxAttempt(unSubscribeMaxAttempt)
-//			.callable(new Callable<String>() {
-//				@Override
-//				public String call() throws Exception {
-//					Channel channel = getChannel(null);
-//					MqCommonResp resp = callServer(channel, req, MqCommonResp.class);
-//					if (!MqCommonRespCode.SUCCESS.getCode().equals(resp.getRespCode())) {
-//						throw new MqException(ConsumerRespCode.UN_SUBSCRIBE_FAILED);
-//					}
-//					return resp.getRespCode();
-//				}
-//			}).retryCall();
+		Retryer.<String>newInstance()
+			.maxAttempt(unSubscribeMaxAttempt)
+			.callable(new Callable<String>() {
+				@Override
+				public String call() throws Exception {
+					Channel channel = getChannel(null);
+					MqCommonResp resp = callServer(channel, req, MqCommonResp.class);
+					if (!MqCommonRespCode.SUCCESS.getCode().equals(resp.getRespCode())) {
+						throw new MqException(ConsumerRespCode.UN_SUBSCRIBE_FAILED);
+					}
+					return resp.getRespCode();
+				}
+			}).retryCall();
 	}
 
 	@Override
 	public void heartbeat() {
 		final MqHeartBeatReq req = new MqHeartBeatReq();
-//		final String traceId = IdHelper.uuid32();
-//		req.setTraceId(traceId);
-//		req.setMethodType(MethodType.C_HEARTBEAT);
-//		req.setAddress(NetUtil.getLocalHost());
-//		req.setPort(0);
-//		req.setTime(System.currentTimeMillis());
+		final String traceId = RandomUtil.randomString(32);
+		req.setTraceId(traceId);
+		req.setMethodType(MethodType.C_HEARTBEAT);
+		req.setAddress(NetUtil.getLocalhostStrV4());
+		req.setPort(0);
+		req.setTime(System.currentTimeMillis());
 
-//		log.debug("[HEARTBEAT] 往服务端发送心跳包 {}", JSON.toJSON(req));
+		log.debug("[HEARTBEAT] 往服务端发送心跳包 {}", JSON.toJSON(req));
 
 		// 通知全部
 		for (RpcChannelFuture channelFuture : channelFutureList) {
@@ -392,8 +398,8 @@ public class ConsumerBrokerService implements IConsumerBrokerService {
 		req.setTagRegex(tagRegex);
 		req.setTopicName(topicName);
 
-//		final String traceId = IdHelper.uuid32();
-//		req.setTraceId(traceId);
+		final String traceId = RandomUtil.randomString(32);
+		req.setTraceId(traceId);
 		req.setMethodType(MethodType.C_MESSAGE_PULL);
 
 		Channel channel = getChannel(null);
@@ -407,25 +413,24 @@ public class ConsumerBrokerService implements IConsumerBrokerService {
 		req.setMessageStatus(consumerStatus.getCode());
 		req.setConsumerGroupName(groupName);
 
-//		final String traceId = IdHelper.uuid32();
-//		req.setTraceId(traceId);
+		final String traceId = RandomUtil.randomString(32);
+		req.setTraceId(traceId);
 		req.setMethodType(MethodType.C_CONSUMER_STATUS);
 
 		// 重试
-//		return Retryer.<MqCommonResp>newInstance()
-//			.maxAttempt(consumerStatusMaxAttempt)
-//			.callable(new Callable<MqCommonResp>() {
-//				@Override
-//				public MqCommonResp call() throws Exception {
-//					Channel channel = getChannel(null);
-//					MqCommonResp resp = callServer(channel, req, MqCommonResp.class);
-//					if (!MqCommonRespCode.SUCCESS.getCode().equals(resp.getRespCode())) {
-//						throw new MqException(ConsumerRespCode.CONSUMER_STATUS_ACK_FAILED);
-//					}
-//					return resp;
-//				}
-//			}).retryCall();
-		return null;
+		return Retryer.<MqCommonResp>newInstance()
+			.maxAttempt(consumerStatusMaxAttempt)
+			.callable(new Callable<MqCommonResp>() {
+				@Override
+				public MqCommonResp call() throws Exception {
+					Channel channel = getChannel(null);
+					MqCommonResp resp = callServer(channel, req, MqCommonResp.class);
+					if (!MqCommonRespCode.SUCCESS.getCode().equals(resp.getRespCode())) {
+						throw new MqException(ConsumerRespCode.CONSUMER_STATUS_ACK_FAILED);
+					}
+					return resp;
+				}
+			}).retryCall();
 	}
 
 	@Override
@@ -433,25 +438,24 @@ public class ConsumerBrokerService implements IConsumerBrokerService {
 		final MqConsumerUpdateStatusBatchReq req = new MqConsumerUpdateStatusBatchReq();
 		req.setStatusList(statusDtoList);
 
-//		final String traceId = IdHelper.uuid32();
-//		req.setTraceId(traceId);
+		final String traceId = RandomUtil.randomString(32);
+		req.setTraceId(traceId);
 		req.setMethodType(MethodType.C_CONSUMER_STATUS_BATCH);
 
 		// 重试
-//		return Retryer.<MqCommonResp>newInstance()
-//			.maxAttempt(consumerStatusMaxAttempt)
-//			.callable(new Callable<MqCommonResp>() {
-//				@Override
-//				public MqCommonResp call() throws Exception {
-//					Channel channel = getChannel(null);
-//					MqCommonResp resp = callServer(channel, req, MqCommonResp.class);
-//					if (!MqCommonRespCode.SUCCESS.getCode().equals(resp.getRespCode())) {
-//						throw new MqException(ConsumerRespCode.CONSUMER_STATUS_ACK_BATCH_FAILED);
-//					}
-//					return resp;
-//				}
-//			}).retryCall();
-		return null;
+		return Retryer.<MqCommonResp>newInstance()
+			.maxAttempt(consumerStatusMaxAttempt)
+			.callable(new Callable<MqCommonResp>() {
+				@Override
+				public MqCommonResp call() throws Exception {
+					Channel channel = getChannel(null);
+					MqCommonResp resp = callServer(channel, req, MqCommonResp.class);
+					if (!MqCommonRespCode.SUCCESS.getCode().equals(resp.getRespCode())) {
+						throw new MqException(ConsumerRespCode.CONSUMER_STATUS_ACK_BATCH_FAILED);
+					}
+					return resp;
+				}
+			}).retryCall();
 	}
 
 	@Override
@@ -459,20 +463,20 @@ public class ConsumerBrokerService implements IConsumerBrokerService {
 		for (RpcChannelFuture channelFuture : channelFutureList) {
 			Channel channel = channelFuture.getChannelFuture().channel();
 			final String channelId = ChannelUtil.getChannelId(channel);
-//			log.info("开始注销：{}", channelId);
+			log.info("开始注销：{}", channelId);
 
 			ServiceEntry serviceEntry = InnerChannelUtils.buildServiceEntry(channelFuture);
 
 			BrokerRegisterReq brokerRegisterReq = new BrokerRegisterReq();
 			brokerRegisterReq.setServiceEntry(serviceEntry);
 
-//			String messageId = IdHelper.uuid32();
-//			brokerRegisterReq.setTraceId(messageId);
+			String messageId = RandomUtil.randomString(32);
+			brokerRegisterReq.setTraceId(messageId);
 			brokerRegisterReq.setMethodType(MethodType.C_UN_REGISTER);
 
 			this.callServer(channel, brokerRegisterReq, null);
 
-//			log.info("完成注销：{}", channelId);
+			log.info("完成注销：{}", channelId);
 		}
 	}
 

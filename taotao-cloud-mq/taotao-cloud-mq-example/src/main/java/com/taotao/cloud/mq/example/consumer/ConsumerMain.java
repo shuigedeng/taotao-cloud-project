@@ -1,6 +1,7 @@
 package com.taotao.cloud.mq.example.consumer;
 
 
+import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.mq.client.consumer.api.IMqConsumerListener;
 import com.taotao.cloud.mq.client.consumer.api.IMqConsumerListenerContext;
 import com.taotao.cloud.mq.client.consumer.core.MqConsumerPush;

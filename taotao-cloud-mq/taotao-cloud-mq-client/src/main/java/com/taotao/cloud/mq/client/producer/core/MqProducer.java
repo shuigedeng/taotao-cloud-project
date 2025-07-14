@@ -1,6 +1,7 @@
 package com.taotao.cloud.mq.client.producer.core;
 
 
+import com.taotao.boot.common.utils.common.ArgUtils;
 import com.taotao.cloud.mq.client.consumer.core.LoadBalances;
 import com.taotao.cloud.mq.client.producer.api.IMqProducer;
 import com.taotao.cloud.mq.client.producer.constant.ProducerConst;
@@ -163,8 +164,8 @@ public class MqProducer extends Thread implements IMqProducer {
 	 * 参数校验
 	 */
 	private void paramCheck() {
-//		ArgUtil.notEmpty(groupName, "groupName");
-//		ArgUtil.notEmpty(brokerAddress, "brokerAddress");
+		ArgUtils.notEmpty(groupName, "groupName");
+		ArgUtils.notEmpty(brokerAddress, "brokerAddress");
 	}
 
 	@Override
@@ -172,8 +173,8 @@ public class MqProducer extends Thread implements IMqProducer {
 		this.paramCheck();
 
 		// 启动服务端
-//		log.info("MQ 生产者开始启动客户端 GROUP: {} brokerAddress: {}",
-//			groupName, brokerAddress);
+		log.info("MQ 生产者开始启动客户端 GROUP: {} brokerAddress: {}",
+			groupName, brokerAddress);
 
 		try {
 			//0. 配置信息

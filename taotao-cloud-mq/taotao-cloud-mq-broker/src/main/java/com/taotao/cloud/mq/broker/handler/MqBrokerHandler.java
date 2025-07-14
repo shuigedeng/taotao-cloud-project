@@ -1,6 +1,8 @@
 package com.taotao.cloud.mq.broker.handler;
 
 import com.alibaba.fastjson2.JSON;
+import com.taotao.boot.common.utils.collection.CollectionUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import com.taotao.cloud.mq.broker.api.IBrokerConsumerService;
 import com.taotao.cloud.mq.broker.api.IBrokerProducerService;
 import com.taotao.cloud.mq.broker.dto.BrokerRegisterReq;
@@ -30,6 +32,7 @@ import com.taotao.cloud.mq.common.rpc.RpcMessageDto;
 import com.taotao.cloud.mq.common.support.invoke.IInvokeService;
 import com.taotao.cloud.mq.common.util.ChannelUtil;
 import com.taotao.cloud.mq.common.util.DelimiterUtil;
+import com.xkzhangsan.time.utils.CollectionUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
@@ -155,7 +158,7 @@ public class MqBrokerHandler extends SimpleChannelInboundHandler {
 			rpcMessageDto = JSON.parseObject(bytes, RpcMessageDto.class);
 		}
 		catch (Exception exception) {
-//			log.error("RpcMessageDto json 格式转换异常 {}", new String(bytes));
+			log.error("RpcMessageDto json 格式转换异常 {}", new String(bytes));
 			return;
 		}
 
@@ -173,11 +176,11 @@ public class MqBrokerHandler extends SimpleChannelInboundHandler {
 			final String traceId = rpcMessageDto.getTraceId();
 
 			// 丢弃掉 traceId 为空的信息
-//			if (StringUtil.isBlank(traceId)) {
-//				log.debug("[Server Response] response traceId 为空，直接丢弃",
-//					JSON.toJSON(rpcMessageDto));
-//				return;
-//			}
+			if (StringUtils.isBlank(traceId)) {
+				log.debug("[Server Response] response traceId 为空，直接丢弃",
+					JSON.toJSON(rpcMessageDto));
+				return;
+			}
 
 			// 添加消息
 			invokeService.addResponse(traceId, rpcMessageDto);
@@ -198,14 +201,14 @@ public class MqBrokerHandler extends SimpleChannelInboundHandler {
 
 			String channelId = ChannelUtil.getChannelId(ctx);
 			final Channel channel = ctx.channel();
-//			log.debug("channelId: {} 接收到 method: {} 内容：{}", channelId,
-//				methodType, json);
+			log.debug("channelId: {} 接收到 method: {} 内容：{}", channelId,
+				methodType, json);
 
 			// 生产者注册
 			if (MethodType.P_REGISTER.equals(methodType)) {
 				BrokerRegisterReq registerReq = JSON.parseObject(json, BrokerRegisterReq.class);
 				if (!brokerRegisterValidService.producerValid(registerReq)) {
-//					log.error("{} 生产者注册验证失败", JSON.toJSON(registerReq));
+					log.error("{} 生产者注册验证失败", JSON.toJSON(registerReq));
 					throw new MqException(MqBrokerRespCode.P_REGISTER_VALID_FAILED);
 				}
 
@@ -251,7 +254,7 @@ public class MqBrokerHandler extends SimpleChannelInboundHandler {
 			if (MethodType.C_REGISTER.equals(methodType)) {
 				BrokerRegisterReq registerReq = JSON.parseObject(json, BrokerRegisterReq.class);
 				if (!brokerRegisterValidService.consumerValid(registerReq)) {
-//					log.error("{} 消费者注册验证失败", JSON.toJSON(registerReq));
+					log.error("{} 消费者注册验证失败", JSON.toJSON(registerReq));
 					throw new MqException(MqBrokerRespCode.C_REGISTER_VALID_FAILED);
 				}
 
@@ -314,7 +317,7 @@ public class MqBrokerHandler extends SimpleChannelInboundHandler {
 				return mqBrokerPersist.updateStatusBatch(statusDtoList);
 			}
 
-//			log.error("暂时不支持的方法类型 {}", methodType);
+			log.error("暂时不支持的方法类型 {}", methodType);
 			throw new MqException(MqBrokerRespCode.B_NOT_SUPPORT_METHOD);
 		}
 		catch (MqException mqException) {
@@ -412,10 +415,10 @@ public class MqBrokerHandler extends SimpleChannelInboundHandler {
 		final MqMessage mqMessage = put.getMqMessage();
 		List<ChannelGroupNameDto> channelList = registerConsumerService.getPushSubscribeList(
 			mqMessage);
-//		if (CollectionUtil.isEmpty(channelList)) {
-//			log.info("监听列表为空，忽略处理");
-//			return;
-//		}
+		if (CollectionUtils.isEmpty(channelList)) {
+			log.info("监听列表为空，忽略处理");
+			return;
+		}
 
 		BrokerPushContext brokerPushContext = BrokerPushContext.newInstance()
 			.channelList(channelList)
@@ -452,7 +455,7 @@ public class MqBrokerHandler extends SimpleChannelInboundHandler {
 		// 回写到 client 端
 		ByteBuf byteBuf = DelimiterUtil.getMessageDelimiterBuffer(rpcMessageDto);
 		ctx.writeAndFlush(byteBuf);
-//		log.debug("[Server] channel {} response {}", id, JSON.toJSON(rpcMessageDto));
+		log.debug("[Server] channel {} response {}", id, JSON.toJSON(rpcMessageDto));
 	}
 
 

@@ -176,7 +176,7 @@ public class MqBroker extends Thread implements IMqBroker {
 	@Override
 	public void run() {
 		// 启动服务端
-//		log.info("MQ 中间人开始启动服务端 port: {}", port);
+		log.info("MQ 中间人开始启动服务端 port: {}", port);
 
 		EventLoopGroup bossGroup = new NioEventLoopGroup();
 		EventLoopGroup workerGroup = new NioEventLoopGroup();

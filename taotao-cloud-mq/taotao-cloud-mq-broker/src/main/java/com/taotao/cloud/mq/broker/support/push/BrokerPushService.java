@@ -14,6 +14,7 @@ import com.taotao.cloud.mq.common.dto.resp.MqConsumerResultResp;
 import com.taotao.cloud.mq.common.resp.ConsumerStatus;
 import com.taotao.cloud.mq.common.resp.MqCommonRespCode;
 import com.taotao.cloud.mq.common.resp.MqException;
+import com.taotao.cloud.mq.common.retry.core.core.Retryer;
 import com.taotao.cloud.mq.common.rpc.RpcMessageDto;
 import com.taotao.cloud.mq.common.support.invoke.IInvokeService;
 import com.taotao.cloud.mq.common.util.ChannelUtil;
@@ -42,7 +43,7 @@ public class BrokerPushService implements IBrokerPushService {
 		EXECUTOR_SERVICE.submit(new Runnable() {
 			@Override
 			public void run() {
-//				log.info("开始异步处理 {}", JSON.toJSON(context));
+				log.info("开始异步处理 {}", JSON.toJSON(context));
 				final MqMessagePersistPut persistPut = context.mqMessagePersistPut();
 				final MqMessage mqMessage = persistPut.getMqMessage();
 				final List<ChannelGroupNameDto> channelList = context.channelList();
@@ -53,7 +54,7 @@ public class BrokerPushService implements IBrokerPushService {
 
 				// 更新状态为处理中
 				final String messageId = mqMessage.getTraceId();
-//				log.info("开始更新消息为处理中：{}", messageId);
+				log.info("开始更新消息为处理中：{}", messageId);
 
 				for (final ChannelGroupNameDto channelGroupNameDto : channelList) {
 					final Channel channel = channelGroupNameDto.getChannel();
@@ -65,42 +66,42 @@ public class BrokerPushService implements IBrokerPushService {
 
 						String channelId = ChannelUtil.getChannelId(channel);
 
-//						log.info("开始处理 channelId: {}", channelId);
+						log.info("开始处理 channelId: {}", channelId);
 						//1. 调用
 						mqMessage.setMethodType(MethodType.B_MESSAGE_PUSH);
 
 						// 重试推送
-//						MqConsumerResultResp resultResp = Retryer.<MqConsumerResultResp>newInstance()
-//							.maxAttempt(pushMaxAttempt)
-//							.callable(new Callable<MqConsumerResultResp>() {
-//								@Override
-//								public MqConsumerResultResp call() throws Exception {
-//									MqConsumerResultResp resp = callServer(channel, mqMessage,
-//										MqConsumerResultResp.class, invokeService, responseTime);
-//
-//									// 失败校验
-//									if (resp == null
-//										|| !ConsumerStatus.SUCCESS.getCode()
-//										.equals(resp.getConsumerStatus())) {
-//										throw new MqException(BrokerRespCode.MSG_PUSH_FAILED);
-//									}
-//									return resp;
-//								}
-//							}).retryCall();
+						MqConsumerResultResp resultResp = Retryer.<MqConsumerResultResp>newInstance()
+							.maxAttempt(pushMaxAttempt)
+							.callable(new Callable<MqConsumerResultResp>() {
+								@Override
+								public MqConsumerResultResp call() throws Exception {
+									MqConsumerResultResp resp = callServer(channel, mqMessage,
+										MqConsumerResultResp.class, invokeService, responseTime);
+
+									// 失败校验
+									if (resp == null
+										|| !ConsumerStatus.SUCCESS.getCode()
+										.equals(resp.getConsumerStatus())) {
+										throw new MqException(BrokerRespCode.MSG_PUSH_FAILED);
+									}
+									return resp;
+								}
+							}).retryCall();
 
 						//2. 更新状态
 						//2.1 处理成功，取 push 消费状态
-//						if (MqCommonRespCode.SUCCESS.getCode().equals(resultResp.getRespCode())) {
-//							mqBrokerPersist.updateStatus(messageId, consumerGroupName,
-//								resultResp.getConsumerStatus());
-//						}
-//						else {
-//							// 2.2 处理失败
-//							log.error("消费失败：{}", JSON.toJSON(resultResp));
-//							mqBrokerPersist.updateStatus(messageId, consumerGroupName,
-//								MessageStatusConst.TO_CONSUMER_FAILED);
-//						}
-//						log.info("完成处理 channelId: {}", channelId);
+						if (MqCommonRespCode.SUCCESS.getCode().equals(resultResp.getRespCode())) {
+							mqBrokerPersist.updateStatus(messageId, consumerGroupName,
+								resultResp.getConsumerStatus());
+						}
+						else {
+							// 2.2 处理失败
+							log.error("消费失败：{}", JSON.toJSON(resultResp));
+							mqBrokerPersist.updateStatus(messageId, consumerGroupName,
+								MessageStatusConst.TO_CONSUMER_FAILED);
+						}
+						log.info("完成处理 channelId: {}", channelId);
 					}
 					catch (Exception exception) {
 						log.error("处理异常");
@@ -154,8 +155,8 @@ public class BrokerPushService implements IBrokerPushService {
 		channel.writeAndFlush(byteBuf);
 
 		String channelId = ChannelUtil.getChannelId(channel);
-//		log.debug("[Client] channelId {} 发送消息 {}", channelId, JSON.toJSON(rpcMessageDto));
-//        channel.closeFuture().syncUninterruptibly();
+		log.debug("[Client] channelId {} 发送消息 {}", channelId, JSON.toJSON(rpcMessageDto));
+        channel.closeFuture().syncUninterruptibly();
 
 		if (respClass == null) {
 			log.debug("[Client] 当前消息为 one-way 消息，忽略响应");

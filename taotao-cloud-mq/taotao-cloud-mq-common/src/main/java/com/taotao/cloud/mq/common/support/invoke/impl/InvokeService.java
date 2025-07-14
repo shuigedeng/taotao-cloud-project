@@ -2,6 +2,7 @@ package com.taotao.cloud.mq.common.support.invoke.impl;
 
 
 import com.alibaba.fastjson2.JSON;
+import com.taotao.boot.common.utils.lang.ObjectUtils;
 import com.taotao.cloud.mq.common.resp.MqCommonRespCode;
 import com.taotao.cloud.mq.common.resp.MqException;
 import com.taotao.cloud.mq.common.rpc.RpcMessageDto;
@@ -49,8 +50,8 @@ public class InvokeService implements IInvokeService {
 
 	@Override
 	public IInvokeService addRequest(String seqId, long timeoutMills) {
-//		logger.debug("[Invoke] start add request for seqId: {}, timeoutMills: {}", seqId,
-//			timeoutMills);
+		logger.debug("[Invoke] start add request for seqId: {}, timeoutMills: {}", seqId,
+			timeoutMills);
 
 		final long expireTime = System.currentTimeMillis() + timeoutMills;
 		requestMap.putIfAbsent(seqId, expireTime);
@@ -63,9 +64,9 @@ public class InvokeService implements IInvokeService {
 		// 1. 判断是否有效
 		Long expireTime = this.requestMap.get(seqId);
 		// 如果为空，可能是这个结果已经超时了，被定时 job 移除之后，响应结果才过来。直接忽略
-//		if (ObjectUtil.isNull(expireTime)) {
-//			return this;
-//		}
+		if (ObjectUtils.isNull(expireTime)) {
+			return this;
+		}
 
 		//2. 判断是否超时
 		if (System.currentTimeMillis() > expireTime) {
@@ -98,10 +99,10 @@ public class InvokeService implements IInvokeService {
 	public RpcMessageDto getResponse(String seqId) {
 		try {
 			RpcMessageDto rpcResponse = this.responseMap.get(seqId);
-//			if (ObjectUtil.isNotNull(rpcResponse)) {
-//				logger.debug("[Invoke] seq {} 对应结果已经获取: {}", seqId, rpcResponse);
-//				return rpcResponse;
-//			}
+			if (ObjectUtils.isNotNull(rpcResponse)) {
+				logger.debug("[Invoke] seq {} 对应结果已经获取: {}", seqId, rpcResponse);
+				return rpcResponse;
+			}
 
 			// 进入等待
 			while (rpcResponse == null) {

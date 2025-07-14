@@ -1,6 +1,7 @@
 package com.taotao.cloud.mq.broker.support.persist;
 
 import com.alibaba.fastjson2.JSON;
+import com.taotao.boot.common.utils.collection.CollectionUtils;
 import com.taotao.cloud.mq.broker.dto.persist.MqMessagePersistPut;
 import com.taotao.cloud.mq.common.constant.MessageStatusConst;
 import com.taotao.cloud.mq.common.dto.req.MqConsumerPullReq;
@@ -9,6 +10,9 @@ import com.taotao.cloud.mq.common.dto.req.component.MqConsumerUpdateStatusDto;
 import com.taotao.cloud.mq.common.dto.resp.MqCommonResp;
 import com.taotao.cloud.mq.common.dto.resp.MqConsumerPullResp;
 import com.taotao.cloud.mq.common.resp.MqCommonRespCode;
+import com.taotao.cloud.mq.common.util.MapUtil;
+import com.taotao.cloud.mq.common.util.RegexUtil;
+import com.xkzhangsan.time.utils.CollectionUtil;
 import io.netty.channel.Channel;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,13 +51,13 @@ public class LocalMqBrokerPersist implements IMqBrokerPersist {
 	}
 
 	private void doPut(MqMessagePersistPut put) {
-//		log.info("put elem: {}", JSON.toJSON(put));
+		LOG.info("put elem: {}", JSON.toJSON(put));
 
 		MqMessage mqMessage = put.getMqMessage();
 		final String topic = mqMessage.getTopic();
 
 		// 放入元素
-//		MapUtil.putToListMap(map, topic, put);
+		MapUtil.putToListMap(map, topic, put);
 	}
 
 	@Override
@@ -126,27 +130,27 @@ public class LocalMqBrokerPersist implements IMqBrokerPersist {
 		List<MqMessage> resultList = new ArrayList<>(fetchSize);
 		List<MqMessagePersistPut> putList = map.get(topic);
 		// 性能比较差
-//		if (CollectionUtil.isNotEmpty(putList)) {
-//			for (MqMessagePersistPut put : putList) {
-//				if (!isEnableStatus(put)) {
-//					continue;
-//				}
-//
-//				final MqMessage mqMessage = put.getMqMessage();
-//				List<String> tagList = mqMessage.getTags();
-//				if (RegexUtil.hasMatch(tagList, tagRegex)) {
-//					// 设置为处理中
-//					// TODO： 消息的最终状态什么时候更新呢？
-//					// 可以给 broker 一个 ACK
-//					put.setMessageStatus(MessageStatusConst.TO_CONSUMER_PROCESS);
-//					resultList.add(mqMessage);
-//				}
-//
-//				if (resultList.size() >= fetchSize) {
-//					break;
-//				}
-//			}
-//		}
+		if (CollectionUtils.isNotEmpty(putList)) {
+			for (MqMessagePersistPut put : putList) {
+				if (!isEnableStatus(put)) {
+					continue;
+				}
+
+				final MqMessage mqMessage = put.getMqMessage();
+				List<String> tagList = mqMessage.getTags();
+				if (RegexUtil.hasMatch(tagList, tagRegex)) {
+					// 设置为处理中
+					// TODO： 消息的最终状态什么时候更新呢？
+					// 可以给 broker 一个 ACK
+					put.setMessageStatus(MessageStatusConst.TO_CONSUMER_PROCESS);
+					resultList.add(mqMessage);
+				}
+
+				if (resultList.size() >= fetchSize) {
+					break;
+				}
+			}
+		}
 
 		MqConsumerPullResp resp = new MqConsumerPullResp();
 		resp.setRespCode(MqCommonRespCode.SUCCESS.getCode());

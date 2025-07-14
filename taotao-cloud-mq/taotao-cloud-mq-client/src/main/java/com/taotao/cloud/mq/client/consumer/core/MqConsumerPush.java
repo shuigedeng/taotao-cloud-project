@@ -1,5 +1,6 @@
 package com.taotao.cloud.mq.client.consumer.core;
 
+import com.taotao.boot.common.utils.common.ArgUtils;
 import com.taotao.cloud.mq.client.consumer.api.IMqConsumer;
 import com.taotao.cloud.mq.client.consumer.api.IMqConsumerListener;
 import com.taotao.cloud.mq.client.consumer.constant.ConsumerConst;
@@ -187,15 +188,15 @@ public class MqConsumerPush extends Thread implements IMqConsumer {
      * 参数校验
      */
     private void paramCheck() {
-//        ArgUtil.notEmpty(brokerAddress, "brokerAddress");
-//        ArgUtil.notEmpty(groupName, "groupName");
+        ArgUtils.notEmpty(brokerAddress, "brokerAddress");
+        ArgUtils.notEmpty(groupName, "groupName");
     }
 
     @Override
     public void run() {
         // 启动服务端
-//        log.info("MQ 消费者开始启动服务端 groupName: {}, brokerAddress: {}",
-//                groupName, brokerAddress);
+        log.info("MQ 消费者开始启动服务端 groupName: {}, brokerAddress: {}",
+                groupName, brokerAddress);
 
         //1. 参数校验
         this.paramCheck();

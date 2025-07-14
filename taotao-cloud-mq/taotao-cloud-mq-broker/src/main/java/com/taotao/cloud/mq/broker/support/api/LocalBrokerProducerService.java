@@ -60,7 +60,7 @@ public class LocalBrokerProducerService implements IBrokerProducerService {
 	@Override
 	public void checkValid(String channelId) {
 		if (!registerMap.containsKey(channelId)) {
-//			log.error("channelId: {} 未注册", channelId);
+			LOG.error("channelId: {} 未注册", channelId);
 			throw new MqException(MqBrokerRespCode.P_REGISTER_CHANNEL_NOT_VALID);
 		}
 	}

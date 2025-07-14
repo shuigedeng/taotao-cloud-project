@@ -4,6 +4,9 @@ package com.taotao.cloud.mq.common.util;
 import com.taotao.cloud.mq.common.tmp.ILoadBalance;
 import com.taotao.cloud.mq.common.tmp.IServer;
 import com.taotao.cloud.mq.common.tmp.LoadBalanceContext;
+import com.xkzhangsan.time.utils.CollectionUtil;
+import com.xkzhangsan.time.utils.StringUtil;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -23,15 +26,15 @@ public class RandomUtils {
 	 */
 	public static <T extends IServer> T loadBalance(final ILoadBalance<T> loadBalance,
 		final List<T> list, String key) {
-//		if (CollectionUtil.isEmpty(list)) {
-//			return null;
-//		}
-//
-//		if (StringUtil.isEmpty(key)) {
-//			LoadBalanceContext<T> loadBalanceContext = LoadBalanceContext.<T>newInstance()
-//				.servers(list);
-//			return loadBalance.select(loadBalanceContext);
-//		}
+		if (CollectionUtil.isEmpty(list)) {
+			return null;
+		}
+
+		if (StringUtil.isEmpty(key)) {
+			LoadBalanceContext<T> loadBalanceContext = LoadBalanceContext.<T>newInstance()
+				.servers(list);
+			return loadBalance.select(loadBalanceContext);
+		}
 
 		// 获取 code
 		int hashCode = Objects.hash(key);

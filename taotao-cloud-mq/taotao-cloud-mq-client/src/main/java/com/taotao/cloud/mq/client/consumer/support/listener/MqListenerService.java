@@ -28,7 +28,7 @@ public class MqListenerService implements IMqListenerService {
 	@Override
 	public ConsumerStatus consumer(MqMessage mqMessage, IMqConsumerListenerContext context) {
 		if (mqConsumerListener == null) {
-//			log.warn("当前监听类为空，直接忽略处理。message: {}", JSON.toJSON(mqMessage));
+			LOG.warn("当前监听类为空，直接忽略处理。message: {}", JSON.toJSON(mqMessage));
 			return ConsumerStatus.SUCCESS;
 		}
 		else {

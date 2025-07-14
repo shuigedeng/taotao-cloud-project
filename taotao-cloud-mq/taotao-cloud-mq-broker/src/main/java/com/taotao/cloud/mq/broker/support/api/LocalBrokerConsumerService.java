@@ -17,7 +17,10 @@ import com.taotao.cloud.mq.common.resp.MqCommonRespCode;
 import com.taotao.cloud.mq.common.resp.MqException;
 import com.taotao.cloud.mq.common.tmp.ILoadBalance;
 import com.taotao.cloud.mq.common.util.ChannelUtil;
+import com.taotao.cloud.mq.common.util.MapUtil;
 import com.taotao.cloud.mq.common.util.RandomUtils;
+import com.taotao.cloud.mq.common.util.RegexUtil;
+import com.xkzhangsan.time.utils.CollectionUtil;
 import io.netty.channel.Channel;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -127,9 +130,9 @@ public class LocalBrokerConsumerService implements IBrokerConsumerService {
 	 */
 	private void removeByChannelId(final String channelId) {
 		BrokerServiceEntryChannel channelRegister = registerMap.remove(channelId);
-//		log.info("移除注册信息 id: {}, channel: {}", channelId, JSON.toJSON(channelRegister));
+		LOG.info("移除注册信息 id: {}, channel: {}", channelId, JSON.toJSON(channelRegister));
 		BrokerServiceEntryChannel channelHeartbeat = heartbeatMap.remove(channelId);
-//		log.info("移除心跳信息 id: {}, channel: {}", channelId, JSON.toJSON(channelHeartbeat));
+		LOG.info("移除心跳信息 id: {}, channel: {}", channelId, JSON.toJSON(channelHeartbeat));
 	}
 
 	@Override
@@ -148,7 +151,7 @@ public class LocalBrokerConsumerService implements IBrokerConsumerService {
 		subscribeBo.setTagRegex(serviceEntry.getTagRegex());
 
 		// 放入集合
-//		MapUtil.putToSetMap(subscribeMap, topicName, subscribeBo);
+		MapUtil.putToSetMap(subscribeMap, topicName, subscribeBo);
 
 		MqCommonResp resp = new MqCommonResp();
 		resp.setRespCode(MqCommonRespCode.SUCCESS.getCode());
@@ -177,9 +180,9 @@ public class LocalBrokerConsumerService implements IBrokerConsumerService {
 
 		// 集合
 		Set<ConsumerSubscribeBo> set = subscribeMap.get(topicName);
-//		if (CollectionUtil.isNotEmpty(set)) {
-//			set.remove(subscribeBo);
-//		}
+		if (CollectionUtil.isNotEmpty(set)) {
+			set.remove(subscribeBo);
+		}
 
 		MqCommonResp resp = new MqCommonResp();
 		resp.setRespCode(MqCommonRespCode.SUCCESS.getCode());
@@ -191,9 +194,9 @@ public class LocalBrokerConsumerService implements IBrokerConsumerService {
 	public List<ChannelGroupNameDto> getPushSubscribeList(MqMessage mqMessage) {
 		final String topicName = mqMessage.getTopic();
 		Set<ConsumerSubscribeBo> set = pushSubscribeMap.get(topicName);
-//		if (CollectionUtil.isEmpty(set)) {
-//			return Collections.emptyList();
-//		}
+		if (CollectionUtil.isEmpty(set)) {
+			return Collections.emptyList();
+		}
 
 		//2. 获取匹配的 tag 列表
 		final List<String> tagNameList = mqMessage.getTags();
@@ -202,11 +205,11 @@ public class LocalBrokerConsumerService implements IBrokerConsumerService {
 		for (ConsumerSubscribeBo bo : set) {
 			String tagRegex = bo.getTagRegex();
 
-//			if (RegexUtil.hasMatch(tagNameList, tagRegex)) {
-//				String groupName = bo.getGroupName();
-//
-//				MapUtil.putToListMap(groupMap, groupName, bo);
-//			}
+			if (RegexUtil.hasMatch(tagNameList, tagRegex)) {
+				String groupName = bo.getGroupName();
+
+				MapUtil.putToListMap(groupMap, groupName, bo);
+			}
 		}
 
 		//3. 按照 groupName 分组之后，每一组只随机返回一个。最好应该调整为以 shardingkey 选择
@@ -214,20 +217,20 @@ public class LocalBrokerConsumerService implements IBrokerConsumerService {
 		List<ChannelGroupNameDto> channelGroupNameList = new ArrayList<>();
 
 		for (Map.Entry<String, List<ConsumerSubscribeBo>> entry : groupMap.entrySet()) {
-//			List<ConsumerSubscribeBo> list = entry.getValue();
-//
-//			ConsumerSubscribeBo bo = RandomUtils.loadBalance(loadBalance, list, shardingKey);
-//			final String channelId = bo.getChannelId();
-//			BrokerServiceEntryChannel entryChannel = registerMap.get(channelId);
-//			if (entryChannel == null) {
-//				log.warn("channelId: {} 对应的通道信息为空", channelId);
-//				continue;
-//			}
-//
-//			final String groupName = entry.getKey();
-//			ChannelGroupNameDto channelGroupNameDto = ChannelGroupNameDto.of(groupName,
-//				entryChannel.getChannel());
-//			channelGroupNameList.add(channelGroupNameDto);
+			List<ConsumerSubscribeBo> list = entry.getValue();
+
+			ConsumerSubscribeBo bo = RandomUtils.loadBalance(loadBalance, list, shardingKey);
+			final String channelId = bo.getChannelId();
+			BrokerServiceEntryChannel entryChannel = registerMap.get(channelId);
+			if (entryChannel == null) {
+				LOG.warn("channelId: {} 对应的通道信息为空", channelId);
+				continue;
+			}
+
+			final String groupName = entry.getKey();
+			ChannelGroupNameDto channelGroupNameDto = ChannelGroupNameDto.of(groupName,
+				entryChannel.getChannel());
+			channelGroupNameList.add(channelGroupNameDto);
 		}
 
 		return channelGroupNameList;
@@ -236,8 +239,8 @@ public class LocalBrokerConsumerService implements IBrokerConsumerService {
 	@Override
 	public void heartbeat(MqHeartBeatReq mqHeartBeatReq, Channel channel) {
 		final String channelId = ChannelUtil.getChannelId(channel);
-//		log.info("[HEARTBEAT] 接收消费者心跳 {}, channelId: {}",
-//			JSON.toJSON(mqHeartBeatReq), channelId);
+		LOG.info("[HEARTBEAT] 接收消费者心跳 {}, channelId: {}",
+			JSON.toJSON(mqHeartBeatReq), channelId);
 
 		ServiceEntry serviceEntry = new ServiceEntry();
 		serviceEntry.setAddress(mqHeartBeatReq.getAddress());
@@ -253,7 +256,7 @@ public class LocalBrokerConsumerService implements IBrokerConsumerService {
 	@Override
 	public void checkValid(String channelId) {
 		if (!registerMap.containsKey(channelId)) {
-//			log.error("channelId: {} 未注册", channelId);
+			LOG.error("channelId: {} 未注册", channelId);
 			throw new MqException(MqBrokerRespCode.C_REGISTER_CHANNEL_NOT_VALID);
 		}
 	}

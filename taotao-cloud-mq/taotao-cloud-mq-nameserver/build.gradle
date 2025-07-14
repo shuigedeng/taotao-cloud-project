@@ -8,10 +8,6 @@ dependencies {
 
     api "io.github.shuigedeng:taotao-boot-starter-core"
 
-    api project(":taotao-cloud-tx:taotao-cloud-tx-tm")
-    api project(":taotao-cloud-tx:taotao-cloud-tx-rm")
-    api project(":taotao-cloud-tx:taotao-cloud-tx-consistency")
-
     api("org.springframework.boot:spring-boot-starter-web") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
     }

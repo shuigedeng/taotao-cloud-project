@@ -1,5 +1,6 @@
 package com.taotao.cloud.mq.common.support.invoke.impl;
 
+import com.taotao.boot.common.utils.common.ArgUtils;
 import com.taotao.cloud.mq.common.rpc.RpcMessageDto;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -35,7 +36,7 @@ public class TimeoutCheckThread implements Runnable {
 	 */
 	public TimeoutCheckThread(ConcurrentHashMap<String, Long> requestMap,
 		ConcurrentHashMap<String, RpcMessageDto> responseMap) {
-		//ArgUtil.notNull(requestMap, "requestMap");
+		ArgUtils.notNull(requestMap, "requestMap");
 		this.requestMap = requestMap;
 		this.responseMap = responseMap;
 	}

@@ -16,6 +16,7 @@ import com.taotao.cloud.mq.common.dto.req.MqMessageBatchReq;
 import com.taotao.cloud.mq.common.dto.resp.MqCommonResp;
 import com.taotao.cloud.mq.common.resp.MqCommonRespCode;
 import com.taotao.cloud.mq.common.resp.MqException;
+import com.taotao.cloud.mq.common.retry.core.core.Retryer;
 import com.taotao.cloud.mq.common.rpc.RpcChannelFuture;
 import com.taotao.cloud.mq.common.rpc.RpcMessageDto;
 import com.taotao.cloud.mq.common.support.invoke.IInvokeService;
@@ -30,11 +31,13 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.handler.codec.DelimiterBasedFrameDecoder;
+import org.dromara.hutool.core.util.RandomUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author shuigedeng
@@ -154,14 +157,14 @@ public class ProducerBrokerService implements IProducerBrokerService {
 			BrokerRegisterReq brokerRegisterReq = new BrokerRegisterReq();
 			brokerRegisterReq.setServiceEntry(serviceEntry);
 			brokerRegisterReq.setMethodType(MethodType.P_REGISTER);
-//			brokerRegisterReq.setTraceId(IdHelper.uuid32());
+			brokerRegisterReq.setTraceId(RandomUtil.randomString(32));
 			brokerRegisterReq.setAppKey(appKey);
 			brokerRegisterReq.setAppSecret(appSecret);
 
-//			log.info("[Register] 开始注册到 broker：{}", JSON.toJSON(brokerRegisterReq));
+			log.info("[Register] 开始注册到 broker：{}", JSON.toJSON(brokerRegisterReq));
 			final Channel channel = channelFuture.getChannelFuture().channel();
 			MqCommonResp resp = callServer(channel, brokerRegisterReq, MqCommonResp.class);
-//			log.info("[Register] 完成注册到 broker：{}", JSON.toJSON(resp));
+			log.info("[Register] 完成注册到 broker：{}", JSON.toJSON(resp));
 
 			if (MqCommonRespCode.SUCCESS.getCode().equals(resp.getRespCode())) {
 				successCount++;
@@ -176,7 +179,7 @@ public class ProducerBrokerService implements IProducerBrokerService {
 
 	@Override
 	public <T extends MqCommonReq, R extends MqCommonResp> R callServer(Channel channel,
-		T commonReq, Class<R> respClass) {
+																		T commonReq, Class<R> respClass) {
 		final String traceId = commonReq.getTraceId();
 		final long requestTime = System.currentTimeMillis();
 
@@ -199,14 +202,13 @@ public class ProducerBrokerService implements IProducerBrokerService {
 		channel.writeAndFlush(byteBuf);
 
 		String channelId = ChannelUtil.getChannelId(channel);
-//		log.debug("[Client] channelId {} 发送消息 {}", channelId, JSON.toJSON(rpcMessageDto));
-//        channel.closeFuture().syncUninterruptibly();
+		log.debug("[Client] channelId {} 发送消息 {}", channelId, JSON.toJSON(rpcMessageDto));
+        channel.closeFuture().syncUninterruptibly();
 
 		if (respClass == null) {
 			log.debug("[Client] 当前消息为 one-way 消息，忽略响应");
 			return null;
-		}
-		else {
+		} else {
 			//channelHandler 中获取对应的响应
 			RpcMessageDto messageDto = invokeService.getResponse(traceId);
 			if (MqCommonRespCode.TIMEOUT.getCode().equals(messageDto.getRespCode())) {
@@ -228,7 +230,11 @@ public class ProducerBrokerService implements IProducerBrokerService {
 			}
 
 			log.debug("等待初始化完成...");
-//			DateUtil.sleep(100);
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				throw new RuntimeException(e);
+			}
 		}
 
 		RpcChannelFuture rpcChannelFuture = RandomUtils.loadBalance(this.loadBalance,
@@ -238,25 +244,24 @@ public class ProducerBrokerService implements IProducerBrokerService {
 
 	@Override
 	public SendResult send(final MqMessage mqMessage) {
-//		final String messageId = IdHelper.uuid32();
-//		mqMessage.setTraceId(messageId);
+		final String messageId = RandomUtil.randomString(32);
+		mqMessage.setTraceId(messageId);
 		mqMessage.setMethodType(MethodType.P_SEND_MSG);
 		mqMessage.setGroupName(groupName);
 
-//		return Retryer.<SendResult>newInstance()
-//			.maxAttempt(maxAttempt)
-//			.callable(new Callable<SendResult>() {
-//				@Override
-//				public SendResult call() throws Exception {
-//					return doSend(messageId, mqMessage);
-//				}
-//			}).retryCall();
-		return null;
+		return Retryer.<SendResult>newInstance()
+			.maxAttempt(maxAttempt)
+			.callable(new Callable<SendResult>() {
+				@Override
+				public SendResult call() throws Exception {
+					return doSend(messageId, mqMessage);
+				}
+			}).retryCall();
 	}
 
 	private SendResult doSend(String messageId, MqMessage mqMessage) {
-//		log.info("[Producer] 发送消息 messageId: {}, mqMessage: {}",
-//			messageId, JSON.toJSON(mqMessage));
+		log.info("[Producer] 发送消息 messageId: {}, mqMessage: {}",
+			messageId, JSON.toJSON(mqMessage));
 
 		Channel channel = getChannel(mqMessage.getShardingKey());
 		MqCommonResp resp = callServer(channel, mqMessage, MqCommonResp.class);
@@ -269,16 +274,15 @@ public class ProducerBrokerService implements IProducerBrokerService {
 
 	@Override
 	public SendResult sendOneWay(MqMessage mqMessage) {
-//		String messageId = IdHelper.uuid32();
-//		mqMessage.setTraceId(messageId);
+		String messageId = RandomUtil.randomString(32);
+		mqMessage.setTraceId(messageId);
 		mqMessage.setMethodType(MethodType.P_SEND_MSG_ONE_WAY);
 		mqMessage.setGroupName(groupName);
 
 		Channel channel = getChannel(mqMessage.getShardingKey());
 		this.callServer(channel, mqMessage, null);
 
-//		return SendResult.of(messageId, SendStatus.SUCCESS);
-		return null;
+		return SendResult.of(messageId, SendStatus.SUCCESS);
 	}
 
 	@Override
@@ -287,26 +291,25 @@ public class ProducerBrokerService implements IProducerBrokerService {
 
 		final MqMessageBatchReq batchReq = new MqMessageBatchReq();
 		batchReq.setMqMessageList(mqMessageList);
-//		String traceId = IdHelper.uuid32();
-//		batchReq.setTraceId(traceId);
+		String traceId = RandomUtil.randomString(32);
+		batchReq.setTraceId(traceId);
 		batchReq.setMethodType(MethodType.P_SEND_MSG_BATCH);
 
-//		return Retryer.<SendBatchResult>newInstance()
-//			.maxAttempt(maxAttempt)
-//			.callable(new Callable<SendBatchResult>() {
-//				@Override
-//				public SendBatchResult call() throws Exception {
-//					return doSendBatch(messageIdList, batchReq, false);
-//				}
-//			}).retryCall();
-		return null;
+		return Retryer.<SendBatchResult>newInstance()
+			.maxAttempt(maxAttempt)
+			.callable(new Callable<SendBatchResult>() {
+				@Override
+				public SendBatchResult call() throws Exception {
+					return doSendBatch(messageIdList, batchReq, false);
+				}
+			}).retryCall();
 	}
 
 	private SendBatchResult doSendBatch(List<String> messageIdList,
-		MqMessageBatchReq batchReq,
-		boolean oneWay) {
-//		log.info("[Producer] 批量发送消息 messageIdList: {}, batchReq: {}, oneWay: {}",
-//			messageIdList, JSON.toJSON(batchReq), oneWay);
+										MqMessageBatchReq batchReq,
+										boolean oneWay) {
+		log.info("[Producer] 批量发送消息 messageIdList: {}, batchReq: {}, oneWay: {}",
+			messageIdList, JSON.toJSON(batchReq), oneWay);
 
 		// 以第一个 sharding-key 为准。
 		// 后续的会被忽略
@@ -331,11 +334,11 @@ public class ProducerBrokerService implements IProducerBrokerService {
 		List<String> idList = new ArrayList<>(mqMessageList.size());
 
 		for (MqMessage mqMessage : mqMessageList) {
-//			String messageId = IdHelper.uuid32();
-//			mqMessage.setTraceId(messageId);
+			String messageId = RandomUtil.randomString(32);
+			mqMessage.setTraceId(messageId);
 			mqMessage.setGroupName(groupName);
 
-//			idList.add(messageId);
+			idList.add(messageId);
 		}
 
 		return idList;
@@ -347,8 +350,8 @@ public class ProducerBrokerService implements IProducerBrokerService {
 
 		MqMessageBatchReq batchReq = new MqMessageBatchReq();
 		batchReq.setMqMessageList(mqMessageList);
-//		String traceId = IdHelper.uuid32();
-//		batchReq.setTraceId(traceId);
+		String traceId = RandomUtil.randomString(32);
+		batchReq.setTraceId(traceId);
 		batchReq.setMethodType(MethodType.P_SEND_MSG_ONE_WAY_BATCH);
 
 		return doSendBatch(messageIdList, batchReq, true);
@@ -359,20 +362,20 @@ public class ProducerBrokerService implements IProducerBrokerService {
 		for (RpcChannelFuture channelFuture : channelFutureList) {
 			Channel channel = channelFuture.getChannelFuture().channel();
 			final String channelId = ChannelUtil.getChannelId(channel);
-//			log.info("开始注销：{}", channelId);
+			log.info("开始注销：{}", channelId);
 
 			ServiceEntry serviceEntry = InnerChannelUtils.buildServiceEntry(channelFuture);
 
 			BrokerRegisterReq brokerRegisterReq = new BrokerRegisterReq();
 			brokerRegisterReq.setServiceEntry(serviceEntry);
 
-//			String messageId = IdHelper.uuid32();
-//			brokerRegisterReq.setTraceId(messageId);
+			String messageId =RandomUtil.randomString(32);
+			brokerRegisterReq.setTraceId(messageId);
 			brokerRegisterReq.setMethodType(MethodType.P_UN_REGISTER);
 
 			this.callServer(channel, brokerRegisterReq, null);
 
-//			log.info("完成注销：{}", channelId);
+			log.info("完成注销：{}", channelId);
 		}
 	}
 
