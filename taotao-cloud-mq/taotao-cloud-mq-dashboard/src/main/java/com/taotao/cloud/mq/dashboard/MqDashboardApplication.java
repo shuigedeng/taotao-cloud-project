@@ -17,6 +17,7 @@
 package com.taotao.cloud.mq.dashboard;
 
 import com.taotao.boot.core.startup.StartupSpringApplication;
+import com.taotao.cloud.mq.broker.MqBrokerBootstrap;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -39,5 +40,6 @@ public class MqDashboardApplication extends SpringBootServletInitializer {
 			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 
+		MqBrokerBootstrap.main(args);
 	}
 }

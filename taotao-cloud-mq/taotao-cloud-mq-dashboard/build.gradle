@@ -1,3 +1,5 @@
+apply from: rootProject.file('gradle/springboot.gradle')
+
 dependencies {
     api project(":taotao-cloud-mq:taotao-cloud-mq-common")
     api project(":taotao-cloud-mq:taotao-cloud-mq-broker")
@@ -48,7 +50,7 @@ jar {
     zip64 = true
 
     manifest {
-        attributes 'Main-Class': "com.taotao.cloud.tx.server.NettyServer"
+        attributes 'Main-Class': "com.taotao.cloud.mq.dashboard.MqDashboardApplication"
         attributes 'Class-Path': configurations.compileClasspath.files.collect { "lib/$it.name" }.join(' ')
     }
 

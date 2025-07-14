@@ -1,3 +1,5 @@
+apply from: rootProject.file('gradle/springboot.gradle')
+
 dependencies {
     api project(":taotao-cloud-job:taotao-cloud-job-common")
     api project(":taotao-cloud-job:taotao-cloud-job-worker")
@@ -41,7 +43,7 @@ jar {
     zip64=true
 
     manifest {
-        attributes 'Main-Class': "com.taotao.cloud.tx.server.NettyServer"
+        attributes 'Main-Class': "com.taotao.cloud.job.dashboard.JobDashboardApplication"
         attributes 'Class-Path': configurations.compileClasspath.files.collect { "lib/$it.name" }.join(' ')
     }
 

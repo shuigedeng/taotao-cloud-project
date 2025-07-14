@@ -1,4 +1,5 @@
 apply plugin: 'application'
+apply from: rootProject.file('gradle/springboot.gradle')
 
 dependencies {
     api "io.github.shuigedeng:taotao-boot-starter-core"

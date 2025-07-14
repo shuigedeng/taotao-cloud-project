@@ -1,3 +1,5 @@
+apply from: rootProject.file('gradle/springboot.gradle')
+
 dependencies {
     api project(":taotao-cloud-mq:taotao-cloud-mq-common")
     api project(":taotao-cloud-mq:taotao-cloud-mq-cluster")
