@@ -95,7 +95,7 @@ public class DefaultShutdownHook extends AbstractShutdownHook {
                 break;
             }
 
-            logger.debug("[Shutdown] still remains request, wait for a while.");
+            logger.info("[Shutdown] still remains request, wait for a while.");
            // DateUtil.sleep(100);
         }
 

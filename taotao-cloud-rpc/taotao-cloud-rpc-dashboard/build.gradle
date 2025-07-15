@@ -50,7 +50,7 @@ jar {
     zip64=true
 
     manifest {
-        attributes 'Main-Class': "com.taotao.cloud.rpc.dashboard.Bootstrap"
+        attributes 'Main-Class': "com.taotao.cloud.rpc.dashboard.RpcDashboardApplication"
         attributes 'Class-Path': configurations.compileClasspath.files.collect { "lib/$it.name" }.join(' ')
     }
 

@@ -1,7 +1,7 @@
 apply from: rootProject.file('gradle/shadow.gradle')
 
 tasks.register('releaseTarZip', Zip) {
-    dependsOn(':taotao-cloud-mq:taotao-cloud-mq-dashboard:jar')
+    dependsOn(':taotao-cloud-mq:taotao-cloud-mq-dashboard:bootJar')
 
     archiveFileName = "${project.name}-${project.version}.zip"
 

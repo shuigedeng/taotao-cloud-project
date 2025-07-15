@@ -166,7 +166,7 @@ public class MqBrokerHandler extends SimpleChannelInboundHandler {
 			MqCommonResp commonResp = this.dispatch(rpcMessageDto, ctx);
 
 			if (commonResp == null) {
-				log.debug("当前消息为 null，忽略处理。");
+				log.info("当前消息为 null，忽略处理。");
 				return;
 			}
 
@@ -177,7 +177,7 @@ public class MqBrokerHandler extends SimpleChannelInboundHandler {
 
 			// 丢弃掉 traceId 为空的信息
 			if (StringUtils.isBlank(traceId)) {
-				log.debug("[Server Response] response traceId 为空，直接丢弃",
+				log.info("[Server Response] response traceId 为空，直接丢弃",
 					JSON.toJSON(rpcMessageDto));
 				return;
 			}
@@ -201,7 +201,7 @@ public class MqBrokerHandler extends SimpleChannelInboundHandler {
 
 			String channelId = ChannelUtil.getChannelId(ctx);
 			final Channel channel = ctx.channel();
-			log.debug("channelId: {} 接收到 method: {} 内容：{}", channelId,
+			log.info("channelId: {} 接收到 method: {} 内容：{}", channelId,
 				methodType, json);
 
 			// 生产者注册
@@ -455,7 +455,7 @@ public class MqBrokerHandler extends SimpleChannelInboundHandler {
 		// 回写到 client 端
 		ByteBuf byteBuf = DelimiterUtil.getMessageDelimiterBuffer(rpcMessageDto);
 		ctx.writeAndFlush(byteBuf);
-		log.debug("[Server] channel {} response {}", id, JSON.toJSON(rpcMessageDto));
+		log.info("[Server] channel {} response {}", id, JSON.toJSON(rpcMessageDto));
 	}
 
 

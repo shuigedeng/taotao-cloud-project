@@ -40,12 +40,12 @@ public class RaftThreadPoolExecutor extends ThreadPoolExecutor {
     @Override
     protected void beforeExecute(Thread t, Runnable r) {
         COST_TIME_WATCH.get();
-        LOGGER.debug("raft thread pool before Execute");
+		LOGGER.info("raft thread pool before Execute");
     }
 
     @Override
     protected void afterExecute(Runnable r, Throwable t) {
-        LOGGER.debug("raft thread pool after Execute, cost time : {}", System.currentTimeMillis() - COST_TIME_WATCH.get());
+		LOGGER.info("raft thread pool after Execute, cost time : {}", System.currentTimeMillis() - COST_TIME_WATCH.get());
         COST_TIME_WATCH.remove();
     }
 

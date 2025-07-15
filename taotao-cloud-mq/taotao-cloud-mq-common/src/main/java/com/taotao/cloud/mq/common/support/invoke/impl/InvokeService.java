@@ -31,7 +31,7 @@ public class InvokeService implements IInvokeService {
 	 * @since 2024.05
 	 */
 	private final ConcurrentHashMap<String, Long> requestMap;
-
+	private boolean condition = false;
 	/**
 	 * 响应结果
 	 *
@@ -50,7 +50,7 @@ public class InvokeService implements IInvokeService {
 
 	@Override
 	public IInvokeService addRequest(String seqId, long timeoutMills) {
-		logger.debug("[Invoke] start add request for seqId: {}, timeoutMills: {}", seqId,
+		logger.info("[Invoke] start add request for seqId: {}, timeoutMills: {}", seqId,
 			timeoutMills);
 
 		final long expireTime = System.currentTimeMillis() + timeoutMills;
@@ -70,7 +70,7 @@ public class InvokeService implements IInvokeService {
 
 		//2. 判断是否超时
 		if (System.currentTimeMillis() > expireTime) {
-			logger.debug("[Invoke] seqId:{} 信息已超时，直接返回超时结果。", seqId);
+			logger.info("[Invoke] seqId:{} 信息已超时，直接返回超时结果。", seqId);
 			rpcResponse = RpcMessageDto.timeout();
 		}
 
@@ -78,18 +78,24 @@ public class InvokeService implements IInvokeService {
 		// 如果 seqId 必须处理请求集合中，才允许放入。或者直接忽略丢弃。
 		// 通知所有等待方
 		responseMap.putIfAbsent(seqId, rpcResponse);
-		logger.debug("[Invoke] 获取结果信息，seqId: {}, rpcResponse: {}", seqId,
+		logger.info("[Invoke] 获取结果信息，seqId: {}, rpcResponse: {}", seqId,
 			JSON.toJSON(rpcResponse));
-		logger.debug("[Invoke] seqId:{} 信息已经放入，通知所有等待方", seqId);
+		logger.info("[Invoke] seqId:{} 信息已经放入，通知所有等待方", seqId);
 
 		// 移除对应的 requestMap
 		requestMap.remove(seqId);
-		logger.debug("[Invoke] seqId:{} remove from request map", seqId);
+		logger.info("[Invoke] seqId:{} remove from request map", seqId);
 
+		logger.info("notifyAll"+this.toString());
 		// 同步锁
+		//synchronized (this) {
+		//	this.notifyAll();
+		//	logger.info("[Invoke] {} notifyAll()", seqId);
+		//}
 		synchronized (this) {
-			this.notifyAll();
-			logger.debug("[Invoke] {} notifyAll()", seqId);
+			condition = true; // 满足条件
+			//logger.info("[Invoke] {} notifyAll()", seqId);
+			this.notifyAll(); // 唤醒等待队列中的线程
 		}
 
 		return this;
@@ -100,23 +106,30 @@ public class InvokeService implements IInvokeService {
 		try {
 			RpcMessageDto rpcResponse = this.responseMap.get(seqId);
 			if (ObjectUtils.isNotNull(rpcResponse)) {
-				logger.debug("[Invoke] seq {} 对应结果已经获取: {}", seqId, rpcResponse);
+				logger.info("[Invoke] seq {} 对应结果已经获取: {}", seqId, rpcResponse);
 				return rpcResponse;
 			}
 
 			// 进入等待
 			while (rpcResponse == null) {
-				logger.debug("[Invoke] seq {} 对应结果为空，进入等待", seqId);
+				logger.info("[Invoke] seq {} 对应结果为空，进入等待", seqId);
 
+				logger.info("wait"+this.toString());
 				// 同步等待锁
+				//synchronized (this) {
+				//	this.wait();
+				//}
 				synchronized (this) {
-					this.wait();
+					while (!condition) {
+						logger.info("条件不满足，释放锁并等待...");
+						this.wait(); // 释放锁，进入等待
+					}
 				}
 
-				logger.debug("[Invoke] {} wait has notified!", seqId);
+				logger.info("[Invoke] {} wait has notified!", seqId);
 
 				rpcResponse = this.responseMap.get(seqId);
-				logger.debug("[Invoke] seq {} 对应结果已经获取: {}", seqId, rpcResponse);
+				logger.info("[Invoke] seq {} 对应结果已经获取: {}", seqId, rpcResponse);
 			}
 
 			return rpcResponse;

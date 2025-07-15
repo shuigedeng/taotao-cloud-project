@@ -34,7 +34,7 @@ public class MqProducerHandler extends SimpleChannelInboundHandler {
 		byteBuf.readBytes(bytes);
 
 		String text = new String(bytes);
-		LOG.debug("[Client] channelId {} 接收到消息 {}", ChannelUtil.getChannelId(ctx), text);
+		LOG.info("[Client] channelId {} 接收到消息 {}", ChannelUtil.getChannelId(ctx), text);
 
 		RpcMessageDto rpcMessageDto = null;
 		try {
@@ -53,12 +53,12 @@ public class MqProducerHandler extends SimpleChannelInboundHandler {
 		else {
 			// 丢弃掉 traceId 为空的信息
 			if (StringUtils.isBlank(rpcMessageDto.getTraceId())) {
-				LOG.debug("[Client] response traceId 为空，直接丢弃", JSON.toJSON(rpcMessageDto));
+				LOG.info("[Client] response traceId 为空，直接丢弃", JSON.toJSON(rpcMessageDto));
 				return;
 			}
 
 			invokeService.addResponse(rpcMessageDto.getTraceId(), rpcMessageDto);
-			LOG.debug("[Client] response is :{}", JSON.toJSON(rpcMessageDto));
+			LOG.info("[Client] response is :{}", JSON.toJSON(rpcMessageDto));
 		}
 	}
 

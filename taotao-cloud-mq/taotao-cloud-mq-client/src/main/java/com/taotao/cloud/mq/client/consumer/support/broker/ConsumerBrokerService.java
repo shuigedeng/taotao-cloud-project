@@ -269,11 +269,11 @@ public class ConsumerBrokerService implements IConsumerBrokerService {
 		channel.writeAndFlush(byteBuf);
 
 		String channelId = ChannelUtil.getChannelId(channel);
-		log.debug("[Client] channelId {} 发送消息 {}", channelId, JSON.toJSON(rpcMessageDto));
-        channel.closeFuture().syncUninterruptibly();
+		log.info("[Client] channelId {} 发送消息 {}", channelId, JSON.toJSON(rpcMessageDto));
+        //channel.closeFuture().syncUninterruptibly();
 
 		if (respClass == null) {
-			log.debug("[Client] 当前消息为 one-way 消息，忽略响应");
+			log.info("[Client] 当前消息为 one-way 消息，忽略响应");
 			return null;
 		}
 		else {
@@ -297,7 +297,7 @@ public class ConsumerBrokerService implements IConsumerBrokerService {
 				throw new MqException(MqCommonRespCode.C_INIT_FAILED);
 			}
 
-			log.debug("等待初始化完成...");
+			log.info("等待初始化完成...");
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
@@ -376,7 +376,7 @@ public class ConsumerBrokerService implements IConsumerBrokerService {
 		req.setPort(0);
 		req.setTime(System.currentTimeMillis());
 
-		log.debug("[HEARTBEAT] 往服务端发送心跳包 {}", JSON.toJSON(req));
+		log.info("[HEARTBEAT] 往服务端发送心跳包 {}", JSON.toJSON(req));
 
 		// 通知全部
 		for (RpcChannelFuture channelFuture : channelFutureList) {

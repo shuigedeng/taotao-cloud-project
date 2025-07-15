@@ -155,11 +155,11 @@ public class BrokerPushService implements IBrokerPushService {
 		channel.writeAndFlush(byteBuf);
 
 		String channelId = ChannelUtil.getChannelId(channel);
-		log.debug("[Client] channelId {} 发送消息 {}", channelId, JSON.toJSON(rpcMessageDto));
-        channel.closeFuture().syncUninterruptibly();
+		log.info("[Client] channelId {} 发送消息 {}", channelId, JSON.toJSON(rpcMessageDto));
+        //channel.closeFuture().syncUninterruptibly();
 
 		if (respClass == null) {
-			log.debug("[Client] 当前消息为 one-way 消息，忽略响应");
+			log.info("[Client] 当前消息为 one-way 消息，忽略响应");
 			return null;
 		}
 		else {

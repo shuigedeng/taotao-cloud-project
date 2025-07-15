@@ -17,6 +17,7 @@
 package com.taotao.cloud.rpc.dashboard;
 
 import com.taotao.boot.core.startup.StartupSpringApplication;
+import com.taotao.cloud.rpc.server.RpcServerBootstrap;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -38,6 +39,8 @@ public class RpcDashboardApplication extends SpringBootServletInitializer {
 			.setTtcApplicationProperty("taotao-cloud-rpc-dashboard")
 			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
+
+		RpcServerBootstrap.main(args);
 
 	}
 }

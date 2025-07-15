@@ -17,14 +17,20 @@ public class ProducerMain {
 
 	public static void main(String[] args) {
 		MqProducer mqProducer = new MqProducer();
-		mqProducer.appKey("test")
-			.appSecret("mq");
+		//mqProducer.appKey("test")
+		//	.appSecret("mq");
 		mqProducer.start();
+
+		try {
+			Thread.sleep(10000L);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
 
 		for (int i = 0; i < 20; i++) {
 			MqMessage mqMessage = buildMessage(i);
 			SendResult sendResult = mqProducer.send(mqMessage);
-			System.out.println(JSON.toJSON(sendResult));
+			System.out.println("========"+JSON.toJSON(sendResult));
 		}
 	}
 

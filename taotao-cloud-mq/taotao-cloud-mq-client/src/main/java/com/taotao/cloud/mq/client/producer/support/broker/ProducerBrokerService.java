@@ -202,11 +202,11 @@ public class ProducerBrokerService implements IProducerBrokerService {
 		channel.writeAndFlush(byteBuf);
 
 		String channelId = ChannelUtil.getChannelId(channel);
-		log.debug("[Client] channelId {} 发送消息 {}", channelId, JSON.toJSON(rpcMessageDto));
-        channel.closeFuture().syncUninterruptibly();
+		log.info("[Client] channelId {} 发送消息 {}", channelId, JSON.toJSON(rpcMessageDto));
+        //channel.closeFuture().syncUninterruptibly();
 
 		if (respClass == null) {
-			log.debug("[Client] 当前消息为 one-way 消息，忽略响应");
+			log.info("[Client] 当前消息为 one-way 消息，忽略响应");
 			return null;
 		} else {
 			//channelHandler 中获取对应的响应
@@ -229,7 +229,7 @@ public class ProducerBrokerService implements IProducerBrokerService {
 				throw new MqException(MqCommonRespCode.P_INIT_FAILED);
 			}
 
-			log.debug("等待初始化完成...");
+			log.info("等待初始化完成...");
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
