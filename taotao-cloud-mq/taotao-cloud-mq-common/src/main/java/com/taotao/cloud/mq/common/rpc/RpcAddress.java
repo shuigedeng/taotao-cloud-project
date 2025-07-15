@@ -1,7 +1,7 @@
 package com.taotao.cloud.mq.common.rpc;
 
 
-import com.taotao.cloud.mq.common.tmp.IServer;
+import com.taotao.cloud.mq.common.balance.IServer;
 
 /**
  * @author shuigedeng

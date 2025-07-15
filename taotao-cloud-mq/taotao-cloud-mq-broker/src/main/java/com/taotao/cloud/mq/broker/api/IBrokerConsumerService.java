@@ -7,10 +7,10 @@ import com.taotao.cloud.mq.broker.dto.ServiceEntry;
 import com.taotao.cloud.mq.broker.dto.consumer.ConsumerSubscribeBo;
 import com.taotao.cloud.mq.broker.dto.consumer.ConsumerSubscribeReq;
 import com.taotao.cloud.mq.broker.dto.consumer.ConsumerUnSubscribeReq;
+import com.taotao.cloud.mq.common.balance.ILoadBalance;
 import com.taotao.cloud.mq.common.dto.req.MqHeartBeatReq;
 import com.taotao.cloud.mq.common.dto.req.MqMessage;
 import com.taotao.cloud.mq.common.dto.resp.MqCommonResp;
-import com.taotao.cloud.mq.common.tmp.ILoadBalance;
 import io.netty.channel.Channel;
 import java.util.List;
 

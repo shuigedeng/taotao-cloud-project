@@ -1,4 +1,4 @@
-package com.taotao.cloud.mq.common.tmp;
+package com.taotao.cloud.mq.common.dto;
 
 public interface RespCode {
 	public String getCode();

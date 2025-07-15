@@ -2,10 +2,10 @@ package com.taotao.cloud.mq.client.consumer.support.broker;
 
 
 import com.taotao.cloud.mq.client.consumer.support.listener.IMqListenerService;
+import com.taotao.cloud.mq.common.balance.ILoadBalance;
 import com.taotao.cloud.mq.common.rpc.RpcChannelFuture;
 import com.taotao.cloud.mq.common.support.invoke.IInvokeService;
 import com.taotao.cloud.mq.common.support.status.IStatusManager;
-import com.taotao.cloud.mq.common.tmp.ILoadBalance;
 
 /**
  * @author shuigedeng

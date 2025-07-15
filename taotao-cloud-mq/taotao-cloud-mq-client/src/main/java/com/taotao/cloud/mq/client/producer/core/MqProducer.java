@@ -2,7 +2,7 @@ package com.taotao.cloud.mq.client.producer.core;
 
 
 import com.taotao.boot.common.utils.common.ArgUtils;
-import com.taotao.cloud.mq.client.consumer.core.LoadBalances;
+import com.taotao.cloud.mq.common.balance.impl.LoadBalances;
 import com.taotao.cloud.mq.client.producer.api.IMqProducer;
 import com.taotao.cloud.mq.client.producer.constant.ProducerConst;
 import com.taotao.cloud.mq.client.producer.constant.ProducerRespCode;
@@ -11,6 +11,7 @@ import com.taotao.cloud.mq.client.producer.dto.SendResult;
 import com.taotao.cloud.mq.client.producer.support.broker.IProducerBrokerService;
 import com.taotao.cloud.mq.client.producer.support.broker.ProducerBrokerConfig;
 import com.taotao.cloud.mq.client.producer.support.broker.ProducerBrokerService;
+import com.taotao.cloud.mq.common.balance.ILoadBalance;
 import com.taotao.cloud.mq.common.dto.req.MqMessage;
 import com.taotao.cloud.mq.common.resp.MqException;
 import com.taotao.cloud.mq.common.rpc.RpcChannelFuture;
@@ -20,7 +21,6 @@ import com.taotao.cloud.mq.common.support.invoke.IInvokeService;
 import com.taotao.cloud.mq.common.support.invoke.impl.InvokeService;
 import com.taotao.cloud.mq.common.support.status.IStatusManager;
 import com.taotao.cloud.mq.common.support.status.StatusManager;
-import com.taotao.cloud.mq.common.tmp.ILoadBalance;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -208,8 +208,7 @@ public class MqProducer extends Thread implements IMqProducer {
 			ShutdownHooks.rpcShutdownHook(rpcShutdownHook);
 
 			log.info("MQ 生产者启动完成");
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error("MQ 生产者启动遇到异常", e);
 			// 设置为初始化失败
 			statusManager.initFailed(true);

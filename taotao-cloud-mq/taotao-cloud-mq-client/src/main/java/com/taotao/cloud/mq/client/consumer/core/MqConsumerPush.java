@@ -10,6 +10,8 @@ import com.taotao.cloud.mq.client.consumer.support.broker.ConsumerBrokerService;
 import com.taotao.cloud.mq.client.consumer.support.broker.IConsumerBrokerService;
 import com.taotao.cloud.mq.client.consumer.support.listener.IMqListenerService;
 import com.taotao.cloud.mq.client.consumer.support.listener.MqListenerService;
+import com.taotao.cloud.mq.common.balance.ILoadBalance;
+import com.taotao.cloud.mq.common.balance.impl.LoadBalances;
 import com.taotao.cloud.mq.common.constant.ConsumerTypeConst;
 import com.taotao.cloud.mq.common.resp.MqException;
 import com.taotao.cloud.mq.common.rpc.RpcChannelFuture;
@@ -19,7 +21,6 @@ import com.taotao.cloud.mq.common.support.invoke.IInvokeService;
 import com.taotao.cloud.mq.common.support.invoke.impl.InvokeService;
 import com.taotao.cloud.mq.common.support.status.IStatusManager;
 import com.taotao.cloud.mq.common.support.status.StatusManager;
-import com.taotao.cloud.mq.common.tmp.ILoadBalance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**

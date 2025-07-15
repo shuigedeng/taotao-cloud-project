@@ -1,8 +1,8 @@
 package com.taotao.cloud.mq.broker.dto.consumer;
 
 
+import com.taotao.cloud.mq.common.balance.IServer;
 import com.taotao.cloud.mq.common.rpc.RpcAddress;
-import com.taotao.cloud.mq.common.tmp.IServer;
 import java.util.Objects;
 
 /**

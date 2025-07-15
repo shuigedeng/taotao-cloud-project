@@ -1,7 +1,7 @@
 package com.taotao.cloud.mq.client.consumer.constant;
 
 
-import com.taotao.cloud.mq.common.tmp.RespCode;
+import com.taotao.cloud.mq.common.dto.RespCode;
 
 /**
  * @author shuigedeng
