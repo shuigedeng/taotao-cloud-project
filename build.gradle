@@ -210,7 +210,7 @@ plugins {
     //https://github.com/vanniktech/gradle-maven-publish-plugin
     //https://vanniktech.github.io/gradle-maven-publish-plugin/central/v
     //https://vanniktech.github.io/gradle-maven-publish-plugin/other/
-    id "com.vanniktech.maven.publish" version "0.33.0"
+    id "com.vanniktech.maven.publish" version "0.34.0"
 }
 
 // 定义库引用
@@ -323,9 +323,6 @@ allprojects {
         maven { url ="https://repo.e-iceblue.cn/repository/maven-public/" }
     }
 }
-
-import com.vanniktech.maven.publish.SonatypeHost
-import com.vanniktech.maven.publish.JavaPlatform
 
 def excludeSubProjects = ['taotao-cloud-maven-plugin', 'taotao-cloud-idea-plugin', 'taotao-cloud-gradle-plugin']
 configure(subprojects.findAll { (!excludeSubProjects.contains(it.name)) }) { project ->
