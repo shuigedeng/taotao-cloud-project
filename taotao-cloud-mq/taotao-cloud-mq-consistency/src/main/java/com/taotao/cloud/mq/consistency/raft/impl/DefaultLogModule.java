@@ -1,19 +1,19 @@
 /*
-Licensed to the Apache Software Foundation (ASF) under one or more
-contributor license agreements.  See the NOTICE file distributed with
-this work for additional information regarding copyright ownership.
-The ASF licenses this file to You under the Apache License, Version 2.0
-(the "License"); you may not use this file except in compliance with
-the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 package com.taotao.cloud.mq.consistency.raft.impl;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
@@ -44,11 +44,12 @@ public class DefaultLogModule implements LogModule {
 
     /** public just for test */
     public String dbDir;
+
     public String logsDir;
 
     private RocksDB logDb;
 
-    public final static byte[] LAST_INDEX_KEY = "LAST_INDEX_KEY".getBytes();
+    public static final byte[] LAST_INDEX_KEY = "LAST_INDEX_KEY".getBytes();
 
     private ReentrantLock lock = new ReentrantLock();
 
@@ -83,9 +84,7 @@ public class DefaultLogModule implements LogModule {
     }
 
     @Override
-    public void init() throws Throwable {
-
-    }
+    public void init() throws Throwable {}
 
     @Override
     public void destroy() throws Throwable {
@@ -127,7 +126,6 @@ public class DefaultLogModule implements LogModule {
         }
     }
 
-
     @Override
     public LogEntry read(Long index) {
         try {
@@ -156,7 +154,11 @@ public class DefaultLogModule implements LogModule {
                 ++count;
             }
             success = true;
-            log.warn("rocksDB removeOnStartIndex success, count={} startIndex={}, lastIndex={}", count, startIndex, getLastIndex());
+            log.warn(
+                    "rocksDB removeOnStartIndex success, count={} startIndex={}, lastIndex={}",
+                    count,
+                    startIndex,
+                    getLastIndex());
         } catch (InterruptedException | RocksDBException e) {
             throw new RuntimeException(e);
         } finally {
@@ -166,7 +168,6 @@ public class DefaultLogModule implements LogModule {
             lock.unlock();
         }
     }
-
 
     @Override
     public LogEntry getLast() {
@@ -208,6 +209,4 @@ public class DefaultLogModule implements LogModule {
             throw new RuntimeException(e);
         }
     }
-
-
 }

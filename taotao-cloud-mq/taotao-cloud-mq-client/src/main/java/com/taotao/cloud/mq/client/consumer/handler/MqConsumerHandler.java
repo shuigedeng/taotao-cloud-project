@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.mq.client.consumer.handler;
 
 import com.alibaba.fastjson2.JSON;
@@ -21,6 +37,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 /**
  * @author shuigedeng
  * @since 2024.05
@@ -66,7 +83,7 @@ public class MqConsumerHandler extends SimpleChannelInboundHandler {
         if (rpcMessageDto.isRequest()) {
             MqCommonResp commonResp = this.dispatch(rpcMessageDto, ctx);
 
-            if(commonResp == null) {
+            if (commonResp == null) {
                 log.info("当前消息为 null，忽略处理。");
                 return;
             }
@@ -76,7 +93,7 @@ public class MqConsumerHandler extends SimpleChannelInboundHandler {
             final String traceId = rpcMessageDto.getTraceId();
 
             // 丢弃掉 traceId 为空的信息
-            if(StringUtils.isBlank(traceId)) {
+            if (StringUtils.isBlank(traceId)) {
                 log.info("[Server Response] response traceId 为空，直接丢弃", JSON.toJSON(rpcMessageDto));
                 return;
             }
@@ -98,11 +115,10 @@ public class MqConsumerHandler extends SimpleChannelInboundHandler {
         final String json = rpcMessageDto.getJson();
 
         String channelId = ChannelUtil.getChannelId(ctx);
-        log.info("channelId: {} 接收到 method: {} 内容：{}", channelId,
-                methodType, json);
+        log.info("channelId: {} 接收到 method: {} 内容：{}", channelId, methodType, json);
 
         // 消息发送
-        if(MethodType.B_MESSAGE_PUSH.equals(methodType)) {
+        if (MethodType.B_MESSAGE_PUSH.equals(methodType)) {
             // 日志输出
             log.info("收到服务端消息: {}", json);
             return this.consumer(json);
@@ -151,9 +167,7 @@ public class MqConsumerHandler extends SimpleChannelInboundHandler {
      * @param resp 响应
      * @param ctx  上下文
      */
-    private void writeResponse(RpcMessageDto req,
-                               Object resp,
-                               ChannelHandlerContext ctx) {
+    private void writeResponse(RpcMessageDto req, Object resp, ChannelHandlerContext ctx) {
         final String id = ctx.channel().id().asLongText();
 
         RpcMessageDto rpcMessageDto = new RpcMessageDto();
@@ -170,6 +184,4 @@ public class MqConsumerHandler extends SimpleChannelInboundHandler {
         ctx.writeAndFlush(byteBuf);
         log.info("[Server] channel {} response {}", id, JSON.toJSON(rpcMessageDto));
     }
-
-
 }

@@ -1,19 +1,19 @@
 /*
-Licensed to the Apache Software Foundation (ASF) under one or more
-contributor license agreements.  See the NOTICE file distributed with
-this work for additional information regarding copyright ownership.
-The ASF licenses this file to You under the Apache License, Version 2.0
-(the "License"); you may not use this file except in compliance with
-the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 package com.taotao.cloud.mq.consistency.raft.impl;
 
 import com.taotao.cloud.mq.consistency.raft.Consensus;
@@ -41,9 +41,7 @@ import org.slf4j.LoggerFactory;
 @Getter
 public class DefaultConsensus implements Consensus {
 
-
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultConsensus.class);
-
 
     public final DefaultNode node;
 
@@ -75,10 +73,19 @@ public class DefaultConsensus implements Consensus {
             }
 
             // (当前节点并没有投票 或者 已经投票过了且是对方节点) && 对方日志和自己一样新
-            LOGGER.info("node {} current vote for [{}], param candidateId : {}", node.peerSet.getSelf(), node.getVotedFor(), param.getCandidateId());
-            LOGGER.info("node {} current term {}, peer term : {}", node.peerSet.getSelf(), node.getCurrentTerm(), param.getTerm());
+            LOGGER.info(
+                    "node {} current vote for [{}], param candidateId : {}",
+                    node.peerSet.getSelf(),
+                    node.getVotedFor(),
+                    param.getCandidateId());
+            LOGGER.info(
+                    "node {} current term {}, peer term : {}",
+                    node.peerSet.getSelf(),
+                    node.getCurrentTerm(),
+                    param.getTerm());
 
-            if ((StringUtil.isNullOrEmpty(node.getVotedFor()) || node.getVotedFor().equals(param.getCandidateId()))) {
+            if ((StringUtil.isNullOrEmpty(node.getVotedFor())
+                    || node.getVotedFor().equals(param.getCandidateId()))) {
 
                 if (node.getLogModule().getLast() != null) {
                     // 对方没有自己新
@@ -107,7 +114,6 @@ public class DefaultConsensus implements Consensus {
             voteLock.unlock();
         }
     }
-
 
     /**
      * 附加日志(多个日志,为了提高效率) RPC
@@ -139,32 +145,43 @@ public class DefaultConsensus implements Consensus {
 
             // 够格
             if (param.getTerm() >= node.getCurrentTerm()) {
-				LOGGER.info("node {} become FOLLOWER, currentTerm : {}, param Term : {}, param serverId = {}",
-                    node.peerSet.getSelf(), node.currentTerm, param.getTerm(), param.getServerId());
+                LOGGER.info(
+                        "node {} become FOLLOWER, currentTerm : {}, param Term : {}, param serverId = {}",
+                        node.peerSet.getSelf(),
+                        node.currentTerm,
+                        param.getTerm(),
+                        param.getServerId());
                 // 认怂
                 node.status = NodeStatus.FOLLOWER;
             }
             // 使用对方的 term.
             node.setCurrentTerm(param.getTerm());
 
-            //心跳
+            // 心跳
             if (param.getEntries() == null || param.getEntries().length == 0) {
-                LOGGER.info("node {} append heartbeat success , he's term : {}, my term : {}",
-                    param.getLeaderId(), param.getTerm(), node.getCurrentTerm());
+                LOGGER.info(
+                        "node {} append heartbeat success , he's term : {}, my term : {}",
+                        param.getLeaderId(),
+                        param.getTerm(),
+                        node.getCurrentTerm());
 
                 // 处理 leader 已提交但未应用到状态机的日志
 
                 // 下一个需要提交的日志的索引（如有）
                 long nextCommit = node.getCommitIndex() + 1;
 
-                //如果 leaderCommit > commitIndex，令 commitIndex 等于 leaderCommit 和 新日志条目索引值中较小的一个
+                // 如果 leaderCommit > commitIndex，令 commitIndex 等于 leaderCommit 和 新日志条目索引值中较小的一个
                 if (param.getLeaderCommit() > node.getCommitIndex()) {
-                    int commitIndex = (int) Math.min(param.getLeaderCommit(), node.getLogModule().getLastIndex());
+                    int commitIndex =
+                            (int)
+                                    Math.min(
+                                            param.getLeaderCommit(),
+                                            node.getLogModule().getLastIndex());
                     node.setCommitIndex(commitIndex);
                     node.setLastApplied(commitIndex);
                 }
 
-                while (nextCommit <= node.getCommitIndex()){
+                while (nextCommit <= node.getCommitIndex()) {
                     // 提交之前的日志
                     node.stateMachine.apply(node.logModule.read(nextCommit));
                     nextCommit++;
@@ -186,7 +203,6 @@ public class DefaultConsensus implements Consensus {
                     // index 不对, 需要递减 nextIndex 重试.
                     return result;
                 }
-
             }
 
             // 如果已经存在的日志条目和新的产生冲突（索引值相同但是任期号不同），删除这一条和之后所有的
@@ -209,14 +225,15 @@ public class DefaultConsensus implements Consensus {
             // 下一个需要提交的日志的索引（如有）
             long nextCommit = node.getCommitIndex() + 1;
 
-            //如果 leaderCommit > commitIndex，令 commitIndex 等于 leaderCommit 和 新日志条目索引值中较小的一个
+            // 如果 leaderCommit > commitIndex，令 commitIndex 等于 leaderCommit 和 新日志条目索引值中较小的一个
             if (param.getLeaderCommit() > node.getCommitIndex()) {
-                int commitIndex = (int) Math.min(param.getLeaderCommit(), node.getLogModule().getLastIndex());
+                int commitIndex =
+                        (int) Math.min(param.getLeaderCommit(), node.getLogModule().getLastIndex());
                 node.setCommitIndex(commitIndex);
                 node.setLastApplied(commitIndex);
             }
 
-            while (nextCommit <= node.getCommitIndex()){
+            while (nextCommit <= node.getCommitIndex()) {
                 // 提交之前的日志
                 node.stateMachine.apply(node.logModule.read(nextCommit));
                 nextCommit++;
@@ -231,6 +248,4 @@ public class DefaultConsensus implements Consensus {
             appendLock.unlock();
         }
     }
-
-
 }

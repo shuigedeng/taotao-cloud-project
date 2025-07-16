@@ -1,19 +1,19 @@
 /*
-Licensed to the Apache Software Foundation (ASF) under one or more
-contributor license agreements.  See the NOTICE file distributed with
-this work for additional information regarding copyright ownership.
-The ASF licenses this file to You under the Apache License, Version 2.0
-(the "License"); you may not use this file except in compliance with
-the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 package com.taotao.cloud.mq.consistency.raft.impl;
 
 import com.taotao.cloud.mq.consistency.raft.changes.ClusterMembershipChanges;
@@ -32,8 +32,8 @@ import org.slf4j.LoggerFactory;
  */
 public class ClusterMembershipChangesImpl implements ClusterMembershipChanges {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ClusterMembershipChangesImpl.class);
-
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(ClusterMembershipChangesImpl.class);
 
     private final DefaultNode node;
 
@@ -68,25 +68,28 @@ public class ClusterMembershipChangesImpl implements ClusterMembershipChanges {
 
             for (Peer ignore : node.peerSet.getPeersWithOutSelf()) {
                 // TODO 同步到其他节点.
-                Request request = Request.builder()
-                        .cmd(Request.CHANGE_CONFIG_ADD)
-                        .url(newPeer.getAddr())
-                        .obj(newPeer)
-                        .build();
+                Request request =
+                        Request.builder()
+                                .cmd(Request.CHANGE_CONFIG_ADD)
+                                .url(newPeer.getAddr())
+                                .obj(newPeer)
+                                .build();
 
                 Result result = node.rpcClient.send(request);
                 if (result != null && result.getStatus() == Result.Status.SUCCESS.getCode()) {
-                    LOGGER.info("replication config success, peer : {}, newServer : {}", newPeer, newPeer);
+                    LOGGER.info(
+                            "replication config success, peer : {}, newServer : {}",
+                            newPeer,
+                            newPeer);
                 } else {
-                    LOGGER.warn("replication config fail, peer : {}, newServer : {}", newPeer, newPeer);
+                    LOGGER.warn(
+                            "replication config fail, peer : {}, newServer : {}", newPeer, newPeer);
                 }
             }
-
         }
 
         return new Result();
     }
-
 
     /**
      * 必须是同步的,一次只能删除一个节点

@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.flume;
 
-
 class TaoTaoCloudFlumeApplicationTests {
 
     void contextLoads() {}

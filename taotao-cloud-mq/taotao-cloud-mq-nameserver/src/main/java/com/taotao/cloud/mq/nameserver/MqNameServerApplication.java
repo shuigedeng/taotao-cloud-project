@@ -24,20 +24,19 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @SpringBootApplication
 public class MqNameServerApplication extends SpringBootServletInitializer {
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(MqNameServerApplication.class);
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(MqNameServerApplication.class);
+    }
 
-	public static void main(String[] args) {
-		System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
+    public static void main(String[] args) {
+        System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
 
-		new StartupSpringApplication(MqNameServerApplication.class)
-			.setTtcBanner()
-			.setTtcProfileIfNotExists("dev")
-			.setTtcApplicationProperty("taotao-cloud-mq-nameserver")
-			.setTtcAllowBeanDefinitionOverriding(true)
-			.run(args);
-
-	}
+        new StartupSpringApplication(MqNameServerApplication.class)
+                .setTtcBanner()
+                .setTtcProfileIfNotExists("dev")
+                .setTtcApplicationProperty("taotao-cloud-mq-nameserver")
+                .setTtcAllowBeanDefinitionOverriding(true)
+                .run(args);
+    }
 }

@@ -25,21 +25,21 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @SpringBootApplication
 public class MqDashboardApplication extends SpringBootServletInitializer {
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(MqDashboardApplication.class);
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(MqDashboardApplication.class);
+    }
 
-	public static void main(String[] args) {
-		System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
+    public static void main(String[] args) {
+        System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
 
-		new StartupSpringApplication(MqDashboardApplication.class)
-			.setTtcBanner()
-			.setTtcProfileIfNotExists("dev")
-			.setTtcApplicationProperty("taotao-cloud-mq-dashboard")
-			.setTtcAllowBeanDefinitionOverriding(true)
-			.run(args);
+        new StartupSpringApplication(MqDashboardApplication.class)
+                .setTtcBanner()
+                .setTtcProfileIfNotExists("dev")
+                .setTtcApplicationProperty("taotao-cloud-mq-dashboard")
+                .setTtcAllowBeanDefinitionOverriding(true)
+                .run(args);
 
-		MqBrokerBootstrap.main(args);
-	}
+        MqBrokerBootstrap.main(args);
+    }
 }

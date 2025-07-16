@@ -1,5 +1,20 @@
-package com.taotao.cloud.mq.example.consumer;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.mq.example.consumer;
 
 import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.mq.client.consumer.api.IMqConsumerListener;
@@ -14,19 +29,20 @@ import com.taotao.cloud.mq.common.resp.ConsumerStatus;
  */
 public class ConsumerMain {
 
-	//1. 首先启动消费者，然后启动生产者。
-	public static void main(String[] args) {
-		final MqConsumerPush mqConsumerPush = new MqConsumerPush();
-		mqConsumerPush.start();
+    // 1. 首先启动消费者，然后启动生产者。
+    public static void main(String[] args) {
+        final MqConsumerPush mqConsumerPush = new MqConsumerPush();
+        mqConsumerPush.start();
 
-		mqConsumerPush.subscribe("TOPIC", "TAGA");
-		mqConsumerPush.registerListener(new IMqConsumerListener() {
-			@Override
-			public ConsumerStatus consumer(MqMessage mqMessage, IMqConsumerListenerContext context) {
-				System.out.println("---------- 自定义 " + JSON.toJSONString(mqMessage));
-				return ConsumerStatus.SUCCESS;
-			}
-		});
-	}
-
+        mqConsumerPush.subscribe("TOPIC", "TAGA");
+        mqConsumerPush.registerListener(
+                new IMqConsumerListener() {
+                    @Override
+                    public ConsumerStatus consumer(
+                            MqMessage mqMessage, IMqConsumerListenerContext context) {
+                        System.out.println("---------- 自定义 " + JSON.toJSONString(mqMessage));
+                        return ConsumerStatus.SUCCESS;
+                    }
+                });
+    }
 }

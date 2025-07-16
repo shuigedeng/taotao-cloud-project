@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.mq.client.consumer.core;
 
 import com.taotao.boot.common.utils.common.ArgUtils;
@@ -23,6 +39,7 @@ import com.taotao.cloud.mq.common.support.status.IStatusManager;
 import com.taotao.cloud.mq.common.support.status.StatusManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 /**
  * 推送消费策略
  *
@@ -41,7 +58,7 @@ public class MqConsumerPush extends Thread implements IMqConsumer {
     /**
      * 中间人地址
      */
-    protected String brokerAddress  = "127.0.0.1:9999";
+    protected String brokerAddress = "127.0.0.1:9999";
 
     /**
      * 获取响应超时时间
@@ -196,39 +213,39 @@ public class MqConsumerPush extends Thread implements IMqConsumer {
     @Override
     public void run() {
         // 启动服务端
-        log.info("MQ 消费者开始启动服务端 groupName: {}, brokerAddress: {}",
-                groupName, brokerAddress);
+        log.info("MQ 消费者开始启动服务端 groupName: {}, brokerAddress: {}", groupName, brokerAddress);
 
-        //1. 参数校验
+        // 1. 参数校验
         this.paramCheck();
 
         try {
-            //0. 配置信息
-            ConsumerBrokerConfig config = ConsumerBrokerConfig.newInstance()
-                    .groupName(groupName)
-                    .brokerAddress(brokerAddress)
-                    .check(check)
-                    .respTimeoutMills(respTimeoutMills)
-                    .invokeService(invokeService)
-                    .statusManager(statusManager)
-                    .mqListenerService(mqListenerService)
-                    .loadBalance(loadBalance)
-                    .subscribeMaxAttempt(subscribeMaxAttempt)
-                    .unSubscribeMaxAttempt(unSubscribeMaxAttempt)
-                    .consumerStatusMaxAttempt(consumerStatusMaxAttempt)
-                    .appKey(appKey)
-                    .appSecret(appSecret);
+            // 0. 配置信息
+            ConsumerBrokerConfig config =
+                    ConsumerBrokerConfig.newInstance()
+                            .groupName(groupName)
+                            .brokerAddress(brokerAddress)
+                            .check(check)
+                            .respTimeoutMills(respTimeoutMills)
+                            .invokeService(invokeService)
+                            .statusManager(statusManager)
+                            .mqListenerService(mqListenerService)
+                            .loadBalance(loadBalance)
+                            .subscribeMaxAttempt(subscribeMaxAttempt)
+                            .unSubscribeMaxAttempt(unSubscribeMaxAttempt)
+                            .consumerStatusMaxAttempt(consumerStatusMaxAttempt)
+                            .appKey(appKey)
+                            .appSecret(appSecret);
 
-            //1. 初始化
+            // 1. 初始化
             this.consumerBrokerService.initChannelFutureList(config);
 
-            //2. 连接到服务端
+            // 2. 连接到服务端
             this.consumerBrokerService.registerToBroker();
 
-            //3. 标识为可用
+            // 3. 标识为可用
             statusManager.status(true);
 
-            //4. 添加钩子函数
+            // 4. 添加钩子函数
             final DefaultShutdownHook rpcShutdownHook = new DefaultShutdownHook();
             rpcShutdownHook.setStatusManager(statusManager);
             rpcShutdownHook.setInvokeService(invokeService);
@@ -236,7 +253,7 @@ public class MqConsumerPush extends Thread implements IMqConsumer {
             rpcShutdownHook.setDestroyable(this.consumerBrokerService);
             ShutdownHooks.rpcShutdownHook(rpcShutdownHook);
 
-            //5. 启动完成以后的事件
+            // 5. 启动完成以后的事件
             this.afterInit();
 
             log.info("MQ 消费者启动完成");
@@ -252,9 +269,7 @@ public class MqConsumerPush extends Thread implements IMqConsumer {
     /**
      * 初始化完成以后
      */
-    protected void afterInit() {
-
-    }
+    protected void afterInit() {}
 
     @Override
     public void subscribe(String topicName, String tagRegex) {
@@ -281,5 +296,4 @@ public class MqConsumerPush extends Thread implements IMqConsumer {
     protected String getConsumerType() {
         return ConsumerTypeConst.PUSH;
     }
-
 }

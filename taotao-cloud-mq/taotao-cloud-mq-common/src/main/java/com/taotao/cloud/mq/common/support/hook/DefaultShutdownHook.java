@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.mq.common.support.hook;
 
 import com.taotao.cloud.mq.common.api.Destroyable;
@@ -5,6 +21,7 @@ import com.taotao.cloud.mq.common.support.invoke.IInvokeService;
 import com.taotao.cloud.mq.common.support.status.IStatusManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 /**
  * 默认的 hook 实现
  * @since 2024.05
@@ -14,7 +31,7 @@ public class DefaultShutdownHook extends AbstractShutdownHook {
     /**
      * DefaultShutdownHook logger
      */
-	private static final Logger logger = LoggerFactory.getLogger(DefaultShutdownHook.class);
+    private static final Logger logger = LoggerFactory.getLogger(DefaultShutdownHook.class);
 
     /**
      * 调用管理类
@@ -90,13 +107,13 @@ public class DefaultShutdownHook extends AbstractShutdownHook {
         while (invokeService.remainsRequest()) {
             long currentMills = System.currentTimeMillis();
             long costMills = currentMills - startMills;
-            if(costMills >= waitMillsForRemainRequest) {
+            if (costMills >= waitMillsForRemainRequest) {
                 logger.warn("[Shutdown] still remains request, but timeout, break.");
                 break;
             }
 
             logger.info("[Shutdown] still remains request, wait for a while.");
-           // DateUtil.sleep(100);
+            // DateUtil.sleep(100);
         }
 
         // 销毁
@@ -106,5 +123,4 @@ public class DefaultShutdownHook extends AbstractShutdownHook {
         statusManager.status(false);
         logger.info("[Shutdown] set status to shutdown success.");
     }
-
 }

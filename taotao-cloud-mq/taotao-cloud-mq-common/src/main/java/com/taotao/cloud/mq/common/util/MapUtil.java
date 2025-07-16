@@ -1,13 +1,23 @@
 /*
- * Copyright (c)  2019. houbinbin Inc.
- * heaven All rights reserved.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.taotao.cloud.mq.common.util;
 
 import com.taotao.boot.common.utils.lang.ObjectUtils;
 import com.taotao.boot.common.utils.lang.StringUtils;
-
 import java.util.*;
 
 /**
@@ -18,8 +28,7 @@ import java.util.*;
  */
 public final class MapUtil {
 
-    private MapUtil() {
-    }
+    private MapUtil() {}
 
     /**
      * 判断map为空
@@ -51,19 +60,20 @@ public final class MapUtil {
      * @return map 结果
      * @since 0.1.7
      */
-    //public static <K, V> Map<K, V> toMap(Collection<V> values, IHandler<? super V, K> keyFunction) {
+    // public static <K, V> Map<K, V> toMap(Collection<V> values, IHandler<? super V, K>
+    // keyFunction) {
     //    if (ObjectUtil.isNull(values)) {
     //        return Collections.emptyMap();
     //    }
-	//
+    //
     //    Map<K, V> map = new HashMap<>(values.size());
-	//
+    //
     //    for (V value : values) {
     //        final K key = keyFunction.handle(value);
     //        map.put(key, value);
     //    }
     //    return map;
-    //}
+    // }
 
     /**
      * 可遍历的结合转换为 map
@@ -76,11 +86,12 @@ public final class MapUtil {
      * @return map 结果
      * @since 0.1.83
      */
-    //public static <K, V, O> Map<K, V> toMap(Collection<O> values, IMapHandler<K, V, O> mapHandler) {
+    // public static <K, V, O> Map<K, V> toMap(Collection<O> values, IMapHandler<K, V, O>
+    // mapHandler) {
     //    if (ObjectUtil.isNull(values)) {
     //        return Collections.emptyMap();
     //    }
-	//
+    //
     //    Map<K, V> map = new HashMap<>(values.size());
     //    for (O line : values) {
     //        final K key = mapHandler.getKey(line);
@@ -88,7 +99,7 @@ public final class MapUtil {
     //        map.put(key, value);
     //    }
     //    return map;
-    //}
+    // }
 
     /**
      * 可遍历的结合转换为 map
@@ -101,18 +112,19 @@ public final class MapUtil {
      * @return list 结果
      * @since 0.1.85
      */
-    //public static <K, V, T> List<T> toList(Map<K, V> map, IMapEntryHandler<K, V, T> entryHandler) {
+    // public static <K, V, T> List<T> toList(Map<K, V> map, IMapEntryHandler<K, V, T> entryHandler)
+    // {
     //    if (MapUtil.isEmpty(map)) {
     //        return Collections.emptyList();
     //    }
-	//
+    //
     //    List<T> resultList = Guavas.newArrayList(map.size());
     //    for (Map.Entry<K, V> entry : map.entrySet()) {
     //        final T result = entryHandler.handler(entry);
     //        resultList.add(result);
     //    }
     //    return resultList;
-    //}
+    // }
 
     /**
      * key 是元素的索引
@@ -144,8 +156,7 @@ public final class MapUtil {
      * @return value
      * @since 0.1.17
      */
-    public static String getMapValue(final Map<String, String> map,
-                                     final String key) {
+    public static String getMapValue(final Map<String, String> map, final String key) {
         if (MapUtil.isEmpty(map)) {
             return key;
         }
@@ -168,8 +179,7 @@ public final class MapUtil {
      * @return value
      * @since 0.1.93
      */
-    public static <K, V> V getMapValue(final Map<K, V> map, final K key,
-                                       final V defaultValue) {
+    public static <K, V> V getMapValue(final Map<K, V> map, final K key, final V defaultValue) {
         if (MapUtil.isEmpty(map)) {
             return defaultValue;
         }
@@ -187,11 +197,11 @@ public final class MapUtil {
      * @since 0.1.111
      */
     public static Map.Entry<String, Object> getFirstEntry(final Map<String, Object> map) {
-        if(MapUtil.isEmpty(map)) {
+        if (MapUtil.isEmpty(map)) {
             return null;
         }
 
-        for(Map.Entry<String, Object> entry : map.entrySet()) {
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
             return entry;
         }
 
@@ -206,10 +216,9 @@ public final class MapUtil {
      * @param <T> 泛型
      * @since 0.1.161
      */
-    public static <T> void putToListMap(Map<String, List<T>> listMap, String key,
-                                    T elem) {
+    public static <T> void putToListMap(Map<String, List<T>> listMap, String key, T elem) {
         List<T> list = listMap.get(key);
-        if(list == null) {
+        if (list == null) {
             list = new ArrayList<>();
         }
         list.add(elem);
@@ -225,15 +234,13 @@ public final class MapUtil {
      * @param <T> 泛型
      * @since 0.1.161
      */
-    public static <T> void putToSetMap(Map<String, Set<T>> setMap, String key,
-                                    T elem) {
+    public static <T> void putToSetMap(Map<String, Set<T>> setMap, String key, T elem) {
         Set<T> set = setMap.get(key);
-        if(set == null) {
+        if (set == null) {
             set = new HashSet<>();
         }
         set.add(elem);
 
         setMap.put(key, set);
     }
-
 }

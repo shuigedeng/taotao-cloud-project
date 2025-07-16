@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.mq.common.retry.core.core;
 
 import com.taotao.boot.common.utils.common.ArgUtils;
@@ -17,7 +33,6 @@ import com.taotao.cloud.mq.common.retry.core.support.listen.NoRetryListen;
 import com.taotao.cloud.mq.common.retry.core.support.recover.NoRecover;
 import com.taotao.cloud.mq.common.retry.core.support.stop.MaxAttemptRetryStop;
 import com.taotao.cloud.mq.common.retry.core.support.wait.NoRetryWait;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -80,7 +95,8 @@ public class Retryer<R> implements Retry<R> {
     /**
      * 重试等待上下文
      */
-    private List<RetryWaitContext<R>> waitContexts = Collections.singletonList(RetryWaiter.<R>retryWait(NoRetryWait.class).context());
+    private List<RetryWaitContext<R>> waitContexts =
+            Collections.singletonList(RetryWaiter.<R>retryWait(NoRetryWait.class).context());
 
     /**
      * 创建一个对象实例
@@ -127,13 +143,12 @@ public class Retryer<R> implements Retry<R> {
         return this;
     }
 
-
     /**
      * 重试等待上下文
      * @param retryWaitContexts 重试等待上下文数组
      * @return 重试等待上下文
      */
-    public Retryer<R> retryWaitContext(RetryWaitContext<R> ... retryWaitContexts) {
+    public Retryer<R> retryWaitContext(RetryWaitContext<R>... retryWaitContexts) {
         ArgUtils.notEmpty(retryWaitContexts, "retryWaitContexts");
         this.waitContexts = Arrays.asList(retryWaitContexts);
         return this;
@@ -248,5 +263,4 @@ public class Retryer<R> implements Retry<R> {
         // 调用执行结果
         return context().retry().retryCall(context);
     }
-
 }

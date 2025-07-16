@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.mq.broker.dto;
 
 import io.netty.channel.Channel;
@@ -8,26 +24,26 @@ import io.netty.channel.Channel;
  */
 public class BrokerServiceEntryChannel extends ServiceEntry {
 
-	private Channel channel;
+    private Channel channel;
 
-	/**
-	 * 最后访问时间
-	 */
-	private long lastAccessTime;
+    /**
+     * 最后访问时间
+     */
+    private long lastAccessTime;
 
-	public Channel getChannel() {
-		return channel;
-	}
+    public Channel getChannel() {
+        return channel;
+    }
 
-	public void setChannel(Channel channel) {
-		this.channel = channel;
-	}
+    public void setChannel(Channel channel) {
+        this.channel = channel;
+    }
 
-	public long getLastAccessTime() {
-		return lastAccessTime;
-	}
+    public long getLastAccessTime() {
+        return lastAccessTime;
+    }
 
-	public void setLastAccessTime(long lastAccessTime) {
-		this.lastAccessTime = lastAccessTime;
-	}
+    public void setLastAccessTime(long lastAccessTime) {
+        this.lastAccessTime = lastAccessTime;
+    }
 }

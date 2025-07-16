@@ -1,7 +1,18 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package com.taotao.cloud.mq.common.hash;
 
@@ -55,7 +66,8 @@ public final class HashBs {
     }
 
     public synchronized HashBs init() {
-        this.hashContext = HashContext.newInstance().salt(this.salt).times(this.times).charset(this.charset);
+        this.hashContext =
+                HashContext.newInstance().salt(this.salt).times(this.times).charset(this.charset);
         return this;
     }
 
@@ -65,7 +77,7 @@ public final class HashBs {
         }
 
         IHashResult result = this.hash.hash(source, this.hashContext);
-        return (T)handler.handle(result);
+        return (T) handler.handle(result);
     }
 
     public <T> T execute(String source, IHashResultHandler<T> handler) {
@@ -74,10 +86,10 @@ public final class HashBs {
             bytes = source.getBytes(this.charset);
         }
 
-        return (T)this.execute(bytes, handler);
+        return (T) this.execute(bytes, handler);
     }
 
     public String execute(String source) {
-        return (String)this.execute(source, HashResultHandlers.hex());
+        return (String) this.execute(source, HashResultHandlers.hex());
     }
 }
