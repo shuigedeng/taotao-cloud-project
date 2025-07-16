@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.jpa.storage;
 
-import com.taotao.cloud.auth.biz.jpa.converter.TtcToOAuth2AuthorizationConsentConverter;
 import com.taotao.cloud.auth.biz.jpa.converter.OAuth2ToTtcAuthorizationConsentConverter;
+import com.taotao.cloud.auth.biz.jpa.converter.TtcToOAuth2AuthorizationConsentConverter;
 import com.taotao.cloud.auth.biz.jpa.entity.TtcAuthorizationConsent;
 import com.taotao.cloud.auth.biz.jpa.service.TtcAuthorizationConsentService;
 import org.slf4j.Logger;
@@ -39,20 +39,25 @@ public class JpaOAuth2AuthorizationConsentService implements OAuth2Authorization
     /**
      * 日志
      */
-    private static final Logger log = LoggerFactory.getLogger(JpaOAuth2AuthorizationConsentService.class);
+    private static final Logger log =
+            LoggerFactory.getLogger(JpaOAuth2AuthorizationConsentService.class);
 
     /**
      * 希罗多德授权同意服务
      */
     private final TtcAuthorizationConsentService ttcAuthorizationConsentService;
+
     /**
      * 希罗多德到oauth2转换器
      */
-    private final Converter<TtcAuthorizationConsent, OAuth2AuthorizationConsent> ttcToOAuth2Converter;
+    private final Converter<TtcAuthorizationConsent, OAuth2AuthorizationConsent>
+            ttcToOAuth2Converter;
+
     /**
      * oauth2到ttc转换器
      */
-    private final Converter<OAuth2AuthorizationConsent, TtcAuthorizationConsent> oauth2ToTtcConverter;
+    private final Converter<OAuth2AuthorizationConsent, TtcAuthorizationConsent>
+            oauth2ToTtcConverter;
 
     /**
      * jpa oauth2授权同意服务
@@ -93,7 +98,8 @@ public class JpaOAuth2AuthorizationConsentService implements OAuth2Authorization
     public void remove(OAuth2AuthorizationConsent authorizationConsent) {
         log.info("Jpa OAuth2 Authorization Consent Service remove entity.");
         this.ttcAuthorizationConsentService.deleteByRegisteredClientIdAndPrincipalName(
-                authorizationConsent.getRegisteredClientId(), authorizationConsent.getPrincipalName());
+                authorizationConsent.getRegisteredClientId(),
+                authorizationConsent.getPrincipalName());
     }
 
     /**

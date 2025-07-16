@@ -20,14 +20,11 @@ import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.common.utils.servlet.TraceUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;
 import com.taotao.cloud.gateway.service.ISafeRuleService;
-import com.taotao.cloud.gateway.skywalking.SkywalkingUtil;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -36,11 +33,7 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.cors.reactive.CorsUtils;
 import org.springframework.web.server.ServerWebExchange;
-import org.springframework.web.server.WebFilter;
-import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
-
-import java.util.Objects;
 
 /**
  * 第一执行 黑名单过滤器
@@ -50,7 +43,11 @@ import java.util.Objects;
  * @since 2023-05-08 13:19:32
  */
 @Component
-@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "blacklist", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(
+        prefix = FilterProperties.PREFIX,
+        name = "blacklist",
+        havingValue = "true",
+        matchIfMissing = true)
 public class BlacklistFilter implements GlobalFilter, Ordered {
 
     private final ISafeRuleService safeRuleService;
@@ -62,7 +59,7 @@ public class BlacklistFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
-		//SkywalkingUtil.putTidIntoMdc(exchange);
+        // SkywalkingUtil.putTidIntoMdc(exchange);
 
         // 是否开启黑名单
         // 从redis里查询黑名单是否存在
@@ -90,15 +87,17 @@ public class BlacklistFilter implements GlobalFilter, Ordered {
             }
         }
 
-        return chain.filter(exchange).then(Mono.fromRunnable(() ->{
-			//SkywalkingUtil.putTidIntoMdc(exchange);
+        return chain.filter(exchange)
+                .then(
+                        Mono.fromRunnable(
+                                () -> {
+                                    // SkywalkingUtil.putTidIntoMdc(exchange);
 
-            LogUtils.info("Response BlacklistFilter 最终最终返回数据");
+                                    LogUtils.info("Response BlacklistFilter 最终最终返回数据");
 
-            TraceUtils.removeTraceId();
-            LocaleContextHolder.resetLocaleContext();
-
-        }));
+                                    TraceUtils.removeTraceId();
+                                    LocaleContextHolder.resetLocaleContext();
+                                }));
     }
 
     @Override

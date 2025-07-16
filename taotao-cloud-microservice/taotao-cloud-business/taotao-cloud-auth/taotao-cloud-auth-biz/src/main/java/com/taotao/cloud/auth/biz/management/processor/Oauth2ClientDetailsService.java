@@ -21,12 +21,11 @@ import com.taotao.cloud.auth.biz.management.entity.OAuth2Application;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Permission;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Scope;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ApplicationService;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.ObjectUtils;
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ObjectUtils;
 
 /**
  * <p>客户端交互处理器 </p>
@@ -53,9 +52,13 @@ public class Oauth2ClientDetailsService implements EnhanceClientDetailsService {
                 for (OAuth2Scope scope : scopes) {
                     Set<OAuth2Permission> permissions = scope.getPermissions();
                     if (CollectionUtils.isNotEmpty(permissions)) {
-                        Set<TtcGrantedAuthority> grantedAuthorities = permissions.stream()
-                                .map(item -> new TtcGrantedAuthority(item.getPermissionCode()))
-                                .collect(Collectors.toSet());
+                        Set<TtcGrantedAuthority> grantedAuthorities =
+                                permissions.stream()
+                                        .map(
+                                                item ->
+                                                        new TtcGrantedAuthority(
+                                                                item.getPermissionCode()))
+                                        .collect(Collectors.toSet());
                         result.addAll(grantedAuthorities);
                     }
                 }

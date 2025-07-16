@@ -1,12 +1,11 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,8 +15,14 @@
  */
 
 package com.taotao.cloud.paimon.kafka.sink;
-import com.taotao.cloud.paimon.kafka.data.CdcRecord;
+
 import com.taotao.cloud.paimon.kafka.cdc.DebeziumRecordParser;
+import com.taotao.cloud.paimon.kafka.data.CdcRecord;
+import java.io.Closeable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import org.apache.kafka.connect.errors.ConnectException;
 import org.apache.kafka.connect.sink.SinkRecord;
 import org.apache.paimon.catalog.Catalog;
@@ -31,12 +36,6 @@ import org.apache.paimon.table.sink.StreamTableCommit;
 import org.apache.paimon.table.sink.StreamTableWrite;
 import org.apache.paimon.table.sink.StreamWriteBuilder;
 
-import java.io.Closeable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
 /**
  * Paimon table writer
  */
@@ -45,6 +44,7 @@ public class PaimonTableWriter implements AutoCloseable {
     private final PaimonSinkConfig config;
     private Map<Identifier, Table> cacheTables;
     private long commitIdentifier = 0;
+
     public PaimonTableWriter(Catalog catalog, PaimonSinkConfig config) {
         this.catalog = catalog;
         this.config = config;
@@ -52,7 +52,7 @@ public class PaimonTableWriter implements AutoCloseable {
     }
 
     public void write(SinkRecord record) throws Exception {
-        Identifier identifier =  tableIdentifier(record);
+        Identifier identifier = tableIdentifier(record);
         // Build paimon table schema
         Schema schema = DebeziumRecordParser.buildSchema(record);
         // extract cdc record
@@ -63,9 +63,10 @@ public class PaimonTableWriter implements AutoCloseable {
         // new write
         StreamTableWrite write = writeBuilder.newWrite();
         // write record
-        for (CdcRecord cdcRecord : records){
-            Optional<GenericRow> optionalGenericRow = DebeziumRecordParser.toGenericRow(cdcRecord, schema.fields());
-            if (optionalGenericRow.isPresent()){
+        for (CdcRecord cdcRecord : records) {
+            Optional<GenericRow> optionalGenericRow =
+                    DebeziumRecordParser.toGenericRow(cdcRecord, schema.fields());
+            if (optionalGenericRow.isPresent()) {
                 write.write(optionalGenericRow.get());
             }
         }
@@ -83,11 +84,13 @@ public class PaimonTableWriter implements AutoCloseable {
                 table = catalog.getTable(identifier);
             } catch (Catalog.TableNotExistException e) {
                 // Enabled auto create table
-                if (config.isAutoCreate()){
+                if (config.isAutoCreate()) {
                     try {
                         catalog.createTable(identifier, schema, false);
                         table = catalog.getTable(identifier);
-                    } catch (Catalog.TableAlreadyExistException | Catalog.DatabaseNotExistException | Catalog.TableNotExistException ex) {
+                    } catch (Catalog.TableAlreadyExistException
+                            | Catalog.DatabaseNotExistException
+                            | Catalog.TableNotExistException ex) {
                         throw new ConnectException(ex);
                     }
                 }
@@ -148,7 +151,7 @@ public class PaimonTableWriter implements AutoCloseable {
      */
     @Override
     public void close() throws Exception {
-        if (!cacheTables.isEmpty()){
+        if (!cacheTables.isEmpty()) {
             cacheTables.clear();
         }
     }

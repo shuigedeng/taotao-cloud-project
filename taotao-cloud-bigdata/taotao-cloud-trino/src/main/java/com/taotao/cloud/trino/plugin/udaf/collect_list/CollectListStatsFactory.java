@@ -27,7 +27,8 @@ import io.trino.spi.function.GroupedAccumulatorState;
  * @version 2022.04
  * @since 2020/10/29 18:06
  */
-public class CollectListStatsFactory implements AccumulatorStateFactory<CollectListAggregationFunctions.CollectState> {
+public class CollectListStatsFactory
+        implements AccumulatorStateFactory<CollectListAggregationFunctions.CollectState> {
 
     @Override
     public CollectListAggregationFunctions.CollectState createSingleState() {
@@ -49,7 +50,8 @@ public class CollectListStatsFactory implements AccumulatorStateFactory<CollectL
         return GroupState.class;
     }
 
-    public static class GroupState implements GroupedAccumulatorState, CollectListAggregationFunctions.CollectState {
+    public static class GroupState
+            implements GroupedAccumulatorState, CollectListAggregationFunctions.CollectState {
 
         private final ObjectBigArray<CollectListStats> collectStatsList = new ObjectBigArray<>();
         private int size;
@@ -84,7 +86,7 @@ public class CollectListStatsFactory implements AccumulatorStateFactory<CollectL
         public long getEstimatedSize() {
             return size + collectStatsList.sizeOf();
         }
-	}
+    }
 
     public static class SingleState implements CollectListAggregationFunctions.CollectState {
 

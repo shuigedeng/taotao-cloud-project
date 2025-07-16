@@ -35,7 +35,11 @@ import org.springframework.http.server.reactive.HttpHandler;
  */
 @Configuration
 @AllArgsConstructor
-@ConditionalOnProperty(prefix = HttpsProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(
+        prefix = HttpsProperties.PREFIX,
+        name = "enabled",
+        havingValue = "true",
+        matchIfMissing = false)
 public class HttpsConfiguration {
 
     private final HttpHandler httpHandler;
@@ -43,7 +47,8 @@ public class HttpsConfiguration {
 
     @PostConstruct
     public void start(HttpsProperties httpsProperties) {
-        NettyReactiveWebServerFactory factory = new NettyReactiveWebServerFactory(httpsProperties.getPort());
+        NettyReactiveWebServerFactory factory =
+                new NettyReactiveWebServerFactory(httpsProperties.getPort());
         WebServer webServer = factory.getWebServer(httpHandler);
         webServer.start();
     }

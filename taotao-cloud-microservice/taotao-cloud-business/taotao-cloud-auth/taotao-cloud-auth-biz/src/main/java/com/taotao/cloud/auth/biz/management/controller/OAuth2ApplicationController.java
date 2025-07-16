@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.auth.biz.management.controller;
 
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Application;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ApplicationService;
-import com.taotao.boot.common.model.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -53,7 +53,8 @@ public class OAuth2ApplicationController {
     })
     @PutMapping
     public Result<OAuth2Application> authorize(
-            @RequestParam(name = "applicationId") String scopeId, @RequestParam(name = "scopes[]") String[] scopes) {
+            @RequestParam(name = "applicationId") String scopeId,
+            @RequestParam(name = "scopes[]") String[] scopes) {
         OAuth2Application application = applicationService.authorize(scopeId, scopes);
         return Result.success(application);
     }

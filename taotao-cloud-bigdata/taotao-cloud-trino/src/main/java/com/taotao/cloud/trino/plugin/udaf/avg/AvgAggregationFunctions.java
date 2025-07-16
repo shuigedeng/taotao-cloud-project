@@ -40,20 +40,24 @@ import io.trino.spi.type.StandardTypes;
 public class AvgAggregationFunctions {
 
     @InputFunction
-    public static void input(@AggregationState LongAndDoubleState state, @SqlType(StandardTypes.BIGINT) long value) {
+    public static void input(
+            @AggregationState LongAndDoubleState state, @SqlType(StandardTypes.BIGINT) long value) {
         state.setLong(state.getLong() + 1);
         state.setDouble(state.getDouble() + value);
     }
 
     @InputFunction
-    public static void input(@AggregationState LongAndDoubleState state, @SqlType(StandardTypes.DOUBLE) double value) {
+    public static void input(
+            @AggregationState LongAndDoubleState state,
+            @SqlType(StandardTypes.DOUBLE) double value) {
         state.setLong(state.getLong() + 1);
         state.setDouble(state.getDouble() + value);
     }
 
     @CombineFunction
     public static void combine(
-            @AggregationState LongAndDoubleState state, @AggregationState LongAndDoubleState otherState) {
+            @AggregationState LongAndDoubleState state,
+            @AggregationState LongAndDoubleState otherState) {
         state.setLong(state.getLong() + otherState.getLong());
         state.setDouble(state.getDouble() + otherState.getDouble());
     }

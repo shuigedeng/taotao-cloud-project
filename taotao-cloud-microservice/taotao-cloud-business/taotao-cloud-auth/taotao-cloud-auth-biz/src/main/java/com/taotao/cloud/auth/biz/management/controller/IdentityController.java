@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.auth.biz.management.controller;
 
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.auth.api.model.dto.SignInErrorPrompt;
 import com.taotao.cloud.auth.api.model.dto.SignInErrorStatus;
 import com.taotao.cloud.auth.biz.authentication.stamp.SignInFailureLimitedStampManager;
@@ -24,7 +25,6 @@ import com.taotao.cloud.auth.biz.management.dto.SessionCreate;
 import com.taotao.cloud.auth.biz.management.dto.SessionExchange;
 import com.taotao.cloud.auth.biz.management.entity.SecretKey;
 import com.taotao.cloud.auth.biz.management.service.InterfaceSecurityService;
-import com.taotao.boot.common.model.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -46,7 +46,11 @@ import org.springframework.web.bind.annotation.RestController;
  * @see <a href="https://conkeyn.iteye.com/blog/2296406">参考文档</a>
  */
 @RestController
-@Tags({@Tag(name = "OAuth2 认证服务器接口"), @Tag(name = "OAuth2 认证服务器开放接口"), @Tag(name = "OAuth2 身份认证辅助接口")})
+@Tags({
+    @Tag(name = "OAuth2 认证服务器接口"),
+    @Tag(name = "OAuth2 认证服务器开放接口"),
+    @Tag(name = "OAuth2 身份认证辅助接口")
+})
 public class IdentityController {
 
     private final Logger log = LoggerFactory.getLogger(IdentityController.class);
@@ -67,7 +71,11 @@ public class IdentityController {
             requestBody =
                     @io.swagger.v3.oas.annotations.parameters.RequestBody(
                             content = @Content(mediaType = "application/json")),
-            responses = {@ApiResponse(description = "自定义Session", content = @Content(mediaType = "application/json"))})
+            responses = {
+                @ApiResponse(
+                        description = "自定义Session",
+                        content = @Content(mediaType = "application/json"))
+            })
     @Parameters({
         @Parameter(
                 name = "sessionCreate",
@@ -78,8 +86,11 @@ public class IdentityController {
     @PostMapping("/open/identity/session")
     public Result<Session> codeToSession(@Validated @RequestBody SessionCreate sessionCreate) {
 
-        SecretKey secretKey = interfaceSecurityService.createSecretKey(
-                sessionCreate.getClientId(), sessionCreate.getClientSecret(), sessionCreate.getSessionId());
+        SecretKey secretKey =
+                interfaceSecurityService.createSecretKey(
+                        sessionCreate.getClientId(),
+                        sessionCreate.getClientSecret(),
+                        sessionCreate.getSessionId());
         if (ObjectUtils.isNotEmpty(secretKey)) {
             Session session = new Session();
             session.setSessionId(secretKey.getIdentity());
@@ -99,7 +110,11 @@ public class IdentityController {
             requestBody =
                     @io.swagger.v3.oas.annotations.parameters.RequestBody(
                             content = @Content(mediaType = "application/json")),
-            responses = {@ApiResponse(description = "加密后的AES", content = @Content(mediaType = "application/json"))})
+            responses = {
+                @ApiResponse(
+                        description = "加密后的AES",
+                        content = @Content(mediaType = "application/json"))
+            })
     @Parameters({
         @Parameter(
                 name = "sessionExchange",
@@ -111,7 +126,8 @@ public class IdentityController {
     public Result<String> exchange(@Validated @RequestBody SessionExchange sessionExchange) {
 
         String encryptedAesKey =
-                interfaceSecurityService.exchange(sessionExchange.getSessionId(), sessionExchange.getConfidential());
+                interfaceSecurityService.exchange(
+                        sessionExchange.getSessionId(), sessionExchange.getConfidential());
         if (StringUtils.isNotEmpty(encryptedAesKey)) {
             return Result.success(encryptedAesKey);
         }
@@ -126,7 +142,11 @@ public class IdentityController {
             requestBody =
                     @io.swagger.v3.oas.annotations.parameters.RequestBody(
                             content = @Content(mediaType = "application/json")),
-            responses = {@ApiResponse(description = "加密后的AES", content = @Content(mediaType = "application/json"))})
+            responses = {
+                @ApiResponse(
+                        description = "加密后的AES",
+                        content = @Content(mediaType = "application/json"))
+            })
     @Parameters({
         @Parameter(
                 name = "signInErrorPrompt",
@@ -135,7 +155,8 @@ public class IdentityController {
                 schema = @Schema(implementation = SignInErrorPrompt.class)),
     })
     @PostMapping("/open/identity/prompt")
-    public Result<SignInErrorStatus> prompt(@Validated @RequestBody SignInErrorPrompt signInErrorPrompt) {
+    public Result<SignInErrorStatus> prompt(
+            @Validated @RequestBody SignInErrorPrompt signInErrorPrompt) {
         SignInErrorStatus signInErrorStatus =
                 signInFailureLimitedStampManager.errorStatus(signInErrorPrompt.getUsername());
         return Result.success(signInErrorStatus);

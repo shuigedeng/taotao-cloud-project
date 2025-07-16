@@ -28,7 +28,8 @@ public class RemotePermissionDetailsService extends AbstractStrategyPermissionDe
 
     //    private final RemoteAuthorityDetailsService remoteAuthorityDetailsService;
     //
-    //    public RemotePermissionDetailsService(RemoteAuthorityDetailsService remoteAuthorityDetailsService) {
+    //    public RemotePermissionDetailsService(RemoteAuthorityDetailsService
+    // remoteAuthorityDetailsService) {
     //        this.remoteAuthorityDetailsService = remoteAuthorityDetailsService;
     //    }
 

@@ -30,12 +30,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TaoTaoCloudDataAnalysisApplication {
 
     public static void main(String[] args) {
-		new StartupSpringApplication(TaoTaoCloudDataAnalysisApplication.class)
-			.setTtcBanner()
-			.setTtcProfileIfNotExists("dev")
-			.setTtcApplicationProperty("taotao-cloud-data-analysis")
-			.setTtcAllowBeanDefinitionOverriding(true)
-			.run(args);
-
-	}
+        new StartupSpringApplication(TaoTaoCloudDataAnalysisApplication.class)
+                .setTtcBanner()
+                .setTtcProfileIfNotExists("dev")
+                .setTtcApplicationProperty("taotao-cloud-data-analysis")
+                .setTtcAllowBeanDefinitionOverriding(true)
+                .run(args);
+    }
 }

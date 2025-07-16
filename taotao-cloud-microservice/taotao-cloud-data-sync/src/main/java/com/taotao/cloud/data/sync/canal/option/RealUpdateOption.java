@@ -33,7 +33,11 @@ import org.springframework.stereotype.Component;
 public class RealUpdateOption extends UpdateOption {
 
     @Override
-    public void doOption(String destination, String schemaName, String tableName, CanalEntry.RowChange rowChange) {
+    public void doOption(
+            String destination,
+            String schemaName,
+            String tableName,
+            CanalEntry.RowChange rowChange) {
         LogUtils.info("======================接口方式（更新数据操作）==========================");
 
         List<CanalEntry.RowData> rowDatasList = rowChange.getRowDatasList();
@@ -41,15 +45,22 @@ public class RealUpdateOption extends UpdateOption {
             String sql = "use " + schemaName + ";\n";
             StringBuffer updates = new StringBuffer();
             StringBuffer conditions = new StringBuffer();
-            rowData.getAfterColumnsList().forEach((c) -> {
-                if (c.getIsKey()) {
-                    conditions.append(c.getName() + "='" + c.getValue() + "'");
-                } else {
-                    updates.append(c.getName() + "='" + c.getValue() + "',");
-                }
-            });
-            sql += "UPDATE " + tableName + " SET " + updates.substring(0, updates.length() - 1) + " WHERE "
-                    + conditions;
+            rowData.getAfterColumnsList()
+                    .forEach(
+                            (c) -> {
+                                if (c.getIsKey()) {
+                                    conditions.append(c.getName() + "='" + c.getValue() + "'");
+                                } else {
+                                    updates.append(c.getName() + "='" + c.getValue() + "',");
+                                }
+                            });
+            sql +=
+                    "UPDATE "
+                            + tableName
+                            + " SET "
+                            + updates.substring(0, updates.length() - 1)
+                            + " WHERE "
+                            + conditions;
 
             LogUtils.info(sql);
         }

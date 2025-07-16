@@ -1,5 +1,29 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.flink.dinky;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.typeinfo.Types;
@@ -17,23 +41,15 @@ import org.apache.flink.streaming.api.windowing.triggers.CountTrigger;
 import org.apache.flink.streaming.api.windowing.windows.GlobalWindow;
 import org.apache.flink.util.Collector;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-
 public class GlobalWindowDemo {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        //设置WebUI绑定的本地端口
-        conf.setString(RestOptions.BIND_PORT,"8081");
-        //使用配置
+        // 设置WebUI绑定的本地端口
+        conf.setString(RestOptions.BIND_PORT, "8081");
+        // 使用配置
 
-        //final StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
+        // final StreamExecutionEnvironment env =
+        // StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
@@ -41,30 +57,42 @@ public class GlobalWindowDemo {
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
         // 使用 DataGeneratorSource 生成数据
-        DataStream<String> text = env.addSource(new org.bigdatatechcir.learn_flink.part4_flink_window.GlobalWindowDemo.DataGeneratorSourceFunction());
+        DataStream<String> text =
+                env.addSource(
+                        new org.bigdatatechcir.learn_flink.part4_flink_window.GlobalWindowDemo
+                                .DataGeneratorSourceFunction());
 
         // 解析数据并提取时间戳
-        DataStream<Tuple3<String, Integer, Long>> tuplesWithTimestamp = text
-                .map(new MapFunction<String, Tuple3<String, Integer, Long>>() {
-                    @Override
-                    public Tuple3<String, Integer, Long> map(String value) {
-                        String[] words = value.split(",");
-                        return new Tuple3<>(words[0], Integer.parseInt(words[1]), Long.parseLong(words[2]));
-                    }
-                })
-                .returns(Types.TUPLE(Types.STRING, Types.INT, Types.LONG));
+        DataStream<Tuple3<String, Integer, Long>> tuplesWithTimestamp =
+                text.map(
+                                new MapFunction<String, Tuple3<String, Integer, Long>>() {
+                                    @Override
+                                    public Tuple3<String, Integer, Long> map(String value) {
+                                        String[] words = value.split(",");
+                                        return new Tuple3<>(
+                                                words[0],
+                                                Integer.parseInt(words[1]),
+                                                Long.parseLong(words[2]));
+                                    }
+                                })
+                        .returns(Types.TUPLE(Types.STRING, Types.INT, Types.LONG));
 
         // 设置 Watermark 策略
-        DataStream<Tuple3<String, Integer, Long>> withWatermarks = tuplesWithTimestamp
-                .assignTimestampsAndWatermarks(WatermarkStrategy.<Tuple3<String, Integer, Long>>forBoundedOutOfOrderness(Duration.ofSeconds(5))
-                        .withTimestampAssigner((element, recordTimestamp) -> element.f2));
+        DataStream<Tuple3<String, Integer, Long>> withWatermarks =
+                tuplesWithTimestamp.assignTimestampsAndWatermarks(
+                        WatermarkStrategy.<Tuple3<String, Integer, Long>>forBoundedOutOfOrderness(
+                                        Duration.ofSeconds(5))
+                                .withTimestampAssigner((element, recordTimestamp) -> element.f2));
 
         // 应用全局窗口
-        DataStream<Tuple2<String, Integer>> globalWindowedStream = withWatermarks
-                .keyBy(value -> value.f0)
-                .windowAll(GlobalWindows.create())
-                .trigger(CountTrigger.of(10)) // 当每个键接收到10个元素时，触发计算
-                .process(new org.bigdatatechcir.learn_flink.part4_flink_window.GlobalWindowDemo.CountProcessFunction());
+        DataStream<Tuple2<String, Integer>> globalWindowedStream =
+                withWatermarks
+                        .keyBy(value -> value.f0)
+                        .windowAll(GlobalWindows.create())
+                        .trigger(CountTrigger.of(10)) // 当每个键接收到10个元素时，触发计算
+                        .process(
+                                new org.bigdatatechcir.learn_flink.part4_flink_window
+                                        .GlobalWindowDemo.CountProcessFunction());
 
         // 输出结果
         globalWindowedStream.print();
@@ -73,9 +101,20 @@ public class GlobalWindowDemo {
         env.execute("Global Windowing Demo");
     }
 
-    public static class CountProcessFunction extends ProcessAllWindowFunction<Tuple3<String, Integer, Long>, Tuple2<String, Integer>, GlobalWindow> {
+    public static class CountProcessFunction
+            extends ProcessAllWindowFunction<
+                    Tuple3<String, Integer, Long>, Tuple2<String, Integer>, GlobalWindow> {
         @Override
-        public void process(ProcessAllWindowFunction<Tuple3<String, Integer, Long>, Tuple2<String, Integer>, GlobalWindow>.Context context, Iterable<Tuple3<String, Integer, Long>> iterable, Collector<Tuple2<String, Integer>> collector) throws Exception {
+        public void process(
+                ProcessAllWindowFunction<
+                                        Tuple3<String, Integer, Long>,
+                                        Tuple2<String, Integer>,
+                                        GlobalWindow>
+                                .Context
+                        context,
+                Iterable<Tuple3<String, Integer, Long>> iterable,
+                Collector<Tuple2<String, Integer>> collector)
+                throws Exception {
             Map<String, Integer> counts = new HashMap<>();
 
             for (Tuple3<String, Integer, Long> element : iterable) {
@@ -99,7 +138,16 @@ public class GlobalWindowDemo {
                 int randomNum = random.nextInt(5) + 1;
                 long timestamp = System.currentTimeMillis();
                 ctx.collectWithTimestamp("key" + randomNum + "," + 1 + "," + timestamp, timestamp);
-                System.out.println("Generated data: " + "key" + randomNum + "," + 1 + "," + timestamp + " at " + getCurrentFormattedDateTime(timestamp));
+                System.out.println(
+                        "Generated data: "
+                                + "key"
+                                + randomNum
+                                + ","
+                                + 1
+                                + ","
+                                + timestamp
+                                + " at "
+                                + getCurrentFormattedDateTime(timestamp));
                 Thread.sleep(1000);
             }
         }
@@ -110,7 +158,8 @@ public class GlobalWindowDemo {
         }
 
         private String getCurrentFormattedDateTime(long timestamp) {
-            ZonedDateTime generateDataDateTime = Instant.ofEpochMilli(timestamp).atZone(ZoneId.systemDefault());
+            ZonedDateTime generateDataDateTime =
+                    Instant.ofEpochMilli(timestamp).atZone(ZoneId.systemDefault());
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
             return generateDataDateTime.format(formatter);
         }

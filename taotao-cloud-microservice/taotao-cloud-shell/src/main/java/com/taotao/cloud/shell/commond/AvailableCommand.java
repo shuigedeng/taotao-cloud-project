@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.shell.commond;
 
 import jakarta.validation.constraints.Size;
@@ -27,7 +43,6 @@ public class AvailableCommand {
         return "Password successfully set to " + password;
     }
 
-
     private boolean connected;
 
     @ShellMethod("设置链接状态为true")
@@ -46,13 +61,10 @@ public class AvailableCommand {
      * 输出:>download
      */
     @ShellMethod("必须链接后才能执行的方法")
-    public void download() {
-    }
+    public void download() {}
 
     public Availability downloadAvailability() {
-        return connected
-                ? Availability.available()
-                : Availability.unavailable("没有进行链接");
+        return connected ? Availability.available() : Availability.unavailable("没有进行链接");
     }
 
     private boolean connected2;
@@ -67,8 +79,7 @@ public class AvailableCommand {
      */
     @ShellMethod("必须链接2链接后才能执行的方法")
     @ShellMethodAvailability("availabilityCheck")
-    public void disconnect2() {
-    }
+    public void disconnect2() {}
 
     /**
      * 为校验方法指定需要校验的命令
@@ -76,10 +87,6 @@ public class AvailableCommand {
      */
     @ShellMethodAvailability({"download2", "disconnect2"})
     public Availability availabilityCheck() {
-        return connected2
-                ? Availability.available()
-                : Availability.unavailable("没有进行链接");
+        return connected2 ? Availability.available() : Availability.unavailable("没有进行链接");
     }
-
-
 }

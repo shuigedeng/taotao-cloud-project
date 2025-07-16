@@ -19,13 +19,13 @@ package com.taotao.cloud.gateway.authentication;
 import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.boot.common.constant.RedisConstants;
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.gateway.exception.InvalidTokenException;
 import com.taotao.boot.security.spring.access.security.SecurityConfigAttribute;
 import com.taotao.boot.security.spring.access.security.SecurityRequest;
 import com.taotao.boot.security.spring.access.security.SecurityRequestMatcher;
 import com.taotao.boot.security.spring.authorization.SecurityMatcherConfigurer;
 import com.taotao.boot.security.spring.authorization.SecurityMetadataSourceStorage;
 import com.taotao.boot.security.spring.utils.WebUtils;
+import com.taotao.cloud.gateway.exception.InvalidTokenException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,130 +53,145 @@ import reactor.core.publisher.Mono;
  */
 @Component
 @AllArgsConstructor
-public class GatewayReactiveAuthorizationManager implements
-	ReactiveAuthorizationManager<AuthorizationContext> {
+public class GatewayReactiveAuthorizationManager
+        implements ReactiveAuthorizationManager<AuthorizationContext> {
 
-	private final RedisRepository redisRepository;
-	private final SecurityMatcherConfigurer securityMatcherConfigurer;
-	private final SecurityMetadataSourceStorage securityMetadataSourceStorage;
+    private final RedisRepository redisRepository;
+    private final SecurityMatcherConfigurer securityMatcherConfigurer;
+    private final SecurityMetadataSourceStorage securityMetadataSourceStorage;
 
-	@Override
-	public Mono<AuthorizationDecision> check(Mono<Authentication> authentication,
-		AuthorizationContext authorizationContext) {
-		return authentication
-			.map(auth -> {
-				final ServerWebExchange serverWebExchange = authorizationContext.getExchange();
+    @Override
+    public Mono<AuthorizationDecision> check(
+            Mono<Authentication> authentication, AuthorizationContext authorizationContext) {
+        return authentication
+                .map(
+                        auth -> {
+                            final ServerWebExchange serverWebExchange =
+                                    authorizationContext.getExchange();
 
-				String url = serverWebExchange.getRequest().getPath().toString();
-				String method = serverWebExchange.getRequest().getMethod().name();
+                            String url = serverWebExchange.getRequest().getPath().toString();
+                            String method = serverWebExchange.getRequest().getMethod().name();
 
-				if (WebUtils.isPathMatch(securityMatcherConfigurer.getPermitAllList(), url)) {
-					LogUtils.info("Is white list resource : [{}], Passed!", url);
-					return new AuthorizationDecision(true);
-				}
+                            if (WebUtils.isPathMatch(
+                                    securityMatcherConfigurer.getPermitAllList(), url)) {
+                                LogUtils.info("Is white list resource : [{}], Passed!", url);
+                                return new AuthorizationDecision(true);
+                            }
 
-				if (WebUtils.isPathMatch(securityMatcherConfigurer.getHasAuthenticatedList(),
-					url)) {
-					LogUtils.info("Is has authenticated resource : [{}]", url);
-					return new AuthorizationDecision(auth.isAuthenticated());
-				}
+                            if (WebUtils.isPathMatch(
+                                    securityMatcherConfigurer.getHasAuthenticatedList(), url)) {
+                                LogUtils.info("Is has authenticated resource : [{}]", url);
+                                return new AuthorizationDecision(auth.isAuthenticated());
+                            }
 
-				List<SecurityConfigAttribute> configAttributes = findConfigAttribute(url, method,
-					serverWebExchange);
-				if (CollectionUtils.isEmpty(configAttributes)) {
-					LogUtils.info("NO PRIVILEGES : [{}].", url);
+                            List<SecurityConfigAttribute> configAttributes =
+                                    findConfigAttribute(url, method, serverWebExchange);
+                            if (CollectionUtils.isEmpty(configAttributes)) {
+                                LogUtils.info("NO PRIVILEGES : [{}].", url);
 
-					if (!securityMatcherConfigurer.getAuthorizationProperties().getStrict()) {
-						if (auth instanceof AnonymousAuthenticationToken anonymousAuthenticationToken) {
-							LogUtils.info("anonymousAuthenticationToken : {}", url);
-							return new AuthorizationDecision(false);
-						}
+                                if (!securityMatcherConfigurer
+                                        .getAuthorizationProperties()
+                                        .getStrict()) {
+                                    if (auth
+                                            instanceof
+                                            AnonymousAuthenticationToken
+                                                    anonymousAuthenticationToken) {
+                                        LogUtils.info("anonymousAuthenticationToken : {}", url);
+                                        return new AuthorizationDecision(false);
+                                    }
 
-						if (auth.isAuthenticated()) {
-							LogUtils.info("Request is authenticated: [{}].", url);
-							return new AuthorizationDecision(true);
-						}
-					}
+                                    if (auth.isAuthenticated()) {
+                                        LogUtils.info("Request is authenticated: [{}].", url);
+                                        return new AuthorizationDecision(true);
+                                    }
+                                }
 
-					return new AuthorizationDecision(false);
-				}
+                                return new AuthorizationDecision(false);
+                            }
 
-				for (SecurityConfigAttribute configAttribute : configAttributes) {
-					//WebExpressionAuthorizationManager webExpressionAuthorizationManager =
-					//	new WebExpressionAuthorizationManager(configAttribute.getAttribute());
-					//AuthorizationDecision decision = webExpressionAuthorizationManager.check(auth, authorizationContext);
-					//if (decision.isGranted()) {
-					//	//LogUtils.info("Request [{}] is authorized!", object.getRequest().getRequestURI());
-					//	return decision;
-					//}
-				}
+                            for (SecurityConfigAttribute configAttribute : configAttributes) {
+                                // WebExpressionAuthorizationManager
+                                // webExpressionAuthorizationManager =
+                                //	new
+                                // WebExpressionAuthorizationManager(configAttribute.getAttribute());
+                                // AuthorizationDecision decision =
+                                // webExpressionAuthorizationManager.check(auth,
+                                // authorizationContext);
+                                // if (decision.isGranted()) {
+                                //	//LogUtils.info("Request [{}] is authorized!",
+                                // object.getRequest().getRequestURI());
+                                //	return decision;
+                                // }
+                            }
 
-				//return new AuthorizationDecision(false);
+                            // return new AuthorizationDecision(false);
 
-				if (auth instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-					Jwt jwt = jwtAuthenticationToken.getToken();
-					String kid = (String) jwt.getHeaders().get("kid");
+                            if (auth instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+                                Jwt jwt = jwtAuthenticationToken.getToken();
+                                String kid = (String) jwt.getHeaders().get("kid");
 
-					// 判断kid是否存在 存在表示令牌不能使用 即:用户已退出
-					Boolean hasKey = redisRepository.exists(
-						RedisConstants.LOGOUT_JWT_KEY_PREFIX + kid);
-					if (hasKey) {
-						throw new InvalidTokenException("无效的token");
-					}
-				}
+                                // 判断kid是否存在 存在表示令牌不能使用 即:用户已退出
+                                Boolean hasKey =
+                                        redisRepository.exists(
+                                                RedisConstants.LOGOUT_JWT_KEY_PREFIX + kid);
+                                if (hasKey) {
+                                    throw new InvalidTokenException("无效的token");
+                                }
+                            }
 
-				ServerWebExchange exchange = authorizationContext.getExchange();
-				ServerHttpRequest request = exchange.getRequest();
+                            ServerWebExchange exchange = authorizationContext.getExchange();
+                            ServerHttpRequest request = exchange.getRequest();
 
-				// 可在此处鉴权也可在各个微服务鉴权
-				// boolean isPermission = super.hasPermission(auth, request.getMethodValue(),
-				// request.getURI().getPath());
+                            // 可在此处鉴权也可在各个微服务鉴权
+                            // boolean isPermission = super.hasPermission(auth,
+                            // request.getMethodValue(),
+                            // request.getURI().getPath());
 
-				return new AuthorizationDecision(true);
-			})
-			.defaultIfEmpty(new AuthorizationDecision(false));
-	}
+                            return new AuthorizationDecision(true);
+                        })
+                .defaultIfEmpty(new AuthorizationDecision(false));
+    }
 
+    /**
+     * 找到配置属性
+     *
+     * @param url     url
+     * @param method  方法
+     * @param request 请求
+     * @return {@link List }<{@link SecurityConfigAttribute }>
+     * @since 2023-07-04 10:00:31
+     */
+    private List<SecurityConfigAttribute> findConfigAttribute(
+            String url, String method, ServerWebExchange request) {
+        LogUtils.info("Current Request is : [{}] - [{}]", url, method);
 
-	/**
-	 * 找到配置属性
-	 *
-	 * @param url     url
-	 * @param method  方法
-	 * @param request 请求
-	 * @return {@link List }<{@link SecurityConfigAttribute }>
-	 * @since 2023-07-04 10:00:31
-	 */
-	private List<SecurityConfigAttribute> findConfigAttribute(String url, String method,
-		ServerWebExchange request) {
-		LogUtils.info("Current Request is : [{}] - [{}]", url, method);
+        List<SecurityConfigAttribute> configAttributes =
+                this.securityMetadataSourceStorage.getConfigAttribute(url, method);
+        if (CollectionUtils.isNotEmpty(configAttributes)) {
+            LogUtils.info("Get configAttributes from local storage for : [{}] - [{}]", url, method);
+            return configAttributes;
+        } else {
+            LinkedHashMap<SecurityRequest, List<SecurityConfigAttribute>> compatible =
+                    this.securityMetadataSourceStorage.getCompatible();
+            if (MapUtils.isNotEmpty(compatible)) {
+                // 支持含有**通配符的路径搜索
+                for (Map.Entry<SecurityRequest, List<SecurityConfigAttribute>> entry :
+                        compatible.entrySet()) {
+                    SecurityRequestMatcher requestMatcher =
+                            new SecurityRequestMatcher(entry.getKey());
 
-		List<SecurityConfigAttribute> configAttributes =
-			this.securityMetadataSourceStorage.getConfigAttribute(url, method);
-		if (CollectionUtils.isNotEmpty(configAttributes)) {
-			LogUtils.info("Get configAttributes from local storage for : [{}] - [{}]", url, method);
-			return configAttributes;
-		}
-		else {
-			LinkedHashMap<SecurityRequest, List<SecurityConfigAttribute>> compatible =
-				this.securityMetadataSourceStorage.getCompatible();
-			if (MapUtils.isNotEmpty(compatible)) {
-				// 支持含有**通配符的路径搜索
-				for (Map.Entry<SecurityRequest, List<SecurityConfigAttribute>> entry : compatible.entrySet()) {
-					SecurityRequestMatcher requestMatcher = new SecurityRequestMatcher(
-						entry.getKey());
+                    SecurityRequest securityRequest = new SecurityRequest();
 
-					SecurityRequest securityRequest = new SecurityRequest();
+                    // todo 需要修改
+                    // if (requestMatcher.matches(request)) {
+                    //	LogUtils.info("Request match the wildcard [{}] - [{}]", entry.getKey(),
+                    // entry.getValue());
+                    //	return entry.getValue();
+                    // }
+                }
+            }
+        }
 
-					//todo 需要修改
-					//if (requestMatcher.matches(request)) {
-					//	LogUtils.info("Request match the wildcard [{}] - [{}]", entry.getKey(), entry.getValue());
-					//	return entry.getValue();
-					//}
-				}
-			}
-		}
-
-		return null;
-	}
+        return null;
+    }
 }

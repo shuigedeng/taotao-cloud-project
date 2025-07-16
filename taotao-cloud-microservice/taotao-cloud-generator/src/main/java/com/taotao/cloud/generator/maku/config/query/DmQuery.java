@@ -1,8 +1,23 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.generator.maku.config.query;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.generator.maku.config.DbType;
-import com.taotao.cloud.generator.maku.config.query.AbstractQuery;
 
 /**
  * 达梦8 查询
@@ -20,8 +35,10 @@ public class DmQuery implements AbstractQuery {
     @Override
     public String tableSql(String tableName) {
         StringBuilder sql = new StringBuilder();
-        sql.append("SELECT T.* FROM (SELECT DISTINCT T1.TABLE_NAME AS TABLE_NAME,T2.COMMENTS AS TABLE_COMMENT FROM USER_TAB_COLUMNS T1 ");
-        sql.append("INNER JOIN USER_TAB_COMMENTS T2 ON T1.TABLE_NAME = T2.TABLE_NAME) T WHERE 1=1 ");
+        sql.append(
+                "SELECT T.* FROM (SELECT DISTINCT T1.TABLE_NAME AS TABLE_NAME,T2.COMMENTS AS TABLE_COMMENT FROM USER_TAB_COLUMNS T1 ");
+        sql.append(
+                "INNER JOIN USER_TAB_COMMENTS T2 ON T1.TABLE_NAME = T2.TABLE_NAME) T WHERE 1=1 ");
         // 表名查询
         if (StrUtil.isNotBlank(tableName)) {
             sql.append("and T.TABLE_NAME = '").append(tableName).append("' ");
@@ -31,24 +48,22 @@ public class DmQuery implements AbstractQuery {
         return sql.toString();
     }
 
-
     @Override
     public String tableFieldsSql() {
-        return
-                "SELECT T2.COLUMN_NAME,T1.COMMENTS," +
-                        "CASE WHEN T2.DATA_TYPE='NUMBER' THEN (CASE WHEN T2.DATA_PRECISION IS NULL THEN T2.DATA_TYPE WHEN NVL(T2.DATA_SCALE, 0) > 0 THEN T2.DATA_TYPE||'('||T2.DATA_PRECISION||','||T2.DATA_SCALE||')' ELSE T2.DATA_TYPE||'('||T2.DATA_PRECISION||')' END) ELSE T2.DATA_TYPE END DATA_TYPE ," +
-                        "CASE WHEN CONSTRAINT_TYPE='P' THEN 'PRI' END AS KEY " +
-                        "FROM USER_COL_COMMENTS T1, USER_TAB_COLUMNS T2, " +
-                        "(SELECT T4.TABLE_NAME, T4.COLUMN_NAME ,T5.CONSTRAINT_TYPE " +
-                        "FROM USER_CONS_COLUMNS T4, USER_CONSTRAINTS T5 " +
-                        "WHERE T4.CONSTRAINT_NAME = T5.CONSTRAINT_NAME " +
-                        "AND T5.CONSTRAINT_TYPE = 'P')T3 " +
-                        "WHERE T1.TABLE_NAME = T2.TABLE_NAME AND " +
-                        "T1.COLUMN_NAME=T2.COLUMN_NAME AND " +
-                        "T1.TABLE_NAME = T3.TABLE_NAME(+) AND " +
-                        "T1.COLUMN_NAME=T3.COLUMN_NAME(+)   AND " +
-                        "T1.TABLE_NAME = '%s' " +
-                        "ORDER BY T2.TABLE_NAME,T2.COLUMN_ID";
+        return "SELECT T2.COLUMN_NAME,T1.COMMENTS,"
+                + "CASE WHEN T2.DATA_TYPE='NUMBER' THEN (CASE WHEN T2.DATA_PRECISION IS NULL THEN T2.DATA_TYPE WHEN NVL(T2.DATA_SCALE, 0) > 0 THEN T2.DATA_TYPE||'('||T2.DATA_PRECISION||','||T2.DATA_SCALE||')' ELSE T2.DATA_TYPE||'('||T2.DATA_PRECISION||')' END) ELSE T2.DATA_TYPE END DATA_TYPE ,"
+                + "CASE WHEN CONSTRAINT_TYPE='P' THEN 'PRI' END AS KEY "
+                + "FROM USER_COL_COMMENTS T1, USER_TAB_COLUMNS T2, "
+                + "(SELECT T4.TABLE_NAME, T4.COLUMN_NAME ,T5.CONSTRAINT_TYPE "
+                + "FROM USER_CONS_COLUMNS T4, USER_CONSTRAINTS T5 "
+                + "WHERE T4.CONSTRAINT_NAME = T5.CONSTRAINT_NAME "
+                + "AND T5.CONSTRAINT_TYPE = 'P')T3 "
+                + "WHERE T1.TABLE_NAME = T2.TABLE_NAME AND "
+                + "T1.COLUMN_NAME=T2.COLUMN_NAME AND "
+                + "T1.TABLE_NAME = T3.TABLE_NAME(+) AND "
+                + "T1.COLUMN_NAME=T3.COLUMN_NAME(+)   AND "
+                + "T1.TABLE_NAME = '%s' "
+                + "ORDER BY T2.TABLE_NAME,T2.COLUMN_ID";
     }
 
     @Override

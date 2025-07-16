@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.hadoop.mr.component.fensi;
 
 import java.io.IOException;
@@ -35,52 +36,52 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  */
 public class SharedFriendsStepOne {
 
-	static class SharedFriendsStepOneMapper extends Mapper<LongWritable, Text, Text, Text> {
+    static class SharedFriendsStepOneMapper extends Mapper<LongWritable, Text, Text, Text> {
 
-		@Override
-		protected void map(LongWritable key, Text value, Context context)
-			throws IOException, InterruptedException {
-			// A:B,C,D,F,E,O
-			String line = value.toString();
-			String[] personFriends = line.split(":");
-			String person = personFriends[0];
-			String friends = personFriends[1];
+        @Override
+        protected void map(LongWritable key, Text value, Context context)
+                throws IOException, InterruptedException {
+            // A:B,C,D,F,E,O
+            String line = value.toString();
+            String[] personFriends = line.split(":");
+            String person = personFriends[0];
+            String friends = personFriends[1];
 
-			for (String friend : friends.split(",")) {
-				// 输出<好友，人>
-				context.write(new Text(friend), new Text(person));
-			}
-		}
-	}
+            for (String friend : friends.split(",")) {
+                // 输出<好友，人>
+                context.write(new Text(friend), new Text(person));
+            }
+        }
+    }
 
-	static class SharedFriendsStepOneReducer extends Reducer<Text, Text, Text, Text> {
+    static class SharedFriendsStepOneReducer extends Reducer<Text, Text, Text, Text> {
 
-		@Override
-		protected void reduce(Text friend, Iterable<Text> persons, Context context)
-			throws IOException, InterruptedException {
-			StringBuilder sb = new StringBuilder();
-			for (Text person : persons) {
-				sb.append(person).append(",");
-			}
-			context.write(friend, new Text(sb.toString()));
-		}
-	}
+        @Override
+        protected void reduce(Text friend, Iterable<Text> persons, Context context)
+                throws IOException, InterruptedException {
+            StringBuilder sb = new StringBuilder();
+            for (Text person : persons) {
+                sb.append(person).append(",");
+            }
+            context.write(friend, new Text(sb.toString()));
+        }
+    }
 
-	public static void main(String[] args) throws Exception {
-		Configuration conf = new Configuration();
+    public static void main(String[] args) throws Exception {
+        Configuration conf = new Configuration();
 
-		Job job = Job.getInstance(conf);
-		job.setJarByClass(SharedFriendsStepOne.class);
+        Job job = Job.getInstance(conf);
+        job.setJarByClass(SharedFriendsStepOne.class);
 
-		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(Text.class);
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(Text.class);
 
-		job.setMapperClass(SharedFriendsStepOneMapper.class);
-		job.setReducerClass(SharedFriendsStepOneReducer.class);
+        job.setMapperClass(SharedFriendsStepOneMapper.class);
+        job.setReducerClass(SharedFriendsStepOneReducer.class);
 
-		FileInputFormat.setInputPaths(job, new Path("D:/srcdata/friends"));
-		FileOutputFormat.setOutputPath(job, new Path("D:/temp/out"));
+        FileInputFormat.setInputPaths(job, new Path("D:/srcdata/friends"));
+        FileOutputFormat.setOutputPath(job, new Path("D:/temp/out"));
 
-		job.waitForCompletion(true);
-	}
+        job.waitForCompletion(true);
+    }
 }

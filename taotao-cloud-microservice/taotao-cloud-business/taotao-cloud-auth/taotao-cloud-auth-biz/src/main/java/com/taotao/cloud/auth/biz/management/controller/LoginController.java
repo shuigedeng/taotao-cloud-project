@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.auth.biz.management.controller;
 
-import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
 import com.taotao.boot.security.spring.utils.SymmetricUtils;
 import com.taotao.boot.security.spring.utils.WebUtils;
+import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import java.util.Collections;
@@ -83,7 +83,8 @@ public class LoginController {
         modelAndView.addObject("login_error", loginError);
         modelAndView.addObject("logout_success", logoutSuccess);
         modelAndView.addObject(
-                "message", StringUtils.isNotBlank(errorMessage) ? HtmlUtils.htmlEscape(errorMessage) : null);
+                "message",
+                StringUtils.isNotBlank(errorMessage) ? HtmlUtils.htmlEscape(errorMessage) : null);
         modelAndView.addObject("contentPath", request.getContextPath());
         modelAndView.addObject("sessionId", WebUtils.getSessionId(request, true));
 

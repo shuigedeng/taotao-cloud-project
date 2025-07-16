@@ -16,14 +16,14 @@
 
 package com.taotao.cloud.auth.biz.management.controller;
 
+import com.taotao.boot.security.spring.constants.DefaultConstants;
+import com.taotao.boot.security.spring.constants.SymbolConstants;
+import com.taotao.boot.security.spring.properties.OAuth2EndpointProperties;
 import com.taotao.cloud.auth.biz.management.dto.Option;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Application;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Scope;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ApplicationService;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ScopeService;
-import com.taotao.boot.security.spring.constants.DefaultConstants;
-import com.taotao.boot.security.spring.constants.SymbolConstants;
-import com.taotao.boot.security.spring.properties.OAuth2EndpointProperties;
 import java.security.Principal;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -84,7 +84,8 @@ public class ConsentController {
             @RequestParam(OAuth2ParameterNames.CLIENT_ID) String clientId,
             @RequestParam(OAuth2ParameterNames.SCOPE) String scope,
             @RequestParam(OAuth2ParameterNames.STATE) String state,
-            @RequestParam(value = OAuth2ParameterNames.USER_CODE, required = false) String userCode) {
+            @RequestParam(value = OAuth2ParameterNames.USER_CODE, required = false)
+                    String userCode) {
 
         // 待授权的scope
         Set<String> scopesToApprove = new HashSet<>();
@@ -96,12 +97,14 @@ public class ConsentController {
         OAuth2AuthorizationConsent currentAuthorizationConsent =
                 this.authorizationConsentService.findById(clientId, principal.getName());
         // 当前Client下用户已经授权的scope
-        Set<String> authorizedScopes = Optional.ofNullable(currentAuthorizationConsent)
-                .map(OAuth2AuthorizationConsent::getScopes)
-                .orElse(Collections.emptySet());
+        Set<String> authorizedScopes =
+                Optional.ofNullable(currentAuthorizationConsent)
+                        .map(OAuth2AuthorizationConsent::getScopes)
+                        .orElse(Collections.emptySet());
 
         // 遍历请求的scope，提取之前已授权过 和 待授权的scope
-        for (String requestedScope : StringUtils.delimitedListToStringArray(scope, SymbolConstants.SPACE)) {
+        for (String requestedScope :
+                StringUtils.delimitedListToStringArray(scope, SymbolConstants.SPACE)) {
             if (OidcScopes.OPENID.equals(requestedScope)) {
                 continue;
             }
@@ -113,7 +116,8 @@ public class ConsentController {
             }
         }
 
-        Set<String> redirectUris = StringUtils.commaDelimitedListToSet(application.getRedirectUris());
+        Set<String> redirectUris =
+                StringUtils.commaDelimitedListToSet(application.getRedirectUris());
 
         // 输出信息指consent页面
         model.addAttribute("clientId", clientId);
@@ -137,7 +141,9 @@ public class ConsentController {
         List<OAuth2Scope> scopes = scopeService.findAll();
         if (CollectionUtils.isNotEmpty(scopes)) {
             if (MapUtils.isEmpty(dictionaries) || scopes.size() != dictionaries.size()) {
-                dictionaries = scopes.stream().collect(Collectors.toMap(OAuth2Scope::getScopeCode, item -> item));
+                dictionaries =
+                        scopes.stream()
+                                .collect(Collectors.toMap(OAuth2Scope::getScopeCode, item -> item));
             }
         }
     }
@@ -160,7 +166,8 @@ public class ConsentController {
 
     private Option scopeToOption(OAuth2Scope scope) {
         Option option = new Option();
-        String label = scope.getDescription() == null ? scope.getScopeName() : scope.getDescription();
+        String label =
+                scope.getDescription() == null ? scope.getScopeName() : scope.getDescription();
         option.setLabel(label);
         option.setValue(scope.getScopeCode());
         return option;

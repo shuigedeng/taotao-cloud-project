@@ -26,13 +26,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class TidbUserService extends ClickHouseJdbcBaseDaoImpl {
 
-    @Autowired
-    private CkUserMapper userMapper;
+    @Autowired private CkUserMapper userMapper;
 
     public void testUseJdbcTemplate() {
-        getJdbcTemplate().query("select * from user", rs -> {
-            LogUtils.info(rs);
-        });
+        getJdbcTemplate()
+                .query(
+                        "select * from user",
+                        rs -> {
+                            LogUtils.info(rs);
+                        });
     }
 
     public List testUseMapperInterface() {

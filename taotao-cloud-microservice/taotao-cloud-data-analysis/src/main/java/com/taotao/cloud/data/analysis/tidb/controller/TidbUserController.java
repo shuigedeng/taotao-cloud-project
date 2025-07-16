@@ -33,8 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TidbUserController {
 
-    @Autowired
-    private TidbUserMapper userMapper;
+    @Autowired private TidbUserMapper userMapper;
 
     @RequestMapping("/queryUser")
     public Object query() {

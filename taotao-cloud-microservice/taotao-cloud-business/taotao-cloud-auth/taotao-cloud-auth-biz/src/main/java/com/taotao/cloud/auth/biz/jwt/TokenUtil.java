@@ -25,7 +25,6 @@ import io.jsonwebtoken.Claims;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import org.dromara.hutool.core.convert.ConvertUtil;
 
 /**
  * 认证工具类

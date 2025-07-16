@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.bff.graphql.repository; // package com.taotao.cloud.backend.graphql.repository;
+package com.taotao.cloud.bff.graphql.repository; // package
+                                                 // com.taotao.cloud.backend.graphql.repository;
 //
 // import jakarta.persistence.Entity;
 // import jakarta.persistence.Id;

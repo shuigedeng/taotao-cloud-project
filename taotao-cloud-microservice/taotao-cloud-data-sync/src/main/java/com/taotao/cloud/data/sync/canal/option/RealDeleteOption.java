@@ -34,7 +34,11 @@ import org.springframework.util.CollectionUtils;
 public class RealDeleteOption extends DeleteOption {
 
     @Override
-    public void doOption(String destination, String schemaName, String tableName, CanalEntry.RowChange rowChange) {
+    public void doOption(
+            String destination,
+            String schemaName,
+            String tableName,
+            CanalEntry.RowChange rowChange) {
         LogUtils.info("======================接口方式（删除数据操作）==========================");
         List<CanalEntry.RowData> rowDatasList = rowChange.getRowDatasList();
         for (CanalEntry.RowData rowData : rowDatasList) {

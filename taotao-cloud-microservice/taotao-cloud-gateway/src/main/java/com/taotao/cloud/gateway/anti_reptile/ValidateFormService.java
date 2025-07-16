@@ -84,7 +84,10 @@ public class ValidateFormService {
         verifyImageUtil.saveVerifyCodeToRedis(verifyImage);
         VerifyImageVO verifyImageVO = new VerifyImageVO();
         BeanUtils.copyProperties(verifyImage, verifyImageVO);
-        return "{\"verifyId\": \"" + verifyImageVO.getVerifyId() + "\",\"verifyImgStr\": \""
-                + verifyImageVO.getVerifyImgStr() + "\"}";
+        return "{\"verifyId\": \""
+                + verifyImageVO.getVerifyId()
+                + "\",\"verifyImgStr\": \""
+                + verifyImageVO.getVerifyImgStr()
+                + "\"}";
     }
 }

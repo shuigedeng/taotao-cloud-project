@@ -16,10 +16,8 @@
 
 package com.taotao.cloud.gateway.filter.global;
 
-import java.util.Locale;
-
 import com.taotao.boot.common.utils.log.LogUtils;
-import lombok.extern.slf4j.Slf4j;
+import java.util.Locale;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -58,6 +56,6 @@ public class GlobalI18nFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return  Ordered.HIGHEST_PRECEDENCE + 5;
+        return Ordered.HIGHEST_PRECEDENCE + 5;
     }
 }

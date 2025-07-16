@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.gateway.configuration;
 
-import com.alibaba.cloud.nacos.NacosConfigProperties;
 import com.taotao.cloud.gateway.properties.ApiProperties;
 import com.taotao.cloud.gateway.properties.DynamicRouteProperties;
 import com.taotao.cloud.gateway.properties.FilterProperties;
@@ -24,8 +23,6 @@ import com.taotao.cloud.gateway.properties.HttpsProperties;
 import com.taotao.cloud.gateway.properties.SecurityProperties;
 import io.micrometer.core.instrument.MeterRegistry;
 import java.util.Objects;
-
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -33,7 +30,6 @@ import org.springframework.cloud.gateway.filter.ratelimit.KeyResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.reactive.HiddenHttpMethodFilter;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilterChain;
@@ -53,17 +49,17 @@ import reactor.core.publisher.Mono;
     FilterProperties.class,
     SecurityProperties.class,
     HttpsProperties.class,
-    //NacosConfigProperties.class
+    // NacosConfigProperties.class
 })
 public class WebFluxConfiguration {
 
-	//    # 指定解析器，使用spEl表达式按beanName从spring容器中获取
-	//                 key-resolver: "#{@pathKeyResolver}"
-	@Bean(name = "pathKeyResolver")
-	public KeyResolver pathKeyResolver() {
-		return exchange -> Mono.just(exchange.getRequest().getPath().toString());
-	}
-	
+    //    # 指定解析器，使用spEl表达式按beanName从spring容器中获取
+    //                 key-resolver: "#{@pathKeyResolver}"
+    @Bean(name = "pathKeyResolver")
+    public KeyResolver pathKeyResolver() {
+        return exchange -> Mono.just(exchange.getRequest().getPath().toString());
+    }
+
     @Bean(name = "userKeyResolver")
     public KeyResolver userKeyResolver() {
         return exchange -> Mono.just(exchange.getRequest().getQueryParams().getFirst("userId"));
@@ -78,9 +74,10 @@ public class WebFluxConfiguration {
     @Bean(name = "remoteAddrKeyResolver")
     public KeyResolver remoteAddrKeyResolver() {
         return exchange ->
-                Mono.just(Objects.requireNonNull(exchange.getRequest().getRemoteAddress())
-                        .getAddress()
-                        .getHostAddress());
+                Mono.just(
+                        Objects.requireNonNull(exchange.getRequest().getRemoteAddress())
+                                .getAddress()
+                                .getHostAddress());
     }
 
     @Bean
@@ -94,7 +91,8 @@ public class WebFluxConfiguration {
     }
 
     @Bean
-    MeterRegistryCustomizer<MeterRegistry> configurer(@Value("${spring.application.name}") String applicationName) {
+    MeterRegistryCustomizer<MeterRegistry> configurer(
+            @Value("${spring.application.name}") String applicationName) {
         return (registry) -> registry.config().commonTags("application", applicationName);
     }
 }

@@ -62,7 +62,8 @@ public class FunnelMergeAggregationsFunctions {
     }
 
     @CombineFunction
-    public static void combine(@AggregationState FunnelSliceState state1, @AggregationState FunnelSliceState state2) {
+    public static void combine(
+            @AggregationState FunnelSliceState state1, @AggregationState FunnelSliceState state2) {
         Slice slice1 = state1.getSlice();
         Slice slice2 = state2.getSlice();
 

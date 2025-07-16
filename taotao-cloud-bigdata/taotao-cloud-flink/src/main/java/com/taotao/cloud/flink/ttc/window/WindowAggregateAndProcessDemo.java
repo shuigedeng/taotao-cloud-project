@@ -1,7 +1,22 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.flink.ttc.window;
 
 import com.taotao.cloud.flink.ttc.bean.WaterSensor;
-
 import com.taotao.cloud.flink.ttc.functions.WaterSensorMapFunction;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.flink.api.common.functions.AggregateFunction;
@@ -26,16 +41,14 @@ public class WindowAggregateAndProcessDemo {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
-
-        SingleOutputStreamOperator<WaterSensor> sensorDS = env
-                .socketTextStream("hadoop102", 7777)
-                .map(new WaterSensorMapFunction());
-
+        SingleOutputStreamOperator<WaterSensor> sensorDS =
+                env.socketTextStream("hadoop102", 7777).map(new WaterSensorMapFunction());
 
         KeyedStream<WaterSensor, String> sensorKS = sensorDS.keyBy(sensor -> sensor.getId());
 
         // 1. 窗口分配器
-        WindowedStream<WaterSensor, String, TimeWindow> sensorWS = sensorKS.window(TumblingProcessingTimeWindows.of(Time.seconds(10)));
+        WindowedStream<WaterSensor, String, TimeWindow> sensorWS =
+                sensorKS.window(TumblingProcessingTimeWindows.of(Time.seconds(10)));
 
         // 2. 窗口函数：
         /**
@@ -49,21 +62,17 @@ public class WindowAggregateAndProcessDemo {
          * 2、全窗口函数： 可以通过 上下文 实现灵活的功能
          */
 
-//        sensorWS.reduce()   //也可以传两个
+        //        sensorWS.reduce()   //也可以传两个
 
-        SingleOutputStreamOperator<String> result = sensorWS.aggregate(
-                new MyAgg(),
-                new MyProcess()
-        );
+        SingleOutputStreamOperator<String> result =
+                sensorWS.aggregate(new MyAgg(), new MyProcess());
 
         result.print();
-
-
 
         env.execute();
     }
 
-    public static class MyAgg implements AggregateFunction<WaterSensor, Integer, String>{
+    public static class MyAgg implements AggregateFunction<WaterSensor, Integer, String> {
 
         @Override
         public Integer createAccumulator() {
@@ -71,10 +80,9 @@ public class WindowAggregateAndProcessDemo {
             return 0;
         }
 
-
         @Override
         public Integer add(WaterSensor value, Integer accumulator) {
-            System.out.println("调用add方法,value="+value);
+            System.out.println("调用add方法,value=" + value);
             return accumulator + value.getVc();
         }
 
@@ -92,10 +100,13 @@ public class WindowAggregateAndProcessDemo {
     }
 
     // 全窗口函数的输入类型 = 增量聚合函数的输出类型
-    public static class MyProcess extends ProcessWindowFunction<String,String,String,TimeWindow>{
+    public static class MyProcess
+            extends ProcessWindowFunction<String, String, String, TimeWindow> {
 
         @Override
-        public void process(String s, Context context, Iterable<String> elements, Collector<String> out) throws Exception {
+        public void process(
+                String s, Context context, Iterable<String> elements, Collector<String> out)
+                throws Exception {
             long startTs = context.window().getStart();
             long endTs = context.window().getEnd();
             String windowStart = DateFormatUtils.format(startTs, "yyyy-MM-dd HH:mm:ss.SSS");
@@ -103,8 +114,17 @@ public class WindowAggregateAndProcessDemo {
 
             long count = elements.spliterator().estimateSize();
 
-            out.collect("key=" + s + "的窗口[" + windowStart + "," + windowEnd + ")包含" + count + "条数据===>" + elements.toString());
-
+            out.collect(
+                    "key="
+                            + s
+                            + "的窗口["
+                            + windowStart
+                            + ","
+                            + windowEnd
+                            + ")包含"
+                            + count
+                            + "条数据===>"
+                            + elements.toString());
         }
     }
 }

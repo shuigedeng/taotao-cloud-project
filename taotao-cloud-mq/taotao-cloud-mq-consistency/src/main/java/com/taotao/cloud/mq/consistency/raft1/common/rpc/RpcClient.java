@@ -20,7 +20,7 @@ import com.taotao.cloud.mq.consistency.raft1.common.core.LifeCycle;
 
 /**
  * rpc 客户端
- * @author houbb
+ * @author shuigedeng
  */
 public interface RpcClient extends LifeCycle {
 

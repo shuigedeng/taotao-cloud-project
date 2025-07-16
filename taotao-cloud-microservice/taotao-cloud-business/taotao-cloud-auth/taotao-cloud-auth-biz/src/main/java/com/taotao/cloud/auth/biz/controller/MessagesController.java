@@ -16,15 +16,13 @@
 
 package com.taotao.cloud.auth.biz.controller;
 
-import com.taotao.cloud.auth.biz.jpa.entity.TtcAuthorizationConsent;
-import com.taotao.cloud.auth.biz.jpa.service.TtcAuthorizationConsentService;
 import com.taotao.boot.common.model.Result;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.security.spring.annotation.NotAuth;
+import com.taotao.cloud.auth.biz.jpa.service.TtcAuthorizationConsentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -50,19 +48,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/test")
 public class MessagesController {
 
-    @Autowired
-    private JwtDecoder jwtDecoder;
-    @Autowired
-    private TtcAuthorizationConsentService ttcAuthorizationConsentService;
+    @Autowired private JwtDecoder jwtDecoder;
+    @Autowired private TtcAuthorizationConsentService ttcAuthorizationConsentService;
 
-//    @Operation(summary = "测试消息NotAuth", description = "测试消息NotAuth")
-//    @GetMapping("/NotAuth/myPageQuery")
-//    @NotAuth
-//    public Result<String> myPageQuery() {
-//        Page<TtcAuthorizationConsent> ttcAuthorizationConsents = ttcAuthorizationConsentService.myPageQuery(null, null);
-//
-//        return Result.success("sadfasdf");
-//    }
+    //    @Operation(summary = "测试消息NotAuth", description = "测试消息NotAuth")
+    //    @GetMapping("/NotAuth/myPageQuery")
+    //    @NotAuth
+    //    public Result<String> myPageQuery() {
+    //        Page<TtcAuthorizationConsent> ttcAuthorizationConsents =
+    // ttcAuthorizationConsentService.myPageQuery(null, null);
+    //
+    //        return Result.success("sadfasdf");
+    //    }
 
     // @Autowired
     // private IFeignDictApi feignDictService;
@@ -86,14 +83,14 @@ public class MessagesController {
         return new String[] {"Message 1", "Message 2", "Message 3"};
     }
 
-	@Operation(summary = "测试消息NotAuth", description = "测试消息NotAuth")
-	@GetMapping("/NotAuth/messages")
-	@NotAuth
-	public String[] getMessagesNotAuth() {
-		LogUtils.info("slfdlaskdf;lasjdf;lj NotAuth");
+    @Operation(summary = "测试消息NotAuth", description = "测试消息NotAuth")
+    @GetMapping("/NotAuth/messages")
+    @NotAuth
+    public String[] getMessagesNotAuth() {
+        LogUtils.info("slfdlaskdf;lasjdf;lj NotAuth");
 
-		return new String[] {"Message 1", "Message 2", "Message 3"};
-	}
+        return new String[] {"Message 1", "Message 2", "Message 3"};
+    }
 
     /**
      * 获取当前认证的OAuth2用户信息，默认是保存在{@link jakarta.servlet.http.HttpSession}中的
@@ -107,12 +104,12 @@ public class MessagesController {
         return Result.success(user);
     }
 
-//    @Operation(summary = "获取当前认证的OAuth2客户端信息", description = "v")
-//    @GetMapping("/client")
-//    public Result<OAuth2AuthorizedClient> client(
-//            @RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient oAuth2AuthorizedClient) {
-//        return Result.success(oAuth2AuthorizedClient);
-//    }
+    //    @Operation(summary = "获取当前认证的OAuth2客户端信息", description = "v")
+    //    @GetMapping("/client")
+    //    public Result<OAuth2AuthorizedClient> client(
+    //            @RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient oAuth2AuthorizedClient) {
+    //        return Result.success(oAuth2AuthorizedClient);
+    //    }
 
     @GetMapping(value = "/info")
     public Object getUserInfo() {

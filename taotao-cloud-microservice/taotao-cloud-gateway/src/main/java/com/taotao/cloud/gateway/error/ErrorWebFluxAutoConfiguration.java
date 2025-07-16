@@ -73,15 +73,17 @@ public class ErrorWebFluxAutoConfiguration {
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public ErrorWebExceptionHandler errorWebExceptionHandler(ErrorAttributes errorAttributes) {
-        // DefaultErrorWebExceptionHandler exceptionHandler = new DefaultErrorWebExceptionHandler(errorAttributes,
+        // DefaultErrorWebExceptionHandler exceptionHandler = new
+        // DefaultErrorWebExceptionHandler(errorAttributes,
         //	 webProperties.getResources(),
         //	this.serverProperties.getError(), applicationContext);
 
-        JsonErrorWebExceptionHandler exceptionHandler = new JsonErrorWebExceptionHandler(
-                errorAttributes,
-                webProperties.getResources(),
-                serverProperties.getError(),
-                this.applicationContext);
+        JsonErrorWebExceptionHandler exceptionHandler =
+                new JsonErrorWebExceptionHandler(
+                        errorAttributes,
+                        webProperties.getResources(),
+                        serverProperties.getError(),
+                        this.applicationContext);
         exceptionHandler.setViewResolvers(this.viewResolvers);
         exceptionHandler.setMessageWriters(this.serverCodecConfigurer.getWriters());
         exceptionHandler.setMessageReaders(this.serverCodecConfigurer.getReaders());

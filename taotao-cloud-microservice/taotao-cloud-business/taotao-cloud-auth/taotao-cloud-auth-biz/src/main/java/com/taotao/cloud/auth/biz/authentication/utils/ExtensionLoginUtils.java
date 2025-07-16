@@ -32,15 +32,17 @@ public class ExtensionLoginUtils {
     public static MultiValueMap<String, String> getParameters(HttpServletRequest request) {
         Map<String, String[]> parameterMap = request.getParameterMap();
         MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>(parameterMap.size());
-        parameterMap.forEach((key, values) -> {
-            for (String value : values) {
-                parameters.add(key, value);
-            }
-        });
+        parameterMap.forEach(
+                (key, values) -> {
+                    for (String value : values) {
+                        parameters.add(key, value);
+                    }
+                });
         return parameters;
     }
 
-    public static Map<String, Object> getParameters(HttpServletRequest request, String... exclusions) {
+    public static Map<String, Object> getParameters(
+            HttpServletRequest request, String... exclusions) {
         Map<String, Object> parameters = new HashMap<>(getParameters(request).toSingleValueMap());
         for (String exclusion : exclusions) {
             parameters.remove(exclusion);
@@ -54,18 +56,19 @@ public class ExtensionLoginUtils {
 
     private static boolean checkRequired(
             MultiValueMap<String, String> parameters, String parameterName, String parameterValue) {
-        return !StringUtils.hasText(parameterValue)
-                || parameters.get(parameterName).size() != 1;
+        return !StringUtils.hasText(parameterValue) || parameters.get(parameterName).size() != 1;
     }
 
     private static boolean checkOptional(
             MultiValueMap<String, String> parameters, String parameterName, String parameterValue) {
-        return StringUtils.hasText(parameterValue)
-                && parameters.get(parameterName).size() != 1;
+        return StringUtils.hasText(parameterValue) && parameters.get(parameterName).size() != 1;
     }
 
     public static String checkParameter(
-            MultiValueMap<String, String> parameters, String parameterName, boolean isRequired, String errorCode) {
+            MultiValueMap<String, String> parameters,
+            String parameterName,
+            boolean isRequired,
+            String errorCode) {
         String value = parameters.getFirst(parameterName);
         if (isRequired) {
             if (checkRequired(parameters, parameterName, value)) {
@@ -85,7 +88,8 @@ public class ExtensionLoginUtils {
         return checkParameter(parameters, parameterName, true, errorCode);
     }
 
-    public static String checkRequiredParameter(MultiValueMap<String, String> parameters, String parameterName) {
+    public static String checkRequiredParameter(
+            MultiValueMap<String, String> parameters, String parameterName) {
         return checkRequiredParameter(parameters, parameterName, OAuth2ErrorCodes.INVALID_REQUEST);
     }
 
@@ -94,7 +98,8 @@ public class ExtensionLoginUtils {
         return checkParameter(parameters, parameterName, false, errorCode);
     }
 
-    public static String checkOptionalParameter(MultiValueMap<String, String> parameters, String parameterName) {
+    public static String checkOptionalParameter(
+            MultiValueMap<String, String> parameters, String parameterName) {
         return checkOptionalParameter(parameters, parameterName, OAuth2ErrorCodes.INVALID_REQUEST);
     }
 }

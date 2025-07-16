@@ -13,8 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.hudi.common;
 
 public enum OpType {
-	UPDATE, INSERT, APPEND, DELETE
+    UPDATE,
+    INSERT,
+    APPEND,
+    DELETE
 }

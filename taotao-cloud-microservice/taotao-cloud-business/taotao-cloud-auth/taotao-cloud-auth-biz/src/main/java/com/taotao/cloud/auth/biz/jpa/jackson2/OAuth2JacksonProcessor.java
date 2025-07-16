@@ -46,8 +46,10 @@ public class OAuth2JacksonProcessor {
         ClassLoader classLoader = OAuth2JacksonProcessor.class.getClassLoader();
         List<Module> securityModules = SecurityJackson2Modules.getModules(classLoader);
 
-        Module module = loadAndGetInstance(
-                "com.taotao.cloud.auth.biz.jpa.jackson2.FormOAuth2PhoneLoginJackson2Module", classLoader);
+        Module module =
+                loadAndGetInstance(
+                        "com.taotao.cloud.auth.biz.jpa.jackson2.FormOAuth2PhoneLoginJackson2Module",
+                        classLoader);
         securityModules.add(module);
 
         objectMapper.registerModules(securityModules);
@@ -59,7 +61,8 @@ public class OAuth2JacksonProcessor {
     private static Module loadAndGetInstance(String className, ClassLoader loader) {
         try {
             @SuppressWarnings("unchecked")
-            Class<? extends Module> securityModule = (Class<? extends Module>) ClassUtils.forName(className, loader);
+            Class<? extends Module> securityModule =
+                    (Class<? extends Module>) ClassUtils.forName(className, loader);
             return securityModule.getDeclaredConstructor().newInstance();
         } catch (Exception ignored) {
         }

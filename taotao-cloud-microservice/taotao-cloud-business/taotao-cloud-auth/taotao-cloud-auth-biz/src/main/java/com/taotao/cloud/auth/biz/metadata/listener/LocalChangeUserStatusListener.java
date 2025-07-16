@@ -30,26 +30,26 @@ import org.springframework.stereotype.Component;
  * <p>本地用户状态变更监听 </p>
  */
 @Component
-public class LocalChangeUserStatusListener implements
-	ApplicationListener<LocalChangeUserStatusEvent> {
+public class LocalChangeUserStatusListener
+        implements ApplicationListener<LocalChangeUserStatusEvent> {
 
-	private static final Logger log = LoggerFactory.getLogger(LocalChangeUserStatusListener.class);
-	private final SysUserService sysUserService;
+    private static final Logger log = LoggerFactory.getLogger(LocalChangeUserStatusListener.class);
+    private final SysUserService sysUserService;
 
-	public LocalChangeUserStatusListener(SysUserService sysUserService) {
-		this.sysUserService = sysUserService;
-	}
+    public LocalChangeUserStatusListener(SysUserService sysUserService) {
+        this.sysUserService = sysUserService;
+    }
 
-	@Override
-	public void onApplicationEvent(LocalChangeUserStatusEvent event) {
-		log.info(" Change user status gather LOCAL listener, response event!");
+    @Override
+    public void onApplicationEvent(LocalChangeUserStatusEvent event) {
+        log.info(" Change user status gather LOCAL listener, response event!");
 
-		UserStatus userStatus = event.getData();
-		if (ObjectUtils.isNotEmpty(userStatus)) {
-			DataItemStatus dataItemStatus = DataItemStatus.valueOf(userStatus.getStatus());
-			if (ObjectUtils.isNotEmpty(dataItemStatus)) {
-				sysUserService.changeStatus(userStatus.getUserId(), dataItemStatus);
-			}
-		}
-	}
+        UserStatus userStatus = event.getData();
+        if (ObjectUtils.isNotEmpty(userStatus)) {
+            DataItemStatus dataItemStatus = DataItemStatus.valueOf(userStatus.getStatus());
+            if (ObjectUtils.isNotEmpty(dataItemStatus)) {
+                sysUserService.changeStatus(userStatus.getUserId(), dataItemStatus);
+            }
+        }
+    }
 }

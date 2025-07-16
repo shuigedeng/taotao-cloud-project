@@ -23,8 +23,10 @@ import java.time.LocalDateTime;
 public class Token implements Serializable {
 
     private static final long serialVersionUID = -8482946147572784305L;
+
     /** token */
     private String token;
+
     /** 有效时间：单位：秒 */
     private Long expire;
 

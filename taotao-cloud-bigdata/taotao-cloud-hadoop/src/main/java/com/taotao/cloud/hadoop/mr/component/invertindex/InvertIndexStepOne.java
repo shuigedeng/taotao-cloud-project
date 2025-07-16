@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.hadoop.mr.component.invertindex;
 
 import java.io.IOException;
@@ -37,55 +38,55 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  */
 public class InvertIndexStepOne {
 
-	static class InverIndexStepOneMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
+    static class InverIndexStepOneMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
 
-		Text k = new Text();
-		IntWritable v = new IntWritable(1);
+        Text k = new Text();
+        IntWritable v = new IntWritable(1);
 
-		@Override
-		protected void map(LongWritable key, Text value, Context context)
-			throws IOException, InterruptedException {
-			String line = value.toString();
-			String[] words = line.split(" ");
-			FileSplit inputSplit = (FileSplit) context.getInputSplit();
-			String fileName = inputSplit.getPath().getName();
-			for (String word : words) {
-				k.set(word + "--" + fileName);
-				context.write(k, v);
-			}
-		}
-	}
+        @Override
+        protected void map(LongWritable key, Text value, Context context)
+                throws IOException, InterruptedException {
+            String line = value.toString();
+            String[] words = line.split(" ");
+            FileSplit inputSplit = (FileSplit) context.getInputSplit();
+            String fileName = inputSplit.getPath().getName();
+            for (String word : words) {
+                k.set(word + "--" + fileName);
+                context.write(k, v);
+            }
+        }
+    }
 
-	static class InverIndexStepOneReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
+    static class InverIndexStepOneReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
 
-		@Override
-		protected void reduce(Text key, Iterable<IntWritable> values, Context context)
-			throws IOException, InterruptedException {
-			int count = 0;
-			for (IntWritable value : values) {
-				count += value.get();
-			}
-			context.write(key, new IntWritable(count));
-		}
-	}
+        @Override
+        protected void reduce(Text key, Iterable<IntWritable> values, Context context)
+                throws IOException, InterruptedException {
+            int count = 0;
+            for (IntWritable value : values) {
+                count += value.get();
+            }
+            context.write(key, new IntWritable(count));
+        }
+    }
 
-	public static void main(String[] args) throws Exception {
-		Configuration conf = new Configuration();
+    public static void main(String[] args) throws Exception {
+        Configuration conf = new Configuration();
 
-		Job job = Job.getInstance(conf);
-		job.setJarByClass(InvertIndexStepOne.class);
+        Job job = Job.getInstance(conf);
+        job.setJarByClass(InvertIndexStepOne.class);
 
-		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(IntWritable.class);
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(IntWritable.class);
 
-		FileInputFormat.setInputPaths(job, new Path("D:/srcdata/inverindexinput"));
-		FileOutputFormat.setOutputPath(job, new Path("D:/temp/out"));
-		// FileInputFormat.setInputPaths(job, new Path(args[0]));
-		// FileOutputFormat.setOutputPath(job, new Path(args[1]));
+        FileInputFormat.setInputPaths(job, new Path("D:/srcdata/inverindexinput"));
+        FileOutputFormat.setOutputPath(job, new Path("D:/temp/out"));
+        // FileInputFormat.setInputPaths(job, new Path(args[0]));
+        // FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
-		job.setMapperClass(InverIndexStepOneMapper.class);
-		job.setReducerClass(InverIndexStepOneReducer.class);
+        job.setMapperClass(InverIndexStepOneMapper.class);
+        job.setReducerClass(InverIndexStepOneReducer.class);
 
-		job.waitForCompletion(true);
-	}
+        job.waitForCompletion(true);
+    }
 }

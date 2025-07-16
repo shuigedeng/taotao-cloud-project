@@ -28,12 +28,11 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
 @JsonAutoDetect(
-	fieldVisibility = JsonAutoDetect.Visibility.ANY,
-	getterVisibility = JsonAutoDetect.Visibility.NONE,
-	isGetterVisibility = JsonAutoDetect.Visibility.NONE)
+        fieldVisibility = JsonAutoDetect.Visibility.ANY,
+        getterVisibility = JsonAutoDetect.Visibility.NONE,
+        isGetterVisibility = JsonAutoDetect.Visibility.NONE)
 public class AuthorizationGrantTypeMixin {
 
-	@JsonCreator
-	AuthorizationGrantTypeMixin(@JsonProperty("value") String value) {
-	}
+    @JsonCreator
+    AuthorizationGrantTypeMixin(@JsonProperty("value") String value) {}
 }

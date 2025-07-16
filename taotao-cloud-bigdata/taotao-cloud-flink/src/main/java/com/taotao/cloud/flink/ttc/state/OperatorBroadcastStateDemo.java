@@ -1,13 +1,24 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.flink.ttc.state;
 
 import com.taotao.cloud.flink.ttc.bean.WaterSensor;
-
-import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.state.*;
 import org.apache.flink.api.common.typeinfo.Types;
-import org.apache.flink.runtime.state.FunctionInitializationContext;
-import org.apache.flink.runtime.state.FunctionSnapshotContext;
-import org.apache.flink.streaming.api.checkpoint.CheckpointedFunction;
 import org.apache.flink.streaming.api.datastream.BroadcastConnectedStream;
 import org.apache.flink.streaming.api.datastream.BroadcastStream;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
@@ -27,17 +38,16 @@ public class OperatorBroadcastStateDemo {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(2);
 
-
         // 数据流
-        SingleOutputStreamOperator<WaterSensor> sensorDS = env
-                .socketTextStream("hadoop102", 7777)
-                .map(new WaterSensorMapFunction());
+        SingleOutputStreamOperator<WaterSensor> sensorDS =
+                env.socketTextStream("hadoop102", 7777).map(new WaterSensorMapFunction());
 
         // 配置流（用来广播配置）
         DataStreamSource<String> configDS = env.socketTextStream("hadoop102", 8888);
 
         // TODO 1. 将 配置流 广播
-        MapStateDescriptor<String, Integer> broadcastMapState = new MapStateDescriptor<>("broadcast-state", Types.STRING, Types.INT);
+        MapStateDescriptor<String, Integer> broadcastMapState =
+                new MapStateDescriptor<>("broadcast-state", Types.STRING, Types.INT);
         BroadcastStream<String> configBS = configDS.broadcast(broadcastMapState);
 
         // TODO 2.把 数据流 和 广播后的配置流 connect
@@ -55,16 +65,18 @@ public class OperatorBroadcastStateDemo {
                              * @throws Exception
                              */
                             @Override
-                            public void processElement(WaterSensor value, ReadOnlyContext ctx, Collector<String> out) throws Exception {
+                            public void processElement(
+                                    WaterSensor value, ReadOnlyContext ctx, Collector<String> out)
+                                    throws Exception {
                                 // TODO 5.通过上下文获取广播状态，取出里面的值（只读，不能修改）
-                                ReadOnlyBroadcastState<String, Integer> broadcastState = ctx.getBroadcastState(broadcastMapState);
+                                ReadOnlyBroadcastState<String, Integer> broadcastState =
+                                        ctx.getBroadcastState(broadcastMapState);
                                 Integer threshold = broadcastState.get("threshold");
                                 // 判断广播状态里是否有数据，因为刚启动时，可能是数据流的第一条数据先来
                                 threshold = (threshold == null ? 0 : threshold);
                                 if (value.getVc() > threshold) {
                                     out.collect(value + ",水位超过指定的阈值：" + threshold + "!!!");
                                 }
-
                             }
 
                             /**
@@ -75,18 +87,17 @@ public class OperatorBroadcastStateDemo {
                              * @throws Exception
                              */
                             @Override
-                            public void processBroadcastElement(String value, Context ctx, Collector<String> out) throws Exception {
+                            public void processBroadcastElement(
+                                    String value, Context ctx, Collector<String> out)
+                                    throws Exception {
                                 // TODO 4. 通过上下文获取广播状态，往里面写数据
-                                BroadcastState<String, Integer> broadcastState = ctx.getBroadcastState(broadcastMapState);
+                                BroadcastState<String, Integer> broadcastState =
+                                        ctx.getBroadcastState(broadcastMapState);
                                 broadcastState.put("threshold", Integer.valueOf(value));
-
                             }
-                        }
-
-                )
+                        })
                 .print();
 
         env.execute();
     }
 }
-

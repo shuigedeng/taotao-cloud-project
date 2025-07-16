@@ -36,13 +36,15 @@ import org.springframework.security.oauth2.server.authorization.settings.ClientS
 public class ClientSettingsDeserializer extends JsonDeserializer<ClientSettings> {
 
     @Override
-    public ClientSettings deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
+    public ClientSettings deserialize(
+            JsonParser jsonParser, DeserializationContext deserializationContext)
             throws IOException, JacksonException {
         ObjectMapper mapper = (ObjectMapper) jsonParser.getCodec();
         JsonNode jsonNode = mapper.readTree(jsonParser);
 
         Map<String, Object> settings =
-                JsonNodeUtils.findValue(jsonNode, "settings", JsonNodeUtils.STRING_OBJECT_MAP, mapper);
+                JsonNodeUtils.findValue(
+                        jsonNode, "settings", JsonNodeUtils.STRING_OBJECT_MAP, mapper);
 
         return ClientSettings.withSettings(settings).build();
     }

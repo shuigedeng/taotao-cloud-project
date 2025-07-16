@@ -28,15 +28,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-    @Autowired
-    JobLauncher jobLauncher;
+    @Autowired JobLauncher jobLauncher;
 
     // @Autowired
     // Job myJob;
     //
     // @GetMapping("testJob")
     // public void testJob()
-    //	throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException,
+    //	throws JobParametersInvalidException, JobExecutionAlreadyRunningException,
+    // JobRestartException,
     // JobInstanceAlreadyCompleteException {
     //	//    后置参数：使用JobParameters中绑定参数 addLong  addString 等方法
     //	JobParameters jobParameters = new JobParametersBuilder().toJobParameters();
@@ -49,7 +49,8 @@ public class TestController {
     //
     // @GetMapping("testJobNew")
     // public void testJobNew(@RequestParam("authorId") String authorId)
-    //	throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException,
+    //	throws JobParametersInvalidException, JobExecutionAlreadyRunningException,
+    // JobRestartException,
     // JobInstanceAlreadyCompleteException {
     //	JobParameters jobParametersNew = new JobParametersBuilder()
     //		.addLong("timeNew", System.currentTimeMillis())

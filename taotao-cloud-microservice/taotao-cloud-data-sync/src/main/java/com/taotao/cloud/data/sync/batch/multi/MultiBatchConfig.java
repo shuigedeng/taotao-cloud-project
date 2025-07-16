@@ -36,11 +36,9 @@ import org.springframework.transaction.PlatformTransactionManager;
 @EnableBatchProcessing
 public class MultiBatchConfig {
 
-    @Autowired
-    private JobRepository jobRepository;
+    @Autowired private JobRepository jobRepository;
 
-    @Autowired
-    private PlatformTransactionManager platformTransactionManager;
+    @Autowired private PlatformTransactionManager platformTransactionManager;
 
     @Bean
     public Job multiBoundStepsJob() {

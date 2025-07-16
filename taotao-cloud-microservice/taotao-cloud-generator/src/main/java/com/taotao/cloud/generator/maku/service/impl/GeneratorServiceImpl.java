@@ -1,11 +1,25 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.generator.maku.service.impl;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import com.taotao.cloud.generator.maku.common.exception.ServerException;
 import com.taotao.cloud.generator.maku.common.utils.DateUtils;
 import com.taotao.cloud.generator.maku.config.template.GeneratorConfig;
@@ -17,16 +31,16 @@ import com.taotao.cloud.generator.maku.entity.TableFieldEntity;
 import com.taotao.cloud.generator.maku.service.*;
 import com.taotao.cloud.generator.maku.utils.TemplateUtils;
 import com.taotao.cloud.generator.maku.vo.PreviewVO;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 代码生成
@@ -222,12 +236,18 @@ public class GeneratorServiceImpl implements GeneratorService {
         Map<String, Object> dataModel = getDataModel(tableId);
         // 代码生成器信息
         GeneratorInfo generator = generatorConfig.getGeneratorConfig();
-        return generator.getTemplates().stream().map(t -> {
-            dataModel.put("templateName", t.getTemplateName());
-            String content = TemplateUtils.getContent(t.getTemplateContent(), dataModel);
-            String fileName = t.getGeneratorPath().substring(t.getGeneratorPath().lastIndexOf("/") + 1);
-            fileName = TemplateUtils.getContent(fileName, dataModel);
-            return new PreviewVO(fileName, content);
-        }).collect(Collectors.toList());
+        return generator.getTemplates().stream()
+                .map(
+                        t -> {
+                            dataModel.put("templateName", t.getTemplateName());
+                            String content =
+                                    TemplateUtils.getContent(t.getTemplateContent(), dataModel);
+                            String fileName =
+                                    t.getGeneratorPath()
+                                            .substring(t.getGeneratorPath().lastIndexOf("/") + 1);
+                            fileName = TemplateUtils.getContent(fileName, dataModel);
+                            return new PreviewVO(fileName, content);
+                        })
+                .collect(Collectors.toList());
     }
 }

@@ -35,7 +35,8 @@ import org.hibernate.annotations.UuidGenerator;
             @Index(name = "sys_role_rcd_idx", columnList = "role_code")
         })
 @Cacheable
-// @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_ROLE)
+// @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region =
+// UpmsConstants.REGION_SYS_ROLE)
 public class SysRole {
 
     @Id

@@ -16,9 +16,12 @@
 
 package com.taotao.cloud.gateway.filter.global;
 
+import static com.taotao.boot.common.constant.CommonConstants.TTC_TRACE_ID;
+
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.common.utils.servlet.ResponseUtils;
 import com.taotao.boot.common.utils.servlet.TraceUtils;
+import java.util.Objects;
 import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -29,10 +32,6 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-
-import java.util.Objects;
-
-import static com.taotao.boot.common.constant.CommonConstants.TTC_TRACE_ID;
 
 /**
  * 最后执行 生成日志链路追踪id
@@ -49,18 +48,23 @@ public class LastFilter implements GlobalFilter, Ordered {
         TraceUtils.removeTraceId();
         LocaleContextHolder.resetLocaleContext();
 
-        return chain.filter(exchange).then(Mono.fromRunnable(() -> {
-            LogUtils.info("Response LastFilter 最终-----返回数据");
+        return chain.filter(exchange)
+                .then(
+                        Mono.fromRunnable(
+                                () -> {
+                                    LogUtils.info("Response LastFilter 最终-----返回数据");
 
-            ServerHttpResponse response = exchange.getResponse();
-            HttpHeaders httpHeaders = response.getHeaders();
-            ResponseUtils.addHeader(httpHeaders, "tid", TraceContext.traceId());
+                                    ServerHttpResponse response = exchange.getResponse();
+                                    HttpHeaders httpHeaders = response.getHeaders();
+                                    ResponseUtils.addHeader(
+                                            httpHeaders, "tid", TraceContext.traceId());
 
-            Object traceId = exchange.getAttributes().get(TTC_TRACE_ID);
-            if (Objects.nonNull(traceId) && traceId instanceof String trace) {
-                TraceUtils.setTraceId(trace);
-            }
-        }));
+                                    Object traceId = exchange.getAttributes().get(TTC_TRACE_ID);
+                                    if (Objects.nonNull(traceId)
+                                            && traceId instanceof String trace) {
+                                        TraceUtils.setTraceId(trace);
+                                    }
+                                }));
     }
 
     @Override

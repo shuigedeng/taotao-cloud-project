@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.hadoop.mr.component.wordcount;
 
 import java.io.IOException;
@@ -29,13 +30,13 @@ import org.apache.hadoop.mapreduce.Reducer;
  */
 public class WordCountCombiner extends Reducer<Text, IntWritable, Text, IntWritable> {
 
-	@Override
-	protected void reduce(Text key, Iterable<IntWritable> values, Context context)
-		throws IOException, InterruptedException {
-		int count = 0;
-		for (IntWritable v : values) {
-			count += v.get();
-		}
-		context.write(key, new IntWritable(count));
-	}
+    @Override
+    protected void reduce(Text key, Iterable<IntWritable> values, Context context)
+            throws IOException, InterruptedException {
+        int count = 0;
+        for (IntWritable v : values) {
+            count += v.get();
+        }
+        context.write(key, new IntWritable(count));
+    }
 }

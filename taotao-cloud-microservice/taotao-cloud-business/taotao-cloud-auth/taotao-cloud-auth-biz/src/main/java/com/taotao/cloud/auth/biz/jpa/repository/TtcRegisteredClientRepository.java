@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.jpa.repository;
 
-import com.taotao.cloud.auth.biz.jpa.entity.TtcRegisteredClient;
 import com.taotao.boot.data.jpa.base.repository.JpaInterfaceSuperRepository;
+import com.taotao.cloud.auth.biz.jpa.entity.TtcRegisteredClient;
 import jakarta.persistence.QueryHint;
 import java.util.Optional;
 import org.hibernate.jpa.AvailableHints;
@@ -30,16 +30,16 @@ import org.springframework.data.jpa.repository.QueryHints;
  * @version 2023.07
  * @since 2023-07-10 17:11:24
  */
-public interface TtcRegisteredClientRepository extends
-	JpaInterfaceSuperRepository<TtcRegisteredClient, String> {
+public interface TtcRegisteredClientRepository
+        extends JpaInterfaceSuperRepository<TtcRegisteredClient, String> {
 
-	/**
-	 * 根据 ClientId 查询 RegisteredClient
-	 *
-	 * @param clientId OAuth2 客户端ID
-	 * @return {@link Optional }<{@link TtcRegisteredClient }>
-	 * @since 2023-07-10 17:11:24
-	 */
-	@QueryHints(@QueryHint(name = AvailableHints.HINT_CACHEABLE, value = "true"))
-	Optional<TtcRegisteredClient> findByClientId(String clientId);
+    /**
+     * 根据 ClientId 查询 RegisteredClient
+     *
+     * @param clientId OAuth2 客户端ID
+     * @return {@link Optional }<{@link TtcRegisteredClient }>
+     * @since 2023-07-10 17:11:24
+     */
+    @QueryHints(@QueryHint(name = AvailableHints.HINT_CACHEABLE, value = "true"))
+    Optional<TtcRegisteredClient> findByClientId(String clientId);
 }

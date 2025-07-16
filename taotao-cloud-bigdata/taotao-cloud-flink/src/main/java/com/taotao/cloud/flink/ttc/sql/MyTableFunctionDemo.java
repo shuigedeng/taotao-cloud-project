@@ -1,20 +1,31 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.flink.ttc.sql;
 
-import com.taotao.cloud.flink.ttc.bean.WaterSensor;
+import static org.apache.flink.table.api.Expressions.$;
+
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.table.annotation.DataTypeHint;
 import org.apache.flink.table.annotation.FunctionHint;
-import org.apache.flink.table.annotation.FunctionHints;
-import org.apache.flink.table.annotation.InputGroup;
 import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
-import org.apache.flink.table.functions.ScalarFunction;
 import org.apache.flink.table.functions.TableFunction;
 import org.apache.flink.types.Row;
-
-import static org.apache.flink.table.api.Expressions.$;
-import static org.apache.flink.table.api.Expressions.call;
 
 /**
  * TODO
@@ -26,12 +37,8 @@ public class MyTableFunctionDemo {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
-
-        DataStreamSource<String> strDS = env.fromElements(
-                "hello flink",
-                "hello world hi",
-                "hello java"
-        );
+        DataStreamSource<String> strDS =
+                env.fromElements("hello flink", "hello world hi", "hello java");
 
         StreamTableEnvironment tableEnv = StreamTableEnvironment.create(env);
 
@@ -45,18 +52,17 @@ public class MyTableFunctionDemo {
         // 3.1 交叉联结
         tableEnv
                 // 3.1 交叉联结
-//                .sqlQuery("select words,word,length from str,lateral table(SplitFunction(words))")
+                //                .sqlQuery("select words,word,length from str,lateral
+                // table(SplitFunction(words))")
                 // 3.2 带 on  true 条件的 左联结
-//                .sqlQuery("select words,word,length from str left join lateral table(SplitFunction(words)) on true")
+                //                .sqlQuery("select words,word,length from str left join lateral
+                // table(SplitFunction(words)) on true")
                 // 重命名侧向表中的字段
-                .sqlQuery("select words,newWord,newLength from str left join lateral table(SplitFunction(words))  as T(newWord,newLength) on true")
+                .sqlQuery(
+                        "select words,newWord,newLength from str left join lateral table(SplitFunction(words))  as T(newWord,newLength) on true")
                 .execute()
                 .print();
-
-
-
     }
-
 
     // TODO 1.继承 TableFunction<返回的类型>
     // 类型标注： Row包含两个字段：word和length
@@ -70,5 +76,4 @@ public class MyTableFunctionDemo {
             }
         }
     }
-
 }

@@ -1,7 +1,22 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.generator.maku.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import lombok.AllArgsConstructor;
 import com.taotao.cloud.generator.maku.common.service.impl.BaseServiceImpl;
 import com.taotao.cloud.generator.maku.dao.TableFieldDao;
 import com.taotao.cloud.generator.maku.entity.FieldTypeEntity;
@@ -9,10 +24,10 @@ import com.taotao.cloud.generator.maku.entity.TableFieldEntity;
 import com.taotao.cloud.generator.maku.enums.AutoFillEnum;
 import com.taotao.cloud.generator.maku.service.FieldTypeService;
 import com.taotao.cloud.generator.maku.service.TableFieldService;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Map;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 /**
  * 表字段
@@ -22,7 +37,8 @@ import java.util.Map;
  */
 @Service
 @AllArgsConstructor
-public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldDao, TableFieldEntity> implements TableFieldService {
+public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldDao, TableFieldEntity>
+        implements TableFieldService {
     private final FieldTypeService fieldTypeService;
 
     @Override
@@ -70,5 +86,4 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldDao, TableF
             field.setSort(index++);
         }
     }
-
 }

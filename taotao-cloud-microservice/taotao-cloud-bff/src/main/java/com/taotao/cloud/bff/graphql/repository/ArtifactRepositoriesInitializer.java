@@ -32,9 +32,12 @@ public class ArtifactRepositoriesInitializer implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         // List<ArtifactRepository> repositoryList = Arrays.asList(
-        // 		new ArtifactRepository("spring-releases", "Spring Releases", "https://repo.spring.io/libs-releases"),
-        // 		new ArtifactRepository("spring-milestones", "Spring Milestones", "https://repo.spring.io/libs-milestones"),
-        // 		new ArtifactRepository("spring-snapshots", "Spring Snapshots", "https://repo.spring.io/libs-snapshots"));
+        // 		new ArtifactRepository("spring-releases", "Spring Releases",
+        // "https://repo.spring.io/libs-releases"),
+        // 		new ArtifactRepository("spring-milestones", "Spring Milestones",
+        // "https://repo.spring.io/libs-milestones"),
+        // 		new ArtifactRepository("spring-snapshots", "Spring Snapshots",
+        // "https://repo.spring.io/libs-snapshots"));
         // repositories.saveAll(repositoryList);
     }
 }

@@ -27,23 +27,24 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  */
 public class LocalUserDetailsService extends AbstractStrategyUserDetailsService {
 
-	private final SysUserService sysUserService;
-	private final SocialAuthenticationHandler socialAuthenticationHandler;
+    private final SysUserService sysUserService;
+    private final SocialAuthenticationHandler socialAuthenticationHandler;
 
-	public LocalUserDetailsService(
-		SysUserService sysUserService, SocialAuthenticationHandler socialAuthenticationHandler) {
-		this.sysUserService = sysUserService;
-		this.socialAuthenticationHandler = socialAuthenticationHandler;
-	}
+    public LocalUserDetailsService(
+            SysUserService sysUserService,
+            SocialAuthenticationHandler socialAuthenticationHandler) {
+        this.sysUserService = sysUserService;
+        this.socialAuthenticationHandler = socialAuthenticationHandler;
+    }
 
-	@Override
-	public TtcUser findUserDetailsByUsername(String userName) throws UsernameNotFoundException {
-		SysUser sysUser = sysUserService.findByUserName(userName);
-		return this.convertSysUser(sysUser, userName);
-	}
+    @Override
+    public TtcUser findUserDetailsByUsername(String userName) throws UsernameNotFoundException {
+        SysUser sysUser = sysUserService.findByUserName(userName);
+        return this.convertSysUser(sysUser, userName);
+    }
 
-	@Override
-	public TtcUser findUserDetailsBySocial(String source, AccessPrincipal accessPrincipal) {
-		return socialAuthenticationHandler.authentication(source, accessPrincipal);
-	}
+    @Override
+    public TtcUser findUserDetailsBySocial(String source, AccessPrincipal accessPrincipal) {
+        return socialAuthenticationHandler.authentication(source, accessPrincipal);
+    }
 }

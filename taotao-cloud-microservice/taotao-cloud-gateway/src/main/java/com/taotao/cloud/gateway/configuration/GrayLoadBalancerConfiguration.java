@@ -47,20 +47,26 @@ import org.springframework.web.reactive.function.client.ClientRequest;
  */
 @Configuration
 @EnableConfigurationProperties(GatewayLoadBalancerProperties.class)
-@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "gray", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(
+        prefix = FilterProperties.PREFIX,
+        name = "gray",
+        havingValue = "true",
+        matchIfMissing = true)
 @AutoConfigureBefore(GatewayReactiveLoadBalancerClientAutoConfiguration.class)
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
 public class GrayLoadBalancerConfiguration {
 
     @Bean
-    public ReactiveLoadBalancerClientFilter grayReactiveLoadBalancerClientFilter(LoadBalancerClientFactory clientFactory,
-                                                                                 GatewayLoadBalancerProperties gatewayLoadBalancerProperties) {
-        return new GrayReactiveLoadBalancerClientFilter(clientFactory, gatewayLoadBalancerProperties);
+    public ReactiveLoadBalancerClientFilter grayReactiveLoadBalancerClientFilter(
+            LoadBalancerClientFactory clientFactory,
+            GatewayLoadBalancerProperties gatewayLoadBalancerProperties) {
+        return new GrayReactiveLoadBalancerClientFilter(
+                clientFactory, gatewayLoadBalancerProperties);
     }
 
-
     @Component
-    public static class CustomLoadBalancerLifecycle implements LoadBalancerLifecycle<Object, Object, ServiceInstance> {
+    public static class CustomLoadBalancerLifecycle
+            implements LoadBalancerLifecycle<Object, Object, ServiceInstance> {
 
         @Override
         public void onStart(Request request) {
@@ -78,8 +84,8 @@ public class GrayLoadBalancerConfiguration {
         }
     }
 
-    //转换负载平衡的HTTP请求
-    //For WebClient,
+    // 转换负载平衡的HTTP请求
+    // For WebClient,
     @Bean
     public LoadBalancerClientRequestTransformer transformer() {
         return new LoadBalancerClientRequestTransformer() {
@@ -92,86 +98,86 @@ public class GrayLoadBalancerConfiguration {
         };
     }
 
-    //For RestTemplate
-//    @Bean
-//    public LoadBalancerRequestTransformer transformer1() {
-//        return new LoadBalancerRequestTransformer() {
-//            @Override
-//            public HttpRequest transformRequest(HttpRequest request, ServiceInstance instance) {
-//                return new HttpRequestWrapper(request) {
-//                    @Override
-//                    public HttpHeaders getHeaders() {
-//                        HttpHeaders headers = new HttpHeaders();
-//                        headers.putAll(super.getHeaders());
-//                        headers.add("X-InstanceId", instance.getInstanceId());
-//                        return headers;
-//                    }
-//                };
-//            }
-//        };
+    // For RestTemplate
+    //    @Bean
+    //    public LoadBalancerRequestTransformer transformer1() {
+    //        return new LoadBalancerRequestTransformer() {
+    //            @Override
+    //            public HttpRequest transformRequest(HttpRequest request, ServiceInstance instance)
+    // {
+    //                return new HttpRequestWrapper(request) {
+    //                    @Override
+    //                    public HttpHeaders getHeaders() {
+    //                        HttpHeaders headers = new HttpHeaders();
+    //                        headers.putAll(super.getHeaders());
+    //                        headers.add("X-InstanceId", instance.getInstanceId());
+    //                        return headers;
+    //                    }
+    //                };
+    //            }
+    //        };
 
-//    @Bean
-//    ReactorLoadBalancer<ServiceInstance> randomLoadBalancer(Environment environment,
-//                                                            LoadBalancerClientFactory loadBalancerClientFactory) {
-//        String name = environment.getProperty(LoadBalancerClientFactory.PROPERTY_NAME);
-//        return new RandomLoadBalancer(loadBalancerClientFactory
-//                .getLazyProvider(name, ServiceInstanceListSupplier.class),
-//                name);
-//    }
+    //    @Bean
+    //    ReactorLoadBalancer<ServiceInstance> randomLoadBalancer(Environment environment,
+    //                                                            LoadBalancerClientFactory
+    // loadBalancerClientFactory) {
+    //        String name = environment.getProperty(LoadBalancerClientFactory.PROPERTY_NAME);
+    //        return new RandomLoadBalancer(loadBalancerClientFactory
+    //                .getLazyProvider(name, ServiceInstanceListSupplier.class),
+    //                name);
+    //    }
 
+    // 加权负载平衡
+    //    @Bean
+    //    public ServiceInstanceListSupplier discoveryClientServiceInstanceListSupplier(
+    //            ConfigurableApplicationContext context) {
+    //        return ServiceInstanceListSupplier.builder()
+    //                .withDiscoveryClient()
+    //                .withWeighted()
+    //              .withWeighted(instance -> ThreadLocalRandom.current().nextInt(1, 101))
+    //                .withCaching()
+    //                .build(context);
+    //    }
 
-    //加权负载平衡
-//    @Bean
-//    public ServiceInstanceListSupplier discoveryClientServiceInstanceListSupplier(
-//            ConfigurableApplicationContext context) {
-//        return ServiceInstanceListSupplier.builder()
-//                .withDiscoveryClient()
-//                .withWeighted()
-//              .withWeighted(instance -> ThreadLocalRandom.current().nextInt(1, 101))
-//                .withCaching()
-//                .build(context);
-//    }
+    // 基于区域的负载平衡
+    //    @Bean
+    //    public ServiceInstanceListSupplier discoveryClientServiceInstanceListSupplier(
+    //            ConfigurableApplicationContext context) {
+    //        return ServiceInstanceListSupplier.builder()
+    //                .withDiscoveryClient()
+    //                .withCaching()
+    //                .withZonePreference()
+    //                .build(context);
+    //    }
 
-    //基于区域的负载平衡
-//    @Bean
-//    public ServiceInstanceListSupplier discoveryClientServiceInstanceListSupplier(
-//            ConfigurableApplicationContext context) {
-//        return ServiceInstanceListSupplier.builder()
-//                .withDiscoveryClient()
-//                .withCaching()
-//                .withZonePreference()
-//                .build(context);
-//    }
+    // LoadBalancer的实例运行状况检查负载平衡
+    //    @Bean
+    //    public ServiceInstanceListSupplier discoveryClientServiceInstanceListSupplier(
+    //            ConfigurableApplicationContext context) {
+    //        return ServiceInstanceListSupplier.builder()
+    //                .withDiscoveryClient()
+    //                .withHealthChecks()
+    //                .build(context);
+    //    }
 
-    //LoadBalancer的实例运行状况检查负载平衡
-//    @Bean
-//    public ServiceInstanceListSupplier discoveryClientServiceInstanceListSupplier(
-//            ConfigurableApplicationContext context) {
-//        return ServiceInstanceListSupplier.builder()
-//                .withDiscoveryClient()
-//                .withHealthChecks()
-//                .build(context);
-//    }
+    // LoadBalancer的实例首选项相同负载平衡 在这种模式中，可以设置LoadBalancer优先选择先前选择过的服务实例(如果该实例可用的话)。
+    //    @Bean
+    //    public ServiceInstanceListSupplier discoveryClientServiceInstanceListSupplier(
+    //            ConfigurableApplicationContext context) {
+    //        return ServiceInstanceListSupplier.builder()
+    //                .withDiscoveryClient()
+    //                .withSameInstancePreference()
+    //                .build(context);
+    //    }
 
-    //LoadBalancer的实例首选项相同负载平衡 在这种模式中，可以设置LoadBalancer优先选择先前选择过的服务实例(如果该实例可用的话)。
-//    @Bean
-//    public ServiceInstanceListSupplier discoveryClientServiceInstanceListSupplier(
-//            ConfigurableApplicationContext context) {
-//        return ServiceInstanceListSupplier.builder()
-//                .withDiscoveryClient()
-//                .withSameInstancePreference()
-//                .build(context);
-//    }
-
-    //LoadBalancer的基于请求的粘性会话负载平衡 在这种模式中，LoadBalancer优先选择与请求携带的cookie中提供的instanceId对应的服务实例。
-//    @Bean
-//    public ServiceInstanceListSupplier discoveryClientServiceInstanceListSupplier(
-//            ConfigurableApplicationContext context) {
-//        return ServiceInstanceListSupplier.builder()
-//                .withDiscoveryClient()
-//                .withRequestBasedStickySession()
-//                .build(context);
-//    }
-
+    // LoadBalancer的基于请求的粘性会话负载平衡 在这种模式中，LoadBalancer优先选择与请求携带的cookie中提供的instanceId对应的服务实例。
+    //    @Bean
+    //    public ServiceInstanceListSupplier discoveryClientServiceInstanceListSupplier(
+    //            ConfigurableApplicationContext context) {
+    //        return ServiceInstanceListSupplier.builder()
+    //                .withDiscoveryClient()
+    //                .withRequestBasedStickySession()
+    //                .build(context);
+    //    }
 
 }

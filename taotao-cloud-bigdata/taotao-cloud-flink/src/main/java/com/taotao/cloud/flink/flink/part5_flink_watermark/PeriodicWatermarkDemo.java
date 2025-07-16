@@ -1,6 +1,27 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.flink.flink.part5_flink_watermark;
 
-import org.apache.flink.api.common.ExecutionConfig;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Random;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.typeinfo.Types;
@@ -19,117 +40,172 @@ import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Random;
-
 public class PeriodicWatermarkDemo {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
         conf.setString(RestOptions.BIND_PORT, "8081");
-        final StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
+        final StreamExecutionEnvironment env =
+                StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
         // 设置自动生成Watermark的间隔时间
         // env.getConfig().setAutoWatermarkInterval(100000);
         env.setParallelism(1);
 
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
-        DataStream<String> text = env.addSource(new RichParallelSourceFunction<String>() {
-            private volatile boolean running = true;
-            private volatile long count = 0; // 计数器用于跟踪已生成的数据条数
-            private final Random random = new Random();
+        DataStream<String> text =
+                env.addSource(
+                        new RichParallelSourceFunction<String>() {
+                            private volatile boolean running = true;
+                            private volatile long count = 0; // 计数器用于跟踪已生成的数据条数
+                            private final Random random = new Random();
 
-            @Override
-            public void run(SourceContext<String> ctx) throws Exception {
-                while (running) {
-                    int randomNum = random.nextInt(5) + 1;
-                    long timestamp = System.currentTimeMillis();
+                            @Override
+                            public void run(SourceContext<String> ctx) throws Exception {
+                                while (running) {
+                                    int randomNum = random.nextInt(5) + 1;
+                                    long timestamp = System.currentTimeMillis();
 
-                    // 如果生成的是 key2，则在一个新线程中处理延迟
-                    if (randomNum == 2) {
-                        new Thread(() -> {
-                            try {
-                                int delay = random.nextInt(10) + 1; // 随机数范围从1到10
-                                Thread.sleep(delay * 1000); // 增加1到10秒的延迟
-                                ctx.collectWithTimestamp("key" + randomNum + "," + 1 + "," + timestamp, timestamp);
-                            } catch (InterruptedException e) {
-                                Thread.currentThread().interrupt();
+                                    // 如果生成的是 key2，则在一个新线程中处理延迟
+                                    if (randomNum == 2) {
+                                        new Thread(
+                                                        () -> {
+                                                            try {
+                                                                int delay =
+                                                                        random.nextInt(10)
+                                                                                + 1; // 随机数范围从1到10
+                                                                Thread.sleep(
+                                                                        delay * 1000); // 增加1到10秒的延迟
+                                                                ctx.collectWithTimestamp(
+                                                                        "key" + randomNum + "," + 1
+                                                                                + "," + timestamp,
+                                                                        timestamp);
+                                                            } catch (InterruptedException e) {
+                                                                Thread.currentThread().interrupt();
+                                                            }
+                                                        })
+                                                .start();
+                                    } else {
+                                        ctx.collectWithTimestamp(
+                                                "key" + randomNum + "," + 1 + "," + timestamp,
+                                                timestamp);
+                                    }
+
+                                    if (++count % 200 == 0) {
+                                        ctx.emitWatermark(new Watermark(timestamp));
+                                        System.out.println(
+                                                "Manual Watermark emitted: " + timestamp);
+                                    }
+
+                                    ZonedDateTime generateDataDateTime =
+                                            Instant.ofEpochMilli(timestamp)
+                                                    .atZone(ZoneId.systemDefault());
+                                    DateTimeFormatter formatter =
+                                            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+                                    String formattedGenerateDataDateTime =
+                                            generateDataDateTime.format(formatter);
+                                    System.out.println(
+                                            "Generated data: "
+                                                    + "key"
+                                                    + randomNum
+                                                    + ","
+                                                    + 1
+                                                    + ","
+                                                    + timestamp
+                                                    + " at "
+                                                    + formattedGenerateDataDateTime);
+
+                                    Thread.sleep(1000); // 每次循环后等待1秒
+                                }
                             }
-                        }).start();
-                    } else {
-                        ctx.collectWithTimestamp("key" + randomNum + "," + 1 + "," + timestamp, timestamp);
-                    }
 
-                    if (++count % 200 == 0) {
-                        ctx.emitWatermark(new Watermark(timestamp));
-                        System.out.println("Manual Watermark emitted: " + timestamp);
-                    }
+                            @Override
+                            public void cancel() {
+                                running = false;
+                            }
+                        });
 
-                    ZonedDateTime generateDataDateTime = Instant.ofEpochMilli(timestamp).atZone(ZoneId.systemDefault());
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
-                    String formattedGenerateDataDateTime = generateDataDateTime.format(formatter);
-                    System.out.println("Generated data: " + "key" + randomNum + "," + 1 + "," + timestamp + " at " + formattedGenerateDataDateTime);
-
-                    Thread.sleep(1000); // 每次循环后等待1秒
-                }
-            }
-
-            @Override
-            public void cancel() {
-                running = false;
-            }
-        });
-
-        DataStream<Tuple3<String, Integer, Long>> tuplesWithTimestamp = text.map(new MapFunction<String, Tuple3<String, Integer, Long>>() {
-            @Override
-            public Tuple3<String, Integer, Long> map(String value) {
-                String[] words = value.split(",");
-                return new Tuple3<>(words[0], Integer.parseInt(words[1]), Long.parseLong(words[2]));
-            }
-        }).returns(Types.TUPLE(Types.STRING, Types.INT, Types.LONG));
+        DataStream<Tuple3<String, Integer, Long>> tuplesWithTimestamp =
+                text.map(
+                                new MapFunction<String, Tuple3<String, Integer, Long>>() {
+                                    @Override
+                                    public Tuple3<String, Integer, Long> map(String value) {
+                                        String[] words = value.split(",");
+                                        return new Tuple3<>(
+                                                words[0],
+                                                Integer.parseInt(words[1]),
+                                                Long.parseLong(words[2]));
+                                    }
+                                })
+                        .returns(Types.TUPLE(Types.STRING, Types.INT, Types.LONG));
 
         // 设置 Watermark 策略
-        DataStream<Tuple3<String, Integer, Long>> withWatermarks = tuplesWithTimestamp.assignTimestampsAndWatermarks(
-                WatermarkStrategy.<Tuple3<String, Integer, Long>>forBoundedOutOfOrderness(Duration.ofSeconds(0))
-                        .withTimestampAssigner((element, recordTimestamp) -> element.f2)
-        );
+        DataStream<Tuple3<String, Integer, Long>> withWatermarks =
+                tuplesWithTimestamp.assignTimestampsAndWatermarks(
+                        WatermarkStrategy.<Tuple3<String, Integer, Long>>forBoundedOutOfOrderness(
+                                        Duration.ofSeconds(0))
+                                .withTimestampAssigner((element, recordTimestamp) -> element.f2));
 
         // 窗口逻辑
-        DataStream<Tuple2<String, Integer>> keyedStream = withWatermarks
-                .keyBy(value -> value.f0)
-                .window(TumblingEventTimeWindows.of(Time.seconds(5)))
-                .process(new ProcessWindowFunction<Tuple3<String, Integer, Long>, Tuple2<String, Integer>, String, TimeWindow>() {
-                    @Override
-                    public void process(String s, Context context, Iterable<Tuple3<String, Integer, Long>> elements, Collector<Tuple2<String, Integer>> out) throws Exception {
-                        int count = 0;
-                        for (Tuple3<String, Integer, Long> element : elements) {
-                            count++;
-                        }
+        DataStream<Tuple2<String, Integer>> keyedStream =
+                withWatermarks
+                        .keyBy(value -> value.f0)
+                        .window(TumblingEventTimeWindows.of(Time.seconds(5)))
+                        .process(
+                                new ProcessWindowFunction<
+                                        Tuple3<String, Integer, Long>,
+                                        Tuple2<String, Integer>,
+                                        String,
+                                        TimeWindow>() {
+                                    @Override
+                                    public void process(
+                                            String s,
+                                            Context context,
+                                            Iterable<Tuple3<String, Integer, Long>> elements,
+                                            Collector<Tuple2<String, Integer>> out)
+                                            throws Exception {
+                                        int count = 0;
+                                        for (Tuple3<String, Integer, Long> element : elements) {
+                                            count++;
+                                        }
 
-                        long start = context.window().getStart();
-                        long end = context.window().getEnd();
+                                        long start = context.window().getStart();
+                                        long end = context.window().getEnd();
 
-                        ZonedDateTime startDateTime = Instant.ofEpochMilli(start).atZone(ZoneId.systemDefault());
-                        ZonedDateTime endDateTime = Instant.ofEpochMilli(end).atZone(ZoneId.systemDefault());
+                                        ZonedDateTime startDateTime =
+                                                Instant.ofEpochMilli(start)
+                                                        .atZone(ZoneId.systemDefault());
+                                        ZonedDateTime endDateTime =
+                                                Instant.ofEpochMilli(end)
+                                                        .atZone(ZoneId.systemDefault());
 
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
-                        String formattedStart = startDateTime.format(formatter);
-                        String formattedEnd = endDateTime.format(formatter);
+                                        DateTimeFormatter formatter =
+                                                DateTimeFormatter.ofPattern(
+                                                        "yyyy-MM-dd HH:mm:ss.SSS");
+                                        String formattedStart = startDateTime.format(formatter);
+                                        String formattedEnd = endDateTime.format(formatter);
 
-                        System.out.println("Tumbling Window [start " + formattedStart + ", end " + formattedEnd + ") for key " + s);
+                                        System.out.println(
+                                                "Tumbling Window [start "
+                                                        + formattedStart
+                                                        + ", end "
+                                                        + formattedEnd
+                                                        + ") for key "
+                                                        + s);
 
-                        // 输出窗口结束时的Watermark
-                        long windowEndWatermark = context.currentWatermark();
-                        ZonedDateTime windowEndDateTime = Instant.ofEpochMilli(windowEndWatermark).atZone(ZoneId.systemDefault());
-                        String formattedWindowEndWatermark = windowEndDateTime.format(formatter);
-                        System.out.println("Watermark at the end of window: " + formattedWindowEndWatermark);
+                                        // 输出窗口结束时的Watermark
+                                        long windowEndWatermark = context.currentWatermark();
+                                        ZonedDateTime windowEndDateTime =
+                                                Instant.ofEpochMilli(windowEndWatermark)
+                                                        .atZone(ZoneId.systemDefault());
+                                        String formattedWindowEndWatermark =
+                                                windowEndDateTime.format(formatter);
+                                        System.out.println(
+                                                "Watermark at the end of window: "
+                                                        + formattedWindowEndWatermark);
 
-                        out.collect(new Tuple2<>(s, count));
-                    }
-                });
+                                        out.collect(new Tuple2<>(s, count));
+                                    }
+                                });
 
         // 输出结果
         keyedStream.print();

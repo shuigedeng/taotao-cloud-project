@@ -25,7 +25,6 @@ import com.taotao.boot.common.utils.servlet.TraceUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -44,7 +43,11 @@ import reactor.core.publisher.Mono;
  * @since 2020-7-16
  */
 @Component
-@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "requestLog", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(
+        prefix = FilterProperties.PREFIX,
+        name = "requestLog",
+        havingValue = "true",
+        matchIfMissing = true)
 public class RequestLogFilter implements GlobalFilter, Ordered {
 
     private static final String START_TIME = "start_time";
@@ -75,37 +78,43 @@ public class RequestLogFilter implements GlobalFilter, Ordered {
 
         exchange.getAttributes().put(START_TIME, System.currentTimeMillis());
         exchange.getAttributes().put(TTC_TRACE_ID, traceId);
-        return chain.filter(exchange).then(Mono.fromRunnable(() -> {
-            ServerHttpResponse response = exchange.getResponse();
-            HttpHeaders httpHeaders = response.getHeaders();
-            Long startTime = exchange.getAttribute(START_TIME);
-            long executeTime = 0L;
-            if (startTime != null) {
-                executeTime = (System.currentTimeMillis() - startTime);
-            }
+        return chain.filter(exchange)
+                .then(
+                        Mono.fromRunnable(
+                                () -> {
+                                    ServerHttpResponse response = exchange.getResponse();
+                                    HttpHeaders httpHeaders = response.getHeaders();
+                                    Long startTime = exchange.getAttribute(START_TIME);
+                                    long executeTime = 0L;
+                                    if (startTime != null) {
+                                        executeTime = (System.currentTimeMillis() - startTime);
+                                    }
 
-            StringBuilder responseLog = new StringBuilder();
-            List<Object> responseArgs = new ArrayList<>();
-            responseLog.append("\n\n================ TaoTao Cloud Response Start  ================\n");
-            responseLog.append("===> requestMethod: {}, requestUrl: {}, traceId: {}, executeTime: {}\n");
-            responseArgs.add(requestMethod);
-            responseArgs.add(requestUrl);
-            responseArgs.add(exchange.getAttribute(TTC_TRACE_ID));
-            responseArgs.add(executeTime + "ms");
+                                    StringBuilder responseLog = new StringBuilder();
+                                    List<Object> responseArgs = new ArrayList<>();
+                                    responseLog.append(
+                                            "\n\n================ TaoTao Cloud Response Start  ================\n");
+                                    responseLog.append(
+                                            "===> requestMethod: {}, requestUrl: {}, traceId: {}, executeTime: {}\n");
+                                    responseArgs.add(requestMethod);
+                                    responseArgs.add(requestUrl);
+                                    responseArgs.add(exchange.getAttribute(TTC_TRACE_ID));
+                                    responseArgs.add(executeTime + "ms");
 
-            String httpHeader = JsonUtils.toJSONString(httpHeaders);
-            responseLog.append("===> responseHeaders : {}\n");
-            responseArgs.add(httpHeader);
-            responseLog.append("================  TaoTao Cloud Response End  =================\n");
-            LogUtils.info(responseLog.toString(), responseArgs.toArray());
+                                    String httpHeader = JsonUtils.toJSONString(httpHeaders);
+                                    responseLog.append("===> responseHeaders : {}\n");
+                                    responseArgs.add(httpHeader);
+                                    responseLog.append(
+                                            "================  TaoTao Cloud Response End  =================\n");
+                                    LogUtils.info(responseLog.toString(), responseArgs.toArray());
 
-            exchange.getAttributes().remove(START_TIME);
-            exchange.getAttributes().remove(TTC_TRACE_ID);
-        }));
+                                    exchange.getAttributes().remove(START_TIME);
+                                    exchange.getAttributes().remove(TTC_TRACE_ID);
+                                }));
     }
 
     @Override
     public int getOrder() {
-        return  Ordered.HIGHEST_PRECEDENCE + 8;
+        return Ordered.HIGHEST_PRECEDENCE + 8;
     }
 }

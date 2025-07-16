@@ -1,12 +1,11 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,7 +16,11 @@
 
 package com.taotao.cloud.paimon.kafka.cdc;
 
+import static org.apache.paimon.utils.JsonSerdeUtil.writeValueAsString;
+
 import com.taotao.cloud.paimon.kafka.data.CdcRecord;
+import java.util.*;
+import java.util.stream.Collectors;
 import org.apache.kafka.connect.data.Field;
 import org.apache.kafka.connect.data.Struct;
 import org.apache.kafka.connect.errors.ConnectException;
@@ -32,11 +35,6 @@ import org.apache.paimon.utils.TypeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static org.apache.paimon.utils.JsonSerdeUtil.writeValueAsString;
-
 public class DebeziumRecordParser {
 
     private static final String FIELD_BEFORE = "before";
@@ -49,27 +47,28 @@ public class DebeziumRecordParser {
 
     private static final Logger LOG = LoggerFactory.getLogger(DebeziumRecordParser.class);
 
-
     /**
      * Build schema for create table
      * @param record
      * @return
      */
-    public static Schema buildSchema(SinkRecord record){
-        org.apache.kafka.connect.data.Schema schema =  record.valueSchema();
-        if (schema.type() != org.apache.kafka.connect.data.Schema.Type.STRUCT){
+    public static Schema buildSchema(SinkRecord record) {
+        org.apache.kafka.connect.data.Schema schema = record.valueSchema();
+        if (schema.type() != org.apache.kafka.connect.data.Schema.Type.STRUCT) {
             throw new ConnectException("Record value schema must be struct!");
         }
         Schema.Builder builder = Schema.newBuilder();
         List<Field> fields = record.valueSchema().fields();
-        for (Field field : fields){
-            builder.column(field.name(), DebeziumSchemaUtils.toDataType(field), field.schema().doc());
+        for (Field field : fields) {
+            builder.column(
+                    field.name(), DebeziumSchemaUtils.toDataType(field), field.schema().doc());
         }
         // build schema
         return builder.build();
     }
 
-    public static Optional<GenericRow> toGenericRow(CdcRecord cdcRecord, List<DataField> dataFields) {
+    public static Optional<GenericRow> toGenericRow(
+            CdcRecord cdcRecord, List<DataField> dataFields) {
         Struct struct = cdcRecord.value();
         GenericRow genericRow = new GenericRow(cdcRecord.kind(), dataFields.size());
         List<String> fieldNames =
@@ -108,9 +107,8 @@ public class DebeziumRecordParser {
         return Optional.of(genericRow);
     }
 
-    private static String getValueAsString(Object value){
-        if (Objects.nonNull(value)
-                && !TypeUtils.isBasicType(value)) {
+    private static String getValueAsString(Object value) {
+        if (Objects.nonNull(value) && !TypeUtils.isBasicType(value)) {
             try {
                 return writeValueAsString(value);
             } catch (JsonProcessingException e) {
@@ -125,7 +123,7 @@ public class DebeziumRecordParser {
         List<CdcRecord> cdcRecords = new ArrayList<>();
         Struct value = (Struct) record.value();
         String op = (String) value.get(FIELD_TYPE);
-        switch (op){
+        switch (op) {
             case OP_DELETE:
                 processRecords(getBefore(value), RowKind.DELETE, cdcRecords);
                 break;
@@ -144,8 +142,9 @@ public class DebeziumRecordParser {
     }
 
     private static Struct getData(Struct value) {
-       return (Struct) value.get(FIELD_AFTER);
+        return (Struct) value.get(FIELD_AFTER);
     }
+
     private static Struct getBefore(Struct value) {
         return (Struct) value.get(FIELD_BEFORE);
     }

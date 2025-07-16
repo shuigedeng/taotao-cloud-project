@@ -39,7 +39,8 @@ public class LoginAreaRiskHandle extends AbstractLoginHandle {
     // private LoginLogService loginLogService;
 
     @Override
-    public void filterRisk(List<RiskRule> filter, Map<Integer, RiskRule> ruleMap, UserAccount account) {
+    public void filterRisk(
+            List<RiskRule> filter, Map<Integer, RiskRule> ruleMap, UserAccount account) {
         if (MapUtil.isNotEmpty(ruleMap)) {
             RiskRule areaRisk = ruleMap.get(4);
             if (null != areaRisk) {

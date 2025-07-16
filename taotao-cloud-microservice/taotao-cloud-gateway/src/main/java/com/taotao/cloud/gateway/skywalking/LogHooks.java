@@ -1,13 +1,13 @@
-//package com.taotao.cloud.gateway.skywalking;
+// package com.taotao.cloud.gateway.skywalking;
 //
-//import jakarta.annotation.PostConstruct;
-//import org.springframework.stereotype.Component;
-//import reactor.core.publisher.Operators;
+// import jakarta.annotation.PostConstruct;
+// import org.springframework.stereotype.Component;
+// import reactor.core.publisher.Operators;
 //
-//import jakarta.annotation.PreDestroy;
+// import jakarta.annotation.PreDestroy;
 //
-//@Component
-//public class LogHooks {
+// @Component
+// public class LogHooks {
 //
 //    private static final String KEY = "logMdc";
 //
@@ -23,4 +23,4 @@
 //        reactor.core.publisher.Hooks.resetOnEachOperator(KEY);
 //    }
 //
-//}
+// }

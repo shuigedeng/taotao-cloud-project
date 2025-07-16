@@ -16,10 +16,8 @@
 
 package com.taotao.cloud.monitor;
 
-import com.taotao.boot.common.utils.common.PropertyUtils;
 import com.taotao.boot.core.startup.StartupSpringApplication;
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
@@ -34,29 +32,29 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableAdminServer
 @SpringBootApplication
 public class TaoTaoCloudMonitorApplication {
-	
-	public static void main(String[] args) {
-		System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
 
-		new StartupSpringApplication(TaoTaoCloudMonitorApplication.class)
-			.setTtcBanner()
-			.setTtcProfileIfNotExists("dev")
-			.setTtcApplicationProperty("taotao-cloud-monitor")
-			.setTtcAllowBeanDefinitionOverriding(true)
-			.run(args);
-	}
+    public static void main(String[] args) {
+        System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
 
-//    public static void main(String[] args) {
-//        PropertyUtils.setDefaultProperty("taotao-cloud-monitor");
-//
-//        new SpringApplication.run(TaoTaoCloudMonitorApplication.class, args);
-//
-//
-//
-//        // try {
-//        //    SpringApplication.run(TaoTaoCloudMonitorApplication.class, args);
-//        // } catch (Throwable e) {
-//        //    LogUtils.error(e);
-//        // }
-//    }
+        new StartupSpringApplication(TaoTaoCloudMonitorApplication.class)
+                .setTtcBanner()
+                .setTtcProfileIfNotExists("dev")
+                .setTtcApplicationProperty("taotao-cloud-monitor")
+                .setTtcAllowBeanDefinitionOverriding(true)
+                .run(args);
+    }
+
+    //    public static void main(String[] args) {
+    //        PropertyUtils.setDefaultProperty("taotao-cloud-monitor");
+    //
+    //        new SpringApplication.run(TaoTaoCloudMonitorApplication.class, args);
+    //
+    //
+    //
+    //        // try {
+    //        //    SpringApplication.run(TaoTaoCloudMonitorApplication.class, args);
+    //        // } catch (Throwable e) {
+    //        //    LogUtils.error(e);
+    //        // }
+    //    }
 }

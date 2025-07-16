@@ -22,7 +22,6 @@ import java.io.ByteArrayOutputStream;
 import java.time.Duration;
 import java.util.Base64;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 
@@ -39,13 +38,16 @@ public class VerifyImageUtil {
     public VerifyImageDTO generateVerifyImg() {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         String result = CaptchaUtil.out(outputStream);
-        String base64Image = "data:image/jpeg;base64," + Base64.getEncoder().encodeToString(outputStream.toByteArray());
+        String base64Image =
+                "data:image/jpeg;base64,"
+                        + Base64.getEncoder().encodeToString(outputStream.toByteArray());
         String verifyId = UUID.randomUUID().toString();
         return new VerifyImageDTO(verifyId, null, base64Image, result);
     }
 
     public void saveVerifyCodeToRedis(VerifyImageDTO verifyImage) {
-        RBucket<String> rBucket = redissonClient.getBucket(VERIFY_CODE_KEY + verifyImage.getVerifyId());
+        RBucket<String> rBucket =
+                redissonClient.getBucket(VERIFY_CODE_KEY + verifyImage.getVerifyId());
         rBucket.set(verifyImage.getResult(), Duration.ofSeconds(60L));
     }
 

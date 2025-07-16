@@ -17,6 +17,11 @@
 package com.taotao.cloud.generator.mbg;
 
 import com.taotao.boot.common.utils.log.LogUtils;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
@@ -24,21 +29,20 @@ import org.mybatis.generator.exception.InvalidConfigurationException;
 import org.mybatis.generator.exception.XMLParserException;
 import org.mybatis.generator.internal.DefaultShellCallback;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 public class MybatisGenerator {
 
     public static void main(String[] args)
-            throws IOException, XMLParserException, InvalidConfigurationException, SQLException, InterruptedException {
+            throws IOException,
+                    XMLParserException,
+                    InvalidConfigurationException,
+                    SQLException,
+                    InterruptedException {
         // MBG 执行过程中的警告信息
         List<String> warnings = new ArrayList<>();
         // 读取我们的 MBG 配置文件
-        InputStream is = MybatisGenerator.class.getResourceAsStream(
-                "src/main/resources/mybatisGenerator/generatorConfiguration.xml");
+        InputStream is =
+                MybatisGenerator.class.getResourceAsStream(
+                        "src/main/resources/mybatisGenerator/generatorConfiguration.xml");
         ConfigurationParser cp = new ConfigurationParser(warnings);
         Configuration config = cp.parseConfiguration(is);
         is.close();

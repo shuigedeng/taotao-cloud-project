@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.auth.biz.management.response;
 
-import com.taotao.cloud.auth.biz.authentication.utils.OAuth2EndpointUtils;
 import com.taotao.boot.common.model.Result;
 import com.taotao.boot.common.utils.servlet.ResponseUtils;
 import com.taotao.boot.security.spring.exception.SecurityGlobalExceptionHandler;
+import com.taotao.cloud.auth.biz.authentication.utils.OAuth2EndpointUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -43,24 +43,29 @@ import org.springframework.util.MultiValueMap;
  */
 public class OAuth2AuthenticationFailureResponseHandler implements AuthenticationFailureHandler {
 
-    private final HttpMessageConverter<OAuth2Error> errorHttpResponseConverter = new OAuth2ErrorHttpMessageConverter();
+    private final HttpMessageConverter<OAuth2Error> errorHttpResponseConverter =
+            new OAuth2ErrorHttpMessageConverter();
 
     @Override
     public void onAuthenticationFailure(
-            HttpServletRequest request, HttpServletResponse response, AuthenticationException exception)
+            HttpServletRequest request,
+            HttpServletResponse response,
+            AuthenticationException exception)
             throws IOException, ServletException {
         MultiValueMap<String, String> parameters = OAuth2EndpointUtils.getParameters(request);
         String deviceCode = parameters.getFirst(OAuth2ParameterNames.DEVICE_CODE);
         // 兼容 Device Grant 错误处理
         // Device Grant 需要 SAS 原始出错信息，如果采用原有 SecurityGlobalExceptionHandler 处理方式，将导致前端获取到错误的错误信息
-        if (exception instanceof OAuth2AuthenticationException oauth2Exception && StringUtils.isNotBlank(deviceCode)) {
+        if (exception instanceof OAuth2AuthenticationException oauth2Exception
+                && StringUtils.isNotBlank(deviceCode)) {
             OAuth2Error error = oauth2Exception.getError();
             ServletServerHttpResponse httpResponse = new ServletServerHttpResponse(response);
             httpResponse.setStatusCode(HttpStatus.BAD_REQUEST);
             this.errorHttpResponseConverter.write(error, null, httpResponse);
         } else {
             Result<String> result =
-                    SecurityGlobalExceptionHandler.resolveSecurityException(exception, request.getRequestURI());
+                    SecurityGlobalExceptionHandler.resolveSecurityException(
+                            exception, request.getRequestURI());
             // response.setStatus(result.getStatus());
             // WebUtils.renderJson(response, result);
             ResponseUtils.fail(response, result);

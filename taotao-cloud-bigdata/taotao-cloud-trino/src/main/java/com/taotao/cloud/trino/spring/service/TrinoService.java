@@ -23,8 +23,11 @@ import org.springframework.stereotype.Service;
 public class TrinoService extends TrinoJdbcBaseDaoImpl {
 
     public void testUseJdbcTemplate() {
-        getJdbcTemplate().query("select * from trino_user", rs -> {
-            LogUtils.info(rs);
-        });
+        getJdbcTemplate()
+                .query(
+                        "select * from trino_user",
+                        rs -> {
+                            LogUtils.info(rs);
+                        });
     }
 }

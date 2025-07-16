@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.flink;
 
-
 class TaoTaoCloudFlinkApplicationTests {
 
     void contextLoads() {}

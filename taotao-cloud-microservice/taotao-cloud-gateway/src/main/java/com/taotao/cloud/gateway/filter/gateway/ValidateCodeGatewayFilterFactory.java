@@ -55,7 +55,8 @@ public class ValidateCodeGatewayFilterFactory extends AbstractGatewayFilterFacto
     public GatewayFilter apply(Object config) {
         return (exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
-            if (!StrUtil.containsAnyIgnoreCase(request.getURI().getPath(), SecurityConstants.OAUTH_TOKEN_URL)) {
+            if (!StrUtil.containsAnyIgnoreCase(
+                    request.getURI().getPath(), SecurityConstants.OAUTH_TOKEN_URL)) {
                 return chain.filter(exchange);
             }
             validateCode(request);

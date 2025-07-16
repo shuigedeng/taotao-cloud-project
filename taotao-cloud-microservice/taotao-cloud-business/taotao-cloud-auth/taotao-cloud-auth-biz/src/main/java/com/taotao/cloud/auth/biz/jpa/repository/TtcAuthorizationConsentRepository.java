@@ -16,17 +16,13 @@
 
 package com.taotao.cloud.auth.biz.jpa.repository;
 
+import com.taotao.boot.data.jpa.base.repository.JpaInterfaceSuperRepository;
 import com.taotao.cloud.auth.biz.jpa.entity.TtcAuthorizationConsent;
 import com.taotao.cloud.auth.biz.jpa.generator.TtcAuthorizationConsentId;
-import com.taotao.boot.data.jpa.base.repository.JpaInterfaceSuperRepository;
-import com.taotao.boot.data.jpa.extend.MyQuery;
 import jakarta.persistence.QueryHint;
 import java.util.Optional;
 import org.hibernate.jpa.AvailableHints;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.QueryHints;
-import org.springframework.data.repository.query.Param;
 
 /**
  * <p>TtcAuthorizationConsentRepository </p>
@@ -36,39 +32,38 @@ import org.springframework.data.repository.query.Param;
  * @since 2023-07-10 17:11:17
  */
 public interface TtcAuthorizationConsentRepository
-	extends
-	JpaInterfaceSuperRepository<TtcAuthorizationConsent, TtcAuthorizationConsentId> {
+        extends JpaInterfaceSuperRepository<TtcAuthorizationConsent, TtcAuthorizationConsentId> {
 
-	/**
-	 * 根据 client id 和 principalName 查询 OAuth2 确认信息
-	 *
-	 * @param registeredClientId 注册OAuth2客户端ID
-	 * @param principalName      用户名
-	 * @return {@link Optional }<{@link TtcAuthorizationConsent }>
-	 * @since 2023-07-10 17:11:17
-	 */
-	@QueryHints(@QueryHint(name = AvailableHints.HINT_CACHEABLE, value = "true"))
-	Optional<TtcAuthorizationConsent> findByRegisteredClientIdAndPrincipalName(
-		String registeredClientId, String principalName);
+    /**
+     * 根据 client id 和 principalName 查询 OAuth2 确认信息
+     *
+     * @param registeredClientId 注册OAuth2客户端ID
+     * @param principalName      用户名
+     * @return {@link Optional }<{@link TtcAuthorizationConsent }>
+     * @since 2023-07-10 17:11:17
+     */
+    @QueryHints(@QueryHint(name = AvailableHints.HINT_CACHEABLE, value = "true"))
+    Optional<TtcAuthorizationConsent> findByRegisteredClientIdAndPrincipalName(
+            String registeredClientId, String principalName);
 
-	/**
-	 * 根据 client id 和 principalName 删除 OAuth2 确认信息
-	 *
-	 * @param registeredClientId 注册OAuth2客户端ID
-	 * @param principalName      用户名
-	 * @since 2023-07-10 17:11:17
-	 */
-	void deleteByRegisteredClientIdAndPrincipalName(String registeredClientId,
-		String principalName);
+    /**
+     * 根据 client id 和 principalName 删除 OAuth2 确认信息
+     *
+     * @param registeredClientId 注册OAuth2客户端ID
+     * @param principalName      用户名
+     * @since 2023-07-10 17:11:17
+     */
+    void deleteByRegisteredClientIdAndPrincipalName(
+            String registeredClientId, String principalName);
 
-//	@MyQuery(value = """
-//		select h
-//		from TtcAuthorizationConsent h
-//		where ?{ registeredClientId = :registeredClientId }
-//		?{ and principalName = :principalName }
-//		""")
-//	Page<TtcAuthorizationConsent> myPageQuery(
-//		@Param("registeredClientId") String registeredClientId,
-//		@Param("principalName") String principalName,
-//		PageRequest pageRequest);
+    //	@MyQuery(value = """
+    //		select h
+    //		from TtcAuthorizationConsent h
+    //		where ?{ registeredClientId = :registeredClientId }
+    //		?{ and principalName = :principalName }
+    //		""")
+    //	Page<TtcAuthorizationConsent> myPageQuery(
+    //		@Param("registeredClientId") String registeredClientId,
+    //		@Param("principalName") String principalName,
+    //		PageRequest pageRequest);
 }

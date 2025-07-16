@@ -1,44 +1,22 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KTD, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
 package com.taotao.cloud.flink.cep.dynamic;
 
-import org.apache.flink.api.java.tuple.Tuple4;
-import org.apache.flink.cep.dynamic.impl.json.deserializer.ConditionSpecStdDeserializer;
-import org.apache.flink.cep.dynamic.impl.json.deserializer.NodeSpecStdDeserializer;
-import org.apache.flink.cep.dynamic.impl.json.deserializer.TimeStdDeserializer;
-import org.apache.flink.cep.dynamic.impl.json.spec.ConditionSpec;
-import org.apache.flink.cep.dynamic.impl.json.spec.GraphSpec;
-import org.apache.flink.cep.dynamic.impl.json.spec.NodeSpec;
-import org.apache.flink.cep.dynamic.processor.PatternProcessor;
-import org.apache.flink.cep.functions.PatternProcessFunction;
-import org.apache.flink.streaming.api.windowing.time.Time;
-import org.apache.flink.util.CollectionUtil;
-import org.apache.flink.util.StringUtils;
-
-import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.SerializationFeature;
-import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.module.SimpleModule;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.annotation.Nullable;
+import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -50,8 +28,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import static java.util.Objects.requireNonNull;
+import javax.annotation.Nullable;
+import org.apache.flink.api.java.tuple.Tuple4;
+import org.apache.flink.cep.dynamic.impl.json.deserializer.ConditionSpecStdDeserializer;
+import org.apache.flink.cep.dynamic.impl.json.deserializer.NodeSpecStdDeserializer;
+import org.apache.flink.cep.dynamic.impl.json.deserializer.TimeStdDeserializer;
+import org.apache.flink.cep.dynamic.impl.json.spec.ConditionSpec;
+import org.apache.flink.cep.dynamic.impl.json.spec.GraphSpec;
+import org.apache.flink.cep.dynamic.impl.json.spec.NodeSpec;
+import org.apache.flink.cep.dynamic.processor.PatternProcessor;
+import org.apache.flink.cep.functions.PatternProcessFunction;
+import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.SerializationFeature;
+import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.module.SimpleModule;
+import org.apache.flink.streaming.api.windowing.time.Time;
+import org.apache.flink.util.CollectionUtil;
+import org.apache.flink.util.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The JDBC implementation of the {@link PeriodicPatternProcessorDiscoverer} that periodically

@@ -1,5 +1,20 @@
-package com.taotao.cloud.flink.doe.operator;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.flink.doe.operator;
 
 import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.flink.doe.beans.HeroBean;
@@ -26,34 +41,36 @@ public class Function01Map03 {
 
         Configuration conf = new Configuration();
         conf.setInteger("rest.port", 8888);
-        StreamExecutionEnvironment see = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
-      //Lambda
+        StreamExecutionEnvironment see =
+                StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
+        // Lambda
         // 单并行逐个接收
         DataStreamSource<String> ds = see.socketTextStream("doe01", 8899);
         // 接收数据  将数据封装成自定义Bean
 
-        SingleOutputStreamOperator<HeroBean> res = ds.map(line -> {
-            HeroBean heroBean;
-            try {
-                heroBean = JSON.parseObject(line, HeroBean.class);
-            } catch (Exception e) {
-                heroBean = new HeroBean();
-            }
-            return heroBean;
-        }).returns(TypeInformation.of(HeroBean.class)) ;
+        SingleOutputStreamOperator<HeroBean> res =
+                ds.map(
+                                line -> {
+                                    HeroBean heroBean;
+                                    try {
+                                        heroBean = JSON.parseObject(line, HeroBean.class);
+                                    } catch (Exception e) {
+                                        heroBean = new HeroBean();
+                                    }
+                                    return heroBean;
+                                })
+                        .returns(TypeInformation.of(HeroBean.class));
 
-               /* .returns(TypeInformation.of(new TypeHint<HeroBean>() {
-                }))*/
+        /* .returns(TypeInformation.of(new TypeHint<HeroBean>() {
+        }))*/
 
-             /*   .returns(new TypeHint<HeroBean>() {
-                }) ;*/
+        /*   .returns(new TypeHint<HeroBean>() {
+        }) ;*/
 
-               /* .returns(HeroBean.class);*/
+        /* .returns(HeroBean.class);*/
 
         res.print();
 
-        see.execute()  ;
-
-
+        see.execute();
     }
 }

@@ -41,6 +41,7 @@ public class TtcJackson2Module extends SimpleModule {
         context.setMixInAnnotations(TtcUser.class, TtcUserMixin.class);
         context.setMixInAnnotations(TtcGrantedAuthority.class, TtcGrantedAuthorityMixin.class);
         context.setMixInAnnotations(
-                FormLoginWebAuthenticationDetails.class, FormLoginWebAuthenticationDetailsMixin.class);
+                FormLoginWebAuthenticationDetails.class,
+                FormLoginWebAuthenticationDetailsMixin.class);
     }
 }

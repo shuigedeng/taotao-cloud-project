@@ -34,26 +34,32 @@ public class AlertInfo implements Serializable {
      * 状态 resolved|firing
      */
     private String status;
+
     /**
      * 标签集合
      */
     private Map<String, String> labels;
+
     /**
      * 注释集合
      */
     private Map<String, String> annotations;
+
     /**
      * 开始时间
      */
     private OffsetDateTime startsAt;
+
     /**
      * 结束时间
      */
     private OffsetDateTime endsAt;
+
     /**
      * identifies the entity that caused the alert
      */
     private String generatorURL;
+
     /**
      * fingerprint to identify the alert
      */
@@ -81,14 +87,25 @@ public class AlertInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "AlertInfo{" + "status='"
-                + status + '\'' + ", labels="
-                + labels + ", annotations="
-                + annotations + ", startsAt="
-                + startsAt + ", endsAt="
-                + endsAt + ", generatorURL='"
-                + generatorURL + '\'' + ", fingerprint='"
-                + fingerprint + '\'' + '}';
+        return "AlertInfo{"
+                + "status='"
+                + status
+                + '\''
+                + ", labels="
+                + labels
+                + ", annotations="
+                + annotations
+                + ", startsAt="
+                + startsAt
+                + ", endsAt="
+                + endsAt
+                + ", generatorURL='"
+                + generatorURL
+                + '\''
+                + ", fingerprint='"
+                + fingerprint
+                + '\''
+                + '}';
     }
 
     @Override
@@ -111,7 +128,8 @@ public class AlertInfo implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(status, labels, annotations, startsAt, endsAt, generatorURL, fingerprint);
+        return Objects.hash(
+                status, labels, annotations, startsAt, endsAt, generatorURL, fingerprint);
     }
 
     public String getStatus() {

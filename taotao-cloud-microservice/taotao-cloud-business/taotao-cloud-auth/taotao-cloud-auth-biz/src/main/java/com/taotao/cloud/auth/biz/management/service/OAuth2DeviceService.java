@@ -59,15 +59,18 @@ public class OAuth2DeviceService {
         this.registeredClientRepository = registeredClientRepository;
         this.ttcRegisteredClientRepository = ttcRegisteredClientRepository;
         this.deviceRepository = deviceRepository;
-        this.oauth2DeviceToRegisteredClientConverter = new OAuth2DeviceToRegisteredClientConverter();
-        this.registeredClientToOAuth2DeviceConverter = new RegisteredClientToOAuth2DeviceConverter(scopeService);
+        this.oauth2DeviceToRegisteredClientConverter =
+                new OAuth2DeviceToRegisteredClientConverter();
+        this.registeredClientToOAuth2DeviceConverter =
+                new RegisteredClientToOAuth2DeviceConverter(scopeService);
     }
 
     @Transactional(rollbackFor = RuntimeException.class)
     public OAuth2Device saveAndFlush(OAuth2Device entity) {
         OAuth2Device device = deviceRepository.saveAndFlush(entity);
         if (ObjectUtils.isNotEmpty(device)) {
-            registeredClientRepository.save(oauth2DeviceToRegisteredClientConverter.convert(device));
+            registeredClientRepository.save(
+                    oauth2DeviceToRegisteredClientConverter.convert(device));
             return device;
         } else {
             log.error("OAuth2DeviceService saveOrUpdate error, rollback data!");
@@ -109,7 +112,8 @@ public class OAuth2DeviceService {
                 registeredClientRepository.findByClientId(oidcClientRegistration.getClientId());
 
         if (ObjectUtils.isNotEmpty(registeredClient)) {
-            OAuth2Device oauth2Device = registeredClientToOAuth2DeviceConverter.convert(registeredClient);
+            OAuth2Device oauth2Device =
+                    registeredClientToOAuth2DeviceConverter.convert(registeredClient);
             if (ObjectUtils.isNotEmpty(oauth2Device)) {
                 OAuth2Device result = deviceRepository.save(oauth2Device);
                 return ObjectUtils.isNotEmpty(result);

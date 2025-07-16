@@ -1,5 +1,20 @@
-package com.taotao.cloud.flink.doe.sources;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.flink.doe.sources;
 
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
@@ -23,7 +38,8 @@ public class Demo04Kafka {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
         conf.setInteger("rest.port", 8888);
-        StreamExecutionEnvironment see = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
+        StreamExecutionEnvironment see =
+                StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
 
         /**
          * kafka地址
@@ -33,8 +49,7 @@ public class Demo04Kafka {
          * 数据的反序列化方式
          */
         KafkaSource<String> kafkaSource =
-                KafkaSource
-                        .<String>builder()  // 注意 泛型
+                KafkaSource.<String>builder() // 注意 泛型
                         // kakfa地址
                         .setBootstrapServers("doe01:9092,doe02:9092,doe03:9092")
                         // 消费主题
@@ -47,12 +62,10 @@ public class Demo04Kafka {
                         .setValueOnlyDeserializer(new SimpleStringSchema())
                         .build();
 
-        DataStreamSource<String> ds = see.fromSource(kafkaSource, WatermarkStrategy.noWatermarks(), "kafak-source");
+        DataStreamSource<String> ds =
+                see.fromSource(kafkaSource, WatermarkStrategy.noWatermarks(), "kafak-source");
 
-        ds.print() ;
-        see.execute() ;
-
-
-
+        ds.print();
+        see.execute();
     }
 }

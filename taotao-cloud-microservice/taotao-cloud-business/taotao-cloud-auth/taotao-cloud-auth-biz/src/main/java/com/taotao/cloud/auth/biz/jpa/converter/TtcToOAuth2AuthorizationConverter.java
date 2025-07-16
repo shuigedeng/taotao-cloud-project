@@ -57,7 +57,8 @@ public class TtcToOAuth2AuthorizationConverter
      * @since 2023-07-10 17:13:54
      */
     public TtcToOAuth2AuthorizationConverter(
-            OAuth2JacksonProcessor jacksonProcessor, RegisteredClientRepository registeredClientRepository) {
+            OAuth2JacksonProcessor jacksonProcessor,
+            RegisteredClientRepository registeredClientRepository) {
         super(jacksonProcessor);
         this.registeredClientRepository = registeredClientRepository;
     }
@@ -71,73 +72,96 @@ public class TtcToOAuth2AuthorizationConverter
      */
     @Override
     public OAuth2Authorization convert(TtcAuthorization entity) {
-        RegisteredClient registeredClient = this.registeredClientRepository.findById(entity.getRegisteredClientId());
+        RegisteredClient registeredClient =
+                this.registeredClientRepository.findById(entity.getRegisteredClientId());
         if (registeredClient == null) {
-            throw new DataRetrievalFailureException("The RegisteredClient with id '" + entity.getRegisteredClientId()
-                    + "' was not found in the RegisteredClientRepository.");
+            throw new DataRetrievalFailureException(
+                    "The RegisteredClient with id '"
+                            + entity.getRegisteredClientId()
+                            + "' was not found in the RegisteredClientRepository.");
         }
 
-        OAuth2Authorization.Builder builder = OAuth2Authorization.withRegisteredClient(registeredClient)
-                .id(entity.getId())
-                .principalName(entity.getPrincipalName())
-                .authorizationGrantType(
-                        OAuth2AuthorizationUtils.resolveAuthorizationGrantType(entity.getAuthorizationGrantType()))
-                .authorizedScopes(StringUtils.commaDelimitedListToSet(entity.getAuthorizedScopes()))
-                .attributes(attributes -> attributes.putAll(parseMap(entity.getAttributes())));
+        OAuth2Authorization.Builder builder =
+                OAuth2Authorization.withRegisteredClient(registeredClient)
+                        .id(entity.getId())
+                        .principalName(entity.getPrincipalName())
+                        .authorizationGrantType(
+                                OAuth2AuthorizationUtils.resolveAuthorizationGrantType(
+                                        entity.getAuthorizationGrantType()))
+                        .authorizedScopes(
+                                StringUtils.commaDelimitedListToSet(entity.getAuthorizedScopes()))
+                        .attributes(
+                                attributes -> attributes.putAll(parseMap(entity.getAttributes())));
         if (entity.getState() != null) {
             builder.attribute(OAuth2ParameterNames.STATE, entity.getState());
         }
 
         if (entity.getAuthorizationCodeValue() != null) {
-            OAuth2AuthorizationCode authorizationCode = new OAuth2AuthorizationCode(
-                    entity.getAuthorizationCodeValue(),
-                    DateUtil.toInstant(entity.getAuthorizationCodeIssuedAt()),
-                    DateUtil.toInstant(entity.getAuthorizationCodeExpiresAt()));
+            OAuth2AuthorizationCode authorizationCode =
+                    new OAuth2AuthorizationCode(
+                            entity.getAuthorizationCodeValue(),
+                            DateUtil.toInstant(entity.getAuthorizationCodeIssuedAt()),
+                            DateUtil.toInstant(entity.getAuthorizationCodeExpiresAt()));
             builder.token(
-                    authorizationCode, metadata -> metadata.putAll(parseMap(entity.getAuthorizationCodeMetadata())));
+                    authorizationCode,
+                    metadata -> metadata.putAll(parseMap(entity.getAuthorizationCodeMetadata())));
         }
 
         if (entity.getAccessTokenValue() != null) {
-            OAuth2AccessToken accessToken = new OAuth2AccessToken(
-                    OAuth2AccessToken.TokenType.BEARER,
-                    entity.getAccessTokenValue(),
-                    DateUtil.toInstant(entity.getAccessTokenIssuedAt()),
-                    DateUtil.toInstant(entity.getAccessTokenExpiresAt()),
-                    StringUtils.commaDelimitedListToSet(entity.getAccessTokenScopes()));
-            builder.token(accessToken, metadata -> metadata.putAll(parseMap(entity.getAccessTokenMetadata())));
+            OAuth2AccessToken accessToken =
+                    new OAuth2AccessToken(
+                            OAuth2AccessToken.TokenType.BEARER,
+                            entity.getAccessTokenValue(),
+                            DateUtil.toInstant(entity.getAccessTokenIssuedAt()),
+                            DateUtil.toInstant(entity.getAccessTokenExpiresAt()),
+                            StringUtils.commaDelimitedListToSet(entity.getAccessTokenScopes()));
+            builder.token(
+                    accessToken,
+                    metadata -> metadata.putAll(parseMap(entity.getAccessTokenMetadata())));
         }
 
         if (entity.getRefreshTokenValue() != null) {
-            OAuth2RefreshToken refreshToken = new OAuth2RefreshToken(
-                    entity.getRefreshTokenValue(),
-                    DateUtil.toInstant(entity.getRefreshTokenIssuedAt()),
-                    DateUtil.toInstant(entity.getRefreshTokenExpiresAt()));
-            builder.token(refreshToken, metadata -> metadata.putAll(parseMap(entity.getRefreshTokenMetadata())));
+            OAuth2RefreshToken refreshToken =
+                    new OAuth2RefreshToken(
+                            entity.getRefreshTokenValue(),
+                            DateUtil.toInstant(entity.getRefreshTokenIssuedAt()),
+                            DateUtil.toInstant(entity.getRefreshTokenExpiresAt()));
+            builder.token(
+                    refreshToken,
+                    metadata -> metadata.putAll(parseMap(entity.getRefreshTokenMetadata())));
         }
 
         if (entity.getOidcIdTokenValue() != null) {
-            OidcIdToken idToken = new OidcIdToken(
-                    entity.getOidcIdTokenValue(),
-                    DateUtil.toInstant(entity.getOidcIdTokenIssuedAt()),
-                    DateUtil.toInstant(entity.getOidcIdTokenExpiresAt()),
-                    parseMap(entity.getOidcIdTokenClaims()));
-            builder.token(idToken, metadata -> metadata.putAll(parseMap(entity.getOidcIdTokenMetadata())));
+            OidcIdToken idToken =
+                    new OidcIdToken(
+                            entity.getOidcIdTokenValue(),
+                            DateUtil.toInstant(entity.getOidcIdTokenIssuedAt()),
+                            DateUtil.toInstant(entity.getOidcIdTokenExpiresAt()),
+                            parseMap(entity.getOidcIdTokenClaims()));
+            builder.token(
+                    idToken,
+                    metadata -> metadata.putAll(parseMap(entity.getOidcIdTokenMetadata())));
         }
 
         if (entity.getUserCodeValue() != null) {
-            OAuth2UserCode userCode = new OAuth2UserCode(
-                    entity.getUserCodeValue(),
-                    DateUtil.toInstant(entity.getUserCodeIssuedAt()),
-                    DateUtil.toInstant(entity.getUserCodeExpiresAt()));
-            builder.token(userCode, metadata -> metadata.putAll(parseMap(entity.getUserCodeMetadata())));
+            OAuth2UserCode userCode =
+                    new OAuth2UserCode(
+                            entity.getUserCodeValue(),
+                            DateUtil.toInstant(entity.getUserCodeIssuedAt()),
+                            DateUtil.toInstant(entity.getUserCodeExpiresAt()));
+            builder.token(
+                    userCode, metadata -> metadata.putAll(parseMap(entity.getUserCodeMetadata())));
         }
 
         if (entity.getDeviceCodeValue() != null) {
-            OAuth2DeviceCode deviceCode = new OAuth2DeviceCode(
-                    entity.getDeviceCodeValue(),
-                    DateUtil.toInstant(entity.getDeviceCodeIssuedAt()),
-                    DateUtil.toInstant(entity.getDeviceCodeExpiresAt()));
-            builder.token(deviceCode, metadata -> metadata.putAll(parseMap(entity.getDeviceCodeMetadata())));
+            OAuth2DeviceCode deviceCode =
+                    new OAuth2DeviceCode(
+                            entity.getDeviceCodeValue(),
+                            DateUtil.toInstant(entity.getDeviceCodeIssuedAt()),
+                            DateUtil.toInstant(entity.getDeviceCodeExpiresAt()));
+            builder.token(
+                    deviceCode,
+                    metadata -> metadata.putAll(parseMap(entity.getDeviceCodeMetadata())));
         }
 
         return builder.build();

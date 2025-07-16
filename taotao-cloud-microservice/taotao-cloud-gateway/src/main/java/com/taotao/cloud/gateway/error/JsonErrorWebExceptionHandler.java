@@ -19,6 +19,10 @@ package com.taotao.cloud.gateway.error;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.model.Result;
 import com.taotao.boot.common.utils.log.LogUtils;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.WebProperties.Resources;
@@ -34,11 +38,6 @@ import org.springframework.web.server.MethodNotAllowedException;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerErrorException;
 import org.springframework.web.server.UnsupportedMediaTypeStatusException;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 自定义异常处理
@@ -66,26 +65,36 @@ public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandle
     // }
 
     @Override
-    protected Map<String, Object> getErrorAttributes(ServerRequest request, ErrorAttributeOptions options) {
+    protected Map<String, Object> getErrorAttributes(
+            ServerRequest request, ErrorAttributeOptions options) {
         Throwable error = super.getError(request);
 
-        LogUtils.error(error, "请求发生异常，请求URI：{}，请求方法：{}，异常信息：{}", request.path(), request.method().name(), error.getMessage());
+        LogUtils.error(
+                error,
+                "请求发生异常，请求URI：{}，请求方法：{}，异常信息：{}",
+                request.path(),
+                request.method().name(),
+                error.getMessage());
 
         String errorMessage = ResultEnum.INNER_ERROR.getDesc();
         int code = ResultEnum.INNER_ERROR.getCode();
 
         if (error instanceof NotFoundException notFoundException) {
-            String serverId = StringUtils.substringAfterLast(error.getMessage(), "Unable to find instance for ");
+            String serverId =
+                    StringUtils.substringAfterLast(
+                            error.getMessage(), "Unable to find instance for ");
             serverId = StringUtils.replace(serverId, "\"", StringUtils.EMPTY);
             LogUtils.error(notFoundException, String.format("无法找到%s服务, 服务不可用", serverId));
         }
         if (error instanceof TimeoutException timeoutException) {
-            String serverId = StringUtils.substringAfterLast(error.getMessage(), "connection refuse");
+            String serverId =
+                    StringUtils.substringAfterLast(error.getMessage(), "connection refuse");
             serverId = StringUtils.replace(serverId, "\"", StringUtils.EMPTY);
             LogUtils.error(timeoutException, String.format("访问服务超时%s服务", serverId));
         }
         if (StringUtils.containsIgnoreCase(error.getMessage(), "connection refused")) {
-            String serverId = StringUtils.substringAfterLast(error.getMessage(), "connection refuse");
+            String serverId =
+                    StringUtils.substringAfterLast(error.getMessage(), "connection refuse");
             serverId = StringUtils.replace(serverId, "\"", StringUtils.EMPTY);
             LogUtils.error(String.format("目标服务拒绝连接%s服务", serverId));
         }
@@ -93,7 +102,9 @@ public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandle
             String message = methodNotAllowedException.getMessage();
             LogUtils.error(methodNotAllowedException, "请求方式错误" + message);
         }
-        if (error instanceof UnsupportedMediaTypeStatusException unsupportedMediaTypeStatusException) {
+        if (error
+                instanceof
+                UnsupportedMediaTypeStatusException unsupportedMediaTypeStatusException) {
             String message = unsupportedMediaTypeStatusException.getMessage();
             LogUtils.error(unsupportedMediaTypeStatusException, "不支持的媒体类型" + message);
         }
@@ -105,7 +116,8 @@ public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandle
         if (error instanceof ResponseStatusException responseStatusException) {
             LogUtils.error(responseStatusException, "请求返回状态错误");
 
-            HttpStatus httpStatus = HttpStatus.resolve(responseStatusException.getStatusCode().value());
+            HttpStatus httpStatus =
+                    HttpStatus.resolve(responseStatusException.getStatusCode().value());
 
             if (HttpStatus.NOT_FOUND == httpStatus) {
                 LogUtils.error(responseStatusException, "未找到该资源");
@@ -117,7 +129,6 @@ public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandle
                 errorMessage = ResultEnum.ERROR.getDesc();
                 code = ResultEnum.ERROR.getCode();
             }
-
         }
 
         return responseError(errorMessage, code);
@@ -153,7 +164,8 @@ public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandle
         // Map<String, Object> map = BeanUtil.beanToMap(result, false, false);
         // LocalDateTime timestamp = (LocalDateTime) map
         //	.getOrDefault("timestamp", LocalDateTime.now());
-        // map.put("timestamp", timestamp.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        // map.put("timestamp", timestamp.format(DateTimeFormatter.ofPattern("yyyy-MM-dd
+        // HH:mm:ss")));
         return res;
     }
 }

@@ -17,7 +17,6 @@
 package com.taotao.cloud.bff.graphql.project;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-
 import java.util.Arrays;
 
 public enum ReleaseStatus {

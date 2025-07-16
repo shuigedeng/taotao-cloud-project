@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.hadoop.hdfs.configuration;
 
+import java.io.Serializable;
 import lombok.Data;
-import lombok.experimental.Accessors;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-
-import java.io.Serializable;
 
 /**
  * HDFS配置类
@@ -33,11 +32,11 @@ import java.io.Serializable;
 @Configuration
 public class HdfsConfiguration implements Serializable {
 
-	private static final long serialVersionUID = -3927708731917979149L;
+    private static final long serialVersionUID = -3927708731917979149L;
 
-	@Value("${hdfs.path:hdfs://host:9000}")
-	private String path;
+    @Value("${hdfs.path:hdfs://host:9000}")
+    private String path;
 
-	@Value("${hdfs.username:root}")
-	private String username;
+    @Value("${hdfs.username:root}")
+    private String username;
 }

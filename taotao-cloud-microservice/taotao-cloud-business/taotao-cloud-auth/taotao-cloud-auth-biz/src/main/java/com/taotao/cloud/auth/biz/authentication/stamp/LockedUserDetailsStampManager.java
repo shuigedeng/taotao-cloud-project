@@ -23,10 +23,9 @@ import com.taotao.boot.captcha.support.core.dto.Captcha;
 import com.taotao.boot.captcha.support.core.dto.Verification;
 import com.taotao.boot.security.spring.constants.OAuth2Constants;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
+import java.time.Duration;
 import org.dromara.hutool.core.data.id.IdUtil;
 import org.springframework.beans.factory.InitializingBean;
-
-import java.time.Duration;
 
 /**
  * <p>锁定账户签章管理 </p>
@@ -36,105 +35,108 @@ import java.time.Duration;
  * @since 2023-07-10 17:25:06
  */
 public class LockedUserDetailsStampManager extends AbstractRenderer implements InitializingBean {
-	/**
-	 * 身份验证属性
-	 */
-	private final OAuth2AuthenticationProperties authenticationProperties;
+    /**
+     * 身份验证属性
+     */
+    private final OAuth2AuthenticationProperties authenticationProperties;
 
-	/**
-	 * 锁定用户详细信息邮票管理器
-	 *
-	 * @param redisRepository          redis存储库
-	 * @param authenticationProperties 身份验证属性
-	 * @return
-	 * @since 2023-07-10 17:25:06
-	 */
-	public LockedUserDetailsStampManager(
-		RedisRepository redisRepository, OAuth2AuthenticationProperties authenticationProperties) {
-		super(redisRepository, OAuth2Constants.CACHE_NAME_TOKEN_LOCKED_USER_DETAIL);
-		this.authenticationProperties = authenticationProperties;
-	}
+    /**
+     * 锁定用户详细信息邮票管理器
+     *
+     * @param redisRepository          redis存储库
+     * @param authenticationProperties 身份验证属性
+     * @return
+     * @since 2023-07-10 17:25:06
+     */
+    public LockedUserDetailsStampManager(
+            RedisRepository redisRepository,
+            OAuth2AuthenticationProperties authenticationProperties) {
+        super(redisRepository, OAuth2Constants.CACHE_NAME_TOKEN_LOCKED_USER_DETAIL);
+        this.authenticationProperties = authenticationProperties;
+    }
 
-	/**
-	 * 锁定用户详细信息邮票管理器
-	 *
-	 * @param redisRepository          redis存储库
-	 * @param expire                   过期
-	 * @param authenticationProperties 身份验证属性
-	 * @return
-	 * @since 2023-07-10 17:25:06
-	 */
-	public LockedUserDetailsStampManager(
-		RedisRepository redisRepository, Duration expire, OAuth2AuthenticationProperties authenticationProperties) {
-		super(redisRepository, OAuth2Constants.CACHE_NAME_TOKEN_LOCKED_USER_DETAIL, expire);
-		this.authenticationProperties = authenticationProperties;
-	}
+    /**
+     * 锁定用户详细信息邮票管理器
+     *
+     * @param redisRepository          redis存储库
+     * @param expire                   过期
+     * @param authenticationProperties 身份验证属性
+     * @return
+     * @since 2023-07-10 17:25:06
+     */
+    public LockedUserDetailsStampManager(
+            RedisRepository redisRepository,
+            Duration expire,
+            OAuth2AuthenticationProperties authenticationProperties) {
+        super(redisRepository, OAuth2Constants.CACHE_NAME_TOKEN_LOCKED_USER_DETAIL, expire);
+        this.authenticationProperties = authenticationProperties;
+    }
 
-	/**
-	 * 下一枚邮票
-	 *
-	 * @param key 钥匙
-	 * @return {@link String }
-	 * @since 2023-07-10 17:25:06
-	 */
-	@Override
-	public String nextStamp(String key) {
-		return IdUtil.fastSimpleUUID();
-	}
+    /**
+     * 下一枚邮票
+     *
+     * @param key 钥匙
+     * @return {@link String }
+     * @since 2023-07-10 17:25:06
+     */
+    @Override
+    public String nextStamp(String key) {
+        return IdUtil.fastSimpleUUID();
+    }
 
-	/**
-	 * 属性设置后
-	 *
-	 * @since 2023-07-10 17:25:06
-	 */
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		super.setExpire(authenticationProperties.getSignInFailureLimited().getExpire());
-	}
+    /**
+     * 属性设置后
+     *
+     * @since 2023-07-10 17:25:06
+     */
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        super.setExpire(authenticationProperties.getSignInFailureLimited().getExpire());
+    }
 
-	/**
-	 * 抽奖
-	 *
-	 * @return {@link Metadata }
-	 * @since 2023-07-10 17:25:07
-	 */
-	@Override
-	public Metadata draw() {
-		return null;
-	}
+    /**
+     * 抽奖
+     *
+     * @return {@link Metadata }
+     * @since 2023-07-10 17:25:07
+     */
+    @Override
+    public Metadata draw() {
+        return null;
+    }
 
-	/**
-	 * 获取capcha
-	 *
-	 * @param key 钥匙
-	 * @return {@link Captcha }
-	 * @since 2023-07-10 17:25:07
-	 */
-	@Override
-	public Captcha getCapcha(String key) {
-		return null;
-	}
+    /**
+     * 获取capcha
+     *
+     * @param key 钥匙
+     * @return {@link Captcha }
+     * @since 2023-07-10 17:25:07
+     */
+    @Override
+    public Captcha getCapcha(String key) {
+        return null;
+    }
 
-	/**
-	 * 验证
-	 *
-	 * @param verification 验证
-	 * @return boolean
-	 * @since 2023-07-10 17:25:08
-	 */
-	@Override
-	public boolean verify(Verification verification) {
-		return false;
-	}
+    /**
+     * 验证
+     *
+     * @param verification 验证
+     * @return boolean
+     * @since 2023-07-10 17:25:08
+     */
+    @Override
+    public boolean verify(Verification verification) {
+        return false;
+    }
 
-	/**
-	 * 获取类别
-	 *
-	 * @return {@link String }
-	 * @since 2023-07-10 17:25:08
-	 */
-	@Override
-	public String getCategory() {
-		return null;
-	}
+    /**
+     * 获取类别
+     *
+     * @return {@link String }
+     * @since 2023-07-10 17:25:08
+     */
+    @Override
+    public String getCategory() {
+        return null;
+    }
 }

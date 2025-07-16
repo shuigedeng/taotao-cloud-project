@@ -48,23 +48,34 @@ public class OAuth2AuthenticationProviderUtils {
         throw new OAuth2AuthenticationException(OAuth2ErrorCodes.INVALID_CLIENT);
     }
 
-    public static <T extends OAuth2Token> OAuth2Authorization invalidate(OAuth2Authorization authorization, T token) {
+    public static <T extends OAuth2Token> OAuth2Authorization invalidate(
+            OAuth2Authorization authorization, T token) {
 
         // @formatter:off
-        OAuth2Authorization.Builder authorizationBuilder = OAuth2Authorization.from(authorization)
-                .token(token, (metadata) -> metadata.put(OAuth2Authorization.Token.INVALIDATED_METADATA_NAME, true));
+        OAuth2Authorization.Builder authorizationBuilder =
+                OAuth2Authorization.from(authorization)
+                        .token(
+                                token,
+                                (metadata) ->
+                                        metadata.put(
+                                                OAuth2Authorization.Token.INVALIDATED_METADATA_NAME,
+                                                true));
 
         if (OAuth2RefreshToken.class.isAssignableFrom(token.getClass())) {
             authorizationBuilder.token(
                     authorization.getAccessToken().getToken(),
-                    (metadata) -> metadata.put(OAuth2Authorization.Token.INVALIDATED_METADATA_NAME, true));
+                    (metadata) ->
+                            metadata.put(
+                                    OAuth2Authorization.Token.INVALIDATED_METADATA_NAME, true));
 
             OAuth2Authorization.Token<OAuth2AuthorizationCode> authorizationCode =
                     authorization.getToken(OAuth2AuthorizationCode.class);
             if (authorizationCode != null && !authorizationCode.isInvalidated()) {
                 authorizationBuilder.token(
                         authorizationCode.getToken(),
-                        (metadata) -> metadata.put(OAuth2Authorization.Token.INVALIDATED_METADATA_NAME, true));
+                        (metadata) ->
+                                metadata.put(
+                                        OAuth2Authorization.Token.INVALIDATED_METADATA_NAME, true));
             }
         }
         // @formatter:on

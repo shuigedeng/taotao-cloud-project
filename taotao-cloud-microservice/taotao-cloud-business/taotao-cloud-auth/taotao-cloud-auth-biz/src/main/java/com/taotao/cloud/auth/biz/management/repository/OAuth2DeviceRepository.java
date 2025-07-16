@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.management.repository;
 
-import com.taotao.cloud.auth.biz.management.entity.OAuth2Device;
 import com.taotao.boot.data.jpa.base.repository.JpaInterfaceSuperRepository;
+import com.taotao.cloud.auth.biz.management.entity.OAuth2Device;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

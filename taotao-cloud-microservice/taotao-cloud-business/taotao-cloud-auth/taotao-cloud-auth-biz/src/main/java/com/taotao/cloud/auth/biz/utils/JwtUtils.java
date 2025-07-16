@@ -38,10 +38,14 @@ public class JwtUtils {
     }
 
     public static JwtClaimsSet.Builder accessTokenClaims(
-            RegisteredClient registeredClient, String issuer, String subject, Set<String> authorizedScopes) {
+            RegisteredClient registeredClient,
+            String issuer,
+            String subject,
+            Set<String> authorizedScopes) {
 
         Instant issuedAt = Instant.now();
-        Instant expiresAt = issuedAt.plus(registeredClient.getTokenSettings().getAccessTokenTimeToLive());
+        Instant expiresAt =
+                issuedAt.plus(registeredClient.getTokenSettings().getAccessTokenTimeToLive());
 
         // @formatter:off
         JwtClaimsSet.Builder claimsBuilder = JwtClaimsSet.builder();
@@ -88,7 +92,4 @@ public class JwtUtils {
 
         return claimsBuilder;
     }
-
-
-
 }

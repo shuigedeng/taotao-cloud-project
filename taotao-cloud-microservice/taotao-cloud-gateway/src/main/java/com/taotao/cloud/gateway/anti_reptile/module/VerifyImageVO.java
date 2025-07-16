@@ -52,9 +52,16 @@ public class VerifyImageVO implements Serializable {
 
     @Override
     public String toString() {
-        return "VerifyImageVO{" + "verifyId='"
-                + verifyId + '\'' + ", verifyType='"
-                + verifyType + '\'' + ", verifyImgStr='"
-                + verifyImgStr + '\'' + '}';
+        return "VerifyImageVO{"
+                + "verifyId='"
+                + verifyId
+                + '\''
+                + ", verifyType='"
+                + verifyType
+                + '\''
+                + ", verifyImgStr='"
+                + verifyImgStr
+                + '\''
+                + '}';
     }
 }

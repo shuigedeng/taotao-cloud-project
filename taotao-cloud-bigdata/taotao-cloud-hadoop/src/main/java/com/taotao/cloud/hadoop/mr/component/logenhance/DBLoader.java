@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.hadoop.mr.component.logenhance;
 
 import java.sql.Connection;
@@ -30,43 +31,43 @@ import java.util.Map;
  */
 public class DBLoader {
 
-	/**
-	 * 加载数据库规则
-	 *
-	 * @param ruleMap ruleMap
-	 * @return void
-	 * @author shuigedeng
-	 * @version 2022.04
-	 * @since 2020/11/26 下午8:27
-	 */
-	public static void dbLoader(Map<String, String> ruleMap) throws Exception {
-		Connection conn = null;
-		Statement st = null;
-		ResultSet res = null;
+    /**
+     * 加载数据库规则
+     *
+     * @param ruleMap ruleMap
+     * @return void
+     * @author shuigedeng
+     * @version 2022.04
+     * @since 2020/11/26 下午8:27
+     */
+    public static void dbLoader(Map<String, String> ruleMap) throws Exception {
+        Connection conn = null;
+        Statement st = null;
+        ResultSet res = null;
 
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/urldb", "root", "root");
-			st = conn.createStatement();
-			res = st.executeQuery("select url,content from url_rule");
-			while (res.next()) {
-				ruleMap.put(res.getString(1), res.getString(2));
-			}
-		} finally {
-			try {
-				if (res != null) {
-					res.close();
-				}
-				if (st != null) {
-					st.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/urldb", "root", "root");
+            st = conn.createStatement();
+            res = st.executeQuery("select url,content from url_rule");
+            while (res.next()) {
+                ruleMap.put(res.getString(1), res.getString(2));
+            }
+        } finally {
+            try {
+                if (res != null) {
+                    res.close();
+                }
+                if (st != null) {
+                    st.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

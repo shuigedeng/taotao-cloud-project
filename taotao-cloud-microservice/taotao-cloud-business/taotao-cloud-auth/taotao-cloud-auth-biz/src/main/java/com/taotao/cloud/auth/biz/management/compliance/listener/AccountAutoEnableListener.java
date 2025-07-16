@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.auth.biz.management.compliance.listener;
 
-import com.taotao.cloud.auth.biz.management.compliance.OAuth2AccountStatusManager;
 import com.taotao.boot.security.spring.constants.OAuth2Constants;
 import com.taotao.boot.security.spring.constants.SymbolConstants;
+import com.taotao.cloud.auth.biz.management.compliance.OAuth2AccountStatusManager;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -32,28 +32,27 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
  */
 public class AccountAutoEnableListener extends KeyExpirationEventMessageListener {
 
-	private static final Logger log = LoggerFactory.getLogger(AccountAutoEnableListener.class);
+    private static final Logger log = LoggerFactory.getLogger(AccountAutoEnableListener.class);
 
-	private final OAuth2AccountStatusManager accountStatusManager;
+    private final OAuth2AccountStatusManager accountStatusManager;
 
-	public AccountAutoEnableListener(
-		RedisMessageListenerContainer listenerContainer,
-		OAuth2AccountStatusManager accountStatusManager) {
-		super(listenerContainer);
-		this.accountStatusManager = accountStatusManager;
-	}
+    public AccountAutoEnableListener(
+            RedisMessageListenerContainer listenerContainer,
+            OAuth2AccountStatusManager accountStatusManager) {
+        super(listenerContainer);
+        this.accountStatusManager = accountStatusManager;
+    }
 
-	@Override
-	public void onMessage(Message message, byte[] pattern) {
-		String key = new String(message.getBody(), StandardCharsets.UTF_8);
-		if (StringUtils.contains(key, OAuth2Constants.CACHE_NAME_TOKEN_LOCKED_USER_DETAIL)) {
-			String userId = StringUtils.substringAfterLast(key, SymbolConstants.COLON);
-			log.info(" Parse the user [{}] at expired redis cache key [{}]", userId,
-				key);
-			if (StringUtils.isNotBlank(userId)) {
-				log.debug(" Automatically unlock user account [{}]", userId);
-				accountStatusManager.enable(userId);
-			}
-		}
-	}
+    @Override
+    public void onMessage(Message message, byte[] pattern) {
+        String key = new String(message.getBody(), StandardCharsets.UTF_8);
+        if (StringUtils.contains(key, OAuth2Constants.CACHE_NAME_TOKEN_LOCKED_USER_DETAIL)) {
+            String userId = StringUtils.substringAfterLast(key, SymbolConstants.COLON);
+            log.info(" Parse the user [{}] at expired redis cache key [{}]", userId, key);
+            if (StringUtils.isNotBlank(userId)) {
+                log.debug(" Automatically unlock user account [{}]", userId);
+                accountStatusManager.enable(userId);
+            }
+        }
+    }
 }

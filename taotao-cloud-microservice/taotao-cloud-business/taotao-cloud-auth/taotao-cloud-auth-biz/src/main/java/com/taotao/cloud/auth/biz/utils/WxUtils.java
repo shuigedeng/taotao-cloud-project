@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.auth.biz.utils;
 
+import com.taotao.boot.common.utils.log.LogUtils;
 import java.security.AlgorithmParameters;
 import java.security.Key;
 import java.security.Security;
@@ -24,7 +25,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import com.taotao.boot.common.utils.log.LogUtils;
+
 /**
  * WxUtils
  *

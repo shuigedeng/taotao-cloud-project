@@ -22,6 +22,8 @@ import com.taotao.cloud.auth.biz.management.entity.OAuth2Compliance;
 import com.taotao.cloud.auth.biz.management.repository.OAuth2ComplianceRepository;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.dromara.hutool.http.useragent.UserAgent;
@@ -33,9 +35,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <p>ActionAuditService </p>
@@ -58,31 +57,34 @@ public class OAuth2ComplianceService {
             int pageNumber, int pageSize, String principalName, String clientId, String ip) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
-        Specification<OAuth2Compliance> specification = (root, criteriaQuery, criteriaBuilder) -> {
-            List<Predicate> predicates = new ArrayList<>();
+        Specification<OAuth2Compliance> specification =
+                (root, criteriaQuery, criteriaBuilder) -> {
+                    List<Predicate> predicates = new ArrayList<>();
 
-            if (StringUtils.isNotBlank(principalName)) {
-                predicates.add(criteriaBuilder.equal(root.get("principalName"), principalName));
-            }
+                    if (StringUtils.isNotBlank(principalName)) {
+                        predicates.add(
+                                criteriaBuilder.equal(root.get("principalName"), principalName));
+                    }
 
-            if (StringUtils.isNotBlank(clientId)) {
-                predicates.add(criteriaBuilder.equal(root.get("clientId"), clientId));
-            }
+                    if (StringUtils.isNotBlank(clientId)) {
+                        predicates.add(criteriaBuilder.equal(root.get("clientId"), clientId));
+                    }
 
-            if (StringUtils.isNotBlank(ip)) {
-                predicates.add(criteriaBuilder.equal(root.get("ip"), ip));
-            }
+                    if (StringUtils.isNotBlank(ip)) {
+                        predicates.add(criteriaBuilder.equal(root.get("ip"), ip));
+                    }
 
-            Predicate[] predicateArray = new Predicate[predicates.size()];
-            criteriaQuery.where(criteriaBuilder.and(predicates.toArray(predicateArray)));
-            return criteriaQuery.getRestriction();
-        };
+                    Predicate[] predicateArray = new Predicate[predicates.size()];
+                    criteriaQuery.where(criteriaBuilder.and(predicates.toArray(predicateArray)));
+                    return criteriaQuery.getRestriction();
+                };
 
         //        return complianceRepository.findByPage(specification, pageable);
         return null;
     }
 
-    public OAuth2Compliance save(String principalName, String clientId, String operation, HttpServletRequest request) {
+    public OAuth2Compliance save(
+            String principalName, String clientId, String operation, HttpServletRequest request) {
         OAuth2Compliance compliance = toEntity(principalName, clientId, operation, request);
         log.info("Sign in user is [{}]", compliance);
         return complianceRepository.save(compliance);

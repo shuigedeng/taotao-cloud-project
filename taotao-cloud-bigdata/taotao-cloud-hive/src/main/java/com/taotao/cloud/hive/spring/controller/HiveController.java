@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.hive.spring.controller;
 
 /**
@@ -20,6 +21,4 @@ package com.taotao.cloud.hive.spring.controller;
  * @version 2022.04
  * @since 2020/10/30 10:20
  */
-public class HiveController {
-
-}
+public class HiveController {}

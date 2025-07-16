@@ -20,7 +20,6 @@ import com.taotao.boot.core.startup.StartupSpringApplication;
 import com.taotao.boot.web.annotation.TaoTaoBootApplication;
 import com.taotao.cloud.generator.maku.GeneratorAutoConfiguration;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 
@@ -32,17 +31,19 @@ import org.springframework.context.annotation.Import;
  * @since 2023-05-11 13:55:49
  */
 @Import(GeneratorAutoConfiguration.class)
-@MapperScan(basePackages = {"com.taotao.cloud.generator.maku.dao", "com.taotao.cloud.generator.mapper"})
-@ComponentScan(basePackages = {"com.taotao.cloud.generator.maku.dao", "com.taotao.cloud.generator.mapper"})
+@MapperScan(
+        basePackages = {"com.taotao.cloud.generator.maku.dao", "com.taotao.cloud.generator.mapper"})
+@ComponentScan(
+        basePackages = {"com.taotao.cloud.generator.maku.dao", "com.taotao.cloud.generator.mapper"})
 @TaoTaoBootApplication
 public class TaoTaoCloudGeneratorApplication {
 
     public static void main(String[] args) {
-		new StartupSpringApplication(TaoTaoCloudGeneratorApplication.class)
-			.setTtcBanner()
-			.setTtcProfileIfNotExists("dev")
-			.setTtcApplicationProperty("taotao-cloud-generator")
-			.setTtcAllowBeanDefinitionOverriding(true)
-			.run(args);
+        new StartupSpringApplication(TaoTaoCloudGeneratorApplication.class)
+                .setTtcBanner()
+                .setTtcProfileIfNotExists("dev")
+                .setTtcApplicationProperty("taotao-cloud-generator")
+                .setTtcAllowBeanDefinitionOverriding(true)
+                .run(args);
     }
 }

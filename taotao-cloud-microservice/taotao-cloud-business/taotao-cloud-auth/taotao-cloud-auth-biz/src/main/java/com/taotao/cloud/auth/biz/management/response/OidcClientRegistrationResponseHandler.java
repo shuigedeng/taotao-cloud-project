@@ -41,12 +41,14 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
  */
 public class OidcClientRegistrationResponseHandler implements AuthenticationSuccessHandler {
 
-    private static final Logger log = LoggerFactory.getLogger(OidcClientRegistrationResponseHandler.class);
+    private static final Logger log =
+            LoggerFactory.getLogger(OidcClientRegistrationResponseHandler.class);
 
     private final OAuth2DeviceService deviceService;
 
-    private final HttpMessageConverter<OidcClientRegistration> clientRegistrationHttpMessageConverter =
-            new OidcClientRegistrationHttpMessageConverter();
+    private final HttpMessageConverter<OidcClientRegistration>
+            clientRegistrationHttpMessageConverter =
+                    new OidcClientRegistrationHttpMessageConverter();
 
     public OidcClientRegistrationResponseHandler(OAuth2DeviceService deviceService) {
         this.deviceService = deviceService;
@@ -60,7 +62,8 @@ public class OidcClientRegistrationResponseHandler implements AuthenticationSucc
         OidcClientRegistrationAuthenticationToken clientRegistrationAuthenticationToken =
                 (OidcClientRegistrationAuthenticationToken) authentication;
 
-        OidcClientRegistration clientRegistration = clientRegistrationAuthenticationToken.getClientRegistration();
+        OidcClientRegistration clientRegistration =
+                clientRegistrationAuthenticationToken.getClientRegistration();
 
         boolean success = deviceService.sync(clientRegistration);
         if (success) {

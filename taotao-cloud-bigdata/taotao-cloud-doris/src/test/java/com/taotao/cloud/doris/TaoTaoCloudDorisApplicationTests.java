@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.doris;
 
-
 class TaoTaoCloudDorisApplicationTests {
     void contextLoads() {}
 }

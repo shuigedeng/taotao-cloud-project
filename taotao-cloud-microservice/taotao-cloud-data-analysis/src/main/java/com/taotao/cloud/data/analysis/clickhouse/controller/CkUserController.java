@@ -32,8 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CkUserController {
 
-    @Autowired
-    private CkUserService userService;
+    @Autowired private CkUserService userService;
 
     @RequestMapping("/queryUser")
     public Object query() {

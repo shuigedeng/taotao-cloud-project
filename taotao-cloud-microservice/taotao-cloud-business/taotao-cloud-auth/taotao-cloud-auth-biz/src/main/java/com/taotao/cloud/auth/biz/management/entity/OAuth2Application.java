@@ -17,9 +17,9 @@
 package com.taotao.cloud.auth.biz.management.entity;
 
 import com.google.common.base.MoreObjects;
-import com.taotao.cloud.auth.biz.management.definition.AbstractOAuth2RegisteredClient;
 import com.taotao.boot.security.spring.constants.OAuth2Constants;
 import com.taotao.boot.security.spring.enums.ApplicationType;
+import com.taotao.cloud.auth.biz.management.definition.AbstractOAuth2RegisteredClient;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

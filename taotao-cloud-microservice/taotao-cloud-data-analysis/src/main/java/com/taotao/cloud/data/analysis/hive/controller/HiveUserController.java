@@ -31,8 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HiveUserController {
 
-    @Autowired
-    private HiveUserService userService;
+    @Autowired private HiveUserService userService;
 
     @RequestMapping("/queryUser")
     public Object query() {

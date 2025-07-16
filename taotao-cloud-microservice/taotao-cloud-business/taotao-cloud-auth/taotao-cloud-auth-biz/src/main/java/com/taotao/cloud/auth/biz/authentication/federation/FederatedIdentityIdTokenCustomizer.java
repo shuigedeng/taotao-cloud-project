@@ -1,5 +1,23 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.auth.biz.authentication.federation;
 
+import java.util.*;
+import java.util.stream.Collectors;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,48 +30,49 @@ import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
 /**
  * An {@link OAuth2TokenCustomizer} to map claims from a federated identity to
  * the {@code id_token} produced by this authorization server.
  */
-public final class FederatedIdentityIdTokenCustomizer implements OAuth2TokenCustomizer<JwtEncodingContext> {
-	/**
-	 * 权限在token中的key
-	 */
-	public static final String AUTHORITIES_KEY = "authorities";
+public final class FederatedIdentityIdTokenCustomizer
+        implements OAuth2TokenCustomizer<JwtEncodingContext> {
+    /**
+     * 权限在token中的key
+     */
+    public static final String AUTHORITIES_KEY = "authorities";
 
-    private static final Set<String> ID_TOKEN_CLAIMS = Set.of(
-            IdTokenClaimNames.ISS,
-            IdTokenClaimNames.SUB,
-            IdTokenClaimNames.AUD,
-            IdTokenClaimNames.EXP,
-            IdTokenClaimNames.IAT,
-            IdTokenClaimNames.AUTH_TIME,
-            IdTokenClaimNames.NONCE,
-            IdTokenClaimNames.ACR,
-            IdTokenClaimNames.AMR,
-            IdTokenClaimNames.AZP,
-            IdTokenClaimNames.AT_HASH,
-            IdTokenClaimNames.C_HASH
-    );
+    private static final Set<String> ID_TOKEN_CLAIMS =
+            Set.of(
+                    IdTokenClaimNames.ISS,
+                    IdTokenClaimNames.SUB,
+                    IdTokenClaimNames.AUD,
+                    IdTokenClaimNames.EXP,
+                    IdTokenClaimNames.IAT,
+                    IdTokenClaimNames.AUTH_TIME,
+                    IdTokenClaimNames.NONCE,
+                    IdTokenClaimNames.ACR,
+                    IdTokenClaimNames.AMR,
+                    IdTokenClaimNames.AZP,
+                    IdTokenClaimNames.AT_HASH,
+                    IdTokenClaimNames.C_HASH);
 
     @Override
     public void customize(JwtEncodingContext context) {
         if (OidcParameterNames.ID_TOKEN.equals(context.getTokenType().getValue())) {
             Map<String, Object> thirdPartyClaims = extractClaims(context.getPrincipal());
-            context.getClaims().claims(existingClaims -> {
-                // Remove conflicting claims set by this authorization server
-                existingClaims.keySet().forEach(thirdPartyClaims::remove);
+            context.getClaims()
+                    .claims(
+                            existingClaims -> {
+                                // Remove conflicting claims set by this authorization server
+                                existingClaims.keySet().forEach(thirdPartyClaims::remove);
 
-                // Remove standard id_token claims that could cause problems with clients
-                ID_TOKEN_CLAIMS.forEach(thirdPartyClaims::remove);
+                                // Remove standard id_token claims that could cause problems with
+                                // clients
+                                ID_TOKEN_CLAIMS.forEach(thirdPartyClaims::remove);
 
-                // Add all other claims directly to id_token
-                existingClaims.putAll(thirdPartyClaims);
-            });
+                                // Add all other claims directly to id_token
+                                existingClaims.putAll(thirdPartyClaims);
+                            });
         }
 
         // 检查登录用户信息是不是OAuth2User，在token中添加loginType属性
@@ -73,11 +92,12 @@ public final class FederatedIdentityIdTokenCustomizer implements OAuth2TokenCust
             // 获取用户的权限
             Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
             // 提取权限并转为字符串
-            Set<String> authoritySet = Optional.ofNullable(authorities).orElse(Collections.emptyList()).stream()
-                    // 获取权限字符串
-                    .map(GrantedAuthority::getAuthority)
-                    // 去重
-                    .collect(Collectors.toSet());
+            Set<String> authoritySet =
+                    Optional.ofNullable(authorities).orElse(Collections.emptyList()).stream()
+                            // 获取权限字符串
+                            .map(GrantedAuthority::getAuthority)
+                            // 去重
+                            .collect(Collectors.toSet());
 
             // 合并scope与用户信息
             authoritySet.addAll(scopes);
@@ -103,6 +123,4 @@ public final class FederatedIdentityIdTokenCustomizer implements OAuth2TokenCust
 
         return new HashMap<>(claims);
     }
-
-
 }

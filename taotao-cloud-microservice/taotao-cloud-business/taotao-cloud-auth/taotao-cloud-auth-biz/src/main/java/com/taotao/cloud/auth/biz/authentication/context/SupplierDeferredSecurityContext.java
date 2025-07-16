@@ -26,46 +26,46 @@ import org.springframework.security.core.context.SecurityContextHolderStrategy;
 
 public final class SupplierDeferredSecurityContext implements DeferredSecurityContext {
 
-	private static final Log logger = LogFactory.getLog(SupplierDeferredSecurityContext.class);
+    private static final Log logger = LogFactory.getLog(SupplierDeferredSecurityContext.class);
 
-	private final Supplier<SecurityContext> supplier;
+    private final Supplier<SecurityContext> supplier;
 
-	private final SecurityContextHolderStrategy strategy;
+    private final SecurityContextHolderStrategy strategy;
 
-	private SecurityContext securityContext;
+    private SecurityContext securityContext;
 
-	private boolean missingContext;
+    private boolean missingContext;
 
-	public SupplierDeferredSecurityContext(Supplier<SecurityContext> supplier,
-		SecurityContextHolderStrategy strategy) {
-		this.supplier = supplier;
-		this.strategy = strategy;
-	}
+    public SupplierDeferredSecurityContext(
+            Supplier<SecurityContext> supplier, SecurityContextHolderStrategy strategy) {
+        this.supplier = supplier;
+        this.strategy = strategy;
+    }
 
-	@Override
-	public SecurityContext get() {
-		init();
-		return this.securityContext;
-	}
+    @Override
+    public SecurityContext get() {
+        init();
+        return this.securityContext;
+    }
 
-	@Override
-	public boolean isGenerated() {
-		init();
-		return this.missingContext;
-	}
+    @Override
+    public boolean isGenerated() {
+        init();
+        return this.missingContext;
+    }
 
-	private void init() {
-		if (this.securityContext != null) {
-			return;
-		}
+    private void init() {
+        if (this.securityContext != null) {
+            return;
+        }
 
-		this.securityContext = this.supplier.get();
-		this.missingContext = (this.securityContext == null);
-		if (this.missingContext) {
-			this.securityContext = this.strategy.createEmptyContext();
-			if (logger.isTraceEnabled()) {
-				logger.trace(LogMessage.format("Created %s", this.securityContext));
-			}
-		}
-	}
+        this.securityContext = this.supplier.get();
+        this.missingContext = (this.securityContext == null);
+        if (this.missingContext) {
+            this.securityContext = this.strategy.createEmptyContext();
+            if (logger.isTraceEnabled()) {
+                logger.trace(LogMessage.format("Created %s", this.securityContext));
+            }
+        }
+    }
 }

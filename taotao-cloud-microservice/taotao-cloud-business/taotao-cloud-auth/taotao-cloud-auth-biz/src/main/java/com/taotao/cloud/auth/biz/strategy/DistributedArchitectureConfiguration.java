@@ -41,7 +41,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration(proxyBeanMethods = false)
 public class DistributedArchitectureConfiguration {
 
-    private static final Logger log = LoggerFactory.getLogger(DistributedArchitectureConfiguration.class);
+    private static final Logger log =
+            LoggerFactory.getLogger(DistributedArchitectureConfiguration.class);
 
     @PostConstruct
     public void postConstruct() {
@@ -49,13 +50,17 @@ public class DistributedArchitectureConfiguration {
     }
 
     @Configuration(proxyBeanMethods = false)
-    @ConditionalOnProperty(prefix = "taotao.cloud.auth.local", name = "enabled", havingValue = "true")
+    @ConditionalOnProperty(
+            prefix = "taotao.cloud.auth.local",
+            name = "enabled",
+            havingValue = "true")
     static class DataAccessStrategyLocalConfiguration {
 
         @Bean
         @ConditionalOnMissingBean
         public StrategyUserDetailsService localUserDetailsService(
-                SysUserService sysUserService, SocialAuthenticationHandler socialAuthenticationHandler) {
+                SysUserService sysUserService,
+                SocialAuthenticationHandler socialAuthenticationHandler) {
             log.debug(" Strategy [Local User Details Service] Auto Configure.");
             return new LocalUserDetailsService(sysUserService, socialAuthenticationHandler);
         }

@@ -33,6 +33,7 @@ public class SecretKey implements Serializable {
      * 数据存储身份标识
      */
     private String identity;
+
     /**
      * 对称加密算法秘钥
      */
@@ -119,7 +120,8 @@ public class SecretKey implements Serializable {
             return false;
         }
         SecretKey secretKey = (SecretKey) o;
-        return Objects.equal(identity, secretKey.identity) && Objects.equal(timestamp, secretKey.timestamp);
+        return Objects.equal(identity, secretKey.identity)
+                && Objects.equal(timestamp, secretKey.timestamp);
     }
 
     @Override

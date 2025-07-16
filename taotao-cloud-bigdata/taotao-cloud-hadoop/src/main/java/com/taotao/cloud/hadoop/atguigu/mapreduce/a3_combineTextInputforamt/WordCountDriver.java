@@ -1,5 +1,22 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.hadoop.atguigu.mapreduce.a3_combineTextInputforamt;
 
+import java.io.IOException;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -9,12 +26,11 @@ import org.apache.hadoop.mapreduce.lib.input.CombineTextInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-import java.io.IOException;
-
 public class WordCountDriver {
-	private static String PATH = "/Users/shuigedeng/Downloads/尚硅谷大数据/尚硅谷-hadoop3资料/11_input";
+    private static String PATH = "/Users/shuigedeng/Downloads/尚硅谷大数据/尚硅谷-hadoop3资料/11_input";
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
+    public static void main(String[] args)
+            throws IOException, ClassNotFoundException, InterruptedException {
 
         // 1 获取job
         Configuration conf = new Configuration();
@@ -38,13 +54,13 @@ public class WordCountDriver {
         // 如果不设置InputFormat，它默认用的是TextInputFormat.class
         job.setInputFormatClass(CombineTextInputFormat.class);
 
-        //虚拟存储切片最大值设置4m
-//        CombineTextInputFormat.setMaxInputSplitSize(job, 4194304);
+        // 虚拟存储切片最大值设置4m
+        //        CombineTextInputFormat.setMaxInputSplitSize(job, 4194304);
         CombineTextInputFormat.setMaxInputSplitSize(job, 20971520);
 
         // 6 设置输入路径和输出路径
-        FileInputFormat.setInputPaths(job, new Path(PATH+"/inputcombinetextinputformat"));
-        FileOutputFormat.setOutputPath(job, new Path(PATH+"/outputCombine3"));
+        FileInputFormat.setInputPaths(job, new Path(PATH + "/inputcombinetextinputformat"));
+        FileOutputFormat.setOutputPath(job, new Path(PATH + "/outputCombine3"));
 
         // 7 提交job
         boolean result = job.waitForCompletion(true);

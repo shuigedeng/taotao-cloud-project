@@ -1,5 +1,22 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.flink.ttc.checkpoint;
 
+import java.time.Duration;
 import org.apache.flink.api.common.typeinfo.Types;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.configuration.Configuration;
@@ -7,10 +24,6 @@ import org.apache.flink.streaming.api.CheckpointingMode;
 import org.apache.flink.streaming.api.environment.CheckpointConfig;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.util.Collector;
-
-import java.time.Duration;
-
-import static org.apache.flink.streaming.api.environment.ExecutionCheckpointingOptions.ENABLE_CHECKPOINTS_AFTER_TASKS_FINISH;
 
 /**
  * TODO
@@ -23,16 +36,15 @@ public class CheckpointConfigDemo {
         Configuration configuration = new Configuration();
 
         // TODO 最终检查点：1.15开始，默认是true
-//        configuration.set(ENABLE_CHECKPOINTS_AFTER_TASKS_FINISH, false);
+        //        configuration.set(ENABLE_CHECKPOINTS_AFTER_TASKS_FINISH, false);
 
-        StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(configuration);
+        StreamExecutionEnvironment env =
+                StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(configuration);
         env.setParallelism(1);
-
 
         // TODO 开启 Changelog
         // 要求checkpoint的最大并发必须为1，其他参数建议在flink-conf配置文件中去指定
         env.enableChangelogStateBackend(true);
-
 
         // 代码中用到hdfs，需要导入hadoop依赖、指定访问hdfs的用户名
         System.setProperty("HADOOP_USER_NAME", "atguigu");
@@ -52,7 +64,8 @@ public class CheckpointConfigDemo {
         // 6、取消作业时，checkpoint的数据 是否保留在外部系统
         // DELETE_ON_CANCELLATION:主动cancel时，删除存在外部系统的chk-xx目录 （如果是程序突然挂掉，不会删）
         // RETAIN_ON_CANCELLATION:主动cancel时，外部系统的chk-xx目录会保存下来
-        checkpointConfig.setExternalizedCheckpointCleanup(CheckpointConfig.ExternalizedCheckpointCleanup.RETAIN_ON_CANCELLATION);
+        checkpointConfig.setExternalizedCheckpointCleanup(
+                CheckpointConfig.ExternalizedCheckpointCleanup.RETAIN_ON_CANCELLATION);
         // 7、允许 checkpoint 连续失败的次数，默认0--》表示checkpoint一失败，job就挂掉
         checkpointConfig.setTolerableCheckpointFailureNumber(10);
 
@@ -63,17 +76,14 @@ public class CheckpointConfigDemo {
         // 如果大于0， 一开始用 对齐的检查点（barrier对齐）， 对齐的时间超过这个参数，自动切换成 非对齐检查点（barrier非对齐）
         checkpointConfig.setAlignedCheckpointTimeout(Duration.ofSeconds(1));
 
-
-        env
-                .socketTextStream("hadoop102", 7777)
+        env.socketTextStream("hadoop102", 7777)
                 .flatMap(
                         (String value, Collector<Tuple2<String, Integer>> out) -> {
                             String[] words = value.split(" ");
                             for (String word : words) {
                                 out.collect(Tuple2.of(word, 1));
                             }
-                        }
-                )
+                        })
                 .returns(Types.TUPLE(Types.STRING, Types.INT))
                 .keyBy(value -> value.f0)
                 .sum(1)

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 the original author or authors.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,48 +13,48 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.modulith;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.modulith.core.ApplicationModules;
 import org.springframework.modulith.docs.Documenter;
 
-//@SpringBootTest
+// @SpringBootTest
 public class TaoTaoCloudModulithApplicationTests {
 
-	ApplicationModules modules = ApplicationModules.of(TaoTaoCloudModulithApplication.class);
+    ApplicationModules modules = ApplicationModules.of(TaoTaoCloudModulithApplication.class);
 
-	{
-		System.setProperty("spring.profiles.active", "dev");
-	}
+    {
+        System.setProperty("spring.profiles.active", "dev");
+    }
 
-	@Test
-	void verifyPackageConformity() {
+    @Test
+    void verifyPackageConformity() {
 
+        System.out.println("\n--- 验证 Spring Modulith 模块结构 ---");
 
-		System.out.println("\n--- 验证 Spring Modulith 模块结构 ---");
+        // 1. 获取应用程序模块模型
+        ApplicationModules modules =
+                ApplicationModules.of(TaoTaoCloudModulithApplicationTests.class);
 
-		// 1. 获取应用程序模块模型
-		ApplicationModules modules = ApplicationModules.of(TaoTaoCloudModulithApplicationTests.class);
+        // 2. 打印模块信息（可选，用于观察和调试）
+        System.out.println("--- 检测到的模块信息 ---");
+        modules.forEach(System.out::println);
+        System.out.println("--------------------");
 
-		// 2. 打印模块信息（可选，用于观察和调试）
-		System.out.println("--- 检测到的模块信息 ---");
-		modules.forEach(System.out::println);
-		System.out.println("--------------------");
+        // 3. 验证模块是否符合模块化约束
+        // 这会检查所有模块间的依赖是否符合Modulith的规则，例如：
+        // - 没有循环依赖
+        // - 模块没有直接访问其他模块的内部类
+        modules.verify();
 
-		// 3. 验证模块是否符合模块化约束
-		// 这会检查所有模块间的依赖是否符合Modulith的规则，例如：
-		// - 没有循环依赖
-		// - 模块没有直接访问其他模块的内部类
-		modules.verify();
+        System.out.println("--- 模块结构验证成功！---");
+        System.out.println("--- 验证 Spring Modulith 模块结构完毕 ---\n");
+    }
 
-		System.out.println("--- 模块结构验证成功！---");
-		System.out.println("--- 验证 Spring Modulith 模块结构完毕 ---\n");
-	}
-
-	@Test
-	void createModulithsDocumentation() {
-		new Documenter(modules).writeDocumentation();
-	}
+    @Test
+    void createModulithsDocumentation() {
+        new Documenter(modules).writeDocumentation();
+    }
 }

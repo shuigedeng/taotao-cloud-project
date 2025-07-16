@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.hadoop;
 
-
 class TaoTaoCloudHadoopApplicationTests {
 
     void contextLoads() {}

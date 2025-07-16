@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.auth.biz.metadata.listener;
 
-import com.taotao.cloud.auth.biz.strategy.local.SysUserService;
 import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.security.spring.event.RemoteChangeUserStatusEvent;
 import com.taotao.boot.security.spring.event.domain.UserStatus;
+import com.taotao.cloud.auth.biz.strategy.local.SysUserService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +32,8 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class RemoteChangeUserStatusListener implements ApplicationListener<RemoteChangeUserStatusEvent> {
+public class RemoteChangeUserStatusListener
+        implements ApplicationListener<RemoteChangeUserStatusEvent> {
 
     private static final Logger log = LoggerFactory.getLogger(RemoteChangeUserStatusListener.class);
 

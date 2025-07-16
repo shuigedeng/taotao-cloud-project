@@ -29,8 +29,7 @@ import java.util.Objects;
  */
 @TableName("user")
 public class CkUser {
-    @TableId
-    private String id;
+    @TableId private String id;
 
     private Integer sales;
 
@@ -50,7 +49,9 @@ public class CkUser {
             return false;
         }
         CkUser user = (CkUser) o;
-        return Objects.equals(id, user.id) && Objects.equals(sales, user.sales) && Objects.equals(month, user.month);
+        return Objects.equals(id, user.id)
+                && Objects.equals(sales, user.sales)
+                && Objects.equals(month, user.month);
     }
 
     @Override

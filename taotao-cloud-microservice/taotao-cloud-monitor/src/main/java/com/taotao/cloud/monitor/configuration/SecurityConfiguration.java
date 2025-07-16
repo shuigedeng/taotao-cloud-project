@@ -46,13 +46,14 @@ public class SecurityConfiguration {
 
     public SecurityConfiguration(AdminServerProperties adminServerProperties) {
         this.adminContextPath = adminServerProperties.getContextPath();
-        this.patterns = Arrays.asList(
-                this.adminContextPath + "/assets/**",
-                this.adminContextPath + "/login",
-                "/actuator/**",
-                "/actuator",
-                "/instances",
-                "/instances/**");
+        this.patterns =
+                Arrays.asList(
+                        this.adminContextPath + "/assets/**",
+                        this.adminContextPath + "/login",
+                        "/actuator/**",
+                        "/actuator",
+                        "/instances",
+                        "/instances/**");
     }
 
     @Bean
@@ -62,34 +63,46 @@ public class SecurityConfiguration {
         successHandler.setTargetUrlParameter("redirectTo");
         successHandler.setDefaultTargetUrl(adminContextPath + "/");
 
-        return http.authorizeHttpRequests(authorizeHttpRequestsCustomizer -> {
-                    // 1.配置所有静态资源和登录页可以公开访问
-                    authorizeHttpRequestsCustomizer
-                            .requestMatchers(toRequestMatchers(this.patterns))
-                            .permitAll()
-                            .anyRequest()
-                            .authenticated();
-                })
+        return http.authorizeHttpRequests(
+                        authorizeHttpRequestsCustomizer -> {
+                            // 1.配置所有静态资源和登录页可以公开访问
+                            authorizeHttpRequestsCustomizer
+                                    .requestMatchers(toRequestMatchers(this.patterns))
+                                    .permitAll()
+                                    .anyRequest()
+                                    .authenticated();
+                        })
                 // 2.配置登录和登出路径
-                .formLogin(formLoginCustomizer -> {
-                    formLoginCustomizer.loginPage(adminContextPath + "/login").successHandler(successHandler);
-                })
-                .logout(logoutCustomizer -> {
-                    logoutCustomizer.logoutUrl(adminContextPath + "/logout");
-                })
+                .formLogin(
+                        formLoginCustomizer -> {
+                            formLoginCustomizer
+                                    .loginPage(adminContextPath + "/login")
+                                    .successHandler(successHandler);
+                        })
+                .logout(
+                        logoutCustomizer -> {
+                            logoutCustomizer.logoutUrl(adminContextPath + "/logout");
+                        })
                 // 3.开启http basic支持，admin-client注册时需要使用
                 .httpBasic(AbstractHttpConfigurer::disable)
-                .csrf(csrfCustomizer -> {
-                    List<String> csrfPatterns =
-                            Arrays.asList(adminContextPath + "/instances", adminContextPath + "/actuator/**");
-                    // 4.开启基于cookie的csrf保护
-                    csrfCustomizer
-                            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                            // 5.忽略这些路径的csrf保护以便admin-client注册
-                            .ignoringRequestMatchers(toRequestMatchers(csrfPatterns));
-                })
-			.rememberMe((rememberMe) -> rememberMe.key(UUID.randomUUID().toString()).tokenValiditySeconds(1209600))
-
+                .csrf(
+                        csrfCustomizer -> {
+                            List<String> csrfPatterns =
+                                    Arrays.asList(
+                                            adminContextPath + "/instances",
+                                            adminContextPath + "/actuator/**");
+                            // 4.开启基于cookie的csrf保护
+                            csrfCustomizer
+                                    .csrfTokenRepository(
+                                            CookieCsrfTokenRepository.withHttpOnlyFalse())
+                                    // 5.忽略这些路径的csrf保护以便admin-client注册
+                                    .ignoringRequestMatchers(toRequestMatchers(csrfPatterns));
+                        })
+                .rememberMe(
+                        (rememberMe) ->
+                                rememberMe
+                                        .key(UUID.randomUUID().toString())
+                                        .tokenValiditySeconds(1209600))
                 .build();
     }
 

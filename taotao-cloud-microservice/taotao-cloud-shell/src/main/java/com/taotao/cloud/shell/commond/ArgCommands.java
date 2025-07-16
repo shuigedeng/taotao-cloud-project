@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.shell.commond;
 
 import org.springframework.shell.standard.ShellComponent;
@@ -24,7 +40,6 @@ public class ArgCommands {
         return String.format("You said a=%d, b=%d, c=%d", a, b, c);
     }
 
-
     /**
      *
      * 输入：echo-int2 1 2  3
@@ -34,7 +49,7 @@ public class ArgCommands {
      * 输出：You said a=3, b=2, c=4
      * @return
      */
-    @ShellMethod(value = "通过明明参数名称，强制的指定输入的数据对应的参数名称", prefix="-")
+    @ShellMethod(value = "通过明明参数名称，强制的指定输入的数据对应的参数名称", prefix = "-")
     public String echoInt2(int a, int b, @ShellOption("--third") int c) {
         return String.format("You said a=%d, b=%d, c=%d", a, b, c);
     }
@@ -46,7 +61,7 @@ public class ArgCommands {
      * @return
      */
     @ShellMethod("输入字符串")
-    public String echoString(@ShellOption(defaultValue="World") String who) {
+    public String echoString(@ShellOption(defaultValue = "World") String who) {
         return "input:" + who;
     }
 
@@ -57,7 +72,7 @@ public class ArgCommands {
      * @return
      */
     @ShellMethod("输入数组")
-    public String echoArray(@ShellOption(arity=3) float[] numbers) {
+    public String echoArray(@ShellOption(arity = 3) float[] numbers) {
         return "input:" + numbers[0] + "," + numbers[1] + "," + numbers[2];
     }
 
@@ -74,5 +89,4 @@ public class ArgCommands {
     public String echoBoolean(boolean force) {
         return "input:" + force;
     }
-
 }

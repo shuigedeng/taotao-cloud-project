@@ -41,7 +41,8 @@ public class ReactivePrometheusApi {
     private final ReactiveDiscoveryClient discoveryClient;
     private final ApplicationEventPublisher eventPublisher;
 
-    public ReactivePrometheusApi(ReactiveDiscoveryClient discoveryClient, ApplicationEventPublisher eventPublisher) {
+    public ReactivePrometheusApi(
+            ReactiveDiscoveryClient discoveryClient, ApplicationEventPublisher eventPublisher) {
         this.discoveryClient = discoveryClient;
         this.eventPublisher = eventPublisher;
     }
@@ -53,14 +54,18 @@ public class ReactivePrometheusApi {
                 .flatMap(discoveryClient::getInstances)
                 .groupBy(
                         ServiceInstance::getServiceId,
-                        (instance) -> String.format("%s:%d", instance.getHost(), instance.getPort()))
-                .flatMap(instanceGrouped -> {
-                    Map<String, String> labels = new HashMap<>(2);
-                    String serviceId = instanceGrouped.key();
-                    labels.put("__taotao_prometheus_job", serviceId);
+                        (instance) ->
+                                String.format("%s:%d", instance.getHost(), instance.getPort()))
+                .flatMap(
+                        instanceGrouped -> {
+                            Map<String, String> labels = new HashMap<>(2);
+                            String serviceId = instanceGrouped.key();
+                            labels.put("__taotao_prometheus_job", serviceId);
 
-                    return instanceGrouped.collectList().map(targets -> new TargetGroup(targets, labels));
-                });
+                            return instanceGrouped
+                                    .collectList()
+                                    .map(targets -> new TargetGroup(targets, labels));
+                        });
     }
 
     @PostMapping("/alerts")

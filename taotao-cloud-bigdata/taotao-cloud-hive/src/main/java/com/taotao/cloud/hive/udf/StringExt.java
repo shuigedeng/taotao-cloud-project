@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.hive.udf;
 
 import org.apache.hadoop.hive.ql.exec.UDF;
@@ -32,7 +33,7 @@ import org.apache.hadoop.hive.ql.exec.UDF;
  */
 public final class StringExt extends UDF {
 
-	public String evaluate(String pnb) {
-		return "Hello " + pnb;
-	}
+    public String evaluate(String pnb) {
+        return "Hello " + pnb;
+    }
 }

@@ -37,7 +37,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * <p>登录成功事件监听 </p>
  *
  */
-public class AuthenticationSuccessListener implements ApplicationListener<AuthenticationSuccessEvent> {
+public class AuthenticationSuccessListener
+        implements ApplicationListener<AuthenticationSuccessEvent> {
 
     private static final Logger log = LoggerFactory.getLogger(AuthenticationSuccessListener.class);
 
@@ -45,7 +46,8 @@ public class AuthenticationSuccessListener implements ApplicationListener<Authen
     private final OAuth2ComplianceService complianceService;
 
     public AuthenticationSuccessListener(
-            SignInFailureLimitedStampManager stampManager, OAuth2ComplianceService complianceService) {
+            SignInFailureLimitedStampManager stampManager,
+            OAuth2ComplianceService complianceService) {
         this.stampManager = stampManager;
         this.complianceService = complianceService;
     }
@@ -69,7 +71,8 @@ public class AuthenticationSuccessListener implements ApplicationListener<Authen
 
             RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
             if (ObjectUtils.isNotEmpty(requestAttributes)
-                    && requestAttributes instanceof ServletRequestAttributes servletRequestAttributes) {
+                    && requestAttributes
+                            instanceof ServletRequestAttributes servletRequestAttributes) {
                 HttpServletRequest request = servletRequestAttributes.getRequest();
 
                 if (ObjectUtils.isNotEmpty(request) && StringUtils.isNotBlank(username)) {

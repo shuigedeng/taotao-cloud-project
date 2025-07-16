@@ -25,7 +25,8 @@ public class RefreshTokenFailureException extends AbstractResponseJsonAuthentica
 
     private static final long serialVersionUID = 6209232579710442552L;
 
-    public RefreshTokenFailureException(ErrorCodeEnum errorCodeEnum, Throwable t, Object data, String uid) {
+    public RefreshTokenFailureException(
+            ErrorCodeEnum errorCodeEnum, Throwable t, Object data, String uid) {
         super(errorCodeEnum, t, data, uid);
     }
 

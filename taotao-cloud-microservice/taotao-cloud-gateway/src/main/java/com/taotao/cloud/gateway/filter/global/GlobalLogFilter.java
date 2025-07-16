@@ -20,7 +20,6 @@ import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;
 import com.taotao.cloud.gateway.utils.WebFluxUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.dromara.hutool.core.map.MapUtil;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -44,7 +43,11 @@ import reactor.core.publisher.Mono;
  * @since 2023-08-17 11:41:33
  */
 @Component
-@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "globalLog", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(
+        prefix = FilterProperties.PREFIX,
+        name = "globalLog",
+        havingValue = "true",
+        matchIfMissing = true)
 public class GlobalLogFilter implements GlobalFilter, Ordered {
 
     private static final String START_TIME = "startTime";
@@ -53,7 +56,7 @@ public class GlobalLogFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
         String requestUrl = exchange.getRequest().getURI().getRawPath();
-        //String path = WebFluxUtils.getOriginalRequestUrl(exchange);
+        // String path = WebFluxUtils.getOriginalRequestUrl(exchange);
         String url = request.getMethod().name() + " " + requestUrl;
 
         // 打印请求参数
@@ -72,17 +75,23 @@ public class GlobalLogFilter implements GlobalFilter, Ordered {
 
         exchange.getAttributes().put(START_TIME, System.currentTimeMillis());
 
-        return chain.filter(exchange).then(Mono.fromRunnable(() -> {
-            Long startTime = exchange.getAttribute(START_TIME);
-            if (startTime != null) {
-                long executeTime = (System.currentTimeMillis() - startTime);
-                LogUtils.info("Response GlobalLogFilter [PLUS]结束请求 => URL[{}],耗时:[{}]毫秒", url, executeTime);
-            }
-        }));
+        return chain.filter(exchange)
+                .then(
+                        Mono.fromRunnable(
+                                () -> {
+                                    Long startTime = exchange.getAttribute(START_TIME);
+                                    if (startTime != null) {
+                                        long executeTime = (System.currentTimeMillis() - startTime);
+                                        LogUtils.info(
+                                                "Response GlobalLogFilter [PLUS]结束请求 => URL[{}],耗时:[{}]毫秒",
+                                                url,
+                                                executeTime);
+                                    }
+                                }));
     }
 
     @Override
     public int getOrder() {
-        return  Ordered.HIGHEST_PRECEDENCE + 6;
+        return Ordered.HIGHEST_PRECEDENCE + 6;
     }
 }

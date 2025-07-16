@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.management.generator;
 
-import com.taotao.cloud.auth.biz.management.entity.OAuth2Permission;
 import com.taotao.boot.data.jpa.hibernate.identifier.AbstractUuidGenerator;
+import com.taotao.cloud.auth.biz.management.entity.OAuth2Permission;
 import java.lang.reflect.Member;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -34,12 +34,15 @@ import org.hibernate.id.factory.spi.CustomIdGeneratorCreationContext;
 public class OAuth2PermissionUuidGenerator extends AbstractUuidGenerator {
 
     public OAuth2PermissionUuidGenerator(
-            OAuth2PermissionUuid config, Member idMember, CustomIdGeneratorCreationContext creationContext) {
+            OAuth2PermissionUuid config,
+            Member idMember,
+            CustomIdGeneratorCreationContext creationContext) {
         super(idMember);
     }
 
     @Override
-    public Object generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
+    public Object generate(SharedSessionContractImplementor session, Object object)
+            throws HibernateException {
         if (ObjectUtils.isEmpty(object)) {
             throw new HibernateException(new NullPointerException());
         }

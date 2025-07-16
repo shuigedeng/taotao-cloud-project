@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.hadoop.hdfs.model;
 
 import java.io.DataInput;
@@ -29,23 +30,23 @@ import org.apache.hadoop.io.Writable;
  */
 public class User implements Writable {
 
-	private String username;
-	private Integer age;
-	private String address;
+    private String username;
+    private Integer age;
+    private String address;
 
-	@Override
-	public void write(DataOutput output) throws IOException {
-		// 把对象序列化
-		output.writeChars(username);
-		output.writeInt(age);
-		output.writeChars(address);
-	}
+    @Override
+    public void write(DataOutput output) throws IOException {
+        // 把对象序列化
+        output.writeChars(username);
+        output.writeInt(age);
+        output.writeChars(address);
+    }
 
-	@Override
-	public void readFields(DataInput input) throws IOException {
-		// 把序列化的对象读取到内存中
-		username = input.readUTF();
-		age = input.readInt();
-		address = input.readUTF();
-	}
+    @Override
+    public void readFields(DataInput input) throws IOException {
+        // 把序列化的对象读取到内存中
+        username = input.readUTF();
+        age = input.readInt();
+        address = input.readUTF();
+    }
 }

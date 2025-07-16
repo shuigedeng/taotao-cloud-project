@@ -1,11 +1,11 @@
 /*
- * Copyright 2021-2024 spring-boot-extension the original author or authors.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *       https://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,9 +16,8 @@
 
 package com.taotao.cloud.data.sync.otherBatch.domain;
 
-import lombok.Data;
-
 import java.util.Date;
+import lombok.Data;
 
 /**
  * <p>
@@ -30,18 +29,17 @@ import java.util.Date;
 @Data
 public class User {
 
-	private String userName;
+    private String userName;
 
-	private String sex;
+    private String sex;
 
-	private Integer age;
+    private Integer age;
 
-	private String address;
+    private String address;
 
-	private Integer status;
+    private Integer status;
 
-	private Date createTime;
+    private Date createTime;
 
-	private Date updateTime;
-
+    private Date updateTime;
 }

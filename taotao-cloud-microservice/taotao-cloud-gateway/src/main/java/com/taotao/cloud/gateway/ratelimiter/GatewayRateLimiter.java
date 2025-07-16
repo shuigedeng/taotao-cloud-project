@@ -18,12 +18,10 @@ package com.taotao.cloud.gateway.ratelimiter;
 
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.RateLimiter;
+import java.util.Objects;
 import org.springframework.cloud.gateway.filter.ratelimit.AbstractRateLimiter;
 import org.springframework.cloud.gateway.support.ConfigurationService;
-import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
-
-import java.util.Objects;
 
 /**
  * CustomRateLimiter
@@ -32,7 +30,7 @@ import java.util.Objects;
  * @version 2022.03
  * @since 2022/01/06 16:42
  */
-//@Component
+// @Component
 public class GatewayRateLimiter extends AbstractRateLimiter<GatewayRateLimiter.Config> {
 
     private final RateLimiter rateLimiter = RateLimiter.create(2.0);
@@ -46,19 +44,19 @@ public class GatewayRateLimiter extends AbstractRateLimiter<GatewayRateLimiter.C
     @Override
     public Mono<Response> isAllowed(String routeId, String id) {
         Config config = getConfig().get(routeId);
-		if(Objects.nonNull(config)){
-			return Mono.fromSupplier(() -> {
-				boolean acquire = rateLimiter.tryAcquire(config.requestedToken);
-				if (acquire) {
-					return new Response(true, Maps.newHashMap());
-				}
+        if (Objects.nonNull(config)) {
+            return Mono.fromSupplier(
+                    () -> {
+                        boolean acquire = rateLimiter.tryAcquire(config.requestedToken);
+                        if (acquire) {
+                            return new Response(true, Maps.newHashMap());
+                        }
 
-				return new Response(false, Maps.newHashMap());
-			});
-		}else {
-			return Mono.fromSupplier(() -> new Response(true, Maps.newHashMap()));
-		}
-
+                        return new Response(false, Maps.newHashMap());
+                    });
+        } else {
+            return Mono.fromSupplier(() -> new Response(true, Maps.newHashMap()));
+        }
     }
 
     public static class Config {

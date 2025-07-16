@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.data.sync.partitioner;
 
 import com.taotao.boot.common.utils.log.LogUtils;
@@ -48,88 +64,82 @@ import org.springframework.core.task.SimpleAsyncTaskExecutor;
 @EnableBatchProcessing
 public class PartStepJob {
 
-	@Autowired
-	private JobBuilderFactory jobBuilderFactory;
-	@Autowired
-	private StepBuilderFactory stepBuilderFactory;
+    @Autowired private JobBuilderFactory jobBuilderFactory;
+    @Autowired private StepBuilderFactory stepBuilderFactory;
 
+    // 每个分区文件读取
+    @Bean
+    @StepScope
+    public FlatFileItemReader<User> flatItemReader(
+            @Value("#{stepExecutionContext['file']}") Resource resource) {
+        return new FlatFileItemReaderBuilder<User>()
+                .name("userItemReader")
+                .resource(resource)
+                .delimited()
+                .delimiter("#")
+                .names("id", "name", "age")
+                .targetType(User.class)
+                .build();
+    }
 
-	//每个分区文件读取
-	@Bean
-	@StepScope
-	public FlatFileItemReader<User> flatItemReader(
-		@Value("#{stepExecutionContext['file']}") Resource resource) {
-		return new FlatFileItemReaderBuilder<User>()
-			.name("userItemReader")
-			.resource(resource)
-			.delimited().delimiter("#")
-			.names("id", "name", "age")
-			.targetType(User.class)
-			.build();
-	}
+    @Bean
+    public ItemWriter<User> itemWriter() {
+        return new ItemWriter<User>() {
+            @Override
+            public void write(Chunk<? extends User> items) throws Exception {
+                items.forEach(System.err::println);
+            }
+        };
+    }
 
-	@Bean
-	public ItemWriter<User> itemWriter() {
-		return new ItemWriter<User>() {
-			@Override
-			public void write(Chunk<? extends User> items) throws Exception {
-				items.forEach(System.err::println);
-			}
-		};
-	}
+    // 文件分区器-设置分区规则
+    @Bean
+    public UserPartitioner userPartitioner() {
+        return new UserPartitioner();
+    }
 
+    // 文件分区处理器-处理分区
+    @Bean
+    public PartitionHandler userPartitionHandler() {
+        TaskExecutorPartitionHandler handler = new TaskExecutorPartitionHandler();
+        handler.setGridSize(5);
+        handler.setTaskExecutor(new SimpleAsyncTaskExecutor());
+        handler.setStep(workStep());
+        try {
+            handler.afterPropertiesSet();
+        } catch (Exception e) {
+            LogUtils.error(e);
+        }
+        return handler;
+    }
 
-	//文件分区器-设置分区规则
-	@Bean
-	public UserPartitioner userPartitioner() {
-		return new UserPartitioner();
-	}
+    // 每个从分区操作步骤
+    @Bean
+    public Step workStep() {
+        return stepBuilderFactory
+                .get("workStep")
+                .<User, User>chunk(10)
+                .reader(flatItemReader(null))
+                .writer(itemWriter())
+                .build();
+    }
 
-	//文件分区处理器-处理分区
-	@Bean
-	public PartitionHandler userPartitionHandler() {
-		TaskExecutorPartitionHandler handler = new TaskExecutorPartitionHandler();
-		handler.setGridSize(5);
-		handler.setTaskExecutor(new SimpleAsyncTaskExecutor());
-		handler.setStep(workStep());
-		try {
-			handler.afterPropertiesSet();
-		}
-		catch (Exception e) {
-			LogUtils.error(e);
-		}
-		return handler;
-	}
+    // 主分区操作步骤
+    @Bean
+    public Step masterStep() {
+        return stepBuilderFactory
+                .get("masterStep")
+                .partitioner(workStep().getName(), userPartitioner())
+                .partitionHandler(userPartitionHandler())
+                .build();
+    }
 
-	//每个从分区操作步骤
-	@Bean
-	public Step workStep() {
-		return stepBuilderFactory.get("workStep")
-			.<User, User>chunk(10)
-			.reader(flatItemReader(null))
-			.writer(itemWriter())
-			.build();
-	}
+    @Bean
+    public Job partJob() {
+        return jobBuilderFactory.get("part-step-job").start(masterStep()).build();
+    }
 
-	//主分区操作步骤
-	@Bean
-	public Step masterStep() {
-		return stepBuilderFactory.get("masterStep")
-			.partitioner(workStep().getName(), userPartitioner())
-			.partitionHandler(userPartitionHandler())
-			.build();
-	}
-
-
-	@Bean
-	public Job partJob() {
-		return jobBuilderFactory.get("part-step-job")
-			.start(masterStep())
-			.build();
-	}
-
-	public static void main(String[] args) {
-		SpringApplication.run(PartStepJob.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PartStepJob.class, args);
+    }
 }
-

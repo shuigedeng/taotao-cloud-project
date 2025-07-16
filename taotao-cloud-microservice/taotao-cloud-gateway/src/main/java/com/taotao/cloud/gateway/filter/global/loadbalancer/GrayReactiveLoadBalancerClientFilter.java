@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2020 the original author or authors.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,13 @@
 
 package com.taotao.cloud.gateway.filter.global.loadbalancer;
 
+import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.*;
+
 import com.taotao.boot.common.constant.CommonConstants;
 import com.taotao.boot.common.utils.log.LogUtils;
+import java.net.URI;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import org.apache.commons.lang3.ObjectUtils;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.beans.factory.ObjectProvider;
@@ -37,12 +42,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import java.net.URI;
-import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
-
-import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.*;
-
 /**
  * 从 org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter 复制 重新修改的添加了灰度
  */
@@ -52,8 +51,8 @@ public class GrayReactiveLoadBalancerClientFilter extends ReactiveLoadBalancerCl
     private final LoadBalancerClientFactory clientFactory;
     private final GatewayLoadBalancerProperties properties;
 
-    public GrayReactiveLoadBalancerClientFilter(LoadBalancerClientFactory clientFactory,
-                                                GatewayLoadBalancerProperties properties) {
+    public GrayReactiveLoadBalancerClientFilter(
+            LoadBalancerClientFactory clientFactory, GatewayLoadBalancerProperties properties) {
         super(clientFactory, properties);
         this.clientFactory = clientFactory;
         this.properties = properties;
@@ -65,7 +64,7 @@ public class GrayReactiveLoadBalancerClientFilter extends ReactiveLoadBalancerCl
         String schemePrefix = exchange.getAttribute(GATEWAY_SCHEME_PREFIX_ATTR);
 
         // 是否需要灰度 判断url 前缀 如不是grayLb开头的就进行下一个过滤器
-        //boolean graylb = "grayLb".equals(url.getScheme()) || "grayLb".equals(schemePrefix);
+        // boolean graylb = "grayLb".equals(url.getScheme()) || "grayLb".equals(schemePrefix);
 
         if (url == null || (!"lb".equals(url.getScheme()) && !"lb".equals(schemePrefix))) {
             return chain.filter(exchange);
@@ -74,81 +73,123 @@ public class GrayReactiveLoadBalancerClientFilter extends ReactiveLoadBalancerCl
         // preserve the original url
         addOriginalRequestUrl(exchange, url);
 
-        LogUtils.info(GrayReactiveLoadBalancerClientFilter.class.getSimpleName() + " url before: {}", url);
+        LogUtils.info(
+                GrayReactiveLoadBalancerClientFilter.class.getSimpleName() + " url before: {}",
+                url);
 
         URI requestUri = exchange.getAttribute(GATEWAY_REQUEST_URL_ATTR);
         String serviceId = requestUri.getHost();
-        Set<LoadBalancerLifecycle> supportedLifecycleProcessors = LoadBalancerLifecycleValidator
-                .getSupportedLifecycleProcessors(clientFactory.getInstances(serviceId, LoadBalancerLifecycle.class),
-                        RequestDataContext.class, ResponseData.class, ServiceInstance.class);
+        Set<LoadBalancerLifecycle> supportedLifecycleProcessors =
+                LoadBalancerLifecycleValidator.getSupportedLifecycleProcessors(
+                        clientFactory.getInstances(serviceId, LoadBalancerLifecycle.class),
+                        RequestDataContext.class,
+                        ResponseData.class,
+                        ServiceInstance.class);
 
-        DefaultRequest<RequestDataContext> lbRequest = new DefaultRequest<>(
-                new RequestDataContext(new RequestData(exchange.getRequest()), getHint(serviceId)));
+        DefaultRequest<RequestDataContext> lbRequest =
+                new DefaultRequest<>(
+                        new RequestDataContext(
+                                new RequestData(exchange.getRequest()), getHint(serviceId)));
 
-        return choose(lbRequest, serviceId, supportedLifecycleProcessors, url, true).doOnNext(response -> {
-                    if (!response.hasServer()) {
-                        supportedLifecycleProcessors.forEach(lifecycle -> lifecycle
-                                .onComplete(new CompletionContext<>(CompletionContext.Status.DISCARD, lbRequest, response)));
-                        throw NotFoundException.create(properties.isUse404(), "Unable to find instance for " + url.getHost());
-                    }
+        return choose(lbRequest, serviceId, supportedLifecycleProcessors, url, true)
+                .doOnNext(
+                        response -> {
+                            if (!response.hasServer()) {
+                                supportedLifecycleProcessors.forEach(
+                                        lifecycle ->
+                                                lifecycle.onComplete(
+                                                        new CompletionContext<>(
+                                                                CompletionContext.Status.DISCARD,
+                                                                lbRequest,
+                                                                response)));
+                                throw NotFoundException.create(
+                                        properties.isUse404(),
+                                        "Unable to find instance for " + url.getHost());
+                            }
 
-                    ServiceInstance retrievedInstance = response.getServer();
+                            ServiceInstance retrievedInstance = response.getServer();
 
-                    URI uri = exchange.getRequest().getURI();
+                            URI uri = exchange.getRequest().getURI();
 
-                    // if the `lb:<scheme>` mechanism was used, use `<scheme>` as the default,
-                    // if the loadbalancer doesn't provide one.
-                    String overrideScheme = retrievedInstance.isSecure() ? "https" : "http";
-                    if (schemePrefix != null) {
-                        overrideScheme = url.getScheme();
-                    }
+                            // if the `lb:<scheme>` mechanism was used, use `<scheme>` as the
+                            // default,
+                            // if the loadbalancer doesn't provide one.
+                            String overrideScheme = retrievedInstance.isSecure() ? "https" : "http";
+                            if (schemePrefix != null) {
+                                overrideScheme = url.getScheme();
+                            }
 
-                    DelegatingServiceInstance serviceInstance = new DelegatingServiceInstance(retrievedInstance,
-                            overrideScheme);
+                            DelegatingServiceInstance serviceInstance =
+                                    new DelegatingServiceInstance(
+                                            retrievedInstance, overrideScheme);
 
-                    URI requestUrl = reconstructURI(serviceInstance, uri);
+                            URI requestUrl = reconstructURI(serviceInstance, uri);
 
-                    LogUtils.info("LoadBalancerClientFilter url chosen: " + requestUrl);
+                            LogUtils.info("LoadBalancerClientFilter url chosen: " + requestUrl);
 
-                    exchange.getAttributes().put(GATEWAY_REQUEST_URL_ATTR, requestUrl);
-                    exchange.getAttributes().put(GATEWAY_LOADBALANCER_RESPONSE_ATTR, response);
-                    supportedLifecycleProcessors.forEach(lifecycle -> lifecycle.onStartRequest(lbRequest, response));
-                }).then(chain.filter(exchange))
-                .doOnError(throwable -> supportedLifecycleProcessors.forEach(lifecycle -> lifecycle
-                        .onComplete(new CompletionContext<ResponseData, ServiceInstance, RequestDataContext>(
-                                CompletionContext.Status.FAILED,
-                                throwable,
-                                lbRequest,
-                                exchange.getAttribute(GATEWAY_LOADBALANCER_RESPONSE_ATTR)))))
-                .doOnSuccess(aVoid -> supportedLifecycleProcessors.forEach(lifecycle -> lifecycle
-                        .onComplete(new CompletionContext<ResponseData, ServiceInstance, RequestDataContext>(
-                                CompletionContext.Status.SUCCESS,
-                                lbRequest,
-                                exchange.getAttribute(GATEWAY_LOADBALANCER_RESPONSE_ATTR),
-                                new ResponseData(exchange.getResponse(),
-                                        new RequestData(exchange.getRequest()))))));
+                            exchange.getAttributes().put(GATEWAY_REQUEST_URL_ATTR, requestUrl);
+                            exchange.getAttributes()
+                                    .put(GATEWAY_LOADBALANCER_RESPONSE_ATTR, response);
+                            supportedLifecycleProcessors.forEach(
+                                    lifecycle -> lifecycle.onStartRequest(lbRequest, response));
+                        })
+                .then(chain.filter(exchange))
+                .doOnError(
+                        throwable ->
+                                supportedLifecycleProcessors.forEach(
+                                        lifecycle ->
+                                                lifecycle.onComplete(
+                                                        new CompletionContext<
+                                                                ResponseData,
+                                                                ServiceInstance,
+                                                                RequestDataContext>(
+                                                                CompletionContext.Status.FAILED,
+                                                                throwable,
+                                                                lbRequest,
+                                                                exchange.getAttribute(
+                                                                        GATEWAY_LOADBALANCER_RESPONSE_ATTR)))))
+                .doOnSuccess(
+                        aVoid ->
+                                supportedLifecycleProcessors.forEach(
+                                        lifecycle ->
+                                                lifecycle.onComplete(
+                                                        new CompletionContext<
+                                                                ResponseData,
+                                                                ServiceInstance,
+                                                                RequestDataContext>(
+                                                                CompletionContext.Status.SUCCESS,
+                                                                lbRequest,
+                                                                exchange.getAttribute(
+                                                                        GATEWAY_LOADBALANCER_RESPONSE_ATTR),
+                                                                new ResponseData(
+                                                                        exchange.getResponse(),
+                                                                        new RequestData(
+                                                                                exchange
+                                                                                        .getRequest()))))));
     }
 
     protected URI reconstructURI(ServiceInstance serviceInstance, URI original) {
         return LoadBalancerUriTools.reconstructURI(serviceInstance, original);
     }
 
-    private Mono<Response<ServiceInstance>> choose(Request<RequestDataContext> lbRequest,
-                                                   String serviceId,
-                                                   Set<LoadBalancerLifecycle> supportedLifecycleProcessors,
-                                                   URI uri,
-                                                   boolean graylb) {
+    private Mono<Response<ServiceInstance>> choose(
+            Request<RequestDataContext> lbRequest,
+            String serviceId,
+            Set<LoadBalancerLifecycle> supportedLifecycleProcessors,
+            URI uri,
+            boolean graylb) {
         if (graylb) {
-            GrayLoadBalancer grayLoadBalancer = new GrayLoadBalancer(
-                    uri.getHost(),
-                    clientFactory.getLazyProvider(uri.getHost(),
-                            ServiceInstanceListSupplier.class));
+            GrayLoadBalancer grayLoadBalancer =
+                    new GrayLoadBalancer(
+                            uri.getHost(),
+                            clientFactory.getLazyProvider(
+                                    uri.getHost(), ServiceInstanceListSupplier.class));
             return grayLoadBalancer.choose(lbRequest);
         } else {
-            //super的代码
-            ReactorLoadBalancer<ServiceInstance> loadBalancer = this.clientFactory.getInstance(
-                    serviceId,
-                    ReactorServiceInstanceLoadBalancer.class);
+            // super的代码
+            ReactorLoadBalancer<ServiceInstance> loadBalancer =
+                    this.clientFactory.getInstance(
+                            serviceId, ReactorServiceInstanceLoadBalancer.class);
             if (loadBalancer == null) {
                 throw new NotFoundException("No loadbalancer available for " + serviceId);
             }
@@ -165,7 +206,6 @@ public class GrayReactiveLoadBalancerClientFilter extends ReactiveLoadBalancerCl
         return hintPropertyValue != null ? hintPropertyValue : defaultHint;
     }
 
-
     /**
      * GrayLoadBalancer<br>
      *
@@ -176,10 +216,12 @@ public class GrayReactiveLoadBalancerClientFilter extends ReactiveLoadBalancerCl
     public static class GrayLoadBalancer implements ReactorServiceInstanceLoadBalancer {
 
         private final String serviceId;
-        private final ObjectProvider<ServiceInstanceListSupplier> serviceInstanceListSupplierProvider;
+        private final ObjectProvider<ServiceInstanceListSupplier>
+                serviceInstanceListSupplierProvider;
 
-        public GrayLoadBalancer(String serviceId,
-                                ObjectProvider<ServiceInstanceListSupplier> serviceInstanceListSupplierProvider) {
+        public GrayLoadBalancer(
+                String serviceId,
+                ObjectProvider<ServiceInstanceListSupplier> serviceInstanceListSupplierProvider) {
             this.serviceId = serviceId;
             this.serviceInstanceListSupplierProvider = serviceInstanceListSupplierProvider;
         }
@@ -191,17 +233,16 @@ public class GrayReactiveLoadBalancerClientFilter extends ReactiveLoadBalancerCl
 
             if (this.serviceInstanceListSupplierProvider != null) {
                 ServiceInstanceListSupplier supplier =
-                        this.serviceInstanceListSupplierProvider.getIfAvailable(NoopServiceInstanceListSupplier::new);
+                        this.serviceInstanceListSupplierProvider.getIfAvailable(
+                                NoopServiceInstanceListSupplier::new);
 
-                return supplier.get()
-                        .next()
-                        .map(list -> getInstanceResponse(list, headers));
+                return supplier.get().next().map(list -> getInstanceResponse(list, headers));
             }
             return null;
         }
 
-        private Response<ServiceInstance> getInstanceResponse(List<ServiceInstance> instances,
-                                                              HttpHeaders headers) {
+        private Response<ServiceInstance> getInstanceResponse(
+                List<ServiceInstance> instances, HttpHeaders headers) {
             if (instances.isEmpty()) {
                 return getServiceInstanceEmptyResponse();
             } else {
@@ -209,26 +250,27 @@ public class GrayReactiveLoadBalancerClientFilter extends ReactiveLoadBalancerCl
             }
         }
 
-        private Response<ServiceInstance> getServiceInstanceResponseWithGray(List<ServiceInstance> instances,
-                                                                             HttpHeaders headers) {
+        private Response<ServiceInstance> getServiceInstanceResponseWithGray(
+                List<ServiceInstance> instances, HttpHeaders headers) {
             String reqVersion = headers.getFirst(CommonConstants.TTC_REQUEST_VERSION);
             if (instances.isEmpty()) {
                 return getServiceInstanceEmptyResponse();
             }
 
             // 根据版本进行分发 todo 需要修改
-//            if (StrUtil.isNotBlank(reqVersion)) {
-//                Map<String, String> versionMap = new HashMap<>();
-//                versionMap.put("version", reqVersion);
-//
-//                final Set<Map.Entry<String, String>> attributes = Collections.unmodifiableSet(versionMap.entrySet());
-//                for (ServiceInstance instance : instances) {
-//                    Map<String, String> metadata = instance.getMetadata();
-//                    if (!metadata.entrySet().containsAll(attributes)) {
-//                        instances.remove(instance);
-//                    }
-//                }
-//            }
+            //            if (StrUtil.isNotBlank(reqVersion)) {
+            //                Map<String, String> versionMap = new HashMap<>();
+            //                versionMap.put("version", reqVersion);
+            //
+            //                final Set<Map.Entry<String, String>> attributes =
+            // Collections.unmodifiableSet(versionMap.entrySet());
+            //                for (ServiceInstance instance : instances) {
+            //                    Map<String, String> metadata = instance.getMetadata();
+            //                    if (!metadata.entrySet().containsAll(attributes)) {
+            //                        instances.remove(instance);
+            //                    }
+            //                }
+            //            }
 
             String weight = headers.getFirst("taotao-cloud-weight");
             if (StrUtil.isNotBlank(weight)) {
@@ -246,7 +288,8 @@ public class GrayReactiveLoadBalancerClientFilter extends ReactiveLoadBalancerCl
                     }
                 }
 
-                WeightMeta<ServiceInstance> weightMeta = WeightRandomUtils.buildWeightMeta(weightMap);
+                WeightMeta<ServiceInstance> weightMeta =
+                        WeightRandomUtils.buildWeightMeta(weightMap);
                 if (ObjectUtils.isEmpty(weightMeta)) {
                     return getServiceInstanceEmptyResponse();
                 }
@@ -258,7 +301,7 @@ public class GrayReactiveLoadBalancerClientFilter extends ReactiveLoadBalancerCl
                 return new DefaultResponse(serviceInstance);
             }
 
-            //最终返回随机
+            // 最终返回随机
             return getInstanceResponse(instances);
         }
 
@@ -269,7 +312,7 @@ public class GrayReactiveLoadBalancerClientFilter extends ReactiveLoadBalancerCl
 
         private Response<ServiceInstance> getInstanceResponse(List<ServiceInstance> instances) {
             if (instances.isEmpty()) {
-                    LogUtils.warn("No servers available for service: " + serviceId);
+                LogUtils.warn("No servers available for service: " + serviceId);
                 return new EmptyResponse();
             }
             int index = ThreadLocalRandom.current().nextInt(instances.size());
@@ -378,5 +421,4 @@ public class GrayReactiveLoadBalancerClientFilter extends ReactiveLoadBalancerCl
             return new WeightMeta<>(data, weights);
         }
     }
-
 }

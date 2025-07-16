@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.flink;
 
 import org.apache.flink.api.common.functions.FlatMapFunction;
@@ -37,46 +38,51 @@ import org.apache.flink.util.Collector;
  */
 public class JStreamWordCount {
 
-	public static void main(String[] args) throws Exception {
-		Configuration conf = new Configuration();
-		conf.setBoolean(ConfigConstants.LOCAL_START_WEBSERVER, true);
-		conf.setInteger(RestOptions.PORT, 8050);
+    public static void main(String[] args) throws Exception {
+        Configuration conf = new Configuration();
+        conf.setBoolean(ConfigConstants.LOCAL_START_WEBSERVER, true);
+        conf.setInteger(RestOptions.PORT, 8050);
 
-		StreamExecutionEnvironment env = StreamExecutionEnvironment
-			.createLocalEnvironmentWithWebUI(conf);
+        StreamExecutionEnvironment env =
+                StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
 
-		DataStream<String> dss = env.socketTextStream("127.0.0.1", 8888);
+        DataStream<String> dss = env.socketTextStream("127.0.0.1", 8888);
 
-		DataStream<String> dso = dss.flatMap(new FlatMapFunction<String, String>() {
-			@Override
-			public void flatMap(String value, Collector<String> out) throws Exception {
-				String[] s = value.split(" ");
-				for (String s1 : s) {
-					out.collect(s1);
-				}
-			}
-		});
+        DataStream<String> dso =
+                dss.flatMap(
+                        new FlatMapFunction<String, String>() {
+                            @Override
+                            public void flatMap(String value, Collector<String> out)
+                                    throws Exception {
+                                String[] s = value.split(" ");
+                                for (String s1 : s) {
+                                    out.collect(s1);
+                                }
+                            }
+                        });
 
-		DataStream<Tuple2<String, Integer>> dst = dso
-			.map(new MapFunction<String, Tuple2<String, Integer>>() {
-				@Override
-				public Tuple2<String, Integer> map(String value) throws Exception {
-					return Tuple2.of(value, 1);
-				}
-			});
+        DataStream<Tuple2<String, Integer>> dst =
+                dso.map(
+                        new MapFunction<String, Tuple2<String, Integer>>() {
+                            @Override
+                            public Tuple2<String, Integer> map(String value) throws Exception {
+                                return Tuple2.of(value, 1);
+                            }
+                        });
 
-		KeyedStream<Tuple2<String, Integer>, String> kst = dst
-			.keyBy(new KeySelector<Tuple2<String, Integer>, String>() {
-				@Override
-				public String getKey(Tuple2<String, Integer> value) throws Exception {
-					return value.f0;
-				}
-			});
+        KeyedStream<Tuple2<String, Integer>, String> kst =
+                dst.keyBy(
+                        new KeySelector<Tuple2<String, Integer>, String>() {
+                            @Override
+                            public String getKey(Tuple2<String, Integer> value) throws Exception {
+                                return value.f0;
+                            }
+                        });
 
-		SingleOutputStreamOperator<Tuple2<String, Integer>> sum = kst.sum(1);
+        SingleOutputStreamOperator<Tuple2<String, Integer>> sum = kst.sum(1);
 
-		sum.print();
+        sum.print();
 
-		env.execute("JBatchWordCount");
-	}
+        env.execute("JBatchWordCount");
+    }
 }

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.hadoop.hdfs.service;
 
 import java.util.List;
@@ -29,31 +30,31 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface HdfsService {
 
-	boolean mkdir(String path) throws Exception;
+    boolean mkdir(String path) throws Exception;
 
-	boolean existFile(String path) throws Exception;
+    boolean existFile(String path) throws Exception;
 
-	List<Map<String, Object>> readPathInfo(String path) throws Exception;
+    List<Map<String, Object>> readPathInfo(String path) throws Exception;
 
-	void createFile(String path, MultipartFile file) throws Exception;
+    void createFile(String path, MultipartFile file) throws Exception;
 
-	String readFile(String path) throws Exception;
+    String readFile(String path) throws Exception;
 
-	List<Map<String, String>> listFile(String path) throws Exception;
+    List<Map<String, String>> listFile(String path) throws Exception;
 
-	boolean renameFile(String oldName, String newName) throws Exception;
+    boolean renameFile(String oldName, String newName) throws Exception;
 
-	boolean deleteFile(String path) throws Exception;
+    boolean deleteFile(String path) throws Exception;
 
-	void uploadFile(String path, String uploadPath) throws Exception;
+    void uploadFile(String path, String uploadPath) throws Exception;
 
-	void downloadFile(String path, String downloadPath) throws Exception;
+    void downloadFile(String path, String downloadPath) throws Exception;
 
-	void copyFile(String sourcePath, String targetPath) throws Exception;
+    void copyFile(String sourcePath, String targetPath) throws Exception;
 
-	byte[] openFileToBytes(String path) throws Exception;
+    byte[] openFileToBytes(String path) throws Exception;
 
-	<T> T openFileToObject(String path, Class<T> clazz) throws Exception;
+    <T> T openFileToObject(String path, Class<T> clazz) throws Exception;
 
-	BlockLocation[] getFileBlockLocations(String path) throws Exception;
+    BlockLocation[] getFileBlockLocations(String path) throws Exception;
 }

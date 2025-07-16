@@ -32,7 +32,11 @@ import org.springframework.stereotype.Component;
 public class RealDropTableOption extends DropTableOption {
 
     @Override
-    public void doOption(String destination, String schemaName, String tableName, CanalEntry.RowChange rowChange) {
+    public void doOption(
+            String destination,
+            String schemaName,
+            String tableName,
+            CanalEntry.RowChange rowChange) {
         LogUtils.info("======================接口方式（删除表操作）==========================");
         LogUtils.info("use " + schemaName + ";\n" + rowChange.getSql());
         LogUtils.info("\n======================================================");

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.hadoop.mr.component.wordcount;
 
 import java.io.IOException;
@@ -33,24 +34,24 @@ import org.apache.hadoop.mapreduce.Reducer;
  */
 public class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
 
-	/**
-	 * <angelababy,1><angelababy,1><angelababy,1><angelababy,1><angelababy,1>
-	 * <hello,1><hello,1><hello,1><hello,1><hello,1><hello,1> <banana,1><banana,1><banana,1><banana,1><banana,1><banana,1>
-	 * 入参key，是一组相同单词kv对的key
-	 */
-	@Override
-	protected void reduce(Text key, Iterable<IntWritable> values, Context context)
-		throws IOException, InterruptedException {
-		int count = 0;
+    /**
+     * <angelababy,1><angelababy,1><angelababy,1><angelababy,1><angelababy,1>
+     * <hello,1><hello,1><hello,1><hello,1><hello,1><hello,1> <banana,1><banana,1><banana,1><banana,1><banana,1><banana,1>
+     * 入参key，是一组相同单词kv对的key
+     */
+    @Override
+    protected void reduce(Text key, Iterable<IntWritable> values, Context context)
+            throws IOException, InterruptedException {
+        int count = 0;
 
-		/*Iterator<IntWritable> iterator = values.iterator();
-		while(iterator.hasNext()){
-			count += iterator.next().get();
-		}*/
+        /*Iterator<IntWritable> iterator = values.iterator();
+        while(iterator.hasNext()){
+            count += iterator.next().get();
+        }*/
 
-		for (IntWritable value : values) {
-			count += value.get();
-		}
-		context.write(key, new IntWritable(count));
-	}
+        for (IntWritable value : values) {
+            count += value.get();
+        }
+        context.write(key, new IntWritable(count));
+    }
 }

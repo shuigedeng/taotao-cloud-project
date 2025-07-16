@@ -32,7 +32,11 @@ import org.springframework.stereotype.Component;
 public class RealCreateTableOption extends CreateTableOption {
 
     @Override
-    public void doOption(String destination, String schemaName, String tableName, CanalEntry.RowChange rowChange) {
+    public void doOption(
+            String destination,
+            String schemaName,
+            String tableName,
+            CanalEntry.RowChange rowChange) {
         LogUtils.info("======================接口方式（创建表操作）==========================");
         LogUtils.info("use " + schemaName + ";\n" + rowChange.getSql());
         LogUtils.info("\n======================================================");

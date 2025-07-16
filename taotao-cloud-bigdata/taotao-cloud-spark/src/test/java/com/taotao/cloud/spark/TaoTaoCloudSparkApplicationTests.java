@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.spark;
 
-
 class TaoTaoCloudSparkApplicationTests {
 
     void contextLoads() {}

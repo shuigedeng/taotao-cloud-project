@@ -120,6 +120,7 @@ public class AntiReptileProperties {
          * 命中规则后，锁定期限,默认10天，单位：秒（s）
          */
         private long lockExpire = TimeUnit.DAYS.toSeconds(1);
+
         /**
          * IP白名单，支持后缀'*'通配，以','分隔
          */

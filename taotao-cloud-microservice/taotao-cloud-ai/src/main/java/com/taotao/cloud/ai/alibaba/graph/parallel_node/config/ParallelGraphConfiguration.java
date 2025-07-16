@@ -1,4 +1,22 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.ai.alibaba.graph.parallel_node.config;
+
+import static com.alibaba.cloud.ai.graph.action.AsyncNodeAction.node_async;
 
 import com.alibaba.cloud.ai.graph.GraphRepresentation;
 import com.alibaba.cloud.ai.graph.KeyStrategy;
@@ -10,16 +28,13 @@ import com.alibaba.cloud.ai.graph.exception.GraphStateException;
 import com.alibaba.cloud.ai.graph.state.strategy.ReplaceStrategy;
 import com.spring.ai.tutorial.graph.parallel.node.ExpanderNode;
 import com.spring.ai.tutorial.graph.parallel.node.TranslateNode;
+import java.util.HashMap;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.alibaba.cloud.ai.graph.action.AsyncNodeAction.node_async;
 
 /**
  * @author yingzi
@@ -31,39 +46,40 @@ public class ParallelGraphConfiguration {
     private static final Logger logger = LoggerFactory.getLogger(ParallelGraphConfiguration.class);
 
     @Bean
-    public StateGraph parallelGraph(ChatClient.Builder chatClientBuilder) throws GraphStateException {
-        KeyStrategyFactory keyStrategyFactory = () -> {
-            HashMap<String, KeyStrategy> keyStrategyHashMap = new HashMap<>();
+    public StateGraph parallelGraph(ChatClient.Builder chatClientBuilder)
+            throws GraphStateException {
+        KeyStrategyFactory keyStrategyFactory =
+                () -> {
+                    HashMap<String, KeyStrategy> keyStrategyHashMap = new HashMap<>();
 
-            // 用户输入
-            keyStrategyHashMap.put("query", new ReplaceStrategy());
+                    // 用户输入
+                    keyStrategyHashMap.put("query", new ReplaceStrategy());
 
-            keyStrategyHashMap.put("expander_number", new ReplaceStrategy());
-            keyStrategyHashMap.put("expander_content", new ReplaceStrategy());
+                    keyStrategyHashMap.put("expander_number", new ReplaceStrategy());
+                    keyStrategyHashMap.put("expander_content", new ReplaceStrategy());
 
-            keyStrategyHashMap.put("translate_language", new ReplaceStrategy());
-            keyStrategyHashMap.put("translate_content", new ReplaceStrategy());
+                    keyStrategyHashMap.put("translate_language", new ReplaceStrategy());
+                    keyStrategyHashMap.put("translate_content", new ReplaceStrategy());
 
-            keyStrategyHashMap.put("merge_result", new ReplaceStrategy());
+                    keyStrategyHashMap.put("merge_result", new ReplaceStrategy());
 
-            return keyStrategyHashMap;
-        };
+                    return keyStrategyHashMap;
+                };
 
-        StateGraph stateGraph = new StateGraph(keyStrategyFactory)
-                .addNode("expander", node_async(new ExpanderNode(chatClientBuilder)))
-                .addNode("translate", node_async(new TranslateNode(chatClientBuilder)))
-                .addNode("merge", node_async(new MergeResultsNode()))
-
-                .addEdge(StateGraph.START, "expander")
-                .addEdge(StateGraph.START, "translate")
-                .addEdge("translate", "merge")
-                .addEdge("expander", "merge")
-
-                .addEdge("merge", StateGraph.END);
+        StateGraph stateGraph =
+                new StateGraph(keyStrategyFactory)
+                        .addNode("expander", node_async(new ExpanderNode(chatClientBuilder)))
+                        .addNode("translate", node_async(new TranslateNode(chatClientBuilder)))
+                        .addNode("merge", node_async(new MergeResultsNode()))
+                        .addEdge(StateGraph.START, "expander")
+                        .addEdge(StateGraph.START, "translate")
+                        .addEdge("translate", "merge")
+                        .addEdge("expander", "merge")
+                        .addEdge("merge", StateGraph.END);
 
         // 添加 PlantUML 打印
-        GraphRepresentation representation = stateGraph.getGraph(GraphRepresentation.Type.PLANTUML,
-                "expander flow");
+        GraphRepresentation representation =
+                stateGraph.getGraph(GraphRepresentation.Type.PLANTUML, "expander flow");
         logger.info("\n=== expander UML Flow ===");
         logger.info(representation.content());
         logger.info("==================================\n");
@@ -77,8 +93,13 @@ public class ParallelGraphConfiguration {
             Object expanderContent = state.value("expander_content").orElse("unknown");
             String translateContent = (String) state.value("translate_content").orElse("");
 
-            return Map.of("merge_result", Map.of("expander_content", expanderContent,
-                    "translate_content", translateContent));
+            return Map.of(
+                    "merge_result",
+                    Map.of(
+                            "expander_content",
+                            expanderContent,
+                            "translate_content",
+                            translateContent));
         }
     }
 }

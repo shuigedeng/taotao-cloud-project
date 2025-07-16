@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.hadoop.mr.controller;
 
-import com.taotao.cloud.hadoop.mr.service.MapReduceService;
 import com.taotao.cloud.core.model.Result;
+import com.taotao.cloud.hadoop.mr.service.MapReduceService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,21 +36,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/hadoop/reduce")
 public class MapReduceController {
 
-	@Autowired
-	MapReduceService mapReduceService;
+    @Autowired MapReduceService mapReduceService;
 
-	/**
-	 * 分组统计、排序
-	 */
-	@PostMapping(value = "groupSort")
-	@ResponseBody
-	public Result<String> groupSort(String jobName, String inputPath)
-		throws Exception {
-		if (StringUtils.isEmpty(jobName) || StringUtils.isEmpty(inputPath)) {
-			return Result.failed("请求参数为空");
-		}
-		mapReduceService.groupSort(jobName, inputPath);
-		return Result.success("分组统计、排序成功");
-	}
-
+    /**
+     * 分组统计、排序
+     */
+    @PostMapping(value = "groupSort")
+    @ResponseBody
+    public Result<String> groupSort(String jobName, String inputPath) throws Exception {
+        if (StringUtils.isEmpty(jobName) || StringUtils.isEmpty(inputPath)) {
+            return Result.failed("请求参数为空");
+        }
+        mapReduceService.groupSort(jobName, inputPath);
+        return Result.success("分组统计、排序成功");
+    }
 }

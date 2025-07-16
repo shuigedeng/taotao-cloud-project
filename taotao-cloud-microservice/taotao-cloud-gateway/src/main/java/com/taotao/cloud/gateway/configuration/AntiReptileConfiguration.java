@@ -45,64 +45,67 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConditionalOnBean(RedissonClient.class)
 @EnableConfigurationProperties(AntiReptileProperties.class)
-@ConditionalOnProperty(prefix = AntiReptileProperties.PREFIX, value = "enabled", havingValue = "true")
+@ConditionalOnProperty(
+        prefix = AntiReptileProperties.PREFIX,
+        value = "enabled",
+        havingValue = "true")
 public class AntiReptileConfiguration {
 
-	@Bean
-	@ConditionalOnProperty(
-		prefix = AntiReptileProperties.PREFIX,
-		name = "ip-rule",
-		value = "enabled",
-		havingValue = "true",
-		matchIfMissing = true)
-	public IpRule ipRule(RedissonClient redissonClient, AntiReptileProperties properties) {
-		return new IpRule(redissonClient, properties);
-	}
+    @Bean
+    @ConditionalOnProperty(
+            prefix = AntiReptileProperties.PREFIX,
+            name = "ip-rule",
+            value = "enabled",
+            havingValue = "true",
+            matchIfMissing = true)
+    public IpRule ipRule(RedissonClient redissonClient, AntiReptileProperties properties) {
+        return new IpRule(redissonClient, properties);
+    }
 
-	@Bean
-	@ConditionalOnProperty(
-		prefix = AntiReptileProperties.PREFIX,
-		name = "ua-rule",
-		value = "enabled",
-		havingValue = "true",
-		matchIfMissing = true)
-	public UaRule uaRule(AntiReptileProperties properties) {
-		return new UaRule(properties);
-	}
+    @Bean
+    @ConditionalOnProperty(
+            prefix = AntiReptileProperties.PREFIX,
+            name = "ua-rule",
+            value = "enabled",
+            havingValue = "true",
+            matchIfMissing = true)
+    public UaRule uaRule(AntiReptileProperties properties) {
+        return new UaRule(properties);
+    }
 
-	@Bean
-	public RuleActuator ruleActuator(final List<AntiReptileRule> rules) {
-		final List<AntiReptileRule> antiReptileRules = rules.stream()
-			.sorted(Comparator.comparingInt(AntiReptileRule::getOrder))
-			.toList();
-		return new RuleActuator(antiReptileRules);
-	}
+    @Bean
+    public RuleActuator ruleActuator(final List<AntiReptileRule> rules) {
+        final List<AntiReptileRule> antiReptileRules =
+                rules.stream().sorted(Comparator.comparingInt(AntiReptileRule::getOrder)).toList();
+        return new RuleActuator(antiReptileRules);
+    }
 
-	@Bean
-	public VerifyImageUtil verifyImageUtil(RedissonClient redissonClient) {
-		return new VerifyImageUtil(redissonClient);
-	}
+    @Bean
+    public VerifyImageUtil verifyImageUtil(RedissonClient redissonClient) {
+        return new VerifyImageUtil(redissonClient);
+    }
 
-	@Bean
-	public ValidateFormService validateFormService(RuleActuator actuator,
-		VerifyImageUtil verifyImageUtil) {
-		return new ValidateFormService(actuator, verifyImageUtil);
-	}
+    @Bean
+    public ValidateFormService validateFormService(
+            RuleActuator actuator, VerifyImageUtil verifyImageUtil) {
+        return new ValidateFormService(actuator, verifyImageUtil);
+    }
 
-	@Bean
-	public AntiReptileFilter antiReptileFilter(RuleActuator actuator,
-		VerifyImageUtil verifyImageUtil,
-		AntiReptileProperties antiReptileProperties) {
-		return new AntiReptileFilter(actuator, verifyImageUtil, antiReptileProperties);
-	}
+    @Bean
+    public AntiReptileFilter antiReptileFilter(
+            RuleActuator actuator,
+            VerifyImageUtil verifyImageUtil,
+            AntiReptileProperties antiReptileProperties) {
+        return new AntiReptileFilter(actuator, verifyImageUtil, antiReptileProperties);
+    }
 
-	@Bean
-	public RefreshFormHandler refreshFormHandler(ValidateFormService validateFormService) {
-		return new RefreshFormHandler(validateFormService);
-	}
+    @Bean
+    public RefreshFormHandler refreshFormHandler(ValidateFormService validateFormService) {
+        return new RefreshFormHandler(validateFormService);
+    }
 
-	@Bean
-	public ValidateFormHandler validateFormHandler(ValidateFormService validateFormService) {
-		return new ValidateFormHandler(validateFormService);
-	}
+    @Bean
+    public ValidateFormHandler validateFormHandler(ValidateFormService validateFormService) {
+        return new ValidateFormHandler(validateFormService);
+    }
 }

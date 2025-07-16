@@ -88,7 +88,8 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
 
         // post请求时，如果是文件上传之类的请求，不修改请求消息体
         if (isPostRequest(method, contentType)) {
-            // 参考的是 org.springframework.cloud.gateway.filter.factory.AddRequestParameterGatewayFilterFactory
+            // 参考的是
+            // org.springframework.cloud.gateway.filter.factory.AddRequestParameterGatewayFilterFactory
 
             // 从请求里获取Post请求体
             String bodyString = resolveBodyFromRequest(serverHttpRequest);
@@ -129,17 +130,18 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
                 }
 
                 // 由于post的body只能订阅一次，由于上面代码中已经订阅过一次body。所以要再次封装请求到request才行，不然会报错请求已经订阅过
-                request = new ServerHttpRequestDecorator(request) {
-                    @Override
-                    public HttpHeaders getHeaders() {
-                        return headers;
-                    }
+                request =
+                        new ServerHttpRequestDecorator(request) {
+                            @Override
+                            public HttpHeaders getHeaders() {
+                                return headers;
+                            }
 
-                    @Override
-                    public Flux<DataBuffer> getBody() {
-                        return bodyFlux;
-                    }
-                };
+                            @Override
+                            public Flux<DataBuffer> getBody() {
+                                return bodyFlux;
+                            }
+                        };
 
                 // 封装request，传给下一级
                 return chain.filter(exchange.mutate().request(request).build());
@@ -158,13 +160,14 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
         // 获取请求体
         Flux<DataBuffer> body = serverHttpRequest.getBody();
         AtomicReference<String> bodyRef = new AtomicReference<>();
-        body.subscribe(buffer -> {
-			ByteBuffer byteBuffer = ByteBuffer.allocate(buffer.readableByteCount());
-			buffer.toByteBuffer(byteBuffer);
-            CharBuffer charBuffer = StandardCharsets.UTF_8.decode(byteBuffer);
-            DataBufferUtils.release(buffer);
-            bodyRef.set(charBuffer.toString());
-        });
+        body.subscribe(
+                buffer -> {
+                    ByteBuffer byteBuffer = ByteBuffer.allocate(buffer.readableByteCount());
+                    buffer.toByteBuffer(byteBuffer);
+                    CharBuffer charBuffer = StandardCharsets.UTF_8.decode(byteBuffer);
+                    DataBufferUtils.release(buffer);
+                    bodyRef.set(charBuffer.toString());
+                });
         // 获取request body
         return bodyRef.get();
     }
@@ -176,7 +179,8 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
      * @return DataBuffer
      */
     private DataBuffer toDataBuffer(byte[] bytes) {
-        NettyDataBufferFactory nettyDataBufferFactory = new NettyDataBufferFactory(ByteBufAllocator.DEFAULT);
+        NettyDataBufferFactory nettyDataBufferFactory =
+                new NettyDataBufferFactory(ByteBufAllocator.DEFAULT);
         DataBuffer buffer = nettyDataBufferFactory.allocateBuffer(bytes.length);
         buffer.write(bytes);
         return buffer;
@@ -184,8 +188,12 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
 
     private Mono<Void> sqlInjectionResponse(ServerWebExchange exchange, URI uri) {
         LogUtils.error(
-                "Paramters of Request [" + uri.getRawPath() + uri.getRawQuery() + "] contain illegal SQL keyword!");
-        return WebFluxUtil.writeJsonResponse(exchange.getResponse(), Result.fail(ResultEnum.SQL_INJECTION_REQUEST));
+                "Paramters of Request ["
+                        + uri.getRawPath()
+                        + uri.getRawQuery()
+                        + "] contain illegal SQL keyword!");
+        return WebFluxUtil.writeJsonResponse(
+                exchange.getResponse(), Result.fail(ResultEnum.SQL_INJECTION_REQUEST));
     }
 
     private boolean isGetRequest(HttpMethod method) {

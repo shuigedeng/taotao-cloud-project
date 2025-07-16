@@ -25,14 +25,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taotao.boot.security.spring.core.authority.TtcGrantedAuthority;
 import com.taotao.cloud.auth.biz.utils.JsonNodeUtils;
+import java.io.IOException;
+import java.util.Set;
 import org.apache.commons.collections4.CollectionUtils;
 import org.dromara.hutool.core.reflect.FieldUtil;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2ClientAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
-
-import java.io.IOException;
-import java.util.Set;
 
 /**
  * <p>OAuth2ClientAuthenticationTokenDeserializer </p>
@@ -40,13 +39,15 @@ import java.util.Set;
  *
  * @since : 2022/10/24 14:43
  */
-public class OAuth2ClientAuthenticationTokenDeserializer extends JsonDeserializer<OAuth2ClientAuthenticationToken> {
+public class OAuth2ClientAuthenticationTokenDeserializer
+        extends JsonDeserializer<OAuth2ClientAuthenticationToken> {
 
     private static final TypeReference<Set<TtcGrantedAuthority>> TTC_GRANTED_AUTHORITY_SET =
             new TypeReference<Set<TtcGrantedAuthority>>() {};
 
     @Override
-    public OAuth2ClientAuthenticationToken deserialize(JsonParser jsonParser, DeserializationContext context)
+    public OAuth2ClientAuthenticationToken deserialize(
+            JsonParser jsonParser, DeserializationContext context)
             throws IOException, JacksonException {
 
         ObjectMapper mapper = (ObjectMapper) jsonParser.getCodec();
@@ -54,18 +55,24 @@ public class OAuth2ClientAuthenticationTokenDeserializer extends JsonDeserialize
         return deserialize(jsonParser, mapper, jsonNode);
     }
 
-    private OAuth2ClientAuthenticationToken deserialize(JsonParser parser, ObjectMapper mapper, JsonNode root)
-            throws IOException {
+    private OAuth2ClientAuthenticationToken deserialize(
+            JsonParser parser, ObjectMapper mapper, JsonNode root) throws IOException {
         Set<TtcGrantedAuthority> authorities =
                 JsonNodeUtils.findValue(root, "authorities", TTC_GRANTED_AUTHORITY_SET, mapper);
         RegisteredClient registeredClient =
-                JsonNodeUtils.findValue(root, "registeredClient", new TypeReference<RegisteredClient>() {}, mapper);
+                JsonNodeUtils.findValue(
+                        root, "registeredClient", new TypeReference<RegisteredClient>() {}, mapper);
         String credentials = JsonNodeUtils.findStringValue(root, "credentials");
-        ClientAuthenticationMethod clientAuthenticationMethod = JsonNodeUtils.findValue(
-                root, "clientAuthenticationMethod", new TypeReference<ClientAuthenticationMethod>() {}, mapper);
+        ClientAuthenticationMethod clientAuthenticationMethod =
+                JsonNodeUtils.findValue(
+                        root,
+                        "clientAuthenticationMethod",
+                        new TypeReference<ClientAuthenticationMethod>() {},
+                        mapper);
 
         OAuth2ClientAuthenticationToken clientAuthenticationToken =
-                new OAuth2ClientAuthenticationToken(registeredClient, clientAuthenticationMethod, credentials);
+                new OAuth2ClientAuthenticationToken(
+                        registeredClient, clientAuthenticationMethod, credentials);
         if (CollectionUtils.isNotEmpty(authorities)) {
             FieldUtil.setFieldValue(clientAuthenticationToken, "authorities", authorities);
         }

@@ -49,9 +49,6 @@ public class Option implements Serializable {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("label", label)
-                .add("value", value)
-                .toString();
+        return MoreObjects.toStringHelper(this).add("label", label).add("value", value).toString();
     }
 }

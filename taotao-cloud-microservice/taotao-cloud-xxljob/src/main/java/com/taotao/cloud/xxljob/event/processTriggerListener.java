@@ -47,11 +47,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class processTriggerListener {
 
-    @Autowired
-    private DingerSender dingerSender;
+    @Autowired private DingerSender dingerSender;
 
-    @Autowired
-    private MailProperties mailProperties;
+    @Autowired private MailProperties mailProperties;
 
     @Async
     @EventListener(ProcessTriggerEvent.class)
@@ -84,14 +82,15 @@ public class processTriggerListener {
         XxlJobGroup group =
                 XxlJobAdminConfig.getAdminConfig().getXxlJobGroupDao().load(info.getJobGroup());
         String title = "xxljob执行信息监控";
-        String content = MessageFormat.format(
-                loadEmailJobAlarmTemplate(),
-                group != null ? group.getTitle() : "null",
-                info.getId(),
-                info.getJobDesc(),
-                time,
-                jobLog.getTriggerCode() == ReturnT.SUCCESS_CODE ? "执行成功" : "执行失败",
-                alarmContent);
+        String content =
+                MessageFormat.format(
+                        loadEmailJobAlarmTemplate(),
+                        group != null ? group.getTitle() : "null",
+                        info.getId(),
+                        info.getJobDesc(),
+                        time,
+                        jobLog.getTriggerCode() == ReturnT.SUCCESS_CODE ? "执行成功" : "执行失败",
+                        alarmContent);
 
         // make mail
         try {
@@ -106,7 +105,10 @@ public class processTriggerListener {
 
             XxlJobAdminConfig.getAdminConfig().getMailSender().send(mimeMessage);
         } catch (Exception e) {
-            LogUtils.error(">>>>>>>>>>> xxl-job, job fail alarm email send error, JobLogId:{}", jobLog.getId(), e);
+            LogUtils.error(
+                    ">>>>>>>>>>> xxl-job, job fail alarm email send error, JobLogId:{}",
+                    jobLog.getId(),
+                    e);
         }
     }
 
@@ -114,17 +116,31 @@ public class processTriggerListener {
      * load email job alarm template
      */
     private static String loadEmailJobAlarmTemplate() {
-        return "<h5>" + "任务执行信息" + "：</span>"
+        return "<h5>"
+                + "任务执行信息"
+                + "：</span>"
                 + "<table border=\"1\" cellpadding=\"3\" style=\"border-collapse:collapse; width:80%;\" >\n"
                 + "   <thead style=\"font-weight: bold;color: #ffffff;background-color: #ff8c00;\" >"
                 + "      <tr>\n"
                 + "         <td width=\"20%\" >"
-                + "执行器名称" + "</td>\n" + "         <td width=\"10%\" >"
-                + "任务ID" + "</td>\n" + "         <td width=\"10%\" >"
-                + "任务描述" + "</td>\n" + "         <td width=\"10%\" >"
-                + "执行时间(毫秒)" + "</td>\n" + "         <td width=\"10%\" >"
-                + "执行状态" + "</td>\n" + "         <td width=\"40%\" >"
-                + "执行详细信息" + "</td>\n" + "      </tr>\n"
+                + "执行器名称"
+                + "</td>\n"
+                + "         <td width=\"10%\" >"
+                + "任务ID"
+                + "</td>\n"
+                + "         <td width=\"10%\" >"
+                + "任务描述"
+                + "</td>\n"
+                + "         <td width=\"10%\" >"
+                + "执行时间(毫秒)"
+                + "</td>\n"
+                + "         <td width=\"10%\" >"
+                + "执行状态"
+                + "</td>\n"
+                + "         <td width=\"40%\" >"
+                + "执行详细信息"
+                + "</td>\n"
+                + "      </tr>\n"
                 + "   </thead>\n"
                 + "   <tbody>\n"
                 + "      <tr>\n"

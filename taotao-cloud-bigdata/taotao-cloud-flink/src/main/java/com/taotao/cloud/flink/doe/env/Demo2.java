@@ -1,5 +1,20 @@
-package com.taotao.cloud.flink.doe.env;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.flink.doe.env;
 
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.configuration.Configuration;
@@ -18,26 +33,26 @@ public class Demo2 {
         // 1 批处理的环境
         ExecutionEnvironment ee = ExecutionEnvironment.getExecutionEnvironment();
 
-
         // 2 获取编程环境 对批数据和流数据处理  [流批一体]
         StreamExecutionEnvironment see = StreamExecutionEnvironment.getExecutionEnvironment();
-        //see.setParallelism() ;
+        // see.setParallelism() ;
         // 设置运行模式   批
-        //executionEnvironment.setRuntimeMode(RuntimeExecutionMode.BATCH);
+        // executionEnvironment.setRuntimeMode(RuntimeExecutionMode.BATCH);
         //  流  默认
         // executionEnvironment.setRuntimeMode(RuntimeExecutionMode.STREAMING);
 
-          // 创建环境时 可以传入用户自定义参数
+        // 创建环境时 可以传入用户自定义参数
         Configuration conf = new Configuration();
         StreamExecutionEnvironment.getExecutionEnvironment(conf);
 
         // 3 获取本地 带监控页面的环境
-         // 设置页面http服务的请求端口
-        conf.setString("rest.port" , "8888");
-        StreamExecutionEnvironment see2 = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
+        // 设置页面http服务的请求端口
+        conf.setString("rest.port", "8888");
+        StreamExecutionEnvironment see2 =
+                StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
 
-        see2.socketTextStream("doe01" , 8899).print() ;
+        see2.socketTextStream("doe01", 8899).print();
 
-        see2.execute() ;
+        see2.execute();
     }
 }

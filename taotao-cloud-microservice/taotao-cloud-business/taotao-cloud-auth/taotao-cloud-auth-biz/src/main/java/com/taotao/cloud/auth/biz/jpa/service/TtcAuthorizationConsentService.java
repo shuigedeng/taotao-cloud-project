@@ -22,8 +22,6 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 /**
@@ -38,74 +36,72 @@ import org.springframework.stereotype.Service;
 @Service
 public class TtcAuthorizationConsentService {
 
-	/**
-	 * 日志
-	 */
-	private static final Logger log = LoggerFactory.getLogger(
-		TtcAuthorizationConsentService.class);
+    /**
+     * 日志
+     */
+    private static final Logger log = LoggerFactory.getLogger(TtcAuthorizationConsentService.class);
 
-	/**
-	 * 授权同意存储库
-	 */
-	private final TtcAuthorizationConsentRepository authorizationConsentRepository;
+    /**
+     * 授权同意存储库
+     */
+    private final TtcAuthorizationConsentRepository authorizationConsentRepository;
 
-	/**
-	 * 希罗多德授权同意服务
-	 *
-	 * @param authorizationConsentRepository 授权同意存储库
-	 * @since 2023-07-10 17:09:45
-	 */
-	@Autowired
-	public TtcAuthorizationConsentService(
-		TtcAuthorizationConsentRepository authorizationConsentRepository) {
-		this.authorizationConsentRepository = authorizationConsentRepository;
-	}
+    /**
+     * 希罗多德授权同意服务
+     *
+     * @param authorizationConsentRepository 授权同意存储库
+     * @since 2023-07-10 17:09:45
+     */
+    @Autowired
+    public TtcAuthorizationConsentService(
+            TtcAuthorizationConsentRepository authorizationConsentRepository) {
+        this.authorizationConsentRepository = authorizationConsentRepository;
+    }
 
-	/**
-	 * 按注册客户端id和主体名称查找
-	 *
-	 * @param registeredClientId 注册客户端id
-	 * @param principalName      主体名称
-	 * @return {@link Optional }<{@link TtcAuthorizationConsent }>
-	 * @since 2023-07-10 17:09:46
-	 */
-	public Optional<TtcAuthorizationConsent> findByRegisteredClientIdAndPrincipalName(
-		String registeredClientId, String principalName) {
-		Optional<TtcAuthorizationConsent> result =
-			this.authorizationConsentRepository.findByRegisteredClientIdAndPrincipalName(
-				registeredClientId, principalName);
-		log.info("TtcAuthorizationConsent Service findByRegisteredClientIdAndPrincipalName.");
-		return result;
-	}
+    /**
+     * 按注册客户端id和主体名称查找
+     *
+     * @param registeredClientId 注册客户端id
+     * @param principalName      主体名称
+     * @return {@link Optional }<{@link TtcAuthorizationConsent }>
+     * @since 2023-07-10 17:09:46
+     */
+    public Optional<TtcAuthorizationConsent> findByRegisteredClientIdAndPrincipalName(
+            String registeredClientId, String principalName) {
+        Optional<TtcAuthorizationConsent> result =
+                this.authorizationConsentRepository.findByRegisteredClientIdAndPrincipalName(
+                        registeredClientId, principalName);
+        log.info("TtcAuthorizationConsent Service findByRegisteredClientIdAndPrincipalName.");
+        return result;
+    }
 
-	/**
-	 * 通过注册客户端id和主体名称删除
-	 *
-	 * @param registeredClientId 注册客户端id
-	 * @param principalName      主体名称
-	 * @since 2023-07-10 17:09:47
-	 */
-	public void deleteByRegisteredClientIdAndPrincipalName(String registeredClientId,
-		String principalName) {
-		this.authorizationConsentRepository.deleteByRegisteredClientIdAndPrincipalName(
-			registeredClientId, principalName);
-		log.info(
-			"TtcAuthorizationConsent Service deleteByRegisteredClientIdAndPrincipalName.");
-	}
+    /**
+     * 通过注册客户端id和主体名称删除
+     *
+     * @param registeredClientId 注册客户端id
+     * @param principalName      主体名称
+     * @since 2023-07-10 17:09:47
+     */
+    public void deleteByRegisteredClientIdAndPrincipalName(
+            String registeredClientId, String principalName) {
+        this.authorizationConsentRepository.deleteByRegisteredClientIdAndPrincipalName(
+                registeredClientId, principalName);
+        log.info("TtcAuthorizationConsent Service deleteByRegisteredClientIdAndPrincipalName.");
+    }
 
-	/**
-	 * 保存
-	 *
-	 * @param entity 实体
-	 * @since 2023-07-10 17:09:47
-	 */
-	public void save(TtcAuthorizationConsent entity) {
-		authorizationConsentRepository.save(entity);
-	}
+    /**
+     * 保存
+     *
+     * @param entity 实体
+     * @since 2023-07-10 17:09:47
+     */
+    public void save(TtcAuthorizationConsent entity) {
+        authorizationConsentRepository.save(entity);
+    }
 
-//	public Page<TtcAuthorizationConsent> myPageQuery(String registeredClientId,
-//		String principalName) {
-//		return authorizationConsentRepository.myPageQuery(registeredClientId, principalName,
-//			PageRequest.of(0, 20));
-//	}
+    //	public Page<TtcAuthorizationConsent> myPageQuery(String registeredClientId,
+    //		String principalName) {
+    //		return authorizationConsentRepository.myPageQuery(registeredClientId, principalName,
+    //			PageRequest.of(0, 20));
+    //	}
 }

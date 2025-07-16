@@ -36,7 +36,8 @@ public class ProcessTriggerEvent extends ApplicationEvent {
 
     private final long time;
 
-    public ProcessTriggerEvent(XxlJobGroup group, XxlJobInfo jobInfo, XxlJobLog xxlJobLog, long time) {
+    public ProcessTriggerEvent(
+            XxlJobGroup group, XxlJobInfo jobInfo, XxlJobLog xxlJobLog, long time) {
         super(xxlJobLog);
 
         this.xxlJobLog = xxlJobLog;

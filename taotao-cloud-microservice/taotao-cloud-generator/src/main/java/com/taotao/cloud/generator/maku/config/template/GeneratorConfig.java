@@ -1,15 +1,28 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.generator.maku.config.template;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.generator.maku.common.exception.ServerException;
 import com.taotao.cloud.generator.maku.common.utils.JsonUtils;
-import com.taotao.cloud.generator.maku.config.template.GeneratorInfo;
-import com.taotao.cloud.generator.maku.config.template.TemplateInfo;
-import org.springframework.util.StreamUtils;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import org.springframework.util.StreamUtils;
 
 /**
  * 代码生成配置内容
@@ -42,12 +55,15 @@ public class GeneratorConfig {
             GeneratorInfo generator = JsonUtils.parseObject(configContent, GeneratorInfo.class);
             for (TemplateInfo templateInfo : generator.getTemplates()) {
                 // 模板文件
-                InputStream isTemplate = this.getClass().getResourceAsStream(template + templateInfo.getTemplateName());
+                InputStream isTemplate =
+                        this.getClass()
+                                .getResourceAsStream(template + templateInfo.getTemplateName());
                 if (isTemplate == null) {
                     throw new ServerException("模板文件 " + templateInfo.getTemplateName() + " 不存在");
                 }
                 // 读取模板内容
-                String templateContent = StreamUtils.copyToString(isTemplate, StandardCharsets.UTF_8);
+                String templateContent =
+                        StreamUtils.copyToString(isTemplate, StandardCharsets.UTF_8);
 
                 templateInfo.setTemplateContent(templateContent);
             }

@@ -37,7 +37,11 @@ public class RealInsertOptoin extends InsertOption {
     //
 
     @Override
-    public void doOption(String destination, String schemaName, String tableName, CanalEntry.RowChange rowChange) {
+    public void doOption(
+            String destination,
+            String schemaName,
+            String tableName,
+            CanalEntry.RowChange rowChange) {
         LogUtils.info("======================接口方式（新增数据操作）==========================");
         List<CanalEntry.RowData> rowDatasList = rowChange.getRowDatasList();
         for (CanalEntry.RowData rowData : rowDatasList) {
@@ -45,13 +49,21 @@ public class RealInsertOptoin extends InsertOption {
             String sql = "use " + schemaName + ";\n";
             StringBuffer colums = new StringBuffer();
             StringBuffer values = new StringBuffer();
-            rowData.getAfterColumnsList().forEach((c) -> {
-                colums.append(c.getName() + ",");
-                values.append("'" + c.getValue() + "',");
-            });
+            rowData.getAfterColumnsList()
+                    .forEach(
+                            (c) -> {
+                                colums.append(c.getName() + ",");
+                                values.append("'" + c.getValue() + "',");
+                            });
 
-            sql += "INSERT INTO " + tableName + "(" + colums.substring(0, colums.length() - 1) + ") VALUES("
-                    + values.substring(0, values.length() - 1) + ");";
+            sql +=
+                    "INSERT INTO "
+                            + tableName
+                            + "("
+                            + colums.substring(0, colums.length() - 1)
+                            + ") VALUES("
+                            + values.substring(0, values.length() - 1)
+                            + ");";
             LogUtils.info(sql);
             // mapper.doOption(sql);
 

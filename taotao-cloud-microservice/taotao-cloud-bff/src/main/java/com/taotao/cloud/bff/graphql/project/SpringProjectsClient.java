@@ -16,9 +16,8 @@
 
 package com.taotao.cloud.bff.graphql.project;
 
-import org.springframework.stereotype.Component;
-
 import java.util.List;
+import org.springframework.stereotype.Component;
 
 @Component
 public class SpringProjectsClient {
@@ -29,7 +28,8 @@ public class SpringProjectsClient {
     // private final Traverson traverson;
     //
     // public SpringProjectsClient(RestTemplateBuilder builder) {
-    // 	List<HttpMessageConverter<?>> converters = Traverson.getDefaultMessageConverters(MediaTypes.HAL_JSON);
+    // 	List<HttpMessageConverter<?>> converters =
+    // Traverson.getDefaultMessageConverters(MediaTypes.HAL_JSON);
     // 	RestTemplate restTemplate = builder.messageConverters(converters).build();
     // 	this.traverson = new Traverson(URI.create("https://spring.io/api/"), MediaTypes.HAL_JSON);
     // 	this.traverson.setRestOperations(restTemplate);
@@ -44,7 +44,8 @@ public class SpringProjectsClient {
 
     public List<Release> fetchProjectReleases(String projectSlug) {
         // CollectionModel<Release> releases = this.traverson.follow("projects")
-        // 		.follow(Hop.rel("project").withParameter("id", projectSlug)).follow(Hop.rel("releases"))
+        // 		.follow(Hop.rel("project").withParameter("id",
+        // projectSlug)).follow(Hop.rel("releases"))
         // 		.toObject(releaseCollection);
         // return new ArrayList(releases.getContent());
         return null;

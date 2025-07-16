@@ -49,14 +49,21 @@ public class MyAnnoEventListener {
             String sql = "use " + canalMsg.getSchemaName() + ";\n";
             StringBuffer colums = new StringBuffer();
             StringBuffer values = new StringBuffer();
-            rowData.getAfterColumnsList().forEach((c) -> {
-                colums.append(c.getName() + ",");
-                values.append("'" + c.getValue() + "',");
-            });
+            rowData.getAfterColumnsList()
+                    .forEach(
+                            (c) -> {
+                                colums.append(c.getName() + ",");
+                                values.append("'" + c.getValue() + "',");
+                            });
 
-            sql += "INSERT INTO " + canalMsg.getTableName() + "(" + colums.substring(0, colums.length() - 1)
-                    + ") VALUES(" + values.substring(0, values.length() - 1)
-                    + ");";
+            sql +=
+                    "INSERT INTO "
+                            + canalMsg.getTableName()
+                            + "("
+                            + colums.substring(0, colums.length() - 1)
+                            + ") VALUES("
+                            + values.substring(0, values.length() - 1)
+                            + ");";
             LogUtils.info(sql);
         }
         LogUtils.info("\n======================================================");
@@ -71,15 +78,22 @@ public class MyAnnoEventListener {
             String sql = "use " + canalMsg.getSchemaName() + ";\n";
             StringBuffer updates = new StringBuffer();
             StringBuffer conditions = new StringBuffer();
-            rowData.getAfterColumnsList().forEach((c) -> {
-                if (c.getIsKey()) {
-                    conditions.append(c.getName() + "='" + c.getValue() + "'");
-                } else {
-                    updates.append(c.getName() + "='" + c.getValue() + "',");
-                }
-            });
-            sql += "UPDATE " + canalMsg.getTableName() + " SET " + updates.substring(0, updates.length() - 1)
-                    + " WHERE " + conditions;
+            rowData.getAfterColumnsList()
+                    .forEach(
+                            (c) -> {
+                                if (c.getIsKey()) {
+                                    conditions.append(c.getName() + "='" + c.getValue() + "'");
+                                } else {
+                                    updates.append(c.getName() + "='" + c.getValue() + "',");
+                                }
+                            });
+            sql +=
+                    "UPDATE "
+                            + canalMsg.getTableName()
+                            + " SET "
+                            + updates.substring(0, updates.length() - 1)
+                            + " WHERE "
+                            + conditions;
             LogUtils.info(sql);
         }
         LogUtils.info("\n======================================================");

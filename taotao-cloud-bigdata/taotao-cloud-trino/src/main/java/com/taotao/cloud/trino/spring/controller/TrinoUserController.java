@@ -31,8 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TrinoUserController {
 
-    @Autowired
-    private TrinoService trinoService;
+    @Autowired private TrinoService trinoService;
 
     @RequestMapping("/queryUser")
     public Object query() {

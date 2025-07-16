@@ -87,7 +87,8 @@ public class PrometheusConfiguration {
     public static class PrometheusApiConfiguration {
 
         @Bean
-        public PrometheusApi prometheusApi(DiscoveryClient discoveryClient, ApplicationEventPublisher eventPublisher) {
+        public PrometheusApi prometheusApi(
+                DiscoveryClient discoveryClient, ApplicationEventPublisher eventPublisher) {
             return new PrometheusApi(discoveryClient, eventPublisher);
         }
 

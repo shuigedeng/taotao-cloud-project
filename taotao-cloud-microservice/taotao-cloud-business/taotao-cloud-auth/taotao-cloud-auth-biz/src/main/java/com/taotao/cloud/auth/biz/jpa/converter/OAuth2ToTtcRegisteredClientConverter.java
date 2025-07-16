@@ -63,33 +63,43 @@ public class OAuth2ToTtcRegisteredClientConverter
      */
     @Override
     public TtcRegisteredClient convert(RegisteredClient registeredClient) {
-        List<String> clientAuthenticationMethods = new ArrayList<>(
-                registeredClient.getClientAuthenticationMethods().size());
+        List<String> clientAuthenticationMethods =
+                new ArrayList<>(registeredClient.getClientAuthenticationMethods().size());
         registeredClient
                 .getClientAuthenticationMethods()
-                .forEach(clientAuthenticationMethod ->
-                        clientAuthenticationMethods.add(clientAuthenticationMethod.getValue()));
+                .forEach(
+                        clientAuthenticationMethod ->
+                                clientAuthenticationMethods.add(
+                                        clientAuthenticationMethod.getValue()));
 
         List<String> authorizationGrantTypes =
                 new ArrayList<>(registeredClient.getAuthorizationGrantTypes().size());
         registeredClient
                 .getAuthorizationGrantTypes()
-                .forEach(authorizationGrantType -> authorizationGrantTypes.add(authorizationGrantType.getValue()));
+                .forEach(
+                        authorizationGrantType ->
+                                authorizationGrantTypes.add(authorizationGrantType.getValue()));
 
         TtcRegisteredClient entity = new TtcRegisteredClient();
         entity.setId(registeredClient.getId());
         entity.setClientId(registeredClient.getClientId());
-        entity.setClientIdIssuedAt(DateUtil.toLocalDateTime(registeredClient.getClientIdIssuedAt()));
+        entity.setClientIdIssuedAt(
+                DateUtil.toLocalDateTime(registeredClient.getClientIdIssuedAt()));
         entity.setClientSecret(encode(registeredClient.getClientSecret()));
-        entity.setClientSecretExpiresAt(DateUtil.toLocalDateTime(registeredClient.getClientSecretExpiresAt()));
+        entity.setClientSecretExpiresAt(
+                DateUtil.toLocalDateTime(registeredClient.getClientSecretExpiresAt()));
         entity.setClientName(registeredClient.getClientName());
         entity.setClientAuthenticationMethods(
                 StringUtils.collectionToCommaDelimitedString(clientAuthenticationMethods));
-        entity.setAuthorizationGrantTypes(StringUtils.collectionToCommaDelimitedString(authorizationGrantTypes));
-        entity.setRedirectUris(StringUtils.collectionToCommaDelimitedString(registeredClient.getRedirectUris()));
+        entity.setAuthorizationGrantTypes(
+                StringUtils.collectionToCommaDelimitedString(authorizationGrantTypes));
+        entity.setRedirectUris(
+                StringUtils.collectionToCommaDelimitedString(registeredClient.getRedirectUris()));
         entity.setPostLogoutRedirectUris(
-                StringUtils.collectionToCommaDelimitedString(registeredClient.getPostLogoutRedirectUris()));
-        entity.setScopes(StringUtils.collectionToCommaDelimitedString(registeredClient.getScopes()));
+                StringUtils.collectionToCommaDelimitedString(
+                        registeredClient.getPostLogoutRedirectUris()));
+        entity.setScopes(
+                StringUtils.collectionToCommaDelimitedString(registeredClient.getScopes()));
         entity.setClientSettings(writeMap(registeredClient.getClientSettings().getSettings()));
         entity.setTokenSettings(writeMap(registeredClient.getTokenSettings().getSettings()));
 

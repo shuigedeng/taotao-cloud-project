@@ -24,7 +24,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.MissingNode;
 import com.taotao.boot.security.spring.authentication.login.form.FormLoginWebAuthenticationDetails;
-
 import java.io.IOException;
 
 /**
@@ -33,9 +32,11 @@ import java.io.IOException;
  *
  * @since : 2022/4/14 11:48
  */
-public class FormLoginWebAuthenticationDetailsDeserializer extends JsonDeserializer<FormLoginWebAuthenticationDetails> {
+public class FormLoginWebAuthenticationDetailsDeserializer
+        extends JsonDeserializer<FormLoginWebAuthenticationDetails> {
     @Override
-    public FormLoginWebAuthenticationDetails deserialize(JsonParser jp, DeserializationContext deserializationContext)
+    public FormLoginWebAuthenticationDetails deserialize(
+            JsonParser jp, DeserializationContext deserializationContext)
             throws IOException, JacksonException {
         ObjectMapper mapper = (ObjectMapper) jp.getCodec();
         JsonNode jsonNode = mapper.readTree(jp);

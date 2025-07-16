@@ -31,20 +31,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BatchController {
 
-    @Autowired
-    private Job singleStepJob;
+    @Autowired private Job singleStepJob;
 
-    @Autowired
-    private Job multiBoundStepsJob;
+    @Autowired private Job multiBoundStepsJob;
 
-    @Autowired
-    private JobLauncher jobLauncher;
+    @Autowired private JobLauncher jobLauncher;
 
     @GetMapping("/job/step")
     public String invokeStep() throws Exception {
-        JobParameters jobParameters = new JobParametersBuilder()
-                .addLong("time", System.currentTimeMillis())
-                .toJobParameters();
+        JobParameters jobParameters =
+                new JobParametersBuilder()
+                        .addLong("time", System.currentTimeMillis())
+                        .toJobParameters();
 
         jobLauncher.run(singleStepJob, jobParameters);
         return "The job is proceed.";
@@ -52,9 +50,10 @@ public class BatchController {
 
     @GetMapping("/job/steps")
     public String invokeSteps() throws Exception {
-        JobParameters jobParameters = new JobParametersBuilder()
-                .addLong("time", System.currentTimeMillis())
-                .toJobParameters();
+        JobParameters jobParameters =
+                new JobParametersBuilder()
+                        .addLong("time", System.currentTimeMillis())
+                        .toJobParameters();
         jobLauncher.run(multiBoundStepsJob, jobParameters);
         return "The multi bound steps job is proceed.";
     }

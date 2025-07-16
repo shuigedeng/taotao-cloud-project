@@ -16,13 +16,13 @@
 
 package com.taotao.cloud.auth.biz.authentication.stamp;
 
-import com.taotao.cloud.auth.api.model.dto.SignInErrorStatus;
-import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
 import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.boot.captcha.support.core.definition.domain.Metadata;
 import com.taotao.boot.captcha.support.core.dto.Captcha;
 import com.taotao.boot.captcha.support.core.dto.Verification;
 import com.taotao.boot.security.spring.constants.OAuth2Constants;
+import com.taotao.cloud.auth.api.model.dto.SignInErrorStatus;
+import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
 import java.time.Duration;
 import org.apache.commons.lang3.ObjectUtils;
 import org.dromara.hutool.crypto.SecureUtil;
@@ -35,7 +35,8 @@ import org.springframework.beans.factory.InitializingBean;
  * @version 2023.07
  * @since 2023-07-10 17:25:15
  */
-public class SignInFailureLimitedStampManager extends AbstractCountStampManager implements InitializingBean {
+public class SignInFailureLimitedStampManager extends AbstractCountStampManager
+        implements InitializingBean {
 
     /**
      * 身份验证属性
@@ -51,7 +52,8 @@ public class SignInFailureLimitedStampManager extends AbstractCountStampManager 
      * @since 2023-07-10 17:25:15
      */
     public SignInFailureLimitedStampManager(
-            RedisRepository redisRepository, OAuth2AuthenticationProperties authenticationProperties) {
+            RedisRepository redisRepository,
+            OAuth2AuthenticationProperties authenticationProperties) {
         super(redisRepository, OAuth2Constants.CACHE_NAME_TOKEN_SIGN_IN_FAILURE_LIMITED);
         this.authenticationProperties = authenticationProperties;
     }
@@ -66,7 +68,9 @@ public class SignInFailureLimitedStampManager extends AbstractCountStampManager 
      * @since 2023-07-10 17:25:15
      */
     public SignInFailureLimitedStampManager(
-            RedisRepository redisRepository, Duration expire, OAuth2AuthenticationProperties authenticationProperties) {
+            RedisRepository redisRepository,
+            Duration expire,
+            OAuth2AuthenticationProperties authenticationProperties) {
         super(redisRepository, OAuth2Constants.CACHE_NAME_TOKEN_SIGN_IN_FAILURE_LIMITED, expire);
         this.authenticationProperties = authenticationProperties;
     }

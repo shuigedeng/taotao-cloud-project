@@ -86,8 +86,7 @@ public class OAuth2ApplicationService {
             scopes.add(scope);
         }
 
-        OAuth2Application oldApplication =
-                applicationRepository.findById(applicationId).get();
+        OAuth2Application oldApplication = applicationRepository.findById(applicationId).get();
         oldApplication.setScopes(scopes);
 
         return saveAndFlush(oldApplication);

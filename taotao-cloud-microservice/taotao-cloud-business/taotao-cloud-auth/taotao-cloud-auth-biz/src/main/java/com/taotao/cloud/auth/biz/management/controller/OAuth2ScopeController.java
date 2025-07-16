@@ -16,12 +16,12 @@
 
 package com.taotao.cloud.auth.biz.management.controller;
 
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.auth.biz.management.dto.OAuth2PermissionDto;
 import com.taotao.cloud.auth.biz.management.dto.OAuth2ScopeDto;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Permission;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Scope;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ScopeService;
-import com.taotao.boot.common.model.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -75,7 +75,8 @@ public class OAuth2ScopeController {
 
         Set<OAuth2Permission> permissions = new HashSet<>();
         if (CollectionUtils.isNotEmpty(scope.getPermissions())) {
-            permissions = scope.getPermissions().stream().map(this::toEntity).collect(Collectors.toSet());
+            permissions =
+                    scope.getPermissions().stream().map(this::toEntity).collect(Collectors.toSet());
         }
 
         OAuth2Scope result = scopeService.assigned(scope.getScopeId(), permissions);

@@ -24,7 +24,8 @@ import org.springframework.context.ApplicationListener;
  * <p>TODO </p>
  *
  */
-public class AccountReleaseFromCacheListener implements ApplicationListener<AccountReleaseFromCacheEvent> {
+public class AccountReleaseFromCacheListener
+        implements ApplicationListener<AccountReleaseFromCacheEvent> {
 
     private final OAuth2AccountStatusManager accountStatusManager;
 

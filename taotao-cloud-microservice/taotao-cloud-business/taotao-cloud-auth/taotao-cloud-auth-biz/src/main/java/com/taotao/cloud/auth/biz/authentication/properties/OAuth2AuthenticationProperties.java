@@ -207,36 +207,49 @@ public class OAuth2AuthenticationProperties {
         /**
          * UI 界面用户名标输入框 name 属性值
          */
-        private String usernameParameter = UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY;
+        private String usernameParameter =
+                UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY;
+
         /**
          * UI 界面密码标输入框 name 属性值
          */
-        private String passwordParameter = UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY;
+        private String passwordParameter =
+                UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY;
+
         /**
          * UI 界面Remember Me name 属性值
          */
-        private String rememberMeParameter = AbstractRememberMeServices.SPRING_SECURITY_REMEMBER_ME_COOKIE_KEY;
+        private String rememberMeParameter =
+                AbstractRememberMeServices.SPRING_SECURITY_REMEMBER_ME_COOKIE_KEY;
+
         /**
          * UI 界面验证码 name 属性值
          */
         private String captchaParameter = "captcha";
+
         /**
          * 登录页面地址
          */
         private String loginPageUrl = DefaultLoginPageGeneratingFilter.DEFAULT_LOGIN_PAGE_URL;
+
         /**
          * 登录失败重定向地址
          */
         private String failureForwardUrl =
-                loginPageUrl + SymbolConstants.QUESTION + DefaultLoginPageGeneratingFilter.ERROR_PARAMETER_NAME;
+                loginPageUrl
+                        + SymbolConstants.QUESTION
+                        + DefaultLoginPageGeneratingFilter.ERROR_PARAMETER_NAME;
+
         /**
          * 登录成功重定向地址
          */
         private String successForwardUrl;
+
         /**
          * 关闭验证码显示，默认 false，显示
          */
         private Boolean closeCaptcha = false;
+
         /**
          * 验证码类别，默认为 Hutool Gif 类型
          */

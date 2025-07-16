@@ -61,7 +61,11 @@ import reactor.core.publisher.Mono;
  * @since 2023-05-08 13:19:14
  */
 @Component
-@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "sign", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(
+        prefix = FilterProperties.PREFIX,
+        name = "sign",
+        havingValue = "true",
+        matchIfMissing = true)
 public class SignFilter implements GlobalFilter, Ordered {
 
     public static final String PRIVATE_KEY =
@@ -71,11 +75,11 @@ public class SignFilter implements GlobalFilter, Ordered {
 
     private final RedisRepository redisRepository;
 
-	public SignFilter(RedisRepository redisRepository) {
-		this.redisRepository = redisRepository;
-	}
+    public SignFilter(RedisRepository redisRepository) {
+        this.redisRepository = redisRepository;
+    }
 
-	@Override
+    @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
         LogUtils.info("访问地址：" + request.getURI());
@@ -110,15 +114,19 @@ public class SignFilter implements GlobalFilter, Ordered {
         // 6 获取请求体,修改请求体
         ServerRequest serverRequest =
                 ServerRequest.create(exchange, HandlerStrategies.withDefaults().messageReaders());
-        Mono<String> modifiedBody = serverRequest.bodyToMono(String.class).flatMap(body -> {
-            String encrypt = RSAUtils.decrypt(body, PRIVATE_KEY);
-            JSONObject jsonObject = JSON.parseObject(encrypt);
-            for (Map.Entry<String, Object> entry : jsonObject.entrySet()) {
-                paramMap.put(entry.getKey(), entry.getValue());
-            }
-            checkSign(sign, dateTimestamp, requestId, paramMap);
-            return Mono.just(encrypt);
-        });
+        Mono<String> modifiedBody =
+                serverRequest
+                        .bodyToMono(String.class)
+                        .flatMap(
+                                body -> {
+                                    String encrypt = RSAUtils.decrypt(body, PRIVATE_KEY);
+                                    JSONObject jsonObject = JSON.parseObject(encrypt);
+                                    for (Map.Entry<String, Object> entry : jsonObject.entrySet()) {
+                                        paramMap.put(entry.getKey(), entry.getValue());
+                                    }
+                                    checkSign(sign, dateTimestamp, requestId, paramMap);
+                                    return Mono.just(encrypt);
+                                });
 
         // 创建BodyInserter修改请求体
         BodyInserter<Mono<String>, ReactiveHttpOutputMessage> bodyInserter =
@@ -130,27 +138,34 @@ public class SignFilter implements GlobalFilter, Ordered {
         MyCachedBodyOutputMessage outputMessage = new MyCachedBodyOutputMessage(exchange, headers);
         outputMessage.initial(paramMap, requestId, sign, dateTimestamp);
 
-        return bodyInserter.insert(outputMessage, new BodyInserterContext()).then(Mono.defer(() -> {
-            ServerHttpRequestDecorator decorator = new ServerHttpRequestDecorator(exchange.getRequest()) {
-                @Override
-                public Flux<DataBuffer> getBody() {
-                    Flux<DataBuffer> body = outputMessage.getBody();
-                    if (body.equals(Flux.empty())) {
-                        // 验证签名
-                        checkSign(
-                                outputMessage.getSign(),
-                                outputMessage.getDateTimestamp(),
-                                outputMessage.getRequestId(),
-                                outputMessage.getParamMap());
-                    }
-                    return outputMessage.getBody();
-                }
-            };
-            return chain.filter(exchange.mutate().request(decorator).build());
-        }));
+        return bodyInserter
+                .insert(outputMessage, new BodyInserterContext())
+                .then(
+                        Mono.defer(
+                                () -> {
+                                    ServerHttpRequestDecorator decorator =
+                                            new ServerHttpRequestDecorator(exchange.getRequest()) {
+                                                @Override
+                                                public Flux<DataBuffer> getBody() {
+                                                    Flux<DataBuffer> body = outputMessage.getBody();
+                                                    if (body.equals(Flux.empty())) {
+                                                        // 验证签名
+                                                        checkSign(
+                                                                outputMessage.getSign(),
+                                                                outputMessage.getDateTimestamp(),
+                                                                outputMessage.getRequestId(),
+                                                                outputMessage.getParamMap());
+                                                    }
+                                                    return outputMessage.getBody();
+                                                }
+                                            };
+                                    return chain.filter(
+                                            exchange.mutate().request(decorator).build());
+                                }));
     }
 
-    public void checkSign(String sign, Long dateTimestamp, String requestId, Map<String, Object> paramMap) {
+    public void checkSign(
+            String sign, Long dateTimestamp, String requestId, Map<String, Object> paramMap) {
         String str = JSON.toJSONString(paramMap) + requestId + dateTimestamp;
         String tempSign = MD5Utils.encrypt(str);
         assert tempSign != null;
@@ -249,7 +264,8 @@ public class SignFilter implements GlobalFilter, Ordered {
             super(exchange, httpHeaders);
         }
 
-        public void initial(Map<String, Object> paramMap, String requestId, String sign, Long dateTimestamp) {
+        public void initial(
+                Map<String, Object> paramMap, String requestId, String sign, Long dateTimestamp) {
             this.paramMap = paramMap;
             this.requestId = requestId;
             this.sign = sign;

@@ -42,13 +42,16 @@ import org.springframework.security.jackson2.SecurityJackson2Modules;
 @SuppressWarnings("serial")
 public class FormOAuth2PhoneLoginJackson2Module extends SimpleModule {
 
-	public FormOAuth2PhoneLoginJackson2Module() {
-		super(FormOAuth2PhoneLoginJackson2Module.class.getName(), new Version(1, 0, 0, null, null, null));
-	}
+    public FormOAuth2PhoneLoginJackson2Module() {
+        super(
+                FormOAuth2PhoneLoginJackson2Module.class.getName(),
+                new Version(1, 0, 0, null, null, null));
+    }
 
-	@Override
-	public void setupModule(SetupContext context) {
-		context.setMixInAnnotations(
-			Oauth2FormSmsLoginAuthenticationToken.class, FormOAuth2PhoneAuthenticationTokenMixin.class);
-	}
+    @Override
+    public void setupModule(SetupContext context) {
+        context.setMixInAnnotations(
+                Oauth2FormSmsLoginAuthenticationToken.class,
+                FormOAuth2PhoneAuthenticationTokenMixin.class);
+    }
 }

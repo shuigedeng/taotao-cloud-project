@@ -23,12 +23,10 @@ import com.taotao.cloud.gateway.properties.XssProperties;
 import io.netty.buffer.ByteBufAllocator;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-
 import lombok.*;
 import org.dromara.hutool.core.collection.CollUtil;
 import org.dromara.hutool.core.text.StrUtil;
 import org.dromara.hutool.http.html.HtmlUtil;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -74,7 +72,7 @@ import reactor.core.publisher.Mono;
  */
 @Component
 @AllArgsConstructor
-//@ConditionalOnProperty(value = "security.xss.enabled", havingValue = "true")
+// @ConditionalOnProperty(value = "security.xss.enabled", havingValue = "true")
 public class XssFilter implements GlobalFilter, Ordered {
 
     private final XssProperties xss;
@@ -110,23 +108,27 @@ public class XssFilter implements GlobalFilter, Ordered {
             @Override
             public Flux<DataBuffer> getBody() {
                 Flux<DataBuffer> body = super.getBody();
-                return body.buffer().map(dataBuffers -> {
-                    DataBufferFactory dataBufferFactory = new DefaultDataBufferFactory();
-                    DataBuffer join = dataBufferFactory.join(dataBuffers);
-                    byte[] content = new byte[join.readableByteCount()];
-                    join.read(content);
-                    DataBufferUtils.release(join);
-                    String bodyStr = new String(content, StandardCharsets.UTF_8);
-                    // 防xss攻击过滤
-                    bodyStr = HtmlUtil.cleanHtmlTag(bodyStr);
-                    // 转成字节
-                    byte[] bytes = bodyStr.getBytes();
-                    NettyDataBufferFactory nettyDataBufferFactory =
-                            new NettyDataBufferFactory(ByteBufAllocator.DEFAULT);
-                    DataBuffer buffer = nettyDataBufferFactory.allocateBuffer(bytes.length);
-                    buffer.write(bytes);
-                    return buffer;
-                });
+                return body.buffer()
+                        .map(
+                                dataBuffers -> {
+                                    DataBufferFactory dataBufferFactory =
+                                            new DefaultDataBufferFactory();
+                                    DataBuffer join = dataBufferFactory.join(dataBuffers);
+                                    byte[] content = new byte[join.readableByteCount()];
+                                    join.read(content);
+                                    DataBufferUtils.release(join);
+                                    String bodyStr = new String(content, StandardCharsets.UTF_8);
+                                    // 防xss攻击过滤
+                                    bodyStr = HtmlUtil.cleanHtmlTag(bodyStr);
+                                    // 转成字节
+                                    byte[] bytes = bodyStr.getBytes();
+                                    NettyDataBufferFactory nettyDataBufferFactory =
+                                            new NettyDataBufferFactory(ByteBufAllocator.DEFAULT);
+                                    DataBuffer buffer =
+                                            nettyDataBufferFactory.allocateBuffer(bytes.length);
+                                    buffer.write(bytes);
+                                    return buffer;
+                                });
             }
 
             @Override
@@ -143,7 +145,7 @@ public class XssFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return  Ordered.HIGHEST_PRECEDENCE + 3;
+        return Ordered.HIGHEST_PRECEDENCE + 3;
     }
 
     /**

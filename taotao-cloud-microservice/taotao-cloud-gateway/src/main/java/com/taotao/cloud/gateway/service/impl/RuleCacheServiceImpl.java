@@ -33,31 +33,33 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class RuleCacheServiceImpl implements IRuleCacheService {
 
-	private final RedisRepository repository;
+    private final RedisRepository repository;
 
-	@Override
-	public Set<Object> getBlackList(String ip) {
-		return repository.sGet(RuleConstant.getBlackListCacheKey(ip));
-	}
+    @Override
+    public Set<Object> getBlackList(String ip) {
+        return repository.sGet(RuleConstant.getBlackListCacheKey(ip));
+    }
 
-	@Override
-	public Set<Object> getBlackList() {
-		return repository.sGet(RuleConstant.getBlackListCacheKey());
-	}
+    @Override
+    public Set<Object> getBlackList() {
+        return repository.sGet(RuleConstant.getBlackListCacheKey());
+    }
 
-	@Override
-	public void setBlackList(BlackList blackList) {
-		String key = StringUtils.isNotBlank(blackList.getIp())
-			? RuleConstant.getBlackListCacheKey(blackList.getIp())
-			: RuleConstant.getBlackListCacheKey();
-		repository.sSet(key, JsonUtils.toJSONString(blackList));
-	}
+    @Override
+    public void setBlackList(BlackList blackList) {
+        String key =
+                StringUtils.isNotBlank(blackList.getIp())
+                        ? RuleConstant.getBlackListCacheKey(blackList.getIp())
+                        : RuleConstant.getBlackListCacheKey();
+        repository.sSet(key, JsonUtils.toJSONString(blackList));
+    }
 
-	@Override
-	public void deleteBlackList(BlackList blackList) {
-		String key = StringUtils.isNotBlank(blackList.getIp())
-			? RuleConstant.getBlackListCacheKey(blackList.getIp())
-			: RuleConstant.getBlackListCacheKey();
-		repository.setRemove(key, JsonUtils.toJSONString(blackList));
-	}
+    @Override
+    public void deleteBlackList(BlackList blackList) {
+        String key =
+                StringUtils.isNotBlank(blackList.getIp())
+                        ? RuleConstant.getBlackListCacheKey(blackList.getIp())
+                        : RuleConstant.getBlackListCacheKey();
+        repository.setRemove(key, JsonUtils.toJSONString(blackList));
+    }
 }

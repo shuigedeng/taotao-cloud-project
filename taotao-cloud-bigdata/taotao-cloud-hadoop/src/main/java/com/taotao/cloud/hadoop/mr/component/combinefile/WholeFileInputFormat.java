@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.hadoop.mr.component.combinefile;
 
 import java.io.IOException;
@@ -34,19 +35,17 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
  */
 public class WholeFileInputFormat extends FileInputFormat<NullWritable, BytesWritable> {
 
-	@Override
-	protected boolean isSplitable(JobContext context, Path file) {
-		return false;
-	}
+    @Override
+    protected boolean isSplitable(JobContext context, Path file) {
+        return false;
+    }
 
-	@Override
-	public RecordReader<NullWritable, BytesWritable> createRecordReader(
-		InputSplit split, TaskAttemptContext context) throws IOException,
-		InterruptedException {
+    @Override
+    public RecordReader<NullWritable, BytesWritable> createRecordReader(
+            InputSplit split, TaskAttemptContext context) throws IOException, InterruptedException {
 
-		WholeFileRecordReader reader = new WholeFileRecordReader();
-		reader.initialize(split, context);
-		return reader;
-	}
-
+        WholeFileRecordReader reader = new WholeFileRecordReader();
+        reader.initialize(split, context);
+        return reader;
+    }
 }

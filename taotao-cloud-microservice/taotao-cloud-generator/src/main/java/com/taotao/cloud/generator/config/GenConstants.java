@@ -1,12 +1,27 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.generator.config;
 
 /**
  * 代码生成通用常量
- * 
+ *
  * @author ruoyi
  */
-public class GenConstants
-{
+public class GenConstants {
     /** 单表（增删改查） */
     public static final String TPL_CRUD = "crud";
 
@@ -32,34 +47,51 @@ public class GenConstants
     public static final String PARENT_MENU_NAME = "parentMenuName";
 
     /** 数据库字符串类型 */
-    public static final String[] COLUMNTYPE_STR = { "char", "varchar", "nvarchar", "varchar2" };
+    public static final String[] COLUMNTYPE_STR = {"char", "varchar", "nvarchar", "varchar2"};
 
     /** 数据库文本类型 */
-    public static final String[] COLUMNTYPE_TEXT = { "tinytext", "text", "mediumtext", "longtext" };
+    public static final String[] COLUMNTYPE_TEXT = {"tinytext", "text", "mediumtext", "longtext"};
 
     /** 数据库时间类型 */
-    public static final String[] COLUMNTYPE_TIME = { "datetime", "time", "date", "timestamp" };
+    public static final String[] COLUMNTYPE_TIME = {"datetime", "time", "date", "timestamp"};
 
     /** 数据库数字类型 */
-    public static final String[] COLUMNTYPE_NUMBER = { "tinyint", "smallint", "mediumint", "int", "number", "integer",
-            "bit", "bigint", "float", "double", "decimal" };
+    public static final String[] COLUMNTYPE_NUMBER = {
+        "tinyint",
+        "smallint",
+        "mediumint",
+        "int",
+        "number",
+        "integer",
+        "bit",
+        "bigint",
+        "float",
+        "double",
+        "decimal"
+    };
 
     /** 页面不需要编辑字段 */
-    public static final String[] COLUMNNAME_NOT_EDIT = { "id", "create_by", "create_time", "del_flag" };
+    public static final String[] COLUMNNAME_NOT_EDIT = {
+        "id", "create_by", "create_time", "del_flag"
+    };
 
     /** 页面不需要显示的列表字段 */
-    public static final String[] COLUMNNAME_NOT_LIST = { "id", "create_by", "create_time", "del_flag", "update_by",
-            "update_time" };
+    public static final String[] COLUMNNAME_NOT_LIST = {
+        "id", "create_by", "create_time", "del_flag", "update_by", "update_time"
+    };
 
     /** 页面不需要查询字段 */
-    public static final String[] COLUMNNAME_NOT_QUERY = { "id", "create_by", "create_time", "del_flag", "update_by",
-            "update_time", "remark" };
+    public static final String[] COLUMNNAME_NOT_QUERY = {
+        "id", "create_by", "create_time", "del_flag", "update_by", "update_time", "remark"
+    };
 
     /** Entity基类字段 */
-    public static final String[] BASE_ENTITY = { "createBy", "createTime", "updateBy", "updateTime", "remark" };
+    public static final String[] BASE_ENTITY = {
+        "createBy", "createTime", "updateBy", "updateTime", "remark"
+    };
 
     /** Tree基类字段 */
-    public static final String[] TREE_ENTITY = { "parentName", "parentId", "orderNum", "ancestors" };
+    public static final String[] TREE_ENTITY = {"parentName", "parentId", "orderNum", "ancestors"};
 
     /** 文本框 */
     public static final String HTML_INPUT = "input";

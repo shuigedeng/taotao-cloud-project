@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.auth.biz.authentication.stamp;
 
-import com.taotao.cloud.auth.biz.exception.MaximumLimitExceededException;
 import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.boot.captcha.support.core.definition.AbstractRenderer;
+import com.taotao.cloud.auth.biz.exception.MaximumLimitExceededException;
 import java.time.Duration;
 import org.apache.commons.lang3.ObjectUtils;
 import org.dromara.hutool.crypto.SecureUtil;
@@ -63,7 +63,8 @@ public abstract class AbstractCountStampManager extends AbstractRenderer {
      * @return
      * @since 2023-07-10 17:25:03
      */
-    public AbstractCountStampManager(RedisRepository redisRepository, String cacheName, Duration expire) {
+    public AbstractCountStampManager(
+            RedisRepository redisRepository, String cacheName, Duration expire) {
         super(redisRepository, cacheName, expire);
     }
 
@@ -88,7 +89,8 @@ public abstract class AbstractCountStampManager extends AbstractRenderer {
      * @return int
      * @since 2023-07-10 17:25:03
      */
-    public int counting(String identity, int maxTimes, Duration expire) throws MaximumLimitExceededException {
+    public int counting(String identity, int maxTimes, Duration expire)
+            throws MaximumLimitExceededException {
         return counting(identity, maxTimes, expire, false);
     }
 
@@ -133,7 +135,8 @@ public abstract class AbstractCountStampManager extends AbstractRenderer {
      * @return int
      * @since 2023-07-10 17:25:03
      */
-    public int counting(String identity, int maxTimes, Duration expire, boolean useMd5, String function)
+    public int counting(
+            String identity, int maxTimes, Duration expire, boolean useMd5, String function)
             throws MaximumLimitExceededException {
         Assert.notNull(identity, "identity cannot be null");
 
@@ -166,7 +169,8 @@ public abstract class AbstractCountStampManager extends AbstractRenderer {
 
             // times 计数相当于数组的索引是 从0~n，所以需要
             if (index == maxTimes - 1) {
-                throw new MaximumLimitExceededException("Requests are too frequent. Please try again later!");
+                throw new MaximumLimitExceededException(
+                        "Requests are too frequent. Please try again later!");
             }
         }
 
@@ -188,7 +192,8 @@ public abstract class AbstractCountStampManager extends AbstractRenderer {
      * @return {@link Duration }
      * @since 2023-07-10 17:25:03
      */
-    private Duration calculateRemainingTime(Duration configuredDuration, String expireKey, String function) {
+    private Duration calculateRemainingTime(
+            Duration configuredDuration, String expireKey, String function) {
         Long begin = (Long) get(expireKey);
         Long current = System.currentTimeMillis();
         long interval = current - begin;

@@ -28,7 +28,8 @@ import org.dromara.hutool.core.convert.ConvertUtil;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DataBaseHelper {
 
-    // private static final DynamicRoutingDataSource DS = ContextUtils.getBean(DynamicRoutingDataSource.class);
+    // private static final DynamicRoutingDataSource DS =
+    // ContextUtils.getBean(DynamicRoutingDataSource.class);
 
     /** 获取当前数据库类型 */
     public static DataBaseType getDataBaseType() {
@@ -40,7 +41,7 @@ public class DataBaseHelper {
         // } catch (SQLException e) {
         //     throw new RuntimeException(e.getMessage());
         // }
-		return null;
+        return null;
     }
 
     public static boolean isMySql() {

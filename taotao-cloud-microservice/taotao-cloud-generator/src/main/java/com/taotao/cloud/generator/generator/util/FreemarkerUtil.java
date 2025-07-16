@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.generator.generator.util;
 
 import freemarker.cache.ClassTemplateLoader;
@@ -5,14 +21,13 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Locale;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * freemarker tool
@@ -23,8 +38,7 @@ import java.util.Map;
 @Component
 public class FreemarkerUtil {
 
-    @Autowired
-    private Configuration configuration;
+    @Autowired private Configuration configuration;
 
     /**
      * 传入需要转义的字符串进行转义
@@ -37,14 +51,18 @@ public class FreemarkerUtil {
     /**
      * freemarker config
      */
-    private static Configuration freemarkerConfig = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
+    private static Configuration freemarkerConfig =
+            new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
 
     static {
         try {
-            //2020-06-21 zhengkai 修复path问题导致jar无法运行而本地项目可以运行的bug
-            freemarkerConfig.setClassForTemplateLoading(FreemarkerUtil.class, "/templates/code-generator");
-            freemarkerConfig.setTemplateLoader(new ClassTemplateLoader(FreemarkerUtil.class, "/templates/code-generator"));
-            //freemarkerConfig.setDirectoryForTemplateLoading(new File(templatePath, "templates/code-generator"));
+            // 2020-06-21 zhengkai 修复path问题导致jar无法运行而本地项目可以运行的bug
+            freemarkerConfig.setClassForTemplateLoading(
+                    FreemarkerUtil.class, "/templates/code-generator");
+            freemarkerConfig.setTemplateLoader(
+                    new ClassTemplateLoader(FreemarkerUtil.class, "/templates/code-generator"));
+            // freemarkerConfig.setDirectoryForTemplateLoading(new File(templatePath,
+            // "templates/code-generator"));
             freemarkerConfig.setNumberFormat("#");
             freemarkerConfig.setClassicCompatible(true);
             freemarkerConfig.setDefaultEncoding("UTF-8");
@@ -88,5 +106,4 @@ public class FreemarkerUtil {
         String htmlText = escapeString(processTemplateIntoString(template, params));
         return htmlText;
     }
-
 }

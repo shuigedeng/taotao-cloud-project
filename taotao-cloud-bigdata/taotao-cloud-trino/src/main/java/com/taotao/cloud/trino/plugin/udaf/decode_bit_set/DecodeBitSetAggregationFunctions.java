@@ -82,7 +82,8 @@ public class DecodeBitSetAggregationFunctions {
     }
 
     @OutputFunction("array(bigint)")
-    public static void output(@AggregationState RouteUserAggregationBase.SliceState state, BlockBuilder out) {
+    public static void output(
+            @AggregationState RouteUserAggregationBase.SliceState state, BlockBuilder out) {
         Slice slice = state.getSlice();
         if (slice == null) {
             out.appendNull();

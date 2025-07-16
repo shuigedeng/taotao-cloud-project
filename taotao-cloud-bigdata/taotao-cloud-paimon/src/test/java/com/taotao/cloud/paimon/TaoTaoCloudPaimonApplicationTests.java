@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.paimon;
 
-
 class TaoTaoCloudPaimonApplicationTests {
 
     void contextLoads() {}

@@ -48,7 +48,8 @@ public class CollectListStatsSerializer
     }
 
     @Override
-    public void deserialize(Block block, int index, CollectListAggregationFunctions.CollectState state) {
+    public void deserialize(
+            Block block, int index, CollectListAggregationFunctions.CollectState state) {
         state.set(new CollectListStats(VARBINARY.getSlice(block, index)));
     }
 }

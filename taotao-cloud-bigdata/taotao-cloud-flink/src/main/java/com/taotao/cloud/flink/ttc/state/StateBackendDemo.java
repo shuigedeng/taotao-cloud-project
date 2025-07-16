@@ -1,7 +1,23 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.flink.ttc.state;
 
 import com.taotao.cloud.flink.ttc.bean.WaterSensor;
-
+import java.time.Duration;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.state.ValueState;
 import org.apache.flink.api.common.state.ValueStateDescriptor;
@@ -14,8 +30,6 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
 import org.apache.flink.util.Collector;
 
-import java.time.Duration;
-
 /**
  * TODO
  *
@@ -26,7 +40,6 @@ public class StateBackendDemo {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
-
 
         /**
          * TODO 状态后端
@@ -46,7 +59,7 @@ public class StateBackendDemo {
          *    -Dstate.backend.type=rocksdb
          *    -c 全类名
          *    jar包
-          */
+         */
 
         // 1. 使用 hashmap状态后端
         HashMapStateBackend hashMapStateBackend = new HashMapStateBackend();
@@ -55,14 +68,14 @@ public class StateBackendDemo {
         EmbeddedRocksDBStateBackend embeddedRocksDBStateBackend = new EmbeddedRocksDBStateBackend();
         env.setStateBackend(embeddedRocksDBStateBackend);
 
-        SingleOutputStreamOperator<WaterSensor> sensorDS = env
-                .socketTextStream("hadoop102", 7777)
-                .map(new WaterSensorMapFunction())
-                .assignTimestampsAndWatermarks(
-                        WatermarkStrategy
-                                .<WaterSensor>forBoundedOutOfOrderness(Duration.ofSeconds(3))
-                                .withTimestampAssigner((element, ts) -> element.getTs() * 1000L)
-                );
+        SingleOutputStreamOperator<WaterSensor> sensorDS =
+                env.socketTextStream("hadoop102", 7777)
+                        .map(new WaterSensorMapFunction())
+                        .assignTimestampsAndWatermarks(
+                                WatermarkStrategy.<WaterSensor>forBoundedOutOfOrderness(
+                                                Duration.ofSeconds(3))
+                                        .withTimestampAssigner(
+                                                (element, ts) -> element.getTs() * 1000L));
 
         sensorDS.keyBy(r -> r.getId())
                 .process(
@@ -70,27 +83,36 @@ public class StateBackendDemo {
 
                             ValueState<Integer> lastVcState;
 
-
                             @Override
                             public void open(Configuration parameters) throws Exception {
                                 super.open(parameters);
-                                lastVcState = getRuntimeContext().getState(new ValueStateDescriptor<Integer>("lastVcState", Types.INT));
-
+                                lastVcState =
+                                        getRuntimeContext()
+                                                .getState(
+                                                        new ValueStateDescriptor<Integer>(
+                                                                "lastVcState", Types.INT));
                             }
 
                             @Override
-                            public void processElement(WaterSensor value, Context ctx, Collector<String> out) throws Exception {
-
+                            public void processElement(
+                                    WaterSensor value, Context ctx, Collector<String> out)
+                                    throws Exception {
 
                                 int lastVc = lastVcState.value() == null ? 0 : lastVcState.value();
                                 Integer vc = value.getVc();
                                 if (Math.abs(vc - lastVc) > 10) {
-                                    out.collect("传感器=" + value.getId() + "==>当前水位值=" + vc + ",与上一条水位值=" + lastVc + ",相差超过10！！！！");
+                                    out.collect(
+                                            "传感器="
+                                                    + value.getId()
+                                                    + "==>当前水位值="
+                                                    + vc
+                                                    + ",与上一条水位值="
+                                                    + lastVc
+                                                    + ",相差超过10！！！！");
                                 }
                                 lastVcState.update(vc);
                             }
-                        }
-                )
+                        })
                 .print();
 
         env.execute();

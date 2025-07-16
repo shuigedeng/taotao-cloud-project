@@ -43,32 +43,33 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  */
 public class SecurityUserDetailsService implements EnhanceUserDetailsService {
 
-	private static final Logger log = LoggerFactory.getLogger(SecurityUserDetailsService.class);
+    private static final Logger log = LoggerFactory.getLogger(SecurityUserDetailsService.class);
 
-	private final StrategyUserDetailsService strategyUserDetailsService;
+    private final StrategyUserDetailsService strategyUserDetailsService;
 
-	public SecurityUserDetailsService(StrategyUserDetailsService strategyUserDetailsService) {
-		this.strategyUserDetailsService = strategyUserDetailsService;
-	}
+    public SecurityUserDetailsService(StrategyUserDetailsService strategyUserDetailsService) {
+        this.strategyUserDetailsService = strategyUserDetailsService;
+    }
 
-	@Override
-	public UserDetails loadUserBySocial(String source, AccessPrincipal accessPrincipal)
-		throws UsernameNotFoundException {
-		TtcUser TtcUser = strategyUserDetailsService.findUserDetailsBySocial(
-			StringUtils.toRootUpperCase(source), accessPrincipal);
-		log.info("UserDetailsService loaded social user : [{}]", TtcUser.getUsername());
-		return TtcUser;
-	}
+    @Override
+    public UserDetails loadUserBySocial(String source, AccessPrincipal accessPrincipal)
+            throws UsernameNotFoundException {
+        TtcUser TtcUser =
+                strategyUserDetailsService.findUserDetailsBySocial(
+                        StringUtils.toRootUpperCase(source), accessPrincipal);
+        log.info("UserDetailsService loaded social user : [{}]", TtcUser.getUsername());
+        return TtcUser;
+    }
 
-	@Override
-	public TtcUser loadTtcUserByUsername(String username) throws UsernameNotFoundException {
-		TtcUser TtcUser = strategyUserDetailsService.findUserDetailsByUsername(username);
-		log.info("UserDetailsService loaded user : [{}]", username);
-		return TtcUser;
-	}
+    @Override
+    public TtcUser loadTtcUserByUsername(String username) throws UsernameNotFoundException {
+        TtcUser TtcUser = strategyUserDetailsService.findUserDetailsByUsername(username);
+        log.info("UserDetailsService loaded user : [{}]", username);
+        return TtcUser;
+    }
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return loadTtcUserByUsername(username);
-	}
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return loadTtcUserByUsername(username);
+    }
 }

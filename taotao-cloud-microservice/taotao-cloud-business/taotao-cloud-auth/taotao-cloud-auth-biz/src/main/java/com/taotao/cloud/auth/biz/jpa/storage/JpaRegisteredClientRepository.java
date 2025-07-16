@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.jpa.storage;
 
-import com.taotao.cloud.auth.biz.jpa.converter.TtcToOAuth2RegisteredClientConverter;
 import com.taotao.cloud.auth.biz.jpa.converter.OAuth2ToTtcRegisteredClientConverter;
+import com.taotao.cloud.auth.biz.jpa.converter.TtcToOAuth2RegisteredClientConverter;
 import com.taotao.cloud.auth.biz.jpa.entity.TtcRegisteredClient;
 import com.taotao.cloud.auth.biz.jpa.jackson2.OAuth2JacksonProcessor;
 import com.taotao.cloud.auth.biz.jpa.service.TtcRegisteredClientService;
@@ -47,10 +47,12 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
      * 希罗多德注册客户服务
      */
     private final TtcRegisteredClientService ttcRegisteredClientService;
+
     /**
      * 希罗多德到oauth2转换器
      */
     private final Converter<TtcRegisteredClient, RegisteredClient> ttcToOAuth2Converter;
+
     /**
      * oauth2到希罗多德转换器
      */
@@ -65,7 +67,8 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
      * @since 2023-07-10 17:10:47
      */
     public JpaRegisteredClientRepository(
-            TtcRegisteredClientService ttcRegisteredClientService, PasswordEncoder passwordEncoder) {
+            TtcRegisteredClientService ttcRegisteredClientService,
+            PasswordEncoder passwordEncoder) {
         this.ttcRegisteredClientService = ttcRegisteredClientService;
         OAuth2JacksonProcessor jacksonProcessor = new OAuth2JacksonProcessor();
         this.ttcToOAuth2Converter = new TtcToOAuth2RegisteredClientConverter(jacksonProcessor);

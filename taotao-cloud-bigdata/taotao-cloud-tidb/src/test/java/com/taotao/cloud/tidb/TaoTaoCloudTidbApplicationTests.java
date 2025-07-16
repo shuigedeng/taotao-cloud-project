@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.tidb;
 
-
 class TaoTaoCloudTidbApplicationTests {
 
     void contextLoads() {}

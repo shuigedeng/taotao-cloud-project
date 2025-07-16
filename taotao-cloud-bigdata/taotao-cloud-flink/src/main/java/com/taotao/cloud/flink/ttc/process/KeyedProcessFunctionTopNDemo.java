@@ -1,24 +1,35 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.flink.ttc.process;
 
 import com.taotao.cloud.flink.ttc.bean.WaterSensor;
-
-import org.apache.commons.lang3.time.DateFormatUtils;
+import java.time.Duration;
+import java.util.*;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.AggregateFunction;
-import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
-import org.apache.flink.streaming.api.functions.windowing.ProcessAllWindowFunction;
 import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction;
 import org.apache.flink.streaming.api.windowing.assigners.SlidingEventTimeWindows;
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
-
-import java.time.Duration;
-import java.util.*;
 
 /**
  * TODO
@@ -31,16 +42,14 @@ public class KeyedProcessFunctionTopNDemo {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
-
-        SingleOutputStreamOperator<WaterSensor> sensorDS = env
-                .socketTextStream("hadoop102", 7777)
-                .map(new WaterSensorMapFunction())
-                .assignTimestampsAndWatermarks(
-                        WatermarkStrategy
-                                .<WaterSensor>forBoundedOutOfOrderness(Duration.ofSeconds(3))
-                                .withTimestampAssigner((element, ts) -> element.getTs() * 1000L)
-                );
-
+        SingleOutputStreamOperator<WaterSensor> sensorDS =
+                env.socketTextStream("hadoop102", 7777)
+                        .map(new WaterSensorMapFunction())
+                        .assignTimestampsAndWatermarks(
+                                WatermarkStrategy.<WaterSensor>forBoundedOutOfOrderness(
+                                                Duration.ofSeconds(3))
+                                        .withTimestampAssigner(
+                                                (element, ts) -> element.getTs() * 1000L));
 
         // 最近10秒= 窗口长度， 每5秒输出 = 滑动步长
         /**
@@ -58,23 +67,16 @@ public class KeyedProcessFunctionTopNDemo {
 
         // 1. 按照 vc 分组、开窗、聚合（增量计算+全量打标签）
         //  开窗聚合后，就是普通的流，没有了窗口信息，需要自己打上窗口的标记 windowEnd
-        SingleOutputStreamOperator<Tuple3<Integer, Integer, Long>> windowAgg = sensorDS.keyBy(sensor -> sensor.getVc())
-                .window(SlidingEventTimeWindows.of(Time.seconds(10), Time.seconds(5)))
-                .aggregate(
-                        new VcCountAgg(),
-                        new WindowResult()
-                );
-
+        SingleOutputStreamOperator<Tuple3<Integer, Integer, Long>> windowAgg =
+                sensorDS.keyBy(sensor -> sensor.getVc())
+                        .window(SlidingEventTimeWindows.of(Time.seconds(10), Time.seconds(5)))
+                        .aggregate(new VcCountAgg(), new WindowResult());
 
         // 2. 按照窗口标签（窗口结束时间）keyby，保证同一个窗口时间范围的结果，到一起去。排序、取TopN
-        windowAgg.keyBy(r -> r.f2)
-                .process(new TopN(2))
-                .print();
-
+        windowAgg.keyBy(r -> r.f2).process(new TopN(2)).print();
 
         env.execute();
     }
-
 
     public static class VcCountAgg implements AggregateFunction<WaterSensor, Integer, Integer> {
 
@@ -99,7 +101,6 @@ public class KeyedProcessFunctionTopNDemo {
         }
     }
 
-
     /**
      * 泛型如下：
      * 第一个：输入类型 = 增量函数的输出  count值，Integer
@@ -107,10 +108,17 @@ public class KeyedProcessFunctionTopNDemo {
      * 第三个：key类型 ， vc，Integer
      * 第四个：窗口类型
      */
-    public static class WindowResult extends ProcessWindowFunction<Integer, Tuple3<Integer, Integer, Long>, Integer, TimeWindow> {
+    public static class WindowResult
+            extends ProcessWindowFunction<
+                    Integer, Tuple3<Integer, Integer, Long>, Integer, TimeWindow> {
 
         @Override
-        public void process(Integer key, Context context, Iterable<Integer> elements, Collector<Tuple3<Integer, Integer, Long>> out) throws Exception {
+        public void process(
+                Integer key,
+                Context context,
+                Iterable<Integer> elements,
+                Collector<Tuple3<Integer, Integer, Long>> out)
+                throws Exception {
             // 迭代器里面只有一条数据，next一次即可
             Integer count = elements.iterator().next();
             long windowEnd = context.window().getEnd();
@@ -118,8 +126,8 @@ public class KeyedProcessFunctionTopNDemo {
         }
     }
 
-
-    public static class TopN extends KeyedProcessFunction<Long, Tuple3<Integer, Integer, Long>, String> {
+    public static class TopN
+            extends KeyedProcessFunction<Long, Tuple3<Integer, Integer, Long>, String> {
         // 存不同窗口的 统计结果，key=windowEnd，value=list数据
         private Map<Long, List<Tuple3<Integer, Integer, Long>>> dataListMap;
         // 要取的Top数量
@@ -131,7 +139,9 @@ public class KeyedProcessFunctionTopNDemo {
         }
 
         @Override
-        public void processElement(Tuple3<Integer, Integer, Long> value, Context ctx, Collector<String> out) throws Exception {
+        public void processElement(
+                Tuple3<Integer, Integer, Long> value, Context ctx, Collector<String> out)
+                throws Exception {
             // 进入这个方法，只是一条数据，要排序，得到齐才行 ===》 存起来，不同窗口分开存
             // 1. 存到HashMap中
             Long windowEnd = value.f2;
@@ -149,25 +159,26 @@ public class KeyedProcessFunctionTopNDemo {
             // 2. 注册一个定时器， windowEnd+1ms即可（
             // 同一个窗口范围，应该同时输出，只不过是一条一条调用processElement方法，只需要延迟1ms即可
             ctx.timerService().registerEventTimeTimer(windowEnd + 1);
-
         }
 
-
         @Override
-        public void onTimer(long timestamp, OnTimerContext ctx, Collector<String> out) throws Exception {
+        public void onTimer(long timestamp, OnTimerContext ctx, Collector<String> out)
+                throws Exception {
             super.onTimer(timestamp, ctx, out);
             // 定时器触发，同一个窗口范围的计算结果攒齐了，开始 排序、取TopN
             Long windowEnd = ctx.getCurrentKey();
             // 1. 排序
             List<Tuple3<Integer, Integer, Long>> dataList = dataListMap.get(windowEnd);
-            dataList.sort(new Comparator<Tuple3<Integer, Integer, Long>>() {
-                @Override
-                public int compare(Tuple3<Integer, Integer, Long> o1, Tuple3<Integer, Integer, Long> o2) {
-                    // 降序， 后 减 前
-                    return o2.f1 - o1.f1;
-                }
-            });
-
+            dataList.sort(
+                    new Comparator<Tuple3<Integer, Integer, Long>>() {
+                        @Override
+                        public int compare(
+                                Tuple3<Integer, Integer, Long> o1,
+                                Tuple3<Integer, Integer, Long> o2) {
+                            // 降序， 后 减 前
+                            return o2.f1 - o1.f1;
+                        }
+                    });
 
             // 2. 取TopN
             StringBuilder outStr = new StringBuilder();

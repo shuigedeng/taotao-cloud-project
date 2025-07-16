@@ -47,7 +47,8 @@ public class PrometheusApi {
     private final DiscoveryClient discoveryClient;
     private final ApplicationEventPublisher eventPublisher;
 
-    public PrometheusApi(DiscoveryClient discoveryClient, ApplicationEventPublisher eventPublisher) {
+    public PrometheusApi(
+            DiscoveryClient discoveryClient, ApplicationEventPublisher eventPublisher) {
         this.discoveryClient = discoveryClient;
         this.eventPublisher = eventPublisher;
     }

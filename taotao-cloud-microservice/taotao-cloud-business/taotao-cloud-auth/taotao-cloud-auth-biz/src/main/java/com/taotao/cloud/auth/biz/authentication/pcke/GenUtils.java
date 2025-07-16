@@ -16,13 +16,14 @@
 
 package com.taotao.cloud.auth.biz.authentication.pcke;
 
+import com.taotao.boot.common.utils.log.LogUtils;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import org.springframework.security.crypto.keygen.Base64StringKeyGenerator;
 import org.springframework.security.crypto.keygen.StringKeyGenerator;
-import com.taotao.boot.common.utils.log.LogUtils;
+
 public class GenUtils {
 
     public static String genCode() throws NoSuchAlgorithmException {
@@ -31,7 +32,7 @@ public class GenUtils {
                 new Base64StringKeyGenerator(Base64.getUrlEncoder().withoutPadding(), 96);
         String codeVerifier = authorizationCodeGenerator.generateKey();
         LogUtils.info(codeVerifier);
-        LogUtils.info("length: {}",codeVerifier.length());
+        LogUtils.info("length: {}", codeVerifier.length());
         // 加密并再次编码
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         byte[] digest = md.digest(codeVerifier.getBytes(StandardCharsets.US_ASCII));

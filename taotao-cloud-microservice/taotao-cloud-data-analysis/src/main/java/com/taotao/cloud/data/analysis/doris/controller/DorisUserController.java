@@ -33,8 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DorisUserController {
 
-    @Autowired
-    private DorisUserMapper userMapper;
+    @Autowired private DorisUserMapper userMapper;
 
     @RequestMapping("/queryUser")
     public Object query() {

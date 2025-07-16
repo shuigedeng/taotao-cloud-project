@@ -43,63 +43,64 @@ import org.springframework.security.oauth2.core.OAuth2Error;
  */
 public class DefaultOAuth2AuthenticationEventPublisher extends DefaultAuthenticationEventPublisher {
 
-	/**
-	 * 默认oauth2身份验证事件发布者
-	 *
-	 * @param applicationEventPublisher 应用程序事件发布者
-	 * @return
-	 * @since 2023-07-10 17:24:35
-	 */
-	public DefaultOAuth2AuthenticationEventPublisher(
-		ApplicationEventPublisher applicationEventPublisher) {
-		super(applicationEventPublisher);
-	}
+    /**
+     * 默认oauth2身份验证事件发布者
+     *
+     * @param applicationEventPublisher 应用程序事件发布者
+     * @return
+     * @since 2023-07-10 17:24:35
+     */
+    public DefaultOAuth2AuthenticationEventPublisher(
+            ApplicationEventPublisher applicationEventPublisher) {
+        super(applicationEventPublisher);
+    }
 
-	/**
-	 * 发布身份验证失败
-	 *
-	 * @param exception      异常
-	 * @param authentication 身份验证
-	 * @since 2023-07-10 17:24:35
-	 */
-	@Override
-	public void publishAuthenticationFailure(AuthenticationException exception,
-		Authentication authentication) {
-		super.publishAuthenticationFailure(convert(exception), authentication);
-	}
+    /**
+     * 发布身份验证失败
+     *
+     * @param exception      异常
+     * @param authentication 身份验证
+     * @since 2023-07-10 17:24:35
+     */
+    @Override
+    public void publishAuthenticationFailure(
+            AuthenticationException exception, Authentication authentication) {
+        super.publishAuthenticationFailure(convert(exception), authentication);
+    }
 
-	/**
-	 * 转换
-	 *
-	 * @param exception 异常
-	 * @return {@link AuthenticationException }
-	 * @since 2023-07-10 17:24:35
-	 */
-	private AuthenticationException convert(AuthenticationException exception) {
-		if (exception instanceof OAuth2AuthenticationException authenticationException) {
-			OAuth2Error error = authenticationException.getError();
+    /**
+     * 转换
+     *
+     * @param exception 异常
+     * @return {@link AuthenticationException }
+     * @since 2023-07-10 17:24:35
+     */
+    private AuthenticationException convert(AuthenticationException exception) {
+        if (exception instanceof OAuth2AuthenticationException authenticationException) {
+            OAuth2Error error = authenticationException.getError();
 
-			return switch (error.getErrorCode()) {
-				case OAuth2ErrorKeys.ACCOUNT_EXPIRED -> new AccountExpiredException(
-					exception.getMessage(), exception.getCause());
-				case OAuth2ErrorKeys.CREDENTIALS_EXPIRED -> new CredentialsExpiredException(
-					exception.getMessage(), exception.getCause());
-				case OAuth2ErrorKeys.ACCOUNT_DISABLED -> new DisabledException(
-					exception.getMessage(), exception.getCause());
-				case OAuth2ErrorKeys.ACCOUNT_LOCKED -> new LockedException(
-					exception.getMessage(), exception.getCause());
-				case OAuth2ErrorKeys.ACCOUNT_ENDPOINT_LIMITED ->
-					new AccountEndpointLimitedException(
-						exception.getMessage(), exception.getCause());
-				case OAuth2ErrorKeys.USERNAME_NOT_FOUND -> new UsernameNotFoundException(
-					exception.getMessage(), exception.getCause());
-				case OAuth2ErrorKeys.SESSION_EXPIRED -> new SessionExpiredException(
-					exception.getMessage(), exception.getCause());
-				default ->
-					new BadCredentialsException(exception.getMessage(), exception.getCause());
-			};
-		}
+            return switch (error.getErrorCode()) {
+                case OAuth2ErrorKeys.ACCOUNT_EXPIRED ->
+                        new AccountExpiredException(exception.getMessage(), exception.getCause());
+                case OAuth2ErrorKeys.CREDENTIALS_EXPIRED ->
+                        new CredentialsExpiredException(
+                                exception.getMessage(), exception.getCause());
+                case OAuth2ErrorKeys.ACCOUNT_DISABLED ->
+                        new DisabledException(exception.getMessage(), exception.getCause());
+                case OAuth2ErrorKeys.ACCOUNT_LOCKED ->
+                        new LockedException(exception.getMessage(), exception.getCause());
+                case OAuth2ErrorKeys.ACCOUNT_ENDPOINT_LIMITED ->
+                        new AccountEndpointLimitedException(
+                                exception.getMessage(), exception.getCause());
+                case OAuth2ErrorKeys.USERNAME_NOT_FOUND ->
+                        new UsernameNotFoundException(exception.getMessage(), exception.getCause());
+                case OAuth2ErrorKeys.SESSION_EXPIRED ->
+                        new SessionExpiredException(exception.getMessage(), exception.getCause());
+                default ->
+                        new BadCredentialsException(exception.getMessage(), exception.getCause());
+            };
+        }
 
-		return exception;
-	}
+        return exception;
+    }
 }

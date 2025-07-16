@@ -19,25 +19,24 @@ package com.taotao.cloud.bff.api.service.backend.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.bff.api.util.StatisticsDateUtil;
-import com.taotao.cloud.bff.api.util.StatisticsSuffix;
 import com.taotao.boot.common.enums.CachePrefix;
 import com.taotao.boot.common.enums.ClientTypeEnum;
 import com.taotao.boot.common.exception.BusinessException;
+import com.taotao.cloud.bff.api.util.StatisticsDateUtil;
+import com.taotao.cloud.bff.api.util.StatisticsSuffix;
 import com.taotao.cloud.report.api.enums.SearchTypeEnum;
 import com.taotao.cloud.report.api.model.dto.StatisticsQueryParam;
 import com.taotao.cloud.report.api.model.vo.OnlineMemberVO;
 import com.taotao.cloud.report.api.model.vo.PlatformViewVO;
 import jakarta.annotation.Resource;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /** 流量统计 */
 @Service
@@ -45,17 +44,16 @@ public class PlatformViewServiceImpl extends ServiceImpl<PlatformViewMapper, Pla
         implements PlatformViewService {
 
     /** 在线人数统计 */
-    @Autowired
-    private StatisticsProperties statisticsProperties;
+    @Autowired private StatisticsProperties statisticsProperties;
+
     /** 会员 */
-    @Autowired
-    private MemberStatisticsService memberStatisticsService;
+    @Autowired private MemberStatisticsService memberStatisticsService;
+
     /** 缓存 */
-    @Autowired
-    private Cache cache;
+    @Autowired private Cache cache;
+
     /** 平台流量统计 */
-    @Resource
-    private PlatformViewMapper platformViewMapper;
+    @Resource private PlatformViewMapper platformViewMapper;
 
     @Override
     public Long online() {
@@ -65,8 +63,10 @@ public class PlatformViewServiceImpl extends ServiceImpl<PlatformViewMapper, Pla
             return (Long) object;
         }
         // 这里统计的是有效的accessToken ，如果需要数据精确，需要调整accessToken的有效时间，开发人员建议2小时误差较为合适
-        Long num = Long.valueOf(cache.keys(CachePrefix.ACCESS_TOKEN.getPrefix(UserEnums.MEMBER) + "*")
-                .size());
+        Long num =
+                Long.valueOf(
+                        cache.keys(CachePrefix.ACCESS_TOKEN.getPrefix(UserEnums.MEMBER) + "*")
+                                .size());
         cache.put(
                 CachePrefix.ONLINE_NUM.getPrefix(),
                 num,
@@ -128,7 +128,8 @@ public class PlatformViewServiceImpl extends ServiceImpl<PlatformViewMapper, Pla
         calendar.set(Calendar.MILLISECOND, 0);
 
         calendar.set(
-                Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - statisticsProperties.getOnlineMember() - 1);
+                Calendar.HOUR_OF_DAY,
+                calendar.get(Calendar.HOUR_OF_DAY) - statisticsProperties.getOnlineMember() - 1);
         // 循环填充数据
         for (int i = 0; i < statisticsProperties.getOnlineMember(); i++) {
             calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) + 1);
@@ -163,39 +164,50 @@ public class PlatformViewServiceImpl extends ServiceImpl<PlatformViewMapper, Pla
                     // 查询 平台流量
                     if (StringUtils.isEmpty(queryParam.getStoreId())) {
                         // 设置PV UV属性
-                        String pv = cache.getString(CachePrefix.PV.getPrefix() + StatisticsSuffix.suffix());
+                        String pv =
+                                cache.getString(
+                                        CachePrefix.PV.getPrefix() + StatisticsSuffix.suffix());
                         if (pv == null) {
                             pv = "0";
                         }
                         today.setPvNum(Long.valueOf(pv));
-                        today.setUvNum(cache.counter(CachePrefix.UV.getPrefix() + StatisticsSuffix.suffix())
-                                .longValue());
+                        today.setUvNum(
+                                cache.counter(
+                                                CachePrefix.UV.getPrefix()
+                                                        + StatisticsSuffix.suffix())
+                                        .longValue());
                     }
                     // 店铺流量
                     else {
                         // 设置PV UV属性
 
-                        String pv = cache.getString(
-                                CachePrefix.STORE_PV.getPrefix() + StatisticsSuffix.suffix(queryParam.getStoreId()));
+                        String pv =
+                                cache.getString(
+                                        CachePrefix.STORE_PV.getPrefix()
+                                                + StatisticsSuffix.suffix(queryParam.getStoreId()));
                         if (pv == null) {
                             pv = "0";
                         }
                         today.setPvNum(Long.valueOf(pv));
-                        today.setUvNum(cache.counter(CachePrefix.STORE_UV.getPrefix()
-                                        + StatisticsSuffix.suffix(queryParam.getStoreId()))
-                                .longValue());
+                        today.setUvNum(
+                                cache.counter(
+                                                CachePrefix.STORE_UV.getPrefix()
+                                                        + StatisticsSuffix.suffix(
+                                                                queryParam.getStoreId()))
+                                        .longValue());
                     }
                     today.setDate(new Date());
                     result.add(today);
                     break;
                 case YESTERDAY:
                 case LAST_SEVEN:
-                case LAST_THIRTY: {
-                    Date[] dates = StatisticsDateUtil.getDateArray(searchTypeEnum);
-                    endTime = dates[1];
-                    startTime = dates[0];
-                    break;
-                }
+                case LAST_THIRTY:
+                    {
+                        Date[] dates = StatisticsDateUtil.getDateArray(searchTypeEnum);
+                        endTime = dates[1];
+                        startTime = dates[0];
+                        break;
+                    }
                 default:
                     throw new BusinessException(ResultEnum.ERROR);
             }
@@ -245,11 +257,12 @@ public class PlatformViewServiceImpl extends ServiceImpl<PlatformViewMapper, Pla
         // 如果是今天的统计，则从redis 中拿，否则从数据库中拿
         if (dates[0].equals(calendar.getTime())) {
             if (StringUtils.isNotEmpty(queryParam.getStoreId())) {
-                return cache.counter(CachePrefix.UV.getPrefix() + StatisticsSuffix.suffix(queryParam.getStoreId()))
+                return cache.counter(
+                                CachePrefix.UV.getPrefix()
+                                        + StatisticsSuffix.suffix(queryParam.getStoreId()))
                         .intValue();
             }
-            return cache.counter(CachePrefix.UV.getPrefix() + StatisticsSuffix.suffix())
-                    .intValue();
+            return cache.counter(CachePrefix.UV.getPrefix() + StatisticsSuffix.suffix()).intValue();
         } else {
             QueryWrapper queryWrapper = new QueryWrapper();
             queryWrapper.between("date", dates[0], dates[1]);
@@ -271,7 +284,8 @@ public class PlatformViewServiceImpl extends ServiceImpl<PlatformViewMapper, Pla
      * @param dataList
      * @return
      */
-    private List<PlatformViewVO> builderVOS(Date startDate, Date endDate, List<PlatformViewData> dataList) {
+    private List<PlatformViewVO> builderVOS(
+            Date startDate, Date endDate, List<PlatformViewData> dataList) {
 
         Calendar startTime = Calendar.getInstance();
         startTime.setTime(startDate);
@@ -288,16 +302,18 @@ public class PlatformViewServiceImpl extends ServiceImpl<PlatformViewMapper, Pla
             startTime.set(Calendar.DAY_OF_MONTH, startTime.get(Calendar.DAY_OF_MONTH) + 1);
         }
         // 根据时间集，匹配查询到等数据，构建返回等VO
-        listDate.forEach(date -> {
-            PlatformViewVO platformViewVO = new PlatformViewVO(date);
-            dataList.forEach(platformViewData -> {
-                if (platformViewData.getDate().equals(date)) {
-                    BeanUtils.copyProperties(platformViewData, platformViewVO);
-                }
-            });
-            // 没有匹配到数据库查询的数据，则初始化数据
-            result.add(platformViewVO);
-        });
+        listDate.forEach(
+                date -> {
+                    PlatformViewVO platformViewVO = new PlatformViewVO(date);
+                    dataList.forEach(
+                            platformViewData -> {
+                                if (platformViewData.getDate().equals(date)) {
+                                    BeanUtils.copyProperties(platformViewData, platformViewVO);
+                                }
+                            });
+                    // 没有匹配到数据库查询的数据，则初始化数据
+                    result.add(platformViewVO);
+                });
         return result;
     }
 }

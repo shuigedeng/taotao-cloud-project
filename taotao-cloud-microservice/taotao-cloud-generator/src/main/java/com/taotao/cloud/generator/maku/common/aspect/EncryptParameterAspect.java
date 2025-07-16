@@ -1,20 +1,35 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.generator.maku.common.aspect;
 
-import lombok.extern.slf4j.Slf4j;
 import com.taotao.cloud.generator.maku.common.annotation.EncryptParameter;
 import com.taotao.cloud.generator.maku.common.page.PageResult;
 import com.taotao.cloud.generator.maku.common.utils.EncryptUtils;
 import com.taotao.cloud.generator.maku.common.utils.Result;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 /**
  * 处理参数加密解密切面
@@ -76,9 +91,7 @@ public class EncryptParameterAspect {
         Object data = ((Result<?>) object).getData();
         if (data instanceof List || data instanceof PageResult) {
             List itemList = data instanceof List ? (List) data : ((PageResult<?>) data).getList();
-            itemList.forEach(f ->
-                    handleItem(f, false)
-            );
+            itemList.forEach(f -> handleItem(f, false));
         } else {
             handleItem(data, false);
         }
@@ -93,7 +106,11 @@ public class EncryptParameterAspect {
     private void handleItem(Object item, boolean isDecrypt) {
 
         // 只处理在entity包下面的对象
-        if (Objects.isNull(item.getClass().getPackage()) || !item.getClass().getPackage().getName().startsWith("com.taotao.cloud.generator.maku.entity")) {
+        if (Objects.isNull(item.getClass().getPackage())
+                || !item.getClass()
+                        .getPackage()
+                        .getName()
+                        .startsWith("com.taotao.cloud.generator.maku.entity")) {
             return;
         }
 
@@ -102,11 +119,16 @@ public class EncryptParameterAspect {
         for (Field field : fields) {
             // 若该字段被EncryptParameter注解,则进行解密/加密
             Class<?> fieldType = field.getType();
-            if (fieldType == String.class && Objects.nonNull(AnnotationUtils.findAnnotation(field, EncryptParameter.class))) {
+            if (fieldType == String.class
+                    && Objects.nonNull(
+                            AnnotationUtils.findAnnotation(field, EncryptParameter.class))) {
                 // 设置private类型允许访问
                 field.setAccessible(Boolean.TRUE);
                 try {
-                    String newFieldValue = isDecrypt ? EncryptUtils.decrypt((String) field.get(item)) : EncryptUtils.encrypt((String) field.get(item));
+                    String newFieldValue =
+                            isDecrypt
+                                    ? EncryptUtils.decrypt((String) field.get(item))
+                                    : EncryptUtils.encrypt((String) field.get(item));
                     field.set(item, newFieldValue);
                 } catch (Exception e) {
                     log.error(e.getMessage(), e);
@@ -116,5 +138,4 @@ public class EncryptParameterAspect {
             }
         }
     }
-
 }

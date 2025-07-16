@@ -16,11 +16,11 @@
 
 package com.taotao.cloud.auth.biz.management.converter;
 
+import com.taotao.boot.security.spring.enums.Signature;
+import com.taotao.boot.security.spring.enums.TokenFormat;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Device;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Scope;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ScopeService;
-import com.taotao.boot.security.spring.enums.Signature;
-import com.taotao.boot.security.spring.enums.TokenFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -41,7 +41,8 @@ import org.springframework.util.StringUtils;
  *
  *
  */
-public class RegisteredClientToOAuth2DeviceConverter implements Converter<RegisteredClient, OAuth2Device> {
+public class RegisteredClientToOAuth2DeviceConverter
+        implements Converter<RegisteredClient, OAuth2Device> {
 
     private final OAuth2ScopeService scopeService;
 
@@ -59,15 +60,20 @@ public class RegisteredClientToOAuth2DeviceConverter implements Converter<Regist
         device.setScopes(getOAuth2Scopes(registeredClient.getScopes()));
         device.setClientId(registeredClient.getClientId());
         device.setClientSecret(registeredClient.getClientSecret());
-        device.setClientIdIssuedAt(DateUtil.toLocalDateTime(registeredClient.getClientIdIssuedAt()));
-        device.setClientSecretExpiresAt(DateUtil.toLocalDateTime(registeredClient.getClientSecretExpiresAt()));
+        device.setClientIdIssuedAt(
+                DateUtil.toLocalDateTime(registeredClient.getClientIdIssuedAt()));
+        device.setClientSecretExpiresAt(
+                DateUtil.toLocalDateTime(registeredClient.getClientSecretExpiresAt()));
         device.setClientAuthenticationMethods(
-                StringUtils.collectionToCommaDelimitedString(registeredClient.getClientAuthenticationMethods()));
+                StringUtils.collectionToCommaDelimitedString(
+                        registeredClient.getClientAuthenticationMethods()));
         device.setAuthorizationGrantTypes(
-                StringUtils.collectionToCommaDelimitedString(registeredClient.getAuthorizationGrantTypes().stream()
-                        .map(AuthorizationGrantType::getValue)
-                        .collect(Collectors.toSet())));
-        device.setRedirectUris(StringUtils.collectionToCommaDelimitedString(registeredClient.getRedirectUris()));
+                StringUtils.collectionToCommaDelimitedString(
+                        registeredClient.getAuthorizationGrantTypes().stream()
+                                .map(AuthorizationGrantType::getValue)
+                                .collect(Collectors.toSet())));
+        device.setRedirectUris(
+                StringUtils.collectionToCommaDelimitedString(registeredClient.getRedirectUris()));
         device.setPostLogoutRedirectUris(
                 StringUtils.collectionToCommaDelimitedString(registeredClient.getRedirectUris()));
 
@@ -75,10 +81,13 @@ public class RegisteredClientToOAuth2DeviceConverter implements Converter<Regist
         device.setRequireProofKey(clientSettings.isRequireProofKey());
         device.setRequireAuthorizationConsent(clientSettings.isRequireAuthorizationConsent());
         device.setJwkSetUrl(clientSettings.getJwkSetUrl());
-        if (ObjectUtils.isNotEmpty(clientSettings.getTokenEndpointAuthenticationSigningAlgorithm())) {
-            device.setAuthenticationSigningAlgorithm(Signature.valueOf(clientSettings
-                    .getTokenEndpointAuthenticationSigningAlgorithm()
-                    .getName()));
+        if (ObjectUtils.isNotEmpty(
+                clientSettings.getTokenEndpointAuthenticationSigningAlgorithm())) {
+            device.setAuthenticationSigningAlgorithm(
+                    Signature.valueOf(
+                            clientSettings
+                                    .getTokenEndpointAuthenticationSigningAlgorithm()
+                                    .getName()));
         }
 
         TokenSettings tokenSettings = registeredClient.getTokenSettings();

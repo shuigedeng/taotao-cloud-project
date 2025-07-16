@@ -33,13 +33,17 @@ public class OAuth2ConstantService {
 
     private static final List<Map<String, Object>> APPLICATION_TYPE_ENUM =
             ApplicationType.getPreprocessedJsonStructure();
-    private static final List<Map<String, Object>> GRANT_TYPE_ENUM = GrantType.getPreprocessedJsonStructure();
-    private static final List<Map<String, Object>> SIGNATURE_ENUM = Signature.getPreprocessedJsonStructure();
+    private static final List<Map<String, Object>> GRANT_TYPE_ENUM =
+            GrantType.getPreprocessedJsonStructure();
+    private static final List<Map<String, Object>> SIGNATURE_ENUM =
+            Signature.getPreprocessedJsonStructure();
     private static final List<Map<String, Object>> AUTHENTICATION_METHOD_ENUM =
             AuthenticationMethod.getPreprocessedJsonStructure();
     private static final List<Map<String, Object>> PERMISSION_EXPRESSION_ENUM =
             PermissionExpression.getPreprocessedJsonStructure();
-    //    private static final List<Map<String, Object>> DATABASE_ENUM = Database.getPreprocessedJsonStructure();
+
+    //    private static final List<Map<String, Object>> DATABASE_ENUM =
+    // Database.getPreprocessedJsonStructure();
     //    private static final List<Map<String, Object>> SERVER_DEVICE_ENUM =
     // ServerDevice.getPreprocessedJsonStructure();
 

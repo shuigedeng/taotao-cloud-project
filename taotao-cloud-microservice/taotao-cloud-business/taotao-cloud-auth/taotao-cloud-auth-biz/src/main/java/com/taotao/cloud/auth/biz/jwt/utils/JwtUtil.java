@@ -16,13 +16,13 @@
 
 package com.taotao.cloud.auth.biz.jwt.utils;
 
-import com.taotao.cloud.auth.biz.jwt.model.ContextConstants;
-import com.taotao.cloud.auth.biz.jwt.model.ExceptionCode;
-import com.taotao.cloud.auth.biz.jwt.model.Token;
 import com.taotao.boot.common.constant.StrPool;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.utils.date.DateUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
+import com.taotao.cloud.auth.biz.jwt.model.ContextConstants;
+import com.taotao.cloud.auth.biz.jwt.model.ExceptionCode;
+import com.taotao.cloud.auth.biz.jwt.model.Token;
 import io.jsonwebtoken.*;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
@@ -43,7 +43,8 @@ public final class JwtUtil {
      * 将 签名（JWT_SIGN_KEY） 编译成BASE64编码
      */
     private static final String BASE64_SECURITY =
-            Base64.getEncoder().encodeToString(ContextConstants.JWT_SIGN_KEY.getBytes(StandardCharsets.UTF_8));
+            Base64.getEncoder()
+                    .encodeToString(ContextConstants.JWT_SIGN_KEY.getBytes(StandardCharsets.UTF_8));
 
     /**
      * authorization: Basic clientId:clientSec 解析请求头中存储的 client 信息
@@ -54,12 +55,14 @@ public final class JwtUtil {
      * @return clientId:clientSec
      */
     public static String[] getClient(String basicHeader) {
-        if (StrUtil.isEmpty(basicHeader) || !basicHeader.startsWith(ContextConstants.BASIC_HEADER_PREFIX)) {
+        if (StrUtil.isEmpty(basicHeader)
+                || !basicHeader.startsWith(ContextConstants.BASIC_HEADER_PREFIX)) {
             // throw BizException.wrap(ExceptionCode.JWT_BASIC_INVALID);
             throw new BusinessException(ExceptionCode.JWT_BASIC_INVALID.name());
         }
 
-        String decodeBasic = StrUtil.subAfter(basicHeader, ContextConstants.BASIC_HEADER_PREFIX, false);
+        String decodeBasic =
+                StrUtil.subAfter(basicHeader, ContextConstants.BASIC_HEADER_PREFIX, false);
         return extractClient(decodeBasic);
     }
 
@@ -107,7 +110,9 @@ public final class JwtUtil {
 
         // 添加构成JWT的类
         JwtBuilder builder =
-                Jwts.builder().setHeaderParam("typ", "JsonWebToken").signWith(signatureAlgorithm, signingKey);
+                Jwts.builder()
+                        .setHeaderParam("typ", "JsonWebToken")
+                        .signWith(signatureAlgorithm, signingKey);
 
         // 设置JWT参数
         user.forEach(builder::claim);
@@ -154,20 +159,23 @@ public final class JwtUtil {
             // throw new BizException(ExceptionCode.JWT_TOKEN_EXPIRED.getCode(),
             //		ExceptionCode.JWT_TOKEN_EXPIRED.getMsg(), ex);
             throw new BusinessException(
-                    ExceptionCode.JWT_TOKEN_EXPIRED.getCode(), ExceptionCode.JWT_TOKEN_EXPIRED.getMsg());
+                    ExceptionCode.JWT_TOKEN_EXPIRED.getCode(),
+                    ExceptionCode.JWT_TOKEN_EXPIRED.getMsg());
         } catch (SignatureException ex) {
             LogUtils.error("token=[{}] 签名错误", jsonWebToken, ex);
             // 签名错误
             // throw new BizException(ExceptionCode.JWT_SIGNATURE.getCode(),
             //		ExceptionCode.JWT_SIGNATURE.getMsg(), ex);
-            throw new BusinessException(ExceptionCode.JWT_SIGNATURE.getCode(), ExceptionCode.JWT_SIGNATURE.getMsg());
+            throw new BusinessException(
+                    ExceptionCode.JWT_SIGNATURE.getCode(), ExceptionCode.JWT_SIGNATURE.getMsg());
         } catch (IllegalArgumentException ex) {
             LogUtils.error("token=[{}] 为空", jsonWebToken, ex);
             // token 为空
             // throw new BizException(ExceptionCode.JWT_ILLEGAL_ARGUMENT.getCode(),
             //		ExceptionCode.JWT_ILLEGAL_ARGUMENT.getMsg(), ex);
             throw new BusinessException(
-                    ExceptionCode.JWT_ILLEGAL_ARGUMENT.getCode(), ExceptionCode.JWT_ILLEGAL_ARGUMENT.getMsg());
+                    ExceptionCode.JWT_ILLEGAL_ARGUMENT.getCode(),
+                    ExceptionCode.JWT_ILLEGAL_ARGUMENT.getMsg());
         } catch (Exception e) {
             LogUtils.error(
                     "token=[{}] errCode:{}, message:{}",
@@ -179,7 +187,8 @@ public final class JwtUtil {
             // JWT_PARSER_TOKEN_FAIL.getMsg(),
             //		e);
             throw new BusinessException(
-                    ExceptionCode.JWT_PARSER_TOKEN_FAIL.getCode(), ExceptionCode.JWT_PARSER_TOKEN_FAIL.getMsg());
+                    ExceptionCode.JWT_PARSER_TOKEN_FAIL.getCode(),
+                    ExceptionCode.JWT_PARSER_TOKEN_FAIL.getMsg());
         }
     }
 

@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.flink.ttc.state;
 
 import org.apache.flink.api.common.functions.MapFunction;
@@ -20,22 +36,17 @@ public class OperatorListStateDemo {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(2);
 
-        env
-                .socketTextStream("hadoop102", 7777)
-                .map(new MyCountMapFunction())
-                .print();
-
+        env.socketTextStream("hadoop102", 7777).map(new MyCountMapFunction()).print();
 
         env.execute();
     }
 
-
     // TODO 1.实现 CheckpointedFunction 接口
-    public static class MyCountMapFunction implements MapFunction<String, Long>, CheckpointedFunction {
+    public static class MyCountMapFunction
+            implements MapFunction<String, Long>, CheckpointedFunction {
 
         private Long count = 0L;
         private ListState<Long> state;
-
 
         @Override
         public Long map(String value) throws Exception {
@@ -67,10 +78,11 @@ public class OperatorListStateDemo {
         public void initializeState(FunctionInitializationContext context) throws Exception {
             System.out.println("initializeState...");
             // 3.1 从 上下文 初始化 算子状态
-            state = context
-                    .getOperatorStateStore()
-                    .getListState(new ListStateDescriptor<Long>("state", Types.LONG));
-//                    .getUnionListState(new ListStateDescriptor<Long>("union-state", Types.LONG));
+            state =
+                    context.getOperatorStateStore()
+                            .getListState(new ListStateDescriptor<Long>("state", Types.LONG));
+            //                    .getUnionListState(new ListStateDescriptor<Long>("union-state",
+            // Types.LONG));
 
             // 3.2 从 算子状态中 把数据 拷贝到 本地变量
             if (context.isRestored()) {

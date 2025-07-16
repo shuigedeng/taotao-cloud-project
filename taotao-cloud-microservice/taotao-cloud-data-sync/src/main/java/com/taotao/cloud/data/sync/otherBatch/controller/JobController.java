@@ -1,11 +1,11 @@
 /*
- * Copyright 2021-2024 spring-boot-extension the original author or authors.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *       https://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.data.sync.otherBatch.controller;
 
+import java.util.Date;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.batch.core.Job;
@@ -23,8 +24,6 @@ import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Date;
 
 /**
  * <p>
@@ -37,14 +36,14 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class JobController {
 
-	private final JobLauncher jobLauncher;
+    private final JobLauncher jobLauncher;
 
-	private final Job job;
+    private final Job job;
 
-	@SneakyThrows
-	@GetMapping("doJob")
-	public void doJob() {
-		jobLauncher.run(job, new JobParametersBuilder().addDate("jobDate", new Date()).toJobParameters());
-	}
-
+    @SneakyThrows
+    @GetMapping("doJob")
+    public void doJob() {
+        jobLauncher.run(
+                job, new JobParametersBuilder().addDate("jobDate", new Date()).toJobParameters());
+    }
 }

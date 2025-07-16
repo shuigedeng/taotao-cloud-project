@@ -80,7 +80,10 @@ public class MaximumLimitExceededException extends RuntimeException {
      * @since 2023-07-10 17:25:12
      */
     protected MaximumLimitExceededException(
-            String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+            String message,
+            Throwable cause,
+            boolean enableSuppression,
+            boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }

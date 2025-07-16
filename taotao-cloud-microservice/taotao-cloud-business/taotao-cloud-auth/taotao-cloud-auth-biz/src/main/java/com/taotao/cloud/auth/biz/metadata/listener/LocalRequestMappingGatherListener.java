@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.auth.biz.metadata.listener;
 
-import com.taotao.cloud.auth.biz.metadata.processor.RequestMappingStoreProcessor;
 import com.taotao.boot.security.spring.event.LocalRequestMappingGatherEvent;
 import com.taotao.boot.security.spring.event.domain.RequestMapping;
+import com.taotao.cloud.auth.biz.metadata.processor.RequestMappingStoreProcessor;
 import java.util.List;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
@@ -34,14 +34,17 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class LocalRequestMappingGatherListener implements ApplicationListener<LocalRequestMappingGatherEvent> {
+public class LocalRequestMappingGatherListener
+        implements ApplicationListener<LocalRequestMappingGatherEvent> {
 
-    private static final Logger log = LoggerFactory.getLogger(LocalRequestMappingGatherListener.class);
+    private static final Logger log =
+            LoggerFactory.getLogger(LocalRequestMappingGatherListener.class);
 
     private final RequestMappingStoreProcessor requestMappingStoreProcessor;
 
     @Autowired
-    public LocalRequestMappingGatherListener(RequestMappingStoreProcessor requestMappingStoreProcessor) {
+    public LocalRequestMappingGatherListener(
+            RequestMappingStoreProcessor requestMappingStoreProcessor) {
         this.requestMappingStoreProcessor = requestMappingStoreProcessor;
     }
 

@@ -17,10 +17,10 @@
 package com.taotao.cloud.gateway.authentication;
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.gateway.properties.SecurityProperties;
 import com.taotao.boot.security.spring.enums.Target;
 import com.taotao.boot.security.spring.properties.OAuth2AuthorizationProperties;
 import com.taotao.boot.security.spring.properties.OAuth2EndpointProperties;
+import com.taotao.cloud.gateway.properties.SecurityProperties;
 import java.util.List;
 import lombok.*;
 import org.springframework.boot.actuate.autoconfigure.security.reactive.EndpointRequest;
@@ -46,119 +46,129 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 @Configuration
 @EnableWebFluxSecurity
 @ConditionalOnProperty(
-	prefix = SecurityProperties.PREFIX,
-	name = "enabled",
-	havingValue = "true",
-	matchIfMissing = true)
+        prefix = SecurityProperties.PREFIX,
+        name = "enabled",
+        havingValue = "true",
+        matchIfMissing = true)
 @AllArgsConstructor
 public class GatewayResourceServerConfiguration {
 
-	private final GatewayReactiveAuthorizationManager gatewayReactiveAuthorizationManager;
-	private final SecurityProperties securityProperties;
-	private final OAuth2EndpointProperties endpointProperties;
-	private final OAuth2ResourceServerProperties resourceServerProperties;
-	private final ReactiveJwtDecoder jwtDecoder;
-	private final OAuth2AuthorizationProperties authorizationProperties;
+    private final GatewayReactiveAuthorizationManager gatewayReactiveAuthorizationManager;
+    private final SecurityProperties securityProperties;
+    private final OAuth2EndpointProperties endpointProperties;
+    private final OAuth2ResourceServerProperties resourceServerProperties;
+    private final ReactiveJwtDecoder jwtDecoder;
+    private final OAuth2AuthorizationProperties authorizationProperties;
 
-	@Bean
-	public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http,
-															ReactiveJwtDecoder jwtDecoder) {
-		// ServerBearerTokenAuthenticationConverter serverBearerTokenAuthenticationConverter =
-		//	new ServerBearerTokenAuthenticationConverter();
-		// serverBearerTokenAuthenticationConverter.setAllowUriQueryParameter(true);
+    @Bean
+    public SecurityWebFilterChain springSecurityFilterChain(
+            ServerHttpSecurity http, ReactiveJwtDecoder jwtDecoder) {
+        // ServerBearerTokenAuthenticationConverter serverBearerTokenAuthenticationConverter =
+        //	new ServerBearerTokenAuthenticationConverter();
+        // serverBearerTokenAuthenticationConverter.setAllowUriQueryParameter(true);
 
-		// AuthenticationWebFilter authenticationWebFilter = new AuthenticationWebFilter(
-		//	new CustomReactiveAuthenticationManager());
-		// authenticationWebFilter
-		//	.setServerAuthenticationConverter(serverBearerTokenAuthenticationConverter);
-		// authenticationWebFilter.setAuthenticationFailureHandler(
-		//	new ServerAuthenticationEntryPointFailureHandler(new JsonServerAuthenticationEntryPoint()));
-		// authenticationWebFilter
-		//	.setAuthenticationSuccessHandler(new CustomServerAuthenticationSuccessHandler());
+        // AuthenticationWebFilter authenticationWebFilter = new AuthenticationWebFilter(
+        //	new CustomReactiveAuthenticationManager());
+        // authenticationWebFilter
+        //	.setServerAuthenticationConverter(serverBearerTokenAuthenticationConverter);
+        // authenticationWebFilter.setAuthenticationFailureHandler(
+        //	new ServerAuthenticationEntryPointFailureHandler(new
+        // JsonServerAuthenticationEntryPoint()));
+        // authenticationWebFilter
+        //	.setAuthenticationSuccessHandler(new CustomServerAuthenticationSuccessHandler());
 
-		http.csrf(ServerHttpSecurity.CsrfSpec::disable)
-			.httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
-			.headers((headerCustomizer) -> {
-				headerCustomizer
-					.frameOptions(ServerHttpSecurity.HeaderSpec.FrameOptionsSpec::disable);
-			})
-			.csrf(ServerHttpSecurity.CsrfSpec::disable)
-			.formLogin(ServerHttpSecurity.FormLoginSpec::disable)
-			.cors(ServerHttpSecurity.CorsSpec::disable)
-			.logout(ServerHttpSecurity.LogoutSpec::disable)
+        http.csrf(ServerHttpSecurity.CsrfSpec::disable)
+                .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
+                .headers(
+                        (headerCustomizer) -> {
+                            headerCustomizer.frameOptions(
+                                    ServerHttpSecurity.HeaderSpec.FrameOptionsSpec::disable);
+                        })
+                .csrf(ServerHttpSecurity.CsrfSpec::disable)
+                .formLogin(ServerHttpSecurity.FormLoginSpec::disable)
+                .cors(ServerHttpSecurity.CorsSpec::disable)
+                .logout(ServerHttpSecurity.LogoutSpec::disable)
+                .authorizeExchange(
+                        authorizeExchangeCustomizer -> {
+                            permitAllUrls(authorizeExchangeCustomizer);
 
-			.authorizeExchange(authorizeExchangeCustomizer -> {
-				permitAllUrls(authorizeExchangeCustomizer);
+                            authorizeExchangeCustomizer
+                                    .anyExchange()
+                                    .access(gatewayReactiveAuthorizationManager);
+                        })
+                // .addFilterAt(authenticationWebFilter, SecurityWebFiltersOrder.AUTHENTICATION)
+                .exceptionHandling(
+                        (exceptionHandlingCustomizer) -> {
+                            exceptionHandlingCustomizer
+                                    .authenticationEntryPoint(
+                                            new JsonServerAuthenticationEntryPoint())
+                                    .accessDeniedHandler(new JsonServerAccessDeniedHandler());
+                        })
+                .oauth2ResourceServer(this::from);
+        return http.build();
+    }
 
-				authorizeExchangeCustomizer
-					.anyExchange()
-					.access(gatewayReactiveAuthorizationManager);
-			})
-			// .addFilterAt(authenticationWebFilter, SecurityWebFiltersOrder.AUTHENTICATION)
-			.exceptionHandling((exceptionHandlingCustomizer) -> {
-				exceptionHandlingCustomizer
-					.authenticationEntryPoint(new JsonServerAuthenticationEntryPoint())
-					.accessDeniedHandler(new JsonServerAccessDeniedHandler());
-			})
-			.oauth2ResourceServer(this::from);
-		return http.build();
-	}
+    public ServerHttpSecurity.OAuth2ResourceServerSpec from(
+            ServerHttpSecurity.OAuth2ResourceServerSpec oAuth2ResourceServerSpec) {
+        if (isRemoteValidate()) {
+            ReactiveSecurityOpaqueTokenIntrospector opaqueTokenIntrospector =
+                    new ReactiveSecurityOpaqueTokenIntrospector(
+                            endpointProperties, resourceServerProperties);
 
+            oAuth2ResourceServerSpec
+                    .opaqueToken(
+                            opaqueTokenCustomizer -> {
+                                opaqueTokenCustomizer.introspector(opaqueTokenIntrospector);
+                            })
+                    .accessDeniedHandler(new JsonServerAccessDeniedHandler())
+                    .authenticationEntryPoint(new JsonServerAuthenticationEntryPoint());
+        } else {
+            oAuth2ResourceServerSpec
+                    .jwt(
+                            jwtCustomizer -> {
+                                jwtCustomizer
+                                        .jwtDecoder(this.jwtDecoder)
+                                        .jwtAuthenticationConverter(
+                                                new ReactiveJwtAuthenticationConverter());
+                                // .jwtAuthenticationConverter(jwtAuthenticationConverter());
+                            })
+                    .bearerTokenConverter(
+                            exchange -> {
+                                ServerBearerTokenAuthenticationConverter
+                                        defaultBearerTokenResolver =
+                                                new ServerBearerTokenAuthenticationConverter();
+                                defaultBearerTokenResolver.setAllowUriQueryParameter(true);
+                                return defaultBearerTokenResolver.convert(exchange);
+                            })
+                    .accessDeniedHandler(new JsonServerAccessDeniedHandler())
+                    .authenticationEntryPoint(new JsonServerAuthenticationEntryPoint());
+        }
+        return oAuth2ResourceServerSpec;
+    }
 
-	public ServerHttpSecurity.OAuth2ResourceServerSpec from(ServerHttpSecurity.OAuth2ResourceServerSpec oAuth2ResourceServerSpec) {
-		if (isRemoteValidate()) {
-			ReactiveSecurityOpaqueTokenIntrospector opaqueTokenIntrospector =
-				new ReactiveSecurityOpaqueTokenIntrospector(endpointProperties, resourceServerProperties);
+    /**
+     * 远程验证
+     *
+     * @return boolean
+     * @since 2023-07-04 09:58:49
+     */
+    private boolean isRemoteValidate() {
+        return this.authorizationProperties.getValidate() == Target.REMOTE;
+    }
 
-			oAuth2ResourceServerSpec
-				.opaqueToken(opaqueTokenCustomizer -> {
-					opaqueTokenCustomizer.introspector(opaqueTokenIntrospector);
-				})
-				.accessDeniedHandler(new JsonServerAccessDeniedHandler())
-				.authenticationEntryPoint(new JsonServerAuthenticationEntryPoint());
-		} else {
-			oAuth2ResourceServerSpec
-				.jwt(jwtCustomizer -> {
-					jwtCustomizer
-						.jwtDecoder(this.jwtDecoder)
-						.jwtAuthenticationConverter(new ReactiveJwtAuthenticationConverter());
-					//.jwtAuthenticationConverter(jwtAuthenticationConverter());
-				})
-				.bearerTokenConverter(exchange -> {
-					ServerBearerTokenAuthenticationConverter defaultBearerTokenResolver = new ServerBearerTokenAuthenticationConverter();
-					defaultBearerTokenResolver.setAllowUriQueryParameter(true);
-					return defaultBearerTokenResolver.convert(exchange);
-				})
-				.accessDeniedHandler(new JsonServerAccessDeniedHandler())
-				.authenticationEntryPoint(new JsonServerAuthenticationEntryPoint());
-		}
-		return oAuth2ResourceServerSpec;
-	}
+    private void permitAllUrls(ServerHttpSecurity.AuthorizeExchangeSpec authorizeExchangeSpec) {
+        List<String> permitAllUrls = securityProperties.getIgnoreUrl();
 
-	/**
-	 * 远程验证
-	 *
-	 * @return boolean
-	 * @since 2023-07-04 09:58:49
-	 */
-	private boolean isRemoteValidate() {
-		return this.authorizationProperties.getValidate() == Target.REMOTE;
-	}
+        permitAllUrls.forEach(url -> authorizeExchangeSpec.pathMatchers(url).permitAll());
 
-	private void permitAllUrls(ServerHttpSecurity.AuthorizeExchangeSpec authorizeExchangeSpec) {
-		List<String> permitAllUrls = securityProperties.getIgnoreUrl();
+        authorizeExchangeSpec
+                .pathMatchers(permitAllUrls.toArray(new String[permitAllUrls.size()]))
+                .permitAll()
+                .pathMatchers(HttpMethod.OPTIONS)
+                .permitAll()
+                .matchers(EndpointRequest.toAnyEndpoint())
+                .permitAll();
 
-		permitAllUrls.forEach(url -> authorizeExchangeSpec.pathMatchers(url).permitAll());
-
-		authorizeExchangeSpec
-			.pathMatchers(permitAllUrls.toArray(new String[permitAllUrls.size()]))
-			.permitAll()
-			.pathMatchers(HttpMethod.OPTIONS)
-			.permitAll()
-			.matchers(EndpointRequest.toAnyEndpoint())
-			.permitAll();
-
-		LogUtils.info("permit all urls: {}", permitAllUrls.toString());
-	}
-
+        LogUtils.info("permit all urls: {}", permitAllUrls.toString());
+    }
 }

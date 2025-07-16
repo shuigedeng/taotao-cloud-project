@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.gateway;
 
-import com.taotao.boot.common.utils.common.PropertyUtils;
 import com.taotao.boot.core.startup.StartupSpringApplication;
 import com.taotao.boot.security.spring.annotation.EnableSecurityConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -41,24 +40,24 @@ import reactor.netty.ReactorNetty;
 @EnableDiscoveryClient
 public class TaoTaoCloudGatewayApplication {
 
-	public static void main(String[] args) {
-		System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
+    public static void main(String[] args) {
+        System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
 
-		//可以减少connection timed错误 可以提升20%左右的qpc
-		System.setProperty(ReactorNetty.IO_SELECT_COUNT, "1");
-		//System.setProperty(ReactorNetty.IO_WORKER_COUNT, "1");
+        // 可以减少connection timed错误 可以提升20%左右的qpc
+        System.setProperty(ReactorNetty.IO_SELECT_COUNT, "1");
+        // System.setProperty(ReactorNetty.IO_WORKER_COUNT, "1");
 
-		//要想查看Reactor Netty访问时的日志信息，你必须设置如下系统属性：
-		//-Dreactor.netty.http.server.accessLogEnabled=true
-		//SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
-		new StartupSpringApplication(TaoTaoCloudGatewayApplication.class)
-			.setTtcBanner()
-			.setTtcProfileIfNotExists("dev")
-			.setTtcApplicationProperty("taotao-cloud-gateway")
-			.setTtcAllowBeanDefinitionOverriding(true)
-			.run(args);
+        // 要想查看Reactor Netty访问时的日志信息，你必须设置如下系统属性：
+        // -Dreactor.netty.http.server.accessLogEnabled=true
+        // SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
+        new StartupSpringApplication(TaoTaoCloudGatewayApplication.class)
+                .setTtcBanner()
+                .setTtcProfileIfNotExists("dev")
+                .setTtcApplicationProperty("taotao-cloud-gateway")
+                .setTtcAllowBeanDefinitionOverriding(true)
+                .run(args);
 
-		// 获取本地 ip 地址
-		//String ip = InetAddress.getLocalHost().getHostAddress();
-	}
+        // 获取本地 ip 地址
+        // String ip = InetAddress.getLocalHost().getHostAddress();
+    }
 }

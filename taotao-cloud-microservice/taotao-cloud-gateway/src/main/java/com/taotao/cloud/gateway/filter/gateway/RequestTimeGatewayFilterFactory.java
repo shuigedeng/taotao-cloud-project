@@ -55,18 +55,24 @@ public class RequestTimeGatewayFilterFactory extends AbstractGatewayFilterFactor
                 return chain.filter(exchange);
             }
             exchange.getAttributes().put(START_TIME, System.currentTimeMillis());
-            return chain.filter(exchange).then(Mono.fromRunnable(() -> {
-                Long startTime = exchange.getAttribute(START_TIME);
-                if (Objects.nonNull(startTime)) {
-                    ServerHttpRequest request = exchange.getRequest();
-                    StringBuilder sb = new StringBuilder(request.getURI().getRawPath())
-                            .append(" 请求时间: ")
-                            .append(System.currentTimeMillis() - startTime)
-                            .append("ms");
-                    sb.append(" 请求参数: ").append(request.getQueryParams());
-                    LogUtils.info(sb.toString());
-                }
-            }));
+            return chain.filter(exchange)
+                    .then(
+                            Mono.fromRunnable(
+                                    () -> {
+                                        Long startTime = exchange.getAttribute(START_TIME);
+                                        if (Objects.nonNull(startTime)) {
+                                            ServerHttpRequest request = exchange.getRequest();
+                                            StringBuilder sb =
+                                                    new StringBuilder(request.getURI().getRawPath())
+                                                            .append(" 请求时间: ")
+                                                            .append(
+                                                                    System.currentTimeMillis()
+                                                                            - startTime)
+                                                            .append("ms");
+                                            sb.append(" 请求参数: ").append(request.getQueryParams());
+                                            LogUtils.info(sb.toString());
+                                        }
+                                    }));
         };
     }
 

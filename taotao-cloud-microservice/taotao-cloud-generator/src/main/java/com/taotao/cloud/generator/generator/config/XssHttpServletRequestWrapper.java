@@ -1,24 +1,24 @@
-//package com.taotao.cloud.generator.generator.config;
+// package com.taotao.cloud.generator.generator.config;
 //
-//import jakarta.servlet.ReadListener;
-//import jakarta.servlet.ServletInputStream;
-//import jakarta.servlet.http.HttpServletRequest;
-//import jakarta.servlet.http.HttpServletRequestWrapper;
-//import java.io.ByteArrayInputStream;
-//import java.io.IOException;
-//import java.util.LinkedHashMap;
-//import java.util.Map;
-//import org.apache.commons.io.IOUtils;
-//import org.apache.commons.lang3.StringUtils;
-//import org.springframework.http.HttpHeaders;
-//import org.springframework.http.MediaType;
+// import jakarta.servlet.ReadListener;
+// import jakarta.servlet.ServletInputStream;
+// import jakarta.servlet.http.HttpServletRequest;
+// import jakarta.servlet.http.HttpServletRequestWrapper;
+// import java.io.ByteArrayInputStream;
+// import java.io.IOException;
+// import java.util.LinkedHashMap;
+// import java.util.Map;
+// import org.apache.commons.io.IOUtils;
+// import org.apache.commons.lang3.StringUtils;
+// import org.springframework.http.HttpHeaders;
+// import org.springframework.http.MediaType;
 //
-///**
+/// **
 // * XSS过滤处理
 // *
 // * @author Mark sunlightcs@gmail.com
 // */
-//public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
+// public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
 //    /**
 //     * 没被包装过的HttpServletRequest（特殊场景，需要自己过滤）
 //     */
@@ -36,7 +36,8 @@
 //    @Override
 //    public ServletInputStream getInputStream() throws IOException {
 //        //非json类型，直接返回
-//        if(!MediaType.APPLICATION_JSON_VALUE.equalsIgnoreCase(super.getHeader(HttpHeaders.CONTENT_TYPE))){
+//
+// if(!MediaType.APPLICATION_JSON_VALUE.equalsIgnoreCase(super.getHeader(HttpHeaders.CONTENT_TYPE))){
 //            return super.getInputStream();
 //        }
 //
@@ -138,4 +139,4 @@
 //        return request;
 //    }
 //
-//}
+// }

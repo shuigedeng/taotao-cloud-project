@@ -1,4 +1,22 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.xxljob.adminbiz;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.xxl.job.core.biz.AdminBiz;
 import com.xxl.job.core.biz.client.AdminBizClient;
@@ -7,12 +25,9 @@ import com.xxl.job.core.biz.model.RegistryParam;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.context.XxlJobContext;
 import com.xxl.job.core.enums.RegistryConfig;
-import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 /**
  * admin api test
@@ -25,7 +40,6 @@ public class AdminBizTest {
     private static String addressUrl = "http://127.0.0.1:8080/xxl-job-admin/";
     private static String accessToken = null;
     private static int timeoutSecond = 3;
-
 
     @Test
     public void callback() throws Exception {
@@ -51,7 +65,11 @@ public class AdminBizTest {
     public void registry() throws Exception {
         AdminBiz adminBiz = new AdminBizClient(addressUrl, accessToken, timeoutSecond);
 
-        RegistryParam registryParam = new RegistryParam(RegistryConfig.RegistType.EXECUTOR.name(), "xxl-job-executor-example", "127.0.0.1:9999");
+        RegistryParam registryParam =
+                new RegistryParam(
+                        RegistryConfig.RegistType.EXECUTOR.name(),
+                        "xxl-job-executor-example",
+                        "127.0.0.1:9999");
         ReturnT<String> returnT = adminBiz.registry(registryParam);
 
         assertTrue(returnT.getCode() == ReturnT.SUCCESS_CODE);
@@ -66,11 +84,13 @@ public class AdminBizTest {
     public void registryRemove() throws Exception {
         AdminBiz adminBiz = new AdminBizClient(addressUrl, accessToken, timeoutSecond);
 
-        RegistryParam registryParam = new RegistryParam(RegistryConfig.RegistType.EXECUTOR.name(), "xxl-job-executor-example", "127.0.0.1:9999");
+        RegistryParam registryParam =
+                new RegistryParam(
+                        RegistryConfig.RegistType.EXECUTOR.name(),
+                        "xxl-job-executor-example",
+                        "127.0.0.1:9999");
         ReturnT<String> returnT = adminBiz.registryRemove(registryParam);
 
         assertTrue(returnT.getCode() == ReturnT.SUCCESS_CODE);
-
     }
-
 }

@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.auth.biz.metadata.listener;
 
-import com.taotao.cloud.auth.biz.metadata.processor.RequestMappingStoreProcessor;
 import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.security.spring.event.RemoteRequestMappingGatherEvent;
 import com.taotao.boot.security.spring.event.domain.RequestMapping;
+import com.taotao.cloud.auth.biz.metadata.processor.RequestMappingStoreProcessor;
 import java.util.List;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
@@ -34,14 +34,17 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class RemoteRequestMappingGatherListener implements ApplicationListener<RemoteRequestMappingGatherEvent> {
+public class RemoteRequestMappingGatherListener
+        implements ApplicationListener<RemoteRequestMappingGatherEvent> {
 
-    private static final Logger log = LoggerFactory.getLogger(RemoteRequestMappingGatherListener.class);
+    private static final Logger log =
+            LoggerFactory.getLogger(RemoteRequestMappingGatherListener.class);
 
     private final RequestMappingStoreProcessor requestMappingStoreProcessor;
 
     @Autowired
-    public RemoteRequestMappingGatherListener(RequestMappingStoreProcessor requestMappingStoreProcessor) {
+    public RemoteRequestMappingGatherListener(
+            RequestMappingStoreProcessor requestMappingStoreProcessor) {
         this.requestMappingStoreProcessor = requestMappingStoreProcessor;
     }
 
@@ -53,7 +56,8 @@ public class RemoteRequestMappingGatherListener implements ApplicationListener<R
         String requestMapping = event.getData();
         log.debug(" Fetch data [{}]", requestMapping);
         if (ObjectUtils.isNotEmpty(requestMapping)) {
-            List<RequestMapping> requestMappings = JsonUtils.toList(requestMapping, RequestMapping.class);
+            List<RequestMapping> requestMappings =
+                    JsonUtils.toList(requestMapping, RequestMapping.class);
             if (CollectionUtils.isNotEmpty(requestMappings)) {
                 requestMappingStoreProcessor.postProcess(requestMappings);
             }

@@ -33,36 +33,41 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
  * @version 2023.07
  * @since 2023-07-10 17:24:44
  */
-public class TtcOidcUserInfoMapper implements Function<OidcUserInfoAuthenticationContext, OidcUserInfo> {
+public class TtcOidcUserInfoMapper
+        implements Function<OidcUserInfoAuthenticationContext, OidcUserInfo> {
 
     /**
      * 电子邮件索赔
      */
     private static final List<String> EMAIL_CLAIMS =
             Arrays.asList(StandardClaimNames.EMAIL, StandardClaimNames.EMAIL_VERIFIED);
+
     /**
      * 电话索赔
      */
     private static final List<String> PHONE_CLAIMS =
-            Arrays.asList(StandardClaimNames.PHONE_NUMBER, StandardClaimNames.PHONE_NUMBER_VERIFIED);
+            Arrays.asList(
+                    StandardClaimNames.PHONE_NUMBER, StandardClaimNames.PHONE_NUMBER_VERIFIED);
+
     /**
      * 个人资料索赔
      */
-    private static final List<String> PROFILE_CLAIMS = Arrays.asList(
-            StandardClaimNames.NAME,
-            StandardClaimNames.FAMILY_NAME,
-            StandardClaimNames.GIVEN_NAME,
-            StandardClaimNames.MIDDLE_NAME,
-            StandardClaimNames.NICKNAME,
-            StandardClaimNames.PREFERRED_USERNAME,
-            StandardClaimNames.PROFILE,
-            StandardClaimNames.PICTURE,
-            StandardClaimNames.WEBSITE,
-            StandardClaimNames.GENDER,
-            StandardClaimNames.BIRTHDATE,
-            StandardClaimNames.ZONEINFO,
-            StandardClaimNames.LOCALE,
-            StandardClaimNames.UPDATED_AT);
+    private static final List<String> PROFILE_CLAIMS =
+            Arrays.asList(
+                    StandardClaimNames.NAME,
+                    StandardClaimNames.FAMILY_NAME,
+                    StandardClaimNames.GIVEN_NAME,
+                    StandardClaimNames.MIDDLE_NAME,
+                    StandardClaimNames.NICKNAME,
+                    StandardClaimNames.PREFERRED_USERNAME,
+                    StandardClaimNames.PROFILE,
+                    StandardClaimNames.PICTURE,
+                    StandardClaimNames.WEBSITE,
+                    StandardClaimNames.GENDER,
+                    StandardClaimNames.BIRTHDATE,
+                    StandardClaimNames.ZONEINFO,
+                    StandardClaimNames.LOCALE,
+                    StandardClaimNames.UPDATED_AT);
 
     /**
      * 应用
@@ -75,10 +80,12 @@ public class TtcOidcUserInfoMapper implements Function<OidcUserInfoAuthenticatio
     public OidcUserInfo apply(OidcUserInfoAuthenticationContext authenticationContext) {
         OidcUserInfoAuthenticationToken authentication = authenticationContext.getAuthentication();
         if (authentication.getPrincipal() instanceof BearerTokenAuthentication) {
-            BearerTokenAuthentication principal = (BearerTokenAuthentication) authentication.getPrincipal();
+            BearerTokenAuthentication principal =
+                    (BearerTokenAuthentication) authentication.getPrincipal();
             return new OidcUserInfo(getClaims(principal.getTokenAttributes()));
         } else {
-            JwtAuthenticationToken principal = (JwtAuthenticationToken) authentication.getPrincipal();
+            JwtAuthenticationToken principal =
+                    (JwtAuthenticationToken) authentication.getPrincipal();
             return new OidcUserInfo(getClaims(principal.getToken().getClaims()));
         }
     }

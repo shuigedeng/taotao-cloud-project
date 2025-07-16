@@ -17,9 +17,8 @@
 package com.taotao.cloud.bff.graphql.greeting;
 
 import jakarta.servlet.*;
-import org.springframework.stereotype.Component;
-
 import java.io.IOException;
+import org.springframework.stereotype.Component;
 
 /**
  * Servlet Filter that adds a Servlet request attribute.

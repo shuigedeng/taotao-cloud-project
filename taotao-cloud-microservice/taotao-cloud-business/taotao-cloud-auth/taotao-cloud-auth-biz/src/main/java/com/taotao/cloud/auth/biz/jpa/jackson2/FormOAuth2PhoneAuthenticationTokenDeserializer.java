@@ -26,11 +26,10 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.MissingNode;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-
 import java.io.IOException;
 import java.util.List;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 
 /**
  * Custom deserializer for {@link UsernamePasswordAuthenticationToken}. At the time of
@@ -48,80 +47,84 @@ import java.util.List;
  * @since 4.2
  */
 public class FormOAuth2PhoneAuthenticationTokenDeserializer
-	extends JsonDeserializer<Oauth2FormSmsLoginAuthenticationToken> {
+        extends JsonDeserializer<Oauth2FormSmsLoginAuthenticationToken> {
 
-	private static final TypeReference<List<GrantedAuthority>> GRANTED_AUTHORITY_LIST =
-		new TypeReference<List<GrantedAuthority>>() {
-		};
+    private static final TypeReference<List<GrantedAuthority>> GRANTED_AUTHORITY_LIST =
+            new TypeReference<List<GrantedAuthority>>() {};
 
-	private static final TypeReference<Object> OBJECT = new TypeReference<Object>() {
-	};
+    private static final TypeReference<Object> OBJECT = new TypeReference<Object>() {};
 
-	/**
-	 * This method construct {@link UsernamePasswordAuthenticationToken} object from
-	 * serialized json.
-	 *
-	 * @param jp   the JsonParser
-	 * @param ctxt the DeserializationContext
-	 * @return the user
-	 * @throws IOException             if a exception during IO occurs
-	 * @throws JsonProcessingException if an error during JSON processing occurs
-	 */
-	@Override
-	public Oauth2FormSmsLoginAuthenticationToken deserialize(JsonParser jp, DeserializationContext ctxt)
-		throws IOException, JsonProcessingException {
-		ObjectMapper mapper = (ObjectMapper) jp.getCodec();
-		JsonNode jsonNode = mapper.readTree(jp);
+    /**
+     * This method construct {@link UsernamePasswordAuthenticationToken} object from
+     * serialized json.
+     *
+     * @param jp   the JsonParser
+     * @param ctxt the DeserializationContext
+     * @return the user
+     * @throws IOException             if a exception during IO occurs
+     * @throws JsonProcessingException if an error during JSON processing occurs
+     */
+    @Override
+    public Oauth2FormSmsLoginAuthenticationToken deserialize(
+            JsonParser jp, DeserializationContext ctxt)
+            throws IOException, JsonProcessingException {
+        ObjectMapper mapper = (ObjectMapper) jp.getCodec();
+        JsonNode jsonNode = mapper.readTree(jp);
 
-		Boolean authenticated = readJsonNode(jsonNode, "authenticated").asBoolean();
-		JsonNode principalNode = readJsonNode(jsonNode, "principal");
-		Object principal = getPrincipal(mapper, principalNode);
+        Boolean authenticated = readJsonNode(jsonNode, "authenticated").asBoolean();
+        JsonNode principalNode = readJsonNode(jsonNode, "principal");
+        Object principal = getPrincipal(mapper, principalNode);
 
-		String type = getText(readJsonNode(jsonNode, "type"));
-		String captcha = getText(readJsonNode(jsonNode, "captcha"));
+        String type = getText(readJsonNode(jsonNode, "type"));
+        String captcha = getText(readJsonNode(jsonNode, "captcha"));
 
-		//		JsonNode credentialsNode = readJsonNode(jsonNode, "credentials");
-		//		Object credentials = getCredentials(credentialsNode);
+        //		JsonNode credentialsNode = readJsonNode(jsonNode, "credentials");
+        //		Object credentials = getCredentials(credentialsNode);
 
-		List<GrantedAuthority> authorities =
-			mapper.readValue(readJsonNode(jsonNode, "authorities").traverse(mapper), GRANTED_AUTHORITY_LIST);
+        List<GrantedAuthority> authorities =
+                mapper.readValue(
+                        readJsonNode(jsonNode, "authorities").traverse(mapper),
+                        GRANTED_AUTHORITY_LIST);
 
-		Oauth2FormSmsLoginAuthenticationToken token = (!authenticated)
-			? Oauth2FormSmsLoginAuthenticationToken.unauthenticated(principal, captcha, type)
-			: Oauth2FormSmsLoginAuthenticationToken.authenticated(principal, captcha, type, authorities);
-		JsonNode detailsNode = readJsonNode(jsonNode, "details");
-		if (detailsNode.isNull() || detailsNode.isMissingNode()) {
-			token.setDetails(null);
-		} else {
-			Object details = mapper.readValue(detailsNode.toString(), OBJECT);
-			token.setDetails(details);
-		}
-		return token;
-	}
+        Oauth2FormSmsLoginAuthenticationToken token =
+                (!authenticated)
+                        ? Oauth2FormSmsLoginAuthenticationToken.unauthenticated(
+                                principal, captcha, type)
+                        : Oauth2FormSmsLoginAuthenticationToken.authenticated(
+                                principal, captcha, type, authorities);
+        JsonNode detailsNode = readJsonNode(jsonNode, "details");
+        if (detailsNode.isNull() || detailsNode.isMissingNode()) {
+            token.setDetails(null);
+        } else {
+            Object details = mapper.readValue(detailsNode.toString(), OBJECT);
+            token.setDetails(details);
+        }
+        return token;
+    }
 
-	private String getText(JsonNode jsonNode) {
-		if (jsonNode.isNull() || jsonNode.isMissingNode()) {
-			return "";
-		}
-		return jsonNode.asText();
-	}
+    private String getText(JsonNode jsonNode) {
+        if (jsonNode.isNull() || jsonNode.isMissingNode()) {
+            return "";
+        }
+        return jsonNode.asText();
+    }
 
-	private Object getCredentials(JsonNode credentialsNode) {
-		if (credentialsNode.isNull() || credentialsNode.isMissingNode()) {
-			return null;
-		}
-		return credentialsNode.asText();
-	}
+    private Object getCredentials(JsonNode credentialsNode) {
+        if (credentialsNode.isNull() || credentialsNode.isMissingNode()) {
+            return null;
+        }
+        return credentialsNode.asText();
+    }
 
-	private Object getPrincipal(ObjectMapper mapper, JsonNode principalNode)
-		throws IOException, JsonParseException, JsonMappingException {
-		if (principalNode.isObject()) {
-			return mapper.readValue(principalNode.traverse(mapper), Object.class);
-		}
-		return principalNode.asText();
-	}
+    private Object getPrincipal(ObjectMapper mapper, JsonNode principalNode)
+            throws IOException, JsonParseException, JsonMappingException {
+        if (principalNode.isObject()) {
+            return mapper.readValue(principalNode.traverse(mapper), Object.class);
+        }
+        return principalNode.asText();
+    }
 
-	private JsonNode readJsonNode(JsonNode jsonNode, String field) {
-		return jsonNode.has(field) ? jsonNode.get(field) : MissingNode.getInstance();
-	}
+    private JsonNode readJsonNode(JsonNode jsonNode, String field) {
+        return jsonNode.has(field) ? jsonNode.get(field) : MissingNode.getInstance();
+    }
 }

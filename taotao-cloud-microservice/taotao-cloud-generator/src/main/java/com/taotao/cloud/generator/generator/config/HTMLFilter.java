@@ -1,17 +1,17 @@
-//package com.taotao.cloud.generator.generator.config;
+// package com.taotao.cloud.generator.generator.config;
 //
-//import java.util.ArrayList;
-//import java.util.Collections;
-//import java.util.HashMap;
-//import java.util.List;
-//import java.util.Map;
-//import java.util.concurrent.ConcurrentHashMap;
-//import java.util.concurrent.ConcurrentMap;
-//import java.util.logging.Logger;
-//import java.util.regex.Matcher;
-//import java.util.regex.Pattern;
+// import java.util.ArrayList;
+// import java.util.Collections;
+// import java.util.HashMap;
+// import java.util.List;
+// import java.util.Map;
+// import java.util.concurrent.ConcurrentHashMap;
+// import java.util.concurrent.ConcurrentMap;
+// import java.util.logging.Logger;
+// import java.util.regex.Matcher;
+// import java.util.regex.Pattern;
 //
-///**
+/// **
 // *
 // * HTML filtering utility for protecting against XSS (Cross Site Scripting).
 // *
@@ -44,7 +44,7 @@
 // * @author Cal Hendersen
 // * @author Michael Semb Wever
 // */
-//public final class HTMLFilter {
+// public final class HTMLFilter {
 //
 //    /** regex flag union representing /si modifiers in php **/
 //    private static final int REGEX_FLAGS_SI = Pattern.CASE_INSENSITIVE | Pattern.DOTALL;
@@ -52,15 +52,19 @@
 //    private static final Pattern P_COMMENT = Pattern.compile("^!--(.*)--$", REGEX_FLAGS_SI);
 //    private static final Pattern P_TAGS = Pattern.compile("<(.*?)>", Pattern.DOTALL);
 //    private static final Pattern P_END_TAG = Pattern.compile("^/([a-z0-9]+)", REGEX_FLAGS_SI);
-//    private static final Pattern P_START_TAG = Pattern.compile("^([a-z0-9]+)(.*?)(/?)$", REGEX_FLAGS_SI);
-//    private static final Pattern P_QUOTED_ATTRIBUTES = Pattern.compile("([a-z0-9]+)=([\"'])(.*?)\\2", REGEX_FLAGS_SI);
-//    private static final Pattern P_UNQUOTED_ATTRIBUTES = Pattern.compile("([a-z0-9]+)(=)([^\"\\s']+)", REGEX_FLAGS_SI);
+//    private static final Pattern P_START_TAG = Pattern.compile("^([a-z0-9]+)(.*?)(/?)$",
+// REGEX_FLAGS_SI);
+//    private static final Pattern P_QUOTED_ATTRIBUTES =
+// Pattern.compile("([a-z0-9]+)=([\"'])(.*?)\\2", REGEX_FLAGS_SI);
+//    private static final Pattern P_UNQUOTED_ATTRIBUTES =
+// Pattern.compile("([a-z0-9]+)(=)([^\"\\s']+)", REGEX_FLAGS_SI);
 //    private static final Pattern P_PROTOCOL = Pattern.compile("^([^:]+):", REGEX_FLAGS_SI);
 //    private static final Pattern P_ENTITY = Pattern.compile("&#(\\d+);?");
 //    private static final Pattern P_ENTITY_UNICODE = Pattern.compile("&#x([0-9a-f]+);?");
 //    private static final Pattern P_ENCODE = Pattern.compile("%([0-9a-f]{2});?");
 //    private static final Pattern P_VALID_ENTITIES = Pattern.compile("&([^&;]*)(?=(;|&|$))");
-//    private static final Pattern P_VALID_QUOTES = Pattern.compile("(>|^)([^<]+?)(<|$)", Pattern.DOTALL);
+//    private static final Pattern P_VALID_QUOTES = Pattern.compile("(>|^)([^<]+?)(<|$)",
+// Pattern.DOTALL);
 //    private static final Pattern P_END_ARROW = Pattern.compile("^>");
 //    private static final Pattern P_BODY_TO_END = Pattern.compile("<([^>]*?)(?=<|$)");
 //    private static final Pattern P_XML_CONTENT = Pattern.compile("(^|>)([^<]*?)(?=>)");
@@ -73,8 +77,10 @@
 //    private static final Pattern P_BOTH_ARROWS = Pattern.compile("<>");
 //
 //    // @xxx could grow large... maybe use sesat's ReferenceMap
-//    private static final ConcurrentMap<String,Pattern> P_REMOVE_PAIR_BLANKS = new ConcurrentHashMap<String, Pattern>();
-//    private static final ConcurrentMap<String,Pattern> P_REMOVE_SELF_BLANKS = new ConcurrentHashMap<String, Pattern>();
+//    private static final ConcurrentMap<String,Pattern> P_REMOVE_PAIR_BLANKS = new
+// ConcurrentHashMap<String, Pattern>();
+//    private static final ConcurrentMap<String,Pattern> P_REMOVE_SELF_BLANKS = new
+// ConcurrentHashMap<String, Pattern>();
 //
 //    /** set of allowed html elements, along with allowed attributes for each element **/
 //    private final Map<String, List<String>> vAllowed;
@@ -83,7 +89,8 @@
 //
 //    /** html elements which must always be self-closing (e.g. "<img />") **/
 //    private final String[] vSelfClosingTags;
-//    /** html elements which must always have separate opening and closing tags (e.g. "<b></b>") **/
+//    /** html elements which must always have separate opening and closing tags (e.g. "<b></b>")
+// **/
 //    private final String[] vNeedClosingTags;
 //    /** set of disallowed html elements **/
 //    private final String[] vDisallowed;
@@ -167,7 +174,8 @@
 //        assert conf.containsKey("vRemoveBlanks") : "configuration requires vRemoveBlanks";
 //        assert conf.containsKey("vAllowedEntities") : "configuration requires vAllowedEntities";
 //
-//        vAllowed = Collections.unmodifiableMap((HashMap<String, List<String>>) conf.get("vAllowed"));
+//        vAllowed = Collections.unmodifiableMap((HashMap<String, List<String>>)
+// conf.get("vAllowed"));
 //        vSelfClosingTags = (String[]) conf.get("vSelfClosingTags");
 //        vNeedClosingTags = (String[]) conf.get("vNeedClosingTags");
 //        vDisallowed = (String[]) conf.get("vDisallowed");
@@ -175,9 +183,12 @@
 //        vProtocolAtts = (String[]) conf.get("vProtocolAtts");
 //        vRemoveBlanks = (String[]) conf.get("vRemoveBlanks");
 //        vAllowedEntities = (String[]) conf.get("vAllowedEntities");
-//        stripComment =  conf.containsKey("stripComment") ? (Boolean) conf.get("stripComment") : true;
-//        encodeQuotes = conf.containsKey("encodeQuotes") ? (Boolean) conf.get("encodeQuotes") : true;
-//        alwaysMakeTags = conf.containsKey("alwaysMakeTags") ? (Boolean) conf.get("alwaysMakeTags") : true;
+//        stripComment =  conf.containsKey("stripComment") ? (Boolean) conf.get("stripComment") :
+// true;
+//        encodeQuotes = conf.containsKey("encodeQuotes") ? (Boolean) conf.get("encodeQuotes") :
+// true;
+//        alwaysMakeTags = conf.containsKey("alwaysMakeTags") ? (Boolean) conf.get("alwaysMakeTags")
+// : true;
 //    }
 //
 //    private void reset() {
@@ -252,7 +263,8 @@
 //        final StringBuffer buf = new StringBuffer();
 //        if (m.find()) {
 //            final String match = m.group(1); //(.*?)
-//            m.appendReplacement(buf, Matcher.quoteReplacement("<!--" + htmlSpecialChars(match) + "-->"));
+//            m.appendReplacement(buf, Matcher.quoteReplacement("<!--" + htmlSpecialChars(match) +
+// "-->"));
 //        }
 //        m.appendTail(buf);
 //
@@ -314,11 +326,13 @@
 //        String result = s;
 //        for (String tag : vRemoveBlanks) {
 //            if(!P_REMOVE_PAIR_BLANKS.containsKey(tag)){
-//                P_REMOVE_PAIR_BLANKS.putIfAbsent(tag, Pattern.compile("<" + tag + "(\\s[^>]*)?></" + tag + ">"));
+//                P_REMOVE_PAIR_BLANKS.putIfAbsent(tag, Pattern.compile("<" + tag + "(\\s[^>]*)?></"
+// + tag + ">"));
 //            }
 //            result = regexReplace(P_REMOVE_PAIR_BLANKS.get(tag), "", result);
 //            if(!P_REMOVE_SELF_BLANKS.containsKey(tag)){
-//                P_REMOVE_SELF_BLANKS.putIfAbsent(tag, Pattern.compile("<" + tag + "(\\s[^>]*)?/>"));
+//                P_REMOVE_SELF_BLANKS.putIfAbsent(tag, Pattern.compile("<" + tag +
+// "(\\s[^>]*)?/>"));
 //            }
 //            result = regexReplace(P_REMOVE_SELF_BLANKS.get(tag), "", result);
 //        }
@@ -326,7 +340,8 @@
 //        return result;
 //    }
 //
-//    private static String regexReplace(final Pattern regex_pattern, final String replacement, final String s) {
+//    private static String regexReplace(final Pattern regex_pattern, final String replacement,
+// final String s) {
 //        Matcher m = regex_pattern.matcher(s);
 //        return m.replaceAll(replacement);
 //    }
@@ -353,7 +368,8 @@
 //            final String body = m.group(2);
 //            String ending = m.group(3);
 //
-//            //debug( "in a starting tag, name='" + name + "'; body='" + body + "'; ending='" + ending + "'" );
+//            //debug( "in a starting tag, name='" + name + "'; body='" + body + "'; ending='" +
+// ending + "'" );
 //            if (allowed(name)) {
 //                String params = "";
 //
@@ -495,7 +511,8 @@
 //                final String one = m.group(1); //(>|^)
 //                final String two = m.group(2); //([^<]+?)
 //                final String three = m.group(3); //(<|$)
-//                m.appendReplacement(buf, Matcher.quoteReplacement(one + regexReplace(P_QUOTE, "&quot;", two) + three));
+//                m.appendReplacement(buf, Matcher.quoteReplacement(one + regexReplace(P_QUOTE,
+// "&quot;", two) + three));
 //            }
 //            m.appendTail(buf);
 //            return buf.toString();
@@ -531,4 +548,4 @@
 //    private boolean allowedAttribute(final String name, final String paramName) {
 //        return allowed(name) && (vAllowed.isEmpty() || vAllowed.get(name).contains(paramName));
 //    }
-//}
+// }

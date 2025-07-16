@@ -47,112 +47,115 @@ import org.springframework.transaction.PlatformTransactionManager;
 @EnableBatchProcessing
 public class MybatisBatchConfig {
 
-	@Autowired
-	private JobRepository jobRepository;
-	@Autowired
-	private SqlSessionFactory sqlSessionFactory;
-	@Autowired
-	private PlatformTransactionManager platformTransactionManager;
+    @Autowired private JobRepository jobRepository;
+    @Autowired private SqlSessionFactory sqlSessionFactory;
+    @Autowired private PlatformTransactionManager platformTransactionManager;
 
-	/**
-	 * JobRepository定义：Job的注册容器以及和数据库打交道（事务管理等）
-	 */
-	@Bean
-	public JobRepository myJobRepository(DataSource dataSource,
-		PlatformTransactionManager transactionManager) throws Exception {
-		JobRepositoryFactoryBean jobRepositoryFactoryBean = new JobRepositoryFactoryBean();
-		jobRepositoryFactoryBean.setDatabaseType("mysql");
-		jobRepositoryFactoryBean.setTransactionManager(transactionManager);
-		jobRepositoryFactoryBean.setDataSource(dataSource);
-		return jobRepositoryFactoryBean.getObject();
-	}
+    /**
+     * JobRepository定义：Job的注册容器以及和数据库打交道（事务管理等）
+     */
+    @Bean
+    public JobRepository myJobRepository(
+            DataSource dataSource, PlatformTransactionManager transactionManager) throws Exception {
+        JobRepositoryFactoryBean jobRepositoryFactoryBean = new JobRepositoryFactoryBean();
+        jobRepositoryFactoryBean.setDatabaseType("mysql");
+        jobRepositoryFactoryBean.setTransactionManager(transactionManager);
+        jobRepositoryFactoryBean.setDataSource(dataSource);
+        return jobRepositoryFactoryBean.getObject();
+    }
 
-	/**
-	 * jobLauncher定义： job的启动器,绑定相关的jobRepository
-	 */
-	@Bean
-	public JobLauncher myJobLauncher(DataSource dataSource,
-		PlatformTransactionManager transactionManager) throws Exception {
-		TaskExecutorJobLauncher jobLauncher = new TaskExecutorJobLauncher();
-		// 设置jobRepository
-		jobLauncher.setJobRepository(myJobRepository(dataSource, transactionManager));
-		return jobLauncher;
-	}
+    /**
+     * jobLauncher定义： job的启动器,绑定相关的jobRepository
+     */
+    @Bean
+    public JobLauncher myJobLauncher(
+            DataSource dataSource, PlatformTransactionManager transactionManager) throws Exception {
+        TaskExecutorJobLauncher jobLauncher = new TaskExecutorJobLauncher();
+        // 设置jobRepository
+        jobLauncher.setJobRepository(myJobRepository(dataSource, transactionManager));
+        return jobLauncher;
+    }
 
-	//Spring Batch提供了一个特殊的bean scope类（StepScope:作为一个自定义的Spring bean scope）。
-	// 这个step scope的作用是连接batches的各个steps。
-	// 这个机制允许配置在Spring的beans当steps开始时才实例化并且允许你为这个step指定配置和参数。
-	@Bean
-	@StepScope
-	public MyBatisCursorItemReader<BlogInfo> itemReader(
-		@Value("#{jobParameters[authorId]}") String authorId) {
+    // Spring Batch提供了一个特殊的bean scope类（StepScope:作为一个自定义的Spring bean scope）。
+    // 这个step scope的作用是连接batches的各个steps。
+    // 这个机制允许配置在Spring的beans当steps开始时才实例化并且允许你为这个step指定配置和参数。
+    @Bean
+    @StepScope
+    public MyBatisCursorItemReader<BlogInfo> itemReader(
+            @Value("#{jobParameters[authorId]}") String authorId) {
 
-		LogUtils.info("开始查询数据库");
+        LogUtils.info("开始查询数据库");
 
-		MyBatisCursorItemReader<BlogInfo> reader = new MyBatisCursorItemReader<>();
-		reader.setQueryId("com.example.batchdemo.mapper.BlogMapper.queryInfoById");
-		reader.setSqlSessionFactory(sqlSessionFactory);
-		Map<String, Object> map = new HashMap<>();
+        MyBatisCursorItemReader<BlogInfo> reader = new MyBatisCursorItemReader<>();
+        reader.setQueryId("com.example.batchdemo.mapper.BlogMapper.queryInfoById");
+        reader.setSqlSessionFactory(sqlSessionFactory);
+        Map<String, Object> map = new HashMap<>();
 
-		map.put("authorId", Integer.valueOf(authorId));
-		reader.setParameterValues(map);
-		return reader;
-	}
+        map.put("authorId", Integer.valueOf(authorId));
+        reader.setParameterValues(map);
+        return reader;
+    }
 
-	/**
-	 * ItemWriter定义：指定datasource，设置批量插入sql语句，写入数据库
-	 */
-	@Bean
-	public ItemWriter<BlogInfo> itemWriter(DataSource dataSource) {
-		// 使用jdbcBcatchItemWrite写数据到数据库中
-		JdbcBatchItemWriter<BlogInfo> writer = new JdbcBatchItemWriter<>();
-		// 设置有参数的sql语句
-		writer.setItemSqlParameterSourceProvider(
-			new BeanPropertyItemSqlParameterSourceProvider<BlogInfo>());
-		String sql = "insert into bloginfonew " + " (blogAuthor,blogUrl,blogTitle,blogItem) "
-			+ " values(:blogAuthor,:blogUrl,:blogTitle,:blogItem)";
-		writer.setSql(sql);
-		writer.setDataSource(dataSource);
-		return writer;
-	}
+    /**
+     * ItemWriter定义：指定datasource，设置批量插入sql语句，写入数据库
+     */
+    @Bean
+    public ItemWriter<BlogInfo> itemWriter(DataSource dataSource) {
+        // 使用jdbcBcatchItemWrite写数据到数据库中
+        JdbcBatchItemWriter<BlogInfo> writer = new JdbcBatchItemWriter<>();
+        // 设置有参数的sql语句
+        writer.setItemSqlParameterSourceProvider(
+                new BeanPropertyItemSqlParameterSourceProvider<BlogInfo>());
+        String sql =
+                "insert into bloginfonew "
+                        + " (blogAuthor,blogUrl,blogTitle,blogItem) "
+                        + " values(:blogAuthor,:blogUrl,:blogTitle,:blogItem)";
+        writer.setSql(sql);
+        writer.setDataSource(dataSource);
+        return writer;
+    }
 
-	@Bean
-	public ItemProcessor<BlogInfo, BlogInfo> itemProcessor() {
-		MybatisProcessorNew csvItemProcessor = new MybatisProcessorNew();
-		// 设置校验器
-		csvItemProcessor.setValidator(new MybatisBeanValidator<>());
-		return csvItemProcessor;
-	}
+    @Bean
+    public ItemProcessor<BlogInfo, BlogInfo> itemProcessor() {
+        MybatisProcessorNew csvItemProcessor = new MybatisProcessorNew();
+        // 设置校验器
+        csvItemProcessor.setValidator(new MybatisBeanValidator<>());
+        return csvItemProcessor;
+    }
 
+    @Bean
+    public Step mybatisStep(
+            MyBatisCursorItemReader<BlogInfo> itemReader,
+            ItemWriter<BlogInfo> itemWriter,
+            ItemProcessor<BlogInfo, BlogInfo> itemProcessor) {
 
-	@Bean
-	public Step mybatisStep(
-		MyBatisCursorItemReader<BlogInfo> itemReader,
-		ItemWriter<BlogInfo> itemWriter,
-		ItemProcessor<BlogInfo, BlogInfo> itemProcessor) {
+        return new StepBuilder("stepNew", jobRepository)
+                .listener(new MybatisStepExecutionListener())
+                // Chunk的机制(即每次读取一条数据，再处理一条数据，累积到一定数量后再一次性交给writer进行写入操作)
+                .<BlogInfo, BlogInfo>chunk(65000, platformTransactionManager)
+                .reader(itemReader)
+                .faultTolerant()
+                .retryLimit(3)
+                .retry(Exception.class)
+                .skip(Exception.class)
+                .skipLimit(10)
+                .listener(new MybatisReadListener())
+                .processor(itemProcessor)
+                .writer(itemWriter)
+                .faultTolerant()
+                .skip(Exception.class)
+                .skipLimit(2)
+                .listener(new MybatisWriteListener())
+                .build();
+    }
 
-		return new StepBuilder("stepNew", jobRepository)
-			.listener(new MybatisStepExecutionListener())
-			// Chunk的机制(即每次读取一条数据，再处理一条数据，累积到一定数量后再一次性交给writer进行写入操作)
-			.<BlogInfo, BlogInfo>chunk(65000, platformTransactionManager)
-			.reader(itemReader).faultTolerant().retryLimit(3).retry(Exception.class)
-			.skip(Exception.class).skipLimit(10)
-			.listener(new MybatisReadListener())
-			.processor(itemProcessor)
-			.writer(itemWriter).faultTolerant().skip(Exception.class).skipLimit(2)
-			.listener(new MybatisWriteListener())
-			.build();
-	}
-
-	@Bean
-	public Job mybatisJob(Step mybatisStep) {
-		return new JobBuilder("myJobNew", jobRepository)
-			.incrementer(new RunIdIncrementer())
-			.flow(mybatisStep)
-			.end()
-			.listener(new MybatisJobListener())
-			.build();
-
-	}
-
+    @Bean
+    public Job mybatisJob(Step mybatisStep) {
+        return new JobBuilder("myJobNew", jobRepository)
+                .incrementer(new RunIdIncrementer())
+                .flow(mybatisStep)
+                .end()
+                .listener(new MybatisJobListener())
+                .build();
+    }
 }

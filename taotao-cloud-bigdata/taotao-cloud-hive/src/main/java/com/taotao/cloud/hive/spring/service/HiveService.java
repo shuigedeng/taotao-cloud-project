@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.hive.spring.service;
 
 /**
@@ -22,11 +23,11 @@ package com.taotao.cloud.hive.spring.service;
  */
 public interface HiveService {
 
-	public String insert();
+    public String insert();
 
-	public String select();
+    public String select();
 
-	public String delete();
+    public String delete();
 
-	public String create();
+    public String create();
 }

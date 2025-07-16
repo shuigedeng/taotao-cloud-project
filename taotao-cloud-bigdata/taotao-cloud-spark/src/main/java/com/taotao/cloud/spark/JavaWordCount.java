@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.spark;
 
+import java.util.Arrays;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.PairFunction;
 import scala.Tuple2;
-
-import java.util.Arrays;
 
 /**
  * 1.本地运行 本地数据参数
@@ -45,36 +45,38 @@ import java.util.Arrays;
  */
 public class JavaWordCount {
 
-	public static void main(String[] args) throws InterruptedException {
-		SparkConf javaWordCount = new SparkConf()
-			.setAppName("JavaWordCount");
-			//.setMaster("local[1]");
+    public static void main(String[] args) throws InterruptedException {
+        SparkConf javaWordCount = new SparkConf().setAppName("JavaWordCount");
+        // .setMaster("local[1]");
 
-		JavaSparkContext jsc = new JavaSparkContext(javaWordCount);
+        JavaSparkContext jsc = new JavaSparkContext(javaWordCount);
 
-		JavaPairRDD<String, Integer> counts = jsc.textFile(args[0])
-			.flatMap(lines -> Arrays.asList(lines.split(" ")).iterator())
-			.mapToPair(new PairFunction<String, String, Integer>() {
-				@Override
-				public Tuple2<String, Integer> call(String word) throws Exception {
-					return Tuple2.apply(word, 1);
-				}
-			})
-			.reduceByKey(Integer::sum);
+        JavaPairRDD<String, Integer> counts =
+                jsc.textFile(args[0])
+                        .flatMap(lines -> Arrays.asList(lines.split(" ")).iterator())
+                        .mapToPair(
+                                new PairFunction<String, String, Integer>() {
+                                    @Override
+                                    public Tuple2<String, Integer> call(String word)
+                                            throws Exception {
+                                        return Tuple2.apply(word, 1);
+                                    }
+                                })
+                        .reduceByKey(Integer::sum);
 
-		JavaPairRDD<String, Integer> sorts = counts
-			.mapToPair(new PairFunction<Tuple2<String, Integer>, String, Integer>() {
-				@Override
-				public Tuple2<String, Integer> call(Tuple2<String, Integer> tuple2)
-					throws Exception {
-					return Tuple2.apply(tuple2._1(), tuple2._2());
+        JavaPairRDD<String, Integer> sorts =
+                counts.mapToPair(
+                                new PairFunction<Tuple2<String, Integer>, String, Integer>() {
+                                    @Override
+                                    public Tuple2<String, Integer> call(
+                                            Tuple2<String, Integer> tuple2) throws Exception {
+                                        return Tuple2.apply(tuple2._1(), tuple2._2());
+                                    }
+                                })
+                        .sortByKey(false);
 
-				}
-			})
-			.sortByKey(false);
+        sorts.saveAsTextFile(args[1]);
 
-		sorts.saveAsTextFile(args[1]);
-
-		jsc.stop();
-	}
+        jsc.stop();
+    }
 }

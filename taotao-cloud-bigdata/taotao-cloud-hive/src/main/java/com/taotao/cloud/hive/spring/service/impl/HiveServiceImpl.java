@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.hive.spring.service.impl;
 
 import com.taotao.cloud.hive.spring.service.HiveService;
@@ -35,51 +36,50 @@ import org.springframework.stereotype.Service;
 @Service
 public class HiveServiceImpl implements HiveService {
 
-	public static final Logger logger = LoggerFactory.getLogger(HiveServiceImpl.class);
+    public static final Logger logger = LoggerFactory.getLogger(HiveServiceImpl.class);
 
-	@Autowired
-	@Qualifier("hiveDruidTemplate")
-	private JdbcTemplate jdbcTemplate;
+    @Autowired
+    @Qualifier("hiveDruidTemplate")
+    private JdbcTemplate jdbcTemplate;
 
-	@Override
-	public String insert() {
-		jdbcTemplate.execute("insert into hive_test(key, value) values('Neo','Chen')");
-		return "Done";
-	}
+    @Override
+    public String insert() {
+        jdbcTemplate.execute("insert into hive_test(key, value) values('Neo','Chen')");
+        return "Done";
+    }
 
-	@Override
-	public String select() {
-		String sql = "select * from HIVE_TEST";
-		List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
-		for (Map<String, Object> row : rows) {
-			System.out.printf("%s\t%s%n", row.get("key"), row.get("value"));
-		}
-		return "Done";
-	}
+    @Override
+    public String select() {
+        String sql = "select * from HIVE_TEST";
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+        for (Map<String, Object> row : rows) {
+            System.out.printf("%s\t%s%n", row.get("key"), row.get("value"));
+        }
+        return "Done";
+    }
 
-	@Override
-	public String delete() {
-		StringBuffer sql = new StringBuffer("DROP TABLE IF EXISTS ");
-		sql.append("HIVE_TEST");
-		logger.info(sql.toString());
-		jdbcTemplate.execute(sql.toString());
-		return "Done";
-	}
+    @Override
+    public String delete() {
+        StringBuffer sql = new StringBuffer("DROP TABLE IF EXISTS ");
+        sql.append("HIVE_TEST");
+        logger.info(sql.toString());
+        jdbcTemplate.execute(sql.toString());
+        return "Done";
+    }
 
-	@Override
-	public String create() {
-		StringBuilder sql = new StringBuilder("create table IF NOT EXISTS ");
-		sql.append("HIVE_TEST");
-		sql.append("(KEY INT, VALUE STRING)");
-		sql.append("PARTITIONED BY (CTIME DATE)"); // 分区存储
-		sql.append(
-			"ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n' "); // 定义分隔符
-		sql.append("STORED AS TEXTFILE"); // 作为文本存储
+    @Override
+    public String create() {
+        StringBuilder sql = new StringBuilder("create table IF NOT EXISTS ");
+        sql.append("HIVE_TEST");
+        sql.append("(KEY INT, VALUE STRING)");
+        sql.append("PARTITIONED BY (CTIME DATE)"); // 分区存储
+        sql.append(
+                "ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n' "); // 定义分隔符
+        sql.append("STORED AS TEXTFILE"); // 作为文本存储
 
-		logger.info(sql.toString());
-		jdbcTemplate.execute(sql.toString());
+        logger.info(sql.toString());
+        jdbcTemplate.execute(sql.toString());
 
-		return "OK";
-
-	}
+        return "OK";
+    }
 }

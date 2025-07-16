@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.jpa.converter;
 
-import com.taotao.cloud.auth.biz.jpa.entity.RegisteredClientDetails;
 import com.taotao.boot.security.spring.utils.OAuth2AuthorizationUtils;
+import com.taotao.cloud.auth.biz.jpa.entity.RegisteredClientDetails;
 import java.util.Set;
 import org.dromara.hutool.core.date.DateUtil;
 import org.springframework.core.convert.converter.Converter;
@@ -33,7 +33,8 @@ import org.springframework.util.StringUtils;
  * @version 2023.07
  * @since 2023-07-10 17:13:32
  */
-public interface RegisteredClientConverter<S extends RegisteredClientDetails> extends Converter<S, RegisteredClient> {
+public interface RegisteredClientConverter<S extends RegisteredClientDetails>
+        extends Converter<S, RegisteredClient> {
 
     /**
      * 获取范围
@@ -75,15 +76,18 @@ public interface RegisteredClientConverter<S extends RegisteredClientDetails> ex
         ClientSettings clientSettings = getClientSettings(details);
 
         // 客服端设置 设置用户需要确认授权
-        // ClientSettings build = ClientSettings.builder().requireAuthorizationConsent(false).build();
+        // ClientSettings build =
+        // ClientSettings.builder().requireAuthorizationConsent(false).build();
 
         TokenSettings tokenSettings = getTokenSettings(details);
 
         Set<String> clientAuthenticationMethods =
                 StringUtils.commaDelimitedListToSet(details.getClientAuthenticationMethods());
-        Set<String> authorizationGrantTypes = StringUtils.commaDelimitedListToSet(details.getAuthorizationGrantTypes());
+        Set<String> authorizationGrantTypes =
+                StringUtils.commaDelimitedListToSet(details.getAuthorizationGrantTypes());
         Set<String> redirectUris = StringUtils.commaDelimitedListToSet(details.getRedirectUris());
-        Set<String> postLogoutRedirectUris = StringUtils.commaDelimitedListToSet(details.getPostLogoutRedirectUris());
+        Set<String> postLogoutRedirectUris =
+                StringUtils.commaDelimitedListToSet(details.getPostLogoutRedirectUris());
 
         return RegisteredClient.withId(details.getId())
                 .clientId(details.getClientId())
@@ -91,11 +95,22 @@ public interface RegisteredClientConverter<S extends RegisteredClientDetails> ex
                 .clientSecret(details.getClientSecret())
                 .clientSecretExpiresAt(DateUtil.toInstant(details.getClientSecretExpiresAt()))
                 .clientName(details.getId())
-                .clientAuthenticationMethods(authenticationMethods ->
-                        clientAuthenticationMethods.forEach(authenticationMethod -> authenticationMethods.add(
-                                OAuth2AuthorizationUtils.resolveClientAuthenticationMethod(authenticationMethod))))
-                .authorizationGrantTypes((grantTypes) -> authorizationGrantTypes.forEach(
-                        grantType -> grantTypes.add(OAuth2AuthorizationUtils.resolveAuthorizationGrantType(grantType))))
+                .clientAuthenticationMethods(
+                        authenticationMethods ->
+                                clientAuthenticationMethods.forEach(
+                                        authenticationMethod ->
+                                                authenticationMethods.add(
+                                                        OAuth2AuthorizationUtils
+                                                                .resolveClientAuthenticationMethod(
+                                                                        authenticationMethod))))
+                .authorizationGrantTypes(
+                        (grantTypes) ->
+                                authorizationGrantTypes.forEach(
+                                        grantType ->
+                                                grantTypes.add(
+                                                        OAuth2AuthorizationUtils
+                                                                .resolveAuthorizationGrantType(
+                                                                        grantType))))
                 .redirectUris((uris) -> uris.addAll(redirectUris))
                 .postLogoutRedirectUris((uris) -> uris.addAll(postLogoutRedirectUris))
                 .scopes((scopes) -> scopes.addAll(clientScopes))

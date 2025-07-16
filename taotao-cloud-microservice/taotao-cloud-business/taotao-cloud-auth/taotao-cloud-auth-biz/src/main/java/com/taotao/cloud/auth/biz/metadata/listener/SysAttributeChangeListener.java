@@ -36,7 +36,8 @@ public class SysAttributeChangeListener implements ApplicationListener<SysAttrib
 
     private final SecurityMetadataDistributeProcessor securityMetadataDistributeProcessor;
 
-    public SysAttributeChangeListener(SecurityMetadataDistributeProcessor securityMetadataDistributeProcessor) {
+    public SysAttributeChangeListener(
+            SecurityMetadataDistributeProcessor securityMetadataDistributeProcessor) {
         this.securityMetadataDistributeProcessor = securityMetadataDistributeProcessor;
     }
 

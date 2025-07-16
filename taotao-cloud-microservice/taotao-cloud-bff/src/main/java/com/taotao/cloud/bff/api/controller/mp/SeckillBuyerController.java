@@ -16,21 +16,20 @@
 
 package com.taotao.cloud.bff.api.controller.mp;
 
-import com.taotao.cloud.bff.api.service.app.ISeckillApplyService;
 import com.taotao.boot.common.model.Result;
+import com.taotao.boot.web.request.annotation.RequestLogger;
+import com.taotao.cloud.bff.api.service.app.ISeckillApplyService;
 import com.taotao.cloud.promotion.api.model.vo.SeckillGoodsVO;
 import com.taotao.cloud.promotion.api.model.vo.SeckillTimelineVO;
-import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * 买家端,秒杀活动接口
@@ -43,8 +42,7 @@ import java.util.List;
 public class SeckillBuyerController {
 
     /** 秒杀活动 */
-    @Autowired
-    private ISeckillApplyService seckillApplyService;
+    @Autowired private ISeckillApplyService seckillApplyService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")

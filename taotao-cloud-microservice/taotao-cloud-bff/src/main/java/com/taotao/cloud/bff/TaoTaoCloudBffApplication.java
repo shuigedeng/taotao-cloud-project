@@ -19,6 +19,7 @@ package com.taotao.cloud.bff;
 import com.taotao.boot.core.startup.StartupSpringApplication;
 import com.taotao.boot.web.annotation.TaoTaoBootApplication;
 import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
+
 // @EnableTaoTaoCloudJpa
 // @EnableTaoTaoCloudP6spy
 // @EnableTaoTaoCloudFeign
@@ -34,12 +35,11 @@ public class TaoTaoCloudBffApplication {
 
     public static void main(String[] args) {
 
-
-		new StartupSpringApplication(TaoTaoCloudBffApplication.class)
-			.setTtcBanner()
-			.setTtcProfileIfNotExists("dev")
-			.setTtcApplicationProperty("taotao-cloud-bff")
-			.setTtcAllowBeanDefinitionOverriding(true)
-			.run(args);
+        new StartupSpringApplication(TaoTaoCloudBffApplication.class)
+                .setTtcBanner()
+                .setTtcProfileIfNotExists("dev")
+                .setTtcApplicationProperty("taotao-cloud-bff")
+                .setTtcAllowBeanDefinitionOverriding(true)
+                .run(args);
     }
 }

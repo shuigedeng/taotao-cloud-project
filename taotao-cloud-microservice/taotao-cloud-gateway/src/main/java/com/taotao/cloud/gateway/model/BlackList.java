@@ -86,15 +86,31 @@ public class BlackList {
 
     @Override
     public String toString() {
-        return "BlackList{" + "id="
-                + id + ", ip='"
-                + ip + '\'' + ", requestUri='"
-                + requestUri + '\'' + ", requestMethod='"
-                + requestMethod + '\'' + ", startTime='"
-                + startTime + '\'' + ", endTime='"
-                + endTime + '\'' + ", status='"
-                + status + '\'' + ", createTime='"
-                + createTime + '\'' + '}';
+        return "BlackList{"
+                + "id="
+                + id
+                + ", ip='"
+                + ip
+                + '\''
+                + ", requestUri='"
+                + requestUri
+                + '\''
+                + ", requestMethod='"
+                + requestMethod
+                + '\''
+                + ", startTime='"
+                + startTime
+                + '\''
+                + ", endTime='"
+                + endTime
+                + '\''
+                + ", status='"
+                + status
+                + '\''
+                + ", createTime='"
+                + createTime
+                + '\''
+                + '}';
     }
 
     @Override
@@ -118,7 +134,8 @@ public class BlackList {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, ip, requestUri, requestMethod, startTime, endTime, status, createTime);
+        return Objects.hash(
+                id, ip, requestUri, requestMethod, startTime, endTime, status, createTime);
     }
 
     public Long getId() {

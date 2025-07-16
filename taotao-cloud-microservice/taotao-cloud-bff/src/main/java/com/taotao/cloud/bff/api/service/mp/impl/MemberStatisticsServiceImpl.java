@@ -22,15 +22,15 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.bff.api.util.StatisticsDateUtil;
 import com.taotao.cloud.report.api.enums.SearchTypeEnum;
 import com.taotao.cloud.report.api.model.dto.StatisticsQueryParam;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 /** 会员统计业务层实现 */
 @Service
-public class MemberStatisticsServiceImpl extends ServiceImpl<MemberStatisticsMapper, MemberStatisticsData>
+public class MemberStatisticsServiceImpl
+        extends ServiceImpl<MemberStatisticsMapper, MemberStatisticsData>
         implements MemberStatisticsService {
 
     @Override

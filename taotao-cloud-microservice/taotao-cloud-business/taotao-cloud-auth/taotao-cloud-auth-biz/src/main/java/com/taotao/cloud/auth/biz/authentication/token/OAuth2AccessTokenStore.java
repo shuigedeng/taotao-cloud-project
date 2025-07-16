@@ -17,14 +17,13 @@
 package com.taotao.cloud.auth.biz.authentication.token;
 
 import com.taotao.boot.cache.redis.repository.RedisRepository;
+import java.util.concurrent.TimeUnit;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.OAuth2RefreshToken;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AccessTokenResponse;
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
 import org.springframework.stereotype.Component;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * <p>OAuth 2.0 Endpoint 工具方法类 </p>
@@ -39,71 +38,79 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class OAuth2AccessTokenStore {
-	/**
-	 * 根据 id 查询时放入Redis中的部分 key
-	 */
-	public static final String OAUTH2_AUTHORIZATION_ID = ":oauth2_authorization:id:";
+    /**
+     * 根据 id 查询时放入Redis中的部分 key
+     */
+    public static final String OAUTH2_AUTHORIZATION_ID = ":oauth2_authorization:id:";
 
-	/**
-	 * 根据 token类型、token 查询时放入Redis中的部分 key
-	 */
-	public static final String OAUTH2_AUTHORIZATION_TOKEN_TYPE = ":oauth2_authorization:tokenType:";
+    /**
+     * 根据 token类型、token 查询时放入Redis中的部分 key
+     */
+    public static final String OAUTH2_AUTHORIZATION_TOKEN_TYPE = ":oauth2_authorization:tokenType:";
 
-	/**
-	 * 授权超时
-	 */
-	public static final long AUTHORIZATION_TIMEOUT = 300L;
+    /**
+     * 授权超时
+     */
+    public static final long AUTHORIZATION_TIMEOUT = 300L;
 
-	/**
-	 * 前缀
-	 */
-	public static final String PREFIX = "spring-authorization-server";
+    /**
+     * 前缀
+     */
+    public static final String PREFIX = "spring-authorization-server";
 
-	private final RedisRepository redisRepository;
+    private final RedisRepository redisRepository;
 
-	public OAuth2AccessTokenStore(RedisRepository redisRepository) {
-		this.redisRepository = redisRepository;
-	}
+    public OAuth2AccessTokenStore(RedisRepository redisRepository) {
+        this.redisRepository = redisRepository;
+    }
 
-	public void addToken(UserDetails userDetails, OAuth2AccessTokenResponse accessTokenResponse, long timeout, TimeUnit unit) {
-		OAuth2AccessToken accessToken = accessTokenResponse.getAccessToken();
-		if (accessToken != null) {
-			String tokenValue = accessToken.getTokenValue();
+    public void addToken(
+            UserDetails userDetails,
+            OAuth2AccessTokenResponse accessTokenResponse,
+            long timeout,
+            TimeUnit unit) {
+        OAuth2AccessToken accessToken = accessTokenResponse.getAccessToken();
+        if (accessToken != null) {
+            String tokenValue = accessToken.getTokenValue();
 
-			redisRepository.set(tokenValue, userDetails);
+            redisRepository.set(tokenValue, userDetails);
 
-			redisRepository
-				.opsForValue()
-				.set(
-					PREFIX + OAUTH2_AUTHORIZATION_TOKEN_TYPE + OAuth2TokenType.ACCESS_TOKEN.getValue() + ":"
-						+ tokenValue,
-					tokenValue,
-					timeout,
-					unit);
-		}
+            redisRepository
+                    .opsForValue()
+                    .set(
+                            PREFIX
+                                    + OAUTH2_AUTHORIZATION_TOKEN_TYPE
+                                    + OAuth2TokenType.ACCESS_TOKEN.getValue()
+                                    + ":"
+                                    + tokenValue,
+                            tokenValue,
+                            timeout,
+                            unit);
+        }
 
-		OAuth2RefreshToken refreshToken = accessTokenResponse.getRefreshToken();
-		if (refreshToken != null) {
-			String tokenValue = refreshToken.getTokenValue();
-			redisRepository
-				.opsForValue()
-				.set(
-					PREFIX + OAUTH2_AUTHORIZATION_TOKEN_TYPE + OAuth2TokenType.REFRESH_TOKEN.getValue()
-						+ ":" + tokenValue,
-					tokenValue,
-					timeout,
-					unit);
-		}
-	}
+        OAuth2RefreshToken refreshToken = accessTokenResponse.getRefreshToken();
+        if (refreshToken != null) {
+            String tokenValue = refreshToken.getTokenValue();
+            redisRepository
+                    .opsForValue()
+                    .set(
+                            PREFIX
+                                    + OAUTH2_AUTHORIZATION_TOKEN_TYPE
+                                    + OAuth2TokenType.REFRESH_TOKEN.getValue()
+                                    + ":"
+                                    + tokenValue,
+                            tokenValue,
+                            timeout,
+                            unit);
+        }
+    }
 
-	public OAuth2AccessTokenResponse freshToken(String freshToken) {
+    public OAuth2AccessTokenResponse freshToken(String freshToken) {
 
-		return null;
-	}
+        return null;
+    }
 
-
-	public String findByToken(String token) {
-		return "";
-
-	}
+    public String findByToken(String token) {
+        return "";
+    }
 }

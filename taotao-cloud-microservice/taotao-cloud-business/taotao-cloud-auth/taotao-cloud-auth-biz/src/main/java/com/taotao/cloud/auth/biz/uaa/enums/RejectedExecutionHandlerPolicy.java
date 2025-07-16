@@ -24,42 +24,42 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 @SuppressWarnings("unused")
 public enum RejectedExecutionHandlerPolicy {
-	/**
-	 * @see ThreadPoolExecutor.CallerRunsPolicy
-	 */
-	CALLER_RUNS {
-		@Override
-		public RejectedExecutionHandler getRejectedHandler() {
-			return new ThreadPoolExecutor.CallerRunsPolicy();
-		}
-	},
-	/**
-	 * @see ThreadPoolExecutor.AbortPolicy
-	 */
-	ABORT {
-		@Override
-		public RejectedExecutionHandler getRejectedHandler() {
-			return new ThreadPoolExecutor.AbortPolicy();
-		}
-	},
-	/**
-	 * @see ThreadPoolExecutor.DiscardOldestPolicy
-	 */
-	DISCARD_OLDEST {
-		@Override
-		public RejectedExecutionHandler getRejectedHandler() {
-			return new ThreadPoolExecutor.DiscardOldestPolicy();
-		}
-	},
-	/**
-	 * @see ThreadPoolExecutor.DiscardPolicy
-	 */
-	DISCARD {
-		@Override
-		public RejectedExecutionHandler getRejectedHandler() {
-			return new ThreadPoolExecutor.DiscardPolicy();
-		}
-	};
+    /**
+     * @see ThreadPoolExecutor.CallerRunsPolicy
+     */
+    CALLER_RUNS {
+        @Override
+        public RejectedExecutionHandler getRejectedHandler() {
+            return new ThreadPoolExecutor.CallerRunsPolicy();
+        }
+    },
+    /**
+     * @see ThreadPoolExecutor.AbortPolicy
+     */
+    ABORT {
+        @Override
+        public RejectedExecutionHandler getRejectedHandler() {
+            return new ThreadPoolExecutor.AbortPolicy();
+        }
+    },
+    /**
+     * @see ThreadPoolExecutor.DiscardOldestPolicy
+     */
+    DISCARD_OLDEST {
+        @Override
+        public RejectedExecutionHandler getRejectedHandler() {
+            return new ThreadPoolExecutor.DiscardOldestPolicy();
+        }
+    },
+    /**
+     * @see ThreadPoolExecutor.DiscardPolicy
+     */
+    DISCARD {
+        @Override
+        public RejectedExecutionHandler getRejectedHandler() {
+            return new ThreadPoolExecutor.DiscardPolicy();
+        }
+    };
 
-	public abstract RejectedExecutionHandler getRejectedHandler();
+    public abstract RejectedExecutionHandler getRejectedHandler();
 }

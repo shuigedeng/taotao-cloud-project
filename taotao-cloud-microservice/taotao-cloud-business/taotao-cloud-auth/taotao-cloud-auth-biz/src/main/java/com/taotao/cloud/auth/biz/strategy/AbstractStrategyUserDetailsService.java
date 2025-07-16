@@ -30,11 +30,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  */
 public abstract class AbstractStrategyUserDetailsService implements StrategyUserDetailsService {
 
-	protected TtcUser convertSysUser(SysUser sysUser, String userName) throws AuthenticationException {
-		if (ObjectUtils.isEmpty(sysUser)) {
-			throw new UsernameNotFoundException("系统用户 " + userName + " 不存在!");
-		}
+    protected TtcUser convertSysUser(SysUser sysUser, String userName)
+            throws AuthenticationException {
+        if (ObjectUtils.isEmpty(sysUser)) {
+            throw new UsernameNotFoundException("系统用户 " + userName + " 不存在!");
+        }
 
-		return UpmsHelper.convertSysUserToTtcUser(sysUser);
-	}
+        return UpmsHelper.convertSysUserToTtcUser(sysUser);
+    }
 }

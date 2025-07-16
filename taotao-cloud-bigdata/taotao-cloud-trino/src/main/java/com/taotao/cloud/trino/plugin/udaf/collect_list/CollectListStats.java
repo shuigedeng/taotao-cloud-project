@@ -130,7 +130,10 @@ public class CollectListStats {
     public Slice serialize() {
         SliceOutput builder = null;
         int requiredBytes =
-                SizeOf.SIZE_OF_INT * 3 + keyListLen * SizeOf.SIZE_OF_INT + keyByteLen + keyListLen * SizeOf.SIZE_OF_INT;
+                SizeOf.SIZE_OF_INT * 3
+                        + keyListLen * SizeOf.SIZE_OF_INT
+                        + keyByteLen
+                        + keyListLen * SizeOf.SIZE_OF_INT;
         try {
             // 序列化
             builder = Slices.allocate(requiredBytes).getOutput();
@@ -150,8 +153,14 @@ public class CollectListStats {
             }
             return builder.getUnderlyingSlice();
         } catch (Exception e) {
-            throw new RuntimeException(e + " ---- serialize err  requiredBytes = " + requiredBytes + " keyByteLen= "
-                    + keyByteLen + " keyListLen = " + keyListLen);
+            throw new RuntimeException(
+                    e
+                            + " ---- serialize err  requiredBytes = "
+                            + requiredBytes
+                            + " keyByteLen= "
+                            + keyByteLen
+                            + " keyListLen = "
+                            + keyListLen);
         }
     }
 

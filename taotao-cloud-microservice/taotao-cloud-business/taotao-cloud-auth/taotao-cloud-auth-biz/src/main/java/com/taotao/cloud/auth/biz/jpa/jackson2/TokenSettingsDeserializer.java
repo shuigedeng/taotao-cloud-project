@@ -36,13 +36,15 @@ import org.springframework.security.oauth2.server.authorization.settings.TokenSe
 public class TokenSettingsDeserializer extends JsonDeserializer<TokenSettings> {
 
     @Override
-    public TokenSettings deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
+    public TokenSettings deserialize(
+            JsonParser jsonParser, DeserializationContext deserializationContext)
             throws IOException, JacksonException {
         ObjectMapper mapper = (ObjectMapper) jsonParser.getCodec();
         JsonNode jsonNode = mapper.readTree(jsonParser);
 
         Map<String, Object> settings =
-                JsonNodeUtils.findValue(jsonNode, "settings", JsonNodeUtils.STRING_OBJECT_MAP, mapper);
+                JsonNodeUtils.findValue(
+                        jsonNode, "settings", JsonNodeUtils.STRING_OBJECT_MAP, mapper);
 
         return TokenSettings.withSettings(settings).build();
     }

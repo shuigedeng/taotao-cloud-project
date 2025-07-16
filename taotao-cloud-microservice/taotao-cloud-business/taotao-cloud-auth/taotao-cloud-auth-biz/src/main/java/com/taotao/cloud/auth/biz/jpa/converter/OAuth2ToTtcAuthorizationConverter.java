@@ -64,9 +64,10 @@ public class OAuth2ToTtcAuthorizationConverter
         entity.setId(authorization.getId());
         entity.setRegisteredClientId(authorization.getRegisteredClientId());
         entity.setPrincipalName(authorization.getPrincipalName());
-        entity.setAuthorizationGrantType(
-                authorization.getAuthorizationGrantType().getValue());
-        entity.setAuthorizedScopes(StringUtils.collectionToDelimitedString(authorization.getAuthorizedScopes(), COMMA));
+        entity.setAuthorizationGrantType(authorization.getAuthorizationGrantType().getValue());
+        entity.setAuthorizedScopes(
+                StringUtils.collectionToDelimitedString(
+                        authorization.getAuthorizedScopes(), COMMA));
         entity.setAttributes(writeMap(authorization.getAttributes()));
         entity.setState(authorization.getAttribute(OAuth2ParameterNames.STATE));
 
@@ -79,7 +80,8 @@ public class OAuth2ToTtcAuthorizationConverter
                 entity::setAuthorizationCodeExpiresAt,
                 entity::setAuthorizationCodeMetadata);
 
-        OAuth2Authorization.Token<OAuth2AccessToken> accessToken = authorization.getToken(OAuth2AccessToken.class);
+        OAuth2Authorization.Token<OAuth2AccessToken> accessToken =
+                authorization.getToken(OAuth2AccessToken.class);
         setTokenValues(
                 accessToken,
                 entity::setAccessTokenValue,
@@ -87,11 +89,13 @@ public class OAuth2ToTtcAuthorizationConverter
                 entity::setAccessTokenExpiresAt,
                 entity::setAccessTokenMetadata);
         if (accessToken != null && accessToken.getToken().getScopes() != null) {
-            entity.setAccessTokenScopes(StringUtils.collectionToCommaDelimitedString(
-                    accessToken.getToken().getScopes()));
+            entity.setAccessTokenScopes(
+                    StringUtils.collectionToCommaDelimitedString(
+                            accessToken.getToken().getScopes()));
         }
 
-        OAuth2Authorization.Token<OAuth2RefreshToken> refreshToken = authorization.getToken(OAuth2RefreshToken.class);
+        OAuth2Authorization.Token<OAuth2RefreshToken> refreshToken =
+                authorization.getToken(OAuth2RefreshToken.class);
         setTokenValues(
                 refreshToken,
                 entity::setRefreshTokenValue,
@@ -99,7 +103,8 @@ public class OAuth2ToTtcAuthorizationConverter
                 entity::setRefreshTokenExpiresAt,
                 entity::setRefreshTokenMetadata);
 
-        OAuth2Authorization.Token<OidcIdToken> oidcIdToken = authorization.getToken(OidcIdToken.class);
+        OAuth2Authorization.Token<OidcIdToken> oidcIdToken =
+                authorization.getToken(OidcIdToken.class);
         setTokenValues(
                 oidcIdToken,
                 entity::setOidcIdTokenValue,
@@ -110,7 +115,8 @@ public class OAuth2ToTtcAuthorizationConverter
             entity.setOidcIdTokenClaims(writeMap(oidcIdToken.getClaims()));
         }
 
-        OAuth2Authorization.Token<OAuth2UserCode> userCode = authorization.getToken(OAuth2UserCode.class);
+        OAuth2Authorization.Token<OAuth2UserCode> userCode =
+                authorization.getToken(OAuth2UserCode.class);
         setTokenValues(
                 userCode,
                 entity::setUserCodeValue,
@@ -118,7 +124,8 @@ public class OAuth2ToTtcAuthorizationConverter
                 entity::setUserCodeExpiresAt,
                 entity::setUserCodeMetadata);
 
-        OAuth2Authorization.Token<OAuth2DeviceCode> deviceCode = authorization.getToken(OAuth2DeviceCode.class);
+        OAuth2Authorization.Token<OAuth2DeviceCode> deviceCode =
+                authorization.getToken(OAuth2DeviceCode.class);
         setTokenValues(
                 deviceCode,
                 entity::setDeviceCodeValue,

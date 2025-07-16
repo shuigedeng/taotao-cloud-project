@@ -38,7 +38,8 @@ import org.springframework.security.oauth2.server.authorization.authentication.O
  * <p>登出成功监听 </p>
  *
  */
-public class AuthenticationFailureListener implements ApplicationListener<AbstractAuthenticationFailureEvent> {
+public class AuthenticationFailureListener
+        implements ApplicationListener<AbstractAuthenticationFailureEvent> {
 
     private static final Logger log = LoggerFactory.getLogger(AuthenticationFailureListener.class);
 
@@ -46,7 +47,8 @@ public class AuthenticationFailureListener implements ApplicationListener<Abstra
     private final OAuth2AccountStatusManager accountStatusManager;
 
     public AuthenticationFailureListener(
-            SignInFailureLimitedStampManager stampManager, OAuth2AccountStatusManager accountStatusManager) {
+            SignInFailureLimitedStampManager stampManager,
+            OAuth2AccountStatusManager accountStatusManager) {
         this.stampManager = stampManager;
         this.accountStatusManager = accountStatusManager;
     }
@@ -54,9 +56,7 @@ public class AuthenticationFailureListener implements ApplicationListener<Abstra
     @Override
     public void onApplicationEvent(AbstractAuthenticationFailureEvent event) {
 
-        log.debug(
-                " User sign in catch failure event : [{}].",
-                event.getClass().getName());
+        log.debug(" User sign in catch failure event : [{}].", event.getClass().getName());
 
         if (event instanceof AuthenticationFailureBadCredentialsEvent) {
             Authentication authentication = event.getAuthentication();
@@ -78,7 +78,8 @@ public class AuthenticationFailureListener implements ApplicationListener<Abstra
 
                 log.debug(" Toke object in failure event  is UsernamePasswordAuthenticationToken");
 
-                UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
+                UsernamePasswordAuthenticationToken token =
+                        (UsernamePasswordAuthenticationToken) authentication;
                 Object principal = token.getPrincipal();
                 if (principal instanceof String) {
                     username = (String) principal;
@@ -89,20 +90,30 @@ public class AuthenticationFailureListener implements ApplicationListener<Abstra
 
                 log.debug(" Parse the username in failure event is [{}].", username);
 
-                int maxTimes = stampManager
-                        .getAuthenticationProperties()
-                        .getSignInFailureLimited()
-                        .getMaxTimes();
-                Duration expire = stampManager
-                        .getAuthenticationProperties()
-                        .getSignInFailureLimited()
-                        .getExpire();
+                int maxTimes =
+                        stampManager
+                                .getAuthenticationProperties()
+                                .getSignInFailureLimited()
+                                .getMaxTimes();
+                Duration expire =
+                        stampManager
+                                .getAuthenticationProperties()
+                                .getSignInFailureLimited()
+                                .getExpire();
                 try {
                     int times =
-                            stampManager.counting(username, maxTimes, expire, true, "AuthenticationFailureListener");
+                            stampManager.counting(
+                                    username,
+                                    maxTimes,
+                                    expire,
+                                    true,
+                                    "AuthenticationFailureListener");
                     log.debug(" Sign in user input password error [{}] items", times);
                 } catch (MaximumLimitExceededException e) {
-                    log.warn(" User [{}] password error [{}] items, LOCK ACCOUNT!", username, maxTimes);
+                    log.warn(
+                            " User [{}] password error [{}] items, LOCK ACCOUNT!",
+                            username,
+                            maxTimes);
                     accountStatusManager.lock(username);
                 }
             }

@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.trino;
 
-
 class TaoTaoCloudTrinoApplicationTests {
 
     void contextLoads() {}

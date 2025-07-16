@@ -1,5 +1,20 @@
-package com.taotao.cloud.flink.doe.high;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.flink.doe.high;
 
 import com.taotao.cloud.flink.doe.beans.HeroBean;
 import com.taotao.cloud.flink.doe.beans.OrdersBean;
@@ -22,49 +37,53 @@ public class Function01Connect02 {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
         conf.setInteger("rest.port", 8888);
-        StreamExecutionEnvironment see = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
+        StreamExecutionEnvironment see =
+                StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
         see.setParallelism(1);
 
-        DataStreamSource<OrdersBean> ds1 = see.fromElements(
-                new OrdersBean(1, "zss", "bj", 100, 1000L),
-                new OrdersBean(2, "zss", "bj", 100, 1000L),
-                new OrdersBean(3, "zss", "bj", 100, 1000L),
-                new OrdersBean(4, "zss", "bj", 100, 1000L)
-        );
+        DataStreamSource<OrdersBean> ds1 =
+                see.fromElements(
+                        new OrdersBean(1, "zss", "bj", 100, 1000L),
+                        new OrdersBean(2, "zss", "bj", 100, 1000L),
+                        new OrdersBean(3, "zss", "bj", 100, 1000L),
+                        new OrdersBean(4, "zss", "bj", 100, 1000L));
 
-        DataStreamSource<HeroBean> ds2 = see.fromElements(
-                new HeroBean(1, "zs", 99),
-                new HeroBean(1, "zs", 99),
-                new HeroBean(1, "zs", 99),
-                new HeroBean(1, "zs", 99)
-        );
+        DataStreamSource<HeroBean> ds2 =
+                see.fromElements(
+                        new HeroBean(1, "zs", 99),
+                        new HeroBean(1, "zs", 99),
+                        new HeroBean(1, "zs", 99),
+                        new HeroBean(1, "zs", 99));
 
         ds1.connect(ds2)
-                .keyBy("city" , "name").map(new RichCoMapFunction<OrdersBean, HeroBean, String>() {
-            ValueState<String> state ;
-            String  str ;
-            @Override
-            public void open(Configuration parameters) throws Exception {
+                .keyBy("city", "name")
+                .map(
+                        new RichCoMapFunction<OrdersBean, HeroBean, String>() {
+                            ValueState<String> state;
+                            String str;
 
-               state = getRuntimeContext().getState(new ValueStateDescriptor<String>("v", String.class, "doe"));
+                            @Override
+                            public void open(Configuration parameters) throws Exception {
 
-            }
+                                state =
+                                        getRuntimeContext()
+                                                .getState(
+                                                        new ValueStateDescriptor<String>(
+                                                                "v", String.class, "doe"));
+                            }
 
-            @Override
-            public String map1(OrdersBean value) throws Exception {
-                return value.toString() + state.value();
-            }
+                            @Override
+                            public String map1(OrdersBean value) throws Exception {
+                                return value.toString() + state.value();
+                            }
 
-            @Override
-            public String map2(HeroBean value) throws Exception {
-                return value.toString()+state.value() ;
-            }
-        }).print() ;
+                            @Override
+                            public String map2(HeroBean value) throws Exception {
+                                return value.toString() + state.value();
+                            }
+                        })
+                .print();
 
-        see.execute() ;
-
-
+        see.execute();
     }
-
-
 }

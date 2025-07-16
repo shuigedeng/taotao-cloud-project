@@ -1,5 +1,20 @@
-package com.taotao.cloud.generator.entity;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.generator.entity;
 
 import com.taotao.boot.data.jpa.tenant.BaseEntity;
 import jakarta.validation.constraints.NotBlank;
@@ -7,11 +22,10 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * 代码生成业务字段表 gen_table_column
- * 
+ *
  * @author ruoyi
  */
-public class GenTableColumn extends BaseEntity
-{
+public class GenTableColumn extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /** 编号 */
@@ -69,305 +83,252 @@ public class GenTableColumn extends BaseEntity
     /** 排序 */
     private Integer sort;
 
-    public void setColumnId(Long columnId)
-    {
+    public void setColumnId(Long columnId) {
         this.columnId = columnId;
     }
 
-    public Long getColumnId()
-    {
+    public Long getColumnId() {
         return columnId;
     }
 
-    public void setTableId(Long tableId)
-    {
+    public void setTableId(Long tableId) {
         this.tableId = tableId;
     }
 
-    public Long getTableId()
-    {
+    public Long getTableId() {
         return tableId;
     }
 
-    public void setColumnName(String columnName)
-    {
+    public void setColumnName(String columnName) {
         this.columnName = columnName;
     }
 
-    public String getColumnName()
-    {
+    public String getColumnName() {
         return columnName;
     }
 
-    public void setColumnComment(String columnComment)
-    {
+    public void setColumnComment(String columnComment) {
         this.columnComment = columnComment;
     }
 
-    public String getColumnComment()
-    {
+    public String getColumnComment() {
         return columnComment;
     }
 
-    public void setColumnType(String columnType)
-    {
+    public void setColumnType(String columnType) {
         this.columnType = columnType;
     }
 
-    public String getColumnType()
-    {
+    public String getColumnType() {
         return columnType;
     }
 
-    public void setJavaType(String javaType)
-    {
+    public void setJavaType(String javaType) {
         this.javaType = javaType;
     }
 
-    public String getJavaType()
-    {
+    public String getJavaType() {
         return javaType;
     }
 
-    public void setJavaField(String javaField)
-    {
+    public void setJavaField(String javaField) {
         this.javaField = javaField;
     }
 
-    public String getJavaField()
-    {
+    public String getJavaField() {
         return javaField;
     }
 
-    public String getCapJavaField()
-    {
+    public String getCapJavaField() {
         return StringUtils.capitalize(javaField);
     }
 
-    public void setIsPk(String isPk)
-    {
+    public void setIsPk(String isPk) {
         this.isPk = isPk;
     }
 
-    public String getIsPk()
-    {
+    public String getIsPk() {
         return isPk;
     }
 
-    public boolean isPk()
-    {
+    public boolean isPk() {
         return isPk(this.isPk);
     }
 
-    public boolean isPk(String isPk)
-    {
+    public boolean isPk(String isPk) {
         return isPk != null && StringUtils.equals("1", isPk);
     }
 
-    public String getIsIncrement()
-    {
+    public String getIsIncrement() {
         return isIncrement;
     }
 
-    public void setIsIncrement(String isIncrement)
-    {
+    public void setIsIncrement(String isIncrement) {
         this.isIncrement = isIncrement;
     }
 
-    public boolean isIncrement()
-    {
+    public boolean isIncrement() {
         return isIncrement(this.isIncrement);
     }
 
-    public boolean isIncrement(String isIncrement)
-    {
+    public boolean isIncrement(String isIncrement) {
         return isIncrement != null && StringUtils.equals("1", isIncrement);
     }
 
-    public void setIsRequired(String isRequired)
-    {
+    public void setIsRequired(String isRequired) {
         this.isRequired = isRequired;
     }
 
-    public String getIsRequired()
-    {
+    public String getIsRequired() {
         return isRequired;
     }
 
-    public boolean isRequired()
-    {
+    public boolean isRequired() {
         return isRequired(this.isRequired);
     }
 
-    public boolean isRequired(String isRequired)
-    {
+    public boolean isRequired(String isRequired) {
         return isRequired != null && StringUtils.equals("1", isRequired);
     }
 
-    public void setIsInsert(String isInsert)
-    {
+    public void setIsInsert(String isInsert) {
         this.isInsert = isInsert;
     }
 
-    public String getIsInsert()
-    {
+    public String getIsInsert() {
         return isInsert;
     }
 
-    public boolean isInsert()
-    {
+    public boolean isInsert() {
         return isInsert(this.isInsert);
     }
 
-    public boolean isInsert(String isInsert)
-    {
+    public boolean isInsert(String isInsert) {
         return isInsert != null && StringUtils.equals("1", isInsert);
     }
 
-    public void setIsEdit(String isEdit)
-    {
+    public void setIsEdit(String isEdit) {
         this.isEdit = isEdit;
     }
 
-    public String getIsEdit()
-    {
+    public String getIsEdit() {
         return isEdit;
     }
 
-    public boolean isEdit()
-    {
+    public boolean isEdit() {
         return isInsert(this.isEdit);
     }
 
-    public boolean isEdit(String isEdit)
-    {
+    public boolean isEdit(String isEdit) {
         return isEdit != null && StringUtils.equals("1", isEdit);
     }
 
-    public void setIsList(String isList)
-    {
+    public void setIsList(String isList) {
         this.isList = isList;
     }
 
-    public String getIsList()
-    {
+    public String getIsList() {
         return isList;
     }
 
-    public boolean isList()
-    {
+    public boolean isList() {
         return isList(this.isList);
     }
 
-    public boolean isList(String isList)
-    {
+    public boolean isList(String isList) {
         return isList != null && StringUtils.equals("1", isList);
     }
 
-    public void setIsQuery(String isQuery)
-    {
+    public void setIsQuery(String isQuery) {
         this.isQuery = isQuery;
     }
 
-    public String getIsQuery()
-    {
+    public String getIsQuery() {
         return isQuery;
     }
 
-    public boolean isQuery()
-    {
+    public boolean isQuery() {
         return isQuery(this.isQuery);
     }
 
-    public boolean isQuery(String isQuery)
-    {
+    public boolean isQuery(String isQuery) {
         return isQuery != null && StringUtils.equals("1", isQuery);
     }
 
-    public void setQueryType(String queryType)
-    {
+    public void setQueryType(String queryType) {
         this.queryType = queryType;
     }
 
-    public String getQueryType()
-    {
+    public String getQueryType() {
         return queryType;
     }
 
-    public String getHtmlType()
-    {
+    public String getHtmlType() {
         return htmlType;
     }
 
-    public void setHtmlType(String htmlType)
-    {
+    public void setHtmlType(String htmlType) {
         this.htmlType = htmlType;
     }
 
-    public void setDictType(String dictType)
-    {
+    public void setDictType(String dictType) {
         this.dictType = dictType;
     }
 
-    public String getDictType()
-    {
+    public String getDictType() {
         return dictType;
     }
 
-    public void setSort(Integer sort)
-    {
+    public void setSort(Integer sort) {
         this.sort = sort;
     }
 
-    public Integer getSort()
-    {
+    public Integer getSort() {
         return sort;
     }
 
-    public boolean isSuperColumn()
-    {
+    public boolean isSuperColumn() {
         return isSuperColumn(this.javaField);
     }
 
-    public static boolean isSuperColumn(String javaField)
-    {
-        return StringUtils.equalsAnyIgnoreCase(javaField,
+    public static boolean isSuperColumn(String javaField) {
+        return StringUtils.equalsAnyIgnoreCase(
+                javaField,
                 // BaseEntity
-                "createBy", "createTime", "updateBy", "updateTime", "remark",
+                "createBy",
+                "createTime",
+                "updateBy",
+                "updateTime",
+                "remark",
                 // TreeEntity
-                "parentName", "parentId", "orderNum", "ancestors");
+                "parentName",
+                "parentId",
+                "orderNum",
+                "ancestors");
     }
 
-    public boolean isUsableColumn()
-    {
+    public boolean isUsableColumn() {
         return isUsableColumn(javaField);
     }
 
-    public static boolean isUsableColumn(String javaField)
-    {
+    public static boolean isUsableColumn(String javaField) {
         // isSuperColumn()中的名单用于避免生成多余Domain属性，若某些属性在生成页面时需要用到不能忽略，则放在此处白名单
         return StringUtils.equalsAnyIgnoreCase(javaField, "parentId", "orderNum", "remark");
     }
 
-    public String readConverterExp()
-    {
+    public String readConverterExp() {
         String remarks = StringUtils.substringBetween(this.columnComment, "（", "）");
         StringBuffer sb = new StringBuffer();
-        if (StringUtils.isNotEmpty(remarks))
-        {
-            for (String value : remarks.split(" "))
-            {
-                if (StringUtils.isNotEmpty(value))
-                {
+        if (StringUtils.isNotEmpty(remarks)) {
+            for (String value : remarks.split(" ")) {
+                if (StringUtils.isNotEmpty(value)) {
                     Object startStr = value.subSequence(0, 1);
                     String endStr = value.substring(1);
                     sb.append("").append(startStr).append("=").append(endStr).append(",");
                 }
             }
             return sb.deleteCharAt(sb.length() - 1).toString();
-        }
-        else
-        {
+        } else {
             return this.columnComment;
         }
     }

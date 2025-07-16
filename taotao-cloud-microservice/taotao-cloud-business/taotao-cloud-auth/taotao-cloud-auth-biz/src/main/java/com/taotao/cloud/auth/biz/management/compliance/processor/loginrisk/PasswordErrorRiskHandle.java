@@ -42,7 +42,8 @@ public class PasswordErrorRiskHandle extends AbstractLoginHandle {
     // private LoginLogService loginLogService;
 
     @Override
-    public void filterRisk(List<RiskRule> filter, Map<Integer, RiskRule> ruleMap, UserAccount account) {
+    public void filterRisk(
+            List<RiskRule> filter, Map<Integer, RiskRule> ruleMap, UserAccount account) {
         if (MapUtil.isNotEmpty(ruleMap)) {
             // 获取密码错误的规则信息
             RiskRule passwordRisk = ruleMap.get(1);

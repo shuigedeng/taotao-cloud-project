@@ -40,7 +40,11 @@ import reactor.core.publisher.Mono;
  * @since 2020/4/29 22:13
  */
 @Component
-@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "trace", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(
+        prefix = FilterProperties.PREFIX,
+        name = "trace",
+        havingValue = "true",
+        matchIfMissing = true)
 public class TraceLogFilter implements GlobalFilter, Ordered {
 
     @Value("${ttcVersion:--}")
@@ -55,14 +59,19 @@ public class TraceLogFilter implements GlobalFilter, Ordered {
         String version = headers.getFirst(CommonConstants.TTC_REQUEST_VERSION);
         String tenantId = headers.getFirst(CommonConstants.TTC_TENANT_ID);
 
-        ServerHttpRequest.Builder builder = exchange.getRequest()
-                .mutate()
-                .headers(h -> h.add(CommonConstants.TTC_TRACE_ID, traceId));
+        ServerHttpRequest.Builder builder =
+                exchange.getRequest()
+                        .mutate()
+                        .headers(h -> h.add(CommonConstants.TTC_TRACE_ID, traceId));
         if (StrUtil.isEmpty(version)) {
             builder.headers(h -> h.add(CommonConstants.TTC_REQUEST_VERSION, ttcVersion));
         }
         if (StrUtil.isEmpty(tenantId)) {
-            builder.headers(h -> h.add(CommonConstants.TTC_TENANT_ID, CommonConstants.TTC_TENANT_ID_DEFAULT));
+            builder.headers(
+                    h ->
+                            h.add(
+                                    CommonConstants.TTC_TENANT_ID,
+                                    CommonConstants.TTC_TENANT_ID_DEFAULT));
         }
         ServerHttpRequest serverHttpRequest = builder.build();
 

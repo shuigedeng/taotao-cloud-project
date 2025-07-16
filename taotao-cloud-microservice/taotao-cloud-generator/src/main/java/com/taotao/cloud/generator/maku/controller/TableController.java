@@ -1,6 +1,21 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.generator.maku.controller;
 
-import lombok.AllArgsConstructor;
 import com.taotao.cloud.generator.maku.common.page.PageResult;
 import com.taotao.cloud.generator.maku.common.query.Query;
 import com.taotao.cloud.generator.maku.common.utils.Result;
@@ -8,9 +23,9 @@ import com.taotao.cloud.generator.maku.entity.TableEntity;
 import com.taotao.cloud.generator.maku.entity.TableFieldEntity;
 import com.taotao.cloud.generator.maku.service.TableFieldService;
 import com.taotao.cloud.generator.maku.service.TableService;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 数据表管理
@@ -96,7 +111,9 @@ public class TableController {
      * @param tableNameList 表名列表
      */
     @PostMapping("import/{datasourceId}")
-    public Result<String> tableImport(@PathVariable("datasourceId") Long datasourceId, @RequestBody List<String> tableNameList) {
+    public Result<String> tableImport(
+            @PathVariable("datasourceId") Long datasourceId,
+            @RequestBody List<String> tableNameList) {
         for (String tableName : tableNameList) {
             tableService.tableImport(datasourceId, tableName);
         }
@@ -111,10 +128,11 @@ public class TableController {
      * @param tableFieldList 字段列表
      */
     @PutMapping("field/{tableId}")
-    public Result<String> updateTableField(@PathVariable("tableId") Long tableId, @RequestBody List<TableFieldEntity> tableFieldList) {
+    public Result<String> updateTableField(
+            @PathVariable("tableId") Long tableId,
+            @RequestBody List<TableFieldEntity> tableFieldList) {
         tableFieldService.updateTableField(tableId, tableFieldList);
 
         return Result.ok();
     }
-
 }

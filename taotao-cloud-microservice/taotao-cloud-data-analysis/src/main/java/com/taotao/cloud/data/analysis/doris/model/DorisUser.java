@@ -47,7 +47,9 @@ public class DorisUser {
             return false;
         }
         DorisUser user = (DorisUser) o;
-        return Objects.equals(id, user.id) && Objects.equals(sales, user.sales) && Objects.equals(month, user.month);
+        return Objects.equals(id, user.id)
+                && Objects.equals(sales, user.sales)
+                && Objects.equals(month, user.month);
     }
 
     @Override

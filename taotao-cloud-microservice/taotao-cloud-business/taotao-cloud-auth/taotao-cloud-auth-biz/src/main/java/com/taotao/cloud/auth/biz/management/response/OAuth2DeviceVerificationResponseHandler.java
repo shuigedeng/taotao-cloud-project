@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.management.response;
 
-import com.taotao.cloud.auth.biz.management.service.OAuth2DeviceService;
 import com.taotao.boot.security.spring.constants.DefaultConstants;
+import com.taotao.cloud.auth.biz.management.service.OAuth2DeviceService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -37,7 +37,8 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
  */
 public class OAuth2DeviceVerificationResponseHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    private static final Logger log = LoggerFactory.getLogger(OAuth2DeviceVerificationResponseHandler.class);
+    private static final Logger log =
+            LoggerFactory.getLogger(OAuth2DeviceVerificationResponseHandler.class);
 
     private final OAuth2DeviceService deviceService;
 
@@ -54,7 +55,9 @@ public class OAuth2DeviceVerificationResponseHandler extends SimpleUrlAuthentica
         OAuth2DeviceVerificationAuthenticationToken deviceVerificationAuthenticationToken =
                 (OAuth2DeviceVerificationAuthenticationToken) authentication;
 
-        log.info("Device verification authentication token is : [{}]", deviceVerificationAuthenticationToken);
+        log.info(
+                "Device verification authentication token is : [{}]",
+                deviceVerificationAuthenticationToken);
 
         String clientId = deviceVerificationAuthenticationToken.getClientId();
 

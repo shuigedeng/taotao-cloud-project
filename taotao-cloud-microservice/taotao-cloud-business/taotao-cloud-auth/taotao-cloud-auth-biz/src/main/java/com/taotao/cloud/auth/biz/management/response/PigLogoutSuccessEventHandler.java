@@ -55,7 +55,8 @@ public class PigLogoutSuccessEventHandler implements ApplicationListener<LogoutS
         //		logVo.setTime(endTime - startTime);
         //
         //		// 设置对应的token
-        //		WebUtils.getRequest().ifPresent(request -> logVo.setParams(request.getHeader(HttpHeaders.AUTHORIZATION)));
+        //		WebUtils.getRequest().ifPresent(request ->
+        // logVo.setParams(request.getHeader(HttpHeaders.AUTHORIZATION)));
         //
         //		// 这边设置ServiceId
         //		if (authentication instanceof PreAuthenticatedAuthenticationToken) {

@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.xxljob.core.util;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -10,14 +26,15 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class LocalCacheUtil {
 
-    private static ConcurrentMap<String, LocalCacheData> cacheRepository = new ConcurrentHashMap<String, LocalCacheData>();   // 类型建议用抽象父类，兼容性更好；
-    private static class LocalCacheData{
+    private static ConcurrentMap<String, LocalCacheData> cacheRepository =
+            new ConcurrentHashMap<String, LocalCacheData>(); // 类型建议用抽象父类，兼容性更好；
+
+    private static class LocalCacheData {
         private String key;
         private Object val;
         private long timeoutTime;
 
-        public LocalCacheData() {
-        }
+        public LocalCacheData() {}
 
         public LocalCacheData(String key, Object val, long timeoutTime) {
             this.key = key;
@@ -50,7 +67,6 @@ public class LocalCacheUtil {
         }
     }
 
-
     /**
      * set cache
      *
@@ -59,13 +75,13 @@ public class LocalCacheUtil {
      * @param cacheTime
      * @return
      */
-    public static boolean set(String key, Object val, long cacheTime){
+    public static boolean set(String key, Object val, long cacheTime) {
 
         // clean timeout cache, before set new cache (avoid cache too much)
         cleanTimeoutCache();
 
         // set new cache
-        if (key==null || key.trim().length()==0) {
+        if (key == null || key.trim().length() == 0) {
             return false;
         }
         if (val == null) {
@@ -86,8 +102,8 @@ public class LocalCacheUtil {
      * @param key
      * @return
      */
-    public static boolean remove(String key){
-        if (key==null || key.trim().length()==0) {
+    public static boolean remove(String key) {
+        if (key == null || key.trim().length() == 0) {
             return false;
         }
         cacheRepository.remove(key);
@@ -100,12 +116,13 @@ public class LocalCacheUtil {
      * @param key
      * @return
      */
-    public static Object get(String key){
-        if (key==null || key.trim().length()==0) {
+    public static Object get(String key) {
+        if (key == null || key.trim().length() == 0) {
             return null;
         }
         LocalCacheData localCacheData = cacheRepository.get(key);
-        if (localCacheData!=null && System.currentTimeMillis()<localCacheData.getTimeoutTime()) {
+        if (localCacheData != null
+                && System.currentTimeMillis() < localCacheData.getTimeoutTime()) {
             return localCacheData.getVal();
         } else {
             remove(key);
@@ -118,16 +135,16 @@ public class LocalCacheUtil {
      *
      * @return
      */
-    public static boolean cleanTimeoutCache(){
+    public static boolean cleanTimeoutCache() {
         if (!cacheRepository.keySet().isEmpty()) {
-            for (String key: cacheRepository.keySet()) {
+            for (String key : cacheRepository.keySet()) {
                 LocalCacheData localCacheData = cacheRepository.get(key);
-                if (localCacheData!=null && System.currentTimeMillis()>=localCacheData.getTimeoutTime()) {
+                if (localCacheData != null
+                        && System.currentTimeMillis() >= localCacheData.getTimeoutTime()) {
                     cacheRepository.remove(key);
                 }
             }
         }
         return true;
     }
-
 }

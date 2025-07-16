@@ -16,11 +16,11 @@
 
 package com.taotao.cloud.bff.api.controller.app;
 
-import com.taotao.cloud.bff.api.service.app.ISeckillApplyService;
 import com.taotao.boot.common.model.Result;
+import com.taotao.boot.web.request.annotation.RequestLogger;
+import com.taotao.cloud.bff.api.service.app.ISeckillApplyService;
 import com.taotao.cloud.promotion.api.model.vo.SeckillGoodsVO;
 import com.taotao.cloud.promotion.api.model.vo.SeckillTimelineVO;
-import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -41,25 +41,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/buyer/promotion/seckill")
 public class SeckillBuyerController {
 
-	/**
-	 * 秒杀活动
-	 */
-	@Autowired
-	private ISeckillApplyService seckillApplyService;
+    /**
+     * 秒杀活动
+     */
+    @Autowired private ISeckillApplyService seckillApplyService;
 
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@Operation(summary = "获取当天秒杀活动信息")
-	@GetMapping
-	public Result<List<SeckillTimelineVO>> getSeckillTime() {
-		return Result.success(seckillApplyService.getSeckillTimeline());
-	}
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+    @Operation(summary = "获取当天秒杀活动信息")
+    @GetMapping
+    public Result<List<SeckillTimelineVO>> getSeckillTime() {
+        return Result.success(seckillApplyService.getSeckillTimeline());
+    }
 
-	@RequestLogger
-	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@Operation(summary = "获取某个时刻的秒杀活动商品信息")
-	@GetMapping("/{timeline}")
-	public Result<List<SeckillGoodsVO>> getSeckillGoods(@PathVariable Integer timeline) {
-		return Result.success(seckillApplyService.getSeckillGoods(timeline));
-	}
+    @RequestLogger
+    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+    @Operation(summary = "获取某个时刻的秒杀活动商品信息")
+    @GetMapping("/{timeline}")
+    public Result<List<SeckillGoodsVO>> getSeckillGoods(@PathVariable Integer timeline) {
+        return Result.success(seckillApplyService.getSeckillGoods(timeline));
+    }
 }

@@ -1,8 +1,28 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.gateway.filter.global.rsa;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Charsets;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.common.utils.secure.RSAUtils;
+import java.net.URI;
+import java.util.Map;
+import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Publisher;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -22,24 +42,22 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.net.URI;
-import java.util.Map;
-import java.util.Objects;
-import com.taotao.boot.common.utils.log.LogUtils;
-//@Component
+// @Component
 @Slf4j
 public class ResponseEncryptFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        log.info("============================ResponseEncryptFilter start===================================");
+        log.info(
+                "============================ResponseEncryptFilter start===================================");
 
         ServerHttpRequest request = exchange.getRequest();
         URI uri = request.getURI();
         String url = uri.getPath();
 
-		HttpStatusCode statusCode = exchange.getResponse().getStatusCode();
-        if(Objects.equals(statusCode, HttpStatus.BAD_REQUEST) || Objects.equals(statusCode, HttpStatus.TOO_MANY_REQUESTS)){
+        HttpStatusCode statusCode = exchange.getResponse().getStatusCode();
+        if (Objects.equals(statusCode, HttpStatus.BAD_REQUEST)
+                || Objects.equals(statusCode, HttpStatus.TOO_MANY_REQUESTS)) {
             // 如果是特殊的请求，已处理响应内容，这里不再处理
             return chain.filter(exchange);
         }
@@ -54,7 +72,7 @@ public class ResponseEncryptFilter implements GlobalFilter, Ordered {
      * @param chain
      * @return
      */
-    private Mono<Void> modifyResponseBody(ServerWebExchange exchange, GatewayFilterChain chain)  {
+    private Mono<Void> modifyResponseBody(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpResponse originalResponse = exchange.getResponse();
         originalResponse.getHeaders().setContentType(MediaType.APPLICATION_JSON);
         DataBufferFactory bufferFactory = originalResponse.bufferFactory();
@@ -62,52 +80,65 @@ public class ResponseEncryptFilter implements GlobalFilter, Ordered {
         return chain.filter(exchange.mutate().response(response).build());
     }
 
-
     @Override
     public int getOrder() {
         return 5;
     }
-    private ServerHttpResponseDecorator buildResponse(ServerHttpResponse originalResponse, DataBufferFactory bufferFactory) {
+
+    private ServerHttpResponseDecorator buildResponse(
+            ServerHttpResponse originalResponse, DataBufferFactory bufferFactory) {
         return new ServerHttpResponseDecorator(originalResponse) {
             @Override
             public Mono<Void> writeWith(Publisher<? extends DataBuffer> body) {
                 if (getStatusCode().equals(HttpStatus.OK) && body instanceof Flux) {
                     Flux<? extends DataBuffer> fluxBody = Flux.from(body);
-                    return super.writeWith(fluxBody.buffer().map(dataBuffers -> {
-                        DataBufferFactory dataBufferFactory = new DefaultDataBufferFactory();
-                        DataBuffer join = dataBufferFactory.join(dataBuffers);
-                        byte[] content = new byte[join.readableByteCount()];
-                        join.read(content);
-                        DataBufferUtils.release(join);
-                        // 流转为字符串
-                        String responseData = new String(content, Charsets.UTF_8);
-                        LogUtils.info(responseData);
+                    return super.writeWith(
+                            fluxBody.buffer()
+                                    .map(
+                                            dataBuffers -> {
+                                                DataBufferFactory dataBufferFactory =
+                                                        new DefaultDataBufferFactory();
+                                                DataBuffer join =
+                                                        dataBufferFactory.join(dataBuffers);
+                                                byte[] content = new byte[join.readableByteCount()];
+                                                join.read(content);
+                                                DataBufferUtils.release(join);
+                                                // 流转为字符串
+                                                String responseData =
+                                                        new String(content, Charsets.UTF_8);
+                                                LogUtils.info(responseData);
 
-                        Map map = JSON.parseObject(responseData);
-                        //处理返回的数据
-                        Object encrypt = map.get("encrypt");
-                        if(encrypt!=null){
-                            log.info("加密响应数据 开始 ：{}",responseData);
-                            //加密数据
-                            responseData = RSAUtils.encrypt(responseData,RSAConstant.PUBLICK_KEY);
-                            log.info("加密响应数据 完成 ：{}",responseData);
-                        }
+                                                Map map = JSON.parseObject(responseData);
+                                                // 处理返回的数据
+                                                Object encrypt = map.get("encrypt");
+                                                if (encrypt != null) {
+                                                    log.info("加密响应数据 开始 ：{}", responseData);
+                                                    // 加密数据
+                                                    responseData =
+                                                            RSAUtils.encrypt(
+                                                                    responseData,
+                                                                    RSAConstant.PUBLICK_KEY);
+                                                    log.info("加密响应数据 完成 ：{}", responseData);
+                                                }
 
-                        byte[] uppedContent = responseData.getBytes(Charsets.UTF_8);
-                        originalResponse.getHeaders().setContentLength(uppedContent.length);
-                        return bufferFactory.wrap(uppedContent);
-                    }));
+                                                byte[] uppedContent =
+                                                        responseData.getBytes(Charsets.UTF_8);
+                                                originalResponse
+                                                        .getHeaders()
+                                                        .setContentLength(uppedContent.length);
+                                                return bufferFactory.wrap(uppedContent);
+                                            }));
                 } else {
-                    log.error("获取响应体数据 ："+getStatusCode());
+                    log.error("获取响应体数据 ：" + getStatusCode());
                 }
                 return super.writeWith(body);
             }
 
             @Override
-            public Mono<Void> writeAndFlushWith(Publisher<? extends Publisher<? extends DataBuffer>> body) {
+            public Mono<Void> writeAndFlushWith(
+                    Publisher<? extends Publisher<? extends DataBuffer>> body) {
                 return writeWith(Flux.from(body).flatMapSequential(p -> p));
             }
         };
     }
 }
-

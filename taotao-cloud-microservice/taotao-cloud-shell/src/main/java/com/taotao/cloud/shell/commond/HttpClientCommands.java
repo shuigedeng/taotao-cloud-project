@@ -1,20 +1,20 @@
-//package com.taotao.cloud.shell.commond;
+// package com.taotao.cloud.shell.commond;
 //
-//import com.taotao.boot.common.http.HttpRequest;
-//import org.dromara.hutool.json.JSONUtil;
-//import org.springframework.shell.standard.ShellCommandGroup;
-//import org.springframework.shell.standard.ShellComponent;
-//import org.springframework.shell.standard.ShellMethod;
-//import org.springframework.shell.standard.ShellOption;
+// import com.taotao.boot.common.http.HttpRequest;
+// import org.dromara.hutool.json.JSONUtil;
+// import org.springframework.shell.standard.ShellCommandGroup;
+// import org.springframework.shell.standard.ShellComponent;
+// import org.springframework.shell.standard.ShellMethod;
+// import org.springframework.shell.standard.ShellOption;
 //
-//import java.util.ArrayList;
-//import java.util.HashMap;
-//import java.util.List;
-//import java.util.Map;
+// import java.util.ArrayList;
+// import java.util.HashMap;
+// import java.util.List;
+// import java.util.Map;
 //
-//@ShellComponent
-//@ShellCommandGroup("HTTP请求")
-//public class HttpClientCommands {
+// @ShellComponent
+// @ShellCommandGroup("HTTP请求")
+// public class HttpClientCommands {
 //
 //	private String baseUrl = "";
 //	private final Map<String, String> headers = new HashMap<>();
@@ -244,4 +244,4 @@
 //
 //		return sb.toString();
 //	}
-//}
+// }

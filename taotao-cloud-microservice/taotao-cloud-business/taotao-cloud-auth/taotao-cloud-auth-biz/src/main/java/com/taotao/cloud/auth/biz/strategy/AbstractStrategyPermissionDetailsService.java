@@ -25,7 +25,8 @@ import java.util.stream.Collectors;
  *
  * @since : 2022/4/1 19:09
  */
-public abstract class AbstractStrategyPermissionDetailsService implements StrategyPermissionDetailsService {
+public abstract class AbstractStrategyPermissionDetailsService
+        implements StrategyPermissionDetailsService {
 
     protected List<TtcPermission> toEntities(List<SysPermission> permissions) {
         return permissions.stream().map(this::toEntity).collect(Collectors.toList());
@@ -33,9 +34,9 @@ public abstract class AbstractStrategyPermissionDetailsService implements Strate
 
     protected TtcPermission toEntity(SysPermission object) {
         TtcPermission ttcPermission = new TtcPermission();
-		ttcPermission.setPermissionId(object.getPermissionId());
-		ttcPermission.setPermissionCode(object.getPermissionCode());
-		ttcPermission.setPermissionName(object.getPermissionName());
+        ttcPermission.setPermissionId(object.getPermissionId());
+        ttcPermission.setPermissionCode(object.getPermissionCode());
+        ttcPermission.setPermissionName(object.getPermissionName());
         return ttcPermission;
     }
 }

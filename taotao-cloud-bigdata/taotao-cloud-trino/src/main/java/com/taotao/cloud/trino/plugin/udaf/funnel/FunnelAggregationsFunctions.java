@@ -88,7 +88,8 @@ public class FunnelAggregationsFunctions extends FunnelBase {
     }
 
     @CombineFunction
-    public static void combine(@AggregationState FunnelSliceState state1, @AggregationState FunnelSliceState state2) {
+    public static void combine(
+            @AggregationState FunnelSliceState state1, @AggregationState FunnelSliceState state2) {
         Slice slice1 = state1.getSlice();
         Slice slice2 = state2.getSlice();
         if (null == slice1) {
@@ -98,7 +99,8 @@ public class FunnelAggregationsFunctions extends FunnelBase {
             int length2 = slice2.length();
             Slice slice = Slices.allocate(length1 + length2 - COUNT_FLAG_LENGTH);
             slice.setBytes(0, slice1.getBytes());
-            slice.setBytes(length1, slice2.getBytes(), COUNT_FLAG_LENGTH, length2 - COUNT_FLAG_LENGTH);
+            slice.setBytes(
+                    length1, slice2.getBytes(), COUNT_FLAG_LENGTH, length2 - COUNT_FLAG_LENGTH);
             state1.setSlice(slice);
         }
     }

@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.flink;
 
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.api.java.tuple.Tuple2;
-import org.apache.flink.configuration.ConfigConstants;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.RestOptions;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -32,7 +32,6 @@ import org.apache.flink.streaming.api.windowing.assigners.SessionWindowTimeGapEx
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
-
 /**
  * JBatchWordCount
  *
@@ -42,60 +41,69 @@ import org.apache.flink.util.Collector;
  */
 public class JBatchWordCount {
 
-	public static void main(String[] args) throws Exception {
-		Configuration conf = new Configuration();
+    public static void main(String[] args) throws Exception {
+        Configuration conf = new Configuration();
 
-		conf.setBoolean(LOCAL_START_WEBSERVER, true);
-		conf.setInteger(RestOptions.PORT, 8050);
+        conf.setBoolean(LOCAL_START_WEBSERVER, true);
+        conf.setInteger(RestOptions.PORT, 8050);
 
-		StreamExecutionEnvironment env = StreamExecutionEnvironment
-			.createLocalEnvironmentWithWebUI(conf);
-		DataStream<String> dss = env.readTextFile("/Users/shuigedeng/spark/hello.txt");
+        StreamExecutionEnvironment env =
+                StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
+        DataStream<String> dss = env.readTextFile("/Users/shuigedeng/spark/hello.txt");
 
-		DataStream<String> dso = dss.flatMap(new FlatMapFunction<String, String>() {
-			@Override
-			public void flatMap(String value, Collector<String> out) throws Exception {
-				String[] s = value.split(" ");
-				for (String s1 : s) {
-					out.collect(s1);
-				}
-			}
-		});
+        DataStream<String> dso =
+                dss.flatMap(
+                        new FlatMapFunction<String, String>() {
+                            @Override
+                            public void flatMap(String value, Collector<String> out)
+                                    throws Exception {
+                                String[] s = value.split(" ");
+                                for (String s1 : s) {
+                                    out.collect(s1);
+                                }
+                            }
+                        });
 
+        KeyedStream<String, String> keyedBy =
+                dso.keyBy(
+                        new KeySelector<String, String>() {
+                            @Override
+                            public String getKey(String value) throws Exception {
+                                return value;
+                            }
+                        });
+        WindowedStream<String, String, TimeWindow> window =
+                keyedBy.window(
+                        EventTimeSessionWindows.withDynamicGap(
+                                new SessionWindowTimeGapExtractor<String>() {
+                                    @Override
+                                    public long extract(String s) {
+                                        return 0;
+                                    }
+                                }));
 
-		KeyedStream<String, String> keyedBy = dso.keyBy(new KeySelector<String, String>() {
-			@Override
-			public String getKey(String value) throws Exception {
-				return value;
-			}
-		});
-		WindowedStream<String, String, TimeWindow> window = keyedBy.window(EventTimeSessionWindows.withDynamicGap(new SessionWindowTimeGapExtractor<String>() {
-			@Override
-			public long extract(String s) {
-				return 0;
-			}
-		}));
+        DataStream<Tuple2<String, Integer>> dst =
+                dso.map(
+                        new MapFunction<String, Tuple2<String, Integer>>() {
+                            @Override
+                            public Tuple2<String, Integer> map(String value) throws Exception {
+                                return Tuple2.of(value, 1);
+                            }
+                        });
 
-		DataStream<Tuple2<String, Integer>> dst = dso
-			.map(new MapFunction<String, Tuple2<String, Integer>>() {
-				@Override
-				public Tuple2<String, Integer> map(String value) throws Exception {
-					return Tuple2.of(value, 1);
-				}
-			});
+        KeyedStream<Tuple2<String, Integer>, String> kst =
+                dst.keyBy(
+                        new KeySelector<Tuple2<String, Integer>, String>() {
+                            @Override
+                            public String getKey(Tuple2<String, Integer> value) throws Exception {
+                                return value.f0;
+                            }
+                        });
 
-		KeyedStream<Tuple2<String, Integer>, String> kst = dst
-			.keyBy(new KeySelector<Tuple2<String, Integer>, String>() {
-				@Override
-				public String getKey(Tuple2<String, Integer> value) throws Exception {
-					return value.f0;
-				}
-			});
+        SingleOutputStreamOperator<Tuple2<String, Integer>> sum = kst.sum(1);
 
-		SingleOutputStreamOperator<Tuple2<String, Integer>> sum = kst.sum(1);
+        sum.print();
 
-		sum.print();
-
-		env.execute("JBatchWordCount");
-	}
+        env.execute("JBatchWordCount");
+    }
 }

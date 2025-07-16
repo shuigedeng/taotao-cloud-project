@@ -1,5 +1,20 @@
-package com.taotao.cloud.flink.doe.state;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.flink.doe.state;
 
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.functions.RichMapFunction;
@@ -29,7 +44,8 @@ public class KeyedStageOrderTotal04 {
 
         Configuration conf = new Configuration();
         conf.setInteger("rest.port", 8888);
-        StreamExecutionEnvironment see = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
+        StreamExecutionEnvironment see =
+                StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
         see.setParallelism(2);
 
         // 重启策略
@@ -39,54 +55,65 @@ public class KeyedStageOrderTotal04 {
 
         DataStreamSource<String> data = see.socketTextStream("doe01", 8899);
         // city,category,money
-        SingleOutputStreamOperator<Tuple3<String,String, Double>> cityCategoryMoney = data.map(new MapFunction<String, Tuple3<String,String, Double>>() {
-            @Override
-            public Tuple3<String,String, Double> map(String value) throws Exception {
-                String[] split = value.split(",");
-                return Tuple3.of(split[0],split[1] , Double.parseDouble(split[2]));
-            }
-        });
+        SingleOutputStreamOperator<Tuple3<String, String, Double>> cityCategoryMoney =
+                data.map(
+                        new MapFunction<String, Tuple3<String, String, Double>>() {
+                            @Override
+                            public Tuple3<String, String, Double> map(String value)
+                                    throws Exception {
+                                String[] split = value.split(",");
+                                return Tuple3.of(split[0], split[1], Double.parseDouble(split[2]));
+                            }
+                        });
         // 分组
-        KeyedStream<Tuple3<String, String, Double>, String> keyed = cityCategoryMoney.keyBy(new KeySelector<Tuple3<String, String, Double>, String>() {
-            @Override
-            public String getKey(Tuple3<String, String, Double> value) throws Exception {
-                return value.f0;
-            }
-        });
-         /// 城市,类别,金额     --> 城市,类别,总金额
-        keyed.map(new RichMapFunction<Tuple3<String, String, Double>, Tuple3<String, String, Double>>() {
-            MapState<String, Double> mapState ;  // 类别,总额
-            @Override
-            public void open(Configuration parameters) throws Exception {
+        KeyedStream<Tuple3<String, String, Double>, String> keyed =
+                cityCategoryMoney.keyBy(
+                        new KeySelector<Tuple3<String, String, Double>, String>() {
+                            @Override
+                            public String getKey(Tuple3<String, String, Double> value)
+                                    throws Exception {
+                                return value.f0;
+                            }
+                        });
+        /// 城市,类别,金额     --> 城市,类别,总金额
+        keyed.map(
+                        new RichMapFunction<
+                                Tuple3<String, String, Double>, Tuple3<String, String, Double>>() {
+                            MapState<String, Double> mapState; // 类别,总额
 
-                MapStateDescriptor<String, Double> cm = new MapStateDescriptor<>("cm", TypeInformation.of(String.class), TypeInformation.of(Double.class));
-               mapState = getRuntimeContext().getMapState(cm);
+                            @Override
+                            public void open(Configuration parameters) throws Exception {
 
+                                MapStateDescriptor<String, Double> cm =
+                                        new MapStateDescriptor<>(
+                                                "cm",
+                                                TypeInformation.of(String.class),
+                                                TypeInformation.of(Double.class));
+                                mapState = getRuntimeContext().getMapState(cm);
+                            }
 
-            }
+                            @Override
+                            public Tuple3<String, String, Double> map(
+                                    Tuple3<String, String, Double> value)
+                                    throws Exception { // 北京 ,类别 , 金额
 
-            @Override
-            public Tuple3<String, String, Double> map(Tuple3<String, String, Double> value) throws Exception { // 北京 ,类别 , 金额
+                                if (value.f1.equals("X")) {
+                                    throw new RuntimeException();
+                                }
+                                Double aDouble = mapState.get(value.f1);
+                                if (aDouble != null) {
+                                    aDouble += value.f2;
+                                    mapState.put(value.f1, aDouble);
+                                } else {
+                                    mapState.put(value.f1, value.f2);
+                                }
+                                Double totalMoney = mapState.get(value.f1);
 
-                if (value.f1.equals("X")){
-                    throw  new RuntimeException() ;
-                }
-                Double aDouble = mapState.get(value.f1);
-                if(aDouble!=null){
-                    aDouble+=value.f2 ;
-                    mapState.put(value.f1 ,aDouble);
-                }else{
-                    mapState.put(value.f1 ,value.f2);
-                }
-                Double totalMoney = mapState.get(value.f1);
-
-                return Tuple3.of(value.f0 ,value.f1 , totalMoney );
-            }
-        }).print() ;
-
-
+                                return Tuple3.of(value.f0, value.f1, totalMoney);
+                            }
+                        })
+                .print();
 
         see.execute();
-
     }
 }

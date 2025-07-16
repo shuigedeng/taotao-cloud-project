@@ -50,7 +50,8 @@ public class TtcOpaqueTokenCustomizer extends AbstractTokenCustomizer
     @Override
     public void customize(OAuth2TokenClaimsContext context) {
         AbstractAuthenticationToken token = null;
-        Authentication clientAuthentication = SecurityContextHolder.getContext().getAuthentication();
+        Authentication clientAuthentication =
+                SecurityContextHolder.getContext().getAuthentication();
         if (clientAuthentication instanceof OAuth2ClientAuthenticationToken) {
             token = (OAuth2ClientAuthenticationToken) clientAuthentication;
         }

@@ -41,7 +41,8 @@ public class CorsConfiguration {
     @Bean
     @Profile({"dev"})
     public CorsWebFilter devCorsFilter() {
-        org.springframework.web.cors.CorsConfiguration config = new org.springframework.web.cors.CorsConfiguration();
+        org.springframework.web.cors.CorsConfiguration config =
+                new org.springframework.web.cors.CorsConfiguration();
         config.setAllowCredentials(true);
         config.addAllowedOriginPattern("*");
         config.addAllowedHeader("*");
@@ -49,7 +50,8 @@ public class CorsConfiguration {
         config.addAllowedMethod("*");
         // 配置前端js允许访问的自定义响应头
         config.addExposedHeader("setToken");
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(new PathPatternParser());
+        UrlBasedCorsConfigurationSource source =
+                new UrlBasedCorsConfigurationSource(new PathPatternParser());
         source.registerCorsConfiguration("/**", config);
 
         return new CorsWebFilter(source);
@@ -58,7 +60,8 @@ public class CorsConfiguration {
     @Bean
     @Profile({"test"})
     public CorsWebFilter testCorsFilter() {
-        org.springframework.web.cors.CorsConfiguration config = new org.springframework.web.cors.CorsConfiguration();
+        org.springframework.web.cors.CorsConfiguration config =
+                new org.springframework.web.cors.CorsConfiguration();
         // 是否允许携带cookie跨域
         config.setAllowCredentials(true);
         config.addAllowedOriginPattern("https://*.test.taotaocloud.top");
@@ -67,7 +70,8 @@ public class CorsConfiguration {
         config.setMaxAge(18000L);
         // 配置前端js允许访问的自定义响应头
         // config.addExposedHeader("*");
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(new PathPatternParser());
+        UrlBasedCorsConfigurationSource source =
+                new UrlBasedCorsConfigurationSource(new PathPatternParser());
         source.registerCorsConfiguration("/**", config);
 
         return new CorsWebFilter(source);

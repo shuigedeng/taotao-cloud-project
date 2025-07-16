@@ -24,8 +24,11 @@ import org.springframework.stereotype.Service;
 public class HiveUserService extends HiveJdbcBaseDaoImpl {
 
     public void testUseJdbcTemplate() {
-        getJdbcTemplate().query("select * from hive_user", rs -> {
-            LogUtils.info(rs.toString());
-        });
+        getJdbcTemplate()
+                .query(
+                        "select * from hive_user",
+                        rs -> {
+                            LogUtils.info(rs.toString());
+                        });
     }
 }

@@ -15,6 +15,7 @@
  */
 
 package com.taotao.cloud.auth.biz.controller;
+
 //
 // import com.markix.dao.UserToAuthDao;
 // import com.markix.entity.UserToAuthPO;
@@ -26,7 +27,8 @@ import lombok.experimental.*;
 // import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.security.core.context.SecurityContextHolder;
 // import org.springframework.security.oauth2.client.registration.ClientRegistration;
-// import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
+// import
+// org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 // import org.springframework.web.bind.annotation.DeleteMapping;
 // import org.springframework.web.bind.annotation.GetMapping;
 // import org.springframework.web.bind.annotation.PathVariable;
@@ -116,7 +118,8 @@ import lombok.experimental.*;
 //        while (it.hasNext()){
 //            ClientRegistration client = it.next();
 //            String appId = client.getRegistrationId();
-//            String type = ThirdPlatformType.parse(client.getProviderDetails().getAuthorizationUri()).toString();
+//            String type =
+// ThirdPlatformType.parse(client.getProviderDetails().getAuthorizationUri()).toString();
 //            OAUTH_TYPES.add(new OAuthType(appId, type));
 //        }
 //    }

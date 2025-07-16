@@ -1,5 +1,22 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.hadoop.atguigu.mapreduce.a13_yasuo;
 
+import java.io.IOException;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -9,11 +26,10 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-import java.io.IOException;
-
 public class WordCountDriver {
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
+    public static void main(String[] args)
+            throws IOException, ClassNotFoundException, InterruptedException {
 
         // 1 获取job
         Configuration conf = new Configuration();
@@ -22,7 +38,8 @@ public class WordCountDriver {
         conf.setBoolean("mapreduce.map.output.compress", true);
 
         // 设置map端输出压缩方式
-        conf.setClass("mapreduce.map.output.compress.codec", SnappyCodec.class, CompressionCodec.class);
+        conf.setClass(
+                "mapreduce.map.output.compress.codec", SnappyCodec.class, CompressionCodec.class);
 
         Job job = Job.getInstance(conf);
 
@@ -45,15 +62,13 @@ public class WordCountDriver {
         FileInputFormat.setInputPaths(job, new Path("D:\\input\\inputword"));
         FileOutputFormat.setOutputPath(job, new Path("D:\\hadoop\\output888"));
 
-
         // 设置reduce端输出压缩开启
         FileOutputFormat.setCompressOutput(job, true);
 
         // 设置压缩的方式
-//        FileOutputFormat.setOutputCompressorClass(job, BZip2Codec.class);
-//	    FileOutputFormat.setOutputCompressorClass(job, GzipCodec.class);
-	    FileOutputFormat.setOutputCompressorClass(job, DefaultCodec.class);
-
+        //        FileOutputFormat.setOutputCompressorClass(job, BZip2Codec.class);
+        //	    FileOutputFormat.setOutputCompressorClass(job, GzipCodec.class);
+        FileOutputFormat.setOutputCompressorClass(job, DefaultCodec.class);
 
         // 7 提交job
         boolean result = job.waitForCompletion(true);

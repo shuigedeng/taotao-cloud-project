@@ -66,7 +66,8 @@ public class TtcRegisteredClientService {
      * @since 2023-07-10 17:10:23
      */
     public Optional<TtcRegisteredClient> findByClientId(String clientId) {
-        Optional<TtcRegisteredClient> result = this.registeredClientRepository.findByClientId(clientId);
+        Optional<TtcRegisteredClient> result =
+                this.registeredClientRepository.findByClientId(clientId);
         log.info("TtcRegisteredClient Service findByClientId.");
         return result;
     }

@@ -28,7 +28,8 @@ public class MultiReaderService2 implements ItemReader<String> {
 
     @Override
     public String read() throws Exception {
-        if (MultiProcessorService1.message != null && count < MultiProcessorService1.message.length) {
+        if (MultiProcessorService1.message != null
+                && count < MultiProcessorService1.message.length) {
             return MultiProcessorService1.message[count++];
         }
         count = 0;

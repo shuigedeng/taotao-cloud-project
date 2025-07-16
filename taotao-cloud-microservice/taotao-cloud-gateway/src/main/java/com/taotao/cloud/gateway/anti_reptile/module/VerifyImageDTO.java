@@ -68,10 +68,19 @@ public class VerifyImageDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "VerifyImageDTO{" + "verifyId='"
-                + verifyId + '\'' + ", verifyType='"
-                + verifyType + '\'' + ", verifyImgStr='"
-                + verifyImgStr + '\'' + ", result='"
-                + result + '\'' + '}';
+        return "VerifyImageDTO{"
+                + "verifyId='"
+                + verifyId
+                + '\''
+                + ", verifyType='"
+                + verifyType
+                + '\''
+                + ", verifyImgStr='"
+                + verifyImgStr
+                + '\''
+                + ", result='"
+                + result
+                + '\''
+                + '}';
     }
 }

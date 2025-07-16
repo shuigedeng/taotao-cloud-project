@@ -34,11 +34,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyEventListenerimpl extends DealCanalEventListener {
 
-	@Autowired
-	public MyEventListenerimpl(
-		@Qualifier("realInsertOptoin") InsertOption insertOption,
-		@Qualifier("realDeleteOption") DeleteOption deleteOption,
-		@Qualifier("realUpdateOption") UpdateOption updateOption) {
-		super(insertOption, deleteOption, updateOption);
-	}
+    @Autowired
+    public MyEventListenerimpl(
+            @Qualifier("realInsertOptoin") InsertOption insertOption,
+            @Qualifier("realDeleteOption") DeleteOption deleteOption,
+            @Qualifier("realUpdateOption") UpdateOption updateOption) {
+        super(insertOption, deleteOption, updateOption);
+    }
 }

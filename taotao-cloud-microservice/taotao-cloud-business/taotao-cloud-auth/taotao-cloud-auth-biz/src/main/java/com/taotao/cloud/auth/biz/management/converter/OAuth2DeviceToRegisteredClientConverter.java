@@ -25,4 +25,5 @@ import com.taotao.cloud.auth.biz.management.entity.OAuth2Device;
  *
  * @since : 2023/5/21 19:04
  */
-public class OAuth2DeviceToRegisteredClientConverter extends AbstractOAuth2RegisteredClientConverter<OAuth2Device> {}
+public class OAuth2DeviceToRegisteredClientConverter
+        extends AbstractOAuth2RegisteredClientConverter<OAuth2Device> {}

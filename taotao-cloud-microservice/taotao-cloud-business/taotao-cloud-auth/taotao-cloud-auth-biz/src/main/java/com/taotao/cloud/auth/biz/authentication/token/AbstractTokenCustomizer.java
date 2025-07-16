@@ -18,6 +18,9 @@ package com.taotao.cloud.auth.biz.authentication.token;
 
 import com.taotao.boot.security.spring.constants.BaseConstants;
 import com.taotao.boot.security.spring.core.userdetails.TtcUser;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,10 +28,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2AccessTokenAuthenticationToken;
-
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * <p>TokenCustomizer 通用处理 </p>
@@ -48,7 +47,9 @@ public abstract class AbstractTokenCustomizer {
      * @since 2023-07-10 17:25:30
      */
     protected void appendAll(
-            Map<String, Object> attributes, Authentication authentication, Set<String> authorizedScopes) {
+            Map<String, Object> attributes,
+            Authentication authentication,
+            Set<String> authorizedScopes) {
         appendAuthorities(attributes, authentication);
         appendCommons(attributes, authentication, authorizedScopes);
     }
@@ -60,11 +61,13 @@ public abstract class AbstractTokenCustomizer {
      * @param authentication 身份验证
      * @since 2023-07-10 17:25:31
      */
-    protected void appendAuthorities(Map<String, Object> attributes, Authentication authentication) {
+    protected void appendAuthorities(
+            Map<String, Object> attributes, Authentication authentication) {
         if (CollectionUtils.isNotEmpty(authentication.getAuthorities())) {
-            Set<String> authorities = authentication.getAuthorities().stream()
-                    .map(GrantedAuthority::getAuthority)
-                    .collect(Collectors.toSet());
+            Set<String> authorities =
+                    authentication.getAuthorities().stream()
+                            .map(GrantedAuthority::getAuthority)
+                            .collect(Collectors.toSet());
             attributes.put(BaseConstants.AUTHORITIES, authorities);
         }
     }
@@ -78,7 +81,9 @@ public abstract class AbstractTokenCustomizer {
      * @since 2023-07-10 17:25:31
      */
     protected void appendCommons(
-            Map<String, Object> attributes, Authentication authentication, Set<String> authorizedScopes) {
+            Map<String, Object> attributes,
+            Authentication authentication,
+            Set<String> authorizedScopes) {
 
         if (CollectionUtils.isNotEmpty(authorizedScopes)) {
             attributes.put(OAuth2ParameterNames.SCOPE, authorizedScopes);

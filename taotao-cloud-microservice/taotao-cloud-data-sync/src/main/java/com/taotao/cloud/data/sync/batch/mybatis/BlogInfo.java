@@ -31,12 +31,22 @@ public class BlogInfo {
 
     @Override
     public String toString() {
-        return "BlogInfo{" + "id="
-                + id + ", blogAuthor='"
-                + blogAuthor + '\'' + ", blogUrl='"
-                + blogUrl + '\'' + ", blogTitle='"
-                + blogTitle + '\'' + ", blogItem='"
-                + blogItem + '\'' + '}';
+        return "BlogInfo{"
+                + "id="
+                + id
+                + ", blogAuthor='"
+                + blogAuthor
+                + '\''
+                + ", blogUrl='"
+                + blogUrl
+                + '\''
+                + ", blogTitle='"
+                + blogTitle
+                + '\''
+                + ", blogItem='"
+                + blogItem
+                + '\''
+                + '}';
     }
 
     public Integer getId() {

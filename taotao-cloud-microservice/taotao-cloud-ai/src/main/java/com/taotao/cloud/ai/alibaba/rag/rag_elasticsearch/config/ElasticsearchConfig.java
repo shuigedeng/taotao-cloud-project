@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.ai.alibaba.rag.rag_elasticsearch.config;
 
 import org.apache.http.HttpHost;
@@ -27,21 +43,23 @@ public class ElasticsearchConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(ElasticsearchConfig.class);
 
-
     @Value("${spring.elasticsearch.uris}")
     private String url;
+
     @Value("${spring.elasticsearch.username}")
     private String username;
+
     @Value("${spring.elasticsearch.password}")
     private String password;
 
     @Value("${spring.ai.vectorstore.elasticsearch.index-name}")
     private String indexName;
+
     @Value("${spring.ai.vectorstore.elasticsearch.similarity}")
     private SimilarityFunction similarityFunction;
+
     @Value("${spring.ai.vectorstore.elasticsearch.dimensions}")
     private int dimensions;
-
 
     @Bean
     public RestClient restClient() {
@@ -55,34 +73,36 @@ public class ElasticsearchConfig {
 
         // 创建凭证提供者
         CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
-        credentialsProvider.setCredentials(AuthScope.ANY, 
-            new UsernamePasswordCredentials(username, password));
+        credentialsProvider.setCredentials(
+                AuthScope.ANY, new UsernamePasswordCredentials(username, password));
 
         logger.info("create elasticsearch rest client");
         // 构建RestClient
         return RestClient.builder(new HttpHost(host, port, protocol))
-                .setHttpClientConfigCallback(httpClientBuilder -> {
-                    httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
-                    return httpClientBuilder;
-                })
+                .setHttpClientConfigCallback(
+                        httpClientBuilder -> {
+                            httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
+                            return httpClientBuilder;
+                        })
                 .build();
     }
 
     @Bean
     @Qualifier("elasticsearchVectorStore")
-    public ElasticsearchVectorStore vectorStore(RestClient restClient, EmbeddingModel embeddingModel) {
+    public ElasticsearchVectorStore vectorStore(
+            RestClient restClient, EmbeddingModel embeddingModel) {
         logger.info("create elasticsearch vector store");
 
         ElasticsearchVectorStoreOptions options = new ElasticsearchVectorStoreOptions();
-        options.setIndexName(indexName);    // Optional: defaults to "spring-ai-document-index"
-        options.setSimilarity(similarityFunction);           // Optional: defaults to COSINE
-        options.setDimensions(dimensions);             // Optional: defaults to model dimensions or 1536
+        options.setIndexName(indexName); // Optional: defaults to "spring-ai-document-index"
+        options.setSimilarity(similarityFunction); // Optional: defaults to COSINE
+        options.setDimensions(dimensions); // Optional: defaults to model dimensions or 1536
 
         return ElasticsearchVectorStore.builder(restClient, embeddingModel)
-                .options(options)                     // Optional: use custom options
-                .initializeSchema(true)               // Optional: defaults to false
-                .batchingStrategy(new TokenCountBatchingStrategy())// Optional: defaults to TokenCountBatchingStrategy
+                .options(options) // Optional: use custom options
+                .initializeSchema(true) // Optional: defaults to false
+                .batchingStrategy(new TokenCountBatchingStrategy()) // Optional: defaults to
+                // TokenCountBatchingStrategy
                 .build();
     }
-
 }

@@ -20,7 +20,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.MissingNode;
-
 import java.time.Instant;
 import java.util.Map;
 import java.util.Set;
@@ -54,12 +53,17 @@ public class JsonNodeUtils {
     }
 
     public static <T> T findValue(
-            JsonNode jsonNode, String fieldName, TypeReference<T> valueTypeReference, ObjectMapper mapper) {
+            JsonNode jsonNode,
+            String fieldName,
+            TypeReference<T> valueTypeReference,
+            ObjectMapper mapper) {
         if (jsonNode == null) {
             return null;
         }
         JsonNode value = jsonNode.findValue(fieldName);
-        return (value != null && value.isContainerNode()) ? mapper.convertValue(value, valueTypeReference) : null;
+        return (value != null && value.isContainerNode())
+                ? mapper.convertValue(value, valueTypeReference)
+                : null;
     }
 
     public static JsonNode findObjectNode(JsonNode jsonNode, String fieldName) {
@@ -70,7 +74,7 @@ public class JsonNodeUtils {
         return (value != null && value.isObject()) ? value : null;
     }
 
-	public static JsonNode readJsonNode(JsonNode jsonNode, String field) {
-		return jsonNode.has(field) ? jsonNode.get(field) : MissingNode.getInstance();
-	}
+    public static JsonNode readJsonNode(JsonNode jsonNode, String field) {
+        return jsonNode.has(field) ? jsonNode.get(field) : MissingNode.getInstance();
+    }
 }

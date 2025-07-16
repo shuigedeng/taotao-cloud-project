@@ -20,10 +20,8 @@ import com.alibaba.fastjson.JSON;
 import com.taotao.boot.common.constant.CommonConstants;
 import com.taotao.boot.security.spring.core.userdetails.TtcUser;
 import org.dromara.hutool.core.collection.CollUtil;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.server.WebFilterExchange;
 import org.springframework.security.web.server.authentication.ServerAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -40,27 +38,32 @@ import reactor.core.publisher.Mono;
  * @since 2020/4/29 22:10
  */
 @Component
-public class GatewayServerAuthenticationSuccessHandler implements ServerAuthenticationSuccessHandler {
+public class GatewayServerAuthenticationSuccessHandler
+        implements ServerAuthenticationSuccessHandler {
 
     @Override
-    public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange, Authentication authentication) {
-//		UserDetails user = (UserDetails) authentication.getPrincipal();
-//
-//		Map<String, Object> tokenInfo = new HashMap<>();
-//		tokenInfo.put("USER_NAME", user.getUsername());
-//		tokenInfo.put("AUTHORITIES", user.getAuthorities());
-//
-//		ServerHttpResponse response = exchange.getExchange().getResponse();
-//		exchange.getExchange().getRequest().mutate().header("X-AUTHENTICATION-TOKEN", JSONObject.toJSONString(tokenInfo));
-//
-//		ResponseEntity<Map<String, Object>> responseEntity = new ResponseEntity<>(tokenInfo, HttpStatus.OK);
-//		return response.writeWith(Mono.just(response.bufferFactory().wrap(JSON.toJSONBytes(responseEntity))));
+    public Mono<Void> onAuthenticationSuccess(
+            WebFilterExchange webFilterExchange, Authentication authentication) {
+        //		UserDetails user = (UserDetails) authentication.getPrincipal();
+        //
+        //		Map<String, Object> tokenInfo = new HashMap<>();
+        //		tokenInfo.put("USER_NAME", user.getUsername());
+        //		tokenInfo.put("AUTHORITIES", user.getAuthorities());
+        //
+        //		ServerHttpResponse response = exchange.getExchange().getResponse();
+        //		exchange.getExchange().getRequest().mutate().header("X-AUTHENTICATION-TOKEN",
+        // JSONObject.toJSONString(tokenInfo));
+        //
+        //		ResponseEntity<Map<String, Object>> responseEntity = new ResponseEntity<>(tokenInfo,
+        // HttpStatus.OK);
+        //		return
+        // response.writeWith(Mono.just(response.bufferFactory().wrap(JSON.toJSONBytes(responseEntity))));
 
         MultiValueMap<String, String> headerValues = new LinkedMultiValueMap<>(4);
         Object principal = authentication.getPrincipal();
 
         if (principal instanceof TtcUser) {
-			TtcUser user = (TtcUser) authentication.getPrincipal();
+            TtcUser user = (TtcUser) authentication.getPrincipal();
             headerValues.add(CommonConstants.TTC_USER_ID_HEADER, String.valueOf(user.getUserId()));
             headerValues.add(CommonConstants.TTC_USER_HEADER, JSON.toJSONString(user));
             headerValues.add(CommonConstants.TTC_USER_NAME_HEADER, user.getUsername());
@@ -74,10 +77,8 @@ public class GatewayServerAuthenticationSuccessHandler implements ServerAuthenti
                 CollUtil.join(authentication.getAuthorities(), ","));
 
         ServerWebExchange exchange = webFilterExchange.getExchange();
-        ServerHttpRequest serverHttpRequest = exchange.getRequest()
-                .mutate()
-                .headers(h -> h.addAll(headerValues))
-                .build();
+        ServerHttpRequest serverHttpRequest =
+                exchange.getRequest().mutate().headers(h -> h.addAll(headerValues)).build();
 
         ServerWebExchange build = exchange.mutate().request(serverHttpRequest).build();
         return webFilterExchange.getChain().filter(build);

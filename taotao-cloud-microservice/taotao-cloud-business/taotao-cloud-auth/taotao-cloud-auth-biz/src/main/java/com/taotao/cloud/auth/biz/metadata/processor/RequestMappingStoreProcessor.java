@@ -36,7 +36,8 @@ public class RequestMappingStoreProcessor {
     private final SecurityMetadataDistributeProcessor securityMetadataDistributeProcessor;
 
     @Autowired
-    public RequestMappingStoreProcessor(SecurityMetadataDistributeProcessor securityMetadataDistributeProcessor) {
+    public RequestMappingStoreProcessor(
+            SecurityMetadataDistributeProcessor securityMetadataDistributeProcessor) {
         this.securityMetadataDistributeProcessor = securityMetadataDistributeProcessor;
     }
 

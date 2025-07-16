@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.flink.ttc.aggreagte;
 
 import com.taotao.cloud.flink.ttc.bean.WaterSensor;
@@ -19,23 +35,22 @@ public class ReduceDemo {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
+        DataStreamSource<WaterSensor> sensorDS =
+                env.fromElements(
+                        new WaterSensor("s1", 1L, 1),
+                        new WaterSensor("s1", 11L, 11),
+                        new WaterSensor("s1", 21L, 21),
+                        new WaterSensor("s2", 2L, 2),
+                        new WaterSensor("s3", 3L, 3));
 
-        DataStreamSource<WaterSensor> sensorDS = env.fromElements(
-                new WaterSensor("s1", 1L, 1),
-                new WaterSensor("s1", 11L, 11),
-                new WaterSensor("s1", 21L, 21),
-                new WaterSensor("s2", 2L, 2),
-                new WaterSensor("s3", 3L, 3)
-        );
-
-
-        KeyedStream<WaterSensor, String> sensorKS = sensorDS
-                .keyBy(new KeySelector<WaterSensor, String>() {
-                    @Override
-                    public String getKey(WaterSensor value) throws Exception {
-                        return value.getId();
-                    }
-                });
+        KeyedStream<WaterSensor, String> sensorKS =
+                sensorDS.keyBy(
+                        new KeySelector<WaterSensor, String>() {
+                            @Override
+                            public String getKey(WaterSensor value) throws Exception {
+                                return value.getId();
+                            }
+                        });
 
         /**
          * TODO reduce:
@@ -46,20 +61,20 @@ public class ReduceDemo {
          *     value1： 之前的计算结果，存状态
          *     value2： 现在来的数据
          */
-        SingleOutputStreamOperator<WaterSensor> reduce = sensorKS.reduce(new ReduceFunction<WaterSensor>() {
-            @Override
-            public WaterSensor reduce(WaterSensor value1, WaterSensor value2) throws Exception {
-                System.out.println("value1=" + value1);
-                System.out.println("value2=" + value2);
-                return new WaterSensor(value1.id, value2.ts, value1.vc + value2.vc);
-            }
-        });
+        SingleOutputStreamOperator<WaterSensor> reduce =
+                sensorKS.reduce(
+                        new ReduceFunction<WaterSensor>() {
+                            @Override
+                            public WaterSensor reduce(WaterSensor value1, WaterSensor value2)
+                                    throws Exception {
+                                System.out.println("value1=" + value1);
+                                System.out.println("value2=" + value2);
+                                return new WaterSensor(value1.id, value2.ts, value1.vc + value2.vc);
+                            }
+                        });
 
         reduce.print();
 
-
         env.execute();
     }
-
-
 }

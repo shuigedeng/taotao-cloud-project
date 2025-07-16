@@ -16,14 +16,14 @@
 
 package com.taotao.cloud.auth.biz.authentication.processor;
 
-import com.taotao.cloud.auth.biz.exception.SessionInvalidException;
-import com.taotao.cloud.auth.biz.exception.StampHasExpiredException;
-import com.taotao.cloud.auth.biz.management.entity.SecretKey;
 import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.boot.captcha.support.core.definition.AbstractRenderer;
 import com.taotao.boot.captcha.support.core.definition.domain.Metadata;
 import com.taotao.boot.captcha.support.core.dto.Captcha;
 import com.taotao.boot.captcha.support.core.dto.Verification;
+import com.taotao.cloud.auth.biz.exception.SessionInvalidException;
+import com.taotao.cloud.auth.biz.exception.StampHasExpiredException;
+import com.taotao.cloud.auth.biz.management.entity.SecretKey;
 import java.time.Duration;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -164,7 +164,8 @@ public class HttpCryptoProcessor extends AbstractRenderer {
     }
 
     private Duration getExpire(Duration accessTokenValiditySeconds) {
-        if (ObjectUtils.isEmpty(accessTokenValiditySeconds) || accessTokenValiditySeconds.isZero()) {
+        if (ObjectUtils.isEmpty(accessTokenValiditySeconds)
+                || accessTokenValiditySeconds.isZero()) {
             return Duration.ofHours(2L);
         } else {
             return accessTokenValiditySeconds;
@@ -207,7 +208,8 @@ public class HttpCryptoProcessor extends AbstractRenderer {
      */
     public String exchange(String identity, String confidential) {
         SecretKey secretKey = getSecretKey(identity);
-        String frontendPublicKey = decryptFrontendPublicKey(confidential, secretKey.getPrivateKey());
+        String frontendPublicKey =
+                decryptFrontendPublicKey(confidential, secretKey.getPrivateKey());
         return encryptBackendKey(secretKey.getSymmetricKey(), frontendPublicKey);
     }
 

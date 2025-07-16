@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.flink.atguigu.apitest.beans;
 
+package com.taotao.cloud.flink.atguigu.apitest.beans;
 
 // 传感器温度读数的数据类型
 public class SensorReading {
@@ -23,8 +23,7 @@ public class SensorReading {
     private Long timestamp;
     private Double temperature;
 
-    public SensorReading() {
-    }
+    public SensorReading() {}
 
     public SensorReading(String id, Long timestamp, Double temperature) {
         this.id = id;
@@ -58,10 +57,14 @@ public class SensorReading {
 
     @Override
     public String toString() {
-        return "SensorReading{" +
-                "id='" + id + '\'' +
-                ", timestamp=" + timestamp +
-                ", temperature=" + temperature +
-                '}';
+        return "SensorReading{"
+                + "id='"
+                + id
+                + '\''
+                + ", timestamp="
+                + timestamp
+                + ", temperature="
+                + temperature
+                + '}';
     }
 }

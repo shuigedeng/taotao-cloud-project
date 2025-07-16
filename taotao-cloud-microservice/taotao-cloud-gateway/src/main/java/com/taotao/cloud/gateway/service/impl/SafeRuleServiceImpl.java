@@ -47,86 +47,85 @@ import reactor.core.publisher.Mono;
 @Service
 public class SafeRuleServiceImpl implements ISafeRuleService {
 
-	private final AntPathMatcher antPathMatcher = new AntPathMatcher();
+    private final AntPathMatcher antPathMatcher = new AntPathMatcher();
 
-	private final IRuleCacheService ruleCacheService;
+    private final IRuleCacheService ruleCacheService;
 
-	public SafeRuleServiceImpl(IRuleCacheService ruleCacheService) {
-		this.ruleCacheService = ruleCacheService;
-	}
+    public SafeRuleServiceImpl(IRuleCacheService ruleCacheService) {
+        this.ruleCacheService = ruleCacheService;
+    }
 
-	@Override
-	public Mono<Void> filterBlackList(ServerWebExchange exchange) {
-		Stopwatch stopwatch = Stopwatch.createStarted();
-		ServerHttpRequest request = exchange.getRequest();
-		ServerHttpResponse response = exchange.getResponse();
+    @Override
+    public Mono<Void> filterBlackList(ServerWebExchange exchange) {
+        Stopwatch stopwatch = Stopwatch.createStarted();
+        ServerHttpRequest request = exchange.getRequest();
+        ServerHttpResponse response = exchange.getResponse();
 
-		try {
-			URI originUri = getOriginRequestUri(exchange);
-			String requestIp = RequestUtils.getRemoteAddr(request);
-			String requestMethod = request.getMethod().name();
-			AtomicBoolean forbid = new AtomicBoolean(false);
-			// 从缓存中获取黑名单信息
-			Set<Object> blackLists = ruleCacheService.getBlackList(requestIp);
-			blackLists.addAll(ruleCacheService.getBlackList());
-			// 检查是否在黑名单中
-			checkBlackLists(forbid, blackLists, originUri, requestMethod);
-			LogUtils.debug("黑名单检查完成 - {}", stopwatch.stop());
-			if (forbid.get()) {
-				LogUtils.info("属于黑名单地址 - {}", originUri.getPath());
-				return ResponseUtils.fail(exchange, "已列入黑名单，访问受限");
-			}
-		}
-		catch (Exception e) {
-			LogUtils.error("黑名单检查异常: {} - {}", e.getMessage(), stopwatch.stop());
-		}
-		return null;
-	}
+        try {
+            URI originUri = getOriginRequestUri(exchange);
+            String requestIp = RequestUtils.getRemoteAddr(request);
+            String requestMethod = request.getMethod().name();
+            AtomicBoolean forbid = new AtomicBoolean(false);
+            // 从缓存中获取黑名单信息
+            Set<Object> blackLists = ruleCacheService.getBlackList(requestIp);
+            blackLists.addAll(ruleCacheService.getBlackList());
+            // 检查是否在黑名单中
+            checkBlackLists(forbid, blackLists, originUri, requestMethod);
+            LogUtils.debug("黑名单检查完成 - {}", stopwatch.stop());
+            if (forbid.get()) {
+                LogUtils.info("属于黑名单地址 - {}", originUri.getPath());
+                return ResponseUtils.fail(exchange, "已列入黑名单，访问受限");
+            }
+        } catch (Exception e) {
+            LogUtils.error("黑名单检查异常: {} - {}", e.getMessage(), stopwatch.stop());
+        }
+        return null;
+    }
 
-	/**
-	 * 获取网关请求URI
-	 *
-	 * @param exchange ServerWebExchange
-	 * @return URI
-	 */
-	private URI getOriginRequestUri(ServerWebExchange exchange) {
-		return exchange.getRequest().getURI();
-	}
+    /**
+     * 获取网关请求URI
+     *
+     * @param exchange ServerWebExchange
+     * @return URI
+     */
+    private URI getOriginRequestUri(ServerWebExchange exchange) {
+        return exchange.getRequest().getURI();
+    }
 
-	/**
-	 * 检查是否满足黑名单的条件
-	 *
-	 * @param forbid        是否黑名单判断
-	 * @param blackLists    黑名列表
-	 * @param uri           资源
-	 * @param requestMethod 请求方法
-	 */
-	private void checkBlackLists(AtomicBoolean forbid, Set<Object> blackLists, URI uri,
-		String requestMethod) {
-		for (Object bl : blackLists) {
-			BlackList blackList = JSONObject.parseObject(bl.toString(), BlackList.class);
-			if (antPathMatcher.match(blackList.getRequestUri(), uri.getPath())
-				&& RuleConstant.BLACKLIST_OPEN.equals(blackList.getStatus())) {
-				if (RuleConstant.ALL.equalsIgnoreCase(blackList.getRequestMethod())
-					|| StringUtils.equalsIgnoreCase(requestMethod, blackList.getRequestMethod())) {
-					if (StringUtil.isNotBlank(blackList.getStartTime())
-						&& StringUtil.isNotBlank(blackList.getEndTime())) {
-						if (DateUtils.between(
-							DateUtils.parseLocalTime(blackList.getStartTime(),
-								CommonConstants.DATETIME_FORMAT),
-							DateUtils.parseLocalTime(blackList.getEndTime(),
-								CommonConstants.DATETIME_FORMAT))) {
-							forbid.set(Boolean.TRUE);
-						}
-					}
-					else {
-						forbid.set(Boolean.TRUE);
-					}
-				}
-			}
-			if (forbid.get()) {
-				break;
-			}
-		}
-	}
+    /**
+     * 检查是否满足黑名单的条件
+     *
+     * @param forbid        是否黑名单判断
+     * @param blackLists    黑名列表
+     * @param uri           资源
+     * @param requestMethod 请求方法
+     */
+    private void checkBlackLists(
+            AtomicBoolean forbid, Set<Object> blackLists, URI uri, String requestMethod) {
+        for (Object bl : blackLists) {
+            BlackList blackList = JSONObject.parseObject(bl.toString(), BlackList.class);
+            if (antPathMatcher.match(blackList.getRequestUri(), uri.getPath())
+                    && RuleConstant.BLACKLIST_OPEN.equals(blackList.getStatus())) {
+                if (RuleConstant.ALL.equalsIgnoreCase(blackList.getRequestMethod())
+                        || StringUtils.equalsIgnoreCase(
+                                requestMethod, blackList.getRequestMethod())) {
+                    if (StringUtil.isNotBlank(blackList.getStartTime())
+                            && StringUtil.isNotBlank(blackList.getEndTime())) {
+                        if (DateUtils.between(
+                                DateUtils.parseLocalTime(
+                                        blackList.getStartTime(), CommonConstants.DATETIME_FORMAT),
+                                DateUtils.parseLocalTime(
+                                        blackList.getEndTime(), CommonConstants.DATETIME_FORMAT))) {
+                            forbid.set(Boolean.TRUE);
+                        }
+                    } else {
+                        forbid.set(Boolean.TRUE);
+                    }
+                }
+            }
+            if (forbid.get()) {
+                break;
+            }
+        }
+    }
 }

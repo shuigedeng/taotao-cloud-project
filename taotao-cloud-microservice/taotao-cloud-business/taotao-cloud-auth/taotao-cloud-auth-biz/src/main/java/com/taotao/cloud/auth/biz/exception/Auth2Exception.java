@@ -25,11 +25,9 @@ import org.springframework.security.core.AuthenticationException;
  */
 public class Auth2Exception extends AuthenticationException {
 
-    @Getter
-    private final ErrorCodeEnum errorCodeEnum;
+    @Getter private final ErrorCodeEnum errorCodeEnum;
 
-    @Getter
-    private final Object data;
+    @Getter private final Object data;
 
     public Auth2Exception(ErrorCodeEnum errorCodeEnum, Object data) {
         super(errorCodeEnum.getMsg());

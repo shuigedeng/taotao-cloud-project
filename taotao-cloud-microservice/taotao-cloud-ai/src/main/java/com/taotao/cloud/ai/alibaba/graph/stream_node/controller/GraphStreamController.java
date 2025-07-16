@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.ai.alibaba.graph.stream_node.controller;
 
 import com.alibaba.cloud.ai.graph.CompiledGraph;
@@ -8,6 +24,8 @@ import com.alibaba.cloud.ai.graph.async.AsyncGenerator;
 import com.alibaba.cloud.ai.graph.exception.GraphRunnerException;
 import com.alibaba.cloud.ai.graph.exception.GraphStateException;
 import com.spring.ai.tutorial.graph.stream.controller.GraphProcess.GraphProcess;
+import java.util.HashMap;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,9 +37,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Sinks;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author yingzi
@@ -35,14 +50,20 @@ public class GraphStreamController {
 
     private final CompiledGraph compiledGraph;
 
-    public GraphStreamController(@Qualifier("streamGraph")StateGraph stateGraph) throws GraphStateException {
+    public GraphStreamController(@Qualifier("streamGraph") StateGraph stateGraph)
+            throws GraphStateException {
         this.compiledGraph = stateGraph.compile();
     }
 
     @GetMapping(value = "/expand", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<ServerSentEvent<String>> expand(@RequestParam(value = "query", defaultValue = "你好，很高兴认识你，能简单介绍一下自己吗？", required = false) String query,
-                                                @RequestParam(value = "expander_number", defaultValue = "3", required = false) Integer  expanderNumber,
-                                                @RequestParam(value = "thread_id", defaultValue = "yingzi", required = false) String threadId) throws GraphRunnerException {
+    public Flux<ServerSentEvent<String>> expand(
+            @RequestParam(value = "query", defaultValue = "你好，很高兴认识你，能简单介绍一下自己吗？", required = false)
+                    String query,
+            @RequestParam(value = "expander_number", defaultValue = "3", required = false)
+                    Integer expanderNumber,
+            @RequestParam(value = "thread_id", defaultValue = "yingzi", required = false)
+                    String threadId)
+            throws GraphRunnerException {
         RunnableConfig runnableConfig = RunnableConfig.builder().threadId(threadId).build();
         Map<String, Object> objectMap = new HashMap<>();
         objectMap.put("query", query);
@@ -57,6 +78,4 @@ public class GraphStreamController {
                 .doOnCancel(() -> logger.info("Client disconnected from stream"))
                 .doOnError(e -> logger.error("Error occurred during streaming", e));
     }
-
-
 }

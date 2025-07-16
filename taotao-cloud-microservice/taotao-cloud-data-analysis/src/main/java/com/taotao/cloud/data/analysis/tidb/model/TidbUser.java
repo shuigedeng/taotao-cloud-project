@@ -47,7 +47,9 @@ public class TidbUser {
             return false;
         }
         TidbUser user = (TidbUser) o;
-        return Objects.equals(id, user.id) && Objects.equals(sales, user.sales) && Objects.equals(month, user.month);
+        return Objects.equals(id, user.id)
+                && Objects.equals(sales, user.sales)
+                && Objects.equals(month, user.month);
     }
 
     @Override

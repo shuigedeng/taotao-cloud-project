@@ -47,17 +47,13 @@ public class LoginHandleManage {
     // @Resource
     // private LoginLogService loginLogService;
 
-    @Resource
-    private IPRiskHandle ipRiskHandle;
+    @Resource private IPRiskHandle ipRiskHandle;
 
-    @Resource
-    private LoginAreaRiskHandle loginAreaRiskHandle;
+    @Resource private LoginAreaRiskHandle loginAreaRiskHandle;
 
-    @Resource
-    private PasswordErrorRiskHandle passwordErrorRiskHandle;
+    @Resource private PasswordErrorRiskHandle passwordErrorRiskHandle;
 
-    @Resource
-    private UnusualLoginRiskHandle unusualLoginRiskHandle;
+    @Resource private UnusualLoginRiskHandle unusualLoginRiskHandle;
 
     /**
      * 构建执行顺序
@@ -80,14 +76,16 @@ public class LoginHandleManage {
         // 获取所有风险规则
         // List<RiskRule> riskRules = riskRuleService.lambdaQuery().list();
         List<RiskRule> riskRules = new ArrayList<>();
-        Map<Integer, RiskRule> riskRuleMap = riskRules.stream().collect(Collectors.toMap(RiskRule::getId, r -> r));
+        Map<Integer, RiskRule> riskRuleMap =
+                riskRules.stream().collect(Collectors.toMap(RiskRule::getId, r -> r));
         List<RiskRule> filterRisk = new ArrayList<>();
         // 开始从首节点执行
         passwordErrorRiskHandle.filterRisk(filterRisk, riskRuleMap, account);
 
         if (CollUtil.isNotEmpty(filterRisk)) {
             // 获取最严重处置措施的规则
-            Optional<RiskRule> optional = filterRisk.stream().max(Comparator.comparing(RiskRule::getOperate));
+            Optional<RiskRule> optional =
+                    filterRisk.stream().max(Comparator.comparing(RiskRule::getOperate));
             if (optional.isPresent()) {
                 RiskRule riskRule = optional.get();
                 handleOperate(riskRule); // 处置

@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.hadoop.mr.service.impl;
 
 import com.taotao.cloud.hadoop.mr.component.ReduceJobsUtils;
 import com.taotao.cloud.hadoop.mr.service.MapReduceService;
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.IOException;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 /**
@@ -32,20 +32,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class MapReduceServiceImpl implements MapReduceService {
 
-	// 默认reduce输出目录
-	private static final String OUTPUT_PATH = "/output";
+    // 默认reduce输出目录
+    private static final String OUTPUT_PATH = "/output";
 
-	@Override
-	public void groupSort(String jobName, String inputPath)
-		throws InterruptedException, IOException, ClassNotFoundException {
-		if (StringUtils.isEmpty(jobName) || StringUtils.isEmpty(inputPath)) {
-			return;
-		}
-		// 输出目录 = output/当前Job
-		String outputPath = OUTPUT_PATH + "/" + jobName;
-		// if (HdfsService.existFile(outputPath)) {
-		// 	HdfsService.deleteFile(outputPath);
-		// }
-		ReduceJobsUtils.groupSort(jobName, inputPath, outputPath);
-	}
+    @Override
+    public void groupSort(String jobName, String inputPath)
+            throws InterruptedException, IOException, ClassNotFoundException {
+        if (StringUtils.isEmpty(jobName) || StringUtils.isEmpty(inputPath)) {
+            return;
+        }
+        // 输出目录 = output/当前Job
+        String outputPath = OUTPUT_PATH + "/" + jobName;
+        // if (HdfsService.existFile(outputPath)) {
+        // 	HdfsService.deleteFile(outputPath);
+        // }
+        ReduceJobsUtils.groupSort(jobName, inputPath, outputPath);
+    }
 }

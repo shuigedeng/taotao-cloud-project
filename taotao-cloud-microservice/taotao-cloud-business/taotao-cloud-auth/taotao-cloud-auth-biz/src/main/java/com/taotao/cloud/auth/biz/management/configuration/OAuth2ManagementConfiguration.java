@@ -40,7 +40,10 @@ import org.springframework.context.annotation.Import;
  * @since : 2022/2/26 12:35
  */
 @Configuration
-@Import({OAuth2DataJpaConfiguration.class, OAuth2AuthenticationConfiguration.class, OAuth2ComplianceConfiguration.class
+@Import({
+    OAuth2DataJpaConfiguration.class,
+    OAuth2AuthenticationConfiguration.class,
+    OAuth2ComplianceConfiguration.class
 })
 public class OAuth2ManagementConfiguration {
 
@@ -57,7 +60,8 @@ public class OAuth2ManagementConfiguration {
             SignInFailureLimitedStampManager stampManager,
             OAuth2ComplianceService complianceService,
             OAuth2DeviceService deviceService) {
-        AuthenticationSuccessListener listener = new AuthenticationSuccessListener(stampManager, complianceService);
+        AuthenticationSuccessListener listener =
+                new AuthenticationSuccessListener(stampManager, complianceService);
         log.info("Bean [OAuth2 Authentication Success Listener] Auto Configure.");
         return listener;
     }
@@ -76,7 +80,8 @@ public class OAuth2ManagementConfiguration {
     @ConditionalOnMissingBean
     public OidcClientRegistrationResponseHandler oidcClientRegistrationResponseHandler(
             OAuth2DeviceService oauth2DeviceService) {
-        OidcClientRegistrationResponseHandler handler = new OidcClientRegistrationResponseHandler(oauth2DeviceService);
+        OidcClientRegistrationResponseHandler handler =
+                new OidcClientRegistrationResponseHandler(oauth2DeviceService);
         log.info("Bean [Oidc Client Registration Response Handler] Auto Configure.");
         return handler;
     }

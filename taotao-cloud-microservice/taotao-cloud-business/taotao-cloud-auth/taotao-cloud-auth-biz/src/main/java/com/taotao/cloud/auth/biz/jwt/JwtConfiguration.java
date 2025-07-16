@@ -24,7 +24,8 @@ package com.taotao.cloud.auth.biz.jwt;
 public class JwtConfiguration {
 
     //    @Bean
-    //    public com.taotao.boot.security.spring.jwt.TokenUtil getTokenUtil(JwtProperties authServerProperties)
+    //    public com.taotao.boot.security.spring.jwt.TokenUtil getTokenUtil(JwtProperties
+    // authServerProperties)
     // {
     //        return new TokenUtil(authServerProperties);
     //    }

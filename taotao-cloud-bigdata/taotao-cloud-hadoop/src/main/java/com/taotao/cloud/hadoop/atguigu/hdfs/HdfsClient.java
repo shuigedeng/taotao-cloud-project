@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.hadoop.atguigu.hdfs;
 
 import java.io.IOException;
@@ -62,7 +78,11 @@ public class HdfsClient {
     @Test
     public void testPut() throws IOException {
         // 参数解读：参数一：表示删除原数据； 参数二：是否允许覆盖；参数三：原数据路径； 参数四：目的地路径
-        fs.copyFromLocalFile(false, true, new Path("D:\\sunwukong.txt"), new Path("hdfs://hadoop102/xiyou/huaguoshan"));
+        fs.copyFromLocalFile(
+                false,
+                true,
+                new Path("D:\\sunwukong.txt"),
+                new Path("hdfs://hadoop102/xiyou/huaguoshan"));
     }
 
     @Test
@@ -76,7 +96,8 @@ public class HdfsClient {
     @Test
     public void testGet() throws IOException {
         // 参数的解读：参数一：原文件是否删除；参数二：原文件路径HDFS； 参数三：目标地址路径Win ; 参数四：
-        //fs.copyToLocalFile(true, new Path("hdfs://hadoop102/xiyou/huaguoshan/"), new Path("D:\\"), true);
+        // fs.copyToLocalFile(true, new Path("hdfs://hadoop102/xiyou/huaguoshan/"), new
+        // Path("D:\\"), true);
         fs.copyToLocalFile(false, new Path("hdfs://hadoop102/a.txt"), new Path("D:\\"), false);
     }
 
@@ -86,10 +107,10 @@ public class HdfsClient {
 
         // 参数解读：参数1：要删除的路径； 参数2 ： 是否递归删除
         // 删除文件
-        //fs.delete(new Path("/jdk-8u212-linux-x64.tar.gz"),false);
+        // fs.delete(new Path("/jdk-8u212-linux-x64.tar.gz"),false);
 
         // 删除空目录
-        //fs.delete(new Path("/xiyou"), false);
+        // fs.delete(new Path("/xiyou"), false);
 
         // 删除非空目录
         fs.delete(new Path("/jinguo"), true);
@@ -100,14 +121,13 @@ public class HdfsClient {
     public void testmv() throws IOException {
         // 参数解读：参数1 ：原文件路径； 参数2 ：目标文件路径
         // 对文件名称的修改
-        //fs.rename(new Path("/input/word.txt"), new Path("/input/ss.txt"));
+        // fs.rename(new Path("/input/word.txt"), new Path("/input/ss.txt"));
 
         // 文件的移动和更名
-        //fs.rename(new Path("/input/ss.txt"),new Path("/cls.txt"));
+        // fs.rename(new Path("/input/ss.txt"),new Path("/cls.txt"));
 
         // 目录更名
         fs.rename(new Path("/input"), new Path("/output"));
-
     }
 
     // 获取文件详细信息
@@ -135,7 +155,6 @@ public class HdfsClient {
             BlockLocation[] blockLocations = fileStatus.getBlockLocations();
 
             System.out.println(Arrays.toString(blockLocations));
-
         }
     }
 
@@ -154,5 +173,4 @@ public class HdfsClient {
             }
         }
     }
-
 }

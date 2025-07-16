@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.xxljob.executorbiz;
 
 import com.xxl.job.core.biz.ExecutorBiz;
@@ -34,7 +50,7 @@ public class ExecutorBizTest {
     }
 
     @Test
-    public void idleBeat(){
+    public void idleBeat() {
         ExecutorBiz executorBiz = new ExecutorBizClient(addressUrl, accessToken, timeout);
 
         final int jobId = 0;
@@ -50,7 +66,7 @@ public class ExecutorBizTest {
     }
 
     @Test
-    public void run(){
+    public void run() {
         ExecutorBiz executorBiz = new ExecutorBizClient(addressUrl, accessToken, timeout);
 
         // trigger data
@@ -73,7 +89,7 @@ public class ExecutorBizTest {
     }
 
     @Test
-    public void kill(){
+    public void kill() {
         ExecutorBiz executorBiz = new ExecutorBizClient(addressUrl, accessToken, timeout);
 
         final int jobId = 0;
@@ -89,7 +105,7 @@ public class ExecutorBizTest {
     }
 
     @Test
-    public void log(){
+    public void log() {
         ExecutorBiz executorBiz = new ExecutorBizClient(addressUrl, accessToken, timeout);
 
         final long logDateTim = 0L;
@@ -97,10 +113,10 @@ public class ExecutorBizTest {
         final int fromLineNum = 0;
 
         // Act
-        final ReturnT<LogResult> retval = executorBiz.log(new LogParam(logDateTim, logId, fromLineNum));
+        final ReturnT<LogResult> retval =
+                executorBiz.log(new LogParam(logDateTim, logId, fromLineNum));
 
         // Assert result
         Assertions.assertNotNull(retval);
     }
-
 }

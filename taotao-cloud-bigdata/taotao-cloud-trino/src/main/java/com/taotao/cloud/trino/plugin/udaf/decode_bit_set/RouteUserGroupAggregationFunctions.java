@@ -75,7 +75,15 @@ public class RouteUserGroupAggregationFunctions extends RouteUserAggregationBase
             // 当前事件时间
             @SqlType(StandardTypes.BIGINT) long eventTime) {
 
-        handleInput(state, targetEvent, (int) targetType, (int) eventInterval, currEvent, (int) eventTime, null, null);
+        handleInput(
+                state,
+                targetEvent,
+                (int) targetType,
+                (int) eventInterval,
+                currEvent,
+                (int) eventTime,
+                null,
+                null);
     }
 
     private static void handleInput(
@@ -100,12 +108,13 @@ public class RouteUserGroupAggregationFunctions extends RouteUserAggregationBase
               目标事件类型
               事件时间间隔
             */
-            int headerByteLen = SizeOf.SIZE_OF_INT
-                    + SizeOf.SIZE_OF_INT
-                    + SizeOf.SIZE_OF_INT
-                    + SizeOf.SIZE_OF_BYTE
-                    + SizeOf.SIZE_OF_INT
-                    + SizeOf.SIZE_OF_INT;
+            int headerByteLen =
+                    SizeOf.SIZE_OF_INT
+                            + SizeOf.SIZE_OF_INT
+                            + SizeOf.SIZE_OF_INT
+                            + SizeOf.SIZE_OF_BYTE
+                            + SizeOf.SIZE_OF_INT
+                            + SizeOf.SIZE_OF_INT;
             int targetLength = SizeOf.SIZE_OF_INT + targetEvent.length();
             headerByteLen += targetLength;
 
@@ -133,7 +142,8 @@ public class RouteUserGroupAggregationFunctions extends RouteUserAggregationBase
         }
         // 直接判断，如果存在分组，判断当前事件就是分组事件，那么直接将分组值和事件拼接在一起
         if (groupByEvent != null && groupByEvent.toStringUtf8().equals(currEvent.toStringUtf8())) {
-            // String newEventKey = currEvent.toStringUtf8() + EVENT_CONCAT_GROUP_VALUE + groupByProp.toStringUtf8();
+            // String newEventKey = currEvent.toStringUtf8() + EVENT_CONCAT_GROUP_VALUE +
+            // groupByProp.toStringUtf8();
             // currEvent = Slices.utf8Slice(newEventKey);
             currEvent = Slices.utf8Slice("newEventKey");
         }
@@ -189,13 +199,19 @@ public class RouteUserGroupAggregationFunctions extends RouteUserAggregationBase
             if (bodyByteSize >= finalBodyByteUsed) {
                 // 左容量足够  这里只copy header之外的数据，就是当前事件和time
                 storedData.setBytes(
-                        headerByteLen + bodyByteUsed, otherStoredData, otherHeaderByteLen, otherBodyByteUsed);
+                        headerByteLen + bodyByteUsed,
+                        otherStoredData,
+                        otherHeaderByteLen,
+                        otherBodyByteUsed);
                 storedData.setInt(VALUES_OFFSET_BODY_BYTE_USED, finalBodyByteUsed);
                 finalStoredData = storedData;
             } else if (otherBodyByteSize >= finalBodyByteUsed) {
                 // 右容量足够
                 otherStoredData.setBytes(
-                        otherHeaderByteLen + otherBodyByteUsed, storedData, headerByteLen, bodyByteUsed);
+                        otherHeaderByteLen + otherBodyByteUsed,
+                        storedData,
+                        headerByteLen,
+                        bodyByteUsed);
                 otherStoredData.setInt(VALUES_OFFSET_BODY_BYTE_USED, finalBodyByteUsed);
                 finalStoredData = otherStoredData;
             } else {
@@ -210,7 +226,10 @@ public class RouteUserGroupAggregationFunctions extends RouteUserAggregationBase
                 storedData = newStoredData;
 
                 storedData.setBytes(
-                        headerByteLen + bodyByteUsed, otherStoredData, otherHeaderByteLen, otherBodyByteUsed);
+                        headerByteLen + bodyByteUsed,
+                        otherStoredData,
+                        otherHeaderByteLen,
+                        otherBodyByteUsed);
                 storedData.setInt(VALUES_OFFSET_BODY_BYTE_USED, finalBodyByteUsed);
                 finalStoredData = storedData;
             }
@@ -244,7 +263,8 @@ public class RouteUserGroupAggregationFunctions extends RouteUserAggregationBase
         int interval = storedData.getInt(VALUES_OFFSET_ROUTE_INTERVAL);
         int targetType = storedData.getInt(VALUES_OFFSET_TARGET_EVENT_TYPE);
         int targetLength = storedData.getInt(VALUES_OFFSET_TARGET_EVENT_LEN);
-        String targetEvent = new String(storedData.getBytes(VALUES_OFFSET_TARGET_EVENT_BYTES, targetLength));
+        String targetEvent =
+                new String(storedData.getBytes(VALUES_OFFSET_TARGET_EVENT_BYTES, targetLength));
         List<Slice> timeEventSeries = new ArrayList<>();
         int headerByteLen = storedData.getInt(VALUES_OFFSET_HEADER_BYTE_LEN);
         int bodyByteUsed = storedData.getInt(VALUES_OFFSET_BODY_BYTE_USED);
@@ -253,7 +273,8 @@ public class RouteUserGroupAggregationFunctions extends RouteUserAggregationBase
         while (idx < bound) {
             // 获取每个事件数据 time，事件名
             int entryByteLen = storedData.getInt(idx);
-            Slice entry = storedData.slice(idx + SizeOf.SIZE_OF_INT, entryByteLen - SizeOf.SIZE_OF_INT);
+            Slice entry =
+                    storedData.slice(idx + SizeOf.SIZE_OF_INT, entryByteLen - SizeOf.SIZE_OF_INT);
             idx += entryByteLen;
             timeEventSeries.add(entry);
         }

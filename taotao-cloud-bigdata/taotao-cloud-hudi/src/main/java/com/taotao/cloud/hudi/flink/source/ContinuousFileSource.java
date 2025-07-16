@@ -1,13 +1,11 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,9 +16,13 @@
 
 package com.taotao.cloud.hudi.flink.source;
 
-import org.apache.hudi.adapter.DataStreamScanProviderAdapter;
-import org.apache.hudi.util.JsonDeserializationFunction;
+import static org.apache.hudi.examples.quickstart.factory.ContinuousFileSourceFactory.CHECKPOINTS;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.flink.api.common.state.CheckpointListener;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.core.fs.Path;
@@ -34,14 +36,8 @@ import org.apache.flink.table.connector.source.ScanTableSource;
 import org.apache.flink.table.data.RowData;
 import org.apache.flink.table.runtime.typeutils.InternalTypeInfo;
 import org.apache.flink.table.types.logical.RowType;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import static org.apache.hudi.examples.quickstart.factory.ContinuousFileSourceFactory.CHECKPOINTS;
+import org.apache.hudi.adapter.DataStreamScanProviderAdapter;
+import org.apache.hudi.util.JsonDeserializationFunction;
 
 /**
  * A continuous file source that can trigger checkpoints continuously.
@@ -60,119 +56,121 @@ import static org.apache.hudi.examples.quickstart.factory.ContinuousFileSourceFa
  */
 public class ContinuousFileSource implements ScanTableSource {
 
-  private final ResolvedSchema tableSchema;
-  private final Path path;
-  private final Configuration conf;
-
-  public ContinuousFileSource(
-      ResolvedSchema tableSchema,
-      Path path,
-      Configuration conf) {
-    this.tableSchema = tableSchema;
-    this.path = path;
-    this.conf = conf;
-  }
-
-  @Override
-  public ScanRuntimeProvider getScanRuntimeProvider(ScanContext scanContext) {
-    return new DataStreamScanProviderAdapter() {
-
-      @Override
-      public boolean isBounded() {
-        return false;
-      }
-
-      @Override
-      public DataStream<RowData> produceDataStream(StreamExecutionEnvironment execEnv) {
-        final RowType rowType = (RowType) tableSchema.toSourceRowDataType().getLogicalType();
-        return execEnv.addSource(new BoundedSourceFunction(path, conf.getInteger(CHECKPOINTS)))
-            .name("continuous_file_source")
-            .setParallelism(1)
-            .map(JsonDeserializationFunction.getInstance(rowType), InternalTypeInfo.of(rowType));
-      }
-    };
-  }
-
-  @Override
-  public ChangelogMode getChangelogMode() {
-    return ChangelogMode.insertOnly();
-  }
-
-  @Override
-  public DynamicTableSource copy() {
-    return new ContinuousFileSource(this.tableSchema, this.path, this.conf);
-  }
-
-  @Override
-  public String asSummaryString() {
-    return "ContinuousFileSource";
-  }
-
-  /**
-   * Source function that partition the data into given number checkpoints batches.
-   */
-  public static class BoundedSourceFunction implements SourceFunction<String>, CheckpointListener {
+    private final ResolvedSchema tableSchema;
     private final Path path;
-    private List<String> dataBuffer;
+    private final Configuration conf;
 
-    private final int checkpoints;
-    private final AtomicInteger currentCP = new AtomicInteger(0);
-
-    private volatile boolean isRunning = true;
-
-    public BoundedSourceFunction(Path path, int checkpoints) {
-      this.path = path;
-      this.checkpoints = checkpoints;
+    public ContinuousFileSource(ResolvedSchema tableSchema, Path path, Configuration conf) {
+        this.tableSchema = tableSchema;
+        this.path = path;
+        this.conf = conf;
     }
 
     @Override
-    public void run(SourceContext<String> context) throws Exception {
-      if (this.dataBuffer == null) {
-        loadDataBuffer();
-      }
-      int oldCP = this.currentCP.get();
-      boolean finish = false;
-      while (isRunning) {
-        int batchSize = this.dataBuffer.size() / this.checkpoints;
-        int start = batchSize * oldCP;
-        synchronized (context.getCheckpointLock()) {
-          for (int i = start; i < start + batchSize; i++) {
-            if (i >= this.dataBuffer.size()) {
-              finish = true;
-              break;
-              // wait for the next checkpoint and exit
+    public ScanRuntimeProvider getScanRuntimeProvider(ScanContext scanContext) {
+        return new DataStreamScanProviderAdapter() {
+
+            @Override
+            public boolean isBounded() {
+                return false;
             }
-            context.collect(this.dataBuffer.get(i));
-          }
-        }
-        oldCP++;
-        while (this.currentCP.get() < oldCP) {
-          synchronized (context.getCheckpointLock()) {
-            context.getCheckpointLock().wait(10);
-          }
-        }
-        if (finish || !isRunning) {
-          return;
-        }
-      }
+
+            @Override
+            public DataStream<RowData> produceDataStream(StreamExecutionEnvironment execEnv) {
+                final RowType rowType =
+                        (RowType) tableSchema.toSourceRowDataType().getLogicalType();
+                return execEnv.addSource(
+                                new BoundedSourceFunction(path, conf.getInteger(CHECKPOINTS)))
+                        .name("continuous_file_source")
+                        .setParallelism(1)
+                        .map(
+                                JsonDeserializationFunction.getInstance(rowType),
+                                InternalTypeInfo.of(rowType));
+            }
+        };
     }
 
     @Override
-    public void cancel() {
-      this.isRunning = false;
-    }
-
-    private void loadDataBuffer() {
-      try {
-        this.dataBuffer = Files.readAllLines(Paths.get(this.path.toUri()));
-      } catch (IOException e) {
-        throw new RuntimeException("Read file " + this.path + " error", e);
-      }
+    public ChangelogMode getChangelogMode() {
+        return ChangelogMode.insertOnly();
     }
 
     @Override
-    public void notifyCheckpointComplete(long l) {
-      this.currentCP.incrementAndGet();
+    public DynamicTableSource copy() {
+        return new ContinuousFileSource(this.tableSchema, this.path, this.conf);
     }
-  }
+
+    @Override
+    public String asSummaryString() {
+        return "ContinuousFileSource";
+    }
+
+    /**
+     * Source function that partition the data into given number checkpoints batches.
+     */
+    public static class BoundedSourceFunction
+            implements SourceFunction<String>, CheckpointListener {
+        private final Path path;
+        private List<String> dataBuffer;
+
+        private final int checkpoints;
+        private final AtomicInteger currentCP = new AtomicInteger(0);
+
+        private volatile boolean isRunning = true;
+
+        public BoundedSourceFunction(Path path, int checkpoints) {
+            this.path = path;
+            this.checkpoints = checkpoints;
+        }
+
+        @Override
+        public void run(SourceContext<String> context) throws Exception {
+            if (this.dataBuffer == null) {
+                loadDataBuffer();
+            }
+            int oldCP = this.currentCP.get();
+            boolean finish = false;
+            while (isRunning) {
+                int batchSize = this.dataBuffer.size() / this.checkpoints;
+                int start = batchSize * oldCP;
+                synchronized (context.getCheckpointLock()) {
+                    for (int i = start; i < start + batchSize; i++) {
+                        if (i >= this.dataBuffer.size()) {
+                            finish = true;
+                            break;
+                            // wait for the next checkpoint and exit
+                        }
+                        context.collect(this.dataBuffer.get(i));
+                    }
+                }
+                oldCP++;
+                while (this.currentCP.get() < oldCP) {
+                    synchronized (context.getCheckpointLock()) {
+                        context.getCheckpointLock().wait(10);
+                    }
+                }
+                if (finish || !isRunning) {
+                    return;
+                }
+            }
+        }
+
+        @Override
+        public void cancel() {
+            this.isRunning = false;
+        }
+
+        private void loadDataBuffer() {
+            try {
+                this.dataBuffer = Files.readAllLines(Paths.get(this.path.toUri()));
+            } catch (IOException e) {
+                throw new RuntimeException("Read file " + this.path + " error", e);
+            }
+        }
+
+        @Override
+        public void notifyCheckpointComplete(long l) {
+            this.currentCP.incrementAndGet();
+        }
+    }
 }

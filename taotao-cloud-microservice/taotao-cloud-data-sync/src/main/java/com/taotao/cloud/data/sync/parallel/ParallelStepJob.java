@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.data.sync.parallel;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -40,88 +56,82 @@ import org.springframework.core.task.SimpleAsyncTaskExecutor;
 @EnableBatchProcessing
 public class ParallelStepJob {
 
-	@Autowired
-	private JobBuilderFactory jobBuilderFactory;
-	@Autowired
-	private StepBuilderFactory stepBuilderFactory;
+    @Autowired private JobBuilderFactory jobBuilderFactory;
+    @Autowired private StepBuilderFactory stepBuilderFactory;
 
+    @Bean
+    public JsonItemReader<User> jsonItemReader() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JacksonJsonObjectReader<User> jsonObjectReader = new JacksonJsonObjectReader<>(User.class);
+        jsonObjectReader.setMapper(objectMapper);
 
-	@Bean
-	public JsonItemReader<User> jsonItemReader() {
-		ObjectMapper objectMapper = new ObjectMapper();
-		JacksonJsonObjectReader<User> jsonObjectReader = new JacksonJsonObjectReader<>(User.class);
-		jsonObjectReader.setMapper(objectMapper);
+        return new JsonItemReaderBuilder<User>()
+                .name("userJsonItemReader")
+                .jsonObjectReader(jsonObjectReader)
+                .resource(new ClassPathResource("user-parallel.json"))
+                .build();
+    }
 
-		return new JsonItemReaderBuilder<User>()
-			.name("userJsonItemReader")
-			.jsonObjectReader(jsonObjectReader)
-			.resource(new ClassPathResource("user-parallel.json"))
-			.build();
-	}
+    @Bean
+    public FlatFileItemReader<User> flatItemReader() {
+        return new FlatFileItemReaderBuilder<User>()
+                .name("userItemReader")
+                .resource(new ClassPathResource("user-parallel.txt"))
+                .delimited()
+                .delimiter("#")
+                .names("id", "name", "age")
+                .targetType(User.class)
+                .build();
+    }
 
-	@Bean
-	public FlatFileItemReader<User> flatItemReader() {
-		return new FlatFileItemReaderBuilder<User>()
-			.name("userItemReader")
-			.resource(new ClassPathResource("user-parallel.txt"))
-			.delimited().delimiter("#")
-			.names("id", "name", "age")
-			.targetType(User.class)
-			.build();
-	}
+    @Bean
+    public ItemWriter<User> itemWriter() {
+        return new ItemWriter<User>() {
+            @Override
+            public void write(Chunk<? extends User> items) throws Exception {
+                items.forEach(System.err::println);
+            }
+        };
+    }
 
-	@Bean
-	public ItemWriter<User> itemWriter() {
-		return new ItemWriter<User>() {
-			@Override
-			public void write(Chunk<? extends User> items) throws Exception {
-				items.forEach(System.err::println);
-			}
+    @Bean
+    public Step jsonStep() {
+        return stepBuilderFactory
+                .get("jsonStep")
+                .<User, User>chunk(2)
+                .reader(jsonItemReader())
+                .writer(itemWriter())
+                .build();
+    }
 
-		};
-	}
+    @Bean
+    public Step flatStep() {
+        return stepBuilderFactory
+                .get("step2")
+                .<User, User>chunk(2)
+                .reader(flatItemReader())
+                .writer(itemWriter())
+                .build();
+    }
 
-	@Bean
-	public Step jsonStep() {
-		return stepBuilderFactory.get("jsonStep")
-			.<User, User>chunk(2)
-			.reader(jsonItemReader())
-			.writer(itemWriter())
-			.build();
-	}
+    @Bean
+    public Job parallelJob() {
 
-	@Bean
-	public Step flatStep() {
-		return stepBuilderFactory.get("step2")
-			.<User, User>chunk(2)
-			.reader(flatItemReader())
-			.writer(itemWriter())
-			.build();
-	}
+        // 线程1-读user-parallel.txt
+        Flow parallelFlow1 = new FlowBuilder<Flow>("parallelFlow1").start(flatStep()).build();
 
-	@Bean
-	public Job parallelJob() {
+        // 线程2-读user-parallel.json
+        Flow parallelFlow2 =
+                new FlowBuilder<Flow>("parallelFlow2")
+                        .start(jsonStep())
+                        .split(new SimpleAsyncTaskExecutor())
+                        .add(parallelFlow1)
+                        .build();
 
-		//线程1-读user-parallel.txt
-		Flow parallelFlow1 = new FlowBuilder<Flow>("parallelFlow1")
-			.start(flatStep())
-			.build();
+        return jobBuilderFactory.get("parallel-step-job").start(parallelFlow2).end().build();
+    }
 
-		//线程2-读user-parallel.json
-		Flow parallelFlow2 = new FlowBuilder<Flow>("parallelFlow2")
-			.start(jsonStep())
-			.split(new SimpleAsyncTaskExecutor())
-			.add(parallelFlow1)
-			.build();
-
-		return jobBuilderFactory.get("parallel-step-job")
-			.start(parallelFlow2)
-			.end()
-			.build();
-	}
-
-	public static void main(String[] args) {
-		SpringApplication.run(ParallelStepJob.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ParallelStepJob.class, args);
+    }
 }
-

@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.flink.demo;
 
 import java.util.ArrayList;
@@ -6,7 +22,6 @@ import java.util.List;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.time.Time;
 import org.apache.flink.api.common.typeutils.TypeSerializer;
-import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.windowing.assigners.WindowAssigner;
 import org.apache.flink.streaming.api.windowing.assigners.WindowAssigner.WindowAssignerContext;
 import org.apache.flink.streaming.api.windowing.triggers.EventTimeTrigger;
@@ -22,9 +37,9 @@ public class DynSlidingEventTimeWindows extends WindowAssigner<Object, TimeWindo
 
     private final long offset;
 
-    //从原始数据中获取窗口长度
+    // 从原始数据中获取窗口长度
     private final TimeAdjustExtractor sizeTimeAdjustExtractor;
-   //从原始数据中获取窗口步长
+    // 从原始数据中获取窗口步长
     private final TimeAdjustExtractor slideTimeAdjustExtractor;
 
     protected DynSlidingEventTimeWindows(long size, long slide, long offset) {
@@ -41,7 +56,12 @@ public class DynSlidingEventTimeWindows extends WindowAssigner<Object, TimeWindo
         this.slideTimeAdjustExtractor = (elem) -> 0;
     }
 
-    protected DynSlidingEventTimeWindows(long size, long slide, long offset,TimeAdjustExtractor sizeTimeAdjustExtractor,                                         TimeAdjustExtractor slideTimeAdjustExtractor) {
+    protected DynSlidingEventTimeWindows(
+            long size,
+            long slide,
+            long offset,
+            TimeAdjustExtractor sizeTimeAdjustExtractor,
+            TimeAdjustExtractor slideTimeAdjustExtractor) {
         if (Math.abs(offset) >= slide || size <= 0) {
             throw new IllegalArgumentException(
                     "SlidingEventTimeWindows parameters must satisfy "
@@ -55,16 +75,25 @@ public class DynSlidingEventTimeWindows extends WindowAssigner<Object, TimeWindo
         this.slideTimeAdjustExtractor = slideTimeAdjustExtractor;
     }
 
-    //每次分配窗口的时候，都从数据里面抽取窗口与步长，如果存在就将新定义的长度以及步长作为新的长度与步长，这样就实现了动态调整
+    // 每次分配窗口的时候，都从数据里面抽取窗口与步长，如果存在就将新定义的长度以及步长作为新的长度与步长，这样就实现了动态调整
     @Override
-    public Collection<TimeWindow> assignWindows(            Object element, long timestamp, WindowAssignerContext context) {
+    public Collection<TimeWindow> assignWindows(
+            Object element, long timestamp, WindowAssignerContext context) {
         long realSize = this.sizeTimeAdjustExtractor.extract(element);
         long realSlide = this.slideTimeAdjustExtractor.extract(element);
         if (timestamp > Long.MIN_VALUE) {
-            List<TimeWindow> windows = new ArrayList<>((int) ((realSize == 0? size : realSize) / (realSlide == 0? slide:realSlide)));
-            long lastStart = TimeWindow.getWindowStartWithOffset(timestamp, offset, (realSlide == 0? slide:realSlide));
-            for (long start = lastStart; start > timestamp - (realSize == 0? size : realSize); start -= (realSlide == 0? slide:realSlide)) {
-                windows.add(new TimeWindow(start, start + (realSize == 0? size : realSize)));
+            List<TimeWindow> windows =
+                    new ArrayList<>(
+                            (int)
+                                    ((realSize == 0 ? size : realSize)
+                                            / (realSlide == 0 ? slide : realSlide)));
+            long lastStart =
+                    TimeWindow.getWindowStartWithOffset(
+                            timestamp, offset, (realSlide == 0 ? slide : realSlide));
+            for (long start = lastStart;
+                    start > timestamp - (realSize == 0 ? size : realSize);
+                    start -= (realSlide == 0 ? slide : realSlide)) {
+                windows.add(new TimeWindow(start, start + (realSize == 0 ? size : realSize)));
             }
             return windows;
         } else {
@@ -93,7 +122,6 @@ public class DynSlidingEventTimeWindows extends WindowAssigner<Object, TimeWindo
         return "SlidingEventTimeWindows(" + size + ", " + slide + ")";
     }
 
-
     /**     * Creates a new {@code SlidingEventTimeWindows} {@link WindowAssigner} that assigns elements to     * sliding time windows based on the element timestamp.     *     * @param size The size of the generated windows.     * @param slide The slide interval of the generated windows.     * @return The time policy.     */
     public static DynSlidingEventTimeWindows of(Time size, Time slide) {
         return new DynSlidingEventTimeWindows(size.toMilliseconds(), slide.toMilliseconds(), 0);
@@ -105,13 +133,19 @@ public class DynSlidingEventTimeWindows extends WindowAssigner<Object, TimeWindo
                 size.toMilliseconds(), slide.toMilliseconds(), offset.toMilliseconds());
     }
 
-
-    public static DynSlidingEventTimeWindows of(Time size, Time slide, Time offset,TimeAdjustExtractor sizeTimeAdjustExtractor,                                                TimeAdjustExtractor slideTimeAdjustExtractor) {
+    public static DynSlidingEventTimeWindows of(
+            Time size,
+            Time slide,
+            Time offset,
+            TimeAdjustExtractor sizeTimeAdjustExtractor,
+            TimeAdjustExtractor slideTimeAdjustExtractor) {
         return new DynSlidingEventTimeWindows(
-                size.toMilliseconds(), slide.toMilliseconds(), offset.toMilliseconds(),
-                sizeTimeAdjustExtractor,slideTimeAdjustExtractor);
+                size.toMilliseconds(),
+                slide.toMilliseconds(),
+                offset.toMilliseconds(),
+                sizeTimeAdjustExtractor,
+                slideTimeAdjustExtractor);
     }
-
 
     @Override
     public TypeSerializer<TimeWindow> getWindowSerializer(ExecutionConfig executionConfig) {
@@ -123,7 +157,7 @@ public class DynSlidingEventTimeWindows extends WindowAssigner<Object, TimeWindo
         return true;
     }
 
-	public interface TimeAdjustExtractor {
-		long extract(Object element);
-	}
+    public interface TimeAdjustExtractor {
+        long extract(Object element);
+    }
 }

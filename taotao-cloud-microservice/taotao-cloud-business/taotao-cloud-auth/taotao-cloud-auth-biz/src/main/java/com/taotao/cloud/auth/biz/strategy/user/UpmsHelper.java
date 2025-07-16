@@ -20,74 +20,79 @@ import com.taotao.boot.common.enums.DataItemStatus;
 import com.taotao.boot.security.spring.core.authority.TtcGrantedAuthority;
 import com.taotao.boot.security.spring.core.userdetails.TtcUser;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.ObjectUtils;
-
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ObjectUtils;
 
 /**
  * <p>实体转换帮助类 </p>
  */
 public class UpmsHelper {
 
-	public static TtcUser convertSysUserToTtcUser(SysUser sysUser) {
-		Set<TtcGrantedAuthority> authorities = new HashSet<>();
-		Set<String> roles = new HashSet<>();
-		for (SysRole sysRole : sysUser.getRoles()) {
-			roles.add(sysRole.getRoleCode());
-			authorities.add(new TtcGrantedAuthority(SecurityUtils.wellFormRolePrefix(sysRole.getRoleCode())));
-			Set<SysPermission> sysPermissions = sysRole.getPermissions();
-			if (CollectionUtils.isNotEmpty(sysPermissions)) {
-				sysPermissions.forEach(sysAuthority ->
-					authorities.add(new TtcGrantedAuthority((sysAuthority.getPermissionCode()))));
-			}
-		}
+    public static TtcUser convertSysUserToTtcUser(SysUser sysUser) {
+        Set<TtcGrantedAuthority> authorities = new HashSet<>();
+        Set<String> roles = new HashSet<>();
+        for (SysRole sysRole : sysUser.getRoles()) {
+            roles.add(sysRole.getRoleCode());
+            authorities.add(
+                    new TtcGrantedAuthority(
+                            SecurityUtils.wellFormRolePrefix(sysRole.getRoleCode())));
+            Set<SysPermission> sysPermissions = sysRole.getPermissions();
+            if (CollectionUtils.isNotEmpty(sysPermissions)) {
+                sysPermissions.forEach(
+                        sysAuthority ->
+                                authorities.add(
+                                        new TtcGrantedAuthority(
+                                                (sysAuthority.getPermissionCode()))));
+            }
+        }
 
-		String employeeId = ObjectUtils.isNotEmpty(sysUser.getEmployee())
-			? sysUser.getEmployee().getEmployeeId()
-			: null;
+        String employeeId =
+                ObjectUtils.isNotEmpty(sysUser.getEmployee())
+                        ? sysUser.getEmployee().getEmployeeId()
+                        : null;
 
-		return new TtcUser(
-			sysUser.getUserId(),
-			sysUser.getUserName(),
-			sysUser.getPassword(),
-			isEnabled(sysUser),
-			isAccountNonExpired(sysUser),
-			isCredentialsNonExpired(sysUser),
-			isNonLocked(sysUser),
-			authorities,
-			roles,
-			employeeId,
-			sysUser.getAvatar());
-	}
+        return new TtcUser(
+                sysUser.getUserId(),
+                sysUser.getUserName(),
+                sysUser.getPassword(),
+                isEnabled(sysUser),
+                isAccountNonExpired(sysUser),
+                isCredentialsNonExpired(sysUser),
+                isNonLocked(sysUser),
+                authorities,
+                roles,
+                employeeId,
+                sysUser.getAvatar());
+    }
 
-	private static boolean isEnabled(SysUser sysUser) {
-		return sysUser.getStatus() != DataItemStatus.FORBIDDEN;
-	}
+    private static boolean isEnabled(SysUser sysUser) {
+        return sysUser.getStatus() != DataItemStatus.FORBIDDEN;
+    }
 
-	private static boolean isNonLocked(SysUser sysUser) {
-		return !(sysUser.getStatus() == DataItemStatus.LOCKING);
-	}
+    private static boolean isNonLocked(SysUser sysUser) {
+        return !(sysUser.getStatus() == DataItemStatus.LOCKING);
+    }
 
-	private static boolean isNonExpired(LocalDateTime localDateTime) {
-		if (ObjectUtils.isEmpty(localDateTime)) {
-			return true;
-		} else {
-			return localDateTime.isAfter(LocalDateTime.now());
-		}
-	}
+    private static boolean isNonExpired(LocalDateTime localDateTime) {
+        if (ObjectUtils.isEmpty(localDateTime)) {
+            return true;
+        } else {
+            return localDateTime.isAfter(LocalDateTime.now());
+        }
+    }
 
-	private static boolean isAccountNonExpired(SysUser sysUser) {
-		if (sysUser.getStatus() == DataItemStatus.EXPIRED) {
-			return false;
-		}
+    private static boolean isAccountNonExpired(SysUser sysUser) {
+        if (sysUser.getStatus() == DataItemStatus.EXPIRED) {
+            return false;
+        }
 
-		return isNonExpired(sysUser.getAccountExpireAt());
-	}
+        return isNonExpired(sysUser.getAccountExpireAt());
+    }
 
-	private static boolean isCredentialsNonExpired(SysUser sysUser) {
-		return isNonExpired(sysUser.getCredentialsExpireAt());
-	}
+    private static boolean isCredentialsNonExpired(SysUser sysUser) {
+        return isNonExpired(sysUser.getCredentialsExpireAt());
+    }
 }

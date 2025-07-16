@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.jpa.storage;
 
-import com.taotao.cloud.auth.biz.jpa.converter.TtcToOAuth2AuthorizationConverter;
 import com.taotao.cloud.auth.biz.jpa.converter.OAuth2ToTtcAuthorizationConverter;
+import com.taotao.cloud.auth.biz.jpa.converter.TtcToOAuth2AuthorizationConverter;
 import com.taotao.cloud.auth.biz.jpa.entity.TtcAuthorization;
 import com.taotao.cloud.auth.biz.jpa.jackson2.OAuth2JacksonProcessor;
 import com.taotao.cloud.auth.biz.jpa.service.TtcAuthorizationService;
@@ -57,10 +57,12 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
      * 希罗多德授权服务
      */
     private final TtcAuthorizationService ttcAuthorizationService;
+
     /**
      * 希罗多德到oauth2转换器
      */
     private final Converter<TtcAuthorization, OAuth2Authorization> ttcToOAuth2Converter;
+
     /**
      * oauth2到希罗多德转换器
      */
@@ -148,7 +150,9 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
      * @since 2023-07-10 17:10:42
      */
     public int findAuthorizationCount(String registeredClientId, String principalName) {
-        int count = this.ttcAuthorizationService.findAuthorizationCount(registeredClientId, principalName);
+        int count =
+                this.ttcAuthorizationService.findAuthorizationCount(
+                        registeredClientId, principalName);
         log.info("Jpa OAuth2 Authorization Service findAuthorizationCount.");
         return count;
     }
@@ -161,9 +165,11 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
      * @return {@link List }<{@link OAuth2Authorization }>
      * @since 2023-07-10 17:10:42
      */
-    public List<OAuth2Authorization> findAvailableAuthorizations(String registeredClientId, String principalName) {
+    public List<OAuth2Authorization> findAvailableAuthorizations(
+            String registeredClientId, String principalName) {
         List<TtcAuthorization> authorizations =
-                this.ttcAuthorizationService.findAvailableAuthorizations(registeredClientId, principalName);
+                this.ttcAuthorizationService.findAvailableAuthorizations(
+                        registeredClientId, principalName);
         if (CollectionUtils.isNotEmpty(authorizations)) {
             return authorizations.stream().map(this::toObject).collect(Collectors.toList());
         }
@@ -185,9 +191,10 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
 
         Optional<TtcAuthorization> result;
         if (tokenType == null) {
-            result = this.ttcAuthorizationService
-                    .findByStateOrAuthorizationCodeValueOrAccessTokenValueOrRefreshTokenValueOrOidcIdTokenValueOrUserCodeValueOrDeviceCodeValue(
-                            token);
+            result =
+                    this.ttcAuthorizationService
+                            .findByStateOrAuthorizationCodeValueOrAccessTokenValueOrRefreshTokenValueOrOidcIdTokenValueOrUserCodeValueOrDeviceCodeValue(
+                                    token);
         } else if (OAuth2ParameterNames.STATE.equals(tokenType.getValue())) {
             result = this.ttcAuthorizationService.findByState(token);
         } else if (OAuth2ParameterNames.CODE.equals(tokenType.getValue())) {

@@ -46,7 +46,9 @@ public class HiveUser {
             return false;
         }
         HiveUser user = (HiveUser) o;
-        return Objects.equals(id, user.id) && Objects.equals(sales, user.sales) && Objects.equals(month, user.month);
+        return Objects.equals(id, user.id)
+                && Objects.equals(sales, user.sales)
+                && Objects.equals(month, user.month);
     }
 
     @Override

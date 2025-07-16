@@ -34,7 +34,8 @@ import org.springframework.util.StringUtils;
  *
  * @since : 2023/5/13 10:34
  */
-public abstract class AbstractOAuth2RegisteredClientConverter<T extends AbstractOAuth2RegisteredClient>
+public abstract class AbstractOAuth2RegisteredClientConverter<
+                T extends AbstractOAuth2RegisteredClient>
         implements RegisteredClientConverter<T> {
 
     @Override
@@ -52,8 +53,8 @@ public abstract class AbstractOAuth2RegisteredClientConverter<T extends Abstract
             clientSettingsBuilder.jwkSetUrl(details.getJwkSetUrl());
         }
         if (ObjectUtils.isNotEmpty(details.getAuthenticationSigningAlgorithm())) {
-            JwsAlgorithm jwsAlgorithm = SignatureAlgorithm.from(
-                    details.getAuthenticationSigningAlgorithm().name());
+            JwsAlgorithm jwsAlgorithm =
+                    SignatureAlgorithm.from(details.getAuthenticationSigningAlgorithm().name());
             if (ObjectUtils.isNotEmpty(jwsAlgorithm)) {
                 clientSettingsBuilder.tokenEndpointAuthenticationSigningAlgorithm(jwsAlgorithm);
             }
@@ -74,8 +75,8 @@ public abstract class AbstractOAuth2RegisteredClientConverter<T extends Abstract
         tokenSettingsBuilder.accessTokenFormat(
                 new OAuth2TokenFormat(details.getAccessTokenFormat().getFormat()));
         if (ObjectUtils.isNotEmpty(details.getIdTokenSignatureAlgorithm())) {
-            SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.from(
-                    details.getIdTokenSignatureAlgorithm().name());
+            SignatureAlgorithm signatureAlgorithm =
+                    SignatureAlgorithm.from(details.getIdTokenSignatureAlgorithm().name());
             if (ObjectUtils.isNotEmpty(signatureAlgorithm)) {
                 tokenSettingsBuilder.idTokenSignatureAlgorithm(signatureAlgorithm);
             }

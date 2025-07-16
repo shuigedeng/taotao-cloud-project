@@ -96,6 +96,7 @@ public enum ErrorCodeEnum {
      * 错误代码
      */
     private final Integer code;
+
     /**
      * 错误消息
      */

@@ -16,25 +16,12 @@
 
 package com.taotao.cloud.gateway.authentication;
 
-import com.alibaba.fastjson.JSON;
-import com.taotao.boot.common.constant.CommonConstants;
 import com.taotao.boot.common.utils.log.LogUtils;
-import org.dromara.hutool.core.collection.CollUtil;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.server.WebFilterExchange;
 import org.springframework.security.web.server.authentication.ServerAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 登录认证失败处理类 (网关目前不支持登录 现在此类无用)
@@ -44,23 +31,27 @@ import java.util.Map;
  * @since 2020/4/29 22:10
  */
 @Component
-public class GatewayServerAuthenticationFailureHandler implements ServerAuthenticationFailureHandler {
+public class GatewayServerAuthenticationFailureHandler
+        implements ServerAuthenticationFailureHandler {
 
-	@Override
-	public Mono<Void> onAuthenticationFailure(WebFilterExchange webFilterExchange, AuthenticationException exception) {
-		LogUtils.error("认证失败", exception);
+    @Override
+    public Mono<Void> onAuthenticationFailure(
+            WebFilterExchange webFilterExchange, AuthenticationException exception) {
+        LogUtils.error("认证失败", exception);
 
-//		ServerHttpResponse response = exchange.getExchange().getResponse();
-//
-//		Map<String, Object> responseBody = new HashMap<>(2);
-//		responseBody.put("ERROR_CODE", "000000");
-//		responseBody.put("ERROR_TYPE", exception.getClass().getName());
-//		responseBody.put("ERROR_MESSAGE", exception.getMessage());
-//		ResponseEntity<Map<String, Object>> responseEntity = new ResponseEntity<>(responseBody, HttpStatus.INTERNAL_SERVER_ERROR);
-//
-//		response.setStatusCode(HttpStatus.FORBIDDEN);
-//		return response.writeWith(Mono.just(response.bufferFactory().wrap(JSON.toJSONBytes(responseEntity))));
+        //		ServerHttpResponse response = exchange.getExchange().getResponse();
+        //
+        //		Map<String, Object> responseBody = new HashMap<>(2);
+        //		responseBody.put("ERROR_CODE", "000000");
+        //		responseBody.put("ERROR_TYPE", exception.getClass().getName());
+        //		responseBody.put("ERROR_MESSAGE", exception.getMessage());
+        //		ResponseEntity<Map<String, Object>> responseEntity = new ResponseEntity<>(responseBody,
+        // HttpStatus.INTERNAL_SERVER_ERROR);
+        //
+        //		response.setStatusCode(HttpStatus.FORBIDDEN);
+        //		return
+        // response.writeWith(Mono.just(response.bufferFactory().wrap(JSON.toJSONBytes(responseEntity))));
 
-		return null;
-	}
+        return null;
+    }
 }

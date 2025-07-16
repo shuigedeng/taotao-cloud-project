@@ -26,7 +26,8 @@ import java.util.Map;
 public class EnhanceFreemarkerTemplateEngine extends FreemarkerTemplateEngine {
 
     @Override
-    protected void outputCustomFile(List<CustomFile> customFiles, TableInfo tableInfo, Map<String, Object> objectMap) {
+    protected void outputCustomFile(
+            List<CustomFile> customFiles, TableInfo tableInfo, Map<String, Object> objectMap) {
         // String entityName = tableInfo.getEntityName();
         // String otherPath = this.getPathInfo(OutputFile.other);
         // customFile.forEach((key, value) -> {

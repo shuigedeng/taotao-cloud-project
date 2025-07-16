@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.ai.alibaba.graph.human_node.controller;
 
 import com.alibaba.cloud.ai.graph.CompileConfig;
@@ -14,6 +30,8 @@ import com.alibaba.cloud.ai.graph.exception.GraphRunnerException;
 import com.alibaba.cloud.ai.graph.exception.GraphStateException;
 import com.alibaba.cloud.ai.graph.state.StateSnapshot;
 import com.spring.ai.tutorial.graph.human.controller.GraphProcess.GraphProcess;
+import java.util.HashMap;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +44,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Sinks;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author yingzi
@@ -43,15 +58,27 @@ public class GraphHumanController {
     private final CompiledGraph compiledGraph;
 
     @Autowired
-    public GraphHumanController(@Qualifier("humanGraph") StateGraph stateGraph) throws GraphStateException {
-        SaverConfig saverConfig = SaverConfig.builder().register(SaverConstant.MEMORY, new MemorySaver()).build();
-        this.compiledGraph = stateGraph
-                .compile(CompileConfig.builder().saverConfig(saverConfig).interruptBefore("human_feedback").build());    }
+    public GraphHumanController(@Qualifier("humanGraph") StateGraph stateGraph)
+            throws GraphStateException {
+        SaverConfig saverConfig =
+                SaverConfig.builder().register(SaverConstant.MEMORY, new MemorySaver()).build();
+        this.compiledGraph =
+                stateGraph.compile(
+                        CompileConfig.builder()
+                                .saverConfig(saverConfig)
+                                .interruptBefore("human_feedback")
+                                .build());
+    }
 
     @GetMapping(value = "/expand", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<ServerSentEvent<String>> expand(@RequestParam(value = "query", defaultValue = "你好，很高兴认识你，能简单介绍一下自己吗？", required = false) String query,
-                                                @RequestParam(value = "expander_number", defaultValue = "3", required = false) Integer expanderNumber,
-                                                @RequestParam(value = "thread_id", defaultValue = "yingzi", required = false) String threadId) throws GraphRunnerException {
+    public Flux<ServerSentEvent<String>> expand(
+            @RequestParam(value = "query", defaultValue = "你好，很高兴认识你，能简单介绍一下自己吗？", required = false)
+                    String query,
+            @RequestParam(value = "expander_number", defaultValue = "3", required = false)
+                    Integer expanderNumber,
+            @RequestParam(value = "thread_id", defaultValue = "yingzi", required = false)
+                    String threadId)
+            throws GraphRunnerException {
         RunnableConfig runnableConfig = RunnableConfig.builder().threadId(threadId).build();
         Map<String, Object> objectMap = new HashMap<>();
         objectMap.put("query", query);
@@ -68,8 +95,12 @@ public class GraphHumanController {
     }
 
     @GetMapping(value = "/resume", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<ServerSentEvent<String>> resume(@RequestParam(value = "thread_id", defaultValue = "yingzi", required = false) String threadId,
-                                      @RequestParam(value = "feed_back", defaultValue = "true", required = false) boolean feedBack) throws GraphRunnerException {
+    public Flux<ServerSentEvent<String>> resume(
+            @RequestParam(value = "thread_id", defaultValue = "yingzi", required = false)
+                    String threadId,
+            @RequestParam(value = "feed_back", defaultValue = "true", required = false)
+                    boolean feedBack)
+            throws GraphRunnerException {
         RunnableConfig runnableConfig = RunnableConfig.builder().threadId(threadId).build();
         StateSnapshot stateSnapshot = this.compiledGraph.getState(runnableConfig);
         OverAllState state = stateSnapshot.state();
@@ -83,10 +114,12 @@ public class GraphHumanController {
         // Create a unicast sink to emit ServerSentEvents
         Sinks.Many<ServerSentEvent<String>> sink = Sinks.many().unicast().onBackpressureBuffer();
         GraphProcess graphProcess = new GraphProcess(this.compiledGraph);
-        AsyncGenerator<NodeOutput> resultFuture = compiledGraph.streamFromInitialNode(state, runnableConfig);
+        AsyncGenerator<NodeOutput> resultFuture =
+                compiledGraph.streamFromInitialNode(state, runnableConfig);
         graphProcess.processStream(resultFuture, sink);
 
         return sink.asFlux()
                 .doOnCancel(() -> logger.info("Client disconnected from stream"))
-                .doOnError(e -> logger.error("Error occurred during streaming", e));    }
+                .doOnError(e -> logger.error("Error occurred during streaming", e));
+    }
 }

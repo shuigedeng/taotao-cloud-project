@@ -34,7 +34,8 @@ import org.springframework.stereotype.Component;
 public class UnusualLoginRiskHandle extends AbstractLoginHandle {
 
     @Override
-    public void filterRisk(List<RiskRule> filter, Map<Integer, RiskRule> ruleMap, UserAccount account) {
+    public void filterRisk(
+            List<RiskRule> filter, Map<Integer, RiskRule> ruleMap, UserAccount account) {
         if (MapUtil.isNotEmpty(ruleMap)) {
             RiskRule loginTimeExe = ruleMap.get(2);
             if (loginTimeExe != null) {
@@ -47,7 +48,8 @@ public class UnusualLoginRiskHandle extends AbstractLoginHandle {
                 for (UnusualLoginTime unusualLoginTime : unusualLoginTimes) {
                     // 如果当前的周数与配置的周数相等，那么判断当前的具体时间
                     if (unusualLoginTime.getWeek() == dayOfWeek) {
-                        DateTime startTime = DateUtil.parseTimeToday(unusualLoginTime.getStartTime());
+                        DateTime startTime =
+                                DateUtil.parseTimeToday(unusualLoginTime.getStartTime());
                         DateTime endTime = DateUtil.parseTimeToday(unusualLoginTime.getEndTime());
                         // 如果当前的时间，在配置的时间范围内，那么将算作异常时间登录
                         if (DateUtil.isIn(now, startTime, endTime)) {

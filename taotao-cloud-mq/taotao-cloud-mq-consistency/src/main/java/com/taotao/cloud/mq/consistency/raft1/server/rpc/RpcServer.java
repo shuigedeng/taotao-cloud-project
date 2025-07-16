@@ -23,7 +23,7 @@ import com.taotao.cloud.mq.consistency.raft1.common.rpc.RpcResponse;
 /**
  * rpc 服务端
  *
- * @author houbb
+ * @author shuigedeng
  */
 public interface RpcServer extends LifeCycle {
 

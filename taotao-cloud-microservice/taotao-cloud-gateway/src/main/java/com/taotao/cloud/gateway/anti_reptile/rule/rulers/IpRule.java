@@ -64,17 +64,20 @@ public class IpRule extends AbstractRule {
         int expirationTime = properties.getIpRule().getExpirationTime();
         // 最高expirationTime时间内请求数
         int requestMaxSize = properties.getIpRule().getRequestMaxSize();
-        RAtomicLong rRequestCount = redissonClient.getAtomicLong(
-                RATELIMITER_COUNT_PREFIX.concat(requestUrl).concat(ipAddress));
-        RAtomicLong rExpirationTime = redissonClient.getAtomicLong(
-                RATELIMITER_EXPIRATIONTIME_PREFIX.concat(requestUrl).concat(ipAddress));
+        RAtomicLong rRequestCount =
+                redissonClient.getAtomicLong(
+                        RATELIMITER_COUNT_PREFIX.concat(requestUrl).concat(ipAddress));
+        RAtomicLong rExpirationTime =
+                redissonClient.getAtomicLong(
+                        RATELIMITER_EXPIRATIONTIME_PREFIX.concat(requestUrl).concat(ipAddress));
         if (!rExpirationTime.isExists()) {
             rRequestCount.set(0L);
             rExpirationTime.set(0L);
             rExpirationTime.expire(Duration.ofMillis(expirationTime));
         } else {
             RMap<String, String> rHitMap = redissonClient.getMap(RATELIMITER_HIT_CRAWLERSTRATEGY);
-            if ((rRequestCount.incrementAndGet() > requestMaxSize) || rHitMap.containsKey(ipAddress)) {
+            if ((rRequestCount.incrementAndGet() > requestMaxSize)
+                    || rHitMap.containsKey(ipAddress)) {
                 // 触发爬虫策略 ，默认10天后可重新访问
                 long lockExpire = properties.getIpRule().getLockExpire();
                 rExpirationTime.expire(Duration.ofSeconds(lockExpire));
@@ -104,10 +107,12 @@ public class IpRule extends AbstractRule {
         String ipAddress = RequestUtils.getServerHttpRequestIpAddress(exchange.getRequest());
         // 重置计数器
         int expirationTime = properties.getIpRule().getExpirationTime();
-        RAtomicLong rRequestCount = redissonClient.getAtomicLong(
-                RATELIMITER_COUNT_PREFIX.concat(realRequestUri).concat(ipAddress));
-        RAtomicLong rExpirationTime = redissonClient.getAtomicLong(
-                RATELIMITER_EXPIRATIONTIME_PREFIX.concat(realRequestUri).concat(ipAddress));
+        RAtomicLong rRequestCount =
+                redissonClient.getAtomicLong(
+                        RATELIMITER_COUNT_PREFIX.concat(realRequestUri).concat(ipAddress));
+        RAtomicLong rExpirationTime =
+                redissonClient.getAtomicLong(
+                        RATELIMITER_EXPIRATIONTIME_PREFIX.concat(realRequestUri).concat(ipAddress));
         rRequestCount.set(0L);
         rExpirationTime.set(0L);
         rExpirationTime.expire(Duration.ofMillis(expirationTime));

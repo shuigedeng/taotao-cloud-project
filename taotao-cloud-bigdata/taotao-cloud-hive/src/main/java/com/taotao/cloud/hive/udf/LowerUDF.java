@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.hive.udf;
 
 import org.apache.commons.lang3.StringUtils;
@@ -40,16 +41,16 @@ import org.apache.hadoop.io.Text;
  */
 public class LowerUDF extends UDF {
 
-	public Text evaluate(Text str) {
-		// input parameter validate
-		if (null == str) {
-			return null;
-		}
-		// validate
-		if (StringUtils.isBlank(str.toString())) {
-			return null;
-		}
-		// lower
-		return new Text(str.toString().toLowerCase());
-	}
+    public Text evaluate(Text str) {
+        // input parameter validate
+        if (null == str) {
+            return null;
+        }
+        // validate
+        if (StringUtils.isBlank(str.toString())) {
+            return null;
+        }
+        // lower
+        return new Text(str.toString().toLowerCase());
+    }
 }

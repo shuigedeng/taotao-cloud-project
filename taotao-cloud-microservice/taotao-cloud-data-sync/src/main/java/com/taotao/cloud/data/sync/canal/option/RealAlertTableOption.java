@@ -32,7 +32,11 @@ import org.springframework.stereotype.Component;
 public class RealAlertTableOption extends AlertTableOption {
 
     @Override
-    public void doOption(String destination, String schemaName, String tableName, CanalEntry.RowChange rowChange) {
+    public void doOption(
+            String destination,
+            String schemaName,
+            String tableName,
+            CanalEntry.RowChange rowChange) {
         LogUtils.info("======================接口方式（修改表信息操作）==========================");
         LogUtils.info("use " + schemaName + ";\n" + rowChange.getSql());
         LogUtils.info("\n======================================================");
