@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.rpc.common.common.remote.netty.impl;
 
 import com.taotao.cloud.rpc.common.common.exception.RpcRuntimeException;
@@ -10,6 +26,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 /**
  * netty 网络客户端
  * @author shuigedeng
@@ -41,8 +58,8 @@ public class DefaultNettyClient extends AbstractNettyClient<ChannelFuture> {
      * @return 对象实例
      * @since 2024.06
      */
-    public static DefaultNettyClient newInstance(String ip, int port,
-                                                 ChannelHandler channelHandler) {
+    public static DefaultNettyClient newInstance(
+            String ip, int port, ChannelHandler channelHandler) {
         return new DefaultNettyClient(ip, port, channelHandler);
     }
 
@@ -60,13 +77,15 @@ public class DefaultNettyClient extends AbstractNettyClient<ChannelFuture> {
         workerGroup = new NioEventLoopGroup();
         try {
             Bootstrap bootstrap = new Bootstrap();
-            channelFuture = bootstrap.group(workerGroup)
-                    .channel(NioSocketChannel.class)
-                    .option(ChannelOption.SO_KEEPALIVE, true)
-                    .handler(channelHandler)
-                    .connect(ip, port)
-                    .syncUninterruptibly();
-//            LOG.info("[Netty Client] 启动客户端完成，监听地址 {}:{}", ip, port);
+            channelFuture =
+                    bootstrap
+                            .group(workerGroup)
+                            .channel(NioSocketChannel.class)
+                            .option(ChannelOption.SO_KEEPALIVE, true)
+                            .handler(channelHandler)
+                            .connect(ip, port)
+                            .syncUninterruptibly();
+            //            LOG.info("[Netty Client] 启动客户端完成，监听地址 {}:{}", ip, port);
         } catch (Exception e) {
             LOG.error("[Netty Client] 端启动遇到异常", e);
             throw new RpcRuntimeException(e);
@@ -100,5 +119,4 @@ public class DefaultNettyClient extends AbstractNettyClient<ChannelFuture> {
             LOG.info("[Netty Client] 线程池关闭完成");
         }
     }
-
 }

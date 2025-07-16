@@ -25,22 +25,21 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @SpringBootApplication
 public class RpcDashboardApplication extends SpringBootServletInitializer {
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(RpcDashboardApplication.class);
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(RpcDashboardApplication.class);
+    }
 
-	public static void main(String[] args) {
-		System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
+    public static void main(String[] args) {
+        System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
 
-		new StartupSpringApplication(RpcDashboardApplication.class)
-			.setTtcBanner()
-			.setTtcProfileIfNotExists("dev")
-			.setTtcApplicationProperty("taotao-cloud-rpc-dashboard")
-			.setTtcAllowBeanDefinitionOverriding(true)
-			.run(args);
+        new StartupSpringApplication(RpcDashboardApplication.class)
+                .setTtcBanner()
+                .setTtcProfileIfNotExists("dev")
+                .setTtcApplicationProperty("taotao-cloud-rpc-dashboard")
+                .setTtcAllowBeanDefinitionOverriding(true)
+                .run(args);
 
-		RpcServerBootstrap.main(args);
-
-	}
+        RpcServerBootstrap.main(args);
+    }
 }

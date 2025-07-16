@@ -1,25 +1,40 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.ccsr.core.storage;
 
-import org.apache.commons.lang3.StringUtils;
 import com.taotao.cloud.ccsr.api.grpc.auto.Metadata;
 import com.taotao.cloud.ccsr.spi.Join;
-
+import org.apache.commons.lang3.StringUtils;
 
 @Join(order = 1, isSingleton = true)
 public class MetadaStorage extends AbstractStorage<Metadata> {
 
     public String key(String namespace, String group, String tag, String dataId) {
         StringBuilder builder = new StringBuilder();
-        if (StringUtils.isNotBlank(namespace)){
+        if (StringUtils.isNotBlank(namespace)) {
             builder.append(namespace).append("#");
         }
-        if (StringUtils.isNotBlank(group)){
+        if (StringUtils.isNotBlank(group)) {
             builder.append(group).append("#");
         }
-        if (StringUtils.isNotBlank(tag)){
+        if (StringUtils.isNotBlank(tag)) {
             builder.append(tag).append("#");
         }
-        if (StringUtils.isNotBlank(dataId)){
+        if (StringUtils.isNotBlank(dataId)) {
             builder.append(dataId).append("#");
         }
         // Remove trailing '#' if present
@@ -31,7 +46,7 @@ public class MetadaStorage extends AbstractStorage<Metadata> {
 
     @Override
     public String key(Metadata data) {
-       return key(data.getNamespace(), data.getGroup(), data.getTag(), data.getDataId());
+        return key(data.getNamespace(), data.getGroup(), data.getTag(), data.getDataId());
     }
 
     @Override

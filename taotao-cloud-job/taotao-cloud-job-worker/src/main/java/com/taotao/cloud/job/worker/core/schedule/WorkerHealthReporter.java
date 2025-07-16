@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.job.worker.core.schedule;
 
 import com.taotao.cloud.job.common.domain.WorkerHeartbeat;
@@ -14,7 +30,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
-
 /**
  * Worker健康度定时上报
  *
@@ -25,74 +40,81 @@ import org.apache.commons.lang3.StringUtils;
 @RequiredArgsConstructor
 public class WorkerHealthReporter extends SafeRunnable {
 
-	private final ServerDiscoverService serverDiscoverService;
-	private final TtcJobWorkerConfig config;
+    private final ServerDiscoverService serverDiscoverService;
+    private final TtcJobWorkerConfig config;
 
-	@Override
-	public void run0() {
+    @Override
+    public void run0() {
 
-		// 没有可用Server，无法上报
-		String currentServer = serverDiscoverService.getCurrentServerAddress();
-		if (StringUtils.isEmpty(currentServer)) {
-			log.warn("[WorkerHealthReporter] no available server,fail to report health info!");
-			return;
-		}
+        // 没有可用Server，无法上报
+        String currentServer = serverDiscoverService.getCurrentServerAddress();
+        if (StringUtils.isEmpty(currentServer)) {
+            log.warn("[WorkerHealthReporter] no available server,fail to report health info!");
+            return;
+        }
 
-		SystemMetrics systemMetrics;
-		systemMetrics = SystemInfoUtils.getSystemMetrics();
+        SystemMetrics systemMetrics;
+        systemMetrics = SystemInfoUtils.getSystemMetrics();
 
-		WorkerHeartbeat heartbeat = new WorkerHeartbeat();
-		heartbeat.setServerIpAddress(currentServer);
-		heartbeat.setSystemMetrics(systemMetrics);
-		heartbeat.setAppName(config.getAppName());
-		heartbeat.setAppId(serverDiscoverService.getCurrentAppId());
-		heartbeat.setHeartbeatTime(System.currentTimeMillis());
-		heartbeat.setWorkerAddress(MyNetUtil.address);
-		heartbeat.setClient("KingPenguin");
-//        heartbeat.setTag(config.getWorkerConfig().getTag());
+        WorkerHeartbeat heartbeat = new WorkerHeartbeat();
+        heartbeat.setServerIpAddress(currentServer);
+        heartbeat.setSystemMetrics(systemMetrics);
+        heartbeat.setAppName(config.getAppName());
+        heartbeat.setAppId(serverDiscoverService.getCurrentAppId());
+        heartbeat.setHeartbeatTime(System.currentTimeMillis());
+        heartbeat.setWorkerAddress(MyNetUtil.address);
+        heartbeat.setClient("KingPenguin");
+        //        heartbeat.setTag(config.getWorkerConfig().getTag());
 
-		// 上报 Tracker 数量
-//        heartbeat.setLightTaskTrackerNum(LightTaskTrackerManager.currentTaskTrackerSize());
-////        heartbeat.setHeavyTaskTrackerNum(HeavyTaskTrackerManager.currentTaskTrackerSize());
-//        // 是否超载
-//        if (config.getMaxLightweightTaskNum() <= LightTaskTrackerManager.currentTaskTrackerSize() || config.getMaxHeavyweightTaskNum() <= HeavyTaskTrackerManager.currentTaskTrackerSize()){
-//            heartbeat.setOverload(true);
-//        }
+        // 上报 Tracker 数量
+        //
+        // heartbeat.setLightTaskTrackerNum(LightTaskTrackerManager.currentTaskTrackerSize());
+        ////
+        // heartbeat.setHeavyTaskTrackerNum(HeavyTaskTrackerManager.currentTaskTrackerSize());
+        //        // 是否超载
+        //        if (config.getMaxLightweightTaskNum() <=
+        // LightTaskTrackerManager.currentTaskTrackerSize() || config.getMaxHeavyweightTaskNum() <=
+        // HeavyTaskTrackerManager.currentTaskTrackerSize()){
+        //            heartbeat.setOverload(true);
+        //        }
 
-		// 发送请求
-		if (StringUtils.isEmpty(currentServer)) {
-			return;
-		}
-		// log
-		log.info("[WorkerHealthReporter] report health status,appId:{},appName:{},isOverload:{},maxLightweightTaskNum:{},currentLightweightTaskNum:{},maxHeavyweightTaskNum:{}",
-			heartbeat.getAppId(),
-			heartbeat.getAppName(),
-			heartbeat.isOverload(),
-			config.getMaxLightweightTaskNum(),
-			heartbeat.getLightTaskTrackerNum(),
-			config.getMaxHeavyweightTaskNum()
-		);
+        // 发送请求
+        if (StringUtils.isEmpty(currentServer)) {
+            return;
+        }
+        // log
+        log.info(
+                "[WorkerHealthReporter] report health status,appId:{},appName:{},isOverload:{},maxLightweightTaskNum:{},currentLightweightTaskNum:{},maxHeavyweightTaskNum:{}",
+                heartbeat.getAppId(),
+                heartbeat.getAppName(),
+                heartbeat.isOverload(),
+                config.getMaxLightweightTaskNum(),
+                heartbeat.getLightTaskTrackerNum(),
+                config.getMaxHeavyweightTaskNum());
 
-		ScheduleCausa.SystemMetrics builder0 = ScheduleCausa.SystemMetrics.newBuilder()
-			.setCpuLoad(heartbeat.getSystemMetrics().getCpuLoad())
-			.setCpuProcessors(heartbeat.getSystemMetrics().getCpuProcessors())
-			.setDiskTotal(heartbeat.getSystemMetrics().getDiskTotal())
-			.setDiskUsage(heartbeat.getSystemMetrics().getDiskUsage())
-			.setScore(heartbeat.getSystemMetrics().getScore())
-			.setJvmMaxMemory(heartbeat.getSystemMetrics().getJvmMaxMemory())
-			.setJvmUsedMemory(heartbeat.getSystemMetrics().getJvmUsedMemory())
-			.setJvmMemoryUsage(heartbeat.getSystemMetrics().getJvmMemoryUsage()).build();
-		ScheduleCausa.WorkerHeartbeat builder = ScheduleCausa.WorkerHeartbeat.newBuilder()
-			.setServerIpAddress(currentServer)
-			.setAppId(heartbeat.getAppId())
-			.setAppName(heartbeat.getAppName())
-			.setHeartbeatTime(heartbeat.getHeartbeatTime())
-			.setClient(heartbeat.getClient())
-			.setIsOverload(heartbeat.isOverload())
-			.setWorkerAddress(heartbeat.getWorkerAddress())
-			.setSystemMetrics(builder0)
-			.build();
+        ScheduleCausa.SystemMetrics builder0 =
+                ScheduleCausa.SystemMetrics.newBuilder()
+                        .setCpuLoad(heartbeat.getSystemMetrics().getCpuLoad())
+                        .setCpuProcessors(heartbeat.getSystemMetrics().getCpuProcessors())
+                        .setDiskTotal(heartbeat.getSystemMetrics().getDiskTotal())
+                        .setDiskUsage(heartbeat.getSystemMetrics().getDiskUsage())
+                        .setScore(heartbeat.getSystemMetrics().getScore())
+                        .setJvmMaxMemory(heartbeat.getSystemMetrics().getJvmMaxMemory())
+                        .setJvmUsedMemory(heartbeat.getSystemMetrics().getJvmUsedMemory())
+                        .setJvmMemoryUsage(heartbeat.getSystemMetrics().getJvmMemoryUsage())
+                        .build();
+        ScheduleCausa.WorkerHeartbeat builder =
+                ScheduleCausa.WorkerHeartbeat.newBuilder()
+                        .setServerIpAddress(currentServer)
+                        .setAppId(heartbeat.getAppId())
+                        .setAppName(heartbeat.getAppName())
+                        .setHeartbeatTime(heartbeat.getHeartbeatTime())
+                        .setClient(heartbeat.getClient())
+                        .setIsOverload(heartbeat.isOverload())
+                        .setWorkerAddress(heartbeat.getWorkerAddress())
+                        .setSystemMetrics(builder0)
+                        .build();
 
-		StrategyCaller.call(TransportTypeEnum.HEARTBEAT_HEALTH_REPORT, builder);
-	}
+        StrategyCaller.call(TransportTypeEnum.HEARTBEAT_HEALTH_REPORT, builder);
+    }
 }

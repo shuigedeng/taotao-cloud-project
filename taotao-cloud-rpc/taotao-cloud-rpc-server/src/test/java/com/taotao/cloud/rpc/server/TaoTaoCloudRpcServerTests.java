@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.rpc.server;
 
-
 class TaoTaoCloudRpcServerTests {
 
     void contextLoads() {}

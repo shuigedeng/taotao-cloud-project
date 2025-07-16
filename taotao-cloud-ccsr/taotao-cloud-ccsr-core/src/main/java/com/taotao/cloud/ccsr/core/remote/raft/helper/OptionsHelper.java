@@ -1,8 +1,24 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.ccsr.core.remote.raft.helper;
 
 import com.alipay.sofa.jraft.option.*;
-import org.apache.commons.lang3.StringUtils;
 import com.taotao.cloud.ccsr.common.config.CcsrConfig;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author shuigedeng
@@ -23,7 +39,7 @@ public class OptionsHelper {
         // 启用共享快照定时器
         nodeOptions.setSharedSnapshotTimer(true);
         // 启用指标收集功能
-        //nodeOptions.setEnableMetrics(true);
+        // nodeOptions.setEnableMetrics(true);
         // 选举超时时间
         nodeOptions.setElectionTimeoutMs(config.getElectionTimeout());
         // 设置快照间隔时间为 1800 秒（即 30 分钟）
@@ -41,7 +57,7 @@ public class OptionsHelper {
         if (config.isSingleNode()) {
             // 单节点必须配置的选项
             nodeOptions.setElectionPriority(100); // 确保节点成为Leader
-            //nodeOptions.setElectionTimeoutMs(Integer.MAX_VALUE); // 可以设置超长选举超时以避免触发
+            // nodeOptions.setElectionTimeoutMs(Integer.MAX_VALUE); // 可以设置超长选举超时以避免触发
         }
 
         return nodeOptions;
@@ -61,7 +77,7 @@ public class OptionsHelper {
         raftOptions.setDisruptorBufferSize(config.getDisruptorBufferSize());
         raftOptions.setReplicatorPipeline(config.isReplicatorPipeline());
         raftOptions.setReplicatorPipeline(config.isReplicatorPipeline());
-        raftOptions.setMaxReplicatorInflightMsgs(config.getMaxReplicatorInflightMsgs());// 减少内存占用
+        raftOptions.setMaxReplicatorInflightMsgs(config.getMaxReplicatorInflightMsgs()); // 减少内存占用
 
         raftOptions.setEnableLogEntryChecksum(config.isEnableLogEntryChecksum());
         return raftOptions;
@@ -77,16 +93,19 @@ public class OptionsHelper {
         String safe = "read_only_safe";
         String leaseBased = "read_only_lease_based";
 
-        if (StringUtils.isBlank(config.getReadOnlyOption()) || StringUtils.equals(safe, config.getReadOnlyOption())) {
+        if (StringUtils.isBlank(config.getReadOnlyOption())
+                || StringUtils.equals(safe, config.getReadOnlyOption())) {
             return ReadOnlyOption.ReadOnlySafe;
         }
 
         if (StringUtils.equals(leaseBased, config.getReadOnlyOption())) {
             return ReadOnlyOption.ReadOnlyLeaseBased;
         }
-        throw new IllegalArgumentException("Illegal Raft system parameters => ReadOnlyOption" + " : ["
-                + config.getReadOnlyOption() + "], should be 'read_only_safe' or 'read_only_lease_based'");
-
+        throw new IllegalArgumentException(
+                "Illegal Raft system parameters => ReadOnlyOption"
+                        + " : ["
+                        + config.getReadOnlyOption()
+                        + "], should be 'read_only_safe' or 'read_only_lease_based'");
     }
 
     public static CliOptions getCliOptions() {
@@ -100,6 +119,4 @@ public class OptionsHelper {
     public static NodeOptions getNodeOptions() {
         return nodeOptions;
     }
-
 }
-

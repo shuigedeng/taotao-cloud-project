@@ -1,18 +1,33 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.ccsr.client.remote.grpc;
 
+import com.taotao.cloud.ccsr.api.event.EventType;
+import com.taotao.cloud.ccsr.api.grpc.auto.*;
 import com.taotao.cloud.ccsr.client.dto.ServerAddress;
 import com.taotao.cloud.ccsr.client.lifecycle.Closeable;
 import com.taotao.cloud.ccsr.client.listener.ConfigListenerManager;
 import com.taotao.cloud.ccsr.client.loadbalancer.ServiceDiscovery;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-import io.grpc.stub.StreamObserver;
-import com.taotao.cloud.ccsr.api.grpc.auto.*;
-import com.taotao.cloud.ccsr.api.event.EventType;
 import com.taotao.cloud.ccsr.common.enums.RaftGroup;
 import com.taotao.cloud.ccsr.common.exception.CcsrClientException;
 import com.taotao.cloud.ccsr.common.log.Log;
-
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import io.grpc.stub.StreamObserver;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -47,14 +62,11 @@ public abstract class GrpcConnection implements Closeable {
     private void startHealthCheckScheduler() {
         if (healthCheckScheduler == null || healthCheckScheduler.isShutdown()) {
             healthCheckScheduler = Executors.newSingleThreadScheduledExecutor();
-            healthCheckScheduler.scheduleAtFixedRate(
-                    this::healthCheck, 0, 30, TimeUnit.SECONDS
-            );
+            healthCheckScheduler.scheduleAtFixedRate(this::healthCheck, 0, 30, TimeUnit.SECONDS);
         }
     }
 
-    public GrpcConnection() {
-    }
+    public GrpcConnection() {}
 
     public GrpcConnection(String namespace, List<ServerAddress> serverAddresses) {
         init(namespace, serverAddresses);
@@ -71,20 +83,21 @@ public abstract class GrpcConnection implements Closeable {
 
     private void rebuildChannel() {
         // 过滤活跃地址并构建目标字符串
-        //String target = buildTargetFromAddresses();
-//        String target = "127.0.0.1:8000,127.0.0.1:8100";
+        // String target = buildTargetFromAddresses();
+        //        String target = "127.0.0.1:8000,127.0.0.1:8100";
         // TODO 这里依赖gRPC默认的负载均衡策略 round_robin, 如果需要可以自定义
-//        this.channel = ManagedChannelBuilder.forTarget(target)
+        //        this.channel = ManagedChannelBuilder.forTarget(target)
 
         discovery.update(serverAddresses);
         ServerAddress server = discovery.selector();
 
         Log.print("尝试连接... host:%s, port:%s", server.getHost(), server.getPort());
 
-        this.channel = ManagedChannelBuilder.forAddress(server.getHost(), server.getPort())
-                .defaultLoadBalancingPolicy("round_robin")
-                .usePlaintext()// 简化开发环境设置，无 SSL
-                .build();
+        this.channel =
+                ManagedChannelBuilder.forAddress(server.getHost(), server.getPort())
+                        .defaultLoadBalancingPolicy("round_robin")
+                        .usePlaintext() // 简化开发环境设置，无 SSL
+                        .build();
 
         this.blockingStub = MetadataServiceGrpc.newBlockingStub(channel);
         this.futureStub = MetadataServiceGrpc.newFutureStub(channel);
@@ -143,27 +156,33 @@ public abstract class GrpcConnection implements Closeable {
                         .setRaftGroup(RaftGroup.CONFIG_CENTER_GROUP.getName())
                         .build();
 
-        asyncStub.subscribe(request, new StreamObserver<>() {
-            @Override
-            public void onNext(MetadataSubscribeResponse response) {
-                Log.print("配置订阅监听: namespace=%s, eventType=%s, metadata=%s", response.getNamespace(), response.getOpType(), response.getMetadata());
-                Metadata metadata = response.getMetadata();
-                EventType eventType = EventType.valueOf(response.getOpType());
-                ConfigListenerManager.fireEvent(metadata, eventType);
-            }
+        asyncStub.subscribe(
+                request,
+                new StreamObserver<>() {
+                    @Override
+                    public void onNext(MetadataSubscribeResponse response) {
+                        Log.print(
+                                "配置订阅监听: namespace=%s, eventType=%s, metadata=%s",
+                                response.getNamespace(),
+                                response.getOpType(),
+                                response.getMetadata());
+                        Metadata metadata = response.getMetadata();
+                        EventType eventType = EventType.valueOf(response.getOpType());
+                        ConfigListenerManager.fireEvent(metadata, eventType);
+                    }
 
-            @Override
-            public void onError(Throwable t) {
-                Log.print("配置订阅监听出错: " + t.getMessage());
-                reconnect();
-            }
+                    @Override
+                    public void onError(Throwable t) {
+                        Log.print("配置订阅监听出错: " + t.getMessage());
+                        reconnect();
+                    }
 
-            @Override
-            public void onCompleted() {
-                Log.print("服务端链接关闭...");
-                // TODO 标记为不健康服务
-            }
-        });
+                    @Override
+                    public void onCompleted() {
+                        Log.print("服务端链接关闭...");
+                        // TODO 标记为不健康服务
+                    }
+                });
     }
 
     private void healthCheck() {
@@ -174,8 +193,13 @@ public abstract class GrpcConnection implements Closeable {
 
                 // 记录状态变化
                 if (reachable != addr.isActive()) {
-                    Log.print("地址状态变化: " + addr.getHost() + ":" + addr.getPort()
-                            + " -> " + (reachable ? "激活" : "失效"));
+                    Log.print(
+                            "地址状态变化: "
+                                    + addr.getHost()
+                                    + ":"
+                                    + addr.getPort()
+                                    + " -> "
+                                    + (reachable ? "激活" : "失效"));
                 }
             }
         } catch (Exception e) {

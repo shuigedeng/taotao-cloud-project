@@ -32,7 +32,8 @@ import java.util.concurrent.ConcurrentHashMap;
 // 分布式事务的核心处理器
 public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
-    private static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+    private static ChannelGroup channelGroup =
+            new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
     // 事务组中的事务状态列表
     private static Map<String, List<String>> transactionTypeMap = new ConcurrentHashMap<>();
@@ -94,8 +95,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
             // 调试时的输出信息
             System.out.println("isEndMap长度：" + isEndMap.size());
             System.out.println("transactionCountMap长度：" + transactionCountMap.get(groupId));
-            System.out.println(
-                    "transactionTypeMap长度：" + transactionTypeMap.get(groupId).size());
+            System.out.println("transactionTypeMap长度：" + transactionTypeMap.get(groupId).size());
 
             JSONObject result = new JSONObject();
             result.put("groupId", groupId);

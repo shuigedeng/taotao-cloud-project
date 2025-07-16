@@ -27,18 +27,17 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @EnableConfigurationProperties(TtcJobServerConfig.class)
 public class JobServerApplication extends SpringBootServletInitializer {
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(JobServerApplication.class);
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(JobServerApplication.class);
+    }
 
-	public static void main(String[] args) {
-		new StartupSpringApplication(JobServerApplication.class)
-			.setTtcBanner()
-			.setTtcProfileIfNotExists("dev")
-			.setTtcApplicationProperty("taotao-cloud-job-server")
-			.setTtcAllowBeanDefinitionOverriding(true)
-			.run(args);
-	}
-
+    public static void main(String[] args) {
+        new StartupSpringApplication(JobServerApplication.class)
+                .setTtcBanner()
+                .setTtcProfileIfNotExists("dev")
+                .setTtcApplicationProperty("taotao-cloud-job-server")
+                .setTtcAllowBeanDefinitionOverriding(true)
+                .run(args);
+    }
 }

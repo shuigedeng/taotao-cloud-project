@@ -26,20 +26,19 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @EnableCcsrClient(enable = true)
 public class CcsrExampleApplication extends SpringBootServletInitializer {
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(CcsrExampleApplication.class);
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(CcsrExampleApplication.class);
+    }
 
-	public static void main(String[] args) {
-		System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
+    public static void main(String[] args) {
+        System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
 
-		new StartupSpringApplication(CcsrExampleApplication.class)
-			.setTtcBanner()
-			.setTtcProfileIfNotExists("dev")
-			.setTtcApplicationProperty("taotao-cloud-ccsr-example")
-			.setTtcAllowBeanDefinitionOverriding(true)
-			.run(args);
-	}
-
+        new StartupSpringApplication(CcsrExampleApplication.class)
+                .setTtcBanner()
+                .setTtcProfileIfNotExists("dev")
+                .setTtcApplicationProperty("taotao-cloud-ccsr-example")
+                .setTtcAllowBeanDefinitionOverriding(true)
+                .run(args);
+    }
 }

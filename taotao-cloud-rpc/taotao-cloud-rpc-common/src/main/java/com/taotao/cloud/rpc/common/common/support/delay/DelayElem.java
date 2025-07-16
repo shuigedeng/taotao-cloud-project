@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.rpc.common.common.support.delay;
 
 import java.util.concurrent.Delayed;
@@ -13,10 +29,12 @@ public class DelayElem implements Delayed {
      * 延迟时间
      */
     private final long delayMills;
+
     /**
      * 到期时间
      */
     private final long expire;
+
     /**
      * 数据
      */
@@ -25,7 +43,7 @@ public class DelayElem implements Delayed {
     public DelayElem(long delayMills, Runnable msg) {
         this.delayMills = delayMills;
         this.msg = msg;
-        //到期时间 = 当前时间+延迟时间
+        // 到期时间 = 当前时间+延迟时间
         this.expire = System.currentTimeMillis() + this.delayMills;
     }
 
@@ -46,8 +64,9 @@ public class DelayElem implements Delayed {
      */
     @Override
     public long getDelay(TimeUnit unit) {
-        return unit.convert(this.expire - System.currentTimeMillis() , TimeUnit.MILLISECONDS);
+        return unit.convert(this.expire - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
     }
+
     /**
      * 用于延迟队列内部比较排序
      * <p>
@@ -60,13 +79,17 @@ public class DelayElem implements Delayed {
     public int compareTo(Delayed o) {
         return (int) (this.getDelay(TimeUnit.MILLISECONDS) - o.getDelay(TimeUnit.MILLISECONDS));
     }
+
     @Override
     public String toString() {
-        return "DelayElem{" +
-                "delayMills=" + delayMills +
-                ", expire=" + expire +
-                ", msg='" + msg + '\'' +
-                '}';
+        return "DelayElem{"
+                + "delayMills="
+                + delayMills
+                + ", expire="
+                + expire
+                + ", msg='"
+                + msg
+                + '\''
+                + '}';
     }
-
 }

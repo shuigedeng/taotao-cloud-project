@@ -1,13 +1,30 @@
-package com.taotao.cloud.rpc.client.constant.enums;//package com.taotao.cloud.rpc.client.client.constant.enums;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.taotao.cloud.rpc.client.constant.enums; // package
+                                                    // com.taotao.cloud.rpc.client.client.constant.enums;
 //
-///**
+/// **
 // * 调用方式枚举
 // * （1）调用方式，是一种非常固定的模式。所以使用枚举代替常量。
 // * （2）在 api 中使用常量，避免二者产生依赖。
 // * @author shuigedeng
 // * @since 0.1.0
 // */
-//public enum CallTypeEnum {
+// public enum CallTypeEnum {
 //
 //    /**
 //     * 单向调用：不关心调用的结果
@@ -50,4 +67,4 @@ package com.taotao.cloud.rpc.client.constant.enums;//package com.taotao.cloud.rp
 //                "code=" + code +
 //                '}';
 //    }
-//}
+// }

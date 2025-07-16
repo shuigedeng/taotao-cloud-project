@@ -1,31 +1,41 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.ccsr.common.utils;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
-import org.apache.commons.collections4.MapUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.net.URLDecoder;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.ConcurrentNavigableMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.lang3.tuple.Pair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * GsonUtils.
@@ -39,13 +49,19 @@ public class GsonUtils {
 
     private static final GsonUtils INSTANCE = new GsonUtils();
 
-    private static final Gson GSON = new GsonBuilder()
-            .registerTypeAdapter(Timestamp.class, new TimestampTypeAdapter())
-            .registerTypeHierarchyAdapter(Pair.class, new PairTypeAdapter())
-            .create();
+    private static final Gson GSON =
+            new GsonBuilder()
+                    .registerTypeAdapter(Timestamp.class, new TimestampTypeAdapter())
+                    .registerTypeHierarchyAdapter(Pair.class, new PairTypeAdapter())
+                    .create();
 
-    private static final Gson GSON_MAP = new GsonBuilder().serializeNulls().registerTypeHierarchyAdapter(new TypeToken<Map<String, Object>>() {
-    }.getRawType(), new MapDeserializer<String, Object>()).create();
+    private static final Gson GSON_MAP =
+            new GsonBuilder()
+                    .serializeNulls()
+                    .registerTypeHierarchyAdapter(
+                            new TypeToken<Map<String, Object>>() {}.getRawType(),
+                            new MapDeserializer<String, Object>())
+                    .create();
 
     private static final String DOT = ".";
 
@@ -138,9 +154,9 @@ public class GsonUtils {
      * @return the list
      */
     public <T> List<T> fromCurrentList(final String json, final Class<T> clazz) {
-        return GSON.fromJson(json, TypeToken.getParameterized(CopyOnWriteArrayList.class, clazz).getType());
+        return GSON.fromJson(
+                json, TypeToken.getParameterized(CopyOnWriteArrayList.class, clazz).getType());
     }
-
 
     /**
      * to Map.
@@ -149,8 +165,7 @@ public class GsonUtils {
      * @return hashMap map
      */
     private Map<String, String> toStringMap(final String json) {
-        return GSON.fromJson(json, new TypeToken<Map<String, String>>() {
-        }.getType());
+        return GSON.fromJson(json, new TypeToken<Map<String, String>>() {}.getType());
     }
 
     /**
@@ -160,8 +175,7 @@ public class GsonUtils {
      * @return hashMap list
      */
     public List<Map<String, Object>> toListMap(final String json) {
-        return GSON.fromJson(json, new TypeToken<List<Map<String, Object>>>() {
-        }.getType());
+        return GSON.fromJson(json, new TypeToken<List<Map<String, Object>>>() {}.getType());
     }
 
     /**
@@ -171,8 +185,7 @@ public class GsonUtils {
      * @return the map
      */
     public Map<String, Object> toObjectMap(final String json) {
-        return GSON_MAP.fromJson(json, new TypeToken<LinkedHashMap<String, Object>>() {
-        }.getType());
+        return GSON_MAP.fromJson(json, new TypeToken<LinkedHashMap<String, Object>>() {}.getType());
     }
 
     /**
@@ -184,7 +197,8 @@ public class GsonUtils {
      * @return the map
      */
     public <T> Map<String, T> toObjectMap(final String json, final Class<T> clazz) {
-        return GSON.fromJson(json, TypeToken.getParameterized(Map.class, String.class, clazz).getType());
+        return GSON.fromJson(
+                json, TypeToken.getParameterized(Map.class, String.class, clazz).getType());
     }
 
     /**
@@ -196,7 +210,13 @@ public class GsonUtils {
      * @return the map
      */
     public <T> Map<String, List<T>> toObjectMapList(final String json, final Class<T> clazz) {
-        return GSON.fromJson(json, TypeToken.getParameterized(Map.class, String.class, TypeToken.getParameterized(List.class, clazz).getType()).getType());
+        return GSON.fromJson(
+                json,
+                TypeToken.getParameterized(
+                                Map.class,
+                                String.class,
+                                TypeToken.getParameterized(List.class, clazz).getType())
+                        .getType());
     }
 
     /**
@@ -206,8 +226,8 @@ public class GsonUtils {
      * @return the tree map
      */
     public ConcurrentNavigableMap<String, Object> toTreeMap(final String json) {
-        return GSON_MAP.fromJson(json, new TypeToken<ConcurrentSkipListMap<String, Object>>() {
-        }.getType());
+        return GSON_MAP.fromJson(
+                json, new TypeToken<ConcurrentSkipListMap<String, Object>>() {}.getType());
     }
 
     /**
@@ -217,8 +237,8 @@ public class GsonUtils {
      * @return the map
      */
     public Map<String, Object> convertToMap(final String json) {
-        Map<String, Object> map = GSON_MAP.fromJson(json, new TypeToken<Map<String, Object>>() {
-        }.getType());
+        Map<String, Object> map =
+                GSON_MAP.fromJson(json, new TypeToken<Map<String, Object>>() {}.getType());
 
         if (MapUtils.isEmpty(map)) {
             return map;
@@ -229,7 +249,8 @@ public class GsonUtils {
             Object value = entry.getValue();
             if (value instanceof String) {
                 String valueStr = ((String) value).trim();
-                if (valueStr.startsWith(LEFT_ANGLE_BRACKETS) && valueStr.endsWith(RIGHT_ANGLE_BRACKETS)) {
+                if (valueStr.startsWith(LEFT_ANGLE_BRACKETS)
+                        && valueStr.endsWith(RIGHT_ANGLE_BRACKETS)) {
                     Map<String, Object> mv = convertToMap(value.toString());
                     map.put(key, mv);
                 }
@@ -279,7 +300,8 @@ public class GsonUtils {
     private static class MapDeserializer<T, U> implements JsonDeserializer<Map<T, U>> {
         @SuppressWarnings("unchecked")
         @Override
-        public Map<T, U> deserialize(final JsonElement json, final Type type, final JsonDeserializationContext context) {
+        public Map<T, U> deserialize(
+                final JsonElement json, final Type type, final JsonDeserializationContext context) {
             if (!json.isJsonObject()) {
                 return null;
             }
@@ -298,8 +320,10 @@ public class GsonUtils {
             } else {
                 try {
                     resultMap = (Map<T, U>) mapClass.getConstructor().newInstance();
-                } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                         NoSuchMethodException e) {
+                } catch (InstantiationException
+                        | IllegalAccessException
+                        | InvocationTargetException
+                        | NoSuchMethodException e) {
                     LOG.error("failed to get constructor", e);
                 }
             }
@@ -337,7 +361,8 @@ public class GsonUtils {
             }
             if (primitive.isNumber()) {
                 String numStr = primitive.getAsString();
-                if (numStr.contains(DOT) || numStr.contains(E)
+                if (numStr.contains(DOT)
+                        || numStr.contains(E)
                         || numStr.contains(E.toUpperCase())) {
                     return Double.class;
                 }
@@ -353,7 +378,8 @@ public class GsonUtils {
     private static class PairTypeAdapter extends TypeAdapter<Pair<String, String>> {
 
         @Override
-        public void write(final JsonWriter out, final Pair<String, String> value) throws IOException {
+        public void write(final JsonWriter out, final Pair<String, String> value)
+                throws IOException {
             out.beginObject();
             out.name(LEFT).value(value.getLeft());
             out.name(RIGHT).value(value.getRight());
@@ -386,12 +412,17 @@ public class GsonUtils {
         }
     }
 
-    private static class TimestampTypeAdapter implements JsonSerializer<Timestamp>, JsonDeserializer<Timestamp> {
+    private static class TimestampTypeAdapter
+            implements JsonSerializer<Timestamp>, JsonDeserializer<Timestamp> {
 
         private final DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         @Override
-        public Timestamp deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context) throws JsonParseException {
+        public Timestamp deserialize(
+                final JsonElement json,
+                final Type typeOfT,
+                final JsonDeserializationContext context)
+                throws JsonParseException {
             if (!(json instanceof JsonPrimitive)) {
                 throw new JsonParseException("The date should be a string value");
             }
@@ -404,7 +435,8 @@ public class GsonUtils {
         }
 
         @Override
-        public JsonElement serialize(final Timestamp src, final Type typeOfSrc, final JsonSerializationContext context) {
+        public JsonElement serialize(
+                final Timestamp src, final Type typeOfSrc, final JsonSerializationContext context) {
             String dfString = format.format(new Date(src.getTime()));
             return new JsonPrimitive(dfString);
         }

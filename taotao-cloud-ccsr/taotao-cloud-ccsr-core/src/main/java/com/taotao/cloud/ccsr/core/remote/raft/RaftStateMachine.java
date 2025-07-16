@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.ccsr.core.remote.raft;
 
 import com.alipay.sofa.jraft.Closure;
@@ -12,24 +28,22 @@ import com.alipay.sofa.jraft.error.RaftException;
 import com.alipay.sofa.jraft.storage.snapshot.SnapshotReader;
 import com.alipay.sofa.jraft.storage.snapshot.SnapshotWriter;
 import com.google.protobuf.Message;
-import org.apache.commons.lang.exception.ExceptionUtils;
 import com.taotao.cloud.ccsr.api.grpc.auto.Metadata;
 import com.taotao.cloud.ccsr.api.grpc.auto.Response;
-import com.taotao.cloud.ccsr.core.remote.raft.handler.RequestDispatcher;
 import com.taotao.cloud.ccsr.api.result.ResponseHelper;
-import com.taotao.cloud.ccsr.core.serializer.SerializeFactory;
+import com.taotao.cloud.ccsr.common.enums.ResponseCode;
+import com.taotao.cloud.ccsr.common.log.Log;
+import com.taotao.cloud.ccsr.core.remote.raft.handler.RequestDispatcher;
 import com.taotao.cloud.ccsr.core.serializer.Serializer;
 import com.taotao.cloud.ccsr.core.storage.MetadaStorage;
 import com.taotao.cloud.ccsr.core.utils.ProtoMessageUtils;
 import com.taotao.cloud.ccsr.core.utils.StorageHolder;
-import com.taotao.cloud.ccsr.common.enums.ResponseCode;
-import com.taotao.cloud.ccsr.common.log.Log;
-
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
+import org.apache.commons.lang.exception.ExceptionUtils;
 
 /**
  * @author shuigedeng
@@ -50,7 +64,11 @@ public class RaftStateMachine extends StateMachineAdapter {
 
     private String group;
 
-    public RaftStateMachine(RaftServer server, Serializer serializer, Map<String, Configuration> configurations, String group) {
+    public RaftStateMachine(
+            RaftServer server,
+            Serializer serializer,
+            Map<String, Configuration> configurations,
+            String group) {
         this.group = group;
         this.server = server;
         this.serializer = serializer;
@@ -89,12 +107,17 @@ public class RaftStateMachine extends StateMachineAdapter {
                     index++;
                     status.setError(RaftError.UNKNOWN, t.toString());
                     // 1. 记录错误日志
-                    Log.print("Failed to process raft entry. Error: %s", ExceptionUtils.getRootCauseMessage(t));
+                    Log.print(
+                            "Failed to process raft entry. Error: %s",
+                            ExceptionUtils.getRootCauseMessage(t));
 
                     // 2. 更新闭包状态
                     if (closure != null) {
                         closure.setThrowable(t);
-                        closure.setResponse(ResponseHelper.error(ResponseCode.SYSTEM_ERROR.getCode(), "Processing failed: " + t.getMessage()));
+                        closure.setResponse(
+                                ResponseHelper.error(
+                                        ResponseCode.SYSTEM_ERROR.getCode(),
+                                        "Processing failed: " + t.getMessage()));
                     }
 
                     Optional.ofNullable(closure).ifPresent(c -> c.setThrowable(t));
@@ -110,7 +133,9 @@ public class RaftStateMachine extends StateMachineAdapter {
             }
         } catch (Throwable e) {
             Log.print("状态机【Critical】异常: %s", ExceptionUtils.getStackTrace(e));
-            it.setErrorAndRollback(index - completed, new Status(RaftError.ESTATEMACHINE, "Critical error: %s", e.getMessage()));
+            it.setErrorAndRollback(
+                    index - completed,
+                    new Status(RaftError.ESTATEMACHINE, "Critical error: %s", e.getMessage()));
         }
     }
 
@@ -139,7 +164,8 @@ public class RaftStateMachine extends StateMachineAdapter {
     @Override
     public void onSnapshotSave(SnapshotWriter writer, Closure done) {
         try {
-            Log.print("快照保存【开始】Saving snapshot to %s, node: %s", writer.getPath(), node.getNodeId());
+            Log.print(
+                    "快照保存【开始】Saving snapshot to %s, node: %s", writer.getPath(), node.getNodeId());
 
             // 将快照信息持久化到磁盘
             saveMetadataSnapshot(writer, done);
@@ -185,7 +211,7 @@ public class RaftStateMachine extends StateMachineAdapter {
     @Override
     public void onError(RaftException e) {
         Log.error("状态机错误...", e);
-        //super.onError(e);
+        // super.onError(e);
     }
 
     /**
@@ -222,23 +248,24 @@ public class RaftStateMachine extends StateMachineAdapter {
         }
     }
 
-//    public static void main(String[] args) {
-//        String snapshotFilePath = "/Users/caoshipeng/IdeaProjects/ccsr/raft/config_center_group/127.0.0.1_9001/snapshot/snapshot_13/metadata_config.data";
-//        File snapshotFile = new File(snapshotFilePath);
-//        try (FileInputStream fis = new FileInputStream(snapshotFile)) {
-//            // 1. 读取快照数据
-//            byte[] data = new byte[(int) snapshotFile.length()];
-//            fis.read(data);
-//
-//            // 2. 反序列化并恢复存储
-//            MetadaStorage storage = StorageHolder.getInstance("metadata");
-//            Map<String, Metadata> snapshot = SerializeFactory.getDefault().deserialize(data);
-//
-//
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    //    public static void main(String[] args) {
+    //        String snapshotFilePath =
+    // "/Users/caoshipeng/IdeaProjects/ccsr/raft/config_center_group/127.0.0.1_9001/snapshot/snapshot_13/metadata_config.data";
+    //        File snapshotFile = new File(snapshotFilePath);
+    //        try (FileInputStream fis = new FileInputStream(snapshotFile)) {
+    //            // 1. 读取快照数据
+    //            byte[] data = new byte[(int) snapshotFile.length()];
+    //            fis.read(data);
+    //
+    //            // 2. 反序列化并恢复存储
+    //            MetadaStorage storage = StorageHolder.getInstance("metadata");
+    //            Map<String, Metadata> snapshot = SerializeFactory.getDefault().deserialize(data);
+    //
+    //
+    //        } catch (IOException e) {
+    //            throw new RuntimeException(e);
+    //        }
+    //    }
 
     /**
      * 保存快照, TODO 后续可以考虑持久化到磁盘后，同时向DB/Redis持久化
@@ -269,16 +296,17 @@ public class RaftStateMachine extends StateMachineAdapter {
     }
 
     public void triggerSnapshot() {
-        node.snapshot(new Closure() {
-            @Override
-            public void run(Status status) {
-                if (status.isOk()) {
-                    Log.print("手动快照成功");
-                } else {
-                    Log.error("手动快照失败: %s", status.getErrorMsg());
-                }
-            }
-        });
+        node.snapshot(
+                new Closure() {
+                    @Override
+                    public void run(Status status) {
+                        if (status.isOk()) {
+                            Log.print("手动快照成功");
+                        } else {
+                            Log.error("手动快照失败: %s", status.getErrorMsg());
+                        }
+                    }
+                });
     }
 
     public boolean isLeader() {

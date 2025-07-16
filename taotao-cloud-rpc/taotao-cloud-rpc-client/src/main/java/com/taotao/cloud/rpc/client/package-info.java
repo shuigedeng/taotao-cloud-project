@@ -1,4 +1,3 @@
-
 /**
  * <p> the client module </p>
  *

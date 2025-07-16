@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.ccsr.core.remote.raft;
 
 import com.alipay.sofa.jraft.*;
@@ -9,24 +25,23 @@ import com.alipay.sofa.jraft.option.CliOptions;
 import com.alipay.sofa.jraft.option.NodeOptions;
 import com.alipay.sofa.jraft.rpc.RpcServer;
 import com.alipay.sofa.jraft.rpc.impl.cli.CliClientServiceImpl;
-import org.apache.commons.collections4.CollectionUtils;
-import com.taotao.cloud.ccsr.common.config.CcsrConfig;
 import com.taotao.cloud.ccsr.api.event.GlobalEventBus;
-import com.taotao.cloud.ccsr.core.event.LeaderRefreshEvent;
-import com.taotao.cloud.ccsr.core.remote.AbstractRpcServer;
-import com.taotao.cloud.ccsr.core.remote.raft.helper.RaftHelper;
-import com.taotao.cloud.ccsr.core.remote.raft.helper.OptionsHelper;
-import com.taotao.cloud.ccsr.core.serializer.SerializeFactory;
-import com.taotao.cloud.ccsr.core.serializer.Serializer;
-import com.taotao.cloud.ccsr.spi.Join;
+import com.taotao.cloud.ccsr.common.config.CcsrConfig;
 import com.taotao.cloud.ccsr.common.enums.RaftGroup;
 import com.taotao.cloud.ccsr.common.exception.CcsrException;
 import com.taotao.cloud.ccsr.common.log.Log;
-
+import com.taotao.cloud.ccsr.core.event.LeaderRefreshEvent;
+import com.taotao.cloud.ccsr.core.remote.AbstractRpcServer;
+import com.taotao.cloud.ccsr.core.remote.raft.helper.OptionsHelper;
+import com.taotao.cloud.ccsr.core.remote.raft.helper.RaftHelper;
+import com.taotao.cloud.ccsr.core.serializer.SerializeFactory;
+import com.taotao.cloud.ccsr.core.serializer.Serializer;
+import com.taotao.cloud.ccsr.spi.Join;
 import java.io.IOException;
 import java.net.*;
 import java.util.*;
 import java.util.concurrent.*;
+import org.apache.commons.collections4.CollectionUtils;
 
 /**
  * @author shuigedeng
@@ -56,8 +71,8 @@ public class RaftServer extends AbstractRpcServer {
 
     private final Map<String, List<ScheduledFuture<?>>> scheduledTasks = new ConcurrentHashMap<>();
 
-    public record RaftGroupTuple(Node node, RaftGroupService raftGroupService, RaftStateMachine machine) {
-    }
+    public record RaftGroupTuple(
+            Node node, RaftGroupService raftGroupService, RaftStateMachine machine) {}
 
     public RaftServer() {
         // 必须要有，用于SPI加载初始化
@@ -82,7 +97,8 @@ public class RaftServer extends AbstractRpcServer {
             this.nodeOptions = OptionsHelper.initNodeOptions(config.getRaftConfig());
             this.localPeerId = initPeerId();
             this.conf = initConfiguration();
-            this.nodeMonitor = new RaftNodeMonitor(this, config.getRaftConfig().getRpcRequestTimeout());
+            this.nodeMonitor =
+                    new RaftNodeMonitor(this, config.getRaftConfig().getRpcRequestTimeout());
             this.serializer = SerializeFactory.getDefault();
 
             initCliServices(config);
@@ -121,9 +137,7 @@ public class RaftServer extends AbstractRpcServer {
     }
 
     @Override
-    public void await() {
-
-    }
+    public void await() {}
 
     @Override
     public void stopPreProcessor() {
@@ -139,18 +153,20 @@ public class RaftServer extends AbstractRpcServer {
     }
 
     private void startMultiRaftGroup() {
-        Arrays.stream(RaftGroup.values()).forEach(groupEnum -> {
-            if (groupEnum.isEnable()) {
-                String groupId = groupEnum.getName();
-                try {
-                    RaftGroupTuple tuple = createRaftGroup(groupId);
-                    multiRaftGroup.put(groupId, tuple);
-                    scheduleLeaderRefresh(groupId);
-                } catch (Exception e) {
-                    Log.error("Failed to start Raft group {}", groupId, e);
-                }
-            }
-        });
+        Arrays.stream(RaftGroup.values())
+                .forEach(
+                        groupEnum -> {
+                            if (groupEnum.isEnable()) {
+                                String groupId = groupEnum.getName();
+                                try {
+                                    RaftGroupTuple tuple = createRaftGroup(groupId);
+                                    multiRaftGroup.put(groupId, tuple);
+                                    scheduleLeaderRefresh(groupId);
+                                } catch (Exception e) {
+                                    Log.error("Failed to start Raft group {}", groupId, e);
+                                }
+                            }
+                        });
     }
 
     private RaftGroupTuple createRaftGroup(String groupId) {
@@ -164,12 +180,14 @@ public class RaftServer extends AbstractRpcServer {
         RaftHelper.initDirectory(raftConfig.getRootPath(), groupId, localPeerId, groupOptions);
 
         // 初始化状态机
-        RaftStateMachine stateMachine = new RaftStateMachine(this, serializer, configurations, groupId);
+        RaftStateMachine stateMachine =
+                new RaftStateMachine(this, serializer, configurations, groupId);
         groupOptions.setFsm(stateMachine);
         groupOptions.setInitialConf(groupConf);
 
         // 创建并启动服务
-        RaftGroupService raftService = new RaftGroupService(groupId, localPeerId, groupOptions, rpcServer, true);
+        RaftGroupService raftService =
+                new RaftGroupService(groupId, localPeerId, groupOptions, rpcServer, true);
         Node node = raftService.start(false);
         stateMachine.setNode(node);
 
@@ -191,38 +209,55 @@ public class RaftServer extends AbstractRpcServer {
         final long electionTimeoutMs = nodeOptions.getElectionTimeoutMs();
 
         // 计算调度参数（带随机抖动） 动态计算抖动范围
-        int jitterRange = config.getRaftConfig().getRefreshJitterMax() - config.getRaftConfig().getRefreshJitterMin();
+        int jitterRange =
+                config.getRaftConfig().getRefreshJitterMax()
+                        - config.getRaftConfig().getRefreshJitterMin();
 
         // 最终调度周期 = 2 * 选举超时 + 基础抖动 + 随机抖动
         Random random = new Random(System.currentTimeMillis());
-        //long initialDelay = electionTimeoutMs + random.nextInt(4000); // 初始延迟：选举超时+0~5秒随机值
+        // long initialDelay = electionTimeoutMs + random.nextInt(4000); // 初始延迟：选举超时+0~5秒随机值
         // 固定为选举周期 * 3
         long initialDelay = electionTimeoutMs * 3;
-        long period = electionTimeoutMs * 3L + config.getRaftConfig().getRefreshJitterMin() + random.nextInt(jitterRange);
+        long period =
+                electionTimeoutMs * 3L
+                        + config.getRaftConfig().getRefreshJitterMin()
+                        + random.nextInt(jitterRange);
 
         // 4. 创建定时任务
-        ScheduledFuture<?> refreshTask = RaftHelper.getScheduleExecutor().scheduleAtFixedRate(
-                () -> {
-                    if (isShutdown) {
-                        return;
-                    }
-                    try {
-                        Log.print(">>>>>>>>>>>>>>触发 leader 刷新【开始】 for group: %s, leader: %s", groupId, getLeader(groupId));
-                        refreshRouteTable(groupId);
-                        Log.print(">>>>>>>>>>>>>>触发 leader 刷新【成功】 for group: %s, leader: %s", groupId, getLeader(groupId));
+        ScheduledFuture<?> refreshTask =
+                RaftHelper.getScheduleExecutor()
+                        .scheduleAtFixedRate(
+                                () -> {
+                                    if (isShutdown) {
+                                        return;
+                                    }
+                                    try {
+                                        Log.print(
+                                                ">>>>>>>>>>>>>>触发 leader 刷新【开始】 for group: %s, leader: %s",
+                                                groupId, getLeader(groupId));
+                                        refreshRouteTable(groupId);
+                                        Log.print(
+                                                ">>>>>>>>>>>>>>触发 leader 刷新【成功】 for group: %s, leader: %s",
+                                                groupId, getLeader(groupId));
 
-                    } catch (Exception e) {
-                        Log.error("Unexpected error during leader refresh for group {}", groupId, e);
-                    }
-                },
-                initialDelay,
-                period,
-                TimeUnit.MILLISECONDS
-        );
+                                    } catch (Exception e) {
+                                        Log.error(
+                                                "Unexpected error during leader refresh for group {}",
+                                                groupId,
+                                                e);
+                                    }
+                                },
+                                initialDelay,
+                                period,
+                                TimeUnit.MILLISECONDS);
 
         // 5. 注册任务以便后续管理
         scheduledTasks.computeIfAbsent(groupId, k -> new CopyOnWriteArrayList<>()).add(refreshTask);
-        Log.print("Scheduled leader refresh for group [{}]. Initial delay: {}ms, Period: {} ms", groupId, initialDelay, period);
+        Log.print(
+                "Scheduled leader refresh for group [{}]. Initial delay: {}ms, Period: {} ms",
+                groupId,
+                initialDelay,
+                period);
     }
 
     void refreshRouteTable(String group) {
@@ -231,11 +266,19 @@ public class RaftServer extends AbstractRpcServer {
             int rpcRequestTimeout = config.getRaftConfig().getRpcRequestTimeout();
             Status status = instance.refreshLeader(this.cliClientService, group, rpcRequestTimeout);
             if (!status.isOk()) {
-                Log.print("不能去刷新【Leader】for group: %s, status is: %s, errorMsg: ", group, status, status.getErrorMsg());
+                Log.print(
+                        "不能去刷新【Leader】for group: %s, status is: %s, errorMsg: ",
+                        group, status, status.getErrorMsg());
             }
             status = instance.refreshConfiguration(this.cliClientService, group, rpcRequestTimeout);
             if (!status.isOk()) {
-                System.out.println("不能去刷新【Route Configuration】 for group : " + group + ", status is : " + status + "=====msg=" + status.getErrorMsg());
+                System.out.println(
+                        "不能去刷新【Route Configuration】 for group : "
+                                + group
+                                + ", status is : "
+                                + status
+                                + "=====msg="
+                                + status.getErrorMsg());
             }
 
             // 重要通知事件，告知当前Raft集群的leader是谁
@@ -248,27 +291,28 @@ public class RaftServer extends AbstractRpcServer {
 
     private void registerNodeToCluster(String groupId, PeerId peer, Configuration conf) {
         ExecutorService regExecutor = Executors.newSingleThreadExecutor();
-        regExecutor.execute(() -> {
-            int maxRetries = 10;
-            for (int i = 0; i < maxRetries && !isShutdown; i++) {
-                try {
-                    if (cliService.getPeers(groupId, conf).contains(peer)) {
-                        Log.info("Node {} already in cluster", peer);
-                        return;
-                    }
+        regExecutor.execute(
+                () -> {
+                    int maxRetries = 10;
+                    for (int i = 0; i < maxRetries && !isShutdown; i++) {
+                        try {
+                            if (cliService.getPeers(groupId, conf).contains(peer)) {
+                                Log.info("Node {} already in cluster", peer);
+                                return;
+                            }
 
-                    Status status = cliService.addPeer(groupId, conf, peer);
-                    if (status.isOk()) {
-                        Log.info("Successfully joined cluster group: " + groupId);
-                        return;
-                    }
+                            Status status = cliService.addPeer(groupId, conf, peer);
+                            if (status.isOk()) {
+                                Log.info("Successfully joined cluster group: " + groupId);
+                                return;
+                            }
 
-                    Thread.sleep(calculateBackoff(i));
-                } catch (Exception e) {
-                    Log.error("Registration attempt {} failed for group {}", i, groupId, e);
-                }
-            }
-        });
+                            Thread.sleep(calculateBackoff(i));
+                        } catch (Exception e) {
+                            Log.error("Registration attempt {} failed for group {}", i, groupId, e);
+                        }
+                    }
+                });
     }
 
     private long calculateBackoff(int attempt) {
@@ -280,15 +324,20 @@ public class RaftServer extends AbstractRpcServer {
     }
 
     private void clearScheduledTasks() {
-        scheduledTasks.forEach((group, tasks) -> {
-            tasks.forEach(task -> {
-                // 发送中断
-                task.cancel(true);
-                if (!task.isDone()) {
-                    Log.warn("Task {} for group {} not terminated immediately", task, group);
-                }
-            });
-        });
+        scheduledTasks.forEach(
+                (group, tasks) -> {
+                    tasks.forEach(
+                            task -> {
+                                // 发送中断
+                                task.cancel(true);
+                                if (!task.isDone()) {
+                                    Log.warn(
+                                            "Task {} for group {} not terminated immediately",
+                                            task,
+                                            group);
+                                }
+                            });
+                });
         scheduledTasks.clear();
     }
 
@@ -352,13 +401,17 @@ public class RaftServer extends AbstractRpcServer {
     private void initCliServices(CcsrConfig config) {
         CliOptions cliOptions = OptionsHelper.initCliOptions(config.getRaftConfig());
         this.cliService = RaftServiceFactory.createAndInitCliService(cliOptions);
-        this.cliClientService = (CliClientServiceImpl) ((CliServiceImpl) this.cliService).getCliClientService();
+        this.cliClientService =
+                (CliClientServiceImpl) ((CliServiceImpl) this.cliService).getCliClientService();
 
         // 增加关闭钩子确保资源释放
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            cliService.shutdown();
-            cliClientService.shutdown();
-        }));
+        Runtime.getRuntime()
+                .addShutdownHook(
+                        new Thread(
+                                () -> {
+                                    cliService.shutdown();
+                                    cliClientService.shutdown();
+                                }));
     }
 
     public Map<String, RaftGroupTuple> getMultiRaftGroup() {

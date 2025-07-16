@@ -1,13 +1,26 @@
-package com.taotao.cloud.job.common.utils;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.time.DateFormatUtils;
-import org.springframework.util.StringUtils;
+package com.taotao.cloud.job.common.utils;
 
 import java.util.Collection;
 import java.util.UUID;
 import java.util.function.Supplier;
-
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.StringUtils;
 
 /**
  * 公共工具类
@@ -29,14 +42,15 @@ public class CommonUtils {
      * @return 函数成功执行后的返回值
      * @throws Exception 执行失败，调用方自行处理
      */
-    public static <T> T executeWithRetry(SupplierPlus<T> executor, int tryTimes, long intervalMS) throws Exception {
+    public static <T> T executeWithRetry(SupplierPlus<T> executor, int tryTimes, long intervalMS)
+            throws Exception {
         if (tryTimes <= 1 || intervalMS <= 0) {
             return executor.get();
         }
         for (int i = 1; i < tryTimes; i++) {
             try {
                 return executor.get();
-            }catch (Exception e) {
+            } catch (Exception e) {
                 Thread.sleep(intervalMS);
             }
         }
@@ -54,7 +68,8 @@ public class CommonUtils {
      * @param intervalMS 失败后下一次执行的间隔时间
      * @return 最终执行结果
      */
-    public static boolean executeWithRetryV2(Supplier<Boolean> booleanExecutor, int tryTimes, long intervalMS) {
+    public static boolean executeWithRetryV2(
+            Supplier<Boolean> booleanExecutor, int tryTimes, long intervalMS) {
 
         if (tryTimes <= 1 || intervalMS <= 0) {
             return booleanExecutor.get();
@@ -66,12 +81,11 @@ public class CommonUtils {
                     return true;
                 }
                 Thread.sleep(intervalMS);
-            }catch (Exception ignore) {
+            } catch (Exception ignore) {
             }
         }
         return booleanExecutor.get();
     }
-
 
     /**
      * 生成数据库查询语句 in 后的条件
@@ -84,23 +98,22 @@ public class CommonUtils {
         }
         StringBuilder sb = new StringBuilder(" ( ");
         collection.forEach(str -> sb.append("'").append(str).append("',"));
-        return sb.replace(sb.length() -1, sb.length(), " ) ").toString();
+        return sb.replace(sb.length() - 1, sb.length(), " ) ").toString();
     }
 
     public static void executeIgnoreException(SupplierPlus<?> executor) {
         try {
             executor.get();
-        }catch (Exception ignore) {
+        } catch (Exception ignore) {
         }
     }
 
     public static void executeIgnoreException(Meaningless executor) {
         try {
             executor.m();
-        }catch (Exception ignore) {
+        } catch (Exception ignore) {
         }
     }
-
 
     /**
      * 将大小格式化为 2的N次
@@ -117,45 +130,45 @@ public class CommonUtils {
         return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
     }
 
-//    public static <T> T requireNonNull(T obj, String msg) {
-//        if (obj == null) {
-//            throw new PowerJobException(msg);
-//        }
-//        if (obj instanceof String) {
-//            if (StringUtils.isEmpty((String) obj)) {
-//                throw new PowerJobException(msg);
-//            }
-//        }
-//        return obj;
-//    }
+    //    public static <T> T requireNonNull(T obj, String msg) {
+    //        if (obj == null) {
+    //            throw new PowerJobException(msg);
+    //        }
+    //        if (obj instanceof String) {
+    //            if (StringUtils.isEmpty((String) obj)) {
+    //                throw new PowerJobException(msg);
+    //            }
+    //        }
+    //        return obj;
+    //    }
 
     /**
      * 格式化时间，将时间戳转化为可阅读时间
      * @param ts 时间戳
      * @return 可阅读时间
      */
-//    public static String formatTime(Long ts) {
-//        if (ts == null || ts <= 0) {
-//            return OmsConstant.NONE;
-//        }
-//        try {
-//            return DateFormatUtils.format(ts, OmsConstant.TIME_PATTERN);
-//        }catch (Exception ignore) {
-//        }
-//        return OmsConstant.NONE;
-//    }
+    //    public static String formatTime(Long ts) {
+    //        if (ts == null || ts <= 0) {
+    //            return OmsConstant.NONE;
+    //        }
+    //        try {
+    //            return DateFormatUtils.format(ts, OmsConstant.TIME_PATTERN);
+    //        }catch (Exception ignore) {
+    //        }
+    //        return OmsConstant.NONE;
+    //    }
 
     /**
      * 格式化字符串，如果是 null 或空则显示 N/A
      * @param str 字符串
      * @return 结果
      */
-//    public static String formatString(String str) {
-//        if (StringUtils.isEmpty(str)) {
-//            return OmsConstant.NONE;
-//        }
-//        return str;
-//    }
+    //    public static String formatString(String str) {
+    //        if (StringUtils.isEmpty(str)) {
+    //            return OmsConstant.NONE;
+    //        }
+    //        return str;
+    //    }
 
     /**
      * 生成 UUID

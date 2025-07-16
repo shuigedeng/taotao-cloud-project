@@ -1,10 +1,25 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.ccsr.core.remote.raft;
 
 import com.alipay.sofa.jraft.Node;
 import com.alipay.sofa.jraft.conf.Configuration;
 import com.alipay.sofa.jraft.entity.PeerId;
 import com.taotao.cloud.ccsr.common.log.Log;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -31,36 +46,42 @@ public class RaftNodeMonitor {
     public RaftNodeMonitor(RaftServer server, long electionTimeout) {
         this.server = Objects.requireNonNull(server);
         this.checkInterval = electionTimeout * 3; // 检查间隔为3倍选举超时
-        this.maxSilentMs = electionTimeout * 5;   // 静默时间为3倍选举超时
-        this.minClusterSize = 2;                  // 最小集群大小为2
+        this.maxSilentMs = electionTimeout * 5; // 静默时间为3倍选举超时
+        this.minClusterSize = 2; // 最小集群大小为2
     }
 
     public void start() {
-        scheduler.scheduleAtFixedRate(this::checkClusterHealth, checkInterval / 2, checkInterval, TimeUnit.MILLISECONDS);
+        scheduler.scheduleAtFixedRate(
+                this::checkClusterHealth, checkInterval / 2, checkInterval, TimeUnit.MILLISECONDS);
         Log.print("[Node监控器] 已启动 (检查间隔={%s}ms, 最大静默时间={%s}ms)", checkInterval, maxSilentMs);
     }
 
     private void checkClusterHealth() {
-        server.getMultiRaftGroup().forEach((groupId, tuple) -> {
-            Node node = tuple.node();
-            // 新增Leader状态校验
-            if (!checkLeaderStatus(groupId, node)) {
-                return;
-            }
+        server.getMultiRaftGroup()
+                .forEach(
+                        (groupId, tuple) -> {
+                            Node node = tuple.node();
+                            // 新增Leader状态校验
+                            if (!checkLeaderStatus(groupId, node)) {
+                                return;
+                            }
 
-            ReentrantLock lock = groupLock.computeIfAbsent(groupId, k -> new ReentrantLock());
-            if (!lock.tryLock()) {
-                Log.print("[%s] 前一次检查流程未完成，跳过本次检查", groupId);
-                return;
-            }
+                            ReentrantLock lock =
+                                    groupLock.computeIfAbsent(groupId, k -> new ReentrantLock());
+                            if (!lock.tryLock()) {
+                                Log.print("[%s] 前一次检查流程未完成，跳过本次检查", groupId);
+                                return;
+                            }
 
-            try {
-                Log.print("[%s] 开始执行Raft组健康检查, node is: %s, leader is: %s", groupId, node, node.getLeaderId());
-                processGroupHealth(groupId, node);
-            } finally {
-                lock.unlock();
-            }
-        });
+                            try {
+                                Log.print(
+                                        "[%s] 开始执行Raft组健康检查, node is: %s, leader is: %s",
+                                        groupId, node, node.getLeaderId());
+                                processGroupHealth(groupId, node);
+                            } finally {
+                                lock.unlock();
+                            }
+                        });
     }
 
     private void processGroupHealth(String groupId, Node node) {
@@ -72,23 +93,24 @@ public class RaftNodeMonitor {
             Log.print("[%s] 当前存活节点列表: %s", groupId, alivePeers);
 
             currentConf.getPeers().stream()
-                    .filter(peer -> {
-                        // 排除自身
-                        boolean isSelf = peer.equals(node.getNodeId().getPeerId());
-                        if (isSelf) {
-                            Log.print("[%s] 跳过自身节点: %s", groupId, peer);
-                        }
-                        return !isSelf;
-                    })
-                    .filter(peer -> {
-                        // 筛选失效节点
-                        boolean isAlive = alivePeers.contains(peer);
-                        if (!isAlive) {
-                            Log.print("[%s] 检测到可能失效的节点: %s", groupId, peer);
-                        }
-                        return !isAlive;
-                    })
-
+                    .filter(
+                            peer -> {
+                                // 排除自身
+                                boolean isSelf = peer.equals(node.getNodeId().getPeerId());
+                                if (isSelf) {
+                                    Log.print("[%s] 跳过自身节点: %s", groupId, peer);
+                                }
+                                return !isSelf;
+                            })
+                    .filter(
+                            peer -> {
+                                // 筛选失效节点
+                                boolean isAlive = alivePeers.contains(peer);
+                                if (!isAlive) {
+                                    Log.print("[%s] 检测到可能失效的节点: %s", groupId, peer);
+                                }
+                                return !isAlive;
+                            })
                     .forEach(peer -> handleDeadNode(groupId, node, peer, currentConf));
         } catch (Exception e) {
             Log.error("[{}] 健康检查执行失败: errorMsg:{}", groupId, e.getMessage(), e);
@@ -105,7 +127,8 @@ public class RaftNodeMonitor {
         removeDeadNode(groupId, node, peer, currentConf);
     }
 
-    private void removeDeadNode(String groupId, Node node, PeerId deadPeer,  Configuration currentConf) {
+    private void removeDeadNode(
+            String groupId, Node node, PeerId deadPeer, Configuration currentConf) {
         try {
             // 二次确认配置有效性:安全校验
             if (!currentConf.contains(deadPeer)) {
@@ -128,13 +151,15 @@ public class RaftNodeMonitor {
             }
 
             Log.print("[%s] 正在提交配置变更: 移除节点 %s", groupId, deadPeer);
-            node.changePeers(newConf, status -> {
-                if (status.isOk()) {
-                    Log.print("[%s] 配置变更成功", groupId);
-                } else {
-                    Log.print("[%s] 变更失败: %s", groupId, status.getErrorMsg());
-                }
-            });
+            node.changePeers(
+                    newConf,
+                    status -> {
+                        if (status.isOk()) {
+                            Log.print("[%s] 配置变更成功", groupId);
+                        } else {
+                            Log.print("[%s] 变更失败: %s", groupId, status.getErrorMsg());
+                        }
+                    });
 
             Log.print("[%s] 原集群大小: %s，移除后大小: %s", groupId, originalSize, newSize);
 
@@ -156,7 +181,9 @@ public class RaftNodeMonitor {
             Log.print("  1. 节点未完成启动 (检查启动日志)");
             Log.print("  2. 网络分区 (检查节点间连通性)");
             Log.print("  3. 初始配置错误 (当前配置: %s)", node.getOptions().getInitialConf());
-            Log.print("[%s] 当前节点不是Leader，跳过健康检查, node=%s, leader=%s", groupId, node.getNodeId(), null);
+            Log.print(
+                    "[%s] 当前节点不是Leader，跳过健康检查, node=%s, leader=%s",
+                    groupId, node.getNodeId(), null);
         }
         return false;
     }

@@ -1,14 +1,29 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package com.taotao.cloud.rpc.registry.simple.server.impl;
 
 import com.taotao.cloud.rpc.registry.domain.entry.ServiceEntry;
 import com.taotao.cloud.rpc.registry.simple.server.RegisterServerService;
 import io.netty.channel.Channel;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 /**
  * <p> 默认服务注册类 </p>
  * @since 2024.06
@@ -29,7 +44,7 @@ public class DefaultRegisterServerService implements RegisterServerService {
      */
     private final Map<ServiceEntry, Channel> serviceEntryChannelMap;
 
-    public DefaultRegisterServerService(){
+    public DefaultRegisterServerService() {
         map = new ConcurrentHashMap<>();
         serviceEntryChannelMap = new ConcurrentHashMap<>();
     }
@@ -40,18 +55,18 @@ public class DefaultRegisterServerService implements RegisterServerService {
 
         final String serviceId = serviceEntry.serviceId();
         Set<ServiceEntry> serviceEntrySet = map.get(serviceId);
-//        if(ObjectUtil.isNull(serviceEntrySet)) {
-//            serviceEntrySet = Guavas.newHashSet();
-//        }
+        //        if(ObjectUtil.isNull(serviceEntrySet)) {
+        //            serviceEntrySet = Guavas.newHashSet();
+        //        }
 
-//        LOG.info("[Register Server] add service: {}", serviceEntry);
+        //        LOG.info("[Register Server] add service: {}", serviceEntry);
         serviceEntrySet.add(serviceEntry);
         map.put(serviceId, serviceEntrySet);
 
         serviceEntryChannelMap.put(serviceEntry, channel);
         // 返回更新后的结果
-//        return Guavas.newArrayList(serviceEntrySet);
-		return null;
+        //        return Guavas.newArrayList(serviceEntrySet);
+        return null;
     }
 
     @Override
@@ -61,33 +76,34 @@ public class DefaultRegisterServerService implements RegisterServerService {
         final String serviceId = serviceEntry.serviceId();
         Set<ServiceEntry> serviceEntrySet = map.get(serviceId);
 
-//        if(CollectionUtil.isEmpty(serviceEntrySet)) {
-//            // 服务列表为空
-//            LOG.info("[Register Server] remove service set is empty. entry: {}", serviceEntry);
-//            return Guavas.newArrayList();
-//        }
-//
-//        serviceEntrySet.remove(serviceEntry);
-//        LOG.info("[Register Server] remove service: {}", serviceEntry);
-//        map.put(serviceId, serviceEntrySet);
+        //        if(CollectionUtil.isEmpty(serviceEntrySet)) {
+        //            // 服务列表为空
+        //            LOG.info("[Register Server] remove service set is empty. entry: {}",
+        // serviceEntry);
+        //            return Guavas.newArrayList();
+        //        }
+        //
+        //        serviceEntrySet.remove(serviceEntry);
+        //        LOG.info("[Register Server] remove service: {}", serviceEntry);
+        //        map.put(serviceId, serviceEntrySet);
 
         serviceEntryChannelMap.remove(serviceEntry);
 
         // 返回更新后的结果
-//        return Guavas.newArrayList(serviceEntrySet);
-		return null;
+        //        return Guavas.newArrayList(serviceEntrySet);
+        return null;
     }
 
     @Override
     public List<ServiceEntry> lookUp(String serviceId) {
-//        ArgUtil.notEmpty(serviceId, "serviceId");
+        //        ArgUtil.notEmpty(serviceId, "serviceId");
 
-//        LOG.info("[Register Server] start lookUp serviceId: {}", serviceId);
-//        Set<ServiceEntry> serviceEntrySet = map.get(serviceId);
-//        LOG.info("[Register Server] end lookUp serviceId: {}, list: {}", serviceId,
-//                serviceEntrySet);
-//        return Guavas.newArrayList(serviceEntrySet);
-		return null;
+        //        LOG.info("[Register Server] start lookUp serviceId: {}", serviceId);
+        //        Set<ServiceEntry> serviceEntrySet = map.get(serviceId);
+        //        LOG.info("[Register Server] end lookUp serviceId: {}, list: {}", serviceId,
+        //                serviceEntrySet);
+        //        return Guavas.newArrayList(serviceEntrySet);
+        return null;
     }
 
     @Override
@@ -105,12 +121,12 @@ public class DefaultRegisterServerService implements RegisterServerService {
         Collection<ServiceEntry> serviceEntries = serviceEntries();
 
         Set<ServiceEntry> set = new HashSet<>();
-        for(ServiceEntry serviceEntry : serviceEntries) {
+        for (ServiceEntry serviceEntry : serviceEntries) {
             String ip = serviceEntry.ip();
             int port = serviceEntry.port();
-            String key = ip+":"+port;
+            String key = ip + ":" + port;
 
-            if(key.equals(ipPort)) {
+            if (key.equals(ipPort)) {
                 set.add(serviceEntry);
             }
         }
@@ -123,9 +139,8 @@ public class DefaultRegisterServerService implements RegisterServerService {
      * @since 2024.06
      */
     private void paramCheck(final ServiceEntry serviceEntry) {
-//        ArgUtil.notNull(serviceEntry, "serviceEntry");
+        //        ArgUtil.notNull(serviceEntry, "serviceEntry");
         final String serviceId = serviceEntry.serviceId();
-//        ArgUtil.notEmpty(serviceId, "serviceId");
+        //        ArgUtil.notEmpty(serviceId, "serviceId");
     }
-
 }

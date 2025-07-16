@@ -1,6 +1,20 @@
-package com.taotao.cloud.job.common.utils;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import lombok.extern.slf4j.Slf4j;
+package com.taotao.cloud.job.common.utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +24,7 @@ import java.net.URLConnection;
 import java.security.CodeSource;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Java 语言相关的工具
@@ -50,14 +65,19 @@ public class JavaUtils {
             try (JarFile jarFile = new JarFile(file)) {
                 return getImplementationVersion(jarFile);
             }
-        }
-        catch (Throwable t) {
-            log.warn("[JavaUtils] determinePackageVersion for clz[{}] failed, msg: {}", clz.getSimpleName(), t.toString());
+        } catch (Throwable t) {
+            log.warn(
+                    "[JavaUtils] determinePackageVersion for clz[{}] failed, msg: {}",
+                    clz.getSimpleName(),
+                    t.toString());
             // windows 下无权限访问会一直报错一直重试，需要在此兼容
             return "UNKNOWN";
         }
     }
+
     private static String getImplementationVersion(JarFile jarFile) throws IOException {
-        return jarFile.getManifest().getMainAttributes().getValue(Attributes.Name.IMPLEMENTATION_VERSION);
+        return jarFile.getManifest()
+                .getMainAttributes()
+                .getValue(Attributes.Name.IMPLEMENTATION_VERSION);
     }
 }

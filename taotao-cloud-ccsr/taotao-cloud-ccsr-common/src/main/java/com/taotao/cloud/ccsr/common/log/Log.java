@@ -1,13 +1,27 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.ccsr.common.log;
-
-
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 日志工具类，规范打日志格式、日志level
@@ -41,12 +55,12 @@ public class Log {
     private static final String DEFAULT_TEMPLATE = "|{}#{}|";
 
     public static void print(String msg) {
-//        debug(msg);
+        //        debug(msg);
         System.out.println(msg);
     }
 
     public static void print(String msgTemplate, Object... msgParams) {
-//        debug(msgTemplate, msgParams);
+        //        debug(msgTemplate, msgParams);
         System.out.printf((msgTemplate) + "%n", msgParams);
     }
 
@@ -130,7 +144,11 @@ public class Log {
     public static void error(String msgTemplate, Object... msgParams) {
         if (ERROR.isErrorEnabled()) {
             StackTraceElement traceElement = Thread.currentThread().getStackTrace()[2];
-            errorInner(traceElement.getClassName(), traceElement.getMethodName(), msgTemplate, msgParams);
+            errorInner(
+                    traceElement.getClassName(),
+                    traceElement.getMethodName(),
+                    msgTemplate,
+                    msgParams);
         }
     }
 
@@ -142,7 +160,8 @@ public class Log {
      * @param msgTemplate 日志格式
      * @param msgParams   参数
      */
-    private static void debug(String className, String methodName, String msgTemplate, Object... msgParams) {
+    private static void debug(
+            String className, String methodName, String msgTemplate, Object... msgParams) {
         List<Object> params = convertParams(className, methodName, msgTemplate, msgParams);
         if (params == null) {
             return;
@@ -159,7 +178,8 @@ public class Log {
      * @param msgTemplate 日志格式
      * @param msgParams   参数
      */
-    private static void info(String className, String methodName, String msgTemplate, Object... msgParams) {
+    private static void info(
+            String className, String methodName, String msgTemplate, Object... msgParams) {
         List<Object> params = convertParams(className, methodName, msgTemplate, msgParams);
         if (params == null) {
             return;
@@ -176,7 +196,8 @@ public class Log {
      * @param msgTemplate 日志格式
      * @param msgParams   参数
      */
-    private static void warn(String className, String methodName, String msgTemplate, Object... msgParams) {
+    private static void warn(
+            String className, String methodName, String msgTemplate, Object... msgParams) {
         List<Object> params = convertParams(className, methodName, msgTemplate, msgParams);
         if (params == null) {
             return;
@@ -193,7 +214,8 @@ public class Log {
      * @param msgTemplate 日志格式
      * @param msgParams   参数，最后一个参数可以是异常对象
      */
-    private static void errorInner(String className, String methodName, String msgTemplate, Object... msgParams) {
+    private static void errorInner(
+            String className, String methodName, String msgTemplate, Object... msgParams) {
         List<Object> params = convertParams(className, methodName, msgTemplate, msgParams);
         if (params == null) {
             return;
@@ -202,7 +224,8 @@ public class Log {
         ERROR.error(DEFAULT_TEMPLATE + msgTemplate, params.toArray());
     }
 
-    private static List<Object> convertParams(String className, String methodName, String msgTemplate, Object... msgParams) {
+    private static List<Object> convertParams(
+            String className, String methodName, String msgTemplate, Object... msgParams) {
         if (StringUtils.isAnyBlank(className, methodName, msgTemplate)) {
             return null;
         }

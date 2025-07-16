@@ -1,12 +1,27 @@
-package com.taotao.cloud.job.worker.common.module;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import lombok.*;
+package com.taotao.cloud.job.worker.common.module;
 
 import java.io.Serializable;
 import java.util.Date;
+import lombok.*;
 
 /**
- * 
+ *
  * @TableName instance_info
  */
 @Getter
@@ -16,7 +31,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Long id;
 
@@ -24,9 +39,10 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Long actualTriggerTime;
+
     // 处理器类型（JavaBean、Jar、脚本等）
     private String processorType;
     // 处理器信息
@@ -36,7 +52,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Long appId;
 
@@ -44,7 +60,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Long expectedTriggerTime;
 
@@ -52,7 +68,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Long finishedTime;
 
@@ -60,7 +76,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Date gmtCreate;
 
@@ -68,7 +84,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Date gmtModified;
 
@@ -76,7 +92,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Long instanceId;
 
@@ -84,7 +100,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private String instanceParams;
 
@@ -92,7 +108,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Long jobId;
 
@@ -100,7 +116,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private String jobParams;
 
@@ -108,7 +124,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Long lastReportTime;
 
@@ -116,7 +132,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private String result;
 
@@ -124,7 +140,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Long runningTimes;
 
@@ -132,7 +148,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Integer status;
 
@@ -140,7 +156,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private String taskTrackerAddress;
 
@@ -148,7 +164,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Integer type;
 
@@ -156,6 +172,6 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
-   }
+}

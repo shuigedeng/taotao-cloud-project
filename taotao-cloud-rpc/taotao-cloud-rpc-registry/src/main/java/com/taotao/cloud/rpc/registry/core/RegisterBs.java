@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package com.taotao.cloud.rpc.registry.core;
 
@@ -28,12 +43,13 @@ public class RegisterBs implements RegisterConfig {
      * 服务端
      */
     private final RegisterServerService registerServerService;
+
     /**
      * 客户端
      */
     private final RegisterClientService registerClientService;
 
-    private RegisterBs(){
+    private RegisterBs() {
         registerServerService = new DefaultRegisterServerService();
         registerClientService = new DefaultRegisterClientService();
     }
@@ -46,7 +62,7 @@ public class RegisterBs implements RegisterConfig {
 
     @Override
     public RegisterBs port(int port) {
-//        ArgUtil.notNegative(port, "port");
+        //        ArgUtil.notNegative(port, "port");
 
         this.port = port;
         return this;
@@ -54,7 +70,8 @@ public class RegisterBs implements RegisterConfig {
 
     @Override
     public RegisterBs start() {
-        ChannelHandler channelHandler = ChannelHandlers.objectCodecHandler(new RegisterCenterServerHandler());
+        ChannelHandler channelHandler =
+                ChannelHandlers.objectCodecHandler(new RegisterCenterServerHandler());
         DefaultNettyServer.newInstance(port, channelHandler).asyncRun();
 
         // 通知对应的服务端和客户端，服务启动。
@@ -63,14 +80,14 @@ public class RegisterBs implements RegisterConfig {
         // 如果使用 redis/database 等集中式的存储，或者进行数据同步，则有通知的必要性。
 
         // 添加对应的 shutdown hook
-//        Runtime.getRuntime().addShutdownHook(new Thread() {
-//            @Override
-//            public void run() {
-//                new com.taotao.cloud.rpc.registry.register.support.hook.RegisterCenterShutdownHook(registerServerService, registerClientService, port).hook();
-//            }
-//        });
+        //        Runtime.getRuntime().addShutdownHook(new Thread() {
+        //            @Override
+        //            public void run() {
+        //                new
+        // com.taotao.cloud.rpc.registry.register.support.hook.RegisterCenterShutdownHook(registerServerService, registerClientService, port).hook();
+        //            }
+        //        });
 
         return this;
     }
-
 }

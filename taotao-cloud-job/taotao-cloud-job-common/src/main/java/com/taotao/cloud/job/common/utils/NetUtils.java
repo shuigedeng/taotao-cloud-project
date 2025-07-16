@@ -1,41 +1,57 @@
-package com.taotao.cloud.job.common.utils;//package com.taotao.cloud.job.common.utils;
-///*
-//Copyright [2020] [PowerJob]
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.taotao.cloud.job.common.utils; // package com.taotao.cloud.job.common.utils;
+/// *
+// Copyright [2020] [PowerJob]
 //
-//Licensed under the Apache License, Version 2.0 (the "License");
-//you may not use this file except in compliance with the License.
-//You may obtain a copy of the License at
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //    http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software
-//distributed under the License is distributed on an "AS IS" BASIS,
-//WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//See the License for the specific language governing permissions and
-//limitations under the License.
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 // */
 //
-//import lombok.extern.slf4j.Slf4j;
-//import org.apache.commons.lang3.StringUtils;
-//import org.apache.commons.lang3.tuple.Pair;
+// import lombok.extern.slf4j.Slf4j;
+// import org.apache.commons.lang3.StringUtils;
+// import org.apache.commons.lang3.tuple.Pair;
 //
 //
-//import java.io.IOException;
-//import java.net.*;
-//import java.util.*;
-//import java.util.concurrent.ThreadLocalRandom;
-//import java.util.regex.Pattern;
+// import java.io.IOException;
+// import java.net.*;
+// import java.util.*;
+// import java.util.concurrent.ThreadLocalRandom;
+// import java.util.regex.Pattern;
 //
-//import static java.util.Collections.emptyList;
+// import static java.util.Collections.emptyList;
 //
-///**
+/// **
 // * IP and Port Helper for RPC
 // *
 // * @author from dubbo, optimize by tjq
 // * @since 2020/8/8
 // */
-//@Slf4j
-//public class NetUtils {
+// @Slf4j
+// public class NetUtils {
 //
 //    /**
 //     * returned port range is [30000, 39999]
@@ -80,14 +96,16 @@ package com.taotao.cloud.job.common.utils;//package com.taotao.cloud.job.common.
 //        return getLocalHostWithNetworkInterfaceChecker(null);
 //    }
 //
-//    public static String getLocalHostWithNetworkInterfaceChecker(NetworkInterfaceChecker networkInterfaceChecker) {
+//    public static String getLocalHostWithNetworkInterfaceChecker(NetworkInterfaceChecker
+// networkInterfaceChecker) {
 //        if (HOST_ADDRESS != null) {
 //            return HOST_ADDRESS;
 //        }
 //
 //        String addressFromJVM = System.getProperty(PowerJobDKey.BIND_LOCAL_ADDRESS);
 //        if (StringUtils.isNotEmpty(addressFromJVM)) {
-//            log.info("[Net] use address from[{}]: {}", PowerJobDKey.BIND_LOCAL_ADDRESS, addressFromJVM);
+//            log.info("[Net] use address from[{}]: {}", PowerJobDKey.BIND_LOCAL_ADDRESS,
+// addressFromJVM);
 //            return HOST_ADDRESS = addressFromJVM;
 //        }
 //
@@ -123,7 +141,8 @@ package com.taotao.cloud.job.common.utils;//package com.taotao.cloud.job.common.
 //    private static InetAddress getLocalAddress0(NetworkInterfaceChecker networkInterfaceChecker) {
 //        // @since 2.7.6, choose the {@link NetworkInterface} first
 //        try {
-//            InetAddress addressOp = getFirstReachableInetAddress( findNetworkInterface(networkInterfaceChecker));
+//            InetAddress addressOp = getFirstReachableInetAddress(
+// findNetworkInterface(networkInterfaceChecker));
 //            if (addressOp != null) {
 //                return addressOp;
 //            }
@@ -173,7 +192,8 @@ package com.taotao.cloud.job.common.utils;//package com.taotao.cloud.job.common.
 //     * @return If no {@link NetworkInterface} is available , return <code>null</code>
 //     * @since 2.7.6
 //     */
-//    public static NetworkInterface findNetworkInterface(NetworkInterfaceChecker networkInterfaceChecker) {
+//    public static NetworkInterface findNetworkInterface(NetworkInterfaceChecker
+// networkInterfaceChecker) {
 //
 //        List<NetworkInterface> validNetworkInterfaces = emptyList();
 //        try {
@@ -213,15 +233,19 @@ package com.taotao.cloud.job.common.utils;//package com.taotao.cloud.job.common.
 //     * @param networkInterfaceChecker 判断方法
 //     * @return true or false
 //     */
-//    static boolean isPassedCheckNetworkInterface(NetworkInterface networkInterface, NetworkInterfaceChecker networkInterfaceChecker) {
+//    static boolean isPassedCheckNetworkInterface(NetworkInterface networkInterface,
+// NetworkInterfaceChecker networkInterfaceChecker) {
 //        if (networkInterfaceChecker == null) {
 //            return false;
 //        }
-//        log.info("[Net] try to choose NetworkInterface by NetworkInterfaceChecker, current NetworkInterface: {}", networkInterface);
+//        log.info("[Net] try to choose NetworkInterface by NetworkInterfaceChecker, current
+// NetworkInterface: {}", networkInterface);
 //        try {
-//            return networkInterfaceChecker.ok(networkInterface, getFirstReachableInetAddress(networkInterface));
+//            return networkInterfaceChecker.ok(networkInterface,
+// getFirstReachableInetAddress(networkInterface));
 //        } catch (Exception e) {
-//            log.warn("[Net] isPassedCheckerNetworkInterface failed, current networkInterface: {}", networkInterface, e);
+//            log.warn("[Net] isPassedCheckerNetworkInterface failed, current networkInterface: {}",
+// networkInterface, e);
 //        }
 //        return false;
 //    }
@@ -305,7 +329,8 @@ package com.taotao.cloud.job.common.utils;//package com.taotao.cloud.job.common.
 //                continue;
 //            }
 //            // 根据用户 -D 参数忽略网卡
-//            if (ignoreInterfaceByConfig(networkInterface.getDisplayName()) || ignoreInterfaceByConfig(networkInterface.getName())) {
+//            if (ignoreInterfaceByConfig(networkInterface.getDisplayName()) ||
+// ignoreInterfaceByConfig(networkInterface.getName())) {
 //                continue;
 //            }
 //            validNetworkInterfaces.add(networkInterface);
@@ -315,11 +340,13 @@ package com.taotao.cloud.job.common.utils;//package com.taotao.cloud.job.common.
 //
 //    /**
 //     * @param networkInterface {@link NetworkInterface}
-//     * @return if the specified {@link NetworkInterface} should be ignored, return <code>true</code>
+//     * @return if the specified {@link NetworkInterface} should be ignored, return
+// <code>true</code>
 //     * @throws SocketException SocketException if an I/O error occurs.
 //     * @since 2.7.6
 //     */
-//    private static boolean ignoreNetworkInterface(NetworkInterface networkInterface) throws SocketException {
+//    private static boolean ignoreNetworkInterface(NetworkInterface networkInterface) throws
+// SocketException {
 //        return networkInterface == null
 //                || networkInterface.isLoopback()
 //                || networkInterface.isVirtual()
@@ -351,11 +378,13 @@ package com.taotao.cloud.job.common.utils;//package com.taotao.cloud.job.common.
 //     *
 //     * @param networkInterface {@link NetworkInterface}
 //     * @return if the name of the specified {@link NetworkInterface} matches
-//     * the property value from {@link PowerJobDKey#PREFERRED_NETWORK_INTERFACE}, return <code>true</code>,
+//     * the property value from {@link PowerJobDKey#PREFERRED_NETWORK_INTERFACE}, return
+// <code>true</code>,
 //     * or <code>false</code>
 //     */
 //    public static boolean isPreferredNetworkInterface(NetworkInterface networkInterface) {
-//        String preferredNetworkInterface = System.getProperty(PowerJobDKey.PREFERRED_NETWORK_INTERFACE);
+//        String preferredNetworkInterface =
+// System.getProperty(PowerJobDKey.PREFERRED_NETWORK_INTERFACE);
 //        if (Objects.equals(networkInterface.getDisplayName(), preferredNetworkInterface)) {
 //            return true;
 //        }
@@ -384,4 +413,4 @@ package com.taotao.cloud.job.common.utils;//package com.taotao.cloud.job.common.
 //    public interface NetworkInterfaceChecker {
 //        boolean ok(NetworkInterface networkInterface, InetAddress inetAddress);
 //    }
-//}
+// }

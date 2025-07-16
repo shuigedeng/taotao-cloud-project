@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.rpc.common.util;
 
 /**
@@ -6,104 +22,108 @@ package com.taotao.cloud.rpc.common.util;
  */
 public class JSONResult {
 
-	// 响应业务状态
-	private Integer status;
+    // 响应业务状态
+    private Integer status;
 
-	// 响应消息
-	private String msg;
+    // 响应消息
+    private String msg;
 
-	// 响应中的数据
-	private Object data;
+    // 响应中的数据
+    private Object data;
 
-	private String ok;    // 不使用
+    private String ok; // 不使用
 
-	public static JSONResult build(Integer status, String msg, Object data) {
-		return new JSONResult(status, msg, data);
-	}
+    public static JSONResult build(Integer status, String msg, Object data) {
+        return new JSONResult(status, msg, data);
+    }
 
-	public static JSONResult ok(Object data) {
-		return new JSONResult(data);
-	}
+    public static JSONResult ok(Object data) {
+        return new JSONResult(data);
+    }
 
-	public static JSONResult ok() {
-		return new JSONResult(null);
-	}
+    public static JSONResult ok() {
+        return new JSONResult(null);
+    }
 
-	public static JSONResult errorMsg(String msg) {
-		return new JSONResult(500, msg, null);
-	}
+    public static JSONResult errorMsg(String msg) {
+        return new JSONResult(500, msg, null);
+    }
 
-	public static JSONResult errorMap(Object data) {
-		return new JSONResult(501, "error", data);
-	}
+    public static JSONResult errorMap(Object data) {
+        return new JSONResult(501, "error", data);
+    }
 
-	public static JSONResult errorTokenMsg(String msg) {
-		return new JSONResult(502, msg, null);
-	}
+    public static JSONResult errorTokenMsg(String msg) {
+        return new JSONResult(502, msg, null);
+    }
 
-	public static JSONResult errorException(String msg) {
-		return new JSONResult(555, msg, null);
-	}
+    public static JSONResult errorException(String msg) {
+        return new JSONResult(555, msg, null);
+    }
 
-	public JSONResult() {
+    public JSONResult() {}
 
-	}
+    public JSONResult(Integer status, String msg, Object data) {
+        this.status = status;
+        this.msg = msg;
+        this.data = data;
+    }
 
-	public JSONResult(Integer status, String msg, Object data) {
-		this.status = status;
-		this.msg = msg;
-		this.data = data;
-	}
+    public JSONResult(Object data) {
+        this.status = 200;
+        this.msg = "OK";
+        this.data = data;
+    }
 
-	public JSONResult(Object data) {
-		this.status = 200;
-		this.msg = "OK";
-		this.data = data;
-	}
+    public Boolean isOK() {
+        return this.status == 200;
+    }
 
-	public Boolean isOK() {
-		return this.status == 200;
-	}
+    public Integer getStatus() {
+        return status;
+    }
 
-	public Integer getStatus() {
-		return status;
-	}
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
+    public String getMsg() {
+        return msg;
+    }
 
-	public String getMsg() {
-		return msg;
-	}
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
-	public void setMsg(String msg) {
-		this.msg = msg;
-	}
+    public Object getData() {
+        return data;
+    }
 
-	public Object getData() {
-		return data;
-	}
+    public void setData(Object data) {
+        this.data = data;
+    }
 
-	public void setData(Object data) {
-		this.data = data;
-	}
+    public String getOk() {
+        return ok;
+    }
 
-	public String getOk() {
-		return ok;
-	}
+    public void setOk(String ok) {
+        this.ok = ok;
+    }
 
-	public void setOk(String ok) {
-		this.ok = ok;
-	}
-
-	@Override
-	public String toString() {
-		return "JSONResult{" +
-			"status=" + status +
-			", msg='" + msg + '\'' +
-			", data=" + data +
-			", ok='" + ok + '\'' +
-			'}';
-	}
+    @Override
+    public String toString() {
+        return "JSONResult{"
+                + "status="
+                + status
+                + ", msg='"
+                + msg
+                + '\''
+                + ", data="
+                + data
+                + ", ok='"
+                + ok
+                + '\''
+                + '}';
+    }
 }

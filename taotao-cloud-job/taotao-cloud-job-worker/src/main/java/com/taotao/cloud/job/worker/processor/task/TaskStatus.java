@@ -1,10 +1,25 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.job.worker.processor.task;
 
 import com.google.common.collect.Sets;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import java.util.Set;
 
 /**
  * 任务状态，task_info 表中 status 字段的枚举值
@@ -15,7 +30,6 @@ import java.util.Set;
 @Getter
 @AllArgsConstructor
 public enum TaskStatus {
-
     WAITING_DISPATCH(1, "等待调度器调度", "dispatching"),
     DISPATCH_SUCCESS_WORKER_UNCHECK(2, "调度成功（但不保证worker收到）", "unreceived"),
     WORKER_RECEIVED(3, "worker接收成功，但未开始执行", "received"),
@@ -23,7 +37,8 @@ public enum TaskStatus {
     WORKER_PROCESS_FAILED(5, "worker执行失败", "failed"),
     WORKER_PROCESS_SUCCESS(6, "worker执行成功", "succeed");
 
-    public static final Set<Integer> FINISHED_STATUS = Sets.newHashSet(WORKER_PROCESS_FAILED.value, WORKER_PROCESS_SUCCESS.value);
+    public static final Set<Integer> FINISHED_STATUS =
+            Sets.newHashSet(WORKER_PROCESS_FAILED.value, WORKER_PROCESS_SUCCESS.value);
 
     private final int value;
     private final String des;

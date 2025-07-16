@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.rpc.common.common.remote.netty.handler;
 
 import com.taotao.cloud.rpc.common.common.config.component.RpcAddress;
@@ -13,7 +29,6 @@ import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-
 import java.util.List;
 
 /**
@@ -23,7 +38,7 @@ import java.util.List;
  */
 public final class ChannelHandlers {
 
-    private ChannelHandlers(){}
+    private ChannelHandlers() {}
 
     /**
      * 包含默认 object 编码解码的 handler
@@ -31,13 +46,15 @@ public final class ChannelHandlers {
      * @return channel handler
      * @since 2024.06
      */
-    public static ChannelHandler objectCodecHandler(final ChannelHandler ... channelHandlers) {
+    public static ChannelHandler objectCodecHandler(final ChannelHandler... channelHandlers) {
         return new ChannelInitializer<Channel>() {
             @Override
             protected void initChannel(Channel ch) throws Exception {
                 ch.pipeline()
                         // 解码 bytes=>resp
-                        .addLast(new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(null)))
+                        .addLast(
+                                new ObjectDecoder(
+                                        Integer.MAX_VALUE, ClassResolvers.cacheDisabled(null)))
                         // request=>bytes
                         .addLast(new ObjectEncoder())
                         .addLast(channelHandlers);
@@ -51,7 +68,7 @@ public final class ChannelHandlers {
      * @return channel handler
      * @since 2024.06
      */
-    public static ChannelHandler objectCodecLogHandler(final ChannelHandler ... channelHandlers) {
+    public static ChannelHandler objectCodecLogHandler(final ChannelHandler... channelHandlers) {
         final ChannelHandler objectCodecHandler = objectCodecHandler(channelHandlers);
         return new ChannelInitializer<Channel>() {
             @Override
@@ -74,25 +91,27 @@ public final class ChannelHandlers {
      * @return 信息列表
      * @since 2024.06
      */
-    public static List<RpcChannelFuture> channelFutureList(final List<RpcAddress> rpcAddressList, final ChannelHandlerFactory handlerFactory) {
-//        List<RpcChannelFuture> resultList = Guavas.newArrayList();
-//
-//        if(CollectionUtil.isNotEmpty(rpcAddressList)) {
-//            for(RpcAddress rpcAddress : rpcAddressList) {
-//                final ChannelHandler channelHandler = handlerFactory.handler();
-//
-//                // 循环中每次都需要一个新的 handler
-//                DefaultRpcChannelFuture future = DefaultRpcChannelFuture.newInstance();
-//                DefaultNettyClient nettyClient = DefaultNettyClient.newInstance(rpcAddress.address(), rpcAddress.port(), channelHandler);
-//                ChannelFuture channelFuture = nettyClient.call();
-//
-//                future.channelFuture(channelFuture).address(rpcAddress)
-//                        .weight(rpcAddress.weight()).destroyable(nettyClient);
-//                resultList.add(future);
-//            }
-//        }
+    public static List<RpcChannelFuture> channelFutureList(
+            final List<RpcAddress> rpcAddressList, final ChannelHandlerFactory handlerFactory) {
+        //        List<RpcChannelFuture> resultList = Guavas.newArrayList();
+        //
+        //        if(CollectionUtil.isNotEmpty(rpcAddressList)) {
+        //            for(RpcAddress rpcAddress : rpcAddressList) {
+        //                final ChannelHandler channelHandler = handlerFactory.handler();
+        //
+        //                // 循环中每次都需要一个新的 handler
+        //                DefaultRpcChannelFuture future = DefaultRpcChannelFuture.newInstance();
+        //                DefaultNettyClient nettyClient =
+        // DefaultNettyClient.newInstance(rpcAddress.address(), rpcAddress.port(), channelHandler);
+        //                ChannelFuture channelFuture = nettyClient.call();
+        //
+        //                future.channelFuture(channelFuture).address(rpcAddress)
+        //                        .weight(rpcAddress.weight()).destroyable(nettyClient);
+        //                resultList.add(future);
+        //            }
+        //        }
 
-//        return resultList;
+        //        return resultList;
         return null;
     }
 
@@ -106,12 +125,15 @@ public final class ChannelHandlers {
      * @return 信息列表
      * @since 0.1.6
      */
-    public static RpcChannelFuture channelFuture(final RpcAddress rpcAddress, final ChannelHandlerFactory handlerFactory) {
+    public static RpcChannelFuture channelFuture(
+            final RpcAddress rpcAddress, final ChannelHandlerFactory handlerFactory) {
         final ChannelHandler channelHandler = handlerFactory.handler();
 
         // 循环中每次都需要一个新的 handler
         DefaultRpcChannelFuture future = DefaultRpcChannelFuture.newInstance();
-        DefaultNettyClient nettyClient = DefaultNettyClient.newInstance(rpcAddress.address(), rpcAddress.port(), channelHandler);
+        DefaultNettyClient nettyClient =
+                DefaultNettyClient.newInstance(
+                        rpcAddress.address(), rpcAddress.port(), channelHandler);
         ChannelFuture channelFuture = nettyClient.call();
 
         future.channelFuture(channelFuture)
@@ -121,5 +143,4 @@ public final class ChannelHandlers {
 
         return future;
     }
-
 }

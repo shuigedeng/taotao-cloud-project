@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.rpc.registry.simple.constant;
 
 /**
@@ -10,7 +26,7 @@ package com.taotao.cloud.rpc.registry.simple.constant;
  */
 public final class MessageTypeConst {
 
-    private MessageTypeConst(){}
+    private MessageTypeConst() {}
 
     /**
      * 服务端注册请求
@@ -52,13 +68,15 @@ public final class MessageTypeConst {
      * 服务端注册通知客户端请求
      * @since 2024.06
      */
-    public static final String SERVER_REGISTER_NOTIFY_CLIENT_REQ = "SERVER_REGISTER_NOTIFY_CLIENT_REQ";
+    public static final String SERVER_REGISTER_NOTIFY_CLIENT_REQ =
+            "SERVER_REGISTER_NOTIFY_CLIENT_REQ";
 
     /**
      * 服务端取消注册通知客户端请求
      * @since 2024.06
      */
-    public static final String SERVER_UNREGISTER_NOTIFY_CLIENT_REQ = "SERVER_UNREGISTER_NOTIFY_CLIENT_REQ";
+    public static final String SERVER_UNREGISTER_NOTIFY_CLIENT_REQ =
+            "SERVER_UNREGISTER_NOTIFY_CLIENT_REQ";
 
     /**
      * 注册中心新增通知
@@ -77,5 +95,4 @@ public final class MessageTypeConst {
      * @since 0.2.0
      */
     public static final String SERVER_HEARTBEAT_REQ = "SERVER_HEARTBEAT_REQ";
-
 }

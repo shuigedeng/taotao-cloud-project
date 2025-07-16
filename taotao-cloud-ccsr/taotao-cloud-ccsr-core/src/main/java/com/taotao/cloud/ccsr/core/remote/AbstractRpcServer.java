@@ -1,10 +1,24 @@
-package com.taotao.cloud.ccsr.core.remote;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.ccsr.core.remote;
 
 import com.taotao.cloud.ccsr.common.config.CcsrConfig;
 import com.taotao.cloud.ccsr.common.log.Log;
 import jakarta.annotation.PreDestroy;
-
 import java.io.IOException;
 
 /**
@@ -55,22 +69,18 @@ public abstract class AbstractRpcServer implements RpcServer {
             Log.error("Ccsr {} Rpc server start fail...", clz, e);
         }
 
-//        try {
-//            this.await();
-//        } catch (Exception e) {
-//            PrintLog.error("Ccsr {} Rpc server await interrupted...", clz);
-//        }
+        //        try {
+        //            this.await();
+        //        } catch (Exception e) {
+        //            PrintLog.error("Ccsr {} Rpc server await interrupted...", clz);
+        //        }
 
         Runtime.getRuntime().addShutdownHook(new Thread(this::stop));
     }
 
-    public void startPreProcessor() {
+    public void startPreProcessor() {}
 
-    }
-
-    public void startPostProcessor() {
-
-    }
+    public void startPostProcessor() {}
 
     @Override
     public void stop() {
@@ -91,13 +101,9 @@ public abstract class AbstractRpcServer implements RpcServer {
         }
     }
 
-    public void stopPreProcessor() {
+    public void stopPreProcessor() {}
 
-    }
-
-    public void stopPostProcessor() {
-
-    }
+    public void stopPostProcessor() {}
 
     /**
      * Start Server.

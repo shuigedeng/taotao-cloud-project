@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package com.taotao.cloud.rpc.registry.simple.handler;
 
@@ -18,6 +33,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 /**
  * <p> 注册中心服务器处理类 </p>
  *
@@ -60,30 +76,30 @@ public class RegisterCenterServerHandler extends SimpleChannelInboundHandler {
         Object body = notifyMessage.body();
         String type = NotifyMessages.type(notifyMessage);
         String seqId = notifyMessage.seqId();
-//        LOG.info("[Register Server] received message type: {}, seqId: {} ", type,
-//                seqId);
+        //        LOG.info("[Register Server] received message type: {}, seqId: {} ", type,
+        //                seqId);
 
         final Channel channel = ctx.channel();
 
         switch (type) {
             case MessageTypeConst.SERVER_REGISTER_REQ:
-                rpcRegister.register((ServiceEntry)body, channel);
+                rpcRegister.register((ServiceEntry) body, channel);
                 break;
 
             case MessageTypeConst.SERVER_UN_REGISTER_REQ:
-                rpcRegister.unRegister((ServiceEntry)body);
+                rpcRegister.unRegister((ServiceEntry) body);
                 break;
 
             case MessageTypeConst.CLIENT_SUBSCRIBE_REQ:
-                rpcRegister.subscribe((ServiceEntry)body, channel);
+                rpcRegister.subscribe((ServiceEntry) body, channel);
                 break;
 
             case MessageTypeConst.CLIENT_UN_SUBSCRIBE_REQ:
-                rpcRegister.unSubscribe((ServiceEntry)body, channel);
+                rpcRegister.unSubscribe((ServiceEntry) body, channel);
                 break;
 
             case MessageTypeConst.CLIENT_LOOK_UP_SERVER_REQ:
-                rpcRegister.lookUp(seqId, (ServiceEntry)body, channel);
+                rpcRegister.lookUp(seqId, (ServiceEntry) body, channel);
                 break;
 
             case MessageTypeConst.SERVER_HEARTBEAT_REQ:
@@ -92,10 +108,9 @@ public class RegisterCenterServerHandler extends SimpleChannelInboundHandler {
                 break;
 
             default:
-//                LOG.warn("[Register Center] not support type: {} and seqId: {}",
-//                        type, seqId);
+                //                LOG.warn("[Register Center] not support type: {} and seqId: {}",
+                //                        type, seqId);
         }
-
     }
 
     /**
@@ -108,7 +123,4 @@ public class RegisterCenterServerHandler extends SimpleChannelInboundHandler {
         final RegisterClientService registerClientService = new DefaultRegisterClientService();
         return new SimpleRpcRegister(registerServerService, registerClientService);
     }
-
-
-
 }

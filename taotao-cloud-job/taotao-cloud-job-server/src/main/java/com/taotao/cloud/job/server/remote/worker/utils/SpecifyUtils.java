@@ -1,19 +1,36 @@
-package com.taotao.cloud.job.server.remote.worker.utils;//package org.kjob.server.remote.worker.utils;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.taotao.cloud.job.server.remote.worker.utils; // package
+                                                         // org.kjob.server.remote.worker.utils;
 //
-//import com.google.common.collect.Sets;
-//import org.apache.commons.lang3.StringUtils;
-//import org.kjob.server.common.module.WorkerInfo;
+// import com.google.common.collect.Sets;
+// import org.apache.commons.lang3.StringUtils;
+// import org.kjob.server.common.module.WorkerInfo;
 //
-//import java.util.Optional;
-//import java.util.Set;
+// import java.util.Optional;
+// import java.util.Set;
 //
-///**
+/// **
 // * 指定工具
 // *
 // * @author shuigedeng
 // * @since 2024/2/24
 // */
-//public class SpecifyUtils {
+// public class SpecifyUtils {
 //
 //    private static final String TAG_EQUALS = "tagEquals:";
 //
@@ -36,10 +53,12 @@ package com.taotao.cloud.job.server.remote.worker.utils;//package org.kjob.serve
 //        }
 //
 ////        // 默认情况，IP 和 tag 逗号分割后任意完全匹配即视为命中（兼容 4.3.8 版本前序逻辑）
-////        Set<String> designatedWorkersSet = Sets.newHashSet(SJ.COMMA_SPLITTER.splitToList(specifyInfo));
+////        Set<String> designatedWorkersSet =
+// Sets.newHashSet(SJ.COMMA_SPLITTER.splitToList(specifyInfo));
 //
 ////        for (String tagOrAddress : designatedWorkersSet) {
-////            if (tagOrAddress.equals(workerInfo.getTag()) || tagOrAddress.equals(workerInfo.getAddress())) {
+////            if (tagOrAddress.equals(workerInfo.getTag()) ||
+// tagOrAddress.equals(workerInfo.getAddress())) {
 ////                return true;
 ////            }
 ////        }
@@ -47,4 +66,4 @@ package com.taotao.cloud.job.server.remote.worker.utils;//package org.kjob.serve
 //        return false;
 //    }
 //
-//}
+// }

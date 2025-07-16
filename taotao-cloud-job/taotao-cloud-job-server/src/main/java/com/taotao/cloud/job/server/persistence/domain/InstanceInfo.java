@@ -1,23 +1,38 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.job.server.persistence.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serializable;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-import java.util.Date;
-
 /**
- * 
+ *
  * @TableName instance_info
  */
 @Getter
-@TableName(value ="instance_info")
+@TableName(value = "instance_info")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,7 +41,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     @TableId(type = IdType.AUTO)
     private Long id;
@@ -35,7 +50,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Long actualTriggerTime;
 
@@ -43,7 +58,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private String appName;
 
@@ -51,7 +66,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Long expectedTriggerTime;
 
@@ -59,7 +74,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Long finishedTime;
 
@@ -67,7 +82,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Date gmtCreate;
 
@@ -75,7 +90,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Date gmtModified;
 
@@ -83,7 +98,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Long instanceId;
 
@@ -91,7 +106,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private String instanceParams;
 
@@ -99,7 +114,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Long jobId;
 
@@ -107,7 +122,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private String jobParams;
 
@@ -115,7 +130,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Long lastReportTime;
 
@@ -123,7 +138,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private String result;
 
@@ -131,7 +146,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Long runningTimes;
 
@@ -139,7 +154,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Integer status;
 
@@ -147,7 +162,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private String taskTrackerAddress;
 
@@ -155,7 +170,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Integer type;
 
@@ -163,7 +178,7 @@ public class InstanceInfo implements Serializable {
      *
      * -- GETTER --
      *
-
+     *
      */
     private Long wfInstanceId;
 
@@ -171,126 +186,126 @@ public class InstanceInfo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 
+     *
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * 
+     *
      */
     public void setActualTriggerTime(Long actualTriggerTime) {
         this.actualTriggerTime = actualTriggerTime;
     }
 
     /**
-     * 
+     *
      */
     public void setAppName(String appName) {
         this.appName = appName;
     }
 
     /**
-     * 
+     *
      */
     public void setExpectedTriggerTime(Long expectedTriggerTime) {
         this.expectedTriggerTime = expectedTriggerTime;
     }
 
     /**
-     * 
+     *
      */
     public void setFinishedTime(Long finishedTime) {
         this.finishedTime = finishedTime;
     }
 
     /**
-     * 
+     *
      */
     public void setGmtCreate(Date gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
     /**
-     * 
+     *
      */
     public void setGmtModified(Date gmtModified) {
         this.gmtModified = gmtModified;
     }
 
     /**
-     * 
+     *
      */
     public void setInstanceId(Long instanceId) {
         this.instanceId = instanceId;
     }
 
     /**
-     * 
+     *
      */
     public void setInstanceParams(String instanceParams) {
         this.instanceParams = instanceParams;
     }
 
     /**
-     * 
+     *
      */
     public void setJobId(Long jobId) {
         this.jobId = jobId;
     }
 
     /**
-     * 
+     *
      */
     public void setJobParams(String jobParams) {
         this.jobParams = jobParams;
     }
 
     /**
-     * 
+     *
      */
     public void setLastReportTime(Long lastReportTime) {
         this.lastReportTime = lastReportTime;
     }
 
     /**
-     * 
+     *
      */
     public void setResult(String result) {
         this.result = result;
     }
 
     /**
-     * 
+     *
      */
     public void setRunningTimes(Long runningTimes) {
         this.runningTimes = runningTimes;
     }
 
     /**
-     * 
+     *
      */
     public void setStatus(Integer status) {
         this.status = status;
     }
 
     /**
-     * 
+     *
      */
     public void setTaskTrackerAddress(String taskTrackerAddress) {
         this.taskTrackerAddress = taskTrackerAddress;
     }
 
     /**
-     * 
+     *
      */
     public void setType(Integer type) {
         this.type = type;
     }
 
     /**
-     * 
+     *
      */
     public void setWfInstanceId(Long wfInstanceId) {
         this.wfInstanceId = wfInstanceId;
@@ -309,23 +324,57 @@ public class InstanceInfo implements Serializable {
         }
         InstanceInfo other = (InstanceInfo) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getActualTriggerTime() == null ? other.getActualTriggerTime() == null : this.getActualTriggerTime().equals(other.getActualTriggerTime()))
-            && (this.getAppName() == null ? other.getAppName() == null : this.getAppName().equals(other.getAppName()))
-            && (this.getExpectedTriggerTime() == null ? other.getExpectedTriggerTime() == null : this.getExpectedTriggerTime().equals(other.getExpectedTriggerTime()))
-            && (this.getFinishedTime() == null ? other.getFinishedTime() == null : this.getFinishedTime().equals(other.getFinishedTime()))
-            && (this.getGmtCreate() == null ? other.getGmtCreate() == null : this.getGmtCreate().equals(other.getGmtCreate()))
-            && (this.getGmtModified() == null ? other.getGmtModified() == null : this.getGmtModified().equals(other.getGmtModified()))
-            && (this.getInstanceId() == null ? other.getInstanceId() == null : this.getInstanceId().equals(other.getInstanceId()))
-            && (this.getInstanceParams() == null ? other.getInstanceParams() == null : this.getInstanceParams().equals(other.getInstanceParams()))
-            && (this.getJobId() == null ? other.getJobId() == null : this.getJobId().equals(other.getJobId()))
-            && (this.getJobParams() == null ? other.getJobParams() == null : this.getJobParams().equals(other.getJobParams()))
-            && (this.getLastReportTime() == null ? other.getLastReportTime() == null : this.getLastReportTime().equals(other.getLastReportTime()))
-            && (this.getResult() == null ? other.getResult() == null : this.getResult().equals(other.getResult()))
-            && (this.getRunningTimes() == null ? other.getRunningTimes() == null : this.getRunningTimes().equals(other.getRunningTimes()))
-            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
-            && (this.getTaskTrackerAddress() == null ? other.getTaskTrackerAddress() == null : this.getTaskTrackerAddress().equals(other.getTaskTrackerAddress()))
-            && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
-            && (this.getWfInstanceId() == null ? other.getWfInstanceId() == null : this.getWfInstanceId().equals(other.getWfInstanceId()));
+                && (this.getActualTriggerTime() == null
+                        ? other.getActualTriggerTime() == null
+                        : this.getActualTriggerTime().equals(other.getActualTriggerTime()))
+                && (this.getAppName() == null
+                        ? other.getAppName() == null
+                        : this.getAppName().equals(other.getAppName()))
+                && (this.getExpectedTriggerTime() == null
+                        ? other.getExpectedTriggerTime() == null
+                        : this.getExpectedTriggerTime().equals(other.getExpectedTriggerTime()))
+                && (this.getFinishedTime() == null
+                        ? other.getFinishedTime() == null
+                        : this.getFinishedTime().equals(other.getFinishedTime()))
+                && (this.getGmtCreate() == null
+                        ? other.getGmtCreate() == null
+                        : this.getGmtCreate().equals(other.getGmtCreate()))
+                && (this.getGmtModified() == null
+                        ? other.getGmtModified() == null
+                        : this.getGmtModified().equals(other.getGmtModified()))
+                && (this.getInstanceId() == null
+                        ? other.getInstanceId() == null
+                        : this.getInstanceId().equals(other.getInstanceId()))
+                && (this.getInstanceParams() == null
+                        ? other.getInstanceParams() == null
+                        : this.getInstanceParams().equals(other.getInstanceParams()))
+                && (this.getJobId() == null
+                        ? other.getJobId() == null
+                        : this.getJobId().equals(other.getJobId()))
+                && (this.getJobParams() == null
+                        ? other.getJobParams() == null
+                        : this.getJobParams().equals(other.getJobParams()))
+                && (this.getLastReportTime() == null
+                        ? other.getLastReportTime() == null
+                        : this.getLastReportTime().equals(other.getLastReportTime()))
+                && (this.getResult() == null
+                        ? other.getResult() == null
+                        : this.getResult().equals(other.getResult()))
+                && (this.getRunningTimes() == null
+                        ? other.getRunningTimes() == null
+                        : this.getRunningTimes().equals(other.getRunningTimes()))
+                && (this.getStatus() == null
+                        ? other.getStatus() == null
+                        : this.getStatus().equals(other.getStatus()))
+                && (this.getTaskTrackerAddress() == null
+                        ? other.getTaskTrackerAddress() == null
+                        : this.getTaskTrackerAddress().equals(other.getTaskTrackerAddress()))
+                && (this.getType() == null
+                        ? other.getType() == null
+                        : this.getType().equals(other.getType()))
+                && (this.getWfInstanceId() == null
+                        ? other.getWfInstanceId() == null
+                        : this.getWfInstanceId().equals(other.getWfInstanceId()));
     }
 
     @Override
@@ -333,21 +382,37 @@ public class InstanceInfo implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getActualTriggerTime() == null) ? 0 : getActualTriggerTime().hashCode());
+        result =
+                prime * result
+                        + ((getActualTriggerTime() == null)
+                                ? 0
+                                : getActualTriggerTime().hashCode());
         result = prime * result + ((getAppName() == null) ? 0 : getAppName().hashCode());
-        result = prime * result + ((getExpectedTriggerTime() == null) ? 0 : getExpectedTriggerTime().hashCode());
+        result =
+                prime * result
+                        + ((getExpectedTriggerTime() == null)
+                                ? 0
+                                : getExpectedTriggerTime().hashCode());
         result = prime * result + ((getFinishedTime() == null) ? 0 : getFinishedTime().hashCode());
         result = prime * result + ((getGmtCreate() == null) ? 0 : getGmtCreate().hashCode());
         result = prime * result + ((getGmtModified() == null) ? 0 : getGmtModified().hashCode());
         result = prime * result + ((getInstanceId() == null) ? 0 : getInstanceId().hashCode());
-        result = prime * result + ((getInstanceParams() == null) ? 0 : getInstanceParams().hashCode());
+        result =
+                prime * result
+                        + ((getInstanceParams() == null) ? 0 : getInstanceParams().hashCode());
         result = prime * result + ((getJobId() == null) ? 0 : getJobId().hashCode());
         result = prime * result + ((getJobParams() == null) ? 0 : getJobParams().hashCode());
-        result = prime * result + ((getLastReportTime() == null) ? 0 : getLastReportTime().hashCode());
+        result =
+                prime * result
+                        + ((getLastReportTime() == null) ? 0 : getLastReportTime().hashCode());
         result = prime * result + ((getResult() == null) ? 0 : getResult().hashCode());
         result = prime * result + ((getRunningTimes() == null) ? 0 : getRunningTimes().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
-        result = prime * result + ((getTaskTrackerAddress() == null) ? 0 : getTaskTrackerAddress().hashCode());
+        result =
+                prime * result
+                        + ((getTaskTrackerAddress() == null)
+                                ? 0
+                                : getTaskTrackerAddress().hashCode());
         result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
         result = prime * result + ((getWfInstanceId() == null) ? 0 : getWfInstanceId().hashCode());
         return result;
