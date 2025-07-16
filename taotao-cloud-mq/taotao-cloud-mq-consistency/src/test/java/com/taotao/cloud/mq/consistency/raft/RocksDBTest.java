@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.raft;
+package com.taotao.cloud.mq.consistency.raft;
 
 import com.alibaba.fastjson.JSON;
-import com.taotao.cloud.raft.impl.DefaultStateMachine;
+import com.taotao.cloud.mq.consistency.raft.impl.DefaultStateMachine;
 import java.io.File;
 import lombok.Getter;
 import lombok.Setter;
@@ -75,7 +75,6 @@ public class RocksDBTest {
 
     RocksDBTest instance;
 
-    @Before
     public void before() {
         instance = getInstance();
     }

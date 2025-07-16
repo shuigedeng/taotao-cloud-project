@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.raft;
+package com.taotao.cloud.mq.consistency.raft;
 
-import com.taotao.cloud.raft.entity.Command;
-import com.taotao.cloud.raft.entity.LogEntry;
-import com.taotao.cloud.raft.impl.DefaultStateMachine;
+import com.taotao.cloud.mq.consistency.raft.entity.Command;
+import com.taotao.cloud.mq.consistency.raft.entity.LogEntry;
+import com.taotao.cloud.mq.consistency.raft.impl.DefaultStateMachine;
 import org.junit.jupiter.api.Test;
 import org.rocksdb.RocksDBException;
 
@@ -36,7 +36,6 @@ public class DefaultStateMachineTest {
         machine.stateMachineDir = machine.dbDir + "/stateMachine";
     }
 
-    @Before
     public void before() {
         machine = DefaultStateMachine.getInstance();
     }

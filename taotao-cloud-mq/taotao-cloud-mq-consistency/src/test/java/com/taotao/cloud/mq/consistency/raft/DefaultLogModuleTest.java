@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.raft;
+package com.taotao.cloud.mq.consistency.raft;
 
-import com.taotao.cloud.raft.entity.Command;
-import com.taotao.cloud.raft.entity.LogEntry;
-import com.taotao.cloud.raft.impl.DefaultLogModule;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import com.taotao.cloud.mq.consistency.raft.entity.Command;
+import com.taotao.cloud.mq.consistency.raft.entity.LogEntry;
+import com.taotao.cloud.mq.consistency.raft.impl.DefaultLogModule;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -35,12 +37,10 @@ public class DefaultLogModuleTest {
         defaultLogs.logsDir = defaultLogs.dbDir + "/logModule";
     }
 
-    @Before
     public void setUp() throws Exception {
         System.setProperty("serverPort", "8777");
     }
 
-    @After
     public void tearDown() throws Exception {}
 
     @Test
@@ -52,7 +52,7 @@ public class DefaultLogModuleTest {
                         .build();
         defaultLogs.write(entry);
 
-        Assert.assertEquals(entry, defaultLogs.read(entry.getIndex()));
+        assertEquals(entry, defaultLogs.read(entry.getIndex()));
     }
 
     @Test
