@@ -1,27 +1,39 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.cache.support.persist;
-
-import com.taotao.boot.common.utils.common.StringUtils;
-import com.taotao.boot.common.utils.io.FileUtils;
-import com.taotao.cloud.cache.api.ICache;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import com.xkzhangsan.time.utils.StringUtil;
-import org.dromara.hutool.core.io.file.FileUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static com.taotao.boot.common.utils.io.FileUtils.createFile;
 import static com.taotao.boot.common.utils.io.FileUtils.exists;
+
+import com.taotao.boot.common.utils.io.FileUtils;
+import com.taotao.cloud.cache.api.ICache;
+import com.xkzhangsan.time.utils.StringUtil;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 缓存持久化-AOF 持久化模式
  * @author shuigedeng
  * @since 2024.06
  */
-public class CachePersistAof<K,V> extends CachePersistAdaptor<K,V> {
+public class CachePersistAof<K, V> extends CachePersistAdaptor<K, V> {
 
     private static final Logger log = LoggerFactory.getLogger(CachePersistAof.class);
 
@@ -51,7 +63,7 @@ public class CachePersistAof<K,V> extends CachePersistAdaptor<K,V> {
     public void persist(ICache<K, V> cache) {
         log.info("开始 AOF 持久化到文件");
         // 1. 创建文件
-        if(!exists(dbPath)) {
+        if (!exists(dbPath)) {
             createFile(dbPath);
         }
         // 2. 持久化追加到文件中
@@ -83,9 +95,8 @@ public class CachePersistAof<K,V> extends CachePersistAdaptor<K,V> {
      * @since 2024.06
      */
     public void append(final String json) {
-        if(StringUtil.isNotEmpty(json)) {
+        if (StringUtil.isNotEmpty(json)) {
             bufferList.add(json);
         }
     }
-
 }

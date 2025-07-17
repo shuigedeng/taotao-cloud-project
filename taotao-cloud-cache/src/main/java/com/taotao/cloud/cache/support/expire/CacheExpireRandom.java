@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.cache.support.expire;
 
 import com.taotao.cloud.cache.api.ICache;
@@ -6,19 +22,17 @@ import com.taotao.cloud.cache.api.ICacheRemoveListener;
 import com.taotao.cloud.cache.api.ICacheRemoveListenerContext;
 import com.taotao.cloud.cache.constant.enums.CacheRemoveType;
 import com.taotao.cloud.cache.exception.CacheRuntimeException;
-import com.taotao.cloud.cache.support.evict.CacheEvictClock;
 import com.taotao.cloud.cache.support.listener.remove.CacheRemoveListenerContext;
-
+import com.xkzhangsan.time.utils.CollectionUtil;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
-
-import com.xkzhangsan.time.utils.CollectionUtil;
 import org.dromara.hutool.core.map.MapUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 /**
  * 缓存过期-普通策略随机
  *
@@ -27,7 +41,7 @@ import org.slf4j.LoggerFactory;
  * @param <K> key
  * @param <V> value
  */
-public class CacheExpireRandom<K,V> implements ICacheExpire<K,V> {
+public class CacheExpireRandom<K, V> implements ICacheExpire<K, V> {
 
     private static final Logger log = LoggerFactory.getLogger(CacheExpireRandom.class);
 
@@ -49,7 +63,7 @@ public class CacheExpireRandom<K,V> implements ICacheExpire<K,V> {
      * 缓存实现
      * @since 2024.06
      */
-    private final ICache<K,V> cache;
+    private final ICache<K, V> cache;
 
     /**
      * 是否启用快模式
@@ -61,7 +75,8 @@ public class CacheExpireRandom<K,V> implements ICacheExpire<K,V> {
      * 线程执行类
      * @since 2024.06
      */
-    private static final ScheduledExecutorService EXECUTOR_SERVICE = Executors.newSingleThreadScheduledExecutor();
+    private static final ScheduledExecutorService EXECUTOR_SERVICE =
+            Executors.newSingleThreadScheduledExecutor();
 
     public CacheExpireRandom(ICache<K, V> cache) {
         this.cache = cache;
@@ -83,22 +98,21 @@ public class CacheExpireRandom<K,V> implements ICacheExpire<K,V> {
     private class ExpireThreadRandom implements Runnable {
         @Override
         public void run() {
-            //1.判断是否为空
-            if(MapUtil.isEmpty(expireMap)) {
+            // 1.判断是否为空
+            if (MapUtil.isEmpty(expireMap)) {
                 log.info("expireMap 信息为空，直接跳过本次处理。");
                 return;
             }
 
-            //2. 是否启用快模式
-            if(fastMode) {
+            // 2. 是否启用快模式
+            if (fastMode) {
                 expireKeys(10L);
             }
 
-            //3. 缓慢模式
+            // 3. 缓慢模式
             expireKeys(100L);
         }
     }
-
 
     /**
      * 过期信息
@@ -111,31 +125,30 @@ public class CacheExpireRandom<K,V> implements ICacheExpire<K,V> {
         // 恢复 fastMode
         this.fastMode = false;
 
-        //2. 获取 key 进行处理
+        // 2. 获取 key 进行处理
         int count = 0;
         while (true) {
-            //2.1 返回判断
-            if(count >= COUNT_LIMIT) {
+            // 2.1 返回判断
+            if (count >= COUNT_LIMIT) {
                 log.info("过期淘汰次数已经达到最大次数: {}，完成本次执行。", COUNT_LIMIT);
                 return;
             }
-            if(System.currentTimeMillis() >= timeLimit) {
+            if (System.currentTimeMillis() >= timeLimit) {
                 this.fastMode = true;
                 log.info("过期淘汰已经达到限制时间，中断本次执行，设置 fastMode=true;");
                 return;
             }
 
-            //2.2 随机过期
+            // 2.2 随机过期
             K key = getRandomKey();
             Long expireAt = expireMap.get(key);
             boolean expireFlag = expireKey(key, expireAt);
             log.debug("key: {} 过期执行结果 {}", key, expireFlag);
 
-            //2.3 信息更新
+            // 2.3 信息更新
             count++;
         }
     }
-
 
     /**
      * 随机获取一个 key 信息
@@ -166,7 +179,7 @@ public class CacheExpireRandom<K,V> implements ICacheExpire<K,V> {
         while (iterator.hasNext()) {
             K key = iterator.next();
 
-            if(count == randomIndex) {
+            if (count == randomIndex) {
                 return key;
             }
             count++;
@@ -193,13 +206,13 @@ public class CacheExpireRandom<K,V> implements ICacheExpire<K,V> {
         Set<K> keySet = new HashSet<>();
         while (iterator.hasNext()) {
             // 判断列表大小
-            if(keySet.size() >= sizeLimit) {
+            if (keySet.size() >= sizeLimit) {
                 return keySet;
             }
 
             K key = iterator.next();
             // index 向后的位置，全部放进来。
-            if(count >= randomIndex) {
+            if (count >= randomIndex) {
                 keySet.add(key);
             }
             count++;
@@ -216,18 +229,18 @@ public class CacheExpireRandom<K,V> implements ICacheExpire<K,V> {
 
     @Override
     public void refreshExpire(Collection<K> keyList) {
-        if(CollectionUtil.isEmpty(keyList)) {
+        if (CollectionUtil.isEmpty(keyList)) {
             return;
         }
 
         // 判断大小，小的作为外循环。一般都是过期的 keys 比较小。
-        if(keyList.size() <= expireMap.size()) {
-            for(K key : keyList) {
+        if (keyList.size() <= expireMap.size()) {
+            for (K key : keyList) {
                 Long expireAt = expireMap.get(key);
                 expireKey(key, expireAt);
             }
         } else {
-            for(Map.Entry<K, Long> entry : expireMap.entrySet()) {
+            for (Map.Entry<K, Long> entry : expireMap.entrySet()) {
                 this.expireKey(entry.getKey(), entry.getValue());
             }
         }
@@ -246,19 +259,23 @@ public class CacheExpireRandom<K,V> implements ICacheExpire<K,V> {
      * @return 是否执行过期
      */
     private boolean expireKey(final K key, final Long expireAt) {
-        if(expireAt == null) {
+        if (expireAt == null) {
             return false;
         }
 
         long currentTime = System.currentTimeMillis();
-        if(currentTime >= expireAt) {
+        if (currentTime >= expireAt) {
             expireMap.remove(key);
             // 再移除缓存，后续可以通过惰性删除做补偿
             V removeValue = cache.remove(key);
 
             // 执行淘汰监听器
-            ICacheRemoveListenerContext<K,V> removeListenerContext = CacheRemoveListenerContext.<K,V>newInstance().key(key).value(removeValue).type(CacheRemoveType.EXPIRE.code());
-            for(ICacheRemoveListener<K,V> listener : cache.removeListeners()) {
+            ICacheRemoveListenerContext<K, V> removeListenerContext =
+                    CacheRemoveListenerContext.<K, V>newInstance()
+                            .key(key)
+                            .value(removeValue)
+                            .type(CacheRemoveType.EXPIRE.code());
+            for (ICacheRemoveListener<K, V> listener : cache.removeListeners()) {
                 listener.listen(removeListenerContext);
             }
 
@@ -267,5 +284,4 @@ public class CacheExpireRandom<K,V> implements ICacheExpire<K,V> {
 
         return false;
     }
-
 }

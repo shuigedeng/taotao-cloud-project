@@ -1,10 +1,25 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.jdbcpool.util;
 
 import com.taotao.cloud.jdbcpool.exception.JdbcPoolException;
-import org.springframework.util.StringUtils;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.util.StringUtils;
 
 /**
  * 驱动类工具
@@ -52,23 +67,27 @@ public final class DriverClassUtil {
         DRIVER_CLASS_MAP.put("jdbc:JTurbo", "com.newatlanta.jturbo.driver.Driver");
         DRIVER_CLASS_MAP.put("jdbc:mimer:multi1", "com.mimer.jdbc.Driver");
     }
-	public static String trim(final String original) {
-		if (StringUtils.isEmpty(original)) {
-			return original;
-		}
-		return original.trim();
-	}
-	public static boolean isEmptyTrim(final String string) {
-		if (isEmpty(string)) {
-			return true;
-		}
 
-		String trim = trim(string);
-		return isEmpty(trim);
-	}
-	public static boolean isEmpty(String str) {
-		return str == null || str.isEmpty();
-	}
+    public static String trim(final String original) {
+        if (StringUtils.isEmpty(original)) {
+            return original;
+        }
+        return original.trim();
+    }
+
+    public static boolean isEmptyTrim(final String string) {
+        if (isEmpty(string)) {
+            return true;
+        }
+
+        String trim = trim(string);
+        return isEmpty(trim);
+    }
+
+    public static boolean isEmpty(String str) {
+        return str == null || str.isEmpty();
+    }
+
     /**
      * 加载驱动类信息
      * @param driverClass 驱动类
@@ -77,7 +96,7 @@ public final class DriverClassUtil {
      */
     public static void loadDriverClass(String driverClass, final String url) {
 
-        if(isEmptyTrim(driverClass)) {
+        if (isEmptyTrim(driverClass)) {
             driverClass = getDriverClassByUrl(url);
         }
 
@@ -87,7 +106,6 @@ public final class DriverClassUtil {
             throw new JdbcPoolException(e);
         }
     }
-
 
     /**
      * 根据 URL 获取对应的驱动类
@@ -99,14 +117,13 @@ public final class DriverClassUtil {
      */
     private static String getDriverClassByUrl(final String url) {
 
-        for(Map.Entry<String, String> entry : DRIVER_CLASS_MAP.entrySet()) {
+        for (Map.Entry<String, String> entry : DRIVER_CLASS_MAP.entrySet()) {
             String urlPrefix = entry.getKey();
-            if(url.startsWith(urlPrefix)) {
+            if (url.startsWith(urlPrefix)) {
                 return entry.getValue();
             }
         }
 
         throw new JdbcPoolException("Can't auto find match driver class for url: " + url);
     }
-
 }

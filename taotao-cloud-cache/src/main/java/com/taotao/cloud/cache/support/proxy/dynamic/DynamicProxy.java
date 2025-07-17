@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package com.taotao.cloud.cache.support.proxy.dynamic;
 
@@ -6,7 +21,6 @@ import com.taotao.cloud.cache.support.proxy.ICacheProxy;
 import com.taotao.cloud.cache.support.proxy.bs.CacheProxyBs;
 import com.taotao.cloud.cache.support.proxy.bs.CacheProxyBsContext;
 import com.taotao.cloud.cache.support.proxy.bs.ICacheProxyBsContext;
-
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -45,8 +59,8 @@ public class DynamicProxy implements InvocationHandler, ICacheProxy {
     @Override
     @SuppressWarnings("all")
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        ICacheProxyBsContext context = CacheProxyBsContext.newInstance()
-                .method(method).params(args).target(target);
+        ICacheProxyBsContext context =
+                CacheProxyBsContext.newInstance().method(method).params(args).target(target);
         return CacheProxyBs.newInstance().context(context).execute();
     }
 
@@ -55,7 +69,7 @@ public class DynamicProxy implements InvocationHandler, ICacheProxy {
         // 我们要代理哪个真实对象，就将该对象传进去，最后是通过该真实对象来调用其方法的
         InvocationHandler handler = new DynamicProxy(target);
 
-        return Proxy.newProxyInstance(handler.getClass().getClassLoader(),
-                target.getClass().getInterfaces(), handler);
+        return Proxy.newProxyInstance(
+                handler.getClass().getClassLoader(), target.getClass().getInterfaces(), handler);
     }
 }

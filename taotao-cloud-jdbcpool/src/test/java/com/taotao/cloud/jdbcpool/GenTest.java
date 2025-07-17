@@ -1,15 +1,28 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.jdbcpool;
 
-
 import org.junit.jupiter.api.Test;
-
-import java.util.Map;
 
 public class GenTest {
 
     @Test
     public void driverClassTest() {
-       /* Map<String, String> map = FileUtil.readToMap("D:\\_github\\jdbc-pool\\src\\test\\resources\\driverClass.txt", " ");
+        /* Map<String, String> map = FileUtil.readToMap("D:\\_github\\jdbc-pool\\src\\test\\resources\\driverClass.txt", " ");
 
         final String format = "DRIVER_CLASS_MAP.put(\"%s\", \"%s\");";
         for(Map.Entry<String, String> entry : map.entrySet()) {
@@ -20,13 +33,13 @@ public class GenTest {
 
     @Test
     public void driverClassMDTest() {
-        //Map<String, String> map = FileUtil.readToMap("D:\\_github\\jdbc-pool\\src\\test\\resources\\driverClass.txt", " ");
-		//
-        //final String format = "| %s | %s |";
-        //for(Map.Entry<String, String> entry : map.entrySet()) {
+        // Map<String, String> map =
+        // FileUtil.readToMap("D:\\_github\\jdbc-pool\\src\\test\\resources\\driverClass.txt", " ");
+        //
+        // final String format = "| %s | %s |";
+        // for(Map.Entry<String, String> entry : map.entrySet()) {
         //    String result = String.format(format, entry.getKey(), entry.getValue());
         //    System.out.println(result);
-        //}
+        // }
     }
-
 }

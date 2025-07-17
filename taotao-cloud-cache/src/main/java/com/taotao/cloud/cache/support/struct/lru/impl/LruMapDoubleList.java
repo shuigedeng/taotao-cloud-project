@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.cache.support.struct.lru.impl;
 
 import com.taotao.boot.common.utils.lang.ObjectUtils;
@@ -6,17 +22,17 @@ import com.taotao.cloud.cache.exception.CacheRuntimeException;
 import com.taotao.cloud.cache.model.CacheEntry;
 import com.taotao.cloud.cache.model.DoubleListNode;
 import com.taotao.cloud.cache.support.struct.lru.ILruMap;
-
 import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 /**
  * 基于双向列表的实现
  * @author shuigedeng
  * @since 2024.06
  */
-public class LruMapDoubleList<K,V> implements ILruMap<K,V> {
+public class LruMapDoubleList<K, V> implements ILruMap<K, V> {
 
     private static final Logger log = LoggerFactory.getLogger(LruMapDoubleList.class);
 
@@ -24,13 +40,13 @@ public class LruMapDoubleList<K,V> implements ILruMap<K,V> {
      * 头结点
      * @since 2024.06
      */
-    private DoubleListNode<K,V> head;
+    private DoubleListNode<K, V> head;
 
     /**
      * 尾巴结点
      * @since 2024.06
      */
-    private DoubleListNode<K,V> tail;
+    private DoubleListNode<K, V> tail;
 
     /**
      * map 信息
@@ -39,7 +55,7 @@ public class LruMapDoubleList<K,V> implements ILruMap<K,V> {
      * value: 元素在 list 中对应的节点信息
      * @since 2024.06
      */
-    private Map<K, DoubleListNode<K,V>> indexMap;
+    private Map<K, DoubleListNode<K, V>> indexMap;
 
     public LruMapDoubleList() {
         this.indexMap = new HashMap<>();
@@ -53,9 +69,9 @@ public class LruMapDoubleList<K,V> implements ILruMap<K,V> {
     @Override
     public ICacheEntry<K, V> removeEldest() {
         // 获取尾巴节点的前一个元素
-        DoubleListNode<K,V> tailPre = this.tail.pre();
-        if(tailPre == this.head) {
-			log.error("当前列表为空，无法进行删除");
+        DoubleListNode<K, V> tailPre = this.tail.pre();
+        if (tailPre == this.head) {
+            log.error("当前列表为空，无法进行删除");
             throw new CacheRuntimeException("不可删除头结点!");
         }
 
@@ -79,22 +95,22 @@ public class LruMapDoubleList<K,V> implements ILruMap<K,V> {
      */
     @Override
     public void updateKey(final K key) {
-        //1. 执行删除
+        // 1. 执行删除
         this.removeKey(key);
 
-        //2. 新元素插入到头部
-        //head<->next
-        //变成：head<->new<->next
-        DoubleListNode<K,V> newNode = new DoubleListNode<>();
+        // 2. 新元素插入到头部
+        // head<->next
+        // 变成：head<->new<->next
+        DoubleListNode<K, V> newNode = new DoubleListNode<>();
         newNode.key(key);
 
-        DoubleListNode<K,V> next = this.head.next();
+        DoubleListNode<K, V> next = this.head.next();
         this.head.next(newNode);
         newNode.pre(this.head);
         next.pre(newNode);
         newNode.next(next);
 
-        //2.2 插入到 map 中
+        // 2.2 插入到 map 中
         indexMap.put(key, newNode);
     }
 
@@ -111,24 +127,24 @@ public class LruMapDoubleList<K,V> implements ILruMap<K,V> {
      */
     @Override
     public void removeKey(final K key) {
-        DoubleListNode<K,V> node = indexMap.get(key);
+        DoubleListNode<K, V> node = indexMap.get(key);
 
-        if(ObjectUtils.isNull(node)) {
+        if (ObjectUtils.isNull(node)) {
             return;
         }
 
         // 删除 list node
         // A<->B<->C
         // 删除 B，需要变成： A<->C
-        DoubleListNode<K,V> pre = node.pre();
-        DoubleListNode<K,V> next = node.next();
+        DoubleListNode<K, V> pre = node.pre();
+        DoubleListNode<K, V> next = node.next();
 
         pre.next(next);
         next.pre(pre);
 
         // 删除 map 中对应信息
         this.indexMap.remove(key);
-		log.debug("从 LruMapDoubleList 中移除 key: {}", key);
+        log.debug("从 LruMapDoubleList 中移除 key: {}", key);
     }
 
     @Override
@@ -140,5 +156,4 @@ public class LruMapDoubleList<K,V> implements ILruMap<K,V> {
     public boolean contains(K key) {
         return indexMap.containsKey(key);
     }
-
 }

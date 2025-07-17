@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.cache.support.expire;
 
 import com.taotao.cloud.cache.api.ICache;
@@ -7,12 +23,11 @@ import com.taotao.cloud.cache.api.ICacheRemoveListenerContext;
 import com.taotao.cloud.cache.constant.enums.CacheRemoveType;
 import com.taotao.cloud.cache.support.listener.remove.CacheRemoveListenerContext;
 import com.xkzhangsan.time.utils.CollectionUtil;
-import org.dromara.hutool.core.map.MapUtil;
-
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import org.dromara.hutool.core.map.MapUtil;
 
 /**
  * 缓存过期-普通策略
@@ -22,7 +37,7 @@ import java.util.concurrent.TimeUnit;
  * @param <K> key
  * @param <V> value
  */
-public class CacheExpire<K,V> implements ICacheExpire<K,V> {
+public class CacheExpire<K, V> implements ICacheExpire<K, V> {
 
     /**
      * 单次清空的数量限制
@@ -42,13 +57,14 @@ public class CacheExpire<K,V> implements ICacheExpire<K,V> {
      * 缓存实现
      * @since 2024.06
      */
-    private final ICache<K,V> cache;
+    private final ICache<K, V> cache;
 
     /**
      * 线程执行类
      * @since 2024.06
      */
-    private static final ScheduledExecutorService EXECUTOR_SERVICE = Executors.newSingleThreadScheduledExecutor();
+    private static final ScheduledExecutorService EXECUTOR_SERVICE =
+            Executors.newSingleThreadScheduledExecutor();
 
     public CacheExpire(ICache<K, V> cache) {
         this.cache = cache;
@@ -70,15 +86,15 @@ public class CacheExpire<K,V> implements ICacheExpire<K,V> {
     private class ExpireThread implements Runnable {
         @Override
         public void run() {
-            //1.判断是否为空
-            if(MapUtil.isEmpty(expireMap)) {
+            // 1.判断是否为空
+            if (MapUtil.isEmpty(expireMap)) {
                 return;
             }
 
-            //2. 获取 key 进行处理
+            // 2. 获取 key 进行处理
             int count = 0;
-            for(Map.Entry<K, Long> entry : expireMap.entrySet()) {
-                if(count >= LIMIT) {
+            for (Map.Entry<K, Long> entry : expireMap.entrySet()) {
+                if (count >= LIMIT) {
                     return;
                 }
 
@@ -95,18 +111,18 @@ public class CacheExpire<K,V> implements ICacheExpire<K,V> {
 
     @Override
     public void refreshExpire(Collection<K> keyList) {
-        if(CollectionUtil.isEmpty(keyList)) {
+        if (CollectionUtil.isEmpty(keyList)) {
             return;
         }
 
         // 判断大小，小的作为外循环。一般都是过期的 keys 比较小。
-        if(keyList.size() <= expireMap.size()) {
-            for(K key : keyList) {
+        if (keyList.size() <= expireMap.size()) {
+            for (K key : keyList) {
                 Long expireAt = expireMap.get(key);
                 expireKey(key, expireAt);
             }
         } else {
-            for(Map.Entry<K, Long> entry : expireMap.entrySet()) {
+            for (Map.Entry<K, Long> entry : expireMap.entrySet()) {
                 this.expireKey(entry.getKey(), entry.getValue());
             }
         }
@@ -124,22 +140,25 @@ public class CacheExpire<K,V> implements ICacheExpire<K,V> {
      * @since 2024.06
      */
     private void expireKey(final K key, final Long expireAt) {
-        if(expireAt == null) {
+        if (expireAt == null) {
             return;
         }
 
         long currentTime = System.currentTimeMillis();
-        if(currentTime >= expireAt) {
+        if (currentTime >= expireAt) {
             expireMap.remove(key);
             // 再移除缓存，后续可以通过惰性删除做补偿
             V removeValue = cache.remove(key);
 
             // 执行淘汰监听器
-            ICacheRemoveListenerContext<K,V> removeListenerContext = CacheRemoveListenerContext.<K,V>newInstance().key(key).value(removeValue).type(CacheRemoveType.EXPIRE.code());
-            for(ICacheRemoveListener<K,V> listener : cache.removeListeners()) {
+            ICacheRemoveListenerContext<K, V> removeListenerContext =
+                    CacheRemoveListenerContext.<K, V>newInstance()
+                            .key(key)
+                            .value(removeValue)
+                            .type(CacheRemoveType.EXPIRE.code());
+            for (ICacheRemoveListener<K, V> listener : cache.removeListeners()) {
                 listener.listen(removeListenerContext);
             }
         }
     }
-
 }

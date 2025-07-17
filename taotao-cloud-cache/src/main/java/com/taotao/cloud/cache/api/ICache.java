@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.cache.api;
 
 import java.util.List;
@@ -63,14 +79,14 @@ public interface ICache<K, V> extends Map<K, V> {
      * @return 处理类实现
      * @since 22024.06
      */
-    ICacheExpire<K,V> expire();
+    ICacheExpire<K, V> expire();
 
     /**
      * 删除监听类列表
      * @return 监听器列表
      * @since 22024.06
      */
-    List<ICacheRemoveListener<K,V>> removeListeners();
+    List<ICacheRemoveListener<K, V>> removeListeners();
 
     /**
      * 慢日志监听类列表
@@ -84,20 +100,19 @@ public interface ICache<K, V> extends Map<K, V> {
      * @return 加载信息
      * @since 22024.06
      */
-    ICacheLoad<K,V> load();
+    ICacheLoad<K, V> load();
 
     /**
      * 持久化类
      * @return 持久化类
      * @since 22024.06
      */
-    ICachePersist<K,V> persist();
+    ICachePersist<K, V> persist();
 
     /**
      * 淘汰策略
      * @return 淘汰
      * @since 22024.06
      */
-    ICacheEvict<K,V> evict();
-
+    ICacheEvict<K, V> evict();
 }

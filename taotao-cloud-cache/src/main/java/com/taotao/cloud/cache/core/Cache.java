@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.cache.core;
 
 import com.taotao.boot.common.utils.lang.ObjectUtils;
@@ -10,7 +26,6 @@ import com.taotao.cloud.cache.support.expire.CacheExpire;
 import com.taotao.cloud.cache.support.listener.remove.CacheRemoveListenerContext;
 import com.taotao.cloud.cache.support.persist.InnerCachePersist;
 import com.taotao.cloud.cache.support.proxy.CacheProxy;
-
 import java.util.*;
 
 /**
@@ -21,13 +36,13 @@ import java.util.*;
  * @param <V> value
  * @since 2024.06
  */
-public class Cache<K,V> implements ICache<K,V> {
+public class Cache<K, V> implements ICache<K, V> {
 
     /**
      * map 信息
      * @since 2024.06
      */
-    private Map<K,V> map;
+    private Map<K, V> map;
 
     /**
      * 大小限制
@@ -39,20 +54,20 @@ public class Cache<K,V> implements ICache<K,V> {
      * 驱除策略
      * @since 2024.06
      */
-    private ICacheEvict<K,V> evict;
+    private ICacheEvict<K, V> evict;
 
     /**
      * 过期策略
      * 暂时不做暴露
      * @since 2024.06
      */
-    private ICacheExpire<K,V> expire;
+    private ICacheExpire<K, V> expire;
 
     /**
      * 删除监听类
      * @since 2024.06
      */
-    private List<ICacheRemoveListener<K,V>> removeListeners;
+    private List<ICacheRemoveListener<K, V>> removeListeners;
 
     /**
      * 慢日志监听类
@@ -64,13 +79,13 @@ public class Cache<K,V> implements ICache<K,V> {
      * 加载类
      * @since 2024.06
      */
-    private ICacheLoad<K,V> load;
+    private ICacheLoad<K, V> load;
 
     /**
      * 持久化
      * @since 2024.06
      */
-    private ICachePersist<K,V> persist;
+    private ICachePersist<K, V> persist;
 
     /**
      * 设置 map 实现
@@ -113,7 +128,6 @@ public class Cache<K,V> implements ICache<K,V> {
         return persist;
     }
 
-
     /**
      * 获取驱除策略
      * @return 驱除策略
@@ -142,7 +156,6 @@ public class Cache<K,V> implements ICache<K,V> {
         this.removeListeners = removeListeners;
         return this;
     }
-
 
     @Override
     public List<ICacheSlowListener> slowListeners() {
@@ -173,7 +186,7 @@ public class Cache<K,V> implements ICache<K,V> {
         this.load.load(this);
 
         // 初始化持久化
-        if(this.persist != null) {
+        if (this.persist != null) {
             new InnerCachePersist<>(this, persist);
         }
     }
@@ -190,7 +203,7 @@ public class Cache<K,V> implements ICache<K,V> {
         long expireTime = System.currentTimeMillis() + timeInMills;
 
         // 使用代理调用
-        Cache<K,V> cachePoxy = (Cache<K, V>) CacheProxy.getProxy(this);
+        Cache<K, V> cachePoxy = (Cache<K, V>) CacheProxy.getProxy(this);
         return cachePoxy.expireAt(key, expireTime);
     }
 
@@ -241,7 +254,7 @@ public class Cache<K,V> implements ICache<K,V> {
     @CacheInterceptor(evict = true)
     @SuppressWarnings("unchecked")
     public V get(Object key) {
-        //1. 刷新所有过期信息
+        // 1. 刷新所有过期信息
         K genericKey = (K) key;
         this.expire.refreshExpire(Collections.singletonList(genericKey));
 
@@ -251,29 +264,31 @@ public class Cache<K,V> implements ICache<K,V> {
     @Override
     @CacheInterceptor(aof = true, evict = true)
     public V put(K key, V value) {
-        //1.1 尝试驱除
-        CacheEvictContext<K,V> context = new CacheEvictContext<>();
+        // 1.1 尝试驱除
+        CacheEvictContext<K, V> context = new CacheEvictContext<>();
         context.key(key).size(sizeLimit).cache(this);
 
-        ICacheEntry<K,V> evictEntry = evict.evict(context);
+        ICacheEntry<K, V> evictEntry = evict.evict(context);
 
         // 添加拦截器调用
-        if(ObjectUtils.isNotNull(evictEntry)) {
+        if (ObjectUtils.isNotNull(evictEntry)) {
             // 执行淘汰监听器
-            ICacheRemoveListenerContext<K,V> removeListenerContext = CacheRemoveListenerContext.<K,V>newInstance().key(evictEntry.key())
-                    .value(evictEntry.value())
-                    .type(CacheRemoveType.EVICT.code());
-            for(ICacheRemoveListener<K,V> listener : context.cache().removeListeners()) {
+            ICacheRemoveListenerContext<K, V> removeListenerContext =
+                    CacheRemoveListenerContext.<K, V>newInstance()
+                            .key(evictEntry.key())
+                            .value(evictEntry.value())
+                            .type(CacheRemoveType.EVICT.code());
+            for (ICacheRemoveListener<K, V> listener : context.cache().removeListeners()) {
                 listener.listen(removeListenerContext);
             }
         }
 
-        //2. 判断驱除后的信息
-        if(isSizeLimit()) {
+        // 2. 判断驱除后的信息
+        if (isSizeLimit()) {
             throw new CacheRuntimeException("当前队列已满，数据添加失败！");
         }
 
-        //3. 执行添加
+        // 3. 执行添加
         return map.put(key, value);
     }
 
@@ -322,5 +337,4 @@ public class Cache<K,V> implements ICache<K,V> {
     public Set<Entry<K, V>> entrySet() {
         return map.entrySet();
     }
-
 }
