@@ -1,11 +1,26 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.netty.itcast.nio.c2;
-
-import io.netty.util.internal.StringUtil;
-
-import java.nio.ByteBuffer;
 
 import static io.netty.util.internal.MathUtil.isOutOfBounds;
 import static io.netty.util.internal.StringUtil.NEWLINE;
+
+import io.netty.util.internal.StringUtil;
+import java.nio.ByteBuffer;
 
 public class ByteBufferUtil {
     private static final char[] BYTE2CHAR = new char[256];
@@ -78,7 +93,8 @@ public class ByteBufferUtil {
         buffer.limit(buffer.capacity());
         StringBuilder origin = new StringBuilder(256);
         appendPrettyHexDump(origin, buffer, 0, buffer.capacity());
-        System.out.println("+--------+-------------------- all ------------------------+----------------+");
+        System.out.println(
+                "+--------+-------------------- all ------------------------+----------------+");
         System.out.printf("position: [%d], limit: [%d]\n", buffer.position(), oldlimit);
         System.out.println(origin);
         buffer.limit(oldlimit);
@@ -91,30 +107,41 @@ public class ByteBufferUtil {
     public static void debugRead(ByteBuffer buffer) {
         StringBuilder builder = new StringBuilder(256);
         appendPrettyHexDump(builder, buffer, buffer.position(), buffer.limit() - buffer.position());
-        System.out.println("+--------+-------------------- read -----------------------+----------------+");
+        System.out.println(
+                "+--------+-------------------- read -----------------------+----------------+");
         System.out.printf("position: [%d], limit: [%d]\n", buffer.position(), buffer.limit());
         System.out.println(builder);
     }
 
     public static void main(String[] args) {
         ByteBuffer buffer = ByteBuffer.allocate(10);
-        buffer.put(new byte[]{97, 98, 99, 100});
+        buffer.put(new byte[] {97, 98, 99, 100});
         debugAll(buffer);
     }
 
-    private static void appendPrettyHexDump(StringBuilder dump, ByteBuffer buf, int offset, int length) {
+    private static void appendPrettyHexDump(
+            StringBuilder dump, ByteBuffer buf, int offset, int length) {
         if (isOutOfBounds(offset, length, buf.capacity())) {
             throw new IndexOutOfBoundsException(
-                    "expected: " + "0 <= offset(" + offset + ") <= offset + length(" + length
-                            + ") <= " + "buf.capacity(" + buf.capacity() + ')');
+                    "expected: "
+                            + "0 <= offset("
+                            + offset
+                            + ") <= offset + length("
+                            + length
+                            + ") <= "
+                            + "buf.capacity("
+                            + buf.capacity()
+                            + ')');
         }
         if (length == 0) {
             return;
         }
         dump.append(
-                "         +-------------------------------------------------+" +
-                        NEWLINE + "         |  0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f |" +
-                        NEWLINE + "+--------+-------------------------------------------------+----------------+");
+                "         +-------------------------------------------------+"
+                        + NEWLINE
+                        + "         |  0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f |"
+                        + NEWLINE
+                        + "+--------+-------------------------------------------------+----------------+");
 
         final int startIndex = offset;
         final int fullRows = length >>> 4;
@@ -162,8 +189,9 @@ public class ByteBufferUtil {
             dump.append('|');
         }
 
-        dump.append(NEWLINE +
-                "+--------+-------------------------------------------------+----------------+");
+        dump.append(
+                NEWLINE
+                        + "+--------+-------------------------------------------------+----------------+");
     }
 
     private static void appendHexDumpRowPrefix(StringBuilder dump, int row, int rowStartIndex) {

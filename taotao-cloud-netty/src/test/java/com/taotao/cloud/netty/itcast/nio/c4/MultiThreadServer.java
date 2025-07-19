@@ -1,6 +1,22 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.netty.itcast.nio.c4;
 
-import lombok.extern.slf4j.Slf4j;
+import static com.taotao.cloud.netty.itcast.nio.c2.ByteBufferUtil.debugAll;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -9,8 +25,7 @@ import java.nio.channels.*;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import static com.taotao.cloud.netty.itcast.nio.c2.ByteBufferUtil.debugAll;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class MultiThreadServer {
@@ -28,7 +43,7 @@ public class MultiThreadServer {
             workers[i] = new Worker("worker-" + i);
         }
         AtomicInteger index = new AtomicInteger();
-        while(true) {
+        while (true) {
             boss.select();
             Iterator<SelectionKey> iter = boss.selectedKeys().iterator();
             while (iter.hasNext()) {
@@ -41,25 +56,28 @@ public class MultiThreadServer {
                     // 2. 关联 selector
                     log.debug("before register...{}", sc.getRemoteAddress());
                     // round robin 轮询
-                    workers[index.getAndIncrement() % workers.length].register(sc); // boss 调用 初始化 selector , 启动 worker-0
+                    workers[index.getAndIncrement() % workers.length].register(
+                            sc); // boss 调用 初始化 selector , 启动 worker-0
                     log.debug("after register...{}", sc.getRemoteAddress());
                 }
             }
         }
     }
-    static class Worker implements Runnable{
+
+    static class Worker implements Runnable {
         private Thread thread;
         private Selector selector;
         private String name;
         private volatile boolean start = false; // 还未初始化
         private ConcurrentLinkedQueue<Runnable> queue = new ConcurrentLinkedQueue<>();
+
         public Worker(String name) {
             this.name = name;
         }
 
         // 初始化线程，和 selector
         public void register(SocketChannel sc) throws IOException {
-            if(!start) {
+            if (!start) {
                 selector = Selector.open();
                 thread = new Thread(this, name);
                 thread.start();
@@ -71,7 +89,7 @@ public class MultiThreadServer {
 
         @Override
         public void run() {
-            while(true) {
+            while (true) {
                 try {
                     selector.select(); // worker-0  阻塞
                     Iterator<SelectionKey> iter = selector.selectedKeys().iterator();

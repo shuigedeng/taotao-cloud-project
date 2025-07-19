@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.realtime.datalake.behavior.hotitems_analysis;
 
 import com.taotao.cloud.realtime.behavior.analysis.hotitems_analysis.beans.UserBehavior;
@@ -19,63 +35,78 @@ public class HotItemsWithSql {
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
         // 2. 读取数据，创建DataStream
-        DataStream<String> inputStream = env.readTextFile("D:\\Projects\\BigData\\UserBehaviorAnalysis\\HotItemsAnalysis\\src\\main\\resources\\UserBehavior.csv");
+        DataStream<String> inputStream =
+                env.readTextFile(
+                        "D:\\Projects\\BigData\\UserBehaviorAnalysis\\HotItemsAnalysis\\src\\main\\resources\\UserBehavior.csv");
 
         // 3. 转换为POJO，分配时间戳和watermark
-        DataStream<UserBehavior> dataStream = inputStream
-                .map(line -> {
-                    String[] fields = line.split(",");
-                    return new UserBehavior(new Long(fields[0]), new Long(fields[1]), new Integer(fields[2]), fields[3], new Long(fields[4]));
-                })
-                .assignTimestampsAndWatermarks(new AscendingTimestampExtractor<UserBehavior>() {
-                    @Override
-                    public long extractAscendingTimestamp(UserBehavior element) {
-                        return element.getTimestamp() * 1000L;
-                    }
-                });
+        DataStream<UserBehavior> dataStream =
+                inputStream
+                        .map(
+                                line -> {
+                                    String[] fields = line.split(",");
+                                    return new UserBehavior(
+                                            new Long(fields[0]),
+                                            new Long(fields[1]),
+                                            new Integer(fields[2]),
+                                            fields[3],
+                                            new Long(fields[4]));
+                                })
+                        .assignTimestampsAndWatermarks(
+                                new AscendingTimestampExtractor<UserBehavior>() {
+                                    @Override
+                                    public long extractAscendingTimestamp(UserBehavior element) {
+                                        return element.getTimestamp() * 1000L;
+                                    }
+                                });
 
         // 4. 创建表执行环境，用blink版本
-        EnvironmentSettings settings = EnvironmentSettings.newInstance()
-                .useBlinkPlanner()
-                .inStreamingMode()
-                .build();
+        EnvironmentSettings settings =
+                EnvironmentSettings.newInstance().useBlinkPlanner().inStreamingMode().build();
         StreamTableEnvironment tableEnv = StreamTableEnvironment.create(env, settings);
 
         // 5. 将流转换成表
-        Table dataTable = tableEnv.fromDataStream(dataStream, "itemId, behavior, timestamp.rowtime as ts");
+        Table dataTable =
+                tableEnv.fromDataStream(dataStream, "itemId, behavior, timestamp.rowtime as ts");
 
         // 6. 分组开窗
         // table api
-        Table windowAggTable = dataTable
-                .filter("behavior = 'pv'")
-                .window(Slide.over("1.hours").every("5.minutes").on("ts").as("w") )
-                .groupBy("itemId, w")
-                .select("itemId, w.end as windowEnd, itemId.count as cnt");
+        Table windowAggTable =
+                dataTable
+                        .filter("behavior = 'pv'")
+                        .window(Slide.over("1.hours").every("5.minutes").on("ts").as("w"))
+                        .groupBy("itemId, w")
+                        .select("itemId, w.end as windowEnd, itemId.count as cnt");
 
         // 7. 利用开窗函数，对count值进行排序并获取Row number，得到Top N
         // SQL
         DataStream<Row> aggStream = tableEnv.toAppendStream(windowAggTable, Row.class);
         tableEnv.createTemporaryView("agg", aggStream, "itemId, windowEnd, cnt");
 
-        Table resultTable = tableEnv.sqlQuery("select * from " +
-                "  ( select *, ROW_NUMBER() over (partition by windowEnd order by cnt desc) as row_num " +
-                "  from agg) " +
-                " where row_num <= 5 ");
+        Table resultTable =
+                tableEnv.sqlQuery(
+                        "select * from "
+                                + "  ( select *, ROW_NUMBER() over (partition by windowEnd order by cnt desc) as row_num "
+                                + "  from agg) "
+                                + " where row_num <= 5 ");
 
         // 纯SQL实现
-        tableEnv.createTemporaryView("data_table", dataStream, "itemId, behavior, timestamp.rowtime as ts");
-        Table resultSqlTable = tableEnv.sqlQuery("select * from " +
-                "  ( select *, ROW_NUMBER() over (partition by windowEnd order by cnt desc) as row_num " +
-                "  from ( " +
-                "    select itemId, count(itemId) as cnt, HOP_END(ts, interval '5' minute, interval '1' hour) as windowEnd " +
-                "    from data_table " +
-                "    where behavior = 'pv' " +
-                "    group by itemId, HOP(ts, interval '5' minute, interval '1' hour)" +
-                "    )" +
-                "  ) " +
-                " where row_num <= 5 ");
+        tableEnv.createTemporaryView(
+                "data_table", dataStream, "itemId, behavior, timestamp.rowtime as ts");
+        Table resultSqlTable =
+                tableEnv.sqlQuery(
+                        "select * from "
+                                + "  ( select *, ROW_NUMBER() over (partition by windowEnd order by cnt desc) as row_num "
+                                + "  from ( "
+                                + "    select itemId, count(itemId) as cnt, HOP_END(ts, interval '5' minute, interval '1' hour) as windowEnd "
+                                + "    from data_table "
+                                + "    where behavior = 'pv' "
+                                + "    group by itemId, HOP(ts, interval '5' minute, interval '1' hour)"
+                                + "    )"
+                                + "  ) "
+                                + " where row_num <= 5 ");
 
-//        tableEnv.toRetractStream(resultTable, Row.class).print();
+        //        tableEnv.toRetractStream(resultTable, Row.class).print();
         tableEnv.toRetractStream(resultSqlTable, Row.class).print();
 
         env.execute("hot items with sql job");

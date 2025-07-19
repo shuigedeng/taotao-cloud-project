@@ -1,39 +1,54 @@
-package com.taotao.cloud.realtime.warehouse.datageneration.business_code.generator;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import org.bigdatatechcir.warehouse.datageneration.business_code.util.DbUtil;
-import org.bigdatatechcir.warehouse.datageneration.business_code.util.RandomUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+package com.taotao.cloud.realtime.warehouse.datageneration.business_code.generator;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.DbUtil;
+import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.RandomUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class PaymentGenerator {
     private static final Logger logger = LoggerFactory.getLogger(PaymentGenerator.class);
     private static final int BATCH_SIZE = 500;
 
-    @Autowired
-    private DbUtil dbUtil;
+    @Autowired private DbUtil dbUtil;
 
     public void generatePaymentData(int count) {
-        String sql = "INSERT INTO payment_info (id, out_trade_no, order_id, user_id, payment_type, " +
-                    "trade_no, total_amount, subject, payment_status, create_time, callback_time, " +
-                    "callback_content) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        
+        String sql =
+                "INSERT INTO payment_info (id, out_trade_no, order_id, user_id, payment_type, "
+                        + "trade_no, total_amount, subject, payment_status, create_time, callback_time, "
+                        + "callback_content) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
         int remainingCount = count;
         while (remainingCount > 0) {
             // 获取最大ID
             String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM payment_info";
             int startId = dbUtil.queryForInt(maxIdSql) + 1;
-            
+
             int batchCount = Math.min(remainingCount, BATCH_SIZE);
             List<Object[]> params = new ArrayList<>();
-            
+
             for (int i = 0; i < batchCount; i++) {
                 int id = startId + i;
                 int orderId = RandomUtil.generateNumber(1, 1000);
@@ -46,16 +61,28 @@ public class PaymentGenerator {
                 int paymentStatus = RandomUtil.generateNumber(1, 3);
                 LocalDateTime now = LocalDateTime.now();
                 LocalDateTime callbackTime = now.plusMinutes(RandomUtil.generateNumber(2, 30));
-                String callbackContent = "{\"trade_no\":\"" + tradeNo + "\",\"status\":\"success\"}";
-                
-                params.add(new Object[]{
-                    id, outTradeNo, orderId, userId, paymentType, tradeNo, totalAmount, subject,
-                    paymentStatus, now, callbackTime, callbackContent
-                });
+                String callbackContent =
+                        "{\"trade_no\":\"" + tradeNo + "\",\"status\":\"success\"}";
+
+                params.add(
+                        new Object[] {
+                            id,
+                            outTradeNo,
+                            orderId,
+                            userId,
+                            paymentType,
+                            tradeNo,
+                            totalAmount,
+                            subject,
+                            paymentStatus,
+                            now,
+                            callbackTime,
+                            callbackContent
+                        });
             }
-            
+
             dbUtil.batchInsert(sql, params);
             remainingCount -= batchCount;
         }
     }
-} 
+}

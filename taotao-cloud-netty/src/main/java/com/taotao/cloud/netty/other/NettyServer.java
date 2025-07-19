@@ -32,7 +32,8 @@ public class NettyServer {
     private void bing(int port) {
         // 配置服务端NIO线程组
         EventLoopGroup parentGroup =
-                new NioEventLoopGroup(); // NioEventLoopGroup extends MultithreadEventLoopGroup Math.max(1,
+                new NioEventLoopGroup(); // NioEventLoopGroup extends MultithreadEventLoopGroup
+        // Math.max(1,
         // SystemPropertyUtil.getInt("io.netty.eventLoopThreads",
         // NettyRuntime.availableProcessors() * 2));
         EventLoopGroup childGroup = new NioEventLoopGroup();

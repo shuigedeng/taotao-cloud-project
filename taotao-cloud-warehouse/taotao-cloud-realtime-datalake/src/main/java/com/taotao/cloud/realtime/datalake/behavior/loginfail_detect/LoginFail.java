@@ -1,5 +1,24 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.realtime.datalake.behavior.loginfail_detect;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
 import org.apache.flink.api.common.state.ListState;
 import org.apache.flink.api.common.state.ListStateDescriptor;
 import org.apache.flink.api.common.state.ValueState;
@@ -15,35 +34,39 @@ import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrderness
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.util.Collector;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Iterator;
-
-
 public class LoginFail {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
         // 1. 从文件中读取数据
         URL resource = LoginFail.class.getResource("/LoginLog.csv");
-        DataStream<LoginEvent> loginEventStream = env.readTextFile(resource.getPath())
-                .map(line -> {
-                    String[] fields = line.split(",");
-                    return new LoginEvent(new Long(fields[0]), fields[1], fields[2], new Long(fields[3]));
-                })
-                .assignTimestampsAndWatermarks(new BoundedOutOfOrdernessTimestampExtractor<LoginEvent>(Time.seconds(3)) {
-                    @Override
-                    public long extractTimestamp(LoginEvent element) {
-                        return element.getTimestamp() * 1000L;
-                    }
-                });
+        DataStream<LoginEvent> loginEventStream =
+                env.readTextFile(resource.getPath())
+                        .map(
+                                line -> {
+                                    String[] fields = line.split(",");
+                                    return new LoginEvent(
+                                            new Long(fields[0]),
+                                            fields[1],
+                                            fields[2],
+                                            new Long(fields[3]));
+                                })
+                        .assignTimestampsAndWatermarks(
+                                new BoundedOutOfOrdernessTimestampExtractor<LoginEvent>(
+                                        Time.seconds(3)) {
+                                    @Override
+                                    public long extractTimestamp(LoginEvent element) {
+                                        return element.getTimestamp() * 1000L;
+                                    }
+                                });
 
         // 自定义处理函数检测连续登录失败事件
-        SingleOutputStreamOperator<LoginFailWarning> warningStream = loginEventStream
-                .keyBy(LoginEvent::getUserId)
-                .process(new LoginFailDetectWarning(2));
+        SingleOutputStreamOperator<LoginFailWarning> warningStream =
+                loginEventStream
+                        .keyBy(LoginEvent::getUserId)
+                        .process(new LoginFailDetectWarning(2));
 
         warningStream.print();
 
@@ -51,7 +74,8 @@ public class LoginFail {
     }
 
     // 实现自定义KeyedProcessFunction
-    public static class LoginFailDetectWarning0 extends KeyedProcessFunction<Long, LoginEvent, LoginFailWarning>{
+    public static class LoginFailDetectWarning0
+            extends KeyedProcessFunction<Long, LoginEvent, LoginFailWarning> {
         // 定义属性，最大连续登录失败次数
         private Integer maxFailTimes;
 
@@ -66,25 +90,32 @@ public class LoginFail {
 
         @Override
         public void open(Configuration parameters) throws Exception {
-            loginFailEventListState = getRuntimeContext().getListState(new ListStateDescriptor<LoginEvent>("login-fail-list", LoginEvent.class));
-            timerTsState = getRuntimeContext().getState(new ValueStateDescriptor<Long>("timer-ts", Long.class));
+            loginFailEventListState =
+                    getRuntimeContext()
+                            .getListState(
+                                    new ListStateDescriptor<LoginEvent>(
+                                            "login-fail-list", LoginEvent.class));
+            timerTsState =
+                    getRuntimeContext()
+                            .getState(new ValueStateDescriptor<Long>("timer-ts", Long.class));
         }
 
         @Override
-        public void processElement(LoginEvent value, Context ctx, Collector<LoginFailWarning> out) throws Exception {
+        public void processElement(LoginEvent value, Context ctx, Collector<LoginFailWarning> out)
+                throws Exception {
             // 判断当前登录事件类型
-            if( "fail".equals(value.getLoginState()) ){
+            if ("fail".equals(value.getLoginState())) {
                 // 1. 如果是失败事件，添加到列表状态中
                 loginFailEventListState.add(value);
                 // 如果没有定时器，注册一个2秒之后的定时器
-                if( timerTsState.value() == null ){
+                if (timerTsState.value() == null) {
                     Long ts = (value.getTimestamp() + 2) * 1000L;
                     ctx.timerService().registerEventTimeTimer(ts);
                     timerTsState.update(ts);
                 }
             } else {
                 // 2. 如果是登录成功，删除定时器，清空状态，重新开始
-                if( timerTsState.value() != null )
+                if (timerTsState.value() != null)
                     ctx.timerService().deleteEventTimeTimer(timerTsState.value());
                 loginFailEventListState.clear();
                 timerTsState.clear();
@@ -92,17 +123,21 @@ public class LoginFail {
         }
 
         @Override
-        public void onTimer(long timestamp, OnTimerContext ctx, Collector<LoginFailWarning> out) throws Exception {
+        public void onTimer(long timestamp, OnTimerContext ctx, Collector<LoginFailWarning> out)
+                throws Exception {
             // 定时器触发，说明2秒内没有登录成功来，判断ListState中失败的个数
-            ArrayList<LoginEvent> loginFailEvents = Lists.newArrayList(loginFailEventListState.get());
+            ArrayList<LoginEvent> loginFailEvents =
+                    Lists.newArrayList(loginFailEventListState.get());
             Integer failTimes = loginFailEvents.size();
 
-            if( failTimes >= maxFailTimes ){
+            if (failTimes >= maxFailTimes) {
                 // 如果超出设定的最大失败次数，输出报警
-                out.collect( new LoginFailWarning(ctx.getCurrentKey(),
-                        loginFailEvents.get(0).getTimestamp(),
-                        loginFailEvents.get(failTimes - 1).getTimestamp(),
-                        "login fail in 2s for " + failTimes + " times") );
+                out.collect(
+                        new LoginFailWarning(
+                                ctx.getCurrentKey(),
+                                loginFailEvents.get(0).getTimestamp(),
+                                loginFailEvents.get(failTimes - 1).getTimestamp(),
+                                "login fail in 2s for " + failTimes + " times"));
             }
 
             // 清空状态
@@ -112,7 +147,8 @@ public class LoginFail {
     }
 
     // 实现自定义KeyedProcessFunction
-    public static class LoginFailDetectWarning extends KeyedProcessFunction<Long, LoginEvent, LoginFailWarning> {
+    public static class LoginFailDetectWarning
+            extends KeyedProcessFunction<Long, LoginEvent, LoginFailWarning> {
         // 定义属性，最大连续登录失败次数
         private Integer maxFailTimes;
 
@@ -125,23 +161,33 @@ public class LoginFail {
 
         @Override
         public void open(Configuration parameters) throws Exception {
-            loginFailEventListState = getRuntimeContext().getListState(new ListStateDescriptor<LoginEvent>("login-fail-list", LoginEvent.class));
+            loginFailEventListState =
+                    getRuntimeContext()
+                            .getListState(
+                                    new ListStateDescriptor<LoginEvent>(
+                                            "login-fail-list", LoginEvent.class));
         }
 
         // 以登录事件作为判断报警的触发条件，不再注册定时器
         @Override
-        public void processElement(LoginEvent value, Context ctx, Collector<LoginFailWarning> out) throws Exception {
+        public void processElement(LoginEvent value, Context ctx, Collector<LoginFailWarning> out)
+                throws Exception {
             // 判断当前事件登录状态
-            if( "fail".equals(value.getLoginState()) ){
+            if ("fail".equals(value.getLoginState())) {
                 // 1. 如果是登录失败，获取状态中之前的登录失败事件，继续判断是否已有失败事件
                 Iterator<LoginEvent> iterator = loginFailEventListState.get().iterator();
-                if( iterator.hasNext() ){
+                if (iterator.hasNext()) {
                     // 1.1 如果已经有登录失败事件，继续判断时间戳是否在2秒之内
                     // 获取已有的登录失败事件
                     LoginEvent firstFailEvent = iterator.next();
-                    if( value.getTimestamp() - firstFailEvent.getTimestamp() <= 2 ){
+                    if (value.getTimestamp() - firstFailEvent.getTimestamp() <= 2) {
                         // 1.1.1 如果在2秒之内，输出报警
-                        out.collect( new LoginFailWarning(value.getUserId(), firstFailEvent.getTimestamp(), value.getTimestamp(), "login fail 2 times in 2s") );
+                        out.collect(
+                                new LoginFailWarning(
+                                        value.getUserId(),
+                                        firstFailEvent.getTimestamp(),
+                                        value.getTimestamp(),
+                                        "login fail 2 times in 2s"));
                     }
 
                     // 不管报不报警，这次都已处理完毕，直接更新状态

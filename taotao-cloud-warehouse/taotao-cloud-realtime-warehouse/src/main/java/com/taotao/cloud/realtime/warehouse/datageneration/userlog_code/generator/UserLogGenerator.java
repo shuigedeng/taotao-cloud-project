@@ -1,23 +1,47 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.realtime.warehouse.datageneration.userlog_code.generator;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.bigdatatechcir.warehouse.datageneration.userlog_code.model.*;
-import java.util.*;
 import java.time.Instant;
+import java.util.*;
+import com.taotao.cloud.realtime.warehouse.datageneration.userlog_code.model.*;
 
 public class UserLogGenerator {
     private static final Random random = new Random();
     private static final ObjectMapper objectMapper = new ObjectMapper();
-    
+
     private static final String[] AREAS = {"北京", "上海", "广州", "深圳", "杭州", "成都", "武汉"};
     private static final String[] BRANDS = {"华为", "小米", "OPPO", "vivo", "Apple", "三星", "魅族"};
-    private static final String[] CHANNELS = {"小米商城", "华为商城", "oppo商城", "vivo商城", "苹果商城", "京东", "天猫"};
-    private static final String[] OS = {"Android 11", "Android 12", "Android 13", "iOS 15", "iOS 16"};
+    private static final String[] CHANNELS = {
+        "小米商城", "华为商城", "oppo商城", "vivo商城", "苹果商城", "京东", "天猫"
+    };
+    private static final String[] OS = {
+        "Android 11", "Android 12", "Android 13", "iOS 15", "iOS 16"
+    };
     private static final String[] VERSIONS = {"1.0.0", "1.1.0", "1.2.0", "2.0.0", "2.1.0"};
-    private static final String[] PAGE_IDS = {"home", "category", "cart", "detail", "pay", "order", "search", "user"};
-    private static final String[] SOURCE_TYPES = {"promotion", "recommend", "search", "self", "advertisement"};
+    private static final String[] PAGE_IDS = {
+        "home", "category", "cart", "detail", "pay", "order", "search", "user"
+    };
+    private static final String[] SOURCE_TYPES = {
+        "promotion", "recommend", "search", "self", "advertisement"
+    };
     private static final String[] ITEM_TYPES = {"sku", "spu", "category", "brand", "shop"};
-    
+
     public static UserLog generateLog() {
         UserLog log = new UserLog();
         log.setCommon(generateCommon());
@@ -29,7 +53,7 @@ public class UserLogGenerator {
         log.setTs(Instant.now().toEpochMilli());
         return log;
     }
-    
+
     private static Common generateCommon() {
         Common common = new Common();
         common.setAr(AREAS[random.nextInt(AREAS.length)]);
@@ -43,7 +67,7 @@ public class UserLogGenerator {
         common.setVc(VERSIONS[random.nextInt(VERSIONS.length)]);
         return common;
     }
-    
+
     private static Start generateStart() {
         Start start = new Start();
         start.setEntry("entry_" + random.nextInt(5));
@@ -53,7 +77,7 @@ public class UserLogGenerator {
         start.setOpen_ad_skip_ms(String.valueOf(random.nextInt(3000)));
         return start;
     }
-    
+
     private static Page generatePage() {
         Page page = new Page();
         page.setDuring_time((long) (random.nextInt(300000) + 1000));
@@ -64,7 +88,7 @@ public class UserLogGenerator {
         page.setSource_type(SOURCE_TYPES[random.nextInt(SOURCE_TYPES.length)]);
         return page;
     }
-    
+
     private static String generateActions() {
         List<Map<String, Object>> actions = new ArrayList<>();
         int actionCount = random.nextInt(5);
@@ -82,7 +106,7 @@ public class UserLogGenerator {
             return "[]";
         }
     }
-    
+
     private static String generateDisplays() {
         List<Map<String, Object>> displays = new ArrayList<>();
         int displayCount = random.nextInt(10);
@@ -101,14 +125,16 @@ public class UserLogGenerator {
             return "[]";
         }
     }
-    
-    private static org.bigdatatechcir.warehouse.datageneration.userlog_code.model.Error generateError() {
+
+    private static com.taotao.cloud.realtime.warehouse.datageneration.userlog_code.model.Error
+            generateError() {
         if (random.nextInt(100) < 95) {
             return null;
         }
-        org.bigdatatechcir.warehouse.datageneration.userlog_code.model.Error error = new org.bigdatatechcir.warehouse.datageneration.userlog_code.model.Error();
+        com.taotao.cloud.realtime.warehouse.datageneration.userlog_code.model.Error error =
+                new com.taotao.cloud.realtime.warehouse.datageneration.userlog_code.model.Error();
         error.setError_code((long) random.nextInt(1000));
         error.setMsg("Error: " + UUID.randomUUID().toString().substring(0, 8));
         return error;
     }
-} 
+}

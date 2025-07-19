@@ -69,9 +69,9 @@ CREATE TABLE IF NOT EXISTS dwd.dwd_traffic_error_full(
     'partition.timestamp-pattern' = '$k1'
     );
 
-CREATE TEMPORARY FUNCTION json_actions_array_parser AS 'org.bigdatatechcir.warehouse.flink.udf.JsonActionsArrayParser';
+CREATE TEMPORARY FUNCTION json_actions_array_parser AS 'com.taotao.cloud.realtime.warehouse.flink.udf.JsonActionsArrayParser';
 
-CREATE TEMPORARY FUNCTION json_displays_array_parser AS 'org.bigdatatechcir.warehouse.flink.udf.JsonDisplaysArrayParser';
+CREATE TEMPORARY FUNCTION json_displays_array_parser AS 'com.taotao.cloud.realtime.warehouse.flink.udf.JsonDisplaysArrayParser';
 
 INSERT INTO dwd.dwd_traffic_error_full(
     id,

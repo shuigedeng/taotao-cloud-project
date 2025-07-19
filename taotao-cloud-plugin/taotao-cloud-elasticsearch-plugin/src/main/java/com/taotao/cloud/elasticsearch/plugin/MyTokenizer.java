@@ -1,17 +1,32 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.elasticsearch.plugin;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-
 public final class MyTokenizer extends Tokenizer {
-    //词元文本属性
+    // 词元文本属性
     private final CharTermAttribute termAtt;
-    //词元位移属性
+    // 词元位移属性
     private final OffsetAttribute offsetAtt;
     // 距离
     private final PositionIncrementAttribute positionAttr;
@@ -59,7 +74,8 @@ public final class MyTokenizer extends Tokenizer {
         if (term != null) {
             positionAttr.setPositionIncrement(position);
             termAtt.setEmpty().append(term.getText());
-            offsetAtt.setOffset(correctOffset(totalOffset + term.getOffset()),
+            offsetAtt.setOffset(
+                    correctOffset(totalOffset + term.getOffset()),
                     correctOffset(totalOffset + term.getOffset() + term.getText().length()));
             return true;
         } else {
@@ -67,7 +83,7 @@ public final class MyTokenizer extends Tokenizer {
             return false;
         }
     }
-    
+
     @Override
     public void end() throws IOException {
         super.end();

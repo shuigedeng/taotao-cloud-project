@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.netty.itcast.nio.c4;
 
 import java.io.IOException;
@@ -40,7 +56,8 @@ public class WriteServer {
                     if (buffer.hasRemaining()) {
                         // 4. 关注可写事件   1                     4
                         sckey.interestOps(sckey.interestOps() + SelectionKey.OP_WRITE);
-//                        sckey.interestOps(sckey.interestOps() | SelectionKey.OP_WRITE);
+                        //                        sckey.interestOps(sckey.interestOps() |
+                        // SelectionKey.OP_WRITE);
                         // 5. 把未写完的数据挂到 sckey 上
                         sckey.attach(buffer);
                     }
@@ -52,7 +69,7 @@ public class WriteServer {
                     // 6. 清理操作
                     if (!buffer.hasRemaining()) {
                         key.attach(null); // 需要清除buffer
-                        key.interestOps(key.interestOps() - SelectionKey.OP_WRITE);//不需关注可写事件
+                        key.interestOps(key.interestOps() - SelectionKey.OP_WRITE); // 不需关注可写事件
                     }
                 }
             }

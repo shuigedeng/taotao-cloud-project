@@ -1,6 +1,20 @@
-package com.taotao.cloud.netty.itcast.nio.c4;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import lombok.extern.slf4j.Slf4j;
+package com.taotao.cloud.netty.itcast.nio.c4;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -8,6 +22,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.nio.charset.Charset;
 import java.util.Iterator;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class Server {
@@ -50,16 +65,16 @@ public class Server {
                         SocketChannel channel = (SocketChannel) key.channel(); // 拿到触发事件的channel
                         ByteBuffer buffer = ByteBuffer.allocate(4);
                         int read = channel.read(buffer); // 如果是正常断开，read 的方法的返回值是 -1
-                        if(read == -1) {
+                        if (read == -1) {
                             key.cancel();
                         } else {
                             buffer.flip();
-//                            debugAll(buffer);
+                            //                            debugAll(buffer);
                             System.out.println(Charset.defaultCharset().decode(buffer));
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
-                        key.cancel();  // 因为客户端断开了,因此需要将 key 取消（从 selector 的 keys 集合中真正删除 key）
+                        key.cancel(); // 因为客户端断开了,因此需要将 key 取消（从 selector 的 keys 集合中真正删除 key）
                     }
                 }
             }

@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.offline.weblog;
 
-
 class TaoTaoCloudOfflineWeblogApplicationTests {
 
     void contextLoads() {}

@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS dwd.dwd_traffic_action_full(
     'partition.timestamp-pattern' = '$k1'
 );
 
-CREATE TEMPORARY FUNCTION json_actions_array_parser AS 'org.bigdatatechcir.warehouse.flink.udf.JsonActionsArrayParser';
+CREATE TEMPORARY FUNCTION json_actions_array_parser AS 'com.taotao.cloud.realtime.warehouse.flink.udf.JsonActionsArrayParser';
 
 insert into dwd.dwd_traffic_action_full(
     id,

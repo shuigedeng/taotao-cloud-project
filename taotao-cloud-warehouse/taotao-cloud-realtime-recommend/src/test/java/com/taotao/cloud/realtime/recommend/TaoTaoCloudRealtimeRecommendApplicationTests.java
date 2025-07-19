@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.realtime.recommend;
 
-
 class TaoTaoCloudRealtimeRecommendApplicationTests {
 
     void contextLoads() {}

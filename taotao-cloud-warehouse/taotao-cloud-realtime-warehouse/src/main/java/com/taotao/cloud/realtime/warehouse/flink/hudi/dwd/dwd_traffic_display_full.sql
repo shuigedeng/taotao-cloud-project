@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS hudi_dwd.dwd_traffic_display_full(
     'hive_sync.conf.dir' = '/opt/software/apache-hive-3.1.3-bin/conf'
     );
 
-CREATE TEMPORARY FUNCTION json_displays_array_parser AS 'org.bigdatatechcir.warehouse.flink.udf.JsonDisplaysArrayParser';
+CREATE TEMPORARY FUNCTION json_displays_array_parser AS 'com.taotao.cloud.realtime.warehouse.flink.udf.JsonDisplaysArrayParser';
 
 insert into hudi_dwd.dwd_traffic_display_full(
     `id`,

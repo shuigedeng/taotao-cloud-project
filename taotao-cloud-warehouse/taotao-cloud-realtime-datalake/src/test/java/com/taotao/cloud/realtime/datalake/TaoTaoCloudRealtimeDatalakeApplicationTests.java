@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.realtime.datalake;
 
-
 class TaoTaoCloudRealtimeDatalakeApplicationTests {
 
     void contextLoads() {}

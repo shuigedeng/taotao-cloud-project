@@ -1,7 +1,29 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.realtime.datalake.behavior.networkflow_analysis;
 
 import com.taotao.cloud.realtime.behavior.analysis.networkflow_analysis.beans.ApacheLogEvent;
 import com.taotao.cloud.realtime.behavior.analysis.networkflow_analysis.beans.PageViewCount;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.regex.Pattern;
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.common.state.MapState;
 import org.apache.flink.api.common.state.MapStateDescriptor;
@@ -19,13 +41,6 @@ import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 import org.apache.flink.util.OutputTag;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Map;
-import java.util.regex.Pattern;
-
 public class HotPages {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
@@ -33,50 +48,57 @@ public class HotPages {
         env.setParallelism(1);
 
         // 读取文件，转换成POJO
-//        URL resource = HotPages.class.getResource("/apache.log");
-//        DataStream<String> inputStream = env.readTextFile(resource.getPath());
+        //        URL resource = HotPages.class.getResource("/apache.log");
+        //        DataStream<String> inputStream = env.readTextFile(resource.getPath());
         DataStream<String> inputStream = env.socketTextStream("localhost", 7777);
 
-        DataStream<ApacheLogEvent> dataStream = inputStream
-                .map(line -> {
-                    String[] fields = line.split(" ");
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy:HH:mm:ss");
-                    Long timestamp = simpleDateFormat.parse(fields[3]).getTime();
-                    return new ApacheLogEvent(fields[0], fields[1], timestamp, fields[5], fields[6]);
-                })
-                .assignTimestampsAndWatermarks(new BoundedOutOfOrdernessTimestampExtractor<ApacheLogEvent>(Time.seconds(1)) {
-                    @Override
-                    public long extractTimestamp(ApacheLogEvent element) {
-                        return element.getTimestamp();
-                    }
-                });
+        DataStream<ApacheLogEvent> dataStream =
+                inputStream
+                        .map(
+                                line -> {
+                                    String[] fields = line.split(" ");
+                                    SimpleDateFormat simpleDateFormat =
+                                            new SimpleDateFormat("dd/MM/yyyy:HH:mm:ss");
+                                    Long timestamp = simpleDateFormat.parse(fields[3]).getTime();
+                                    return new ApacheLogEvent(
+                                            fields[0], fields[1], timestamp, fields[5], fields[6]);
+                                })
+                        .assignTimestampsAndWatermarks(
+                                new BoundedOutOfOrdernessTimestampExtractor<ApacheLogEvent>(
+                                        Time.seconds(1)) {
+                                    @Override
+                                    public long extractTimestamp(ApacheLogEvent element) {
+                                        return element.getTimestamp();
+                                    }
+                                });
 
         dataStream.print("data");
 
         // 分组开窗聚合
 
         // 定义一个侧输出流标签
-        OutputTag<ApacheLogEvent> lateTag = new OutputTag<ApacheLogEvent>("late"){};
+        OutputTag<ApacheLogEvent> lateTag = new OutputTag<ApacheLogEvent>("late") {};
 
-        SingleOutputStreamOperator<PageViewCount> windowAggStream = dataStream
-                .filter(data -> "GET".equals(data.getMethod()))    // 过滤get请求
-                .filter(data -> {
-                    String regex = "^((?!\\.(css|js|png|ico)$).)*$";
-                    return Pattern.matches(regex, data.getUrl());
-                })
-                .keyBy(ApacheLogEvent::getUrl)    // 按照url分组
-                .timeWindow(Time.minutes(10), Time.seconds(5))
-                .allowedLateness(Time.minutes(1))
-                .sideOutputLateData(lateTag)
-                .aggregate(new PageCountAgg(), new PageCountResult());
+        SingleOutputStreamOperator<PageViewCount> windowAggStream =
+                dataStream
+                        .filter(data -> "GET".equals(data.getMethod())) // 过滤get请求
+                        .filter(
+                                data -> {
+                                    String regex = "^((?!\\.(css|js|png|ico)$).)*$";
+                                    return Pattern.matches(regex, data.getUrl());
+                                })
+                        .keyBy(ApacheLogEvent::getUrl) // 按照url分组
+                        .timeWindow(Time.minutes(10), Time.seconds(5))
+                        .allowedLateness(Time.minutes(1))
+                        .sideOutputLateData(lateTag)
+                        .aggregate(new PageCountAgg(), new PageCountResult());
 
         windowAggStream.print("agg");
         windowAggStream.getSideOutput(lateTag).print("late");
 
         // 收集同一窗口count数据，排序输出
-        DataStream<String> resultStream = windowAggStream
-                .keyBy(PageViewCount::getWindowEnd)
-                .process(new TopNHotPages(3));
+        DataStream<String> resultStream =
+                windowAggStream.keyBy(PageViewCount::getWindowEnd).process(new TopNHotPages(3));
 
         resultStream.print();
 
@@ -107,9 +129,12 @@ public class HotPages {
     }
 
     // 实现自定义的窗口函数
-    public static class PageCountResult implements WindowFunction<Long, PageViewCount, String, TimeWindow> {
+    public static class PageCountResult
+            implements WindowFunction<Long, PageViewCount, String, TimeWindow> {
         @Override
-        public void apply(String url, TimeWindow window, Iterable<Long> input, Collector<PageViewCount> out) throws Exception {
+        public void apply(
+                String url, TimeWindow window, Iterable<Long> input, Collector<PageViewCount> out)
+                throws Exception {
             out.collect(new PageViewCount(url, window.getEnd(), input.iterator().next()));
         }
     }
@@ -123,18 +148,24 @@ public class HotPages {
         }
 
         // 定义状态，保存当前所有PageViewCount到Map中
-//        ListState<PageViewCount> pageViewCountListState;
+        //        ListState<PageViewCount> pageViewCountListState;
         MapState<String, Long> pageViewCountMapState;
 
         @Override
         public void open(Configuration parameters) throws Exception {
-//            pageViewCountListState = getRuntimeContext().getListState(new ListStateDescriptor<PageViewCount>("page-count-list", PageViewCount.class));
-            pageViewCountMapState = getRuntimeContext().getMapState(new MapStateDescriptor<String, Long>("page-count-map", String.class, Long.class));
+            //            pageViewCountListState = getRuntimeContext().getListState(new
+            // ListStateDescriptor<PageViewCount>("page-count-list", PageViewCount.class));
+            pageViewCountMapState =
+                    getRuntimeContext()
+                            .getMapState(
+                                    new MapStateDescriptor<String, Long>(
+                                            "page-count-map", String.class, Long.class));
         }
 
         @Override
-        public void processElement(PageViewCount value, Context ctx, Collector<String> out) throws Exception {
-//            pageViewCountListState.add(value);
+        public void processElement(PageViewCount value, Context ctx, Collector<String> out)
+                throws Exception {
+            //            pageViewCountListState.add(value);
             pageViewCountMapState.put(value.getUrl(), value.getCount());
             ctx.timerService().registerEventTimeTimer(value.getWindowEnd() + 1);
             // 注册一个1分钟之后的定时器，用来清空状态
@@ -142,26 +173,26 @@ public class HotPages {
         }
 
         @Override
-        public void onTimer(long timestamp, OnTimerContext ctx, Collector<String> out) throws Exception {
+        public void onTimer(long timestamp, OnTimerContext ctx, Collector<String> out)
+                throws Exception {
             // 先判断是否到了窗口关闭清理时间，如果是，直接清空状态返回
-            if( timestamp == ctx.getCurrentKey() + 60 * 1000L ){
+            if (timestamp == ctx.getCurrentKey() + 60 * 1000L) {
                 pageViewCountMapState.clear();
                 return;
             }
 
-            ArrayList<Map.Entry<String, Long>> pageViewCounts = Lists.newArrayList(pageViewCountMapState.entries());
+            ArrayList<Map.Entry<String, Long>> pageViewCounts =
+                    Lists.newArrayList(pageViewCountMapState.entries());
 
-            pageViewCounts.sort(new Comparator<Map.Entry<String, Long>>() {
-                @Override
-                public int compare(Map.Entry<String, Long> o1, Map.Entry<String, Long> o2) {
-                    if(o1.getValue() > o2.getValue())
-                        return -1;
-                    else if(o1.getValue() < o2.getValue())
-                        return 1;
-                    else
-                        return 0;
-                }
-            });
+            pageViewCounts.sort(
+                    new Comparator<Map.Entry<String, Long>>() {
+                        @Override
+                        public int compare(Map.Entry<String, Long> o1, Map.Entry<String, Long> o2) {
+                            if (o1.getValue() > o2.getValue()) return -1;
+                            else if (o1.getValue() < o2.getValue()) return 1;
+                            else return 0;
+                        }
+                    });
 
             // 格式化成String输出
             StringBuilder resultBuilder = new StringBuilder();
@@ -171,9 +202,14 @@ public class HotPages {
             // 遍历列表，取top n输出
             for (int i = 0; i < Math.min(topSize, pageViewCounts.size()); i++) {
                 Map.Entry<String, Long> currentItemViewCount = pageViewCounts.get(i);
-                resultBuilder.append("NO ").append(i + 1).append(":")
-                        .append(" 页面URL = ").append(currentItemViewCount.getKey())
-                        .append(" 浏览量 = ").append(currentItemViewCount.getValue())
+                resultBuilder
+                        .append("NO ")
+                        .append(i + 1)
+                        .append(":")
+                        .append(" 页面URL = ")
+                        .append(currentItemViewCount.getKey())
+                        .append(" 浏览量 = ")
+                        .append(currentItemViewCount.getValue())
                         .append("\n");
             }
             resultBuilder.append("===============================\n\n");
@@ -183,7 +219,7 @@ public class HotPages {
 
             out.collect(resultBuilder.toString());
 
-//            pageViewCountListState.clear();
+            //            pageViewCountListState.clear();
         }
     }
 }

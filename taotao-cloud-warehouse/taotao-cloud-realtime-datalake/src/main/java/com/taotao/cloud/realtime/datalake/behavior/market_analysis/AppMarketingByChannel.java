@@ -1,7 +1,27 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.realtime.datalake.behavior.market_analysis;
 
 import com.taotao.cloud.realtime.behavior.analysis.market_analysis.beans.ChannelPromotionCount;
 import com.taotao.cloud.realtime.behavior.analysis.market_analysis.beans.MarketingUserBehavior;
+import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.java.tuple.Tuple;
 import org.apache.flink.streaming.api.TimeCharacteristic;
@@ -15,33 +35,31 @@ import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
-import java.sql.Timestamp;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
-
 public class AppMarketingByChannel {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
         // 1. 从自定义数据源中读取数据
-        DataStream<MarketingUserBehavior> dataStream = env.addSource( new SimulatedMarketingUserBehaviorSource() )
-                .assignTimestampsAndWatermarks(new AscendingTimestampExtractor<MarketingUserBehavior>() {
-                    @Override
-                    public long extractAscendingTimestamp(MarketingUserBehavior element) {
-                        return element.getTimestamp();
-                    }
-                });
+        DataStream<MarketingUserBehavior> dataStream =
+                env.addSource(new SimulatedMarketingUserBehaviorSource())
+                        .assignTimestampsAndWatermarks(
+                                new AscendingTimestampExtractor<MarketingUserBehavior>() {
+                                    @Override
+                                    public long extractAscendingTimestamp(
+                                            MarketingUserBehavior element) {
+                                        return element.getTimestamp();
+                                    }
+                                });
 
         // 2. 分渠道开窗统计
-        SingleOutputStreamOperator<ChannelPromotionCount> resultStream = dataStream
-                .filter(data -> !"UNINSTALL".equals(data.getBehavior()))
-                .keyBy("channel", "behavior")
-                .timeWindow(Time.hours(1), Time.seconds(5))    // 定义滑窗
-                .aggregate(new MarketingCountAgg(), new MarketingCountResult());
+        SingleOutputStreamOperator<ChannelPromotionCount> resultStream =
+                dataStream
+                        .filter(data -> !"UNINSTALL".equals(data.getBehavior()))
+                        .keyBy("channel", "behavior")
+                        .timeWindow(Time.hours(1), Time.seconds(5)) // 定义滑窗
+                        .aggregate(new MarketingCountAgg(), new MarketingCountResult());
 
         resultStream.print();
 
@@ -49,7 +67,8 @@ public class AppMarketingByChannel {
     }
 
     // 实现自定义的模拟市场用户行为数据源
-    public static class SimulatedMarketingUserBehaviorSource implements SourceFunction<MarketingUserBehavior>{
+    public static class SimulatedMarketingUserBehaviorSource
+            implements SourceFunction<MarketingUserBehavior> {
         // 控制是否正常运行的标识位
         Boolean running = true;
 
@@ -61,11 +80,11 @@ public class AppMarketingByChannel {
 
         @Override
         public void run(SourceContext<MarketingUserBehavior> ctx) throws Exception {
-            while(running){
+            while (running) {
                 // 随机生成所有字段
                 Long id = random.nextLong();
-                String behavior = behaviorList.get( random.nextInt(behaviorList.size()) );
-                String channel = channelList.get( random.nextInt(channelList.size()) );
+                String behavior = behaviorList.get(random.nextInt(behaviorList.size()));
+                String channel = channelList.get(random.nextInt(channelList.size()));
                 Long timestamp = System.currentTimeMillis();
 
                 // 发出数据
@@ -82,7 +101,8 @@ public class AppMarketingByChannel {
     }
 
     // 实现自定义的增量聚合函数
-    public static class MarketingCountAgg implements AggregateFunction<MarketingUserBehavior, Long, Long>{
+    public static class MarketingCountAgg
+            implements AggregateFunction<MarketingUserBehavior, Long, Long> {
         @Override
         public Long createAccumulator() {
             return 0L;
@@ -105,9 +125,15 @@ public class AppMarketingByChannel {
     }
 
     // 实现自定义的全窗口函数
-    public static class MarketingCountResult extends ProcessWindowFunction<Long, ChannelPromotionCount, Tuple, TimeWindow>{
+    public static class MarketingCountResult
+            extends ProcessWindowFunction<Long, ChannelPromotionCount, Tuple, TimeWindow> {
         @Override
-        public void process(Tuple tuple, Context context, Iterable<Long> elements, Collector<ChannelPromotionCount> out) throws Exception {
+        public void process(
+                Tuple tuple,
+                Context context,
+                Iterable<Long> elements,
+                Collector<ChannelPromotionCount> out)
+                throws Exception {
             String channel = tuple.getField(0);
             String behavior = tuple.getField(1);
             String windowEnd = new Timestamp(context.window().getEnd()).toString();

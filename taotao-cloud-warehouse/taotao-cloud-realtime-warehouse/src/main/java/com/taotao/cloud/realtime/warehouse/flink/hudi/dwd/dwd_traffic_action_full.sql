@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS hudi_dwd.dwd_traffic_action_full(
     'hive_sync.conf.dir' = '/opt/software/apache-hive-3.1.3-bin/conf'
     );
 
-CREATE TEMPORARY FUNCTION json_actions_array_parser AS 'org.bigdatatechcir.warehouse.flink.udf.JsonActionsArrayParser';
+CREATE TEMPORARY FUNCTION json_actions_array_parser AS 'com.taotao.cloud.realtime.warehouse.flink.udf.JsonActionsArrayParser';
 
 insert into hudi_dwd.dwd_traffic_action_full(
     id,

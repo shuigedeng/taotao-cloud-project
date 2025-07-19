@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.realtime.warehouse.flink.udf;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -10,11 +26,12 @@ import org.apache.flink.types.Row;
  * 1. mvn clean install -DskipTests
  * 2. 上传jar包到flink_home/lib
  * 3. 重启flink集群
- * 4. 创建临时方法  CREATE TEMPORARY FUNCTION json_actions_array_parser AS 'org.bigdatatechcir.warehouse.flink.udf.JsonActionsArrayParser';
+ * 4. 创建临时方法  CREATE TEMPORARY FUNCTION json_actions_array_parser AS 'com.taotao.cloud.realtime.warehouse.flink.udf.JsonActionsArrayParser';
  * 5. 查询 select json_actions_array_parser(`actions`).`action_id` as action_id, json_actions_array_parser(`actions`).`item` as item,json_actions_array_parser(`actions`).`item_type` as item_type,json_actions_array_parser(`actions`).`ts` as ts from ods.ods_log_inc;
  */
 public class JsonActionsArrayParser extends ScalarFunction {
     private static final ObjectMapper mapper = new ObjectMapper();
+
     @DataTypeHint("ROW<action_id STRING, item STRING, item_type STRING, ts BIGINT>")
     public Row eval(String jsonStr) {
         if (jsonStr == null || jsonStr.isEmpty()) {
@@ -28,9 +45,11 @@ public class JsonActionsArrayParser extends ScalarFunction {
             }
             JsonNode actionNode = rootNode.get(0);
 
-            String actionId = actionNode.has("action_id") ? actionNode.get("action_id").asText() : "";
+            String actionId =
+                    actionNode.has("action_id") ? actionNode.get("action_id").asText() : "";
             String item = actionNode.has("item") ? actionNode.get("item").asText() : "";
-            String itemType = actionNode.has("item_type") ? actionNode.get("item_type").asText() : "";
+            String itemType =
+                    actionNode.has("item_type") ? actionNode.get("item_type").asText() : "";
             Long timestamp = actionNode.has("ts") ? actionNode.get("ts").asLong() : 0L;
 
             Row result = new Row(4);
@@ -45,7 +64,7 @@ public class JsonActionsArrayParser extends ScalarFunction {
             return null; // 或者返回一个默认的Row
         }
     }
+
     @DataTypeHint("ROW<action_id STRING, item STRING, item_type STRING, ts BIGINT>")
-    public static class ReturnType {
-    }
+    public static class ReturnType {}
 }

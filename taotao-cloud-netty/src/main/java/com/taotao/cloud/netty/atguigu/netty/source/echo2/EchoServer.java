@@ -1,18 +1,19 @@
 /*
- * Copyright 2012 The Netty Project
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
- * The Netty Project licenses this file to you under the Apache License,
- * version 2.0 (the "License"); you may not use this file except in compliance
- * with the License. You may obtain a copy of the License at:
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations
- * under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 package com.taotao.cloud.netty.atguigu.netty.source.echo2;
 
 import io.netty.bootstrap.ServerBootstrap;
@@ -36,8 +37,8 @@ public final class EchoServer {
     static final boolean SSL = System.getProperty("ssl") != null;
     static final int PORT = Integer.parseInt(System.getProperty("port", "8007"));
 
-    //创建业务线程池
-    //这里我们就创建2个子线程
+    // 创建业务线程池
+    // 这里我们就创建2个子线程
     static final EventExecutorGroup group = new DefaultEventExecutorGroup(2);
 
     public static void main(String[] args) throws Exception {
@@ -56,24 +57,25 @@ public final class EchoServer {
         try {
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
-             .channel(NioServerSocketChannel.class)
-             .option(ChannelOption.SO_BACKLOG, 100)
-             .handler(new LoggingHandler(LogLevel.INFO))
-             .childHandler(new ChannelInitializer<SocketChannel>() {
-                 @Override
-                 public void initChannel(SocketChannel ch) throws Exception {
-                     ChannelPipeline p = ch.pipeline();
-                     if (sslCtx != null) {
-                         p.addLast(sslCtx.newHandler(ch.alloc()));
-                     }
-                     //p.addLast(new LoggingHandler(LogLevel.INFO));
-                     p.addLast(new EchoServerHandler());
-                     //说明: 如果我们在addLast 添加handler ，前面有指定
-                     //EventExecutorGroup, 那么该handler 会优先加入到该线程池中
+                    .channel(NioServerSocketChannel.class)
+                    .option(ChannelOption.SO_BACKLOG, 100)
+                    .handler(new LoggingHandler(LogLevel.INFO))
+                    .childHandler(
+                            new ChannelInitializer<SocketChannel>() {
+                                @Override
+                                public void initChannel(SocketChannel ch) throws Exception {
+                                    ChannelPipeline p = ch.pipeline();
+                                    if (sslCtx != null) {
+                                        p.addLast(sslCtx.newHandler(ch.alloc()));
+                                    }
+                                    // p.addLast(new LoggingHandler(LogLevel.INFO));
+                                    p.addLast(new EchoServerHandler());
+                                    // 说明: 如果我们在addLast 添加handler ，前面有指定
+                                    // EventExecutorGroup, 那么该handler 会优先加入到该线程池中
 
-                     //p.addLast(group, new EchoServerHandler());
-                 }
-             });
+                                    // p.addLast(group, new EchoServerHandler());
+                                }
+                            });
 
             // Start the server.
             ChannelFuture f = b.bind(PORT).sync();

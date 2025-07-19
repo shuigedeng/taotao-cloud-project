@@ -1,6 +1,21 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.netty.itcast.server;
 
-import com.taotao.cloud.netty.itcast.message.GroupJoinRequestMessage;
 import com.taotao.cloud.netty.itcast.protocol.MessageCodecSharable;
 import com.taotao.cloud.netty.itcast.protocol.ProcotolFrameDecoder;
 import com.taotao.cloud.netty.itcast.server.handler.*;
@@ -28,9 +43,11 @@ public class ChatServer {
         MessageCodecSharable MESSAGE_CODEC = new MessageCodecSharable();
         LoginRequestMessageHandler LOGIN_HANDLER = new LoginRequestMessageHandler();
         ChatRequestMessageHandler CHAT_HANDLER = new ChatRequestMessageHandler();
-        GroupCreateRequestMessageHandler GROUP_CREATE_HANDLER = new GroupCreateRequestMessageHandler();
+        GroupCreateRequestMessageHandler GROUP_CREATE_HANDLER =
+                new GroupCreateRequestMessageHandler();
         GroupJoinRequestMessageHandler GROUP_JOIN_HANDLER = new GroupJoinRequestMessageHandler();
-        GroupMembersRequestMessageHandler GROUP_MEMBERS_HANDLER = new GroupMembersRequestMessageHandler();
+        GroupMembersRequestMessageHandler GROUP_MEMBERS_HANDLER =
+                new GroupMembersRequestMessageHandler();
         GroupQuitRequestMessageHandler GROUP_QUIT_HANDLER = new GroupQuitRequestMessageHandler();
         GroupChatRequestMessageHandler GROUP_CHAT_HANDLER = new GroupChatRequestMessageHandler();
         QuitHandler QUIT_HANDLER = new QuitHandler();
@@ -38,38 +55,43 @@ public class ChatServer {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.channel(NioServerSocketChannel.class);
             serverBootstrap.group(boss, worker);
-            serverBootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
-                @Override
-                protected void initChannel(SocketChannel ch) throws Exception {
-                    ch.pipeline().addLast(new ProcotolFrameDecoder());
-                    ch.pipeline().addLast(LOGGING_HANDLER);
-                    ch.pipeline().addLast(MESSAGE_CODEC);
-                    // 用来判断是不是 读空闲时间过长，或 写空闲时间过长
-                    // 5s 内如果没有收到 channel 的数据，会触发一个 IdleState#READER_IDLE 事件
-                    ch.pipeline().addLast(new IdleStateHandler(5, 0, 0));
-                    // ChannelDuplexHandler 可以同时作为入站和出站处理器
-                    ch.pipeline().addLast(new ChannelDuplexHandler() {
-                        // 用来触发特殊事件
+            serverBootstrap.childHandler(
+                    new ChannelInitializer<SocketChannel>() {
                         @Override
-                        public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception{
-                            IdleStateEvent event = (IdleStateEvent) evt;
-                            // 触发了读空闲事件
-                            if (event.state() == IdleState.READER_IDLE) {
-                                log.debug("已经 5s 没有读到数据了");
-                                ctx.channel().close();
-                            }
+                        protected void initChannel(SocketChannel ch) throws Exception {
+                            ch.pipeline().addLast(new ProcotolFrameDecoder());
+                            ch.pipeline().addLast(LOGGING_HANDLER);
+                            ch.pipeline().addLast(MESSAGE_CODEC);
+                            // 用来判断是不是 读空闲时间过长，或 写空闲时间过长
+                            // 5s 内如果没有收到 channel 的数据，会触发一个 IdleState#READER_IDLE 事件
+                            ch.pipeline().addLast(new IdleStateHandler(5, 0, 0));
+                            // ChannelDuplexHandler 可以同时作为入站和出站处理器
+                            ch.pipeline()
+                                    .addLast(
+                                            new ChannelDuplexHandler() {
+                                                // 用来触发特殊事件
+                                                @Override
+                                                public void userEventTriggered(
+                                                        ChannelHandlerContext ctx, Object evt)
+                                                        throws Exception {
+                                                    IdleStateEvent event = (IdleStateEvent) evt;
+                                                    // 触发了读空闲事件
+                                                    if (event.state() == IdleState.READER_IDLE) {
+                                                        log.debug("已经 5s 没有读到数据了");
+                                                        ctx.channel().close();
+                                                    }
+                                                }
+                                            });
+                            ch.pipeline().addLast(LOGIN_HANDLER);
+                            ch.pipeline().addLast(CHAT_HANDLER);
+                            ch.pipeline().addLast(GROUP_CREATE_HANDLER);
+                            ch.pipeline().addLast(GROUP_JOIN_HANDLER);
+                            ch.pipeline().addLast(GROUP_MEMBERS_HANDLER);
+                            ch.pipeline().addLast(GROUP_QUIT_HANDLER);
+                            ch.pipeline().addLast(GROUP_CHAT_HANDLER);
+                            ch.pipeline().addLast(QUIT_HANDLER);
                         }
                     });
-                    ch.pipeline().addLast(LOGIN_HANDLER);
-                    ch.pipeline().addLast(CHAT_HANDLER);
-                    ch.pipeline().addLast(GROUP_CREATE_HANDLER);
-                    ch.pipeline().addLast(GROUP_JOIN_HANDLER);
-                    ch.pipeline().addLast(GROUP_MEMBERS_HANDLER);
-                    ch.pipeline().addLast(GROUP_QUIT_HANDLER);
-                    ch.pipeline().addLast(GROUP_CHAT_HANDLER);
-                    ch.pipeline().addLast(QUIT_HANDLER);
-                }
-            });
             Channel channel = serverBootstrap.bind(8080).sync().channel();
             channel.closeFuture().sync();
         } catch (InterruptedException e) {
@@ -79,5 +101,4 @@ public class ChatServer {
             worker.shutdownGracefully();
         }
     }
-
 }

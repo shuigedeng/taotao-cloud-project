@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.elasticsearch.plugin;
 
 import java.io.IOException;
@@ -12,26 +28,32 @@ public class AnalyzeContext {
      * 输入
      */
     private Reader input;
+
     /**
      * 配置
      */
     private Configuration configuration;
+
     /**
      * 分词结果
      */
     private Iterator<Term> iterator;
+
     /**
      * term的偏移量，由于wrapper是按行读取的，必须对term.offset做一个校正
      */
     int offset;
+
     /**
      * 缓冲区大小
      */
     private static final int BUFFER_SIZE = 4096;
+
     /**
      * 缓冲区
      */
     private char[] buffer = new char[BUFFER_SIZE];
+
     /**
      * 缓冲区未处理的下标
      */
@@ -40,19 +62,22 @@ public class AnalyzeContext {
     /**
      * 句子分隔符
      */
-    private static final Set<Character> delimiterCharSet = new HashSet<Character>() {{
-        add('\r');
-        add('\n');
-        add('。');
-        add('!');
-        add('！');
-        add('，');
-        add(',');
-        add('?');
-        add('？');
-        add(';');
-        add('；');
-    }};
+    private static final Set<Character> delimiterCharSet =
+            new HashSet<Character>() {
+                {
+                    add('\r');
+                    add('\n');
+                    add('。');
+                    add('!');
+                    add('！');
+                    add('，');
+                    add(',');
+                    add('?');
+                    add('？');
+                    add(';');
+                    add('；');
+                }
+            };
 
     public AnalyzeContext(Reader reader, Configuration configuration) {
         this.input = reader;
@@ -82,18 +107,18 @@ public class AnalyzeContext {
             return null;
         }
 
-        // todo 
-        List<Term> termList = [你的分词算法].getTextTokenizer(line, configuration);
-        // 分词结果是空
-        if (termList.size() == 0) {
-            return null;
-        }
+        // todo
+        // List<Term> termList = [你的分词算法].getTextTokenizer(line, configuration);
+        //// 分词结果是空
+        // if (termList.size() == 0) {
+        //    return null;
+        // }
 
-        for (Term term : termList) {
-            term.setOffset(term.getOffset() + offset);
-        }
-        offset += line.length();
-        iterator = termList.iterator();
+        // for (Term term : termList) {
+        //    term.setOffset(term.getOffset() + offset);
+        // }
+        // offset += line.length();
+        // iterator = termList.iterator();
         return iterator.next();
     }
 

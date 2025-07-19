@@ -1,7 +1,24 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.realtime.datalake.behavior.networkflow_analysis;
 
 import com.taotao.cloud.realtime.behavior.analysis.networkflow_analysis.beans.PageViewCount;
 import com.taotao.cloud.realtime.behavior.analysis.networkflow_analysis.beans.UserBehavior;
+import java.net.URL;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -16,9 +33,6 @@ import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 import redis.clients.jedis.Jedis;
 
-import java.net.URL;
-
-
 public class UvWithBloomFilter {
     public static void main(String[] args) throws Exception {
         // 1. 创建执行环境
@@ -31,24 +45,33 @@ public class UvWithBloomFilter {
         DataStream<String> inputStream = env.readTextFile(resource.getPath());
 
         // 3. 转换为POJO，分配时间戳和watermark
-        DataStream<UserBehavior> dataStream = inputStream
-                .map(line -> {
-                    String[] fields = line.split(",");
-                    return new UserBehavior(new Long(fields[0]), new Long(fields[1]), new Integer(fields[2]), fields[3], new Long(fields[4]));
-                })
-                .assignTimestampsAndWatermarks(new AscendingTimestampExtractor<UserBehavior>() {
-                    @Override
-                    public long extractAscendingTimestamp(UserBehavior element) {
-                        return element.getTimestamp() * 1000L;
-                    }
-                });
+        DataStream<UserBehavior> dataStream =
+                inputStream
+                        .map(
+                                line -> {
+                                    String[] fields = line.split(",");
+                                    return new UserBehavior(
+                                            new Long(fields[0]),
+                                            new Long(fields[1]),
+                                            new Integer(fields[2]),
+                                            fields[3],
+                                            new Long(fields[4]));
+                                })
+                        .assignTimestampsAndWatermarks(
+                                new AscendingTimestampExtractor<UserBehavior>() {
+                                    @Override
+                                    public long extractAscendingTimestamp(UserBehavior element) {
+                                        return element.getTimestamp() * 1000L;
+                                    }
+                                });
 
         // 开窗统计uv值
-        SingleOutputStreamOperator<PageViewCount> uvStream = dataStream
-                .filter(data -> "pv".equals(data.getBehavior()))
-                .timeWindowAll(Time.hours(1))
-                .trigger( new MyTrigger() )
-                .process( new UvCountResultWithBloomFliter() );
+        SingleOutputStreamOperator<PageViewCount> uvStream =
+                dataStream
+                        .filter(data -> "pv".equals(data.getBehavior()))
+                        .timeWindowAll(Time.hours(1))
+                        .trigger(new MyTrigger())
+                        .process(new UvCountResultWithBloomFliter());
 
         uvStream.print();
 
@@ -56,26 +79,29 @@ public class UvWithBloomFilter {
     }
 
     // 自定义触发器
-    public static class MyTrigger extends Trigger<UserBehavior, TimeWindow>{
+    public static class MyTrigger extends Trigger<UserBehavior, TimeWindow> {
         @Override
-        public TriggerResult onElement(UserBehavior element, long timestamp, TimeWindow window, TriggerContext ctx) throws Exception {
+        public TriggerResult onElement(
+                UserBehavior element, long timestamp, TimeWindow window, TriggerContext ctx)
+                throws Exception {
             // 每一条数据来到，直接触发窗口计算，并且直接清空窗口
             return TriggerResult.FIRE_AND_PURGE;
         }
 
         @Override
-        public TriggerResult onProcessingTime(long time, TimeWindow window, TriggerContext ctx) throws Exception {
+        public TriggerResult onProcessingTime(long time, TimeWindow window, TriggerContext ctx)
+                throws Exception {
             return TriggerResult.CONTINUE;
         }
 
         @Override
-        public TriggerResult onEventTime(long time, TimeWindow window, TriggerContext ctx) throws Exception {
+        public TriggerResult onEventTime(long time, TimeWindow window, TriggerContext ctx)
+                throws Exception {
             return TriggerResult.CONTINUE;
         }
 
         @Override
-        public void clear(TimeWindow window, TriggerContext ctx) throws Exception {
-        }
+        public void clear(TimeWindow window, TriggerContext ctx) throws Exception {}
     }
 
     // 自定义一个布隆过滤器
@@ -86,10 +112,11 @@ public class UvWithBloomFilter {
         public MyBloomFilter(Integer cap) {
             this.cap = cap;
         }
+
         // 实现一个hash函数
-        public Long hashCode( String value, Integer seed ){
+        public Long hashCode(String value, Integer seed) {
             Long result = 0L;
-            for( int i = 0; i < value.length(); i++ ){
+            for (int i = 0; i < value.length(); i++) {
                 result = result * seed + value.charAt(i);
             }
             return result & (cap - 1);
@@ -97,7 +124,8 @@ public class UvWithBloomFilter {
     }
 
     // 实现自定义的处理函数
-    public static class UvCountResultWithBloomFliter extends ProcessAllWindowFunction<UserBehavior, PageViewCount, TimeWindow>{
+    public static class UvCountResultWithBloomFliter
+            extends ProcessAllWindowFunction<UserBehavior, PageViewCount, TimeWindow> {
         // 定义jedis连接和布隆过滤器
         Jedis jedis;
         MyBloomFilter myBloomFilter;
@@ -105,11 +133,13 @@ public class UvWithBloomFilter {
         @Override
         public void open(Configuration parameters) throws Exception {
             jedis = new Jedis("localhost", 6379);
-            myBloomFilter = new MyBloomFilter(1<<29);    // 要处理1亿个数据，用64MB大小的位图
+            myBloomFilter = new MyBloomFilter(1 << 29); // 要处理1亿个数据，用64MB大小的位图
         }
 
         @Override
-        public void process(Context context, Iterable<UserBehavior> elements, Collector<PageViewCount> out) throws Exception {
+        public void process(
+                Context context, Iterable<UserBehavior> elements, Collector<PageViewCount> out)
+                throws Exception {
             // 将位图和窗口count值全部存入redis，用windowEnd作为key
             Long windowEnd = context.window().getEnd();
             String bitmapKey = windowEnd.toString();
@@ -126,14 +156,14 @@ public class UvWithBloomFilter {
             // 3. 用redis的getbit命令，判断对应位置的值
             Boolean isExist = jedis.getbit(bitmapKey, offset);
 
-            if( !isExist ){
+            if (!isExist) {
                 // 如果不存在，对应位图位置置1
                 jedis.setbit(bitmapKey, offset, true);
 
                 // 更新redis中保存的count值
-                Long uvCount = 0L;    // 初始count值
+                Long uvCount = 0L; // 初始count值
                 String uvCountString = jedis.hget(countHashName, countKey);
-                if( uvCountString != null && !"".equals(uvCountString) )
+                if (uvCountString != null && !"".equals(uvCountString))
                     uvCount = Long.valueOf(uvCountString);
                 jedis.hset(countHashName, countKey, String.valueOf(uvCount + 1));
 

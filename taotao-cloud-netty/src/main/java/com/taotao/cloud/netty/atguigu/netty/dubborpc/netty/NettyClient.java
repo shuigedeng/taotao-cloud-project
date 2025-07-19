@@ -1,5 +1,20 @@
-package com.taotao.cloud.netty.atguigu.netty.dubborpc.netty;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.netty.atguigu.netty.dubborpc.netty;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelInitializer;
@@ -10,50 +25,50 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
-
 import java.lang.reflect.Proxy;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class NettyClient {
 
-    //创建线程池
-    private static ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+    // 创建线程池
+    private static ExecutorService executor =
+            Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
     private static NettyClientHandler client;
     private int count = 0;
 
-    //编写方法使用代理模式，获取一个代理对象
+    // 编写方法使用代理模式，获取一个代理对象
 
     public Object getBean(final Class<?> serivceClass, final String providerName) {
 
-        return Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(),
-                new Class<?>[]{serivceClass}, (proxy, method, args) -> {
-
+        return Proxy.newProxyInstance(
+                Thread.currentThread().getContextClassLoader(),
+                new Class<?>[] {serivceClass},
+                (proxy, method, args) -> {
                     System.out.println("(proxy, method, args) 进入...." + (++count) + " 次");
-                    //{}  部分的代码，客户端每调用一次 hello, 就会进入到该代码
+                    // {}  部分的代码，客户端每调用一次 hello, 就会进入到该代码
                     if (client == null) {
                         initClient();
                     }
 
-                    //设置要发给服务器端的信息
-                    //providerName 协议头 args[0] 就是客户端调用api hello(???), 参数
+                    // 设置要发给服务器端的信息
+                    // providerName 协议头 args[0] 就是客户端调用api hello(???), 参数
                     client.setPara(providerName + args[0]);
 
                     //
                     return executor.submit(client).get();
-
                 });
     }
 
-    //初始化客户端
+    // 初始化客户端
     private static void initClient() {
         client = new NettyClientHandler();
-        //创建EventLoopGroup
+        // 创建EventLoopGroup
         NioEventLoopGroup group = new NioEventLoopGroup();
         Bootstrap bootstrap = new Bootstrap();
-        bootstrap.group(group)
+        bootstrap
+                .group(group)
                 .channel(NioSocketChannel.class)
                 .option(ChannelOption.TCP_NODELAY, true)
                 .handler(
@@ -65,8 +80,7 @@ public class NettyClient {
                                 pipeline.addLast(new StringEncoder());
                                 pipeline.addLast(client);
                             }
-                        }
-                );
+                        });
 
         try {
             bootstrap.connect("127.0.0.1", 7000).sync();

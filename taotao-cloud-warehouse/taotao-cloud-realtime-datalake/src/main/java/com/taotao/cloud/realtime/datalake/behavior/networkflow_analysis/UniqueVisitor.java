@@ -1,8 +1,25 @@
-package com.taotao.cloud.realtime.datalake.behavior.networkflow_analysis;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.taotao.cloud.realtime.datalake.behavior.networkflow_analysis;
 
 import com.taotao.cloud.realtime.behavior.analysis.networkflow_analysis.beans.PageViewCount;
 import com.taotao.cloud.realtime.behavior.analysis.networkflow_analysis.beans.UserBehavior;
+import java.net.URL;
+import java.util.HashSet;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
@@ -12,10 +29,6 @@ import org.apache.flink.streaming.api.functions.windowing.AllWindowFunction;
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
-
-import java.net.URL;
-import java.util.HashSet;
-
 
 public class UniqueVisitor {
     public static void main(String[] args) throws Exception {
@@ -29,22 +42,32 @@ public class UniqueVisitor {
         DataStream<String> inputStream = env.readTextFile(resource.getPath());
 
         // 3. 转换为POJO，分配时间戳和watermark
-        DataStream<UserBehavior> dataStream = inputStream
-                .map(line -> {
-                    String[] fields = line.split(",");
-                    return new UserBehavior(new Long(fields[0]), new Long(fields[1]), new Integer(fields[2]), fields[3], new Long(fields[4]));
-                })
-                .assignTimestampsAndWatermarks(new AscendingTimestampExtractor<UserBehavior>() {
-                    @Override
-                    public long extractAscendingTimestamp(UserBehavior element) {
-                        return element.getTimestamp() * 1000L;
-                    }
-                });
+        DataStream<UserBehavior> dataStream =
+                inputStream
+                        .map(
+                                line -> {
+                                    String[] fields = line.split(",");
+                                    return new UserBehavior(
+                                            new Long(fields[0]),
+                                            new Long(fields[1]),
+                                            new Integer(fields[2]),
+                                            fields[3],
+                                            new Long(fields[4]));
+                                })
+                        .assignTimestampsAndWatermarks(
+                                new AscendingTimestampExtractor<UserBehavior>() {
+                                    @Override
+                                    public long extractAscendingTimestamp(UserBehavior element) {
+                                        return element.getTimestamp() * 1000L;
+                                    }
+                                });
 
         // 开窗统计uv值
-        SingleOutputStreamOperator<PageViewCount> uvStream = dataStream.filter(data -> "pv".equals(data.getBehavior()))
-                .timeWindowAll(Time.hours(1))
-                .apply(new UvCountResult());
+        SingleOutputStreamOperator<PageViewCount> uvStream =
+                dataStream
+                        .filter(data -> "pv".equals(data.getBehavior()))
+                        .timeWindowAll(Time.hours(1))
+                        .apply(new UvCountResult());
 
         uvStream.print();
 
@@ -52,15 +75,18 @@ public class UniqueVisitor {
     }
 
     // 实现自定义全窗口函数
-    public static class UvCountResult implements AllWindowFunction<UserBehavior, PageViewCount, TimeWindow>{
+    public static class UvCountResult
+            implements AllWindowFunction<UserBehavior, PageViewCount, TimeWindow> {
         @Override
-        public void apply(TimeWindow window, Iterable<UserBehavior> values, Collector<PageViewCount> out) throws Exception {
+        public void apply(
+                TimeWindow window, Iterable<UserBehavior> values, Collector<PageViewCount> out)
+                throws Exception {
             // 定义一个Set结构，保存窗口中的所有userId，自动去重
             HashSet<Long> uidSet = new HashSet<>();
-            for (UserBehavior ub: values) {
-	            uidSet.add(ub.getUserId());
+            for (UserBehavior ub : values) {
+                uidSet.add(ub.getUserId());
             }
-            out.collect( new PageViewCount("uv", window.getEnd(), (long)uidSet.size()) );
+            out.collect(new PageViewCount("uv", window.getEnd(), (long) uidSet.size()));
         }
     }
 }

@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS iceberg_dwd.dwd_traffic_display_full(
     'warehouse'='hdfs://192.168.244.129:9000/user/hive/warehouse/'
 );
 
-CREATE TEMPORARY FUNCTION json_displays_array_parser AS 'org.bigdatatechcir.warehouse.flink.udf.JsonDisplaysArrayParser';
+CREATE TEMPORARY FUNCTION json_displays_array_parser AS 'com.taotao.cloud.realtime.warehouse.flink.udf.JsonDisplaysArrayParser';
 
 insert into iceberg_dwd.dwd_traffic_display_full /*+ OPTIONS('upsert-enabled'='true') */(
     `id`,

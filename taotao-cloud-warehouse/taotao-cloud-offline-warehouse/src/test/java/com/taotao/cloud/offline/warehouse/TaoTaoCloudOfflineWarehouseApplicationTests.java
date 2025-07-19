@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.offline.warehouse;
 
-
 class TaoTaoCloudOfflineWarehouseApplicationTests {
 
     void contextLoads() {}

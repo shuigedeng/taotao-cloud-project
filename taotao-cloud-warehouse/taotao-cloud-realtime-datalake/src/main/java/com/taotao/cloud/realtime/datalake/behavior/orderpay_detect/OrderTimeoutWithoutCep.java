@@ -1,8 +1,25 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.realtime.datalake.behavior.orderpay_detect;
 
 import com.taotao.cloud.realtime.behavior.analysis.orderpay_detect.OrderPayTimeout;
 import com.taotao.cloud.realtime.behavior.analysis.orderpay_detect.beans.OrderEvent;
 import com.taotao.cloud.realtime.behavior.analysis.orderpay_detect.beans.OrderResult;
+import java.net.URL;
 import org.apache.flink.api.common.state.ValueState;
 import org.apache.flink.api.common.state.ValueStateDescriptor;
 import org.apache.flink.configuration.Configuration;
@@ -15,12 +32,10 @@ import org.apache.flink.streaming.api.functions.timestamps.AscendingTimestampExt
 import org.apache.flink.util.Collector;
 import org.apache.flink.util.OutputTag;
 
-import java.net.URL;
-
-
 public class OrderTimeoutWithoutCep {
     // 定义超时事件的侧输出流标签
-    private final static OutputTag<OrderResult> orderTimeoutTag = new OutputTag<OrderResult>("order-timeout"){};
+    private static final OutputTag<OrderResult> orderTimeoutTag =
+            new OutputTag<OrderResult>("order-timeout") {};
 
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
@@ -29,22 +44,28 @@ public class OrderTimeoutWithoutCep {
 
         // 读取数据并转换成POJO类型
         URL resource = OrderPayTimeout.class.getResource("/OrderLog.csv");
-        DataStream<OrderEvent> orderEventStream = env.readTextFile(resource.getPath())
-                .map(line -> {
-                    String[] fields = line.split(",");
-                    return new OrderEvent(new Long(fields[0]), fields[1], fields[2], new Long(fields[3]));
-                })
-                .assignTimestampsAndWatermarks(new AscendingTimestampExtractor<OrderEvent>() {
-                    @Override
-                    public long extractAscendingTimestamp(OrderEvent element) {
-                        return element.getTimestamp() * 1000L;
-                    }
-                });
+        DataStream<OrderEvent> orderEventStream =
+                env.readTextFile(resource.getPath())
+                        .map(
+                                line -> {
+                                    String[] fields = line.split(",");
+                                    return new OrderEvent(
+                                            new Long(fields[0]),
+                                            fields[1],
+                                            fields[2],
+                                            new Long(fields[3]));
+                                })
+                        .assignTimestampsAndWatermarks(
+                                new AscendingTimestampExtractor<OrderEvent>() {
+                                    @Override
+                                    public long extractAscendingTimestamp(OrderEvent element) {
+                                        return element.getTimestamp() * 1000L;
+                                    }
+                                });
 
         // 自定义处理函数，主流输出正常匹配订单事件，侧输出流输出超时报警事件
-        SingleOutputStreamOperator<OrderResult> resultStream = orderEventStream
-                .keyBy(OrderEvent::getOrderId)
-                .process(new OrderPayMatchDetect());
+        SingleOutputStreamOperator<OrderResult> resultStream =
+                orderEventStream.keyBy(OrderEvent::getOrderId).process(new OrderPayMatchDetect());
 
         resultStream.print("payed normally");
         resultStream.getSideOutput(orderTimeoutTag).print("timeout");
@@ -53,7 +74,8 @@ public class OrderTimeoutWithoutCep {
     }
 
     // 实现自定义KeyedProcessFunction
-    public static class OrderPayMatchDetect extends KeyedProcessFunction<Long, OrderEvent, OrderResult>{
+    public static class OrderPayMatchDetect
+            extends KeyedProcessFunction<Long, OrderEvent, OrderResult> {
         // 定义状态，保存之前点单是否已经来过create、pay的事件
         ValueState<Boolean> isPayedState;
         ValueState<Boolean> isCreatedState;
@@ -62,22 +84,30 @@ public class OrderTimeoutWithoutCep {
 
         @Override
         public void open(Configuration parameters) throws Exception {
-            isPayedState = getRuntimeContext().getState(new ValueStateDescriptor<Boolean>("is-payed", Boolean.class));
-            isCreatedState = getRuntimeContext().getState(new ValueStateDescriptor<Boolean>("is-created", Boolean.class));
-            timerTsState = getRuntimeContext().getState(new ValueStateDescriptor<Long>("timer-ts", Long.class));
+            isPayedState =
+                    getRuntimeContext()
+                            .getState(new ValueStateDescriptor<Boolean>("is-payed", Boolean.class));
+            isCreatedState =
+                    getRuntimeContext()
+                            .getState(
+                                    new ValueStateDescriptor<Boolean>("is-created", Boolean.class));
+            timerTsState =
+                    getRuntimeContext()
+                            .getState(new ValueStateDescriptor<Long>("timer-ts", Long.class));
         }
 
         @Override
-        public void processElement(OrderEvent value, Context ctx, Collector<OrderResult> out) throws Exception {
+        public void processElement(OrderEvent value, Context ctx, Collector<OrderResult> out)
+                throws Exception {
             // 先获取当前状态
             Boolean isPayed = isPayedState.value();
             Boolean isCreated = isCreatedState.value();
             Long timerTs = timerTsState.value();
 
             // 判断当前事件类型
-            if( "create".equals(value.getEventType()) ){
+            if ("create".equals(value.getEventType())) {
                 // 1. 如果来的是create，要判断是否支付过
-                if( isPayed ){
+                if (isPayed) {
                     // 1.1 如果已经正常支付，输出正常匹配结果
                     out.collect(new OrderResult(value.getOrderId(), "payed successfully"));
                     // 清空状态，删除定时器
@@ -87,22 +117,24 @@ public class OrderTimeoutWithoutCep {
                     ctx.timerService().deleteEventTimeTimer(timerTs);
                 } else {
                     // 1.2 如果没有支付过，注册15分钟后的定时器，开始等待支付事件
-                    Long ts = ( value.getTimestamp() + 15 * 60 ) * 1000L;
+                    Long ts = (value.getTimestamp() + 15 * 60) * 1000L;
                     ctx.timerService().registerEventTimeTimer(ts);
                     // 更新状态
                     timerTsState.update(ts);
                     isCreatedState.update(true);
                 }
-            } else if( "pay".equals(value.getEventType()) ){
+            } else if ("pay".equals(value.getEventType())) {
                 // 2. 如果来的是pay，要判断是否有下单事件来过
-                if( isCreated ){
+                if (isCreated) {
                     // 2.1 已经有过下单事件，要继续判断支付的时间戳是否超过15分钟
-                    if( value.getTimestamp() * 1000L < timerTs ){
+                    if (value.getTimestamp() * 1000L < timerTs) {
                         // 2.1.1 在15分钟内，没有超时，正常匹配输出
                         out.collect(new OrderResult(value.getOrderId(), "payed successfully"));
                     } else {
                         // 2.1.2 已经超时，输出侧输出流报警
-                        ctx.output(orderTimeoutTag, new OrderResult(value.getOrderId(), "payed but already timeout"));
+                        ctx.output(
+                                orderTimeoutTag,
+                                new OrderResult(value.getOrderId(), "payed but already timeout"));
                     }
                     // 统一清空状态
                     isCreatedState.clear();
@@ -111,7 +143,7 @@ public class OrderTimeoutWithoutCep {
                     ctx.timerService().deleteEventTimeTimer(timerTs);
                 } else {
                     // 2.2 没有下单事件，乱序，注册一个定时器，等待下单事件
-                    ctx.timerService().registerEventTimeTimer( value.getTimestamp() * 1000L);
+                    ctx.timerService().registerEventTimeTimer(value.getTimestamp() * 1000L);
                     // 更新状态
                     timerTsState.update(value.getTimestamp() * 1000L);
                     isPayedState.update(true);
@@ -120,12 +152,15 @@ public class OrderTimeoutWithoutCep {
         }
 
         @Override
-        public void onTimer(long timestamp, OnTimerContext ctx, Collector<OrderResult> out) throws Exception {
+        public void onTimer(long timestamp, OnTimerContext ctx, Collector<OrderResult> out)
+                throws Exception {
             // 定时器触发，说明一定有一个事件没来
-            if( isPayedState.value() ){
+            if (isPayedState.value()) {
                 // 如果pay来了，说明create没来
-                ctx.output(orderTimeoutTag, new OrderResult(ctx.getCurrentKey(), "payed but not found created log"));
-            }else {
+                ctx.output(
+                        orderTimeoutTag,
+                        new OrderResult(ctx.getCurrentKey(), "payed but not found created log"));
+            } else {
                 // 如果pay没来，支付超时
                 ctx.output(orderTimeoutTag, new OrderResult(ctx.getCurrentKey(), "timeout"));
             }

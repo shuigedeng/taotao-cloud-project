@@ -1,31 +1,47 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.netty.netty.sixthexample;
 
-
+import com.taotao.cloud.netty.grpc.code2.MyMessage;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import com.taotao.cloud.netty.grpc.code2.MyMessage;
+
 public class TestServerHandler extends SimpleChannelInboundHandler<MyMessage> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MyMessage msg) throws Exception {
         MyMessage.DataType dataType = msg.getDataType();
 
-        //if (dataType == MyMessage.DataType.StudentType) {
+        // if (dataType == MyMessage.DataType.StudentType) {
         //    Person person = msg.getPerson();
-		//
+        //
         //    System.out.println(person.getName());
         //    System.out.println(person.getAge());
         //    System.out.println(person.getAddress());
-        //} else if (dataType == MyMessage.DataType.DogType) {
+        // } else if (dataType == MyMessage.DataType.DogType) {
         //    Dog dog = msg.getDog();
-		//
+        //
         //    System.out.println(dog.getName());
         //    System.out.println(dog.getAge());
-        //} else {
+        // } else {
         //    Cat cat = msg.getCat();
-		//
+        //
         //    System.out.println(cat.getName());
         //    System.out.println(cat.getCity());
-        //}
+        // }
     }
 }
