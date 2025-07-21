@@ -57,7 +57,7 @@ tasks.register("releaseTarGz", Tar) {
         into "target"
     }
 
-    duplicatesStrategy DuplicatesStrategy.EXCLUDE
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
     finalizedBy("generateMd5ForTarGz")
 }

@@ -247,7 +247,7 @@ tasks.register("releaseTarGz", Tar) {
 //    from(project(':streams:examples').configurations.runtimeClasspath) { into("libs/") }
 //    from(project(':tools:tools-api').jar) { into("libs/") }
 //    from(project(':tools:tools-api').configurations.runtimeClasspath) { into("libs/") }
-    duplicatesStrategy DuplicatesStrategy.EXCLUDE
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
 }
 
