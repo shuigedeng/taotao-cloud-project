@@ -4,7 +4,7 @@ dependencies {
     api "io.github.shuigedeng:taotao-boot-starter-core"
     api "net.devh:grpc-client-spring-boot-starter:3.1.0.RELEASE"
 
-    api "io.netty:netty-all:4.2.2.Final"
+    api "io.netty:netty-all:4.2.3.Final"
     api "com.google.protobuf:protobuf-java:4.31.1"
     api "com.google.protobuf:protobuf-java-util:4.31.1"
     api "org.apache.thrift:libthrift:0.21.0"

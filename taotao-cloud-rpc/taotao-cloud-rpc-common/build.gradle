@@ -14,8 +14,8 @@ dependencies {
         exclude group: 'io.netty', module: 'netty-transport'
     }
     //json 转换工具
-    api 'com.fasterxml.jackson.core:jackson-databind:2.19.1'
-    api 'com.fasterxml.jackson.core:jackson-core:2.19.1'
+    api 'com.fasterxml.jackson.core:jackson-databind:2.19.2'
+    api 'com.fasterxml.jackson.core:jackson-core:2.19.2'
     //kryo 序列化 工具
     api 'com.esotericsoftware:kryo:5.6.2'
     //hessian 序列化 工具
@@ -24,7 +24,7 @@ dependencies {
     api 'ch.qos.logback:logback-classic:1.5.18'
     api "com.google.guava:guava:33.4.8-jre"
 
-    api 'io.netty:netty-all:4.2.2.Final'
+    api 'io.netty:netty-all:4.2.3.Final'
 
     api("org.springframework.boot:spring-boot-starter-web") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
