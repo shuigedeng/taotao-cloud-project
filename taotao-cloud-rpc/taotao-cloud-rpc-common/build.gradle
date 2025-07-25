@@ -1,14 +1,14 @@
 dependencies {
-    api('com.alibaba.nacos:nacos-client:2.4.3') {
+    api('com.alibaba.nacos:nacos-client:3.0.2') {
         exclude group: 'org.slf4j', module: 'slf4j-api'
     }
 
     //作为 包验证，防止修改
-    api 'commons-codec:commons-codec:1.18.0'
+    api 'commons-codec:commons-codec:1.19.0'
     // redis 分布式锁
     api 'redis.clients:jedis:6.0.0'
     //Lettuce Redis客户端
-    api('io.lettuce:lettuce-core:6.5.2.RELEASE') {
+    api('io.lettuce:lettuce-core:6.7.1.RELEASE') {
         exclude group: 'io.netty', module: 'netty-handler'
         exclude group: 'io.netty', module: 'netty-common'
         exclude group: 'io.netty', module: 'netty-transport'

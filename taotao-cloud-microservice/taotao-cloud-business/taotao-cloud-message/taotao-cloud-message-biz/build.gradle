@@ -33,7 +33,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-statemachine"
     implementation "io.github.shuigedeng:taotao-boot-starter-flowengine"
 
-    implementation 'org.apache.rocketmq:rocketmq-spring-boot-starter:2.3.3'
+    implementation 'org.apache.rocketmq:rocketmq-spring-boot-starter:2.3.4'
     implementation("com.aliyun:alibaba-dingtalk-service-sdk:2.0.0") {
         exclude group: "com.sun.jmx", module: "jmxri"
     }

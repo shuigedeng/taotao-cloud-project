@@ -21,8 +21,8 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
 
     //https://search.maven.org/artifact/org.springframework.integration/spring-integration-core
-    implementation 'org.springframework.integration:spring-integration-core:6.5.0'
-    implementation 'org.springframework.integration:spring-integration-jdbc:6.5.0'
+    implementation 'org.springframework.integration:spring-integration-core:6.5.1'
+    implementation 'org.springframework.integration:spring-integration-jdbc:6.5.1'
 
     implementation 'org.springframework.boot:spring-boot-starter-batch'
     implementation 'org.springframework.batch:spring-batch-infrastructure:5.2.2'

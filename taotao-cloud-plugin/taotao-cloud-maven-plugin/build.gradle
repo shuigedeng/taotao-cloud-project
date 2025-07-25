@@ -94,17 +94,17 @@ apply plugin: 'com.vanniktech.maven.publish'
 description = "Maven插件模块"
 
 dependencies {
-    implementation 'org.apache.maven:maven-core:3.9.10'
-    implementation 'org.apache.maven:maven-model:3.9.10'
-    implementation 'org.apache.maven:maven-plugin-api:3.9.10'
+    implementation 'org.apache.maven:maven-core:3.9.11'
+    implementation 'org.apache.maven:maven-model:3.9.11'
+    implementation 'org.apache.maven:maven-plugin-api:3.9.11'
 
     implementation "com.google.guava:guava:33.4.8-jre"
 
     implementation 'org.apache.maven.plugin-tools:maven-plugin-annotations:3.15.1'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.13.3'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.13.3'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.13.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.13.4'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.13.4'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.13.4'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.3'
     testImplementation "org.assertj:assertj-core:3.27.3"
 }
@@ -300,7 +300,7 @@ mavenPublishing {
                 "maven.compiler.target": JavaVersion.VERSION_21.toString(),
                 "project.build.sourceEncoding": "UTF-8",
                 "project.reporting.outputEncoding": "UTF-8",
-                "spring-boot-dependencies.version"   : "3.5.3",
+                "spring-boot-dependencies.version"   : "3.5.4",
                 "taotao-cloud-dependencies.version"   : rootProject.version,
                 "taotao-boot-dependencies.version"   : rootProject.version
         ]

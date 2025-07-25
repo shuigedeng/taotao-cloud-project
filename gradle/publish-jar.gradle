@@ -241,7 +241,7 @@ publishing {
                         "maven.compiler.target": JavaVersion.VERSION_21.toString(),
                         "project.build.sourceEncoding": "UTF-8",
                         "project.reporting.outputEncoding": "UTF-8",
-                        "spring-boot-dependencies.version"   : "3.5.3",
+                        "spring-boot-dependencies.version"   : "3.5.4",
                         "taotao-cloud-dependencies.version"   : rootProject.version,
                         "taotao-boot-dependencies.version"   : rootProject.version
                 ]

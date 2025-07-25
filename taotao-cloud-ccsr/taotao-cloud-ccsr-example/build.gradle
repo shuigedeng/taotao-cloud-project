@@ -17,7 +17,7 @@ configurations {
 
         resolutionStrategy {
             force "com.caucho:hessian:4.0.63"
-            force "com.alipay.sofa:hessian:3.3.6"
+            force "com.alipay.sofa:hessian:3.5.5"
         }
 
         exclude group: "commons-logging", module: "commons-logging"
