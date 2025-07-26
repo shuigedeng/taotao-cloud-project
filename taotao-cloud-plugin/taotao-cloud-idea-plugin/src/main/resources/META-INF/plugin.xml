@@ -140,13 +140,13 @@
 
 	<!-- 声明该插件对IDEA core或其他插件的扩展 可以配置侧边的工具栏，例如maven所在的侧边栏 。-->
 	<extensions defaultExtensionNs="com.intellij">
-		<applicationService serviceInterface="com.taotao.cloud.idea.plugin.service.CacheService"
-			serviceImplementation="com.taotao.cloud.idea.plugin.service.impl.CacheServiceImpl"/>'
+		<applicationService serviceInterface="com.taotao.cloud.idea.plugin.toolkit.service.CacheService"
+			serviceImplementation="com.taotao.cloud.idea.plugin.toolkit.service.impl.CacheServiceImpl"/>'
 		<applicationService
-			serviceInterface="com.taotao.cloud.idea.plugin.service.ToolkitCommandService"
-			serviceImplementation="com.taotao.cloud.idea.plugin.service.impl.ToolkitCommandServiceImpl"/>
+			serviceInterface="com.taotao.cloud.idea.plugin.toolkit.service.ToolkitCommandService"
+			serviceImplementation="com.taotao.cloud.idea.plugin.toolkit.service.impl.ToolkitCommandServiceImpl"/>
 		<runAnything.executionProvider id="runAnythingExecutionProvider"
-			implementation="com.taotao.cloud.idea.plugin.extensions.runanything.RunAnythingToolkitProvider"/>
+			implementation="com.taotao.cloud.idea.plugin.toolkit.extensions.runanything.RunAnythingToolkitProvider"/>
 	</extensions>
 
 <!--	<actions>-->
@@ -164,7 +164,7 @@
 		<!-- Add your actions here -->
 		<group id="groupid" text="Ptg Menu" description="decription1">
 			<add-to-group group-id="EditorPopupMenu" anchor="last"/>
-			<action class="com.taotao.cloud.idea.plugin.aaa.GenerateJavaBeanAction" id="getterandsetter"
+			<action class="com.taotao.cloud.idea.plugin.generateJavaBean.GenerateJavaBeanAction" id="getterandsetter"
 					text="Ptg To JavaBean" description="generate contructor getter/setter toString">
 				<keyboard-shortcut keymap="$default" first-keystroke="alt D"/>
 			</action>
@@ -174,7 +174,7 @@
 		</group>
 
 		<!-- 定义 id, 对应类和显示的文本 -->
-		<action id="genCopyMethod" class="com.taotao.cloud.idea.plugin.actions.BeanConvertAction" text="genCopyMethod" description="genCopyMethod">
+		<action id="genCopyMethod" class="com.taotao.cloud.idea.plugin.beanConvert.BeanConvertAction" text="genCopyMethod" description="genCopyMethod">
 			<!-- 添加到编辑器菜单的第一项 -->
 			<add-to-group group-id="GenerateGroup" anchor="last"/>
 
@@ -183,4 +183,55 @@
 		</action>
 	</actions>
 
+	<!-- Extension points defined by the plugin.
+	 Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+<!--	<extensions defaultExtensionNs="com.intellij">-->
+<!--		<postStartupActivity implementation="com.taotao.cloud.idea.plugin.convertClassFields.PluginInitializer"/>-->
+<!--	</extensions>-->
+<!--	<actions>-->
+<!--		<action id="Convert Class Fields" class="com.taotao.cloud.idea.plugin.convertClassFields.ConvertClassFieldsAction"-->
+<!--			text="Convert Class Fields" description="Generate set all fields">-->
+<!--			<add-to-group group-id="GenerateGroup" anchor="last"/>-->
+
+<!--			&lt;!&ndash; 这里配置快捷键 &ndash;&gt;-->
+<!--			<keyboard-shortcut keymap="$default" first-keystroke="ctrl shift C"/>-->
+<!--		</action>-->
+<!--	</actions>-->
+
+<!--	<extensions defaultExtensionNs="com.intellij">-->
+<!--		<postStartupActivity implementation="com.taotao.cloud.idea.plugin.generateMappingConstructor.PluginInitializer"/>-->
+<!--	</extensions>-->
+<!--	<actions>-->
+<!--		<action id="Generate Mapping Constructor" class="com.taotao.cloud.idea.plugin.generateMappingConstructor.GenerateMappingConstructorAction"-->
+<!--			text="Generate Mapping Constructor" description="Generate Mapping Constructor">-->
+<!--			<add-to-group group-id="GenerateGroup" anchor="last"/>-->
+
+<!--			&lt;!&ndash; 这里配置快捷键 &ndash;&gt;-->
+<!--			<keyboard-shortcut keymap="$default" first-keystroke="ctrl shift B"/>-->
+<!--		</action>-->
+<!--	</actions>-->
+
+
+	<!-- Extension points defined by the plugin.
+	 Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+<!--	<extensions defaultExtensionNs="com.intellij">-->
+<!--		&lt;!&ndash; 注册 DatabaseSettings 服务 &ndash;&gt;-->
+<!--		<projectService serviceImplementation="com.taotao.cloud.idea.plugin.generateDBEntity.DatabaseSettings"/>-->
+
+<!--		&lt;!&ndash; 注册 DatabaseConfigDialog 配置页面 &ndash;&gt;-->
+<!--		<projectConfigurable groupId="tools" displayName="Database Entity Generator"-->
+<!--			id="com.dev.gear.DatabaseConfigDialog"-->
+<!--			instance="com.taotao.cloud.idea.plugin.generateDBEntity.DatabaseConfigDialog"/>-->
+<!--	</extensions>-->
+<!--	<actions>-->
+<!--		<action id="com.dev.gear.GenerateEntityAction"-->
+<!--			class="com.taotao.cloud.idea.plugin.generateDBEntity.GenerateEntityAction"-->
+<!--			text="Generate DB Entity from Database"-->
+<!--			description="Generate entity classes from database tables">-->
+<!--			<add-to-group group-id="GenerateGroup" anchor="last"/>-->
+
+<!--			&lt;!&ndash; 这里配置快捷键 &ndash;&gt;-->
+<!--			<keyboard-shortcut keymap="$default" first-keystroke="ctrl shift I"/>-->
+<!--		</action>-->
+<!--	</actions>-->
 </idea-plugin>
