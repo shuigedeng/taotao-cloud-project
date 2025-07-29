@@ -44,7 +44,8 @@ dependencies {
     implementation 'org.apache.flink:flink-connector-files:2.0.0'
     implementation "org.apache.flink:flink-connector-kafka:4.0.0-2.0"
     //implementation 'org.apache.flink:flink-connector-hbase-2.2:3.0.0-1.17'
-    implementation 'org.apache.flink:flink-connector-jdbc:3.3.0-1.20'
+    implementation 'org.apache.flink:flink-connector-jdbc-core:4.0.0-2.0'
+    implementation 'org.apache.flink:flink-connector-jdbc-mysql:4.0.0-2.0'
     implementation 'org.apache.flink:flink-connector-hive_2.12:3.0.0-1.20'
     implementation 'org.apache.flink:flink-connector-mongodb:2.0.0-1.20.0'
     //implementation 'org.apache.flink:flink-connector-pulsar:4.1.0-1.18'
