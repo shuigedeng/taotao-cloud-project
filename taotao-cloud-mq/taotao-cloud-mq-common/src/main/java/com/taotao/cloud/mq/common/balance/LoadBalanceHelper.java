@@ -17,7 +17,7 @@
 package com.taotao.cloud.mq.common.balance;
 
 import com.taotao.cloud.mq.common.balance.impl.LoadBalances;
-import com.taotao.cloud.mq.common.hash.api.IHashCode;
+import com.taotao.boot.common.support.hash.api.IHashCode;
 import java.util.List;
 
 public final class LoadBalanceHelper {
