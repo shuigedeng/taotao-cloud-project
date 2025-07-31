@@ -14,7 +14,7 @@ dependencies {
     api "org.springframework.boot:spring-boot-starter-undertow"
     api 'org.springframework.boot:spring-boot-starter-aop'
 
-    api "com.mysql:mysql-connector-j:9.3.0"
+    api "com.mysql:mysql-connector-j:9.4.0"
 }
 
 configurations {

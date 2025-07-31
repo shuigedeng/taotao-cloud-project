@@ -3,7 +3,7 @@ dependencies {
     implementation "org.apache.hadoop:hadoop-client:3.4.1"
     implementation "org.apache.hadoop:hadoop-hdfs-client:3.4.1"
 
-    implementation "com.alibaba.fastjson2:fastjson2:2.0.57"
+    implementation "com.alibaba.fastjson2:fastjson2:2.0.58"
 
     //implementation 'org.slf4j:slf4j-reload4j:2.0.17'
     //implementation 'org.slf4j:slf4j-reload4j:2.0.17'

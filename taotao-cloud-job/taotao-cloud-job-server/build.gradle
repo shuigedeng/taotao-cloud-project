@@ -13,7 +13,7 @@ dependencies {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
     }
     api "org.springframework.boot:spring-boot-starter-undertow"
-    api "com.mysql:mysql-connector-j:9.3.0"
+    api "com.mysql:mysql-connector-j:9.4.0"
     api "net.devh:grpc-server-spring-boot-starter:3.1.0.RELEASE"
     api "com.cronutils:cron-utils:9.2.1"
 }

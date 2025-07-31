@@ -58,7 +58,7 @@ dependencies {
     implementation 'cn.monitor4all:log-record-springboot3-starter:1.7.0'
     implementation 'com.alibaba.boot:nacos-config-spring-boot-starter:0.3.0-RC'
     implementation 'com.tencentcloudapi:tencentcloud-sdk-java:3.1.1253'
-    implementation "com.alibaba.fastjson2:fastjson2:2.0.57"
+    implementation "com.alibaba.fastjson2:fastjson2:2.0.58"
     implementation 'com.squareup.okhttp3:okhttp:5.1.0'
     implementation 'com.google.guava:guava:33.4.8-jre'
     implementation 'org.dromara.hutool:hutool-all'

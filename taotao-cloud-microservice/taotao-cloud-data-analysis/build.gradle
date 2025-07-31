@@ -17,7 +17,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-web"
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
     //https://search.maven.org/artifact/com.clickhouse/clickhouse-jdbc
-    implementation "com.clickhouse:clickhouse-jdbc:0.9.0"
+    implementation "com.clickhouse:clickhouse-jdbc:0.9.1"
 
     //implementation "org.hibernate.common:hibernate-commons-annotations:6.0.5.Final"
     //implementation "jakarta.xml.bind:jakarta.xml.bind-api:4.0.0"
@@ -62,7 +62,7 @@ configurations {
         //    }
         //}
         //或者简写为 force 的优先级会比较高，会覆盖 strictly 策略
-        //implementation 'com.alibaba:fastjson:2.0.57!!'
+        //implementation 'com.alibaba:fastjson:2.0.58!!'
 
         resolutionStrategy {
             force "org.codehaus.groovy:groovy:3.0.25"
