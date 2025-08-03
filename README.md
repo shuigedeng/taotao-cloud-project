@@ -4,7 +4,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/license-Apache%202-green" alt="License"/>
-  <img src="https://img.shields.io/badge/taotao--cloud--project-2025.08-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/taotao--cloud--project-2025.09-red" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring-6.2.9-red" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_boot-3.5.4-orange" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud-2025.0.0-yellowgree" alt="Downloads"/>
@@ -22,7 +22,7 @@
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-**taotao-cloud(taotao云平台)**  基于**gradle9.0.0** 、**jdk21**, 支持**graalvm21**, 采用最新的**spring 6.2.8**、**SpringBoot 3.5.4**、**SpringCloud 2025.0.0**、**SpringSecurity 6.5.0**、**Nacos 3.0.1**、**Mybatis-Plus 3.5.12**、**Redis 7.4.0**等框架，开发的一款企业级微服务架构的云服务平台， 
+**taotao-cloud(taotao云平台)**  基于**gradle9.0.0** 、**jdk21**, 支持**graalvm21**, 采用最新的**spring 6.2.9**、**SpringBoot 3.5.4**、**SpringCloud 2025.0.0**、**SpringSecurity 6.5.2**、**Nacos 3.0.2**、**Mybatis-Plus 3.5.12**、**Redis 7.4.0**等框架，开发的一款企业级微服务架构的云服务平台， 
 
 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循**SpringBoot**编程思想，高度模块化和可配置化。
 
@@ -87,7 +87,7 @@ Requires:
 ```
 JAVA_VERSION >= 21 (推荐使用graalvm-jdk-21)
 GRALE_VERSION >= 9.0.0
-IDEA_VERSION >= 2025.1.3
+IDEA_VERSION >= 2025.1.4.1
 ```
 
 Gradle:
@@ -95,13 +95,13 @@ Gradle:
 ```groovy
 dependencyManagement{
   imports {
-    mavenBom "io.github.shuigedeng:taotao-boot-dependencies:2025.08"
+    mavenBom "io.github.shuigedeng:taotao-boot-dependencies:2025.09"
   }
 }
 
 dependencyManagement{
   imports {
-    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2025.08"
+    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2025.09"
   }
 }
 
@@ -116,7 +116,7 @@ Maven:
     <dependency>
       <groupId>io.github.shuigedeng</groupId>
       <artifactId>taotao-boot-dependencies</artifactId>
-      <version>2025.08</version>
+      <version>2025.09</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -128,7 +128,7 @@ Maven:
     <dependency>
       <groupId>io.github.shuigedeng</groupId>
       <artifactId>taotao-cloud-dependencies</artifactId>
-      <version>2025.08</version>
+      <version>2025.09</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -185,7 +185,7 @@ Maven:
 		<plugin>
 			<groupId>io.github.shuigedeng</groupId>
 			<artifactId>taotao-cloud-maven-plugin</artifactId>
-			<version>2025.08</version>
+			<version>2025.09</version>
 		</plugin>
 	</plugins>
 </build>
@@ -255,18 +255,18 @@ Maven:
 
 | 依赖                   | 版本            |
 |----------------------|---------------|
-| Spring               | 6.2.8         |
+| Spring               | 6.2.9         |
 | Spring Boot          | 3.5.4         |
 | Spring Cloud         | 2025.0.0      |
 | Spring Cloud Alibaba | 2023.0.3.3    |
 | Seata                | 2.4.0         |
 | Sentinel             | 1.8.8         |
-| Spring-kafka         | 3.3.6         |
+| Spring-kafka         | 3.3.8         |
 | Roketmq              | 5.2.4         |
-| Spring Security      | 6.5.1         |
+| Spring Security      | 6.5.2         |
 | Mybatis Plus         | 3.5.12        |
 | Hutool               | 6.0.0-M22     |
-| Mysql                | 9.3.0         |
+| Mysql                | 9.4.0         |
 | Querydsl             | 5.1.0         |
 | Swagger              | 3.0.0         |
 | Knife4j              | 4.5.0         |
@@ -275,9 +275,9 @@ Maven:
 | Elasticsearch        | 9.0.0         |
 | Xxl-job              | 3.1.1         |
 | Guava                | 33.5.8-jre    |
-| Grpc                 | 1.73.0        |
+| Grpc                 | 1.74.0        |
 | Arthas               | 4.0.3         |
-| Netty                | 4.2.2.Final   |
+| Netty                | 4.2.3.Final   |
 
 
 ## 10. 模块说明

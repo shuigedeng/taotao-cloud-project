@@ -128,7 +128,7 @@ intellijPlatform {
     pluginConfiguration {
         id = 'com.taotao.cloud.idea.plugin'
         name = 'TaoTaoToolKit'
-        version = '2025.08'
+        version = '2025.09'
         description =
                 """
                 <h3>Tool sets commonly used by programmers</h3>

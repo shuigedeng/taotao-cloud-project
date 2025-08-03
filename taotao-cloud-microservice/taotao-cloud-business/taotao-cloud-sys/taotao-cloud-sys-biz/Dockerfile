@@ -2,9 +2,9 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 
 WORKDIR /root
 
-ADD ./build/libs/taotao-cloud-sys-2025.08.jar ./
+ADD ./build/libs/taotao-cloud-sys-2025.09.jar ./
 
-RUN java -Djarmode=layertools -jar taotao-cloud-sys-2025.08.jar extract
+RUN java -Djarmode=layertools -jar taotao-cloud-sys-2025.09.jar extract
 
 # FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 # FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:latest
@@ -18,7 +18,7 @@ ARG DINGDING_TOKEN_ID=xxx
 ARG DINGDING_SECRET=xxx
 ARG TAOTAO_CLOUD_MAIL_PASSWORD=xxxx
 ARG APP_NAME=taotao-cloud-sys
-ARG APP_VERSION=2025.08
+ARG APP_VERSION=2025.09
 ARG APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ARG APP_PORT=33421
 ARG APP_PRROFILES=dev
