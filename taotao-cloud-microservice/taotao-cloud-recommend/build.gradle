@@ -24,9 +24,9 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
-mainClassName = "com.taotao.cloud.recommend.TaoTaoCloudRecommendApplication"
+//mainClassName = "com.taotao.cloud.recommend.TaoTaoCloudRecommendApplication"
 description = "推荐系统中心"
-archivesBaseName = 'taotao-cloud-recommend'
+//archivesBaseName = 'taotao-cloud-recommend'
 
 configurations {
     configureEach {

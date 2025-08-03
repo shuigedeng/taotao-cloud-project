@@ -53,9 +53,9 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
-mainClassName = "com.taotao.cloud.member.biz.TaoTaoCloudMemberApplication"
+// = "com.taotao.cloud.member.biz.TaoTaoCloudMemberApplication"
 description = "会员中心biz"
-archivesBaseName = 'taotao-cloud-member'
+//archivesBaseName = 'taotao-cloud-member'
 
 configurations {
     configureEach {

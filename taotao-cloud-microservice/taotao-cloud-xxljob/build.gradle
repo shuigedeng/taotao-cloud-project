@@ -35,9 +35,9 @@ dependencies {
     implementation "com.google.protobuf:protobuf-java-util:3.25.5"
 }
 
-mainClassName = "com.taotao.cloud.xxljob.TaoTaoCloudXxlJobApplication"
+//mainClassName = "com.taotao.cloud.xxljob.TaoTaoCloudXxlJobApplication"
 description = "xxljob中心"
-archivesBaseName = 'taotao-cloud-xxljob'
+//archivesBaseName = 'taotao-cloud-xxljob'
 
 
 configurations {

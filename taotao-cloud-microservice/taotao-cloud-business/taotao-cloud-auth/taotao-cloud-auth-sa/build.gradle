@@ -43,9 +43,9 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
-mainClassName = "com.taotao.cloud.sa.biz.TaoTaoCloudSaJustApplication"
+//mainClassName = "com.taotao.cloud.sa.biz.TaoTaoCloudSaJustApplication"
 description = "sa认证中心biz"
-archivesBaseName = 'taotao-cloud-sajust'
+//archivesBaseName = 'taotao-cloud-sajust'
 
 configurations {
     configureEach {

@@ -103,9 +103,9 @@ dependencies {
 
 }
 
-mainClassName = "com.taotao.cloud.media.biz.TaotaoCloudMediaApplication"
+//mainClassName = "com.taotao.cloud.media.biz.TaotaoCloudMediaApplication"
 description = "多媒体中心biz"
-archivesBaseName = 'taotao-cloud-media'
+//archivesBaseName = 'taotao-cloud-media'
 
 configurations {
     configureEach {

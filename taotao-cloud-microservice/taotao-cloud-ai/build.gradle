@@ -224,9 +224,9 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-mainClassName = "com.taotao.cloud.ai.TaoTaoCloudAiApplication"
+//mainClassName = "com.taotao.cloud.ai.TaoTaoCloudAiApplication"
 description = "ai中心"
-archivesBaseName = 'taotao-cloud-ai'
+//archivesBaseName = 'taotao-cloud-ai'
 
 configurations {
     configureEach {

@@ -52,9 +52,9 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
-mainClassName = "com.taotao.cloud.shell.TaoTaoCloudShellApplication"
+//mainClassName = "com.taotao.cloud.shell.TaoTaoCloudShellApplication"
 description = "shell中心"
-archivesBaseName = 'taotao-cloud-shell'
+//archivesBaseName = 'taotao-cloud-shell'
 
 configurations {
     configureEach {

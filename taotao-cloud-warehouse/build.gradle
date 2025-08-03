@@ -1,6 +1,6 @@
 subprojects {
     //apply from: rootProject.file('gradle/sonar.gradle')
-    apply from: rootProject.file('gradle/shadow.gradle')
+    //apply from: rootProject.file('gradle/shadow.gradle')
     apply from: rootProject.file('gradle/google-tools-jib.gradle')
 
     dependencies {

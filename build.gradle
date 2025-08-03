@@ -162,7 +162,7 @@ plugins {
 
     //Gradle 插件，用于将所有依赖项和项目代码折叠到一个 Jar 文件中。
     //https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow
-    id "com.github.johnrengelman.shadow" version "8.1.1"
+    //id "com.github.johnrengelman.shadow" version "8.1.1"
 
     //用于运行 SonarQube 分析的 Gradle 插件。
     //https://plugins.gradle.org/plugin/org.sonarqube

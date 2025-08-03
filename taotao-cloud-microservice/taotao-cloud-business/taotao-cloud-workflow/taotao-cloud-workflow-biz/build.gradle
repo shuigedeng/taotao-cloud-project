@@ -36,9 +36,9 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
-mainClassName = "com.taotao.cloud.workflow.biz.TaoTaoCloudWorkflowApplication"
+//mainClassName = "com.taotao.cloud.workflow.biz.TaoTaoCloudWorkflowApplication"
 description = "工作流中心"
-archivesBaseName = 'taotao-cloud-workflow'
+//archivesBaseName = 'taotao-cloud-workflow'
 
 configurations {
     configureEach {

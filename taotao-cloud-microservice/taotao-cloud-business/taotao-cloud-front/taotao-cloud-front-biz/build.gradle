@@ -27,9 +27,9 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
-mainClassName = "com.taotao.cloud.front.biz.TaoTaoCloudPortalApplication"
+//mainClassName = "com.taotao.cloud.front.biz.TaoTaoCloudPortalApplication"
 description = "前端PC biz中心"
-archivesBaseName = 'taotao-cloud-front'
+//archivesBaseName = 'taotao-cloud-front'
 
 
 tasks.register('processFrontendResources', Copy) {

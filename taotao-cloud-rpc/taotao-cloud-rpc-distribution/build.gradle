@@ -1,4 +1,4 @@
-apply from: rootProject.file('gradle/shadow.gradle')
+//apply from: rootProject.file('gradle/shadow.gradle')
 
 tasks.register('releaseTarZip', Zip) {
     dependsOn(':taotao-cloud-rpc:taotao-cloud-rpc-dashboard:bootJar')

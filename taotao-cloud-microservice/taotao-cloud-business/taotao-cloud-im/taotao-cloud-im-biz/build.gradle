@@ -42,9 +42,9 @@ dependencies {
 
 }
 
-mainClassName = "com.taotao.cloud.im.biz.TaoTaoCloudImApplication"
+//mainClassName = "com.taotao.cloud.im.biz.TaoTaoCloudImApplication"
 description = "im中心biz"
-archivesBaseName = 'taotao-cloud-im'
+//archivesBaseName = 'taotao-cloud-im'
 
 configurations {
     configureEach {

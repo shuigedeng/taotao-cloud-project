@@ -231,38 +231,38 @@ tasks.register('customFatJar', Jar) {
     finalizedBy("jar")
 }
 
-mainClassName = "com.taotao.cloud.flink.JStreamWordCount"
-shadowJar {
-    zip64 true
-    mergeServiceFiles()
-    archiveClassifier = ""
-
-    //transform(Log4j2PluginsCacheFileTransformer)
-    //version = 1.0
-    manifest {
-        attributes(
-                "Main-Class": "com.taotao.cloud.flink.JStreamWordCount"
-        )
-    }
-
-    //dependencies {
-    //    exclude(dependency("org.apache.flink:force-shading:.*"))
-    //    exclude(dependency("com.google.code.findbugs:jsr305:.*"))
-    //    exclude(dependency("org.slf4j:slf4j-api:*"))
-    //    exclude(dependency{ it.moduleGroup == "xml-apis" })
-    //}
-
-    // creates the spring boot shaded jar
-    //import com.github.jengelman.gradle.plugins.shadow.transformers.PropertiesFileTransformer
-    //append 'META-INF/spring.handlers'
-    //append 'META-INF/spring.schemas'
-    //append 'META-INF/spring.tooling'
-    //transform(PropertiesFileTransformer) {
-    //    paths = ['META-INF/spring.factories' ]
-    //    mergeStrategy = "append"
-    //}
-    //archiveFileName = "test-${version}.jar"
-}
+//mainClassName = "com.taotao.cloud.flink.JStreamWordCount"
+//shadowJar {
+//    zip64 true
+//    mergeServiceFiles()
+//    archiveClassifier = ""
+//
+//    //transform(Log4j2PluginsCacheFileTransformer)
+//    //version = 1.0
+//    manifest {
+//        attributes(
+//                "Main-Class": "com.taotao.cloud.flink.JStreamWordCount"
+//        )
+//    }
+//
+//    //dependencies {
+//    //    exclude(dependency("org.apache.flink:force-shading:.*"))
+//    //    exclude(dependency("com.google.code.findbugs:jsr305:.*"))
+//    //    exclude(dependency("org.slf4j:slf4j-api:*"))
+//    //    exclude(dependency{ it.moduleGroup == "xml-apis" })
+//    //}
+//
+//    // creates the spring boot shaded jar
+//    //import com.github.jengelman.gradle.plugins.shadow.transformers.PropertiesFileTransformer
+//    //append 'META-INF/spring.handlers'
+//    //append 'META-INF/spring.schemas'
+//    //append 'META-INF/spring.tooling'
+//    //transform(PropertiesFileTransformer) {
+//    //    paths = ['META-INF/spring.factories' ]
+//    //    mergeStrategy = "append"
+//    //}
+//    //archiveFileName = "test-${version}.jar"
+//}
 
 tasks.register('packageZip', Zip) {
     archiveFileName = "${project.name}-${project.version}.zip"

@@ -77,9 +77,9 @@ dependencies {
 //    }
 //}
 
-mainClassName = "com.taotao.cloud.order.biz.TaoTaoCloudOrderApplication"
+//mainClassName = "com.taotao.cloud.order.biz.TaoTaoCloudOrderApplication"
 description = "订单中心biz"
-archivesBaseName = 'taotao-cloud-order'
+//archivesBaseName = 'taotao-cloud-order'
 
 configurations {
     configureEach {

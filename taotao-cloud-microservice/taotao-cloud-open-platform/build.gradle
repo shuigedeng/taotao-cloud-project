@@ -33,9 +33,9 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
-mainClassName = "com.taotao.cloud.open.platform.TaoTaoCloudOpenPlatformApplication"
+//mainClassName = "com.taotao.cloud.open.platform.TaoTaoCloudOpenPlatformApplication"
 description = "开放平台中心"
-archivesBaseName = 'taotao-cloud-open-platform'
+//archivesBaseName = 'taotao-cloud-open-platform'
 
 configurations {
     configureEach {

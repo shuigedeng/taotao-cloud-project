@@ -103,9 +103,9 @@ configurations {
     }
 }
 
-mainClassName = "com.taotao.cloud.gateway.TaoTaoCloudGatewayApplication"
+//mainClassName = "com.taotao.cloud.gateway.TaoTaoCloudGatewayApplication"
 description = "网关中心"
-archivesBaseName = 'taotao-cloud-gateway'
+//archivesBaseName = 'taotao-cloud-gateway'
 
 
 //apache-shenyu网关中心配置

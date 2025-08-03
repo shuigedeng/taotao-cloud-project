@@ -47,9 +47,9 @@ dependencies {
 //    compile.exclude group: "org.springframework.security", module: "spring-security-core"
 //}
 
-mainClassName = "com.taotao.boot.data.analysis.TaoTaoCloudDataAnalysisApplication"
+//mainClassName = "com.taotao.boot.data.analysis.TaoTaoCloudDataAnalysisApplication"
 description = "数据分析中心"
-archivesBaseName = 'taotao-cloud-data-analysis'
+//archivesBaseName = 'taotao-cloud-data-analysis'
 
 configurations {
     configureEach {
