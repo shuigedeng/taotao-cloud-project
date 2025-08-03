@@ -53,7 +53,7 @@ repositories {
 }
 
 dependencies {
-    implementation platform("org.springframework.ai:spring-ai-bom:1.0.0")
+    implementation platform("org.springframework.ai:spring-ai-bom:1.0.1")
     implementation platform("com.alibaba.cloud.ai:spring-ai-alibaba-bom:1.0.0.2")
 
     //cloud
