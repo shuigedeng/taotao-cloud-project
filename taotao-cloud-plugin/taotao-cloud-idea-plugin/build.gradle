@@ -69,7 +69,7 @@ plugins {
     id "java"
     //https://plugins.gradle.org/plugin/org.jetbrains.intellij
     //https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin.html
-    id("org.jetbrains.intellij.platform") version "2.6.0"
+    id("org.jetbrains.intellij.platform") version "2.7.0"
 }
 
 repositories {
@@ -87,8 +87,9 @@ apply plugin: "java"
 
 dependencies {
     intellijPlatform {
+        //https://www.jetbrains.com/intellij-repository/releases
         //https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-dependencies-extension.html#default-target-platforms
-        intellijIdeaUltimate '2025.1.2'
+        intellijIdeaUltimate '2025.2'
 
         //https://plugins.jetbrains.com/docs/intellij/plugin-dependencies.html
         bundledPlugin 'com.intellij.java'
@@ -185,9 +186,9 @@ intellijPlatform {
         //版本参考：https://plugins.jetbrains.com/docs/intellij/build-number-ranges.html?from=jetbrains.org#intellij-platform-based-products-of-recent-ide-versions
         ideaVersion {
             //与插件兼容的最早IDE版本。
-            sinceBuild = '251'
+            sinceBuild = '252'
             //与插件兼容的最新IDE版本。未定义的值表示与从since-build中提到的版本开始的所有IDE兼容，包括可能导致兼容性问题的潜在未来版本。
-            untilBuild = '251.*'
+            untilBuild = '252.*'
         }
 
         vendor {
