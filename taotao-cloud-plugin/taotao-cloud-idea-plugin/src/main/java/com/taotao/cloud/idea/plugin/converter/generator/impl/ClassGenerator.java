@@ -9,7 +9,7 @@ import com.intellij.psi.PsiElementFactory;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.codeStyle.JavaCodeStyleManager;
 import com.taotao.cloud.idea.plugin.converter.exception.ConverterException;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class ClassGenerator extends ListGenerator {
 

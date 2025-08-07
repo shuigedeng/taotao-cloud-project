@@ -18,7 +18,7 @@ package com.taotao.cloud.stock.biz.domain.permission.model.specification;
 
 import com.taotao.cloud.stock.biz.domain.permission.model.enums.PermissionTypeEnum;
 import com.taotao.cloud.stock.biz.domain.permission.repository.PermissionRepository;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 权限创建Specification

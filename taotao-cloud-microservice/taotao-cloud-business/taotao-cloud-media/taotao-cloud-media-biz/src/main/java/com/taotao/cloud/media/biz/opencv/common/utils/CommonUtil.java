@@ -20,7 +20,7 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ResourceBundle;
 import java.util.UUID;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class CommonUtil {
 

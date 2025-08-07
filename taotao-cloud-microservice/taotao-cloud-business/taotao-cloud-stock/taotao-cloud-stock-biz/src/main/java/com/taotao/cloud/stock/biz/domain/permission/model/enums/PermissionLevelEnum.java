@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.stock.biz.domain.permission.model.enums;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 权限级别

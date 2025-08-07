@@ -17,7 +17,7 @@
 package com.taotao.cloud.stock.biz.infrastructure.persistence.converter;
 
 import java.util.*;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 权限Converter
