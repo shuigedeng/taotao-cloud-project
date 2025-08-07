@@ -1,9 +1,26 @@
-apply plugin: "com.github.johnrengelman.shadow"
+apply plugin: "com.gradleup.shadow"
+apply plugin: "application"
 
+//https://github.com/GradleUp/shadow
+//https://gradleup.com/shadow/getting-started/
 shadowJar {
     zip64 true
+
+    // 可选：合并可能存在的服务文件
     mergeServiceFiles()
+
+    // 可选：设置归档文件名后缀（classifier），设为空字符串则不添加后缀
     archiveClassifier = ""
+
+    // 关键：在生成的 JAR 的 MANIFEST.MF 文件中设置 Main-Class
+    manifest {
+        attributes(
+                "Main-Class": application.mainClass
+        )
+    }
+
+    // 可选：如果需要，可以配置重定位（Relocation）来避免依赖冲突
+    // relocate 'com.fasterxml.jackson', 'shadow.com.fasterxml.jackson'
 }
 
 //shadowJar {
