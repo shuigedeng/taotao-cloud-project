@@ -88,9 +88,9 @@ dependencies {
     implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter"
 
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
-    implementation "com.nimbusds:nimbus-jose-jwt:10.4"
+    implementation "com.nimbusds:nimbus-jose-jwt:10.4.2"
     //https://search.maven.org/artifact/com.nimbusds/oauth2-oidc-sdk
-    implementation 'com.nimbusds:oauth2-oidc-sdk:11.26'
+    implementation 'com.nimbusds:oauth2-oidc-sdk:11.27.1'
 
     implementation "org.apache.commons:commons-collections4"
 

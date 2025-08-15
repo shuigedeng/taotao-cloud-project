@@ -99,8 +99,8 @@ dependencies {
     //implementation 'com.ververica:flink-cdc-pipeline-connector-values:3.0.1'
 
     implementation 'com.mysql:mysql-connector-j:9.4.0'
-    implementation 'redis.clients:jedis:6.0.0'
-    implementation 'org.apache.hive:hive-exec:4.0.1'
+    implementation 'redis.clients:jedis:6.1.0'
+    implementation 'org.apache.hive:hive-exec:4.1.0'
 
     implementation 'org.apache.hadoop:hadoop-common:3.4.1'
     implementation 'org.apache.hadoop:hadoop-client:3.4.1'
@@ -148,7 +148,7 @@ dependencies {
     //implementation('org.apache.paimon:paimon-shade-jackson-2:2.14.2-0.8.0')
     //implementation('org.apache.paimon:paimon-shade-caffeine-2:2.9.3-0.8.0')
 
-    implementation 'org.apache.commons:commons-compress:1.27.1'
+    implementation 'org.apache.commons:commons-compress:1.28.0'
     implementation 'org.slf4j:slf4j-api:2.0.17'
     //implementation 'org.slf4j:slf4j-reload4j:2.0.17'
 

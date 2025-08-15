@@ -53,13 +53,13 @@ dependencies {
     implementation("org.apache.hadoop:hadoop-client:3.4.1")
     implementation("org.apache.hadoop:hadoop-hdfs:3.4.1")
 
-    implementation("org.apache.hive:hive-common:4.0.1")
-    implementation("org.apache.hive:hive-metastore:4.0.1") {
+    implementation("org.apache.hive:hive-common:4.1.0")
+    implementation("org.apache.hive:hive-metastore:4.1.0") {
         exclude group: "ch.qos.logback", module: "logback-core"
         exclude group: "ch.qos.logback", module: "logback-classic"
         exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
     }
-    implementation("org.apache.hive:hive-jdbc:4.0.1") {
+    implementation("org.apache.hive:hive-jdbc:4.1.0") {
         exclude group: "org.eclipse.jetty.aggregate", module: "*"
         exclude group: "com.google.guava", module: "guava"
         exclude group: "log4j", module: "log4j"

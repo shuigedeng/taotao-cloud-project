@@ -4,9 +4,9 @@ dependencies {
     implementation "org.apache.hadoop:hadoop-mapreduce-client-common:3.4.1"
     implementation "org.apache.hadoop:hadoop-hdfs:3.4.1"
 
-    implementation "org.apache.hive:hive-exec:4.0.1"
-    implementation "org.apache.hive:hive-service:4.0.1"
-    implementation("org.apache.hive:hive-jdbc:4.0.1") {
+    implementation "org.apache.hive:hive-exec:4.1.0"
+    implementation "org.apache.hive:hive-service:4.1.0"
+    implementation("org.apache.hive:hive-jdbc:4.1.0") {
         exclude group: "org.eclipse.jetty.aggregate", module: "*"
     }
 

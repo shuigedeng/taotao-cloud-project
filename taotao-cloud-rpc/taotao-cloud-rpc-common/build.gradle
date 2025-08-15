@@ -6,7 +6,7 @@ dependencies {
     //作为 包验证，防止修改
     api 'commons-codec:commons-codec:1.19.0'
     // redis 分布式锁
-    api 'redis.clients:jedis:6.0.0'
+    api 'redis.clients:jedis:6.1.0'
     //Lettuce Redis客户端
     api('io.lettuce:lettuce-core:6.7.1.RELEASE') {
         exclude group: 'io.netty', module: 'netty-handler'
@@ -24,7 +24,7 @@ dependencies {
     api 'ch.qos.logback:logback-classic:1.5.18'
     api "com.google.guava:guava:33.4.8-jre"
 
-    api 'io.netty:netty-all:4.2.3.Final'
+    api 'io.netty:netty-all:4.2.4.Final'
 
     api("org.springframework.boot:spring-boot-starter-web") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"

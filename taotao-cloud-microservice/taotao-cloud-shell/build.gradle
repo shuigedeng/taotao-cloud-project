@@ -25,7 +25,7 @@ dependencies {
     //}
 
     //https://central.sonatype.com/artifact/org.springframework.shell/spring-shell-starter
-    implementation 'org.springframework.shell:spring-shell-starter:3.4.0'
+    implementation 'org.springframework.shell:spring-shell-starter:3.4.1'
 
     //，jcommander 是一个只有几十 kb 的 Java 命令行参数解析工具，可以通过注解的方式快速实现命令行参数解析。
     //https://search.maven.org/artifact/com.beust/jcommander
@@ -74,7 +74,7 @@ configurations {
             force 'org.antlr:antlr4:4.13.2'
             force 'net.minidev:json-smart:2.5.2'
             //todo 临时使用
-            force "io.opentelemetry:opentelemetry-api-incubator:1.52.0-alpha"
+            force "io.opentelemetry:opentelemetry-api-incubator:1.53.0-alpha"
         }
 
         //exclude group: "log4j", module: "log4j"
