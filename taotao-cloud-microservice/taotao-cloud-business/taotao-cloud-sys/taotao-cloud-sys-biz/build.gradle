@@ -89,8 +89,8 @@ dependencies {
     implementation 'org.zalando:logbook-openfeign:3.12.2'
     implementation 'org.zalando:logbook-spring-webflux:3.12.2'
 
-    //implementation "io.github.shuigedeng:taotao-boot-starter-apt")
-    //annotationProcessor "io.github.shuigedeng:taotao-boot-starter-apt")
+    //implementation "io.github.shuigedeng:taotao-boot-starter-processor")
+    //annotationProcessor "io.github.shuigedeng:taotao-boot-starter-processor")
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"

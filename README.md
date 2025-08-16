@@ -391,7 +391,7 @@ taotao-cloud-project -- 父项目
 +--- Project ':taotao-boot-starter-actuator'
 +--- Project ':taotao-boot-starter-agent'
 +--- Project ':taotao-boot-starter-apollo'
-+--- Project ':taotao-boot-starter-apt'
++--- Project ':taotao-boot-starter-processor'
 +--- Project ':taotao-boot-starter-cache'
 +--- Project ':taotao-boot-starter-canal'
 +--- Project ':taotao-boot-starter-common'
