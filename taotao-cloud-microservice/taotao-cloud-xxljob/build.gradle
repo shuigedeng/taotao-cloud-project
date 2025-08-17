@@ -9,13 +9,11 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-dingtalk"
     implementation "io.github.shuigedeng:taotao-boot-starter-mail"
     implementation "io.github.shuigedeng:taotao-boot-starter-data-p6spy"
-    implementation "io.github.shuigedeng:taotao-boot-starter-idgenerator"
     implementation "io.github.shuigedeng:taotao-boot-starter-lock"
     implementation "io.github.shuigedeng:taotao-boot-starter-prometheus"
     implementation "io.github.shuigedeng:taotao-boot-starter-actuator"
     implementation "io.github.shuigedeng:taotao-boot-starter-skywalking"
     implementation "io.github.shuigedeng:taotao-boot-starter-tracer"
-    implementation "io.github.shuigedeng:taotao-boot-starter-cache-redis"
 
     implementation("org.springframework.boot:spring-boot-starter-web") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"

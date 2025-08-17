@@ -7,7 +7,6 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-core"
     implementation "io.github.shuigedeng:taotao-boot-starter-logger"
     implementation "io.github.shuigedeng:taotao-boot-starter-dingtalk"
-    implementation "io.github.shuigedeng:taotao-boot-starter-idgenerator"
     implementation "io.github.shuigedeng:taotao-boot-starter-lock"
     implementation "io.github.shuigedeng:taotao-boot-starter-prometheus"
     implementation "io.github.shuigedeng:taotao-boot-starter-actuator"
@@ -17,7 +16,6 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-mail"
     implementation "io.github.shuigedeng:taotao-boot-starter-tracer"
     implementation "io.github.shuigedeng:taotao-boot-starter-skywalking"
-    implementation "io.github.shuigedeng:taotao-boot-starter-cache-redis"
 
     implementation "de.codecentric:spring-boot-admin-starter-server"
 

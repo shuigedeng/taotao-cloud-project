@@ -8,10 +8,10 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-eventbus"
     //implementation "io.github.shuigedeng:taotao-boot-starter-mq-rocketmq"
     //implementation "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
-    implementation "io.github.shuigedeng:taotao-boot-starter-lock"
+//    implementation "io.github.shuigedeng:taotao-boot-starter-lock"
     implementation "io.github.shuigedeng:taotao-boot-starter-web"
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
-    implementation "io.github.shuigedeng:taotao-boot-starter-cache-redis"
+//    implementation "io.github.shuigedeng:taotao-boot-starter-cache-redis"
 
     //https://search.maven.org/artifact/org.apache.velocity/velocity-engine-core
     implementation 'org.apache.velocity:velocity-engine-core:2.4.1'
