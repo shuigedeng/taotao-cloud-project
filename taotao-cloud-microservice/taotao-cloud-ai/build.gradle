@@ -125,8 +125,6 @@ dependencies {
     implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-ollamasearchmodel"
     implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-minio"
     implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-worldbankdata"
-    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-memcachad"
-    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-memcachad"
     implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-store-analyticdb"
     implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-store-tablestore"
     implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-store-oceanbase"
