@@ -1,13 +1,13 @@
 dependencies {
-    implementation 'org.apache.seatunnel:seatunnel-transforms-v2:2.3.10'
-    implementation 'org.apache.seatunnel:seatunnel-api:2.3.10'
-    implementation 'org.apache.seatunnel:seatunnel-starter:2.3.10'
+    implementation 'org.apache.seatunnel:seatunnel-transforms-v2:2.3.11'
+    implementation 'org.apache.seatunnel:seatunnel-api:2.3.11'
+    implementation 'org.apache.seatunnel:seatunnel-starter:2.3.11'
 
-    implementation 'org.apache.seatunnel:connector-fake:2.3.10'
-    implementation 'org.apache.seatunnel:connector-console:2.3.10'
-    implementation 'org.apache.seatunnel:connector-assert:2.3.10'
+    implementation 'org.apache.seatunnel:connector-fake:2.3.11'
+    implementation 'org.apache.seatunnel:connector-console:2.3.11'
+    implementation 'org.apache.seatunnel:connector-assert:2.3.11'
 
-    implementation 'org.apache.seatunnel:seatunnel-flink-15-starter:2.3.10'
+    implementation 'org.apache.seatunnel:seatunnel-flink-15-starter:2.3.11'
 
     // flinksql本地运行需要的依赖
     implementation "org.apache.flink:flink-core:2.1.0"

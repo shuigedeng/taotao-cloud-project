@@ -69,19 +69,19 @@ apply plugin: "com.google.protobuf"
 
 dependencies {
     implementation "io.netty:netty-all:4.2.4.Final"
-    implementation "com.google.protobuf:protobuf-java:4.31.1"
-    implementation "com.google.protobuf:protobuf-java-util:4.31.1"
+    implementation "com.google.protobuf:protobuf-java:4.32.0"
+    implementation "com.google.protobuf:protobuf-java-util:4.32.0"
     implementation "org.apache.thrift:libthrift:0.21.0"
-    implementation "io.grpc:grpc-api:1.74.0"
-    implementation "io.grpc:grpc-context:1.74.0"
-    implementation "io.grpc:grpc-core:1.74.0"
-    implementation "io.grpc:grpc-netty:1.74.0"
-    implementation "io.grpc:grpc-netty-shaded:1.74.0"
-    implementation "io.grpc:grpc-protobuf:1.74.0"
-    implementation "io.grpc:grpc-protobuf-lite:1.74.0"
-    implementation "io.grpc:grpc-stub:1.74.0"
-    implementation "io.grpc:grpc-services:1.74.0"
-    testImplementation("io.grpc:grpc-testing:1.74.0")
+    implementation "io.grpc:grpc-api:1.75.0"
+    implementation "io.grpc:grpc-context:1.75.0"
+    implementation "io.grpc:grpc-core:1.75.0"
+    implementation "io.grpc:grpc-netty:1.75.0"
+    implementation "io.grpc:grpc-netty-shaded:1.75.0"
+    implementation "io.grpc:grpc-protobuf:1.75.0"
+    implementation "io.grpc:grpc-protobuf-lite:1.75.0"
+    implementation "io.grpc:grpc-stub:1.75.0"
+    implementation "io.grpc:grpc-services:1.75.0"
+    testImplementation("io.grpc:grpc-testing:1.75.0")
     implementation 'com.google.code.gson:gson:2.13.1'
     implementation 'com.google.guava:guava:33.4.8-jre'
 
@@ -100,8 +100,8 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.13.4'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.13.4'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.13.4'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.3'
-    testImplementation "org.assertj:assertj-core:3.27.3"
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.4'
+    testImplementation "org.assertj:assertj-core:3.27.4"
 
     compileOnly "org.projectlombok:lombok:1.18.38"
     annotationProcessor "org.projectlombok:lombok:1.18.38"
@@ -115,7 +115,7 @@ protobuf {
     protoc {
         //https://repo1.maven.org/maven2/com/google/protobuf/protoc/
         //直接使用Maven Central上已经编译好的protoc编译器，
-        artifact = "com.google.protobuf:protoc:4.31.1"
+        artifact = "com.google.protobuf:protoc:4.32.0"
         //指定本地已经安装的protoc编译器
         //path = '/usr/local/bin/protoc'
     }
@@ -126,7 +126,7 @@ protobuf {
     //指定protoc运行插件
     plugins {
         grpc {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.74.0"
+            artifact = "io.grpc:protoc-gen-grpc-java:1.75.0"
         }
         //javalite {
         //    // The codegen for lite comes as a separate artifact
@@ -145,12 +145,12 @@ protobuf {
 
 //protobuf {
 //    protoc {
-//        artifact = "com.google.protobuf:protoc:4.31.1"
+//        artifact = "com.google.protobuf:protoc:4.32.0"
 //    }
 //
 //    plugins {
 //        grpc {
-//            artifact = "io.grpc:protoc-gen-grpc-java:1.74.0"
+//            artifact = "io.grpc:protoc-gen-grpc-java:1.75.0"
 //        }
 //    }
 //

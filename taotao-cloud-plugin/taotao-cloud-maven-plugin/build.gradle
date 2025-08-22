@@ -70,7 +70,7 @@ plugins {
     //https://github.com/freefair/gradle-plugins
     //https://github.com/freefair/gradle-plugins/tree/master/examples/test-maven-plugin
     //https://plugins.gradle.org/plugin/io.freefair.maven-plugin
-    id "io.freefair.maven-plugin" version "8.14"
+    id "io.freefair.maven-plugin" version "8.14.2"
 
     //https://gradlex.org/maven-plugin-development/
     ////https://github.com/gradlex-org/maven-plugin-development
@@ -105,8 +105,8 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.13.4'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.13.4'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.13.4'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.3'
-    testImplementation "org.assertj:assertj-core:3.27.3"
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.4'
+    testImplementation "org.assertj:assertj-core:3.27.4"
 }
 
 
@@ -300,7 +300,7 @@ mavenPublishing {
                 "maven.compiler.target": JavaVersion.VERSION_21.toString(),
                 "project.build.sourceEncoding": "UTF-8",
                 "project.reporting.outputEncoding": "UTF-8",
-                "spring-boot-dependencies.version"   : "3.5.4",
+                "spring-boot-dependencies.version"   : "3.5.5",
                 "taotao-cloud-dependencies.version"   : rootProject.version,
                 "taotao-boot-dependencies.version"   : rootProject.version
         ]

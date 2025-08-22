@@ -67,9 +67,9 @@ buildscript {
 
 plugins {
     id "java"
-    //https://plugins.gradle.org/plugin/org.jetbrains.intellij
+    //https://plugins.gradle.org/plugin/org.jetbrains.intellij.platform
     //https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin.html
-    id("org.jetbrains.intellij.platform") version "2.7.0"
+    id("org.jetbrains.intellij.platform") version "2.7.2"
 }
 
 repositories {
@@ -116,8 +116,8 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.13.4'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.13.4'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.13.4'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.3'
-    testImplementation "org.assertj:assertj-core:3.27.3"
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.4'
+    testImplementation "org.assertj:assertj-core:3.27.4"
 }
 
 intellijPlatform {

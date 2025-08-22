@@ -56,15 +56,15 @@ dependencies {
 
     implementation "org.webjars:webjars-locator-lite:1.1.0"
 
-    implementation "io.grpc:grpc-api:1.74.0"
-    implementation "io.grpc:grpc-context:1.74.0"
-    implementation "io.grpc:grpc-core:1.74.0"
-    implementation "io.grpc:grpc-netty:1.74.0"
-    implementation "io.grpc:grpc-netty-shaded:1.74.0"
-    implementation "io.grpc:grpc-protobuf:1.74.0"
-    implementation "io.grpc:grpc-protobuf-lite:1.74.0"
-    implementation "io.grpc:grpc-stub:1.74.0"
-    implementation "io.grpc:grpc-services:1.74.0"
+    implementation "io.grpc:grpc-api:1.75.0"
+    implementation "io.grpc:grpc-context:1.75.0"
+    implementation "io.grpc:grpc-core:1.75.0"
+    implementation "io.grpc:grpc-netty:1.75.0"
+    implementation "io.grpc:grpc-netty-shaded:1.75.0"
+    implementation "io.grpc:grpc-protobuf:1.75.0"
+    implementation "io.grpc:grpc-protobuf-lite:1.75.0"
+    implementation "io.grpc:grpc-stub:1.75.0"
+    implementation "io.grpc:grpc-services:1.75.0"
 
     //网关限流 https://search.maven.org/artifact/com.eeeffff.limiter/ip-limiter-core-spring-gateway
     //implementation "com.eeeffff.limiter:ip-limiter-core-spring-gateway:1.1.3"
