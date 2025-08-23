@@ -57,8 +57,8 @@ public class KeyedListStateDemo {
                             ListState<Integer> vcListState;
 
                             @Override
-                            public void open(Configuration parameters) throws Exception {
-                                super.open(parameters);
+                            public void open(OpenContext openContext) throws Exception {
+                                super.open(openContext);
                                 vcListState =
                                         getRuntimeContext()
                                                 .getListState(

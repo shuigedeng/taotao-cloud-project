@@ -34,8 +34,8 @@ public class SocketWordCountDemo {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
         // 设置WebUI绑定的本地端口
-        conf.setString(RestOptions.BIND_PORT, "8081");
-        conf.setString("rest.flamegraph.enabled", "true");
+        conf.set(RestOptions.BIND_PORT, "8081");
+        conf.set("rest.flamegraph.enabled", "true");
         // 使用配置
         StreamExecutionEnvironment env =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);

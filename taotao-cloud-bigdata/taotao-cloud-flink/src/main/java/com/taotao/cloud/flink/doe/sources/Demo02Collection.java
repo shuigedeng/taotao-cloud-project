@@ -48,8 +48,8 @@ import org.apache.flink.util.LongValueSequenceIterator;
 public class Demo02Collection {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        // conf.setInteger("rest.port", 8888);
-        conf.setInteger(RestOptions.PORT, 8888);
+        // conf.set("rest.port", 8888);
+        conf.set(RestOptions.PORT, 8888);
         StreamExecutionEnvironment see =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
         see.setParallelism(3);
@@ -102,8 +102,8 @@ public class Demo02Collection {
                 stringDataStreamSource.map(
                         new RichMapFunction<FlinkUser, FlinkUser>() {
                             @Override
-                            public void open(Configuration parameters) throws Exception {
-                                super.open(parameters);
+                            public void open(OpenContext openContext) throws Exception {
+                                super.open(openContext);
                             }
 
                             @Override

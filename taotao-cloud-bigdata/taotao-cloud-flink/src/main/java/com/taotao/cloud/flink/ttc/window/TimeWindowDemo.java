@@ -17,6 +17,8 @@
 package com.taotao.cloud.flink.ttc.window;
 
 import com.taotao.cloud.flink.ttc.bean.WaterSensor;
+import com.taotao.cloud.flink.ttc.functions.WaterSensorMapFunction;
+import java.time.Duration;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
@@ -24,7 +26,6 @@ import org.apache.flink.streaming.api.datastream.WindowedStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTimeWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
@@ -46,10 +47,10 @@ public class TimeWindowDemo {
 
         // 1. 窗口分配器
         WindowedStream<WaterSensor, String, TimeWindow> sensorWS =
-                sensorKS.window(TumblingProcessingTimeWindows.of(Time.seconds(10))); // 滚动窗口，窗口长度10秒
-        //                .window(SlidingProcessingTimeWindows.of(Time.seconds(10),
-        // Time.seconds(5)));//滑动窗口，长度10s，步长5s
-        //                .window(ProcessingTimeSessionWindows.withGap(Time.seconds(5)));//会话窗口，间隔5s
+                sensorKS.window(TumblingProcessingTimeWindows.of(Duration.ofSeconds(10))); // 滚动窗口，窗口长度10秒
+        //                .window(SlidingProcessingTimeWindows.of(Duration.ofSeconds(10),
+        // Duration.ofSeconds(5)));//滑动窗口，长度10s，步长5s
+        //                .window(ProcessingTimeSessionWindows.withGap(Duration.ofSeconds(5)));//会话窗口，间隔5s
         //                .window(ProcessingTimeSessionWindows.withDynamicGap(
         //                        new SessionWindowTimeGapExtractor<WaterSensor>() {
         //                            @Override

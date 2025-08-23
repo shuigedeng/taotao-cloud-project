@@ -106,7 +106,7 @@ public class SlidingEventTimeWindows extends WindowAssigner<Object, TimeWindow> 
     //			public Integer getKey(FakeRecordSource.TrafficRecord s) throws Exception {
     //				return s.getCityId();
     //			}
-    //		}).window(DynSlidingEventTimeWindows.of(Time.seconds(2), Time.seconds(1), Time.seconds(0),
+    //		}).window(DynSlidingEventTimeWindows.of(Duration.ofSeconds(2), Duration.ofSeconds(1), Duration.ofSeconds(0),
     // new TimeAdjustExtractor() {
     //			@Override
     //			public long extract(Object element) {

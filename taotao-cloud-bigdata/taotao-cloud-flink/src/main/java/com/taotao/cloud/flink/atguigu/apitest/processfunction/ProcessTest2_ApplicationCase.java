@@ -17,6 +17,7 @@
 package com.taotao.cloud.flink.atguigu.apitest.processfunction;
 
 import com.taotao.cloud.flink.atguigu.apitest.beans.SensorReading;
+import org.apache.flink.api.common.functions.OpenContext;
 import org.apache.flink.api.common.state.ValueState;
 import org.apache.flink.api.common.state.ValueStateDescriptor;
 import org.apache.flink.api.java.tuple.Tuple;
@@ -44,14 +45,14 @@ public class ProcessTest2_ApplicationCase {
                         });
 
         // 测试KeyedProcessFunction，先分组然后自定义处理
-        dataStream.keyBy("id").process(new TempConsIncreWarning(10)).print();
+        dataStream.keyBy(SensorReading::getId).process(new TempConsIncreWarning(10)).print();
 
         env.execute();
     }
 
     // 实现自定义处理函数，检测一段时间内的温度连续上升，输出报警
     public static class TempConsIncreWarning
-            extends KeyedProcessFunction<Tuple, SensorReading, String> {
+            extends KeyedProcessFunction<String, SensorReading, String> {
         // 定义私有属性，当前统计的时间间隔
         private Integer interval;
 
@@ -64,7 +65,7 @@ public class ProcessTest2_ApplicationCase {
         private ValueState<Long> timerTsState;
 
         @Override
-        public void open(Configuration parameters) throws Exception {
+        public void open(OpenContext openContext) throws Exception {
             lastTempState =
                     getRuntimeContext()
                             .getState(
@@ -103,7 +104,7 @@ public class ProcessTest2_ApplicationCase {
         public void onTimer(long timestamp, OnTimerContext ctx, Collector<String> out)
                 throws Exception {
             // 定时器触发，输出报警信息
-            out.collect("传感器" + ctx.getCurrentKey().getField(0) + "温度值连续" + interval + "s上升");
+            out.collect("传感器" + ctx.getCurrentKey() + "温度值连续" + interval + "s上升");
             timerTsState.clear();
         }
 

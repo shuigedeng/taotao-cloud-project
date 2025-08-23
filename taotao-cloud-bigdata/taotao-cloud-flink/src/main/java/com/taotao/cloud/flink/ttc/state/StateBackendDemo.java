@@ -84,8 +84,8 @@ public class StateBackendDemo {
                             ValueState<Integer> lastVcState;
 
                             @Override
-                            public void open(Configuration parameters) throws Exception {
-                                super.open(parameters);
+                            public void open(OpenContext openContext) throws Exception {
+                                super.open(openContext);
                                 lastVcState =
                                         getRuntimeContext()
                                                 .getState(

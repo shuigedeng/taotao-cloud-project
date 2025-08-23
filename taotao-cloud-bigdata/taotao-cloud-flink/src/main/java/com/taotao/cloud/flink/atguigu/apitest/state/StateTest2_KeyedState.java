@@ -60,7 +60,7 @@ public class StateTest2_KeyedState {
         private ReducingState<SensorReading> myReducingState;
 
         @Override
-        public void open(Configuration parameters) throws Exception {
+        public void open(OpenContext openContext) throws Exception {
             keyCountState =
                     getRuntimeContext()
                             .getState(

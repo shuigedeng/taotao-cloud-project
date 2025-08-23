@@ -24,7 +24,7 @@ import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.windowing.assigners.SlidingProcessingTimeWindows;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTimeWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
+
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 
 /**
@@ -40,7 +40,7 @@ import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 public class WindowsFunctions01 {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        conf.setInteger("rest.port", 8888);
+        conf.set("rest.port", 8888);
         StreamExecutionEnvironment see =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
         see.setParallelism(1);
@@ -76,7 +76,7 @@ public class WindowsFunctions01 {
          *    滚动窗口
          */
         AllWindowedStream<Tuple2<String, Integer>, TimeWindow> windowed =
-                tp2.windowAll(TumblingProcessingTimeWindows.of(Time.seconds(10)));
+                tp2.windowAll(TumblingProcessingTimeWindows.of(Duration.ofSeconds(10)));
 
         /**
          * 4 时间窗口
@@ -88,7 +88,7 @@ public class WindowsFunctions01 {
          *    参数二  步进 5s
          */
         AllWindowedStream<Tuple2<String, Integer>, TimeWindow> windowed2 =
-                tp2.windowAll(SlidingProcessingTimeWindows.of(Time.seconds(10), Time.seconds(5)));
+                tp2.windowAll(SlidingProcessingTimeWindows.of(Duration.ofSeconds(10), Duration.ofSeconds(5)));
         SingleOutputStreamOperator<Tuple2<String, Integer>> res = windowed.sum("1");
         res.print();
 

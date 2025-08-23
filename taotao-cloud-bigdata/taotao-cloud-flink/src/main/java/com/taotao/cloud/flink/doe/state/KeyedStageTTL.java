@@ -44,13 +44,13 @@ public class KeyedStageTTL {
     public static void main(String[] args) throws Exception {
 
         Configuration conf = new Configuration();
-        conf.setInteger("rest.port", 8888);
+        conf.set("rest.port", 8888);
         StreamExecutionEnvironment see =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
         see.setParallelism(2);
 
         // 重启策略
-        see.setRestartStrategy(RestartStrategies.fixedDelayRestart(3, Time.seconds(10)));
+        see.setRestartStrategy(RestartStrategies.fixedDelayRestart(3, Duration.ofSeconds(10)));
         // checkpoint开启
         see.enableCheckpointing(5000);
         see.setStateBackend(new EmbeddedRocksDBStateBackend());
@@ -59,7 +59,7 @@ public class KeyedStageTTL {
          * 设置状态的过期时间
          */
         StateTtlConfig config =
-                StateTtlConfig.newBuilder(Time.seconds(5))
+                StateTtlConfig.newBuilder(Duration.ofSeconds(5))
                         // 状态数据有读写操作  就会更新过期时间
                         .updateTtlOnReadAndWrite() // 读写
                         // .updateTtlOnCreateAndWrite() //  写
@@ -92,7 +92,7 @@ public class KeyedStageTTL {
                             ValueState<Double> state;
 
                             @Override
-                            public void open(Configuration parameters) throws Exception {
+                            public void open(OpenContext openContext) throws Exception {
                                 ValueStateDescriptor<Double> sumMoney =
                                         new ValueStateDescriptor<>(
                                                 "sumMoney", TypeInformation.of(Double.class));

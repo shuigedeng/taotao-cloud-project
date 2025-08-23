@@ -25,7 +25,6 @@ import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.util.Collector;
 
 /**
@@ -39,7 +38,7 @@ import org.apache.flink.util.Collector;
 public class FunctionCoGroup {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        conf.setInteger("rest.port", 8888);
+        conf.set("rest.port", 8888);
         StreamExecutionEnvironment see =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
         see.setParallelism(1);
@@ -101,7 +100,7 @@ public class FunctionCoGroup {
                 .coGroup(orderBeanWm)
                 .where(uBean -> uBean.getUid())
                 .equalTo(oBean -> oBean.getUid())
-                .window(TumblingEventTimeWindows.of(Time.seconds(10)))
+                .window(TumblingEventTimeWindows.of(Duration.ofSeconds(10)))
                 .apply(
                         new CoGroupFunction<UserBean, OrderBean, String>() {
                             @Override

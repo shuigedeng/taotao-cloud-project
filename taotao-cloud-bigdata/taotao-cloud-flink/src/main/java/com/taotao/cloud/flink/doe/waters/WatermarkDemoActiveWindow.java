@@ -27,7 +27,7 @@ import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
+
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 
 /**
@@ -50,7 +50,7 @@ import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 public class WatermarkDemoActiveWindow {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        conf.setInteger("rest.port", 8888);
+        conf.set("rest.port", 8888);
         StreamExecutionEnvironment see =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
         see.setParallelism(1);
@@ -98,7 +98,7 @@ public class WatermarkDemoActiveWindow {
                                         }));
         // 开时间窗口 使用事件时间语义  每10s计算一次最近10s的订单总额
         AllWindowedStream<OrdersBean, TimeWindow> windowed =
-                beansWithWM.windowAll(TumblingEventTimeWindows.of(Time.seconds(10)));
+                beansWithWM.windowAll(TumblingEventTimeWindows.of(Duration.ofSeconds(10)));
         // 窗口内部聚合 全局聚合
         SingleOutputStreamOperator<OrdersBean> res = windowed.sum("money");
 

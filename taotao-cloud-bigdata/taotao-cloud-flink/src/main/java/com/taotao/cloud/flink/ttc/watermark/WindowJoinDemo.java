@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.flink.ttc.watermark;
 
+import java.time.Duration;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.JoinFunction;
 import org.apache.flink.api.java.tuple.Tuple2;
@@ -24,7 +25,7 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
+
 
 /**
  * TODO
@@ -68,7 +69,7 @@ public class WindowJoinDemo {
                 ds1.join(ds2)
                         .where(r1 -> r1.f0) // ds1的keyby
                         .equalTo(r2 -> r2.f0) // ds2的keyby
-                        .window(TumblingEventTimeWindows.of(Time.seconds(10)))
+                        .window(TumblingEventTimeWindows.of(Duration.ofSeconds(10)))
                         .apply(
                                 new JoinFunction<
                                         Tuple2<String, Integer>,

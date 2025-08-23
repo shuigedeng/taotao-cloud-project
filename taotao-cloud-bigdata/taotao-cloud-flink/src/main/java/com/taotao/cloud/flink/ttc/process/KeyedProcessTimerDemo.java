@@ -17,6 +17,7 @@
 package com.taotao.cloud.flink.ttc.process;
 
 import com.taotao.cloud.flink.ttc.bean.WaterSensor;
+import com.taotao.cloud.flink.ttc.functions.WaterSensorMapFunction;
 import java.time.Duration;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.streaming.api.TimerService;

@@ -28,7 +28,6 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.LocatedFileStatus;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.fs.RemoteIterator;
-
 /**
  * 客户端代码常用套路
  * 1、获取一个客户端对象
@@ -40,7 +39,7 @@ public class HdfsClient {
 
     private FileSystem fs;
 
-    @Before
+//    @Before
     public void init() throws URISyntaxException, IOException, InterruptedException {
         // 连接的集群nn地址
         URI uri = new URI("hdfs://hadoop102:8020");
@@ -55,14 +54,14 @@ public class HdfsClient {
         fs = FileSystem.get(uri, configuration, user);
     }
 
-    @After
+    //@After
     public void close() throws IOException {
         // 3 关闭资源
         fs.close();
     }
 
     // 创建目录
-    @Test
+	//@Test
     public void testmkdir() throws URISyntaxException, IOException, InterruptedException {
         // 2 创建一个文件夹
         fs.mkdirs(new Path("/xiyou/huaguoshan1"));
@@ -75,7 +74,7 @@ public class HdfsClient {
      *
      * @throws IOException
      */
-    @Test
+	//@Test
     public void testPut() throws IOException {
         // 参数解读：参数一：表示删除原数据； 参数二：是否允许覆盖；参数三：原数据路径； 参数四：目的地路径
         fs.copyFromLocalFile(
@@ -85,7 +84,7 @@ public class HdfsClient {
                 new Path("hdfs://hadoop102/xiyou/huaguoshan"));
     }
 
-    @Test
+	// @Test
     public void testPut2() throws IOException {
         FSDataOutputStream fos = fs.create(new Path("/input"));
 
@@ -93,7 +92,7 @@ public class HdfsClient {
     }
 
     // 文件下载
-    @Test
+	//@Test
     public void testGet() throws IOException {
         // 参数的解读：参数一：原文件是否删除；参数二：原文件路径HDFS； 参数三：目标地址路径Win ; 参数四：
         // fs.copyToLocalFile(true, new Path("hdfs://hadoop102/xiyou/huaguoshan/"), new
@@ -102,7 +101,7 @@ public class HdfsClient {
     }
 
     // 删除
-    @Test
+	// @Test
     public void testRm() throws IOException {
 
         // 参数解读：参数1：要删除的路径； 参数2 ： 是否递归删除
@@ -117,7 +116,7 @@ public class HdfsClient {
     }
 
     // 文件的更名和移动
-    @Test
+	// @Test
     public void testmv() throws IOException {
         // 参数解读：参数1 ：原文件路径； 参数2 ：目标文件路径
         // 对文件名称的修改
@@ -131,7 +130,7 @@ public class HdfsClient {
     }
 
     // 获取文件详细信息
-    @Test
+	// @Test
     public void fileDetail() throws IOException {
 
         // 获取所有文件信息
@@ -159,7 +158,7 @@ public class HdfsClient {
     }
 
     // 判断是文件夹还是文件
-    @Test
+	//@Test
     public void testFile() throws IOException {
 
         FileStatus[] listStatus = fs.listStatus(new Path("/"));

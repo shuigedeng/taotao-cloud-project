@@ -41,7 +41,7 @@ import org.apache.flink.util.function.SerializableSupplier;
 public class Sink05ExcatlyOnce {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        conf.setInteger("rest.port", 8888);
+        conf.set("rest.port", 8888);
         StreamExecutionEnvironment see =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
         // 1 获取数据

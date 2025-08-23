@@ -29,7 +29,7 @@ import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.datastream.WindowedStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
+
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 
 /**
@@ -52,7 +52,7 @@ import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 public class WindowsFunctions04 {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        conf.setInteger("rest.port", 8888);
+        conf.set("rest.port", 8888);
         StreamExecutionEnvironment see =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
         see.setParallelism(2);
@@ -108,7 +108,7 @@ public class WindowsFunctions04 {
          *    当时间窗口触发后 ,当前窗口中的所有的数据按照分组key统计
          */
         WindowedStream<OrdersBean, String, TimeWindow> window =
-                keyed.window(TumblingEventTimeWindows.of(Time.seconds(10)));
+                keyed.window(TumblingEventTimeWindows.of(Duration.ofSeconds(10)));
         SingleOutputStreamOperator<OrdersBean> res = window.sum("money");
 
         res.print();

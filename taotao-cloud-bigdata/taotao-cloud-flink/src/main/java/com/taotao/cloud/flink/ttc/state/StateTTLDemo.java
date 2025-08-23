@@ -57,12 +57,12 @@ public class StateTTLDemo {
                             ValueState<Integer> lastVcState;
 
                             @Override
-                            public void open(Configuration parameters) throws Exception {
-                                super.open(parameters);
+                            public void open(OpenContext openContext) throws Exception {
+                                super.open(openContext);
 
                                 // TODO 1.创建 StateTtlConfig
                                 StateTtlConfig stateTtlConfig =
-                                        StateTtlConfig.newBuilder(Time.seconds(5)) // 过期时间5s
+                                        StateTtlConfig.newBuilder(Duration.ofSeconds(5)) // 过期时间5s
                                                 //
                                                 // .setUpdateType(StateTtlConfig.UpdateType.OnCreateAndWrite) // 状态 创建和写入（更新） 更新 过期时间
                                                 .setUpdateType(

@@ -27,7 +27,7 @@ import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.windowing.assigners.SlidingEventTimeWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
+
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 
 /**
@@ -57,7 +57,7 @@ import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 public class WindowsFunctions02 {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        conf.setInteger("rest.port", 8888);
+        conf.set("rest.port", 8888);
         StreamExecutionEnvironment see =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
         see.setParallelism(1);
@@ -102,7 +102,7 @@ public class WindowsFunctions02 {
         // 开窗  滑动
         AllWindowedStream<OrdersBean, TimeWindow> windowed =
                 beansWithWm.windowAll(
-                        SlidingEventTimeWindows.of(Time.seconds(10), Time.seconds(5)));
+                        SlidingEventTimeWindows.of(Duration.ofSeconds(10), Duration.ofSeconds(5)));
         // 聚合
         SingleOutputStreamOperator<OrdersBean> res = windowed.sum("money");
         res.print();

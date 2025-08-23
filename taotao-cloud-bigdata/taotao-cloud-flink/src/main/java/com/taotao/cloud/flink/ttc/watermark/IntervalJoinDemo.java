@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.flink.ttc.watermark;
 
+import java.time.Duration;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
@@ -23,7 +24,7 @@ import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.co.ProcessJoinFunction;
-import org.apache.flink.streaming.api.windowing.time.Time;
+
 import org.apache.flink.util.Collector;
 
 /**
@@ -67,7 +68,7 @@ public class IntervalJoinDemo {
 
         // 2. 调用 interval join
         ks1.intervalJoin(ks2)
-                .between(Time.seconds(-2), Time.seconds(2))
+                .between(Duration.ofSeconds(-2), Duration.ofSeconds(2))
                 .process(
                         new ProcessJoinFunction<
                                 Tuple2<String, Integer>,

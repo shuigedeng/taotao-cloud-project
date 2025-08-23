@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.FilterFunction;
+import org.apache.flink.api.common.functions.OpenContext;
 import org.apache.flink.api.common.functions.RichMapFunction;
 import org.apache.flink.api.common.state.MapState;
 import org.apache.flink.api.common.state.MapStateDescriptor;
@@ -52,7 +53,7 @@ public class JBatchWordCountDemo {
 
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        conf.setInteger(RestOptions.PORT, 8050);
+        conf.set(RestOptions.PORT, 8050);
 
         StreamExecutionEnvironment env =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
@@ -138,8 +139,8 @@ public class JBatchWordCountDemo {
                                     private MapState<Integer, FlinkUser> mapState;
 
                                     @Override
-                                    public void open(Configuration parameters) throws Exception {
-                                        super.open(parameters);
+                                    public void open(OpenContext openContext) throws Exception {
+                                        super.open(openContext);
                                         MapStateDescriptor<Integer, FlinkUser> mapStateDescriptor =
                                                 new MapStateDescriptor<>(
                                                         "valueStateDesc",

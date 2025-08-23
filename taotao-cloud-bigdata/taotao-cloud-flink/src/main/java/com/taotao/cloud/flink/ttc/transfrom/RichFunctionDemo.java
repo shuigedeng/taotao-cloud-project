@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.flink.ttc.transfrom;
 
+import org.apache.flink.api.common.functions.OpenContext;
 import org.apache.flink.api.common.functions.RichMapFunction;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
@@ -42,8 +43,8 @@ public class RichFunctionDemo {
                         new RichMapFunction<String, Integer>() {
 
                             @Override
-                            public void open(Configuration parameters) throws Exception {
-                                super.open(parameters);
+                            public void open(OpenContext openContext) throws Exception {
+                                super.open(openContext);
                                 System.out.println(
                                         "子任务编号="
                                                 + getRuntimeContext().getIndexOfThisSubtask()
@@ -84,8 +85,8 @@ public class RichFunctionDemo {
         // Integer>() {
         //
         //            @Override
-        //            public void open(Configuration parameters) throws Exception {
-        //                super.open(parameters);
+        //            public void open(OpenContext openContext) throws Exception {
+        //                super.open(openContext);
         //                System.out.println(
         //                        "子任务编号="+getRuntimeContext().getIndexOfThisSubtask()
         //                                +"，子任务名称="+getRuntimeContext().getTaskNameWithSubtasks()

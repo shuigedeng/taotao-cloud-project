@@ -36,7 +36,7 @@ import org.apache.flink.streaming.api.checkpoint.CheckpointedFunction;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.sink.SinkFunction;
-import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
+
 import org.bigdatatechcir.learn_flink.part6_flink_state.OperatorStateDemo;
 
 public class StateTtlDemo {
@@ -128,7 +128,7 @@ public class StateTtlDemo {
         private List<Tuple3<String, Integer, Long>> bufferedElements = new ArrayList<>();
 
         StateTtlConfig ttlConfig =
-                StateTtlConfig.newBuilder(Time.seconds(10))
+                StateTtlConfig.newBuilder(Duration.ofSeconds(10))
                         .setUpdateType(StateTtlConfig.UpdateType.OnCreateAndWrite)
                         .setStateVisibility(
                                 StateTtlConfig.StateVisibility.ReturnExpiredIfNotCleanedUp)

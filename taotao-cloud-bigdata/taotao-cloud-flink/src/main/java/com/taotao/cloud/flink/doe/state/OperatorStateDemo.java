@@ -34,13 +34,13 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 public class OperatorStateDemo {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        conf.setInteger("rest.port", 8888);
+        conf.set("rest.port", 8888);
         StreamExecutionEnvironment see =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
         see.setParallelism(2);
         // 程序出现故障后  默认停止job  设置重启机制
         // 出现故障后选择重启   10s内最大允许重启3次
-        see.setRestartStrategy(RestartStrategies.fixedDelayRestart(3, Time.seconds(10)));
+        see.setRestartStrategy(RestartStrategies.fixedDelayRestart(3, Duration.ofSeconds(10)));
         // 开启checkpoint机制  定期持久化状态数据(保证数据安全)
         see.enableCheckpointing(5000);
         DataStreamSource<String> ds1 = see.socketTextStream("doe01", 8899);

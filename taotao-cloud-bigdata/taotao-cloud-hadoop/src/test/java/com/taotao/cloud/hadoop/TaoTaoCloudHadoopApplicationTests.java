@@ -16,7 +16,10 @@
 
 package com.taotao.cloud.hadoop;
 
+import org.junit.jupiter.api.Test;
+
 class TaoTaoCloudHadoopApplicationTests {
 
+	@Test
     void contextLoads() {}
 }

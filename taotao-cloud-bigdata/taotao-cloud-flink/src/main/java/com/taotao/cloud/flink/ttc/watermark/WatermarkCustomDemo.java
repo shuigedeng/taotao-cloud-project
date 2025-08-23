@@ -17,13 +17,15 @@
 package com.taotao.cloud.flink.ttc.watermark;
 
 import com.taotao.cloud.flink.ttc.bean.WaterSensor;
+import com.taotao.cloud.flink.ttc.functions.WaterSensorMapFunction;
+import java.time.Duration;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
+
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
@@ -63,7 +65,7 @@ public class WatermarkCustomDemo {
 
         sensorDSwithWatermark
                 .keyBy(sensor -> sensor.getId())
-                .window(TumblingEventTimeWindows.of(Time.seconds(10)))
+                .window(TumblingEventTimeWindows.of(Duration.ofSeconds(10)))
                 .process(
                         new ProcessWindowFunction<WaterSensor, String, String, TimeWindow>() {
 

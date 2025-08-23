@@ -57,7 +57,7 @@ public class SinkTest4_Jdbc {
         PreparedStatement updateStmt = null;
 
         @Override
-        public void open(Configuration parameters) throws Exception {
+        public void open(OpenContext openContext) throws Exception {
             connection =
                     DriverManager.getConnection(
                             "jdbc:mysql://127.0.0.1:3306/test", "root", "123456");

@@ -25,7 +25,6 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.windowing.WindowFunction;
-import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 import org.apache.flink.util.OutputTag;
@@ -60,8 +59,8 @@ public class WindowTest1_TimeWindow {
                         //                .countWindow(10, 2);
                         //                .window(EventTimeSessionWindows.withGap(Time.minutes(1)));
                         //
-                        // .window(TumblingProcessingTimeWindows.of(Time.seconds(15)))
-                        .timeWindow(Time.seconds(15))
+                        // .window(TumblingProcessingTimeWindows.of(Duration.ofSeconds(15)))
+                        .timeWindow(Duration.ofSeconds(15))
                         .aggregate(
                                 new AggregateFunction<SensorReading, Integer, Integer>() {
                                     @Override
@@ -89,7 +88,7 @@ public class WindowTest1_TimeWindow {
         SingleOutputStreamOperator<Tuple3<String, Long, Integer>> resultStream2 =
                 dataStream
                         .keyBy("id")
-                        .timeWindow(Time.seconds(15))
+                        .timeWindow(Duration.ofSeconds(15))
                         //                .process(new ProcessWindowFunction<SensorReading, Object,
                         // Tuple, TimeWindow>() {
                         //                })
@@ -120,7 +119,7 @@ public class WindowTest1_TimeWindow {
         SingleOutputStreamOperator<SensorReading> sumStream =
                 dataStream
                         .keyBy("id")
-                        .timeWindow(Time.seconds(15))
+                        .timeWindow(Duration.ofSeconds(15))
                         //                .trigger()
                         //                .evictor()
                         .allowedLateness(Time.minutes(1))

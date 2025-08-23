@@ -34,7 +34,7 @@ public class Function01Map01 {
     public static void main(String[] args) throws Exception {
 
         Configuration conf = new Configuration();
-        conf.setInteger("rest.port", 8888);
+        conf.set("rest.port", 8888);
         StreamExecutionEnvironment see =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
 

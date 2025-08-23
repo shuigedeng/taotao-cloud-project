@@ -30,7 +30,7 @@ import org.apache.flink.streaming.api.datastream.WindowedStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.windowing.WindowFunction;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
+
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
@@ -54,7 +54,7 @@ import org.apache.flink.util.Collector;
 public class WindowsFunctionsAll02 {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        conf.setInteger("rest.port", 8888);
+        conf.set("rest.port", 8888);
         StreamExecutionEnvironment see =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
         see.setParallelism(1);
@@ -110,7 +110,7 @@ public class WindowsFunctionsAll02 {
          *    当时间窗口触发后 ,当前窗口中的所有的数据按照分组key统计
          */
         WindowedStream<OrdersBean, String, TimeWindow> window =
-                keyed.window(TumblingEventTimeWindows.of(Time.seconds(10)));
+                keyed.window(TumblingEventTimeWindows.of(Duration.ofSeconds(10)));
 
         window.apply(
                 new WindowFunction<OrdersBean, OrdersBean, String, TimeWindow>() {

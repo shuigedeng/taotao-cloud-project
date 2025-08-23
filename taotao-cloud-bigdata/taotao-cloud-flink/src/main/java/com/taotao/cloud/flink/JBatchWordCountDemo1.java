@@ -43,7 +43,7 @@ public class JBatchWordCountDemo1 {
 
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        conf.setInteger(RestOptions.PORT, 8050);
+        conf.set(RestOptions.PORT, 8050);
 
         StreamExecutionEnvironment env =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
@@ -168,8 +168,8 @@ public class JBatchWordCountDemo1 {
         //				private MapState<Integer, FlinkUser> mapState;
         //
         //				@Override
-        //				public void open(Configuration parameters) throws Exception {
-        //					super.open(parameters);
+        //				public void open(OpenContext openContext) throws Exception {
+        //					super.open(openContext);
         //					MapStateDescriptor<Integer, FlinkUser> mapStateDescriptor = new MapStateDescriptor<>(
         //						"valueStateDesc",
         //						TypeInformation.of(new TypeHint<Integer>() {

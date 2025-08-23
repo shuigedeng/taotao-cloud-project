@@ -66,7 +66,7 @@ public class TransformTest5_RichFunction {
         }
 
         @Override
-        public void open(Configuration parameters) throws Exception {
+        public void open(OpenContext openContext) throws Exception {
             // 初始化工作，一般是定义状态，或者建立数据库连接
             System.out.println("open");
         }

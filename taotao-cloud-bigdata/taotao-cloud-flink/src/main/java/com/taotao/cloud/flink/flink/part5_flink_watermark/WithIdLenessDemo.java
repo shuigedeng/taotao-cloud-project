@@ -29,26 +29,26 @@ import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.RestOptions;
-import org.apache.flink.streaming.api.TimeCharacteristic;
+
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
+
 import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction;
 import org.apache.flink.streaming.api.watermark.Watermark;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
+
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
 public class WithIdLenessDemo {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        conf.setString(RestOptions.BIND_PORT, "8081");
+        conf.set(RestOptions.BIND_PORT, "8081");
         final StreamExecutionEnvironment env =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
         env.setParallelism(1);
 
-        env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
+        //env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
         DataStream<String> text =
                 env.addSource(
@@ -126,7 +126,7 @@ public class WithIdLenessDemo {
         DataStream<Tuple2<String, Integer>> keyedStream =
                 withWatermarks
                         .keyBy(value -> value.f0)
-                        .window(TumblingEventTimeWindows.of(Time.seconds(5)))
+                        .window(TumblingEventTimeWindows.of(Duration.ofSeconds(5)))
                         .process(
                                 new ProcessWindowFunction<
                                         Tuple3<String, Integer, Long>,

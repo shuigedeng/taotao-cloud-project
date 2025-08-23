@@ -29,7 +29,7 @@ import org.apache.flink.streaming.api.datastream.*;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
+
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 import org.apache.flink.util.OutputTag;
@@ -56,7 +56,7 @@ public class LateData {
     public static void main(String[] args) throws Exception {
         // 1  环境
         Configuration conf = new Configuration();
-        conf.setInteger("rest.port", 8888);
+        conf.set("rest.port", 8888);
         StreamExecutionEnvironment see =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
         see.setParallelism(1);
@@ -112,14 +112,14 @@ public class LateData {
          * 5 滚动窗口
          *    keyby后的数据调用时间窗口
          *    当时间窗口触发后 ,当前窗口中的所有的数据按照分组key统计
-         *    ************************.allowedLateness(Time.seconds(2)) **********
+         *    ************************.allowedLateness(Duration.ofSeconds(2)) **********
          *    ************************sideOutputLateData(late_data) **********
          */
         OutputTag<OrdersBean> late_data =
                 new OutputTag<>("late_data", TypeInformation.of(new TypeHint<OrdersBean>() {}));
         WindowedStream<OrdersBean, String, TimeWindow> window =
-                keyed.window(TumblingEventTimeWindows.of(Time.seconds(10)))
-                        .allowedLateness(Time.seconds(2))
+                keyed.window(TumblingEventTimeWindows.of(Duration.ofSeconds(10)))
+                        .allowedLateness(Duration.ofSeconds(2))
                         .sideOutputLateData(late_data);
 
         SingleOutputStreamOperator<OrdersBean> res =

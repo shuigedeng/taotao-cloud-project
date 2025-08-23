@@ -26,7 +26,6 @@ import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
 
 /**
  * @since: 2024/1/3
@@ -39,7 +38,7 @@ import org.apache.flink.streaming.api.windowing.time.Time;
 public class FunctionJoin {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        conf.setInteger("rest.port", 8888);
+        conf.set("rest.port", 8888);
         StreamExecutionEnvironment see =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
         see.setParallelism(1);
@@ -108,7 +107,7 @@ public class FunctionJoin {
                         .join(orderBeanWm)
                         .where(user -> user.getUid())
                         .equalTo(orders -> orders.getUid())
-                        .window(TumblingEventTimeWindows.of(Time.seconds(10)))
+                        .window(TumblingEventTimeWindows.of(Duration.ofSeconds(10)))
                         .apply(
                                 new JoinFunction<UserBean, OrderBean, String>() {
                                     /**

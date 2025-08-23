@@ -214,7 +214,7 @@ configurations {
         resolutionStrategy {
             force "org.codehaus.groovy:groovy:3.0.25"
             force 'org.antlr:antlr4:4.13.2'
-            force 'net.minidev:json-smart:2.5.2'
+            force 'net.minidev:json-smart:2.6.0'
             //todo 临时使用
             force "io.opentelemetry:opentelemetry-api-incubator:1.53.0-alpha"
             force "org.glassfish:javax.el:3.0.0"

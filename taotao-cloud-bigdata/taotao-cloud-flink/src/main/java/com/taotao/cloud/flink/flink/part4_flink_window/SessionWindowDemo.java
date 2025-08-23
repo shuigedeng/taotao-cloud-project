@@ -31,10 +31,10 @@ import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.RestOptions;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
+
 import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction;
 import org.apache.flink.streaming.api.windowing.assigners.EventTimeSessionWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
+
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
@@ -42,7 +42,7 @@ public class SessionWindowDemo {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
         // 设置WebUI绑定的本地端口
-        conf.setString(RestOptions.BIND_PORT, "8081");
+        conf.set(RestOptions.BIND_PORT, "8081");
         // 使用配置
         final StreamExecutionEnvironment env =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
@@ -120,7 +120,7 @@ public class SessionWindowDemo {
         DataStream<Tuple2<String, Integer>> keyedStream =
                 withWatermarks
                         .keyBy(value -> value.f0)
-                        .window(EventTimeSessionWindows.withGap(Time.seconds(5))) // 设置5秒的空闲期
+                        .window(EventTimeSessionWindows.withGap(Duration.ofSeconds(5))) // 设置5秒的空闲期
                         .process(
                                 new ProcessWindowFunction<
                                         Tuple3<String, Integer, Long>,

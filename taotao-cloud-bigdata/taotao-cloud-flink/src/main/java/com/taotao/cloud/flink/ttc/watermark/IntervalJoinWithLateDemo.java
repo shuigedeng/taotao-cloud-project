@@ -26,7 +26,7 @@ import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.co.ProcessJoinFunction;
-import org.apache.flink.streaming.api.windowing.time.Time;
+
 import org.apache.flink.util.Collector;
 import org.apache.flink.util.OutputTag;
 
@@ -98,7 +98,7 @@ public class IntervalJoinWithLateDemo {
                 new OutputTag<>("ks2-late", Types.TUPLE(Types.STRING, Types.INT, Types.INT));
         SingleOutputStreamOperator<String> process =
                 ks1.intervalJoin(ks2)
-                        .between(Time.seconds(-2), Time.seconds(2))
+                        .between(Duration.ofSeconds(-2), Duration.ofSeconds(2))
                         .sideOutputLeftLateData(ks1LateTag) // 将 ks1的迟到数据，放入侧输出流
                         .sideOutputRightLateData(ks2LateTag) // 将 ks2的迟到数据，放入侧输出流
                         .process(

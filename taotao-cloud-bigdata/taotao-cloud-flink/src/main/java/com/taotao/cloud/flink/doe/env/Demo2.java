@@ -47,7 +47,7 @@ public class Demo2 {
 
         // 3 获取本地 带监控页面的环境
         // 设置页面http服务的请求端口
-        conf.setString("rest.port", "8888");
+        conf.set("rest.port", "8888");
         StreamExecutionEnvironment see2 =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
 

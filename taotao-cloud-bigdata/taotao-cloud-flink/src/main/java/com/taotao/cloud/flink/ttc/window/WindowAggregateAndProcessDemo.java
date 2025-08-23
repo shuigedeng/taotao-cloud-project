@@ -18,6 +18,7 @@ package com.taotao.cloud.flink.ttc.window;
 
 import com.taotao.cloud.flink.ttc.bean.WaterSensor;
 import com.taotao.cloud.flink.ttc.functions.WaterSensorMapFunction;
+import java.time.Duration;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.streaming.api.datastream.KeyedStream;
@@ -26,7 +27,6 @@ import org.apache.flink.streaming.api.datastream.WindowedStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTimeWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
@@ -48,7 +48,7 @@ public class WindowAggregateAndProcessDemo {
 
         // 1. 窗口分配器
         WindowedStream<WaterSensor, String, TimeWindow> sensorWS =
-                sensorKS.window(TumblingProcessingTimeWindows.of(Time.seconds(10)));
+                sensorKS.window(TumblingProcessingTimeWindows.of(Duration.ofSeconds(10)));
 
         // 2. 窗口函数：
         /**

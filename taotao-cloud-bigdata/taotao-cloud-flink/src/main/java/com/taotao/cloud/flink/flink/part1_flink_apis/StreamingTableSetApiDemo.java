@@ -16,12 +16,12 @@
 
 package com.taotao.cloud.flink.flink.part1_flink_apis;
 
+import com.taotao.cloud.flink.flink.util.WordCountData;
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.util.Collector;
-import org.bigdatatechcir.learn_flink.util.WordCountData;
 
 public class StreamingTableSetApiDemo {
     /**

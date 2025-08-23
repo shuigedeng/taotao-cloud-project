@@ -26,7 +26,7 @@ import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.windowing.ProcessAllWindowFunction;
 import org.apache.flink.streaming.api.windowing.assigners.SlidingEventTimeWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
+
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
@@ -52,7 +52,7 @@ public class ProcessAllWindowTopNDemo {
 
         // 最近10秒= 窗口长度， 每5秒输出 = 滑动步长
         // TODO 思路一： 所有数据到一起， 用hashmap存， key=vc，value=count值
-        sensorDS.windowAll(SlidingEventTimeWindows.of(Time.seconds(10), Time.seconds(5)))
+        sensorDS.windowAll(SlidingEventTimeWindows.of(Duration.ofSeconds(10), Duration.ofSeconds(5)))
                 .process(new MyTopNPAWF())
                 .print();
 

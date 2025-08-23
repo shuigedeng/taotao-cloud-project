@@ -56,8 +56,8 @@ public class KeyedMapStateDemo {
                             MapState<Integer, Integer> vcCountMapState;
 
                             @Override
-                            public void open(Configuration parameters) throws Exception {
-                                super.open(parameters);
+                            public void open(OpenContext openContext) throws Exception {
+                                super.open(openContext);
                                 vcCountMapState =
                                         getRuntimeContext()
                                                 .getMapState(

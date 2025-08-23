@@ -17,6 +17,7 @@
 package com.taotao.cloud.flink.ttc.process;
 
 import com.taotao.cloud.flink.ttc.bean.WaterSensor;
+import com.taotao.cloud.flink.ttc.functions.WaterSensorMapFunction;
 import java.time.Duration;
 import java.util.*;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
@@ -27,7 +28,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
 import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction;
 import org.apache.flink.streaming.api.windowing.assigners.SlidingEventTimeWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
+
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
@@ -69,7 +70,7 @@ public class KeyedProcessFunctionTopNDemo {
         //  开窗聚合后，就是普通的流，没有了窗口信息，需要自己打上窗口的标记 windowEnd
         SingleOutputStreamOperator<Tuple3<Integer, Integer, Long>> windowAgg =
                 sensorDS.keyBy(sensor -> sensor.getVc())
-                        .window(SlidingEventTimeWindows.of(Time.seconds(10), Time.seconds(5)))
+                        .window(SlidingEventTimeWindows.of(Duration.ofSeconds(10), Duration.ofSeconds(5)))
                         .aggregate(new VcCountAgg(), new WindowResult());
 
         // 2. 按照窗口标签（窗口结束时间）keyby，保证同一个窗口时间范围的结果，到一起去。排序、取TopN

@@ -56,8 +56,8 @@ public class KeyedValueStateDemo {
                             ValueState<Integer> lastVcState;
 
                             @Override
-                            public void open(Configuration parameters) throws Exception {
-                                super.open(parameters);
+                            public void open(OpenContext openContext) throws Exception {
+                                super.open(openContext);
                                 // TODO 2.在open方法中，初始化状态
                                 // 状态描述器两个参数：第一个参数，起个名字，不重复；第二个参数，存储的类型
                                 lastVcState =

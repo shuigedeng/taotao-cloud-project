@@ -48,13 +48,13 @@ public class KeyedStageOrderTotal06 {
     public static void main(String[] args) throws Exception {
 
         Configuration conf = new Configuration();
-        conf.setInteger("rest.port", 8888);
+        conf.set("rest.port", 8888);
         StreamExecutionEnvironment see =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
         see.setParallelism(2);
 
         // 重启策略
-        see.setRestartStrategy(RestartStrategies.fixedDelayRestart(3, Time.seconds(10)));
+        see.setRestartStrategy(RestartStrategies.fixedDelayRestart(3, Duration.ofSeconds(10)));
         // checkpoint开启
         see.enableCheckpointing(5000);
 
@@ -113,7 +113,7 @@ public class KeyedStageOrderTotal06 {
                             }
 
                             @Override
-                            public void open(Configuration parameters) throws Exception {
+                            public void open(OpenContext openContext) throws Exception {
                                 // 输入:类别,金额   缓存  类别,总额 ,个数   输出:  类别,总额 ,个数
                                 /**
                                  * 参数1  名字

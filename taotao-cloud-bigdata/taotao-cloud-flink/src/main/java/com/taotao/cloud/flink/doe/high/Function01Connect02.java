@@ -36,7 +36,7 @@ import org.apache.flink.streaming.api.functions.co.RichCoMapFunction;
 public class Function01Connect02 {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        conf.setInteger("rest.port", 8888);
+        conf.set("rest.port", 8888);
         StreamExecutionEnvironment see =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
         see.setParallelism(1);
@@ -63,7 +63,7 @@ public class Function01Connect02 {
                             String str;
 
                             @Override
-                            public void open(Configuration parameters) throws Exception {
+                            public void open(OpenContext openContext) throws Exception {
 
                                 state =
                                         getRuntimeContext()

@@ -40,8 +40,8 @@ public class JStreamWordCount {
 
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        conf.setBoolean(ConfigConstants.LOCAL_START_WEBSERVER, true);
-        conf.setInteger(RestOptions.PORT, 8050);
+//        conf.set(ConfigConstants.LOCAL_START_WEBSERVER, true);
+        conf.set(RestOptions.PORT, 8050);
 
         StreamExecutionEnvironment env =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);

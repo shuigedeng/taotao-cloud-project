@@ -45,8 +45,8 @@ public class SinkCustom {
         Connection conn = null;
 
         @Override
-        public void open(Configuration parameters) throws Exception {
-            super.open(parameters);
+        public void open(OpenContext openContext) throws Exception {
+            super.open(openContext);
             // 在这里 创建连接
             // conn = new xxxx
         }

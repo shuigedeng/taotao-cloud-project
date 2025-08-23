@@ -23,7 +23,7 @@ import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
-import org.apache.flink.streaming.api.windowing.time.Time;
+
 import org.apache.flink.util.Collector;
 
 public class ProcessFunctionDemo {
@@ -92,8 +92,8 @@ public class ProcessFunctionDemo {
         private ValueState<Integer> lastValue;
 
         @Override
-        public void open(Configuration parameters) throws Exception {
-            super.open(parameters);
+        public void open(OpenContext openContext) throws Exception {
+            super.open(openContext);
             lastValue =
                     getRuntimeContext()
                             .getState(new ValueStateDescriptor<>("lastValue", Integer.class));
@@ -112,7 +112,7 @@ public class ProcessFunctionDemo {
 
             ctx.timerService()
                     .registerEventTimeTimer(
-                            value.getTimestamp() + Time.seconds(5).toMilliseconds());
+                            value.getTimestamp() + Duration.ofSeconds(5).toMilliseconds());
         }
 
         @Override

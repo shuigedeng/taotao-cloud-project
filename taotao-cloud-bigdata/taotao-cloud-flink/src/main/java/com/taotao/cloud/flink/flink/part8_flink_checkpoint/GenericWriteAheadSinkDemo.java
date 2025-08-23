@@ -34,15 +34,15 @@ import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.RestOptions;
 import org.apache.flink.runtime.state.hashmap.HashMapStateBackend;
 import org.apache.flink.streaming.api.CheckpointingMode;
-import org.apache.flink.streaming.api.TimeCharacteristic;
+
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.CheckpointConfig;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
+
 import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction;
 import org.apache.flink.streaming.api.watermark.Watermark;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
+
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.streaming.runtime.operators.CheckpointCommitter;
 import org.apache.flink.streaming.runtime.operators.GenericWriteAheadSink;
@@ -53,7 +53,7 @@ public class GenericWriteAheadSinkDemo {
 
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        conf.setString(RestOptions.BIND_PORT, "8081");
+        conf.set(RestOptions.BIND_PORT, "8081");
         final StreamExecutionEnvironment env =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
         env.setStateBackend(new HashMapStateBackend());
@@ -79,7 +79,7 @@ public class GenericWriteAheadSinkDemo {
         // env.getConfig().setAutoWatermarkInterval(100000);
         env.setParallelism(1);
 
-        env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
+        //env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
         DataStream<String> text =
                 env.addSource(
@@ -178,7 +178,7 @@ public class GenericWriteAheadSinkDemo {
         DataStream<Tuple2<String, Integer>> keyedStream =
                 withWatermarks
                         .keyBy(value -> value.f0)
-                        .window(TumblingEventTimeWindows.of(Time.seconds(5)))
+                        .window(TumblingEventTimeWindows.of(Duration.ofSeconds(5)))
                         .process(
                                 new ProcessWindowFunction<
                                         Tuple3<String, Integer, Long>,
@@ -188,7 +188,7 @@ public class GenericWriteAheadSinkDemo {
                                     private ValueState<Integer> countState;
 
                                     @Override
-                                    public void open(Configuration parameters) {
+                                    public void open(OpenContext openContext) {
                                         countState =
                                                 getRuntimeContext()
                                                         .getState(

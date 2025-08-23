@@ -56,8 +56,8 @@ public class KeyedReducingStateDemo {
                             ReducingState<Integer> vcSumReducingState;
 
                             @Override
-                            public void open(Configuration parameters) throws Exception {
-                                super.open(parameters);
+                            public void open(OpenContext openContext) throws Exception {
+                                super.open(openContext);
                                 vcSumReducingState =
                                         getRuntimeContext()
                                                 .getReducingState(

@@ -31,10 +31,10 @@ import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.RestOptions;
-import org.apache.flink.streaming.api.TimeCharacteristic;
+
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
+
 import org.apache.flink.streaming.api.functions.windowing.ProcessAllWindowFunction;
 import org.apache.flink.streaming.api.windowing.assigners.GlobalWindows;
 import org.apache.flink.streaming.api.windowing.triggers.CountTrigger;
@@ -45,7 +45,7 @@ public class GlobalWindowDemo {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
         // 设置WebUI绑定的本地端口
-        conf.setString(RestOptions.BIND_PORT, "8081");
+        conf.set(RestOptions.BIND_PORT, "8081");
         // 使用配置
 
         // final StreamExecutionEnvironment env =
@@ -54,7 +54,7 @@ public class GlobalWindowDemo {
         env.setParallelism(1);
 
         // 设置时间语义为 Event Time
-        env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
+        //env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
         // 使用 DataGeneratorSource 生成数据
         DataStream<String> text =

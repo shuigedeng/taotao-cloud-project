@@ -16,12 +16,28 @@
 
 package com.taotao.cloud.flink;
 
+
+
+
+import static org.apache.flink.runtime.state.StateBackendLoader.FORST_STATE_BACKEND_NAME;
+import static org.apache.flink.runtime.state.StateBackendLoader.ROCKSDB_STATE_BACKEND_NAME;
+
+import java.io.File;
+import java.net.URI;
+import java.nio.file.Paths;
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.configuration.ConfigConstants;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.RestOptions;
+import org.apache.flink.configuration.StateBackendOptions;
+import org.apache.flink.configuration.WebOptions;
+import org.apache.flink.connector.file.src.FileSource;
+import org.apache.flink.connector.file.src.reader.TextLineInputFormat;
+import org.apache.flink.core.fs.Path;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
@@ -44,12 +60,18 @@ public class JBatchWordCount {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
 
-        conf.setBoolean(LOCAL_START_WEBSERVER, true);
-        conf.setInteger(RestOptions.PORT, 8050);
+//        conf.set(ConfigConstants.LOCAL_START_WEBSERVER, true);
+        conf.set(RestOptions.PORT, 8050);
+		conf.set(StateBackendOptions.STATE_BACKEND, ROCKSDB_STATE_BACKEND_NAME);
 
         StreamExecutionEnvironment env =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
-        DataStream<String> dss = env.readTextFile("/Users/shuigedeng/spark/hello.txt");
+
+		FileSource.FileSourceBuilder<String> builder =
+			FileSource.forRecordStreamFormat(
+				new TextLineInputFormat(),  Path.fromLocalFile(new File("/Users/shuigedeng/spark/hello.txt")));
+
+        DataStream<String> dss = env.fromSource(builder.build(), WatermarkStrategy.noWatermarks(), "file-input");;
 
         DataStream<String> dso =
                 dss.flatMap(

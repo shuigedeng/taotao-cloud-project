@@ -67,7 +67,7 @@ public class StateTest3_KeyedStateApplicationCase {
         private ValueState<Double> lastTempState;
 
         @Override
-        public void open(Configuration parameters) throws Exception {
+        public void open(OpenContext openContext) throws Exception {
             lastTempState =
                     getRuntimeContext()
                             .getState(new ValueStateDescriptor<Double>("last-temp", Double.class));

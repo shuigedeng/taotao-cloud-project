@@ -21,14 +21,13 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor;
-import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.util.OutputTag;
 
 public class WindowTest3_EventTimeWindow {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         //        env.setParallelism(1);
-        //         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
+        //         //env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
         env.getConfig().setAutoWatermarkInterval(100);
 
         // socket文本流
@@ -55,7 +54,7 @@ public class WindowTest3_EventTimeWindow {
                         // 乱序数据设置时间戳和watermark
                         .assignTimestampsAndWatermarks(
                                 new BoundedOutOfOrdernessTimestampExtractor<SensorReading>(
-                                        Time.seconds(2)) {
+                                        Duration.ofSeconds(2)) {
                                     @Override
                                     public long extractTimestamp(SensorReading element) {
                                         return element.getTimestamp() * 1000L;
@@ -68,7 +67,7 @@ public class WindowTest3_EventTimeWindow {
         SingleOutputStreamOperator<SensorReading> minTempStream =
                 dataStream
                         .keyBy("id")
-                        .timeWindow(Time.seconds(15))
+                        .timeWindow(Duration.ofSeconds(15))
                         .allowedLateness(Time.minutes(1))
                         .sideOutputLateData(outputTag)
                         .minBy("temperature");

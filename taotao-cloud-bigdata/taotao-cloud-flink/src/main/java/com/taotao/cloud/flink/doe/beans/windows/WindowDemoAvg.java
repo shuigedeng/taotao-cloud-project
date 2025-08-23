@@ -32,7 +32,7 @@ import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.datastream.WindowedStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
+
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 
 /**
@@ -47,7 +47,7 @@ import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 public class WindowDemoAvg {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        conf.setInteger("rest.port", 8888);
+        conf.set("rest.port", 8888);
         StreamExecutionEnvironment see =
                 StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
         see.setParallelism(1);
@@ -97,7 +97,7 @@ public class WindowDemoAvg {
                             }
                         });
         WindowedStream<OrdersBean, String, TimeWindow> window =
-                keyed.window(TumblingEventTimeWindows.of(Time.seconds(10)));
+                keyed.window(TumblingEventTimeWindows.of(Duration.ofSeconds(10)));
         /**
          * reduce的返回数据类型和输入数据类型一致 , 中间缓存的数据类型和输入类型一致
          * aggregate :用户设定返回值类型 ,  设定中间缓存的数据类型
