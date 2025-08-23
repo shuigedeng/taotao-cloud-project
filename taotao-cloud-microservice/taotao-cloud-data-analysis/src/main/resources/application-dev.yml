@@ -443,7 +443,7 @@ spring:
       nacos: # nacos配置，不配置有默认值（规则appname-dev.yml这样），cloud应用不需要配置
         dataId: taotao-cloud-data-analysis-graphql-dev.yml
         group: SYS_GROUP
-        namespace: taotao-cloud-dev
+        namespace: 82f5c2ff-c0d5-478d-9987-7f082d1a55d7
       apollo: # apollo配置，不配置默认拿apollo配置第一个namespace
         namespace: dynamic-tp-demo-dev.yml
       platforms: # 通知报警平台配置
@@ -742,7 +742,7 @@ spring:
       port: 6379
       database: 1
       #password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
-      connect-timeout: 60000
+      connect-timeout: 60s
       #sentinel:
       #  master:
       #  nodes:
@@ -932,7 +932,7 @@ spring:
       # 消费监听接口监听的主题不存在时，默认会报错，所以设置为false忽略错误
       missing-topics-fatal: false
       # 两次poll之间的最大间隔，默认值为5分钟。如果超过这个间隔会触发reBalance
-      poll-timeout: 600000
+      poll-timeout: 60s
       type: batch #设置批量消费
   security:
     oauth2:
@@ -1422,8 +1422,8 @@ management:
       enabled: true
   zipkin:
     tracing:
-      connect-timeout: 1
-      read-timeout: 10
+      connect-timeout: 60s
+      read-timeout: 60s
       endpoint: http://127.0.0.1:9411/api/v2/spans
   tracing:
     enabled: true

@@ -149,7 +149,7 @@ spring:
       port: 6379
       database: 1
       #password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
-      connect-timeout: 60000
+      connect-timeout: 60s
       #cluster:
       #  nodes: 192.168.218.2:6381,192.168.218.2:6382,192.168.218.2:6383,192.168.218.2:6384,192.168.218.2:6385,192.168.218.2:6386
       #  max-redirects: 3
@@ -1200,7 +1200,7 @@ resilience4j:
       #假设 timeoutDuration 为 1000。那么，当调用 backendA 服务时，如果超过 1 秒仍然没有完成，则会被 TimeLimiter 实例视为超时，并抛出 TimeoutException 异常。
       backendA:
         #操作的超时时间，单位毫秒。这里设置为 1000，表示 backendA 服务的调用必须在 1 秒内完成，否则会被视为超时。
-        timeoutDuration: 1000
+        timeoutDuration: 1s
 
 #knife4j:
 #  enable: true
@@ -1349,8 +1349,8 @@ management:
         enabled: true
   zipkin:
     tracing:
-      connect-timeout: 1
-      read-timeout: 10
+      connect-timeout: 60s
+      read-timeout: 60s
       endpoint: http://192.168.218.2:9411/api/v2/spans
   tracing:
     enabled: true

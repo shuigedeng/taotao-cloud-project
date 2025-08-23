@@ -281,7 +281,7 @@ spring:
       port: 6379
       database: 5
       password: lyy-single+node
-      connect-timeout: 60000
+      connect-timeout: 60s
       #cluster:
       #  nodes: 127.0.0.1:7100
       #  max-redirects: 3

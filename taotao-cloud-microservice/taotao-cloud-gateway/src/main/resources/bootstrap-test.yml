@@ -32,7 +32,7 @@
 #          user.name: "admin"
 #          user.password: "123456"
 #        group: TAOTAO_CLOUD_GROUP
-#        namespace: taotao-cloud-dev
+#        namespace: 82f5c2ff-c0d5-478d-9987-7f082d1a55d7
 #        username: nacos
 #        password: nacos
 #        cluster-name: CQ
@@ -40,7 +40,7 @@
 #      config:
 #        enabled: true
 #        server-addr: 192.168.218.2:8848
-#        namespace: taotao-cloud-dev
+#        namespace: 82f5c2ff-c0d5-478d-9987-7f082d1a55d7
 #        file-extension: yml
 #        cluster-name: CQ
 #        group: TAOTAO_CLOUD_GROUP

@@ -423,7 +423,7 @@ spring:
       port: 6379
       database: 1
       #password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
-      connect-timeout: 60000
+      connect-timeout: 60s
       #sentinel:
       #  master:
       #  nodes:
@@ -779,8 +779,8 @@ management:
         enabled: true
   zipkin:
     tracing:
-      connect-timeout: 1
-      read-timeout: 10
+      connect-timeout: 60s
+      read-timeout: 60s
       endpoint: http://192.168.218.2:9411/api/v2/spans
   tracing:
     enabled: true

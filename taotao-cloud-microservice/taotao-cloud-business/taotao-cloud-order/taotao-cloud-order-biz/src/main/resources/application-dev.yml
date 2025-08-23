@@ -197,7 +197,7 @@ spring:
           max-wait: 5000
           max-idle: 500
           min-idle: 100
-      connect-timeout: 60000
+      connect-timeout: 60s
     elasticsearch:
       rest:
         uris:
