@@ -60,7 +60,7 @@ public class CronTaskServiceImpl implements CronTaskService {
             returnT = JSON.parseObject(response.body(), ReturnT.class);
 
             // 插入时需要返回Id，而更新时不需要
-            if (response.isOk() && ReturnT.ofSuccess()_CODE == returnT.getCode()) {
+            if (response.isOk() && ReturnT.SUCCESS_CODE == returnT.getCode()) {
                 if (path.contains(XxlJobConstant.INSERT_URL)) {
                     Integer taskId = Integer.parseInt(String.valueOf(returnT.getContent()));
                     return BasicResultVO.success(taskId);
@@ -88,7 +88,7 @@ public class CronTaskServiceImpl implements CronTaskService {
         try {
             response = HttpRequest.post(path).form(params).cookie(getCookie()).execute();
             returnT = JSON.parseObject(response.body(), ReturnT.class);
-            if (response.isOk() && ReturnT.ofSuccess()_CODE == returnT.getCode()) {
+            if (response.isOk() && ReturnT.SUCCESS_CODE == returnT.getCode()) {
                 return BasicResultVO.success();
             }
         } catch (Exception e) {
@@ -111,7 +111,7 @@ public class CronTaskServiceImpl implements CronTaskService {
         try {
             response = HttpRequest.post(path).form(params).cookie(getCookie()).execute();
             returnT = JSON.parseObject(response.body(), ReturnT.class);
-            if (response.isOk() && ReturnT.ofSuccess()_CODE == returnT.getCode()) {
+            if (response.isOk() && ReturnT.SUCCESS_CODE == returnT.getCode()) {
                 return BasicResultVO.success();
             }
         } catch (Exception e) {
@@ -134,7 +134,7 @@ public class CronTaskServiceImpl implements CronTaskService {
         try {
             response = HttpRequest.post(path).form(params).cookie(getCookie()).execute();
             returnT = JSON.parseObject(response.body(), ReturnT.class);
-            if (response.isOk() && ReturnT.ofSuccess()_CODE == returnT.getCode()) {
+            if (response.isOk() && ReturnT.SUCCESS_CODE == returnT.getCode()) {
                 return BasicResultVO.success();
             }
         } catch (Exception e) {
@@ -184,7 +184,7 @@ public class CronTaskServiceImpl implements CronTaskService {
         try {
             response = HttpRequest.post(path).form(params).cookie(getCookie()).execute();
             returnT = JSON.parseObject(response.body(), ReturnT.class);
-            if (response.isOk() && ReturnT.ofSuccess()_CODE == returnT.getCode()) {
+            if (response.isOk() && ReturnT.SUCCESS_CODE == returnT.getCode()) {
                 return BasicResultVO.success();
             }
         } catch (Exception e) {

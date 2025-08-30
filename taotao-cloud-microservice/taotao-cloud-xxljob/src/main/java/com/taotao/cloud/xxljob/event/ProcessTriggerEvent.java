@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.xxljob.event;
 
-import com.taotao.cloud.xxljob.core.model.XxlJobGroup;
-import com.taotao.cloud.xxljob.core.model.XxlJobInfo;
-import com.taotao.cloud.xxljob.core.model.XxlJobLog;
+import com.taotao.cloud.xxljob.model.XxlJobGroup;
+import com.taotao.cloud.xxljob.model.XxlJobInfo;
+import com.taotao.cloud.xxljob.model.XxlJobLog;
 import org.springframework.context.ApplicationEvent;
 
 /**

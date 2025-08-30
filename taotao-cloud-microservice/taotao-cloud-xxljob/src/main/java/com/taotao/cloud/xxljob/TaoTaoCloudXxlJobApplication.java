@@ -30,7 +30,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * @version 2022.03
  * @since 2020/11/26 下午7:55
  */
-@MapperScan("com.taotao.cloud.xxljob.dao")
+@MapperScan("com.taotao.cloud.xxljob.mapper")
 @EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)
 @EnableEncryptableProperties
 @EnableDiscoveryClient

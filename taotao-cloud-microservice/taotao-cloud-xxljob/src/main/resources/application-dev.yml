@@ -136,7 +136,9 @@ redisson:
 
 spring:
   autoconfigure:
-    exclude: org.springframework.cloud.function.web.mvc.ReactorAutoConfiguration
+    exclude:
+      - org.springframework.cloud.function.web.mvc.ReactorAutoConfiguration
+      - org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
   config:
     activate:
       on-profile: dev
@@ -314,7 +316,7 @@ spring:
       enabled: false
 
 mybatis:
-  mapper-locations: classpath:/mybatis-mapper/*Mapper.xml
+  mapper-locations: classpath:/mapper/*Mapper.xml
 
 xxl:
   job:
@@ -331,7 +333,15 @@ xxl:
       slow:
         max: 200
     logretentiondays: 30
-
+xxl-sso:
+  token:
+    key: xxl_job_login_token
+    timeout: 604800000
+  client:
+    excluded:
+      paths:
+    login:
+      path: /auth/login
 
 taotao:
   boot:

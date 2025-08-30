@@ -53,7 +53,7 @@ public class AdminBizTest {
 
         ReturnT<String> returnT = adminBiz.callback(callbackParamList);
 
-        assertTrue(returnT.getCode() == ReturnT.ofSuccess()_CODE);
+        assertTrue(returnT.getCode() == ReturnT.SUCCESS_CODE);
     }
 
     /**
@@ -72,7 +72,7 @@ public class AdminBizTest {
                         "127.0.0.1:9999");
         ReturnT<String> returnT = adminBiz.registry(registryParam);
 
-        assertTrue(returnT.getCode() == ReturnT.ofSuccess()_CODE);
+        assertTrue(returnT.getCode() == ReturnT.SUCCESS_CODE);
     }
 
     /**
@@ -91,6 +91,6 @@ public class AdminBizTest {
                         "127.0.0.1:9999");
         ReturnT<String> returnT = adminBiz.registryRemove(registryParam);
 
-        assertTrue(returnT.getCode() == ReturnT.ofSuccess()_CODE);
+        assertTrue(returnT.getCode() == ReturnT.SUCCESS_CODE);
     }
 }
