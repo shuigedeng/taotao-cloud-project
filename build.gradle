@@ -90,7 +90,7 @@ buildscript {
         /* 添加插件依赖路径（通过jar方式） */
 
         //https://plugins.gradle.org/m2/com/github/spotbugs/snom/spotbugs-gradle-plugin/
-        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:6.2.5"
+        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:6.2.6"
 
         //https://github.com/spring-io/spring-javaformat/
         classpath "io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.47"
@@ -162,11 +162,11 @@ plugins {
 
     //Gradle 插件，用于将所有依赖项和项目代码折叠到一个 Jar 文件中。
     //https://plugins.gradle.org/plugin/com.gradleup.shadow
-    id "com.gradleup.shadow" version "9.0.2"
+    id "com.gradleup.shadow" version "9.1.0"
 
     //用于运行 SonarQube 分析的 Gradle 插件。
     //https://plugins.gradle.org/plugin/org.sonarqube
-    id "org.sonarqube" version "6.2.0.5505"
+    id "org.sonarqube" version "6.3.1.5724"
 
     //Spring Boot 可以轻松创建独立的、生产级的基于 Spring 的应用程序，您可以“直接运行”
     // 我们对 Spring 平台和第三方库持固执己见的看法，

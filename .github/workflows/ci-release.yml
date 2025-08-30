@@ -26,7 +26,7 @@ jobs:
     steps:
       #https://github.com/marketplace/actions/checkout
       - name: Checkout Project
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v5.0.0
 
       - name: Get tag name from ref
         shell: bash
@@ -34,7 +34,7 @@ jobs:
         id: get_tag
 
       #https://github.com/marketplace/actions/github-action-for-graalvm
-      - uses: graalvm/setup-graalvm@v1.3.3
+      - uses: graalvm/setup-graalvm@v1.3.5
         with:
           java-version: '21'
           distribution: 'graalvm'
@@ -43,7 +43,7 @@ jobs:
 
       #https://github.com/marketplace/actions/cache
       - name: Cache Gradle Packages
-        uses: actions/cache@v4.2.3
+        uses: actions/cache@v4.2.4
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
@@ -79,7 +79,7 @@ jobs:
 
       #https://github.com/ncipollo/release-action/tree/main
       #https://github.com/marketplace/actions/create-release
-      - uses: ncipollo/release-action@v1.16.0
+      - uses: ncipollo/release-action@v1.18.0
         with:
           allowUpdates: true
           artifactErrorsFailBuild: true

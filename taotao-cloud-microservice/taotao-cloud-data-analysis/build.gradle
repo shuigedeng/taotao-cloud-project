@@ -30,7 +30,7 @@ dependencies {
     //https://search.maven.org/artifact/com.google.guava/guava
     implementation "com.google.guava:guava:33.4.8-jre"
     //https://search.maven.org/artifact/com.fasterxml.jackson.core/jackson-annotations
-    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.19.2'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.20.0'
 
     //https://search.maven.org/artifact/org.apache.hbase/hbase-client
     //implementation 'org.apache.hbase:hbase-client:2.5.9-hadoop3'

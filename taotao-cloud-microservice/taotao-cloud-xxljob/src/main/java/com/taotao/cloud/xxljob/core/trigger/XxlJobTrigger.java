@@ -203,7 +203,7 @@ public class XxlJobTrigger {
                         executorRouteStrategyEnum
                                 .getRouter()
                                 .route(triggerParam, group.getRegistryList());
-                if (routeAddressResult.getCode() == ReturnT.SUCCESS_CODE) {
+                if (routeAddressResult.getCode() == ReturnT.ofSuccess()_CODE) {
                     address = routeAddressResult.getContent();
                 }
             }

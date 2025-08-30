@@ -67,7 +67,7 @@ public class UserJobHandler {
 		LogUtils.info("=============xxljob succcccccccccccccc, jobId: {}, jobParam: {}, shardIndex:{}, shardTotal:{}, jobLogFileName:{}",
 			jobId, jobParam, shardIndex, shardTotal, jobLogFileName);
 
-        return ReturnT.SUCCESS;
+        return ReturnT.ofSuccess();
     }
 
     @XxlJob("UserJobHandler")
@@ -89,7 +89,7 @@ public class UserJobHandler {
 
         // throw new RuntimeException("XXL-JOB测试异常");
 
-        return ReturnT.FAIL;
+        return ReturnT.ofFail();
     }
 
     /** 1、简单任务示例（Bean模式） */

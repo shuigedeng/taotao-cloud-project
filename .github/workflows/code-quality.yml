@@ -15,13 +15,13 @@ jobs:
     steps:
       #https://github.com/marketplace/actions/checkout
       - name: Checkout Project
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v5.0.0
         with:
           fetch-depth: 0
 
       #https://github.com/marketplace/actions/qodana-scan
       - name: Qodana Scan
-        uses: JetBrains/qodana-action@v2024.3.4
+        uses: JetBrains/qodana-action@v2025.2.1
         with:
           #args: "--project-dir ${{ github.workflow }}/taotao-cloud-microservice"
           results-dir: ${{ github.workspace }}/qodana/results

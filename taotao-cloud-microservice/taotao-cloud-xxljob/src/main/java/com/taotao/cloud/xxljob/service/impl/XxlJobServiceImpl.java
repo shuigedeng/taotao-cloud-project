@@ -455,20 +455,20 @@ public class XxlJobServiceImpl implements XxlJobService {
         exists_jobInfo.setUpdateTime(new Date());
         xxlJobInfoDao.update(exists_jobInfo);
 
-        return ReturnT.SUCCESS;
+        return ReturnT.ofSuccess();
     }
 
     @Override
     public ReturnT<String> remove(int id) {
         XxlJobInfo xxlJobInfo = xxlJobInfoDao.loadById(id);
         if (xxlJobInfo == null) {
-            return ReturnT.SUCCESS;
+            return ReturnT.ofSuccess();
         }
 
         xxlJobInfoDao.delete(id);
         xxlJobLogDao.delete(id);
         xxlJobLogGlueDao.deleteByJobId(id);
-        return ReturnT.SUCCESS;
+        return ReturnT.ofSuccess();
     }
 
     @Override
@@ -477,7 +477,7 @@ public class XxlJobServiceImpl implements XxlJobService {
         XxlJobInfo xxlJobInfo = xxlJobInfoDao.loadById(id);
         if (xxlJobInfo == null) {
             return new ReturnT<String>(
-                    ReturnT.FAIL.getCode(), I18nUtil.getString("jobinfo_glue_jobid_unvalid"));
+                    ReturnT.ofFail().getCode(), I18nUtil.getString("jobinfo_glue_jobid_unvalid"));
         }
 
         // valid
@@ -515,7 +515,7 @@ public class XxlJobServiceImpl implements XxlJobService {
 
         xxlJobInfo.setUpdateTime(new Date());
         xxlJobInfoDao.update(xxlJobInfo);
-        return ReturnT.SUCCESS;
+        return ReturnT.ofSuccess();
     }
 
     @Override
@@ -524,7 +524,7 @@ public class XxlJobServiceImpl implements XxlJobService {
         XxlJobInfo xxlJobInfo = xxlJobInfoDao.loadById(id);
         if (xxlJobInfo == null) {
             return new ReturnT<String>(
-                    ReturnT.FAIL.getCode(), I18nUtil.getString("jobinfo_glue_jobid_unvalid"));
+                    ReturnT.ofFail().getCode(), I18nUtil.getString("jobinfo_glue_jobid_unvalid"));
         }
 
         // stop
@@ -534,7 +534,7 @@ public class XxlJobServiceImpl implements XxlJobService {
 
         xxlJobInfo.setUpdateTime(new Date());
         xxlJobInfoDao.update(xxlJobInfo);
-        return ReturnT.SUCCESS;
+        return ReturnT.ofSuccess();
     }
 
     @Override
@@ -543,16 +543,16 @@ public class XxlJobServiceImpl implements XxlJobService {
         // permission
         if (loginUser == null) {
             return new ReturnT<String>(
-                    ReturnT.FAIL.getCode(), I18nUtil.getString("system_permission_limit"));
+                    ReturnT.ofFail().getCode(), I18nUtil.getString("system_permission_limit"));
         }
         XxlJobInfo xxlJobInfo = xxlJobInfoDao.loadById(jobId);
         if (xxlJobInfo == null) {
             return new ReturnT<String>(
-                    ReturnT.FAIL.getCode(), I18nUtil.getString("jobinfo_glue_jobid_unvalid"));
+                    ReturnT.ofFail().getCode(), I18nUtil.getString("jobinfo_glue_jobid_unvalid"));
         }
         if (!hasPermission(loginUser, xxlJobInfo.getJobGroup())) {
             return new ReturnT<String>(
-                    ReturnT.FAIL.getCode(), I18nUtil.getString("system_permission_limit"));
+                    ReturnT.ofFail().getCode(), I18nUtil.getString("system_permission_limit"));
         }
 
         // force cover job param
@@ -562,7 +562,7 @@ public class XxlJobServiceImpl implements XxlJobService {
 
         JobTriggerPoolHelper.trigger(
                 jobId, TriggerTypeEnum.MANUAL, -1, null, executorParam, addressList);
-        return ReturnT.SUCCESS;
+        return ReturnT.ofSuccess();
     }
 
     private boolean hasPermission(XxlJobUser loginUser, int jobGroup) {

@@ -109,7 +109,7 @@ dependencies {
     //implementation "com.github.javaparser:javaparser-symbol-solver-core:3.15.21"
     //implementation "com.esotericsoftware:kryo:4.0.0"
     //implementation "com.caucho:hessian:4.0.38"
-    //implementation "redis.clients:jedis:6.1.0"
+    //implementation "redis.clients:jedis:6.2.0"
     //implementation "com.jianggujin:IKAnalyzer-lucene:8.0.0"
     //implementation "org.lionsoul:jcseg-core:1.9.9"
     //implementation "org.apache.lucene:lucene-analyzers-common:4.2.0"

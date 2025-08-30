@@ -8,7 +8,7 @@ dependencies {
     api project(":taotao-cloud-job:taotao-cloud-job-dag")
     api project(":taotao-cloud-job:taotao-cloud-job-consistency")
 
-    api "com.baomidou:mybatis-plus-spring-boot3-starter:3.5.12"
+    api "com.baomidou:mybatis-plus-spring-boot3-starter:3.5.14"
     api("org.springframework.boot:spring-boot-starter-web") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
     }

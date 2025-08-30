@@ -127,7 +127,7 @@ public class JobUserController {
 
         // write
         xxlJobUserDao.save(xxlJobUser);
-        return ReturnT.SUCCESS;
+        return ReturnT.ofSuccess();
     }
 
     @RequestMapping("/update")
@@ -139,7 +139,7 @@ public class JobUserController {
         XxlJobUser loginUser = PermissionInterceptor.getLoginUser(request);
         if (loginUser.getUsername().equals(xxlJobUser.getUsername())) {
             return new ReturnT<String>(
-                    ReturnT.FAIL.getCode(), I18nUtil.getString("user_update_loginuser_limit"));
+                    ReturnT.ofFail().getCode(), I18nUtil.getString("user_update_loginuser_limit"));
         }
 
         // valid password
@@ -158,7 +158,7 @@ public class JobUserController {
 
         // write
         xxlJobUserDao.update(xxlJobUser);
-        return ReturnT.SUCCESS;
+        return ReturnT.ofSuccess();
     }
 
     @RequestMapping("/remove")
@@ -170,11 +170,11 @@ public class JobUserController {
         XxlJobUser loginUser = PermissionInterceptor.getLoginUser(request);
         if (loginUser.getId() == id) {
             return new ReturnT<String>(
-                    ReturnT.FAIL.getCode(), I18nUtil.getString("user_update_loginuser_limit"));
+                    ReturnT.ofFail().getCode(), I18nUtil.getString("user_update_loginuser_limit"));
         }
 
         xxlJobUserDao.delete(id);
-        return ReturnT.SUCCESS;
+        return ReturnT.ofSuccess();
     }
 
     @RequestMapping("/updatePwd")
@@ -187,13 +187,13 @@ public class JobUserController {
         // valid
         if (oldPassword == null || oldPassword.trim().length() == 0) {
             return new ReturnT<String>(
-                    ReturnT.FAIL.getCode(),
+                    ReturnT.ofFail().getCode(),
                     I18nUtil.getString("system_please_input")
                             + I18nUtil.getString("change_pwd_field_oldpwd"));
         }
         if (password == null || password.trim().length() == 0) {
             return new ReturnT<String>(
-                    ReturnT.FAIL.getCode(),
+                    ReturnT.ofFail().getCode(),
                     I18nUtil.getString("system_please_input")
                             + I18nUtil.getString("change_pwd_field_oldpwd"));
         }
@@ -212,7 +212,7 @@ public class JobUserController {
         XxlJobUser existUser = xxlJobUserDao.loadByUserName(loginUser.getUsername());
         if (!md5OldPassword.equals(existUser.getPassword())) {
             return new ReturnT<String>(
-                    ReturnT.FAIL.getCode(),
+                    ReturnT.ofFail().getCode(),
                     I18nUtil.getString("change_pwd_field_oldpwd")
                             + I18nUtil.getString("system_unvalid"));
         }
@@ -221,6 +221,6 @@ public class JobUserController {
         existUser.setPassword(md5Password);
         xxlJobUserDao.update(existUser);
 
-        return ReturnT.SUCCESS;
+        return ReturnT.ofSuccess();
     }
 }

@@ -261,7 +261,7 @@ public class JobLogController {
         if (jobInfo == null) {
             return new ReturnT<String>(500, I18nUtil.getString("jobinfo_glue_jobid_unvalid"));
         }
-        if (ReturnT.SUCCESS_CODE != log.getTriggerCode()) {
+        if (ReturnT.ofSuccess()_CODE != log.getTriggerCode()) {
             return new ReturnT<String>(500, I18nUtil.getString("joblog_kill_log_limit"));
         }
 
@@ -275,7 +275,7 @@ public class JobLogController {
             runResult = new ReturnT<String>(500, e.getMessage());
         }
 
-        if (ReturnT.SUCCESS_CODE == runResult.getCode()) {
+        if (ReturnT.ofSuccess()_CODE == runResult.getCode()) {
             log.setHandleCode(ReturnT.FAIL_CODE);
             log.setHandleMsg(
                     I18nUtil.getString("joblog_kill_log_byman")
@@ -335,6 +335,6 @@ public class JobLogController {
             }
         } while (logIds != null && logIds.size() > 0);
 
-        return ReturnT.SUCCESS;
+        return ReturnT.ofSuccess();
     }
 }

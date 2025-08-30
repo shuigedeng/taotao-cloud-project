@@ -73,10 +73,10 @@ public class Cs1DbJobHandler {
                         .start();
             }
             latch.await();
-            return ReturnT.SUCCESS;
+            return ReturnT.ofSuccess();
         } catch (InterruptedException e) {
             LogUtils.error(e);
-            return ReturnT.FAIL;
+            return ReturnT.ofFail();
         }
     }
 }

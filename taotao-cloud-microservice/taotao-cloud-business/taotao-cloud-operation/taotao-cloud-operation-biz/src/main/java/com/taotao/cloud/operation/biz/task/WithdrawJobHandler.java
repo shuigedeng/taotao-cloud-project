@@ -41,6 +41,6 @@ public class WithdrawJobHandler {
             LogUtils.info("XXL-JOB测试-----" + i);
             TimeUnit.SECONDS.sleep(2);
         }
-        return ReturnT.SUCCESS;
+        return ReturnT.ofSuccess();
     }
 }

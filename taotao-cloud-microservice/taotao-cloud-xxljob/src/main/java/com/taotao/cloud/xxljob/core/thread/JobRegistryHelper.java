@@ -239,7 +239,7 @@ public class JobRegistryHelper {
                     }
                 });
 
-        return ReturnT.SUCCESS;
+        return ReturnT.ofSuccess();
     }
 
     public ReturnT<String> registryRemove(RegistryParam registryParam) {
@@ -270,7 +270,7 @@ public class JobRegistryHelper {
                     }
                 });
 
-        return ReturnT.SUCCESS;
+        return ReturnT.ofSuccess();
     }
 
     private void freshGroupRegistryInfo(RegistryParam registryParam) {

@@ -27,13 +27,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v5.0.0
 
       - name: show release
         run: lsb_release -a
 
       #https://github.com/marketplace/actions/github-action-for-graalvm
-      - uses: graalvm/setup-graalvm@v1.3.3
+      - uses: graalvm/setup-graalvm@v1.3.5
         with:
           java-version: '21'
           distribution: 'graalvm'
@@ -79,8 +79,8 @@ jobs:
     #    os: [ macos-latest, windows-latest, ubuntu-latest ]
     #steps:
     #  - name: Checkout Project
-    #    uses: actions/checkout@v4.2.2
-    #  - uses: graalvm/setup-graalvm@v1.3.3
+    #    uses: actions/checkout@v5.0.0
+    #  - uses: graalvm/setup-graalvm@v1.3.5
     #    with:
     #      version: '22.3.2'
     #      java-version: '21'

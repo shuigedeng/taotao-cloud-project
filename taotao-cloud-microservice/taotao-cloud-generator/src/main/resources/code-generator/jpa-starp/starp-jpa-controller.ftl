@@ -39,7 +39,7 @@ public class ${classInfo.className}Controller {
     @ApiOperation(value = "save ${classInfo.className}", notes = "save ${classInfo.className}")
     public Object save(@RequestBody ${classInfo.className} ${classInfo.className?uncap_first}){
         try {
-            return ReturnT.success(${classInfo.className?uncap_first}Repository.save(${classInfo.className?uncap_first}));
+            return ReturnT.ofSuccess()(${classInfo.className?uncap_first}Repository.save(${classInfo.className?uncap_first}));
         } catch (Exception e) {
             e.printStackTrace();
             return ReturnT.error("保存失败");
@@ -94,7 +94,7 @@ public class ${classInfo.className}Controller {
                 //分页构造
                 Pageable pageable = PageRequest.of(pageNumber,pageSize);
 
-                return ReturnT.success(${classInfo.className?uncap_first}Repository.findAll(example, pageable));
+                return ReturnT.ofSuccess()(${classInfo.className?uncap_first}Repository.findAll(example, pageable));
 
             } catch (Exception e) {
                 e.printStackTrace();

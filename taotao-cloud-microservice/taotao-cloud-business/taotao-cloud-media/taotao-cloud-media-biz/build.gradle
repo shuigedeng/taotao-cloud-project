@@ -30,7 +30,7 @@ dependencies {
     //开源OCR识别框架Tess4j
     //https://tess4j.sourceforge.net/
     //https://search.maven.org/artifact/net.sourceforge.tess4j/tess4j
-    implementation "net.sourceforge.tess4j:tess4j:5.15.0"
+    implementation "net.sourceforge.tess4j:tess4j:5.16.0"
     implementation "com.google.zxing:core:3.5.3"
     implementation "com.google.zxing:javase:3.5.3"
 
@@ -49,8 +49,8 @@ dependencies {
 
     //https://search.maven.org/artifact/org.bytedeco/javacv
     //http://bytedeco.org
-    implementation "org.bytedeco:javacv:1.5.11"
-    implementation "org.bytedeco:ffmpeg:7.1-1.5.11:linux-x86_64"
+    implementation "org.bytedeco:javacv:1.5.12"
+    implementation "org.bytedeco:ffmpeg:7.1.1-1.5.12:linux-x86_64"
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"

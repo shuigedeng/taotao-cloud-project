@@ -58,10 +58,10 @@ public class EmailJobAlarm implements JobAlarm {
 
             // alarmContent
             String alarmContent = "Alarm Job LogId=" + jobLog.getId();
-            if (jobLog.getTriggerCode() != ReturnT.SUCCESS_CODE) {
+            if (jobLog.getTriggerCode() != ReturnT.ofSuccess()_CODE) {
                 alarmContent += "<br>TriggerMsg=<br>" + jobLog.getTriggerMsg();
             }
-            if (jobLog.getHandleCode() > 0 && jobLog.getHandleCode() != ReturnT.SUCCESS_CODE) {
+            if (jobLog.getHandleCode() > 0 && jobLog.getHandleCode() != ReturnT.ofSuccess()_CODE) {
                 alarmContent += "<br>HandleCode=" + jobLog.getHandleMsg();
             }
 

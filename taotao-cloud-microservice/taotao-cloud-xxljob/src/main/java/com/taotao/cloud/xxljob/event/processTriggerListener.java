@@ -89,7 +89,7 @@ public class processTriggerListener {
                         info.getId(),
                         info.getJobDesc(),
                         time,
-                        jobLog.getTriggerCode() == ReturnT.SUCCESS_CODE ? "执行成功" : "执行失败",
+                        jobLog.getTriggerCode() == ReturnT.ofSuccess()_CODE ? "执行成功" : "执行失败",
                         alarmContent);
 
         // make mail
