@@ -2,9 +2,9 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 
 WORKDIR /root
 
-ADD ./build/libs/taotao-cloud-bff-2025.09.jar ./
+ADD ./build/libs/taotao-cloud-bff-2025.10.jar ./
 
-RUN java -Djarmode=layertools -jar taotao-cloud-bff-2025.09.jar extract
+RUN java -Djarmode=layertools -jar taotao-cloud-bff-2025.10.jar extract
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:skywalking9.1.0-pyroscope0.13.0-jre-font
 FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21-skywalking-9-3-0:latest
@@ -12,7 +12,7 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 ARG SKYWALKING_BACKEND_SERVICE=127.0.0.1:11800
 ARG SKYWALKING_AGENT_AUTHENTICATION=taotao-cloud
 ARG APP_NAME=taotao-cloud-bff
-ARG APP_VERSION=2025.09
+ARG APP_VERSION=2025.10
 ARG APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ARG APP_PORT=33302
 ARG APP_PRROFILES=dev

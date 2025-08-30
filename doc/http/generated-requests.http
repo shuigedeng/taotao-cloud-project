@@ -43,7 +43,7 @@ GET http://127.0.0.1:33338/order/order/xxxx
 GET http://127.0.0.1:33338/order/order/xxxx?memberId=1&code='1221'
 
 ###
-POST http://127.0.0.1:33333/api/v2025.09/order/excel/export
+POST http://127.0.0.1:33333/api/v2025.10/order/excel/export
 Content-Type: application/json
 
 {
@@ -71,5 +71,5 @@ POST http://127.0.0.1:33337/sys/tools/email
 POST http://127.0.0.1:33337/sys/tools/setting/save
 
 ###
-POST http://127.0.0.1:33333/api/v2025.09/auth/api/test/messages
+POST http://127.0.0.1:33333/api/v2025.10/auth/api/test/messages
 Authorization: bearer eyJraWQiOiIyZTdjYjRiNC1mZDM5LTRjNjQtOGI2ZS01MDllYzBmMjlmYTMiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1ZCI6WyJjbGllbnQxIiwiY2xpZW50MiJdLCJzY29wZSI6WyJzbGRmbCIsInh4eCJdLCJpc3MiOiJodHRwczovL2Jsb2cudGFvdGFvY2xvdWQudG9wLyIsImV4cCI6MTY4ODU1NDAwNSwiaWF0IjoxNjg4NTM2MDA1fQ.Fy0YuQtzXTNjMhxI6j-EfQfPR4Q8vqxhnw0HAjDTOAm12RStnYUVPgMCpk4H4MqF3rdb3LIQSvFFjD4d_klei7OgRjMmnrgrq1v9L0YBhgs2ixXlgG1CmC6o3_-UzXWQbI9Fs7MD2h0HzhePKViEnfp7W9WdozgEuIm9RVyMJUIfSg19MyhEuJyOhnXjyKqhSsjYh4s4pyD-uprdMkS3DctjKYvm0mO62Ux-3zsWC0tMelkqtA8rqZYvx_rn8TeG8kbWX63Lp1Ojw2avsBSTKrP-PIHFfAeh-XBZiYBD0xEjA4AIhdUfdMgnAX16xDMNCGauOPueynISeREzZTC4-Q
