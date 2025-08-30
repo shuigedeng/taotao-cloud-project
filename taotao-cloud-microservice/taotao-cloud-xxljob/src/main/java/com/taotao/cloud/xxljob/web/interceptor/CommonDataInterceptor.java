@@ -4,6 +4,8 @@ import com.taotao.cloud.xxljob.util.I18nUtil;
 import com.xxl.tool.freemarker.FtlTool;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.boot.context.ApplicationPidFileWriter;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,5 +37,6 @@ public class CommonDataInterceptor implements WebMvcConfigurer {
 			}
 		}).addPathPatterns("/**");
 	}
+
 
 }
