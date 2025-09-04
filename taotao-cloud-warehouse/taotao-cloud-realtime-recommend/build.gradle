@@ -102,9 +102,9 @@ dependencies {
     implementation 'redis.clients:jedis:6.2.0'
     implementation 'org.apache.hive:hive-exec:4.1.0'
 
-    implementation 'org.apache.hadoop:hadoop-common:3.4.1'
-    implementation 'org.apache.hadoop:hadoop-client:3.4.1'
-    implementation 'org.apache.hadoop:hadoop-hdfs:3.4.1'
+    implementation 'org.apache.hadoop:hadoop-common:3.4.2'
+    implementation 'org.apache.hadoop:hadoop-client:3.4.2'
+    implementation 'org.apache.hadoop:hadoop-hdfs:3.4.2'
     //implementation 'org.apache.flink:flink-shaded-hadoop-2-uber:3.4.0'
     // https://mvnrepository.com/artifact/org.apache.flink/flink-shaded-hadoop-3-uber
     //implementation group: 'org.apache.flink', name: 'flink-shaded-hadoop-3-uber', version: '3.1.1.7.2.9.0-173-9.0'

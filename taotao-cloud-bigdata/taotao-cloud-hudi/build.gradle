@@ -49,9 +49,9 @@ dependencies {
     //implementation("org.apache.hudi:hudi-utilities_2.13:1.0.2")
     implementation("org.apache.hudi:hudi-sync:1.0.2")
 
-    implementation("org.apache.hadoop:hadoop-common:3.4.1")
-    implementation("org.apache.hadoop:hadoop-client:3.4.1")
-    implementation("org.apache.hadoop:hadoop-hdfs:3.4.1")
+    implementation("org.apache.hadoop:hadoop-common:3.4.2")
+    implementation("org.apache.hadoop:hadoop-client:3.4.2")
+    implementation("org.apache.hadoop:hadoop-hdfs:3.4.2")
 
     implementation("org.apache.hive:hive-common:4.1.0")
     implementation("org.apache.hive:hive-metastore:4.1.0") {

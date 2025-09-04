@@ -1,8 +1,8 @@
 dependencies {
-    implementation "org.apache.hadoop:hadoop-common:3.4.1"
-    implementation "org.apache.hadoop:hadoop-mapreduce-client-core:3.4.1"
-    implementation "org.apache.hadoop:hadoop-mapreduce-client-common:3.4.1"
-    implementation "org.apache.hadoop:hadoop-hdfs:3.4.1"
+    implementation "org.apache.hadoop:hadoop-common:3.4.2"
+    implementation "org.apache.hadoop:hadoop-mapreduce-client-core:3.4.2"
+    implementation "org.apache.hadoop:hadoop-mapreduce-client-common:3.4.2"
+    implementation "org.apache.hadoop:hadoop-hdfs:3.4.2"
 
     implementation "org.apache.hive:hive-exec:4.1.0"
     implementation "org.apache.hive:hive-service:4.1.0"
