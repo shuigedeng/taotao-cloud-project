@@ -31,7 +31,7 @@ spring:
       probability: 1.0
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.218.3}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true
+    url: jdbc:mysql://192.168.218.3:3306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: bigdata
     password: bigdata
@@ -51,7 +51,7 @@ spring:
         cachePrepStmts: true
         prepStmtCacheSize: 250
   kafka:
-    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:192.168.218.3}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
+    bootstrap-servers: 192.168.218.3:9092
     topic: ods_log_full
     producer:
       retries: 1
