@@ -13,7 +13,7 @@ SET 'execution.runtime-mode' = 'batch';
 CREATE CATALOG iceberg_catalog WITH (
     'type' = 'iceberg',
     'metastore' = 'hive',
-    'uri' = 'thrift://192.168.244.129:9083',
+    'uri' = 'thrift://192.168.218.3:9083',
     'hive-conf-dir' = '/opt/software/apache-hive-3.1.3-bin/conf',
     'hadoop-conf-dir' = '/opt/software/hadoop-3.1.3/etc/hadoop',
     'warehouse' = 'hdfs:////user/hive/warehouse'
@@ -47,8 +47,8 @@ CREATE TABLE IF NOT EXISTS iceberg_dwd.dwd_traffic_page_view_full(
     PRIMARY KEY (`id`,`k1` ) NOT ENFORCED
     )   PARTITIONED BY (`k1` ) WITH (
     'catalog-name'='hive_prod',
-    'uri'='thrift://192.168.244.129:9083',
-    'warehouse'='hdfs://192.168.244.129:9000/user/hive/warehouse/'
+    'uri'='thrift://192.168.218.3:9083',
+    'warehouse'='hdfs://192.168.218.3:9000/user/hive/warehouse/'
     );
 
 ALTER TABLE iceberg_dwd.dwd_traffic_page_view_full SET (

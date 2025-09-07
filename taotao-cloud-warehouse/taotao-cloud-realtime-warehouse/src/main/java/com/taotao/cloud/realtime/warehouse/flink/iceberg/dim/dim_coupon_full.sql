@@ -11,7 +11,7 @@ SET 'execution.runtime-mode' = 'streaming';
 CREATE CATALOG iceberg_catalog WITH (
     'type' = 'iceberg',
     'metastore' = 'hive',
-    'uri' = 'thrift://192.168.244.129:9083',
+    'uri' = 'thrift://192.168.218.3:9083',
     'hive-conf-dir' = '/opt/software/apache-hive-3.1.3-bin/conf',
     'hadoop-conf-dir' = '/opt/software/hadoop-3.1.3/etc/hadoop',
     'warehouse' = 'hdfs:////user/hive/warehouse'
@@ -45,8 +45,8 @@ CREATE TABLE IF NOT EXISTS iceberg_dim.dim_coupon_full(
     PRIMARY KEY (`id`,`k1` ) NOT ENFORCED
     )   PARTITIONED BY (`k1` ) WITH (
     'catalog-name'='hive_prod',
-    'uri'='thrift://192.168.244.129:9083',
-    'warehouse'='hdfs://192.168.244.129:9000/user/hive/warehouse/'
+    'uri'='thrift://192.168.218.3:9083',
+    'warehouse'='hdfs://192.168.218.3:9000/user/hive/warehouse/'
    );
 
 insert into iceberg_dim.dim_coupon_full /*+ OPTIONS('upsert-enabled'='true') */ (id, k1, coupon_name, coupon_type_code, coupon_type_name, condition_amount, condition_num, activity_id, benefit_amount, benefit_discount, benefit_rule, create_time, range_type_code, range_type_name, limit_num, taken_count, start_time, end_time, operate_time, expire_time)

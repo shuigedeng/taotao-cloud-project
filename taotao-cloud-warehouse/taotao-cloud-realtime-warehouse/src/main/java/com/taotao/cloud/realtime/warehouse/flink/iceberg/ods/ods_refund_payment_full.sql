@@ -23,7 +23,7 @@ CREATE TABLE refund_payment_full_mq (
 ) WITH (
       'connector' = 'mysql-cdc',
       'scan.startup.mode' = 'earliest-offset',
-      'hostname' = '192.168.244.129',
+      'hostname' = '192.168.218.3',
       'port' = '3306',
       'username' = 'root',
       'password' = '',
@@ -35,7 +35,7 @@ CREATE TABLE refund_payment_full_mq (
 CREATE CATALOG iceberg_catalog WITH (
     'type' = 'iceberg',
     'metastore' = 'hive',
-    'uri' = 'thrift://192.168.244.129:9083',
+    'uri' = 'thrift://192.168.218.3:9083',
     'hive-conf-dir' = '/opt/software/apache-hive-3.1.3-bin/conf',
     'hadoop-conf-dir' = '/opt/software/hadoop-3.1.3/etc/hadoop',
     'warehouse' = 'hdfs:////user/hive/warehouse'
@@ -63,8 +63,8 @@ CREATE TABLE IF NOT EXISTS iceberg_ods.ods_refund_payment_full(
     PRIMARY KEY (`id`,`k1` ) NOT ENFORCED
     )   PARTITIONED BY (`k1` ) WITH (
     'catalog-name'='hive_prod',
-    'uri'='thrift://192.168.244.129:9083',
-    'warehouse'='hdfs://192.168.244.129:9000/user/hive/warehouse/'
+    'uri'='thrift://192.168.218.3:9083',
+    'warehouse'='hdfs://192.168.218.3:9000/user/hive/warehouse/'
    );
 
 INSERT INTO iceberg_ods.ods_refund_payment_full  /*+ OPTIONS('upsert-enabled'='true') */(

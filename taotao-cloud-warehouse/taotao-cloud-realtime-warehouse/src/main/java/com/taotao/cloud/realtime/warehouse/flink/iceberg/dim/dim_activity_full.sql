@@ -11,7 +11,7 @@ SET 'execution.runtime-mode' = 'streaming';
 CREATE CATALOG iceberg_catalog WITH (
     'type' = 'iceberg',
     'metastore' = 'hive',
-    'uri' = 'thrift://192.168.244.129:9083',
+    'uri' = 'thrift://192.168.218.3:9083',
     'hive-conf-dir' = '/opt/software/apache-hive-3.1.3-bin/conf',
     'hadoop-conf-dir' = '/opt/software/hadoop-3.1.3/etc/hadoop',
     'warehouse' = 'hdfs:////user/hive/warehouse'
@@ -41,8 +41,8 @@ CREATE TABLE IF NOT EXISTS iceberg_dim.dim_activity_full(
     PRIMARY KEY (`activity_rule_id`,`activity_id`,`k1` ) NOT ENFORCED
     )   PARTITIONED BY (`k1` ) WITH (
     'catalog-name'='hive_prod',
-    'uri'='thrift://192.168.244.129:9083',
-    'warehouse'='hdfs://192.168.244.129:9000/user/hive/warehouse/'
+    'uri'='thrift://192.168.218.3:9083',
+    'warehouse'='hdfs://192.168.218.3:9000/user/hive/warehouse/'
     );
 
 insert into iceberg_dim.dim_activity_full /*+ OPTIONS('upsert-enabled'='true') */(

@@ -11,7 +11,7 @@ SET 'table.exec.sink.upsert-materialize' = 'NONE';
 CREATE CATALOG paimon_hive WITH (
     'type' = 'paimon',
     'metastore' = 'hive',
-    'uri' = 'thrift://192.168.244.129:9083',
+    'uri' = 'thrift://192.168.218.3:9083',
     'hive-conf-dir' = '/opt/software/apache-hive-3.1.3-bin/conf',
     'hadoop-conf-dir' = '/opt/software/hadoop-3.1.3/etc/hadoop',
     'warehouse' = 'hdfs:////user/hive/warehouse'

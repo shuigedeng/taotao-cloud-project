@@ -63,7 +63,7 @@ spring:
     name: user-log-generator
 
 kafka:
-  bootstrap-servers: 192.168.244.129:9092
+  bootstrap-servers: 192.168.218.3:9092
   topic: ODS_BASE_LOG
   
 generator:
@@ -89,7 +89,7 @@ java -jar target/data-warehouse-learning-1.0-SNAPSHOT.jar
 4. 验证数据：
 ```bash
 # 使用Kafka消费者查看生成的数据
-kafka-console-consumer.sh --bootstrap-server 192.168.244.129:9092 --topic ODS_BASE_LOG --from-beginning
+kafka-console-consumer.sh --bootstrap-server 192.168.218.3:9092 --topic ODS_BASE_LOG --from-beginning
 ```
 
 ## 数据生成规则

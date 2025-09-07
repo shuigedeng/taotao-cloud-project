@@ -20,7 +20,7 @@ CREATE TABLE kafka_source (
 ) WITH (
     'connector' = 'kafka',
     'topic' = 'ODS_BASE_LOG',
-    'properties.bootstrap.servers' = '192.168.244.129:9092',
+    'properties.bootstrap.servers' = '192.168.218.3:9092',
     'properties.group.id' = 'ODS_BASE_LOG',
     -- 'scan.startup.mode' = 'group-offsets',
     'scan.startup.mode' = 'earliest-offset',
@@ -34,7 +34,7 @@ CREATE TABLE kafka_source (
 CREATE CATALOG iceberg_catalog WITH (
     'type' = 'iceberg',
     'metastore' = 'hive',
-    'uri' = 'thrift://192.168.244.129:9083',
+    'uri' = 'thrift://192.168.218.3:9083',
     'hive-conf-dir' = '/opt/software/apache-hive-3.1.3-bin/conf',
     'hadoop-conf-dir' = '/opt/software/hadoop-3.1.3/etc/hadoop',
     'warehouse' = 'hdfs:////user/hive/warehouse'

@@ -17,7 +17,7 @@ CREATE TABLE sku_attr_value_full_mq (
 ) WITH (
     'connector' = 'mysql-cdc',
     'scan.startup.mode' = 'earliest-offset',
-    'hostname' = '192.168.244.129',
+    'hostname' = '192.168.218.3',
     'port' = '3306',
     'username' = 'root',
     'password' = '',
