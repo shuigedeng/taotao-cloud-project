@@ -1,4 +1,4 @@
-description = "系统中心"
+description = "系统模块"
 
 allprojects {
     configurations {

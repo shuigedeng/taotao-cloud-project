@@ -77,9 +77,13 @@ dependencies {
 //    }
 //}
 
-//mainClassName = "com.taotao.cloud.order.biz.TaoTaoCloudOrderApplication"
-description = "订单中心biz"
-//archivesBaseName = 'taotao-cloud-order'
+
+application {
+    //指定应用程序的入口点（主类）
+    mainClass = "com.taotao.cloud.order.biz.TaoTaoCloudOrderApplication"
+    applicationName = "taotao-cloud-order"
+}
+description = "订单模块biz"
 
 configurations {
     configureEach {

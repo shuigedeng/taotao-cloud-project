@@ -40,7 +40,7 @@ application {
     applicationName = "taotao-cloud-xxljob"
 }
 
-description = "xxljob中心"
+description = "xxljob模块"
 
 configurations {
     configureEach {

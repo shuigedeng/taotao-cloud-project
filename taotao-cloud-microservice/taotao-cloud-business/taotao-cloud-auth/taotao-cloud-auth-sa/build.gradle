@@ -44,7 +44,7 @@ dependencies {
 }
 
 //mainClassName = "com.taotao.cloud.sa.biz.TaoTaoCloudSaJustApplication"
-description = "sa认证中心biz"
+description = "sa认证模块biz"
 //archivesBaseName = 'taotao-cloud-sajust'
 
 configurations {

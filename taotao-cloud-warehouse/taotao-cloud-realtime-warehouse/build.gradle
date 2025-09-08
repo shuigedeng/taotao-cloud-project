@@ -196,7 +196,10 @@ configurations {
 application {
     //指定应用程序的入口点（主类）
     mainClass = "com.taotao.cloud.realtime.warehouse.datageneration.DataGenerationApplication"
+    applicationName = "taotao-cloud-realtime-warehouse-datageneration"
 }
+
+description = "实时数仓模块"
 
 tasks.withType(ScalaCompile).configureEach {
     scalaCompileOptions.additionalParameters = ['-unchecked', '-deprecation']

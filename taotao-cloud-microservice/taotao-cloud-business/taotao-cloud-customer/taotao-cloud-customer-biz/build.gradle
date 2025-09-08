@@ -38,9 +38,12 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
-//mainClassName = "com.taotao.cloud.customer.biz.TaoTaoCloudCustomerApplication"
-description = "客服中心biz"
-//archivesBaseName = 'taotao-cloud-customer'
+application {
+    //指定应用程序的入口点（主类）
+    mainClass = "com.taotao.cloud.customer.biz.TaoTaoCloudCustomerApplication"
+    applicationName = "taotao-cloud-customer"
+}
+description = "客服模块biz"
 
 configurations {
     configureEach {

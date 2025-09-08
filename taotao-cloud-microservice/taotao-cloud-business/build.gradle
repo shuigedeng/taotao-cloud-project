@@ -6,7 +6,7 @@
 //    apply from: rootProject.file('gradle/mybatis-generator.gradle')
 //}
 
-description = "业务中心"
+description = "业务模块"
 
 configure(subprojects.findAll { (it.name.endsWith("-api")) }) { project ->
 

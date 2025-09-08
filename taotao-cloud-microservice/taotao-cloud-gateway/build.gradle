@@ -103,12 +103,16 @@ configurations {
     }
 }
 
-//mainClassName = "com.taotao.cloud.gateway.TaoTaoCloudGatewayApplication"
-description = "网关中心"
-//archivesBaseName = 'taotao-cloud-gateway'
+application {
+    //指定应用程序的入口点（主类）
+    mainClass = "com.taotao.cloud.gateway.TaoTaoCloudGatewayApplication"
+    applicationName = "taotao-cloud-gateway"
+}
+
+description = "网关模块"
 
 
-//apache-shenyu网关中心配置
+//apache-shenyu网关模块配置
 //dependencies {
 //    implementation "io.github.shuigedeng:taotao-boot-starter-core"
 //    implementation "io.github.shuigedeng:taotao-boot-starter-monitor"
@@ -190,7 +194,7 @@ description = "网关中心"
 //}
 //
 //mainClassName = "com.taotao.cloud.gateway.shenyu.TaoTaoCloudGatewayShenyuApplication"
-//description = "基于apache-shenyu网关中心"
+//description = "基于apache-shenyu网关模块"
 //archivesBaseName = 'taotao-cloud-gateway-shenyu'
 
 

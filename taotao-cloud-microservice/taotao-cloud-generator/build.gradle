@@ -26,9 +26,13 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
-//mainClassName = "com.taotao.cloud.generator.TaoTaoCloudGeneratorApplication"
-description = "代码生成器中心biz"
-//archivesBaseName = 'taotao-cloud-generator'
+application {
+    //指定应用程序的入口点（主类）
+    mainClass = "com.taotao.cloud.generator.TaoTaoCloudGeneratorApplication"
+    applicationName = "taotao-cloud-generator"
+}
+
+description = "代码生成器模块"
 
 configurations {
     configureEach {

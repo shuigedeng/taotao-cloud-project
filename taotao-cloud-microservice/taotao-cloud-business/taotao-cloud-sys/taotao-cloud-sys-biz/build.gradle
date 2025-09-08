@@ -129,9 +129,12 @@ dependencies {
     //}
 }
 
-//mainClassName = "com.taotao.cloud.sys.biz.TaoTaoCloudSysApplication"
-description = "系统中心biz"
-//archivesBaseName = 'taotao-cloud-sys'
+application {
+    //指定应用程序的入口点（主类）
+    mainClass = "com.taotao.cloud.sys.biz.TaoTaoCloudSysApplication"
+    applicationName = "taotao-cloud-sys"
+}
+description = "系统模块biz"
 
 configurations {
     configureEach {

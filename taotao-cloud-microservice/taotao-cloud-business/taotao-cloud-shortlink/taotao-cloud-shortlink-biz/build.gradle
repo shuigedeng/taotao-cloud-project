@@ -33,9 +33,12 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
-//mainClassName = "com.taotao.cloud.shortlink.biz.TaoTaoCloudShortlinkApplication"
-description = "短链接中心biz"
-//archivesBaseName = 'taotao-cloud-shortlink'
+application {
+    //指定应用程序的入口点（主类）
+    mainClass = "com.taotao.cloud.shortlink.biz.TaoTaoCloudShortlinkApplication"
+    applicationName = "taotao-cloud-shortlink"
+}
+description = "短链接模块biz"
 
 configurations {
     configureEach {

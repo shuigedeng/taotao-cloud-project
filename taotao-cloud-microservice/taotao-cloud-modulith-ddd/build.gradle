@@ -61,9 +61,13 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-//mainClassName = "com.taotao.cloud.modulith.TaoTaoCloudModulithApplication"
-description = "Modulith中心"
-//archivesBaseName = 'taotao-cloud-modulith'
+application {
+    //指定应用程序的入口点（主类）
+    mainClass = "com.taotao.cloud.modulith.TaoTaoCloudModulithApplication"
+    applicationName = "taotao-cloud-modulith"
+}
+
+description = "Modulith DDD模块"
 
 configurations {
     configureEach {

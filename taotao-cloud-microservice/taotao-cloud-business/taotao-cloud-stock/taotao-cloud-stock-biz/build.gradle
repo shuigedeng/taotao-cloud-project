@@ -33,9 +33,12 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
-//mainClassName = "com.taotao.cloud.stock.biz.TaoTaoCloudStockApplication"
-description = "库存中心biz"
-//archivesBaseName = 'taotao-cloud-stock'
+application {
+    //指定应用程序的入口点（主类）
+    mainClass = "com.taotao.cloud.stock.biz.TaoTaoCloudStockApplication"
+    applicationName = "taotao-cloud-stock"
+}
+description = "库存模块biz"
 
 configurations {
     configureEach {

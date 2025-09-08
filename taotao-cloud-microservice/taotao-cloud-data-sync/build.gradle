@@ -194,9 +194,13 @@ dependencies {
     implementation "com.alibaba.fastjson2:fastjson2:2.0.58"
 }
 
-//mainClassName = "com.taotao.cloud.data.sync.TaoTaoCloudDataSyncApplication"
-description = "数据同步中心"
-//archivesBaseName = 'taotao-cloud-data-sync'
+application {
+    //指定应用程序的入口点（主类）
+    mainClass = "com.taotao.cloud.data.sync.TaoTaoCloudDataSyncApplication"
+    applicationName = "taotao-cloud-data-sync"
+}
+
+description = "数据同步模块"
 
 configurations {
     configureEach {
