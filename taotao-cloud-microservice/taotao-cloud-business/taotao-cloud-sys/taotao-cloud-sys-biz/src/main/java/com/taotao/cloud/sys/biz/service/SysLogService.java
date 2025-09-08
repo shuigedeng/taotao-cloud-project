@@ -17,5 +17,8 @@
 package com.taotao.cloud.sys.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.sys.biz.model.entity.SysLog;
 
-public interface SysLogService extends IService<SysLog> {}
+public interface SysLogService extends IService<SysLog> {
+
+}

@@ -44,7 +44,8 @@ public class OperateLogController {
 	@Operation(summary = "分页")
 	@GetMapping("/page")
 	public Result<PageResult<OperateLogDto>> page(OperateLogParam operateLogParam) {
-		return Result.success(operateLogService.page(operateLogParam));
+//		return Result.success(operateLogService.page(operateLogParam));
+		return null;
 	}
 
 	@Operation(summary = "获取")

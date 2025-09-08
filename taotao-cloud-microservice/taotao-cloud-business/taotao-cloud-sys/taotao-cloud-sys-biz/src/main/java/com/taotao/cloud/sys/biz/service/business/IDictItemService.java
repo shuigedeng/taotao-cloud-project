@@ -32,7 +32,7 @@ import org.springframework.data.domain.Pageable;
  * @version 2021.10
  * @since 2021-10-09 20:32:47
  */
-public interface IDictItemService extends BaseSuperService<DictItem, Long> {
+public interface IDictItemService {
 
     /**
      * 根据字典id删除字典项

@@ -16,14 +16,14 @@
 
 package com.taotao.cloud.sys.biz.supports.core.db.convert;
 
-import com.taotao.cloud.log.biz.log.core.db.entity.DataVersionLogDb;
-import com.taotao.cloud.log.biz.log.core.db.entity.LoginLogDb;
-import com.taotao.cloud.log.biz.log.core.db.entity.OperateLogDb;
-import com.taotao.cloud.log.biz.log.dto.DataVersionLogDto;
-import com.taotao.cloud.log.biz.log.dto.LoginLogDto;
-import com.taotao.cloud.log.biz.log.dto.OperateLogDto;
-import com.taotao.cloud.log.biz.log.param.LoginLogParam;
-import com.taotao.cloud.log.biz.log.param.OperateLogParam;
+import com.taotao.cloud.sys.biz.model.dto.DataVersionLogDto;
+import com.taotao.cloud.sys.biz.model.dto.LoginLogDto;
+import com.taotao.cloud.sys.biz.model.dto.OperateLogDto;
+import com.taotao.cloud.sys.biz.model.param.LoginLogParam;
+import com.taotao.cloud.sys.biz.model.param.OperateLogParam;
+import com.taotao.cloud.sys.biz.supports.core.db.entity.DataVersionLogDb;
+import com.taotao.cloud.sys.biz.supports.core.db.entity.LoginLogDb;
+import com.taotao.cloud.sys.biz.supports.core.db.entity.OperateLogDb;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -35,15 +35,16 @@ import org.mapstruct.factory.Mappers;
  */
 @Mapper
 public interface LogConvert {
-    LogConvert CONVERT = Mappers.getMapper(LogConvert.class);
 
-    OperateLogDto convert(OperateLogDb in);
+	LogConvert CONVERT = Mappers.getMapper(LogConvert.class);
 
-    LoginLogDto convert(LoginLogDb in);
+	OperateLogDto convert(OperateLogDb in);
 
-    OperateLogDb convert(OperateLogParam in);
+	LoginLogDto convert(LoginLogDb in);
 
-    LoginLogDb convert(LoginLogParam in);
+	OperateLogDb convert(OperateLogParam in);
 
-    DataVersionLogDto convert(DataVersionLogDb in);
+	LoginLogDb convert(LoginLogParam in);
+
+	DataVersionLogDto convert(DataVersionLogDb in);
 }

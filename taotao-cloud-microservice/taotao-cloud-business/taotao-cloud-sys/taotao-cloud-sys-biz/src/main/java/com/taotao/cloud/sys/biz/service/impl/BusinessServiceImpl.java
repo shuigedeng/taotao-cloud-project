@@ -1,10 +1,9 @@
 package com.taotao.cloud.sys.biz.service.impl;
 
-import com.taotao.cloud.file.biz.service.IBussinessService;
+import com.taotao.cloud.sys.biz.service.IBussinessService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.seata.core.context.RootContext;
 import org.apache.seata.spring.annotation.GlobalTransactional;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 //https://blog.csdn.net/weixin_46209120/article/details/132223385
@@ -19,11 +18,11 @@ public class BusinessServiceImpl implements IBussinessService {
 //    @Autowired
 //    private OrderService orderService;
 
-    @Override
-    @GlobalTransactional(name="createOrder",rollbackFor=Exception.class)
-    public boolean saveOrder() {
-        log.info("=============用户下单=================");
-        log.info("当前 XID: {}", RootContext.getXID());
+	@Override
+	@GlobalTransactional(name = "createOrder", rollbackFor = Exception.class)
+	public boolean saveOrder() {
+		log.info("=============用户下单=================");
+		log.info("当前 XID: {}", RootContext.getXID());
 
 //        //获取全局唯一订单号
 //        Long orderId = UUIDGenerator.generateUUID();
@@ -33,6 +32,6 @@ public class BusinessServiceImpl implements IBussinessService {
 //        storageFeignService.deduct(orderVo.getCommodityCode(), orderVo.getCount());
 //        //扣减余额
 //        accountFeignService.debit(orderVo.getUserId(), orderVo.getMoney());
-        return true;
-    }
+		return true;
+	}
 }

@@ -16,11 +16,14 @@
 
 package com.taotao.cloud.shortlink.biz.config.redis;
 
-import com.taotao.boot.common.constant.RedisConstant;
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.boot.core.configuration.MonitorAutoConfiguration.MonitorThreadPoolExecutor;
-import com.taotao.boot.core.configuration.MonitorAutoConfiguration.MonitorThreadPoolFactory;
 import com.taotao.cloud.shortlink.biz.config.redis.delegate.RequestLogTopicMessageDelegate;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.TimeUnit;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -32,13 +35,6 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.Topic;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.SynchronousQueue;
-import java.util.concurrent.TimeUnit;
-
 /**
  * RedisListenerConfig
  *
@@ -49,53 +45,53 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class RedisListenerConfig {
 
-    @Bean
-    @Primary
-    public RedisMessageListenerContainer redisMessageListenerContainer(
-            RedisConnectionFactory redisConnectionFactory,
-            RequestLogTopicMessageDelegate requestLogTopicMessageDelegate) {
+	@Bean
+	@Primary
+	public RedisMessageListenerContainer redisMessageListenerContainer(
+		RedisConnectionFactory redisConnectionFactory,
+		RequestLogTopicMessageDelegate requestLogTopicMessageDelegate) {
 
-        RedisMessageListenerContainer container = new RedisMessageListenerContainer();
-        container.setConnectionFactory(redisConnectionFactory);
+		RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+		container.setConnectionFactory(redisConnectionFactory);
 
-        // Runtime.getRuntime().availableProcessors() * 2
-        MonitorThreadPoolExecutor executor = new MonitorThreadPoolExecutor(
-                100,
-                1500,
-                2000,
-                TimeUnit.SECONDS,
-                new SynchronousQueue<>(),
-                new MonitorThreadPoolFactory("taotao-cloud-redis-listener-executor"));
-        executor.setNamePrefix("taotao-cloud-redis-listener-executor");
-        container.setTaskExecutor(executor);
+		// Runtime.getRuntime().availableProcessors() * 2
+		MonitorThreadPoolExecutor executor = new MonitorThreadPoolExecutor(
+			100,
+			1500,
+			2000,
+			TimeUnit.SECONDS,
+			new SynchronousQueue<>(),
+			new MonitorThreadPoolFactory("taotao-cloud-redis-listener-executor"));
+		executor.setNamePrefix("taotao-cloud-redis-listener-executor");
+		container.setTaskExecutor(executor);
 
-        Map<MessageListenerAdapter, Collection<? extends Topic>> listeners = new HashMap<>();
+		Map<MessageListenerAdapter, Collection<? extends Topic>> listeners = new HashMap<>();
 
-        MessageListenerAdapter handleRequestLog =
-                new MessageListenerAdapter(requestLogTopicMessageDelegate, "handleRequestLog");
-        handleRequestLog.afterPropertiesSet();
-        listeners.put(handleRequestLog, List.of(ChannelTopic.of(RedisConstant.REQUEST_LOG_TOPIC)));
+		MessageListenerAdapter handleRequestLog =
+			new MessageListenerAdapter(requestLogTopicMessageDelegate, "handleRequestLog");
+		handleRequestLog.afterPropertiesSet();
+		listeners.put(handleRequestLog, List.of(ChannelTopic.of(RedisConstant.REQUEST_LOG_TOPIC)));
 
-        container.setMessageListeners(listeners);
-        return container;
-    }
+		container.setMessageListeners(listeners);
+		return container;
+	}
 
-    @Bean
-    @Primary
-    public KeyExpirationEventMessageListener keyExpirationEventMessageListener(
-            RedisMessageListenerContainer listenerContainer) {
-        return new RedisKeyExpirationEventMessageListener(listenerContainer);
-    }
+	@Bean
+	@Primary
+	public KeyExpirationEventMessageListener keyExpirationEventMessageListener(
+		RedisMessageListenerContainer listenerContainer) {
+		return new RedisKeyExpirationEventMessageListener(listenerContainer);
+	}
 
-    public static class RedisKeyExpirationEventMessageListener extends KeyExpirationEventMessageListener {
+	public static class RedisKeyExpirationEventMessageListener extends KeyExpirationEventMessageListener {
 
-        public RedisKeyExpirationEventMessageListener(RedisMessageListenerContainer listenerContainer) {
-            super(listenerContainer);
-        }
+		public RedisKeyExpirationEventMessageListener(RedisMessageListenerContainer listenerContainer) {
+			super(listenerContainer);
+		}
 
-        @Override
-        public void onMessage(Message message, byte[] pattern) {
-            LogUtils.info("接受到消息: {}, {}", message, new String(pattern));
-        }
-    }
+		@Override
+		public void onMessage(Message message, byte[] pattern) {
+			LogUtils.info("接受到消息: {}, {}", message, new String(pattern));
+		}
+	}
 }

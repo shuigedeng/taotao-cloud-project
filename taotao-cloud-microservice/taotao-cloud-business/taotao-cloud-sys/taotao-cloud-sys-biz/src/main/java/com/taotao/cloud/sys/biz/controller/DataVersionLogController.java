@@ -37,17 +37,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/log/dataVersion")
 @RequiredArgsConstructor
 public class DataVersionLogController {
-	private final DataVersionLogService service;
-
-	@Operation(summary = "分页")
-	@GetMapping("/page")
-	public Result<PageResult<DataVersionLogDto>> page(DataVersionLogParam param) {
-		return Result.success(service.page(param));
-	}
-
-	@Operation(summary = "获取")
-	@GetMapping("/findById")
-	public Result<DataVersionLogDto> findById(Long id) {
-		return Result.success(service.findById(id));
-	}
+//	private final DataVersionLogService service;
+//
+//	@Operation(summary = "分页")
+//	@GetMapping("/page")
+//	public Result<PageResult<DataVersionLogDto>> page(DataVersionLogParam param) {
+//		return Result.success(service.page(param));
+//	}
+//
+//	@Operation(summary = "获取")
+//	@GetMapping("/findById")
+//	public Result<DataVersionLogDto> findById(Long id) {
+//		return Result.success(service.findById(id));
+//	}
 }

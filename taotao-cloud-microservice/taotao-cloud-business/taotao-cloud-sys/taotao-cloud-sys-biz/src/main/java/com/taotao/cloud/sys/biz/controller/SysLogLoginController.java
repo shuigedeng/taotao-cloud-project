@@ -54,7 +54,8 @@ public class SysLogLoginController {
     // @ApiOperation(value = "分页查询", notes = "分页查询")
     public Result<Page> page(Page page, SysLogLogin sysLogLogin) {
         page.setOrders(Arrays.asList(OrderItem.desc("login_time")));
-        return Result.success(sysLogLoginService.page(page, Wrappers.query(sysLogLogin)));
+//        return Result.success(sysLogLoginService.page(page, Wrappers.query(sysLogLogin)));
+		return null;
     }
 
     /**
@@ -80,7 +81,8 @@ public class SysLogLoginController {
     @PostMapping
     // @ApiOperation(value = "新增", notes = "新增")
     public Result<Boolean> save(@RequestBody SysLogLogin sysLogLogin) {
-        return Result.success(sysLogLoginService.save(sysLogLogin));
+//        return Result.success(sysLogLoginService.save(sysLogLogin));
+		return null;
     }
 
     /**
@@ -94,7 +96,8 @@ public class SysLogLoginController {
     // @ApiOperation(value = "修改", notes = "修改")
     @PreAuthorize("@authorize.hasPermission('sys_editor_sysLogLogin')")
     public Result<Boolean> update(@RequestBody SysLogLogin sysLogLogin) {
-        return Result.success(sysLogLoginService.updateById(sysLogLogin));
+//        return Result.success(sysLogLoginService.updateById(sysLogLogin));
+		return null;
     }
 
     /**

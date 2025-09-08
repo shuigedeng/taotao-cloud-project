@@ -17,33 +17,34 @@
 package com.taotao.cloud.sys.biz.service;
 
 import com.taotao.boot.common.model.PageResult;
-import com.taotao.cloud.log.biz.log.dto.OperateLogDto;
-import com.taotao.cloud.log.biz.log.param.OperateLogParam;
+import com.taotao.cloud.sys.biz.model.dto.OperateLogDto;
+import com.taotao.cloud.sys.biz.model.param.OperateLogParam;
 
 /**
  * 操作日志
+ *
  * @author shuigedeng
  * @since 2021/8/12
  */
 public interface OperateLogService {
 
-    /**
-     * 添加
-     */
-    void add(OperateLogParam operateLog);
+	/**
+	 * 添加
+	 */
+	void add(OperateLogParam operateLog);
 
-    /**
-     * 获取
-     */
-    OperateLogDto findById(Long id);
+	/**
+	 * 获取
+	 */
+	OperateLogDto findById(Long id);
 
-    /**
-     * 分页
-     */
-    PageResult<OperateLogDto> page(OperateLogParam operateLogParam);
+	/**
+	 * 分页
+	 */
+	PageResult<OperateLogDto> page(OperateLogParam operateLogParam);
 
-    /**
-     * 删除
-     */
-    void delete(Long id);
+	/**
+	 * 删除
+	 */
+	void delete(Long id);
 }

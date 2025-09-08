@@ -16,8 +16,11 @@
 
 package com.taotao.cloud.sys.biz.service;
 
-import org.springframework.web.multipart.MultipartFile;
+import com.taotao.cloud.sys.api.model.vo.UploadFileVO;
+import com.taotao.cloud.sys.biz.model.entity.File;
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
+
 /**
  * 文件服务信息
  *
@@ -78,5 +81,5 @@ public interface IFileService {
 
 	boolean testSeata();
 
-    void test(long fileId);
+	void test(long fileId);
 }

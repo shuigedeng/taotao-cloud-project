@@ -18,7 +18,6 @@ package com.taotao.cloud.sys.biz.service.dubbo;
 
 import com.taotao.cloud.sys.api.dubbo.UserRpcService;
 import com.taotao.cloud.sys.biz.mapper.IUserMapper;
-import com.taotao.cloud.sys.biz.model.entity.system.QUser;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
 import com.taotao.cloud.sys.biz.repository.cls.UserRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IUserRepository;
@@ -37,10 +36,9 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 @DubboService(interfaceClass = UserRpcService.class, validation = "true")
-public class DubboUserRpcServiceImpl extends BaseSuperServiceImpl< User, Long,IUserMapper, UserRepository, IUserRepository>
+public class DubboUserRpcServiceImpl
         implements UserRpcService {
 
-    private static final QUser USER = QUser.user;
 
     private static final String DEFAULT_PASSWORD = "123456";
     private static final String DEFAULT_USERNAME = "admin";

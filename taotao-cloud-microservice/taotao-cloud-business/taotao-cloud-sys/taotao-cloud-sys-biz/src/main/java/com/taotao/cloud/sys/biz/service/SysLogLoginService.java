@@ -17,6 +17,7 @@
 package com.taotao.cloud.sys.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.sys.biz.model.entity.SysLogLogin;
 
 /**
  * @program: logs
@@ -24,4 +25,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author: Sinda
  * @create: 2022-03-19 20:42:34
  */
-public interface SysLogLoginService extends IService<SysLogLogin> {}
+public interface SysLogLoginService extends IService<SysLogLogin> {
+
+}

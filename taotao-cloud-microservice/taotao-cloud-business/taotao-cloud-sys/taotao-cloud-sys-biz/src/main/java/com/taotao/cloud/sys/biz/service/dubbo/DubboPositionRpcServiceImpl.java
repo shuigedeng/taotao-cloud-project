@@ -37,5 +37,5 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @DubboService(interfaceClass = PositionRpcService.class, validation = "true")
 public class DubboPositionRpcServiceImpl
-        extends BaseSuperServiceImpl< Position, Long,IPositionMapper, JobRepository, IJobRepository>
+
         implements PositionRpcService {}

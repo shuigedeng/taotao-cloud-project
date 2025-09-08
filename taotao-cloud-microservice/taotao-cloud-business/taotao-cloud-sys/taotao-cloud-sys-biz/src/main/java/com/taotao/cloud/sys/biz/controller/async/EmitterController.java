@@ -1,6 +1,10 @@
 package com.taotao.cloud.sys.biz.controller.async;
 
+import java.io.IOException;
+import java.time.LocalTime;
+import java.util.Date;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
@@ -76,7 +80,7 @@ public class EmitterController {
 					writer.flush();
 					Thread.sleep(500);
 				}
-			} catch (IOException | InterruptedException e) {
+			} catch (InterruptedException e) {
 				// 处理异常
 				e.printStackTrace();
 			}

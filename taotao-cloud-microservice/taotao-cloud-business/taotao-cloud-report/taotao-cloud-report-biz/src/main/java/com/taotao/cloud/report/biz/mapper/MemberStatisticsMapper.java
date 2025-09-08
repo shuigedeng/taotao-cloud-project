@@ -18,13 +18,14 @@ package com.taotao.cloud.report.biz.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.taotao.boot.webagg.mapper.BaseSuperMapper;
 import com.taotao.cloud.report.biz.model.entity.MemberStatisticsData;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /** 会员统计数据处理层 */
-public interface MemberStatisticsMapper extends BaseSuperMapper<MemberStatisticsData> {
+public interface MemberStatisticsMapper  {
 
     /**
      * 获取会员统计数量
@@ -40,6 +41,6 @@ public interface MemberStatisticsMapper extends BaseSuperMapper<MemberStatistics
      *
      * @return 会员分布列表
      */
-    @Select("select client_enum,count(0) as num from tt_member group by client_enum")
-    List<MemberDistributionVO> distribution();
+//    @Select("select client_enum,count(0) as num from tt_member group by client_enum")
+//    List<MemberDistributionVO> distribution();
 }

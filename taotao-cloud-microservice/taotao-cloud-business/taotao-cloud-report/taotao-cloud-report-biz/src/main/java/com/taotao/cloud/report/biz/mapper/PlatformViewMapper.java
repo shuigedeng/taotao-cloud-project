@@ -23,7 +23,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /** 平台流量数据 */
-public interface PlatformViewMapper extends BaseSuperMapper<PlatformViewData> {
+public interface PlatformViewMapper  {
     /**
      * UV流量统计
      *

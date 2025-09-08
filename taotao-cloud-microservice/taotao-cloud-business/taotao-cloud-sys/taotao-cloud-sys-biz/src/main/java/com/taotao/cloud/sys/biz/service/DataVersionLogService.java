@@ -17,32 +17,34 @@
 package com.taotao.cloud.sys.biz.service;
 
 import com.taotao.boot.common.model.PageResult;
-import com.taotao.cloud.log.biz.log.dto.DataVersionLogDto;
-import com.taotao.cloud.log.biz.log.param.DataVersionLogParam;
+import com.taotao.cloud.sys.biz.model.dto.DataVersionLogDto;
+import com.taotao.cloud.sys.biz.model.param.DataVersionLogParam;
 
 /**
  * 数据版本日志
+ *
  * @author shuigedeng
  * @since 2022/1/10
  */
 public interface DataVersionLogService {
-    /**
-     * 添加
-     */
-    void add(DataVersionLogParam param);
 
-    /**
-     * 获取
-     */
-    DataVersionLogDto findById(Long id);
+	/**
+	 * 添加
+	 */
+	void add(DataVersionLogParam param);
 
-    /**
-     * 分页
-     */
-    PageResult<DataVersionLogDto> page(DataVersionLogParam param);
+	/**
+	 * 获取
+	 */
+	DataVersionLogDto findById(Long id);
 
-    /**
-     * 删除
-     */
-    void delete(Long id);
+	/**
+	 * 分页
+	 */
+	PageResult<DataVersionLogDto> page(DataVersionLogParam param);
+
+	/**
+	 * 删除
+	 */
+	void delete(Long id);
 }

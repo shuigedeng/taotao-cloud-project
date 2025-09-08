@@ -20,7 +20,6 @@ import com.taotao.cloud.sys.api.dubbo.ResourceRpcService;
 import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRpcRequest;
 import com.taotao.cloud.sys.biz.mapper.IResourceMapper;
 import com.taotao.cloud.sys.biz.model.convert.ResourceConvert;
-import com.taotao.cloud.sys.biz.model.entity.system.QResource;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import com.taotao.cloud.sys.biz.repository.cls.ResourceRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IResourceRepository;
@@ -41,16 +40,16 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @DubboService(interfaceClass = ResourceRpcService.class, validation = "true")
 public class DubboResourceRpcServiceImpl
-        extends BaseSuperServiceImpl< Resource, Long, IResourceMapper,ResourceRepository, IResourceRepository>
         implements ResourceRpcService {
 
 //    private final IRoleService roleService;
 
-    private static final QResource RESOURCE = QResource.resource;
+//    private static final QResource RESOURCE = QResource.resource;
 
     @Override
     public List<MenuQueryRpcRequest> queryAllById(Long id) {
-        List<Resource> all = ir().findAll();
-        return ResourceConvert.INSTANCE.convertListRequest(all);
+//        List<Resource> all = ir().findAll();
+//        return ResourceConvert.INSTANCE.convertListRequest(all);
+		return null;
     }
 }

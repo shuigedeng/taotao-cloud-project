@@ -18,7 +18,6 @@ package com.taotao.cloud.report.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Date;
 import lombok.Data;
@@ -27,8 +26,7 @@ import lombok.experimental.*;
 /** 会员统计 */
 @Data
 @TableName("tt_member_statistics_data")
-@ApiModel(value = "会员统计")
-public class MemberStatisticsData extends BaseIdEntity {
+public class MemberStatisticsData  {
 
     private static final long serialVersionUID = 1L;
 

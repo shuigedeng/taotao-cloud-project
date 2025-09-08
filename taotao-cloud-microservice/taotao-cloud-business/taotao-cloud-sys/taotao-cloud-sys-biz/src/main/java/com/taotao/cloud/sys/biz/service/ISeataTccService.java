@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.sys.biz.service;
 
-import com.taotao.cloud.file.api.model.vo.UploadFileVO;
-import com.taotao.cloud.file.biz.entity.File;
 import org.apache.seata.rm.tcc.api.BusinessActionContext;
 import org.apache.seata.rm.tcc.api.BusinessActionContextParameter;
 import org.apache.seata.rm.tcc.api.LocalTCC;

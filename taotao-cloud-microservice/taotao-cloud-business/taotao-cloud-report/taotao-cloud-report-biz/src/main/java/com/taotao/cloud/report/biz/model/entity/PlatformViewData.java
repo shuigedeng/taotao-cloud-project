@@ -17,7 +17,6 @@
 package com.taotao.cloud.report.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Date;
 import lombok.Data;
@@ -26,8 +25,7 @@ import lombok.experimental.*;
 /** 平台pv统计 */
 @Data
 @TableName("tt_s_platform_view_data")
-@ApiModel(value = "平台pv统计")
-public class PlatformViewData extends BaseIdEntity {
+public class PlatformViewData {
 
     @Schema(description = "pv数量")
     private Long pvNum;

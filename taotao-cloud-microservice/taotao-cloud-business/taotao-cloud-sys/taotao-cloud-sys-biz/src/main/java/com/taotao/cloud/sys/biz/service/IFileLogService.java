@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.sys.biz.service;
 
-import com.taotao.cloud.file.api.model.vo.UploadFileVO;
-import com.taotao.cloud.file.biz.entity.File;
 import org.springframework.web.multipart.MultipartFile;
 
 /**

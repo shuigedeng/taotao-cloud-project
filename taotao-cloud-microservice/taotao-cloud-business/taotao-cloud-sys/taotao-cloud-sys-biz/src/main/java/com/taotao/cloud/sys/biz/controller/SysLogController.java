@@ -47,12 +47,14 @@ public class SysLogController {
     @GetMapping("/page")
     // @ApiOperation(value = "分页查询", notes = "分页查询")
     public Result<Page> page(Page page, SysLog sysLog) {
-        return Result.success(sysLogService.page(page, Wrappers.query(sysLog).orderByDesc("id")));
+//        return Result.success(sysLogService.page(page, Wrappers.query(sysLog).orderByDesc("id")));
+		return null;
     }
 
     // @Anonymous
     @PostMapping("/save")
     public Result save(@RequestBody SysLog sysLog) {
-        return Result.success(sysLogService.save(sysLog));
+//        return Result.success(sysLogService.save(sysLog));
+		return null;
     }
 }

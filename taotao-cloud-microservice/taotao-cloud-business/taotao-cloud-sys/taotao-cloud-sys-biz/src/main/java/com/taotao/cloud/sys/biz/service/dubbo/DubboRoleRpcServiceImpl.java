@@ -18,7 +18,6 @@ package com.taotao.cloud.sys.biz.service.dubbo;
 
 import com.taotao.cloud.sys.api.dubbo.RoleRpcService;
 import com.taotao.cloud.sys.biz.mapper.IRoleMapper;
-import com.taotao.cloud.sys.biz.model.entity.system.QRole;
 import com.taotao.cloud.sys.biz.model.entity.system.Role;
 import com.taotao.cloud.sys.biz.repository.cls.RoleRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IRoleRepository;
@@ -37,10 +36,9 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 @DubboService(interfaceClass = RoleRpcService.class, validation = "true")
-public class DubboRoleRpcServiceImpl extends BaseSuperServiceImpl< Role, Long,IRoleMapper, RoleRepository, IRoleRepository>
+public class DubboRoleRpcServiceImpl
         implements RoleRpcService {
 
-    private static final QRole ROLE = QRole.role;
 
 //    private final IRoleResourceService roleResourceService;
 }

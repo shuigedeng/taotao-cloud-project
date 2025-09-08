@@ -16,10 +16,14 @@
 
 package com.taotao.cloud.sys.biz.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.log.biz.entity.SysLogLogin;
-import com.taotao.cloud.log.biz.mapper.SysLogLoginMapper;
-import com.taotao.cloud.log.biz.service.SysLogLoginService;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.taotao.cloud.sys.biz.model.entity.SysLogLogin;
+import com.taotao.cloud.sys.biz.service.SysLogLoginService;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
 import org.springframework.stereotype.Service;
 
 /**
@@ -29,4 +33,55 @@ import org.springframework.stereotype.Service;
  * @create: 2022-03-19 20:42:34
  */
 @Service
-public class SysLogLoginServiceImpl extends ServiceImpl<SysLogLoginMapper, SysLogLogin> implements SysLogLoginService {}
+public class SysLogLoginServiceImpl implements SysLogLoginService {
+
+	@Override
+	public boolean saveBatch(Collection<SysLogLogin> entityList, int batchSize) {
+		return false;
+	}
+
+	@Override
+	public boolean saveOrUpdateBatch(Collection<SysLogLogin> entityList, int batchSize) {
+		return false;
+	}
+
+	@Override
+	public boolean updateBatchById(Collection<SysLogLogin> entityList, int batchSize) {
+		return false;
+	}
+
+	@Override
+	public boolean saveOrUpdate(SysLogLogin entity) {
+		return false;
+	}
+
+	@Override
+	public SysLogLogin getOne(Wrapper<SysLogLogin> queryWrapper, boolean throwEx) {
+		return null;
+	}
+
+	@Override
+	public Optional<SysLogLogin> getOneOpt(Wrapper<SysLogLogin> queryWrapper, boolean throwEx) {
+		return Optional.empty();
+	}
+
+	@Override
+	public Map<String, Object> getMap(Wrapper<SysLogLogin> queryWrapper) {
+		return Map.of();
+	}
+
+	@Override
+	public <V> V getObj(Wrapper<SysLogLogin> queryWrapper, Function<? super Object, V> mapper) {
+		return null;
+	}
+
+	@Override
+	public BaseMapper<SysLogLogin> getBaseMapper() {
+		return null;
+	}
+
+	@Override
+	public Class<SysLogLogin> getEntityClass() {
+		return null;
+	}
+}

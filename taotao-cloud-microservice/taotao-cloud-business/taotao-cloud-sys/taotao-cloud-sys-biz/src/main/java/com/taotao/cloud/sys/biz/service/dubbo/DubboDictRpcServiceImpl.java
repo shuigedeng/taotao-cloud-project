@@ -37,7 +37,7 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 @DubboService(interfaceClass = DictRpcService.class, validation = "true")
-public class DubboDictRpcServiceImpl extends BaseSuperServiceImpl<Dict, Long,IDictMapper, DictRepository, IDictRepository>
+public class DubboDictRpcServiceImpl
         implements DictRpcService {
 
     @Override

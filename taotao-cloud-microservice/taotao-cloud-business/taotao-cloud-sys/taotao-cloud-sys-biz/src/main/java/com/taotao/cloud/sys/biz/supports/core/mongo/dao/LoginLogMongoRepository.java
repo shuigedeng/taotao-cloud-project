@@ -16,11 +16,15 @@
 
 package com.taotao.cloud.sys.biz.supports.core.mongo.dao;
 
+import com.taotao.cloud.sys.biz.supports.core.mongo.entity.LoginLogMongo;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
  * mongo持久化方式
+ *
  * @author shuigedeng
  * @since 2021/12/2
  */
-public interface LoginLogMongoRepository extends MongoRepository<LoginLogMongo, Long> {}
+public interface LoginLogMongoRepository extends MongoRepository<LoginLogMongo, Long> {
+
+}

@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 /** 会员统计业务层 */
-public interface IMemberStatisticsService extends IService<MemberStatisticsData> {
+public interface IMemberStatisticsService {
 
     /**
      * 获取会员数量
@@ -77,5 +77,5 @@ public interface IMemberStatisticsService extends IService<MemberStatisticsData>
      *
      * @return 会员数据分布
      */
-    List<MemberDistributionVO> distribution();
+//    List<MemberDistributionVO> distribution();
 }

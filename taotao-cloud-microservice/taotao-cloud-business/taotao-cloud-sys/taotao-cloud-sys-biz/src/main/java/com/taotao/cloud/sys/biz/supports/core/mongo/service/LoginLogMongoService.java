@@ -17,6 +17,12 @@
 package com.taotao.cloud.sys.biz.supports.core.mongo.service;
 
 import com.taotao.boot.common.model.PageResult;
+import com.taotao.cloud.sys.biz.model.dto.LoginLogDto;
+import com.taotao.cloud.sys.biz.model.param.LoginLogParam;
+import com.taotao.cloud.sys.biz.service.LoginLogService;
+import com.taotao.cloud.sys.biz.supports.core.db.convert.LogConvert;
+import com.taotao.cloud.sys.biz.supports.core.mongo.dao.LoginLogMongoRepository;
+import com.taotao.cloud.sys.biz.supports.core.mongo.entity.LoginLogMongo;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,39 +47,42 @@ import org.springframework.stereotype.Service;
 @ConditionalOnProperty(prefix = "log.store", value = "type", havingValue = "mongodb")
 @RequiredArgsConstructor
 public class LoginLogMongoService implements LoginLogService {
-    private final LoginLogMongoRepository repository;
 
-    @Override
-    public void add(LoginLogParam loginLog) {
-        LoginLogMongo loginLogMongo = LogConvert.CONVERT.convert(loginLog);
-        loginLogMongo.setId(IdUtil.getSnowflakeNextId());
-        repository.save(loginLogMongo);
-    }
+	private final LoginLogMongoRepository repository;
 
-    @Override
-    public LoginLogDto findById(Long id) {
-        return repository.findById(id).map(LoginLogMongo::toDto).orElseThrow(RuntimeException::new);
-    }
+	@Override
+	public void add(LoginLogParam loginLog) {
+//		LoginLogMongo loginLogMongo = LogConvert.CONVERT.convert(loginLog);
+//		loginLogMongo.setId(IdUtil.getSnowflakeNextId());
+//		repository.save(loginLogMongo);
+	}
 
-    @Override
-    public PageResult<LoginLogDto> page(LoginLogParam loginLogParam) {
-        // 查询条件
-        ExampleMatcher matching = ExampleMatcher.matching().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-        Example<LoginLogMongo> example = Example.of(LogConvert.CONVERT.convert(loginLogParam), matching);
-        // 设置分页条件 (第几页，每页大小，排序)
-        Sort sort = Sort.by(Sort.Order.desc("id"));
-        Pageable pageable = PageRequest.of(loginLogParam.getCurrentPage() - 1, loginLogParam.getPageSize(), sort);
+	@Override
+	public LoginLogDto findById(Long id) {
+//		return repository.findById(id).map(LoginLogMongo::toDto).orElseThrow(RuntimeException::new);
+		return null;
+	}
 
-        Page<LoginLogMongo> page = repository.findAll(example, pageable);
-        List<LoginLogDto> records =
-                page.getContent().stream().map(LoginLogMongo::toDto).toList();
+	@Override
+	public PageResult<LoginLogDto> page(LoginLogParam loginLogParam) {
+//		// 查询条件
+//		ExampleMatcher matching = ExampleMatcher.matching().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+//		Example<LoginLogMongo> example = Example.of(LogConvert.CONVERT.convert(loginLogParam), matching);
+//		// 设置分页条件 (第几页，每页大小，排序)
+//		Sort sort = Sort.by(Sort.Order.desc("id"));
+//		Pageable pageable = PageRequest.of(loginLogParam.getCurrentPage() - 1, loginLogParam.getPageSize(), sort);
+//
+//		Page<LoginLogMongo> page = repository.findAll(example, pageable);
+//		List<LoginLogDto> records =
+//			page.getContent().stream().map(LoginLogMongo::toDto).toList();
+//
+//		return PageResult.of(
+//			page.getTotalElements(), 1, loginLogParam.getCurrentPage(), loginLogParam.getPageSize(), records);
+		return null;
+	}
 
-        return PageResult.of(
-                page.getTotalElements(), 1, loginLogParam.getCurrentPage(), loginLogParam.getPageSize(), records);
-    }
-
-    @Override
-    public void delete(Long id) {
-        repository.deleteById(id);
-    }
+	@Override
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
 }
