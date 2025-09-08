@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.sys.biz.model.convert;
 
-import com.taotao.cloud.file.api.model.vo.FileVO;
-import com.taotao.cloud.file.biz.entity.File;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;

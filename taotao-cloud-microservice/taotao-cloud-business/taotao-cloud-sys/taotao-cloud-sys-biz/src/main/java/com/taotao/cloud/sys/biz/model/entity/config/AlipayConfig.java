@@ -26,6 +26,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * 支付宝配置表
@@ -42,7 +43,7 @@ import lombok.Setter;
 @Entity
 @Table(name = AlipayConfig.TABLE_NAME)
 @TableName(AlipayConfig.TABLE_NAME)
-@org.springframework.data.relational.core.mapping.Table(name = AlipayConfig.TABLE_NAME, comment = "支付宝配置表")
+@org.springframework.data.relational.core.mapping.Table(name = AlipayConfig.TABLE_NAME)
 public class AlipayConfig extends BaseSuperEntity<AlipayConfig, Long> {
 
     public static final String TABLE_NAME = "tt_alipay_config";

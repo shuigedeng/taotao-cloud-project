@@ -5,12 +5,13 @@ import com.taotao.boot.common.constant.CommonConstants;
 import lombok.Data;
 import lombok.experimental.*;
 import lombok.experimental.*;
-import org.dromara.hutool.core.date.DatePattern;
 import org.dromara.hutool.core.date.DateUtil;
 import org.dromara.hutool.core.math.NumberUtil;
 
 import java.lang.management.ManagementFactory;
 import java.math.BigDecimal;
+
+import static com.taotao.boot.common.model.DatePattern.NORM_DATETIME_PATTERN;
 
 /**
  * JVM相关信息
@@ -75,7 +76,7 @@ public class JvmInfo {
      */
     public String getStartTime() {
         return DateUtil.format(DateUtil.date(ManagementFactory.getRuntimeMXBean().getStartTime()),
-            DatePattern.NORM_DATETIME_PATTERN);
+            NORM_DATETIME_PATTERN);
     }
 
     /**

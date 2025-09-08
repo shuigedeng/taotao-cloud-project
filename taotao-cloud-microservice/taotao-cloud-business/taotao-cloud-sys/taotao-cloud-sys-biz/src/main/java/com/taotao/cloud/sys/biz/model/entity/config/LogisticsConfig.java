@@ -26,6 +26,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /** 物流公司设置 */
 @NoArgsConstructor
@@ -36,7 +37,7 @@ import lombok.Setter;
 @Entity
 @Table(name = LogisticsConfig.TABLE_NAME)
 @TableName(LogisticsConfig.TABLE_NAME)
-@org.springframework.data.relational.core.mapping.Table(name = LogisticsConfig.TABLE_NAME, comment = "物流公司表")
+@org.springframework.data.relational.core.mapping.Table(name = LogisticsConfig.TABLE_NAME)
 public class LogisticsConfig extends BaseSuperEntity<LogisticsConfig, Long> {
 
     public static final String TABLE_NAME = "tt_logistics_config";

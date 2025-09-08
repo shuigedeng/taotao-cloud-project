@@ -26,6 +26,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * 邮件配置表
@@ -42,7 +43,7 @@ import lombok.Setter;
 @Entity
 @Table(name = EmailConfig.TABLE_NAME)
 @TableName(EmailConfig.TABLE_NAME)
-@org.springframework.data.relational.core.mapping.Table(name = EmailConfig.TABLE_NAME, comment = "邮件配置表")
+@org.springframework.data.relational.core.mapping.Table(name = EmailConfig.TABLE_NAME)
 public class EmailConfig extends BaseSuperEntity<EmailConfig, Long> {
 
     public static final String TABLE_NAME = "tt_email_config";

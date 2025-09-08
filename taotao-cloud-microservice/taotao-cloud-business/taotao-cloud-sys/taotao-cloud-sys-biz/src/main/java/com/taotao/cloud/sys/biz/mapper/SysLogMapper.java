@@ -17,6 +17,7 @@
 package com.taotao.cloud.sys.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.taotao.cloud.sys.biz.model.entity.SysLog;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

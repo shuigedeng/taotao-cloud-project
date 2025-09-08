@@ -17,15 +17,9 @@
 package com.taotao.cloud.sys.biz.controller.feign;
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.file.api.feign.IFeignFileApi;
-import com.taotao.cloud.file.api.feign.response.FeignFileResponse;
-import com.taotao.cloud.file.api.grpc.ConditionsRequest;
-import com.taotao.cloud.file.api.grpc.File;
-import com.taotao.cloud.file.api.grpc.FileGrpcServiceGrpc;
-import com.taotao.cloud.file.biz.grpc.FileGrpcService;
-import com.taotao.cloud.file.biz.service.IFileService;
 import com.taotao.boot.web.annotation.FeignApi;
 import com.taotao.boot.webagg.controller.BaseFeignController;
+import com.taotao.cloud.sys.api.grpc.FileGrpcServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.swagger.v3.oas.annotations.tags.Tag;

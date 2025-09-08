@@ -18,6 +18,9 @@ package com.taotao.cloud.sys.biz.controller;
 
 import com.taotao.boot.common.model.PageResult;
 import com.taotao.boot.common.model.Result;
+import com.taotao.boot.data.mybatis.mybatisplus.interceptor.datachanage.service.DataVersionLogService;
+import com.taotao.cloud.sys.biz.model.dto.DataVersionLogDto;
+import com.taotao.cloud.sys.biz.model.param.DataVersionLogParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -34,17 +37,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/log/dataVersion")
 @RequiredArgsConstructor
 public class DataVersionLogController {
-    private final DataVersionLogService service;
+	private final DataVersionLogService service;
 
-    @Operation(summary = "分页")
-    @GetMapping("/page")
-    public Result<PageResult<DataVersionLogDto>> page(DataVersionLogParam param) {
-        return Result.success(service.page(param));
-    }
+	@Operation(summary = "分页")
+	@GetMapping("/page")
+	public Result<PageResult<DataVersionLogDto>> page(DataVersionLogParam param) {
+		return Result.success(service.page(param));
+	}
 
-    @Operation(summary = "获取")
-    @GetMapping("/findById")
-    public Result<DataVersionLogDto> findById(Long id) {
-        return Result.success(service.findById(id));
-    }
+	@Operation(summary = "获取")
+	@GetMapping("/findById")
+	public Result<DataVersionLogDto> findById(Long id) {
+		return Result.success(service.findById(id));
+	}
 }

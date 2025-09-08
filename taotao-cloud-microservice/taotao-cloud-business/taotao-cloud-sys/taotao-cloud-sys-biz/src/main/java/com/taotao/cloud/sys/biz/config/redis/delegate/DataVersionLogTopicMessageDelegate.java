@@ -19,7 +19,9 @@ package com.taotao.cloud.sys.biz.config.redis.delegate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
+import com.taotao.cloud.sys.biz.model.entity.Log;
 import com.taotao.cloud.sys.biz.service.ILogService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,17 +33,18 @@ import org.springframework.stereotype.Component;
  * @since 2022/02/09 20:46
  */
 @Component
+@Slf4j
 public class DataVersionLogTopicMessageDelegate {
 
-    @Autowired
-    private ILogService logService;
+	@Autowired
+	private ILogService logService;
 
-    public void handleRequestLog(String message, String channel) {
-        try {
-            Log log = JsonUtils.MAPPER.readValue(message, Log.class);
-            logService.save(log);
-        } catch (JsonProcessingException e) {
-            LogUtils.error(e);
-        }
-    }
+	public void handleRequestLog(String message, String channel) {
+		try {
+			Log log = JsonUtils.MAPPER.readValue(message, Log.class);
+			logService.save(log);
+		} catch (JsonProcessingException e) {
+			LogUtils.error(e);
+		}
+	}
 }

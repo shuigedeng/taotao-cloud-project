@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.sys.biz.repository.inf;
 
-import com.taotao.cloud.file.biz.entity.File;
 import com.taotao.boot.webagg.repository.BaseInterfaceSuperRepository;
+import com.taotao.cloud.sys.biz.model.entity.File;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

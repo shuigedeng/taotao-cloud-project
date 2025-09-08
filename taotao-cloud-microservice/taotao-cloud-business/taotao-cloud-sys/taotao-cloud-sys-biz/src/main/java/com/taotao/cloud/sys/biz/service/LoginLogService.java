@@ -17,8 +17,6 @@
 package com.taotao.cloud.sys.biz.service;
 
 import com.taotao.boot.common.model.PageResult;
-import com.taotao.cloud.log.biz.log.dto.LoginLogDto;
-import com.taotao.cloud.log.biz.log.param.LoginLogParam;
 
 /**
  * 登陆日志

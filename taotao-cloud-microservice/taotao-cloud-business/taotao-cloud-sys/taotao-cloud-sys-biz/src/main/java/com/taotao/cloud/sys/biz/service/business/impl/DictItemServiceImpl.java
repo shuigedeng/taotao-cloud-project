@@ -25,7 +25,6 @@ import com.taotao.cloud.sys.biz.model.page.DictItemPageQuery;
 import com.taotao.cloud.sys.biz.model.query.DictItemQuery;
 import com.taotao.cloud.sys.biz.mapper.IDictItemMapper;
 import com.taotao.cloud.sys.biz.model.entity.dict.DictItem;
-import com.taotao.cloud.sys.biz.model.entity.dict.QDictItem;
 import com.taotao.cloud.sys.biz.repository.cls.DictItemRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IDictItemRepository;
 import com.taotao.cloud.sys.biz.service.business.IDictItemService;

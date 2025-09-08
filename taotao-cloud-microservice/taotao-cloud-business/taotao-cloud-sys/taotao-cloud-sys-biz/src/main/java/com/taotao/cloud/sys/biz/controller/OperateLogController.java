@@ -18,6 +18,9 @@ package com.taotao.cloud.sys.biz.controller;
 
 import com.taotao.boot.common.model.PageResult;
 import com.taotao.boot.common.model.Result;
+import com.taotao.cloud.sys.biz.model.dto.OperateLogDto;
+import com.taotao.cloud.sys.biz.model.param.OperateLogParam;
+import com.taotao.cloud.sys.biz.service.OperateLogService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -36,17 +39,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/log/operate")
 @RequiredArgsConstructor
 public class OperateLogController {
-    private final OperateLogService operateLogService;
+	private final OperateLogService operateLogService;
 
-    @Operation(summary = "分页")
-    @GetMapping("/page")
-    public Result<PageResult<OperateLogDto>> page(OperateLogParam operateLogParam) {
-        return Result.success(operateLogService.page(operateLogParam));
-    }
+	@Operation(summary = "分页")
+	@GetMapping("/page")
+	public Result<PageResult<OperateLogDto>> page(OperateLogParam operateLogParam) {
+		return Result.success(operateLogService.page(operateLogParam));
+	}
 
-    @Operation(summary = "获取")
-    @GetMapping("/findById")
-    public Result<OperateLogDto> findById(Long id) {
-        return Result.success(operateLogService.findById(id));
-    }
+	@Operation(summary = "获取")
+	@GetMapping("/findById")
+	public Result<OperateLogDto> findById(Long id) {
+		return Result.success(operateLogService.findById(id));
+	}
 }

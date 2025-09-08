@@ -17,6 +17,7 @@
 package com.taotao.cloud.sys.biz.mapper;
 
 import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.cloud.sys.biz.model.entity.File;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
