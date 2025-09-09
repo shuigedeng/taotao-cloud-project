@@ -30,11 +30,17 @@ application {
     //executableDir = 'custom_bin_dir'
 }
 
+String removeBizSuffix(String input) {
+    return input ? input.replaceAll(/-biz$/, '') : ''
+}
+
 bootJar {
     // 排除所有的jar
     //excludes = ["*.jar"]
     // lib目录的清除和复制任务
     //dependsOn copyJar
+
+    archiveBaseName = removeBizSuffix(project.name)
 
     manifest {
         attributes project.tasks.jar.manifest.attributes
