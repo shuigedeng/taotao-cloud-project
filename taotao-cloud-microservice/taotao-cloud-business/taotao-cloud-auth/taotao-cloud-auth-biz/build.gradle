@@ -90,7 +90,7 @@ dependencies {
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
     implementation "com.nimbusds:nimbus-jose-jwt:10.5"
     //https://search.maven.org/artifact/com.nimbusds/oauth2-oidc-sdk
-    implementation 'com.nimbusds:oauth2-oidc-sdk:11.27.1'
+    implementation 'com.nimbusds:oauth2-oidc-sdk:11.28'
 
     implementation "org.apache.commons:commons-collections4"
 

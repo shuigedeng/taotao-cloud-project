@@ -34,7 +34,7 @@ jobs:
         id: get_tag
 
       #https://github.com/marketplace/actions/github-action-for-graalvm
-      - uses: graalvm/setup-graalvm@v1.3.5
+      - uses: graalvm/setup-graalvm@v1.3.6
         with:
           java-version: '21'
           distribution: 'graalvm'
@@ -79,7 +79,7 @@ jobs:
 
       #https://github.com/ncipollo/release-action/tree/main
       #https://github.com/marketplace/actions/create-release
-      - uses: ncipollo/release-action@v1.18.0
+      - uses: ncipollo/release-action@v1.20.0
         with:
           allowUpdates: true
           artifactErrorsFailBuild: true
@@ -108,7 +108,7 @@ jobs:
                       taotao-cloud-jdbcpool/build/libs/taotao-cloud-jdbcpool-2025.10.jar,
                       taotao-cloud-jdbcpool/build/libs/taotao-cloud-jdbcpool-2025.10.jar.md5"
           #body: "sdfsa"
-          bodyFile: "doc/release/2025-09.md"
+          bodyFile: "doc/release/2025-10.md"
           draft: false
           generateReleaseNotes: false
           prerelease: false

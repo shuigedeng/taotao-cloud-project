@@ -118,7 +118,7 @@ configure(subprojects){ project ->
         annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
         //https://github.com/entur/mapstruct-spi-protobuf
         //https://search.maven.org/artifact/no.entur.mapstruct.spi/protobuf-spi-impl
-        annotationProcessor "no.entur.mapstruct.spi:protobuf-spi-impl:1.50.0"
+        annotationProcessor "no.entur.mapstruct.spi:protobuf-spi-impl:1.52.0"
 
         annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
     }
