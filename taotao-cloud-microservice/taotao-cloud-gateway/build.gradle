@@ -87,7 +87,7 @@ configurations {
             force 'org.antlr:antlr4:4.13.2'
             force 'net.minidev:json-smart:2.6.0'
             //todo 临时使用
-            force "io.opentelemetry:opentelemetry-api-incubator:1.53.0-alpha"
+            force "io.opentelemetry:opentelemetry-api-incubator:1.54.0-alpha"
 
             force "com.google.protobuf:protobuf-java:3.25.5"
             force "com.google.protobuf:protobuf-java-util:3.25.5"

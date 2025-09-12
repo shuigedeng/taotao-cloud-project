@@ -24,7 +24,7 @@ dependencies {
     api 'ch.qos.logback:logback-classic:1.5.18'
     api "com.google.guava:guava:33.4.8-jre"
 
-    api 'io.netty:netty-all:4.2.4.Final'
+    api 'io.netty:netty-all:4.2.6.Final'
 
     api("org.springframework.boot:spring-boot-starter-web") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
