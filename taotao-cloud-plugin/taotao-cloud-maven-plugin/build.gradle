@@ -70,7 +70,7 @@ plugins {
     //https://github.com/freefair/gradle-plugins
     //https://github.com/freefair/gradle-plugins/tree/master/examples/test-maven-plugin
     //https://plugins.gradle.org/plugin/io.freefair.maven-plugin
-    id "io.freefair.maven-plugin" version "8.14.2"
+    id "io.freefair.maven-plugin" version "9.0.0-rc2"
 
     //https://gradlex.org/maven-plugin-development/
     ////https://github.com/gradlex-org/maven-plugin-development

@@ -69,7 +69,7 @@ plugins {
     id "java"
     //https://plugins.gradle.org/plugin/org.jetbrains.intellij.platform
     //https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin.html
-    id("org.jetbrains.intellij.platform") version "2.7.2"
+    id("org.jetbrains.intellij.platform") version "2.9.0"
 }
 
 repositories {

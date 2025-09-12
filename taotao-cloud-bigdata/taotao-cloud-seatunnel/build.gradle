@@ -1,13 +1,13 @@
 dependencies {
-    implementation 'org.apache.seatunnel:seatunnel-transforms-v2:2.3.11'
-    implementation 'org.apache.seatunnel:seatunnel-api:2.3.11'
-    implementation 'org.apache.seatunnel:seatunnel-starter:2.3.11'
+    implementation 'org.apache.seatunnel:seatunnel-transforms-v2:2.3.12'
+    implementation 'org.apache.seatunnel:seatunnel-api:2.3.12'
+    implementation 'org.apache.seatunnel:seatunnel-starter:2.3.12'
 
-    implementation 'org.apache.seatunnel:connector-fake:2.3.11'
-    implementation 'org.apache.seatunnel:connector-console:2.3.11'
-    implementation 'org.apache.seatunnel:connector-assert:2.3.11'
+    implementation 'org.apache.seatunnel:connector-fake:2.3.12'
+    implementation 'org.apache.seatunnel:connector-console:2.3.12'
+    implementation 'org.apache.seatunnel:connector-assert:2.3.12'
 
-    implementation 'org.apache.seatunnel:seatunnel-flink-15-starter:2.3.11'
+    implementation 'org.apache.seatunnel:seatunnel-flink-15-starter:2.3.12'
 
     // flinksql本地运行需要的依赖
     implementation "org.apache.flink:flink-core:2.1.0"
@@ -39,7 +39,7 @@ dependencies {
     //flink连接器
     implementation 'org.apache.flink:flink-connector-datagen:2.1.0'
     implementation 'org.apache.flink:flink-connector-files:2.1.0'
-    implementation "org.apache.flink:flink-connector-kafka:4.0.0-2.0"
+    implementation "org.apache.flink:flink-connector-kafka:4.0.1-2.0"
     //implementation 'org.apache.flink:flink-connector-hbase-2.2:3.0.0-1.17'
     implementation 'org.apache.flink:flink-connector-jdbc-core:4.0.0-2.0'
     implementation 'org.apache.flink:flink-connector-jdbc-mysql:4.0.0-2.0'
@@ -51,7 +51,7 @@ dependencies {
     //implementation "org.apache.flink:flink-connector-redis_2.11:1.1.5"
 
     implementation 'org.apache.flink:flink-sql-connector-hive-3.1.3_2.12:3.0.0-1.20'
-    implementation 'org.apache.flink:flink-sql-connector-kafka:4.0.0-2.0'
+    implementation 'org.apache.flink:flink-sql-connector-kafka:4.0.1-2.0'
     //implementation 'org.apache.flink:flink-sql-connector-hbase-2.2:3.0.0-1.17'
     implementation 'org.apache.flink:flink-sql-connector-mongodb:2.0.0-1.20.0'
     //implementation 'org.apache.flink:flink-sql-connector-pulsar:4.1.0-1.18'
