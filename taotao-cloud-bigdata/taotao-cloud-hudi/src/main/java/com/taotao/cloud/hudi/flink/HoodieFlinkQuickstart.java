@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.hudi.flink;
 
-import static org.apache.hudi.examples.quickstart.utils.QuickstartConfigurations.sql;
 
 import java.util.Collection;
 import java.util.List;
@@ -42,6 +41,7 @@ import org.apache.hudi.common.model.HoodieTableType;
 import org.apache.hudi.configuration.FlinkOptions;
 import org.apache.hudi.examples.quickstart.factory.CollectSinkTableFactory;
 import org.apache.hudi.examples.quickstart.utils.QuickstartConfigurations;
+import org.apache.spark.sql.classic.Catalog$;
 import org.jetbrains.annotations.NotNull;
 
 public final class HoodieFlinkQuickstart {
@@ -201,7 +201,7 @@ public final class HoodieFlinkQuickstart {
             // use the source table schema as the sink schema if the source table was specified, .
             ObjectPath objectPath = new ObjectPath(tEnv.getCurrentDatabase(), sourceTable);
             String currentCatalog = tEnv.getCurrentCatalog();
-            Catalog catalog = tEnv.getCatalog(currentCatalog).get();
+            Catalog$ catalog = tEnv.getCatalog(currentCatalog).get();
             ResolvedCatalogTable table = (ResolvedCatalogTable) catalog.getTable(objectPath);
             ResolvedSchema schema = table.getResolvedSchema();
             sinkDDL = QuickstartConfigurations.getCollectSinkDDL("sink", schema);

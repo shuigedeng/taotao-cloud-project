@@ -19,4 +19,8 @@ package com.taotao.cloud.hudi;
 class TaoTaoCloudHudiApplicationTests {
 
     void contextLoads() {}
+
+	static void main() {
+
+	}
 }
