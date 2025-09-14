@@ -69,7 +69,7 @@ CREATE TABLE kafka_source (
     -- Kafka连接器配置
     'connector' = 'kafka',                        -- 使用Kafka连接器
     'topic' = 'ods_log_full',                     -- Kafka主题名
-    'properties.bootstrap.servers' = '192.168.241.128:9092', -- Kafka服务器地址
+    'properties.bootstrap.servers' = '192.168.128.3:9092', -- Kafka服务器地址
     'properties.group.id' = 'ods_log_full',        -- 消费者组ID
     -- 'scan.startup.mode' = 'group-offsets',     -- 从上次消费位置开始读取(已注释)
     'scan.startup.mode' = 'earliest-offset',       -- 从最早的偏移量开始读取
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS ods_log_full(
 ) WITH (
     -- JDBC连接器配置，指向Doris数据库
     'connector' = 'jdbc',                           -- 使用JDBC连接器
-    'url' = 'jdbc:mysql://192.168.241.128:9030/ods', -- Doris的JDBC连接URL
+    'url' = 'jdbc:mysql://192.168.128.3:9030/ods', -- Doris的JDBC连接URL
     'table-name' = 'ods_log_full',                  -- 目标表名
     'username' = 'root',                            -- 数据库用户名
     'password' = ''                                 -- 数据库密码
