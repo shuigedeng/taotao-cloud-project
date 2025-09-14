@@ -131,6 +131,66 @@ CREATE TABLE IF NOT EXISTS ods_log_full(
 );
 
 
+
+CREATE TABLE IF NOT EXISTS ods_log_full(
+    -- 主键
+    `id`                            STRING,        -- 主键ID
+    `k1`                            DATE,          -- 日期分区键
+    
+    -- 通用信息字段
+    `common_ar`                     STRING,        -- 地区
+    `common_ba`                     STRING,        -- 品牌
+    `common_ch`                     STRING,        -- 渠道
+    `common_is_new`                 STRING,        -- 是否新用户
+    `common_md`                     STRING,        -- 设备型号
+    `common_mid`                    STRING,        -- 设备ID
+    `common_os`                     STRING,        -- 操作系统
+    `common_uid`                    STRING,        -- 用户ID
+    `common_vc`                     STRING,        -- 版本号
+    
+    -- 启动信息字段
+    `start_entry`                   STRING,        -- 启动入口
+    `start_loading_time`            STRING,        -- 加载时间
+    `start_open_ad_id`              STRING,        -- 开屏广告ID
+    `start_open_ad_ms`              STRING,        -- 开屏广告展示时间
+    `start_open_ad_skip_ms`         STRING,        -- 开屏广告跳过时间
+    
+    -- 页面信息字段
+    `page_during_time`              BIGINT,        -- 页面停留时间
+    `page_item`                     STRING,        -- 目标ID
+    `page_item_type`                STRING,        -- 目标类型
+    `page_last_page_id`             STRING,        -- 上一页ID
+    `page_page_id`                  STRING,        -- 页面ID
+    `page_source_type`              STRING,        -- 来源类型
+    
+    -- 行为数据
+    `actions`                       STRING COMMENT '动作信息',    -- 用户行为JSON
+    `displays`                      STRING COMMENT '曝光信息',    -- 曝光数据JSON
+    
+    -- 错误信息
+    `err_error_code`                BIGINT,        -- 错误代码
+    `err_msg`                       STRING,        -- 错误信息
+    
+    -- 时间信息
+    `ts`                            BIGINT  COMMENT '时间戳'      -- 数据生成时间戳
+) WITH (
+    'connector' = 'doris',
+    'fenodes' = '192.168.218.3:9030',
+    'table.identifier' = 'ods.ods_log_full',
+    'username' = 'admin',
+    'password' = '123456',
+    
+    -- 关键配置：关闭严格模式，允许10%错误率
+    'sink.properties.strict_mode' = 'false',
+    'sink.properties.max_filter_ratio' = '0.1',
+    
+    -- 性能配置
+    'sink.batch.size' = '1000',
+    'sink.batch.interval' = '1s',
+    'sink.max-retries' = '3'
+);
+
+
 -- ==================== 数据转换插入语句 ====================
 -- 将Kafka数据插入到Doris表中，转换字段结构
 insert into ods_log_full(
