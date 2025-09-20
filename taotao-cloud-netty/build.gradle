@@ -83,7 +83,7 @@ dependencies {
     implementation "io.grpc:grpc-services:1.75.0"
     testImplementation("io.grpc:grpc-testing:1.75.0")
     implementation 'com.google.code.gson:gson:2.13.2'
-    implementation 'com.google.guava:guava:33.4.8-jre'
+    implementation 'com.google.guava:guava:33.5.0-jre'
 
     api "jakarta.servlet:jakarta.servlet-api:6.1.0"
     api "jakarta.validation:jakarta.validation-api:3.1.0"
@@ -103,10 +103,10 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.4'
     testImplementation "org.assertj:assertj-core:3.27.4"
 
-    compileOnly "org.projectlombok:lombok:1.18.40"
-    annotationProcessor "org.projectlombok:lombok:1.18.40"
-    testCompileOnly "org.projectlombok:lombok:1.18.40"
-    testAnnotationProcessor "org.projectlombok:lombok:1.18.40"
+    compileOnly "org.projectlombok:lombok:1.18.42"
+    annotationProcessor "org.projectlombok:lombok:1.18.42"
+    testCompileOnly "org.projectlombok:lombok:1.18.42"
+    testAnnotationProcessor "org.projectlombok:lombok:1.18.42"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
 }
 

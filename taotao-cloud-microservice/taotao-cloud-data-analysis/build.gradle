@@ -28,7 +28,7 @@ dependencies {
     //https://search.maven.org/artifact/io.airlift/units
     implementation "io.airlift:units:1.10"
     //https://search.maven.org/artifact/com.google.guava/guava
-    implementation "com.google.guava:guava:33.4.8-jre"
+    implementation "com.google.guava:guava:33.5.0-jre"
     //https://search.maven.org/artifact/com.fasterxml.jackson.core/jackson-annotations
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.20'
 

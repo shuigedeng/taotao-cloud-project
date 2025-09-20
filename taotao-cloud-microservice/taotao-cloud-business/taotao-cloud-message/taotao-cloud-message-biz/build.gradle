@@ -60,7 +60,7 @@ dependencies {
     implementation 'com.tencentcloudapi:tencentcloud-sdk-java:3.1.1253'
     implementation "com.alibaba.fastjson2:fastjson2:2.0.58"
     implementation 'com.squareup.okhttp3:okhttp:5.1.0'
-    implementation 'com.google.guava:guava:33.4.8-jre'
+    implementation 'com.google.guava:guava:33.5.0-jre'
     implementation 'org.dromara.hutool:hutool-all'
     implementation 'com.mysql:mysql-connector-j'
 

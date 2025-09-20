@@ -98,7 +98,7 @@ dependencies {
     implementation 'org.apache.maven:maven-model:3.9.11'
     implementation 'org.apache.maven:maven-plugin-api:3.9.11'
 
-    implementation "com.google.guava:guava:33.4.8-jre"
+    implementation "com.google.guava:guava:33.5.0-jre"
 
     implementation 'org.apache.maven.plugin-tools:maven-plugin-annotations:3.15.1'
 

@@ -50,13 +50,13 @@ dependencies {
 
     //https://github.com/xmolecules/jmolecules-integrations
     //https://central.sonatype.com/artifact/org.jmolecules.integrations/jmolecules-spring
-    implementation 'org.jmolecules.integrations:jmolecules-bytebuddy:0.29.0'
-    implementation 'org.jmolecules.integrations:jmolecules-jackson:0.29.0'
-    implementation 'org.jmolecules.integrations:jmolecules-jpa:0.29.0'
-    implementation 'org.jmolecules.integrations:jmolecules-spring:0.29.0'
-    implementation 'org.jmolecules.integrations:jmolecules-starter-ddd:0.29.0'
-    testImplementation 'org.jmolecules.integrations:jmolecules-archunit:0.29.0'
-    testImplementation 'org.jmolecules.integrations:jmolecules-starter-test:0.29.0'
+    implementation 'org.jmolecules.integrations:jmolecules-bytebuddy:0.30.0'
+    implementation 'org.jmolecules.integrations:jmolecules-jackson:0.30.0'
+    implementation 'org.jmolecules.integrations:jmolecules-jpa:0.30.0'
+    implementation 'org.jmolecules.integrations:jmolecules-spring:0.30.0'
+    implementation 'org.jmolecules.integrations:jmolecules-starter-ddd:0.30.0'
+    testImplementation 'org.jmolecules.integrations:jmolecules-archunit:0.30.0'
+    testImplementation 'org.jmolecules.integrations:jmolecules-starter-test:0.30.0'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

@@ -24,7 +24,7 @@ dependencies {
     api "io.grpc:grpc-services:1.64.2"
     testImplementation("io.grpc:grpc-testing:1.64.2")
     api 'com.google.code.gson:gson:2.13.2'
-    api 'com.google.guava:guava:33.4.8-jre'
+    api 'com.google.guava:guava:33.5.0-jre'
     api 'org.reflections:reflections:0.10.2'
 
     api 'jakarta.xml.ws:jakarta.xml.ws-api:4.0.2'
