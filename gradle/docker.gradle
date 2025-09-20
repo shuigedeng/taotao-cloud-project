@@ -18,7 +18,7 @@ docker {
     }
     
     springBootApplication {
-        baseImage = "openjdk:21"
+        baseImage = "openjdk:25"
         maintainer = "shuigedeng (https://github.com/shuigedeng)"
         ports = [8200, 5701]
         images = ["micyo202/${project.name}:${project.version}"]

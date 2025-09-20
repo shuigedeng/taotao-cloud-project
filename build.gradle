@@ -228,7 +228,7 @@ allprojects {
     // 统一group和version
     //group = "com.terra.ns.imp"
     //version = pLibs.versions.imp.service.get()
-    //java.sourceCompatibility = JavaVersion.VERSION_21
+    //java.sourceCompatibility = JavaVersion.VERSION_25
 
     //dependencies {
     //    // bom 管理着一组依赖的版本，各模块按需引入其中的依赖即可，由bom统一约束着版本，
@@ -238,11 +238,11 @@ allprojects {
 
     java {
         /* 指定jdk版本 */
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_25
+        targetCompatibility = JavaVersion.VERSION_25
 
         toolchain {
-            languageVersion = JavaLanguageVersion.of(21)
+            languageVersion = JavaLanguageVersion.of(25)
         }
     }
 
@@ -257,7 +257,7 @@ allprojects {
     }
     javadoc.options {
         addBooleanOption('-enable-preview', true)
-        addStringOption('-release', '21')
+        addStringOption('-release', '25')
     }
 
     /* java编译的时候缺省状态下会因为中文字符而失败 */
@@ -398,14 +398,14 @@ configure(subprojects.findAll { (!excludeSubProjects.contains(it.name)) }) { pro
             author true
             version true
             title project.name
-            links "https://docs.oracle.com/en/java/javase/21/docs/api"
+            links "https://docs.oracle.com/en/java/javase/25/docs/api"
         }
 
         options.addStringOption('Xdoclint:none', '-quiet')
         options.addStringOption('encoding', 'UTF-8')
         options.addStringOption('charSet', 'UTF-8')
         options.addBooleanOption('-enable-preview', true)
-        options.addStringOption('-release', '21')
+        options.addStringOption('-release', '25')
 
         if(JavaVersion.current().isJava9Compatible()) {
             options.addBooleanOption('html5', true)
@@ -503,7 +503,7 @@ configure(subprojects.findAll { (!excludeSubProjects.contains(it.name)) }) { pro
                     'Built-By': 'shuigedeng',
                     'Automatic-Module-Name': project.name.replace("-", "."),
                     'Implementation-URL': "https://github.com/shuigedeng/taotao-cloud-project",
-                    'Build-Jdk-Spec': JavaVersion.VERSION_21.toString(),
+                    'Build-Jdk-Spec': JavaVersion.VERSION_25.toString(),
                     'Bundle-DocURL': 'https://github.com/shuigedeng/taotao-cloud-project',
                     'Built-Gradle': gradle.gradleVersion,
                     'Build-OS': System.getProperty("os.name"),
@@ -580,9 +580,9 @@ configure(subprojects.findAll { (!excludeSubProjects.contains(it.name)) }) { pro
             url = "https://github.com/shuigedeng/taotao-cloud-project.git"
 
             properties = [
-                    "java.version": JavaVersion.VERSION_21.toString(),
-                    "maven.compiler.source": JavaVersion.VERSION_21.toString(),
-                    "maven.compiler.target": JavaVersion.VERSION_21.toString(),
+                    "java.version": JavaVersion.VERSION_25.toString(),
+                    "maven.compiler.source": JavaVersion.VERSION_25.toString(),
+                    "maven.compiler.target": JavaVersion.VERSION_25.toString(),
                     "project.build.sourceEncoding": "UTF-8",
                     "project.reporting.outputEncoding": "UTF-8",
                     "spring-boot-dependencies.version"   : "3.5.6",

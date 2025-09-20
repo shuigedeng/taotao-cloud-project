@@ -4,7 +4,7 @@ jib {
     //https://cr.console.aliyun.com/cn-hangzhou/instances/repositories
     allowInsecureRegistries = true
     from {
-        image = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:amd64"
+        image = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:amd64"
         auth {
             username findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME").toString() ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: ""
             password findProperty("TAOTAO_CLOUD_REGISTRY_PASSWORD").toString() ?: System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: ""

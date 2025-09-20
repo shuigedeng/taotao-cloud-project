@@ -11,14 +11,14 @@ javadoc {
         author true
         version true
         title project.name
-        links "https://docs.oracle.com/en/java/javase/21/docs/api"
+        links "https://docs.oracle.com/en/java/javase/25/docs/api"
     }
 
     options.addStringOption('Xdoclint:none', '-quiet')
     options.addStringOption('encoding', 'UTF-8')
     options.addStringOption('charSet', 'UTF-8')
     options.addBooleanOption('-enable-preview', true)
-    options.addStringOption('-release', '21')
+    options.addStringOption('-release', '25')
 
     if(JavaVersion.current().isJava9Compatible()) {
         options.addBooleanOption('html5', true)
@@ -128,7 +128,7 @@ jar {
                 'Built-By': 'shuigedeng',
                 'Automatic-Module-Name': project.name.replace("-", "."),
                 'Implementation-URL': "https://github.com/shuigedeng/taotao-cloud-project",
-                'Build-Jdk-Spec': JavaVersion.VERSION_21.toString(),
+                'Build-Jdk-Spec': JavaVersion.VERSION_25.toString(),
                 'Bundle-DocURL': 'https://github.com/shuigedeng/taotao-cloud-project',
                 'Built-Gradle': gradle.gradleVersion,
                 'Build-OS': System.getProperty("os.name"),
@@ -236,9 +236,9 @@ publishing {
                 description = project.name
                 url = 'https://github.com/shuigedeng/taotao-cloud-project.git'
                 properties = [
-                        "java.version": JavaVersion.VERSION_21.toString(),
-                        "maven.compiler.source": JavaVersion.VERSION_21.toString(),
-                        "maven.compiler.target": JavaVersion.VERSION_21.toString(),
+                        "java.version": JavaVersion.VERSION_25.toString(),
+                        "maven.compiler.source": JavaVersion.VERSION_25.toString(),
+                        "maven.compiler.target": JavaVersion.VERSION_25.toString(),
                         "project.build.sourceEncoding": "UTF-8",
                         "project.reporting.outputEncoding": "UTF-8",
                         "spring-boot-dependencies.version"   : "3.5.6",

@@ -2,7 +2,7 @@ apply plugin: 'pmd'
 
 pmd {
     //PMD使用的JDK版本。有些规则可能会要求JDK的最低或者最高版本，具体要求参考Java Rules。
-    //targetJdk = 21
+    //targetJdk = 25
     // 是否将 PMD 结果输出到终端
     consoleOutput = true
     //PMD 运行时使用的线程数。
