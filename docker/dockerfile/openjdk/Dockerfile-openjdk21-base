@@ -36,7 +36,7 @@ RUN ln -s /usr/lib/libfontconfig.so.1 /usr/lib/libfontconfig.so \
     && ln -s /lib/libuuid.so.1 /usr/lib/libuuid.so.1 \
     && ln -s /lib/libc.musl-x86_64.so.1 /usr/lib/libc.musl-x86_64.so.1 # buildkit
 
-# 安装openjdk21 从openjdk镜像copy https://jdk.java.net/21/
+# 安装openjdk25 从openjdk镜像copy https://jdk.java.net/21/
 RUN echo 'sdfasf'   \
     && set -eux   \
     && downloadUrl='https://download.java.net/java/GA/jdk21/fd2272bbf8e04c3dbaee13770090416c/35/GPL/openjdk-21_linux-x64_bin.tar.gz'  \

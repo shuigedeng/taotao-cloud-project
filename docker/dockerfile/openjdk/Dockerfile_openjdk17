@@ -46,7 +46,7 @@ RUN chmod 755 /healthcheck.sh
 # docker tag sunrdocker/jdk17-jre-font-openssl-alpine:latest registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:jre-font
 # docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:jre-font
 
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:latest
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:latest
 
 USER root
 
@@ -56,4 +56,4 @@ COPY ./skywalking-agent /skywalking/agent
 
 COPY ./pyroscope-agent /pyroscope/agent
 
-#docker build -t registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21-skywalking-9-3-0:latest .
+#docker build -t registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25-skywalking-9-5-0:latest .
