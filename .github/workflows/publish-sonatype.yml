@@ -5,7 +5,7 @@ name: Microservice Starters Publish sonatype
 
 on:
 #  push:
-#    branches: [ dev ]
+#    branches: [ main ]
   release:
     types: [ created ]
 

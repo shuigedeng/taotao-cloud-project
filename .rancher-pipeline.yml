@@ -27,7 +27,7 @@ stages:
         when:
           branch:
             include:
-              - master
+              - main
               - dev
           event:
             include:
@@ -46,7 +46,7 @@ stages:
     when:
       branch:
         include:
-          - master
+          - main
           - dev
       event:
         include:
@@ -94,7 +94,7 @@ stages:
     when:
       branch:
         include:
-          - master
+          - main
       event:
         include:
           - push
@@ -111,7 +111,7 @@ stages:
     when:
       branch:
         include:
-          - master
+          - main
           - dev
       event:
         include:
@@ -123,7 +123,7 @@ timeout: 60
 
 branch:
   include:
-    - master
+    - main
     - dev
   exclude:
     - feature/*

@@ -6,7 +6,7 @@ name: Microservice Docker graalvm Image
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 env:
   TAOTAO_CLOUD_OSSRH_USERNAME: ${{ secrets.TAOTAO_CLOUD_OSSRH_USERNAME }}
