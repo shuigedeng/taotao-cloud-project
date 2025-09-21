@@ -198,7 +198,7 @@ plugins {
 
     //https://plugins.gradle.org/plugin/io.swagger.core.v3.swagger-gradle-plugin
     //https://github.com/swagger-api/swagger-core/tree/master/modules/swagger-gradle-plugin
-    id "io.swagger.core.v3.swagger-gradle-plugin" version "2.2.26"
+    id "io.swagger.core.v3.swagger-gradle-plugin" version "2.2.37"
 
     //id 'org.cyclonedx.bom' version '2.0.0'
 
