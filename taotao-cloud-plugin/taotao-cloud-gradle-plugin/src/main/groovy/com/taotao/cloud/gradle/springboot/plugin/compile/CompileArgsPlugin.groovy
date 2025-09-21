@@ -67,7 +67,7 @@ abstract class CompileArgsPlugin implements Plugin<Project> {
     private static void addCompile(JavaCompile javaCompile) {
         javaCompile.options.compilerArgs.addAll(COMPILER_ARGS)
         javaCompile.options.encoding = UTF_8
-        javaCompile.sourceCompatibility = JavaVersion.VERSION_17
-        javaCompile.targetCompatibility = JavaVersion.VERSION_17
+        javaCompile.sourceCompatibility = JavaVersion.VERSION_25
+        javaCompile.targetCompatibility = JavaVersion.VERSION_25
     }
 }
