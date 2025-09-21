@@ -96,7 +96,7 @@ jobs:
       #    gradle publishToMavenLocal
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v4.4.3
         with:
           gradle-version: "9.0.0"
 
