@@ -187,7 +187,7 @@ plugins {
     id "com.diffplug.spotless" version "7.2.1"
 
     //https://plugins.gradle.org/plugin/com.gorylenko.gradle-git-properties
-    id "com.gorylenko.gradle-git-properties" version "2.5.2"
+    id "com.gorylenko.gradle-git-properties" version "2.5.3"
 
     //https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html
     id 'org.graalvm.buildtools.native' version '0.11.0'
