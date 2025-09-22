@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.biz.repository.inf;
+package com.taotao.cloud.sys.biz.repository;
 
-import com.taotao.boot.webagg.repository.BaseInterfaceSuperRepository;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.cloud.sys.biz.model.entity.sensitive.SensitiveWord;
 
 /**
  * CompanyMapper
@@ -26,4 +26,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IFileLogRepository extends BaseInterfaceSuperRepository<FileLog, Long> {}
+public interface SensitiveWordRepository extends JpaSuperRepository<SensitiveWord, Long> {}

@@ -14,24 +14,16 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.biz.repository.cls;
+package com.taotao.cloud.sys.biz.repository;
 
-import com.taotao.cloud.sys.biz.model.entity.system.User;
-import com.taotao.boot.webagg.repository.BaseClassSuperRepository;
-import jakarta.persistence.EntityManager;
-import org.springframework.stereotype.Repository;
+import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.cloud.sys.biz.model.entity.system.Position;
 
 /**
  * CompanyMapper
  *
  * @author shuigedeng
- * @version 2023.01
- * @since 2023-02-10 17:00:04
+ * @version 2022.03
+ * @since 2021/10/13 22:50
  */
-@Repository
-public class UserRepository extends BaseClassSuperRepository<User, Long> {
-
-    public UserRepository(EntityManager em) {
-        super(User.class, em);
-    }
-}
+public interface JobRepository extends JpaSuperRepository<Position, Long> {}

@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.biz.repository.cls;
+package com.taotao.cloud.sys.biz.repository;
 
-import com.taotao.cloud.sys.biz.model.entity.system.ServiceNotice;
-import com.taotao.boot.webagg.repository.BaseClassSuperRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import org.springframework.stereotype.Repository;
+import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.cloud.sys.biz.model.entity.sms.SmsTemplate;
 
 /**
  * CompanyMapper
@@ -29,12 +26,4 @@ import org.springframework.stereotype.Repository;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-@Repository
-public class ServiceNoticeRepository extends BaseClassSuperRepository<ServiceNotice, Long> {
-	@PersistenceContext
-	private EntityManager em;
-
-	public ServiceNoticeRepository(EntityManager em) {
-		super(ServiceNotice.class, em);
-	}
-}
+public interface SmsTemplateRepository extends JpaSuperRepository<SmsTemplate, Long> {}

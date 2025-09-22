@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.biz.repository.cls;
+package com.taotao.cloud.sys.biz.repository;
 
-import com.taotao.cloud.sys.biz.model.entity.system.RoleResource;
-import com.taotao.boot.webagg.repository.BaseClassSuperRepository;
-import jakarta.persistence.EntityManager;
-import org.springframework.stereotype.Repository;
+import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.cloud.sys.biz.model.entity.config.LogisticsConfig;
 
 /**
  * CompanyMapper
@@ -28,10 +26,4 @@ import org.springframework.stereotype.Repository;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-@Repository
-public class RoleResourceRepository extends BaseClassSuperRepository<RoleResource, Long> {
-
-    public RoleResourceRepository(EntityManager em) {
-        super(RoleResource.class, em);
-    }
-}
+public interface LogisticsRepository extends JpaSuperRepository<LogisticsConfig, Long> {}

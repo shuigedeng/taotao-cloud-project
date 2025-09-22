@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.biz.repository.inf;
+package com.taotao.cloud.sys.biz.repository;
 
-import com.taotao.cloud.sys.biz.model.entity.system.Position;
-import com.taotao.boot.webagg.repository.BaseInterfaceSuperRepository;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.cloud.sys.biz.model.entity.system.Role;
 
 /**
  * CompanyMapper
@@ -27,4 +26,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IJobRepository extends BaseInterfaceSuperRepository<Position, Long> {}
+public interface RoleRepository extends JpaSuperRepository<Role, Long> {}

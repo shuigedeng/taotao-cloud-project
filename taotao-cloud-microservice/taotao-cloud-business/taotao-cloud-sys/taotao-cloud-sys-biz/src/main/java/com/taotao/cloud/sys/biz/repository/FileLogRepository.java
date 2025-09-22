@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.biz.repository.inf;
+package com.taotao.cloud.sys.biz.repository;
 
-import com.taotao.cloud.sys.biz.model.entity.dict.DictItem;
-import com.taotao.boot.webagg.repository.BaseInterfaceSuperRepository;
+
+import com.taotao.cloud.sys.biz.model.entity.FileLog;
 
 /**
  * CompanyMapper
@@ -26,4 +26,4 @@ import com.taotao.boot.webagg.repository.BaseInterfaceSuperRepository;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IDictItemRepository extends BaseInterfaceSuperRepository<DictItem, Long> {}
+public interface FileLogRepository extends JpaSuperRepository<FileLog, Long> {}

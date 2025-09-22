@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.biz.repository.inf;
+package com.taotao.cloud.sys.biz.repository;
 
-import com.taotao.cloud.sys.biz.model.entity.system.UserRelation;
-import com.taotao.boot.webagg.repository.BaseInterfaceSuperRepository;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.cloud.sys.biz.model.entity.system.ServiceNotice;
 
 /**
  * CompanyMapper
@@ -27,4 +26,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IUserRelationRepository extends BaseInterfaceSuperRepository<UserRelation, Long> {}
+public interface ServiceNoticeRepository extends JpaSuperRepository<ServiceNotice, Long> {}
