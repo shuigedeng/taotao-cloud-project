@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.management.repository;
 
-import com.taotao.boot.data.jpa.base.repository.JpaInterfaceSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Scope;
 import java.util.List;
 
@@ -26,7 +26,7 @@ import java.util.List;
  *
  * @since : 2020/3/19 16:57
  */
-public interface OAuth2ScopeRepository extends JpaInterfaceSuperRepository<OAuth2Scope, String> {
+public interface OAuth2ScopeRepository extends JpaSuperRepository<OAuth2Scope, String> {
 
     /**
      * 根据范围代码查询应用范围

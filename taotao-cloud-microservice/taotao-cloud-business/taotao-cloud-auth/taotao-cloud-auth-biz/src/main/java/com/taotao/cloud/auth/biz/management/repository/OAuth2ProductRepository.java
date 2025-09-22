@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.management.repository;
 
-import com.taotao.boot.data.jpa.base.repository.JpaInterfaceSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Product;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.auth.biz.management.entity.OAuth2Product;
  * @since : 2023/5/15 16:29
  */
 public interface OAuth2ProductRepository
-        extends JpaInterfaceSuperRepository<OAuth2Product, String> {}
+        extends JpaSuperRepository<OAuth2Product, String> {}

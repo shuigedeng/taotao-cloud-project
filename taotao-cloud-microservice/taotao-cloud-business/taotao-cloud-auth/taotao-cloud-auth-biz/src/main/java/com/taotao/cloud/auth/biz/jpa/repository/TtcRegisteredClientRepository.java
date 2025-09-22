@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.jpa.repository;
 
-import com.taotao.boot.data.jpa.base.repository.JpaInterfaceSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
 import com.taotao.cloud.auth.biz.jpa.entity.TtcRegisteredClient;
 import jakarta.persistence.QueryHint;
 import java.util.Optional;
@@ -31,7 +31,7 @@ import org.springframework.data.jpa.repository.QueryHints;
  * @since 2023-07-10 17:11:24
  */
 public interface TtcRegisteredClientRepository
-        extends JpaInterfaceSuperRepository<TtcRegisteredClient, String> {
+        extends JpaSuperRepository<TtcRegisteredClient, String> {
 
     /**
      * 根据 ClientId 查询 RegisteredClient
