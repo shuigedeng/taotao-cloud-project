@@ -19,4 +19,4 @@ package com.taotao.cloud.workflow.biz.form.mapper;
 import com.taotao.cloud.workflow.biz.form.entity.BatchTableEntity;
 
 /** 行文呈批表 */
-public interface BatchTableMapper extends BaseSuperMapper<BatchTableEntity> {}
+public interface BatchTableMapper extends MpSuperMapper<BatchTableEntity> {}

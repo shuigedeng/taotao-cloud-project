@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.biz.mapper;
 
 import com.taotao.cloud.member.biz.model.entity.MemberGrade;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 
 /** 会员等级数据层 */
-public interface IMemberGradeMapper extends BaseSuperMapper<MemberGrade, Long> {}
+public interface IMemberGradeMapper extends MpSuperMapper<MemberGrade, Long> {}

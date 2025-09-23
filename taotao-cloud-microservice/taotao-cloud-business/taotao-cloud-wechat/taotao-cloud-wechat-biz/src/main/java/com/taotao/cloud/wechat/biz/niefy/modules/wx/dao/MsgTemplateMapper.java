@@ -22,4 +22,4 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 @CacheNamespace(flushInterval = 300000L) // 缓存五分钟过期
-public interface MsgTemplateMapper extends BaseSuperMapper<MsgTemplate> {}
+public interface MsgTemplateMapper extends MpSuperMapper<MsgTemplate> {}

@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.mapper; // package com.taotao.cloud.order.biz.mapper;
 //
 // import com.taotao.cloud.order.biz.entity.order.OrderItemBack;
-// import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+// import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 // import org.apache.ibatis.annotations.Mapper;
 //
 /// **
@@ -27,6 +27,6 @@ package com.taotao.cloud.order.biz.mapper; // package com.taotao.cloud.order.biz
 // * @since 2020/4/30 11:12
 // */
 // @Mapper
-// public interface IOrderItemMapper extends BaseSuperMapper<OrderItemBack, Long> {
+// public interface IOrderItemMapper extends MpSuperMapper<OrderItemBack, Long> {
 //
 // }

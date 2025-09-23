@@ -17,4 +17,4 @@
 package com.taotao.cloud.workflow.biz.form.mapper;
 
 /** 采购原材料明细 */
-public interface ProcurementEntryMapper extends BaseSuperMapper<ProcurementEntryEntity> {}
+public interface ProcurementEntryMapper extends MpSuperMapper<ProcurementEntryEntity> {}

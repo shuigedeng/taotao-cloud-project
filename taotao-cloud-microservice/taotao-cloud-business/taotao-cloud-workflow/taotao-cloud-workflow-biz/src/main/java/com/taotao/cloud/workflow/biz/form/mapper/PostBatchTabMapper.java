@@ -19,4 +19,4 @@ package com.taotao.cloud.workflow.biz.form.mapper;
 import com.taotao.cloud.workflow.biz.form.entity.PostBatchTabEntity;
 
 /** 发文呈批表 */
-public interface PostBatchTabMapper extends BaseSuperMapper<PostBatchTabEntity> {}
+public interface PostBatchTabMapper extends MpSuperMapper<PostBatchTabEntity> {}

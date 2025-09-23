@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.mapper;
 
 import com.taotao.cloud.goods.biz.model.entity.DraftGoods;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 
 /**
  * 草稿商品数据处理层
@@ -26,4 +26,4 @@ import com.taotao.boot.webagg.mapper.BaseSuperMapper;
  * @version 2022.04
  * @since 2022-04-27 16:55:53
  */
-public interface IDraftGoodsMapper extends BaseSuperMapper<DraftGoods, Long> {}
+public interface IDraftGoodsMapper extends MpSuperMapper<DraftGoods, Long> {}

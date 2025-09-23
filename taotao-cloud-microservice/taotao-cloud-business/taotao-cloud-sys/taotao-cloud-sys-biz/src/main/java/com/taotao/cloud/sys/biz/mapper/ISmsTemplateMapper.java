@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.mapper;
 
 import com.taotao.cloud.sys.biz.model.entity.sms.SmsTemplate;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 
 /**
  * ISmsTemplateMapper
@@ -26,4 +26,4 @@ import com.taotao.boot.webagg.mapper.BaseSuperMapper;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface ISmsTemplateMapper extends BaseSuperMapper<SmsTemplate, Long> {}
+public interface ISmsTemplateMapper extends MpSuperMapper<SmsTemplate, Long> {}

@@ -22,7 +22,7 @@ import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.querydsl.core.types.Predicate;
 import com.taotao.boot.cache.redis.model.CacheKey;
 import com.taotao.boot.lock.support.DistributedLock;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 import com.taotao.boot.webagg.repository.BaseClassSuperRepository;
 import com.taotao.cloud.sys.biz.mapper.IDictMapper;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;

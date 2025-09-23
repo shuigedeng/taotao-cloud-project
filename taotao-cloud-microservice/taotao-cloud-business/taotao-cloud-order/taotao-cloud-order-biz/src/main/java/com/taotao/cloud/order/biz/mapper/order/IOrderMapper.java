@@ -23,14 +23,14 @@ import com.taotao.cloud.order.sys.model.vo.cart.OrderExportVO;
 import com.taotao.cloud.order.sys.model.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.sys.model.vo.order.PaymentLogVO;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 /** 订单数据处理层 */
-public interface IOrderMapper extends BaseSuperMapper<Order, Long> {
+public interface IOrderMapper extends MpSuperMapper<Order, Long> {
 
     /**
      * 修改订单状态

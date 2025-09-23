@@ -28,7 +28,7 @@ import org.apache.ibatis.annotations.Select;
  * @version 2022.04
  * @since 2022-04-27 16:36:29
  */
-public interface CouponActivityItemMapper extends BaseSuperMapper<CouponActivityItem> {
+public interface CouponActivityItemMapper extends MpSuperMapper<CouponActivityItem> {
 
     /**
      * 获取优惠券活动关联优惠券列表VO

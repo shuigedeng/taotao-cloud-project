@@ -29,7 +29,7 @@ import org.apache.ibatis.annotations.Param;
  * @since 2021-02-14
  */
 @Mapper
-public interface SysRoleMapper extends BaseSuperMapper<SysRoleDO> {
+public interface SysRoleMapper extends MpSuperMapper<SysRoleDO> {
 
     /**
      * 分页查询

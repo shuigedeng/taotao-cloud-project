@@ -25,4 +25,4 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2021-02-08
  */
 @Mapper
-public interface SysCaptchaMapper extends BaseSuperMapper<SysCaptchaDO> {}
+public interface SysCaptchaMapper extends MpSuperMapper<SysCaptchaDO> {}

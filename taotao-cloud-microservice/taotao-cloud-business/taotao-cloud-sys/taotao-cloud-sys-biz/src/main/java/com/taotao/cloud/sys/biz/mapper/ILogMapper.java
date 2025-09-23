@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.mapper;
 
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 import com.taotao.cloud.sys.biz.model.entity.Log;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
@@ -31,7 +31,7 @@ import java.util.List;
  * @version 2021.10
  * @since 2022-02-11 16:33:34
  */
-public interface ILogMapper extends BaseSuperMapper<Log, Long> {
+public interface ILogMapper extends MpSuperMapper<Log, Long> {
 
 	@Delete("delete from log where log_type = #{logType}")
 	void deleteByLogType(@Param("logType") String logType);

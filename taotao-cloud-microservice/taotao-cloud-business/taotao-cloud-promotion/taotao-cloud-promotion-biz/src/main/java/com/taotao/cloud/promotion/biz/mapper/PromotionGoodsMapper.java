@@ -31,7 +31,7 @@ import org.apache.ibatis.annotations.Select;
  * @version 2022.04
  * @since 2022-04-27 16:37:11
  */
-public interface PromotionGoodsMapper extends BaseSuperMapper<PromotionGoods> {
+public interface PromotionGoodsMapper extends MpSuperMapper<PromotionGoods> {
 
     /**
      * 查询参加活动促销商品是否同时参加指定类型的活动

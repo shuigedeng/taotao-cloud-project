@@ -17,7 +17,7 @@
 package com.taotao.cloud.operation.biz.mapper;
 
 import com.taotao.cloud.operation.biz.model.entity.Feedback;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 
 /** 意见反馈处理层 */
-public interface FeedbackMapper extends BaseSuperMapper<Feedback, Long> {}
+public interface FeedbackMapper extends MpSuperMapper<Feedback, Long> {}

@@ -28,7 +28,7 @@ import org.apache.ibatis.annotations.Param;
  */
 @Mapper
 @CacheNamespace(flushInterval = 300000L) // 缓存五分钟过期
-public interface SysConfigDao extends BaseSuperMapper<SysConfigEntity> {
+public interface SysConfigDao extends MpSuperMapper<SysConfigEntity> {
 
     /** 根据key，查询value */
     SysConfigEntity queryByKey(String paramKey);

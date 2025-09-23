@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author shuigedeng
  */
-public interface ChannelAccountDao extends JpaRepository<ChannelAccount, Long> {
+public interface ChannelAccountDao extends JpaSuperRepository<ChannelAccount, Long> {
 
 
     /**

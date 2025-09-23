@@ -17,11 +17,11 @@
 package com.taotao.cloud.message.biz.mapper;
 
 import com.taotao.cloud.message.biz.model.entity.WechatMPMessage;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 import org.apache.ibatis.annotations.Delete;
 
 /** 微信小程序消息订阅 Dao层 */
-public interface WechatMPMessageMapper extends BaseSuperMapper<WechatMPMessage, Long> {
+public interface WechatMPMessageMapper extends MpSuperMapper<WechatMPMessage, Long> {
 
     /** 删除微信服务消息 */
     @Delete("delete from tt_wechat_mp_message")

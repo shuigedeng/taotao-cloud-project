@@ -22,7 +22,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.store.api.model.vo.BillListVO;
 import com.taotao.cloud.store.biz.model.entity.Bill;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -33,7 +33,7 @@ import org.apache.ibatis.annotations.Select;
  * @version 2023.04
  * @since 2023-05-11 17:42:50
  */
-public interface BillMapper extends BaseSuperMapper<Bill, String> {
+public interface BillMapper extends MpSuperMapper<Bill, String> {
 
     /**
      * 查询结算单分页

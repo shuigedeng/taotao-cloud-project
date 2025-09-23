@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.engine.mapper;
 
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowCandidatesEntity;
 
 /** 流程候选人 */
-public interface FlowCandidatesMapper extends BaseSuperMapper<FlowCandidatesEntity, String> {}
+public interface FlowCandidatesMapper extends MpSuperMapper<FlowCandidatesEntity, String> {}

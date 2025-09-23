@@ -22,7 +22,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 @CacheNamespace(flushInterval = 300000L) // 缓存五分钟过期
-public interface WxUserMapper extends BaseSuperMapper<WxUser> {
+public interface WxUserMapper extends MpSuperMapper<WxUser> {
 
     void unsubscribe(String openid);
 }

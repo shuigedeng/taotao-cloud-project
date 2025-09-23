@@ -30,7 +30,7 @@ import org.apache.ibatis.annotations.Param;
  * @since 2021-01-23
  */
 @Mapper
-public interface SysUserMapper extends BaseSuperMapper<SysUserDO> {
+public interface SysUserMapper extends MpSuperMapper<SysUserDO> {
 
     /**
      * 分页查询

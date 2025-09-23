@@ -38,7 +38,7 @@ package com.taotao.cloud.sys.biz.supports.test; /// *
 // import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 // import com.taotao.cloud.sys.biz.entity.SysCompany;
 // import com.taotao.cloud.sys.biz.entity.User;
-// import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+// import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 // import java.time.LocalDate;
 // import java.util.List;
 // import org.apache.ibatis.annotations.Many;
@@ -57,7 +57,7 @@ package com.taotao.cloud.sys.biz.supports.test; /// *
 // * @since 2021/10/13 22:50
 // */
 // @Mapper
-// public interface ISysCompanyMapper extends BaseSuperMapper<SysCompany, Long> {
+// public interface ISysCompanyMapper extends MpSuperMapper<SysCompany, Long> {
 //
 //	@Select("""
 //		select t.id,t.login_name,t.name,b.name as login_station_name

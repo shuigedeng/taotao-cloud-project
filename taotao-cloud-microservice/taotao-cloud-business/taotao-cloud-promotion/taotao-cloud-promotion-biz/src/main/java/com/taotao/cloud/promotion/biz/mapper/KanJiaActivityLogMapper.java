@@ -25,4 +25,4 @@ import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityLog;
  * @version 2022.04
  * @since 2022-04-27 16:36:55
  */
-public interface KanJiaActivityLogMapper extends BaseSuperMapper<KanjiaActivityLog> {}
+public interface KanJiaActivityLogMapper extends MpSuperMapper<KanjiaActivityLog> {}

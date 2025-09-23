@@ -17,11 +17,11 @@
 package com.taotao.cloud.order.biz.mapper.order;
 
 import com.taotao.cloud.order.biz.model.entity.order.Trade;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 import org.apache.ibatis.annotations.Update;
 
 /** 交易数据处理层 */
-public interface ITradeMapper extends BaseSuperMapper<Trade, Long> {
+public interface ITradeMapper extends MpSuperMapper<Trade, Long> {
 
     /**
      * 修改交易金额

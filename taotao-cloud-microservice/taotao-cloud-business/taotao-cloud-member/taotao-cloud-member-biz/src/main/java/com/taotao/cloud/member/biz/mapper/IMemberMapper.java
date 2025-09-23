@@ -21,13 +21,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.member.sys.model.vo.MemberVO;
 import com.taotao.cloud.member.biz.model.entity.Member;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /** 会员数据处理层 */
-public interface IMemberMapper extends BaseSuperMapper<Member, Long> {
+public interface IMemberMapper extends MpSuperMapper<Member, Long> {
 
     /**
      * 获取所有的会员手机号

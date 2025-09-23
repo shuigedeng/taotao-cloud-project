@@ -17,7 +17,7 @@
 package com.taotao.cloud.message.biz.mapper;
 
 import com.taotao.cloud.message.biz.model.entity.NoticeMessage;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 
 /** 通知类消息模板数据处理层 */
-public interface NoticeMessageTemplateMapper extends BaseSuperMapper<NoticeMessage, Long> {}
+public interface NoticeMessageTemplateMapper extends MpSuperMapper<NoticeMessage, Long> {}

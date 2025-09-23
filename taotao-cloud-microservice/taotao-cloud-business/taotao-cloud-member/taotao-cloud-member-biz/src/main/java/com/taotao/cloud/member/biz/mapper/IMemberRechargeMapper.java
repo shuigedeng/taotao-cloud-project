@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.biz.mapper;
 
 import com.taotao.cloud.member.biz.model.entity.MemberRecharge;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 
 /** 会员签到数据处理层 */
-public interface IMemberRechargeMapper extends BaseSuperMapper<MemberRecharge, Long> {}
+public interface IMemberRechargeMapper extends MpSuperMapper<MemberRecharge, Long> {}

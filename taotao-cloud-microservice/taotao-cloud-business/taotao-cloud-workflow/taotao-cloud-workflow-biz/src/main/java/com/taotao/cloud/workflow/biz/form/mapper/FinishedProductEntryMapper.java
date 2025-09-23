@@ -17,4 +17,4 @@
 package com.taotao.cloud.workflow.biz.form.mapper;
 
 /** 成品入库单明细 */
-public interface FinishedProductEntryMapper extends BaseSuperMapper<FinishedProductEntryEntity> {}
+public interface FinishedProductEntryMapper extends MpSuperMapper<FinishedProductEntryEntity> {}

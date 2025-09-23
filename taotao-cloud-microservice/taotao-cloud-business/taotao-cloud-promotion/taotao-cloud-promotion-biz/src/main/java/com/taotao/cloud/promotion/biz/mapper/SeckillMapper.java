@@ -26,7 +26,7 @@ import org.apache.ibatis.annotations.Update;
  * @version 2022.04
  * @since 2022-04-27 16:37:18
  */
-public interface SeckillMapper extends BaseSuperMapper<Seckill> {
+public interface SeckillMapper extends MpSuperMapper<Seckill> {
 
     /**
      * 修改秒杀活动数量

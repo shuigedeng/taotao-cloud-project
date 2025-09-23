@@ -18,7 +18,7 @@ package com.taotao.cloud.report.biz.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 import com.taotao.cloud.report.biz.model.entity.MemberStatisticsData;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;

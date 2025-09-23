@@ -17,4 +17,4 @@
 package com.taotao.cloud.workflow.biz.form.mapper;
 
 /** 日常物品采购清单明细 */
-public interface PurchaseListEntryMapper extends BaseSuperMapper<PurchaseListEntryEntity> {}
+public interface PurchaseListEntryMapper extends MpSuperMapper<PurchaseListEntryEntity> {}

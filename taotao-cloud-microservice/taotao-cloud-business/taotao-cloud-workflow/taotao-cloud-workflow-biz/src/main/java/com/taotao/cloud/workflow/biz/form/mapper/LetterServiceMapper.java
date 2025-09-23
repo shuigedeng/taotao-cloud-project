@@ -19,4 +19,4 @@ package com.taotao.cloud.workflow.biz.form.mapper;
 import com.taotao.cloud.workflow.biz.form.entity.LetterServiceEntity;
 
 /** 发文单 */
-public interface LetterServiceMapper extends BaseSuperMapper<LetterServiceEntity> {}
+public interface LetterServiceMapper extends MpSuperMapper<LetterServiceEntity> {}

@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.mapper;
 
 import com.taotao.cloud.goods.biz.model.entity.GoodsUnit;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 
 /**
  * 商品计量单位数据处理层
@@ -26,4 +26,4 @@ import com.taotao.boot.webagg.mapper.BaseSuperMapper;
  * @version 2022.04
  * @since 2022-04-27 16:57:27
  */
-public interface IGoodsUnitMapper extends BaseSuperMapper<GoodsUnit, Long> {}
+public interface IGoodsUnitMapper extends MpSuperMapper<GoodsUnit, Long> {}

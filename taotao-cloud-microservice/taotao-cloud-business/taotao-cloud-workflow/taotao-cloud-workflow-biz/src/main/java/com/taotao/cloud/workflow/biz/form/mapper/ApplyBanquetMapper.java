@@ -19,4 +19,4 @@ package com.taotao.cloud.workflow.biz.form.mapper;
 import com.taotao.cloud.workflow.biz.form.entity.ApplyBanquetEntity;
 
 /** 宴请申请 */
-public interface ApplyBanquetMapper extends BaseSuperMapper<ApplyBanquetEntity> {}
+public interface ApplyBanquetMapper extends MpSuperMapper<ApplyBanquetEntity> {}

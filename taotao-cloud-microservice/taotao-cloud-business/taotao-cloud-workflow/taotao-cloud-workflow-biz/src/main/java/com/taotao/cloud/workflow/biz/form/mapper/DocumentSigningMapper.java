@@ -19,4 +19,4 @@ package com.taotao.cloud.workflow.biz.form.mapper;
 import com.taotao.cloud.workflow.biz.form.entity.DocumentSigningEntity;
 
 /** 文件签阅表 */
-public interface DocumentSigningMapper extends BaseSuperMapper<DocumentSigningEntity> {}
+public interface DocumentSigningMapper extends MpSuperMapper<DocumentSigningEntity> {}

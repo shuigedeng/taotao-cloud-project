@@ -41,7 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,7 +53,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @version 2022.04
  * @since 2022-04-27 16:44:46
  */
-public class AbstractPromotionsServiceImpl<M extends BaseSuperMapper<T>, T extends BasePromotions<T, Long>>
+public class AbstractPromotionsServiceImpl<M extends MpSuperMapper<T>, T extends BasePromotions<T, Long>>
         extends ServiceImpl<M, T> implements AbstractPromotionsService<T> {
 
     /** 推广产品服务 促销商品 */

@@ -26,7 +26,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2021-02-14
  */
 @Mapper
-public interface SysUserRoleMapper extends BaseSuperMapper<SysUserRoleDO> {
+public interface SysUserRoleMapper extends MpSuperMapper<SysUserRoleDO> {
 
     /** 根据角色ID，批量删除 */
     int deleteByRoleIds(List<String> roleIds);

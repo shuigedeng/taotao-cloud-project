@@ -17,11 +17,11 @@
 package com.taotao.cloud.member.biz.mapper;
 
 import com.taotao.cloud.member.biz.model.entity.MemberPointsHistory;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 import org.apache.ibatis.annotations.Select;
 
 /** 会员积分历史数据处理层 */
-public interface IMemberPointsHistoryMapper extends BaseSuperMapper<MemberPointsHistory, Long> {
+public interface IMemberPointsHistoryMapper extends MpSuperMapper<MemberPointsHistory, Long> {
 
     /**
      * 获取所有用户的积分历史VO

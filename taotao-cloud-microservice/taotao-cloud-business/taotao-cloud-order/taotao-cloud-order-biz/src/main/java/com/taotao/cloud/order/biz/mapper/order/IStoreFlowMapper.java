@@ -21,13 +21,13 @@ import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.order.biz.model.entity.order.StoreFlow;
 import com.taotao.cloud.store.api.model.vo.StoreFlowPayDownloadVO;
 import com.taotao.cloud.store.api.model.vo.StoreFlowRefundDownloadVO;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /** 商家订单流水数据处理层 */
-public interface IStoreFlowMapper extends BaseSuperMapper<StoreFlow, Long> {
+public interface IStoreFlowMapper extends MpSuperMapper<StoreFlow, Long> {
 
     /**
      * 获取结算单的入账流水

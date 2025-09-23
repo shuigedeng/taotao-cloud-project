@@ -24,13 +24,13 @@ import com.taotao.cloud.store.api.model.vo.StoreOtherVO;
 import com.taotao.cloud.store.biz.model.entity.StoreDetail;
 import java.util.List;
 
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 /** 店铺详细数据处理层 */
-public interface StoreDetailMapper extends BaseSuperMapper<StoreDetail, String> {
+public interface StoreDetailMapper extends MpSuperMapper<StoreDetail, String> {
 
     /**
      * 获取店铺详情VO

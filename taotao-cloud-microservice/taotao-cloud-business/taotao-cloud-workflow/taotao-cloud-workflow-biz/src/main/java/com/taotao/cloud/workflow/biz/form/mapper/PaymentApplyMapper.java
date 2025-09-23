@@ -19,4 +19,4 @@ package com.taotao.cloud.workflow.biz.form.mapper;
 import com.taotao.cloud.workflow.biz.form.entity.PaymentApplyEntity;
 
 /** 付款申请单 */
-public interface PaymentApplyMapper extends BaseSuperMapper<PaymentApplyEntity> {}
+public interface PaymentApplyMapper extends MpSuperMapper<PaymentApplyEntity> {}

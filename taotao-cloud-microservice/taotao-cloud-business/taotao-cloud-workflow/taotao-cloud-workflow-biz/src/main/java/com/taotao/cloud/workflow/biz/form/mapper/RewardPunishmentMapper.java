@@ -19,4 +19,4 @@ package com.taotao.cloud.workflow.biz.form.mapper;
 import com.taotao.cloud.workflow.biz.form.entity.RewardPunishmentEntity;
 
 /** 行政赏罚单 */
-public interface RewardPunishmentMapper extends BaseSuperMapper<RewardPunishmentEntity> {}
+public interface RewardPunishmentMapper extends MpSuperMapper<RewardPunishmentEntity> {}

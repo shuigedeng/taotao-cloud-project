@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.mapper.purchase;
 
 import com.taotao.cloud.order.biz.model.entity.purchase.PurchaseQuotedItem;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 
 /** 采购单子内容数据处理层 */
-public interface IPurchaseQuotedItemMapper extends BaseSuperMapper<PurchaseQuotedItem, Long> {}
+public interface IPurchaseQuotedItemMapper extends MpSuperMapper<PurchaseQuotedItem, Long> {}

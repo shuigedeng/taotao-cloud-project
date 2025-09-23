@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.biz.mapper;
 
 import com.taotao.cloud.member.biz.model.entity.MemberAddress;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 
 /** 会员地址数据处理层 */
-public interface IMemberAddressMapper extends BaseSuperMapper<MemberAddress, Long> {}
+public interface IMemberAddressMapper extends MpSuperMapper<MemberAddress, Long> {}

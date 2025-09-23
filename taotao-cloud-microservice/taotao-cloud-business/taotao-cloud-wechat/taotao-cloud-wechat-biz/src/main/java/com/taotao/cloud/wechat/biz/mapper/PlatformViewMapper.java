@@ -26,7 +26,7 @@ package com.taotao.cloud.wechat.biz.mapper; // package com.taotao.cloud.wechat.b
 /// **
 // * 平台流量数据
 // */
-// public interface PlatformViewMapper extends BaseSuperMapper<PlatformViewData> {
+// public interface PlatformViewMapper extends MpSuperMapper<PlatformViewData> {
 //    /**
 //     * UV流量统计
 //     *

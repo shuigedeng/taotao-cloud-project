@@ -23,12 +23,12 @@ import com.taotao.cloud.order.sys.model.dto.order.OrderReceiptDTO;
 import com.taotao.cloud.order.sys.model.page.order.ReceiptPageQuery;
 import com.taotao.cloud.order.sys.model.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.biz.model.entity.order.Receipt;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /** 发票数据处理层 */
-public interface IReceiptMapper extends BaseSuperMapper<Receipt, Long> {
+public interface IReceiptMapper extends MpSuperMapper<Receipt, Long> {
 
     /**
      * 查询发票信息

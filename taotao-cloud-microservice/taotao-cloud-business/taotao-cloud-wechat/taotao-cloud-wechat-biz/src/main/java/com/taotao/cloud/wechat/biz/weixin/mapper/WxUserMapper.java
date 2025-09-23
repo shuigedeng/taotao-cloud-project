@@ -24,4 +24,4 @@ import com.joolun.weixin.entity.WxUser;
  * @author www.joolun.com
  * @since 2019-03-25 15:39:39
  */
-public interface WxUserMapper extends BaseSuperMapper<WxUser> {}
+public interface WxUserMapper extends MpSuperMapper<WxUser> {}

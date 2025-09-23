@@ -19,4 +19,4 @@ package com.taotao.cloud.workflow.biz.form.mapper;
 import com.taotao.cloud.workflow.biz.form.entity.TravelReimbursementEntity;
 
 /** 差旅报销申请表 */
-public interface TravelReimbursementMapper extends BaseSuperMapper<TravelReimbursementEntity> {}
+public interface TravelReimbursementMapper extends MpSuperMapper<TravelReimbursementEntity> {}

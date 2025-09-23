@@ -19,4 +19,4 @@ package com.taotao.cloud.workflow.biz.form.mapper;
 import com.taotao.cloud.workflow.biz.form.entity.WorkContactSheetEntity;
 
 /** 工作联系单 */
-public interface WorkContactSheetMapper extends BaseSuperMapper<WorkContactSheetEntity> {}
+public interface WorkContactSheetMapper extends MpSuperMapper<WorkContactSheetEntity> {}

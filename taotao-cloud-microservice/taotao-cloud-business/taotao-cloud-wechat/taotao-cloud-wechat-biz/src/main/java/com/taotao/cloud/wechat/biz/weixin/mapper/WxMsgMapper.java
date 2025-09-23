@@ -29,7 +29,7 @@ import org.apache.ibatis.annotations.Param;
  * @author www.joolun.com
  * @since 2019-05-28 16:12:10
  */
-public interface WxMsgMapper extends BaseSuperMapper<WxMsg> {
+public interface WxMsgMapper extends MpSuperMapper<WxMsg> {
 
     /**
      * 获取分组后的消息列表

@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.mapper;
 
 import com.taotao.cloud.sys.biz.model.entity.config.EmailConfig;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 
 /**
  * IEmailConfigMapper
@@ -26,4 +26,4 @@ import com.taotao.boot.webagg.mapper.BaseSuperMapper;
  * @version 2022.03
  * @since 2022-03-29 09:01:48
  */
-public interface IEmailConfigMapper extends BaseSuperMapper<EmailConfig, Long> {}
+public interface IEmailConfigMapper extends MpSuperMapper<EmailConfig, Long> {}

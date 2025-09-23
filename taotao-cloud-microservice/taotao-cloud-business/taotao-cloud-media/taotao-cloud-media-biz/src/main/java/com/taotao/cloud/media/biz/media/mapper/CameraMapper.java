@@ -18,7 +18,7 @@ package com.taotao.cloud.media.biz.media.mapper;
 
 import com.taotao.cloud.media.biz.media.entity.Camera;
 
-public interface CameraMapper extends BaseSuperMapper<Camera> {
+public interface CameraMapper extends MpSuperMapper<Camera> {
 
     //	@Select("select id from camera")
     //	List<Camera> listCamera();

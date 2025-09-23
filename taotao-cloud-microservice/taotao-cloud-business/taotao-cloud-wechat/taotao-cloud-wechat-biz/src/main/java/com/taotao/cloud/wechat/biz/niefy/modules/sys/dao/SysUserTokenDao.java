@@ -27,7 +27,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 @CacheNamespace(flushInterval = 300000L) // 缓存五分钟过期
-public interface SysUserTokenDao extends BaseSuperMapper<SysUserTokenEntity> {
+public interface SysUserTokenDao extends MpSuperMapper<SysUserTokenEntity> {
 
     SysUserTokenEntity queryByToken(String token);
 }

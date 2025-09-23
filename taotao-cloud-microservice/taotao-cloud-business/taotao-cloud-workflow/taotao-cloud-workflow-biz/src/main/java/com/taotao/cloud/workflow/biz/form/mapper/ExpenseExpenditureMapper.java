@@ -17,4 +17,4 @@
 package com.taotao.cloud.workflow.biz.form.mapper;
 
 /** 费用支出单 */
-public interface ExpenseExpenditureMapper extends BaseSuperMapper<ExpenseExpenditureEntity> {}
+public interface ExpenseExpenditureMapper extends MpSuperMapper<ExpenseExpenditureEntity> {}

@@ -24,4 +24,4 @@ import com.joolun.weixin.entity.WxMenu;
  * @author www.joolun.com
  * @since 2019-03-27 16:52:10
  */
-public interface WxMenuMapper extends BaseSuperMapper<WxMenu> {}
+public interface WxMenuMapper extends MpSuperMapper<WxMenu> {}

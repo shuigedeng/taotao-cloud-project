@@ -28,7 +28,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 @CacheNamespace(flushInterval = 300000L) // 缓存五分钟过期
-public interface SysMenuDao extends BaseSuperMapper<SysMenuEntity> {
+public interface SysMenuDao extends MpSuperMapper<SysMenuEntity> {
 
     /**
      * 根据父菜单，查询子菜单

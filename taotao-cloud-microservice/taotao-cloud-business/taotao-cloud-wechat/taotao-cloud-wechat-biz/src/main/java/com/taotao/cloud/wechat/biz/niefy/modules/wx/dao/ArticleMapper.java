@@ -23,7 +23,7 @@ import org.springframework.scheduling.annotation.Async;
 
 @Mapper
 @CacheNamespace(flushInterval = 300000L) // 缓存五分钟过期
-public interface ArticleMapper extends BaseSuperMapper<Article> {
+public interface ArticleMapper extends MpSuperMapper<Article> {
     @Async
     void addOpenCount(int id);
 }

@@ -28,7 +28,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 @CacheNamespace(flushInterval = 300000L) // 缓存五分钟过期
-public interface SysRoleDao extends BaseSuperMapper<SysRoleEntity> {
+public interface SysRoleDao extends MpSuperMapper<SysRoleEntity> {
 
     /** 查询用户创建的角色ID列表 */
     List<Long> queryRoleIdList(Long createUserId);

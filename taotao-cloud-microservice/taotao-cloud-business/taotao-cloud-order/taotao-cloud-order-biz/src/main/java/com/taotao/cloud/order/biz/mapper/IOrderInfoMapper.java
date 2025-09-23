@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.mapper; // package com.taotao.cloud.order.biz.mapper;
 //
 // import com.taotao.cloud.order.biz.entity.order.OrderInfo;
-// import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+// import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 // import org.apache.ibatis.annotations.Mapper;
 // import org.apache.ibatis.annotations.Param;
 // import org.apache.ibatis.annotations.Select;
@@ -29,7 +29,7 @@ package com.taotao.cloud.order.biz.mapper; // package com.taotao.cloud.order.biz
 // * @since 2020/4/30 11:12
 // */
 // @Mapper
-// public interface IOrderInfoMapper extends BaseSuperMapper<OrderInfo, Long> {
+// public interface IOrderInfoMapper extends MpSuperMapper<OrderInfo, Long> {
 //
 //	@Select({"""
 //		select * from order_info where id = #{id}

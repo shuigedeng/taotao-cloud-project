@@ -26,4 +26,4 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2022-07-23
  */
 @Mapper
-public interface WecomRobotConfigMapper extends BaseSuperMapper<WecomRobotConfig> {}
+public interface WecomRobotConfigMapper extends MpSuperMapper<WecomRobotConfig> {}

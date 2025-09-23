@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author shuigedeng
  */
-public interface MessageTemplateDao extends JpaRepository<MessageTemplate, Long>, JpaSpecificationExecutor<MessageTemplate> {
+public interface MessageTemplateDao extends JpaSuperRepository<MessageTemplate, Long>, JpaSpecificationExecutor<MessageTemplate> {
 
 
     /**

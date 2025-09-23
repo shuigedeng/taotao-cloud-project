@@ -19,4 +19,4 @@ package com.taotao.cloud.workflow.biz.form.mapper;
 import com.taotao.cloud.workflow.biz.form.entity.BatchPackEntity;
 
 /** 批包装指令 */
-public interface BatchPackMapper extends BaseSuperMapper<BatchPackEntity> {}
+public interface BatchPackMapper extends MpSuperMapper<BatchPackEntity> {}

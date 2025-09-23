@@ -28,4 +28,4 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 @CacheNamespace(flushInterval = 10 * 1000L) // 缓存过期时间（毫秒）
-public interface WxMsgMapper extends BaseSuperMapper<WxMsg> {}
+public interface WxMsgMapper extends MpSuperMapper<WxMsg> {}

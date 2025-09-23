@@ -19,4 +19,4 @@ package com.taotao.cloud.workflow.biz.form.mapper;
 import com.taotao.cloud.workflow.biz.form.entity.ConBillingEntity;
 
 /** 合同开票流程 */
-public interface ConBillingMapper extends BaseSuperMapper<ConBillingEntity> {}
+public interface ConBillingMapper extends MpSuperMapper<ConBillingEntity> {}

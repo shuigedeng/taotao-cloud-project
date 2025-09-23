@@ -21,7 +21,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.goods.biz.model.vo.GoodsSkuParamsVO;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -37,7 +37,7 @@ import org.springframework.stereotype.Repository;
  */
 //添加@Repository注解是为了引导IntelliJ IDEA作出正确的判断.
 @Repository
-public interface IGoodsMapper extends BaseSuperMapper<Goods, Long> {
+public interface IGoodsMapper extends MpSuperMapper<Goods, Long> {
 
 	/**
 	 * 根据店铺ID获取商品ID列表

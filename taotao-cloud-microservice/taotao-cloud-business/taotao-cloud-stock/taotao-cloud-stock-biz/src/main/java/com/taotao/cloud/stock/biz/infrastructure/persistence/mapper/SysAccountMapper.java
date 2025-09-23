@@ -25,4 +25,4 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2021-02-10
  */
 @Mapper
-public interface SysAccountMapper extends BaseSuperMapper<SysAccountDO> {}
+public interface SysAccountMapper extends MpSuperMapper<SysAccountDO> {}

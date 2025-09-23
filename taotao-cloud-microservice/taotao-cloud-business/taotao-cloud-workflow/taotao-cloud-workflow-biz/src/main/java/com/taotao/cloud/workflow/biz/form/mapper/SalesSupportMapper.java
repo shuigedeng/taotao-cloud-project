@@ -17,4 +17,4 @@
 package com.taotao.cloud.workflow.biz.form.mapper;
 
 /** 销售支持表 */
-public interface SalesSupportMapper extends BaseSuperMapper<SalesSupportEntity> {}
+public interface SalesSupportMapper extends MpSuperMapper<SalesSupportEntity> {}

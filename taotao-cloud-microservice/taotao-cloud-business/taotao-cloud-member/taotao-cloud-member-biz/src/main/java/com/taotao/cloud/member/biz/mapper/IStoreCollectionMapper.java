@@ -21,14 +21,14 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.member.biz.model.entity.MemberStoreCollection;
 import com.taotao.cloud.store.api.model.vo.StoreCollectionVO;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /**
  * 会员收藏数据处理层
  */
-public interface IStoreCollectionMapper extends BaseSuperMapper<MemberStoreCollection, Long> {
+public interface IStoreCollectionMapper extends MpSuperMapper<MemberStoreCollection, Long> {
 
     /**
      * 会员店铺收藏分页

@@ -22,7 +22,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 /** Dao基类 */
-public interface BaseDao<T> extends BaseSuperMapper<T> {
+public interface BaseDao<T> extends MpSuperMapper<T> {
 
     /**
      * 批量插入 仅适用于mysql

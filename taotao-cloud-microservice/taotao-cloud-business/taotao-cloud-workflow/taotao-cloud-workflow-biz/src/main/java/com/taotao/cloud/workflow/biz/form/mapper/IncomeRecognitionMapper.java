@@ -17,4 +17,4 @@
 package com.taotao.cloud.workflow.biz.form.mapper;
 
 /** 收入确认分析表 */
-public interface IncomeRecognitionMapper extends BaseSuperMapper<IncomeRecognitionEntity> {}
+public interface IncomeRecognitionMapper extends MpSuperMapper<IncomeRecognitionEntity> {}

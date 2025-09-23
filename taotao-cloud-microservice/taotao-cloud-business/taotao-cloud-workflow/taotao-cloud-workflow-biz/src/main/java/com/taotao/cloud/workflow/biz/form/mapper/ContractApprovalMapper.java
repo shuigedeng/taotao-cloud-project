@@ -17,4 +17,4 @@
 package com.taotao.cloud.workflow.biz.form.mapper;
 
 /** 合同审批 */
-public interface ContractApprovalMapper extends BaseSuperMapper<ContractApprovalEntity> {}
+public interface ContractApprovalMapper extends MpSuperMapper<ContractApprovalEntity> {}

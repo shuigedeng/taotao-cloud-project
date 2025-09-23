@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.mapper.trade;
 
 import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 
 /** 订单日志数据处理层 */
-public interface IOrderLogMapper extends BaseSuperMapper<OrderLog, Long> {}
+public interface IOrderLogMapper extends MpSuperMapper<OrderLog, Long> {}

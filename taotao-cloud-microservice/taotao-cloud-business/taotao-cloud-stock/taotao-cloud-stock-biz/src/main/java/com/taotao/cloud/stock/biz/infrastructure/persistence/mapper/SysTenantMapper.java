@@ -28,7 +28,7 @@ import org.apache.ibatis.annotations.Param;
  * @since 2021-02-14
  */
 @Mapper
-public interface SysTenantMapper extends BaseSuperMapper<SysTenantDO> {
+public interface SysTenantMapper extends MpSuperMapper<SysTenantDO> {
 
     /**
      * 分页查询租户

@@ -19,4 +19,4 @@ package com.taotao.cloud.workflow.biz.form.mapper;
 import com.taotao.cloud.workflow.biz.form.entity.PayDistributionEntity;
 
 /** 薪酬发放 */
-public interface PayDistributionMapper extends BaseSuperMapper<PayDistributionEntity> {}
+public interface PayDistributionMapper extends MpSuperMapper<PayDistributionEntity> {}

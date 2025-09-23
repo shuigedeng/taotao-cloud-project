@@ -25,4 +25,4 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2021-01-23
  */
 @Mapper
-public interface SysLogMapper extends BaseSuperMapper<SysLogDO> {}
+public interface SysLogMapper extends MpSuperMapper<SysLogDO> {}

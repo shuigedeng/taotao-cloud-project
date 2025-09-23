@@ -17,7 +17,7 @@
 package com.taotao.cloud.operation.biz.mapper;
 
 import com.taotao.cloud.operation.biz.model.entity.Special;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 
 /** 专题活动数据处理层 */
-public interface SpecialMapper extends BaseSuperMapper<Special, Long> {}
+public interface SpecialMapper extends MpSuperMapper<Special, Long> {}

@@ -28,7 +28,7 @@ package com.taotao.cloud.im.biz.mapper; // package com.taotao.cloud.wechat.biz.m
 /// **
 // * 会员统计数据处理层
 // */
-// public interface MemberStatisticsMapper extends BaseSuperMapper<MemberStatisticsData> {
+// public interface MemberStatisticsMapper extends MpSuperMapper<MemberStatisticsData> {
 //
 //    /**
 //     * 获取会员统计数量

@@ -17,4 +17,4 @@
 package com.taotao.cloud.workflow.biz.form.mapper;
 
 /** 外出申请单 */
-public interface OutgoingApplyMapper extends BaseSuperMapper<OutgoingApplyEntity> {}
+public interface OutgoingApplyMapper extends MpSuperMapper<OutgoingApplyEntity> {}

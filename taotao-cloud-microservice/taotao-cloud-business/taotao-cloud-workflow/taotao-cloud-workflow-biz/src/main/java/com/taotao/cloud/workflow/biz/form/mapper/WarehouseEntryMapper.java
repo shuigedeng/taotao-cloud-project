@@ -19,4 +19,4 @@ package com.taotao.cloud.workflow.biz.form.mapper;
 import com.taotao.cloud.workflow.biz.form.entity.WarehouseEntryEntity;
 
 /** 入库申请单 */
-public interface WarehouseEntryMapper extends BaseSuperMapper<WarehouseEntryEntity> {}
+public interface WarehouseEntryMapper extends MpSuperMapper<WarehouseEntryEntity> {}

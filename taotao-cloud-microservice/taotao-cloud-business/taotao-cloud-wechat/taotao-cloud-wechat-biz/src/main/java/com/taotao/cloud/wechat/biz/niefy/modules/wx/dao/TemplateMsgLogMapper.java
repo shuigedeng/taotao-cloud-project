@@ -20,4 +20,4 @@ import com.github.niefy.modules.wx.entity.TemplateMsgLog;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface TemplateMsgLogMapper extends BaseSuperMapper<TemplateMsgLog> {}
+public interface TemplateMsgLogMapper extends MpSuperMapper<TemplateMsgLog> {}

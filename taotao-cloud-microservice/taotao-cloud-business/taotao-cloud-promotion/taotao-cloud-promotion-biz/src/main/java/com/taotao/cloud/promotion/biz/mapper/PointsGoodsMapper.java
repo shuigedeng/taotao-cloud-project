@@ -25,4 +25,4 @@ import com.taotao.cloud.promotion.biz.model.entity.PointsGoods;
  * @version 2022.04
  * @since 2022-04-27 16:37:08
  */
-public interface PointsGoodsMapper extends BaseSuperMapper<PointsGoods> {}
+public interface PointsGoodsMapper extends MpSuperMapper<PointsGoods> {}

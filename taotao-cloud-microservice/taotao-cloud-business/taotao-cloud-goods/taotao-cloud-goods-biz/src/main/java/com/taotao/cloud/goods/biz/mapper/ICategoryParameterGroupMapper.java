@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.mapper;
 
 import com.taotao.cloud.goods.biz.model.entity.CategoryParameterGroup;
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 
 /**
  * 分类绑定参数组数据处理层
@@ -26,4 +26,4 @@ import com.taotao.boot.webagg.mapper.BaseSuperMapper;
  * @version 2022.04
  * @since 2022-04-27 16:55:31
  */
-public interface ICategoryParameterGroupMapper extends BaseSuperMapper<CategoryParameterGroup, Long> {}
+public interface ICategoryParameterGroupMapper extends MpSuperMapper<CategoryParameterGroup, Long> {}

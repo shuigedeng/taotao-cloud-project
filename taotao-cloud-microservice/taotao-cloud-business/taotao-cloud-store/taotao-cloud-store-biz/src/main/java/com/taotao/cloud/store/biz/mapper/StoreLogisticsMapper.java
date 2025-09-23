@@ -20,11 +20,11 @@ import com.taotao.cloud.store.api.model.vo.StoreLogisticsVO;
 import com.taotao.cloud.store.biz.model.entity.StoreLogistics;
 import java.util.List;
 
-import com.taotao.boot.webagg.mapper.BaseSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
 import org.apache.ibatis.annotations.Select;
 
 /** 物流公司数据处理层 */
-public interface StoreLogisticsMapper extends BaseSuperMapper<StoreLogistics, String> {
+public interface StoreLogisticsMapper extends MpSuperMapper<StoreLogistics, String> {
 
     /**
      * 获取店铺选择的物流公司
