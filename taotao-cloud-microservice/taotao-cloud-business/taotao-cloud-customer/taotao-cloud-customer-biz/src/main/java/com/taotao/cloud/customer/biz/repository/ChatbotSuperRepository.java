@@ -27,9 +27,6 @@ import org.springframework.stereotype.Repository;
  * @since 2020/11/13 10:01
  */
 @Repository
-public class ChatbotSuperRepository extends JpaSuperRepository<Chatbot, Long> {
+public interface ChatbotSuperRepository extends JpaSuperRepository<Chatbot, Long> {
 
-    public ChatbotSuperRepository(EntityManager em) {
-        super(Chatbot.class, em);
-    }
 }
