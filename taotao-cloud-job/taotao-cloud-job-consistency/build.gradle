@@ -4,7 +4,7 @@ dependencies {
     api project(":taotao-cloud-job:taotao-cloud-job-api")
 
     api 'com.google.guava:guava:33.5.0-jre'
-    api 'com.alibaba:fastjson:2.0.58'
+    api 'com.alibaba:fastjson:2.0.59'
     api 'org.rocksdb:rocksdbjni:9.4.0'
     api ("com.alipay.sofa:rpc-grpc-impl:1.4.0")
     api 'com.alipay.sofa:hessian:3.5.5'
