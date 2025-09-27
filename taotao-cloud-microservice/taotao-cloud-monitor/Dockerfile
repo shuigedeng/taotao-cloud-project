@@ -2,10 +2,10 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 
 WORKDIR /root
 
-ADD ./build/libs/taotao-cloud-monitor-2025.10.jar ./
+ADD ./build/libs/taotao-cloud-monitor-2025.11.jar ./
 
-#RUN java -Djarmode=layertools -jar taotao-cloud-monitor-2025.10.jar extract
-RUN java -Djarmode=tools -jar taotao-cloud-monitor-2025.10.jar extract --layers --destination extracted
+#RUN java -Djarmode=layertools -jar taotao-cloud-monitor-2025.11.jar extract
+RUN java -Djarmode=tools -jar taotao-cloud-monitor-2025.11.jar extract --layers --destination extracted
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:latest
@@ -15,7 +15,7 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 ARG SKYWALKING_BACKEND_SERVICE=192.168.218.2:11800
 ARG SKYWALKING_AGENT_AUTHENTICATION=taotao-cloud
 ARG APP_NAME=taotao-cloud-monitor
-ARG APP_VERSION=2025.10
+ARG APP_VERSION=2025.11
 ARG APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ARG APP_PORT=33308
 ARG APP_PRROFILES=dev
@@ -213,13 +213,13 @@ RUN true
 
 #HEALTHCHECK --start-period=60s --interval=10s --timeout=3s --retries=50 CMD /bin/sh /healthcheck.sh
 
-#ENTRYPOINT ["java","${ZGC_OPTIONS}","-jar","taotao-cloud-monitor-2025.10.jar"]
-#ENTRYPOINT java ${ZGC_OPTIONS} -jar taotao-cloud-monitor-2025.10.jar
+#ENTRYPOINT ["java","${ZGC_OPTIONS}","-jar","taotao-cloud-monitor-2025.11.jar"]
+#ENTRYPOINT java ${ZGC_OPTIONS} -jar taotao-cloud-monitor-2025.11.jar
 ENTRYPOINT sleep 30; java ${JAVA_OPTIONS} org.springframework.boot.loader.launch.JarLauncher
 
 #cds
 #https://docs.spring.io/spring-boot/reference/packaging/class-data-sharing.html
 #https://docs.spring.io/spring-boot/reference/packaging/container-images/dockerfiles.html
-RUN java -XX:ArchiveClassesAtExit=taotao-cloud-monitor.jsa -Dspring.context.exit=onRefresh -jar taotao-cloud-monitor-2025.10.jar
+RUN java -XX:ArchiveClassesAtExit=taotao-cloud-monitor.jsa -Dspring.context.exit=onRefresh -jar taotao-cloud-monitor-2025.11.jar
 
-ENTRYPOINT ["java", "-XX:SharedArchiveFile=taotao-cloud-monitor.jsa", "-jar", "taotao-cloud-monitor-2025.10.jar"]
+ENTRYPOINT ["java", "-XX:SharedArchiveFile=taotao-cloud-monitor.jsa", "-jar", "taotao-cloud-monitor-2025.11.jar"]

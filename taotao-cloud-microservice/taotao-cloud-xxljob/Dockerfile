@@ -2,9 +2,9 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 
 WORKDIR /root
 
-ADD ./build/libs/taotao-cloud-xxljob-2025.10.jar ./
+ADD ./build/libs/taotao-cloud-xxljob-2025.11.jar ./
 
-RUN java -Djarmode=layertools -jar taotao-cloud-xxljob-2025.10.jar extract
+RUN java -Djarmode=layertools -jar taotao-cloud-xxljob-2025.11.jar extract
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:latest
@@ -14,7 +14,7 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 ARG SKYWALKING_BACKEND_SERVICE=192.168.218.2:11800
 ARG SKYWALKING_AGENT_AUTHENTICATION=taotao-cloud
 ARG APP_NAME=taotao-cloud-xxljob
-ARG APP_VERSION=2025.10
+ARG APP_VERSION=2025.11
 ARG APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ARG APP_PORT=33313
 ARG APP_PRROFILES=dev

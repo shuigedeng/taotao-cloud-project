@@ -2,9 +2,9 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 
 WORKDIR /root
 
-ADD ./build/libs/taotao-cloud-shell-2025.10.jar ./
+ADD ./build/libs/taotao-cloud-shell-2025.11.jar ./
 
-RUN java -Djarmode=layertools -jar taotao-cloud-shell-2025.10.jar extract
+RUN java -Djarmode=layertools -jar taotao-cloud-shell-2025.11.jar extract
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:latest
@@ -14,7 +14,7 @@ ARG BACKEND_SERVICE=192.168.10.200:11800
 ARG AGENT_AUTHENTICATION=taotao-cloud
 ARG TAOTAO_CLOUD_MAIL_PASSWORD=xxxx
 ARG APP_NAME=taotao-cloud-shell
-ARG APP_VERSION=2025.10
+ARG APP_VERSION=2025.11
 ARG JAR=${APP_NAME}-${VERSION}
 ARG JAR_NAME=${JAR}.jar
 ARG APP_PORT=33309

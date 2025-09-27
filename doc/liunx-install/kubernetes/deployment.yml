@@ -19,7 +19,7 @@ metadata: # 资源的元数据/属性
   namespace: defalult # 部署在哪个namespace中
   labels: # 设定资源的标签
     app: taotao-cloud-sys
-    version: 2025.10
+    version: 2025.11
     kubernetes.io/cluster-service: "true"
 spec: # 资源描述字段
   replicas: 1 # 声明副本数目
@@ -30,7 +30,7 @@ spec: # 资源描述字段
     matchLabels: # 匹配标签
       workload.user.cattle.io/workloadselector: deployment-taotao-cloud-sys
       app: taotao-cloud-sys
-      version: 2025.10
+      version: 2025.11
       kubernetes.io/cluster-service: "true"
   strategy: # 更新策略 更多策略 1.https://www.qikqiak.com/post/k8s-deployment-strategies/
     type: RollingUpdate # 滚动更新策略
@@ -44,7 +44,7 @@ spec: # 资源描述字段
       labels: # 设定资源的标签
         workload.user.cattle.io/workloadselector: deployment-taotao-cloud-sys
         app: taotao-cloud-sys
-        version: 2025.10
+        version: 2025.11
         kubernetes.io/cluster-service: "true"
     spec: # 资源规范字段
       terminationGracePeriodSeconds: 30 #优雅关闭时间，这个时间内优雅关闭未结束，k8s 强制 kill

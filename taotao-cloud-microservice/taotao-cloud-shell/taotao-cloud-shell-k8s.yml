@@ -4,7 +4,7 @@ metadata:
   name: taotao-cloud-shell-configmap
 data:
   APPLICATION_NAME: "taotao-cloud-shell"
-  APPLICATION_VERSION: '2025.10'
+  APPLICATION_VERSION: '2025.11'
 ---
 apiVersion: v1
 kind: Secret
@@ -87,7 +87,7 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-shell:2025.10
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-shell:2025.11
           imagePullPolicy: IfNotPresent
           ports:
             - name: admin-port

@@ -1004,7 +1004,7 @@ taotao:
         - /file/**
         - /job/**
         - /sys/**
-        - /api/v2025.10/sys/**
+        - /api/v2025.11/sys/**
     core:
       async:
         enabled: false
