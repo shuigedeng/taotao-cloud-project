@@ -25,7 +25,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @MapperScan(basePackages = "com.taotao.cloud.store.biz.mapper")
-@EnableJpaRepositories(basePackages = "com.taotao.cloud.payment.biz.repository.inf")
+@EnableJpaRepositories(basePackages = "com.taotao.cloud.payment.biz.repository")
 @TaoTaoBootApplication
 @TaoTaoCloudApplication
 public class TaoTaoCloudPaymentApplication {
