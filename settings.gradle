@@ -172,8 +172,8 @@ for (project in threeLayerProjects) {
 //    }
 //}
 
-//gradle.settingsEvaluated {
-//    if (JavaVersion.current() < JavaVersion.VERSION_25) {
-//        throw new GradleException("This build requires JDK 25. It's currently ${JavaVersion.current()}. You can ignore this check by passing '-Dorg.gradle.ignoreBuildJavaVersionCheck'.")
-//    }
-//}
+gradle.settingsEvaluated {
+    if (JavaVersion.current() < JavaVersion.VERSION_25) {
+        throw new GradleException("This build requires JDK 25. It's currently ${JavaVersion.current()}. You can ignore this check by passing '-Dorg.gradle.ignoreBuildJavaVersionCheck'.")
+    }
+}
