@@ -8,7 +8,6 @@ from tornado.options import options
 
 tornado.options.define('port', default=8000, type=int, help='port')
 
-
 class IndexHandler(RequestHandler):
     def set_default_headers(self):
         print("执行了set_default_headers()")

@@ -28,7 +28,7 @@ dependencies {
     implementation "org.mybatis:mybatis-spring:3.0.5"
     implementation "com.mysql:mysql-connector-j"
     implementation "com.xuxueli:xxl-job-core"
-    implementation "com.xuxueli:xxl-sso-core:2.0.0"
+    implementation "com.xuxueli:xxl-sso-core:2.1.0"
 
     implementation "com.google.protobuf:protobuf-java:3.25.5"
     implementation "com.google.protobuf:protobuf-java-util:3.25.5"

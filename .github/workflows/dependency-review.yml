@@ -5,15 +5,7 @@
 # Source repository: https://github.com/actions/dependency-review-action
 # Public documentation: https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/about-dependency-review#dependency-review-enforcement
 name: 'Dependency Review'
-
-#on: [ pull_request ]
-
-on:
-  push:
-    branches:
-      - main
-  #schedule:
-  #  - cron: '29 9 * * 0'
+on: [ pull_request ]
 
 permissions:
   contents: read
@@ -24,6 +16,5 @@ jobs:
     steps:
       - name: 'Checkout Repository'
         uses: actions/checkout@v5.0.0
-
       - name: 'Dependency Review'
-        uses: actions/dependency-review-action@v4.5.0
+        uses: actions/dependency-review-action@v4.7.3

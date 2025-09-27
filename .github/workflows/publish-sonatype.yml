@@ -47,7 +47,7 @@ jobs:
       #    server-id: github
 
       #https://github.com/marketplace/actions/github-action-for-graalvm
-      - uses: graalvm/setup-graalvm@v1.3.7
+      - uses: graalvm/setup-graalvm@v1.4.0
         with:
           java-version: '25'
           distribution: 'graalvm'
@@ -63,7 +63,7 @@ jobs:
 
       #https://github.com/marketplace/actions/cache
       - name: Cache Gradle Packages
-        uses: actions/cache@v4.2.4
+        uses: actions/cache@v4.3.0
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
