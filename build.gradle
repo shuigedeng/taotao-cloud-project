@@ -162,7 +162,7 @@ plugins {
 
     //Gradle 插件，用于将所有依赖项和项目代码折叠到一个 Jar 文件中。
     //https://plugins.gradle.org/plugin/com.gradleup.shadow
-    id "com.gradleup.shadow" version "9.2.1"
+    id "com.gradleup.shadow" version "9.2.2"
 
     //用于运行 SonarQube 分析的 Gradle 插件。
     //https://plugins.gradle.org/plugin/org.sonarqube
