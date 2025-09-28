@@ -56,7 +56,7 @@ dependencies {
     implementation 'org.apache.flink:flink-cdc-base:3.5.0'
     implementation 'org.apache.flink:flink-cdc-cli:3.5.0'
     implementation 'org.apache.flink:flink-cdc-runtime:3.5.0'
-    implementation 'org.apache.flink:flink-cdc-pipeline-connectors:3.5.0'
+    //implementation 'org.apache.flink:flink-cdc-pipeline-connectors:3.5.0'
     implementation 'org.apache.flink:flink-cdc-pipeline-connector-doris:3.5.0'
     implementation 'org.apache.flink:flink-cdc-pipeline-connector-kafka:3.5.0'
     implementation 'org.apache.flink:flink-cdc-pipeline-connector-mysql:3.5.0'
