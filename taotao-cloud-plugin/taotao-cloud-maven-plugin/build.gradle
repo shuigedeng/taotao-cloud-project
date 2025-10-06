@@ -70,7 +70,7 @@ plugins {
     //https://github.com/freefair/gradle-plugins
     //https://github.com/freefair/gradle-plugins/tree/master/examples/test-maven-plugin
     //https://plugins.gradle.org/plugin/io.freefair.maven-plugin
-    id "io.freefair.maven-plugin" version "9.0.0-rc2"
+    id "io.freefair.maven-plugin" version "9.0.0"
 
     //https://gradlex.org/maven-plugin-development/
     ////https://github.com/gradlex-org/maven-plugin-development
@@ -102,10 +102,10 @@ dependencies {
 
     implementation 'org.apache.maven.plugin-tools:maven-plugin-annotations:3.15.1'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.13.4'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.13.4'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.13.4'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.4'
+    testImplementation 'org.junit.jupiter:junit-jupiter:6.0.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:6.0.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:6.0.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:6.0.0'
     testImplementation "org.assertj:assertj-core:3.27.6"
 }
 

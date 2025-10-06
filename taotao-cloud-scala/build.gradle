@@ -3,8 +3,8 @@ apply plugin: "java"
 apply plugin: "idea"
 
 dependencies {
-    implementation "org.scala-lang:scala-library:2.13.16"
-    implementation "org.scala-lang:scala-reflect:2.13.16"
+    implementation "org.scala-lang:scala-library:2.13.17"
+    implementation "org.scala-lang:scala-reflect:2.13.17"
 
     //implementation 'org.slf4j:slf4j-api:2.0.17'
     //implementation 'org.slf4j:slf4j-reload4j:2.0.17'
@@ -16,14 +16,14 @@ dependencies {
     implementation 'com.typesafe.akka:akka-remote_2.13:2.8.8'
 
     implementation 'org.slf4j:slf4j-api:2.0.17'
-    implementation 'ch.qos.logback:logback-core:1.5.18'
-    implementation 'ch.qos.logback:logback-access:1.5.18'
-    implementation 'ch.qos.logback:logback-classic:1.5.18'
+    implementation 'ch.qos.logback:logback-core:1.5.19'
+    implementation 'ch.qos.logback:logback-access:1.5.19'
+    implementation 'ch.qos.logback:logback-classic:1.5.19'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.13.4'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.13.4'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.13.4'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.4'
+    testImplementation 'org.junit.jupiter:junit-jupiter:6.0.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:6.0.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:6.0.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:6.0.0'
     testImplementation "org.assertj:assertj-core:3.27.6"
 
     compileOnly "org.projectlombok:lombok:1.18.42"

@@ -150,9 +150,9 @@ dependencies {
 
     implementation 'org.apache.commons:commons-compress:1.28.0'
 
-    implementation "org.scala-lang:scala-library:2.13.16"
-    implementation "org.scala-lang:scala-compiler:2.13.16"
-    implementation "org.scala-lang:scala-reflect:2.13.16"
+    implementation "org.scala-lang:scala-library:2.13.17"
+    implementation "org.scala-lang:scala-compiler:2.13.17"
+    implementation "org.scala-lang:scala-reflect:2.13.17"
 
     //implementation 'com.alibaba.ververica:flink-cep:1.17-vvr-8.0.8'
     //implementation(project(":taotao-cloud-bigdata:taotao-cloud-flink-cep"))

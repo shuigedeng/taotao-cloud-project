@@ -157,9 +157,9 @@ dependencies {
     implementation 'org.slf4j:slf4j-api:2.0.17'
     //implementation 'org.slf4j:slf4j-reload4j:2.0.17'
 
-    implementation "org.scala-lang:scala-library:2.13.16"
-    implementation "org.scala-lang:scala-compiler:2.13.16"
-    implementation "org.scala-lang:scala-reflect:2.13.16"
+    implementation "org.scala-lang:scala-library:2.13.17"
+    implementation "org.scala-lang:scala-compiler:2.13.17"
+    implementation "org.scala-lang:scala-reflect:2.13.17"
 
     //implementation 'com.alibaba.ververica:flink-cep:1.17-vvr-8.0.8'
     //implementation(project(":taotao-cloud-bigdata:taotao-cloud-flink-cep"))

@@ -58,10 +58,10 @@ dependencies {
     implementation "cn.afterturn:easypoi-base:4.5.0"
     implementation "cn.afterturn:easypoi-annotation:4.5.0"
 
-    implementation 'com.jd.easyflow:easyflow-flow:1.6.7'
-    implementation 'com.jd.easyflow:easyflow-flow-bpmn:1.6.7'
-    implementation 'com.jd.easyflow:easyflow-flow-extension:1.6.7'
-    implementation 'com.jd.easyflow:easyflow-fsm:1.6.7'
+    implementation 'com.jd.easyflow:easyflow-flow:1.6.8'
+    implementation 'com.jd.easyflow:easyflow-flow-bpmn:1.6.8'
+    implementation 'com.jd.easyflow:easyflow-flow-extension:1.6.8'
+    implementation 'com.jd.easyflow:easyflow-fsm:1.6.8'
 
     //implementation 'org.smartboot.flow:smart-flow-springboot-starter:1.1.4'
 
