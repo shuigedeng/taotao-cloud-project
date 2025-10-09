@@ -19,7 +19,7 @@ package com.taotao.cloud.payment.biz.service.impl;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.dubbo.biz.entity.PayFlow;
-import com.taotao.cloud.payment.biz.repository.cls.PayFlowSuperRepository;
+import com.taotao.cloud.payment.biz.repository.PayFlowSuperRepository;
 import com.taotao.cloud.payment.biz.service.IPayFlowService;
 import java.util.Optional;
 import org.springframework.stereotype.Service;

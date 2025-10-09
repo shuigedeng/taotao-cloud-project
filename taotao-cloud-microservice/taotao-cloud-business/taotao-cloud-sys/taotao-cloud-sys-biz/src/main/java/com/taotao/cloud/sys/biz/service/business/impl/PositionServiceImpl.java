@@ -18,8 +18,8 @@ package com.taotao.cloud.sys.biz.service.business.impl;
 
 import com.taotao.cloud.sys.biz.mapper.IPositionMapper;
 import com.taotao.cloud.sys.biz.model.entity.system.Position;
-import com.taotao.cloud.sys.biz.repository.cls.JobRepository;
-import com.taotao.cloud.sys.biz.repository.inf.IJobRepository;
+import com.taotao.cloud.sys.biz.repository.JobRepository;
+import com.taotao.cloud.sys.biz.repository.IJobRepository;
 import com.taotao.cloud.sys.biz.service.business.IPositionService;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import org.springframework.stereotype.Service;

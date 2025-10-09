@@ -18,8 +18,8 @@ package com.taotao.cloud.goods.biz.service.business.impl;
 
 import com.taotao.cloud.goods.biz.mapper.IGoodsUnitMapper;
 import com.taotao.cloud.goods.biz.model.entity.GoodsUnit;
-import com.taotao.cloud.goods.biz.repository.cls.GoodsUnitRepository;
-import com.taotao.cloud.goods.biz.repository.inf.IGoodsUnitRepository;
+import com.taotao.cloud.goods.biz.repository.GoodsUnitRepository;
+import com.taotao.cloud.goods.biz.repository.IGoodsUnitRepository;
 import com.taotao.cloud.goods.biz.service.business.IGoodsUnitService;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import org.springframework.stereotype.Service;

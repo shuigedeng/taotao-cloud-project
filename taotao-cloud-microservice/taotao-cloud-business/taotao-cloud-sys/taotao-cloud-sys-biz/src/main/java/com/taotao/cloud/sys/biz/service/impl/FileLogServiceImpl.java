@@ -19,8 +19,8 @@ package com.taotao.cloud.sys.biz.service.impl;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import com.taotao.cloud.sys.biz.mapper.IFileLogMapper;
 import com.taotao.cloud.sys.biz.model.entity.FileLog;
-import com.taotao.cloud.sys.biz.repository.cls.FileLogRepository;
-import com.taotao.cloud.sys.biz.repository.inf.IFileLogRepository;
+import com.taotao.cloud.sys.biz.repository.FileLogRepository;
+import com.taotao.cloud.sys.biz.repository.IFileLogRepository;
 import com.taotao.cloud.sys.biz.service.IFileLogService;
 
 /**

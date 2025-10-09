@@ -18,8 +18,8 @@ package com.taotao.cloud.goods.biz.service.feign.impl;
 
 import com.taotao.cloud.goods.biz.mapper.IGoodsMapper;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
-import com.taotao.cloud.goods.biz.repository.cls.GoodsRepository;
-import com.taotao.cloud.goods.biz.repository.inf.IGoodsRepository;
+import com.taotao.cloud.goods.biz.repository.GoodsRepository;
+import com.taotao.cloud.goods.biz.repository.IGoodsRepository;
 import com.taotao.cloud.goods.biz.service.feign.IFeignGoodsService;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import lombok.*;

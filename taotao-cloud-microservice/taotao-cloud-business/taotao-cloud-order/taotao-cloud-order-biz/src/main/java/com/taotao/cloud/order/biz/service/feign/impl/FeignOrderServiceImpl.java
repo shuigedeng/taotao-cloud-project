@@ -18,8 +18,8 @@ package com.taotao.cloud.order.biz.service.feign.impl;
 
 import com.taotao.cloud.order.biz.mapper.order.IOrderMapper;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
-import com.taotao.cloud.order.biz.repository.cls.order.OrderRepository;
-import com.taotao.cloud.order.biz.repository.inf.order.IOrderRepository;
+import com.taotao.cloud.order.biz.repository.order.OrderRepository;
+import com.taotao.cloud.order.biz.repository.order.IOrderRepository;
 import com.taotao.cloud.order.biz.service.business.order.IOrderService;
 import com.taotao.cloud.order.biz.service.feign.IFeignOrderService;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;

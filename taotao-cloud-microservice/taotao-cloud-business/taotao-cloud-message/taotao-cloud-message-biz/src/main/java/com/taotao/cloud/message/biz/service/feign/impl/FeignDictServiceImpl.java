@@ -18,8 +18,8 @@ package com.taotao.cloud.message.biz.service.feign.impl;
 
 import com.taotao.cloud.sys.biz.mapper.IDictMapper;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
-import com.taotao.cloud.sys.biz.repository.cls.DictRepository;
-import com.taotao.cloud.sys.biz.repository.inf.IDictRepository;
+import com.taotao.cloud.sys.biz.repository.DictRepository;
+import com.taotao.cloud.sys.biz.repository.IDictRepository;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.cloud.sys.biz.service.feign.IFeignDictService;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
