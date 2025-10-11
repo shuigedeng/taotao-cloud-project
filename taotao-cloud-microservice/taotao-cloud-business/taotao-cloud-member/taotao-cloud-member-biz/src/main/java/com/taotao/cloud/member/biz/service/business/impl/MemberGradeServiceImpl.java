@@ -18,7 +18,7 @@ package com.taotao.cloud.member.biz.service.business.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.request.PageQuery;
 import com.taotao.cloud.member.biz.mapper.IMemberGradeMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberGrade;
 import com.taotao.cloud.member.biz.service.business.IMemberGradeService;

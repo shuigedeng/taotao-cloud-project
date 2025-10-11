@@ -17,7 +17,7 @@
 package com.taotao.cloud.im.api.feign;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.im.api.feign.fallback.FeignMediaFallback;
 import com.taotao.cloud.im.api.model.vo.FileVO;
 import org.springframework.cloud.openfeign.FeignClient;

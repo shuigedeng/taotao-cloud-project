@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.biz.controller.feign;
 
-import com.taotao.boot.common.model.PageResult;
+import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.cloud.member.api.feign.MemberEvaluationApi;
 import com.taotao.cloud.member.api.feign.request.EvaluationPageQueryApiRequest;
 import com.taotao.cloud.member.api.feign.request.MemberEvaluationApiRequest;

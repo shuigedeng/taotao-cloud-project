@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.boot.security.spring.annotation.NotAuth;
 import com.taotao.cloud.sys.biz.model.vo.setting.SettingVO;

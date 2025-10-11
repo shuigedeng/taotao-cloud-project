@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
-import com.taotao.boot.common.model.BaseQuery;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.request.BaseQuery;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.tree.ForestNodeMerger;
 import com.taotao.boot.security.spring.annotation.NotAuth;
 import com.taotao.cloud.sys.biz.model.dto.region.RegionSaveDTO;
@@ -33,7 +33,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

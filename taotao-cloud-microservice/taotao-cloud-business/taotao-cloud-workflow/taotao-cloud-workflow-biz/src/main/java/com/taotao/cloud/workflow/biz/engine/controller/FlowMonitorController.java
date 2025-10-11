@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.engine.controller;
 
-import com.taotao.boot.common.model.PageResult;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.PageResult;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.api.vo.UserEntity;
 import com.taotao.cloud.workflow.biz.common.base.vo.PaginationVO;
@@ -35,7 +35,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;

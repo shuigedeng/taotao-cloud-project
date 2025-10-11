@@ -23,7 +23,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.enums.UserEnum;
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.request.PageQuery;
 import com.taotao.boot.security.spring.model.SecurityUser;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;

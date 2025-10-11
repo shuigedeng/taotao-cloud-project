@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.common.flowable.feign.fallback;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.flowable.api.feign.IFeignChatbotService;
 import com.taotao.cloud.flowable.api.model.vo.ChatbotVO;

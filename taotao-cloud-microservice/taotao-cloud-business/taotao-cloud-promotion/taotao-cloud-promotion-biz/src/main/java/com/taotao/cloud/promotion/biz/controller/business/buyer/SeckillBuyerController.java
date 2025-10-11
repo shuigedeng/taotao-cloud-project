@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.promotion.biz.controller.business.buyer;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.promotion.api.model.vo.SeckillGoodsVO;
 import com.taotao.cloud.promotion.api.model.vo.SeckillTimelineVO;
 import com.taotao.cloud.promotion.biz.service.business.ISeckillApplyService;

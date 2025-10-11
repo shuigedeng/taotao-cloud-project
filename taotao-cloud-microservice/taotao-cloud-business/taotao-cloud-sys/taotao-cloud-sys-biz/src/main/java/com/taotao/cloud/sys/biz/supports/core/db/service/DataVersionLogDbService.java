@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.supports.core.db.service;
 
-import com.taotao.boot.common.model.PageResult;
+import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import java.time.LocalDateTime;

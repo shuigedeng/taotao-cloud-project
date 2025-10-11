@@ -17,7 +17,7 @@
 package com.taotao.cloud.distribution.biz.api.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.distribution.api.model.vo.DistributionCashSearchVO;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionCash;
 import com.taotao.cloud.distribution.biz.service.IDistributionCashService;

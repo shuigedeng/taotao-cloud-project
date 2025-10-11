@@ -17,8 +17,8 @@
 package com.taotao.cloud.promotion.biz.controller.business.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.boot.common.model.PageResult;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.PageResult;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.security.spring.model.SecurityUser;
 import com.taotao.boot.web.utils.OperationalJudgment;
 import com.taotao.boot.security.spring.utils.SecurityUtils;

@@ -17,8 +17,8 @@
 package com.taotao.cloud.goods.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.boot.common.model.PageResult;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.PageResult;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.goods.biz.model.dto.SpecificationDTO;
 import com.taotao.cloud.goods.biz.model.page.SpecificationPageQuery;
 import com.taotao.cloud.goods.biz.model.vo.SpecificationVO;

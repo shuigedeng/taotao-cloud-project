@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.store.biz.api.controller.seller;
 
-import com.taotao.boot.common.model.PageResult;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.PageResult;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.web.utils.OperationalJudgment;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.cloud.member.api.feign.MemberEvaluationApi;

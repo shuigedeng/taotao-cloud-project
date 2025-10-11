@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.biz.service.business.order.check.handler;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.order.biz.service.business.order.check.CheckHandlerConfig;
 import com.taotao.cloud.order.biz.service.business.order.check.ProductVO;
 import java.util.Objects;

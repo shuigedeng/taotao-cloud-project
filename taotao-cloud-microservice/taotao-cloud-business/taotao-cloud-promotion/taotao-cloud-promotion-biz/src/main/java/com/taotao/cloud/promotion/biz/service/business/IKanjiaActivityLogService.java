@@ -18,7 +18,7 @@ package com.taotao.cloud.promotion.biz.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.request.PageQuery;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityDTO;
 import com.taotao.cloud.promotion.api.model.page.KanJiaActivityLogPageQuery;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityLog;

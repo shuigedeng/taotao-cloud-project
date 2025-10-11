@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.sys.biz.model.vo.monitor.OnlineUserInfo;
 import com.taotao.cloud.sys.biz.model.vo.monitor.RedisCacheInfoDTO;
 import com.taotao.cloud.sys.biz.model.vo.monitor.ServerInfo;

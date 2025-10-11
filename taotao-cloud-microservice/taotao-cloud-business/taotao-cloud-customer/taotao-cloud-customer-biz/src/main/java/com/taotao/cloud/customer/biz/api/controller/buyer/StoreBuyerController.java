@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.customer.biz.api.controller.buyer;
 
-import com.taotao.boot.common.model.PageResult;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.PageResult;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.cloud.goods.api.feign.StoreGoodsLabelApi;
 import com.taotao.cloud.goods.api.model.vo.StoreGoodsLabelVO;

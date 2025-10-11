@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
-import com.taotao.boot.common.model.BaseQuery;
+import com.taotao.boot.common.model.request.BaseQuery;
 import com.taotao.cloud.sys.biz.model.dto.dictItem.DictItemSaveDTO;
 import com.taotao.cloud.sys.biz.model.dto.dictItem.DictItemUpdateDTO;
 import com.taotao.cloud.sys.biz.model.vo.dict_item.DictItemQueryVO;

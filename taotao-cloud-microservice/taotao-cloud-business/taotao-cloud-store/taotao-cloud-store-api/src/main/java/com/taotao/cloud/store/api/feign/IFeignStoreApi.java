@@ -17,7 +17,7 @@
 package com.taotao.cloud.store.api.feign;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
-import com.taotao.boot.common.model.PageResult;
+import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.cloud.store.api.feign.fallback.FeignStoreApiFallback;
 import com.taotao.cloud.store.api.model.dto.CollectionDTO;
 import com.taotao.cloud.store.api.model.dto.StoreBankDTO;

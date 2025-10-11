@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.service.business.order.check;
 
 import com.alibaba.fastjson.JSON;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.order.biz.service.business.order.check.handler.AbstractCheckHandler;
 import java.util.Map;
 import java.util.Objects;

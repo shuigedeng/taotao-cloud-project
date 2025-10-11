@@ -18,7 +18,7 @@ package com.taotao.cloud.promotion.biz.controller.business.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.enums.ResultEnum;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.security.spring.model.SecurityUser;
 import com.taotao.boot.web.utils.OperationalJudgment;
 import com.taotao.cloud.order.api.model.vo.cart.FullDiscountVO;

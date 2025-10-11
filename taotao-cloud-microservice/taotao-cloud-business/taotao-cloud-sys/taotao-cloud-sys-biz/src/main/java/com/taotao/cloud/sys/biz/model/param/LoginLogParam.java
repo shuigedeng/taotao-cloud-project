@@ -16,14 +16,12 @@
 
 package com.taotao.cloud.sys.biz.model.param;
 
-import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.request.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.experimental.*;
-import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.*;
 
 /**
  * 登录日志

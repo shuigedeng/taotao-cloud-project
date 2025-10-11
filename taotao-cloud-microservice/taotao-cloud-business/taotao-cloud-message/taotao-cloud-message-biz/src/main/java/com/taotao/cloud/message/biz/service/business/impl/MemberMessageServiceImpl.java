@@ -19,7 +19,7 @@ package com.taotao.cloud.message.biz.service.business.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.request.PageQuery;
 import com.taotao.boot.common.utils.lang.StringUtils;
 import com.taotao.cloud.message.api.model.vo.MemberMessageQueryVO;
 import com.taotao.cloud.message.biz.mapper.MemberMessageMapper;

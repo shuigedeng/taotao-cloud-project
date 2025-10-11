@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.distribution.api.enums.DistributionOrderStatusEnum;
 import com.taotao.cloud.distribution.api.model.query.DistributionOrderPageQuery;

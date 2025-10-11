@@ -17,7 +17,7 @@
 package com.taotao.cloud.operation.biz.controller.business.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.operation.api.model.query.ArticlePageQuery;
 import com.taotao.cloud.operation.api.model.vo.ArticleVO;
 import com.taotao.cloud.operation.biz.model.entity.Article;

@@ -16,11 +16,10 @@
 
 package com.taotao.cloud.iot.api.model.dto;
 
-import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.request.PageQuery;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Data;
-import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
 
 /**

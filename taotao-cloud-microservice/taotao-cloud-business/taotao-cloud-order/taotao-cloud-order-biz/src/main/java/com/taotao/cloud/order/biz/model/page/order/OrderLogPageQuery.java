@@ -17,11 +17,10 @@
 package com.taotao.cloud.order.biz.model.page.order;
 
 import com.taotao.boot.common.enums.UserEnum;
-import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.request.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import lombok.*;
-import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.*;
 import lombok.EqualsAndHashCode;

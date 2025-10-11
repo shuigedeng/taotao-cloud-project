@@ -17,8 +17,8 @@
 package com.taotao.cloud.order.biz.controller.business.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.boot.common.model.PageResult;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.PageResult;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.order.sys.model.dto.order.OrderReceiptDTO;
 import com.taotao.cloud.order.sys.model.page.order.ReceiptPageQuery;
 import com.taotao.cloud.order.biz.model.entity.order.Receipt;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.operation.biz.controller.business.manger;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.operation.api.model.vo.ArticleCategoryVO;
 import com.taotao.cloud.operation.biz.model.entity.ArticleCategory;
 import com.taotao.cloud.operation.biz.service.business.ArticleCategoryService;

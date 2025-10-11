@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.biz.controller.business.buyer;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.member.sys.model.vo.MemberSignVO;
 import com.taotao.cloud.member.biz.service.business.IMemberSignService;
 import com.taotao.boot.web.request.annotation.RequestLogger;

@@ -18,8 +18,8 @@ package com.taotao.cloud.customer.biz.api.controller.manager;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.boot.common.model.PageResult;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.PageResult;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.store.api.model.dto.AdminStoreApplyDTO;
 import com.taotao.cloud.store.api.model.dto.StoreEditDTO;
 import com.taotao.cloud.store.api.model.query.StorePageQuery;

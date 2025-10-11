@@ -16,12 +16,11 @@
 
 package com.taotao.cloud.goods.biz.model.vo;
 
-import com.taotao.boot.common.model.PageResult;
+import com.taotao.boot.common.model.result.PageResult;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
 import lombok.*;
-import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.*;
 import lombok.NoArgsConstructor;

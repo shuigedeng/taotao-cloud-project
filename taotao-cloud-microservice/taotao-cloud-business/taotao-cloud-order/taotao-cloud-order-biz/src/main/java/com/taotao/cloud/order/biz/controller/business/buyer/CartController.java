@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.biz.controller.business.buyer;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.sys.model.dto.trade.TradeDTO;
 import com.taotao.cloud.order.sys.model.vo.order.ReceiptVO;

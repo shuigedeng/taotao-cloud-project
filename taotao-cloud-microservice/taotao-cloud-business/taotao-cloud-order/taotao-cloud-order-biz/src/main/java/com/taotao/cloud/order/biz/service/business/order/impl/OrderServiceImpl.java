@@ -27,7 +27,7 @@ import com.taotao.boot.common.enums.PromotionTypeEnum;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.enums.UserEnum;
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.web.utils.OperationalJudgment;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.boot.common.utils.lang.StringUtils;

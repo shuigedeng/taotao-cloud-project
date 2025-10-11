@@ -18,7 +18,7 @@ package com.taotao.cloud.member.biz.controller.business.buyer.connect;
 
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.member.biz.connect.entity.dto.AuthCallback;
 import com.taotao.cloud.member.biz.connect.entity.dto.ConnectAuthUser;

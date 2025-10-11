@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.model.page.order;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.request.PageQuery;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
@@ -25,7 +25,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.time.LocalDateTime;
 import lombok.*;
-import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.*;
 import lombok.EqualsAndHashCode;

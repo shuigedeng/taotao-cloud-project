@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.model.page;
 
-import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.request.PageQuery;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
@@ -24,7 +24,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import lombok.*;
 import lombok.Data;
-import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 

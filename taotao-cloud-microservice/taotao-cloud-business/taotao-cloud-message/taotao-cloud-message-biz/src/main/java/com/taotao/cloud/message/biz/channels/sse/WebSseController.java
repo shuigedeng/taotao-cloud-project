@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.channels.sse;
 
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.message.biz.service.business.SseService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

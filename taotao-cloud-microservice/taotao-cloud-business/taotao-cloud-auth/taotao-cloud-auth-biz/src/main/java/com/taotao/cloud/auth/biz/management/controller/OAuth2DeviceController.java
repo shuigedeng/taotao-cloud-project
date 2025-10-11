@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.management.controller;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Device;
 import com.taotao.cloud.auth.biz.management.service.OAuth2DeviceService;
 import io.swagger.v3.oas.annotations.Operation;

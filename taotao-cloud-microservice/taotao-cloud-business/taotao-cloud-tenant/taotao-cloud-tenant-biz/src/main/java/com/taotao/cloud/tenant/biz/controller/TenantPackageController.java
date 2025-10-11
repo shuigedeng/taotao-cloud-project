@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.tenant.biz.controller;
 
-import com.taotao.boot.common.model.PageResult;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.PageResult;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.tenant.api.model.dto.TenantPackageDTO;
 import com.taotao.cloud.tenant.api.model.dto.TenantPackagePageDTO;
 import com.taotao.cloud.tenant.biz.service.TenantPackageService;

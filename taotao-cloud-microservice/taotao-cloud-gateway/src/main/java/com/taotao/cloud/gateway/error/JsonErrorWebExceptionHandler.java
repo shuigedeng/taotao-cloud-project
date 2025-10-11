@@ -17,7 +17,7 @@
 package com.taotao.cloud.gateway.error;
 
 import com.taotao.boot.common.enums.ResultEnum;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.log.LogUtils;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

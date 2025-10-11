@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.management.response;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.servlet.ResponseUtils;
 import com.taotao.boot.security.spring.exception.SecurityGlobalExceptionHandler;
 import com.taotao.cloud.auth.biz.authentication.utils.OAuth2EndpointUtils;

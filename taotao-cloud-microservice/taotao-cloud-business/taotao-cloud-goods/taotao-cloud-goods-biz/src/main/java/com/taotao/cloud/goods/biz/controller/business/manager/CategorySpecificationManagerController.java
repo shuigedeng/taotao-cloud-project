@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.controller.business.manager;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.goods.biz.model.entity.Specification;
 import com.taotao.cloud.goods.biz.service.business.ICategorySpecificationService;
 import com.taotao.cloud.goods.biz.service.business.ISpecificationService;

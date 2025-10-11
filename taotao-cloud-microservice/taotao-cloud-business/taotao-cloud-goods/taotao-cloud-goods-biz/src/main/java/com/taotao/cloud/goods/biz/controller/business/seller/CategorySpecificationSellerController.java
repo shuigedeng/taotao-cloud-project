@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.controller.business.seller;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.goods.biz.model.vo.SpecificationVO;
 import com.taotao.cloud.goods.biz.model.convert.SpecificationConvert;
 import com.taotao.cloud.goods.biz.model.entity.Specification;

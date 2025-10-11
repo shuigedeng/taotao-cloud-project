@@ -18,8 +18,8 @@ package com.taotao.cloud.workflow.biz.engine.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.cache.redis.repository.RedisRepository;
-import com.taotao.boot.common.model.PageResult;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.PageResult;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.boot.common.utils.lang.StringUtils;
@@ -62,7 +62,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;

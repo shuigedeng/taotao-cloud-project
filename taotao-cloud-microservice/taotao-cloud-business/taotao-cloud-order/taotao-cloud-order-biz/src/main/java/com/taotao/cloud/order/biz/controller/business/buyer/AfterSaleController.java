@@ -17,8 +17,8 @@
 package com.taotao.cloud.order.biz.controller.business.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.boot.common.model.PageResult;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.PageResult;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.data.mybatis.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.order.sys.model.dto.aftersale.AfterSaleDTO;
 import com.taotao.cloud.order.sys.model.page.aftersale.AfterSalePageQuery;

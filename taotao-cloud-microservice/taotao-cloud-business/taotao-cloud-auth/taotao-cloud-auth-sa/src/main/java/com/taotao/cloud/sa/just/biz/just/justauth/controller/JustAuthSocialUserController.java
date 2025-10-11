@@ -17,7 +17,7 @@
 package com.taotao.cloud.sa.just.biz.just.justauth.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.sa.just.biz.just.justauth.dto.JustAuthSocialUserDTO;
 import com.taotao.cloud.sa.just.biz.just.justauth.service.IJustAuthSocialUserService;
 import io.swagger.annotations.Api;

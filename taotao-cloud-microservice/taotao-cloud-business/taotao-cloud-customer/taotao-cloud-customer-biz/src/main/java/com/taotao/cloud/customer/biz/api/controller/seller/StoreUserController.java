@@ -18,7 +18,7 @@ package com.taotao.cloud.customer.biz.api.controller.seller;
 
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.security.spring.model.SecurityUser;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.cloud.member.api.feign.MemberApi;

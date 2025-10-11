@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.im.api.feign.fallback;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.im.api.feign.IFeignMediaService;
 import com.taotao.cloud.im.api.model.vo.FileVO;

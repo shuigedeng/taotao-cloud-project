@@ -17,7 +17,7 @@
 package com.taotao.cloud.gateway.filter.global;
 
 import com.taotao.boot.common.enums.ResultEnum;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.common.utils.sql.SqlInjectionUtils;
 import com.taotao.cloud.gateway.utils.WebFluxUtil;

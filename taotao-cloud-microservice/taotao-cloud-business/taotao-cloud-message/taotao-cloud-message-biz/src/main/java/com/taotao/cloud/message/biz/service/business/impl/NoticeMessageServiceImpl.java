@@ -22,7 +22,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.boot.common.enums.SwitchEnum;
-import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.request.PageQuery;
 import com.taotao.cloud.message.api.enums.MessageStatusEnum;
 import com.taotao.cloud.message.api.enums.NoticeMessageParameterEnum;
 import com.taotao.cloud.message.api.model.dto.NoticeMessageDTO;

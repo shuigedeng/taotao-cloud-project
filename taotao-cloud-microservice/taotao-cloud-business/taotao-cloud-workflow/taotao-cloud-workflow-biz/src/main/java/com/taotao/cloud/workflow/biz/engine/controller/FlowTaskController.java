@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.engine.controller;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.FlowTaskForm;
 import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.FlowTaskInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskEntity;

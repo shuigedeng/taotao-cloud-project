@@ -17,7 +17,7 @@
 package com.taotao.cloud.promotion.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.promotion.api.model.vo.PointsGoodsCategoryVO;
 import com.taotao.cloud.promotion.biz.model.entity.PointsGoodsCategory;
 import com.taotao.cloud.promotion.biz.service.business.IPointsGoodsCategoryService;

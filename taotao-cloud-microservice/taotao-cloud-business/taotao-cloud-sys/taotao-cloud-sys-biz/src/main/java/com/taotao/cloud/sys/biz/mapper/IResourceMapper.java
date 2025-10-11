@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.mapper;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.request.PageQuery;
 import com.taotao.boot.data.mybatis.mybatisplus.query.LambdaQueryWrapperX;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;

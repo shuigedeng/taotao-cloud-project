@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.supports.core.mongo.service;
 
-import com.taotao.boot.common.model.PageResult;
+import com.taotao.boot.common.model.result.PageResult;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

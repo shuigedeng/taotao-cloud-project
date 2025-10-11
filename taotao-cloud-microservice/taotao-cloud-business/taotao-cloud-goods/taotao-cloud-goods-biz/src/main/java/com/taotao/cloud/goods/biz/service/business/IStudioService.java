@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.request.PageQuery;
 import com.taotao.cloud.goods.biz.model.vo.StudioCommodityVO;
 import com.taotao.cloud.goods.biz.model.entity.Studio;
 import com.taotao.cloud.stream.framework.trigger.message.BroadcastMessage;

@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.member.biz.controller.business.buyer;
 
-import com.taotao.boot.common.model.PageQuery;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.request.PageQuery;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.goods.api.model.vo.EsGoodsIndexVO;
 import com.taotao.cloud.member.biz.service.business.IMemberBrowseService;
 import com.taotao.boot.web.request.annotation.RequestLogger;

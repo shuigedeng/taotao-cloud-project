@@ -18,7 +18,7 @@ package com.taotao.cloud.message.biz.service.business.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.request.PageQuery;
 import com.taotao.cloud.message.api.model.vo.MessageVO;
 import com.taotao.cloud.message.biz.mapper.MessageMapper;
 import com.taotao.cloud.message.biz.model.entity.Message;

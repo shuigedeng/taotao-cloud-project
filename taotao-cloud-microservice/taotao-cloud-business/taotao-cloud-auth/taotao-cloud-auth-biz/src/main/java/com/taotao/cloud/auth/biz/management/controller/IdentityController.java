@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.management.controller;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.auth.api.model.dto.SignInErrorPrompt;
 import com.taotao.cloud.auth.api.model.dto.SignInErrorStatus;
 import com.taotao.cloud.auth.biz.authentication.stamp.SignInFailureLimitedStampManager;

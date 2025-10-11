@@ -18,7 +18,7 @@ package com.taotao.cloud.sa.just.biz.just.justauth.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.sa.just.biz.just.justauth.dto.CreateJustAuthConfigDTO;
 import com.taotao.cloud.sa.just.biz.just.justauth.dto.JustAuthConfigDTO;
 import com.taotao.cloud.sa.just.biz.just.justauth.dto.QueryJustAuthConfigDTO;

@@ -20,7 +20,7 @@ import org.dromara.hutooljson.JSONUtil;
 import com.taotao.boot.common.enums.ClientTypeEnum;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.member.api.feign.MemberWalletApi;
 import com.taotao.cloud.payment.api.enums.PaymentClientEnum;

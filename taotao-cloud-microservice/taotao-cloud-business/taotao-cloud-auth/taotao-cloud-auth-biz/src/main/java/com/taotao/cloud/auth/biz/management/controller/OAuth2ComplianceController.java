@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.management.controller;
 
-import com.taotao.boot.common.model.PageResult;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.PageResult;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.data.jpa.utils.JpaUtils;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Compliance;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ComplianceService;

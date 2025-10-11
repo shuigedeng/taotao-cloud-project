@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.bff.api.controller.pc;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import com.taotao.cloud.bff.api.service.app.ISeckillApplyService;
 import com.taotao.cloud.promotion.api.model.vo.SeckillGoodsVO;

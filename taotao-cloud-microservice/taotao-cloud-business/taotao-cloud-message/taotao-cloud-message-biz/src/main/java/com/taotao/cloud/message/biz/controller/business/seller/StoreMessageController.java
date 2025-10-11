@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.controller.business.seller;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.web.utils.OperationalJudgment;
 import com.taotao.cloud.message.api.enums.MessageStatusEnum;
 import com.taotao.cloud.message.biz.service.business.StoreMessageService;

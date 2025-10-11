@@ -22,7 +22,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.enums.PromotionTypeEnum;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.request.PageQuery;
 import com.taotao.boot.common.utils.date.DateUtils;
 import com.taotao.boot.data.mybatis.mybatisplus.utils.PageUtils;
 import com.taotao.cloud.goods.api.feign.GoodsSkuApi;

@@ -16,24 +16,14 @@
 
 package com.taotao.cloud.sys.biz.supports.core.mongo.service;
 
-import com.taotao.boot.common.model.PageResult;
+import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.cloud.sys.biz.model.dto.LoginLogDto;
 import com.taotao.cloud.sys.biz.model.param.LoginLogParam;
 import com.taotao.cloud.sys.biz.service.LoginLogService;
-import com.taotao.cloud.sys.biz.supports.core.db.convert.LogConvert;
 import com.taotao.cloud.sys.biz.supports.core.mongo.dao.LoginLogMongoRepository;
-import com.taotao.cloud.sys.biz.supports.core.mongo.entity.LoginLogMongo;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.dromara.hutool.core.data.id.IdUtil;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 /**

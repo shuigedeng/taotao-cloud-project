@@ -21,7 +21,7 @@ import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.G
 import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.boot.captcha.util.CaptchaUtils;
 import com.taotao.boot.common.constant.RedisConstants;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.common.utils.context.ContextUtils;
 import com.taotao.boot.common.utils.log.LogUtils;

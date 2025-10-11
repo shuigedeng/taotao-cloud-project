@@ -18,7 +18,7 @@ package com.taotao.cloud.operation.biz.controller.business.manger;
 
 import org.dromara.hutoolcore.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.operation.biz.model.entity.Special;
 import com.taotao.cloud.operation.biz.service.business.SpecialService;
 import com.taotao.boot.web.request.annotation.RequestLogger;

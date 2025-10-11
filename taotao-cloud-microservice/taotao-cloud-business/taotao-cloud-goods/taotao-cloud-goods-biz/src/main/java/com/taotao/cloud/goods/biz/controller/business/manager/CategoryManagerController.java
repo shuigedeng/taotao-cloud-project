@@ -18,7 +18,7 @@ package com.taotao.cloud.goods.biz.controller.business.manager;
 
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.goods.biz.model.vo.CategoryTreeVO;
 import com.taotao.cloud.goods.biz.model.vo.CategoryVO;
 import com.taotao.cloud.goods.biz.model.convert.CategoryConvert;

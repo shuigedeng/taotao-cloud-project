@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.service;
 
-import com.taotao.boot.common.model.PageResult;
+import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.cloud.sys.biz.model.dto.DataVersionLogDto;
 import com.taotao.cloud.sys.biz.model.param.DataVersionLogParam;
 

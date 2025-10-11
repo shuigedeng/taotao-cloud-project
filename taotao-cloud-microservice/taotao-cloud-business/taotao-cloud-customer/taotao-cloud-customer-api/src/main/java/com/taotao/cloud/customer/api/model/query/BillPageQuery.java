@@ -17,10 +17,9 @@
 package com.taotao.cloud.customer.api.model.query;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.request.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.*;
 import lombok.EqualsAndHashCode;

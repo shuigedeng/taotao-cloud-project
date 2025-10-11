@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.sys.biz.service.business.IVisitsService;
 import com.taotao.boot.web.request.annotation.RequestLogger;

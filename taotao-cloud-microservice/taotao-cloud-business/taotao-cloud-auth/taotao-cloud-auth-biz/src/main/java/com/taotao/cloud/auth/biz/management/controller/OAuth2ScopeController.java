@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.management.controller;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.auth.biz.management.dto.OAuth2PermissionDto;
 import com.taotao.cloud.auth.biz.management.dto.OAuth2ScopeDto;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Permission;

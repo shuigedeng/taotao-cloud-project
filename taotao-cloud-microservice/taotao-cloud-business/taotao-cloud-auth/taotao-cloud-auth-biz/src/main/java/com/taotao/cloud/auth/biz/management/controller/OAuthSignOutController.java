@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.management.controller;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.auth.biz.management.compliance.event.AccountReleaseFromCacheEvent;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ComplianceService;
 import io.swagger.v3.oas.annotations.Operation;

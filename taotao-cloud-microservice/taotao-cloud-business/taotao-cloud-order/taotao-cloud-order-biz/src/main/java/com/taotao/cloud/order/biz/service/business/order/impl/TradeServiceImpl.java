@@ -23,7 +23,7 @@ import com.taotao.boot.cache.redis.repository.RedisRepository;
 
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.api.feign.MemberApi;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;

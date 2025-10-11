@@ -23,8 +23,8 @@ import com.taotao.boot.cache.redis.repository.RedisRepository;
 
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.boot.common.model.PageQuery;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.request.PageQuery;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.cloud.distribution.api.enums.DistributionStatusEnum;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.supports.largefile.controller;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.sys.biz.supports.largefile.service.LargeFileService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

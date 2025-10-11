@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.distribution.biz.service;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 
 /** 生成商品静态页 */
 public interface ICreateHtmlService {

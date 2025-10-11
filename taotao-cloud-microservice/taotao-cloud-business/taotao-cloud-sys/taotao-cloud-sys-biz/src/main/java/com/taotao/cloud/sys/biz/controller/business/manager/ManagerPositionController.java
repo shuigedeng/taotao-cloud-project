@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
-import com.taotao.boot.common.model.BaseQuery;
+import com.taotao.boot.common.model.request.BaseQuery;
 import com.taotao.cloud.sys.biz.model.dto.position.PositionSaveDTO;
 import com.taotao.cloud.sys.biz.model.dto.position.PositionUpdateDTO;
 import com.taotao.cloud.sys.biz.model.vo.position.PositionQueryVO;

@@ -17,9 +17,7 @@
 package com.taotao.cloud.sys.biz.controller.business.tools;
 
 
-import com.taotao.boot.cache.redis.delay.config.RedissonTemplate;
-import com.taotao.boot.cache.redis.redisson.RedisDelayQueue;
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.support.info.ApiInfo;
 import com.taotao.boot.common.support.info.Create;
 import com.taotao.boot.common.support.info.Update;

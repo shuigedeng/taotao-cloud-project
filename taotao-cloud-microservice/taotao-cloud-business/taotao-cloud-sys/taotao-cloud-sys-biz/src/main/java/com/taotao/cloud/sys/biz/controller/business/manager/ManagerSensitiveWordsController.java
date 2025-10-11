@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
-import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.sys.biz.model.entity.sensitive.SensitiveWord;
 import com.taotao.cloud.sys.biz.service.business.ISensitiveWordService;
 import io.swagger.v3.oas.annotations.Operation;

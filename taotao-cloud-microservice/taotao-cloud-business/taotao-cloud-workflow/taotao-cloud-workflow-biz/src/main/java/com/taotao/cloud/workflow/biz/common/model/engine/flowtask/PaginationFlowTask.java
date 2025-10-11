@@ -17,10 +17,9 @@
 package com.taotao.cloud.workflow.biz.common.model.engine.flowtask;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.request.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
 
 /**

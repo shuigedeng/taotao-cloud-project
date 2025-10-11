@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.message.api.feign.fallback;
 
-import com.taotao.boot.common.model.PageQuery;
-import com.taotao.boot.common.model.PageResult;
+import com.taotao.boot.common.model.request.PageQuery;
+import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.cloud.message.api.feign.StoreMessageApi;
 import com.taotao.cloud.message.api.feign.response.StoreMessageApiResponse;
 import org.springframework.cloud.openfeign.FallbackFactory;
