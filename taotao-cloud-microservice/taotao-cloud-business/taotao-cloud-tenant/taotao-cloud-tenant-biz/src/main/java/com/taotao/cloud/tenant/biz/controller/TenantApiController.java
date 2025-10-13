@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.tenant.biz.controller;
 
-import com.taotao.boot.web.annotation.FeignApi;
+import com.taotao.boot.web.annotation.Api;
 import com.taotao.cloud.tenant.api.feign.TenantServiceApi;
 import com.taotao.cloud.tenant.api.model.dto.TenantDTO;
 import com.taotao.cloud.tenant.biz.service.TenantService;
@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2023.04
  * @since 2023-05-10 10:58:13
  */
-@FeignApi
+@Api
 @RestController
 @RequestMapping
 @AllArgsConstructor

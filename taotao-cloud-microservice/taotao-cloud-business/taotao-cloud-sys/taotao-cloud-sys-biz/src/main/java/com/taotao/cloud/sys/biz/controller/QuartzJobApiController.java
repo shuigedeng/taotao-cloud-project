@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.controller;
 
-import com.taotao.boot.web.annotation.FeignApi;
+import com.taotao.boot.web.annotation.Api;
 import com.taotao.cloud.sys.api.feign.QuartzJobApi;
 import com.taotao.cloud.sys.api.model.dto.QuartzJobDTO;
 import com.taotao.cloud.sys.biz.task.job.quartz.service.QuartzJobService;
@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2023.04
  * @since 2023-05-09 15:18:19
  */
-@FeignApi
+@Api
 @AllArgsConstructor
 @Validated
 @RestController
