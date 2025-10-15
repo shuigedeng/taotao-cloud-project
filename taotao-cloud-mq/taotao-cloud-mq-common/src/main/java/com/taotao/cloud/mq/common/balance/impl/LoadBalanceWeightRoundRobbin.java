@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.mq.common.balance.impl;
 
-import com.taotao.boot.common.support.filter.IFilter;
-import com.taotao.boot.common.support.handler.IHandler;
+import com.taotao.boot.common.support.filter.Filter;
+import com.taotao.boot.common.support.handler.Handler;
 import com.taotao.boot.common.utils.collection.CollectionUtils;
 import com.taotao.boot.common.utils.number.MathUtils;
 import com.taotao.cloud.mq.common.balance.ILoadBalanceContext;
@@ -42,7 +42,7 @@ public class LoadBalanceWeightRoundRobbin<T extends IServer> extends AbstractLoa
         List<T> notZeroServers =
                 CollectionUtils.filterList(
                         serverList,
-                        new IFilter<T>() {
+                        new Filter<T>() {
                             public boolean filter(IServer iServer) {
                                 return iServer.weight() <= 0;
                             }
@@ -50,7 +50,7 @@ public class LoadBalanceWeightRoundRobbin<T extends IServer> extends AbstractLoa
         List<Integer> weightList =
                 CollectionUtils.toList(
                         notZeroServers,
-                        new IHandler<T, Integer>() {
+                        new Handler<T, Integer>() {
                             public Integer handle(T iServer) {
                                 return iServer.weight();
                             }
