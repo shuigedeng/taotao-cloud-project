@@ -167,12 +167,12 @@ dependencies {
     //implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-yuque"
 
     //langchain4j
-    implementation 'dev.langchain4j:langchain4j-open-ai:1.7.1'
-    implementation 'dev.langchain4j:langchain4j-ollama:1.7.1'
-    implementation 'dev.langchain4j:langchain4j-spring-boot-starter:1.7.1-beta14'
-    implementation 'dev.langchain4j:langchain4j-anthropic-spring-boot-starter:1.7.1-beta14'
-    implementation 'dev.langchain4j:langchain4j-ollama-spring-boot-starter:1.7.1-beta14'
-    implementation 'dev.langchain4j:langchain4j-open-ai-spring-boot-starter:1.7.1-beta14'
+    implementation 'dev.langchain4j:langchain4j-open-ai:1.8.0'
+    implementation 'dev.langchain4j:langchain4j-ollama:1.8.0'
+    implementation 'dev.langchain4j:langchain4j-spring-boot-starter:1.8.0-beta15'
+    implementation 'dev.langchain4j:langchain4j-anthropic-spring-boot-starter:1.8.0-beta15'
+    implementation 'dev.langchain4j:langchain4j-ollama-spring-boot-starter:1.8.0-beta15'
+    implementation 'dev.langchain4j:langchain4j-open-ai-spring-boot-starter:1.8.0-beta15'
 
     //spring ai
     // https://repo.spring.io/milestone

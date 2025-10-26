@@ -21,10 +21,10 @@ dependencies {
     //hessian 序列化 工具
     api 'com.caucho:hessian:4.0.66'
     // 日志框架
-    api 'ch.qos.logback:logback-classic:1.5.19'
+    api 'ch.qos.logback:logback-classic:1.5.20'
     api "com.google.guava:guava:33.5.0-jre"
 
-    api 'io.netty:netty-all:4.2.6.Final'
+    api 'io.netty:netty-all:4.2.7.Final'
 
     api("org.springframework.boot:spring-boot-starter-web") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
