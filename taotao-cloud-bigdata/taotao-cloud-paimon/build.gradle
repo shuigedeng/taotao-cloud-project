@@ -104,7 +104,7 @@ dependencies {
     //implementation 'com.ververica:flink-cdc-pipeline-connector-values:3.0.1'
 
     implementation 'com.mysql:mysql-connector-j:9.4.0'
-    implementation 'redis.clients:jedis:6.2.0'
+    implementation 'redis.clients:jedis:7.0.0'
     implementation 'org.apache.hive:hive-exec:4.1.0'
 
     implementation 'org.apache.hadoop:hadoop-common:3.4.2'
