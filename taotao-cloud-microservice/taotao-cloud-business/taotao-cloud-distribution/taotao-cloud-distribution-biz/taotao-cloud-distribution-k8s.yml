@@ -4,7 +4,7 @@ metadata:
   name: taotao-cloud-distribution-configmap
 data:
   APPLICATION_NAME: "taotao-cloud-distribution"
-  APPLICATION_VERSION: '2025.11'
+  APPLICATION_VERSION: '2025.12'
 ---
 apiVersion: v1
 kind: Secret
@@ -86,7 +86,7 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-distribution:2025.11
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-distribution:2025.12
           imagePullPolicy: IfNotPresent
           ports:
             - name: oauth2-port

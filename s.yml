@@ -1,6 +1,6 @@
 # aliyun serverless 配置
 
-edition: 2025.11
+edition: 2025.12
 name: taotao-cloud-microservice
 access: default
 vars:

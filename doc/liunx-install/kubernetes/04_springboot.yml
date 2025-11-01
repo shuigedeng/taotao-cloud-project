@@ -19,7 +19,7 @@ metadata:
   namespace: taotao-cloud-dev
   labels:
     app: taotao-cloud
-    version: 2025.11
+    version: 2025.12
     kubernetes.io/cluster-service: "true"
 spec:
   replicas: 1
@@ -29,7 +29,7 @@ spec:
   selector:
     matchLabels:
       app: taotao-cloud
-      version: 2025.11
+      version: 2025.12
       kubernetes.io/cluster-service: "true"
   strategy:
     type: RollingUpdate
@@ -42,13 +42,13 @@ spec:
         sidecar.istio.io/inject: "false"
       labels:
         app: taotao-cloud
-        version: 2025.11
+        version: 2025.12
         kubernetes.io/cluster-service: "true"
     spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: taotao-cloud-gateway
-          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2025.11"
+          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2025.12"
           imagePullPolicy: IfNotPresent
           stdin: true
           terminationMessagePath: /dev/termination-log
@@ -101,7 +101,7 @@ spec:
                   - -c
                   - sleep 30
         - name: taotao-cloud-monitor
-          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor:2025.11"
+          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor:2025.12"
           imagePullPolicy: IfNotPresent
           ports:
             - name: taotao-cloud-monitor-port
@@ -149,7 +149,7 @@ spec:
                   - -c
                   - sleep 30
         - name: taotao-cloud-xxljob
-          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob:2025.11"
+          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob:2025.12"
           imagePullPolicy: IfNotPresent
           ports:
             - name: taotao-cloud-xxljob-port
@@ -197,7 +197,7 @@ spec:
                   - -c
                   - sleep 30
         - name: taotao-cloud-auth
-          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:2025.11"
+          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:2025.12"
           imagePullPolicy: IfNotPresent
           ports:
             - name: taotao-cloud-auth-port
@@ -245,7 +245,7 @@ spec:
                   - -c
                   - sleep 30
         - name: taotao-cloud-sys
-          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys:2025.11"
+          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys:2025.12"
           imagePullPolicy: IfNotPresent
           ports:
             - name: taotao-cloud-sys-port
@@ -293,7 +293,7 @@ spec:
                   - -c
                   - sleep 30
         - name: taotao-cloud-order
-          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order:2025.11"
+          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order:2025.12"
           imagePullPolicy: IfNotPresent
           ports:
             - name: taotao-cloud-order-port
@@ -350,7 +350,7 @@ metadata:
   namespace: taotao-cloud-dev
   labels:
     app: taotao-cloud
-    version: 2025.11
+    version: 2025.12
     kubernetes.io/cluster-service: "true"
 spec:
   replicas: 1
@@ -360,7 +360,7 @@ spec:
   selector:
     matchLabels:
       app: taotao-cloud
-      version: 2025.11
+      version: 2025.12
       kubernetes.io/cluster-service: "true"
   strategy:
     type: RollingUpdate
@@ -373,7 +373,7 @@ spec:
         sidecar.istio.io/inject: "false"
       labels:
         app: taotao-cloud
-        version: 2025.11
+        version: 2025.12
         kubernetes.io/cluster-service: "true"
     spec:
       terminationGracePeriodSeconds: 30
@@ -385,7 +385,7 @@ spec:
       #args: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8080)" != '200' ]]; do echo Waiting for springboot;sleep 5; done; echo springboot available
       containers:
         - name: taotao-cloud-gateway
-          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2025.11"
+          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2025.12"
           imagePullPolicy: IfNotPresent
           ports:
             - name: taotao-cloud-gateway-port
@@ -434,7 +434,7 @@ spec:
                   - -c
                   - sleep 30
         - name: taotao-cloud-monitor
-          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor:2025.11"
+          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor:2025.12"
           imagePullPolicy: IfNotPresent
           ports:
             - name: taotao-cloud-monitor-port
@@ -482,7 +482,7 @@ spec:
                   - -c
                   - sleep 30
         - name: taotao-cloud-xxljob
-          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob:2025.11"
+          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob:2025.12"
           imagePullPolicy: IfNotPresent
           ports:
             - name: taotao-cloud-xxljob-port
@@ -530,7 +530,7 @@ spec:
                   - -c
                   - sleep 30
         - name: taotao-cloud-auth
-          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:2025.11"
+          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:2025.12"
           imagePullPolicy: IfNotPresent
           ports:
             - name: taotao-cloud-auth-port
@@ -578,7 +578,7 @@ spec:
                   - -c
                   - sleep 30
         - name: taotao-cloud-sys
-          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys:2025.11"
+          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys:2025.12"
           imagePullPolicy: IfNotPresent
           ports:
             - name: taotao-cloud-sys-port
@@ -626,7 +626,7 @@ spec:
                   - -c
                   - sleep 30
         - name: taotao-cloud-order
-          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order:2025.11"
+          image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order:2025.12"
           imagePullPolicy: IfNotPresent
           ports:
             - name: taotao-cloud-order-port
@@ -683,12 +683,12 @@ metadata:
   namespace: taotao-cloud-dev
   labels:
     app: taotao-cloud
-    version: 2025.11
+    version: 2025.12
 spec:
   type: NodePort
   selector:
     app: taotao-cloud
-    version: 2025.11
+    version: 2025.12
   ports:
     - name: taotao-cloud-gateway-port
       protocol: TCP

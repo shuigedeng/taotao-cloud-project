@@ -95,13 +95,13 @@ Gradle:
 ```groovy
 dependencyManagement{
   imports {
-    mavenBom "io.github.shuigedeng:taotao-boot-dependencies:2025.11"
+    mavenBom "io.github.shuigedeng:taotao-boot-dependencies:2025.12"
   }
 }
 
 dependencyManagement{
   imports {
-    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2025.11"
+    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2025.12"
   }
 }
 
@@ -116,7 +116,7 @@ Maven:
     <dependency>
       <groupId>io.github.shuigedeng</groupId>
       <artifactId>taotao-boot-dependencies</artifactId>
-      <version>2025.11</version>
+      <version>2025.12</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -128,7 +128,7 @@ Maven:
     <dependency>
       <groupId>io.github.shuigedeng</groupId>
       <artifactId>taotao-cloud-dependencies</artifactId>
-      <version>2025.11</version>
+      <version>2025.12</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -185,7 +185,7 @@ Maven:
 		<plugin>
 			<groupId>io.github.shuigedeng</groupId>
 			<artifactId>taotao-cloud-maven-plugin</artifactId>
-			<version>2025.11</version>
+			<version>2025.12</version>
 		</plugin>
 	</plugins>
 </build>

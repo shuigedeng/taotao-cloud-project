@@ -1,7 +1,7 @@
 #!/bin/bash
-docker pull registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2025.11
+docker pull registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2025.12
 
-docker tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2025.11 taotao-cloud-gateway:latest
+docker tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2025.12 taotao-cloud-gateway:latest
 
 docker stop gateway
 
