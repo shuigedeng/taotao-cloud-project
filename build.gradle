@@ -98,7 +98,7 @@ buildscript {
         //代码混淆工具
         //https://github.com/Guardsquare/proguard
         //https://www.guardsquare.com/manual/quickstart
-        classpath "com.guardsquare:proguard-gradle:7.8.0"
+        classpath "com.guardsquare:proguard-gradle:7.8.1"
     }
 }
 
@@ -158,7 +158,7 @@ plugins {
 
     //用于管理 Docker 镜像和容器的 Gradle 插件。
     //https://plugins.gradle.org/plugin/com.bmuschko.docker-spring-boot-application
-    id "com.bmuschko.docker-spring-boot-application" version "9.4.0"
+    id "com.bmuschko.docker-spring-boot-application" version "10.0.0"
 
     //Gradle 插件，用于将所有依赖项和项目代码折叠到一个 Jar 文件中。
     //https://plugins.gradle.org/plugin/com.gradleup.shadow

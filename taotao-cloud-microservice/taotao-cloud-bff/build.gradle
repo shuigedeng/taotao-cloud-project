@@ -26,7 +26,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
 
     implementation "org.springframework.boot:spring-boot-starter-graphql"
-    testImplementation 'org.springframework.graphql:spring-graphql-test:1.4.1'
+    testImplementation 'org.springframework.graphql:spring-graphql-test:1.4.3'
 
     //implementation "org.springframework.boot:spring-boot-starter-webflux"
     //implementation("org.springframework.boot:spring-boot-starter-web") {

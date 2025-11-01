@@ -21,6 +21,7 @@ import com.google.common.base.Charsets;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.common.utils.secure.RSAUtils;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
@@ -105,7 +106,7 @@ public class ResponseEncryptFilter implements GlobalFilter, Ordered {
                                                 DataBufferUtils.release(join);
                                                 // 流转为字符串
                                                 String responseData =
-                                                        new String(content, Charsets.UTF_8);
+                                                        new String(content, StandardCharsets.UTF_8);
                                                 LogUtils.info(responseData);
 
                                                 Map map = JSON.parseObject(responseData);
@@ -122,7 +123,7 @@ public class ResponseEncryptFilter implements GlobalFilter, Ordered {
                                                 }
 
                                                 byte[] uppedContent =
-                                                        responseData.getBytes(Charsets.UTF_8);
+                                                        responseData.getBytes(StandardCharsets.UTF_8);
                                                 originalResponse
                                                         .getHeaders()
                                                         .setContentLength(uppedContent.length);

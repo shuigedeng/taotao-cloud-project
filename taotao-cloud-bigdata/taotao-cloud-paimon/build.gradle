@@ -11,35 +11,35 @@ repositories {
 //https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/dev/configuration/overview/
 dependencies {
     // flinksql本地运行需要的依赖
-    implementation "org.apache.flink:flink-core:2.1.0"
-    implementation "org.apache.flink:flink-clients:2.1.0"
-    implementation "org.apache.flink:flink-streaming-java:2.1.0"
+    implementation "org.apache.flink:flink-core:2.1.1"
+    implementation "org.apache.flink:flink-clients:2.1.1"
+    implementation "org.apache.flink:flink-streaming-java:2.1.1"
     //状态后端管理器
-    implementation "org.apache.flink:flink-statebackend-rocksdb:2.1.0"
+    implementation "org.apache.flink:flink-statebackend-rocksdb:2.1.1"
     //flink本地运行时 提供的web功能
-    implementation "org.apache.flink:flink-runtime-web:2.1.0"
+    implementation "org.apache.flink:flink-runtime-web:2.1.1"
 
     //flink sql
-    implementation 'org.apache.flink:flink-table-api-java:2.1.0'
-    implementation 'org.apache.flink:flink-table-runtime:2.1.0'
-    implementation 'org.apache.flink:flink-table-api-java-bridge:2.1.0'
-    implementation "org.apache.flink:flink-table-planner_2.12:2.1.0"
-    implementation "org.apache.flink:flink-table-planner-loader:2.1.0"
-    implementation 'org.apache.flink:flink-sql-gateway-api:2.1.0'
+    implementation 'org.apache.flink:flink-table-api-java:2.1.1'
+    implementation 'org.apache.flink:flink-table-runtime:2.1.1'
+    implementation 'org.apache.flink:flink-table-api-java-bridge:2.1.1'
+    implementation "org.apache.flink:flink-table-planner_2.12:2.1.1"
+    implementation "org.apache.flink:flink-table-planner-loader:2.1.1"
+    implementation 'org.apache.flink:flink-sql-gateway-api:2.1.1'
 
     //使用alibaba 动态cep
-    implementation 'org.apache.flink:flink-cep:2.1.0'
-    implementation "org.apache.flink:flink-csv:2.1.0"
-    implementation 'org.apache.flink:flink-parquet:2.1.0'
+    implementation 'org.apache.flink:flink-cep:2.1.1'
+    implementation "org.apache.flink:flink-csv:2.1.1"
+    implementation 'org.apache.flink:flink-parquet:2.1.1'
     implementation 'org.apache.parquet:parquet-avro:1.16.0'
-    implementation 'org.apache.flink:flink-avro:2.1.0'
-    implementation 'org.apache.flink:flink-json:2.1.0'
-    implementation 'org.apache.flink:flink-format-common:2.1.0'
-    implementation 'org.apache.flink:flink-compress:2.1.0'
+    implementation 'org.apache.flink:flink-avro:2.1.1'
+    implementation 'org.apache.flink:flink-json:2.1.1'
+    implementation 'org.apache.flink:flink-format-common:2.1.1'
+    implementation 'org.apache.flink:flink-compress:2.1.1'
 
     //flink连接器
-    implementation 'org.apache.flink:flink-connector-datagen:2.1.0'
-    implementation 'org.apache.flink:flink-connector-files:2.1.0'
+    implementation 'org.apache.flink:flink-connector-datagen:2.1.1'
+    implementation 'org.apache.flink:flink-connector-files:2.1.1'
     implementation "org.apache.flink:flink-connector-kafka:4.0.1-2.0"
     //implementation 'org.apache.flink:flink-connector-hbase-2.2:3.0.0-1.17'
     implementation 'org.apache.flink:flink-connector-jdbc-core:4.0.0-2.0'
@@ -103,7 +103,7 @@ dependencies {
     //implementation 'com.ververica:flink-cdc-pipeline-connector-mysql:3.0.1'
     //implementation 'com.ververica:flink-cdc-pipeline-connector-values:3.0.1'
 
-    implementation 'com.mysql:mysql-connector-j:9.4.0'
+    implementation 'com.mysql:mysql-connector-j:9.5.0'
     implementation 'redis.clients:jedis:7.0.0'
     implementation 'org.apache.hive:hive-exec:4.1.0'
 

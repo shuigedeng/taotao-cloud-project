@@ -4,13 +4,13 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/license-Apache%202-green" alt="License"/>
-  <img src="https://img.shields.io/badge/taotao--cloud--project-2025.11-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring-6.2.11-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/taotao--cloud--project-2025.12-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring-6.2.12-red" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_boot-3.5.7-orange" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud-2025.0.0-yellowgree" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud_alibaba-2025.0.0.0--preview-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud_tencent-2.0.2.2--2024.0.1-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/netty-4.2.6.Final-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/netty-4.2.7.Final-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_security-6.5.6-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/elasticsearch-9.0.4-green" alt="Downloads"/>
   <img src="https://img.shields.io/badge/mybatis_plus-3.5.16-yellow" alt="Downloads"/>
@@ -22,7 +22,7 @@
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-**taotao-cloud(taotao云平台)**  基于**gradle9.1.0** 、**jdk25**, 支持**graalvm25**, 采用最新的**spring 6.2.11**、**SpringBoot 3.5.7**、**SpringCloud 2025.0.0**、**SpringSecurity 6.5.6**、**Nacos 3.1.0**、**Mybatis-Plus 3.5.16**、**Redis 7.4.0**等框架，开发的一款企业级微服务架构的云服务平台， 
+**taotao-cloud(taotao云平台)**  基于**gradle9.2.0** 、**jdk25**, 支持**graalvm25**, 采用最新的**spring 6.2.12**、**SpringBoot 3.5.7**、**SpringCloud 2025.0.0**、**SpringSecurity 6.5.6**、**Nacos 3.1.0**、**Mybatis-Plus 3.5.16**、**Redis 7.4.0**等框架，开发的一款企业级微服务架构的云服务平台， 
 
 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循**SpringBoot**编程思想，高度模块化和可配置化。
 
@@ -86,8 +86,8 @@ Requires:
 
 ```
 JAVA_VERSION >= 25 (推荐使用graalvm-jdk-25)
-GRALE_VERSION >= 9.1.0
-IDEA_VERSION >= 2025.2.2
+GRALE_VERSION >= 9.2.0
+IDEA_VERSION >= 2025.2.4
 ```
 
 Gradle:
@@ -253,31 +253,31 @@ Maven:
 
 ## 9. 核心依赖
 
-| 依赖                   | 版本                 |
-|----------------------|--------------------|
-| Spring               | 6.2.11             |
-| Spring Boot          | 3.5.7              |
-| Spring Cloud         | 2025.0.0           |
-| Spring Cloud Alibaba | 2025.0.0.0 |
-| Seata                | 2.5.0              |
-| Sentinel             | 1.8.9              |
-| Spring-kafka         | 3.3.9              |
-| Roketmq              | 5.2.4              |
-| Spring Security      | 6.5.6              |
-| Mybatis Plus         | 3.5.16             |
-| Hutool               | 6.0.0-M22          |
-| Mysql                | 9.4.0              |
-| Querydsl             | 5.1.0              |
-| Swagger              | 3.0.0              |
-| Knife4j              | 4.5.0              |
-| Redisson             | 3.51.0             |
-| Lettuce              | 6.5.4.RELEASE      |
-| Elasticsearch        | 9.0.4              |
-| Xxl-job              | 3.2.0              |
-| Guava                | 33.5.8-jre         |
-| Grpc                 | 1.75.0             |
-| Arthas               | 4.0.3              |
-| Netty                | 4.2.6.Final        |
+| 依赖                   | 版本            |
+|----------------------|---------------|
+| Spring               | 6.2.12        |
+| Spring Boot          | 3.5.7         |
+| Spring Cloud         | 2025.0.0      |
+| Spring Cloud Alibaba | 2025.0.0.0    |
+| Seata                | 2.5.0         |
+| Sentinel             | 1.8.9         |
+| Spring-kafka         | 3.3.9         |
+| Roketmq              | 5.2.4         |
+| Spring Security      | 6.5.6         |
+| Mybatis Plus         | 3.5.16        |
+| Hutool               | 6.0.0-M22     |
+| Mysql                | 9.4.0         |
+| Querydsl             | 5.1.0         |
+| Swagger              | 3.0.0         |
+| Knife4j              | 4.5.0         |
+| Redisson             | 3.51.0        |
+| Lettuce              | 6.5.4.RELEASE |
+| Elasticsearch        | 9.0.4         |
+| Xxl-job              | 3.2.0         |
+| Guava                | 33.5.8-jre    |
+| Grpc                 | 1.75.0        |
+| Arthas               | 4.0.3         |
+| Netty                | 4.2.7.Final   |
 
 
 ## 10. 模块说明
