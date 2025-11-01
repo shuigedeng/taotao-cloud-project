@@ -18,8 +18,6 @@ package com.taotao.cloud.wechat.biz.weixin.handler;
 
 import static me.chanjar.weixin.common.api.WxConsts.EventType;
 
-import org.dromara.hutooljson.JSONObject;
-import org.dromara.hutooljson.JSONUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.joolun.weixin.config.CommonConstants;
 import com.joolun.weixin.constant.ConfigConstant;

@@ -10,7 +10,7 @@ import java.util.Map;
 import javax.swing.JCheckBox;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.dromara.hutool.http.HttpUtil;
+
 
 public class SQL2DSLConvertActionListener implements ActionListener {
     private static final String URL = "http://www.ischoolbar.com/EsParser/convert.php";

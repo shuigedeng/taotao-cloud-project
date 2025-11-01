@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.cache.support.evict;
 
-import static org.dromara.hutool.core.lang.Validator.isNotNull;
 
 import com.taotao.cloud.cache.api.ICache;
 import com.taotao.cloud.cache.api.ICacheEntry;

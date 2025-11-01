@@ -4,7 +4,7 @@ import com.taotao.boot.common.constant.CommonConstants;
 import lombok.Data;
 import lombok.experimental.*;
 import lombok.experimental.*;
-import org.dromara.hutool.core.math.NumberUtil;
+
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.CentralProcessor.TickType;
 import oshi.hardware.GlobalMemory;

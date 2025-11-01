@@ -32,7 +32,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import lombok.*;
-import org.dromara.hutool.core.bean.BeanUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

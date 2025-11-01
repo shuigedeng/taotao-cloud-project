@@ -19,7 +19,6 @@ package com.taotao.cloud.wechat.biz.wecom.core.notice.executor;
 import static cn.bootx.starter.wecom.code.WeComCode.NOTICE_MSG_ID;
 
 import cn.bootx.common.jackson.util.JacksonUtil;
-import org.dromara.hutoolhttp.HttpUtil;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;

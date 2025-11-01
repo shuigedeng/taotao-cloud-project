@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.operation.biz.service.business.impl;
 
-import org.dromara.hutoolcore.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;

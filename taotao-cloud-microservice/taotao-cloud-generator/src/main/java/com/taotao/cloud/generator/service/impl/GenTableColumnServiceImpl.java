@@ -20,7 +20,7 @@ import com.taotao.cloud.generator.entity.GenTableColumn;
 import com.taotao.cloud.generator.mapper.GenTableColumnMapper;
 import com.taotao.cloud.generator.service.IGenTableColumnService;
 import java.util.List;
-import org.dromara.hutool.core.convert.ConvertUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

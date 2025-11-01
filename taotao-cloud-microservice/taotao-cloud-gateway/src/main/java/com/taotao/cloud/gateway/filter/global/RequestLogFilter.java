@@ -25,7 +25,7 @@ import com.taotao.boot.common.utils.servlet.TraceUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;
 import java.util.ArrayList;
 import java.util.List;
-import org.dromara.hutool.core.text.StrUtil;
+
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;

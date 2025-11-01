@@ -19,7 +19,6 @@ package com.taotao.cloud.design.patterns.pipeline.demo;
 import com.taotao.cloud.design.patterns.pipeline.AbstractDemoJob;
 import com.taotao.cloud.design.patterns.pipeline.DemoPipelineProduct;
 import lombok.extern.slf4j.Slf4j;
-import org.dromara.hutool.json.JSONUtil;
 
 /**
  * 审核-参数验证-实现类

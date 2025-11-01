@@ -22,8 +22,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
-import org.dromara.hutool.core.collection.CollUtil;
-import org.dromara.hutool.core.util.ObjUtil;
+
+
 
 /**
  * 分页查询实体类

@@ -3,7 +3,7 @@ package com.taotao.cloud.idea.plugin.toolkit.listener.action;
 import com.intellij.ui.EditorTextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import org.dromara.hutool.core.data.id.IdUtil;
+
 
 public class GenerateUUIDActionListener implements ActionListener {
     private EditorTextField lowerCaseTextField;

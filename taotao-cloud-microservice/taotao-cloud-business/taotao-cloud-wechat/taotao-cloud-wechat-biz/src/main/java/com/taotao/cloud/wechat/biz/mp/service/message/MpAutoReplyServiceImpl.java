@@ -19,9 +19,7 @@ package com.taotao.cloud.wechat.biz.mp.service.message;
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static cn.iocoder.yudao.module.mp.enums.ErrorCodeConstants.*;
 
-import org.dromara.hutoolcore.collection.CollUtil;
-import org.dromara.hutoolcore.lang.Assert;
-import org.dromara.hutoolcore.util.ObjUtil;
+
 import cn.iocoder.yudao.framework.common.exception.ErrorCode;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.module.mp.controller.admin.message.vo.autoreply.MpAutoReplyCreateReqVO;

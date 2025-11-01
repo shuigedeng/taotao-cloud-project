@@ -19,7 +19,7 @@ package com.taotao.cloud.gateway.authentication;
 import com.alibaba.fastjson.JSON;
 import com.taotao.boot.common.constant.CommonConstants;
 import com.taotao.boot.security.spring.core.userdetails.TtcUser;
-import org.dromara.hutool.core.collection.CollUtil;
+
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.server.WebFilterExchange;

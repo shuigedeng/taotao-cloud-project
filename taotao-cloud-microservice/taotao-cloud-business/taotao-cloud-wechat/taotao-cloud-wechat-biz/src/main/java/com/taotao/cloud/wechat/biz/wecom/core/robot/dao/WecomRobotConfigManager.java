@@ -22,7 +22,7 @@ import cn.bootx.common.mybatisplus.impl.BaseManager;
 import cn.bootx.common.mybatisplus.util.MpUtil;
 import cn.bootx.starter.wecom.core.robot.entity.WecomRobotConfig;
 import cn.bootx.starter.wecom.param.robot.WecomRobotConfigParam;
-import org.dromara.hutoolcore.util.StrUtil;
+
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;

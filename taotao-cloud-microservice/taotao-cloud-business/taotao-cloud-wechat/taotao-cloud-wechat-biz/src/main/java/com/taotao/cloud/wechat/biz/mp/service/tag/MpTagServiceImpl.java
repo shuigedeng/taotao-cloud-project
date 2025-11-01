@@ -21,7 +21,6 @@ import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.
 import static cn.iocoder.yudao.framework.common.util.collection.CollectionUtils.convertMap;
 import static cn.iocoder.yudao.module.mp.enums.ErrorCodeConstants.*;
 
-import org.dromara.hutoolcore.collection.CollUtil;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.module.mp.controller.admin.tag.vo.MpTagCreateReqVO;
 import cn.iocoder.yudao.module.mp.controller.admin.tag.vo.MpTagPageReqVO;

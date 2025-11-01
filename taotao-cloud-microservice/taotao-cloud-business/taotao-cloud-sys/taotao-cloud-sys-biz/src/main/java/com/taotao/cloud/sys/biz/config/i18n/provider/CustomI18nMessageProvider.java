@@ -7,8 +7,6 @@ import com.taotao.cloud.sys.biz.model.entity.i18n.I18nData;
 import com.taotao.cloud.sys.biz.service.business.I18nDataService;
 import com.taotao.boot.web.i18n.I18nMessage;
 import com.taotao.boot.web.i18n.I18nMessageProvider;
-import org.dromara.hutool.core.cache.impl.TimedCache;
-import org.dromara.hutool.core.util.RandomUtil;
 import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.Topic;
 

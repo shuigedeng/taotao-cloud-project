@@ -28,7 +28,7 @@ import com.taotao.cloud.gateway.properties.ApiProperties;
 import java.util.List;
 import java.util.Map;
 import lombok.*;
-import org.dromara.hutool.http.HttpUtil;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;

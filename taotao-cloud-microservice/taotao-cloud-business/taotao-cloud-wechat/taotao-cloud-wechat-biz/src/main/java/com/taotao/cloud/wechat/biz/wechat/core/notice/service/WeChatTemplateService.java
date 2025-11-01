@@ -29,9 +29,7 @@ import cn.bootx.starter.wechat.core.notice.dao.WeChatTemplateManager;
 import cn.bootx.starter.wechat.core.notice.entity.WeChatTemplate;
 import cn.bootx.starter.wechat.dto.notice.WeChatTemplateDto;
 import cn.bootx.starter.wechat.param.notice.WeChatTemplateParam;
-import org.dromara.hutoolcore.bean.BeanUtil;
-import org.dromara.hutoolcore.bean.copier.CopyOptions;
-import org.dromara.hutoolcore.util.StrUtil;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;

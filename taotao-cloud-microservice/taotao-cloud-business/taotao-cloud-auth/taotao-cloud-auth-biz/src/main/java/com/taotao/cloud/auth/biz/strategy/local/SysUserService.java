@@ -22,7 +22,7 @@ import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.cloud.auth.biz.strategy.user.SysUser;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.dromara.hutool.core.data.id.IdUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

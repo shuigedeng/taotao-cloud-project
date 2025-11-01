@@ -22,7 +22,7 @@ import com.taotao.cloud.wechat.api.feign.response.FeignDictResponse;
 import org.apache.seata.core.context.RootContext;
 import org.apache.seata.core.exception.TransactionException;
 import org.apache.seata.tm.api.GlobalTransactionContext;
-import org.dromara.hutool.core.text.StrUtil;
+
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**

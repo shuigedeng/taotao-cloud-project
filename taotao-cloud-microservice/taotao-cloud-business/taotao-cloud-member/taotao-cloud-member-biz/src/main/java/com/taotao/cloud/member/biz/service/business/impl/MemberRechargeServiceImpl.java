@@ -89,8 +89,8 @@ public class MemberRechargeServiceImpl extends ServiceImpl<IMemberRechargeMapper
         // 支付时间 开始时间和结束时间
         if (!CharSequenceUtil.isEmpty(rechargePageQuery.getStartDate())
                 && !CharSequenceUtil.isEmpty(rechargePageQuery.getEndDate())) {
-            Date start = org.dromara.hutoolcore.date.DateUtil.parse(rechargePageQuery.getStartDate());
-            Date end = org.dromara.hutoolcore.date.DateUtil.parse(rechargePageQuery.getEndDate());
+            Date start = DateUtil.parse(rechargePageQuery.getStartDate());
+            Date end = date.DateUtil.parse(rechargePageQuery.getEndDate());
             queryWrapper.between("pay_time", start, end);
         }
         queryWrapper.orderByDesc("create_time");

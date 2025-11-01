@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 import org.apache.commons.lang3.StringUtils;
-import org.dromara.hutool.http.HttpUtil;
+
 
 public class IPSearchActionListener implements ActionListener {
     private static final String URL = "http://whois.pconline.com.cn/ipJson.jsp";

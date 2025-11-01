@@ -25,7 +25,7 @@ import com.taotao.cloud.auth.api.model.dto.SignInErrorStatus;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
 import java.time.Duration;
 import org.apache.commons.lang3.ObjectUtils;
-import org.dromara.hutool.crypto.SecureUtil;
+
 import org.springframework.beans.factory.InitializingBean;
 
 /**

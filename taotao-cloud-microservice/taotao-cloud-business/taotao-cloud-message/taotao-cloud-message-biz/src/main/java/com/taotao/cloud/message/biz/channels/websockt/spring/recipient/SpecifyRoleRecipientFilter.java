@@ -1,6 +1,5 @@
 package com.taotao.cloud.message.biz.channels.websockt.spring.recipient;
 
-import org.dromara.hutoolcore.collection.CollUtil;
 import com.hccake.ballcat.notify.enums.NotifyRecipientFilterTypeEnum;
 import com.hccake.ballcat.system.model.entity.SysUser;
 import com.hccake.ballcat.system.service.SysUserService;

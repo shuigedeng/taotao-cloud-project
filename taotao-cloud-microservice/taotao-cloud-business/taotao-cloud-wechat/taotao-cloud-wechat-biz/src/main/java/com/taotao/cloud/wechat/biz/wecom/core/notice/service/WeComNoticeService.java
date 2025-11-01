@@ -20,8 +20,6 @@ import static cn.bootx.starter.wecom.code.WeComCode.NOTICE_RECALL_URL;
 
 import cn.bootx.starter.wecom.configuration.WeComProperties;
 import cn.bootx.starter.wecom.core.notice.executor.RecallNoticeRequestExecutor;
-import org.dromara.hutoolcore.io.FileTypeUtil;
-import org.dromara.hutoolcore.io.IoUtil;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import lombok.RequiredArgsConstructor;

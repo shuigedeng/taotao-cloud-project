@@ -20,7 +20,6 @@ import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.ToString;
 import lombok.experimental.*;
-import org.dromara.hutool.core.net.Ipv4Util;
 
 @Data
 public class VisitRecord {

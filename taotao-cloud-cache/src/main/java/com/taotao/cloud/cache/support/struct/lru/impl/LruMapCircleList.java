@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.cache.support.struct.lru.impl;
 
-import static org.dromara.hutool.core.lang.Validator.isNotNull;
 
 import com.taotao.boot.common.utils.lang.ObjectUtils;
 import com.taotao.cloud.cache.api.ICacheEntry;

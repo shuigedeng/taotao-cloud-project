@@ -17,7 +17,6 @@
 package com.taotao.cloud.cache.support.load;
 
 import static com.taotao.boot.common.utils.io.PathUtils.readAllLines;
-import static org.dromara.hutool.core.reflect.method.MethodUtil.invoke;
 
 import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.cache.annotation.CacheInterceptor;

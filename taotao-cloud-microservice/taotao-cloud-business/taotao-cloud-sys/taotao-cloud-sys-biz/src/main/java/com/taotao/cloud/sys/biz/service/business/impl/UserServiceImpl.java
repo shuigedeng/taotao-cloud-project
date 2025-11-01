@@ -34,7 +34,7 @@ import com.taotao.cloud.sys.biz.service.business.IUserRelationService;
 import com.taotao.cloud.sys.biz.service.business.IUserService;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import lombok.*;
-import org.dromara.hutool.core.text.StrUtil;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

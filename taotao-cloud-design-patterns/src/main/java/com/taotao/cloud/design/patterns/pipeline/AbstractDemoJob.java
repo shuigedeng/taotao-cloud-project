@@ -17,8 +17,6 @@
 package com.taotao.cloud.design.patterns.pipeline;
 
 import lombok.extern.slf4j.Slf4j;
-import org.dromara.hutool.core.reflect.ClassUtil;
-import org.dromara.hutool.json.JSONUtil;
 
 /**
  * 管道任务-抽象层

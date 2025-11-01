@@ -19,8 +19,7 @@ package com.taotao.cloud.wechat.biz.wechat.core.login.service;
 import cn.bootx.common.redis.RedisClient;
 import cn.bootx.starter.auth.exception.LoginFailureException;
 import cn.bootx.starter.wechat.dto.login.WeChatLoginQrCode;
-import org.dromara.hutoolcore.util.IdUtil;
-import org.dromara.hutoolcore.util.StrUtil;
+
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

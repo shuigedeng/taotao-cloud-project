@@ -21,7 +21,6 @@ import java.io.Serializable;
 import java.util.List;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.dromara.hutool.http.meta.HttpStatus;
 
 /**
  * 表格分页数据对象

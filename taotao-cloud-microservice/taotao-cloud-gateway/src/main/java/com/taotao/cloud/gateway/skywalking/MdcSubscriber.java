@@ -17,7 +17,6 @@
 package com.taotao.cloud.gateway.skywalking;
 
 import java.util.Optional;
-import org.dromara.hutool.core.bean.BeanUtil;
 import org.reactivestreams.Subscription;
 import org.slf4j.MDC;
 import reactor.core.CoreSubscriber;

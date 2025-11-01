@@ -11,7 +11,7 @@ import com.intellij.ui.LanguageTextField;
 import com.taotao.cloud.idea.plugin.toolkit.domain.ToolkitCommand;
 import com.taotao.cloud.idea.plugin.toolkit.listener.action.CopyContentActionListener;
 import com.taotao.cloud.idea.plugin.toolkit.listener.document.DateTimestampDocumentListener;
-import org.dromara.hutool.core.date.DateTime;
+
 
 import javax.swing.JButton;
 import javax.swing.JPanel;

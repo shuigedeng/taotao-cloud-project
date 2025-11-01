@@ -23,7 +23,7 @@ import java.util.Map;
 import org.apache.seatunnel.api.table.type.BasicType;
 import org.apache.seatunnel.api.table.type.SeaTunnelDataType;
 import org.apache.seatunnel.transform.sql.zeta.ZetaUDF;
-import org.dromara.hutool.core.text.StrUtil;
+
 
 // mvn -T 8 clean install -DskipTests -Dcheckstyle.skip -Dmaven.javadoc.skip=true
 @AutoService(ZetaUDF.class)

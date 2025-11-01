@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.channels.websockt.spring.push;
 
-import org.dromara.hutoolcore.util.StrUtil;
+
 import com.hccake.ballcat.common.mail.model.MailDetails;
 import com.hccake.ballcat.common.mail.sender.MailSender;
 import com.hccake.ballcat.notify.enums.NotifyChannelEnum;

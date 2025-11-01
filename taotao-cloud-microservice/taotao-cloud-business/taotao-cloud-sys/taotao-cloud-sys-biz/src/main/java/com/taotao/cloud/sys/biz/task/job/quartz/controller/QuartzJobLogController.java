@@ -24,7 +24,7 @@ import com.taotao.boot.web.annotation.BusinessApi;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.*;
-import org.dromara.hutool.core.bean.BeanUtil;
+
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -21,8 +21,6 @@ import com.taotao.boot.oss.common.storage.FileStorageService;
 import com.taotao.boot.oss.common.storage.UploadPretreatment;
 import java.io.InputStream;
 import lombok.extern.slf4j.Slf4j;
-import org.dromara.hutoolcore.bean.BeanUtil;
-import org.dromara.hutoolcore.lang.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

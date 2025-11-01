@@ -32,8 +32,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.dromara.hutool.core.text.CharSequenceUtil;
-import org.dromara.hutool.http.html.HtmlUtil;
 import org.hibernate.Hibernate;
 
 /** 草稿商品表 */

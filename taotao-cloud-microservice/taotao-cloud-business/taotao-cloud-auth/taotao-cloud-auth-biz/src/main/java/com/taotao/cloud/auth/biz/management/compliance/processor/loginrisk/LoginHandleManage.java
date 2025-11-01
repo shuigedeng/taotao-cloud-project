@@ -21,7 +21,7 @@ import jakarta.annotation.Resource;
 import java.util.*;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
-import org.dromara.hutool.core.collection.CollUtil;
+
 import org.springframework.stereotype.Component;
 
 /**

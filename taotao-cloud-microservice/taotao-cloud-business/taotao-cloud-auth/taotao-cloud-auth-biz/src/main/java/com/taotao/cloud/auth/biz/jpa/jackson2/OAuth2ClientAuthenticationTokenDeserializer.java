@@ -28,7 +28,6 @@ import com.taotao.cloud.auth.biz.utils.JsonNodeUtils;
 import java.io.IOException;
 import java.util.Set;
 import org.apache.commons.collections4.CollectionUtils;
-import org.dromara.hutool.core.reflect.FieldUtil;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2ClientAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;

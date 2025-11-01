@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.kit.core.model;
 
-import org.dromara.hutoolcore.util.StrUtil;
+
 import com.ijpay.core.enums.SignType;
 import com.ijpay.core.kit.WxPayKit;
 import java.lang.reflect.Field;

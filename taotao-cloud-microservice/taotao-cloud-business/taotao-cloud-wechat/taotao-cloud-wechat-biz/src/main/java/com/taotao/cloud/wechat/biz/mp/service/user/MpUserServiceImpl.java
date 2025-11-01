@@ -20,8 +20,7 @@ import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionU
 import static cn.iocoder.yudao.module.mp.enums.ErrorCodeConstants.USER_NOT_EXISTS;
 import static cn.iocoder.yudao.module.mp.enums.ErrorCodeConstants.USER_UPDATE_TAG_FAIL;
 
-import org.dromara.hutoolcore.collection.CollUtil;
-import org.dromara.hutoolcore.util.StrUtil;
+
 import cn.iocoder.yudao.framework.common.enums.CommonStatusEnum;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.common.util.collection.CollectionUtils;

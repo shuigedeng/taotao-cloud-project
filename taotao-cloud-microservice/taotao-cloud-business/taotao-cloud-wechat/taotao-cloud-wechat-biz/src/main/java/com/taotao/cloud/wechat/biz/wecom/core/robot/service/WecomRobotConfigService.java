@@ -25,8 +25,6 @@ import cn.bootx.starter.wecom.core.robot.dao.WecomRobotConfigManager;
 import cn.bootx.starter.wecom.core.robot.entity.WecomRobotConfig;
 import cn.bootx.starter.wecom.dto.robot.WecomRobotConfigDto;
 import cn.bootx.starter.wecom.param.robot.WecomRobotConfigParam;
-import org.dromara.hutoolcore.bean.BeanUtil;
-import org.dromara.hutoolcore.bean.copier.CopyOptions;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

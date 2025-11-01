@@ -19,8 +19,6 @@ package com.taotao.cloud.auth.biz.management.compliance.processor.loginrisk;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import org.dromara.hutool.core.map.MapUtil;
-import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.stereotype.Component;
 
 /**

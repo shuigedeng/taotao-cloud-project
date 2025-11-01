@@ -24,7 +24,7 @@ import java.net.URI;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import org.apache.commons.lang3.ObjectUtils;
-import org.dromara.hutool.core.text.StrUtil;
+
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.*;

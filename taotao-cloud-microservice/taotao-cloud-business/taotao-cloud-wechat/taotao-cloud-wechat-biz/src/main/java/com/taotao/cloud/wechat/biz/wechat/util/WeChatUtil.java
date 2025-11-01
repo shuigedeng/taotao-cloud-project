@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.biz.wechat.util;
 
-import org.dromara.hutoolcore.util.StrUtil;
+
 import lombok.experimental.UtilityClass;
 
 /**

@@ -23,11 +23,7 @@ import cn.bootx.starter.wecom.core.robot.dao.WecomRobotConfigManager;
 import cn.bootx.starter.wecom.core.robot.domin.UploadMedia;
 import cn.bootx.starter.wecom.core.robot.entity.WecomRobotConfig;
 import cn.bootx.starter.wecom.core.robot.executor.RobotMediaFileUploadRequestExecutor;
-import org.dromara.hutoolcore.io.FileTypeUtil;
-import org.dromara.hutoolcore.io.IoUtil;
-import org.dromara.hutoolcore.io.file.FileNameUtil;
-import org.dromara.hutoolcore.util.IdUtil;
-import org.dromara.hutoolcore.util.StrUtil;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;

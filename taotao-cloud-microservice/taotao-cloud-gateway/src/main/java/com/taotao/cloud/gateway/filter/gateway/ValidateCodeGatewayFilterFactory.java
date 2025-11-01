@@ -20,7 +20,6 @@ import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.boot.common.constant.RedisConstants;
 import com.taotao.boot.common.constant.SecurityConstants;
 import com.taotao.boot.common.exception.BaseException;
-import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.server.reactive.ServerHttpRequest;

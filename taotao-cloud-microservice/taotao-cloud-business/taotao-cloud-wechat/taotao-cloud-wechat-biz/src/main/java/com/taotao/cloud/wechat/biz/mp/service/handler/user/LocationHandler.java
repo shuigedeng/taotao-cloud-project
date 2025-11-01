@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.wechat.biz.mp.service.handler.user;
 
-import org.dromara.hutoolcore.util.ObjectUtil;
 import cn.iocoder.yudao.module.mp.framework.mp.core.context.MpContextHolder;
 import cn.iocoder.yudao.module.mp.service.message.MpAutoReplyService;
 import java.util.Map;

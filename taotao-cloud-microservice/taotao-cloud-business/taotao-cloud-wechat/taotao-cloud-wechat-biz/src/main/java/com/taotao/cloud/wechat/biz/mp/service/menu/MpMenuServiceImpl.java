@@ -20,8 +20,7 @@ import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionU
 import static cn.iocoder.yudao.module.mp.enums.ErrorCodeConstants.MENU_DELETE_FAIL;
 import static cn.iocoder.yudao.module.mp.enums.ErrorCodeConstants.MENU_SAVE_FAIL;
 
-import org.dromara.hutoolcore.collection.CollUtil;
-import org.dromara.hutoolcore.util.StrUtil;
+
 import cn.iocoder.yudao.module.mp.controller.admin.menu.vo.MpMenuSaveReqVO;
 import cn.iocoder.yudao.module.mp.convert.menu.MpMenuConvert;
 import cn.iocoder.yudao.module.mp.dal.dataobject.account.MpAccountDO;

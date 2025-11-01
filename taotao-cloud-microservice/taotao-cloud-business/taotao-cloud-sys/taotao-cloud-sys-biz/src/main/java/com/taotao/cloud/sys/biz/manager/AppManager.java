@@ -27,7 +27,7 @@ import com.taotao.cloud.sys.biz.model.entity.app.App;
 import com.taotao.boot.web.annotation.Manager;
 import com.taotao.boot.webagg.manager.BaseManager;
 import lombok.RequiredArgsConstructor;
-import org.dromara.hutool.core.text.StrUtil;
+
 
 import java.util.List;
 import java.util.Objects;

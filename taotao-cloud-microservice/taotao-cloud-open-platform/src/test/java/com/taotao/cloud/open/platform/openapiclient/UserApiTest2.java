@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.open.platform.openapiclient;
 
-import org.dromara.hutooljson.JSONUtil;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.openapi.client.model.Gender;
 import com.taotao.boot.openapi.client.model.Role;

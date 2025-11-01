@@ -34,7 +34,7 @@ import com.taotao.cloud.goods.biz.repository.ICategoryRepository;
 import com.taotao.cloud.goods.biz.service.business.*;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import lombok.*;
-import org.dromara.hutool.core.text.CharSequenceUtil;
+
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;

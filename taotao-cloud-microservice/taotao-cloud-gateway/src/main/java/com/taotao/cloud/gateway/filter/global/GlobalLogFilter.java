@@ -20,7 +20,6 @@ import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;
 import com.taotao.cloud.gateway.utils.WebFluxUtils;
-import org.dromara.hutool.core.map.MapUtil;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;

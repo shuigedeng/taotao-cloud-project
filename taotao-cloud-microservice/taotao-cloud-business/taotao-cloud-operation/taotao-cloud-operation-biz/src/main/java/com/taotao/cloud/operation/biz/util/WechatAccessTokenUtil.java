@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.operation.biz.util; // package com.taotao.cloud.message.biz.util;
 //
-// import org.dromara.hutoolhttp.HttpUtil;
-// import org.dromara.hutooljson.JSONObject;
 // import com.google.gson.Gson;
 // 
 // import com.taotao.boot.common.enums.ClientTypeEnum;

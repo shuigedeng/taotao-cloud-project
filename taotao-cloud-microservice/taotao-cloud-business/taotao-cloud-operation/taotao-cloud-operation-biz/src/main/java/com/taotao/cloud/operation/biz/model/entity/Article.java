@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.operation.biz.model.entity;
 
-import org.dromara.hutoolcore.text.CharSequenceUtil;
-import org.dromara.hutoolhttp.HtmlUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.operation.api.enums.ArticleEnum;
 import com.taotao.boot.webagg.entity.BaseSuperEntity;

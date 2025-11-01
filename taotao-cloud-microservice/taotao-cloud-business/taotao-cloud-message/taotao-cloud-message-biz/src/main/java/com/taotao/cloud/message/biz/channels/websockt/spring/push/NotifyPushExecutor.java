@@ -1,6 +1,5 @@
 package com.taotao.cloud.message.biz.channels.websockt.spring.push;
 
-import org.dromara.hutoolcore.collection.CollUtil;
 import com.taotao.cloud.message.biz.ballcat.notify.model.domain.NotifyInfo;
 import com.taotao.cloud.message.biz.ballcat.notify.recipient.RecipientHandler;
 import lombok.extern.slf4j.Slf4j;

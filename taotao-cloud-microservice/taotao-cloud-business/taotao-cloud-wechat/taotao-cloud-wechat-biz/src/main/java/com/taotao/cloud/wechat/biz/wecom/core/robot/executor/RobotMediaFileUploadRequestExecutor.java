@@ -18,7 +18,6 @@ package com.taotao.cloud.wechat.biz.wecom.core.robot.executor;
 
 import cn.bootx.starter.wecom.code.WeComCode;
 import cn.bootx.starter.wecom.core.robot.domin.UploadMedia;
-import org.dromara.hutoolhttp.HttpUtil;
 import java.io.File;
 import java.io.IOException;
 import me.chanjar.weixin.common.bean.result.WxMediaUploadResult;

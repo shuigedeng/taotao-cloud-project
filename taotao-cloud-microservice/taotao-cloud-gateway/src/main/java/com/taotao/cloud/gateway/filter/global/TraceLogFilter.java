@@ -20,7 +20,7 @@ import com.taotao.boot.common.constant.CommonConstants;
 import com.taotao.boot.common.utils.common.IdGeneratorUtils;
 import com.taotao.boot.common.utils.servlet.TraceUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;
-import org.dromara.hutool.core.text.StrUtil;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;

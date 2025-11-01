@@ -20,7 +20,6 @@ import com.taotao.cloud.auth.biz.jpa.entity.TtcRegisteredClient;
 import com.taotao.cloud.auth.biz.jpa.jackson2.OAuth2JacksonProcessor;
 import java.util.ArrayList;
 import java.util.List;
-import org.dromara.hutool.core.date.DateUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.util.StringUtils;

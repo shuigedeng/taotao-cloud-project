@@ -18,7 +18,6 @@ package com.taotao.cloud.goods.biz.util;
 
 import com.taotao.cloud.goods.biz.model.entity.Commodity;
 import com.taotao.cloud.goods.biz.model.entity.Studio;
-import org.dromara.hutool.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

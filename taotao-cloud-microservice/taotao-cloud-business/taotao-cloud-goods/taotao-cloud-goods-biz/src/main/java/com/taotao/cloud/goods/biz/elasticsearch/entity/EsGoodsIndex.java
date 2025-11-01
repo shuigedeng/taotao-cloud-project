@@ -36,7 +36,7 @@ import lombok.Data;
 import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 import lombok.experimental.*;
-import org.dromara.hutool.json.JSONUtil;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;

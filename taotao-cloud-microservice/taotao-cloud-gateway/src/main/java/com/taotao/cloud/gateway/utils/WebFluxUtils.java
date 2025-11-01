@@ -27,7 +27,7 @@ import java.util.LinkedHashSet;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import org.apache.commons.lang3.StringUtils;
-import org.dromara.hutool.core.util.ObjUtil;
+
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.biz.mp.framework.mp.core.util;
 
-import org.dromara.hutoolcore.util.StrUtil;
+
 import cn.iocoder.yudao.framework.common.util.validation.ValidationUtils;
 import jakarta.validation.Validator;
 import lombok.extern.slf4j.Slf4j;

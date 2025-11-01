@@ -1,6 +1,5 @@
 package com.taotao.cloud.message.biz.channels.netty;
 
-import org.dromara.hutooljson.JSONUtil;
 import lombok.*;
 import lombok.Data;
 import lombok.experimental.*;

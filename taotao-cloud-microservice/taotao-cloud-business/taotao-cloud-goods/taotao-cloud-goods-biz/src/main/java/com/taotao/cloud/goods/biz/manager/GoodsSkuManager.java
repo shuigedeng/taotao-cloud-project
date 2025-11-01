@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.*;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.dromara.hutool.json.JSONUtil;
+
 
 /**
  * 只能注入mapper或者dao  不能注入service

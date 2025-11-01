@@ -16,13 +16,11 @@
 
 package com.taotao.cloud.auth.biz.jpa.converter;
 
-import static org.dromara.hutool.core.text.StrPool.COMMA;
 
 import com.taotao.cloud.auth.biz.jpa.entity.TtcAuthorization;
 import com.taotao.cloud.auth.biz.jpa.jackson2.OAuth2JacksonProcessor;
 import java.time.LocalDateTime;
 import java.util.function.Consumer;
-import org.dromara.hutool.core.date.DateUtil;
 import org.springframework.security.oauth2.core.*;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;

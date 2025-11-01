@@ -63,8 +63,8 @@ import com.taotao.cloud.sys.api.model.vo.logistics.LogisticsVO;
 import com.taotao.cloud.sys.api.model.vo.logistics.TracesVO;
 import lombok.*;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.dromara.hutool.core.text.CharSequenceUtil;
-import org.dromara.hutool.json.JSONUtil;
+
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

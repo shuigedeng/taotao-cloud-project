@@ -19,7 +19,7 @@ package com.taotao.cloud.wechat.biz.wechat.handler;
 import static cn.bootx.starter.wechat.WeChatCode.EVENT_KEY_QRSCENE;
 
 import cn.bootx.starter.wechat.core.login.service.WeChatQrLoginService;
-import org.dromara.hutoolcore.util.StrUtil;
+
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

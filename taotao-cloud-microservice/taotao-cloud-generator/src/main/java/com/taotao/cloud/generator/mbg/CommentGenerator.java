@@ -19,7 +19,7 @@ package com.taotao.cloud.generator.mbg;
 import com.taotao.boot.common.utils.log.LogUtils;
 import java.util.Properties;
 import java.util.Set;
-import org.dromara.hutool.core.collection.CollUtil;
+
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.CompilationUnit;

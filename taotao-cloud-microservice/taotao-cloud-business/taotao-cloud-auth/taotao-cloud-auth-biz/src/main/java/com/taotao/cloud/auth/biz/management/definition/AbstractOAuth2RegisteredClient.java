@@ -27,7 +27,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.MappedSuperclass;
 import java.time.Duration;
 import java.util.Set;
-import org.dromara.hutool.core.data.id.IdUtil;
+
 
 /**
  * <p>应用对象转 RegisteredClient 共性属性 </p>

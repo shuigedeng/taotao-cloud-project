@@ -27,7 +27,7 @@ import com.taotao.cloud.tenant.biz.entity.TenantPackage;
 import java.util.List;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
-import org.dromara.hutool.core.text.StrUtil;
+
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor

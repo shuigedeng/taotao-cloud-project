@@ -16,12 +16,6 @@
 
 package com.taotao.cloud.auth.biz.authentication.processor;
 
-import org.dromara.hutool.core.codec.binary.Base64;
-import org.dromara.hutool.core.text.StrUtil;
-import org.dromara.hutool.core.util.ByteUtil;
-import org.dromara.hutool.core.util.RandomUtil;
-import org.dromara.hutool.crypto.SecureUtil;
-import org.dromara.hutool.crypto.symmetric.AES;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -5,8 +5,8 @@ import com.intellij.openapi.editor.event.DocumentListener;
 import com.intellij.ui.EditorTextField;
 import com.taotao.cloud.idea.plugin.toolkit.domain.ToolkitCommand;
 import org.apache.commons.lang3.StringUtils;
-import org.dromara.hutool.core.date.DateTime;
-import org.dromara.hutool.core.date.DateUtil;
+
+
 
 public class DateTimestampDocumentListener implements DocumentListener {
 

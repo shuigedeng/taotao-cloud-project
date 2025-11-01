@@ -22,7 +22,7 @@ import cn.bootx.common.mybatisplus.impl.BaseManager;
 import cn.bootx.common.mybatisplus.util.MpUtil;
 import cn.bootx.starter.wechat.core.menu.entity.WeChatMenu;
 import cn.bootx.starter.wechat.param.menu.WeChatMenuParam;
-import org.dromara.hutoolcore.util.StrUtil;
+
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

@@ -20,7 +20,6 @@ import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.job.quartz.entity.QuartzTaskLog;
 import com.taotao.boot.job.quartz.utils.QuartzLogRecord;
 import lombok.*;
-import org.dromara.hutool.core.bean.BeanUtil;
 import org.springframework.stereotype.Component;
 
 @Component
