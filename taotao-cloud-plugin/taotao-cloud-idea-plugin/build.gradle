@@ -109,7 +109,7 @@ dependencies {
     }
 
     //testImplementation "junit:junit:4.13.2"
-    implementation "cn.hutool:hutool-all"
+    implementation "cn.hutool:hutool-all:5.8.41"
     implementation "com.google.zxing:core:3.5.3"
     implementation "com.google.zxing:javase:3.5.3"
 
