@@ -43,7 +43,7 @@ dependencies {
     //implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
     //implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
 
-    implementation "org.dromara.hutool:hutool-all"
+    implementation "cn.hutool:hutool-all"
     implementation "io.netty:netty-all"
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"

@@ -1,7 +1,7 @@
 dependencies {
     implementation 'io.netty:netty-all'
     implementation 'com.alibaba.fastjson2:fastjson2:2.0.60'
-    implementation "org.dromara.hutool:hutool-all:6.0.0-M22"
+    implementation "cn.hutool:hutool-all"
 
     implementation 'org.slf4j:slf4j-api:2.0.17'
     implementation 'ch.qos.logback:logback-core:1.5.20'
