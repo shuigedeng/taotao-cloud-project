@@ -18,6 +18,7 @@ package com.taotao.cloud.gateway.filter.global.loadbalancer;
 
 import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.*;
 
+import cn.hutool.core.util.StrUtil;
 import com.taotao.boot.common.constant.CommonConstants;
 import com.taotao.boot.common.utils.log.LogUtils;
 import java.net.URI;

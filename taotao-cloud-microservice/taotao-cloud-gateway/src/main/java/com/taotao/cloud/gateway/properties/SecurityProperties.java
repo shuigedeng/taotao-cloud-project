@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.gateway.properties;
 
+import cn.hutool.core.collection.CollUtil;
 import com.taotao.boot.common.utils.context.ContextUtils;
 import jakarta.annotation.PostConstruct;
 import java.util.ArrayList;

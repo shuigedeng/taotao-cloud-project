@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.gateway.service;
 
+import cn.hutool.core.thread.ThreadFactoryBuilder;
 import com.alibaba.cloud.commons.lang.StringUtils;
 import com.taotao.boot.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.gateway.model.AccessRecord;

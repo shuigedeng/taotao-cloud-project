@@ -26,6 +26,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashSet;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
+
+import cn.hutool.core.util.ObjUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;

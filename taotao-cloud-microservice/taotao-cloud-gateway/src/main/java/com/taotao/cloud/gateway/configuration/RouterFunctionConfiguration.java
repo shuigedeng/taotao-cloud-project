@@ -18,6 +18,7 @@ package com.taotao.cloud.gateway.configuration;
 
 import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR;
 
+import cn.hutool.http.HttpStatus;
 import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.boot.captcha.util.CaptchaUtils;
 import com.taotao.boot.common.constant.RedisConstants;

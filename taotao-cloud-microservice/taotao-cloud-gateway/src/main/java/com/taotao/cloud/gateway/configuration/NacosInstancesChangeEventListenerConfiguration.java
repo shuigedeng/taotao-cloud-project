@@ -18,6 +18,7 @@ package com.taotao.cloud.gateway.configuration;
 
 import static org.springframework.cloud.loadbalancer.core.CachingServiceInstanceListSupplier.SERVICE_INSTANCE_CACHE_NAME;
 
+import cn.hutool.http.HttpUtil;
 import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.alibaba.nacos.client.naming.event.InstancesChangeEvent;
 import com.alibaba.nacos.common.notify.NotifyCenter;

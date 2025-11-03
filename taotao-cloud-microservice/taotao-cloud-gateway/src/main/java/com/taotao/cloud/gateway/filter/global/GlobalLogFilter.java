@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.gateway.filter.global;
 
+import cn.hutool.core.map.MapUtil;
 import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;

@@ -17,6 +17,8 @@
 package com.taotao.cloud.gateway.model;
 
 import java.time.LocalDateTime;
+
+import cn.hutool.core.net.Ipv4Util;
 import lombok.Data;
 import lombok.ToString;
 import lombok.experimental.*;

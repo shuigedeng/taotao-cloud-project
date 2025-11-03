@@ -16,8 +16,11 @@
 
 package com.taotao.cloud.gateway.filter.global;
 
+import static cn.hutool.http.HtmlUtil.cleanHtmlTag;
 import static com.taotao.cloud.gateway.utils.WebFluxUtils.isJsonRequest;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.properties.XssProperties;
 import io.netty.buffer.ByteBufAllocator;
@@ -116,7 +119,7 @@ public class XssFilter implements GlobalFilter, Ordered {
                                     DataBufferUtils.release(join);
                                     String bodyStr = new String(content, StandardCharsets.UTF_8);
                                     // 防xss攻击过滤
-                                    bodyStr = HtmlUtil.cleanHtmlTag(bodyStr);
+                                    bodyStr = cleanHtmlTag(bodyStr);
                                     // 转成字节
                                     byte[] bytes = bodyStr.getBytes();
                                     NettyDataBufferFactory nettyDataBufferFactory =

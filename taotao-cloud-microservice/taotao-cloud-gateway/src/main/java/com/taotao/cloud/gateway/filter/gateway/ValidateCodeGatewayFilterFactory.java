@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.gateway.filter.gateway;
 
+import cn.hutool.core.util.StrUtil;
 import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.boot.common.constant.RedisConstants;
 import com.taotao.boot.common.constant.SecurityConstants;

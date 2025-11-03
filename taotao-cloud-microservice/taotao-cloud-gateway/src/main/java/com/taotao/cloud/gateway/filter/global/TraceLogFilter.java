@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.gateway.filter.global;
 
+import cn.hutool.core.util.StrUtil;
 import com.taotao.boot.common.constant.CommonConstants;
 import com.taotao.boot.common.utils.common.IdGeneratorUtils;
 import com.taotao.boot.common.utils.servlet.TraceUtils;
