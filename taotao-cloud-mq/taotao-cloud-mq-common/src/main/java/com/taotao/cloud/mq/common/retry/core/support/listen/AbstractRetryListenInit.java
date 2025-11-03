@@ -17,7 +17,7 @@
 package com.taotao.cloud.mq.common.retry.core.support.listen;
 
 import com.taotao.boot.common.support.pipeline.Pipeline;
-import com.taotao.boot.common.support.pipeline.impl.DefaultPipeline;
+import com.taotao.boot.common.support.pipeline.DefaultPipeline;
 import com.taotao.cloud.mq.common.retry.api.model.RetryAttempt;
 import com.taotao.cloud.mq.common.retry.api.support.listen.RetryListen;
 import java.util.List;
