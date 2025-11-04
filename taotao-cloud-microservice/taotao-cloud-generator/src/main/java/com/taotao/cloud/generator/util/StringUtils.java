@@ -18,6 +18,11 @@ package com.taotao.cloud.generator.util;
 
 import java.util.*;
 import java.util.function.Function;
+
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.convert.Convert;
+import cn.hutool.core.lang.Validator;
+import cn.hutool.core.util.StrUtil;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -42,7 +47,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * @return value 返回值
      */
     public static String blankToDefault(String str, String defaultValue) {
-        return StrUtil.defaultIfBlank(str, defaultValue);
+        return defaultIfBlank(str, defaultValue);
     }
 
     /**
@@ -285,7 +290,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * @return 分割后的数据列表
      */
     public static List<String> splitList(String str) {
-        return splitTo(str, ConvertUtil::toStr);
+        return splitTo(str, Convert::toStr);
     }
 
     /**
@@ -296,7 +301,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * @return 分割后的数据列表
      */
     public static List<String> splitList(String str, String separator) {
-        return splitTo(str, separator, ConvertUtil::toStr);
+        return splitTo(str, separator, Convert::toStr);
     }
 
     /**
@@ -323,7 +328,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         if (isBlank(str)) {
             return new ArrayList<>(0);
         }
-        return SplitUtil.split(str, separator).stream()
+        return StrUtil.split(str, separator).stream()
                 .filter(Objects::nonNull)
                 .map(mapper)
                 .toList();

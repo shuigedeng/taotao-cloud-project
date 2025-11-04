@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.mq.common.retry.core.core.retry;
 
+import cn.hutool.core.date.DateUtil;
 import com.taotao.boot.common.support.instance.impl.InstanceFactory;
 import com.taotao.boot.common.utils.lang.ObjectUtils;
 import com.taotao.cloud.mq.common.retry.api.context.RetryContext;
@@ -163,7 +164,7 @@ public class DefaultRetry<R> implements Retry<R> {
             final int attempts,
             final List<RetryAttempt<R>> history,
             final RetryContext<R> context) {
-        final Date startTime = DateUtil.now();
+        final Date startTime = new Date();
 
         DefaultRetryAttempt<R> retryAttempt = new DefaultRetryAttempt<>();
         Throwable throwable = null;
@@ -173,7 +174,7 @@ public class DefaultRetry<R> implements Retry<R> {
         } catch (Exception e) {
             throwable = getActualThrowable(e);
         }
-        final Date endTime = DateUtil.now();
+        final Date endTime = new Date();
         final long costTimeInMills = costTimeInMills(startTime, endTime);
         DefaultAttemptTime attemptTime = new DefaultAttemptTime();
         attemptTime.startTime(startTime).endTime(endTime).costTimeInMills(costTimeInMills);

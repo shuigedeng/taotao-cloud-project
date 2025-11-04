@@ -39,6 +39,9 @@ public class TrinoUserController {
         return new Object();
     }
 
+	static void main() {
+
+	}
     //	@RequestMapping("/insertUser")
     //	public Object insertUser() {
     //		User user = new User();

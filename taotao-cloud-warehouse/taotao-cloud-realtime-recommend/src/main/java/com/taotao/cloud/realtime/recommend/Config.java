@@ -16,4 +16,8 @@
 
 package com.taotao.cloud.realtime.recommend;
 
-public class Config {}
+public class Config {
+	static void main() {
+
+	}
+}

@@ -19,6 +19,7 @@ package com.taotao.cloud.generator.service.impl;
 import static cn.hutool.core.util.CharsetUtil.UTF_8;
 import static com.baomidou.mybatisplus.generator.config.ConstVal.UTF8;
 
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.taotao.boot.common.exception.BusinessException;
@@ -154,8 +155,8 @@ public class GenTableServiceImpl implements IGenTableService {
     @Override
     @Transactional
     public void deleteGenTableByIds(String ids) {
-        genTableMapper.deleteGenTableByIds(ConvertUtil.toLongArray(ids));
-        genTableColumnMapper.deleteGenTableColumnByIds(ConvertUtil.toLongArray(ids));
+        genTableMapper.deleteGenTableByIds(Convert.toLongArray(ids));
+        genTableColumnMapper.deleteGenTableColumnByIds(Convert.toLongArray(ids));
     }
 
     /**

@@ -47,6 +47,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import static cn.hutool.core.convert.Convert.toStrArray;
+
 /**
  * 代码生成 操作处理
  *
@@ -127,7 +129,7 @@ public class GenController {
     @PostMapping("/importTable")
     @ResponseBody
     public Result<Boolean> importTableSave(String tables) {
-        String[] tableNames = ConvertUtil.toStrArray(tables);
+        String[] tableNames = toStrArray(tables);
         // 查询表信息
         List<GenTable> tableList = genTableService.selectDbTableListByNames(tableNames);
         //		String operName = Convert.toStr(PermissionUtils.getPrincipalProperty("loginName"));
@@ -260,7 +262,7 @@ public class GenController {
     @GetMapping("/batchGenCode")
     @ResponseBody
     public void batchGenCode(HttpServletResponse response, String tables) throws IOException {
-        String[] tableNames = ConvertUtil.toStrArray(tables);
+        String[] tableNames = toStrArray(tables);
         byte[] data = genTableService.downloadCode(tableNames);
         genCode(response, data);
     }

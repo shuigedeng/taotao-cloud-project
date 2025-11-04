@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.cache.support.load;
 
+import static cn.hutool.core.util.ReflectUtil.invoke;
 import static com.taotao.boot.common.utils.io.PathUtils.readAllLines;
 
 import com.alibaba.fastjson2.JSON;

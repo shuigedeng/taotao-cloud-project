@@ -16,4 +16,5 @@
 
 package com.taotao.cloud.dolphinscheduler;
 
-public class Config {}
+public class Config {
+}

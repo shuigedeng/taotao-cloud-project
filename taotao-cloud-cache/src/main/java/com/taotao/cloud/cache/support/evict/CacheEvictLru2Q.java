@@ -30,6 +30,8 @@ import java.util.Queue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static cn.hutool.core.util.ObjectUtil.isNotNull;
+
 /**
  * 淘汰策略-LRU 最近最少使用
  *

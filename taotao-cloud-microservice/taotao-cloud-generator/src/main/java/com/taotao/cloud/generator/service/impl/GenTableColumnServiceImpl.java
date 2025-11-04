@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.generator.service.impl;
 
+import cn.hutool.core.convert.Convert;
 import com.taotao.cloud.generator.entity.GenTableColumn;
 import com.taotao.cloud.generator.mapper.GenTableColumnMapper;
 import com.taotao.cloud.generator.service.IGenTableColumnService;
@@ -74,6 +75,6 @@ public class GenTableColumnServiceImpl implements IGenTableColumnService {
      */
     @Override
     public int deleteGenTableColumnByIds(String ids) {
-        return genTableColumnMapper.deleteGenTableColumnByIds(ConvertUtil.toLongArray(ids));
+        return genTableColumnMapper.deleteGenTableColumnByIds(Convert.toLongArray(ids));
     }
 }

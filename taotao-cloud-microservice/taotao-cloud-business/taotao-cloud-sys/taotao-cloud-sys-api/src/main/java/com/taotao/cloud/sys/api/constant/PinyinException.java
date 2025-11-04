@@ -28,31 +28,5 @@ import com.taotao.boot.common.exception.BaseException;
  */
 public class PinyinException extends BaseException {
 
-    public PinyinException(String message) {
-        super(message);
-    }
 
-    public PinyinException(Integer code, String message) {
-        super(code, message);
-    }
-
-    public PinyinException(Throwable e) {
-        super(e);
-    }
-
-    public PinyinException(String message, Throwable e) {
-        super(message, e);
-    }
-
-    public PinyinException(Integer code, String message, Throwable e) {
-        super(code, message, e);
-    }
-
-    public PinyinException(ResultEnum result) {
-        super(result);
-    }
-
-    public PinyinException(ResultEnum result, Throwable e) {
-        super(result, e);
-    }
 }

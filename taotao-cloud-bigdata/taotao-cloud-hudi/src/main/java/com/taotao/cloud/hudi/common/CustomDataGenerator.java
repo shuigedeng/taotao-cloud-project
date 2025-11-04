@@ -27,7 +27,9 @@ import org.apache.spark.sql.SparkSession;
  * A util class to generator data for demos.
  */
 public class CustomDataGenerator {
+	static void main() {
 
+	}
     public static Dataset<Row> getCustomDataset(int num, OpType opType, SparkSession spark) {
         List<String> datas = new ArrayList<>();
         for (int i = 0; i < num; i++) {

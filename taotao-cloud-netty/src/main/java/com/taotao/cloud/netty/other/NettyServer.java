@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.netty.other;
 
-import com.taotao.cloud.tx.server.MyChannelInitializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;

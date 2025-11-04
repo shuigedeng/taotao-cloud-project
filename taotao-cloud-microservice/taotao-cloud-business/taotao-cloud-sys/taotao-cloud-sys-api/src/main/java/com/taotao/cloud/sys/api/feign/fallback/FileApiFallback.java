@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.sys.api.feign.fallback;
 
+import cn.hutool.core.util.StrUtil;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.api.feign.FileApi;
 import com.taotao.cloud.sys.api.feign.response.FileApiResponse;

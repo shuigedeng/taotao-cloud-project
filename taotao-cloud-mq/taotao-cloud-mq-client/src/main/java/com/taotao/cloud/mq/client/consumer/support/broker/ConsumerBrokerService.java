@@ -16,6 +16,8 @@
 
 package com.taotao.cloud.mq.client.consumer.support.broker;
 
+import cn.hutool.core.net.NetUtil;
+import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.mq.broker.dto.BrokerRegisterReq;
 import com.taotao.cloud.mq.broker.dto.ServiceEntry;
@@ -401,7 +403,7 @@ public class ConsumerBrokerService implements IConsumerBrokerService {
         final String traceId = RandomUtil.randomString(32);
         req.setTraceId(traceId);
         req.setMethodType(MethodType.C_HEARTBEAT);
-        req.setAddress(NetUtil.getLocalhostStrV4());
+        req.setAddress(NetUtil.getLocalhostStr());
         req.setPort(0);
         req.setTime(System.currentTimeMillis());
 

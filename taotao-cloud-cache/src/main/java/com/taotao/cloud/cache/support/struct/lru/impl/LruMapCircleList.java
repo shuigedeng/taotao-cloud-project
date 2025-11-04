@@ -28,6 +28,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static cn.hutool.core.util.ObjectUtil.isNotNull;
+
 /**
  * 基于循环列表的实现
  * @author shuigedeng

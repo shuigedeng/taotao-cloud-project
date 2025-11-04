@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.mq.client.producer.support.broker;
 
+import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.mq.broker.dto.BrokerRegisterReq;
 import com.taotao.cloud.mq.broker.dto.ServiceEntry;

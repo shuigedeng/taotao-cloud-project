@@ -40,6 +40,9 @@ public class ExplodeUDTF extends GenericUDTF {
 
     private transient ObjectInspector inputOI = null;
 
+	static void main() {
+
+	}
     /**
      * 初始化 构建一个StructObjectInspector类型用于输出 其中struct的字段构成输出的一行
      * <p/>

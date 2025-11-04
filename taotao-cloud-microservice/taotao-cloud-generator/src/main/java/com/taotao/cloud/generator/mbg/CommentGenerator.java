@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.generator.mbg;
 
+import cn.hutool.core.collection.CollUtil;
 import com.taotao.boot.common.utils.log.LogUtils;
 import java.util.Properties;
 import java.util.Set;

@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.generator.page;
 
+import cn.hutool.http.HttpStatus;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import java.io.Serializable;
 import java.util.List;
