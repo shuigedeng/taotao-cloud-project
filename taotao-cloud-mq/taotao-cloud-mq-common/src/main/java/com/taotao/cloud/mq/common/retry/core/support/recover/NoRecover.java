@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.mq.common.retry.core.support.recover;
 
-import com.taotao.boot.common.support.instance.impl.InstanceFactory;
+import com.taotao.boot.common.support.instance.InstanceFactory;
 import com.taotao.cloud.mq.common.retry.api.model.RetryAttempt;
 import com.taotao.cloud.mq.common.retry.api.support.recover.Recover;
 

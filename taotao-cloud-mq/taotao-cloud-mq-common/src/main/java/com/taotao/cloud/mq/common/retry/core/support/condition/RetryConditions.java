@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.mq.common.retry.core.support.condition;
 
-import com.taotao.boot.common.support.instance.impl.InstanceFactory;
+import com.taotao.boot.common.support.instance.InstanceFactory;
 import com.taotao.boot.common.support.pipeline.Pipeline;
 import com.taotao.boot.common.utils.collection.ArrayUtils;
 import com.taotao.boot.common.utils.lang.ObjectUtils;
