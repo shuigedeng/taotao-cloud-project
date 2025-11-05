@@ -139,6 +139,14 @@ configurations {
             force 'org.webjars.npm:postcss:8.4.39'
             force 'org.webjars.npm:nanoid:4.0.2'
 
+            force 'org.webjars.bower:jquery:3.7.1'
+            force 'org.webjars.npm:magic-string:0.30.19'
+            force 'org.webjars.npm:estree-walker:4.0.2'
+            force 'org.webjars.npm:source-map-js:4.0.2'
+            force 'org.webjars.npm:entities:4.0.2'
+            force 'org.webjars.npm:picocolors:4.0.2'
+            force 'org.webjars.npm:source-map-js:4.0.2'
+
         }
 
         //exclude group: "log4j", module: "log4j"
