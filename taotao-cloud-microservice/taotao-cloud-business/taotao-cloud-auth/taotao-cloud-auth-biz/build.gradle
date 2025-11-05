@@ -141,11 +141,10 @@ configurations {
 
             force 'org.webjars.bower:jquery:3.7.1'
             force 'org.webjars.npm:magic-string:0.30.19'
-            force 'org.webjars.npm:estree-walker:4.0.2'
-            force 'org.webjars.npm:source-map-js:4.0.2'
-            force 'org.webjars.npm:entities:4.0.2'
-            force 'org.webjars.npm:picocolors:4.0.2'
-            force 'org.webjars.npm:source-map-js:4.0.2'
+            force 'org.webjars.npm:estree-walker:3.0.3'
+            force 'org.webjars.npm:source-map-js:1.2.1'
+            force 'org.webjars.npm:entities:6.0.1'
+            force 'org.webjars.npm:picocolors:1.1.1'
 
         }
 
