@@ -123,7 +123,6 @@ RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
     && mkdir -p /root/logs/${APP_NAME} \
 	&& touch /root/logs/${APP_NAME}/jit.compile.log /root/logs/${APP_NAME}/gc.log
 
-
 #https://mirrors.aliyun.com/alpine/v3.14/main
 #https://mirrors.ustc.edu.cn/alpine/v3.14/main/
 #清华TUNA镜像源 https://mirror.tuna.tsinghua.edu.cn/alpine/v3.14/main
