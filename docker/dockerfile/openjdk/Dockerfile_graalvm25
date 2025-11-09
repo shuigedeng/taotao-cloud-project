@@ -1,0 +1,24 @@
+# jre25 基于graalvm 不带字体
+
+# docker tag ghcr.io/graalvm/jdk-community:25.0.1 registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-graalvm25:25.0.1
+
+
+##################################################################################################################
+# jre25 基于microsoft 不带字体 https://mcr.microsoft.com/zh-cn/artifact/mar/openjdk/jdk
+
+# docker tag mcr.microsoft.com/openjdk/jdk:25-ubuntu registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:ubuntu
+
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:ubuntu
+
+USER root
+
+RUN mkdir /skywalking
+
+RUN mkdir /pyroscope
+
+COPY ./skywalking-agent /skywalking/agent
+
+COPY ./pyroscope-agent /pyroscope/agent
+
+#docker build -t registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:latest .
+
