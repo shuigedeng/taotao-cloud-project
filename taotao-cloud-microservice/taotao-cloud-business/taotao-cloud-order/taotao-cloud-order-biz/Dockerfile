@@ -8,7 +8,7 @@ RUN java -Djarmode=layertools -jar taotao-cloud-orderPO-biz-2025.12.jar extract
 
 # FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 # FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:latest
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25-skywalking-9-5-0:latest
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:latest
 
 ARG BACKEND_SERVICE=192.168.10.200:11800
 ARG AGENT_AUTHENTICATION=taotao-cloud
