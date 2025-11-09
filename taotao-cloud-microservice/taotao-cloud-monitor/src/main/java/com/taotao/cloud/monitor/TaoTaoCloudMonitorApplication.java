@@ -36,6 +36,9 @@ public class TaoTaoCloudMonitorApplication {
     public static void main(String[] args) {
         System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
 
+		System.out.println(">>> SAXParserFactory impl: " +
+			javax.xml.parsers.SAXParserFactory.newInstance().getClass().getName());
+
         new StartupSpringApplication(TaoTaoCloudMonitorApplication.class)
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
