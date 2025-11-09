@@ -193,13 +193,13 @@ VOLUME /root/logs
 
 EXPOSE ${APP_PORT}
 
-COPY --from=builder /root/extracted/dependencies/ ./
+COPY --from=builder /root/dependencies/ ./
 RUN true
-COPY --from=builder /root/extracted/spring-boot-loader/ ./
+COPY --from=builder /root/spring-boot-loader/ ./
 RUN true
-COPY --from=builder /root/extracted/snapshot-dependencies/ ./
+COPY --from=builder /root/snapshot-dependencies/ ./
 RUN true
-COPY --from=builder /root/extracted/application/ ./
+COPY --from=builder /root/application/ ./
 RUN true
 
 #docker inspect --format='{{json .State.Health}}' file
