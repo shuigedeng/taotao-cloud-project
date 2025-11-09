@@ -5,7 +5,7 @@ WORKDIR /root
 ADD ./build/libs/taotao-cloud-monitor-2025.12.jar ./
 
 #RUN java -Djarmode=layertools -jar taotao-cloud-monitor-2025.12.jar extract
-RUN java -Djarmode=tools -jar taotao-cloud-monitor-2025.12.jar extract
+RUN java -Djarmode=layertools -jar taotao-cloud-xxljob-2025.12.jar extract
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:latest
