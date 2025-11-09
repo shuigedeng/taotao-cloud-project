@@ -53,13 +53,13 @@ jobs:
           java --version
           native-image --version
 
-      #https://github.com/marketplace/actions/cache
-      - name: Cache Gradle Packages
-        uses: actions/cache@v4.3.0
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-          restore-keys: ${{ runner.os }}-gradle
+#      #https://github.com/marketplace/actions/cache
+#      - name: Cache Gradle Packages
+#        uses: actions/cache@v4.3.0
+#        with:
+#          path: ~/.gradle/caches
+#          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+#          restore-keys: ${{ runner.os }}-gradle
 
       - name: Show Github
         run: echo "$GITHUB_CONTEXT"

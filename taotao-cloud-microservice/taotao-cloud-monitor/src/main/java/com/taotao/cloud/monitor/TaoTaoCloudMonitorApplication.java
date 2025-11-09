@@ -35,6 +35,7 @@ public class TaoTaoCloudMonitorApplication {
 
     public static void main(String[] args) {
         System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
+//System.setProperty("javax.xml.parsers.SAXParserFactory", "com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl");
 
 		System.out.println(">>> SAXParserFactory impl: " +
 			javax.xml.parsers.SAXParserFactory.newInstance().getClass().getName());
