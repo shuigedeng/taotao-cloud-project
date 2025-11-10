@@ -145,6 +145,8 @@ configurations {
             force 'org.webjars.npm:source-map-js:1.2.1'
             force 'org.webjars.npm:entities:6.0.1'
             force 'org.webjars.npm:picocolors:1.1.1'
+            force 'org.webjars.npm:jridgewell__sourcemap-codec:1.5.5'
+            force 'org.webjars.npm:types__estree:1.0.8'
 
         }
 
