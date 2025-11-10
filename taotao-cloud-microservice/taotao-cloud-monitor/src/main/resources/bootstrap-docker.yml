@@ -1,0 +1,60 @@
+server:
+  port: 33308
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+  pid:
+    file: ${user.home}/logs/${spring.application.name}/${spring.application.name}.pid
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+    banner-mode: off
+    register-shutdown-hook: true
+  application:
+    name: taotao-cloud-monitor
+  cloud:
+    loadbalancer:
+      enabled: true
+    nacos:
+      discovery:
+        server-addr: 172.11.0.13:8848
+        metadata:
+          version: ${ttcVersion}
+          user.name: "admin"
+          user.password: "123456"
+        group: TAOTAO_CLOUD_GROUP
+        namespace: 82f5c2ff-c0d5-478d-9987-7f082d1a55d7
+        username: nacos
+        password: nacos
+        cluster-name: CQ
+        naming-load-cache-at-start: false
+      config:
+        enabled: false
+        server-addr: 172.11.0.13:8848
+        namespace: 82f5c2ff-c0d5-478d-9987-7f082d1a55d7
+        username: nacos
+        password: nacos
+        group: TAOTAO_CLOUD_GROUP
+        file-extension: yml
+        cluster-name: CQ
+        refresh-enabled: true
+        #使用nacos配置中心配置 dynamic-tp-nacos-cloud-demo-dtp-dev.yml
+        #extension-configs:
+        #  - dataId: ${spring.application.name}-dtp-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+        #    group: DEFAULT_GROUP
+        #    refresh: true  # 必须配置，负责自动刷新不生效
+
+logging:
+  file:
+    name: ${user.home}/logs/${spring.application.name}/${spring.application.name}.all.log
+    path: ${user.home}/logs/${spring.application.name}/
+  level:
+    root: INFO
+    org.springframework.web: off
+    org.springframework.security: off
+    org.springframework.security.oauth2: off
+    org.springframework.boot.autoconfigure: off
+    #de.codecentric.boot.admin.server: debug
+  config: classpath:logback-spring.xml

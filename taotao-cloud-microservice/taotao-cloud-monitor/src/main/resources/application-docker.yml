@@ -1,0 +1,386 @@
+server:
+  port: 33308
+  http2:
+    enabled: true
+  undertow:
+    buffer-size: 2048
+    direct-buffers: true
+    threads:
+      io: 16
+      worker: 256
+    accesslog:
+      dir: ${user.home}/logs/${spring.application.name}/undertow
+      enabled: true
+  servlet:
+    application-display-name: ${spring.application.name}
+
+jasypt:
+  encryptor:
+    password: ${TAOTAO_CLOUD_ENCRYPTOR_PASSWORD:taotao-cloud}
+    algorithm: PBEWITHHMACSHA512ANDAES_256
+    property:
+      prefix: "ENC@["
+      suffix: "]"
+
+
+redisson:
+  #在Redis节点里显示的客户端名称。
+  client-name: ${spring.application.name}
+  #用于节点身份验证的密码
+  #password: taotao-cloud
+  #锁的模式.如果不设置, REENTRANT(可重入锁),FAIR(公平锁),MULTIPLE(联锁),REDLOCK(红锁),READ(读锁), WRITE(写锁)
+  lock-model: auto
+  #集群模式:SINGLE(单例),SENTINEL(哨兵),MASTERSLAVE(主从),CLUSTER(集群),REPLICATED(云托管)
+  model: cluster
+  #Redisson的对象编码类是用于将对象进行序列化和反序列化，以实现对该对象在Redis里的读取和存储
+  codec: "com.zengtengpeng.codec.MyJsonJacksonCodec"
+  #这个线程池数量被所有RTopic对象监听器，RRemoteService调用者和RExecutorService任务共同共享。
+  threads: 16
+  #这个线程池数量是在一个Redisson实例内，被其创建的所有分布式数据类型和服务，以及底层客户端所一同共享的线程池里保存的线程数量。
+  netty_threads: 32
+  #TransportMode.NIO,TransportMode.EPOLL - 需要依赖里有netty-transport-native-epoll包（Linux） TransportMode.KQUEUE - 需要依赖里有 netty-transport-native-kqueue包（macOS）
+  transport_mode: nio
+  #如果当前连接池里的连接数量超过了最小空闲连接数，而同时有连接空闲时间超过了该数值，那么这些连接将会自动被关闭，并从连接池里去掉。时间单位是毫秒
+  idleConnectionTimeout: 1000
+  #同任何节点建立连接时的等待超时。时间单位是毫秒
+  connectTimeout: 1000
+  #等待节点回复命令的时间。该时间从命令发送成功时开始计时。
+  timeout: 3000
+  #如果尝试达到 retryAttempts（命令失败重试次数） 仍然不能将命令发送至某个指定的节点时，将抛出错误。如果尝试在此限制之内发送成功，则开始启用 timeout（命令等待超时） 计时。
+  retryAttempts: 3
+  #在一条命令发送失败以后，等待重试发送的时间间隔。时间单位是毫秒。
+  retryInterval: 1500
+  #	每个连接的最大订阅数量。
+  subscriptionsPerConnection: 5
+  #开启SSL终端识别能力。
+  sslEnableEndpointIdentification: true
+  #确定采用哪种方式（JDK或OPENSSL）来实现SSL连接。
+  ssl-provider: jdk
+  ssl-truststore:
+  ssl-truststore-password:
+  ssl-keystore:
+  ssl-keystore-password:
+  #监控锁的看门狗超时时间单位为毫秒。该参数只适用于分布式锁的加锁请求中未明确使用leaseTimeout参数的情况。如果该看门口未使用lockWatchdogTimeout去重新调整一个分布式锁的lockWatchdogTimeout超时，那么这个锁将变为失效状态。这个参数可以用来避免由Redisson客户端节点宕机或其他原因造成死锁的情况。
+  lockWatchdogTimeout: 30000
+  #通过该参数来修改是否按订阅发布消息的接收顺序出来消息，如果选否将对消息实行并行处理，该参数只适用于订阅发布消息的情况。
+  keepPubSubOrder: true
+  pingConnectionInterval: 30000
+  keepAlive: false
+  tcpNoDelay: false
+  referenceEnabled: true
+  useScriptCache: false
+  minCleanUpDelay: 5
+  maxCleanUpDelay: 1800
+  #等待获取锁超时时间,-1则是一直等待
+  attemptTimeout: 10000
+  dataValidTime: 1800000
+  single_server_config:
+    #服务器地址,必填ip:port
+    address: "172.11.0.12:6379"
+    #用于发布和订阅连接的最小保持连接数（长连接）。Redisson内部经常通过发布和订阅来实现许多功能。长期保持一定数量的发布订阅连接是必须的。
+    subscription_connection_minimum_idle_size: 1
+    #用于发布和订阅连接的连接池最大容量。连接池的连接数量自动弹性伸缩。
+    subscription_connection_pool_size: 50
+    #最小保持连接数（长连接）。长期保持一定数量的连接有利于提高瞬时写入反应速度。
+    connection_minimum_idle_size: 24
+    #连接池最大容量。连接池的连接数量自动弹性伸缩。
+    connection_pool_size: 64
+    #尝试连接的数据库编号。
+    database: 3
+    #用来指定检查节点DNS变化的时间间隔。使用的时候应该确保JVM里的DNS数据的缓存时间保持在足够低的范围才有意义。用-1来禁用该功能。
+    dns_monitoring_interval: 5000
+
+#arthas:
+#  # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
+#  # 如果是防止一个机器上启动多个 arthas端口冲突。可以配置为随机端口，或者配置为 -1，并且通过tunnel server来使用arthas。
+#  # ~/logs/arthas/arthas.log (用户目录下面)里可以找到具体端口日志
+#  telnetPort: -1
+#  httpPort: -1
+#  # 192.168.218.2只能本地访问，0.0.0.0则可网络访问，但是存在安全问题
+#  ip: 0.0.0.0
+#  agent-id: ${spring.application.name}
+#  app-name: ${spring.application.name}
+#  tunnel-server: ws://192.168.218.2:7777/ws
+
+spring:
+  autoconfigure:
+    exclude: org.springframework.cloud.function.web.mvc.ReactorAutoConfiguration
+  task:
+    execution:
+      mode: FORCE
+      thread-name-prefix: ttc-task-
+      pool:
+        core-size: 16
+        max-size: 200
+        queue-capacity: 500
+        allow-core-thread-timeout: true
+        keep-alive: 60s
+  config:
+    activate:
+      on-profile: dev
+  pid:
+    file: ${user.home}/logs/${spring.application.name}/${spring.application.name}.pid
+  cloud:
+    compatibility-verifier:
+      enabled: false
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  main:
+    allow-bean-definition-overriding: true
+    banner-mode: off
+  application:
+    name: taotao-cloud-monitor
+  boot:
+    admin:
+      notify:
+        #mail:
+        #  enabled: false
+        #  # 配置接收邮箱
+        #  to: 981376577@qq.com
+        #  # 转给其他人
+        #  #cc: 981376577@qq.com
+        #  # 配置发送邮箱
+        #  from: 981376577@qq.com
+        dingtalk:
+          enabled: true
+          secret: ${DINGDING_SECRET:xxx}
+          webhook-url: "https://oapi.dingtalk.com/robot/send?access_token=${DINGDING_TOKEN_ID:xxxx}"
+          message: '服务告警: #{instance.registration.name} #{instance.id} is #{event.statusInfo.status}'
+      ui:
+        title: taotao cloud admin
+        #brand: <img src="assets/img/icon-spring-boot-admin.svg"><span>${spring.boot.admin.ui.title}</span>
+        #view-settings:
+        #  - name: "about"
+        #    enabled: false
+        theme:
+          color: '#14615A'
+  mail:
+    host: smtp.qq.com
+    port: 465
+    password: ${TAOTAO_CLOUD_MAIL_PASSWORD:xxx}
+    username: 981376577@qq.com
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        smtp:
+          auth: true
+          port: ${spring.mail.port}
+          starttls:
+            enable: true
+            required: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+  security:
+    user:
+      name: admin
+      password: 123456
+  data:
+    redis:
+      host: 172.11.0.12
+      port: 6379
+      #sentinel:
+      #  master:
+      #  nodes:
+      database: 1
+      #password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
+      connect-timeout: 60s
+      #cluster:
+      #  nodes: 192.168.218.2:6381,192.168.218.2:6382,192.168.218.2:6383,192.168.218.2:6384,192.168.218.2:6385,192.168.218.2:6386
+      #  max-redirects: 3
+      client-type: lettuce
+      lettuce:
+        pool:
+          max-active: 1500
+          max-wait: 5000
+          max-idle: 500
+          min-idle: 100
+      redisson:
+        config: |
+          singleServerConfig:
+            # 连接空闲超时，单位：毫秒
+            idleConnectionTimeout: 10000
+            # 连接超时，单位：毫秒
+            connectTimeout: 10000
+            # 命令等待超时，单位：毫秒
+            timeout: 3000
+            # 命令失败重试次数,如果尝试达到 retryAttempts（命令失败重试次数） 仍然不能将命令发送至某个指定的节点时，将抛出错误。
+            # 如果尝试在此限制之内发送成功，则开始启用 timeout（命令等待超时） 计时。
+            retryAttempts: 3
+            # 命令重试发送时间间隔，单位：毫秒
+            retryInterval: 1500
+            # 密码，没有设置密码时，需要注释掉，否则会报错
+            #password: taotao-cloud
+            # 单个连接最大订阅数量
+            subscriptionsPerConnection: 5
+            # 客户端名称
+            clientName: "taotao-cloud-redis-client"
+            # 节点地址
+            address: "redis://172.11.0.12:6379"
+            # 发布和订阅连接的最小空闲连接数
+            subscriptionConnectionMinimumIdleSize: 1
+            # 发布和订阅连接池大小
+            subscriptionConnectionPoolSize: 50
+            # 最小空闲连接数
+            connectionMinimumIdleSize: 32
+            # 连接池大小
+            connectionPoolSize: 64
+            # 数据库编号
+            database: 1
+            # DNS监测时间间隔，单位：毫秒
+            dnsMonitoringInterval: 5000
+          # 线程池数量,默认值: 当前处理核数量 * 2
+          threads: 0
+          # Netty线程池数量,默认值: 当前处理核数量 * 2
+          nettyThreads: 0
+          # 编码
+          codec: !<org.redisson.codec.JsonJacksonCodec> {}
+          # 传输模式
+          transportMode : "NIO"
+          # 配置看门狗的默认超时时间为30s，这里改为 10s
+          lockWatchdogTimeout: 10000
+  kafka:
+    bootstrap-servers: 172.11.0.24:9092
+    producer:
+      retries: 1
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: 0
+      properties:
+        linger.ms: 100
+    consumer:
+      auto-commit-interval: 1S
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      concurrency: 5
+      ack-mode: manual_immediate
+      missing-topics-fatal: false
+
+taotao:
+  boot:
+    idgenerator:
+      enabled: true
+      type: redis
+    prometheus:
+      enabled: true
+    dingtalk:
+      enabled: true
+      project-id: ${spring.application.name}
+      dingers:
+        dingtalk:
+          tokenId: ${DINGDING_TOKEN_ID:xx}
+          secret: ${DINGDING_SECRET:xxx}
+    core:
+      enabled: true
+      async:
+        enabled: false
+
+management:
+  info:
+    java:
+      enabled: true
+    env:
+      enabled: true
+    git:
+      enabled: true
+      mode: "full"
+    os:
+      enabled: true
+    build:
+      enabled: true
+    defaults:
+      enabled: true
+    process:
+      enabled: true
+  endpoints:
+    web:
+      #base-path: "/manage"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "GET,POST"
+      discovery:
+        enabled: true
+      exposure:
+        include: '*'
+    access:
+      default: read_only
+  endpoint:
+    scheduledtasks:
+      access: unrestricted
+    logfile:
+      access: unrestricted
+    metrics:
+      access: unrestricted
+    prometheus:
+      access: unrestricted
+    health:
+      show-details: ALWAYS
+      access: unrestricted
+    shutdown:
+      access: unrestricted
+    loggers:
+      access: unrestricted
+    beans:
+      access: unrestricted
+      cache:
+        time-to-live: "10s"
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  health:
+    mail:
+      enabled: false
+    elasticsearch:
+      enabled: true
+    rabbit:
+      enabled: true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+        #pushgateway:
+        #  base-url:
+  wavefront:
+    api-token: xxxxxxxxxxxxxxxx
+    api-token-type: wavefront_api_token
+  zipkin:
+    tracing:
+      connect-timeout: 60s
+      read-timeout: 60s
+      endpoint: http://172.11.0.18:9411/api/v2/spans
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+  otlp:
+    metrics:
+      export:
+        url: http://192.168.218.2:4318/v1/metrics
+        enabled: true
+        headers:
+          version: 2024
+        batch-size: 10000
+        connect-timeout: 10s
+    tracing:
+      compression: none
+      endpoint: http://192.168.218.2:4318/v1/metrics
+      timeout: 10s
+      headers:
+        version: 111
+
+logging:
+  file:
+    name: ${user.home}/logs/${spring.application.name}/${spring.application.name}.all.log
+    path: ${user.home}/logs/${spring.application.name}/
+  level:
+    root: INFO
+    org.springframework.web: off
+    org.springframework.security: off
+    org.springframework.security.oauth2: off
+    org.springframework.boot.autoconfigure: off
+    #de.codecentric.boot.admin.server: debug
