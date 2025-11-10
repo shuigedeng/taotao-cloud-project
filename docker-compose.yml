@@ -1,0 +1,482 @@
+version: '3.8'
+services:
+  #https://www.pudn.com/news/632d53b0272bb74d44e90b24.html    需要执行 START SLAVE ; SHOW SLAVE STATUS\G
+  mysql8:
+    hostname: mysql8
+    image: mysql:8.0
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_USER: master
+      MYSQL_PASSWORD: 123456
+    command:
+      --bind-address=172.11.0.10
+      --default-authentication-plugin=mysql_native_password
+      --max_connections=1000
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --default-time-zone='+8:00'
+      --explicit_defaults_for_timestamp=true
+      --lower_case_table_names=1
+      --expire-logs-days=7
+    privileged: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+    restart: no
+    container_name: mysql8
+    ports:
+      - "3306:3306"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.10
+
+  redis:
+    image: redis:7.4.0
+    container_name: redis
+    restart: no	
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "6379:6379"
+    #command: [ "redis-server","/etc/redis/redis.conf" ]
+    #    restart: always
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.12
+  
+  nacos:
+    image: nacos/nacos-server:v2.4.2
+    restart: no
+    container_name: nacos
+    privileged: true
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+    environment:
+      MODE: standalone
+      PREFER_HOST_MODE: hostname
+      SPRING_DATASOURCE_PLATFORM: mysql
+      MYSQL_SERVICE_HOST: 172.11.0.10
+      MYSQL_SERVICE_PORT: 3306
+      MYSQL_SERVICE_USER: root
+      MYSQL_SERVICE_PASSWORD: 123456
+      MYSQL_SERVICE_DB_NAME: "nacos2.4.2"
+      SQL_SERVICE_DB_PARAM: characterEncoding=utf8&connectTimeout=10000&socketTimeout=30000&autoReconnect=true&useSSL=false
+      JVM_XMS: 256m
+      JVM_XMX: 512m
+      NACOS_AUTH_ENABLE: true
+      NACOS_AUTH_TOKEN: SecretKey01234567890123456789012345345678999987654901234567890123456789
+      NACOS_AUTH_IDENTITY_KEY: nacos
+      NACOS_AUTH_IDENTITY_VALUE: nacos
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.13
+  
+  sentinel-dashboard:
+    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sentinel:v1.8.8
+    container_name: sentinel-dashboard
+    restart: no	
+    ports:
+      - "8858:8858"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.14
+
+  dubbo-admin:
+    image: apache/dubbo-admin:0.6.0
+    container_name: dubbo-admin
+    ports:
+      - "38080:38080"
+    privileged: true
+    restart: no	
+    environment:
+      - TZ=Asia/Shanghai
+      # nacos config, add parameters to url like username=nacos&password=nacos
+      - admin.registry.address=nacos://192.168.218.2:8848?namespace=213336af-bf44-45ce-850d-6ae563173799&username=nacos&password=nacos
+      - admin.registry.group=DUBBO_REGISTRY_GROUP
+      - admin.config-center=nacos://192.168.218.2:8848?namespace=213336af-bf44-45ce-850d-6ae563173799&username=nacos&password=nacos
+      - admin.config-center.group=DUBBO_REGISTRY_GROUP
+      - admin.metadata-report.address=nacos://192.168.218.2:8848?namespace=213336af-bf44-45ce-850d-6ae563173799&username=nacos&password=nacos
+      - admin.metadata-report.group=DUBBO_REGISTRY_GROUP
+      - admin.root.user.name=admin
+      - admin.root.user.password=123456
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.15
+
+  #skywalking-oap:
+  #  image: apache/skywalking-oap-server:9.7.0-java17
+  #  container_name: skywalking-oap
+  #  restart: no
+  #  ports:
+  #    - "11800:11800"
+  #    - "12800:12800"
+  #    - "9412:9412"
+  #  environment:
+  #    - TZ=Asia/Shanghai
+  #  networks:
+  #    taotao-cluster-network:
+  #      ipv4_address: 172.11.0.16
+  #skywalking-ui:
+  #  image: apache/skywalking-ui:9.7.0-java17
+  #  container_name: skywalking-ui
+  #  restart: no
+  #  ports:
+  #    - "18080:8080"
+  #  environment:
+  #    - TZ=Asia/Shanghai
+  #    - SW_OAP_ADDRESS=http://172.11.0.16:12800
+  #  networks:
+  #    taotao-cluster-network:
+  #      ipv4_address: 172.11.0.17
+
+  zipkin:
+    image: openzipkin/zipkin:3.4.2
+    container_name: zipkin
+    restart: no	
+    environment:
+      - STORAGE_TYPE=mysql
+      - MYSQL_DB=taotao-cloud-zipkin-3.4.2
+      - MYSQL_USER=root
+      - MYSQL_PASS=123456
+      - MYSQL_HOST=172.11.0.10
+      - MYSQL_TCP_PORT=3306
+    ports:
+      - "9411:9411"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.18
+    
+    #rocketmq-nameserv:
+    #  image: apache/rocketmq:4.9.6
+    #  container_name: rocketmq-nameserv
+    #  ports:
+    #    - "9876:9876"
+    #  restart: no
+    #  privileged: true
+    #  command: [ "sh","mqnamesrv" ]
+    #  networks:
+    #    taotao-cluster-network:
+    #       ipv4_address: 172.11.0.19
+    #rocketmq-broker:
+    #  image: apache/rocketmq:4.9.6
+    #  container_name: rocketmq-broker
+    #  ports:
+    #    - "10909:10909"
+    #    - "10911:10911"
+    #    - "10912:10912"
+    #  restart: no
+    #  privileged: true
+    #  depends_on:
+    #    - 'rocketmq-nameserv'
+    #  environment:
+    #    NAMESRV_ADDR: 192.168.218.2:9876
+    #  volumes:
+    #    - ./rocketmq/broker.conf:/home/rocketmq/rocketmq-4.9.6/conf/broker.conf       
+    #  command: [ "sh","mqbroker","-c","/home/rocketmq/rocketmq-4.9.6/conf/broker.conf", "autoCreateTopicEnable=true" ]        
+    #  networks:
+    #    taotao-cluster-network:
+    #      ipv4_address: 172.11.0.20
+    #rocketmq-dashboard:
+    #  image: apacherocketmq/rocketmq-dashboard:latest
+    #  container_name: rocketmq-dashboard
+    #  ports:
+    #    - "8082:8080"
+    #  restart: no
+    #  privileged: true
+    #  depends_on:
+    #    - 'rocketmq-nameserv'
+    #    - 'rocketmq-broker'
+    #  environment:
+    #    JAVA_OPTS: '-Drocketmq.namesrv.addr=192.168.218.2:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false'
+    #  networks:
+    #    taotao-cluster-network:
+    #      ipv4_address: 172.11.0.21
+    #
+    
+    #rocketmq-nameserv:
+    #  image: apache/rocketmq:5.3.0
+    #  container_name: rocketmq-nameserv
+    #  ports:
+    #    - "9876:9876"
+    #  restart: no
+    #  privileged: true
+    #  environment:
+    #    MAX_HEAP_SIZE: 512M
+    #    HEAP_NEWSIZE: 256M	
+    #  command: [ "sh","mqnamesrv" ]
+    #  networks:
+    #    taotao-cluster-network:
+    #       ipv4_address: 172.11.0.19
+    #rocketmq-broker:
+    #  image: apache/rocketmq:5.3.0
+    #  container_name: rocketmq-broker
+    #  ports:
+    #    - "10909:10909"
+    #    - "10911:10911"
+    #    - "10912:10912"
+    #  restart: no
+    #  privileged: true
+    #  depends_on:
+    #    - 'rocketmq-nameserv'
+    #  environment:
+    #    NAMESRV_ADDR: 192.168.218.2:9876
+    #    MAX_HEAP_SIZE: 512M
+    #    HEAP_NEWSIZE: 256M	  
+    #  volumes:
+    #    - ./rocketmq/broker.conf:/home/rocketmq/rocketmq-5.3.0/conf/broker.conf   
+    #    - ./rocketmq/acl/plain_acl.yml:/home/rocketmq/rocketmq-5.3.0/conf/plain_acl.yml    
+    #  command: [ "sh","mqbroker","-c","/home/rocketmq/rocketmq-5.3.0/conf/broker.conf ", "autoCreateTopicEnable=true" ]        
+    #  networks:
+    #    taotao-cluster-network:
+    #      ipv4_address: 172.11.0.20
+    #rocketmq-dashboard:
+    #  image: apacherocketmq/rocketmq-dashboard:latest
+    #  container_name: rocketmq-dashboard
+    #  ports:
+    #    - "8086:8080"
+    #  restart: no
+    #  privileged: true
+    #  volumes:
+    #    # 数据目录映射, user.properties需要放在data目录下
+    #    - ./rocketmq/dashboard:/tmp/rocketmq-console/data 
+    #  depends_on:
+    #    - 'rocketmq-nameserv'
+    #    - 'rocketmq-broker'
+    #  environment:
+    #    JAVA_OPTS: '-Xmx256M -Xms256M -Xmn128M -Drocketmq.namesrv.addr=192.168.218.2:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false -Drocketmq.config.loginRequired=true -Drocketmq.config.accessKey=console -Drocketmq.config.secretKey=12345678'
+    #  networks:
+    #    taotao-cluster-network:
+    #      ipv4_address: 172.11.0.21
+  
+  rocketmq-nameserv:
+    image: apache/rocketmq:5.3.3
+    container_name: rocketmq-nameserv
+    ports:
+      - "9876:9876"
+    restart: no
+    privileged: true
+    environment:
+      MAX_HEAP_SIZE: 512M
+      HEAP_NEWSIZE: 256M
+      TZ: Asia/Shanghai
+    command: [ "sh","mqnamesrv" ]
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.19
+  rocketmq-broker:
+    image: apache/rocketmq:5.3.3
+    container_name: rocketmq-broker
+    ports:
+      - "10909:10909"
+      - "10911:10911"
+      - "10912:10912"
+    restart: no
+    privileged: true
+    depends_on:
+      - 'rocketmq-nameserv'
+    environment:
+      NAMESRV_ADDR: 192.168.218.2:9876
+      MAX_HEAP_SIZE: 512M
+      HEAP_NEWSIZE: 256M
+    volumes:
+      - ./rocketmq5.3.3/broker/broker.conf:/home/rocketmq/rocketmq-5.3.3/conf/broker.conf
+      - ./rocketmq5.3.3/broker/tools.yml:/home/rocketmq/rocketmq-5.3.3/conf/tools.yml
+    command: [ "sh","mqbroker","-c","/home/rocketmq/rocketmq-5.3.3/conf/broker.conf ", "autoCreateTopicEnable=true" ]
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.20
+  rocketmq-proxy:
+    image: apache/rocketmq:5.3.3
+    container_name: rocketmq-proxy
+    depends_on:
+      - 'rocketmq-nameserv'
+      - 'rocketmq-broker'
+    ports:
+      - 18680:18680
+      - 18681:18681
+    restart: no
+    volumes:
+      - ./rocketmq5.3.3/proxy/rmq-proxy.json:/home/rocketmq/rocketmq-5.3.3/conf/rmq-proxy.json
+      - ./rocketmq5.3.3/broker/tools.yml:/home/rocketmq/rocketmq-5.3.3/conf/tools.yml
+    environment:
+      NAMESRV_ADDR: 172.11.0.19:9876
+    command: sh mqproxy -pc /home/rocketmq/rocketmq-5.3.3/conf/rmq-proxy.json
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.70
+  rocketmq-dashboard:
+    image: apacherocketmq/rocketmq-dashboard:latest
+    container_name: rocketmq-dashboard
+    ports:
+      - "8086:8080"
+    restart: no
+    privileged: true
+    volumes:
+      # 数据目录映射, user.properties需要放在data目录下
+      - ./rocketmq5.3.3/dashboard/users.properties:/tmp/rocketmq-console/data/users.properties
+    depends_on:
+      - 'rocketmq-nameserv'
+      - 'rocketmq-broker'
+    environment:
+      JAVA_OPTS: '-Xmx256M -Xms256M -Xmn128M -Drocketmq.namesrv.addr=192.168.218.2:9876 -Drocketmq.config.proxyAddrs=192.168.218.2:18680 -Dcom.rocketmq.sendMessageWithVIPChannel=false -Drocketmq.config.loginRequired=true -Drocketmq.config.accessKey=taotaocloud -Drocketmq.config.secretKey=taotaocloud'
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.21
+  
+  #arthas:
+  #  image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-arthas:4.0.2
+  #  container_name: arthas
+  #  restart: no
+  #  ports:
+  #    - "7777:7777"
+  #    - "48080:8080"
+  #  command:
+  #    - "java -jar /arthas-tunnel-server.jar"
+  #  networks:
+  #    taotao-cluster-network:
+  #      ipv4_address: 172.11.0.22
+
+  zookeeper:
+    image: bitnami/zookeeper:3.8
+    container_name: zookeeper
+    restart: no
+    ports:
+      - "2181:2181"
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.23
+
+  kafka:
+    image: bitnami/kafka:3.7
+    container_name: kafka
+    restart: no	
+    ports:
+      - "9092:9092"
+      - "9093:9093"
+    environment:
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_CFG_NODE_ID=1
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@172.11.0.24:9093
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://192.168.218.2:9092
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_NUM_PARTITIONS=1
+      - KAFKA_CFG_DEFAULT_REPLICATION_FACTOR=1
+      - KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+      - KAFKA_CFG_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=1
+      - KAFKA_CFG_TRANSACTION_STATE_LOG_MIN_ISR=1
+      - KAFKA_CFG_MIN_INSYNC_REPLICAS=1
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.24
+  kafka-ui:
+    image: provectuslabs/kafka-ui:v0.7.2
+    container_name: kafka-ui
+    restart: no
+    ports:
+      - "28080:8080"
+    environment:
+      # 集群名称
+      - KAFKA_CLUSTERS_0_NAME=kafkaCluster
+      # 集群地址
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=192.168.218.2:9092
+      - DYNAMIC_CONFIG_ENABLED=true
+      - AUTH_TYPE=LOGIN_FORM
+      - SPRING_SECURITY_USER_NAME=admin
+      - SPRING_SECURITY_USER_PASSWORD=123456
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.25
+
+  #minio:
+  #  image: quay.io/minio/minio:latest
+  #  container_name: minio
+  #  ports:
+  #    - "9000:9000"
+  #    - "9090:9090"
+  #  restart: no
+  #  command: server /data --console-address ":9090"
+  #  environment:
+  #    MINIO_ROOT_USER: minioadmin
+  #    MINIO_ROOT_PASSWORD: minioadmin
+  #  networks:
+  #    taotao-cluster-network:
+  #      ipv4_address: 172.11.0.26
+
+  xxl-job-admin:
+    image: xuxueli/xxl-job-admin:3.2.0
+    container_name: xxl-job-admin
+    restart: no	
+    ports:
+      - "48080:8080"
+    environment:
+      PARAMS: >-
+        --spring.datasource.url=jdbc:mysql://172.11.0.10:3306/xxl_job?useUnicode=true&useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+        --spring.datasource.username=root
+        --spring.datasource.password=123456
+        --xxl.job.accessToken=123456
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.27
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: no
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+      - '--web.external-url=http://192.168.218.2:9090/'
+      - '--web.enable-lifecycle'
+    ports:
+      - "9090:9090"
+    links:
+      - alertmanager:alertmanager
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.28
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: alertmanager
+    restart: no
+    ports:
+      - "9094:9093"
+    volumes:
+      - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+      - '--cluster.listen-address='
+      - '--cluster.advertise-address='
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.29
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: no
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_INSTALL_PLUGINS=camptocamp-prometheus-alertmanager-datasource
+    links:
+      - prometheus:prometheus
+      - alertmanager:alertmanager
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.30
+
+networks:
+  taotao-cluster-network:
+    external: true
