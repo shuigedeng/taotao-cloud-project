@@ -117,7 +117,7 @@ spring:
         keep-alive: 60s
   config:
     activate:
-      on-profile: dev
+      on-profile: docker
   pid:
     file: ${user.home}/logs/${spring.application.name}/${spring.application.name}.pid
   cloud:
