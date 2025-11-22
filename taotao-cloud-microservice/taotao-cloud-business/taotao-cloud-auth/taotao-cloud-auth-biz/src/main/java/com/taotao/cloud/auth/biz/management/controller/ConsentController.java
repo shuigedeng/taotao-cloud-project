@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.biz.management.controller;
 
 import com.taotao.boot.security.spring.constants.DefaultConstants;
 import com.taotao.boot.security.spring.constants.SymbolConstants;
-import com.taotao.boot.security.spring.properties.OAuth2EndpointProperties;
+import com.taotao.boot.security.spring.autoconfigure.OAuth2EndpointProperties;
 import com.taotao.cloud.auth.biz.management.dto.Option;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Application;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Scope;
