@@ -41,9 +41,9 @@ dependencies {
     implementation "org.apache.hadoop:hadoop-mapreduce-client-common:3.4.2"
     implementation "org.apache.hadoop:hadoop-hdfs:3.4.2"
 
-    implementation "org.scala-lang:scala-library:2.13.17"
-    implementation "org.scala-lang:scala-compiler:2.13.17"
-    implementation "org.scala-lang:scala-reflect:2.13.17"
+    implementation "org.scala-lang:scala-library:2.13.18"
+    implementation "org.scala-lang:scala-compiler:2.13.18"
+    implementation "org.scala-lang:scala-reflect:2.13.18"
 
     //implementation 'org.slf4j:slf4j-api:2.0.17'
     //implementation 'org.slf4j:slf4j-reload4j:2.0.17'

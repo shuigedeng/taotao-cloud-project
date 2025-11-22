@@ -30,7 +30,7 @@ spring:
         password: nacos
         cluster-name: CQ
         naming-load-cache-at-start: false
-        fail-fast: false
+        #fail-fast: false
       config:
         enabled: false
         server-addr: 172.11.0.13:8848

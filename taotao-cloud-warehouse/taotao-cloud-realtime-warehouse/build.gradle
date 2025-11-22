@@ -130,27 +130,27 @@ dependencies {
     ////implementation("org.apache.hudi:hudi-utilities_2.13:1.0.2")
     //implementation("org.apache.hudi:hudi-sync:1.0.2")
 
-    //implementation("org.apache.paimon:paimon-bundle:1.2.0")
-    //implementation("org.apache.paimon:paimon-format:1.2.0")
-    //implementation("org.apache.paimon:paimon-codegen:1.2.0")
-    //implementation("org.apache.paimon:paimon-codegen-loader:1.2.0")
-    //implementation("org.apache.paimon:paimon-filesystems:1.2.0")
-    //implementation("org.apache.paimon:paimon-service-client:1.2.0")
-    //implementation("org.apache.paimon:paimon-service-runtime:1.2.0")
-    //implementation("org.apache.paimon:paimon-oss:1.2.0")
-    //implementation("org.apache.paimon:paimon-oss-impl:1.2.0")
-    //implementation("org.apache.paimon:paimon-flink-2.0:1.2.0")
-    //implementation("org.apache.paimon:paimon-flink-cdc:1.2.0")
-    //implementation('org.apache.paimon:paimon-flink-action:1.2.0')
-    //implementation("org.apache.paimon:paimon-hive-catalog:1.2.0")
-    //implementation("org.apache.paimon:paimon-hive-connector-3.1:1.2.0")
+    //implementation("org.apache.paimon:paimon-bundle:1.3.1")
+    //implementation("org.apache.paimon:paimon-format:1.3.1")
+    //implementation("org.apache.paimon:paimon-codegen:1.3.1")
+    //implementation("org.apache.paimon:paimon-codegen-loader:1.3.1")
+    //implementation("org.apache.paimon:paimon-filesystems:1.3.1")
+    //implementation("org.apache.paimon:paimon-service-client:1.3.1")
+    //implementation("org.apache.paimon:paimon-service-runtime:1.3.1")
+    //implementation("org.apache.paimon:paimon-oss:1.3.1")
+    //implementation("org.apache.paimon:paimon-oss-impl:1.3.1")
+    //implementation("org.apache.paimon:paimon-flink-2.0:1.3.1")
+    //implementation("org.apache.paimon:paimon-flink-cdc:1.3.1")
+    //implementation('org.apache.paimon:paimon-flink-action:1.3.1')
+    //implementation("org.apache.paimon:paimon-hive-catalog:1.3.1")
+    //implementation("org.apache.paimon:paimon-hive-connector-3.1:1.3.1")
     //implementation('org.apache.paimon:paimon-shade-guava-30:30.1.1-jre-0.8.0')
     //implementation('org.apache.paimon:paimon-shade-jackson-2:2.14.2-0.8.0')
     //implementation('org.apache.paimon:paimon-shade-caffeine-2:2.9.3-0.8.0')
 
-    //implementation "org.scala-lang:scala-library:2.13.17"
-    //implementation "org.scala-lang:scala-compiler:2.13.17"
-    //implementation "org.scala-lang:scala-reflect:2.13.17"
+    //implementation "org.scala-lang:scala-library:2.13.18"
+    //implementation "org.scala-lang:scala-compiler:2.13.18"
+    //implementation "org.scala-lang:scala-reflect:2.13.18"
 
     //implementation 'com.alibaba.ververica:flink-cep:1.17-vvr-8.0.8'
     //implementation(project(":taotao-cloud-bigdata:taotao-cloud-flink-cep"))
@@ -170,10 +170,12 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-core"
     implementation "io.github.shuigedeng:taotao-boot-starter-actuator"
 
-    implementation("org.springframework.boot:spring-boot-starter-web") {
-        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    implementation("org.springframework.boot:spring-boot-starter-webmvc") {
+        //exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-undertow"
     }
-    implementation "org.springframework.boot:spring-boot-starter-undertow"
+    //implementation "org.springframework.boot:spring-boot-starter-undertow"
+    implementation "org.springframework.boot:spring-boot-starter-tomcat"
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
     //https://search.maven.org/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter

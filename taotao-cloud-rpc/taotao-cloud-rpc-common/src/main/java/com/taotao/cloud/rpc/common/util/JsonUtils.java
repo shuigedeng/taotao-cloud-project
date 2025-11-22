@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.rpc.common.util;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.JavaType;
+import tools.jackson.databind.ObjectMapper;
 import java.util.List;
 
 /**
@@ -41,7 +41,7 @@ public class JsonUtils {
         try {
             String string = MAPPER.writeValueAsString(data);
             return string;
-        } catch (JsonProcessingException e) {
+        } catch (JacksonException e) {
             e.printStackTrace();
         }
         return null;

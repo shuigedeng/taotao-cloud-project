@@ -1,23 +1,25 @@
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web") {
-        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    implementation("org.springframework.boot:spring-boot-starter-webmvc") {
+        //exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-undertow"
     }
-    implementation "org.springframework.boot:spring-boot-starter-undertow"
-    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    //implementation "org.springframework.boot:spring-boot-starter-undertow"
+    implementation "org.springframework.boot:spring-boot-starter-tomcat"
+    implementation 'org.springframework.boot:spring-boot-starter-aspectj'
     implementation 'io.netty:netty-all'
     implementation 'com.alibaba.fastjson2:fastjson2'
     implementation "cglib:cglib:3.3.0"
     implementation "io.github.shuigedeng:taotao-boot-starter-common"
 
     implementation 'org.slf4j:slf4j-api:2.0.17'
-    implementation 'ch.qos.logback:logback-core:1.5.20'
-    implementation 'ch.qos.logback:logback-access:1.5.20'
-    implementation 'ch.qos.logback:logback-classic:1.5.20'
+    implementation 'ch.qos.logback:logback-core:1.5.21'
+    implementation 'ch.qos.logback:logback-access:1.5.21'
+    implementation 'ch.qos.logback:logback-classic:1.5.21'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter:6.0.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:6.0.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:6.0.0'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:6.0.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:6.0.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:6.0.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:6.0.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:6.0.1'
     testImplementation "org.assertj:assertj-core:3.27.6"
 
     compileOnly "org.projectlombok:lombok:1.18.42"

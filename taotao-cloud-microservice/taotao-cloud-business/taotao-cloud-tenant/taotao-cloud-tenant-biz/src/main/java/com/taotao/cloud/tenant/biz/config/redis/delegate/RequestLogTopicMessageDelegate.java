@@ -35,7 +35,7 @@ public class RequestLogTopicMessageDelegate {
         //		try {
         //			Log log = JsonUtils.MAPPER.readValue(message, Log.class);
         //			logService.save(log);
-        //		} catch (JsonProcessingException e) {
+        //		} catch (JacksonException e) {
         //			LogUtils.error(e);
         //		}
     }

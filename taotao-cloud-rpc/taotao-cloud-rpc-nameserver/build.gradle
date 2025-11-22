@@ -11,11 +11,13 @@ dependencies {
 
     api "io.github.shuigedeng:taotao-boot-starter-core"
 
-    api("org.springframework.boot:spring-boot-starter-web") {
-        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    api("org.springframework.boot:spring-boot-starter-webmvc") {
+        //exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-undertow"
     }
-    api "org.springframework.boot:spring-boot-starter-undertow"
-    api 'org.springframework.boot:spring-boot-starter-aop'
+        //api "org.springframework.boot:spring-boot-starter-undertow"
+        api "org.springframework.boot:spring-boot-starter-tomcat"
+    api 'org.springframework.boot:spring-boot-starter-aspectj'
 }
 
 configurations {

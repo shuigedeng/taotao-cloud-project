@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.biz.jpa.jackson2;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import tools.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.security.jackson2.*;
 
 /**

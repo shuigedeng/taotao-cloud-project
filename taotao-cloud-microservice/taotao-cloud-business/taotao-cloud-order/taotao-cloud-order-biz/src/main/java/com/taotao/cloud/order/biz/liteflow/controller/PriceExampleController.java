@@ -12,7 +12,7 @@ import com.yomahub.liteflow.example.enums.PromotionTypeEnum;
 import com.yomahub.liteflow.example.enums.SkuSourceEnum;
 import com.yomahub.liteflow.example.slot.PriceContext;
 import com.yomahub.liteflow.flow.LiteflowResponse;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;

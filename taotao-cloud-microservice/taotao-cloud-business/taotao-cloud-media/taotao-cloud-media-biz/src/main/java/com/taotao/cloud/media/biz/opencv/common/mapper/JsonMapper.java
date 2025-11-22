@@ -17,17 +17,17 @@
 package com.taotao.cloud.media.biz.opencv.common.mapper;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParser.Feature;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.databind.util.JSONPObject;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.core.JsonParser.Feature;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.DeserializationFeature;
+import tools.jackson.databind.JavaType;
+import tools.jackson.databind.JsonSerializer;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.SerializationFeature;
+import tools.jackson.databind.SerializerProvider;
+import tools.jackson.databind.module.SimpleModule;
+import tools.jackson.databind.util.JSONPObject;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -66,7 +66,7 @@ public class JsonMapper extends ObjectMapper {
         this.getSerializerProvider().setNullValueSerializer(new JsonSerializer<Object>() {
             @Override
             public void serialize(Object value, JsonGenerator jgen, SerializerProvider provider)
-                    throws IOException, JsonProcessingException {
+                    throws IOException, JacksonException {
                 jgen.writeString("");
             }
         });
@@ -77,7 +77,7 @@ public class JsonMapper extends ObjectMapper {
             this.registerModule(new SimpleModule().addSerializer(Date.class, new JsonSerializer<Date>() {
                 @Override
                 public void serialize(Date value, JsonGenerator jgen, SerializerProvider provider)
-                        throws IOException, JsonProcessingException {
+                        throws IOException, JacksonException {
                     if (value != null) {
                         jgen.writeString(sdf.format(value));
                     }
@@ -88,7 +88,7 @@ public class JsonMapper extends ObjectMapper {
         this.registerModule(new SimpleModule().addSerializer(String.class, new JsonSerializer<String>() {
             @Override
             public void serialize(String value, JsonGenerator jgen, SerializerProvider provider)
-                    throws IOException, JsonProcessingException {
+                    throws IOException, JacksonException {
                 if (value != null) {
                     jgen.writeString(StringEscapeUtils.unescapeHtml4(value));
                 }
@@ -177,7 +177,7 @@ public class JsonMapper extends ObjectMapper {
     public <T> T update(String jsonString, T object) {
         try {
             return (T) this.readerForUpdating(object).readValue(jsonString);
-        } catch (JsonProcessingException e) {
+        } catch (JacksonException e) {
             logger.warn("update json string:" + jsonString + " to object:" + object + " error.", e);
         } catch (IOException e) {
             logger.warn("update json string:" + jsonString + " to object:" + object + " error.", e);

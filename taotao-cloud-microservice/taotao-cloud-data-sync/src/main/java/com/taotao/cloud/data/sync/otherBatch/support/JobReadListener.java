@@ -19,8 +19,8 @@ package com.taotao.cloud.data.sync.otherBatch.support;
 import com.taotao.cloud.data.sync.otherBatch.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.ItemReadListener;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  * <p>

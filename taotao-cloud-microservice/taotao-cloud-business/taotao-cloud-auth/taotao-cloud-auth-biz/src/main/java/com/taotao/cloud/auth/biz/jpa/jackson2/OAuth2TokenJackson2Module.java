@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.jpa.jackson2;
 
-import com.fasterxml.jackson.databind.module.SimpleModule;
+import tools.jackson.databind.module.SimpleModule;
 import com.taotao.cloud.auth.biz.utils.Jackson2Constants;
 import org.springframework.security.jackson2.SecurityJackson2Modules;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;

@@ -1,6 +1,6 @@
 dependencies {
-    api "org.springframework.boot:spring-boot-configuration-processor:3.5.7"
-    api "org.springframework.boot:spring-boot-starter:3.5.7"
+    api "org.springframework.boot:spring-boot-configuration-processor:4.0.0"
+    api "org.springframework.boot:spring-boot-starter:4.0.0"
     api "org.springframework:spring-web"
 
     api project(":taotao-cloud-ccsr:taotao-cloud-ccsr-core")

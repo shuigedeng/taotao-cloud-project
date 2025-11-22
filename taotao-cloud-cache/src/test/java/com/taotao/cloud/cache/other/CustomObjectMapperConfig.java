@@ -1,7 +1,7 @@
 package com.taotao.cloud.cache.other;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.module.SimpleModule;
 
 public class CustomObjectMapperConfig {
 

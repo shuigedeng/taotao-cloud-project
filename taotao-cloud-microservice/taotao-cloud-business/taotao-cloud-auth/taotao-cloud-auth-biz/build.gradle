@@ -40,7 +40,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-flowengine"
 
     //https://central.sonatype.com/artifact/org.springframework.session/spring-session-data-redis
-    implementation 'org.springframework.session:spring-session-data-redis:3.5.3'
+    implementation 'org.springframework.session:spring-session-data-redis:4.0.0'
 
     //https://central.sonatype.com/artifact/com.github.binarywang/weixin-java-pay?smo=true
     implementation 'com.github.binarywang:weixin-java-mp:4.7.8.B'
@@ -53,7 +53,7 @@ dependencies {
     //https://search.maven.org/artifact/org.webjars/bootstrap
     implementation "org.webjars:bootstrap:5.3.5"
     //https://search.maven.org/artifact/org.webjars/webjars-locator-lite
-    implementation "org.webjars:webjars-locator-lite:1.1.0"
+    implementation "org.webjars:webjars-locator-lite:1.1.2"
     implementation 'org.webjars:font-awesome:6.5.1'
     implementation 'org.webjars.bower:jquery-backstretch:2.1.17'
     implementation 'org.webjars:uniform:2.1.2-1'
@@ -69,10 +69,12 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.4.0'
 
-    implementation("org.springframework.boot:spring-boot-starter-web") {
-        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    implementation("org.springframework.boot:spring-boot-starter-webmvc") {
+        //exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-undertow"
     }
-    implementation "org.springframework.boot:spring-boot-starter-undertow"
+    //implementation "org.springframework.boot:spring-boot-starter-undertow"
+    implementation "org.springframework.boot:spring-boot-starter-tomcat"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
     implementation "org.springframework.boot:spring-boot-starter-validation"
@@ -81,16 +83,16 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-security"
     implementation 'org.springframework.security:spring-security-crypto'
     implementation "org.springframework.security:spring-security-oauth2-jose"
-    implementation "org.springframework.boot:spring-boot-starter-oauth2-client"
-    implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
-    implementation "org.springframework.boot:spring-boot-starter-oauth2-authorization-server"
+    implementation "org.springframework.boot:spring-boot-starter-security-oauth2-client"
+    implementation "org.springframework.boot:spring-boot-starter-security-oauth2-resource-server"
+    implementation "org.springframework.boot:spring-boot-starter-security-oauth2-authorization-server"
 
     implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter"
 
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
-    implementation "com.nimbusds:nimbus-jose-jwt:10.5"
+    implementation "com.nimbusds:nimbus-jose-jwt:10.6"
     //https://search.maven.org/artifact/com.nimbusds/oauth2-oidc-sdk
-    implementation 'com.nimbusds:oauth2-oidc-sdk:11.30'
+    implementation 'com.nimbusds:oauth2-oidc-sdk:11.30.1'
 
     implementation "org.apache.commons:commons-collections4"
 
@@ -112,8 +114,8 @@ dependencies {
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"
-    api "jakarta.persistence:jakarta.persistence-api:3.1.0"
-    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
+    api "jakarta.persistence:jakarta.persistence-api:3.2.0"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.2.0"
 }
 
 application {
@@ -156,7 +158,8 @@ configurations {
         //exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
         //exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
         //exclude group: "org.apache.logging.log4j", module: "log4j-api"
-        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+        //exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-undertow"
         exclude group: "commons-logging", module: "commons-logging"
         exclude group: "org.bouncycastle", module: "bcprov-jdk15on"
         exclude group: "org.bouncycastle", module: "bcpkix-jdk15on"

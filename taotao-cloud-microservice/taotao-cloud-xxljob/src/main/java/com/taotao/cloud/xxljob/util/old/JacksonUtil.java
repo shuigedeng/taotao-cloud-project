@@ -1,10 +1,10 @@
 package com.taotao.cloud.xxljob.util.old;//package com.xxl.job.admin.util.old;
 //
-//import com.fasterxml.jackson.core.JsonGenerationException;
-//import com.fasterxml.jackson.core.JsonParseException;
-//import com.fasterxml.jackson.databind.JavaType;
-//import com.fasterxml.jackson.databind.JsonMappingException;
-//import com.fasterxml.jackson.databind.ObjectMapper;
+//import tools.jackson.core.JsonGenerationException;
+//import tools.jackson.core.JsonParseException;
+//import tools.jackson.databind.JavaType;
+//import tools.jackson.databind.JsonMappingException;
+//import tools.jackson.databind.ObjectMapper;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 //

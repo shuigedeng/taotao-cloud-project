@@ -1,11 +1,11 @@
 package com.taotao.cloud.cache.other;
 
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.deser.*;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.introspect.AnnotatedField;
-import com.fasterxml.jackson.databind.introspect.BeanPropertyDefinition;
+import tools.jackson.databind.*;
+import tools.jackson.databind.deser.*;
+import tools.jackson.databind.deser.std.StdDeserializer;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.introspect.AnnotatedField;
+import tools.jackson.databind.introspect.BeanPropertyDefinition;
 import java.io.IOException;
 
 public class CustomBeanDeserializerModifier extends BeanDeserializerModifier {

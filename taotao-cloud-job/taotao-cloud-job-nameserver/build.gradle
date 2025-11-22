@@ -8,10 +8,12 @@ dependencies {
     api project(":taotao-cloud-job:taotao-cloud-job-dag")
     api project(":taotao-cloud-job:taotao-cloud-job-consistency")
 
-    implementation("org.springframework.boot:spring-boot-starter-web") {
-        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    implementation("org.springframework.boot:spring-boot-starter-webmvc") {
+        //exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-undertow"
     }
-    implementation "org.springframework.boot:spring-boot-starter-undertow"
+    //implementation "org.springframework.boot:spring-boot-starter-undertow"
+    implementation "org.springframework.boot:spring-boot-starter-tomcat"
     api "com.mysql:mysql-connector-j:9.5.0"
     api "net.devh:grpc-server-spring-boot-starter:3.1.0.RELEASE"
 }

@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.rpc.common.serializer;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
 import com.taotao.cloud.rpc.common.enums.SerializerCode;
 import com.taotao.cloud.rpc.common.protocol.RpcRequest;
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class JsonSerializer implements CommonSerializer {
         byte[] data = null;
         try {
             data = objectMapper.writeValueAsBytes(obj);
-        } catch (JsonProcessingException e) {
+        } catch (JacksonException e) {
             log.error("Error occurred while serializing, info: {}", e.getMessage());
         }
         return data;

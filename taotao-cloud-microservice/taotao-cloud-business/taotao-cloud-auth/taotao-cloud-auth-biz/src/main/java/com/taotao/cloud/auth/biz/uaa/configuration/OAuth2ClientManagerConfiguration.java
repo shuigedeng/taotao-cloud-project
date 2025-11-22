@@ -25,7 +25,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientProviderBuilder;
-import org.springframework.security.oauth2.client.endpoint.DefaultRefreshTokenTokenResponseClient;
 import org.springframework.security.oauth2.client.http.OAuth2ErrorResponseErrorHandler;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizedClientManager;
@@ -57,11 +56,11 @@ public class OAuth2ClientManagerConfiguration {
         DefaultOAuth2AuthorizedClientManager authorizedClientManager =
                 new DefaultOAuth2AuthorizedClientManager(
                         clientRegistrationRepository, authorizedClientRepository);
-        DefaultRefreshTokenTokenResponseClient defaultRefreshTokenTokenResponseClient =
-                new DefaultRefreshTokenTokenResponseClient();
-
-        defaultRefreshTokenTokenResponseClient.setRequestEntityConverter(
-                new SocialDelegateOAuth2RefreshTokenRequestEntityConverter());
+//        DefaultRefreshTokenTokenResponseClient defaultRefreshTokenTokenResponseClient =
+//                new DefaultRefreshTokenTokenResponseClient();
+//
+//        defaultRefreshTokenTokenResponseClient.setRequestEntityConverter(
+//                new SocialDelegateOAuth2RefreshTokenRequestEntityConverter());
         OAuth2AccessTokenResponseHttpMessageConverter messageConverter =
                 new OAuth2AccessTokenResponseHttpMessageConverter();
         // 微信返回的content-type 是 text-plain
@@ -79,18 +78,18 @@ public class OAuth2ClientManagerConfiguration {
                 new RestTemplate(Arrays.asList(new FormHttpMessageConverter(), messageConverter));
 
         restTemplate.setErrorHandler(new OAuth2ErrorResponseErrorHandler());
-        defaultRefreshTokenTokenResponseClient.setRestOperations(restTemplate);
+//        defaultRefreshTokenTokenResponseClient.setRestOperations(restTemplate);
 
-        authorizedClientManager.setAuthorizedClientProvider(
-                OAuth2AuthorizedClientProviderBuilder.builder()
-                        .authorizationCode()
-                        .refreshToken(
-                                (refreshTokenGrantBuilder) -> {
-                                    refreshTokenGrantBuilder.accessTokenResponseClient(
-                                            defaultRefreshTokenTokenResponseClient);
-                                })
-                        .clientCredentials()
-                        .build());
+//        authorizedClientManager.setAuthorizedClientProvider(
+//                OAuth2AuthorizedClientProviderBuilder.builder()
+//                        .authorizationCode()
+//                        .refreshToken(
+//                                (refreshTokenGrantBuilder) -> {
+//                                    refreshTokenGrantBuilder.accessTokenResponseClient(
+//                                            defaultRefreshTokenTokenResponseClient);
+//                                })
+//                        .clientCredentials()
+//                        .build());
         return authorizedClientManager;
     }
 }

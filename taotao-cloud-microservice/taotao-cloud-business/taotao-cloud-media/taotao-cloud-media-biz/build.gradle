@@ -54,8 +54,8 @@ dependencies {
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"
-    api "jakarta.persistence:jakarta.persistence-api:3.1.0"
-    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
+    api "jakarta.persistence:jakarta.persistence-api:3.2.0"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.2.0"
 
     //基于海康威视网络摄像机和NVR录像机的SDK二次开发, https://github.com/waimifeier/hikvision-spring-boot-starter
     //compile 'com.github.waimifeier:hikvision-spring-boot-starter:1.2.10'
@@ -126,7 +126,8 @@ configurations {
         //exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
         //exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
         //exclude group: "org.apache.logging.log4j", module: "log4j-api"
-        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+        //exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-undertow"
     }
 }
 

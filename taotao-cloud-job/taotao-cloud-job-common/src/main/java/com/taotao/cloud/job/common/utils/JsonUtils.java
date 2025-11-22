@@ -17,12 +17,12 @@
 package com.taotao.cloud.job.common.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.json.JsonMapper;
+import tools.jackson.core.JsonParser;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.DeserializationFeature;
+import tools.jackson.databind.MapperFeature;
+import tools.jackson.databind.json.JsonMapper;
 import com.taotao.cloud.job.common.exception.TtcJobException;
 import java.io.IOException;
 import java.util.HashMap;
@@ -92,7 +92,7 @@ public class JsonUtils {
         return null;
     }
 
-    public static <T> T parseObject(String json, Class<T> clz) throws JsonProcessingException {
+    public static <T> T parseObject(String json, Class<T> clz) throws JacksonException {
         return JSON_MAPPER.readValue(json, clz);
     }
 

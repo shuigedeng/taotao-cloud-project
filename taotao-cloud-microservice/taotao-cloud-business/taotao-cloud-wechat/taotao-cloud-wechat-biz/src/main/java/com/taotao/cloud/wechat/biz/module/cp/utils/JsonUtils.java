@@ -17,9 +17,9 @@
 package com.taotao.cloud.wechat.biz.module.cp.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.SerializationFeature;
 
 /**
  * @author Binary Wang(https://github.com/binarywang)
@@ -35,7 +35,7 @@ public class JsonUtils {
     public static String toJson(Object obj) {
         try {
             return JSON.writeValueAsString(obj);
-        } catch (JsonProcessingException e) {
+        } catch (JacksonException e) {
             LogUtils.error(e);
         }
 

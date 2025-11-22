@@ -42,7 +42,7 @@ public class TaoTaoCloudMonitorApplication {
 
         new StartupSpringApplication(TaoTaoCloudMonitorApplication.class)
                 .setTtcBanner()
-                .setTtcProfileIfNotExists("docker")
+//                .setTtcProfileIfNotExists("docker")
                 .setTtcApplicationProperty("taotao-cloud-monitor")
                 .setTtcAllowBeanDefinitionOverriding(true)
                 .run(args);

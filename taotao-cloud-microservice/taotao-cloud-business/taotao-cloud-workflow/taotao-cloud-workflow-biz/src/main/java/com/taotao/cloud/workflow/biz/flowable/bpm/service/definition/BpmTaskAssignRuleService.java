@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Set;
 import jakarta.validation.Valid;
 import org.flowable.engine.delegate.DelegateExecution;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * BPM 任务分配规则 Service 接口

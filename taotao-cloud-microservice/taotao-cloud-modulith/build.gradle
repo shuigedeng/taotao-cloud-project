@@ -19,8 +19,8 @@ dependencies {
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"
-    api "jakarta.persistence:jakarta.persistence-api:3.1.0"
-    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
+    api "jakarta.persistence:jakarta.persistence-api:3.2.0"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.2.0"
 
     //https://github.com/spring-projects/spring-modulith
     //https://central.sonatype.com/artifact/org.springframework.modulith/spring-modulith-starter-core
@@ -42,21 +42,21 @@ dependencies {
 
     //https://github.com/xmolecules/jmolecules
     //https://central.sonatype.com/artifact/org.jmolecules/jmolecules-ddd
-    implementation 'org.jmolecules:jmolecules-layered-architecture:1.10.0'
-    implementation 'org.jmolecules:jmolecules-hexagonal-architecture:1.10.0'
-    implementation 'org.jmolecules:jmolecules-onion-architecture:1.10.0'
-    implementation 'org.jmolecules:jmolecules-ddd:1.10.0'
-    implementation 'org.jmolecules:jmolecules-events:1.10.0'
+    implementation 'org.jmolecules:jmolecules-layered-architecture:2.0.1'
+    implementation 'org.jmolecules:jmolecules-hexagonal-architecture:2.0.1'
+    implementation 'org.jmolecules:jmolecules-onion-architecture:2.0.1'
+    implementation 'org.jmolecules:jmolecules-ddd:2.0.1'
+    implementation 'org.jmolecules:jmolecules-events:2.0.1'
 
     //https://github.com/xmolecules/jmolecules-integrations
     //https://central.sonatype.com/artifact/org.jmolecules.integrations/jmolecules-spring
-    implementation 'org.jmolecules.integrations:jmolecules-bytebuddy:0.30.0'
-    implementation 'org.jmolecules.integrations:jmolecules-jackson:0.30.0'
-    implementation 'org.jmolecules.integrations:jmolecules-jpa:0.30.0'
-    implementation 'org.jmolecules.integrations:jmolecules-spring:0.30.0'
-    implementation 'org.jmolecules.integrations:jmolecules-starter-ddd:0.30.0'
-    testImplementation 'org.jmolecules.integrations:jmolecules-archunit:0.30.0'
-    testImplementation 'org.jmolecules.integrations:jmolecules-starter-test:0.30.0'
+    implementation 'org.jmolecules.integrations:jmolecules-bytebuddy:0.32.0'
+    implementation 'org.jmolecules.integrations:jmolecules-jackson:0.32.0'
+    implementation 'org.jmolecules.integrations:jmolecules-jpa:0.32.0'
+    implementation 'org.jmolecules.integrations:jmolecules-spring:0.32.0'
+    implementation 'org.jmolecules.integrations:jmolecules-starter-ddd:0.32.0'
+    testImplementation 'org.jmolecules.integrations:jmolecules-archunit:0.32.0'
+    testImplementation 'org.jmolecules.integrations:jmolecules-starter-test:0.32.0'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
@@ -88,7 +88,7 @@ configurations {
             force 'org.antlr:antlr4:4.13.2'
             force 'net.minidev:json-smart:2.6.0'
             //todo 临时使用
-            force "io.opentelemetry:opentelemetry-api-incubator:1.55.0-alpha"
+            force "io.opentelemetry:opentelemetry-api-incubator:1.56.0-alpha"
         }
 
         //exclude group: "log4j", module: "log4j"
@@ -97,7 +97,8 @@ configurations {
         //exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
         //exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
         //exclude group: "org.apache.logging.log4j", module: "log4j-api"
-        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+        //exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-undertow"
         //Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
         exclude group: "commons-logging", module: "commons-logging"
     }

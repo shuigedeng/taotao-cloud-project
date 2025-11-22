@@ -58,17 +58,17 @@ dependencies {
     implementation "cn.afterturn:easypoi-base:4.5.0"
     implementation "cn.afterturn:easypoi-annotation:4.5.0"
 
-    implementation 'com.jd.easyflow:easyflow-flow:1.6.8'
-    implementation 'com.jd.easyflow:easyflow-flow-bpmn:1.6.8'
-    implementation 'com.jd.easyflow:easyflow-flow-extension:1.6.8'
-    implementation 'com.jd.easyflow:easyflow-fsm:1.6.8'
+    implementation 'com.jd.easyflow:easyflow-flow:1.6.10'
+    implementation 'com.jd.easyflow:easyflow-flow-bpmn:1.6.10'
+    implementation 'com.jd.easyflow:easyflow-flow-extension:1.6.10'
+    implementation 'com.jd.easyflow:easyflow-fsm:1.6.10'
 
     //implementation 'org.smartboot.flow:smart-flow-springboot-starter:1.1.4'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"
-    api "jakarta.persistence:jakarta.persistence-api:3.1.0"
-    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
+    api "jakarta.persistence:jakarta.persistence-api:3.2.0"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.2.0"
 }
 
 //dependencyManagement {
@@ -101,7 +101,8 @@ configurations {
         //exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
         //exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
         //exclude group: "org.apache.logging.log4j", module: "log4j-api"
-        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+        //exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-undertow"
     }
 }
 

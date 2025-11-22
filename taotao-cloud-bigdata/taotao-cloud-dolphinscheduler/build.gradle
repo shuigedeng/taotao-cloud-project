@@ -1,4 +1,4 @@
 dependencies {
-    //implementation 'org.apache.dolphinscheduler:dolphinscheduler-api:3.3.0'
+    //implementation 'org.apache.dolphinscheduler:dolphinscheduler-api:3.3.2'
 
 }

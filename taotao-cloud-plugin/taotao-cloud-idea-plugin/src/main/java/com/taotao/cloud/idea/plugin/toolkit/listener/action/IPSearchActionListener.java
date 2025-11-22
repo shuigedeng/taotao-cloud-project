@@ -1,6 +1,6 @@
 package com.taotao.cloud.idea.plugin.toolkit.listener.action;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import tools.jackson.databind.JsonNode;
 import com.intellij.ui.EditorTextField;
 import com.taotao.cloud.idea.plugin.toolkit.notification.ToolkitNotifier;
 import com.taotao.cloud.idea.plugin.toolkit.utils.JsonUtils;

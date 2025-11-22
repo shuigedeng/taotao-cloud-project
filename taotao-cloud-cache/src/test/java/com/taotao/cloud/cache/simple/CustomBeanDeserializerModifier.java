@@ -1,11 +1,11 @@
 package com.taotao.cloud.cache.simple;
 
-import com.fasterxml.jackson.databind.BeanDescription;
-import com.fasterxml.jackson.databind.DeserializationConfig;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.deser.BeanDeserializerModifier;
-import com.fasterxml.jackson.databind.deser.std.StdScalarDeserializer;
-import com.fasterxml.jackson.databind.introspect.BeanPropertyDefinition;
+import tools.jackson.databind.BeanDescription;
+import tools.jackson.databind.DeserializationConfig;
+import tools.jackson.databind.JsonDeserializer;
+import tools.jackson.databind.deser.BeanDeserializerModifier;
+import tools.jackson.databind.deser.std.StdScalarDeserializer;
+import tools.jackson.databind.introspect.BeanPropertyDefinition;
 import java.util.List;
 
 public class CustomBeanDeserializerModifier extends BeanDeserializerModifier {

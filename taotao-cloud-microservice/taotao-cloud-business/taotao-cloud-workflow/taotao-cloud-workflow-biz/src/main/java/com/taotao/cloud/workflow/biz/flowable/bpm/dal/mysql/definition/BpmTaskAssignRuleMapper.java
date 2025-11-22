@@ -21,7 +21,7 @@ import cn.iocoder.yudao.framework.mybatis.core.query.QueryWrapperX;
 import com.taotao.cloud.flowable.biz.bpm.dal.dataobject.definition.BpmTaskAssignRuleDO;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 @Mapper
 public interface BpmTaskAssignRuleMapper extends BaseMapperX<BpmTaskAssignRuleDO> {

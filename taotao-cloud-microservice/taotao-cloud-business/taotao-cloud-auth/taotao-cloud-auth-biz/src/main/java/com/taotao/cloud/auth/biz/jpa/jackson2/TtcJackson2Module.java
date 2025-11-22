@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.jpa.jackson2;
 
-import com.fasterxml.jackson.databind.module.SimpleModule;
+import tools.jackson.databind.module.SimpleModule;
 import com.taotao.boot.security.spring.authentication.login.form.FormLoginWebAuthenticationDetails;
 import com.taotao.boot.security.spring.core.authority.TtcGrantedAuthority;
 import com.taotao.boot.security.spring.core.userdetails.TtcUser;

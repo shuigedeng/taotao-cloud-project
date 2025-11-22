@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.utils;
 
-import com.fasterxml.jackson.core.Version;
+import tools.jackson.core.Version;
 
 /**
  * <p>Jackson2 用到的常量值 </p>

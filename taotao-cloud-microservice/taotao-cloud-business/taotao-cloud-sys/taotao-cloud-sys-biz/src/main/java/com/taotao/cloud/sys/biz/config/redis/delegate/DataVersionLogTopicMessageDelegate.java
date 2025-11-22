@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.config.redis.delegate;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import tools.jackson.core.JacksonException;
 import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.biz.model.entity.Log;
@@ -43,7 +43,7 @@ public class DataVersionLogTopicMessageDelegate {
 		try {
 			Log log = JsonUtils.MAPPER.readValue(message, Log.class);
 			logService.save(log);
-		} catch (JsonProcessingException e) {
+		} catch (JacksonException e) {
 			LogUtils.error(e);
 		}
 	}

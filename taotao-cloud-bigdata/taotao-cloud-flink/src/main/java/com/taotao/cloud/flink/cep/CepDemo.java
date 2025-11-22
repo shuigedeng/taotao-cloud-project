@@ -30,7 +30,7 @@ import org.apache.flink.cep.CEP;
 import org.apache.flink.cep.TimeBehaviour;
 import org.apache.flink.cep.dynamic.impl.json.util.CepJsonUtils;
 import org.apache.flink.cep.pattern.Pattern;
-import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.core.JsonProcessingException;
+import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.core.JacksonException;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
@@ -38,7 +38,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 public class CepDemo {
 
-    public static void printTestPattern(Pattern<?, ?> pattern) throws JsonProcessingException {
+    public static void printTestPattern(Pattern<?, ?> pattern) throws JacksonException {
         System.out.println(CepJsonUtils.convertPatternToJSONString(pattern));
     }
 

@@ -27,7 +27,8 @@ allprojects {
             //exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
             //exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
             //exclude group: "org.apache.logging.log4j", module: "log4j-api"
-            exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+            //exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-undertow"
             exclude group: "commons-logging", module: "commons-logging"
         }
     }

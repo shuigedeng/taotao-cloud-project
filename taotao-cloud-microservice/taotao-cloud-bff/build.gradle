@@ -26,10 +26,10 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
 
     implementation "org.springframework.boot:spring-boot-starter-graphql"
-    testImplementation 'org.springframework.graphql:spring-graphql-test:1.4.3'
+    testImplementation 'org.springframework.graphql:spring-graphql-test:2.0.0'
 
-    //implementation "org.springframework.boot:spring-boot-starter-webflux"
-    //implementation("org.springframework.boot:spring-boot-starter-web") {
+    //implementation "org.springframework.boot:spring-boot-starter-webmvcflux"
+    //implementation("org.springframework.boot:spring-boot-starter-webmvc") {
     //    exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
     //}
     //implementation "org.springframework.boot:spring-boot-starter-actuator"
@@ -49,8 +49,8 @@ dependencies {
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"
-    api "jakarta.persistence:jakarta.persistence-api:3.1.0"
-    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
+    api "jakarta.persistence:jakarta.persistence-api:3.2.0"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.2.0"
 }
 
 application {

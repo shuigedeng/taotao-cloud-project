@@ -27,7 +27,7 @@ import org.apache.kafka.connect.errors.ConnectException;
 import org.apache.kafka.connect.sink.SinkRecord;
 import org.apache.paimon.data.GenericRow;
 import org.apache.paimon.schema.Schema;
-import org.apache.paimon.shade.jackson2.com.fasterxml.jackson.core.JsonProcessingException;
+import org.apache.paimon.shade.jackson2.com.fasterxml.jackson.core.JacksonException;
 import org.apache.paimon.types.DataField;
 import org.apache.paimon.types.DataType;
 import org.apache.paimon.types.RowKind;
@@ -111,7 +111,7 @@ public class DebeziumRecordParser {
         if (Objects.nonNull(value) && !TypeUtils.isBasicType(value)) {
             try {
                 return writeValueAsString(value);
-            } catch (JsonProcessingException e) {
+            } catch (JacksonException e) {
                 LOG.error("Failed to deserialize record.", e);
                 return Objects.toString(value);
             }

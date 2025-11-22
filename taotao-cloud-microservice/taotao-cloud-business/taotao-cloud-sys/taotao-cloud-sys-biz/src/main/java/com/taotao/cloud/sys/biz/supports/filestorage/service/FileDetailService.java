@@ -5,7 +5,7 @@ import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import com.taotao.cloud.file.biz.filestorage.mapper.FileDetailMapper;
 import com.taotao.cloud.file.biz.filestorage.model.FileDetail;
 import lombok.SneakyThrows;
