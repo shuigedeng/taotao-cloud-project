@@ -21,7 +21,7 @@ import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.core.startup.StartupSpringApplication;
 import com.taotao.cloud.recommend.dto.ItemDTO;
 import com.taotao.cloud.recommend.service.Recommend;
-import com.taotao.boot.web.annotation.TaoTaoBootApplication;
+import com.taotao.boot.webmvc.annotation.TaoTaoBootApplication;
 import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 import java.util.List;
 import org.springframework.boot.SpringApplication;

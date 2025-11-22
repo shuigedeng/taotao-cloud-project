@@ -19,7 +19,7 @@ package com.taotao.cloud.goods.biz.controller.business.seller;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.goods.biz.model.vo.ParameterGroupVO;
 import com.taotao.cloud.goods.biz.service.business.ICategoryParameterGroupService;
-import com.taotao.boot.web.request.annotation.RequestLogger;
+import com.taotao.boot.webmvc.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;

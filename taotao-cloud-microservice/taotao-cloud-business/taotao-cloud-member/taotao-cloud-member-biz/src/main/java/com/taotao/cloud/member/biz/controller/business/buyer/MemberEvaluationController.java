@@ -28,7 +28,7 @@ import com.taotao.cloud.member.sys.model.vo.MemberEvaluationVO;
 import com.taotao.cloud.member.biz.model.convert.MemberEvaluationConvert;
 import com.taotao.cloud.member.biz.model.entity.MemberEvaluation;
 import com.taotao.cloud.member.biz.service.business.IMemberEvaluationService;
-import com.taotao.boot.web.request.annotation.RequestLogger;
+import com.taotao.boot.webmvc.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;

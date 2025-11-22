@@ -14,7 +14,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
     implementation "io.github.shuigedeng:taotao-boot-starter-grpc"
     implementation "io.github.shuigedeng:taotao-boot-starter-lock"
-    implementation "io.github.shuigedeng:taotao-boot-starter-web"
+    implementation "io.github.shuigedeng:taotao-boot-starter-webmvc"
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
     //https://search.maven.org/artifact/com.clickhouse/clickhouse-jdbc
     implementation "com.clickhouse:clickhouse-jdbc:0.9.2"

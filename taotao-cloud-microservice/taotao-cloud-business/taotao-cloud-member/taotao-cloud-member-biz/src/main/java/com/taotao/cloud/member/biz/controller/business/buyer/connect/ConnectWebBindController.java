@@ -27,7 +27,7 @@ import com.taotao.cloud.member.biz.connect.service.ConnectService;
 import com.taotao.cloud.member.biz.connect.token.Token;
 import com.taotao.cloud.member.biz.connect.util.ConnectUtil;
 import com.taotao.cloud.member.biz.service.business.IMemberService;
-import com.taotao.boot.web.request.annotation.RequestLogger;
+import com.taotao.boot.webmvc.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

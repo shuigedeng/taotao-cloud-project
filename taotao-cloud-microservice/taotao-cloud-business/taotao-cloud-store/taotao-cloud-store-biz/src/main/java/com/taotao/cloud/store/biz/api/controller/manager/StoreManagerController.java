@@ -29,7 +29,7 @@ import com.taotao.cloud.store.api.model.vo.StoreVO;
 import com.taotao.cloud.store.biz.model.entity.Store;
 import com.taotao.cloud.store.biz.service.IStoreDetailService;
 import com.taotao.cloud.store.biz.service.IStoreService;
-import com.taotao.boot.web.request.annotation.RequestLogger;
+import com.taotao.boot.webmvc.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

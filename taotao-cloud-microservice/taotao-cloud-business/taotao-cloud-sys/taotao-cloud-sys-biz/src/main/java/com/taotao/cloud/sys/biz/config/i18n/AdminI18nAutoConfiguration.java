@@ -2,8 +2,8 @@ package com.taotao.cloud.sys.biz.config.i18n;
 
 import com.taotao.cloud.sys.biz.config.i18n.provider.CustomI18nMessageProvider;
 import com.taotao.cloud.sys.biz.service.business.I18nDataService;
-import com.taotao.boot.web.i18n.I18nMessageProvider;
-import com.taotao.boot.web.i18n.config.I18nMessageSourceAutoConfiguration;
+import com.taotao.boot.webmvc.i18n.I18nMessageProvider;
+import com.taotao.boot.webmvc.i18n.config.I18nMessageSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;

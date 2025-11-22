@@ -26,7 +26,7 @@ import com.taotao.cloud.tenant.biz.entity.Tenant;
 import java.util.List;
 import java.util.Objects;
 
-import com.taotao.boot.web.annotation.Manager;
+import com.taotao.boot.webmvc.annotation.Manager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

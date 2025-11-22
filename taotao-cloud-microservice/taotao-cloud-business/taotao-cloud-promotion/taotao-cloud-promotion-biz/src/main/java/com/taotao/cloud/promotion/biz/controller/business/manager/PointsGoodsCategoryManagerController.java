@@ -21,7 +21,7 @@ import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.promotion.api.model.vo.PointsGoodsCategoryVO;
 import com.taotao.cloud.promotion.biz.model.entity.PointsGoodsCategory;
 import com.taotao.cloud.promotion.biz.service.business.IPointsGoodsCategoryService;
-import com.taotao.boot.web.request.annotation.RequestLogger;
+import com.taotao.boot.webmvc.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

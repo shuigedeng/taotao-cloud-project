@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz;
 
 import com.taotao.boot.core.startup.StartupSpringApplication;
-import com.taotao.boot.web.annotation.TaoTaoBootApplication;
+import com.taotao.boot.webmvc.annotation.TaoTaoBootApplication;
 import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 import org.dromara.x.file.storage.spring.EnableFileStorage;
 import org.springframework.boot.builder.SpringApplicationBuilder;

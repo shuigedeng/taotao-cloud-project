@@ -26,7 +26,7 @@ import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.security.spring.model.SecurityUser;
 import com.taotao.boot.common.utils.bean.BeanUtils;
-import com.taotao.boot.web.utils.OperationalJudgment;
+import com.taotao.boot.webmvc.utils.OperationalJudgment;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;

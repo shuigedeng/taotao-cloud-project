@@ -22,7 +22,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-job-snail"
     implementation "io.github.shuigedeng:taotao-boot-starter-grpc"
     implementation "io.github.shuigedeng:taotao-boot-starter-lock"
-    implementation "io.github.shuigedeng:taotao-boot-starter-web"
+    implementation "io.github.shuigedeng:taotao-boot-starter-webmvc"
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
     implementation "io.github.shuigedeng:taotao-boot-starter-statemachine"
     implementation "io.github.shuigedeng:taotao-boot-starter-flowengine"

@@ -26,7 +26,7 @@ import com.taotao.cloud.member.sys.model.vo.MemberGradeVO;
 import com.taotao.cloud.member.biz.model.convert.MemberGradeConvert;
 import com.taotao.cloud.member.biz.model.entity.MemberGrade;
 import com.taotao.cloud.member.biz.service.business.IMemberGradeService;
-import com.taotao.boot.web.request.annotation.RequestLogger;
+import com.taotao.boot.webmvc.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.*;

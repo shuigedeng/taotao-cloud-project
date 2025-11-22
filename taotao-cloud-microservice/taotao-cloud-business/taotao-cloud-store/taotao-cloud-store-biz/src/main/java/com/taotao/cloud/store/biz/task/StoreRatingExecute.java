@@ -25,7 +25,7 @@ package com.taotao.cloud.store.biz.task;
 // import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 // import com.taotao.cloud.store.biz.model.entity.Store;
 // import com.taotao.cloud.store.biz.service.IStoreService;
-// import com.taotao.boot.web.timetask.EveryDayExecute;
+// import com.taotao.boot.webmvc.timetask.EveryDayExecute;
 // import jakarta.annotation.Resource;
 // import java.util.List;
 // import org.springframework.beans.factory.annotation.Autowired;

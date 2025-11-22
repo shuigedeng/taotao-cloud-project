@@ -5,8 +5,8 @@ import com.taotao.cloud.sys.api.constant.I18nRedisKeyConstants;
 import com.taotao.cloud.sys.biz.model.dto.I18nDataUnique;
 import com.taotao.cloud.sys.biz.model.entity.i18n.I18nData;
 import com.taotao.cloud.sys.biz.service.business.I18nDataService;
-import com.taotao.boot.web.i18n.I18nMessage;
-import com.taotao.boot.web.i18n.I18nMessageProvider;
+import com.taotao.boot.webmvc.i18n.I18nMessage;
+import com.taotao.boot.webmvc.i18n.I18nMessageProvider;
 import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.Topic;
 

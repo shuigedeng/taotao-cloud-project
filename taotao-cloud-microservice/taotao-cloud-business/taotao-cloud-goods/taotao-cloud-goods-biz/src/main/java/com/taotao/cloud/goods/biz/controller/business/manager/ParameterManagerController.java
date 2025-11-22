@@ -21,7 +21,7 @@ import com.taotao.cloud.goods.biz.model.dto.ParametersDTO;
 import com.taotao.cloud.goods.biz.model.convert.ParametersConvert;
 import com.taotao.cloud.goods.biz.model.entity.Parameters;
 import com.taotao.cloud.goods.biz.service.business.IParametersService;
-import com.taotao.boot.web.request.annotation.RequestLogger;
+import com.taotao.boot.webmvc.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;

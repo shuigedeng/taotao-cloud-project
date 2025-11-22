@@ -27,7 +27,7 @@ import com.taotao.boot.common.utils.common.IdGeneratorUtils;
 import com.taotao.boot.common.utils.common.OrikaUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.common.utils.secure.SignUtils;
-import com.taotao.boot.core.configuration.OkhttpAutoConfiguration.OkHttpService;
+import com.taotao.boot.core.autoconfigure.OkhttpAutoConfiguration.OkHttpService;
 import com.taotao.cloud.sys.biz.model.vo.region.RegionParentVO;
 import com.taotao.cloud.sys.biz.model.vo.region.RegionTreeVO;
 import com.taotao.cloud.sys.biz.model.vo.region.RegionVO;
@@ -45,7 +45,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * RegionServiceImpl

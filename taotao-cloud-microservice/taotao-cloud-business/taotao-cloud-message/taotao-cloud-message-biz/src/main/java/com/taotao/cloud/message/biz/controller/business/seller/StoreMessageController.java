@@ -17,10 +17,10 @@
 package com.taotao.cloud.message.biz.controller.business.seller;
 
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.boot.web.utils.OperationalJudgment;
+import com.taotao.boot.webmvc.utils.OperationalJudgment;
 import com.taotao.cloud.message.api.enums.MessageStatusEnum;
 import com.taotao.cloud.message.biz.service.business.StoreMessageService;
-import com.taotao.boot.web.request.annotation.RequestLogger;
+import com.taotao.boot.webmvc.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

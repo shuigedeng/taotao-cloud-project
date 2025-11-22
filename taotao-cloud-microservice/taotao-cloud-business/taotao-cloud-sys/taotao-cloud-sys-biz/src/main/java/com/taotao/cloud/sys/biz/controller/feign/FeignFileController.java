@@ -17,7 +17,7 @@
 //package com.taotao.cloud.sys.biz.controller.feign;
 //
 //import com.taotao.boot.common.utils.log.LogUtils;
-//import com.taotao.boot.web.annotation.FeignApi;
+//import com.taotao.boot.webmvc.annotation.FeignApi;
 //import com.taotao.boot.webagg.controller.BaseFeignController;
 //import com.taotao.cloud.sys.api.grpc.FileGrpcServiceGrpc;
 //import io.grpc.ManagedChannel;

@@ -23,7 +23,7 @@ import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.message.api.feign.IFeignStoreMessageService;
 import com.taotao.cloud.message.api.vo.StoreMessageQueryVO;
 import com.taotao.cloud.message.api.vo.StoreMessageVO;
-import com.taotao.boot.web.request.annotation.RequestLogger;
+import com.taotao.boot.webmvc.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

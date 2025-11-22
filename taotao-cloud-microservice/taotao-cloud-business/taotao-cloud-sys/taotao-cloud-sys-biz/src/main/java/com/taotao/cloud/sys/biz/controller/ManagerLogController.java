@@ -20,7 +20,7 @@ import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.data.mybatis.interceptor.easylog.common.audit.DataAuditLogging;
 import com.taotao.boot.security.spring.annotation.NotAuth;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
-import com.taotao.boot.web.request.annotation.RequestLogger;
+import com.taotao.boot.webmvc.request.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.model.dto.LogQueryCriteria;
 import com.taotao.cloud.sys.biz.model.entity.Log;
 import com.taotao.cloud.sys.biz.service.ILogService;

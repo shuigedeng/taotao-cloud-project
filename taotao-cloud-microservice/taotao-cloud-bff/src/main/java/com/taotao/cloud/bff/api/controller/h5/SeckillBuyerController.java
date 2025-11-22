@@ -17,7 +17,7 @@
 package com.taotao.cloud.bff.api.controller.h5;
 
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.boot.web.request.annotation.RequestLogger;
+import com.taotao.boot.webmvc.request.annotation.RequestLogger;
 import com.taotao.cloud.bff.api.service.app.ISeckillApplyService;
 import com.taotao.cloud.promotion.api.model.vo.SeckillGoodsVO;
 import com.taotao.cloud.promotion.api.model.vo.SeckillTimelineVO;
