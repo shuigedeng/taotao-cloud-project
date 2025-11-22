@@ -51,7 +51,7 @@ configurations {
         //exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-undertow"
         exclude group: "com.querydsl", module: "querydsl-apt"
-        exclude group: "commons-logging", module: "commons-logging"
+        //exclude group: "commons-logging", module: "commons-logging"
 
         resolutionStrategy {
             force "com.google.protobuf:protobuf-java:3.25.5"

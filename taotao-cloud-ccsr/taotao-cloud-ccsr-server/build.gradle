@@ -24,7 +24,7 @@ configurations {
             force "com.google.protobuf:protobuf-java-util:3.25.5"
         }
 
-        exclude group: "commons-logging", module: "commons-logging"
+        //exclude group: "commons-logging", module: "commons-logging"
     }
 }
 

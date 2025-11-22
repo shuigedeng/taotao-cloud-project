@@ -12,8 +12,8 @@ dependencies {
         //exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-undertow"
     }
-        //api "org.springframework.boot:spring-boot-starter-undertow"
-        api "org.springframework.boot:spring-boot-starter-tomcat"
+    //api "org.springframework.boot:spring-boot-starter-undertow"
+    api "org.springframework.boot:spring-boot-starter-tomcat"
     api 'org.springframework.boot:spring-boot-starter-aspectj'
 
     api "com.mysql:mysql-connector-j:9.5.0"
@@ -24,7 +24,7 @@ configurations {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
-        exclude group: "commons-logging", module: "commons-logging"
+        //exclude group: "commons-logging", module: "commons-logging"
     }
 }
 

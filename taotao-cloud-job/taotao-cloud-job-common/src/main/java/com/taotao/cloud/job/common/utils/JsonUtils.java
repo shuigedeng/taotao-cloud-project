@@ -16,6 +16,9 @@
 
 package com.taotao.cloud.job.common.utils;
 
+import static tools.jackson.core.StreamReadFeature.IGNORE_UNDEFINED;
+import static tools.jackson.core.json.JsonReadFeature.ALLOW_SINGLE_QUOTES;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import tools.jackson.core.JsonParser;
 import tools.jackson.core.JacksonException;
@@ -43,13 +46,13 @@ public class JsonUtils {
     private static final JsonMapper JSON_MAPPER =
             JsonMapper.builder()
                     .configure(MapperFeature.PROPAGATE_TRANSIENT_MARKER, true)
-                    .configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true)
-                    .configure(JsonParser.Feature.IGNORE_UNDEFINED, true)
+                    .configure(ALLOW_SINGLE_QUOTES, true)
+                    .configure(IGNORE_UNDEFINED, true)
                     .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                     .build();
 
     static {
-        JSON_MAPPER.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        //JSON_MAPPER.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 
     private static final TypeReference<Map<String, Object>> MAP_TYPE_REFERENCE =

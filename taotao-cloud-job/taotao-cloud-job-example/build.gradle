@@ -11,6 +11,6 @@ configurations {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
-        exclude group: "commons-logging", module: "commons-logging"
+        //exclude group: "commons-logging", module: "commons-logging"
     }
 }

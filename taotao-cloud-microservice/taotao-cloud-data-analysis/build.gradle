@@ -85,6 +85,6 @@ configurations {
         //exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-undertow"
         //Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
-        exclude group: "commons-logging", module: "commons-logging"
+        //exclude group: "commons-logging", module: "commons-logging"
     }
 }

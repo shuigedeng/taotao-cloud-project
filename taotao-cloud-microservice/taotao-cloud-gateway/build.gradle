@@ -98,7 +98,7 @@ configurations {
         exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
         exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-v6x-adapter"
         exclude group: "com.querydsl", module: "querydsl-apt"
-        exclude group: "commons-logging", module: "commons-logging"
+        //exclude group: "commons-logging", module: "commons-logging"
     }
 }
 

@@ -30,8 +30,8 @@ dependencies {
         //exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-undertow"
     }
-        //api "org.springframework.boot:spring-boot-starter-undertow"
-        api "org.springframework.boot:spring-boot-starter-tomcat"
+    //api "org.springframework.boot:spring-boot-starter-undertow"
+    api "org.springframework.boot:spring-boot-starter-tomcat"
     api 'org.springframework.boot:spring-boot-starter-aspectj'
     api 'io.netty:netty-all'
     api 'com.alibaba.fastjson2:fastjson2'

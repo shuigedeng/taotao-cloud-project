@@ -22,7 +22,7 @@ configurations {
             force "com.alipay.sofa:hessian:3.5.5"
         }
 
-        exclude group: "commons-logging", module: "commons-logging"
+        //exclude group: "commons-logging", module: "commons-logging"
     }
 }
 
