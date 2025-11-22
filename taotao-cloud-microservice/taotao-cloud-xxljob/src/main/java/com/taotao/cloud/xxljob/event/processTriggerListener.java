@@ -31,7 +31,7 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.mail.MailProperties;
+import org.springframework.boot.mail.autoconfigure.MailProperties;
 import org.springframework.context.event.EventListener;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;

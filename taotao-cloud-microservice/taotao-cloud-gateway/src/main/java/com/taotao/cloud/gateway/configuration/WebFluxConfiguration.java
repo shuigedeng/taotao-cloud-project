@@ -24,8 +24,8 @@ import com.taotao.cloud.gateway.properties.SecurityProperties;
 import io.micrometer.core.instrument.MeterRegistry;
 import java.util.Objects;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.micrometer.metrics.autoconfigure.MeterRegistryCustomizer;
 import org.springframework.cloud.gateway.filter.ratelimit.KeyResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -91,7 +91,7 @@ public class WebFluxConfiguration {
     }
 
     @Bean
-    MeterRegistryCustomizer<MeterRegistry> configurer(
+	MeterRegistryCustomizer<MeterRegistry> configurer(
             @Value("${spring.application.name}") String applicationName) {
         return (registry) -> registry.config().commonTags("application", applicationName);
     }

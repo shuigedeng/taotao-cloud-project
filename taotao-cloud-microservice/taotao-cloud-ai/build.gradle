@@ -78,11 +78,11 @@ dependencies {
 
 
 	//alibaba ai
-    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-dashscope"
-    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-arms-observation"
-    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-memory"
-    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-mcp-registry"
-    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-mcp-router"
+//    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-dashscope"
+//    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-arms-observation"
+//    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-memory"
+//    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-mcp-registry"
+//    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-mcp-router"
     //implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-nacos-prompt"
     //implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-nl2sql"
     //implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-tool-calling-common"

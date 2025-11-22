@@ -35,6 +35,7 @@ import org.apache.commons.collections4.MapUtils;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authorization.AuthorizationDecision;
+import org.springframework.security.authorization.AuthorizationResult;
 import org.springframework.security.authorization.ReactiveAuthorizationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -60,99 +61,98 @@ public class GatewayReactiveAuthorizationManager
     private final SecurityMatcherConfigurer securityMatcherConfigurer;
     private final SecurityMetadataSourceStorage securityMetadataSourceStorage;
 
-    @Override
-    public Mono<AuthorizationDecision> check(
-            Mono<Authentication> authentication, AuthorizationContext authorizationContext) {
-        return authentication
-                .map(
-                        auth -> {
-                            final ServerWebExchange serverWebExchange =
-                                    authorizationContext.getExchange();
+	@Override
+	public Mono<AuthorizationResult> authorize(Mono<Authentication> authentication, AuthorizationContext authorizationContext) {
+		return authentication
+			.map(
+				auth -> {
+					final ServerWebExchange serverWebExchange =
+						authorizationContext.getExchange();
 
-                            String url = serverWebExchange.getRequest().getPath().toString();
-                            String method = serverWebExchange.getRequest().getMethod().name();
+					String url = serverWebExchange.getRequest().getPath().toString();
+					String method = serverWebExchange.getRequest().getMethod().name();
 
-                            if (WebUtils.isPathMatch(
-                                    securityMatcherConfigurer.getPermitAllList(), url)) {
-                                LogUtils.info("Is white list resource : [{}], Passed!", url);
-                                return new AuthorizationDecision(true);
-                            }
+					if (WebUtils.isPathMatch(
+						securityMatcherConfigurer.getPermitAllList(), url)) {
+						LogUtils.info("Is white list resource : [{}], Passed!", url);
+						return new AuthorizationDecision(true);
+					}
 
-                            if (WebUtils.isPathMatch(
-                                    securityMatcherConfigurer.getHasAuthenticatedList(), url)) {
-                                LogUtils.info("Is has authenticated resource : [{}]", url);
-                                return new AuthorizationDecision(auth.isAuthenticated());
-                            }
+					if (WebUtils.isPathMatch(
+						securityMatcherConfigurer.getHasAuthenticatedList(), url)) {
+						LogUtils.info("Is has authenticated resource : [{}]", url);
+						return new AuthorizationDecision(auth.isAuthenticated());
+					}
 
-                            List<SecurityConfigAttribute> configAttributes =
-                                    findConfigAttribute(url, method, serverWebExchange);
-                            if (CollectionUtils.isEmpty(configAttributes)) {
-                                LogUtils.info("NO PRIVILEGES : [{}].", url);
+					List<SecurityConfigAttribute> configAttributes =
+						findConfigAttribute(url, method, serverWebExchange);
+					if (CollectionUtils.isEmpty(configAttributes)) {
+						LogUtils.info("NO PRIVILEGES : [{}].", url);
 
-                                if (!securityMatcherConfigurer
-                                        .getAuthorizationProperties()
-                                        .getStrict()) {
-                                    if (auth
-                                            instanceof
-                                            AnonymousAuthenticationToken
-                                                    anonymousAuthenticationToken) {
-                                        LogUtils.info("anonymousAuthenticationToken : {}", url);
-                                        return new AuthorizationDecision(false);
-                                    }
+						if (!securityMatcherConfigurer
+							.getAuthorizationProperties()
+							.getStrict()) {
+							if (auth
+								instanceof
+								AnonymousAuthenticationToken
+									anonymousAuthenticationToken) {
+								LogUtils.info("anonymousAuthenticationToken : {}", url);
+								return new AuthorizationDecision(false);
+							}
 
-                                    if (auth.isAuthenticated()) {
-                                        LogUtils.info("Request is authenticated: [{}].", url);
-                                        return new AuthorizationDecision(true);
-                                    }
-                                }
+							if (auth.isAuthenticated()) {
+								LogUtils.info("Request is authenticated: [{}].", url);
+								return new AuthorizationDecision(true);
+							}
+						}
 
-                                return new AuthorizationDecision(false);
-                            }
+						return new AuthorizationDecision(false);
+					}
 
-                            for (SecurityConfigAttribute configAttribute : configAttributes) {
-                                // WebExpressionAuthorizationManager
-                                // webExpressionAuthorizationManager =
-                                //	new
-                                // WebExpressionAuthorizationManager(configAttribute.getAttribute());
-                                // AuthorizationDecision decision =
-                                // webExpressionAuthorizationManager.check(auth,
-                                // authorizationContext);
-                                // if (decision.isGranted()) {
-                                //	//LogUtils.info("Request [{}] is authorized!",
-                                // object.getRequest().getRequestURI());
-                                //	return decision;
-                                // }
-                            }
+					for (SecurityConfigAttribute configAttribute : configAttributes) {
+						// WebExpressionAuthorizationManager
+						// webExpressionAuthorizationManager =
+						//	new
+						// WebExpressionAuthorizationManager(configAttribute.getAttribute());
+						// AuthorizationDecision decision =
+						// webExpressionAuthorizationManager.check(auth,
+						// authorizationContext);
+						// if (decision.isGranted()) {
+						//	//LogUtils.info("Request [{}] is authorized!",
+						// object.getRequest().getRequestURI());
+						//	return decision;
+						// }
+					}
 
-                            // return new AuthorizationDecision(false);
+					// return new AuthorizationDecision(false);
 
-                            if (auth instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-                                Jwt jwt = jwtAuthenticationToken.getToken();
-                                String kid = (String) jwt.getHeaders().get("kid");
+					if (auth instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+						Jwt jwt = jwtAuthenticationToken.getToken();
+						String kid = (String) jwt.getHeaders().get("kid");
 
-                                // 判断kid是否存在 存在表示令牌不能使用 即:用户已退出
-                                Boolean hasKey =
-                                        redisRepository.exists(
-                                                RedisConstants.LOGOUT_JWT_KEY_PREFIX + kid);
-                                if (hasKey) {
-                                    throw new InvalidTokenException("无效的token");
-                                }
-                            }
+						// 判断kid是否存在 存在表示令牌不能使用 即:用户已退出
+						Boolean hasKey =
+							redisRepository.exists(
+								RedisConstants.LOGOUT_JWT_KEY_PREFIX + kid);
+						if (hasKey) {
+							throw new InvalidTokenException("无效的token");
+						}
+					}
 
-                            ServerWebExchange exchange = authorizationContext.getExchange();
-                            ServerHttpRequest request = exchange.getRequest();
+					ServerWebExchange exchange = authorizationContext.getExchange();
+					ServerHttpRequest request = exchange.getRequest();
 
-                            // 可在此处鉴权也可在各个微服务鉴权
-                            // boolean isPermission = super.hasPermission(auth,
-                            // request.getMethodValue(),
-                            // request.getURI().getPath());
+					// 可在此处鉴权也可在各个微服务鉴权
+					// boolean isPermission = super.hasPermission(auth,
+					// request.getMethodValue(),
+					// request.getURI().getPath());
 
-                            return new AuthorizationDecision(true);
-                        })
-                .defaultIfEmpty(new AuthorizationDecision(false));
-    }
+					return new AuthorizationDecision(true);
+				})
+			.defaultIfEmpty(new AuthorizationDecision(false));
+	}
 
-    /**
+	/**
      * 找到配置属性
      *
      * @param url     url
@@ -194,4 +194,7 @@ public class GatewayReactiveAuthorizationManager
 
         return null;
     }
+
+
+
 }
