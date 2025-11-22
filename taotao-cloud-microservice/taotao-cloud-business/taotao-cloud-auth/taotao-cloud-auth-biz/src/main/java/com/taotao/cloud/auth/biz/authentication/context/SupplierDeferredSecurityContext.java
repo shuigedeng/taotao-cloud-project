@@ -16,9 +16,10 @@
 
 package com.taotao.cloud.auth.biz.authentication.context;
 
+import com.taotao.boot.core.runtime.report.ConditionEvaluationReportLogger;
 import java.util.function.Supplier;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.log.LogMessage;
 import org.springframework.security.core.context.DeferredSecurityContext;
 import org.springframework.security.core.context.SecurityContext;
@@ -26,7 +27,7 @@ import org.springframework.security.core.context.SecurityContextHolderStrategy;
 
 public final class SupplierDeferredSecurityContext implements DeferredSecurityContext {
 
-    private static final Log logger = LogFactory.getLog(SupplierDeferredSecurityContext.class);
+	private static final Logger logger = LoggerFactory.getLogger(SupplierDeferredSecurityContext.class);
 
     private final Supplier<SecurityContext> supplier;
 
@@ -64,7 +65,7 @@ public final class SupplierDeferredSecurityContext implements DeferredSecurityCo
         if (this.missingContext) {
             this.securityContext = this.strategy.createEmptyContext();
             if (logger.isTraceEnabled()) {
-                logger.trace(LogMessage.format("Created %s", this.securityContext));
+                logger.trace(String.valueOf(LogMessage.format("Created %s", this.securityContext)));
             }
         }
     }

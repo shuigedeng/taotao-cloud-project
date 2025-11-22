@@ -23,9 +23,9 @@ import java.net.URI;
 import java.time.Instant;
 import java.util.*;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.security.oauth2.server.resource.autoconfigure.OAuth2ResourceServerProperties;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.*;
@@ -64,8 +64,7 @@ public class ReactiveSecurityOpaqueTokenIntrospector implements ReactiveOpaqueTo
     /**
      * 日志记录器
      */
-    private final Log logger = LogFactory.getLog(getClass());
-
+	private static final Logger logger = LoggerFactory.getLogger(ReactiveSecurityOpaqueTokenIntrospector.class);
     /**
      * 其他操作
      */
