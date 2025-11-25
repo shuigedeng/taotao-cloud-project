@@ -18,14 +18,15 @@ package com.taotao.cloud.gateway.filter.gateway;
 
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.filter.gateway.RequestTimeGatewayFilterFactory.Config;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * RequestTimeGatewayFilterFactory
@@ -36,60 +37,64 @@ import reactor.core.publisher.Mono;
  */
 @Component
 public class RequestTimeGatewayFilterFactory extends AbstractGatewayFilterFactory<Config> {
-    private static final String START_TIME = "StartTime";
-    private static final String ENABLED = "enabled";
 
-    @Override
-    public List<String> shortcutFieldOrder() {
-        return Collections.singletonList(ENABLED);
-    }
+	private static final String START_TIME = "StartTime";
+	private static final String ENABLED = "enabled";
 
-    public RequestTimeGatewayFilterFactory() {
-        super(Config.class);
-    }
+	@Override
+	public List<String> shortcutFieldOrder() {
+		return Collections.singletonList(ENABLED);
+	}
 
-    @Override
-    public GatewayFilter apply(Config config) {
-        return (exchange, chain) -> {
-            if (!config.isEnabled()) {
-                return chain.filter(exchange);
-            }
-            exchange.getAttributes().put(START_TIME, System.currentTimeMillis());
-            return chain.filter(exchange)
-                    .then(
-                            Mono.fromRunnable(
-                                    () -> {
-                                        Long startTime = exchange.getAttribute(START_TIME);
-                                        if (Objects.nonNull(startTime)) {
-                                            ServerHttpRequest request = exchange.getRequest();
-                                            StringBuilder sb =
-                                                    new StringBuilder(request.getURI().getRawPath())
-                                                            .append(" 请求时间: ")
-                                                            .append(
-                                                                    System.currentTimeMillis()
-                                                                            - startTime)
-                                                            .append("ms");
-                                            sb.append(" 请求参数: ").append(request.getQueryParams());
-                                            LogUtils.info(sb.toString());
-                                        }
-                                    }));
-        };
-    }
 
-    public static class Config {
-        /**
-         * 控制是否开启统计
-         */
-        private boolean enabled;
+	public RequestTimeGatewayFilterFactory() {
+		super(Config.class);
+	}
 
-        public Config() {}
+	@Override
+	public GatewayFilter apply( Config config ) {
+		return ( exchange, chain ) -> {
+			if (!config.isEnabled()) {
+				return chain.filter(exchange);
+			}
+			exchange.getAttributes().put(START_TIME, System.currentTimeMillis());
+			return chain.filter(exchange)
+				.then(
+					Mono.fromRunnable(
+						() -> {
+							Long startTime = exchange.getAttribute(START_TIME);
+							if (Objects.nonNull(startTime)) {
+								ServerHttpRequest request = exchange.getRequest();
+								StringBuilder sb =
+									new StringBuilder(request.getURI().getRawPath())
+										.append(" 请求时间: ")
+										.append(
+											System.currentTimeMillis()
+												- startTime)
+										.append("ms");
+								sb.append(" 请求参数: ").append(request.getQueryParams());
+								LogUtils.info(sb.toString());
+							}
+						}));
+		};
+	}
 
-        public boolean isEnabled() {
-            return enabled;
-        }
+	public static class Config {
 
-        public void setEnabled(boolean enabled) {
-            this.enabled = enabled;
-        }
-    }
+		/**
+		 * 控制是否开启统计
+		 */
+		private boolean enabled;
+
+		public Config() {
+		}
+
+		public boolean isEnabled() {
+			return enabled;
+		}
+
+		public void setEnabled( boolean enabled ) {
+			this.enabled = enabled;
+		}
+	}
 }
