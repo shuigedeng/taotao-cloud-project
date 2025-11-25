@@ -29,6 +29,8 @@ import com.taotao.cloud.gateway.exception.InvalidTokenException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
@@ -40,6 +42,8 @@ import org.springframework.security.authorization.ReactiveAuthorizationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
+import org.springframework.security.web.access.expression.WebExpressionAuthorizationManager;
+import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
 import org.springframework.security.web.server.authorization.AuthorizationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
@@ -110,18 +114,18 @@ public class GatewayReactiveAuthorizationManager
 					}
 
 					for (SecurityConfigAttribute configAttribute : configAttributes) {
-						// WebExpressionAuthorizationManager
-						// webExpressionAuthorizationManager =
-						//	new
-						// WebExpressionAuthorizationManager(configAttribute.getAttribute());
-						// AuthorizationDecision decision =
-						// webExpressionAuthorizationManager.check(auth,
-						// authorizationContext);
-						// if (decision.isGranted()) {
-						//	//LogUtils.info("Request [{}] is authorized!",
-						// object.getRequest().getRequestURI());
-						//	return decision;
-						// }
+						 WebExpressionAuthorizationManager
+						 webExpressionAuthorizationManager =
+							new
+								WebExpressionAuthorizationManager(configAttribute.getAttribute());
+						AuthorizationResult decision =
+						 webExpressionAuthorizationManager.authorize(() -> auth,
+						 //todo 这个转换有问题
+						 new RequestAuthorizationContext((HttpServletRequest) serverWebExchange.getRequest()));
+						 if (decision.isGranted()) {
+							//LogUtils.info("Request [{}] is authorized!",object.getRequest().getRequestURI());
+							return decision;
+						 }
 					}
 
 					// return new AuthorizationDecision(false);

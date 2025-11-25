@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.gateway.service.impl;
 
-import com.alibaba.csp.sentinel.util.StringUtil;
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Stopwatch;
 import com.taotao.boot.common.constant.CommonConstants;
@@ -31,7 +31,6 @@ import com.taotao.cloud.gateway.service.ISafeRuleService;
 import java.net.URI;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Service;
@@ -107,10 +106,10 @@ public class SafeRuleServiceImpl implements ISafeRuleService {
             if (antPathMatcher.match(blackList.getRequestUri(), uri.getPath())
                     && RuleConstant.BLACKLIST_OPEN.equals(blackList.getStatus())) {
                 if (RuleConstant.ALL.equalsIgnoreCase(blackList.getRequestMethod())
-                        || StringUtils.equalsIgnoreCase(
+                        || StrUtil.equalsIgnoreCase(
                                 requestMethod, blackList.getRequestMethod())) {
-                    if (StringUtil.isNotBlank(blackList.getStartTime())
-                            && StringUtil.isNotBlank(blackList.getEndTime())) {
+                    if (StrUtil.isNotBlank(blackList.getStartTime())
+                            && StrUtil.isNotBlank(blackList.getEndTime())) {
                         if (DateUtils.between(
                                 DateUtils.parseLocalTime(
                                         blackList.getStartTime(), CommonConstants.DATETIME_FORMAT),

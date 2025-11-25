@@ -31,6 +31,10 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 登录认证成功处理类 (网关目前不支持登录 现在此类无用)
  *
@@ -60,26 +64,28 @@ public class GatewayServerAuthenticationSuccessHandler
         //		return
         // response.writeWith(Mono.just(response.bufferFactory().wrap(JSON.toJSONBytes(responseEntity))));
 
-        MultiValueMap<String, String> headerValues = new LinkedMultiValueMap<>(4);
+        Map<String, String> headerValues = new HashMap<>(4);
         Object principal = authentication.getPrincipal();
 
         if (principal instanceof TtcUser) {
             TtcUser user = (TtcUser) authentication.getPrincipal();
-            headerValues.add(CommonConstants.TTC_USER_ID_HEADER, String.valueOf(user.getUserId()));
-            headerValues.add(CommonConstants.TTC_USER_HEADER, JSON.toJSONString(user));
-            headerValues.add(CommonConstants.TTC_USER_NAME_HEADER, user.getUsername());
+            headerValues.put(CommonConstants.TTC_USER_ID_HEADER, String.valueOf(user.getUserId()));
+            headerValues.put(CommonConstants.TTC_USER_HEADER, JSON.toJSONString(user));
+            headerValues.put(CommonConstants.TTC_USER_NAME_HEADER, user.getUsername());
         }
 
         //        OAuth2Authentication oauth2Authentication = (OAuth2Authentication) authentication;
         //        String clientId = oauth2Authentication.getOAuth2Request().getClientId();
         //        headerValues.add(CommonConstants.TTC_TENANT_ID, clientId);
-        headerValues.add(
+        headerValues.put(
                 CommonConstants.TTC_USER_ROLE_HEADER,
                 CollUtil.join(authentication.getAuthorities(), ","));
 
         ServerWebExchange exchange = webFilterExchange.getExchange();
         ServerHttpRequest serverHttpRequest =
-                exchange.getRequest().mutate().headers(h -> h.addAll(headerValues)).build();
+                exchange.getRequest().mutate().headers(h -> {
+					headerValues.forEach(h::add);
+				}).build();
 
         ServerWebExchange build = exchange.mutate().request(serverHttpRequest).build();
         return webFilterExchange.getChain().filter(build);

@@ -17,6 +17,7 @@
 package com.taotao.cloud.gateway.utils;
 
 import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.GATEWAY_ORIGINAL_REQUEST_URL_ATTR;
+import static org.springframework.util.StringUtils.startsWithIgnoreCase;
 
 //import com.taotao.cloud.gateway.filter.global.GlobalCacheRequestFilter;
 import java.net.URI;
@@ -28,6 +29,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 
 import cn.hutool.core.util.ObjUtil;
+import cn.hutool.core.util.StrUtil;
+import com.taotao.cloud.gateway.filter.global.GlobalCacheRequestFilter;
 import org.apache.commons.lang3.StringUtils;
 
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
@@ -62,7 +65,7 @@ public class WebFluxUtils {
      */
     public static boolean isJsonRequest(ServerWebExchange exchange) {
         String header = exchange.getRequest().getHeaders().getFirst(HttpHeaders.CONTENT_TYPE);
-        return StringUtils.startsWithIgnoreCase(header, MediaType.APPLICATION_JSON_VALUE);
+        return startsWithIgnoreCase(header, MediaType.APPLICATION_JSON_VALUE);
     }
 
     /**
