@@ -5,7 +5,7 @@ import com.yomahub.liteflow.example.bean.PriceStepVO;
 import com.yomahub.liteflow.example.enums.PriceTypeEnum;
 import com.yomahub.liteflow.example.slot.PriceContext;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

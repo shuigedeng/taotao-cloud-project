@@ -34,7 +34,7 @@ import lombok.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 /**
  * MyBatis Plus Generator

@@ -21,7 +21,7 @@ import com.jeequan.jeepay.core.model.params.NormalMchParams;
 import com.jeequan.jeepay.core.utils.StringKit;
 import lombok.Data;
 import lombok.experimental.*;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 /*
  * 小新支付 普通商户参数定义

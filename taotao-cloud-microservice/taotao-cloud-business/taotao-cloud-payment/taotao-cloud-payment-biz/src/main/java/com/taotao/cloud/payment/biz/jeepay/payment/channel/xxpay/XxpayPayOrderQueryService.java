@@ -27,7 +27,7 @@ import com.jeequan.jeepay.pay.rqrs.msg.ChannelRetMsg;
 import com.jeequan.jeepay.pay.service.ConfigContextQueryService;
 import com.taotao.cloud.payment.biz.jeepay.pay.channel.xxpay.XxpayKit;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

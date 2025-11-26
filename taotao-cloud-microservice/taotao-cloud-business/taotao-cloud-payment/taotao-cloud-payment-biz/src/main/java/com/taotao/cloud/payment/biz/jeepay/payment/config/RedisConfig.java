@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.payment.biz.jeepay.payment.config;
 
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

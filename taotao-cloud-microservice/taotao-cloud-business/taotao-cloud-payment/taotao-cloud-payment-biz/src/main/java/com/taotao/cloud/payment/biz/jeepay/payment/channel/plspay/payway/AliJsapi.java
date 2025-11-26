@@ -31,7 +31,7 @@ import com.jeequan.jeepay.pay.rqrs.payorder.payway.AliJsapiOrderRQ;
 import com.jeequan.jeepay.pay.rqrs.payorder.payway.AliJsapiOrderRS;
 import com.jeequan.jeepay.pay.util.ApiResBuilder;
 import com.jeequan.jeepay.response.PayOrderCreateResponse;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 /*

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.doris.udf;
 
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.apache.hadoop.hive.ql.exec.UDF;
 
 public class AESDecrypt extends UDF {

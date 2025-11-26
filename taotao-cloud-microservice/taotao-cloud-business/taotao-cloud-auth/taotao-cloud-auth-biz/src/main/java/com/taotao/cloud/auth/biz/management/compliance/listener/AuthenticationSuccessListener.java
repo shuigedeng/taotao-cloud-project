@@ -21,7 +21,7 @@ import com.taotao.cloud.auth.biz.authentication.stamp.SignInFailureLimitedStampM
 import com.taotao.cloud.auth.biz.management.service.OAuth2ComplianceService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;

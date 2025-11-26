@@ -19,7 +19,7 @@ package com.taotao.cloud.hadoop.mr.service.impl;
 import com.taotao.cloud.hadoop.mr.component.ReduceJobsUtils;
 import com.taotao.cloud.hadoop.mr.service.MapReduceService;
 import java.io.IOException;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 /**

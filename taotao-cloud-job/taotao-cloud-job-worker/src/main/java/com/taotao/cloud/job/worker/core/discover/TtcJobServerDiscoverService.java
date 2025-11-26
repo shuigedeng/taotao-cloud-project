@@ -26,7 +26,7 @@ import com.taotao.cloud.job.worker.subscribe.WorkerSubscribeManager;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 
 /**

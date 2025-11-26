@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.stock.biz.domain.role.model.vo;
 
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 /**
  * 角色名称

@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JCheckBox;
 import org.apache.commons.lang3.StringEscapeUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 
 public class SQL2DSLConvertActionListener implements ActionListener {

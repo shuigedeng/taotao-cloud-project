@@ -17,7 +17,7 @@ import com.paypal.http.exceptions.HttpException;
 import com.paypal.http.serializer.Json;
 import com.paypal.orders.*;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

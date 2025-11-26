@@ -18,7 +18,7 @@ package com.taotao.cloud.ccsr.core.remote.raft.helper;
 
 import com.alipay.sofa.jraft.option.*;
 import com.taotao.cloud.ccsr.common.config.CcsrConfig;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 /**
  * @author shuigedeng

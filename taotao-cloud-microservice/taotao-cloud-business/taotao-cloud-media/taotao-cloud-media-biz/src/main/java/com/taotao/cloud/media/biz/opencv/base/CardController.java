@@ -26,7 +26,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.Vector;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;

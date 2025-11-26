@@ -22,7 +22,7 @@ import jakarta.validation.constraints.NotBlank;
 import java.util.List;
 import javax.validation.Valid;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 /**
  * 业务表 gen_table

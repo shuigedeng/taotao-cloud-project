@@ -18,7 +18,7 @@ package com.taotao.cloud.generator.entity;
 
 import com.taotao.boot.data.jpa.tenant.BaseEntity;
 import jakarta.validation.constraints.NotBlank;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 /**
  * 代码生成业务字段表 gen_table_column

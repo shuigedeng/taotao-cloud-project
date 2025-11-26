@@ -26,7 +26,7 @@ import com.jeequan.jeepay.core.model.params.alipay.AlipayIsvsubMchParams;
 import com.jeequan.jeepay.core.utils.SpringBeansUtil;
 import com.jeequan.jeepay.pay.model.MchAppConfigContext;
 import com.jeequan.jeepay.pay.service.ConfigContextQueryService;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 /*
 * 【支付宝】支付通道工具包

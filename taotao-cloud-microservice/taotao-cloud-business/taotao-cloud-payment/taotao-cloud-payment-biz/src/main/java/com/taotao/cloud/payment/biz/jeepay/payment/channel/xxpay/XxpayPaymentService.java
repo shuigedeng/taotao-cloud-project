@@ -29,7 +29,7 @@ import com.jeequan.jeepay.pay.rqrs.payorder.UnifiedOrderRQ;
 import com.jeequan.jeepay.pay.util.PaywayUtil;
 import com.taotao.cloud.payment.biz.jeepay.pay.channel.xxpay.XxpayKit;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;

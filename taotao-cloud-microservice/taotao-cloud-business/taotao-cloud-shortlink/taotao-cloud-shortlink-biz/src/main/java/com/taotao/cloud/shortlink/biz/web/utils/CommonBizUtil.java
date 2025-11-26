@@ -19,7 +19,7 @@ package com.taotao.cloud.shortlink.biz.web.utils;
 import com.google.common.hash.Hashing;
 import com.taotao.boot.common.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

@@ -13,7 +13,7 @@ import ${package}.${moduleName}.vo.${ClassName}VO;
 import ${package}.${moduleName}.dao.${ClassName}Dao;
 import ${package}.${moduleName}.service.${ClassName}Service;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

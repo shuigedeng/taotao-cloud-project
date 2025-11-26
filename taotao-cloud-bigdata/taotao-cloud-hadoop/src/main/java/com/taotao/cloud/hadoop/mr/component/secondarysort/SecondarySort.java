@@ -17,7 +17,7 @@
 package com.taotao.cloud.hadoop.mr.component.secondarysort;
 
 import java.io.IOException;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.DoubleWritable;

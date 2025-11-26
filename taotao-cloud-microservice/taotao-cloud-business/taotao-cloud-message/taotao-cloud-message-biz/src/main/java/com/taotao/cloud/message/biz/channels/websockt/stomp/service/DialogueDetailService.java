@@ -35,7 +35,7 @@ import cn.herodotus.engine.supplier.message.entity.Notification;
 import cn.herodotus.engine.supplier.message.repository.DialogueDetailRepository;
 import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

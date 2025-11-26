@@ -18,7 +18,7 @@ import com.taotao.cloud.message.biz.austin.handler.domain.sms.YunPianSendResult;
 import com.taotao.cloud.message.biz.austin.handler.script.SmsScript;
 import com.taotao.cloud.message.biz.austin.support.domain.SmsRecord;
 import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

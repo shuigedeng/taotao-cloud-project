@@ -26,7 +26,7 @@ import com.taotao.cloud.auth.biz.exception.StampHasExpiredException;
 import com.taotao.cloud.auth.biz.management.entity.SecretKey;
 import java.time.Duration;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -24,7 +24,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.Collections;
 import java.util.Map;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.web.WebAttributes;

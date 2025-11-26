@@ -22,7 +22,7 @@ import com.taotao.boot.security.spring.autoconfigure.OAuth2EndpointProperties;
 import java.net.URI;
 import java.time.Instant;
 import java.util.*;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.security.oauth2.server.resource.autoconfigure.OAuth2ResourceServerProperties;

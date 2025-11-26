@@ -28,7 +28,7 @@ import com.taotao.cloud.job.worker.common.utils.SystemInfoUtils;
 import com.taotao.cloud.job.worker.core.discover.ServerDiscoverService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 /**
  * Worker健康度定时上报

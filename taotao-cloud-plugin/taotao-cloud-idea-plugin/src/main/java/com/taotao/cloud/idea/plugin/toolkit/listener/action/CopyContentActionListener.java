@@ -5,7 +5,7 @@ import com.taotao.cloud.idea.plugin.toolkit.notification.ToolkitNotifier;
 import com.taotao.cloud.idea.plugin.toolkit.utils.SystemUtils;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 /**
  * CopyContentAction

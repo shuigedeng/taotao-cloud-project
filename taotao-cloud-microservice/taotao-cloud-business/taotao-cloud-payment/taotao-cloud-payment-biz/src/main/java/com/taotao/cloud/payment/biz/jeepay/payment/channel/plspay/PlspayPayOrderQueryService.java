@@ -30,7 +30,7 @@ import com.jeequan.jeepay.request.PayOrderQueryRequest;
 import com.jeequan.jeepay.response.PayOrderQueryResponse;
 import com.taotao.cloud.payment.biz.jeepay.pay.channel.plspay.PlspayKit;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

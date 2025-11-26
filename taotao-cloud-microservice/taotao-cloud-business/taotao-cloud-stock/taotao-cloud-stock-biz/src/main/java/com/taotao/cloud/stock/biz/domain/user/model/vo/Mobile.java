@@ -18,7 +18,7 @@ package com.taotao.cloud.stock.biz.domain.user.model.vo;
 
 import java.util.regex.Pattern;
 import org.apache.commons.lang.Validate;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 /**
  * 手机

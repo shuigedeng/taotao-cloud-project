@@ -30,7 +30,7 @@ package com.taotao.cloud.wechat.biz.service.impl; // package
 // import com.taotao.cloud.wechat.biz.service.MemberStatisticsService;
 // import com.taotao.cloud.wechat.biz.service.PlatformViewService;
 // import com.taotao.cloud.wechat.biz.util.StatisticsSuffix;
-// import org.apache.commons.lang3.StringUtils;
+// import com.taotao.boot.common.utils.lang.StringUtils;
 // import org.springframework.beans.BeanUtils;
 // import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.stereotype.Service;

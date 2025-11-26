@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.api.model.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 @Schema(title = "scheduled定时任务")
 public class ScheduledJobDTO {

@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.jeepay.payment.channel.xxpay;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

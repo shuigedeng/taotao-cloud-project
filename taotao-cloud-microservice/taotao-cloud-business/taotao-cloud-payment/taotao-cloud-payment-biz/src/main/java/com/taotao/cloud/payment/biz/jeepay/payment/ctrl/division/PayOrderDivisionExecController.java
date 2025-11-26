@@ -35,7 +35,7 @@ import com.jeequan.jeepay.service.impl.MchDivisionReceiverGroupService;
 import com.jeequan.jeepay.service.impl.MchDivisionReceiverService;
 import com.jeequan.jeepay.service.impl.PayOrderService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;

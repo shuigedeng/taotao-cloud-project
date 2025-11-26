@@ -26,7 +26,7 @@ import com.jeequan.jeepay.pay.model.MchAppConfigContext;
 import com.jeequan.jeepay.pay.rqrs.msg.ChannelRetMsg;
 import com.jeequan.jeepay.util.JeepayKit;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

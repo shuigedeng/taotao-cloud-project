@@ -30,7 +30,7 @@ import com.jeequan.jeepay.pay.rqrs.transfer.QueryTransferOrderRS;
 import com.jeequan.jeepay.service.impl.MchNotifyRecordService;
 import com.taotao.cloud.payment.biz.jeepay.pay.service.ConfigContextQueryService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -31,7 +31,7 @@ package com.taotao.cloud.media.biz.opencv.common.mapper; // package
 // import javax.xml.bind.Unmarshaller;
 // import javax.xml.bind.annotation.XmlAnyElement;
 // import javax.xml.namespace.QName;
-// import org.apache.commons.lang3.StringUtils;
+// import com.taotao.boot.common.utils.lang.StringUtils;
 // import org.springframework.http.converter.HttpMessageConversionException;
 // import org.springframework.util.Assert;
 //

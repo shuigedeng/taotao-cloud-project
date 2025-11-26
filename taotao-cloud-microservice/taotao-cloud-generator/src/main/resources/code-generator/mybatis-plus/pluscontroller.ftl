@@ -5,7 +5,7 @@ import ${packageName}.entity.${classInfo.className};
 import ${packageName}.mapper.${classInfo.className}Mapper;
 import ${packageName}.util.ReturnT;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;

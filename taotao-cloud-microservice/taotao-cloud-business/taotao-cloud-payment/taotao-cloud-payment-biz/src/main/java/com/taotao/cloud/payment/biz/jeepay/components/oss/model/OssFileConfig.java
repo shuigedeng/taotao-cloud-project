@@ -19,7 +19,7 @@ import com.jeequan.jeepay.components.oss.constant.OssSavePlaceEnum;
 import lombok.*;
 import lombok.Data;
 import lombok.experimental.*;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 import java.util.*;
 

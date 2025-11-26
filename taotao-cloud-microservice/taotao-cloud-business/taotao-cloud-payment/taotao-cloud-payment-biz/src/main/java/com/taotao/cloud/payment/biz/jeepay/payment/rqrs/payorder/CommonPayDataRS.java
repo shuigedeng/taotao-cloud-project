@@ -19,7 +19,7 @@ import com.jeequan.jeepay.core.constants.CS;
 import com.taotao.cloud.payment.biz.jeepay.pay.rqrs.payorder.UnifiedOrderRS;
 import lombok.Data;
 import lombok.experimental.*;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 /*
 * 通用支付数据RS

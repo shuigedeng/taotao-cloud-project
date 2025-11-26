@@ -21,7 +21,7 @@ import com.jeequan.jeepay.core.entity.SysUserAuth;
 import com.jeequan.jeepay.core.model.security.JeeUserDetails;
 import com.jeequan.jeepay.core.utils.StringKit;
 import com.jeequan.jeepay.service.mapper.SysUserAuthMapper;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

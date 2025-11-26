@@ -23,7 +23,7 @@ import com.taotao.cloud.gateway.model.RuleConstant;
 import com.taotao.cloud.gateway.service.IRuleCacheService;
 import java.util.Set;
 import lombok.*;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 /**

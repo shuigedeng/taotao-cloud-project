@@ -6,7 +6,7 @@ import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
 import com.taotao.cloud.message.biz.austin.handler.receiver.MessageReceiver;
 import com.taotao.cloud.message.biz.austin.handler.receiver.service.ConsumeService;
 import com.taotao.cloud.message.biz.austin.support.constans.MessageQueuePipeline;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.Exchange;

@@ -25,7 +25,7 @@ import com.jeequan.jeepay.core.constants.ApiCodeEnum;
 import com.jeequan.jeepay.core.exception.BizException;
 import com.jeequan.jeepay.core.model.BaseModel;
 import com.jeequan.jeepay.core.utils.DateKit;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

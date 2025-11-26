@@ -36,7 +36,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import lombok.Data;
 import lombok.experimental.*;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 /** 在线工作流开发 */
 @Data

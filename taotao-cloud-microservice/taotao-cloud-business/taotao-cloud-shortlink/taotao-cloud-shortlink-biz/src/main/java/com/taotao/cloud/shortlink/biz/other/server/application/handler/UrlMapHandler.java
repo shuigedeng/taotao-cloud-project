@@ -23,7 +23,7 @@ import com.taotao.cloud.shortlink.biz.other.server.application.dto.UrlResponse;
 import com.taotao.cloud.shortlink.biz.other.server.application.util.ConversionUtil;
 import com.taotao.cloud.shortlink.biz.other.server.application.util.IdWorkerInstance;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

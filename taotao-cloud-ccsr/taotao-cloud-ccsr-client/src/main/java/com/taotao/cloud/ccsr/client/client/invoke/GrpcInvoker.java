@@ -30,7 +30,7 @@ import com.taotao.cloud.ccsr.common.exception.CcsrClientException;
 import com.taotao.cloud.ccsr.common.exception.InitializationException;
 import com.taotao.cloud.ccsr.spi.SpiExtensionFactory;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 public class GrpcInvoker extends AbstractInvoker<Message, GrpcOption> {
 

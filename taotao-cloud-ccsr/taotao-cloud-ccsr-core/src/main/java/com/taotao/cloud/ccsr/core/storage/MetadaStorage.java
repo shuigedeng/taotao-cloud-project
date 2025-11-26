@@ -18,7 +18,7 @@ package com.taotao.cloud.ccsr.core.storage;
 
 import com.taotao.cloud.ccsr.api.grpc.auto.Metadata;
 import com.taotao.cloud.ccsr.spi.Join;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 @Join(order = 1, isSingleton = true)
 public class MetadaStorage extends AbstractStorage<Metadata> {

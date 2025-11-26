@@ -15,7 +15,7 @@ import com.taotao.cloud.message.biz.austin.service.api.service.SendService;
 import com.taotao.cloud.message.biz.austin.support.pending.AbstractLazyPending;
 import com.taotao.cloud.message.biz.austin.support.pending.PendingParam;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;

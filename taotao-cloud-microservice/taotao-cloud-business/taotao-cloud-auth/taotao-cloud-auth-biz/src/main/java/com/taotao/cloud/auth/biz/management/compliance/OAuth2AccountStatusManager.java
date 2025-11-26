@@ -23,7 +23,7 @@ import com.taotao.cloud.auth.biz.authentication.stamp.LockedUserDetailsStampMana
 import com.taotao.cloud.auth.biz.management.compliance.processor.changer.AccountStatusChanger;
 import com.taotao.cloud.auth.biz.management.processor.EnhanceUserDetailsService;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetailsService;

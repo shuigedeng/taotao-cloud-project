@@ -22,7 +22,7 @@ import com.taotao.cloud.shortlink.biz.web.biz.ShortLinkBiz;
 import com.taotao.cloud.shortlink.biz.web.service.IShortLinkService;
 import com.taotao.cloud.shortlink.biz.web.web.request.ShortLinkUpdateRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.redisson.api.RBucket;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;

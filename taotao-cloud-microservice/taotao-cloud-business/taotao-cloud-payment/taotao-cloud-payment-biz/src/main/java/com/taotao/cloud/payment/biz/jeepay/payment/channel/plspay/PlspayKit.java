@@ -15,7 +15,7 @@ import com.jeequan.jeepay.request.PayOrderCreateRequest;
 import com.jeequan.jeepay.response.JeepayResponse;
 import com.jeequan.jeepay.response.PayOrderCreateResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 /*
  * 工具类

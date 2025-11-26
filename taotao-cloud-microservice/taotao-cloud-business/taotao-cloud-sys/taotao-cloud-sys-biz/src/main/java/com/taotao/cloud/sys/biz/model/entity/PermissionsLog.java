@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.model.entity;
 //
-// import org.apache.commons.lang3.StringUtils;
+// import com.taotao.boot.common.utils.lang.StringUtils;
 // import org.apache.commons.lang3.builder.EqualsBuilder;
 // import org.apache.commons.lang3.builder.HashCodeBuilder;
 // import org.springrain.frame.annotation.WhereSQL;

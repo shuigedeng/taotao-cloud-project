@@ -27,7 +27,7 @@ import com.jeequan.jeepay.pay.rqrs.payorder.payway.WxBarOrderRQ;
 import com.jeequan.jeepay.pay.rqrs.payorder.payway.WxBarOrderRS;
 import com.jeequan.jeepay.pay.util.ApiResBuilder;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;

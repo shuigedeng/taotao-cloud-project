@@ -28,7 +28,7 @@ import com.github.niefy.modules.sys.entity.SysConfigEntity;
 import com.github.niefy.modules.sys.service.SysConfigService;
 import java.util.Arrays;
 import java.util.Map;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

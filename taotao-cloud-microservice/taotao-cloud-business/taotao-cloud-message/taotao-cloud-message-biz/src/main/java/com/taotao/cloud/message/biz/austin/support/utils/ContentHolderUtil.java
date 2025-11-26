@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.austin.support.utils;
 
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.util.PropertyPlaceholderHelper;
 
 import java.text.MessageFormat;

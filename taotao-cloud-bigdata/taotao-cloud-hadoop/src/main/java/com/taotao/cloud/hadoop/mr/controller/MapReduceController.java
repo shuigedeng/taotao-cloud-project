@@ -18,7 +18,7 @@ package com.taotao.cloud.hadoop.mr.controller;
 
 import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.hadoop.mr.service.MapReduceService;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -3,7 +3,7 @@ package com.taotao.cloud.message.biz.austin.support.mq.rocketmq;
 import com.taotao.cloud.message.biz.austin.support.constans.MessageQueuePipeline;
 import com.taotao.cloud.message.biz.austin.support.mq.SendMqService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

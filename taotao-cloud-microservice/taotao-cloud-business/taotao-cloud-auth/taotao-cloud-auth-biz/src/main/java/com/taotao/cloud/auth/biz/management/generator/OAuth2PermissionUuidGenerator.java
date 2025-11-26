@@ -20,7 +20,7 @@ import com.taotao.boot.data.jpa.hibernate.identifier.AbstractUuidGenerator;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Permission;
 import java.lang.reflect.Member;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.factory.spi.CustomIdGeneratorCreationContext;

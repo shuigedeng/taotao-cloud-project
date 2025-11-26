@@ -2,7 +2,7 @@ package com.taotao.cloud.payment.biz.jeepay.components.mq.vender.aliyunrocketmq;
 
 import com.aliyun.openservices.ons.api.*;
 import com.jeequan.jeepay.components.mq.constant.MQVenderCS;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

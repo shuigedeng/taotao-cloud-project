@@ -25,7 +25,7 @@ import com.github.niefy.modules.sys.dao.SysLogDao;
 import com.github.niefy.modules.sys.entity.SysLogEntity;
 import com.github.niefy.modules.sys.service.SysLogService;
 import java.util.Map;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 @Service("sysLogService")

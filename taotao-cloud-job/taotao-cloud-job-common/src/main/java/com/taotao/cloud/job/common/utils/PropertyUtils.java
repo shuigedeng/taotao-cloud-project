@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.job.common.utils;
 
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 /**
  * PropertyUtils

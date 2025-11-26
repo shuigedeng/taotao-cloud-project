@@ -20,7 +20,7 @@ import com.github.niefy.common.utils.DateUtils;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.UUID;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 /**
  * 云存储(支持七牛、阿里云、腾讯云、又拍云)

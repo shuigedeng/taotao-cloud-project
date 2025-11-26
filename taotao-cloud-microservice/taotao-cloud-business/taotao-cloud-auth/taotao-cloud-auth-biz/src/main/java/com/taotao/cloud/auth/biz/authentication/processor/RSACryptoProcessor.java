@@ -19,7 +19,7 @@ package com.taotao.cloud.auth.biz.authentication.processor;
 import com.taotao.boot.security.spring.constants.SymbolConstants;
 import com.taotao.cloud.auth.biz.management.entity.SecretKey;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

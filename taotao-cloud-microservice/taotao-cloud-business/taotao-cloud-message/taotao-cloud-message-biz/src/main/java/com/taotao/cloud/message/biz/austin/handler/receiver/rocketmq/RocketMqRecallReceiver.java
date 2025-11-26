@@ -5,7 +5,7 @@ import com.taotao.cloud.message.biz.austin.common.domain.RecallTaskInfo;
 import com.taotao.cloud.message.biz.austin.handler.receiver.MessageReceiver;
 import com.taotao.cloud.message.biz.austin.handler.receiver.service.ConsumeService;
 import com.taotao.cloud.message.biz.austin.support.constans.MessageQueuePipeline;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.annotation.SelectorType;
 import org.apache.rocketmq.spring.core.RocketMQListener;

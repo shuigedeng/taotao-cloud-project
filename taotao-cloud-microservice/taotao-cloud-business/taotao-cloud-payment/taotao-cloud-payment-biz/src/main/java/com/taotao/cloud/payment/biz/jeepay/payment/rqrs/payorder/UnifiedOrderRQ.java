@@ -22,7 +22,7 @@ import com.jeequan.jeepay.pay.rqrs.AbstractMchAppRQ;
 import com.jeequan.jeepay.pay.rqrs.payorder.payway.*;
 import lombok.Data;
 import lombok.experimental.*;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.BeanUtils;
 

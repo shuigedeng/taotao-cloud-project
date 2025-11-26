@@ -19,7 +19,7 @@ import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.SystemClock;
 import com.jeequan.jeepay.core.exception.BizException;
-import org.apache.commons.lang3.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 
 import java.util.Date;
 
