@@ -34,7 +34,7 @@ import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.core.JsonFactory;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.core.JsonParser;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.core.type.TypeReference;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.JsonNode;
-import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.JsonMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -84,13 +84,13 @@ public class CustomMiddleCondition extends CustomArgsCondition<Event> {
         for (String variableName : variableNames) {
             Object variableValue = getVariableValue(event, variableName);
             if (variableName.equals("eventArgs")) {
-                ObjectMapper mapper = new ObjectMapper();
+                JsonMapper mapper = new JsonMapper();
                 JsonFactory factory = mapper.getFactory();
                 JsonParser parser = factory.createParser((String) variableValue);
                 JsonNode actualObj = mapper.readTree(parser);
                 if (actualObj.get("group") != null) {
                     // Skip events whose group does not fall in the target groups
-                    if (!targetGroup.contains(actualObj.get("group").asText())) {
+                    if (!targetGroup.contains(actualObj.get("group").asString())) {
                         return false;
                     }
                 }

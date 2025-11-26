@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.biz.jpa.jackson2;
 
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.Module;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -37,11 +37,11 @@ public class OAuth2JacksonProcessor {
 
     private static final Logger log = LoggerFactory.getLogger(OAuth2JacksonProcessor.class);
 
-    private final ObjectMapper objectMapper;
+    private final JsonMapper objectMapper;
 
     public OAuth2JacksonProcessor() {
 
-        objectMapper = new ObjectMapper();
+        objectMapper = new JsonMapper();
 
         ClassLoader classLoader = OAuth2JacksonProcessor.class.getClassLoader();
         List<Module> securityModules = SecurityJackson2Modules.getModules(classLoader);

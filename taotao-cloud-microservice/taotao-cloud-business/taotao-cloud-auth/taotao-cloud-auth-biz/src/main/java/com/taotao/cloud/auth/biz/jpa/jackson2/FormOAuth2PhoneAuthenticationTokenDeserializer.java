@@ -24,7 +24,7 @@ import tools.jackson.databind.DeserializationContext;
 import tools.jackson.databind.JsonDeserializer;
 import tools.jackson.databind.JsonMappingException;
 import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import tools.jackson.databind.node.MissingNode;
 import java.io.IOException;
 import java.util.List;
@@ -68,7 +68,7 @@ public class FormOAuth2PhoneAuthenticationTokenDeserializer
     public Oauth2FormSmsLoginAuthenticationToken deserialize(
             JsonParser jp, DeserializationContext ctxt)
             throws IOException, JacksonException {
-        ObjectMapper mapper = (ObjectMapper) jp.getCodec();
+        JsonMapper mapper = (JsonMapper) jp.getCodec();
         JsonNode jsonNode = mapper.readTree(jp);
 
         Boolean authenticated = readJsonNode(jsonNode, "authenticated").asBoolean();
@@ -106,22 +106,22 @@ public class FormOAuth2PhoneAuthenticationTokenDeserializer
         if (jsonNode.isNull() || jsonNode.isMissingNode()) {
             return "";
         }
-        return jsonNode.asText();
+        return jsonNode.asString();
     }
 
     private Object getCredentials(JsonNode credentialsNode) {
         if (credentialsNode.isNull() || credentialsNode.isMissingNode()) {
             return null;
         }
-        return credentialsNode.asText();
+        return credentialsNode.asString();
     }
 
-    private Object getPrincipal(ObjectMapper mapper, JsonNode principalNode)
+    private Object getPrincipal(JsonMapper mapper, JsonNode principalNode)
             throws IOException, JsonParseException, JsonMappingException {
         if (principalNode.isObject()) {
             return mapper.readValue(principalNode.traverse(mapper), Object.class);
         }
-        return principalNode.asText();
+        return principalNode.asString();
     }
 
     private JsonNode readJsonNode(JsonNode jsonNode, String field) {

@@ -3,7 +3,7 @@ package com.taotao.cloud.idea.plugin.toolkit.utils;
 import tools.jackson.core.util.DefaultIndenter;
 import tools.jackson.core.util.DefaultPrettyPrinter;
 import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import java.io.IOException;
 
 /**
@@ -34,7 +34,7 @@ public class JsonUtils {
 
 	private static final class Holder {
 
-		public static final ObjectMapper MAPPER = new ObjectMapper();
+		public static final JsonMapper MAPPER = new JsonMapper();
 		public static final DefaultPrettyPrinter DEFAULT_PRETTY_PRINTER = new CustomPrettyPrinter();
 	}
 

@@ -18,7 +18,7 @@ package com.taotao.cloud.generator.maku.common.utils;
 
 import cn.hutool.core.util.StrUtil;
 import tools.jackson.core.type.TypeReference;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +29,7 @@ import java.util.List;
  * <a href="https://maku.net">MAKU</a>
  */
 public class JsonUtils {
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final JsonMapper objectMapper = new JsonMapper();
 
     public static String toJsonString(Object object) {
         try {

@@ -27,10 +27,10 @@ import org.springframework.security.jackson2.SecurityJackson2Modules;
  * and {@link FormOAuth2PhoneAuthenticationTokenMixin}. If no default typing enabled by
  * default then it'll enable it because typing info is needed to properly
  * serialize/deserialize objects. In order to use this module just add this module into
- * your ObjectMapper configuration.
+ * your JsonMapper configuration.
  *
  * <pre>
- *     ObjectMapper mapper = new ObjectMapper();
+ *     JsonMapper mapper = new JsonMapper();
  *     mapper.registerModule(new CoreJackson2Module());
  * </pre> <b>Note: use {@link SecurityJackson2Modules#getModules(ClassLoader)} to get list
  * of all security modules.</b>

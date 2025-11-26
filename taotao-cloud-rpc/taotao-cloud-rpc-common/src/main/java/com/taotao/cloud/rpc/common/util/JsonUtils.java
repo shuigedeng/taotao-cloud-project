@@ -18,7 +18,7 @@ package com.taotao.cloud.rpc.common.util;
 
 import tools.jackson.core.JacksonException;
 import tools.jackson.databind.JavaType;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import java.util.List;
 
 /**
@@ -27,7 +27,7 @@ import java.util.List;
 public class JsonUtils {
 
     // 定义jackson对象
-    private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final JsonMapper MAPPER = new JsonMapper();
 
     /**
      * 将对象转换成json字符串。

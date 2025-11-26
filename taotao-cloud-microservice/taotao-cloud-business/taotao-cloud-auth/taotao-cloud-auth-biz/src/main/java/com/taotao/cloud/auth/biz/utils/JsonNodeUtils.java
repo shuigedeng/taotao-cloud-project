@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.biz.utils;
 
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import tools.jackson.databind.node.MissingNode;
 import java.time.Instant;
 import java.util.Map;
@@ -41,7 +41,7 @@ public class JsonNodeUtils {
             return null;
         }
         JsonNode value = jsonNode.findValue(fieldName);
-        return (value != null && value.isTextual()) ? value.asText() : null;
+        return (value != null && value.isTextual()) ? value.asString() : null;
     }
 
     public static Boolean findBooleanValue(JsonNode jsonNode, String fieldName) {
@@ -56,7 +56,7 @@ public class JsonNodeUtils {
             JsonNode jsonNode,
             String fieldName,
             TypeReference<T> valueTypeReference,
-            ObjectMapper mapper) {
+            JsonMapper mapper) {
         if (jsonNode == null) {
             return null;
         }

@@ -17,7 +17,7 @@
 package com.taotao.cloud.realtime.warehouse.flink.udf;
 
 import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import org.apache.flink.table.annotation.DataTypeHint;
 import org.apache.flink.table.functions.ScalarFunction;
 import org.apache.flink.types.Row;
@@ -31,7 +31,7 @@ import org.apache.flink.types.Row;
  */
 
 public class JsonDisplaysArrayParser extends ScalarFunction {
-    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final JsonMapper mapper = new JsonMapper();
 
     @DataTypeHint("ROW<display_type STRING, item STRING, item_type STRING, order INT, pos_id INT>")
     public Row eval(String jsonStr) {
@@ -47,10 +47,10 @@ public class JsonDisplaysArrayParser extends ScalarFunction {
             JsonNode actionNode = rootNode.get(0);
 
             String displayType =
-                    actionNode.has("display_type") ? actionNode.get("display_type").asText() : "";
-            String item = actionNode.has("item") ? actionNode.get("item").asText() : "";
+                    actionNode.has("display_type") ? actionNode.get("display_type").asString() : "";
+            String item = actionNode.has("item") ? actionNode.get("item").asString() : "";
             String itemType =
-                    actionNode.has("item_type") ? actionNode.get("item_type").asText() : "";
+                    actionNode.has("item_type") ? actionNode.get("item_type").asString() : "";
             Integer order = actionNode.has("order") ? actionNode.get("order").asInt() : null;
             Integer posId = actionNode.has("pos_id") ? actionNode.get("pos_id").asInt() : null;
 

@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.apache.flink.api.java.tuple.Tuple4;
 import org.apache.flink.cep.functions.PatternProcessFunction;
-import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.JsonMapper;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.SerializationFeature;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.module.SimpleModule;
 import org.apache.flink.util.CollectionUtil;
@@ -141,8 +141,8 @@ public class JDBCPeriodicPatternProcessorDiscoverer<T>
     @SuppressWarnings("unchecked")
     @Override
     public List<PatternProcessor<T>> getLatestPatternProcessors() throws Exception {
-        ObjectMapper objectMapper =
-                new ObjectMapper()
+        JsonMapper objectMapper =
+                new JsonMapper()
                         .registerModule(
                                 new SimpleModule()
                                         .addDeserializer(

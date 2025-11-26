@@ -1,7 +1,7 @@
 package com.taotao.cloud.iot.biz.communication.tcp.handler;
 
 import cn.hutool.core.util.StrUtil;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.taotao.cloud.iot.biz.communication.dto.DeviceCommandResponseDTO;
@@ -56,7 +56,7 @@ public class DeviceCommandResponseTCPMessageHandler implements TCPMessageHandler
 
     private DeviceCommandResponseDTO parseCommandReplyMessage(String topic, Object message) {
         try {
-            ObjectMapper mapper = new ObjectMapper();
+            JsonMapper mapper = new JsonMapper();
             DeviceCommandResponseDTO commandResponse =  mapper.convertValue(message, DeviceCommandResponseDTO.class);
             if (StrUtil.isBlank(commandResponse.getCommandId())) {
                 log.error(StrUtil.format("主题'{}'的消息,缺失指令ID", topic));

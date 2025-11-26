@@ -21,7 +21,7 @@ import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ObjectUtil;
 import tools.jackson.core.JacksonException;
 import tools.jackson.core.type.TypeReference;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import tools.jackson.databind.exc.MismatchedInputException;
 import com.taotao.boot.common.utils.context.ContextUtils;
 import java.io.IOException;
@@ -38,9 +38,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class JsonUtils {
 
-    private static ObjectMapper OBJECT_MAPPER = ContextUtils.getBean(ObjectMapper.class);
+    private static JsonMapper OBJECT_MAPPER = ContextUtils.getBean(JsonMapper.class);
 
-    public static ObjectMapper getObjectMapper() {
+    public static JsonMapper getJsonMapper() {
         return OBJECT_MAPPER;
     }
 

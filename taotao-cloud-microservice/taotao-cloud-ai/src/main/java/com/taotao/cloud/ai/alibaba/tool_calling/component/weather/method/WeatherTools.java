@@ -17,7 +17,7 @@
 package com.taotao.cloud.ai.alibaba.tool_calling.component.weather.method;
 
 import tools.jackson.core.type.TypeReference;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -42,7 +42,7 @@ public class WeatherTools {
 
     private final WebClient webClient;
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final JsonMapper objectMapper = new JsonMapper();
 
     public WeatherTools(WeatherProperties properties) {
         this.webClient =

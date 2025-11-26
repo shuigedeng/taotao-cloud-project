@@ -1,7 +1,7 @@
 package com.taotao.cloud.iot.biz.communication.tcp.handler;
 
 import cn.hutool.core.util.StrUtil;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.taotao.cloud.iot.biz.communication.dto.DevicePropertyDTO;
@@ -38,7 +38,7 @@ public class DevicePropertyTCPMessageHandler implements TCPMessageHandler {
 
     private DevicePropertyDTO parseStatusMessage(String topic, Object message) {
         try {
-            ObjectMapper mapper = new ObjectMapper();
+            JsonMapper mapper = new JsonMapper();
             return mapper.convertValue(message, DevicePropertyDTO.class);
         } catch (Exception e) {
             log.error(StrUtil.format("将主题'{}'的消息解析为设备运行状态对象失败", topic), e);

@@ -22,7 +22,7 @@ import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.DeserializationContext;
 import tools.jackson.databind.JsonDeserializer;
 import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import com.taotao.cloud.auth.biz.utils.JsonNodeUtils;
 import java.io.IOException;
 import java.time.Instant;
@@ -52,12 +52,12 @@ public class RegisteredClientDeserializer extends JsonDeserializer<RegisteredCli
             JsonParser jsonParser, DeserializationContext deserializationContext)
             throws IOException, JacksonException {
 
-        ObjectMapper mapper = (ObjectMapper) jsonParser.getCodec();
+        JsonMapper mapper = (JsonMapper) jsonParser.getCodec();
         JsonNode root = mapper.readTree(jsonParser);
         return deserialize(jsonParser, mapper, root);
     }
 
-    private RegisteredClient deserialize(JsonParser parser, ObjectMapper mapper, JsonNode root)
+    private RegisteredClient deserialize(JsonParser parser, JsonMapper mapper, JsonNode root)
             throws IOException {
 
         String id = JsonNodeUtils.findStringValue(root, "id");

@@ -22,7 +22,7 @@ import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.DeserializationContext;
 import tools.jackson.databind.JsonDeserializer;
 import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import com.taotao.boot.security.spring.core.authority.TtcGrantedAuthority;
 import com.taotao.cloud.auth.biz.utils.JsonNodeUtils;
 import java.io.IOException;
@@ -49,13 +49,13 @@ public class OAuth2ClientAuthenticationTokenDeserializer
             JsonParser jsonParser, DeserializationContext context)
             throws IOException, JacksonException {
 
-        ObjectMapper mapper = (ObjectMapper) jsonParser.getCodec();
+        JsonMapper mapper = (JsonMapper) jsonParser.getCodec();
         JsonNode jsonNode = mapper.readTree(jsonParser);
         return deserialize(jsonParser, mapper, jsonNode);
     }
 
     private OAuth2ClientAuthenticationToken deserialize(
-            JsonParser parser, ObjectMapper mapper, JsonNode root) throws IOException {
+            JsonParser parser, JsonMapper mapper, JsonNode root) throws IOException {
         Set<TtcGrantedAuthority> authorities =
                 JsonNodeUtils.findValue(root, "authorities", TTC_GRANTED_AUTHORITY_SET, mapper);
         RegisteredClient registeredClient =

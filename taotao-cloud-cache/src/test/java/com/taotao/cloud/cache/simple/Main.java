@@ -3,13 +3,13 @@ package com.taotao.cloud.cache.simple;
 import tools.jackson.databind.BeanDescription;
 import tools.jackson.databind.DeserializationConfig;
 import tools.jackson.databind.JsonDeserializer;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import tools.jackson.databind.deser.BeanDeserializerModifier;
 import tools.jackson.databind.module.SimpleModule;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
+        JsonMapper objectMapper = new JsonMapper();
         
         // 注册自定义模块
 //        SimpleModule module = new SimpleModule();

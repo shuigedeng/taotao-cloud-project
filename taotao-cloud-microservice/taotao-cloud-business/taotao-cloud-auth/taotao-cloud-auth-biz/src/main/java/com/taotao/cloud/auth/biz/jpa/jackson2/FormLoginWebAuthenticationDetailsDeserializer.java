@@ -21,7 +21,7 @@ import tools.jackson.core.JsonParser;
 import tools.jackson.databind.DeserializationContext;
 import tools.jackson.databind.JsonDeserializer;
 import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import tools.jackson.databind.node.MissingNode;
 import com.taotao.boot.security.spring.authentication.login.form.FormLoginWebAuthenticationDetails;
 import java.io.IOException;
@@ -38,15 +38,15 @@ public class FormLoginWebAuthenticationDetailsDeserializer
     public FormLoginWebAuthenticationDetails deserialize(
             JsonParser jp, DeserializationContext deserializationContext)
             throws IOException, JacksonException {
-        ObjectMapper mapper = (ObjectMapper) jp.getCodec();
+        JsonMapper mapper = (JsonMapper) jp.getCodec();
         JsonNode jsonNode = mapper.readTree(jp);
 
-        String remoteAddress = readJsonNode(jsonNode, "remoteAddress").asText();
-        String sessionId = readJsonNode(jsonNode, "sessionId").asText();
-        String parameterName = readJsonNode(jsonNode, "parameterName").asText();
-        String category = readJsonNode(jsonNode, "category").asText();
-        String code = readJsonNode(jsonNode, "code").asText();
-        String identity = readJsonNode(jsonNode, "identity").asText();
+        String remoteAddress = readJsonNode(jsonNode, "remoteAddress").asString();
+        String sessionId = readJsonNode(jsonNode, "sessionId").asString();
+        String parameterName = readJsonNode(jsonNode, "parameterName").asString();
+        String category = readJsonNode(jsonNode, "category").asString();
+        String code = readJsonNode(jsonNode, "code").asString();
+        String identity = readJsonNode(jsonNode, "identity").asString();
         boolean closed = readJsonNode(jsonNode, "closed").asBoolean();
 
         return new FormLoginWebAuthenticationDetails(

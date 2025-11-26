@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import tools.jackson.core.type.TypeReference;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -45,7 +45,7 @@ public class WeatherService implements Function<WeatherService.Request, WeatherS
 
     private final WebClient webClient;
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final JsonMapper objectMapper = new JsonMapper();
 
     public WeatherService(WeatherProperties properties) {
         this.webClient =

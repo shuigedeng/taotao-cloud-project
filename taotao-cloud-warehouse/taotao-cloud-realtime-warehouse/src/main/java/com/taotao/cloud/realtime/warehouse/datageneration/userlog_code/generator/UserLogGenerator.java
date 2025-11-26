@@ -16,14 +16,14 @@
 
 package com.taotao.cloud.realtime.warehouse.datageneration.userlog_code.generator;
 
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import java.time.Instant;
 import java.util.*;
 import com.taotao.cloud.realtime.warehouse.datageneration.userlog_code.model.*;
 
 public class UserLogGenerator {
     private static final Random random = new Random();
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final JsonMapper objectMapper = new JsonMapper();
 
     private static final String[] AREAS = {"北京", "上海", "广州", "深圳", "杭州", "成都", "武汉"};
     private static final String[] BRANDS = {"华为", "小米", "OPPO", "vivo", "Apple", "三星", "魅族"};

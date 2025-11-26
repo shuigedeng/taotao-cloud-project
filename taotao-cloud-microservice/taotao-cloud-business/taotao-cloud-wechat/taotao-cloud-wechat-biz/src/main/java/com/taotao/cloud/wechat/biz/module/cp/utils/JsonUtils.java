@@ -18,14 +18,14 @@ package com.taotao.cloud.wechat.biz.module.cp.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import tools.jackson.core.JacksonException;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import tools.jackson.databind.SerializationFeature;
 
 /**
  * @author Binary Wang(https://github.com/binarywang)
  */
 public class JsonUtils {
-    private static final ObjectMapper JSON = new ObjectMapper();
+    private static final JsonMapper JSON = new JsonMapper();
 
     static {
         JSON.setSerializationInclusion(Include.NON_NULL);

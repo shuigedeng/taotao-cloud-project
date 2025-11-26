@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.TimeZone;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -42,7 +41,7 @@ public class ApplicationConfig {
 
     /** 时区配置 */
     @Bean
-    public Jackson2ObjectMapperBuilderCustomizer jacksonObjectMapperCustomization() {
+    public Jackson2JsonMapperBuilderCustomizer jacksonJsonMapperCustomization() {
         return builder -> builder.timeZone(TimeZone.getDefault());
     }
 
@@ -52,13 +51,13 @@ public class ApplicationConfig {
      * @return
      */
     @Bean
-    public Jackson2ObjectMapperBuilderCustomizer customizer() {
+    public Jackson2JsonMapperBuilderCustomizer customizer() {
         return builder -> builder.featuresToEnable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
     }
 
     @Bean
-    public ObjectMapper objectMapper() {
-        final ObjectMapper objectMapper = new ObjectMapper();
+    public JsonMapper objectMapper() {
+        final JsonMapper objectMapper = new JsonMapper();
         // 忽略未知的枚举字段
         objectMapper.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL);
         // 忽略多余的字段不参与序列化

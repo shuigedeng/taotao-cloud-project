@@ -5,7 +5,7 @@ import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import com.taotao.cloud.file.biz.filestorage.mapper.FileDetailMapper;
 import com.taotao.cloud.file.biz.filestorage.model.FileDetail;
 import lombok.SneakyThrows;
@@ -31,7 +31,7 @@ public class FileDetailService extends ServiceImpl<FileDetailMapper, FileDetail>
 
 		//这是手动获 取附加属性字典 并转成 json 字符串，方便存储在数据库中
 		if (info.getAttr() != null) {
-			detail.setAttr(new ObjectMapper().writeValueAsString(info.getAttr()));
+			detail.setAttr(new JsonMapper().writeValueAsString(info.getAttr()));
 		}
 		boolean b = save(detail);
 		if (b) {
@@ -56,7 +56,7 @@ public class FileDetailService extends ServiceImpl<FileDetailMapper, FileDetail>
 
 		//这是手动获取数据库中的 json 字符串 并转成 附加属性字典，方便使用
 		if (StrUtil.isNotBlank(detail.getAttr())) {
-			info.setAttr(new ObjectMapper().readValue(detail.getAttr(),Dict.class));
+			info.setAttr(new JsonMapper().readValue(detail.getAttr(),Dict.class));
 		}
 		return info;
 	}

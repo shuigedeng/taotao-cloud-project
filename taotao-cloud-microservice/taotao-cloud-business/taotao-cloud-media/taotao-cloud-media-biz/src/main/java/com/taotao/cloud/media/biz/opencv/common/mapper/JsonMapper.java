@@ -23,7 +23,7 @@ import tools.jackson.core.JacksonException;
 import tools.jackson.databind.DeserializationFeature;
 import tools.jackson.databind.JavaType;
 import tools.jackson.databind.JsonSerializer;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import tools.jackson.databind.SerializationFeature;
 import tools.jackson.databind.SerializerProvider;
 import tools.jackson.databind.module.SimpleModule;
@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
  * 简单封装Jackson，实现JSON String<->Java Object的Mapper. 封装不同的输出风格, 使用不同的builder函数创建实例. 创建者 张志朋 创建时间
  * 2017年9月28日
  */
-public class JsonMapper extends ObjectMapper {
+public class JsonMapper extends JsonMapper {
 
     private static final long serialVersionUID = 1L;
 
@@ -217,7 +217,7 @@ public class JsonMapper extends ObjectMapper {
     }
 
     /** 取出Mapper做进一步的设置或使用其他序列化API. */
-    public ObjectMapper getMapper() {
+    public JsonMapper getMapper() {
         return this;
     }
 

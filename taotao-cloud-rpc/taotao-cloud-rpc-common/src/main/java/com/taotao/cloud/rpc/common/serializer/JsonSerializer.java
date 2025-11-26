@@ -17,7 +17,7 @@
 package com.taotao.cloud.rpc.common.serializer;
 
 import tools.jackson.core.JacksonException;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import com.taotao.cloud.rpc.common.enums.SerializerCode;
 import com.taotao.cloud.rpc.common.protocol.RpcRequest;
 import java.io.IOException;
@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class JsonSerializer implements CommonSerializer {
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private JsonMapper objectMapper = new JsonMapper();
 
     @Override
     public byte[] serialize(Object obj) {

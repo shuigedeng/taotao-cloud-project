@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.data.sync.parallel;
 
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -61,7 +61,7 @@ public class ParallelStepJob {
 
     @Bean
     public JsonItemReader<User> jsonItemReader() {
-        ObjectMapper objectMapper = new ObjectMapper();
+        JsonMapper objectMapper = new JsonMapper();
         JacksonJsonObjectReader<User> jsonObjectReader = new JacksonJsonObjectReader<>(User.class);
         jsonObjectReader.setMapper(objectMapper);
 

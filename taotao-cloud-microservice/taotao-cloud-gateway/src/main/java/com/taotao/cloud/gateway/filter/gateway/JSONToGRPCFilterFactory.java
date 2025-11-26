@@ -17,7 +17,7 @@
 package com.taotao.cloud.gateway.filter.gateway;
 //
 // import tools.jackson.core.JacksonException;
-// import tools.jackson.databind.ObjectMapper;
+// import tools.jackson.databind.JsonMapper;
 // import io.grpc.ManagedChannel;
 // import io.grpc.netty.shaded.io.grpc.netty.GrpcSslContexts;
 // import io.grpc.netty.shaded.io.grpc.netty.NettyChannelBuilder;
@@ -136,7 +136,7 @@ package com.taotao.cloud.gateway.filter.gateway;
 //             return jsonResponse -> {
 //                 try {
 //                     return new NettyDataBufferFactory(new PooledByteBufAllocator())
-//                             .wrap(Objects.requireNonNull(new ObjectMapper()
+//                             .wrap(Objects.requireNonNull(new JsonMapper()
 //                                     .writeValueAsBytes(jsonResponse)));
 //                 } catch (JacksonException e) {
 //                     return new NettyDataBufferFactory(new PooledByteBufAllocator())

@@ -17,7 +17,7 @@
 package com.taotao.cloud.realtime.warehouse.flink.udf;
 
 import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import org.apache.flink.table.annotation.DataTypeHint;
 import org.apache.flink.table.functions.ScalarFunction;
 import org.apache.flink.types.Row;
@@ -30,7 +30,7 @@ import org.apache.flink.types.Row;
  * 5. 查询 select json_actions_array_parser(`actions`).`action_id` as action_id, json_actions_array_parser(`actions`).`item` as item,json_actions_array_parser(`actions`).`item_type` as item_type,json_actions_array_parser(`actions`).`ts` as ts from ods.ods_log_inc;
  */
 public class JsonActionsArrayParser extends ScalarFunction {
-    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final JsonMapper mapper = new JsonMapper();
 
     @DataTypeHint("ROW<action_id STRING, item STRING, item_type STRING, ts BIGINT>")
     public Row eval(String jsonStr) {
@@ -46,10 +46,10 @@ public class JsonActionsArrayParser extends ScalarFunction {
             JsonNode actionNode = rootNode.get(0);
 
             String actionId =
-                    actionNode.has("action_id") ? actionNode.get("action_id").asText() : "";
-            String item = actionNode.has("item") ? actionNode.get("item").asText() : "";
+                    actionNode.has("action_id") ? actionNode.get("action_id").asString() : "";
+            String item = actionNode.has("item") ? actionNode.get("item").asString() : "";
             String itemType =
-                    actionNode.has("item_type") ? actionNode.get("item_type").asText() : "";
+                    actionNode.has("item_type") ? actionNode.get("item_type").asString() : "";
             Long timestamp = actionNode.has("ts") ? actionNode.get("ts").asLong() : 0L;
 
             Row result = new Row(4);

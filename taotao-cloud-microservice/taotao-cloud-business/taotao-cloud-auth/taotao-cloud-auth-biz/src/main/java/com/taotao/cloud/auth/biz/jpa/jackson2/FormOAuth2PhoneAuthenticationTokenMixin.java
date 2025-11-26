@@ -35,7 +35,7 @@ import org.springframework.security.jackson2.*;
  * </ol>
  *
  * <pre>
- *     ObjectMapper mapper = new ObjectMapper();
+ *     JsonMapper mapper = new JsonMapper();
  *     mapper.registerModule(new CoreJackson2Module());
  * </pre>
  *

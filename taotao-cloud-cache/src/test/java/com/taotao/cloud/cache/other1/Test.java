@@ -2,13 +2,13 @@ package com.taotao.cloud.cache.other1;
 
 import tools.jackson.core.JacksonException;
 import tools.jackson.databind.DeserializationFeature;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import tools.jackson.databind.module.SimpleModule;
 
 public class Test {
 
 	public static void main(String[] args) throws JacksonException {
-		ObjectMapper mapper = new ObjectMapper();
+		JsonMapper mapper = new JsonMapper();
 		SimpleModule module = new SimpleModule();
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		module.setDeserializerModifier(new CustomBeanDeserializerModifier());

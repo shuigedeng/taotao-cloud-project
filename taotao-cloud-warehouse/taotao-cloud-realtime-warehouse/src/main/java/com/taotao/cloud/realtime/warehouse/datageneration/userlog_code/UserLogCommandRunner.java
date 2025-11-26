@@ -18,7 +18,7 @@ package com.taotao.cloud.realtime.warehouse.datageneration.userlog_code;
 
 import tools.jackson.core.JsonGenerator;
 import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import tools.jackson.databind.node.ObjectNode;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
@@ -42,7 +42,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 @Order(2)
 public class UserLogCommandRunner implements CommandLineRunner {
     private static final Logger logger = LoggerFactory.getLogger(UserLogCommandRunner.class);
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final JsonMapper objectMapper = new JsonMapper();
 
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
@@ -141,7 +141,7 @@ public class UserLogCommandRunner implements CommandLineRunner {
 
         // 处理actions字段
         if (rootNode.has("actions") && !rootNode.get("actions").isNull()) {
-            String actionsStr = rootNode.get("actions").asText();
+            String actionsStr = rootNode.get("actions").asString();
             if (actionsStr != null && !actionsStr.isEmpty() && !actionsStr.equals("[]")) {
                 // 解析actions字符串为JSON数组
                 JsonNode actionsNode = objectMapper.readTree(actionsStr);
@@ -151,7 +151,7 @@ public class UserLogCommandRunner implements CommandLineRunner {
 
         // 处理displays字段
         if (rootNode.has("displays") && !rootNode.get("displays").isNull()) {
-            String displaysStr = rootNode.get("displays").asText();
+            String displaysStr = rootNode.get("displays").asString();
             if (displaysStr != null && !displaysStr.isEmpty() && !displaysStr.equals("[]")) {
                 // 解析displays字符串为JSON数组
                 JsonNode displaysNode = objectMapper.readTree(displaysStr);

@@ -21,7 +21,7 @@ import tools.jackson.core.JsonParser;
 import tools.jackson.databind.DeserializationContext;
 import tools.jackson.databind.JsonDeserializer;
 import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import tools.jackson.databind.node.MissingNode;
 import com.taotao.boot.security.spring.core.authority.TtcGrantedAuthority;
 import java.io.IOException;
@@ -36,9 +36,9 @@ public class TtcGrantedAuthorityDeserializer extends JsonDeserializer<TtcGranted
     @Override
     public TtcGrantedAuthority deserialize(JsonParser jp, DeserializationContext ctxt)
             throws IOException, JacksonException {
-        ObjectMapper mapper = (ObjectMapper) jp.getCodec();
+        JsonMapper mapper = (JsonMapper) jp.getCodec();
         JsonNode jsonNode = mapper.readTree(jp);
-        String authority = readJsonNode(jsonNode, "authority").asText();
+        String authority = readJsonNode(jsonNode, "authority").asString();
         return new TtcGrantedAuthority(authority);
     }
 

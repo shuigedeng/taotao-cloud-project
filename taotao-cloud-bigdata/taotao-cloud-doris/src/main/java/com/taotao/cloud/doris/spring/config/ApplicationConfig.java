@@ -18,7 +18,7 @@ package com.taotao.cloud.doris.spring.config;
 
 import java.util.TimeZone;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.boot.autoconfigure.jackson.Jackson2JsonMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -29,8 +29,8 @@ public class ApplicationConfig {
      * Time zone configuration
      */
     @Bean
-    public Jackson2ObjectMapperBuilderCustomizer jacksonObjectMapperCustomization() {
-        return jacksonObjectMapperBuilder ->
-                jacksonObjectMapperBuilder.timeZone(TimeZone.getDefault());
+    public Jackson2JsonMapperBuilderCustomizer jacksonJsonMapperCustomization() {
+        return jacksonJsonMapperBuilder ->
+                jacksonJsonMapperBuilder.timeZone(TimeZone.getDefault());
     }
 }

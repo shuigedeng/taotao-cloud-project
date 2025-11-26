@@ -1,12 +1,12 @@
 package com.taotao.cloud.cache.other;
 
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonMapper;
 import tools.jackson.databind.module.SimpleModule;
 
-public class CustomObjectMapperConfig {
+public class CustomJsonMapperConfig {
 
-    public static ObjectMapper createCustomObjectMapper() {
-        ObjectMapper mapper = new ObjectMapper();
+    public static JsonMapper createCustomJsonMapper() {
+        JsonMapper mapper = new JsonMapper();
         
         SimpleModule module = new SimpleModule();
         module.setDeserializerModifier(new CustomBeanDeserializerModifier());
@@ -16,7 +16,7 @@ public class CustomObjectMapperConfig {
     }
 
 		public static void main(String[] args) throws Exception {
-			ObjectMapper mapper = CustomObjectMapperConfig.createCustomObjectMapper();
+			JsonMapper mapper = CustomJsonMapperConfig.createCustomJsonMapper();
 
 			String json = "{\"name\":\"John\",\"email\":\"john@example.com\"}";
 			User user = mapper.readValue(json, User.class);
