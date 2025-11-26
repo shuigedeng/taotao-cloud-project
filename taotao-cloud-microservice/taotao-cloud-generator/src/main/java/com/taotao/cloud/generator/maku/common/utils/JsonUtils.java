@@ -29,11 +29,11 @@ import java.util.List;
  * <a href="https://maku.net">MAKU</a>
  */
 public class JsonUtils {
-    private static final JsonMapper objectMapper = new JsonMapper();
+    private static final JsonMapper jsonMapper = new JsonMapper();
 
     public static String toJsonString(Object object) {
         try {
-            return objectMapper.writeValueAsString(object);
+            return jsonMapper.writeValueAsString(object);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -44,7 +44,7 @@ public class JsonUtils {
             return null;
         }
         try {
-            return objectMapper.readValue(text, clazz);
+            return jsonMapper.readValue(text, clazz);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -52,7 +52,7 @@ public class JsonUtils {
 
     public static <T> T parseObject(String text, TypeReference<T> typeReference) {
         try {
-            return objectMapper.readValue(text, typeReference);
+            return jsonMapper.readValue(text, typeReference);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -63,8 +63,8 @@ public class JsonUtils {
             return new ArrayList<>();
         }
         try {
-            return objectMapper.readValue(
-                    text, objectMapper.getTypeFactory().constructCollectionType(List.class, clazz));
+            return jsonMapper.readValue(
+                    text, jsonMapper.getTypeFactory().constructCollectionType(List.class, clazz));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

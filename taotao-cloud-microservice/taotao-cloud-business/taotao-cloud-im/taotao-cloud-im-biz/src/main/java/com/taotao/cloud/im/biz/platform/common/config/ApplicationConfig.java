@@ -56,16 +56,16 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public JsonMapper objectMapper() {
-        final JsonMapper objectMapper = new JsonMapper();
+    public JsonMapper jsonMapper() {
+        final JsonMapper jsonMapper = new JsonMapper();
         // 忽略未知的枚举字段
-        objectMapper.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL);
+        jsonMapper.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL);
         // 忽略多余的字段不参与序列化
-        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        jsonMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         // 忽略null属性字段
-        //        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        //        jsonMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         // null属性字段转""
-        objectMapper.getSerializerProvider().setNullValueSerializer(new JsonSerializer<Object>() {
+        jsonMapper.getSerializerProvider().setNullValueSerializer(new JsonSerializer<Object>() {
             @Override
             public void serialize(Object arg0, JsonGenerator arg1, SerializerProvider arg2) throws IOException {
                 arg1.writeString("");
@@ -83,7 +83,7 @@ public class ApplicationConfig {
             }
         });
         // 注册 module
-        objectMapper.registerModule(simpleModule);
-        return objectMapper;
+        jsonMapper.registerModule(simpleModule);
+        return jsonMapper;
     }
 }

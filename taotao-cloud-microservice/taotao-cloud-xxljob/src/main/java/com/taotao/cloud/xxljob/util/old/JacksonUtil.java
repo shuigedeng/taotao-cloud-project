@@ -21,9 +21,9 @@ package com.taotao.cloud.xxljob.util.old;//package com.xxl.job.admin.util.old;
 //public class JacksonUtil {
 //	private static Logger logger = LoggerFactory.getLogger(JacksonUtil.class);
 //
-//    private final static JsonMapper objectMapper = new JsonMapper();
+//    private final static JsonMapper jsonMapper = new JsonMapper();
 //    public static JsonMapper getInstance() {
-//        return objectMapper;
+//        return jsonMapper;
 //    }
 //
 //    /**

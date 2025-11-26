@@ -141,7 +141,7 @@ public class JDBCPeriodicPatternProcessorDiscoverer<T>
     @SuppressWarnings("unchecked")
     @Override
     public List<PatternProcessor<T>> getLatestPatternProcessors() throws Exception {
-        JsonMapper objectMapper =
+        JsonMapper jsonMapper =
                 new JsonMapper()
                         .registerModule(
                                 new SimpleModule()
@@ -158,10 +158,10 @@ public class JDBCPeriodicPatternProcessorDiscoverer<T>
                             try {
                                 String patternStr = patternProcessor.f2;
                                 GraphSpec graphSpec =
-                                        objectMapper.readValue(patternStr, GraphSpec.class);
-                                objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+                                        jsonMapper.readValue(patternStr, GraphSpec.class);
+                                jsonMapper.enable(SerializationFeature.INDENT_OUTPUT);
                                 System.out.println(
-                                        objectMapper
+                                        jsonMapper
                                                 .writerWithDefaultPrettyPrinter()
                                                 .writeValueAsString(graphSpec));
                                 PatternProcessFunction<T, ?> patternProcessFunction = null;
@@ -177,7 +177,7 @@ public class JDBCPeriodicPatternProcessorDiscoverer<T>
                                                             .newInstance(id, version);
                                 }
                                 LOG.warn(
-                                        objectMapper
+                                        jsonMapper
                                                 .writerWithDefaultPrettyPrinter()
                                                 .writeValueAsString(patternProcessor.f2));
                                 return new DefaultPatternProcessor<>(

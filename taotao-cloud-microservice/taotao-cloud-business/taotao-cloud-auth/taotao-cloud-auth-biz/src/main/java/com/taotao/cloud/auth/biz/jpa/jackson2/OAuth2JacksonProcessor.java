@@ -37,11 +37,11 @@ public class OAuth2JacksonProcessor {
 
     private static final Logger log = LoggerFactory.getLogger(OAuth2JacksonProcessor.class);
 
-    private final JsonMapper objectMapper;
+    private final JsonMapper jsonMapper;
 
     public OAuth2JacksonProcessor() {
 
-        objectMapper = new JsonMapper();
+        jsonMapper = new JsonMapper();
 
         ClassLoader classLoader = OAuth2JacksonProcessor.class.getClassLoader();
         List<Module> securityModules = SecurityJackson2Modules.getModules(classLoader);
@@ -52,10 +52,10 @@ public class OAuth2JacksonProcessor {
                         classLoader);
         securityModules.add(module);
 
-        objectMapper.registerModules(securityModules);
-        objectMapper.registerModules(new OAuth2AuthorizationServerJackson2Module());
-        objectMapper.registerModules(new TtcJackson2Module());
-        objectMapper.registerModules(new OAuth2TokenJackson2Module());
+        jsonMapper.registerModules(securityModules);
+        jsonMapper.registerModules(new OAuth2AuthorizationServerJackson2Module());
+        jsonMapper.registerModules(new TtcJackson2Module());
+        jsonMapper.registerModules(new OAuth2TokenJackson2Module());
     }
 
     private static Module loadAndGetInstance(String className, ClassLoader loader) {
@@ -71,7 +71,7 @@ public class OAuth2JacksonProcessor {
 
     public Map<String, Object> parseMap(String data) {
         try {
-            return this.objectMapper.readValue(data, new TypeReference<>() {});
+            return this.jsonMapper.readValue(data, new TypeReference<>() {});
         } catch (Exception ex) {
             log.error("OAuth2 jackson processing parseMap catch error {}", ex.getMessage());
             throw new IllegalArgumentException(ex.getMessage(), ex);
@@ -80,7 +80,7 @@ public class OAuth2JacksonProcessor {
 
     public String writeMap(Map<String, Object> data) {
         try {
-            return this.objectMapper.writeValueAsString(data);
+            return this.jsonMapper.writeValueAsString(data);
         } catch (Exception ex) {
             log.error("OAuth2 jackson processing writeMap catch error {}", ex.getMessage());
             throw new IllegalArgumentException(ex.getMessage(), ex);

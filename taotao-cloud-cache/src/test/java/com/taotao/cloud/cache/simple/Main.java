@@ -9,12 +9,12 @@ import tools.jackson.databind.module.SimpleModule;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        JsonMapper objectMapper = new JsonMapper();
+        JsonMapper jsonMapper = new JsonMapper();
         
         // 注册自定义模块
 //        SimpleModule module = new SimpleModule();
 //        module.setDeserializerModifier(new CustomBeanDeserializerModifier());
-        objectMapper.registerModule(new SimpleModule(){{
+        jsonMapper.registerModule(new SimpleModule(){{
 			setDeserializerModifier(new BeanDeserializerModifier() {
 				@Override
 				public JsonDeserializer<?> modifyDeserializer(DeserializationConfig config, BeanDescription beanDesc,
@@ -38,7 +38,7 @@ public class Main {
                 "}";
 
         // 反序列化
-        User user = objectMapper.readValue(json, User.class);
+        User user = jsonMapper.readValue(json, User.class);
         System.out.println(user);
         // 正确输出：
         // User{name='John Doe', email='JOHN.DOE@EXAMPLE.COM', age=30, 

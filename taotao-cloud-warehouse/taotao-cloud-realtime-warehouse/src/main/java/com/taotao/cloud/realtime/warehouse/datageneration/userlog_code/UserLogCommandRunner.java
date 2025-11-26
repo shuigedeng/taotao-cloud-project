@@ -42,7 +42,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 @Order(2)
 public class UserLogCommandRunner implements CommandLineRunner {
     private static final Logger logger = LoggerFactory.getLogger(UserLogCommandRunner.class);
-    private static final JsonMapper objectMapper = new JsonMapper();
+    private static final JsonMapper jsonMapper = new JsonMapper();
 
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
@@ -137,14 +137,14 @@ public class UserLogCommandRunner implements CommandLineRunner {
      */
     private String processNestedJson(UserLog log) throws Exception {
         // 先将对象转换为JSON节点
-        JsonNode rootNode = objectMapper.valueToTree(log);
+        JsonNode rootNode = jsonMapper.valueToTree(log);
 
         // 处理actions字段
         if (rootNode.has("actions") && !rootNode.get("actions").isNull()) {
             String actionsStr = rootNode.get("actions").asString();
             if (actionsStr != null && !actionsStr.isEmpty() && !actionsStr.equals("[]")) {
                 // 解析actions字符串为JSON数组
-                JsonNode actionsNode = objectMapper.readTree(actionsStr);
+                JsonNode actionsNode = jsonMapper.readTree(actionsStr);
                 ((ObjectNode) rootNode).set("actions", actionsNode);
             }
         }
@@ -154,12 +154,12 @@ public class UserLogCommandRunner implements CommandLineRunner {
             String displaysStr = rootNode.get("displays").asString();
             if (displaysStr != null && !displaysStr.isEmpty() && !displaysStr.equals("[]")) {
                 // 解析displays字符串为JSON数组
-                JsonNode displaysNode = objectMapper.readTree(displaysStr);
+                JsonNode displaysNode = jsonMapper.readTree(displaysStr);
                 ((ObjectNode) rootNode).set("displays", displaysNode);
             }
         }
 
         // 将处理后的JSON节点转换回字符串
-        return objectMapper.writeValueAsString(rootNode);
+        return jsonMapper.writeValueAsString(rootNode);
     }
 }

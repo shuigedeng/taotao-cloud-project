@@ -30,13 +30,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class JsonSerializer implements CommonSerializer {
 
-    private JsonMapper objectMapper = new JsonMapper();
+    private JsonMapper jsonMapper = new JsonMapper();
 
     @Override
     public byte[] serialize(Object obj) {
         byte[] data = null;
         try {
-            data = objectMapper.writeValueAsBytes(obj);
+            data = jsonMapper.writeValueAsBytes(obj);
         } catch (JacksonException e) {
             log.error("Error occurred while serializing, info: {}", e.getMessage());
         }
@@ -50,7 +50,7 @@ public class JsonSerializer implements CommonSerializer {
         }
         Object obj = null;
         try {
-            obj = objectMapper.readValue(data, clazz);
+            obj = jsonMapper.readValue(data, clazz);
             if (obj instanceof RpcRequest) {
                 obj = validateAndHandlerRequest(obj);
             }
@@ -74,8 +74,8 @@ public class JsonSerializer implements CommonSerializer {
         for (int i = 0; i < rpcRequest.getParamTypes().length; i++) {
             Class<?> clazz = rpcRequest.getParamTypes()[i];
             if (!clazz.isAssignableFrom(rpcRequest.getParameters()[i].getClass())) {
-                byte[] bytes = objectMapper.writeValueAsBytes(rpcRequest.getParameters()[i]);
-                rpcRequest.getParameters()[i] = objectMapper.readValue(bytes, clazz);
+                byte[] bytes = jsonMapper.writeValueAsBytes(rpcRequest.getParameters()[i]);
+                rpcRequest.getParameters()[i] = jsonMapper.readValue(bytes, clazz);
             }
         }
         return rpcRequest;

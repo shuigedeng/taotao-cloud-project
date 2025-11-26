@@ -42,7 +42,7 @@ public class WeatherTools {
 
     private final WebClient webClient;
 
-    private final JsonMapper objectMapper = new JsonMapper();
+    private final JsonMapper jsonMapper = new JsonMapper();
 
     public WeatherTools(WeatherProperties properties) {
         this.webClient =
@@ -80,7 +80,7 @@ public class WeatherTools {
 
             Response response =
                     fromJson(
-                            objectMapper.readValue(
+                            jsonMapper.readValue(
                                     jsonResponse, new TypeReference<Map<String, Object>>() {}));
             logger.info("Weather data fetched successfully for city: {}", response.city());
             return response;

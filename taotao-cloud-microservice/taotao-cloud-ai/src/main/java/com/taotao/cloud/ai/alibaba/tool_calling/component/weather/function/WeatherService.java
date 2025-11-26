@@ -45,7 +45,7 @@ public class WeatherService implements Function<WeatherService.Request, WeatherS
 
     private final WebClient webClient;
 
-    private final JsonMapper objectMapper = new JsonMapper();
+    private final JsonMapper jsonMapper = new JsonMapper();
 
     public WeatherService(WeatherProperties properties) {
         this.webClient =
@@ -87,7 +87,7 @@ public class WeatherService implements Function<WeatherService.Request, WeatherS
 
             Response response =
                     fromJson(
-                            objectMapper.readValue(
+                            jsonMapper.readValue(
                                     jsonResponse, new TypeReference<Map<String, Object>>() {}));
             logger.info("Weather data fetched successfully for city: {}", response.city());
             return response;

@@ -23,7 +23,7 @@ import com.taotao.cloud.realtime.warehouse.datageneration.userlog_code.model.*;
 
 public class UserLogGenerator {
     private static final Random random = new Random();
-    private static final JsonMapper objectMapper = new JsonMapper();
+    private static final JsonMapper jsonMapper = new JsonMapper();
 
     private static final String[] AREAS = {"北京", "上海", "广州", "深圳", "杭州", "成都", "武汉"};
     private static final String[] BRANDS = {"华为", "小米", "OPPO", "vivo", "Apple", "三星", "魅族"};
@@ -101,7 +101,7 @@ public class UserLogGenerator {
             actions.add(action);
         }
         try {
-            return objectMapper.writeValueAsString(actions);
+            return jsonMapper.writeValueAsString(actions);
         } catch (Exception e) {
             return "[]";
         }
@@ -120,7 +120,7 @@ public class UserLogGenerator {
             displays.add(display);
         }
         try {
-            return objectMapper.writeValueAsString(displays);
+            return jsonMapper.writeValueAsString(displays);
         } catch (Exception e) {
             return "[]";
         }
