@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.realtime.warehouse.datageneration.userlog_code.generator;
 
-import tools.jackson.databind.JsonMapper;
+import tools.jackson.databind.json.JsonMapper;
 import java.time.Instant;
 import java.util.*;
 import com.taotao.cloud.realtime.warehouse.datageneration.userlog_code.model.*;

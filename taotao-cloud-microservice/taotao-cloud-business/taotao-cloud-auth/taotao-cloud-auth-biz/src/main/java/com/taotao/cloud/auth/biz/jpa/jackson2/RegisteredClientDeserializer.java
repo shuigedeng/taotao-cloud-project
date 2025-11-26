@@ -22,7 +22,7 @@ import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.DeserializationContext;
 import tools.jackson.databind.JsonDeserializer;
 import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.JsonMapper;
+import tools.jackson.databind.json.JsonMapper;
 import com.taotao.cloud.auth.biz.utils.JsonNodeUtils;
 import java.io.IOException;
 import java.time.Instant;

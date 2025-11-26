@@ -2,7 +2,7 @@ package com.taotao.cloud.cache.other1;
 
 import tools.jackson.core.JacksonException;
 import tools.jackson.databind.DeserializationFeature;
-import tools.jackson.databind.JsonMapper;
+import tools.jackson.databind.json.JsonMapper;
 import tools.jackson.databind.module.SimpleModule;
 
 public class Test {

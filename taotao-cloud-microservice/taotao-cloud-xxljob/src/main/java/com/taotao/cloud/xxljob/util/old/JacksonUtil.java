@@ -4,7 +4,7 @@ package com.taotao.cloud.xxljob.util.old;//package com.xxl.job.admin.util.old;
 //import tools.jackson.core.JsonParseException;
 //import tools.jackson.databind.JavaType;
 //import tools.jackson.databind.JsonMappingException;
-//import tools.jackson.databind.JsonMapper;
+//import tools.jackson.databind.json.JsonMapper;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 //

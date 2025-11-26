@@ -17,7 +17,7 @@
 package com.taotao.cloud.realtime.warehouse.flink.udf;
 
 import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.JsonMapper;
+import tools.jackson.databind.json.JsonMapper;
 import org.apache.flink.table.annotation.DataTypeHint;
 import org.apache.flink.table.functions.ScalarFunction;
 import org.apache.flink.types.Row;

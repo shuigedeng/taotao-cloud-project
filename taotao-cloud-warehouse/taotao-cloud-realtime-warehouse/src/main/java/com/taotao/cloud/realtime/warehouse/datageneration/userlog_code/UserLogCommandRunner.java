@@ -18,7 +18,7 @@ package com.taotao.cloud.realtime.warehouse.datageneration.userlog_code;
 
 import tools.jackson.core.JsonGenerator;
 import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.JsonMapper;
+import tools.jackson.databind.json.JsonMapper;
 import tools.jackson.databind.node.ObjectNode;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;

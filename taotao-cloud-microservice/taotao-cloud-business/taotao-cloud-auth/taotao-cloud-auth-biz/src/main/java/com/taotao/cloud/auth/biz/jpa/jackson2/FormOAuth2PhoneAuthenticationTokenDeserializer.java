@@ -24,7 +24,7 @@ import tools.jackson.databind.DeserializationContext;
 import tools.jackson.databind.JsonDeserializer;
 import tools.jackson.databind.JsonMappingException;
 import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.JsonMapper;
+import tools.jackson.databind.json.JsonMapper;
 import tools.jackson.databind.node.MissingNode;
 import java.io.IOException;
 import java.util.List;

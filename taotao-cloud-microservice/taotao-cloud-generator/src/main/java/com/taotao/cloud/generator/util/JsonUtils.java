@@ -21,7 +21,7 @@ import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ObjectUtil;
 import tools.jackson.core.JacksonException;
 import tools.jackson.core.type.TypeReference;
-import tools.jackson.databind.JsonMapper;
+import tools.jackson.databind.json.JsonMapper;
 import tools.jackson.databind.exc.MismatchedInputException;
 import com.taotao.boot.common.utils.context.ContextUtils;
 import java.io.IOException;

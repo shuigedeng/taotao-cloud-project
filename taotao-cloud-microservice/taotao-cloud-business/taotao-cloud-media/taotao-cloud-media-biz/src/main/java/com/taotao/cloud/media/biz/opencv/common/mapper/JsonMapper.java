@@ -23,7 +23,7 @@ import tools.jackson.core.JacksonException;
 import tools.jackson.databind.DeserializationFeature;
 import tools.jackson.databind.JavaType;
 import tools.jackson.databind.JsonSerializer;
-import tools.jackson.databind.JsonMapper;
+import tools.jackson.databind.json.JsonMapper;
 import tools.jackson.databind.SerializationFeature;
 import tools.jackson.databind.SerializerProvider;
 import tools.jackson.databind.module.SimpleModule;

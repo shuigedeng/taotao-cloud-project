@@ -3,7 +3,7 @@ package com.taotao.cloud.cache.simple;
 import tools.jackson.databind.BeanDescription;
 import tools.jackson.databind.DeserializationConfig;
 import tools.jackson.databind.JsonDeserializer;
-import tools.jackson.databind.JsonMapper;
+import tools.jackson.databind.json.JsonMapper;
 import tools.jackson.databind.deser.BeanDeserializerModifier;
 import tools.jackson.databind.module.SimpleModule;
 

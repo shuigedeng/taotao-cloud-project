@@ -18,7 +18,7 @@ package com.taotao.cloud.rpc.common.util;
 
 import tools.jackson.core.JacksonException;
 import tools.jackson.databind.JavaType;
-import tools.jackson.databind.JsonMapper;
+import tools.jackson.databind.json.JsonMapper;
 import java.util.List;
 
 /**

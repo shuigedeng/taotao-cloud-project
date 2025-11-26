@@ -1,6 +1,6 @@
 package com.taotao.cloud.cache.other;
 
-import tools.jackson.databind.JsonMapper;
+import tools.jackson.databind.json.JsonMapper;
 import tools.jackson.databind.module.SimpleModule;
 
 public class CustomJsonMapperConfig {

@@ -17,7 +17,7 @@
 package com.taotao.cloud.rpc.common.serializer;
 
 import tools.jackson.core.JacksonException;
-import tools.jackson.databind.JsonMapper;
+import tools.jackson.databind.json.JsonMapper;
 import com.taotao.cloud.rpc.common.enums.SerializerCode;
 import com.taotao.cloud.rpc.common.protocol.RpcRequest;
 import java.io.IOException;

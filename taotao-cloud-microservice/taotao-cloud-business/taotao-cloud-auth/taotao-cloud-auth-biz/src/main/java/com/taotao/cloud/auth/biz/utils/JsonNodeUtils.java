@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.biz.utils;
 
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.JsonMapper;
+import tools.jackson.databind.json.JsonMapper;
 import tools.jackson.databind.node.MissingNode;
 import java.time.Instant;
 import java.util.Map;

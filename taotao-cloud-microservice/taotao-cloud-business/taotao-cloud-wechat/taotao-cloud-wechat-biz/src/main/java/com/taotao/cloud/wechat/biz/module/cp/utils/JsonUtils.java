@@ -18,7 +18,7 @@ package com.taotao.cloud.wechat.biz.module.cp.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import tools.jackson.core.JacksonException;
-import tools.jackson.databind.JsonMapper;
+import tools.jackson.databind.json.JsonMapper;
 import tools.jackson.databind.SerializationFeature;
 
 /**

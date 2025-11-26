@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.biz.jpa.jackson2;
 
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.Module;
-import tools.jackson.databind.JsonMapper;
+import tools.jackson.databind.json.JsonMapper;
 import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;

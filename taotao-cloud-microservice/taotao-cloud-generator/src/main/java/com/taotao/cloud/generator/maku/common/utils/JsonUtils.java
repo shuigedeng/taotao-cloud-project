@@ -18,7 +18,7 @@ package com.taotao.cloud.generator.maku.common.utils;
 
 import cn.hutool.core.util.StrUtil;
 import tools.jackson.core.type.TypeReference;
-import tools.jackson.databind.JsonMapper;
+import tools.jackson.databind.json.JsonMapper;
 import java.util.ArrayList;
 import java.util.List;
 

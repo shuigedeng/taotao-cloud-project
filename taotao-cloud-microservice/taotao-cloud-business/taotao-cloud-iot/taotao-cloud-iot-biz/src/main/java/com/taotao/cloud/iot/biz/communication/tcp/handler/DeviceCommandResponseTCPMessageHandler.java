@@ -1,7 +1,7 @@
 package com.taotao.cloud.iot.biz.communication.tcp.handler;
 
 import cn.hutool.core.util.StrUtil;
-import tools.jackson.databind.JsonMapper;
+import tools.jackson.databind.json.JsonMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.taotao.cloud.iot.biz.communication.dto.DeviceCommandResponseDTO;
