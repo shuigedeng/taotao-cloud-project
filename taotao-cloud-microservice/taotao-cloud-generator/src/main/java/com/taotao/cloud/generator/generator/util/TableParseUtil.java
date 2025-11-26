@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.generator.generator.util;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 import com.taotao.cloud.generator.generator.entity.ClassInfo;
 import com.taotao.cloud.generator.generator.entity.FieldInfo;
 import com.taotao.cloud.generator.generator.entity.NonCaseString;

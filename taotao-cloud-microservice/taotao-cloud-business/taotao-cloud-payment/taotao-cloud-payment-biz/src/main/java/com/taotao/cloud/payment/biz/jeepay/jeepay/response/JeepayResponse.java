@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.jeepay.jeepay.response;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.taotao.cloud.disruptor.util.StringUtils;
 import com.taotao.cloud.payment.biz.jeepay.core.utils.JeepayKit;
 import java.io.Serializable;

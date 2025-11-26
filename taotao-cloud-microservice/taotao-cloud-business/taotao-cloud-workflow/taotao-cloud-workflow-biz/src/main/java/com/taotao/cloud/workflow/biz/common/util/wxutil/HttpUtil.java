@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.common.util.wxutil;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.google.common.collect.ImmutableMap;
 import java.io.BufferedReader;
 import java.io.File;

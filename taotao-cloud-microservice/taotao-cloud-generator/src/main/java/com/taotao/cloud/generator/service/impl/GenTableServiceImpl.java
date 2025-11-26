@@ -21,7 +21,7 @@ import static com.baomidou.mybatisplus.generator.config.ConstVal.UTF8;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ObjectUtil;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.generator.config.GenConstants;
 import com.taotao.cloud.generator.entity.GenTable;

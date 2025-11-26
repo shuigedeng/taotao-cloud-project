@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.gateway.filter.global.rsa;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import java.nio.charset.StandardCharsets;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpStatus;

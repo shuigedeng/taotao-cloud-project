@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.task.job.powerjob.processors.test;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import java.util.Date;
 import java.util.Optional;
 import org.springframework.stereotype.Component;

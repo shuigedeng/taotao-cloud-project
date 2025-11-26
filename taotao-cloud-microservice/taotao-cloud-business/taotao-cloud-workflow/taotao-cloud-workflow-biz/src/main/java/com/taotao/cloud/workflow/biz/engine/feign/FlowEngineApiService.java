@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.engine.feign;
 
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson2.JSONArray;
 import com.taotao.cloud.workflow.api.feign.flow.FlowEngineApi;
 import com.taotao.cloud.workflow.api.vo.entity.DictionaryDataEntity;
 import com.taotao.cloud.workflow.biz.common.base.ActionResult;

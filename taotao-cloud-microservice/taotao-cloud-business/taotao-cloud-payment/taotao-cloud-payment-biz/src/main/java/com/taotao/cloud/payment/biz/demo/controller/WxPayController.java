@@ -17,7 +17,7 @@
 package com.taotao.cloud.payment.biz.demo.controller;
 
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.yungouos.springboot.demo.common.ApiResponse;
 import com.yungouos.springboot.demo.service.wxpay.WxPayService;
 import jakarta.annotation.Resource;

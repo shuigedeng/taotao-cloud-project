@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.payment.biz.jeepay.payment.ctrl.division;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.jeequan.jeepay.components.mq.model.PayOrderDivisionMQ;
 import com.jeequan.jeepay.core.constants.CS;
 import com.jeequan.jeepay.core.entity.MchDivisionReceiver;

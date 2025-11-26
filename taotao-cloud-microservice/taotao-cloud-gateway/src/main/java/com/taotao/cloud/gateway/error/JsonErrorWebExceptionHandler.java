@@ -43,6 +43,8 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerErrorException;
 import org.springframework.web.server.UnsupportedMediaTypeStatusException;
 
+import static org.apache.commons.lang3.StringUtils.substringAfterLast;
+
 /**
  * 自定义异常处理
  *
@@ -85,20 +87,20 @@ public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandle
 
 		if (error instanceof NotFoundException notFoundException) {
 			String serverId =
-				StringUtils.substringAfterLast(
+				substringAfterLast(
 					error.getMessage(), "Unable to find instance for ");
 			serverId = StrUtil.replace(serverId, "\"", StringUtils.EMPTY);
 			LogUtils.error(notFoundException, String.format("无法找到%s服务, 服务不可用", serverId));
 		}
 		if (error instanceof TimeoutException timeoutException) {
 			String serverId =
-				StringUtils.substringAfterLast(error.getMessage(), "connection refuse");
+				substringAfterLast(error.getMessage(), "connection refuse");
 			serverId = StrUtil.replace(serverId, "\"", StringUtils.EMPTY);
 			LogUtils.error(timeoutException, String.format("访问服务超时%s服务", serverId));
 		}
 		if (StrUtil.containsIgnoreCase(error.getMessage(), "connection refused")) {
 			String serverId =
-				StringUtils.substringAfterLast(error.getMessage(), "connection refuse");
+				substringAfterLast(error.getMessage(), "connection refuse");
 			serverId = StrUtil.replace(serverId, "\"", StringUtils.EMPTY);
 			LogUtils.error(String.format("目标服务拒绝连接%s服务", serverId));
 		}

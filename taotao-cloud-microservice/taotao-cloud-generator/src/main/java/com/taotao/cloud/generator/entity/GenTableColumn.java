@@ -20,6 +20,9 @@ import com.taotao.boot.data.jpa.tenant.BaseEntity;
 import jakarta.validation.constraints.NotBlank;
 import com.taotao.boot.common.utils.lang.StringUtils;
 
+import static org.apache.commons.lang3.StringUtils.substringBetween;
+import static org.springframework.util.StringUtils.capitalize;
+
 /**
  * 代码生成业务字段表 gen_table_column
  *
@@ -140,7 +143,7 @@ public class GenTableColumn extends BaseEntity {
     }
 
     public String getCapJavaField() {
-        return StringUtils.capitalize(javaField);
+        return capitalize(javaField);
     }
 
     public void setIsPk(String isPk) {
@@ -317,7 +320,7 @@ public class GenTableColumn extends BaseEntity {
     }
 
     public String readConverterExp() {
-        String remarks = StringUtils.substringBetween(this.columnComment, "（", "）");
+        String remarks = substringBetween(this.columnComment, "（", "）");
         StringBuffer sb = new StringBuffer();
         if (StringUtils.isNotEmpty(remarks)) {
             for (String value : remarks.split(" ")) {

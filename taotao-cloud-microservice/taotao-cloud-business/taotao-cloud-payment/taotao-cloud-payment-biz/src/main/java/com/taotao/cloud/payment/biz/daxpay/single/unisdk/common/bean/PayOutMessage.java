@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.single.unisdk.common.bean;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import lombok.Getter;
 import lombok.Setter;
 import com.taotao.cloud.payment.biz.daxpay.unisdk.common.bean.outbuilder.JsonBuilder;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.kit.plugin.alipay;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayRequest;
 import com.alipay.api.AlipayResponse;

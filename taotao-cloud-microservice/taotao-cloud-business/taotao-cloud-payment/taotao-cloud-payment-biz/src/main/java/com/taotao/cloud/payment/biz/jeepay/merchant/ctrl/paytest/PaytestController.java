@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.payment.biz.jeepay.merchant.ctrl.paytest;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.jeequan.jeepay.JeepayClient;
 import com.jeequan.jeepay.core.constants.CS;
 import com.jeequan.jeepay.core.entity.MchApp;

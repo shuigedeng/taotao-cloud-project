@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.shortlink.biz.web.invoker;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.taotao.cloud.log.api.api.dto.ShortLinkDTO;
 import com.taotao.cloud.log.api.api.request.ShortLinkListRequest;
 import com.taotao.cloud.log.api.api.service.ShortLinkService;

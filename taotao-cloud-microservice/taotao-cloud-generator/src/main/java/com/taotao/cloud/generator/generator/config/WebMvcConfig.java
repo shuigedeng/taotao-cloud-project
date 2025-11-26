@@ -1,7 +1,7 @@
 // package com.taotao.cloud.generator.generator.config;
 //
-// import com.alibaba.fastjson.support.config.FastJsonConfig;
-// import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+// import com.alibaba.fastjson2.support.config.FastJsonConfig;
+// import com.alibaba.fastjson2.support.spring.FastJsonHttpMessageConverter;
 // import jakarta.servlet.DispatcherType;
 // import org.springframework.boot.web.servlet.FilterRegistrationBean;
 // import org.springframework.context.annotation.Bean;

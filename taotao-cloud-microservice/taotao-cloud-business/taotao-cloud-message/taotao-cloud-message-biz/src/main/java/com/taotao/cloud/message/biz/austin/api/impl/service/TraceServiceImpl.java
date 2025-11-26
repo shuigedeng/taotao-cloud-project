@@ -3,7 +3,7 @@ package com.taotao.cloud.message.biz.austin.api.impl.service;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.StrUtil;
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
 import com.taotao.cloud.message.biz.austin.common.domain.SimpleAnchorInfo;
 import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;

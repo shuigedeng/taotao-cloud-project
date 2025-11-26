@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.biz.wechatpush.util;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

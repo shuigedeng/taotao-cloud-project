@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.austin.web.config;
 
-import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.alibaba.fastjson2.support.spring.FastJsonHttpMessageConverter;
 import com.google.common.collect.Lists;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.context.annotation.Bean;

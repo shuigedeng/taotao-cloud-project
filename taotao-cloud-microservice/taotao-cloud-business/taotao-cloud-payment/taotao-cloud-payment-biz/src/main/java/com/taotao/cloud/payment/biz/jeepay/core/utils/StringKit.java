@@ -17,7 +17,7 @@ package com.taotao.cloud.payment.biz.jeepay.core.utils;
 
 import cn.hutool.core.net.url.UrlBuilder;
 import cn.hutool.core.util.URLUtil;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.taotao.boot.common.utils.lang.StringUtils;
 
 import java.util.Map;

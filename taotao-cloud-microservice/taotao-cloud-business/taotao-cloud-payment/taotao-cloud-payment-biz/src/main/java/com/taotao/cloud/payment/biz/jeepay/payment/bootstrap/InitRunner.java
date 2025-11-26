@@ -16,10 +16,10 @@
 package com.taotao.cloud.payment.biz.jeepay.payment.bootstrap;
 
 import cn.hutool.core.date.DatePattern;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializeConfig;
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.alibaba.fastjson.serializer.SimpleDateFormatSerializer;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.serializer.SerializeConfig;
+import com.alibaba.fastjson2.serializer.SerializerFeature;
+import com.alibaba.fastjson2.serializer.SimpleDateFormatSerializer;
 import com.jeequan.jeepay.pay.config.SystemYmlConfig;
 import com.jeequan.jeepay.service.impl.SysConfigService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.demo.test;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.yungouos.pay.entity.WxOauthInfo;
 import com.yungouos.pay.entity.WxWebLoginBiz;
 import com.yungouos.pay.wxapi.WxApi;

@@ -3,7 +3,7 @@ package com.taotao.cloud.message.biz.austin.api.impl.action.send;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ReUtil;
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
 import com.taotao.cloud.message.biz.austin.common.enums.IdType;
 import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;

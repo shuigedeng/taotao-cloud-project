@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.channel.union.sdk.bean;
 
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.taotao.cloud.payment.biz.daxpay.unisdk.common.bean.PayMessage;
 
 import java.math.BigDecimal;

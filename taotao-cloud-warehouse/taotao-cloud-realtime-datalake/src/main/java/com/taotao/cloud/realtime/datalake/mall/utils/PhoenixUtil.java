@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.realtime.datalake.mall.utils;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.taotao.cloud.realtime.mall.common.GmallConfig;
 import java.sql.*;
 import java.util.ArrayList;

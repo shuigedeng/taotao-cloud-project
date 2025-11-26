@@ -18,7 +18,7 @@ package com.taotao.cloud.mq.consistency.raft.impl;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.mq.consistency.raft.LogModule;
 import com.taotao.cloud.mq.consistency.raft.entity.LogEntry;
 import java.io.File;

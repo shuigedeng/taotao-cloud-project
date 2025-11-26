@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.payment.biz.jeepay.payment.rqrs.payorder;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.jeequan.jeepay.pay.rqrs.AbstractRS;
 import com.jeequan.jeepay.pay.rqrs.msg.ChannelRetMsg;
 import lombok.Data;

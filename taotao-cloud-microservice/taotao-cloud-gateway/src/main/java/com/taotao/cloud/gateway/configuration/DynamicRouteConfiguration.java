@@ -20,7 +20,8 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.cloud.nacos.NacosConfigProperties;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
@@ -160,7 +161,7 @@ public class DynamicRouteConfiguration {
 
         private List<RouteDefinition> getListByStr(String content) {
             if (StrUtil.isNotEmpty(content)) {
-                return JSONObject.parseArray(content, RouteDefinition.class);
+                return JSONArray.parseArray(content, RouteDefinition.class);
             }
             return new ArrayList<>(0);
         }

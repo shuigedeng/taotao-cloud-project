@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.single.unisdk.common.http;
 
 import cn.hutool.core.util.StrUtil;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import com.taotao.cloud.payment.biz.daxpay.unisdk.common.bean.result.PayException;
 import com.taotao.cloud.payment.biz.daxpay.unisdk.common.exception.PayErrorException;

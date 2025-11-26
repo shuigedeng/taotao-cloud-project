@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.payment.biz.jeepay.payment.channel.wxpay;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.github.binarywang.wxpay.bean.request.WxPayOrderCloseRequest;
 import com.github.binarywang.wxpay.bean.result.WxPayOrderCloseResult;
 import com.github.binarywang.wxpay.exception.WxPayException;

@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.payment.biz.jeepay.merchant.ctrl.sysuser;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 import com.jeequan.jeepay.core.constants.CS;
 import com.jeequan.jeepay.core.entity.SysEntitlement;
 import com.jeequan.jeepay.core.model.ApiRes;

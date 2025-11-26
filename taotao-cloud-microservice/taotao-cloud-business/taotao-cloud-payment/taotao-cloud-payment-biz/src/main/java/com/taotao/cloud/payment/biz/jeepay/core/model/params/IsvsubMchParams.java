@@ -16,7 +16,7 @@
 package com.taotao.cloud.payment.biz.jeepay.core.model.params;
 
 import cn.hutool.core.util.StrUtil;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 
 /*
  * 抽象类 特约商户参数定义

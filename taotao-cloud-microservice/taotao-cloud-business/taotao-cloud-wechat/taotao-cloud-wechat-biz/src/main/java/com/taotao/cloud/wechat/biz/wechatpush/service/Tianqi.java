@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.wechat.biz.wechatpush.service;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 import com.taotao.cloud.wechat.biz.wechatpush.util.HttpUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

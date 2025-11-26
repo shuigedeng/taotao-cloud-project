@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.distribution.biz.api.controller;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.itstyle.distribution.common.entity.Result;
 import com.itstyle.distribution.common.redis.RedisUtil;
 import com.itstyle.distribution.common.utils.HttpClient;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.mq.consistency.raft;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.mq.consistency.raft.impl.DefaultStateMachine;
 import java.io.File;
 import lombok.Getter;

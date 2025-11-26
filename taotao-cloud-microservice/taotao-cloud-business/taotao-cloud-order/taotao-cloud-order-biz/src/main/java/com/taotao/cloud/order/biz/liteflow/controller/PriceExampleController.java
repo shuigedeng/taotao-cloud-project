@@ -1,7 +1,7 @@
 package com.yomahub.liteflow.example.controller;
 
 import cn.hutool.core.collection.ListUtil;
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.yomahub.liteflow.core.FlowExecutor;
 import com.yomahub.liteflow.example.bean.PriceCalcReqVO;
 import com.yomahub.liteflow.example.bean.ProductPackVO;

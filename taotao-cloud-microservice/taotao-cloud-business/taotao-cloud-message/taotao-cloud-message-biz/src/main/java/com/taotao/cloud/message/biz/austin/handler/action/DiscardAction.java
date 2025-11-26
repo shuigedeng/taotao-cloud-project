@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.handler.action;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONArray;
 import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;
 import com.taotao.cloud.message.biz.austin.common.domain.AnchorInfo;
 import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;

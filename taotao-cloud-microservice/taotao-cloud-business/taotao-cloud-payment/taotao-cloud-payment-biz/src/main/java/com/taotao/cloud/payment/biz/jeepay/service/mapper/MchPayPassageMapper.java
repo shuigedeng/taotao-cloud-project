@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.payment.biz.jeepay.service.mapper;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jeequan.jeepay.core.entity.MchPayPassage;
 

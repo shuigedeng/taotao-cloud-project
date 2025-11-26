@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.common.util;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.taotao.cloud.workflow.biz.common.base.ActionResultCode;
 import com.taotao.cloud.workflow.biz.common.base.UserInfo;
 import com.taotao.cloud.workflow.biz.common.model.OnlineUserModel;

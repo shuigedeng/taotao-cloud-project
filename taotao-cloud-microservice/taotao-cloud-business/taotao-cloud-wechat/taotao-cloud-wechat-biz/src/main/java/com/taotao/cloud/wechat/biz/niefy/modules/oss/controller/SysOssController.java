@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.biz.niefy.modules.oss.controller;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.github.niefy.common.exception.RRException;
 import com.github.niefy.common.utils.ConfigConstant;
 import com.github.niefy.common.utils.Constant;

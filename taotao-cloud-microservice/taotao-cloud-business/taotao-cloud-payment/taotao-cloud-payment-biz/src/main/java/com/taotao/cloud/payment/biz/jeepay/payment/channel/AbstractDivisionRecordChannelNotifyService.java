@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.payment.biz.jeepay.payment.channel;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.jeequan.jeepay.core.beans.RequestKitBean;
 import com.jeequan.jeepay.core.entity.PayOrderDivisionRecord;
 import com.jeequan.jeepay.pay.model.MchAppConfigContext;

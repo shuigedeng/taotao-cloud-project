@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.payment.biz.jeepay.core.beans;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.jeequan.jeepay.core.constants.ApiCodeEnum;
 import com.jeequan.jeepay.core.exception.BizException;
 import lombok.extern.slf4j.Slf4j;

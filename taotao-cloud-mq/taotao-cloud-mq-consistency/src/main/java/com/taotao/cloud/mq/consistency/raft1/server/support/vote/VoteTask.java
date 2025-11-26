@@ -18,7 +18,7 @@ package com.taotao.cloud.mq.consistency.raft1.server.support.vote;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.mq.consistency.raft1.common.constant.RpcRequestCmdConst;
 import com.taotao.cloud.mq.consistency.raft1.common.constant.enums.NodeStatusEnum;
 import com.taotao.cloud.mq.consistency.raft1.common.entity.req.VoteRequest;

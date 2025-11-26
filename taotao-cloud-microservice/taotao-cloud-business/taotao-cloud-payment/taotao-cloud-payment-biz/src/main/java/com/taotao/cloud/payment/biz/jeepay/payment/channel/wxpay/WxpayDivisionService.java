@@ -15,9 +15,9 @@
  */
 package com.taotao.cloud.payment.biz.jeepay.payment.channel.wxpay;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 import com.github.binarywang.wxpay.bean.profitsharing.*;
 import com.github.binarywang.wxpay.bean.profitsharingV3.ProfitSharingReceiver;
 import com.github.binarywang.wxpay.bean.profitsharingV3.ProfitSharingUnfreezeRequest;

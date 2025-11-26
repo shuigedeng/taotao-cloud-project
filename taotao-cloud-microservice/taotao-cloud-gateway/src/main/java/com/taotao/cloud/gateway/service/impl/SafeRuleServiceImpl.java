@@ -17,7 +17,7 @@
 package com.taotao.cloud.gateway.service.impl;
 
 import cn.hutool.core.util.StrUtil;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.google.common.base.Stopwatch;
 import com.taotao.boot.common.constant.CommonConstants;
 import com.taotao.boot.common.utils.date.DateUtils;

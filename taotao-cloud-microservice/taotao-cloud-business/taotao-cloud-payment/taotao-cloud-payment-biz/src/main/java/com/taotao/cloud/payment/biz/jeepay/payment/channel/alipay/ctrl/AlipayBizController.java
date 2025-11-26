@@ -16,7 +16,7 @@
 package com.taotao.cloud.payment.biz.jeepay.payment.channel.alipay.ctrl;
 
 import cn.hutool.core.util.URLUtil;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.alipay.api.domain.AlipayOpenAuthTokenAppModel;
 import com.alipay.api.request.AlipayOpenAuthTokenAppRequest;
 import com.alipay.api.response.AlipayOpenAuthTokenAppResponse;

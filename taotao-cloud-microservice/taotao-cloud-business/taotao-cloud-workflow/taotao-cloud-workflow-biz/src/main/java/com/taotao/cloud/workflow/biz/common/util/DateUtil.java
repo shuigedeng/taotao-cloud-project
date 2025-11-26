@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.common.util;
 
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson2.JSONArray;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.ParsePosition;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.shortlink.biz.shortlink.component; // package com.zc.shortlink.component;
 //
-// import com.alibaba.fastjson.JSONObject;
+// import com.alibaba.fastjson2.JSONObject;
 // import com.zc.shortlink.utils.CommonBizUtil;
 // import lombok.extern.slf4j.Slf4j;
 // import org.springframework.data.redis.core.StringRedisTemplate;

@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.austin.support.mq.eventbus;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.google.common.eventbus.EventBus;
 import com.taotao.cloud.message.biz.austin.common.domain.RecallTaskInfo;
 import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;

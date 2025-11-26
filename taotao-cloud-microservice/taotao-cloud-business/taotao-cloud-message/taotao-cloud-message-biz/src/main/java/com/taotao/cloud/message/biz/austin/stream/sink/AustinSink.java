@@ -3,7 +3,7 @@ package com.taotao.cloud.message.biz.austin.stream.sink;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.text.StrPool;
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.google.common.base.Throwables;
 import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
 import com.taotao.cloud.message.biz.austin.common.domain.AnchorInfo;

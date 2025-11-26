@@ -3,7 +3,7 @@ package com.taotao.cloud.payment.biz.daxpay.channel.union.sdk.api;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import com.taotao.cloud.payment.biz.daxpay.channel.union.sdk.bean.*;
 import com.taotao.cloud.payment.biz.daxpay.unisdk.common.api.BasePayService;

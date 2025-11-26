@@ -3,7 +3,7 @@ package com.taotao.cloud.message.biz.austin.handler.handler.impl;
 import cn.hutool.http.ContentType;
 import cn.hutool.http.Header;
 import cn.hutool.http.HttpRequest;
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.google.common.base.Throwables;
 import com.taotao.cloud.message.biz.austin.common.domain.RecallTaskInfo;
 import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;

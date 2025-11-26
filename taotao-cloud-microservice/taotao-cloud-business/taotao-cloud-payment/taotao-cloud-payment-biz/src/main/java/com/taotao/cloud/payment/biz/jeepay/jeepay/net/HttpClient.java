@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.jeepay.jeepay.net;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.payment.biz.jeepay.jeepay.exception.APIConnectionException;
 import com.taotao.cloud.payment.biz.jeepay.jeepay.exception.JeepayException;
 import java.net.ConnectException;

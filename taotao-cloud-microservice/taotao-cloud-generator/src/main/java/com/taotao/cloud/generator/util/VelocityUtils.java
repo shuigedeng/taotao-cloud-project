@@ -17,7 +17,7 @@
 package com.taotao.cloud.generator.util;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.taotao.cloud.generator.config.GenConfig;
 import com.taotao.cloud.generator.config.GenConstants;
 import com.taotao.cloud.generator.entity.GenTable;

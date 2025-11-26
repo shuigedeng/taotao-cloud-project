@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.payment.biz.jeepay.payment.channel.ysfpay.utils;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import org.apache.commons.codec.binary.Base64;
 import com.taotao.boot.common.utils.lang.StringUtils;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;

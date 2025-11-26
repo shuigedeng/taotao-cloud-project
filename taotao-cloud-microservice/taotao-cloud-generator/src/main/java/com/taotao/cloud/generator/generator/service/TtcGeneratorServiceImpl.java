@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.generator.generator.service;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 import com.taotao.cloud.generator.generator.util.FreemarkerUtil;
 import com.taotao.cloud.generator.generator.util.MapUtil;
 import freemarker.template.TemplateException;

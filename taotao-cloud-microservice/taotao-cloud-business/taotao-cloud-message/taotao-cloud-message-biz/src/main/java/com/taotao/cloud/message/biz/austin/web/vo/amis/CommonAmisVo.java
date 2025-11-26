@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.web.vo.amis;
 
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import lombok.*;
 import lombok.Builder;
 import lombok.Data;

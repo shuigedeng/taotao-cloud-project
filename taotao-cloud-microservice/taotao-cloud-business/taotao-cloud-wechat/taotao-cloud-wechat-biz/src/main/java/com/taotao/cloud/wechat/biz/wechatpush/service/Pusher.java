@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.biz.wechatpush.service;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.taotao.cloud.wechat.biz.wechatpush.util.CaiHongPi;
 import com.taotao.cloud.wechat.biz.wechatpush.util.JiNianRi;
 import me.chanjar.weixin.mp.api.WxMpService;

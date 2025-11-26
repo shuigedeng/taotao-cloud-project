@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.api.impl.action.recall;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.serializer.SerializerFeature;
 import com.google.common.base.Throwables;
 import com.taotao.cloud.message.biz.austin.common.domain.RecallTaskInfo;
 import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;

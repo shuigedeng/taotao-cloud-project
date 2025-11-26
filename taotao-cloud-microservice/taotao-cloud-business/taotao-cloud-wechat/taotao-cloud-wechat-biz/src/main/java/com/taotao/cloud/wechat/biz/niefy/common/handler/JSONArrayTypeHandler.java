@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.biz.niefy.common.handler;
 
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson2.JSONArray;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.payment.biz.jeepay.payment.channel.ysfpay.utils;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.jeequan.jeepay.core.constants.CS;
 
 import jakarta.activation.MimetypesFileTypeMap;

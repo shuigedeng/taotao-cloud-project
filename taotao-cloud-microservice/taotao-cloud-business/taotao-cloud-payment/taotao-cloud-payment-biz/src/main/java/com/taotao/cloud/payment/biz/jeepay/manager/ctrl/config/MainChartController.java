@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.payment.biz.jeepay.manager.ctrl.config;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.jeequan.jeepay.core.model.ApiRes;
 import com.jeequan.jeepay.mgr.ctrl.CommonCtrl;
 import com.jeequan.jeepay.service.impl.PayOrderService;

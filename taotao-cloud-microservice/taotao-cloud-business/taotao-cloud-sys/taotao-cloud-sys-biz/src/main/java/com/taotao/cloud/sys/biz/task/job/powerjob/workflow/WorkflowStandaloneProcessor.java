@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.task.job.powerjob.workflow;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.taotao.boot.common.utils.log.LogUtils;
 import java.util.Map;
 import org.springframework.stereotype.Component;

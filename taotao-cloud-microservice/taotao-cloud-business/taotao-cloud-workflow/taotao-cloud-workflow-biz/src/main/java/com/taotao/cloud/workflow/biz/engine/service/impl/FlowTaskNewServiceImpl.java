@@ -17,7 +17,7 @@
 package com.taotao.cloud.workflow.biz.engine.service.impl;
 
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.dynamic.datasource.annotation.DSTransactional;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.taotao.boot.cache.redis.repository.RedisRepository;

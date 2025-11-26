@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.austin.web.handler;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.google.common.base.Throwables;
 import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;
 import com.taotao.cloud.message.biz.austin.common.constant.OfficialAccountParamConstant;

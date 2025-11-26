@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.payment.biz.jeepay.merchant.ctrl.transfer;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.jeequan.jeepay.mch.ctrl.CommonCtrl;
 import com.jeequan.jeepay.mch.websocket.server.WsChannelUserIdServer;
 import io.swagger.annotations.Api;

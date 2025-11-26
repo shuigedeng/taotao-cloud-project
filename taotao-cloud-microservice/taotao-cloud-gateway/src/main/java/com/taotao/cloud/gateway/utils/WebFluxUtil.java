@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.gateway.utils;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.taotao.boot.common.model.result.Result;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;

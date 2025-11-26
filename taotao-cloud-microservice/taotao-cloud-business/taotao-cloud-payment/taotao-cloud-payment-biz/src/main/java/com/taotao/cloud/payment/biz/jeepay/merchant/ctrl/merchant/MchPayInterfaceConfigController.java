@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.payment.biz.jeepay.merchant.ctrl.merchant;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.jeequan.jeepay.components.mq.model.ResetIsvMchAppInfoConfigMQ;
 import com.jeequan.jeepay.components.mq.vender.IMQSender;
 import com.jeequan.jeepay.core.aop.MethodLog;

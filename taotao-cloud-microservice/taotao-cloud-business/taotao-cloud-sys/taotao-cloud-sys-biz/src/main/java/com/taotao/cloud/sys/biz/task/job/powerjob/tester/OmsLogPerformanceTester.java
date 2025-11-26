@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.task.job.powerjob.tester;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.taotao.boot.common.utils.log.LogUtils;
 import org.springframework.stereotype.Component;
 import tech.powerjob.worker.core.processor.ProcessResult;

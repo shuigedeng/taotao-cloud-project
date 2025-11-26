@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.payment.biz.jeepay.components.mq.vender.aliyunrocketmq;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.aliyun.openservices.ons.api.Message;
 import com.aliyun.openservices.ons.api.Producer;
 import com.aliyun.openservices.ons.api.SendResult;

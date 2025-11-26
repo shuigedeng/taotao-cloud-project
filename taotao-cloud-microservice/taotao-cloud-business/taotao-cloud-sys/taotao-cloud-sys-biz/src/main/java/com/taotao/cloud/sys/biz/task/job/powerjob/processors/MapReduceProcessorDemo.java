@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.sys.biz.task.job.powerjob.processors;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import com.google.common.collect.Lists;
 import com.taotao.boot.common.utils.log.LogUtils;
 import java.util.List;
