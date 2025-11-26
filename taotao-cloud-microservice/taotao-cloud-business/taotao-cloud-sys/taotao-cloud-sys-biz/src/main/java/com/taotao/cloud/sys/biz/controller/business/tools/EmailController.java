@@ -27,7 +27,7 @@ import com.taotao.cloud.sys.biz.model.vo.alipay.EmailVO;
 import com.taotao.cloud.sys.biz.model.convert.EmailConvert;
 import com.taotao.cloud.sys.biz.model.entity.config.EmailConfig;
 import com.taotao.cloud.sys.biz.service.business.IEmailConfigService;
-import com.taotao.boot.webmvc.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.*;

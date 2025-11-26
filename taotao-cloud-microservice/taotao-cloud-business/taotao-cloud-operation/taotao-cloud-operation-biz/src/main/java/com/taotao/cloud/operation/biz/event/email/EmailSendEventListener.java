@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.operation.biz.event.email;
 
-import com.taotao.boot.webmvc.request.model.RequestLog;
+import com.taotao.boot.web.request.model.RequestLog;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;

@@ -24,7 +24,7 @@ import com.taotao.cloud.sys.biz.model.vo.alipay.TradeVO;
 import com.taotao.cloud.sys.biz.model.entity.config.AlipayConfig;
 import com.taotao.cloud.sys.biz.service.business.IAlipayConfigService;
 import com.taotao.cloud.sys.biz.utils.AlipayUtils;
-import com.taotao.boot.webmvc.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

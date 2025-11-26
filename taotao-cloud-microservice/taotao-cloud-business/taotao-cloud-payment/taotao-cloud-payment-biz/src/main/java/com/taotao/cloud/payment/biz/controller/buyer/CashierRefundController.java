@@ -18,7 +18,7 @@ package com.taotao.cloud.payment.biz.controller.buyer;
 
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.biz.kit.RefundSupport;
-import com.taotao.boot.webmvc.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;

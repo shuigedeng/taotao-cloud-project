@@ -24,7 +24,7 @@ import com.taotao.cloud.member.sys.model.vo.MemberPointsHistoryPageVO;
 import com.taotao.cloud.member.sys.model.vo.MemberPointsHistoryVO;
 import com.taotao.cloud.member.biz.model.entity.MemberPointsHistory;
 import com.taotao.cloud.member.biz.service.business.IMemberPointsHistoryService;
-import com.taotao.boot.webmvc.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.*;

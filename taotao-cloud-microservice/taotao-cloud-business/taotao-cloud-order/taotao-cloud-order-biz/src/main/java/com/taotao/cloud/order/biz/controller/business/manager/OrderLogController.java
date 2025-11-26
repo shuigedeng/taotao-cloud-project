@@ -23,7 +23,7 @@ import com.taotao.cloud.order.sys.model.page.order.OrderLogPageQuery;
 import com.taotao.cloud.order.sys.model.vo.order.OrderLogVO;
 import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
 import com.taotao.cloud.order.biz.service.business.trade.IOrderLogService;
-import com.taotao.boot.webmvc.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.*;

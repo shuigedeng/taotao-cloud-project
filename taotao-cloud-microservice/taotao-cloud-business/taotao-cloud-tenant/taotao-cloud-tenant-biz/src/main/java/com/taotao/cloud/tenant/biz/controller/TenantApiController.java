@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.tenant.biz.controller;
 
-import com.taotao.boot.webmvc.annotation.FeignApi;
+import com.taotao.boot.web.annotation.FeignApi;
 import com.taotao.cloud.tenant.api.feign.TenantServiceApi;
 import com.taotao.cloud.tenant.api.model.dto.TenantDTO;
 import com.taotao.cloud.tenant.biz.service.TenantService;

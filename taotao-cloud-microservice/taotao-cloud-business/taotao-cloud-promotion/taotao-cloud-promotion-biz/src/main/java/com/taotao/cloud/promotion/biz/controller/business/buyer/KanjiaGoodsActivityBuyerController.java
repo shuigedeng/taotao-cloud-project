@@ -40,7 +40,7 @@ import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityLog;
 import com.taotao.cloud.promotion.biz.service.business.IKanjiaActivityGoodsService;
 import com.taotao.cloud.promotion.biz.service.business.IKanjiaActivityLogService;
 import com.taotao.cloud.promotion.biz.service.business.IKanjiaActivityService;
-import com.taotao.boot.webmvc.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

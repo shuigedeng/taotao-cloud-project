@@ -23,7 +23,7 @@ import com.taotao.cloud.operation.api.model.query.ArticlePageQuery;
 import com.taotao.cloud.operation.api.model.vo.ArticleVO;
 import com.taotao.cloud.operation.biz.model.entity.Article;
 import com.taotao.cloud.operation.biz.service.business.ArticleService;
-import com.taotao.boot.webmvc.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

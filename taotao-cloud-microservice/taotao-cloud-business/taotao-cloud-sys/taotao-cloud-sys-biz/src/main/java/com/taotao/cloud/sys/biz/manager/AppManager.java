@@ -24,7 +24,7 @@ import com.taotao.cloud.sys.biz.model.dto.app.AppPageDTO;
 import com.taotao.cloud.sys.biz.mapper.AppMapper;
 import com.taotao.cloud.sys.biz.model.convert.AppConvert;
 import com.taotao.cloud.sys.biz.model.entity.app.App;
-import com.taotao.boot.webmvc.annotation.Manager;
+import com.taotao.boot.web.annotation.Manager;
 import com.taotao.boot.webagg.manager.BaseManager;
 import lombok.RequiredArgsConstructor;
 

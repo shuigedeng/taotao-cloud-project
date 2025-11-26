@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
 import com.taotao.cloud.promotion.biz.model.entity.MemberCoupon;
 import com.taotao.cloud.promotion.biz.service.business.IMemberCouponService;
-import com.taotao.boot.webmvc.timetask.EveryDayExecute;
+import com.taotao.boot.web.timetask.EveryDayExecute;
 import java.util.Calendar;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;

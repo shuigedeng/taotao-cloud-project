@@ -25,7 +25,7 @@ import com.taotao.cloud.promotion.biz.model.entity.PointsGoods;
 import com.taotao.cloud.promotion.biz.model.entity.PointsGoodsCategory;
 import com.taotao.cloud.promotion.biz.service.business.IPointsGoodsCategoryService;
 import com.taotao.cloud.promotion.biz.service.business.IPointsGoodsService;
-import com.taotao.boot.webmvc.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

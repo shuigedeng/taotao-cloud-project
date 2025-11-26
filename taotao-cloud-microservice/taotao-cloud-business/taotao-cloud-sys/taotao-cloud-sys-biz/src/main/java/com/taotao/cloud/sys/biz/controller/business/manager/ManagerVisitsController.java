@@ -19,7 +19,7 @@ package com.taotao.cloud.sys.biz.controller.business.manager;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.sys.biz.service.business.IVisitsService;
-import com.taotao.boot.webmvc.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.*;

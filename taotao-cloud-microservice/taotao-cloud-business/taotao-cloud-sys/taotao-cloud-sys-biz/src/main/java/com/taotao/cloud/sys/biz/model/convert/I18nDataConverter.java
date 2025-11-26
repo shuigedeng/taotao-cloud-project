@@ -4,7 +4,7 @@ import com.taotao.cloud.sys.biz.model.dto.I18nDataDTO;
 import com.taotao.cloud.sys.biz.model.vo.I18nDataExcelVO;
 import com.taotao.cloud.sys.biz.model.vo.I18nDataPageVO;
 import com.taotao.cloud.sys.biz.model.entity.i18n.I18nData;
-import com.taotao.boot.webmvc.i18n.I18nMessage;
+import com.taotao.boot.web.i18n.I18nMessage;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

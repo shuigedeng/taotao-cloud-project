@@ -19,7 +19,7 @@ package com.taotao.cloud.store.biz.task;
 // import com.taotao.cloud.store.api.model.dto.StoreSettlementDay;
 // import com.taotao.cloud.store.biz.service.IBillService;
 // import com.taotao.cloud.store.biz.service.IStoreDetailService;
-// import com.taotao.boot.webmvc.timetask.EveryDayExecute;
+// import com.taotao.boot.web.timetask.EveryDayExecute;
 // import java.time.LocalDateTime;
 // import java.util.List;
 // import org.springframework.beans.factory.annotation.Autowired;

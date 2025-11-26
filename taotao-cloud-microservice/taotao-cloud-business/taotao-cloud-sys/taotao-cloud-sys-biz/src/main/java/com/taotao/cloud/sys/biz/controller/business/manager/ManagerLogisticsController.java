@@ -21,7 +21,7 @@ import com.taotao.cloud.sys.biz.model.vo.logistics.LogisticsVO;
 import com.taotao.cloud.sys.biz.model.convert.LogisticsConvert;
 import com.taotao.cloud.sys.biz.model.entity.config.LogisticsConfig;
 import com.taotao.cloud.sys.biz.service.business.ILogisticsService;
-import com.taotao.boot.webmvc.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;

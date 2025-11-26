@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.controller;
 
-import com.taotao.boot.webmvc.annotation.FeignApi;
+import com.taotao.boot.web.annotation.FeignApi;
 import com.taotao.cloud.sys.api.feign.QuartzJobApi;
 import com.taotao.cloud.sys.api.model.dto.QuartzJobDTO;
 import com.taotao.cloud.sys.biz.task.job.quartz.service.QuartzJobService;

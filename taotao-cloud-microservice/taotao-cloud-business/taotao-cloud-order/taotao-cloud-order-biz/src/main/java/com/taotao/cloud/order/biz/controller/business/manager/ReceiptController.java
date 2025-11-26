@@ -22,7 +22,7 @@ import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.order.sys.model.dto.order.OrderReceiptDTO;
 import com.taotao.cloud.order.sys.model.page.order.ReceiptPageQuery;
 import com.taotao.cloud.order.biz.service.business.order.IReceiptService;
-import com.taotao.boot.webmvc.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.*;

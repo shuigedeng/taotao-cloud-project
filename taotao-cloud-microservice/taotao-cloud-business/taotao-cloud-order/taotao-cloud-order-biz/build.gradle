@@ -37,7 +37,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-lock"
     implementation "io.github.shuigedeng:taotao-boot-starter-statemachine"
     implementation "io.github.shuigedeng:taotao-boot-starter-flowengine"
-    implementation "io.github.shuigedeng:taotao-boot-starter-webmvc"
+    implementation "io.github.shuigedeng:taotao-boot-starter-web"
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
 
     //AVIATOR——轻量级JAVA表达式求值引擎 https://blog.csdn.net/ZhangQingmu/article/details/125087255

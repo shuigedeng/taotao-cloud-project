@@ -22,7 +22,7 @@ import com.taotao.cloud.order.sys.model.dto.trade.TradeDTO;
 import com.taotao.cloud.order.sys.model.vo.order.ReceiptVO;
 import com.taotao.cloud.order.biz.model.entity.order.Trade;
 import com.taotao.cloud.order.biz.service.business.cart.ICartService;
-import com.taotao.boot.webmvc.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Min;

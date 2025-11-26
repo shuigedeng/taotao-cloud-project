@@ -17,7 +17,7 @@
 package com.taotao.cloud.modulith;
 
 import com.taotao.boot.core.startup.StartupSpringApplication;
-import com.taotao.boot.webmvc.annotation.TaoTaoBootApplication;
+import com.taotao.boot.web.annotation.TaoTaoBootApplication;
 import org.springframework.modulith.core.ApplicationModules;
 
 @TaoTaoBootApplication

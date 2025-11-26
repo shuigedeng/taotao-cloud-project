@@ -23,7 +23,7 @@ import com.taotao.boot.security.spring.model.SecurityUser;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.cloud.member.api.feign.IFeignMemberApi;
 import com.taotao.cloud.member.api.vo.MemberVO;
-import com.taotao.boot.webmvc.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -16,7 +16,7 @@ import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import com.taotao.boot.security.spring.model.SecurityUser;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
-import com.taotao.boot.webmvc.annotation.Manager;
+import com.taotao.boot.web.annotation.Manager;
 import com.taotao.boot.webagg.manager.BaseManager;
 import java.util.ArrayList;
 import java.util.List;

@@ -19,7 +19,7 @@ package com.taotao.cloud.order.biz.controller.business.buyer;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.member.api.feign.MemberRechargeApi;
 import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
-import com.taotao.boot.webmvc.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Max;

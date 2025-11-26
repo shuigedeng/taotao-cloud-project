@@ -24,7 +24,7 @@ import com.taotao.cloud.goods.biz.model.vo.GoodsUnitVO;
 import com.taotao.cloud.goods.biz.model.convert.GoodsUnitConvert;
 import com.taotao.cloud.goods.biz.model.entity.GoodsUnit;
 import com.taotao.cloud.goods.biz.service.business.IGoodsUnitService;
-import com.taotao.boot.webmvc.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.*;

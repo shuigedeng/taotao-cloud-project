@@ -24,7 +24,7 @@ import com.taotao.cloud.goods.biz.model.vo.StoreGoodsLabelVO;
 import com.taotao.cloud.goods.biz.model.convert.GoodsLabelStoreConvert;
 import com.taotao.cloud.goods.biz.model.entity.StoreGoodsLabel;
 import com.taotao.cloud.goods.biz.service.business.IStoreGoodsLabelService;
-import com.taotao.boot.webmvc.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
