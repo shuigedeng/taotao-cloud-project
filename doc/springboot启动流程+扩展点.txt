@@ -1,0 +1,124 @@
+springboot前阶段：
+
+	1.创建DefaultBootstrapContext(创建DefaultBootstrapContext时) 回调BootstrapRegistryInitializer -- initialize
+	2.回调SpringApplicationRunListener -- starting
+			1.发布ApplicationStartingEvent事件
+	3.创建ConfigurableEnvironment  回调SpringApplicationRunListener -- environmentPrepared
+			1.发布ApplicationEnvironmentPreparedEvent事件
+			2.在事件里回调EnvironmentPostProcessor(Environment准备完成后) -- postProcessEnvironment
+	4.打印banner
+	5.创建ConfigurableEnvironment
+	6.创建ConfigurableApplicationContext
+	7.回调ApplicationContextInitializer(ApplicationContext创建后，refresh前) -- initialize
+	8.回调SpringApplicationRunListener -- contextPrepared
+	9.DefaultBootstrapContext生命周期完成
+	10.回调SpringApplicationRunListener -- contextLoaded
+	11.调用refreshContext方法进入到spring的refresh方法
+
+		12.spring阶段 AbstractApplicationContext -- refresh：
+			1.prepareRefresh 初始化initPropertySources
+			2.obtainFreshBeanFactory 刷新BeanFactory 加载loadBeanDefinitions到BeanFactory
+			3.prepareBeanFactory 添加内部的ClassLoader 或者 post-processors
+
+		阶段1-2：准备和加载 BeanDefinition
+			4.postProcessBeanFactory
+					//4.1 this.scanner.scan(this.basePackages); 扫描类路径注册BeanDefinitions
+					//4.2 this.reader.register(this.annotatedClasses); 根据注解注册BeanDefinitions
+			5.invokeBeanFactoryPostProcessors
+					5.1 回调BeanDefinitionRegistryPostProcessor -- postProcessBeanDefinitionRegistry (BeanDefinition注册后实例化前执行)
+						  1.重点回调ConfiguarationClassPostProcessor
+								处理@Component @PropertySources PropertySourceFactory @Configuration
+								处理@CompoentScan @CompoentScans @ComponentScan(nameGenerator = ..., scopeResolver = ...) 使用了ClassPathBeanDefinitionScanner
+								处理@Import @ImportResource @Configuration @Bean
+								处理Condition ConditionEvaluator  BeanNameGenerator ScopeMetadataResolver
+								回调ImportSeleter -- selectImports
+								** 涉及到重要类 ImportAutoConfiguartionImportSelector AutoConfiguartionImportSelector
+                  ** 回调DeferredImportSelector ImportSelector 的延迟版本，在所有 @Configuration 类解析完成后才执行，用于解决依赖顺序问题
+								** 涉及到BeanClassLoaerAware BeaFatoryAware EnvironmentAware ResourceLoaderAware这4个回调
+								** 把这些BeanDefinition注册到BeanFactory
+								回调ImportBeanDefinitionRegistrar -- registerBeanDefinitions (配合@Import注解 在解析配置类时动态注册 BeanDefinition)
+					5.2 回调BeanFactoryPostProcessor -- postProcessBeanFactory (BeanDefinition注册后实例化前执行)
+
+			6.registerBeanPostProcessors到BeanFactory
+					6.1 注册所有的 BeanPostProcessor (仅注册，不回调) 在getBean(BeanPostProcessor.class)会走getBean的生命周期
+							6.1.1 内部的MergedBeanDefinitionPostProcessor
+							6.1.2 排序的BeanPostProcessor
+			7.initMessageSource 初始化国际化
+			8.initApplicationEventMulticaster 初始化事件分发器
+			9.onRefresh
+				9.1子类创建createWebServer 会提前创建filter servlet等bean 会走getBean的生命周期
+						扩展点ServletContextInitializer
+			10.registerListeners
+				10.添加ApplicationListener到事件分发器中 回调早期的事件
+
+		阶段3：实例化Bean
+			11.finishBeanFactoryInitialization
+				1.主要方法为getBean
+					1.实例化Bean Instantiation
+						1.回调FactoryBean -- getObject
+						2.回调SmartFactoryBean -- isEagerInit getObject
+						3.getBean大头+重点
+							回调InstantiationAwareBeanPostProcessor -- postProcessBeforeInstantiation (Bean实例化前)
+							回调SmartInstantiationAwareBeanPostProcessor：处理循环依赖、选择构造函数
+							执行反射创建对象
+							回调MergedBeanDefinitionPostProcessor -- postProcessMergedBeanDefinition
+							回调SmartInstantiationAwareBeanPostProcessor -- getEarlyBeanReference
+							执行populateBean
+							回调InstantiationAwareBeanPostProcessor -- postProcessAfterInstantiation	(Bean实例化后)
+							执行属性装配前
+							回调InstantiationAwareBeanPostProcessor -- postProcessProperties
+							回调InstantiationAwareBeanPostProcessor -- postProcessPropertyValues
+							执行属性装配完成
+
+					2.初始化Bean Initializing
+							回调各种Aware BeanNameAware BeanClassLoaerAware BeaFatoryAware
+												ApplicationContextAware EnvironmentAware  EmbeddedValueResolverAware
+												ResourceLoaderAware / ApplicationEventPublisherAware
+							回调BeanPostProcessor -- postProcessBeforeInitialization （Bean初始化前调用）
+							执行初始化方法
+							回调InitializingBean -- afterPropertiesSet
+							回调Bean上面的init方法
+							回调BeanPostProcessor -- postProcessAfterInitialization  （Bean初始化后调用）
+
+					3.注册DisposableBean
+
+			  2.回调SmartInitializingSingleton -- afterSingletonsInstantiated 在所有单例Bean初始化完成后执行
+
+		finishRefresh： 回调SmartLifecycle 的start方法
+
+		阶段4：应用运行
+
+springboot后阶段：
+	12.回调SpringApplicationRunListener -- started
+	13.回调ApplicationRunner -- run
+	13.回调CommandLineRunner -- run
+
+在整个springboot启动过程中启动失败处理:
+1.FailureAnalyzer  启动失败时提供友好的错误分析报告
+1.SpringBootExceptionReporter   报告启动过程中的异常
+
+应用Destory阶段
+1.@PreDestroy
+2.DisposableBean
+3.DestructionAwareBeanPostProcessor.postProcessBeforeDestruction
+
+
+
+
+只执行1次（容器级别）：
+
+ApplicationContextInitializer
+BeanDefinitionRegistryPostProcessor
+BeanFactoryPostProcessor
+SmartInitializingSingleton
+ApplicationListener
+ApplicationRunner
+
+每个Bean都执行（Bean级别）：
+
+InstantiationAwareBeanPostProcessor
+BeanPostProcessor（Before和After）
+
+比如你有10个Bean，BeanPostProcessor的postProcessBeforeInitialization会执行10次。
+
+
