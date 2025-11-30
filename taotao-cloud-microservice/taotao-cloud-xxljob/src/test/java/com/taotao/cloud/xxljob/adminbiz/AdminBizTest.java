@@ -22,7 +22,7 @@ import com.xxl.job.core.biz.AdminBiz;
 import com.xxl.job.core.biz.client.AdminBizClient;
 import com.xxl.job.core.biz.model.HandleCallbackParam;
 import com.xxl.job.core.biz.model.RegistryParam;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import com.xxl.job.core.context.XxlJobContext;
 import com.xxl.job.core.enums.RegistryConfig;
 import java.util.Arrays;
@@ -51,9 +51,9 @@ public class AdminBizTest {
 
         List<HandleCallbackParam> callbackParamList = Arrays.asList(param);
 
-        ReturnT<String> returnT = adminBiz.callback(callbackParamList);
+        Response<String> returnT = adminBiz.callback(callbackParamList);
 
-        assertTrue(returnT.getCode() == ReturnT.SUCCESS_CODE);
+        assertTrue(Response.getCode() == Response.SUCCESS_CODE);
     }
 
     /**
@@ -70,9 +70,9 @@ public class AdminBizTest {
                         RegistryConfig.RegistType.EXECUTOR.name(),
                         "xxl-job-executor-example",
                         "127.0.0.1:9999");
-        ReturnT<String> returnT = adminBiz.registry(registryParam);
+        Response<String> returnT = adminBiz.registry(registryParam);
 
-        assertTrue(returnT.getCode() == ReturnT.SUCCESS_CODE);
+        assertTrue(Response.getCode() == Response.SUCCESS_CODE);
     }
 
     /**
@@ -89,8 +89,8 @@ public class AdminBizTest {
                         RegistryConfig.RegistType.EXECUTOR.name(),
                         "xxl-job-executor-example",
                         "127.0.0.1:9999");
-        ReturnT<String> returnT = adminBiz.registryRemove(registryParam);
+        Response<String> returnT = adminBiz.registryRemove(registryParam);
 
-        assertTrue(returnT.getCode() == ReturnT.SUCCESS_CODE);
+        assertTrue(Response.getCode() == Response.SUCCESS_CODE);
     }
 }

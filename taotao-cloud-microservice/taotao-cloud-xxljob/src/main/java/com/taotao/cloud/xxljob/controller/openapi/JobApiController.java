@@ -4,7 +4,7 @@ import com.taotao.cloud.xxljob.scheduler.conf.XxlJobAdminConfig;
 import com.xxl.job.core.biz.AdminBiz;
 import com.xxl.job.core.biz.model.HandleCallbackParam;
 import com.xxl.job.core.biz.model.RegistryParam;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import com.xxl.job.core.util.XxlJobRemotingUtil;
 import com.xxl.sso.core.annotation.XxlSso;
 import com.xxl.tool.core.StringTool;
@@ -39,18 +39,18 @@ public class JobApiController {
     @RequestMapping("/{uri}")
     @ResponseBody
     @XxlSso(login = false)
-    public ReturnT<String> api(HttpServletRequest request, @PathVariable("uri") String uri, @RequestBody(required = false) String data) {
+    public Response<String> api(HttpServletRequest request, @PathVariable("uri") String uri, @RequestBody(required = false) String data) {
 
         // valid
         if (!"POST".equalsIgnoreCase(request.getMethod())) {
-            return ReturnT.ofFail("invalid request, HttpMethod not support.");
+            return Response.ofFail("invalid request, HttpMethod not support.");
         }
         if (StringTool.isBlank(uri)) {
-            return ReturnT.ofFail("invalid request, uri-mapping empty.");
+            return Response.ofFail("invalid request, uri-mapping empty.");
         }
         if (StringTool.isNotBlank(XxlJobAdminConfig.getAdminConfig().getAccessToken())
                 && !XxlJobAdminConfig.getAdminConfig().getAccessToken().equals(request.getHeader(XxlJobRemotingUtil.XXL_JOB_ACCESS_TOKEN))) {
-            return ReturnT.ofFail("The access token is wrong.");
+            return Response.ofFail("The access token is wrong.");
         }
 
         // services mapping
@@ -64,7 +64,7 @@ public class JobApiController {
             RegistryParam registryParam = GsonTool.fromJson(data, RegistryParam.class);
             return adminBiz.registryRemove(registryParam);
         } else {
-            return ReturnT.ofFail("invalid request, uri-mapping("+ uri +") not found.");
+            return Response.ofFail("invalid request, uri-mapping("+ uri +") not found.");
         }
 
     }

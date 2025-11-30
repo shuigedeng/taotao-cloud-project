@@ -25,7 +25,7 @@ import com.taotao.cloud.xxljob.model.XxlJobGroup;
 import com.taotao.cloud.xxljob.model.XxlJobInfo;
 import com.taotao.cloud.xxljob.model.XxlJobLog;
 import com.taotao.cloud.xxljob.scheduler.conf.XxlJobAdminConfig;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import jakarta.mail.internet.MimeMessage;
 import java.text.MessageFormat;
 import java.util.HashMap;
@@ -91,7 +91,7 @@ public class processTriggerListener {
 				info.getId(),
 				info.getJobDesc(),
 				time,
-				jobLog.getTriggerCode() == ReturnT.SUCCESS_CODE ? "执行成功" : "执行失败",
+				jobLog.getTriggerCode() == Response.SUCCESS_CODE ? "执行成功" : "执行失败",
 				alarmContent);
 
 		// make mail

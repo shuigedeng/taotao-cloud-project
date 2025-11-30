@@ -32,7 +32,7 @@ package com.taotao.cloud.sys.biz.task.xxljob;
  */
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import java.util.concurrent.CountDownLatch;
 import org.springframework.stereotype.Component;
@@ -51,7 +51,7 @@ public class Cs1DbJobHandler {
     // private ICs1DbService cs1DbService;
 
     @XxlJob("Cs1DbJobHandler")
-    public ReturnT<String> execute(String s) {
+    public Response<String> execute(String s) {
         try {
             String[] tableNameList = new String[] {"order_amazon", "order_amazon_detail"}; // 要同步的表名
 
@@ -73,10 +73,10 @@ public class Cs1DbJobHandler {
                         .start();
             }
             latch.await();
-            return ReturnT.ofSuccess();
+            return Response.ofSuccess();
         } catch (InterruptedException e) {
             LogUtils.error(e);
-            return ReturnT.ofFail();
+            return Response.ofFail();
         }
     }
 }

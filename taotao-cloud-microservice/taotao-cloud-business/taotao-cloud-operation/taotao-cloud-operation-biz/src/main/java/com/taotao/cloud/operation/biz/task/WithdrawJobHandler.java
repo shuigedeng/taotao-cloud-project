@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.operation.biz.task;
 
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import java.util.concurrent.TimeUnit;
@@ -33,7 +33,7 @@ import org.springframework.stereotype.Component;
 public class WithdrawJobHandler {
 
     @XxlJob("WithdrawJobHandler")
-    public ReturnT<String> userJobHandler(String param) throws Exception {
+    public Response<String> userJobHandler(String param) throws Exception {
         XxlJobHelper.log("XXL-JOB, Hello World.");
 
         for (int i = 0; i < 5; i++) {
@@ -41,6 +41,6 @@ public class WithdrawJobHandler {
             LogUtils.info("XXL-JOB测试-----" + i);
             TimeUnit.SECONDS.sleep(2);
         }
-        return ReturnT.ofSuccess();
+        return Response.ofSuccess();
     }
 }

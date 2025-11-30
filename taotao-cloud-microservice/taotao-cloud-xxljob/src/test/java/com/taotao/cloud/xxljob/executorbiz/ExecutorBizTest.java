@@ -40,11 +40,11 @@ public class ExecutorBizTest {
     public void beat() throws Exception {
         ExecutorBiz executorBiz = new ExecutorBizClient(addressUrl, accessToken, timeout);
         // Act
-        final ReturnT<String> retval = executorBiz.beat();
+        final Response<String> retval = executorBiz.beat();
 
         // Assert result
         Assertions.assertNotNull(retval);
-        Assertions.assertNull(((ReturnT<String>) retval).getContent());
+        Assertions.assertNull(((Response<String>) retval).getContent());
         Assertions.assertEquals(200, retval.getCode());
         Assertions.assertNull(retval.getMsg());
     }
@@ -56,11 +56,11 @@ public class ExecutorBizTest {
         final int jobId = 0;
 
         // Act
-        final ReturnT<String> retval = executorBiz.idleBeat(new IdleBeatParam(jobId));
+        final Response<String> retval = executorBiz.idleBeat(new IdleBeatParam(jobId));
 
         // Assert result
         Assertions.assertNotNull(retval);
-        Assertions.assertNull(((ReturnT<String>) retval).getContent());
+        Assertions.assertNull(((Response<String>) retval).getContent());
         Assertions.assertEquals(500, retval.getCode());
         Assertions.assertEquals("job thread is running or has trigger queue.", retval.getMsg());
     }
@@ -82,7 +82,7 @@ public class ExecutorBizTest {
         triggerParam.setLogDateTime(System.currentTimeMillis());
 
         // Act
-        final ReturnT<String> retval = executorBiz.run(triggerParam);
+        final Response<String> retval = executorBiz.run(triggerParam);
 
         // Assert result
         Assertions.assertNotNull(retval);
@@ -95,11 +95,11 @@ public class ExecutorBizTest {
         final int jobId = 0;
 
         // Act
-        final ReturnT<String> retval = executorBiz.kill(new KillParam(jobId));
+        final Response<String> retval = executorBiz.kill(new KillParam(jobId));
 
         // Assert result
         Assertions.assertNotNull(retval);
-        Assertions.assertNull(((ReturnT<String>) retval).getContent());
+        Assertions.assertNull(((Response<String>) retval).getContent());
         Assertions.assertEquals(200, retval.getCode());
         Assertions.assertNull(retval.getMsg());
     }
@@ -113,7 +113,7 @@ public class ExecutorBizTest {
         final int fromLineNum = 0;
 
         // Act
-        final ReturnT<LogResult> retval =
+        final Response<LogResult> retval =
                 executorBiz.log(new LogParam(logDateTim, logId, fromLineNum));
 
         // Assert result

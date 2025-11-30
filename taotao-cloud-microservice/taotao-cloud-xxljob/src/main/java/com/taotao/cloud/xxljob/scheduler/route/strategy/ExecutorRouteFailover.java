@@ -4,7 +4,7 @@ import com.taotao.cloud.xxljob.scheduler.scheduler.XxlJobScheduler;
 import com.taotao.cloud.xxljob.scheduler.route.ExecutorRouter;
 import com.taotao.cloud.xxljob.util.I18nUtil;
 import com.xxl.job.core.biz.ExecutorBiz;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import com.xxl.job.core.biz.model.TriggerParam;
 
 import java.util.List;
@@ -15,18 +15,18 @@ import java.util.List;
 public class ExecutorRouteFailover extends ExecutorRouter {
 
     @Override
-    public ReturnT<String> route(TriggerParam triggerParam, List<String> addressList) {
+    public Response<String> route(TriggerParam triggerParam, List<String> addressList) {
 
         StringBuffer beatResultSB = new StringBuffer();
         for (String address : addressList) {
             // beat
-            ReturnT<String> beatResult = null;
+            Response<String> beatResult = null;
             try {
                 ExecutorBiz executorBiz = XxlJobScheduler.getExecutorBiz(address);
                 beatResult = executorBiz.beat();
             } catch (Exception e) {
                 logger.error(e.getMessage(), e);
-                beatResult = ReturnT.ofFail(e.getMessage() );
+                beatResult = Response.ofFail(e.getMessage() );
             }
             beatResultSB.append( (beatResultSB.length()>0)?"<br><br>":"")
                     .append(I18nUtil.getString("jobconf_beat") + "：")
@@ -42,7 +42,7 @@ public class ExecutorRouteFailover extends ExecutorRouter {
                 return beatResult;
             }
         }
-        return ReturnT.ofFail( beatResultSB.toString());
+        return Response.ofFail( beatResultSB.toString());
 
     }
 }

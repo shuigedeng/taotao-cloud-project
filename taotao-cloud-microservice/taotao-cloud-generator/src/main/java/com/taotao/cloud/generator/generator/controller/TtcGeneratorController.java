@@ -62,7 +62,7 @@ public class TtcGeneratorController {
     @ResponseBody
     public ReturnT getAllTemplates() throws Exception {
         String templates = ttcGeneratorService.getTemplateConfig();
-        return ReturnT.ok().put("templates", templates);
+        return Response.ok().put("templates", templates);
     }
 
     @PostMapping("/code/generate")
@@ -70,7 +70,7 @@ public class TtcGeneratorController {
     public ReturnT generateCode(@RequestBody ParamInfo paramInfo) throws Exception {
         // log.info(JSON.toJSONString(paramInfo.getOptions()));
         if (StringUtils.isEmpty(paramInfo.getTableSql())) {
-            return ReturnT.error("表结构信息为空");
+            return Response.error("表结构信息为空");
         }
 
         // 1.Parse Table Structure 表结构解析
@@ -108,6 +108,6 @@ public class TtcGeneratorController {
         Map<String, String> result = ttcGeneratorService.getResultByParams(paramInfo.getOptions());
         //        log.info("result {}",result);
         log.info("table:{} - time:{} ", MapUtil.getString(result, "tableName"), new Date());
-        return ReturnT.ok().put("outputJson", result);
+        return Response.ok().put("outputJson", result);
     }
 }

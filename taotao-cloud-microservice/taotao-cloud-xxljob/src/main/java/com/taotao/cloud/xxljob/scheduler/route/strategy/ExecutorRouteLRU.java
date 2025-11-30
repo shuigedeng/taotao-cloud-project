@@ -1,7 +1,7 @@
 package com.taotao.cloud.xxljob.scheduler.route.strategy;
 
 import com.taotao.cloud.xxljob.scheduler.route.ExecutorRouter;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import com.xxl.job.core.biz.model.TriggerParam;
 
 import java.util.ArrayList;
@@ -68,9 +68,9 @@ public class ExecutorRouteLRU extends ExecutorRouter {
     }
 
     @Override
-    public ReturnT<String> route(TriggerParam triggerParam, List<String> addressList) {
+    public Response<String> route(TriggerParam triggerParam, List<String> addressList) {
         String address = route(triggerParam.getJobId(), addressList);
-        return ReturnT.ofSuccess(address);
+        return Response.ofSuccess(address);
     }
 
 }

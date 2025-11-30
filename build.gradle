@@ -90,13 +90,13 @@ buildscript {
         /* 添加插件依赖路径（通过jar方式） */
 
         //https://plugins.gradle.org/m2/com/github/spotbugs/snom/spotbugs-gradle-plugin/
-        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:6.4.5"
+        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:6.4.6"
 
         //https://github.com/spring-io/spring-javaformat/
         classpath "io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.47"
 
         //代码混淆工具
-        //https://github.com/Guardsquare/proguard
+        //https://github.com/Guardsquare/prog   uard
         //https://www.guardsquare.com/manual/quickstart
         classpath "com.guardsquare:proguard-gradle:7.8.1"
     }
@@ -210,7 +210,7 @@ plugins {
     //https://github.com/vanniktech/gradle-maven-publish-plugin
     //https://vanniktech.github.io/gradle-maven-publish-plugin/central/v
     //https://vanniktech.github.io/gradle-maven-publish-plugin/other/
-    id "com.vanniktech.maven.publish" version "0.34.0"
+    id "com.vanniktech.maven.publish" version "0.35.0"
 }
 
 // 定义库引用

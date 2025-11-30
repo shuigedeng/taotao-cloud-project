@@ -6,7 +6,7 @@ import com.taotao.cloud.xxljob.model.XxlJobLog;
 import com.taotao.cloud.xxljob.scheduler.thread.JobTriggerPoolHelper;
 import com.taotao.cloud.xxljob.scheduler.trigger.TriggerTypeEnum;
 import com.taotao.cloud.xxljob.util.I18nUtil;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import com.xxl.job.core.context.XxlJobContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,7 +64,7 @@ public class XxlJobCompleter {
 
                         // trigger child job
                         JobTriggerPoolHelper.trigger(childJobId, TriggerTypeEnum.PARENT, -1, null, null, null);
-                        ReturnT<String> triggerChildResult = ReturnT.ofSuccess();
+                        Response<String> triggerChildResult = Response.ofSuccess();
 
                         // add msg
                         triggerChildMsg += MessageFormat.format(I18nUtil.getString("jobconf_callback_child_msg1"),

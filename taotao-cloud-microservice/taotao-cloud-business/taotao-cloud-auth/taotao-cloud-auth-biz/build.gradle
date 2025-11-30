@@ -43,8 +43,8 @@ dependencies {
     implementation 'org.springframework.session:spring-session-data-redis:4.0.0'
 
     //https://central.sonatype.com/artifact/com.github.binarywang/weixin-java-pay?smo=true
-    implementation 'com.github.binarywang:weixin-java-mp:4.7.8.B'
-    implementation 'com.github.binarywang:weixin-java-miniapp:4.7.8.B'
+    implementation 'com.github.binarywang:weixin-java-mp:4.7.9.B'
+    implementation 'com.github.binarywang:weixin-java-miniapp:4.7.9.B'
 
     //implementation 'top.dcenter:justAuth-spring-security-starter:1.1.25'
 
@@ -134,9 +134,9 @@ configurations {
             force "org.codehaus.groovy:groovy:3.0.25"
             force 'org.antlr:antlr4:4.13.2'
             force 'net.minidev:json-smart:2.6.0'
-            force 'org.bouncycastle:bcprov-jdk18on:1.82'
-            force 'org.bouncycastle:bcpkix-jdk18on:1.82'
-            force 'org.bouncycastle:bcutil-jdk18on:1.82'
+            force 'org.bouncycastle:bcprov-jdk18on:1.83'
+            force 'org.bouncycastle:bcpkix-jdk18on:1.83'
+            force 'org.bouncycastle:bcutil-jdk18on:1.83'
             force 'org.webjars.npm:csstype:3.1.3'
             force 'org.webjars.npm:postcss:8.4.39'
             force 'org.webjars.npm:nanoid:4.0.2'

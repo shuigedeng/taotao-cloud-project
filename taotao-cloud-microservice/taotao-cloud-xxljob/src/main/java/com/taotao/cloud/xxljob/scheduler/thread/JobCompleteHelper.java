@@ -5,7 +5,7 @@ import com.taotao.cloud.xxljob.scheduler.conf.XxlJobAdminConfig;
 import com.taotao.cloud.xxljob.model.XxlJobLog;
 import com.taotao.cloud.xxljob.util.I18nUtil;
 import com.xxl.job.core.biz.model.HandleCallbackParam;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import com.xxl.job.core.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,7 +85,7 @@ public class JobCompleteHelper {
 								jobLog.setId(logId);
 
 								jobLog.setHandleTime(new Date());
-								jobLog.setHandleCode(ReturnT.FAIL_CODE);
+								jobLog.setHandleCode(Response.FAIL_CODE);
 								jobLog.setHandleMsg( I18nUtil.getString("joblog_lost_fail") );
 
 								XxlJobCompleter.updateHandleInfoAndFinish(jobLog);
@@ -135,30 +135,30 @@ public class JobCompleteHelper {
 
 	// ---------------------- helper ----------------------
 
-	public ReturnT<String> callback(List<HandleCallbackParam> callbackParamList) {
+	public Response<String> callback(List<HandleCallbackParam> callbackParamList) {
 
 		callbackThreadPool.execute(new Runnable() {
 			@Override
 			public void run() {
 				for (HandleCallbackParam handleCallbackParam: callbackParamList) {
-					ReturnT<String> callbackResult = callback(handleCallbackParam);
+					Response<String> callbackResult = callback(handleCallbackParam);
 					logger.debug(">>>>>>>>> JobApiController.callback {}, handleCallbackParam={}, callbackResult={}",
 							(callbackResult.isSuccess()?"success":"fail"), handleCallbackParam, callbackResult);
 				}
 			}
 		});
 
-		return ReturnT.ofSuccess();
+		return Response.ofSuccess();
 	}
 
-	private ReturnT<String> callback(HandleCallbackParam handleCallbackParam) {
+	private Response<String> callback(HandleCallbackParam handleCallbackParam) {
 		// valid log item
 		XxlJobLog log = XxlJobAdminConfig.getAdminConfig().getXxlJobLogMapper().load(handleCallbackParam.getLogId());
 		if (log == null) {
-			return ReturnT.ofFail( "log item not found.");
+			return Response.ofFail( "log item not found.");
 		}
 		if (log.getHandleCode() > 0) {
-			return ReturnT.ofFail("log repeate callback.");     // avoid repeat callback, trigger child job etc
+			return Response.ofFail("log repeate callback.");     // avoid repeat callback, trigger child job etc
 		}
 
 		// handle msg
@@ -176,7 +176,7 @@ public class JobCompleteHelper {
 		log.setHandleMsg(handleMsg.toString());
 		XxlJobCompleter.updateHandleInfoAndFinish(log);
 
-		return ReturnT.ofSuccess();
+		return Response.ofSuccess();
 	}
 
 

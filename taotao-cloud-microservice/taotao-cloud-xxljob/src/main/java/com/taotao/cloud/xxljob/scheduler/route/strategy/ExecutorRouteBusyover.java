@@ -5,7 +5,7 @@ import com.taotao.cloud.xxljob.scheduler.route.ExecutorRouter;
 import com.taotao.cloud.xxljob.util.I18nUtil;
 import com.xxl.job.core.biz.ExecutorBiz;
 import com.xxl.job.core.biz.model.IdleBeatParam;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import com.xxl.job.core.biz.model.TriggerParam;
 
 import java.util.List;
@@ -16,17 +16,17 @@ import java.util.List;
 public class ExecutorRouteBusyover extends ExecutorRouter {
 
     @Override
-    public ReturnT<String> route(TriggerParam triggerParam, List<String> addressList) {
+    public Response<String> route(TriggerParam triggerParam, List<String> addressList) {
         StringBuffer idleBeatResultSB = new StringBuffer();
         for (String address : addressList) {
             // beat
-            ReturnT<String> idleBeatResult = null;
+            Response<String> idleBeatResult = null;
             try {
                 ExecutorBiz executorBiz = XxlJobScheduler.getExecutorBiz(address);
                 idleBeatResult = executorBiz.idleBeat(new IdleBeatParam(triggerParam.getJobId()));
             } catch (Exception e) {
                 logger.error(e.getMessage(), e);
-                idleBeatResult = ReturnT.ofFail( ""+e );
+                idleBeatResult = Response.ofFail( ""+e );
             }
             idleBeatResultSB.append( (idleBeatResultSB.length()>0)?"<br><br>":"")
                     .append(I18nUtil.getString("jobconf_idleBeat") + "：")
@@ -42,7 +42,7 @@ public class ExecutorRouteBusyover extends ExecutorRouter {
             }
         }
 
-        return ReturnT.ofFail( idleBeatResultSB.toString());
+        return Response.ofFail( idleBeatResultSB.toString());
     }
 
 }

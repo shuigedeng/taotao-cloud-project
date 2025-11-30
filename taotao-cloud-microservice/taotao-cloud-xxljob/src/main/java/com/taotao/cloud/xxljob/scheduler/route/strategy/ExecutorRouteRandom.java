@@ -1,7 +1,7 @@
 package com.taotao.cloud.xxljob.scheduler.route.strategy;
 
 import com.taotao.cloud.xxljob.scheduler.route.ExecutorRouter;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import com.xxl.job.core.biz.model.TriggerParam;
 
 import java.util.List;
@@ -15,9 +15,9 @@ public class ExecutorRouteRandom extends ExecutorRouter {
     private static Random localRandom = new Random();
 
     @Override
-    public ReturnT<String> route(TriggerParam triggerParam, List<String> addressList) {
+    public Response<String> route(TriggerParam triggerParam, List<String> addressList) {
         String address = addressList.get(localRandom.nextInt(addressList.size()));
-        return ReturnT.ofSuccess(address);
+        return Response.ofSuccess(address);
     }
 
 }

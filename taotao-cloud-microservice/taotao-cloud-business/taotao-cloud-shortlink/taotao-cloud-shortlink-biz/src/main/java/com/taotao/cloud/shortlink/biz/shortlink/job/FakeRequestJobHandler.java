@@ -19,7 +19,7 @@ package com.taotao.cloud.shortlink.biz.shortlink.job;
 import com.taotao.cloud.log.api.api.enums.ShortLinkDomainTypeEnum;
 import com.taotao.cloud.log.api.api.request.ShortLinkCreateRequest;
 import com.taotao.cloud.shortlink.biz.shortlink.rpc.ShortLinkServiceImpl;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import com.xxl.job.core.handler.IJobHandler;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import com.xxl.job.core.log.XxlJobLogger;
@@ -44,7 +44,7 @@ public class FakeRequestJobHandler extends IJobHandler {
 
     @XxlJob(value = "fakeRequest")
     @Override
-    public ReturnT<String> execute(String param) throws Exception {
+    public Response<String> execute(String param) throws Exception {
         XxlJobLogger.log("XXL-JOB, fakeRequest.");
         Random random = new Random();
 

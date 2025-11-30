@@ -7,7 +7,7 @@ import com.taotao.cloud.xxljob.util.I18nUtil;
 import com.taotao.cloud.xxljob.mapper.XxlJobGroupMapper;
 import com.taotao.cloud.xxljob.mapper.XxlJobInfoMapper;
 import com.taotao.cloud.xxljob.mapper.XxlJobRegistryMapper;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import com.xxl.job.core.enums.RegistryConfig;
 import com.xxl.sso.core.annotation.XxlSso;
 import com.xxl.tool.core.CollectionTool;
@@ -67,36 +67,36 @@ public class JobGroupController {
 	@RequestMapping("/save")
 	@ResponseBody
 	@XxlSso(role = Consts.ADMIN_ROLE)
-	public ReturnT<String> save(XxlJobGroup xxlJobGroup){
+	public Response<String> save(XxlJobGroup xxlJobGroup){
 
 		// valid
 		if (StringTool.isBlank(xxlJobGroup.getAppname())) {
-			return ReturnT.ofFail((I18nUtil.getString("system_please_input")+"AppName") );
+			return Response.ofFail((I18nUtil.getString("system_please_input")+"AppName") );
 		}
 		if (xxlJobGroup.getAppname().length()<4 || xxlJobGroup.getAppname().length()>64) {
-			return ReturnT.ofFail( I18nUtil.getString("jobgroup_field_appname_length") );
+			return Response.ofFail( I18nUtil.getString("jobgroup_field_appname_length") );
 		}
 		if (xxlJobGroup.getAppname().contains(">") || xxlJobGroup.getAppname().contains("<")) {
-			return ReturnT.ofFail( "AppName"+I18nUtil.getString("system_unvalid") );
+			return Response.ofFail( "AppName"+I18nUtil.getString("system_unvalid") );
 		}
 		if (StringTool.isBlank(xxlJobGroup.getTitle())) {
-			return ReturnT.ofFail((I18nUtil.getString("system_please_input") + I18nUtil.getString("jobgroup_field_title")) );
+			return Response.ofFail((I18nUtil.getString("system_please_input") + I18nUtil.getString("jobgroup_field_title")) );
 		}
 		if (xxlJobGroup.getTitle().contains(">") || xxlJobGroup.getTitle().contains("<")) {
-			return ReturnT.ofFail(I18nUtil.getString("jobgroup_field_title")+I18nUtil.getString("system_unvalid") );
+			return Response.ofFail(I18nUtil.getString("jobgroup_field_title")+I18nUtil.getString("system_unvalid") );
 		}
 		if (xxlJobGroup.getAddressType()!=0) {
 			if (StringTool.isBlank(xxlJobGroup.getAddressList())) {
-				return ReturnT.ofFail( I18nUtil.getString("jobgroup_field_addressType_limit") );
+				return Response.ofFail( I18nUtil.getString("jobgroup_field_addressType_limit") );
 			}
 			if (xxlJobGroup.getAddressList().contains(">") || xxlJobGroup.getAddressList().contains("<")) {
-				return ReturnT.ofFail(I18nUtil.getString("jobgroup_field_registryList")+I18nUtil.getString("system_unvalid") );
+				return Response.ofFail(I18nUtil.getString("jobgroup_field_registryList")+I18nUtil.getString("system_unvalid") );
 			}
 
 			String[] addresss = xxlJobGroup.getAddressList().split(",");
 			for (String item: addresss) {
 				if (StringTool.isBlank(item)) {
-					return ReturnT.ofFail( I18nUtil.getString("jobgroup_field_registryList_unvalid") );
+					return Response.ofFail( I18nUtil.getString("jobgroup_field_registryList_unvalid") );
 				}
 			}
 		}
@@ -105,22 +105,22 @@ public class JobGroupController {
 		xxlJobGroup.setUpdateTime(new Date());
 
 		int ret = xxlJobGroupMapper.save(xxlJobGroup);
-		return (ret>0)?ReturnT.ofSuccess():ReturnT.ofFail();
+		return (ret>0)?Response.ofSuccess():Response.ofFail();
 	}
 
 	@RequestMapping("/update")
 	@ResponseBody
 	@XxlSso(role = Consts.ADMIN_ROLE)
-	public ReturnT<String> update(XxlJobGroup xxlJobGroup){
+	public Response<String> update(XxlJobGroup xxlJobGroup){
 		// valid
 		if (StringTool.isBlank(xxlJobGroup.getAppname())) {
-			return ReturnT.ofFail((I18nUtil.getString("system_please_input")+"AppName") );
+			return Response.ofFail((I18nUtil.getString("system_please_input")+"AppName") );
 		}
 		if (xxlJobGroup.getAppname().length()<4 || xxlJobGroup.getAppname().length()>64) {
-			return ReturnT.ofFail( I18nUtil.getString("jobgroup_field_appname_length") );
+			return Response.ofFail( I18nUtil.getString("jobgroup_field_appname_length") );
 		}
 		if (StringTool.isBlank(xxlJobGroup.getTitle())) {
-			return ReturnT.ofFail( (I18nUtil.getString("system_please_input") + I18nUtil.getString("jobgroup_field_title")) );
+			return Response.ofFail( (I18nUtil.getString("system_please_input") + I18nUtil.getString("jobgroup_field_title")) );
 		}
 		if (xxlJobGroup.getAddressType() == 0) {
 			// 0=自动注册
@@ -134,12 +134,12 @@ public class JobGroupController {
 		} else {
 			// 1=手动录入
 			if (StringTool.isBlank(xxlJobGroup.getAddressList())) {
-				return ReturnT.ofFail( I18nUtil.getString("jobgroup_field_addressType_limit") );
+				return Response.ofFail( I18nUtil.getString("jobgroup_field_addressType_limit") );
 			}
 			String[] addresss = xxlJobGroup.getAddressList().split(",");
 			for (String item: addresss) {
 				if (StringTool.isBlank(item)) {
-					return ReturnT.ofFail(I18nUtil.getString("jobgroup_field_registryList_unvalid") );
+					return Response.ofFail(I18nUtil.getString("jobgroup_field_registryList_unvalid") );
 				}
 			}
 		}
@@ -148,7 +148,7 @@ public class JobGroupController {
 		xxlJobGroup.setUpdateTime(new Date());
 
 		int ret = xxlJobGroupMapper.update(xxlJobGroup);
-		return (ret>0)?ReturnT.ofSuccess():ReturnT.ofFail();
+		return (ret>0)?Response.ofSuccess():Response.ofFail();
 	}
 
 	private List<String> findRegistryByAppName(String appnameParam){
@@ -174,29 +174,29 @@ public class JobGroupController {
 	@RequestMapping("/remove")
 	@ResponseBody
 	@XxlSso(role = Consts.ADMIN_ROLE)
-	public ReturnT<String> remove(@RequestParam("id") int id){
+	public Response<String> remove(@RequestParam("id") int id){
 
 		// valid
 		int count = xxlJobInfoMapper.pageListCount(0, 10, id, -1,  null, null, null);
 		if (count > 0) {
-			return ReturnT.ofFail( I18nUtil.getString("jobgroup_del_limit_0") );
+			return Response.ofFail( I18nUtil.getString("jobgroup_del_limit_0") );
 		}
 
 		List<XxlJobGroup> allList = xxlJobGroupMapper.findAll();
 		if (allList.size() == 1) {
-			return ReturnT.ofFail( I18nUtil.getString("jobgroup_del_limit_1") );
+			return Response.ofFail( I18nUtil.getString("jobgroup_del_limit_1") );
 		}
 
 		int ret = xxlJobGroupMapper.remove(id);
-		return (ret>0)?ReturnT.ofSuccess():ReturnT.ofFail();
+		return (ret>0)?Response.ofSuccess():Response.ofFail();
 	}
 
 	@RequestMapping("/loadById")
 	@ResponseBody
 	@XxlSso(role = Consts.ADMIN_ROLE)
-	public ReturnT<XxlJobGroup> loadById(@RequestParam("id") int id){
+	public Response<XxlJobGroup> loadById(@RequestParam("id") int id){
 		XxlJobGroup jobGroup = xxlJobGroupMapper.load(id);
-		return jobGroup!=null?ReturnT.ofSuccess(jobGroup):ReturnT.ofFail();
+		return jobGroup!=null?Response.ofSuccess(jobGroup):Response.ofFail();
 	}
 
 }

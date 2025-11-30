@@ -28,38 +28,38 @@ dependencies {
 
     implementation "org.elasticsearch:elasticsearch-spark-30_2.13:9.0.2"
 
-    implementation("org.apache.hudi:hudi-common:1.0.2")
-    implementation("org.apache.hudi:hudi-client:1.0.2")
-    implementation("org.apache.hudi:hudi-flink-client:1.0.2")
-    implementation("org.apache.hudi:hudi-flink1.20-bundle:1.0.2")
-    implementation("org.apache.hudi:hudi-flink1.20.x:1.0.2")
-    implementation("org.apache.hudi:hudi-gcp-bundle:1.0.2")
-    //implementation("org.apache.hudi:hudi-cli-bundle_2.13:1.0.2")
-    implementation("org.apache.hudi:hudi-datahub-sync-bundle:1.0.2")
-    implementation("org.apache.hudi:hudi-hadoop-mr-bundle:1.0.2")
-    implementation("org.apache.hudi:hudi-hive-sync-bundle:1.0.2")
-    implementation("org.apache.hudi:hudi-kafka-connect-bundle:1.0.2")
-    implementation("org.apache.hudi:hudi-metaserver-server-bundle:1.0.2")
-    implementation("org.apache.hudi:hudi-metaserver-client:1.0.2")
-    implementation("org.apache.hudi:hudi-presto-bundle:1.0.2")
-    implementation("org.apache.hudi:hudi-trino-bundle:1.0.2")
-    implementation("org.apache.hudi:hudi-timeline-server-bundle:1.0.2")
-    implementation("org.apache.hudi:hudi-utilities-bundle_2.13:1.0.2")
-    implementation("org.apache.hudi:hudi-utilities-slim-bundle_2.13:1.0.2")
-    //implementation("org.apache.hudi:hudi-utilities_2.13:1.0.2")
-    implementation("org.apache.hudi:hudi-sync:1.0.2")
+    implementation("org.apache.hudi:hudi-common:1.1.0")
+    implementation("org.apache.hudi:hudi-client:1.1.0")
+    implementation("org.apache.hudi:hudi-flink-client:1.1.0")
+    implementation("org.apache.hudi:hudi-flink1.20-bundle:1.1.0")
+    implementation("org.apache.hudi:hudi-flink1.20.x:1.1.0")
+    implementation("org.apache.hudi:hudi-gcp-bundle:1.1.0")
+    //implementation("org.apache.hudi:hudi-cli-bundle_2.13:1.1.0")
+    implementation("org.apache.hudi:hudi-datahub-sync-bundle:1.1.0")
+    implementation("org.apache.hudi:hudi-hadoop-mr-bundle:1.1.0")
+    implementation("org.apache.hudi:hudi-hive-sync-bundle:1.1.0")
+    implementation("org.apache.hudi:hudi-kafka-connect-bundle:1.1.0")
+    implementation("org.apache.hudi:hudi-metaserver-server-bundle:1.1.0")
+    implementation("org.apache.hudi:hudi-metaserver-client:1.1.0")
+    implementation("org.apache.hudi:hudi-presto-bundle:1.1.0")
+    implementation("org.apache.hudi:hudi-trino-bundle:1.1.0")
+    implementation("org.apache.hudi:hudi-timeline-server-bundle:1.1.0")
+    implementation("org.apache.hudi:hudi-utilities-bundle_2.13:1.1.0")
+    implementation("org.apache.hudi:hudi-utilities-slim-bundle_2.13:1.1.0")
+    //implementation("org.apache.hudi:hudi-utilities_2.13:1.1.0")
+    implementation("org.apache.hudi:hudi-sync:1.1.0")
 
     implementation("org.apache.hadoop:hadoop-common:3.4.2")
     implementation("org.apache.hadoop:hadoop-client:3.4.2")
     implementation("org.apache.hadoop:hadoop-hdfs:3.4.2")
 
-    implementation("org.apache.hive:hive-common:4.1.0")
-    implementation("org.apache.hive:hive-metastore:4.1.0") {
+    implementation("org.apache.hive:hive-common:4.2.0")
+    implementation("org.apache.hive:hive-metastore:4.2.0") {
         exclude group: "ch.qos.logback", module: "logback-core"
         exclude group: "ch.qos.logback", module: "logback-classic"
         exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
     }
-    implementation("org.apache.hive:hive-jdbc:4.1.0") {
+    implementation("org.apache.hive:hive-jdbc:4.2.0") {
         exclude group: "org.eclipse.jetty.aggregate", module: "*"
         exclude group: "com.google.guava", module: "guava"
         exclude group: "log4j", module: "log4j"

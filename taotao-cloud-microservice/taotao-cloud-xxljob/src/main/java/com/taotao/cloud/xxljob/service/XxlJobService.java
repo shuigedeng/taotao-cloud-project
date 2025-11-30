@@ -3,7 +3,7 @@ package com.taotao.cloud.xxljob.service;
 
 import com.taotao.cloud.xxljob.model.XxlJobInfo;
 import com.taotao.cloud.xxljob.model.XxlJobUser;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import com.xxl.sso.core.model.LoginInfo;
 
 import java.util.Date;
@@ -35,7 +35,7 @@ public interface XxlJobService {
 	 * @param jobInfo
 	 * @return
 	 */
-	public ReturnT<String> add(XxlJobInfo jobInfo, LoginInfo loginInfo);
+	public Response<String> add(XxlJobInfo jobInfo, LoginInfo loginInfo);
 
 	/**
 	 * update job
@@ -43,7 +43,7 @@ public interface XxlJobService {
 	 * @param jobInfo
 	 * @return
 	 */
-	public ReturnT<String> update(XxlJobInfo jobInfo, LoginInfo loginInfo);
+	public Response<String> update(XxlJobInfo jobInfo, LoginInfo loginInfo);
 
 	/**
 	 * remove job
@@ -51,7 +51,7 @@ public interface XxlJobService {
 	 * @param id
 	 * @return
 	 */
-	public ReturnT<String> remove(int id, LoginInfo loginInfo);
+	public Response<String> remove(int id, LoginInfo loginInfo);
 
 	/**
 	 * start job
@@ -59,7 +59,7 @@ public interface XxlJobService {
 	 * @param id
 	 * @return
 	 */
-	public ReturnT<String> start(int id, LoginInfo loginInfo);
+	public Response<String> start(int id, LoginInfo loginInfo);
 
 	/**
 	 * stop job
@@ -67,7 +67,7 @@ public interface XxlJobService {
 	 * @param id
 	 * @return
 	 */
-	public ReturnT<String> stop(int id, LoginInfo loginInfo);
+	public Response<String> stop(int id, LoginInfo loginInfo);
 
 	/**
 	 * trigger
@@ -78,7 +78,7 @@ public interface XxlJobService {
 	 * @param addressList
 	 * @return
 	 */
-	public ReturnT<String> trigger(LoginInfo loginInfo, int jobId, String executorParam, String addressList);
+	public Response<String> trigger(LoginInfo loginInfo, int jobId, String executorParam, String addressList);
 
 	/**
 	 * dashboard info
@@ -94,6 +94,6 @@ public interface XxlJobService {
 	 * @param endDate
 	 * @return
 	 */
-	public ReturnT<Map<String,Object>> chartInfo(Date startDate, Date endDate);
+	public Response<Map<String,Object>> chartInfo(Date startDate, Date endDate);
 
 }

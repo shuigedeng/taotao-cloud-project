@@ -14,7 +14,7 @@ import com.taotao.cloud.message.biz.austin.cron.xxl.constants.XxlJobConstant;
 import com.taotao.cloud.message.biz.austin.cron.xxl.entity.XxlJobGroup;
 import com.taotao.cloud.message.biz.austin.cron.xxl.entity.XxlJobInfo;
 import com.taotao.cloud.message.biz.austin.cron.xxl.service.CronTaskService;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -57,12 +57,12 @@ public class CronTaskServiceImpl implements CronTaskService {
         ReturnT returnT = null;
         try {
             response = HttpRequest.post(path).form(params).cookie(getCookie()).execute();
-            returnT = JSON.parseObject(response.body(), ReturnT.class);
+            returnT = JSON.parseObject(response.body(), Response.class);
 
             // 插入时需要返回Id，而更新时不需要
-            if (response.isOk() && ReturnT.SUCCESS_CODE == returnT.getCode()) {
+            if (response.isOk() && Response.SUCCESS_CODE == Response.getCode()) {
                 if (path.contains(XxlJobConstant.INSERT_URL)) {
-                    Integer taskId = Integer.parseInt(String.valueOf(returnT.getContent()));
+                    Integer taskId = Integer.parseInt(String.valueOf(Response.getContent()));
                     return BasicResultVO.success(taskId);
                 } else if (path.contains(XxlJobConstant.UPDATE_URL)) {
                     return BasicResultVO.success();
@@ -87,8 +87,8 @@ public class CronTaskServiceImpl implements CronTaskService {
         ReturnT returnT = null;
         try {
             response = HttpRequest.post(path).form(params).cookie(getCookie()).execute();
-            returnT = JSON.parseObject(response.body(), ReturnT.class);
-            if (response.isOk() && ReturnT.SUCCESS_CODE == returnT.getCode()) {
+            returnT = JSON.parseObject(response.body(), Response.class);
+            if (response.isOk() && Response.SUCCESS_CODE == Response.getCode()) {
                 return BasicResultVO.success();
             }
         } catch (Exception e) {
@@ -110,8 +110,8 @@ public class CronTaskServiceImpl implements CronTaskService {
         ReturnT returnT = null;
         try {
             response = HttpRequest.post(path).form(params).cookie(getCookie()).execute();
-            returnT = JSON.parseObject(response.body(), ReturnT.class);
-            if (response.isOk() && ReturnT.SUCCESS_CODE == returnT.getCode()) {
+            returnT = JSON.parseObject(response.body(), Response.class);
+            if (response.isOk() && Response.SUCCESS_CODE == Response.getCode()) {
                 return BasicResultVO.success();
             }
         } catch (Exception e) {
@@ -133,8 +133,8 @@ public class CronTaskServiceImpl implements CronTaskService {
         ReturnT returnT = null;
         try {
             response = HttpRequest.post(path).form(params).cookie(getCookie()).execute();
-            returnT = JSON.parseObject(response.body(), ReturnT.class);
-            if (response.isOk() && ReturnT.SUCCESS_CODE == returnT.getCode()) {
+            returnT = JSON.parseObject(response.body(), Response.class);
+            if (response.isOk() && Response.SUCCESS_CODE == Response.getCode()) {
                 return BasicResultVO.success();
             }
         } catch (Exception e) {
@@ -183,8 +183,8 @@ public class CronTaskServiceImpl implements CronTaskService {
 
         try {
             response = HttpRequest.post(path).form(params).cookie(getCookie()).execute();
-            returnT = JSON.parseObject(response.body(), ReturnT.class);
-            if (response.isOk() && ReturnT.SUCCESS_CODE == returnT.getCode()) {
+            returnT = JSON.parseObject(response.body(), Response.class);
+            if (response.isOk() && Response.SUCCESS_CODE == Response.getCode()) {
                 return BasicResultVO.success();
             }
         } catch (Exception e) {

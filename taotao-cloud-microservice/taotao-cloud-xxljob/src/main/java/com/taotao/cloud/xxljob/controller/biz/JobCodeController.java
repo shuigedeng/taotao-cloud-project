@@ -6,7 +6,7 @@ import com.taotao.cloud.xxljob.model.XxlJobInfo;
 import com.taotao.cloud.xxljob.model.XxlJobLogGlue;
 import com.taotao.cloud.xxljob.util.I18nUtil;
 import com.taotao.cloud.xxljob.util.JobGroupPermissionUtil;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import com.xxl.job.core.glue.GlueTypeEnum;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
@@ -57,21 +57,21 @@ public class JobCodeController {
 	
 	@RequestMapping("/save")
 	@ResponseBody
-	public ReturnT<String> save(HttpServletRequest request,
+	public Response<String> save(HttpServletRequest request,
 								@RequestParam("id") int id,
 								@RequestParam("glueSource") String glueSource,
 								@RequestParam("glueRemark") String glueRemark) {
 
 		// valid
 		if (glueRemark==null) {
-			return ReturnT.ofFail( (I18nUtil.getString("system_please_input") + I18nUtil.getString("jobinfo_glue_remark")) );
+			return Response.ofFail( (I18nUtil.getString("system_please_input") + I18nUtil.getString("jobinfo_glue_remark")) );
 		}
 		if (glueRemark.length()<4 || glueRemark.length()>100) {
-			return ReturnT.ofFail(I18nUtil.getString("jobinfo_glue_remark_limit"));
+			return Response.ofFail(I18nUtil.getString("jobinfo_glue_remark_limit"));
 		}
 		XxlJobInfo existsJobInfo = xxlJobInfoMapper.loadById(id);
 		if (existsJobInfo == null) {
-			return ReturnT.ofFail( I18nUtil.getString("jobinfo_glue_jobid_unvalid"));
+			return Response.ofFail( I18nUtil.getString("jobinfo_glue_jobid_unvalid"));
 		}
 
 		// valid jobGroup permission
@@ -99,7 +99,7 @@ public class JobCodeController {
 		// remove code backup more than 30
 		xxlJobLogGlueMapper.removeOld(existsJobInfo.getId(), 30);
 
-		return ReturnT.ofSuccess();
+		return Response.ofSuccess();
 	}
 	
 }

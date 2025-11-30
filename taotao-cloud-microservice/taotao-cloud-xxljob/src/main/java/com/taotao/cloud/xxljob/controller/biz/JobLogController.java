@@ -15,7 +15,7 @@ import com.xxl.job.core.biz.ExecutorBiz;
 import com.xxl.job.core.biz.model.KillParam;
 import com.xxl.job.core.biz.model.LogParam;
 import com.xxl.job.core.biz.model.LogResult;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import com.xxl.job.core.util.DateUtil;
 import com.xxl.tool.core.CollectionTool;
 import com.xxl.tool.core.StringTool;
@@ -93,14 +93,14 @@ public class JobLogController {
 
 	/*@RequestMapping("/getJobsByGroup")
 	@ResponseBody
-	public ReturnT<List<XxlJobInfo>> getJobsByGroup(HttpServletRequest request, @RequestParam("jobGroup") int jobGroup){
+	public Response<List<XxlJobInfo>> getJobsByGroup(HttpServletRequest request, @RequestParam("jobGroup") int jobGroup){
 
 		// valid permission
 		JobInfoController.validJobGroupPermission(request, jobGroup);
 
 		// query
 		List<XxlJobInfo> list = xxlJobInfoMapper.getJobsByGroup(jobGroup);
-		return ReturnT.ofSuccess(list);
+		return Response.ofSuccess(list);
 	}*/
 	
 	@RequestMapping("/pageList")
@@ -160,17 +160,17 @@ public class JobLogController {
 
 	@RequestMapping("/logDetailCat")
 	@ResponseBody
-	public ReturnT<LogResult> logDetailCat(@RequestParam("logId") long logId, @RequestParam("fromLineNum") int fromLineNum){
+	public Response<LogResult> logDetailCat(@RequestParam("logId") long logId, @RequestParam("fromLineNum") int fromLineNum){
 		try {
 			// valid
 			XxlJobLog jobLog = xxlJobLogMapper.load(logId);	// todo, need to improve performance
 			if (jobLog == null) {
-				return ReturnT.ofFail(I18nUtil.getString("joblog_logid_unvalid"));
+				return Response.ofFail(I18nUtil.getString("joblog_logid_unvalid"));
 			}
 
 			// log cat
 			ExecutorBiz executorBiz = XxlJobScheduler.getExecutorBiz(jobLog.getExecutorAddress());
-			ReturnT<LogResult> logResult = executorBiz.log(new LogParam(jobLog.getTriggerTime().getTime(), logId, fromLineNum));
+			Response<LogResult> logResult = executorBiz.log(new LogParam(jobLog.getTriggerTime().getTime(), logId, fromLineNum));
 
 			// is end
             if (logResult.getContent()!=null && logResult.getContent().getFromLineNum() > logResult.getContent().getToLineNum()) {
@@ -188,7 +188,7 @@ public class JobLogController {
 			return logResult;
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
-			return ReturnT.ofFail(e.getMessage());
+			return Response.ofFail(e.getMessage());
 		}
 	}
 
@@ -226,44 +226,44 @@ public class JobLogController {
 
 	@RequestMapping("/logKill")
 	@ResponseBody
-	public ReturnT<String> logKill(HttpServletRequest request, @RequestParam("id") int id){
+	public Response<String> logKill(HttpServletRequest request, @RequestParam("id") int id){
 		// base check
 		XxlJobLog log = xxlJobLogMapper.load(id);
 		XxlJobInfo jobInfo = xxlJobInfoMapper.loadById(log.getJobId());
 		if (jobInfo==null) {
-			return ReturnT.ofFail(I18nUtil.getString("jobinfo_glue_jobid_unvalid"));
+			return Response.ofFail(I18nUtil.getString("jobinfo_glue_jobid_unvalid"));
 		}
-		if (ReturnT.SUCCESS_CODE != log.getTriggerCode()) {
-			return ReturnT.ofFail( I18nUtil.getString("joblog_kill_log_limit"));
+		if (Response.SUCCESS_CODE != log.getTriggerCode()) {
+			return Response.ofFail( I18nUtil.getString("joblog_kill_log_limit"));
 		}
 
 		// valid JobGroup permission
 		JobGroupPermissionUtil.validJobGroupPermission(request, jobInfo.getJobGroup());
 
 		// request of kill
-		ReturnT<String> runResult = null;
+		Response<String> runResult = null;
 		try {
 			ExecutorBiz executorBiz = XxlJobScheduler.getExecutorBiz(log.getExecutorAddress());
 			runResult = executorBiz.kill(new KillParam(jobInfo.getId()));
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
-			runResult = ReturnT.ofFail( e.getMessage());
+			runResult = Response.ofFail( e.getMessage());
 		}
 
-		if (ReturnT.SUCCESS_CODE == runResult.getCode()) {
-			log.setHandleCode(ReturnT.FAIL_CODE);
+		if (Response.SUCCESS_CODE == runResult.getCode()) {
+			log.setHandleCode(Response.FAIL_CODE);
 			log.setHandleMsg( I18nUtil.getString("joblog_kill_log_byman")+":" + (runResult.getMsg()!=null?runResult.getMsg():""));
 			log.setHandleTime(new Date());
 			XxlJobCompleter.updateHandleInfoAndFinish(log);
-			return ReturnT.ofSuccess(runResult.getMsg());
+			return Response.ofSuccess(runResult.getMsg());
 		} else {
-			return ReturnT.ofFail(runResult.getMsg());
+			return Response.ofFail(runResult.getMsg());
 		}
 	}
 
 	@RequestMapping("/clearLog")
 	@ResponseBody
-	public ReturnT<String> clearLog(HttpServletRequest request,
+	public Response<String> clearLog(HttpServletRequest request,
 									@RequestParam("jobGroup") int jobGroup,
 									@RequestParam("jobId") int jobId,
 									@RequestParam("type") int type){
@@ -292,7 +292,7 @@ public class JobLogController {
 		} else if (type == 9) {
 			clearBeforeNum = 0;			// 清理所有日志数据
 		} else {
-			return ReturnT.ofFail(I18nUtil.getString("joblog_clean_type_unvalid"));
+			return Response.ofFail(I18nUtil.getString("joblog_clean_type_unvalid"));
 		}
 
 		List<Long> logIds = null;
@@ -303,7 +303,7 @@ public class JobLogController {
 			}
 		} while (logIds!=null && logIds.size()>0);
 
-		return ReturnT.ofSuccess();
+		return Response.ofSuccess();
 	}
 
 }

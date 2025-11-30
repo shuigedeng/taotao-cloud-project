@@ -5,7 +5,7 @@ import com.taotao.cloud.xxljob.scheduler.thread.JobRegistryHelper;
 import com.xxl.job.core.biz.AdminBiz;
 import com.xxl.job.core.biz.model.HandleCallbackParam;
 import com.xxl.job.core.biz.model.RegistryParam;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,17 +18,17 @@ public class AdminBizImpl implements AdminBiz {
 
 
     @Override
-    public ReturnT<String> callback(List<HandleCallbackParam> callbackParamList) {
+    public Response<String> callback(List<HandleCallbackParam> callbackParamList) {
         return JobCompleteHelper.getInstance().callback(callbackParamList);
     }
 
     @Override
-    public ReturnT<String> registry(RegistryParam registryParam) {
+    public Response<String> registry(RegistryParam registryParam) {
         return JobRegistryHelper.getInstance().registry(registryParam);
     }
 
     @Override
-    public ReturnT<String> registryRemove(RegistryParam registryParam) {
+    public Response<String> registryRemove(RegistryParam registryParam) {
         return JobRegistryHelper.getInstance().registryRemove(registryParam);
     }
 

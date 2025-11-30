@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.task.xxljob;
 
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.job.xxl.executor.annotation.XxlRegister;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import java.io.BufferedInputStream;
@@ -44,7 +44,7 @@ import org.springframework.stereotype.Component;
 public class UserJobHandler {
 
     @XxlJob("ThrowJobHandler")
-    public ReturnT<String> throwJobHandler(String param) throws Exception {
+    public Response<String> throwJobHandler(String param) throws Exception {
         XxlJobHelper.log("XXL-JOB, throwwwwwwwwwwwwww");
 
         LogUtils.info("=============xxljob throwwwwwwwwwwwwwwwwwwwwwwwwww");
@@ -53,7 +53,7 @@ public class UserJobHandler {
     }
 
     @XxlJob("TestJobHandler")
-    public ReturnT<String> testJobHandler(String param) throws Exception {
+    public Response<String> testJobHandler(String param) throws Exception {
 
 		long jobId = XxlJobHelper.getJobId();
 		String jobParam = XxlJobHelper.getJobParam();
@@ -67,12 +67,12 @@ public class UserJobHandler {
 		LogUtils.info("=============xxljob succcccccccccccccc, jobId: {}, jobParam: {}, shardIndex:{}, shardTotal:{}, jobLogFileName:{}",
 			jobId, jobParam, shardIndex, shardTotal, jobLogFileName);
 
-        return ReturnT.ofSuccess();
+        return Response.ofSuccess();
     }
 
     @XxlJob("UserJobHandler")
     @XxlRegister(cron = "59 59 23 * * ?", author = "shuigedeng")
-    public ReturnT<String> userJobHandler(String param) throws Exception {
+    public Response<String> userJobHandler(String param) throws Exception {
         XxlJobHelper.log("XXL-JOB, Hello World.");
         XxlJobHelper.log("XXL-JOB, Hello World.1");
         XxlJobHelper.log("XXL-JOB, Hello World.2");
@@ -89,7 +89,7 @@ public class UserJobHandler {
 
         // throw new RuntimeException("XXL-JOB测试异常");
 
-        return ReturnT.ofFail();
+        return Response.ofFail();
     }
 
     /** 1、简单任务示例（Bean模式） */

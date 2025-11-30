@@ -26,7 +26,7 @@ jobs:
     steps:
       #https://github.com/marketplace/actions/checkout
       - name: Checkout Project
-        uses: actions/checkout@v5.0.0
+        uses: actions/checkout@v6.0.0
 
       - name: Get tag name from ref
         shell: bash
@@ -34,7 +34,7 @@ jobs:
         id: get_tag
 
       #https://github.com/marketplace/actions/github-action-for-graalvm
-      - uses: graalvm/setup-graalvm@v1.4.0
+      - uses: graalvm/setup-graalvm@v1.4.3
         with:
           java-version: '25'
           distribution: 'graalvm'

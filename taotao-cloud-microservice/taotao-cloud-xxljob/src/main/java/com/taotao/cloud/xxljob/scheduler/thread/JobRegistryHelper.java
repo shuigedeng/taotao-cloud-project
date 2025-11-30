@@ -4,7 +4,7 @@ import com.taotao.cloud.xxljob.model.XxlJobGroup;
 import com.taotao.cloud.xxljob.model.XxlJobRegistry;
 import com.taotao.cloud.xxljob.scheduler.conf.XxlJobAdminConfig;
 import com.xxl.job.core.biz.model.RegistryParam;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import com.xxl.job.core.enums.RegistryConfig;
 import com.xxl.tool.core.StringTool;
 import org.slf4j.Logger;
@@ -146,13 +146,13 @@ public class JobRegistryHelper {
 
 	// ---------------------- helper ----------------------
 
-	public ReturnT<String> registry(RegistryParam registryParam) {
+	public Response<String> registry(RegistryParam registryParam) {
 
 		// valid
 		if (StringTool.isBlank(registryParam.getRegistryGroup())
 				|| StringTool.isBlank(registryParam.getRegistryKey())
 				|| StringTool.isBlank(registryParam.getRegistryValue())) {
-			return ReturnT.ofFail("Illegal Argument.");
+			return Response.ofFail("Illegal Argument.");
 		}
 
 		// async execute
@@ -175,16 +175,16 @@ public class JobRegistryHelper {
 			}
 		});
 
-		return ReturnT.ofSuccess();
+		return Response.ofSuccess();
 	}
 
-	public ReturnT<String> registryRemove(RegistryParam registryParam) {
+	public Response<String> registryRemove(RegistryParam registryParam) {
 
 		// valid
 		if (StringTool.isBlank(registryParam.getRegistryGroup())
 				|| StringTool.isBlank(registryParam.getRegistryKey())
 				|| StringTool.isBlank(registryParam.getRegistryValue())) {
-			return ReturnT.ofFail("Illegal Argument.");
+			return Response.ofFail("Illegal Argument.");
 		}
 
 		// async execute
@@ -199,7 +199,7 @@ public class JobRegistryHelper {
 			}
 		});
 
-		return ReturnT.ofSuccess();
+		return Response.ofSuccess();
 	}
 
 	private void freshGroupRegistryInfo(RegistryParam registryParam){

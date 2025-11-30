@@ -11,7 +11,7 @@ import com.taotao.cloud.xxljob.scheduler.thread.JobScheduleHelper;
 import com.taotao.cloud.xxljob.service.XxlJobService;
 import com.taotao.cloud.xxljob.util.I18nUtil;
 import com.taotao.cloud.xxljob.util.JobGroupPermissionUtil;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import com.xxl.job.core.enums.ExecutorBlockStrategyEnum;
 import com.xxl.job.core.glue.GlueTypeEnum;
 import com.xxl.job.core.util.DateUtil;
@@ -93,7 +93,7 @@ public class JobInfoController {
 	
 	@RequestMapping("/add")
 	@ResponseBody
-	public ReturnT<String> add(HttpServletRequest request, XxlJobInfo jobInfo) {
+	public Response<String> add(HttpServletRequest request, XxlJobInfo jobInfo) {
 		// valid permission
 		LoginInfo loginInfo = JobGroupPermissionUtil.validJobGroupPermission(request, jobInfo.getJobGroup());
 
@@ -103,7 +103,7 @@ public class JobInfoController {
 
 	@RequestMapping("/update")
 	@ResponseBody
-	public ReturnT<String> update(HttpServletRequest request, XxlJobInfo jobInfo) {
+	public Response<String> update(HttpServletRequest request, XxlJobInfo jobInfo) {
 		// valid permission
 		LoginInfo loginInfo = JobGroupPermissionUtil.validJobGroupPermission(request, jobInfo.getJobGroup());
 
@@ -113,28 +113,28 @@ public class JobInfoController {
 	
 	@RequestMapping("/remove")
 	@ResponseBody
-	public ReturnT<String> remove(HttpServletRequest request, @RequestParam("id") int id) {
+	public Response<String> remove(HttpServletRequest request, @RequestParam("id") int id) {
 		Response<LoginInfo> loginInfoResponse = XxlSsoHelper.loginCheckWithAttr(request);
 		return xxlJobService.remove(id, loginInfoResponse.getData());
 	}
 	
 	@RequestMapping("/stop")
 	@ResponseBody
-	public ReturnT<String> pause(HttpServletRequest request, @RequestParam("id") int id) {
+	public Response<String> pause(HttpServletRequest request, @RequestParam("id") int id) {
 		Response<LoginInfo> loginInfoResponse = XxlSsoHelper.loginCheckWithAttr(request);
 		return xxlJobService.stop(id, loginInfoResponse.getData());
 	}
 	
 	@RequestMapping("/start")
 	@ResponseBody
-	public ReturnT<String> start(HttpServletRequest request, @RequestParam("id") int id) {
+	public Response<String> start(HttpServletRequest request, @RequestParam("id") int id) {
 		Response<LoginInfo> loginInfoResponse = XxlSsoHelper.loginCheckWithAttr(request);
 		return xxlJobService.start(id, loginInfoResponse.getData());
 	}
 	
 	@RequestMapping("/trigger")
 	@ResponseBody
-	public ReturnT<String> triggerJob(HttpServletRequest request,
+	public Response<String> triggerJob(HttpServletRequest request,
 									  @RequestParam("id") int id,
 									  @RequestParam("executorParam") String executorParam,
 									  @RequestParam("addressList") String addressList) {
@@ -144,7 +144,7 @@ public class JobInfoController {
 
 	@RequestMapping("/nextTriggerTime")
 	@ResponseBody
-	public ReturnT<List<String>> nextTriggerTime(@RequestParam("scheduleType") String scheduleType,
+	public Response<List<String>> nextTriggerTime(@RequestParam("scheduleType") String scheduleType,
 												 @RequestParam("scheduleConf") String scheduleConf) {
 
 		XxlJobInfo paramXxlJobInfo = new XxlJobInfo();
@@ -164,9 +164,9 @@ public class JobInfoController {
 			}
 		} catch (Exception e) {
 			logger.error("nextTriggerTime error. scheduleType = {}, scheduleConf= {}", scheduleType, scheduleConf, e);
-			return ReturnT.ofFail((I18nUtil.getString("schedule_type")+I18nUtil.getString("system_unvalid")) + e.getMessage());
+			return Response.ofFail((I18nUtil.getString("schedule_type")+I18nUtil.getString("system_unvalid")) + e.getMessage());
 		}
-		return ReturnT.ofSuccess(result);
+		return Response.ofSuccess(result);
 
 	}
 

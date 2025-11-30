@@ -1,7 +1,7 @@
 package com.taotao.cloud.xxljob.scheduler.route.strategy;
 
 import com.taotao.cloud.xxljob.scheduler.route.ExecutorRouter;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import com.xxl.job.core.biz.model.TriggerParam;
 
 import java.io.UnsupportedEncodingException;
@@ -77,9 +77,9 @@ public class ExecutorRouteConsistentHash extends ExecutorRouter {
     }
 
     @Override
-    public ReturnT<String> route(TriggerParam triggerParam, List<String> addressList) {
+    public Response<String> route(TriggerParam triggerParam, List<String> addressList) {
         String address = hashJob(triggerParam.getJobId(), addressList);
-        return ReturnT.ofSuccess(address);
+        return Response.ofSuccess(address);
     }
 
 }

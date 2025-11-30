@@ -17,7 +17,7 @@
 //    @ResponseBody
 //    public ReturnT defaultExceptionHandler(HttpServletRequest req, Exception e) {
 //        e.printStackTrace();
-//        return ReturnT.error("代码生成失败:"+e.getMessage());
+//        return Response.error("代码生成失败:"+e.getMessage());
 //    }
 //
 // }

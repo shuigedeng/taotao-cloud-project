@@ -6,7 +6,7 @@ import com.taotao.cloud.xxljob.model.XxlJobGroup;
 import com.taotao.cloud.xxljob.model.XxlJobInfo;
 import com.taotao.cloud.xxljob.model.XxlJobLog;
 import com.taotao.cloud.xxljob.util.I18nUtil;
-import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.tool.response.Response;
 import jakarta.mail.internet.MimeMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,10 +41,10 @@ public class EmailJobAlarm implements JobAlarm {
 
             // alarmContent
             String alarmContent = "Alarm Job LogId=" + jobLog.getId();
-            if (jobLog.getTriggerCode() != ReturnT.SUCCESS_CODE) {
+            if (jobLog.getTriggerCode() != Response.SUCCESS_CODE) {
                 alarmContent += "<br>TriggerMsg=<br>" + jobLog.getTriggerMsg();
             }
-            if (jobLog.getHandleCode()>0 && jobLog.getHandleCode() != ReturnT.SUCCESS_CODE) {
+            if (jobLog.getHandleCode()>0 && jobLog.getHandleCode() != Response.SUCCESS_CODE) {
                 alarmContent += "<br>HandleCode=" + jobLog.getHandleMsg();
             }
 

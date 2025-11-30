@@ -70,7 +70,7 @@ plugins {
     //https://github.com/freefair/gradle-plugins
     //https://github.com/freefair/gradle-plugins/tree/master/examples/test-maven-plugin
     //https://plugins.gradle.org/plugin/io.freefair.maven-plugin
-    id "io.freefair.maven-plugin" version "9.0.0"
+    id "io.freefair.maven-plugin" version "9.1.0"
 
     //https://gradlex.org/maven-plugin-development/
     ////https://github.com/gradlex-org/maven-plugin-development
@@ -85,7 +85,7 @@ plugins {
     //https://github.com/vanniktech/gradle-maven-publish-plugin
     //https://vanniktech.github.io/gradle-maven-publish-plugin/central/v
     //https://vanniktech.github.io/gradle-maven-publish-plugin/other/
-    id "com.vanniktech.maven.publish" version "0.34.0"
+    id "com.vanniktech.maven.publish" version "0.35.0"
 }
 
 apply plugin: "io.freefair.maven-plugin"

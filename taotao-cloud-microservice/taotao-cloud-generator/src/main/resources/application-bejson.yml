@@ -56,7 +56,7 @@ OEM:
   author: BEJSON
   packageName: www.bejson.com
   copyright: powered by Moshow郑锴(大狼狗)
-  returnUtilSuccess: ReturnT.ofSuccess()
-  returnUtilFailure: ReturnT.error
+  returnUtilSuccess: Response.ofSuccess()
+  returnUtilFailure: Response.error
   outputStr: www.bejson.com
   mode: CDN
