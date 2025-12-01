@@ -1,10 +1,9 @@
 package com.taotao.cloud.xxljob.service.impl;
 
-import com.taotao.cloud.xxljob.scheduler.thread.JobCompleteHelper;
-import com.taotao.cloud.xxljob.scheduler.thread.JobRegistryHelper;
-import com.xxl.job.core.biz.AdminBiz;
-import com.xxl.job.core.biz.model.HandleCallbackParam;
-import com.xxl.job.core.biz.model.RegistryParam;
+import com.taotao.cloud.xxljob.scheduler.config.XxlJobAdminBootstrap;
+import com.xxl.job.core.openapi.AdminBiz;
+import com.xxl.job.core.openapi.model.CallbackRequest;
+import com.xxl.job.core.openapi.model.RegistryRequest;
 import com.xxl.tool.response.Response;
 import org.springframework.stereotype.Service;
 
@@ -16,20 +15,19 @@ import java.util.List;
 @Service
 public class AdminBizImpl implements AdminBiz {
 
-
     @Override
-    public Response<String> callback(List<HandleCallbackParam> callbackParamList) {
-        return JobCompleteHelper.getInstance().callback(callbackParamList);
+    public Response<String> callback(List<CallbackRequest> callbackRequestList) {
+        return XxlJobAdminBootstrap.getInstance().getJobCompleteHelper().callback(callbackRequestList);
     }
 
     @Override
-    public Response<String> registry(RegistryParam registryParam) {
-        return JobRegistryHelper.getInstance().registry(registryParam);
+    public Response<String> registry(RegistryRequest registryRequest) {
+        return XxlJobAdminBootstrap.getInstance().getJobRegistryHelper().registry(registryRequest);
     }
 
     @Override
-    public Response<String> registryRemove(RegistryParam registryParam) {
-        return JobRegistryHelper.getInstance().registryRemove(registryParam);
+    public Response<String> registryRemove(RegistryRequest registryRequest) {
+        return XxlJobAdminBootstrap.getInstance().getJobRegistryHelper().registryRemove(registryRequest);
     }
 
 }

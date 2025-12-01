@@ -1,7 +1,7 @@
 package com.taotao.cloud.xxljob.scheduler.route;
 
+import com.xxl.job.core.openapi.model.TriggerRequest;
 import com.xxl.tool.response.Response;
-import com.xxl.job.core.biz.model.TriggerParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,9 +16,9 @@ public abstract class ExecutorRouter {
     /**
      * route address
      *
-     * @param addressList
-     * @return  Response.content=address
+     * @param addressList  executor address list
+     * @return  ReturnT.content=address
      */
-    public abstract Response<String> route(TriggerParam triggerParam, List<String> addressList);
+    public abstract Response<String> route(TriggerRequest triggerParam, List<String> addressList);
 
 }

@@ -1,4 +1,4 @@
-package com.taotao.cloud.xxljob.util.old;//package com.xxl.job.admin.util;
+package com.taotao.cloud.xxljob.util.old;//package com.taotao.cloud.xxljob.util;
 //
 //import freemarker.ext.beans.BeansWrapper;
 //import freemarker.ext.beans.BeansWrapperBuilder;

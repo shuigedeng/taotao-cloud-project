@@ -1,4 +1,4 @@
-package com.taotao.cloud.xxljob.util.old;//package com.xxl.job.admin.core.jobbean;
+package com.taotao.cloud.xxljob.util.old;//package com.taotao.cloud.xxljob.core.jobbean;
 //
 //import com.taotao.cloud.xxljob.core.thread.JobTriggerPoolHelper;
 //import com.taotao.cloud.xxljob.core.trigger.TriggerTypeEnum;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.xxljob.util.old;//package com.xxl.job.admin.core.schedule;
+package com.taotao.cloud.xxljob.util.old;//package com.taotao.cloud.xxljob.core.schedule;
 //
 //import com.taotao.cloud.xxljob.core.conf.XxlJobAdminConfig;
 //import com.taotao.cloud.xxljob.core.jobbean.RemoteHttpJobBean;

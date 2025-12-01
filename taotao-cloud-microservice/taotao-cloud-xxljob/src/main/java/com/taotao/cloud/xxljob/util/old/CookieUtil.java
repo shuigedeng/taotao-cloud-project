@@ -1,4 +1,4 @@
-package com.taotao.cloud.xxljob.util.old;//package com.xxl.job.admin.util;
+package com.taotao.cloud.xxljob.util.old;//package com.taotao.cloud.xxljob.util;
 //
 //import jakarta.servlet.http.Cookie;
 //import jakarta.servlet.http.HttpServletRequest;

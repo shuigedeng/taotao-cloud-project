@@ -1,4 +1,4 @@
-package com.taotao.cloud.xxljob.util.old;//package com.xxl.job.admin.util;
+package com.taotao.cloud.xxljob.util.old;//package com.taotao.cloud.xxljob.util;
 //
 //import java.util.concurrent.ConcurrentHashMap;
 //import java.util.concurrent.ConcurrentMap;

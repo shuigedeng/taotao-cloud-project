@@ -1,10 +1,10 @@
-package com.taotao.cloud.xxljob.util.old;//package com.xxl.job.admin.util.old;
+package com.taotao.cloud.xxljob.util.old;//package com.taotao.cloud.xxljob.util.old;
 //
-//import tools.jackson.core.JsonGenerationException;
-//import tools.jackson.core.JsonParseException;
-//import tools.jackson.databind.JavaType;
-//import tools.jackson.databind.JsonMappingException;
-//import tools.jackson.databind.json.JsonMapper;
+//import com.fasterxml.jackson.core.JsonGenerationException;
+//import com.fasterxml.jackson.core.JsonParseException;
+//import com.fasterxml.jackson.databind.JavaType;
+//import com.fasterxml.jackson.databind.JsonMappingException;
+//import com.fasterxml.jackson.databind.ObjectMapper;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 //
@@ -21,9 +21,9 @@ package com.taotao.cloud.xxljob.util.old;//package com.xxl.job.admin.util.old;
 //public class JacksonUtil {
 //	private static Logger logger = LoggerFactory.getLogger(JacksonUtil.class);
 //
-//    private final static JsonMapper jsonMapper = new JsonMapper();
-//    public static JsonMapper getInstance() {
-//        return jsonMapper;
+//    private final static ObjectMapper objectMapper = new ObjectMapper();
+//    public static ObjectMapper getInstance() {
+//        return objectMapper;
 //    }
 //
 //    /**

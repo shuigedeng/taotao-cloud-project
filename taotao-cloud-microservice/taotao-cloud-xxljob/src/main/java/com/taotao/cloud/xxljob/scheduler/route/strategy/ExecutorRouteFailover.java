@@ -1,11 +1,11 @@
 package com.taotao.cloud.xxljob.scheduler.route.strategy;
 
-import com.taotao.cloud.xxljob.scheduler.scheduler.XxlJobScheduler;
+import com.taotao.cloud.xxljob.scheduler.config.XxlJobAdminBootstrap;
 import com.taotao.cloud.xxljob.scheduler.route.ExecutorRouter;
 import com.taotao.cloud.xxljob.util.I18nUtil;
-import com.xxl.job.core.biz.ExecutorBiz;
+import com.xxl.job.core.openapi.ExecutorBiz;
+import com.xxl.job.core.openapi.model.TriggerRequest;
 import com.xxl.tool.response.Response;
-import com.xxl.job.core.biz.model.TriggerParam;
 
 import java.util.List;
 
@@ -15,14 +15,14 @@ import java.util.List;
 public class ExecutorRouteFailover extends ExecutorRouter {
 
     @Override
-    public Response<String> route(TriggerParam triggerParam, List<String> addressList) {
+    public Response<String> route(TriggerRequest triggerParam, List<String> addressList) {
 
         StringBuffer beatResultSB = new StringBuffer();
         for (String address : addressList) {
             // beat
             Response<String> beatResult = null;
             try {
-                ExecutorBiz executorBiz = XxlJobScheduler.getExecutorBiz(address);
+                ExecutorBiz executorBiz = XxlJobAdminBootstrap.getExecutorBiz(address);
                 beatResult = executorBiz.beat();
             } catch (Exception e) {
                 logger.error(e.getMessage(), e);
@@ -38,7 +38,7 @@ public class ExecutorRouteFailover extends ExecutorRouter {
             if (beatResult.isSuccess()) {
 
                 beatResult.setMsg(beatResultSB.toString());
-                beatResult.setContent(address);
+                beatResult.setData(address);
                 return beatResult;
             }
         }

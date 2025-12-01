@@ -1,12 +1,12 @@
 package com.taotao.cloud.xxljob.scheduler.alarm.impl;
 
 import com.taotao.cloud.xxljob.scheduler.alarm.JobAlarm;
-import com.taotao.cloud.xxljob.scheduler.conf.XxlJobAdminConfig;
+import com.taotao.cloud.xxljob.scheduler.config.XxlJobAdminBootstrap;
 import com.taotao.cloud.xxljob.model.XxlJobGroup;
 import com.taotao.cloud.xxljob.model.XxlJobInfo;
 import com.taotao.cloud.xxljob.model.XxlJobLog;
 import com.taotao.cloud.xxljob.util.I18nUtil;
-import com.xxl.tool.response.Response;
+import com.xxl.job.core.context.XxlJobContext;
 import jakarta.mail.internet.MimeMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,15 +41,15 @@ public class EmailJobAlarm implements JobAlarm {
 
             // alarmContent
             String alarmContent = "Alarm Job LogId=" + jobLog.getId();
-            if (jobLog.getTriggerCode() != Response.SUCCESS_CODE) {
+            if (jobLog.getTriggerCode() != XxlJobContext.HANDLE_CODE_SUCCESS) {
                 alarmContent += "<br>TriggerMsg=<br>" + jobLog.getTriggerMsg();
             }
-            if (jobLog.getHandleCode()>0 && jobLog.getHandleCode() != Response.SUCCESS_CODE) {
+            if (jobLog.getHandleCode()>0 && jobLog.getHandleCode() != XxlJobContext.HANDLE_CODE_SUCCESS) {
                 alarmContent += "<br>HandleCode=" + jobLog.getHandleMsg();
             }
 
             // email info
-            XxlJobGroup group = XxlJobAdminConfig.getAdminConfig().getXxlJobGroupMapper().load(Integer.valueOf(info.getJobGroup()));
+            XxlJobGroup group = XxlJobAdminBootstrap.getInstance().getXxlJobGroupMapper().load(Integer.valueOf(info.getJobGroup()));
             String personal = I18nUtil.getString("admin_name_full");
             String title = I18nUtil.getString("jobconf_monitor");
             String content = MessageFormat.format(loadEmailJobAlarmTemplate(),
@@ -63,15 +63,15 @@ public class EmailJobAlarm implements JobAlarm {
 
                 // make mail
                 try {
-                    MimeMessage mimeMessage = XxlJobAdminConfig.getAdminConfig().getMailSender().createMimeMessage();
+                    MimeMessage mimeMessage = XxlJobAdminBootstrap.getInstance().getMailSender().createMimeMessage();
 
                     MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-                    helper.setFrom(XxlJobAdminConfig.getAdminConfig().getEmailFrom(), personal);
+                    helper.setFrom(XxlJobAdminBootstrap.getInstance().getEmailFrom(), personal);
                     helper.setTo(email);
                     helper.setSubject(title);
                     helper.setText(content, true);
 
-                    XxlJobAdminConfig.getAdminConfig().getMailSender().send(mimeMessage);
+                    XxlJobAdminBootstrap.getInstance().getMailSender().send(mimeMessage);
                 } catch (Exception e) {
                     logger.error(">>>>>>>>>>> xxl-job, job fail alarm email send error, JobLogId:{}", jobLog.getId(), e);
 

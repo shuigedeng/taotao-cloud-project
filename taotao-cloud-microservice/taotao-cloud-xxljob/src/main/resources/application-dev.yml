@@ -329,7 +329,7 @@ xxl:
     #触发池
     triggerpool:
       fast:
-        max: 200
+        max: 300
       slow:
         max: 200
     logretentiondays: 30

@@ -1,4 +1,4 @@
-package com.taotao.cloud.xxljob.util.old;//package com.xxl.job.admin.core.quartz;
+package com.taotao.cloud.xxljob.util.old;//package com.taotao.cloud.xxljob.core.quartz;
 //
 //import org.quartz.SchedulerConfigException;
 //import org.quartz.spi.ThreadPool;

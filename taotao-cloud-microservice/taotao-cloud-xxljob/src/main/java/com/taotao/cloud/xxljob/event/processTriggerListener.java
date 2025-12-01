@@ -24,8 +24,9 @@ import com.taotao.boot.dingtalk.model.DingerSender;
 import com.taotao.cloud.xxljob.model.XxlJobGroup;
 import com.taotao.cloud.xxljob.model.XxlJobInfo;
 import com.taotao.cloud.xxljob.model.XxlJobLog;
-import com.taotao.cloud.xxljob.scheduler.conf.XxlJobAdminConfig;
+import com.taotao.cloud.xxljob.scheduler.config.XxlJobAdminBootstrap;
 import com.xxl.tool.response.Response;
+import com.xxl.tool.response.ResponseCode;
 import jakarta.mail.internet.MimeMessage;
 import java.text.MessageFormat;
 import java.util.HashMap;
@@ -82,7 +83,7 @@ public class processTriggerListener {
 		alarmContent += "<br>HandleCode=" + jobLog.getHandleMsg();
 
 		XxlJobGroup group =
-			XxlJobAdminConfig.getAdminConfig().getXxlJobGroupMapper().load(info.getJobGroup());
+			XxlJobAdminBootstrap.getInstance().getXxlJobGroupMapper().load(info.getJobGroup());
 		String title = "xxljob执行信息监控";
 		String content =
 			MessageFormat.format(
@@ -91,13 +92,13 @@ public class processTriggerListener {
 				info.getId(),
 				info.getJobDesc(),
 				time,
-				jobLog.getTriggerCode() == Response.SUCCESS_CODE ? "执行成功" : "执行失败",
+				jobLog.getTriggerCode() == ResponseCode.SUCCESS.getCode() ? "执行成功" : "执行失败",
 				alarmContent);
 
 		// make mail
 		try {
 			MimeMessage mimeMessage =
-				XxlJobAdminConfig.getAdminConfig().getMailSender().createMimeMessage();
+				XxlJobAdminBootstrap.getInstance().getMailSender().createMimeMessage();
 
 			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 			helper.setFrom(mailProperties.getUsername());
@@ -105,7 +106,7 @@ public class processTriggerListener {
 			helper.setSubject(title);
 			helper.setText(content, true);
 
-			XxlJobAdminConfig.getAdminConfig().getMailSender().send(mimeMessage);
+			XxlJobAdminBootstrap.getInstance().getMailSender().send(mimeMessage);
 		} catch (Exception e) {
 			LogUtils.error(
 				">>>>>>>>>>> xxl-job, job fail alarm email send error, JobLogId:{}",

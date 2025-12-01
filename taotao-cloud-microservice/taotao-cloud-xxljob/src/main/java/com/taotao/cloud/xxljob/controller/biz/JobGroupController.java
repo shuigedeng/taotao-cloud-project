@@ -7,13 +7,15 @@ import com.taotao.cloud.xxljob.util.I18nUtil;
 import com.taotao.cloud.xxljob.mapper.XxlJobGroupMapper;
 import com.taotao.cloud.xxljob.mapper.XxlJobInfoMapper;
 import com.taotao.cloud.xxljob.mapper.XxlJobRegistryMapper;
-import com.xxl.tool.response.Response;
-import com.xxl.job.core.enums.RegistryConfig;
+import com.xxl.job.core.constant.Const;
+import com.xxl.job.core.constant.RegistType;
 import com.xxl.sso.core.annotation.XxlSso;
 import com.xxl.tool.core.CollectionTool;
 import com.xxl.tool.core.StringTool;
+import com.xxl.tool.http.HttpTool;
+import com.xxl.tool.response.PageModel;
+import com.xxl.tool.response.Response;
 import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,34 +42,33 @@ public class JobGroupController {
 	@RequestMapping
 	@XxlSso(role = Consts.ADMIN_ROLE)
 	public String index(Model model) {
-		return "jobgroup/jobgroup.index";
+		return "biz/group.list";
 	}
 
 	@RequestMapping("/pageList")
 	@ResponseBody
 	@XxlSso(role = Consts.ADMIN_ROLE)
-	public Map<String, Object> pageList(HttpServletRequest request,
-										@RequestParam(value = "start", required = false, defaultValue = "0") int start,
-										@RequestParam(value = "length", required = false, defaultValue = "10") int length,
-										@RequestParam("appname") String appname,
-										@RequestParam("title") String title) {
+	public Response<PageModel<XxlJobGroup>> pageList(@RequestParam(required = false, defaultValue = "0") int offset,
+													 @RequestParam(required = false, defaultValue = "10") int pagesize,
+													 String appname,
+													 String title) {
 
 		// page query
-		List<XxlJobGroup> list = xxlJobGroupMapper.pageList(start, length, appname, title);
-		int list_count = xxlJobGroupMapper.pageListCount(start, length, appname, title);
+		List<XxlJobGroup> list = xxlJobGroupMapper.pageList(offset, pagesize, appname, title);
+		int list_count = xxlJobGroupMapper.pageListCount(offset, pagesize, appname, title);
 
 		// package result
-		Map<String, Object> maps = new HashMap<String, Object>();
-		maps.put("recordsTotal", list_count);		// 总记录数
-		maps.put("recordsFiltered", list_count);	// 过滤后的总记录数
-		maps.put("data", list);  					// 分页列表
-		return maps;
+		PageModel<XxlJobGroup> pageModel = new PageModel<>();
+		pageModel.setData(list);
+		pageModel.setTotal(list_count);
+
+		return Response.ofSuccess(pageModel);
 	}
 
-	@RequestMapping("/save")
+	@RequestMapping("/insert")
 	@ResponseBody
 	@XxlSso(role = Consts.ADMIN_ROLE)
-	public Response<String> save(XxlJobGroup xxlJobGroup){
+	public Response<String> insert(XxlJobGroup xxlJobGroup){
 
 		// valid
 		if (StringTool.isBlank(xxlJobGroup.getAppname())) {
@@ -98,6 +99,9 @@ public class JobGroupController {
 				if (StringTool.isBlank(item)) {
 					return Response.ofFail( I18nUtil.getString("jobgroup_field_registryList_unvalid") );
 				}
+                if (!(HttpTool.isHttp(item) || HttpTool.isHttps(item))) {
+                    return Response.ofFail( I18nUtil.getString("jobgroup_field_registryList_unvalid")+"[2]" );
+                }
 			}
 		}
 
@@ -141,6 +145,9 @@ public class JobGroupController {
 				if (StringTool.isBlank(item)) {
 					return Response.ofFail(I18nUtil.getString("jobgroup_field_registryList_unvalid") );
 				}
+                if (!(HttpTool.isHttp(item) || HttpTool.isHttps(item))) {
+                    return Response.ofFail( I18nUtil.getString("jobgroup_field_registryList_unvalid")+"[2]" );
+                }
 			}
 		}
 
@@ -153,10 +160,10 @@ public class JobGroupController {
 
 	private List<String> findRegistryByAppName(String appnameParam){
 		HashMap<String, List<String>> appAddressMap = new HashMap<>();
-		List<XxlJobRegistry> list = xxlJobRegistryMapper.findAll(RegistryConfig.DEAD_TIMEOUT, new Date());
+		List<XxlJobRegistry> list = xxlJobRegistryMapper.findAll(Const.DEAD_TIMEOUT, new Date());
 		if (CollectionTool.isNotEmpty(list)) {
 			for (XxlJobRegistry item: list) {
-				if (!RegistryConfig.RegistType.EXECUTOR.name().equals(item.getRegistryGroup())) {
+				if (!RegistType.EXECUTOR.name().equals(item.getRegistryGroup())) {
 					continue;
 				}
 
@@ -171,10 +178,16 @@ public class JobGroupController {
 		return appAddressMap.get(appnameParam);
 	}
 
-	@RequestMapping("/remove")
+	@RequestMapping("/delete")
 	@ResponseBody
 	@XxlSso(role = Consts.ADMIN_ROLE)
-	public Response<String> remove(@RequestParam("id") int id){
+	public Response<String> delete(@RequestParam("ids[]") List<Integer> ids){
+
+		// valid
+		if (CollectionTool.isEmpty(ids) || ids.size()!=1) {
+			return Response.ofFail(I18nUtil.getString("system_please_choose") + I18nUtil.getString("system_one") + I18nUtil.getString("system_data"));
+		}
+		int id = ids.get(0);
 
 		// valid
 		int count = xxlJobInfoMapper.pageListCount(0, 10, id, -1,  null, null, null);
