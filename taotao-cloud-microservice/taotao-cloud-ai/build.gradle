@@ -72,7 +72,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-elk"
     implementation "io.github.shuigedeng:taotao-boot-starter-captcha"
     implementation "io.github.shuigedeng:taotao-boot-starter-office"
-    implementation "io.github.shuigedeng:taotao-boot-starter-third-client"
+    implementation "io.github.shuigedeng:taotao-boot-starter-client"
     implementation "io.github.shuigedeng:taotao-boot-starter-web"
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
 

@@ -41,7 +41,7 @@ dependencies {
     //implementation "io.github.shuigedeng:taotao-boot-starter-canal"
     implementation "io.github.shuigedeng:taotao-boot-starter-captcha"
     implementation "io.github.shuigedeng:taotao-boot-starter-office"
-    implementation "io.github.shuigedeng:taotao-boot-starter-third-client"
+    implementation "io.github.shuigedeng:taotao-boot-starter-client"
     //implementation "io.github.shuigedeng:taotao-boot-starter-security-satoken"
     implementation "io.github.shuigedeng:taotao-boot-starter-data-elasticsearch"
     implementation "io.github.shuigedeng:taotao-boot-starter-data-mongodb"
