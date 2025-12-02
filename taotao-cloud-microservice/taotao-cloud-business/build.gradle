@@ -13,7 +13,7 @@ configure(subprojects.findAll { (it.name.endsWith("-api")) }) { project ->
     apply plugin: "com.google.protobuf"
 
     dependencies {
-        api "io.github.shuigedeng:taotao-cloud-starter-openfeign"
+        //api "io.github.shuigedeng:taotao-cloud-starter-openfeign"
 
         compileOnly "io.github.shuigedeng:taotao-boot-starter-seata"
         compileOnly "io.github.shuigedeng:taotao-boot-starter-grpc"

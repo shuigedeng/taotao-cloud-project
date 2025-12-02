@@ -5,7 +5,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
     implementation "io.github.shuigedeng:taotao-cloud-starter-ttc"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
     implementation "io.github.shuigedeng:taotao-cloud-starter-seata"
     implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
 

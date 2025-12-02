@@ -16,7 +16,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
     implementation "io.github.shuigedeng:taotao-cloud-starter-ttc"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
 
     //boot
     implementation "io.github.shuigedeng:taotao-boot-starter-seata"
@@ -84,9 +84,6 @@ dependencies {
     implementation 'org.zalando:logbook-spring-boot-starter:3.12.3'
     implementation 'org.zalando:logbook-httpclient5:3.12.3'
     implementation 'org.zalando:logbook-netty:3.12.3'
-    implementation 'org.zalando:logbook-okhttp:3.12.3'
-    implementation 'org.zalando:logbook-okhttp2:3.12.3'
-    implementation 'org.zalando:logbook-openfeign:3.12.3'
     implementation 'org.zalando:logbook-spring-webflux:3.12.3'
 
     //implementation "io.github.shuigedeng:taotao-boot-starter-processor")
