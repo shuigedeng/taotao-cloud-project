@@ -19,7 +19,7 @@ package com.taotao.cloud.goods.api.feign;
  import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.cloud.goods.api.feign.fallback.CategoryApiFallback;
 import com.taotao.cloud.goods.api.feign.fallback.GoodsEsSearchApiFallback;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.service.annotation.HttpExchange;
 
 /**
  * 远程调用订单模块
@@ -27,7 +27,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(
+@HttpExchange(
 	contextId = "GoodsEsSearchApi",
         value = ServiceNameConstants.TAOTAO_CLOUD_GOODS,
         fallbackFactory = GoodsEsSearchApiFallback.class)

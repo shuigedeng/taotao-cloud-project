@@ -20,7 +20,7 @@ package com.taotao.cloud.stock.api.feign;
 import com.taotao.cloud.stock.api.feign.fallback.FeignProductFallback;
 import com.taotao.cloud.stock.api.model.dto.ProductDTO;
 import com.taotao.cloud.stock.api.model.vo.ProductVO;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(
+@HttpExchange(
         contextId = "RemoteProductService",
         value = ServiceNameConstants.TAOTAO_CLOUD_GOODS,
         fallbackFactory = FeignProductFallback.class)

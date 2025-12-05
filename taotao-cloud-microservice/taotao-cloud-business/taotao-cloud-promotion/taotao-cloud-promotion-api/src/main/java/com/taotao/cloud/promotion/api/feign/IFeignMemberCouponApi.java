@@ -19,7 +19,7 @@ package com.taotao.cloud.promotion.api.feign;
  import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.cloud.promotion.api.feign.fallback.FeignMemberCouponApiFallback;
 import java.util.List;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(value = ServiceNameConstants.TAOTAO_CLOUD_PROMOTION, fallbackFactory = FeignMemberCouponApiFallback.class)
+@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_PROMOTION, fallbackFactory = FeignMemberCouponApiFallback.class)
 public interface IFeignMemberCouponApi {
 
     @GetMapping(value = "/used")

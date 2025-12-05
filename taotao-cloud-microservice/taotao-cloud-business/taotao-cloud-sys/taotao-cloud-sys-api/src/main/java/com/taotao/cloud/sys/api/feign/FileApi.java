@@ -26,7 +26,7 @@ import com.taotao.boot.common.support.info.Create;
 import com.taotao.boot.common.support.info.Update;
 import com.taotao.cloud.sys.api.feign.fallback.FileApiFallback;
 import com.taotao.cloud.sys.api.feign.response.FileApiResponse;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(
+@HttpExchange(
         name = ServiceNameConstants.TAOTAO_CLOUD_FILE,
         contextId = "feignDictApi",
         fallbackFactory = FileApiFallback.class)

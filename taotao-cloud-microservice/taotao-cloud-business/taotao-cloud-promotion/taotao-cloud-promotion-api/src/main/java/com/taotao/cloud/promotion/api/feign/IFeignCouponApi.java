@@ -18,7 +18,7 @@ package com.taotao.cloud.promotion.api.feign;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.cloud.promotion.api.feign.fallback.FeignCouponApiFallback;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.service.annotation.HttpExchange;
 
 /**
  * 远程调用售后模块
@@ -26,7 +26,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(
+@HttpExchange(
         contextId = "remoteWithdrawService",
         value = ServiceNameConstants.TAOTAO_CLOUD_PROMOTION,
         fallbackFactory = FeignCouponApiFallback.class)

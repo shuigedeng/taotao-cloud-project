@@ -20,14 +20,14 @@ package com.taotao.cloud.iot.api.feign;
 import com.taotao.cloud.iot.api.feign.fallback.FeignTenantFallbackImpl;
 import com.taotao.cloud.iot.api.model.dto.TenantDTO;
 import org.springframework.cloud.openfeign.FeignAutoConfiguration;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(value = ServiceNameConstants.TAOTAO_CLOUD_TENANT, fallbackFactory = FeignTenantFallbackImpl.class)
+@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_TENANT, fallbackFactory = FeignTenantFallbackImpl.class)
 public interface TenantServiceApi {
 
 	/**

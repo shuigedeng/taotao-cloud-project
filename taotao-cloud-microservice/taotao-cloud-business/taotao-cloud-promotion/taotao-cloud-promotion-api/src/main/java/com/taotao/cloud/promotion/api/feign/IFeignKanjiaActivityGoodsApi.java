@@ -19,7 +19,7 @@ package com.taotao.cloud.promotion.api.feign;
  import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.cloud.promotion.api.feign.fallback.FeignKanjiaActivityApiFallback;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsDTO;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @version 2022.04
  * @since 2022-04-07 22:09
  */
-@FeignClient(value = ServiceNameConstants.TAOTAO_CLOUD_PROMOTION, fallbackFactory = FeignKanjiaActivityApiFallback.class)
+@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_PROMOTION, fallbackFactory = FeignKanjiaActivityApiFallback.class)
 public interface IFeignKanjiaActivityGoodsApi {
 
     @GetMapping(value = "/updateById")

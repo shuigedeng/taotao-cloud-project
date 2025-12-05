@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /** api接口 */
-// @FeignClient(name = FeignName.WORKFLOW_SERVER_NAME, fallback = FlowTaskApiFallback.class, path =
+// @HttpExchange(name = FeignName.WORKFLOW_SERVER_NAME, fallback = FlowTaskApiFallback.class, path =
 // "/Engine/FlowTask")
 public interface FlowTaskApi {
 //    /**

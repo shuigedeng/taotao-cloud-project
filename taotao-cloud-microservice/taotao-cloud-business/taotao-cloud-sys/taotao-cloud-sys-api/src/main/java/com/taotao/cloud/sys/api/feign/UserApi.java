@@ -24,7 +24,7 @@ import com.taotao.boot.common.support.info.Create;
 import com.taotao.boot.common.support.info.Update;
 import com.taotao.cloud.sys.api.feign.fallback.UserApiFallback;
 import com.taotao.cloud.sys.api.feign.response.UserQueryApiResponse;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -37,7 +37,7 @@ import static com.taotao.boot.common.support.info.ApiVersionEnum.V2022_08;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(
+@HttpExchange(
 	name = ServiceNameConstants.TAOTAO_CLOUD_SYS,
 	contextId = "IFeignUserApi",
 	fallbackFactory = UserApiFallback.class)

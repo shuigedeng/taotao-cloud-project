@@ -20,7 +20,7 @@ package com.taotao.cloud.customer.api.feign;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.customer.api.feign.fallback.ChatbotApiFallback;
 import com.taotao.cloud.customer.api.model.vo.ChatbotVO;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(
+@HttpExchange(
         contextId = "remoteChatbotService",
         value = ServiceNameConstants.TAOTAO_CLOUD_STORE,
         fallbackFactory = ChatbotApiFallback.class)

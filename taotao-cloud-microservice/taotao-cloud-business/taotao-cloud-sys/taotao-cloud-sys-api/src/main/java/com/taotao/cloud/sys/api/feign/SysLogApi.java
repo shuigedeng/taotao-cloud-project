@@ -20,11 +20,11 @@ package com.taotao.cloud.sys.api.feign;
 import com.taotao.cloud.sys.api.feign.fallback.SysLogApiFallback;
 import com.taotao.cloud.sys.api.feign.request.SysLogApiRequest;
 import com.taotao.cloud.sys.api.feign.response.LogsApiResponse;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(
+@HttpExchange(
         name = ServiceNameConstants.TAOTAO_CLOUD_LOG,
         contextId = "feignDictApi",
         fallbackFactory = SysLogApiFallback.class)

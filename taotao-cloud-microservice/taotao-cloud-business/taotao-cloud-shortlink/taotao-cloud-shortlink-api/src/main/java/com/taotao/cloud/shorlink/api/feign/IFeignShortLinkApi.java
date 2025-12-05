@@ -20,11 +20,11 @@ package com.taotao.cloud.shorlink.api.feign;
 import com.taotao.cloud.shorlink.api.feign.fallback.FeignShortLinkApiFallback;
 import com.taotao.cloud.shorlink.api.feign.request.FeignSysLogRequest;
 import com.taotao.cloud.shorlink.api.feign.response.FeignLogsResponse;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(
+@HttpExchange(
         name = ServiceNameConstants.TAOTAO_CLOUD_LOG,
         contextId = "feignDictApi",
         fallbackFactory = FeignShortLinkApiFallback.class)

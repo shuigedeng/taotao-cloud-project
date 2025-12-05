@@ -25,7 +25,7 @@ import com.taotao.cloud.store.api.model.dto.StoreCompanyDTO;
 import com.taotao.cloud.store.api.model.dto.StoreOtherInfoDTO;
 import com.taotao.cloud.store.api.model.query.StorePageQuery;
 import com.taotao.cloud.store.api.model.vo.StoreVO;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(
+@HttpExchange(
         contextId = "IFeignStoreService",
         value = ServiceNameConstants.TAOTAO_CLOUD_GOODS,
         fallbackFactory = FeignStoreApiFallback.class)

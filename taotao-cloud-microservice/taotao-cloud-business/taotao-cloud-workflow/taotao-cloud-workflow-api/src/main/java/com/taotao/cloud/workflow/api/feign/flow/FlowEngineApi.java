@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * 
  * @since 2021/3/15 11:55
  */
-// @FeignClient(name = FeignName.WORKFLOW_SERVER_NAME , fallback = FlowEngineApiFallback.class, path
+// @HttpExchange(name = FeignName.WORKFLOW_SERVER_NAME , fallback = FlowEngineApiFallback.class, path
 // = "/Engine/FlowEngine")
 public interface FlowEngineApi {
 

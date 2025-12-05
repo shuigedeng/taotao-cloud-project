@@ -21,11 +21,11 @@ import com.taotao.cloud.goods.api.feign.fallback.CategoryApiFallback;
 import com.taotao.cloud.goods.api.feign.fallback.StoreGoodsLabelApiFallback;
 import com.taotao.cloud.goods.api.feign.response.StoreGoodsLabelApiResponse;
 import java.util.List;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(
+@HttpExchange(
 	contextId = "StoreGoodsLabelApi",
 	value = ServiceNameConstants.TAOTAO_CLOUD_GOODS,
 	fallbackFactory = StoreGoodsLabelApiFallback.class)

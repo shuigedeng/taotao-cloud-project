@@ -20,7 +20,7 @@
  import com.taotao.cloud.auth.api.feign.request.FeignClientQueryApiRequest;
  import com.taotao.cloud.auth.api.feign.response.ClientApiResponse;
  import com.taotao.boot.common.constant.ServiceNameConstants;
- import org.springframework.cloud.openfeign.FeignClient;
+ import org.springframework.web.service.annotation.HttpExchange;
 
  /**
   * 远程调用客户端
@@ -29,7 +29,7 @@
   * @version 2022.03
   * @since 2020/5/2 16:42
   */
- @FeignClient(
+ @HttpExchange(
 	 contextId = "remoteUserService",
 	 value = ServiceNameConstants.TAOTAO_CLOUD_AUTH,
 	 fallbackFactory = Oauth2ClientApiFallback.class)

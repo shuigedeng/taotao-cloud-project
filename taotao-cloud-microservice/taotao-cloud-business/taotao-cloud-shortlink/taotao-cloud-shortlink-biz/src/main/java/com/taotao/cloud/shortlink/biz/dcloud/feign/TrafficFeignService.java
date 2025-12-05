@@ -2,7 +2,7 @@ package com.taotao.cloud.shortlink.biz.dcloud.feign;
 
 import net.xdclass.controller.request.UseTrafficRequest;
 import net.xdclass.util.JsonData;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @since 2023-02-09
  */
 
-@FeignClient(name = "dcloud-account-service")
+@HttpExchange(name = "dcloud-account-service")
 public interface TrafficFeignService {
 
     /**

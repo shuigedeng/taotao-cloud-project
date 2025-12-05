@@ -21,7 +21,7 @@ import com.taotao.cloud.goods.api.feign.fallback.CategoryApiFallback;
 import com.taotao.cloud.goods.api.feign.fallback.GoodsEsIndexApiFallback;
 import com.taotao.cloud.goods.api.feign.response.EsGoodsIndexApiResponse;
 import java.util.List;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(
+@HttpExchange(
 	contextId = "GoodsEsIndexApi",
 	value = ServiceNameConstants.TAOTAO_CLOUD_GOODS,
 	fallbackFactory = GoodsEsIndexApiFallback.class)

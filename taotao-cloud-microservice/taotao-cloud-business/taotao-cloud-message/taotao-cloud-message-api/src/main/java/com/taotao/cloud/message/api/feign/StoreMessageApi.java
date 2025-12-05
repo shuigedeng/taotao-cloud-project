@@ -21,7 +21,7 @@ import com.taotao.boot.common.model.request.PageQuery;
 import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.cloud.message.api.feign.fallback.StoreMessageApiFallback;
 import com.taotao.cloud.message.api.feign.response.StoreMessageApiResponse;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(value = ServiceNameConstants.TAOTAO_CLOUD_MESSAGE, fallbackFactory = StoreMessageApiFallback.class)
+@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_MESSAGE, fallbackFactory = StoreMessageApiFallback.class)
 public interface StoreMessageApi {
 
     @GetMapping(value = "/message/getPage")

@@ -23,7 +23,7 @@ import com.taotao.cloud.member.api.feign.fallback.MemberApiFallback;
 import com.taotao.cloud.member.api.feign.response.MemberApiResponse;
 import java.util.List;
 import java.util.Map;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @version 2022.04
  * @since 2022-04-25 16:37:54
  */
-@FeignClient(value = ServiceNameConstants.TAOTAO_CLOUD_MEMBER, fallbackFactory = MemberApiFallback.class)
+@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_MEMBER, fallbackFactory = MemberApiFallback.class)
 public interface MemberApi {
 
     /**

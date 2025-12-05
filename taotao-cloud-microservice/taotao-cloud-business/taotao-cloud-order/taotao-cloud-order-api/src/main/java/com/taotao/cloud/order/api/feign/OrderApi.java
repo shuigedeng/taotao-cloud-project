@@ -29,7 +29,7 @@ import com.taotao.cloud.order.api.feign.request.OrderSaveApiRequest;
 import com.taotao.cloud.order.api.feign.response.OrderDetailApiResponse;
 import com.taotao.cloud.order.api.feign.response.OrderApiResponse;
 import java.util.List;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,7 +41,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(value = ServiceNameConstants.TAOTAO_CLOUD_ORDER, fallbackFactory = FeignOrderApiFallback.class)
+@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_ORDER, fallbackFactory = FeignOrderApiFallback.class)
 public interface OrderApi {
 
 	@ApiInfo(

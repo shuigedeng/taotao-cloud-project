@@ -19,7 +19,7 @@ package com.taotao.cloud.wechat.api.feign;
  import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.cloud.wechat.api.feign.fallback.FeignDictApiFallback;
 import com.taotao.cloud.wechat.api.feign.response.FeignDictResponse;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(
+@HttpExchange(
         name = ServiceNameConstants.TAOTAO_CLOUD_SYS,
         contextId = "feignDictApi",
         fallbackFactory = FeignDictApiFallback.class)

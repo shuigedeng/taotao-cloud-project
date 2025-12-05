@@ -21,7 +21,7 @@ import com.taotao.cloud.report.api.feign.fallback.FeignMemberStatisticsFallbackI
 import com.taotao.cloud.report.api.model.dto.MemberStatisticsDTO;
 import com.taotao.cloud.report.api.model.vo.MemberStatisticsVO;
 import java.util.Date;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(
+@HttpExchange(
         contextId = "RemoteProductService",
         value = ServiceNameConstants.TAOTAO_CLOUD_GOODS,
         fallbackFactory = FeignMemberStatisticsFallbackImpl.class)
