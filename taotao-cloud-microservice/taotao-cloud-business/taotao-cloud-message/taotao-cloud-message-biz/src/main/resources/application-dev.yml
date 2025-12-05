@@ -515,10 +515,7 @@ taotao:
     redis:
       lock:
         enabled: true
-    feign:
-      enabled: true
-      loadbalancer:
-        enabled: true
+
     cache:
       enabled: true
       type: redis
@@ -551,20 +548,14 @@ mybatis-plus:
     cache-enabled: false
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-feign:
-  sentinel:
-    enabled: true
+
   okhttp:
     enabled: true
   httpclient:
     enabled: false
     max-connections: 1000
     max-connections-per-route: 100
-  client:
-    config:
-      feignName:
-        connectTimeout: 30000
-        readTimeout: 30000
+
   compression:
     request:
       enabled: true

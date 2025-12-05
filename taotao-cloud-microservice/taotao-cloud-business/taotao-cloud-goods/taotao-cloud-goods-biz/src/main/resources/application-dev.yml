@@ -1051,10 +1051,7 @@ taotao:
       export: true
       warn: true
       check: true
-    feign:
-      enabled: true
-      loadbalancer:
-        enabled: true
+
     encrypt:
       enabled: false
       filter:
@@ -1102,20 +1099,14 @@ mybatis-plus:
     cache-enabled: false
     log-impl: com.taotao.boot.data.mybatis.log.StandardStdOutImpl
 
-feign:
-  sentinel:
-    enabled: true
+
   okhttp:
     enabled: true
   httpclient:
     enabled: false
     max-connections: 1000
     max-connections-per-route: 100
-  client:
-    config:
-      feignName:
-        connectTimeout: 30000
-        readTimeout: 30000
+
   compression:
     request:
       enabled: true

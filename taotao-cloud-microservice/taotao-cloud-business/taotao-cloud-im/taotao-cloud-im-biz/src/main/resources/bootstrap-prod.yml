@@ -347,22 +347,15 @@ taotao:
         ignore-sqls:
           - com.central.user.mapper.SysRoleMapper.findAll
 
-feign:
-  sentinel:
-    enabled: true
-  hystrix:
-    enabled: false
+
+
   okhttp:
     enabled: true
   httpclient:
     enabled: false
     max-connections: 1000
     max-connections-per-route: 100
-  client:
-    config:
-      feignName:
-        connectTimeout: 30000
-        readTimeout: 30000
+
   compression:
     request:
       enabled: true

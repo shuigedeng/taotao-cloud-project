@@ -516,28 +516,7 @@ spring:
           client-secret: a667ed5606f44e159db062239ed5a838
           introspection-uri: http://127.0.0.1
   cloud:
-    openfeign:
-      micrometer:
-        enabled: true
-      lazy-attributes-resolution: true
-      okhttp:
-        enabled: true
-      httpclient:
-        enabled: false
-        max-connections: 1000
-        max-connections-per-route: 100
-      client:
-        config:
-          feignName:
-            connectTimeout: 30000
-            readTimeout: 30000
-      compression:
-        request:
-          enabled: true
-          mime-types: text/xml,application/xml,application/json
-          min-request-size: 2048
-        response:
-          enabled: true
+
     compatibility-verifier:
       enabled: false
     loadbalancer:
@@ -692,10 +671,7 @@ taotao:
         enabled: true
       warn:
         enabled: true
-    feign:
-      enabled: true
-      loadbalancer:
-        enabled: true
+
     encrypt:
       enabled: false
       filter:
@@ -749,9 +725,7 @@ mybatis-plus:
     CONSTANT_CIPHER_TEXT: taotao-cloud
 
 
-feign:
-  sentinel:
-    enabled: true
+
 
 management:
   info:
@@ -797,30 +771,6 @@ management:
     enabled: true
     sampling:
       probability: 1.0
-#  sleuth:
-#    jdbc:
-#      # 为false时 datasource-proxy-spring-boot-starter会生效 程序启动时会卡着不动
-#      enabled: false
-#    enabled: true
-#    web:
-#      client:
-#        enabled: true
-#      servlet:
-#        enabled: true
-#    sampler:
-#      probability: 1.0
-#      refresh:
-#        enabled: true
-#  zipkin:
-#    enabled: true
-#    base-url: http://127.0.0.1:9411/
-#    discoveryClientEnabled: false
-#    sender:
-#      type: WEB
-#    service:
-#      name: ${spring.application.name}
-#    compression:
-#      enabled: true
 
 logging:
   file:

@@ -486,10 +486,7 @@ taotao:
     mq:
       kafka:
         enabled: true
-    feign:
-      enabled: true
-      loadbalancer:
-        enabled: true
+
     cache:
       redis:
         enabled: true
@@ -513,20 +510,14 @@ taotao:
       packages-to-scan:
         - com.taotao.cloud.auth.biz.controller
 
-feign:
-  sentinel:
-    enabled: true
+
   okhttp:
     enabled: true
   httpclient:
     enabled: false
     max-connections: 1000
     max-connections-per-route: 100
-  client:
-    config:
-      feignName:
-        connectTimeout: 30000
-        readTimeout: 30000
+
   compression:
     request:
       enabled: true

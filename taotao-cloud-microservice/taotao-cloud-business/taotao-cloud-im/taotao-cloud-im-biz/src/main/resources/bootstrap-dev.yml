@@ -350,22 +350,15 @@ taotao:
       # 使用日志系统记录sql
       #appender: com.p6spy.engine.spy.appender.Slf4JLogger
 
-feign:
-  sentinel:
-    enabled: true
-  hystrix:
-    enabled: false
+
+
   okhttp:
     enabled: false
   httpclient:
     enabled: false
     max-connections: 1000
     max-connections-per-route: 100
-  client:
-    config:
-      feignName:
-        connectTimeout: 30000
-        readTimeout: 30000
+
   compression:
     request:
       enabled: true

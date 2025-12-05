@@ -946,37 +946,7 @@ spring:
           client-secret: a667ed5606f44e159db062239ed5a838
           introspection-uri: http://127.0.0.1
   cloud:
-    openfeign:
-      circuitbreaker: #如果 Spring Cloud CircuitBreaker 在 classpath 上，并且feign.circuitbreaker.enabled=true Feign 将使用断路器包装所有方法。
-        enabled: false
-      micrometer: #Feign 指标 MicrometerCapability则会创建并注册一个bean，以便您的 Feign 客户端将指标发布到 Micrometer
-        enabled: true
-      lazy-attributes-resolution: true
-      okhttp:
-        enabled: true
-      httpclient:
-        enabled: false
-        max-connections: 1000
-        max-connections-per-route: 100
-      client:
-        refresh-enabled: false #@RefreshScope支持
-        config:
-          default:
-            connectTimeout: 30000 #防止由于服务器处理时间长而阻塞调用者
-            readTimeout: 30000 #从连接建立时开始应用，在返回响应时间过长时触发。
-          #feignName:
-          #  connectTimeout: 30000
-          #  readTimeout: 30000
-      compression: #Feign 请求/响应压缩
-        request:
-          enabled: true
-          mime-types: text/xml,application/xml,application/json
-          min-request-size: 2048
-        response:
-          enabled: true
-      autoconfiguration: #您可以考虑启用 Jackson Modules 来支持org.springframework.data.domain.Page和org.springframework.data.domain.Sort解码。
-        jackson:
-          enabled: true
+
     compatibility-verifier:
       enabled: false
     loadbalancer:
@@ -1299,10 +1269,7 @@ taotao:
         enabled: true
       warn:
         enabled: true
-    feign:
-      enabled: true
-      loadbalancer:
-        enabled: true
+
     encrypt:
       enabled: false
       filter:
@@ -1388,9 +1355,7 @@ mybatis-plus:
     CONSTANT_CIPHER_TEXT: taotao-cloud
 
 
-feign:
-  sentinel:
-    enabled: true
+
 
 management:
   info:
@@ -1448,30 +1413,6 @@ management:
       export:
         batch-size: 500
 
-#  sleuth:
-#    jdbc:
-#      # 为false时 datasource-proxy-spring-boot-starter会生效 程序启动时会卡着不动
-#      enabled: false
-#    enabled: true
-#    web:
-#      client:
-#        enabled: true
-#      servlet:
-#        enabled: true
-#    sampler:
-#      probability: 1.0
-#      refresh:
-#        enabled: true
-#  zipkin:
-#    enabled: true
-#    base-url: http://127.0.0.1:9411/
-#    discoveryClientEnabled: false
-#    sender:
-#      type: WEB
-#    service:
-#      name: ${spring.application.name}
-#    compression:
-#      enabled: true
 
 logging:
   file:
