@@ -1,4 +1,4 @@
-package com.taotao.cloud.xxljob.util.old;//package com.taotao.cloud.xxljob.web.interceptor;
+package com.taotao.cloud.xxljob.util.old;//package com.xxl.job.admin.web.interceptor;
 //
 //import com.taotao.cloud.xxljob.util.I18nUtil;
 //import com.xxl.tool.freemarker.FtlTool;

@@ -1,6 +1,5 @@
 package com.taotao.cloud.xxljob.admin.mapper;
 
-import com.taotao.cloud.xxljob.mapper.XxlJobGroupMapper;
 import com.taotao.cloud.xxljob.model.XxlJobGroup;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;

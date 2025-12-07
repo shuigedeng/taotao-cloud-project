@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -33,7 +32,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 
 @Component
-public class XxlJobAdminBootstrap implements InitializingBean, DisposableBean, ApplicationEventPublisherAware {
+public class XxlJobAdminBootstrap implements InitializingBean, DisposableBean , ApplicationEventPublisherAware {
     private static final Logger logger = LoggerFactory.getLogger(XxlJobAdminBootstrap.class);
 
     // ---------------------- instance ----------------------
@@ -301,8 +300,7 @@ public class XxlJobAdminBootstrap implements InitializingBean, DisposableBean, A
     public JobCompleter getJobCompleter() {
         return jobCompleter;
     }
-
-	private  ApplicationEventPublisher applicationEventPublisher;
+	private ApplicationEventPublisher applicationEventPublisher;
 	@Override
 	public void setApplicationEventPublisher( ApplicationEventPublisher applicationEventPublisher ) {
 		this.applicationEventPublisher = applicationEventPublisher;
