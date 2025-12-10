@@ -18,7 +18,7 @@ package com.taotao.cloud.gateway.authentication;
 
 import com.taotao.boot.security.spring.constants.BaseConstants;
 import com.taotao.boot.security.spring.core.authority.TtcGrantedAuthority;
-import com.taotao.boot.security.spring.autoconfigure.OAuth2EndpointProperties;
+import com.taotao.boot.security.spring.autoconfigure.properties.OAuth2EndpointProperties;
 import java.net.URI;
 import java.time.Instant;
 import java.util.*;
