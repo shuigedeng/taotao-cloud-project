@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.api.feign.response;
+package com.taotao.cloud.auth.api.inner.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
 import lombok.*;
-import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.*;
 import lombok.EqualsAndHashCode;

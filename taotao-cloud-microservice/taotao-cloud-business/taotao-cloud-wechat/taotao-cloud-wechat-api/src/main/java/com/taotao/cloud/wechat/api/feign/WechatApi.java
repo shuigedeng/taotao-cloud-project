@@ -30,9 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @since 2020/5/2 16:42
  */
 @HttpExchange(
-        name = ServiceNameConstants.TAOTAO_CLOUD_SYS,
-        contextId = "feignDictApi",
-        fallbackFactory = FeignDictApiFallback.class)
+        name = ServiceNameConstants.TAOTAO_CLOUD_SYS)
 public interface WechatApi {
 
     /**

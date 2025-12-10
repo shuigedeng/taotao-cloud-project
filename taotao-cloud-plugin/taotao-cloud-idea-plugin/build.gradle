@@ -89,7 +89,7 @@ dependencies {
     intellijPlatform {
         //https://www.jetbrains.com/intellij-repository/releases
         //https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-dependencies-extension.html#default-target-platforms
-        intellijIdeaUltimate '2025.2'
+        intellijIdeaUltimate '2025.3'
 
         //https://plugins.jetbrains.com/docs/intellij/plugin-dependencies.html
         bundledPlugin 'com.intellij.java'
@@ -109,9 +109,9 @@ dependencies {
     }
 
     //testImplementation "junit:junit:4.13.2"
-    implementation "cn.hutool:hutool-all:5.8.41"
-    implementation "com.google.zxing:core:3.5.3"
-    implementation "com.google.zxing:javase:3.5.3"
+    implementation "cn.hutool:hutool-all:5.8.42"
+    implementation "com.google.zxing:core:3.5.4"
+    implementation "com.google.zxing:javase:3.5.4"
 
     testImplementation 'org.junit.jupiter:junit-jupiter:6.0.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:6.0.1'
@@ -186,9 +186,9 @@ intellijPlatform {
         //版本参考：https://plugins.jetbrains.com/docs/intellij/build-number-ranges.html?from=jetbrains.org#intellij-platform-based-products-of-recent-ide-versions
         ideaVersion {
             //与插件兼容的最早IDE版本。
-            sinceBuild = '252'
+            sinceBuild = '253'
             //与插件兼容的最新IDE版本。未定义的值表示与从since-build中提到的版本开始的所有IDE兼容，包括可能导致兼容性问题的潜在未来版本。
-            untilBuild = '252.*'
+            untilBuild = '253.*'
         }
 
         vendor {
@@ -290,7 +290,7 @@ intellijPlatform {
 //    //sandboxDir = "${rootProject.rootDir}/idea-sandbox"
 //
 //    // IDEA 的版本
-//    version = "2025.1"
+//    version = "2025.3"
 //    // 这里 IU 是指付费版, 也可以选择 IC 对应社区版
 //    type = "IU"
 //

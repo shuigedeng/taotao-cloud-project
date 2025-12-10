@@ -14,11 +14,11 @@
   * limitations under the License.
   */
 
- package com.taotao.cloud.auth.api.feign;
+ package com.taotao.cloud.auth.api.inner;
 
- import com.taotao.cloud.auth.api.feign.fallback.Oauth2ClientApiFallback;
- import com.taotao.cloud.auth.api.feign.request.FeignClientQueryApiRequest;
- import com.taotao.cloud.auth.api.feign.response.ClientApiResponse;
+ import com.taotao.cloud.auth.api.inner.fallback.Oauth2ClientApiFallback;
+ import com.taotao.cloud.auth.api.inner.request.FeignClientQueryApiRequest;
+ import com.taotao.cloud.auth.api.inner.response.ClientApiResponse;
  import com.taotao.boot.common.constant.ServiceNameConstants;
  import org.springframework.web.service.annotation.HttpExchange;
 

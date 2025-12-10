@@ -31,8 +31,8 @@ dependencies {
     //https://tess4j.sourceforge.net/
     //https://search.maven.org/artifact/net.sourceforge.tess4j/tess4j
     implementation "net.sourceforge.tess4j:tess4j:5.16.0"
-    implementation "com.google.zxing:core:3.5.3"
-    implementation "com.google.zxing:javase:3.5.3"
+    implementation "com.google.zxing:core:3.5.4"
+    implementation "com.google.zxing:javase:3.5.4"
 
     //官网文档地址：https://docs.opencv.org/4.9.0/df/d65/tutorial_table_of_content_introduction.html
     //教程参考：https://www.w3cschool.cn/opencv/

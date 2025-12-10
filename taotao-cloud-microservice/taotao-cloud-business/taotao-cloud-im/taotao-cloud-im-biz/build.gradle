@@ -29,7 +29,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-flowengine"
 
     implementation "com.tencentcloudapi:tencentcloud-sdk-java:3.1.1356"
-    implementation "com.google.zxing:core:3.5.3"
+    implementation "com.google.zxing:core:3.5.4"
     implementation 'com.getui.push:restful-sdk:1.0.7.0'
     //implementation "com.q3z3:core-upload:1.0.0"
     //implementation fileTree(dir: "src/main/resources/lib", includes: ["*.jar"])
