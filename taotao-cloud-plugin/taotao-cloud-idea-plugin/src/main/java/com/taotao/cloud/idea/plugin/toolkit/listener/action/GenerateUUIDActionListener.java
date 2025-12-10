@@ -1,5 +1,6 @@
 package com.taotao.cloud.idea.plugin.toolkit.listener.action;
 
+import cn.hutool.core.util.IdUtil;
 import com.intellij.ui.EditorTextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

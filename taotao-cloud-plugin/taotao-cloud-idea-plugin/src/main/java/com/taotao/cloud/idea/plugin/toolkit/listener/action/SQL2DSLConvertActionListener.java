@@ -1,5 +1,6 @@
 package com.taotao.cloud.idea.plugin.toolkit.listener.action;
 
+import cn.hutool.http.HttpUtil;
 import com.intellij.ui.EditorTextField;
 import com.taotao.cloud.idea.plugin.toolkit.notification.ToolkitNotifier;
 import com.taotao.cloud.idea.plugin.toolkit.utils.JsonFormatter;
@@ -9,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JCheckBox;
 import org.apache.commons.lang3.StringEscapeUtils;
-import com.taotao.boot.common.utils.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 
 public class SQL2DSLConvertActionListener implements ActionListener {

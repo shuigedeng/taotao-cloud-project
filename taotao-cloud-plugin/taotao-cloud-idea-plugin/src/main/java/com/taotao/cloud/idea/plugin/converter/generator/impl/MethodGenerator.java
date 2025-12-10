@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import com.taotao.boot.common.utils.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class MethodGenerator extends AbstractGenerator {
 

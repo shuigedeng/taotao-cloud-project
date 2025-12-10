@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JCheckBox;
-import com.taotao.boot.common.utils.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class RegularMatchListener implements ActionListener {
     private EditorTextField textField;

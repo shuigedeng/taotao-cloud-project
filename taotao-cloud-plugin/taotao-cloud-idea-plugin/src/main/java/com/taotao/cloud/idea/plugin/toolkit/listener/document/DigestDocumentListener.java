@@ -5,7 +5,7 @@ import com.intellij.openapi.editor.event.DocumentListener;
 import com.intellij.ui.EditorTextField;
 import javax.swing.JRadioButton;
 import org.apache.commons.codec.digest.DigestUtils;
-import com.taotao.boot.common.utils.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class DigestDocumentListener implements DocumentListener {
 

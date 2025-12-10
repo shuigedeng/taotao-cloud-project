@@ -1,5 +1,6 @@
 package com.taotao.cloud.idea.plugin.toolkit.listener.action;
 
+import cn.hutool.http.HttpUtil;
 import com.intellij.ui.EditorTextField;
 import com.taotao.cloud.idea.plugin.toolkit.notification.ToolkitNotifier;
 import com.taotao.cloud.idea.plugin.toolkit.utils.ParseJsonStrUtils;
@@ -7,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
-import com.taotao.boot.common.utils.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 
 public class PhoneAddressSearchActionListener implements ActionListener {

@@ -6,7 +6,7 @@ import com.intellij.ui.EditorTextField;
 import com.taotao.cloud.idea.plugin.toolkit.domain.ToolkitCommand;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import com.taotao.boot.common.utils.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class UrlEncodeAndDecodeDocumentListener implements DocumentListener {
 
