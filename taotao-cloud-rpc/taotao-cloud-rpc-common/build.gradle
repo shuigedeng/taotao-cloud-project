@@ -14,8 +14,8 @@ dependencies {
         exclude group: 'io.netty', module: 'netty-transport'
     }
     //json 转换工具
-    api 'tools.jackson.core:jackson-databind:3.0.2'
-    api 'tools.jackson.core:jackson-core:3.0.2'
+    api 'tools.jackson.core:jackson-databind:3.0.3'
+    api 'tools.jackson.core:jackson-core:3.0.3'
     //kryo 序列化 工具
     api 'com.esotericsoftware:kryo:5.6.2'
     //hessian 序列化 工具

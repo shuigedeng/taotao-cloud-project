@@ -18,7 +18,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-captcha"
     implementation "io.github.shuigedeng:taotao-boot-starter-idgenerator"
     implementation "io.github.shuigedeng:taotao-boot-starter-lock"
-    implementation "io.github.shuigedeng:taotao-boot-starter-prometheus"
+    implementation "io.github.shuigedeng:taotao-boot-starter-metrics"
     implementation "io.github.shuigedeng:taotao-boot-starter-actuator"
     implementation "io.github.shuigedeng:taotao-boot-starter-cache-redis"
     implementation "io.github.shuigedeng:taotao-boot-starter-security-spring"

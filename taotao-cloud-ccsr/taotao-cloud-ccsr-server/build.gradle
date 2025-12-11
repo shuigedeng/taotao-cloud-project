@@ -2,6 +2,8 @@ apply from: rootProject.file('gradle/springboot.gradle')
 
 dependencies {
     api "io.github.shuigedeng:taotao-boot-starter-core"
+
+
     api project(":taotao-cloud-ccsr:taotao-cloud-ccsr-server-starter")
 
     implementation("org.springframework.boot:spring-boot-starter-webmvc") {
