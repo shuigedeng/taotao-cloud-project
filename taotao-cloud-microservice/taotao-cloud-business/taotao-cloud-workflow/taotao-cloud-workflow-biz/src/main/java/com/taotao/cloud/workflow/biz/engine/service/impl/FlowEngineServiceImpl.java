@@ -25,7 +25,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.common.CodeUtil;
-import com.taotao.boot.common.utils.common.IdGeneratorUtils;
+import com.taotao.boot.common.utils.id.IdGeneratorUtils;
 import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.common.utils.common.RandomUtils;
 import com.taotao.boot.security.spring.utils.SecurityUtils;

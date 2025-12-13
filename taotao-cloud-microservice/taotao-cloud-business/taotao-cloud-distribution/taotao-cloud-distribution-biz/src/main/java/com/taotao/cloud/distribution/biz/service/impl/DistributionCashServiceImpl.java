@@ -21,7 +21,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.boot.common.utils.common.IdGeneratorUtils;
+import com.taotao.boot.common.utils.id.IdGeneratorUtils;
 import com.taotao.boot.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.distribution.api.enums.DistributionStatusEnum;
 import com.taotao.cloud.distribution.api.model.vo.DistributionCashSearchVO;

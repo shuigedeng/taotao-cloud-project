@@ -19,7 +19,7 @@ package com.taotao.cloud.order.biz.roketmq.event.impl;
 import com.taotao.boot.cache.redis.repository.RedisRepository;
 
 import com.taotao.boot.common.enums.UserEnum;
-import com.taotao.boot.common.utils.common.IdGeneratorUtils;
+import com.taotao.boot.common.utils.id.IdGeneratorUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
