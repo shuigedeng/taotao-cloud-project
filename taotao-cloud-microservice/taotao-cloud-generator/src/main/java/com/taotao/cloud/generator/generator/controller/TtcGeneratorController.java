@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.generator.generator.controller;
 
+import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.generator.generator.entity.ClassInfo;
 import com.taotao.cloud.generator.generator.entity.ParamInfo;
 import com.taotao.cloud.generator.generator.entity.ReturnT;
@@ -60,17 +61,18 @@ public class TtcGeneratorController {
 
     @RequestMapping("/template/all")
     @ResponseBody
-    public ReturnT getAllTemplates() throws Exception {
+    public Result getAllTemplates() throws Exception {
         String templates = ttcGeneratorService.getTemplateConfig();
-        return Response.ok().put("templates", templates);
+//        return Result.success().put("templates", templates);
+        return Result.success();
     }
 
     @PostMapping("/code/generate")
     @ResponseBody
-    public ReturnT generateCode(@RequestBody ParamInfo paramInfo) throws Exception {
+    public Result generateCode(@RequestBody ParamInfo paramInfo) throws Exception {
         // log.info(JSON.toJSONString(paramInfo.getOptions()));
         if (StringUtils.isEmpty(paramInfo.getTableSql())) {
-            return Response.error("表结构信息为空");
+            return Result.fail("表结构信息为空");
         }
 
         // 1.Parse Table Structure 表结构解析
@@ -108,6 +110,7 @@ public class TtcGeneratorController {
         Map<String, String> result = ttcGeneratorService.getResultByParams(paramInfo.getOptions());
         //        log.info("result {}",result);
         log.info("table:{} - time:{} ", MapUtil.getString(result, "tableName"), new Date());
-        return Response.ok().put("outputJson", result);
+//        return Result.success().put("outputJson", result);
+        return Result.success();
     }
 }

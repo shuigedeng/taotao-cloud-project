@@ -25,7 +25,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-cache-redis"
 
     //https://central.sonatype.com/artifact/org.apache.pdfbox/pdfbox
-    implementation "org.apache.pdfbox:pdfbox:3.0.5"
+    implementation "org.apache.pdfbox:pdfbox:3.0.6"
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"

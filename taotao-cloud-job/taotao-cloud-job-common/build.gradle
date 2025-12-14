@@ -7,8 +7,8 @@ dependencies {
     api "net.devh:grpc-client-spring-boot-starter:3.1.0.RELEASE"
 
     api "io.netty:netty-all:4.2.7.Final"
-    api "com.google.protobuf:protobuf-java:4.32.0"
-    api "com.google.protobuf:protobuf-java-util:4.32.0"
+    api "com.google.protobuf:protobuf-java:4.33.2"
+    api "com.google.protobuf:protobuf-java-util:4.33.2"
     api "org.apache.thrift:libthrift:0.21.0"
     api "io.grpc:grpc-api:1.77.0"
     api "io.grpc:grpc-context:1.77.0"
@@ -38,7 +38,7 @@ protobuf {
     protoc {
         //https://repo1.maven.org/maven2/com/google/protobuf/protoc/
         //直接使用Maven Central上已经编译好的protoc编译器，
-        artifact = "com.google.protobuf:protoc:4.32.0"
+        artifact = "com.google.protobuf:protoc:4.33.2"
         //指定本地已经安装的protoc编译器
         //path = '/usr/local/bin/protoc'
     }
