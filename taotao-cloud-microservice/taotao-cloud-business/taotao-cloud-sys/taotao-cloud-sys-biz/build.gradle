@@ -84,7 +84,7 @@ dependencies {
     implementation 'org.zalando:logbook-spring-boot-starter:3.12.3'
     implementation 'org.zalando:logbook-httpclient5:3.12.3'
     implementation 'org.zalando:logbook-netty:3.12.3'
-    implementation 'org.zalando:logbook-spring-webflux:3.12.3'
+    //implementation 'org.zalando:logbook-spring-webflux:3.12.3'
 
     //implementation "io.github.shuigedeng:taotao-boot-starter-processor")
     //annotationProcessor "io.github.shuigedeng:taotao-boot-starter-processor")

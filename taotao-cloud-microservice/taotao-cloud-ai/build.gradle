@@ -194,9 +194,9 @@ dependencies {
     //mcp
     implementation 'org.springframework.ai:spring-ai-starter-mcp-server'
     implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webmvc'
-    implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webflux'
+    //implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webflux'
     implementation 'org.springframework.ai:spring-ai-starter-mcp-client'
-    implementation 'org.springframework.ai:spring-ai-starter-mcp-client-webflux'
+    //implementation 'org.springframework.ai:spring-ai-starter-mcp-client-webflux'
 
     implementation 'org.springframework.ai:spring-ai-spring-boot-testcontainers'
 

@@ -10,13 +10,13 @@ dependencies {
     implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"
     implementation 'org.apache.skywalking:apm-spring-cloud-gateway-3.x-plugin'
     implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
-    implementation 'org.springframework.cloud:spring-cloud-starter-function-webflux'
+    //implementation 'org.springframework.cloud:spring-cloud-starter-function-webflux'
     //支持mvc
-    //implementation "org.springframework.cloud:spring-cloud-starter-gateway-server-webmvc"
-    implementation("org.springframework.cloud:spring-cloud-starter-gateway-server-webflux") {
-        exclude group: "org.springframework.boot", module: "spring-boot-starter-webmvc"
-        exclude group: "org.springframework.boot", module: "spring-boot-starter-webflux"
-    }
+    implementation "org.springframework.cloud:spring-cloud-starter-gateway-server-webmvc"
+    //implementation("org.springframework.cloud:spring-cloud-starter-gateway-server-webflux") {
+    //    exclude group: "org.springframework.boot", module: "spring-boot-starter-webmvc"
+    //    exclude group: "org.springframework.boot", module: "spring-boot-starter-webflux"
+    //}
 
     implementation "org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j"
     implementation "io.github.resilience4j:resilience4j-ratelimiter:2.3.0"
@@ -38,13 +38,13 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-cache-caffeine"
     implementation "io.github.shuigedeng:taotao-boot-starter-cache-redis"
 
-    implementation "org.springframework.boot:spring-boot-starter-webflux"
+    //implementation "org.springframework.boot:spring-boot-starter-webflux"
 
-    implementation 'org.springdoc:springdoc-openapi-starter-webflux-api'
-    implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui'
+    //implementation 'org.springdoc:springdoc-openapi-starter-webflux-api'
+    //implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui'
 
-    implementation "com.github.xiaoymin:knife4j-openapi3-webflux-jakarta-spring-boot-starter"
-    implementation "com.github.xiaoymin:knife4j-openapi3-webflux-spring-boot-starter"
+    //implementation "com.github.xiaoymin:knife4j-openapi3-webflux-jakarta-spring-boot-starter"
+    //implementation "com.github.xiaoymin:knife4j-openapi3-webflux-spring-boot-starter"
     implementation "com.github.xiaoymin:knife4j-gateway-spring-boot-starter:4.5.0"
 
     implementation "org.apache.commons:commons-pool2"

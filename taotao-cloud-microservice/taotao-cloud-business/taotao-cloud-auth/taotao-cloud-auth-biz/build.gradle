@@ -96,7 +96,6 @@ dependencies {
 
     implementation "org.apache.commons:commons-collections4"
 
-    implementation "org.springframework:spring-webflux"
     implementation "io.projectreactor.netty:reactor-netty-http"
     implementation "io.projectreactor.netty:reactor-netty"
 

@@ -106,6 +106,9 @@ redisson:
   #  scanInterval: 1000
 
 spring:
+  threads:
+    virtual:
+      enabled: true
   autoconfigure:
     exclude:
       - org.springframework.cloud.function.web.flux.ReactorAutoConfiguration
@@ -141,8 +144,6 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
-    serialization:
-      write-dates-as-timestamps: false
   data:
     redis:
       host: 192.168.218.2
@@ -257,7 +258,7 @@ spring:
           response-body: "{'data': null, 'code': 429,'message': 'scg访问频繁,进入系统熔断'}"
     gateway:
       server:
-        webflux:
+        webmvc:
           #请求窃听
           #Reactor Netty HttpClient 和 HttpServer 可以启用窃听功能。如果将 reactor.netty 日志级别设置为 DEBUG 或 TRACE，就能记录信息，如下配置：
           httpserver:
@@ -949,6 +950,7 @@ spring:
           #                redis-rate-limiter.burstCapacity: 5
           default-filters:
             - AddRequestHeader=X-Request-taotao-cloud, ${ttcVersion}
+
 
 taotao:
   boot:

@@ -68,7 +68,7 @@ apply plugin: "idea"
 apply plugin: "com.google.protobuf"
 
 dependencies {
-    implementation "io.netty:netty-all:4.2.7.Final"
+    implementation "io.netty:netty-all:4.2.8.Final"
     implementation "com.google.protobuf:protobuf-java:4.33.2"
     implementation "com.google.protobuf:protobuf-java-util:4.33.2"
     implementation "org.apache.thrift:libthrift:0.21.0"
