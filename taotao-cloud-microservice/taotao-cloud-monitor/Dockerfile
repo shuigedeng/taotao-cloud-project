@@ -117,6 +117,8 @@ ENV JAVA_OPTIONS="-Xms1g \
                   -Xmn1280m \
                   -Xss512k \
                   -Xlog:async \
+                  -XX:+UseContainerSupport \
+                  -XX:MaxRAMPercentage=75 \
                   -XX:MaxDirectMemorySize=1024m \
                   -XX:MetaspaceSize=256m \
                   -XX:MaxMetaspaceSize=512m \

@@ -49,6 +49,8 @@ ENV JAVA_OPTIONS="-Xms512m \
                   -XX:MaxMetaspaceSize=256m \
                   -verbose:gc \
                   -Xlog:async \
+                  -XX:+UseContainerSupport \
+                  -XX:MaxRAMPercentage=75 \
                   -XX:AsyncLogBufferSize=409600 \
                   -XX:ParallelGCThreads=4 \
                   -Djava.security.egd=file:/dev/./urandom \

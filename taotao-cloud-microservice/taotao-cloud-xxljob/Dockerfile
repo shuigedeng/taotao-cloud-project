@@ -58,11 +58,30 @@ ENV PYROSCOPE_LOG_LEVEL=info
 ENV PYROSCOPE_LABELS="APP=taotao-cloud-xxljob"
 #ENV PYROSCOPE_AUTH_TOKEN=info
 
+#JVM 包含多种不同类型的参数选项、
+#-- 用来设置应用参数，不是JVM参数的标准前缀
+#   -- 用于将应用参数传递给 Spring Boot 应用本身(而不是 JVM) 本质：Spring Boot 的命令行参数（Command line arguments）
+#   --xxx（命令行参数）的优先级高于 -Dxxx（JVM 系统属性
+#-D 用来设置系统属性，属于标准选项   可以通过 System.getProperty("property") 在代码中获取
+#-X 非标准参数，支持的选项范围跟具体的 JVM 实现有关 非标准但稳定的 JVM 选项
+#-XX 非标准参数，设置高级选项，允许开发者调整 JVM 的行为、性能、输出调试信息，支持的选项范围也跟具体的 JVM 实现有关
+#-XX 高级/实验性 JVM 选项 用于控制 JVM 内部行为，如垃圾回收器、JIT 编译器、内存管理等
+#    分为两类：
+#      布尔型：-XX:+Option（启用）、-XX:-Option（禁用）
+#      键值型：-XX:Option=value
+#布尔类型的高级选项是起到功能的开关作用，不带参数。使用 + 启用功能，使用 - 禁用功能；对于带参数的高级选项，需要指定参数值
+#使用 java -XX:+UnlockDiagnosticVMOptions -XX:+UnlockExperimentalVMOptions -XX:+PrintFlagsFinal -version 命令可以查看 JVM 所有的选项
 ENV JAVA_OPTIONS="-Xms1g \
                   -Xmx2g \
                   -Xmn1280m \
                   -Xss512k \
+                  -verbose:gc \
                   -Xlog:async \
+                  -Xlog:gc*=debug:file=/root/logs/${APP_NAME}/gc.log:utctime,level,tags:filecount=50,filesize=100M \
+                  -Xlog:jit+compilation=debug:file=/root/logs/${APP_NAME}/jit.compile.log:utctime,level,tags:filecount=10,filesize=100M \
+                  -Xlog:safepoint=debug:file=/root/logs/${APP_NAME}/safepoint%t.log:utctime,level,tags:filecount=10,filesize=10M \
+                  -XX:+UseContainerSupport \
+                  -XX:MaxRAMPercentage=75 \
                   -XX:MaxDirectMemorySize=1024m \
                   -XX:MetaspaceSize=256m \
                   -XX:MaxMetaspaceSize=512m \
@@ -87,13 +106,6 @@ ENV JAVA_OPTIONS="-Xms1g \
                   -XX:+ShowCodeDetailsInExceptionMessages \
                   -XX:ParallelGCThreads=4 \
                   -XX:AsyncLogBufferSize=409600 \
-                  -Xlog:gc*=debug:file=/root/logs/${APP_NAME}/gc.log:utctime,level,tags:filecount=50,filesize=100M \
-                  -Xlog:jit+compilation=debug:file=/root/logs/${APP_NAME}/jit.compile.log:utctime,level,tags:filecount=10,filesize=100M \
-                  -Xlog:safepoint=debug:file=/root/logs/${APP_NAME}/safepoint%t.log:utctime,level,tags:filecount=10,filesize=10M \
-                  -verbose:gc \
-                  -Dnetworkaddress.cache.ttl=10 \
-                  -Djava.security.egd=file:/dev/./urandom \
-                  -Dfile.encoding=utf-8 \
                   --add-opens java.base/java.security=ALL-UNNAMED \
                   --add-opens java.base/jdk.internal.misc=ALL-UNNAMED \
                   --add-opens java.base/java.text=ALL-UNNAMED \
@@ -111,6 +123,10 @@ ENV JAVA_OPTIONS="-Xms1g \
                   --add-opens java.base/java.math=ALL-UNNAMED \
                   --add-exports java.desktop/sun.awt=ALL-UNNAMED \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
+                  -Dnetworkaddress.cache.ttl=10 \
+                  -Djava.security.egd=file:/dev/./urandom \
+                  -Dfile.encoding=utf-8 \
+                  -Duser.timezone=GMT+08 \
                   -Dspring.profiles.active=${APP_PRROFILES} \
                   -javaagent:/skywalking/agent/skywalking-agent.jar"
 

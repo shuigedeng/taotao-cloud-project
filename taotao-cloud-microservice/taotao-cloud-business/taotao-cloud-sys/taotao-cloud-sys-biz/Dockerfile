@@ -67,6 +67,9 @@ ENV JAVA_OPTIONS="-Xms1g \
                   -Xmn1280m \
                   -Xss512k \
                   -Xlog:async \
+                  -verbose:gc \
+                  -XX:+UseContainerSupport \
+                  -XX:MaxRAMPercentage=75 \
                   -XX:MaxDirectMemorySize=1024m \
                   -XX:MetaspaceSize=256m \
                   -XX:MaxMetaspaceSize=512m \
@@ -94,7 +97,6 @@ ENV JAVA_OPTIONS="-Xms1g \
                   -Xlog:gc*=debug:file=/root/logs/${APP_NAME}/gc.log:utctime,level,tags:filecount=50,filesize=100M \
                   -Xlog:jit+compilation=debug:file=/root/logs/${APP_NAME}/jit.compile.log:utctime,level,tags:filecount=10,filesize=100M \
                   -Xlog:safepoint=debug:file=/root/logs/${APP_NAME}/safepoint%t.log:utctime,level,tags:filecount=10,filesize=10M \
-                  -verbose:gc \
                   -Dnetworkaddress.cache.ttl=10 \
                   -Djava.security.egd=file:/dev/./urandom \
                   -Dfile.encoding=utf-8 \
@@ -204,6 +206,7 @@ ENTRYPOINT sleep 30; java ${JAVA_OPTIONS} org.springframework.boot.loader.launch
 #server模式启动慢，但性能和内存管理效率高，适用于服务器。64位的JVM只有server模式
 #-verbose：查询GC（垃圾回收）问题最常用的命令之一，常用于排查GC问题。
 #例如，-verbose:gc输出每次GC的相关情况，-verbose:class输出JVM载入类的相关信息，-verbose:jni输出native方法调用的相关情况
+#     启动 Java 应用时，JVM 会在每次发生垃圾回收时输出一行或多行日志
 #
 #2.非标准参数（-X）
 #-Xms：设置初始堆内存大小，即程序启动时占用内存大小，默认是物理内存的1/64。
@@ -291,6 +294,8 @@ ENTRYPOINT sleep 30; java ${JAVA_OPTIONS} org.springframework.boot.loader.launch
 #                  -XX:+DisableExplicitGC 禁止System.gc()如果后台跑批可以开启,关闭显示GC(System.gc())触发的FullGC，防止netty这种误检测内存泄漏显示调用 \
 #########################################日志输出参数##########################
 #                  -Xlog:async \
+                  -XX:+UseContainerSupport \
+                  -XX:MaxRAMPercentage=75 \
 #                  -XX:AsyncLogBufferSize=409600 \
 #                  -verbose:gc 显示每次垃圾事件的信息\
 #                  -XX:+PrintGCTimeStamps  打印gc时间戳
@@ -440,6 +445,8 @@ ENTRYPOINT sleep 30; java ${JAVA_OPTIONS} org.springframework.boot.loader.launch
 #                  -XX:+ShowCodeDetailsInExceptionMessages \
 #                  -XX:ParallelGCThreads=4 \
 #                  -Xlog:async \
+                  -XX:+UseContainerSupport \
+                  -XX:MaxRAMPercentage=75 \
 #                  -XX:AsyncLogBufferSize=409600 \
 #                  # gc日志 \
 #                  -Xlog:gc*=debug:file=/root/logs/${APP_NAME}/gc.log:utctime,level,tags:filecount=50,filesize=100M \
