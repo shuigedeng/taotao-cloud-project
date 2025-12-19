@@ -18,15 +18,24 @@ package com.taotao.cloud.mq.common.balance.impl;
 
 import com.taotao.cloud.mq.common.balance.ILoadBalanceContext;
 import com.taotao.cloud.mq.common.balance.IServer;
+
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * LoadBalanceRandom
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class LoadBalanceRandom<T extends IServer> extends AbstractLoadBalance<T> {
-    protected T doSelect(ILoadBalanceContext<T> context) {
+
+    protected T doSelect( ILoadBalanceContext<T> context ) {
         List<T> servers = context.servers();
         Random random = ThreadLocalRandom.current();
         int nextIndex = random.nextInt(servers.size());
-        return (T) (servers.get(nextIndex));
+        return (T) ( servers.get(nextIndex) );
     }
 }

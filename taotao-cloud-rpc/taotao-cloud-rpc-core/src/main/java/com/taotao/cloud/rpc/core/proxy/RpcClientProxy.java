@@ -31,6 +31,7 @@ import com.taotao.cloud.rpc.core.net.RpcClient;
 import com.taotao.cloud.rpc.core.net.netty.client.NettyClient;
 import com.taotao.cloud.rpc.core.net.netty.client.UnprocessedRequests;
 import com.taotao.cloud.rpc.core.net.socket.client.SocketClient;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -39,8 +40,16 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * RpcClientProxy
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class RpcClientProxy implements InvocationHandler {
 
@@ -74,9 +83,9 @@ public class RpcClientProxy implements InvocationHandler {
     }
 
     /**
-     * @param rpcClient
+     *
      */
-    public RpcClientProxy(RpcClient rpcClient) {
+    public RpcClientProxy( RpcClient rpcClient ) {
         this.rpcClient = rpcClient;
         /**
          * 客户端 清除钩子
@@ -85,33 +94,28 @@ public class RpcClientProxy implements InvocationHandler {
     }
 
     /**
-     * 用于可 超时重试 的动态代理，需要配合 @Reference使用 兼容 阻塞模式 asyncTime 字段 缺省 或者 <= 0 将启用 注意，此时 timeout 、 retries
-     * 字段将失效
+     * 用于可 超时重试 的动态代理，需要配合 @Reference使用 兼容 阻塞模式 asyncTime 字段 缺省 或者 <= 0 将启用 注意，此时 timeout 、 retries 字段将失效
      *
-     * @param clazz     获取的服务类
+     * @param clazz 获取的服务类
      * @param pareClazz 使用 @Reference 所在类
-     * @param <T>
-     * @return
      */
-    public <T> T getProxy(Class<T> clazz, Class<?> pareClazz) {
+    public <T> T getProxy( Class<T> clazz, Class<?> pareClazz ) {
         this.pareClazz = pareClazz;
-        return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class<?>[] {clazz}, this);
+        return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class<?>[]{clazz}, this);
     }
 
     /**
      * 用于普通动态代理，@Reference 将失效，已过时，不推荐使用 原因：无法识别到 @Reference, 服务名 和 版本号 不可用
      *
      * @param clazz 获取的服务类
-     * @param <T>
-     * @return
      */
     @Deprecated
-    public <T> T getProxy(Class<T> clazz) {
-        return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class<?>[] {clazz}, this);
+    public <T> T getProxy( Class<T> clazz ) {
+        return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class<?>[]{clazz}, this);
     }
 
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    public Object invoke( Object proxy, Method method, Object[] args ) throws Throwable {
 
         RpcRequest rpcRequest =
                 new RpcRequest.Builder()

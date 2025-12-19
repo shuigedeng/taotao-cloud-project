@@ -24,14 +24,23 @@ import org.aspectj.lang.ProceedingJoinPoint;
  * @ApiClient解析器
  */
 public class BaseApiClientParser {
+
+    /**
+     * ApiClientParserInfo
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class ApiClientParserInfo {
+
         String appName;
         String url;
         Method method;
         ProceedingJoinPoint joinPoint;
 
         public ApiClientParserInfo(
-                String appName, String url, Method method, ProceedingJoinPoint joinPoint) {
+                String appName, String url, Method method, ProceedingJoinPoint joinPoint ) {
             this.appName = appName;
             this.url = url;
             this.method = method;
@@ -42,7 +51,7 @@ public class BaseApiClientParser {
             return appName;
         }
 
-        public void setAppName(String appName) {
+        public void setAppName( String appName ) {
             this.appName = appName;
         }
 
@@ -50,7 +59,7 @@ public class BaseApiClientParser {
             return url;
         }
 
-        public void setUrl(String url) {
+        public void setUrl( String url ) {
             this.url = url;
         }
 
@@ -58,7 +67,7 @@ public class BaseApiClientParser {
             return method;
         }
 
-        public void setMethod(Method method) {
+        public void setMethod( Method method ) {
             this.method = method;
         }
 
@@ -66,12 +75,12 @@ public class BaseApiClientParser {
             return joinPoint;
         }
 
-        public void setJoinPoint(ProceedingJoinPoint joinPoint) {
+        public void setJoinPoint( ProceedingJoinPoint joinPoint ) {
             this.joinPoint = joinPoint;
         }
     }
 
-    public RequestInfo parse(ApiClientParserInfo info) {
+    public RequestInfo parse( ApiClientParserInfo info ) {
         return null;
     }
 }

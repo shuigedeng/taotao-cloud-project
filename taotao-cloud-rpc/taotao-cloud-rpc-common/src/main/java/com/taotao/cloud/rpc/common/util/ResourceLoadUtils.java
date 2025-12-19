@@ -24,8 +24,16 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * ResourceLoadUtils
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class ResourceLoadUtils {
 
@@ -33,11 +41,8 @@ public class ResourceLoadUtils {
 
     /**
      * 加载 Jar 包外置配置文件 找不到返回 null
-     *
-     * @param resourceName
-     * @return
      */
-    public static Map<String, String> load(String resourceName) {
+    public static Map<String, String> load( String resourceName ) {
         // 2.1 创建Properties对象
         Properties p = new Properties();
         // 2.2 调用p对象中的load方法进行配置文件的加载
@@ -46,7 +51,7 @@ public class ResourceLoadUtils {
         InputStream is = null;
         String propertyValue = "";
         try (BufferedReader bufferedReader =
-                new BufferedReader(new FileReader(currentWorkPath + "/config/" + resourceName)); ) {
+                new BufferedReader(new FileReader(currentWorkPath + "/config/" + resourceName));) {
             p.load(bufferedReader);
             Enumeration<Object> keys = p.keys();
             while (keys.hasMoreElements()) {

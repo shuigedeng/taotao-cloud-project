@@ -16,15 +16,24 @@
 
 package com.taotao.cloud.realtime.datalake.behavior.loginfail_detect;
 
+/**
+ * LoginFailWarning
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class LoginFailWarning {
+
     private Long userId;
     private Long firstFailTime;
     private Long lastFailTime;
     private String warningMsg;
 
-    public LoginFailWarning() {}
+    public LoginFailWarning() {
+    }
 
-    public LoginFailWarning(Long userId, Long firstFailTime, Long lastFailTime, String warningMsg) {
+    public LoginFailWarning( Long userId, Long firstFailTime, Long lastFailTime, String warningMsg ) {
         this.userId = userId;
         this.firstFailTime = firstFailTime;
         this.lastFailTime = lastFailTime;
@@ -35,7 +44,7 @@ public class LoginFailWarning {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId( Long userId ) {
         this.userId = userId;
     }
 
@@ -43,7 +52,7 @@ public class LoginFailWarning {
         return firstFailTime;
     }
 
-    public void setFirstFailTime(Long firstFailTime) {
+    public void setFirstFailTime( Long firstFailTime ) {
         this.firstFailTime = firstFailTime;
     }
 
@@ -51,7 +60,7 @@ public class LoginFailWarning {
         return lastFailTime;
     }
 
-    public void setLastFailTime(Long lastFailTime) {
+    public void setLastFailTime( Long lastFailTime ) {
         this.lastFailTime = lastFailTime;
     }
 
@@ -59,7 +68,7 @@ public class LoginFailWarning {
         return warningMsg;
     }
 
-    public void setWarningMsg(String warningMsg) {
+    public void setWarningMsg( String warningMsg ) {
         this.warningMsg = warningMsg;
     }
 

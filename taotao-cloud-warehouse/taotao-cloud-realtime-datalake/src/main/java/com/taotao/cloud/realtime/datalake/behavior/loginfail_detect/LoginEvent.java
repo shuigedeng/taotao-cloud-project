@@ -16,15 +16,24 @@
 
 package com.taotao.cloud.realtime.datalake.behavior.loginfail_detect;
 
+/**
+ * LoginEvent
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class LoginEvent {
+
     private Long userId;
     private String ip;
     private String loginState;
     private Long timestamp;
 
-    public LoginEvent() {}
+    public LoginEvent() {
+    }
 
-    public LoginEvent(Long userId, String ip, String loginState, Long timestamp) {
+    public LoginEvent( Long userId, String ip, String loginState, Long timestamp ) {
         this.userId = userId;
         this.ip = ip;
         this.loginState = loginState;
@@ -35,7 +44,7 @@ public class LoginEvent {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId( Long userId ) {
         this.userId = userId;
     }
 
@@ -43,7 +52,7 @@ public class LoginEvent {
         return ip;
     }
 
-    public void setIp(String ip) {
+    public void setIp( String ip ) {
         this.ip = ip;
     }
 
@@ -51,7 +60,7 @@ public class LoginEvent {
         return loginState;
     }
 
-    public void setLoginState(String loginState) {
+    public void setLoginState( String loginState ) {
         this.loginState = loginState;
     }
 
@@ -59,7 +68,7 @@ public class LoginEvent {
         return timestamp;
     }
 
-    public void setTimestamp(Long timestamp) {
+    public void setTimestamp( Long timestamp ) {
         this.timestamp = timestamp;
     }
 

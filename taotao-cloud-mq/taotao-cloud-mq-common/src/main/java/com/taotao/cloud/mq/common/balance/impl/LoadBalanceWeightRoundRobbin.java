@@ -22,28 +22,37 @@ import com.taotao.boot.common.utils.collection.CollectionUtils;
 import com.taotao.boot.common.utils.number.MathUtils;
 import com.taotao.cloud.mq.common.balance.ILoadBalanceContext;
 import com.taotao.cloud.mq.common.balance.IServer;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+/**
+ * LoadBalanceWeightRoundRobbin
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class LoadBalanceWeightRoundRobbin<T extends IServer> extends AbstractLoadBalance<T> {
+
     private final AtomicLong indexHolder = new AtomicLong();
 
-    protected T doSelect(ILoadBalanceContext<T> context) {
+    protected T doSelect( ILoadBalanceContext<T> context ) {
         List<T> servers = context.servers();
         List<T> actualList = this.buildActualList(servers);
         long index = this.indexHolder.getAndIncrement();
-        int actual = (int) (index % (long) actualList.size());
-        return (T) (actualList.get(actual));
+        int actual = (int) ( index % (long) actualList.size() );
+        return (T) ( actualList.get(actual) );
     }
 
-    private List<T> buildActualList(List<T> serverList) {
+    private List<T> buildActualList( List<T> serverList ) {
         List<T> actualList = new ArrayList();
         List<T> notZeroServers =
                 CollectionUtils.filterList(
                         serverList,
                         new Filter<T>() {
-                            public boolean filter(IServer iServer) {
+                            public boolean filter( IServer iServer ) {
                                 return iServer.weight() <= 0;
                             }
                         });
@@ -51,7 +60,7 @@ public class LoadBalanceWeightRoundRobbin<T extends IServer> extends AbstractLoa
                 CollectionUtils.toList(
                         notZeroServers,
                         new Handler<T, Integer>() {
-                            public Integer handle(T iServer) {
+                            public Integer handle( T iServer ) {
                                 return iServer.weight();
                             }
                         });

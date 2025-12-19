@@ -16,16 +16,25 @@
 
 package com.taotao.cloud.realtime.datalake.behavior.networkflow_analysis.beans;
 
+/**
+ * ApacheLogEvent
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ApacheLogEvent {
+
     private String ip;
     private String userId;
     private Long timestamp;
     private String method;
     private String url;
 
-    public ApacheLogEvent() {}
+    public ApacheLogEvent() {
+    }
 
-    public ApacheLogEvent(String ip, String userId, Long timestamp, String method, String url) {
+    public ApacheLogEvent( String ip, String userId, Long timestamp, String method, String url ) {
         this.ip = ip;
         this.userId = userId;
         this.timestamp = timestamp;
@@ -37,7 +46,7 @@ public class ApacheLogEvent {
         return ip;
     }
 
-    public void setIp(String ip) {
+    public void setIp( String ip ) {
         this.ip = ip;
     }
 
@@ -45,7 +54,7 @@ public class ApacheLogEvent {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId( String userId ) {
         this.userId = userId;
     }
 
@@ -53,7 +62,7 @@ public class ApacheLogEvent {
         return timestamp;
     }
 
-    public void setTimestamp(Long timestamp) {
+    public void setTimestamp( Long timestamp ) {
         this.timestamp = timestamp;
     }
 
@@ -61,7 +70,7 @@ public class ApacheLogEvent {
         return method;
     }
 
-    public void setMethod(String method) {
+    public void setMethod( String method ) {
         this.method = method;
     }
 
@@ -69,7 +78,7 @@ public class ApacheLogEvent {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl( String url ) {
         this.url = url;
     }
 

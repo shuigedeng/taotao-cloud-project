@@ -33,14 +33,23 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.timeout.IdleStateHandler;
+
 import java.net.InetSocketAddress;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * ChannelProvider
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class ChannelProvider {
 
@@ -54,13 +63,8 @@ public class ChannelProvider {
 
     /**
      * 这里 是可以 共享 channel 的 共享的策略是 同一台 主机 并且 是用同一种 编解码处理的，使用同一条 通道
-     *
-     * @param address
-     * @param serializer
-     * @return
-     * @throws RpcException
      */
-    public static Channel get(InetSocketAddress address, CommonSerializer serializer)
+    public static Channel get( InetSocketAddress address, CommonSerializer serializer )
             throws RpcException {
         String key = address.toString() + serializer.getCode();
         if (channels.containsKey(key)) {
@@ -79,7 +83,7 @@ public class ChannelProvider {
         bootstrap.handler(
                 new ChannelInitializer<SocketChannel>() {
                     @Override
-                    protected void initChannel(SocketChannel ch) throws Exception {
+                    protected void initChannel( SocketChannel ch ) throws Exception {
                         ChannelPipeline pipeline = ch.pipeline();
                         pipeline.addLast(new IdleStateHandler(3, 5, 7, TimeUnit.SECONDS))
                                 .addLast(new CommonDecoder())
@@ -104,7 +108,7 @@ public class ChannelProvider {
         return channel;
     }
 
-    private static Channel connect(Bootstrap bootstrap, InetSocketAddress address)
+    private static Channel connect( Bootstrap bootstrap, InetSocketAddress address )
             throws ExecutionException, InterruptedException {
 
         CompletableFuture<Channel> completableFuture = new CompletableFuture<>();
@@ -116,7 +120,7 @@ public class ChannelProvider {
         channelFuture.addListener(
                 new ChannelFutureListener() {
                     @Override
-                    public void operationComplete(ChannelFuture future) throws Exception {
+                    public void operationComplete( ChannelFuture future ) throws Exception {
                         log.debug("connect operationComplete: future [{}]", future);
                         log.debug(
                                 "connect operationComplete: future.isSuccess [{}]",

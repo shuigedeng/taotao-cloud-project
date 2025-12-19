@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.DbUtil;
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.RandomUtil;
 import org.slf4j.Logger;
@@ -27,18 +28,27 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * FinancialDataGenerator
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class FinancialDataGenerator {
+
     private static final Logger logger = LoggerFactory.getLogger(FinancialDataGenerator.class);
     private static final int BATCH_SIZE = 500;
 
-    @Autowired private DbUtil dbUtil;
+    @Autowired
+    private DbUtil dbUtil;
 
-    public void generateFinancialData(int count) {
+    public void generateFinancialData( int count ) {
         generateSkuCost(count);
     }
 
-    private void generateSkuCost(int count) {
+    private void generateSkuCost( int count ) {
         String sql =
                 "INSERT INTO financial_sku_cost (id, sku_id, sku_name, sku_cost, busi_date, is_lastest, create_time) "
                         + "VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -61,7 +71,7 @@ public class FinancialDataGenerator {
                 String busiDate = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 String isLastest = "1";
 
-                params.add(new Object[] {id, skuId, skuName, skuCost, busiDate, isLastest, now});
+                params.add(new Object[]{id, skuId, skuName, skuCost, busiDate, isLastest, now});
             }
 
             dbUtil.batchInsert(sql, params);

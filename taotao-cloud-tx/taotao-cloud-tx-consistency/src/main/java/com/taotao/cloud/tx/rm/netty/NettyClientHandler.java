@@ -24,17 +24,24 @@ import com.taotao.cloud.tx.rm.transactional.TtcTxParticipant;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
+/**
+ * NettyClientHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NettyClientHandler extends ChannelInboundHandlerAdapter {
 
     private ChannelHandlerContext channelHandlerContext;
 
     @Override
-    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+    public void handlerAdded( ChannelHandlerContext ctx ) throws Exception {
         channelHandlerContext = ctx;
     }
 
     @Override
-    public synchronized void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public synchronized void channelRead( ChannelHandlerContext ctx, Object msg ) throws Exception {
         System.out.println("接收到事务管理者的最终决断：" + msg.toString());
 
         // 反序列化解析JSON数据
@@ -61,7 +68,7 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
         ttcTx.getTask().signalTask();
     }
 
-    public void sendData(JSONObject result) {
+    public void sendData( JSONObject result ) {
         System.out.println("向事务管理者发送数据：" + result.toJSONString());
         channelHandlerContext.writeAndFlush(result.toJSONString());
     }

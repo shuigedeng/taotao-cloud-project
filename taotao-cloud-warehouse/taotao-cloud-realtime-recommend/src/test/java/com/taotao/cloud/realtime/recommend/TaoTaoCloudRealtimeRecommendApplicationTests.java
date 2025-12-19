@@ -16,7 +16,15 @@
 
 package com.taotao.cloud.realtime.recommend;
 
+/**
+ * TaoTaoCloudRealtimeRecommendApplicationTests
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 class TaoTaoCloudRealtimeRecommendApplicationTests {
 
-    void contextLoads() {}
+    void contextLoads() {
+    }
 }

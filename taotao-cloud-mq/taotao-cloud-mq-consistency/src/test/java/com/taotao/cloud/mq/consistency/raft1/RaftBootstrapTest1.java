@@ -17,12 +17,20 @@
 package com.taotao.cloud.mq.consistency.raft1;
 
 import com.taotao.cloud.mq.consistency.raft1.server.bs.RaftBootstrap;
+
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * RaftBootstrapTest1
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class RaftBootstrapTest1 {
 
-    public static void main(String[] args) throws Throwable {
+    public static void main( String[] args ) throws Throwable {
         System.setProperty("serverPort", "8775");
 
         List<String> clusterList =

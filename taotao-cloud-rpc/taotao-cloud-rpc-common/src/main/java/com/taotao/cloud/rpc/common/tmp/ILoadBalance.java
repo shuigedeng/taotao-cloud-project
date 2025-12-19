@@ -16,9 +16,16 @@
 
 package com.taotao.cloud.rpc.common.tmp;
 
+/**
+ * ILoadBalance
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ILoadBalance<T extends IServer> {
 
-    public <T extends IServer> T select(LoadBalanceContext<T> loadBalanceContext) {
+    public <T extends IServer> T select( LoadBalanceContext<T> loadBalanceContext ) {
         return null;
     }
 }

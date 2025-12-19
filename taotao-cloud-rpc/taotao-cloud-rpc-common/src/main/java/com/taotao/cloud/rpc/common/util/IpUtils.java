@@ -28,6 +28,7 @@ import java.net.URL;
 import java.util.Enumeration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
@@ -36,10 +37,17 @@ import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.apache.hc.core5.http.ParseException;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 
+/**
+ * IpUtils
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class IpUtils {
 
-    public static boolean valid(String ip) {
+    public static boolean valid( String ip ) {
         if (ip.equals("localhost")) {
             return true;
         }
@@ -68,10 +76,10 @@ public class IpUtils {
                 int k = Integer.parseInt(l); // 第三个数
                 String m = g.substring(h + 1); // 截取第三个点后面的数
                 int n = Integer.parseInt(m); // 第四个数
-                if ((i >= 0 && i <= 255)
-                        && (j >= 0 && j <= 255)
-                        && (k >= 0 && k <= 255)
-                        && (n >= 0 && n <= 255)) {
+                if (( i >= 0 && i <= 255 )
+                        && ( j >= 0 && j <= 255 )
+                        && ( k >= 0 && k <= 255 )
+                        && ( n >= 0 && n <= 255 )) {
                     return true;
                 } else {
                     return false;
@@ -86,8 +94,6 @@ public class IpUtils {
 
     /**
      * 目前较为稳定
-     *
-     * @return
      */
     public static String getPubIpAddr() {
         String ip = "";
@@ -102,7 +108,7 @@ public class IpUtils {
             url = new URL(chinaz);
             urlConnection = (HttpURLConnection) url.openConnection();
             in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
-            while ((read = in.readLine()) != null) {
+            while (( read = in.readLine() ) != null) {
                 inputLine.append(read + "\r\n");
             }
         } catch (MalformedURLException e) {
@@ -129,8 +135,6 @@ public class IpUtils {
 
     /**
      * 方法描述：获取公网ip（不稳定）
-     *
-     * @return
      */
     public static String getPubIpAddr0() {
         try {
@@ -139,7 +143,7 @@ public class IpUtils {
             String s = "";
             StringBuffer sb = new StringBuffer("");
             String webContent = "";
-            while ((s = br.readLine()) != null) {
+            while (( s = br.readLine() ) != null) {
                 sb.append(s + "\r\n");
             }
             br.close();
@@ -157,8 +161,6 @@ public class IpUtils {
 
     /**
      * 方法描述：获取公网ip（接口稳定，ip不稳定）
-     *
-     * @return
      */
     private static String getPubIpAddr1() {
         String url = "https://ip.renfei.net/";
@@ -230,7 +232,7 @@ public class IpUtils {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         for (int i = 0; i < 10; i++) {
             String pubIpAddr = getPubIpAddr();
             System.out.println(pubIpAddr);
@@ -238,6 +240,13 @@ public class IpUtils {
     }
 }
 
+/**
+ * CitySN
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 class CitySN {
 
     private String cip;
@@ -248,7 +257,7 @@ class CitySN {
         return cip;
     }
 
-    public void setCip(String cip) {
+    public void setCip( String cip ) {
         this.cip = cip;
     }
 
@@ -256,7 +265,7 @@ class CitySN {
         return cid;
     }
 
-    public void setCid(String cid) {
+    public void setCid( String cid ) {
         this.cid = cid;
     }
 
@@ -264,7 +273,7 @@ class CitySN {
         return cname;
     }
 
-    public void setCname(String cname) {
+    public void setCname( String cname ) {
         this.cname = cname;
     }
 

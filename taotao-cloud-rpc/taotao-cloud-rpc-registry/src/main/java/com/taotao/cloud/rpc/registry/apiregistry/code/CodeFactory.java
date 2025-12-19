@@ -17,12 +17,20 @@
 package com.taotao.cloud.rpc.registry.apiregistry.code;
 
 import com.taotao.cloud.rpc.registry.apiregistry.base.ApiRegistryException;
+
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * CodeFactory
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class CodeFactory {
 
-    public static ICode create(String contentType) {
+    public static ICode create( String contentType ) {
         //        contentType = StringUtils.nullToEmpty(contentType).toLowerCase();
         if (contentType.contains("json")) {
             return new JsonCode();

@@ -32,21 +32,31 @@ public class PeerSet implements Serializable {
 
     private volatile Peer leader;
 
-    /** final */
+    /**
+     * final
+     */
     private volatile Peer self;
 
-    private PeerSet() {}
+    private PeerSet() {
+    }
 
     public static PeerSet getInstance() {
         return PeerSetLazyHolder.INSTANCE;
     }
 
+    /**
+     * PeerSetLazyHolder
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     private static class PeerSetLazyHolder {
 
         private static final PeerSet INSTANCE = new PeerSet();
     }
 
-    public void setSelf(Peer peer) {
+    public void setSelf( Peer peer ) {
         self = peer;
     }
 
@@ -54,11 +64,11 @@ public class PeerSet implements Serializable {
         return self;
     }
 
-    public void addPeer(Peer peer) {
+    public void addPeer( Peer peer ) {
         list.add(peer);
     }
 
-    public void removePeer(Peer peer) {
+    public void removePeer( Peer peer ) {
         list.remove(peer);
     }
 
@@ -76,7 +86,7 @@ public class PeerSet implements Serializable {
         return leader;
     }
 
-    public void setLeader(Peer peer) {
+    public void setLeader( Peer peer ) {
         leader = peer;
     }
 

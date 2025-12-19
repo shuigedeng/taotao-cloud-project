@@ -19,6 +19,7 @@ package com.taotao.cloud.realtime.warehouse.datageneration.business_code.generat
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.DbUtil;
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.RandomUtil;
 import org.slf4j.Logger;
@@ -26,13 +27,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * ProductDataGenerator
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class ProductDataGenerator {
+
     private static final Logger logger = LoggerFactory.getLogger(ProductDataGenerator.class);
 
-    @Autowired private DbUtil dbUtil;
+    @Autowired
+    private DbUtil dbUtil;
 
-    public void generateProductData(int spuCount, int skuCount) {
+    public void generateProductData( int spuCount, int skuCount ) {
         generateSpuInfo(spuCount);
         generateSkuInfo(skuCount);
         generateSkuImage(skuCount);
@@ -40,7 +50,7 @@ public class ProductDataGenerator {
         generateSkuSaleAttrValue(skuCount);
     }
 
-    private void generateSpuInfo(int count) {
+    private void generateSpuInfo( int count ) {
         // 获取最大ID
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM spu_info";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -57,12 +67,12 @@ public class ProductDataGenerator {
             int category3Id = RandomUtil.generateNumber(1, 1099); // 根据base_category3表的实际数据
             int tmId = RandomUtil.generateNumber(1, 50); // 根据base_trademark表的实际数据
 
-            params.add(new Object[] {id, spuName, description, category3Id, tmId});
+            params.add(new Object[]{id, spuName, description, category3Id, tmId});
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateSkuInfo(int count) {
+    private void generateSkuInfo( int count ) {
         // 获取最大ID
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM sku_info";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -86,23 +96,23 @@ public class ProductDataGenerator {
             int isSale = 1;
 
             params.add(
-                    new Object[] {
-                        id,
-                        spuId,
-                        price,
-                        skuName,
-                        skuDesc,
-                        weight,
-                        tmId,
-                        category3Id,
-                        skuDefaultImg,
-                        isSale
+                    new Object[]{
+                            id,
+                            spuId,
+                            price,
+                            skuName,
+                            skuDesc,
+                            weight,
+                            tmId,
+                            category3Id,
+                            skuDefaultImg,
+                            isSale
                     });
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateSkuImage(int count) {
+    private void generateSkuImage( int count ) {
         // 获取最大ID
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM sku_image";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -120,12 +130,12 @@ public class ProductDataGenerator {
             int spuImgId = RandomUtil.generateNumber(1, 12); // 根据spu_image表的实际数据
             int isDefault = i % 5 == 0 ? 1 : 0; // 每5个图片设置一个默认图片
 
-            params.add(new Object[] {id, skuId, imgName, imgUrl, spuImgId, isDefault});
+            params.add(new Object[]{id, skuId, imgName, imgUrl, spuImgId, isDefault});
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateSkuAttrValue(int count) {
+    private void generateSkuAttrValue( int count ) {
         // 获取最大ID
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM sku_attr_value";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -143,12 +153,12 @@ public class ProductDataGenerator {
             String attrName = "属性" + attrId;
             String valueName = "属性值" + valueId;
 
-            params.add(new Object[] {id, attrId, valueId, skuId, attrName, valueName});
+            params.add(new Object[]{id, attrId, valueId, skuId, attrName, valueName});
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateSkuSaleAttrValue(int count) {
+    private void generateSkuSaleAttrValue( int count ) {
         // 获取最大ID
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM sku_sale_attr_value";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -169,14 +179,14 @@ public class ProductDataGenerator {
             String saleAttrValueName = "销售属性值" + saleAttrValueId;
 
             params.add(
-                    new Object[] {
-                        id,
-                        skuId,
-                        spuId,
-                        saleAttrValueId,
-                        saleAttrId,
-                        saleAttrName,
-                        saleAttrValueName
+                    new Object[]{
+                            id,
+                            skuId,
+                            spuId,
+                            saleAttrValueId,
+                            saleAttrId,
+                            saleAttrName,
+                            saleAttrValueName
                     });
         }
         dbUtil.batchInsert(sql, params);

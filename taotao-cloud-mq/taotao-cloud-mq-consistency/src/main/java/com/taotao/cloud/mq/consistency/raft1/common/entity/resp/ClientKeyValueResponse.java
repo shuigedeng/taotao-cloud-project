@@ -16,13 +16,21 @@
 
 package com.taotao.cloud.mq.consistency.raft1.common.entity.resp;
 
+/**
+ * ClientKeyValueResponse
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ClientKeyValueResponse extends BaseRaftResponse {
 
     private Object result;
 
-    public ClientKeyValueResponse() {}
+    public ClientKeyValueResponse() {
+    }
 
-    public ClientKeyValueResponse(Object result) {
+    public ClientKeyValueResponse( Object result ) {
         this.result = result;
     }
 
@@ -30,7 +38,7 @@ public class ClientKeyValueResponse extends BaseRaftResponse {
         return result;
     }
 
-    public void setResult(Object result) {
+    public void setResult( Object result ) {
         this.result = result;
     }
 

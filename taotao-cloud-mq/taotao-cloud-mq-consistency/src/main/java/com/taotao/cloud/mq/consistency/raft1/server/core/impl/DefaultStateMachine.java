@@ -30,6 +30,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 默认的状态机
+ *
  * @since 1.0.0
  */
 public class DefaultStateMachine implements StateMachine {
@@ -41,7 +42,15 @@ public class DefaultStateMachine implements StateMachine {
     private RocksDB machineDb;
 
     // double-lock
+    /**
+     * DefaultStateMachineLazyHolder
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     private static class DefaultStateMachineLazyHolder {
+
         private static final DefaultStateMachine INSTANCE = new DefaultStateMachine();
     }
 
@@ -49,7 +58,7 @@ public class DefaultStateMachine implements StateMachine {
         return DefaultStateMachineLazyHolder.INSTANCE;
     }
 
-    private DefaultStateMachine(String dbDir) {
+    private DefaultStateMachine( String dbDir ) {
         ArgUtils.notEmpty(dbDir, "dbDir");
         this.dbDir = dbDir;
         this.stateMachineDir = this.dbDir + "/stateMachine";
@@ -83,7 +92,7 @@ public class DefaultStateMachine implements StateMachine {
     }
 
     @Override
-    public synchronized void apply(LogEntry logEntry) {
+    public synchronized void apply( LogEntry logEntry ) {
         try {
             Command command = logEntry.getCommand();
 
@@ -100,7 +109,7 @@ public class DefaultStateMachine implements StateMachine {
     }
 
     @Override
-    public LogEntry get(String key) {
+    public LogEntry get( String key ) {
         try {
             byte[] result = machineDb.get(key.getBytes());
             if (result == null) {
@@ -113,7 +122,7 @@ public class DefaultStateMachine implements StateMachine {
     }
 
     @Override
-    public String getString(String key) {
+    public String getString( String key ) {
         try {
             byte[] bytes = machineDb.get(key.getBytes());
             if (bytes != null) {
@@ -126,7 +135,7 @@ public class DefaultStateMachine implements StateMachine {
     }
 
     @Override
-    public void setString(String key, String value) {
+    public void setString( String key, String value ) {
         try {
             machineDb.put(key.getBytes(), value.getBytes());
         } catch (RocksDBException e) {
@@ -135,7 +144,7 @@ public class DefaultStateMachine implements StateMachine {
     }
 
     @Override
-    public void delString(String... key) {
+    public void delString( String... key ) {
         try {
             for (String s : key) {
                 machineDb.delete(s.getBytes());
@@ -146,7 +155,8 @@ public class DefaultStateMachine implements StateMachine {
     }
 
     @Override
-    public void init() throws Throwable {}
+    public void init() throws Throwable {
+    }
 
     @Override
     public void destroy() throws Throwable {

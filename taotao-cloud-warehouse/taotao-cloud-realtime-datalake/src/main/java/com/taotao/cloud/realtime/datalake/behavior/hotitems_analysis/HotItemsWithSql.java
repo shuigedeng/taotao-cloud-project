@@ -27,8 +27,16 @@ import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 import org.apache.flink.types.Row;
 
+/**
+ * HotItemsWithSql
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class HotItemsWithSql {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         // 1. 创建执行环境
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
@@ -55,7 +63,7 @@ public class HotItemsWithSql {
                         .assignTimestampsAndWatermarks(
                                 new AscendingTimestampExtractor<UserBehavior>() {
                                     @Override
-                                    public long extractAscendingTimestamp(UserBehavior element) {
+                                    public long extractAscendingTimestamp( UserBehavior element ) {
                                         return element.getTimestamp() * 1000L;
                                     }
                                 });

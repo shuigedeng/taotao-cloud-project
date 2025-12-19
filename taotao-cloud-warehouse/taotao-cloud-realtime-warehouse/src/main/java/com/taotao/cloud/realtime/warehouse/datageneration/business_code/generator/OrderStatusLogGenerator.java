@@ -19,6 +19,7 @@ package com.taotao.cloud.realtime.warehouse.datageneration.business_code.generat
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.DbUtil;
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.RandomUtil;
 import org.slf4j.Logger;
@@ -26,13 +27,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * OrderStatusLogGenerator
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class OrderStatusLogGenerator {
+
     private static final Logger logger = LoggerFactory.getLogger(OrderStatusLogGenerator.class);
 
-    @Autowired private DbUtil dbUtil;
+    @Autowired
+    private DbUtil dbUtil;
 
-    public void generateOrderStatusLog(int count) {
+    public void generateOrderStatusLog( int count ) {
         // 获取最大ID
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM order_status_log";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -50,7 +60,7 @@ public class OrderStatusLogGenerator {
                     String.valueOf(RandomUtil.generateNumber(1001, 1006)); // 根据base_dic表中的状态码
             LocalDateTime operateTime = LocalDateTime.now();
 
-            params.add(new Object[] {id, orderId, orderStatus, operateTime});
+            params.add(new Object[]{id, orderId, orderStatus, operateTime});
         }
         dbUtil.batchInsert(sql, params);
     }

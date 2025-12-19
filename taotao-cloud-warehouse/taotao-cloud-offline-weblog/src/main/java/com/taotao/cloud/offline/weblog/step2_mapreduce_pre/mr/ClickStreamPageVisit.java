@@ -43,13 +43,20 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  */
 public class ClickStreamPageVisit {
 
-    static class ClickStreamPageVisitMapper
-            extends Mapper<LongWritable, Text, Text, PageViewsBean> {
+    /**
+     * ClickStreamPageVisitMapper
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    static class ClickStreamPageVisitMapper extends Mapper<LongWritable, Text, Text, PageViewsBean> {
+
         PageViewsBean pageViewsBean = new PageViewsBean();
         Text k = new Text();
 
         @Override
-        protected void map(LongWritable key, Text value, Context context)
+        protected void map( LongWritable key, Text value, Context context )
                 throws IOException, InterruptedException {
             String line = value.toString();
             String[] fields = line.split(",");
@@ -63,13 +70,20 @@ public class ClickStreamPageVisit {
         }
     }
 
-    static class ClickStreamPageVisitReducer
-            extends Reducer<Text, PageViewsBean, NullWritable, VisitBean> {
+    /**
+     * ClickStreamPageVisitReducer
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    static class ClickStreamPageVisitReducer extends Reducer<Text, PageViewsBean, NullWritable, VisitBean> {
+
         NullWritable k = NullWritable.get();
         Text v = new Text();
 
         @Override
-        protected void reduce(Text session, Iterable<PageViewsBean> pvBeans, Context context)
+        protected void reduce( Text session, Iterable<PageViewsBean> pvBeans, Context context )
                 throws IOException, InterruptedException {
             // 将pvBeans按照step排序
             ArrayList<PageViewsBean> beans = new ArrayList<>();
@@ -87,7 +101,7 @@ public class ClickStreamPageVisit {
                     beans,
                     new Comparator<PageViewsBean>() {
                         @Override
-                        public int compare(PageViewsBean o1, PageViewsBean o2) {
+                        public int compare( PageViewsBean o1, PageViewsBean o2 ) {
                             return Integer.parseInt(o1.getStep()) > Integer.parseInt(o2.getStep())
                                     ? 1
                                     : -1;
@@ -119,7 +133,7 @@ public class ClickStreamPageVisit {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf);
 

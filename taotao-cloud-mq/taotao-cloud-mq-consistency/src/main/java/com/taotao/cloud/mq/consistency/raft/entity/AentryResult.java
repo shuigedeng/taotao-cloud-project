@@ -32,26 +32,30 @@ import lombok.ToString;
 @ToString
 public class AentryResult implements Serializable {
 
-    /** 当前的任期号，用于领导人去更新自己 */
+    /**
+     * 当前的任期号，用于领导人去更新自己
+     */
     long term;
 
-    /** 跟随者包含了匹配上 prevLogIndex 和 prevLogTerm 的日志时为真  */
+    /**
+     * 跟随者包含了匹配上 prevLogIndex 和 prevLogTerm 的日志时为真
+     */
     boolean success;
 
-    public AentryResult(long term) {
+    public AentryResult( long term ) {
         this.term = term;
     }
 
-    public AentryResult(boolean success) {
+    public AentryResult( boolean success ) {
         this.success = success;
     }
 
-    public AentryResult(long term, boolean success) {
+    public AentryResult( long term, boolean success ) {
         this.term = term;
         this.success = success;
     }
 
-    private AentryResult(Builder builder) {
+    private AentryResult( Builder builder ) {
         setTerm(builder.term);
         setSuccess(builder.success);
     }
@@ -68,19 +72,27 @@ public class AentryResult implements Serializable {
         return new Builder();
     }
 
+    /**
+     * Builder
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static final class Builder {
 
         private long term;
         private boolean success;
 
-        private Builder() {}
+        private Builder() {
+        }
 
-        public Builder term(long val) {
+        public Builder term( long val ) {
             term = val;
             return this;
         }
 
-        public Builder success(boolean val) {
+        public Builder success( boolean val ) {
             success = val;
             return this;
         }

@@ -23,6 +23,13 @@ import com.taotao.cloud.rpc.common.util.NacosUtils;
 import com.taotao.cloud.rpc.core.net.netty.server.NettyServer;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * ServerShutdownHook
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class ServerShutdownHook {
 

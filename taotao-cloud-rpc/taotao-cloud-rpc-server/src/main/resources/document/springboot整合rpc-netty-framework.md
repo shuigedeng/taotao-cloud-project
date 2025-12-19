@@ -131,8 +131,16 @@
 项目在准备测试服务端的自动发现服务功能时，要保证`cn.fyupeng.@Service`注解类能够被扫描，使用`cn.fyupeng.util.ReflectUtil`类即可。
 
 ```java
+/**
+ * Test
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class Test {
-    public static void main(String[] args) throws IOException {
+
+    public static void main( String[] args ) throws IOException {
         Set<Class<?>> classes = ReflectUtil.getClasses("cn.fyupeng");
         for (Class<?> aClass : classes) {
             System.out.println(aClass);
@@ -148,10 +156,18 @@ public class Test {
 新建`cn.fyupeng`包，包下新建启动器类
 
 ```java
+/**
+ * SpringBootClientStarter
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @SpringBootApplication
-@ComponentScan(basePackages = {"cn.fyupeng","org.utils"})
+@ComponentScan(basePackages = {"cn.fyupeng", "org.utils"})
 public class SpringBootClientStarter {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         SpringApplication.run(SpringBootClientStarter.class, args);
     }
 }
@@ -260,18 +276,26 @@ public class HelloController {
 
 - ResourceConfig 配置类
 ```java
+/**
+ * ResourceConfig
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Configuration
-@ConfigurationProperties(prefix="cn.fyupeng.config")
+@ConfigurationProperties(prefix = "cn.fyupeng.config")
 //不使用默认配置文件application.properties和application.yml
 @PropertySource("classpath:resource.properties")
 public class ResourceConfig {
+
     private int serverPort;
 
     public int getServerPort() {
         return serverPort;
     }
 
-    public void setServerPort(int serverPort) {
+    public void setServerPort( int serverPort ) {
         this.serverPort = serverPort;
     }
 }
@@ -339,6 +363,13 @@ public class SpringContextUtil implements ApplicationContextAware {
 ### 3.3 编写启动器
 
 ```java
+/**
+ * RpcServerStarter
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 @ServiceScan
 @SpringBootApplication
@@ -359,14 +390,14 @@ public class RpcServerStarter implements CommandLineRunner {
         }
     }
 
-    public static void main(String[] args) {
-        SpringApplication.run(RpcServerStarter.class,args);
+    public static void main( String[] args ) {
+        SpringApplication.run(RpcServerStarter.class, args);
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run( String... args ) throws Exception {
         //这里也可以添加一些业务处理方法，比如一些初始化参数等
-        while(true){
+        while (true) {
             NettyServer nettyServer = null;
             try {
                 // 2.2.0 以下版本
@@ -375,17 +406,19 @@ public class RpcServerStarter implements CommandLineRunner {
                 /**
                  * 实现将 容器对象 放到 自管理容器中
                  */
-                nettyServer = new NettyServer(resourceConfig.getServerIp(), resourceConfig.getServerPort(), SerializerCode.HESSIAN.getCode()) {
+                nettyServer = new NettyServer(resourceConfig.getServerIp(), resourceConfig.getServerPort(),
+                        SerializerCode.HESSIAN.getCode()) {
 
                     @Override
-                    public Object newInstance(String fullName, String simpleName, String firstLowCaseName, Class<?> clazz) throws InstantiationException, IllegalAccessException {
+                    public Object newInstance( String fullName, String simpleName, String firstLowCaseName,
+                            Class<?> clazz ) throws InstantiationException, IllegalAccessException {
                         return SpringContextUtil.getBean(firstLowCaseName, clazz);
                     }
                 };
             } catch (RpcException e) {
                 e.printStackTrace();
             }
-            log.info("Service bind in port with "+ resourceConfig.getServerPort() +" and start successfully!");
+            log.info("Service bind in port with " + resourceConfig.getServerPort() + " and start successfully!");
             nettyServer.start();
             log.error("RegisterAndLoginService is died，Service is restarting....");
         }

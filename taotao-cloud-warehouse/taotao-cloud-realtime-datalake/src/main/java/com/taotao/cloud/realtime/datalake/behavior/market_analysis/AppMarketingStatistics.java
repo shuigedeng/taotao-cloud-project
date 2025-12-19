@@ -19,7 +19,9 @@ package com.taotao.cloud.realtime.datalake.behavior.market_analysis;
 import com.taotao.cloud.realtime.behavior.analysis.market_analysis.AppMarketingByChannel;
 import com.taotao.cloud.realtime.behavior.analysis.market_analysis.beans.ChannelPromotionCount;
 import com.taotao.cloud.realtime.behavior.analysis.market_analysis.beans.MarketingUserBehavior;
+
 import java.sql.Timestamp;
+
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.tuple.Tuple;
@@ -34,8 +36,16 @@ import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
+/**
+ * AppMarketingStatistics
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class AppMarketingStatistics {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
@@ -47,7 +57,7 @@ public class AppMarketingStatistics {
                                 new AscendingTimestampExtractor<MarketingUserBehavior>() {
                                     @Override
                                     public long extractAscendingTimestamp(
-                                            MarketingUserBehavior element) {
+                                            MarketingUserBehavior element ) {
                                         return element.getTimestamp();
                                     }
                                 });
@@ -59,7 +69,7 @@ public class AppMarketingStatistics {
                         .map(
                                 new MapFunction<MarketingUserBehavior, Tuple2<String, Long>>() {
                                     @Override
-                                    public Tuple2<String, Long> map(MarketingUserBehavior value)
+                                    public Tuple2<String, Long> map( MarketingUserBehavior value )
                                             throws Exception {
                                         return new Tuple2<>("total", 1L);
                                     }
@@ -75,35 +85,37 @@ public class AppMarketingStatistics {
 
     public static class MarketingStatisticsAgg
             implements AggregateFunction<Tuple2<String, Long>, Long, Long> {
+
         @Override
         public Long createAccumulator() {
             return 0L;
         }
 
         @Override
-        public Long add(Tuple2<String, Long> value, Long accumulator) {
+        public Long add( Tuple2<String, Long> value, Long accumulator ) {
             return accumulator + 1;
         }
 
         @Override
-        public Long getResult(Long accumulator) {
+        public Long getResult( Long accumulator ) {
             return accumulator;
         }
 
         @Override
-        public Long merge(Long a, Long b) {
+        public Long merge( Long a, Long b ) {
             return a + b;
         }
     }
 
     public static class MarketingStatisticsResult
             implements WindowFunction<Long, ChannelPromotionCount, Tuple, TimeWindow> {
+
         @Override
         public void apply(
                 Tuple tuple,
                 TimeWindow window,
                 Iterable<Long> input,
-                Collector<ChannelPromotionCount> out)
+                Collector<ChannelPromotionCount> out )
                 throws Exception {
             String windowEnd = new Timestamp(window.getEnd()).toString();
             Long count = input.iterator().next();

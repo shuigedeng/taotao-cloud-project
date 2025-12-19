@@ -18,8 +18,10 @@ package com.taotao.cloud.realtime.datalake.behavior.networkflow_analysis;
 
 import com.taotao.cloud.realtime.behavior.analysis.networkflow_analysis.beans.PageViewCount;
 import com.taotao.cloud.realtime.behavior.analysis.networkflow_analysis.beans.UserBehavior;
+
 import java.net.URL;
 import java.util.Random;
+
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.state.ValueState;
@@ -37,8 +39,16 @@ import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
+/**
+ * PageView
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class PageView {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         // 1. 创建执行环境
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(4);
@@ -64,7 +74,7 @@ public class PageView {
                         .assignTimestampsAndWatermarks(
                                 new AscendingTimestampExtractor<UserBehavior>() {
                                     @Override
-                                    public long extractAscendingTimestamp(UserBehavior element) {
+                                    public long extractAscendingTimestamp( UserBehavior element ) {
                                         return element.getTimestamp() * 1000L;
                                     }
                                 });
@@ -76,7 +86,7 @@ public class PageView {
                         .map(
                                 new MapFunction<UserBehavior, Tuple2<String, Long>>() {
                                     @Override
-                                    public Tuple2<String, Long> map(UserBehavior value)
+                                    public Tuple2<String, Long> map( UserBehavior value )
                                             throws Exception {
                                         return new Tuple2<>("pv", 1L);
                                     }
@@ -92,7 +102,7 @@ public class PageView {
                         .map(
                                 new MapFunction<UserBehavior, Tuple2<Integer, Long>>() {
                                     @Override
-                                    public Tuple2<Integer, Long> map(UserBehavior value)
+                                    public Tuple2<Integer, Long> map( UserBehavior value )
                                             throws Exception {
                                         Random random = new Random();
                                         return new Tuple2<>(random.nextInt(10), 1L);
@@ -114,23 +124,24 @@ public class PageView {
 
     // 实现自定义预聚合函数
     public static class PvCountAgg implements AggregateFunction<Tuple2<Integer, Long>, Long, Long> {
+
         @Override
         public Long createAccumulator() {
             return 0L;
         }
 
         @Override
-        public Long add(Tuple2<Integer, Long> value, Long accumulator) {
+        public Long add( Tuple2<Integer, Long> value, Long accumulator ) {
             return accumulator + 1;
         }
 
         @Override
-        public Long getResult(Long accumulator) {
+        public Long getResult( Long accumulator ) {
             return accumulator;
         }
 
         @Override
-        public Long merge(Long a, Long b) {
+        public Long merge( Long a, Long b ) {
             return a + b;
         }
     }
@@ -138,12 +149,13 @@ public class PageView {
     // 实现自定义窗口
     public static class PvCountResult
             implements WindowFunction<Long, PageViewCount, Integer, TimeWindow> {
+
         @Override
         public void apply(
                 Integer integer,
                 TimeWindow window,
                 Iterable<Long> input,
-                Collector<PageViewCount> out)
+                Collector<PageViewCount> out )
                 throws Exception {
             out.collect(
                     new PageViewCount(
@@ -154,11 +166,12 @@ public class PageView {
     // 实现自定义处理函数，把相同窗口分组统计的count值叠加
     public static class TotalPvCount
             extends KeyedProcessFunction<Long, PageViewCount, PageViewCount> {
+
         // 定义状态，保存当前的总count值
         ValueState<Long> totalCountState;
 
         @Override
-        public void open(Configuration parameters) throws Exception {
+        public void open( Configuration parameters ) throws Exception {
             totalCountState =
                     getRuntimeContext()
                             .getState(
@@ -166,14 +179,14 @@ public class PageView {
         }
 
         @Override
-        public void processElement(PageViewCount value, Context ctx, Collector<PageViewCount> out)
+        public void processElement( PageViewCount value, Context ctx, Collector<PageViewCount> out )
                 throws Exception {
             totalCountState.update(totalCountState.value() + value.getCount());
             ctx.timerService().registerEventTimeTimer(value.getWindowEnd() + 1);
         }
 
         @Override
-        public void onTimer(long timestamp, OnTimerContext ctx, Collector<PageViewCount> out)
+        public void onTimer( long timestamp, OnTimerContext ctx, Collector<PageViewCount> out )
                 throws Exception {
             // 定时器触发，所有分组count值都到齐，直接输出当前的总count数量
             Long totalCount = totalCountState.value();

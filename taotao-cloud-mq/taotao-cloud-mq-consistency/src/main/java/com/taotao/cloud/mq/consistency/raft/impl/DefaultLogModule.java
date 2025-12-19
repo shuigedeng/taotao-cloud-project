@@ -42,7 +42,9 @@ import org.rocksdb.RocksDBException;
 @Slf4j
 public class DefaultLogModule implements LogModule {
 
-    /** public just for test */
+    /**
+     * public just for test
+     */
     public String dbDir;
 
     public String logsDir;
@@ -84,7 +86,8 @@ public class DefaultLogModule implements LogModule {
     }
 
     @Override
-    public void init() throws Throwable {}
+    public void init() throws Throwable {
+    }
 
     @Override
     public void destroy() throws Throwable {
@@ -92,6 +95,13 @@ public class DefaultLogModule implements LogModule {
         log.info("destroy success");
     }
 
+    /**
+     * DefaultLogsLazyHolder
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     private static class DefaultLogsLazyHolder {
 
         private static final DefaultLogModule INSTANCE = new DefaultLogModule();
@@ -99,11 +109,9 @@ public class DefaultLogModule implements LogModule {
 
     /**
      * logEntry 的 index 就是 key. 严格保证递增.
-     *
-     * @param logEntry
      */
     @Override
-    public void write(LogEntry logEntry) {
+    public void write( LogEntry logEntry ) {
 
         boolean success = false;
         boolean result;
@@ -127,7 +135,7 @@ public class DefaultLogModule implements LogModule {
     }
 
     @Override
-    public LogEntry read(Long index) {
+    public LogEntry read( Long index ) {
         try {
             byte[] result = logDb.get(convert(index));
             if (result == null) {
@@ -140,7 +148,7 @@ public class DefaultLogModule implements LogModule {
     }
 
     @Override
-    public void removeOnStartIndex(Long startIndex) {
+    public void removeOnStartIndex( Long startIndex ) {
         boolean success = false;
         int count = 0;
         boolean tryLock;
@@ -196,12 +204,12 @@ public class DefaultLogModule implements LogModule {
         return Long.valueOf(new String(lastIndex));
     }
 
-    private byte[] convert(Long key) {
+    private byte[] convert( Long key ) {
         return key.toString().getBytes();
     }
 
     // on lock
-    private void updateLastIndex(Long index) {
+    private void updateLastIndex( Long index ) {
         try {
             // overWrite
             logDb.put(LAST_INDEX_KEY, index.toString().getBytes());

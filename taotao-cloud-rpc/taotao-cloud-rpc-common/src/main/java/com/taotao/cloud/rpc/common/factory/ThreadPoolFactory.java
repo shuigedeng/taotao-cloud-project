@@ -17,6 +17,7 @@
 package com.taotao.cloud.rpc.common.factory;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -26,14 +27,22 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * ThreadPoolFactory
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class ThreadPoolFactory {
 
     /**
-     * CORE_POOL_SIZE : 线程池 CPU 核数 MAXIMUM_POOL_SIZE ： 最大 的 线程数 BLOCKING_QUEUE_CAPACITY ： 阻塞 队列 容量
-     * KEEP_ALIVE_TIMEOUT ： 心跳（单位：每分钟）
+     * CORE_POOL_SIZE : 线程池 CPU 核数 MAXIMUM_POOL_SIZE ： 最大 的 线程数 BLOCKING_QUEUE_CAPACITY ： 阻塞 队列 容量 KEEP_ALIVE_TIMEOUT ：
+     * 心跳（单位：每分钟）
      */
     // CPU 密集型 推荐 核心线程
     // private static final int CORE_POOL_SIZE = Runtime.getRuntime().availableProcessors();
@@ -47,16 +56,16 @@ public class ThreadPoolFactory {
 
     private static Map<String, ExecutorService> threadPoolsMap = new ConcurrentHashMap<>();
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         ExecutorService test = createDefaultThreadPool("test", null);
         System.out.println(test);
     }
 
-    public static ExecutorService createDefaultThreadPool(String threadNamePrefix) {
+    public static ExecutorService createDefaultThreadPool( String threadNamePrefix ) {
         return createDefaultThreadPool(threadNamePrefix, false);
     }
 
-    public static ExecutorService createDefaultThreadPool(String threadNamePrefix, Boolean daemon) {
+    public static ExecutorService createDefaultThreadPool( String threadNamePrefix, Boolean daemon ) {
         /**
          * 第一次有效，下次 返回 首次值, 参数 2 支持 函数编程
          * @FunctionalInterface
@@ -106,10 +115,10 @@ public class ThreadPoolFactory {
      * 创建 线程池，线程名前缀为 null 时 创建 默认线程工厂,daemon 为 null 时 不设置 守护线程 属性
      *
      * @param threadNamePrefix 线程名 前缀
-     * @param daemon           指定 是否为 守护 线程
+     * @param daemon 指定 是否为 守护 线程
      * @return ExecutorService
      */
-    private static ExecutorService createThreadPool(String threadNamePrefix, Boolean daemon) {
+    private static ExecutorService createThreadPool( String threadNamePrefix, Boolean daemon ) {
         BlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<>(BLOCKING_QUEUE_CAPACITY);
         ThreadFactory threadFactory = createThreadFactory(threadNamePrefix, daemon);
         return new ThreadPoolExecutor(
@@ -125,10 +134,10 @@ public class ThreadPoolFactory {
      * 创建 ThreadFactory, 如果 threadNamePrefix 不为空则 使用 ThreadFactory, 否则 默认 创建 defaultThreadFactory
      *
      * @param threadNamePrefix 线程名 前缀
-     * @param daemon           指定 是否 为 守护线程
+     * @param daemon 指定 是否 为 守护线程
      * @return ThreadFactory
      */
-    private static ThreadFactory createThreadFactory(String threadNamePrefix, Boolean daemon) {
+    private static ThreadFactory createThreadFactory( String threadNamePrefix, Boolean daemon ) {
         if (threadNamePrefix != null) {
             if (daemon != null) {
                 return new ThreadFactoryBuilder()

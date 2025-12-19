@@ -18,8 +18,16 @@ package com.taotao.cloud.realtime.warehouse.datageneration.userlog_code.model;
 
 import lombok.Data;
 
+/**
+ * Page
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 public class Page {
+
     private Long during_time;
     private String item;
     private String item_type;

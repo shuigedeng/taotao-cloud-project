@@ -19,8 +19,10 @@ package com.taotao.cloud.realtime.datalake.behavior.market_analysis;
 import com.taotao.cloud.realtime.behavior.analysis.market_analysis.beans.AdClickEvent;
 import com.taotao.cloud.realtime.behavior.analysis.market_analysis.beans.AdCountViewByProvince;
 import com.taotao.cloud.realtime.behavior.analysis.market_analysis.beans.BlackListUserWarning;
+
 import java.net.URL;
 import java.sql.Timestamp;
+
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.common.state.ValueState;
 import org.apache.flink.api.common.state.ValueStateDescriptor;
@@ -38,8 +40,16 @@ import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 import org.apache.flink.util.OutputTag;
 
+/**
+ * AdStatisticsByProvince
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class AdStatisticsByProvince {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
         env.setParallelism(1);
@@ -61,7 +71,7 @@ public class AdStatisticsByProvince {
                         .assignTimestampsAndWatermarks(
                                 new AscendingTimestampExtractor<AdClickEvent>() {
                                     @Override
-                                    public long extractAscendingTimestamp(AdClickEvent element) {
+                                    public long extractAscendingTimestamp( AdClickEvent element ) {
                                         return element.getTimestamp() * 1000L;
                                     }
                                 });
@@ -81,42 +91,45 @@ public class AdStatisticsByProvince {
 
         adCountResultStream.print();
         filterAdClickStream
-                .getSideOutput(new OutputTag<BlackListUserWarning>("blacklist") {})
+                .getSideOutput(new OutputTag<BlackListUserWarning>("blacklist") {
+                })
                 .print("blacklist-user");
 
         env.execute("ad count by province job");
     }
 
     public static class AdCountAgg implements AggregateFunction<AdClickEvent, Long, Long> {
+
         @Override
         public Long createAccumulator() {
             return 0L;
         }
 
         @Override
-        public Long add(AdClickEvent value, Long accumulator) {
+        public Long add( AdClickEvent value, Long accumulator ) {
             return accumulator + 1;
         }
 
         @Override
-        public Long getResult(Long accumulator) {
+        public Long getResult( Long accumulator ) {
             return accumulator;
         }
 
         @Override
-        public Long merge(Long a, Long b) {
+        public Long merge( Long a, Long b ) {
             return a + b;
         }
     }
 
     public static class AdCountResult
             implements WindowFunction<Long, AdCountViewByProvince, String, TimeWindow> {
+
         @Override
         public void apply(
                 String province,
                 TimeWindow window,
                 Iterable<Long> input,
-                Collector<AdCountViewByProvince> out)
+                Collector<AdCountViewByProvince> out )
                 throws Exception {
             String windowEnd = new Timestamp(window.getEnd()).toString();
             Long count = input.iterator().next();
@@ -127,10 +140,11 @@ public class AdStatisticsByProvince {
     // 实现自定义处理函数
     public static class FilterBlackListUser
             extends KeyedProcessFunction<Tuple, AdClickEvent, AdClickEvent> {
+
         // 定义属性：点击次数上限
         private Integer countUpperBound;
 
-        public FilterBlackListUser(Integer countUpperBound) {
+        public FilterBlackListUser( Integer countUpperBound ) {
             this.countUpperBound = countUpperBound;
         }
 
@@ -140,7 +154,7 @@ public class AdStatisticsByProvince {
         ValueState<Boolean> isSentState;
 
         @Override
-        public void open(Configuration parameters) throws Exception {
+        public void open( Configuration parameters ) throws Exception {
             countState =
                     getRuntimeContext()
                             .getState(new ValueStateDescriptor<Long>("ad-count", Long.class, 0L));
@@ -152,7 +166,7 @@ public class AdStatisticsByProvince {
         }
 
         @Override
-        public void processElement(AdClickEvent value, Context ctx, Collector<AdClickEvent> out)
+        public void processElement( AdClickEvent value, Context ctx, Collector<AdClickEvent> out )
                 throws Exception {
             // 判断当前用户对同一广告的点击次数，如果不够上限，就count加1正常输出；如果达到上限，直接过滤掉，并侧输出流输出黑名单报警
             // 首先获取当前的count值
@@ -161,8 +175,8 @@ public class AdStatisticsByProvince {
             // 1. 判断是否是第一个数据，如果是的话，注册一个第二天0点的定时器
             if (curCount == 0) {
                 Long ts =
-                        (ctx.timerService().currentProcessingTime() / (24 * 60 * 60 * 1000) + 1)
-                                        * (24 * 60 * 60 * 1000)
+                        ( ctx.timerService().currentProcessingTime() / ( 24 * 60 * 60 * 1000 ) + 1 )
+                                * ( 24 * 60 * 60 * 1000 )
                                 - 8 * 60 * 60 * 1000;
                 //                System.out.println(new Timestamp(ts));
                 ctx.timerService().registerProcessingTimeTimer(ts);
@@ -174,7 +188,8 @@ public class AdStatisticsByProvince {
                 if (!isSentState.value()) {
                     isSentState.update(true); // 更新状态
                     ctx.output(
-                            new OutputTag<BlackListUserWarning>("blacklist") {},
+                            new OutputTag<BlackListUserWarning>("blacklist") {
+                            },
                             new BlackListUserWarning(
                                     value.getUserId(),
                                     value.getAdId(),
@@ -189,7 +204,7 @@ public class AdStatisticsByProvince {
         }
 
         @Override
-        public void onTimer(long timestamp, OnTimerContext ctx, Collector<AdClickEvent> out)
+        public void onTimer( long timestamp, OnTimerContext ctx, Collector<AdClickEvent> out )
                 throws Exception {
             // 清空所有状态
             countState.clear();

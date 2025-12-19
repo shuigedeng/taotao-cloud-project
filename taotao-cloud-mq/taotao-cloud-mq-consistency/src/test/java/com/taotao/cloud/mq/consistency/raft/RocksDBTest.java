@@ -68,6 +68,13 @@ public class RocksDBTest {
         return RocksDBTestLazyHolder.INSTANCE;
     }
 
+    /**
+     * RocksDBTestLazyHolder
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     private static class RocksDBTestLazyHolder {
 
         private static final RocksDBTest INSTANCE = new RocksDBTest();
@@ -101,7 +108,7 @@ public class RocksDBTest {
         System.out.println(get(getLastIndex()));
     }
 
-    public synchronized void write(Cmd cmd) {
+    public synchronized void write( Cmd cmd ) {
         try {
             cmd.setIndex(getLastIndex() + 1);
             machineDb.put(cmd.getIndex().toString().getBytes(), JSON.toJSONBytes(cmd));
@@ -112,11 +119,11 @@ public class RocksDBTest {
         }
     }
 
-    public synchronized void deleteOnStartIndex(Long index) {
+    public synchronized void deleteOnStartIndex( Long index ) {
         try {
             for (long i = index; i <= getLastIndex(); i++) {
                 try {
-                    machineDb.delete((i + "").getBytes());
+                    machineDb.delete(( i + "" ).getBytes());
                 } catch (RocksDBException e) {
                     e.printStackTrace();
                 }
@@ -127,7 +134,7 @@ public class RocksDBTest {
         }
     }
 
-    public Cmd get(Long index) {
+    public Cmd get( Long index ) {
         try {
             if (index == null) {
                 throw new IllegalArgumentException();
@@ -142,7 +149,7 @@ public class RocksDBTest {
         return null;
     }
 
-    public void updateLastIndex(Long index) {
+    public void updateLastIndex( Long index ) {
         try {
             // overWrite
             machineDb.put(this.lastIndexKey, index.toString().getBytes());
@@ -164,6 +171,13 @@ public class RocksDBTest {
         return Long.valueOf(new String(lastIndex));
     }
 
+    /**
+     * Cmd
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     @Setter
     @Getter
     @ToString
@@ -173,9 +187,10 @@ public class RocksDBTest {
         String key;
         String value;
 
-        public Cmd() {}
+        public Cmd() {
+        }
 
-        public Cmd(String key, String value) {
+        public Cmd( String key, String value ) {
             this.key = key;
             this.value = value;
         }

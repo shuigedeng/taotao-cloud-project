@@ -19,20 +19,24 @@ package com.taotao.cloud.rpc.common.factory;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * SingleFactory
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class SingleFactory {
 
     private static Map<Class, Object> objectMap = new HashMap<>();
 
-    private SingleFactory() {}
+    private SingleFactory() {
+    }
 
     /**
      * 使用 双重 校验锁 实现 单例模式
-     *
-     * @param clazz
-     * @param <T>
-     * @return
      */
-    public static <T> T getInstance(Class<T> clazz) {
+    public static <T> T getInstance( Class<T> clazz ) {
         Object instance = objectMap.get(clazz);
         if (instance == null) {
             synchronized (clazz) {

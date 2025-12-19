@@ -19,11 +19,18 @@ package com.taotao.cloud.realtime.warehouse.datageneration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * DataGenerationApplication
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @SpringBootApplication
 public class DataGenerationApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DataGenerationApplication.class, args);
-	}
+    public static void main( String[] args ) {
+        SpringApplication.run(DataGenerationApplication.class, args);
+    }
 
 }

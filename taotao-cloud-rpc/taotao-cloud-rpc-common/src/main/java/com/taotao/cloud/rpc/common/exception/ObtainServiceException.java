@@ -16,13 +16,20 @@
 
 package com.taotao.cloud.rpc.common.exception;
 
+/**
+ * ObtainServiceException
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ObtainServiceException extends RpcException {
 
     public ObtainServiceException() {
         super();
     }
 
-    public ObtainServiceException(String message) {
+    public ObtainServiceException( String message ) {
         super(message);
     }
 }

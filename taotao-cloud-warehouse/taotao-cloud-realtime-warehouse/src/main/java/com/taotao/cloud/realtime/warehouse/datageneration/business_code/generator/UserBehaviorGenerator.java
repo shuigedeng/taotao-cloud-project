@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.DbUtil;
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.RandomUtil;
 import org.slf4j.Logger;
@@ -27,21 +28,30 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * UserBehaviorGenerator
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class UserBehaviorGenerator {
+
     private static final Logger logger = LoggerFactory.getLogger(UserBehaviorGenerator.class);
     private static final int BATCH_SIZE = 500;
     private static final int GENERATION_INTERVAL = 1000; // 生成间隔（毫秒）
 
-    @Autowired private DbUtil dbUtil;
+    @Autowired
+    private DbUtil dbUtil;
 
-    public void generateUserBehaviorData(int count) {
+    public void generateUserBehaviorData( int count ) {
         generateCartInfo(count);
         generateCommentInfo(count);
         generateFavorInfo(count);
     }
 
-    private void generateCartInfo(int count) {
+    private void generateCartInfo( int count ) {
         logger.info("正在更新 cart_info 表...");
         String sql =
                 "INSERT INTO cart_info (id, user_id, sku_id, cart_price, sku_num, "
@@ -64,28 +74,28 @@ public class UserBehaviorGenerator {
             String skuName = "商品" + skuId;
 
             params.add(
-                    new Object[] {
-                        id,
-                        userId,
-                        skuId,
-                        cartPrice,
-                        skuNum,
-                        imgUrl,
-                        skuName,
-                        RandomUtil.generateNumber(0, 1), // is_checked
-                        now,
-                        now,
-                        0, // is_ordered
-                        null, // order_time
-                        "2401", // source_type: 用户查询
-                        null // source_id
+                    new Object[]{
+                            id,
+                            userId,
+                            skuId,
+                            cartPrice,
+                            skuNum,
+                            imgUrl,
+                            skuName,
+                            RandomUtil.generateNumber(0, 1), // is_checked
+                            now,
+                            now,
+                            0, // is_ordered
+                            null, // order_time
+                            "2401", // source_type: 用户查询
+                            null // source_id
                     });
         }
 
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateCommentInfo(int count) {
+    private void generateCommentInfo( int count ) {
         logger.info("正在更新 comment_info 表...");
         String sql =
                 "INSERT INTO comment_info (id, user_id, nick_name, head_img, sku_id, "
@@ -110,25 +120,25 @@ public class UserBehaviorGenerator {
             String commentTxt = "商品" + skuId + "的评价内容";
 
             params.add(
-                    new Object[] {
-                        id,
-                        userId,
-                        nickName,
-                        headImg,
-                        skuId,
-                        spuId,
-                        orderId,
-                        appraise,
-                        commentTxt,
-                        now,
-                        now
+                    new Object[]{
+                            id,
+                            userId,
+                            nickName,
+                            headImg,
+                            skuId,
+                            spuId,
+                            orderId,
+                            appraise,
+                            commentTxt,
+                            now,
+                            now
                     });
         }
 
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateFavorInfo(int count) {
+    private void generateFavorInfo( int count ) {
         logger.info("正在更新 favor_info 表...");
         String sql =
                 "INSERT INTO favor_info (id, user_id, sku_id, spu_id, is_cancel, "
@@ -152,7 +162,7 @@ public class UserBehaviorGenerator {
                 cancelTime = now.minusDays(RandomUtil.generateNumber(1, 30));
             }
 
-            params.add(new Object[] {id, userId, skuId, spuId, isCancel, now, cancelTime});
+            params.add(new Object[]{id, userId, skuId, spuId, isCancel, now, cancelTime});
         }
 
         dbUtil.batchInsert(sql, params);

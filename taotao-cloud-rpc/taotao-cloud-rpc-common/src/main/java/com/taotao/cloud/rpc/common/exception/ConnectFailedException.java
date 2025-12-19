@@ -16,13 +16,20 @@
 
 package com.taotao.cloud.rpc.common.exception;
 
+/**
+ * ConnectFailedException
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ConnectFailedException extends RpcException {
 
     public ConnectFailedException() {
         super();
     }
 
-    public ConnectFailedException(String message) {
+    public ConnectFailedException( String message ) {
         super(message);
     }
 }

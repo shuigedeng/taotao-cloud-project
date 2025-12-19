@@ -19,18 +19,28 @@ package com.taotao.cloud.realtime.warehouse.datageneration.business_code.util;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import jakarta.annotation.PostConstruct;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+/**
+ * DbUtil
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class DbUtil {
+
     private static final Logger logger = LoggerFactory.getLogger(DbUtil.class);
     private HikariDataSource dataSource;
     private boolean isConnected = false;
@@ -99,7 +109,7 @@ public class DbUtil {
         return dataSource.getConnection();
     }
 
-    public void batchInsert(String sql, List<Object[]> params) {
+    public void batchInsert( String sql, List<Object[]> params ) {
         if (!isConnected) {
             printToConsole(sql, params);
             return;
@@ -126,14 +136,14 @@ public class DbUtil {
         }
     }
 
-    private void printToConsole(String sql, List<Object[]> params) {
+    private void printToConsole( String sql, List<Object[]> params ) {
         System.out.println("\n=== 模拟SQL执行（数据库连接失败时的打印输出）===");
         System.out.println("SQL: " + sql);
         System.out.println("数据:");
         int count = 0;
         for (Object[] param : params) {
             if (count++ > 10) {
-                System.out.println("... (还有 " + (params.size() - 10) + " 条数据)");
+                System.out.println("... (还有 " + ( params.size() - 10 ) + " 条数据)");
                 break;
             }
             StringBuilder row = new StringBuilder("(");
@@ -149,7 +159,7 @@ public class DbUtil {
         System.out.println("=== 模拟SQL执行结束 ===\n");
     }
 
-    private void closeResources(Connection conn, PreparedStatement ps) {
+    private void closeResources( Connection conn, PreparedStatement ps ) {
         if (ps != null) {
             try {
                 ps.close();
@@ -172,7 +182,7 @@ public class DbUtil {
         }
     }
 
-    public int queryForInt(String sql) {
+    public int queryForInt( String sql ) {
         if (!isConnected) {
             return 0;
         }

@@ -19,6 +19,7 @@ package com.taotao.cloud.realtime.datalake.behavior.loginfail_detect;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.flink.cep.CEP;
 import org.apache.flink.cep.PatternSelectFunction;
 import org.apache.flink.cep.PatternStream;
@@ -31,8 +32,16 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor;
 import org.apache.flink.streaming.api.windowing.time.Time;
 
+/**
+ * LoginFailWithCep
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class LoginFailWithCep {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
@@ -54,7 +63,7 @@ public class LoginFailWithCep {
                                 new BoundedOutOfOrdernessTimestampExtractor<LoginEvent>(
                                         Time.seconds(3)) {
                                     @Override
-                                    public long extractTimestamp(LoginEvent element) {
+                                    public long extractTimestamp( LoginEvent element ) {
                                         return element.getTimestamp() * 1000L;
                                     }
                                 });
@@ -66,7 +75,7 @@ public class LoginFailWithCep {
                         .where(
                                 new SimpleCondition<LoginEvent>() {
                                     @Override
-                                    public boolean filter(LoginEvent value) throws Exception {
+                                    public boolean filter( LoginEvent value ) throws Exception {
                                         return "fail".equals(value.getLoginState());
                                     }
                                 })
@@ -74,7 +83,7 @@ public class LoginFailWithCep {
                         .where(
                                 new SimpleCondition<LoginEvent>() {
                                     @Override
-                                    public boolean filter(LoginEvent value) throws Exception {
+                                    public boolean filter( LoginEvent value ) throws Exception {
                                         return "fail".equals(value.getLoginState());
                                     }
                                 })
@@ -82,7 +91,7 @@ public class LoginFailWithCep {
                         .where(
                                 new SimpleCondition<LoginEvent>() {
                                     @Override
-                                    public boolean filter(LoginEvent value) throws Exception {
+                                    public boolean filter( LoginEvent value ) throws Exception {
                                         return "fail".equals(value.getLoginState());
                                     }
                                 })
@@ -93,7 +102,7 @@ public class LoginFailWithCep {
                         .where(
                                 new SimpleCondition<LoginEvent>() {
                                     @Override
-                                    public boolean filter(LoginEvent value) throws Exception {
+                                    public boolean filter( LoginEvent value ) throws Exception {
                                         return "fail".equals(value.getLoginState());
                                     }
                                 })
@@ -117,8 +126,9 @@ public class LoginFailWithCep {
     // 实现自定义的PatternSelectFunction
     public static class LoginFailMatchDetectWarning
             implements PatternSelectFunction<LoginEvent, LoginFailWarning> {
+
         @Override
-        public LoginFailWarning select(Map<String, List<LoginEvent>> pattern) throws Exception {
+        public LoginFailWarning select( Map<String, List<LoginEvent>> pattern ) throws Exception {
             //            LoginEvent firstFailEvent = pattern.get("firstFail").iterator().next();
             //            LoginEvent lastFailEvent = pattern.get("thirdFail").get(0);
             //            return new LoginFailWarning(firstFailEvent.getUserId(),

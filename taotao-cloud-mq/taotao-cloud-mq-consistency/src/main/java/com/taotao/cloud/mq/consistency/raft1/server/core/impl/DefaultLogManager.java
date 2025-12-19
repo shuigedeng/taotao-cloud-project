@@ -40,7 +40,15 @@ public class DefaultLogManager implements LogManager {
     private static final Logger log = LoggerFactory.getLogger(DefaultConsensus.class);
 
     // double-lock
+    /**
+     * DefaultLogsLazyHolder
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     private static class DefaultLogsLazyHolder {
+
         private static final DefaultLogManager INSTANCE = new DefaultLogManager();
     }
 
@@ -64,7 +72,7 @@ public class DefaultLogManager implements LogManager {
 
     private ReentrantLock lock = new ReentrantLock();
 
-    private DefaultLogManager(String dbDir) {
+    private DefaultLogManager( String dbDir ) {
         ArgUtils.notEmpty(dbDir, "dbDir");
 
         this.dbDir = dbDir;
@@ -98,7 +106,7 @@ public class DefaultLogManager implements LogManager {
     }
 
     @Override
-    public void write(LogEntry logEntry) {
+    public void write( LogEntry logEntry ) {
         boolean success = false;
         boolean result;
         try {
@@ -121,7 +129,7 @@ public class DefaultLogManager implements LogManager {
     }
 
     @Override
-    public LogEntry read(Long index) {
+    public LogEntry read( Long index ) {
         try {
             byte[] result = logDb.get(convert(index));
             if (result == null) {
@@ -134,7 +142,7 @@ public class DefaultLogManager implements LogManager {
     }
 
     @Override
-    public void removeOnStartIndex(Long startIndex) {
+    public void removeOnStartIndex( Long startIndex ) {
         boolean success = false;
         int count = 0;
         boolean tryLock;
@@ -190,12 +198,12 @@ public class DefaultLogManager implements LogManager {
         return Long.valueOf(new String(lastIndex));
     }
 
-    private byte[] convert(Long key) {
+    private byte[] convert( Long key ) {
         return key.toString().getBytes();
     }
 
     // on lock
-    private void updateLastIndex(Long index) {
+    private void updateLastIndex( Long index ) {
         try {
             // overWrite
             logDb.put(LAST_INDEX_KEY, index.toString().getBytes());

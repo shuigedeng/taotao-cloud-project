@@ -16,16 +16,24 @@
 
 package com.taotao.cloud.rpc.registry.apiregistry.base;
 
+/**
+ * ApiRegistryException
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ApiRegistryException extends RuntimeException {
-    public ApiRegistryException(String message, Exception exp) {
+
+    public ApiRegistryException( String message, Exception exp ) {
         super(message, exp);
     }
 
-    public ApiRegistryException(String message) {
+    public ApiRegistryException( String message ) {
         super(message);
     }
 
-    public ApiRegistryException(Exception exp) {
+    public ApiRegistryException( Exception exp ) {
         super(exp);
     }
 }

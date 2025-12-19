@@ -16,13 +16,22 @@
 
 package com.taotao.cloud.realtime.datalake.behavior.orderpay_detect.beans;
 
+/**
+ * OrderResult
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class OrderResult {
+
     private Long orderId;
     private String resultState;
 
-    public OrderResult() {}
+    public OrderResult() {
+    }
 
-    public OrderResult(Long orderId, String resultState) {
+    public OrderResult( Long orderId, String resultState ) {
         this.orderId = orderId;
         this.resultState = resultState;
     }
@@ -31,7 +40,7 @@ public class OrderResult {
         return orderId;
     }
 
-    public void setOrderId(Long orderId) {
+    public void setOrderId( Long orderId ) {
         this.orderId = orderId;
     }
 
@@ -39,7 +48,7 @@ public class OrderResult {
         return resultState;
     }
 
-    public void setResultState(String resultState) {
+    public void setResultState( String resultState ) {
         this.resultState = resultState;
     }
 

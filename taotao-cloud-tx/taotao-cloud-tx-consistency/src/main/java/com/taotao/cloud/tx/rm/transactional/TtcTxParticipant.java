@@ -19,11 +19,19 @@ package com.taotao.cloud.tx.rm.transactional;
 import com.alibaba.fastjson2.JSONObject;
 import com.taotao.cloud.tx.rm.netty.NettyClient;
 import com.taotao.cloud.tx.rm.util.ApplicationContextProvider;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 // 事务参与者的核心实现类
+/**
+ * TtcTxParticipant
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TtcTxParticipant {
 
     // 获取前面伴随服务启动产生的NettyClient客户端
@@ -40,8 +48,6 @@ public class TtcTxParticipant {
 
     /**
      * 向事务管理者中发送一个创建事务组的命令
-     *
-     * @return
      */
     public static String createTtcTransactionalManagerGroup() {
         // 随机产生一个UUID作为事务组ID
@@ -65,7 +71,7 @@ public class TtcTxParticipant {
     /***
      *  创建一个子事务对象
      */
-    public static TtcTx createTransactional(String groupId) {
+    public static TtcTx createTransactional( String groupId ) {
         // 随机产生一个UUID作为子事务ID
         String transactionalId = UUID.randomUUID().toString();
         // 示例化出一个子事务对象
@@ -82,7 +88,7 @@ public class TtcTxParticipant {
     /**
      * 注册事务（向事务管理者的事务组中添加子事务）
      */
-    public static TtcTx addTtcTransactional(TtcTx ztp, Boolean isEnd, TransactionalType type) {
+    public static TtcTx addTtcTransactional( TtcTx ztp, Boolean isEnd, TransactionalType type ) {
         // 通过JSON序列化一个对象
         JSONObject sendData = new JSONObject();
         // 传入当前子事务的组ID、事务ID、事务类型、操作类型....信息
@@ -101,7 +107,7 @@ public class TtcTxParticipant {
     // 增加事务组数量的方法
     public static Integer addTransactionCount() {
         System.out.println(transactionalCount.get());
-        int i = (transactionalCount.get() == null ? 0 : transactionalCount.get()) + 1;
+        int i = ( transactionalCount.get() == null ? 0 : transactionalCount.get() ) + 1;
         transactionalCount.set(i);
         return i;
     }
@@ -119,7 +125,7 @@ public class TtcTxParticipant {
         return currentGroupId.get();
     }
 
-    public static void setCurrentGroupId(String groupId) {
+    public static void setCurrentGroupId( String groupId ) {
         currentGroupId.set(groupId);
     }
 
@@ -127,11 +133,11 @@ public class TtcTxParticipant {
         return transactionalCount.get();
     }
 
-    public static void setTransactionCount(int i) {
+    public static void setTransactionCount( int i ) {
         transactionalCount.set(i);
     }
 
-    public static TtcTx getTtcTransactional(String groupId) {
+    public static TtcTx getTtcTransactional( String groupId ) {
         return TTC_TRANSACTIONAL_MAP.get(groupId);
     }
 }

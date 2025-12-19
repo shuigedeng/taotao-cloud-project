@@ -20,6 +20,13 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/**
+ * TimeUtils
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TimeUtils {
 
     public static long midnightMillis() {
@@ -34,7 +41,7 @@ public class TimeUtils {
         return date.getTimeInMillis();
     }
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         // 2013-12-25 00:00:00.000
         System.out.println(
                 new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")

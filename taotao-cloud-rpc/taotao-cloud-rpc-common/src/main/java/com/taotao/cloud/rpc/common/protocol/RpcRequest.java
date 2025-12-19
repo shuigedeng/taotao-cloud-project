@@ -43,9 +43,9 @@ public class RpcRequest implements Serializable {
     private String group;
 
     /**
-     * 指定 是否为 心跳包，区分数据包和心跳包的关键，需要配合 IdleStateHandler 使用 IdleStateHandler 作用 做 读空闲检测、写检测、读写检测 客户端 设置
-     * 写 状态超时时，超时时间内 未 向 服务端 写操作，即 触发 读超时时间 理解：表示 客户端 虽然 没有 向 服务端 写 数据了，但 还是 要向 服务端 “表示我还活着” -> 发送
-     * 心跳包 注意：这里 JSON 对 boolean 反序列 有时会出现 异常（Reference Chain），最好 使用 引用类型的 Boolean，推荐 KRYO
+     * 指定 是否为 心跳包，区分数据包和心跳包的关键，需要配合 IdleStateHandler 使用 IdleStateHandler 作用 做 读空闲检测、写检测、读写检测 客户端 设置 写 状态超时时，超时时间内 未 向
+     * 服务端 写操作，即 触发 读超时时间 理解：表示 客户端 虽然 没有 向 服务端 写 数据了，但 还是 要向 服务端 “表示我还活着” -> 发送 心跳包 注意：这里 JSON 对 boolean 反序列 有时会出现
+     * 异常（Reference Chain），最好 使用 引用类型的 Boolean，推荐 KRYO
      */
     private Boolean heartBeat = false;
 
@@ -56,7 +56,7 @@ public class RpcRequest implements Serializable {
         super();
     }
 
-    public RpcRequest(Builder builder) {
+    public RpcRequest( Builder builder ) {
         this.requestId = builder.requestId;
         this.interfaceName = builder.interfaceName;
         this.methodName = builder.methodName;
@@ -66,6 +66,13 @@ public class RpcRequest implements Serializable {
         this.heartBeat = builder.heartBeat;
     }
 
+    /**
+     * Builder
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static final class Builder {
 
         private String requestId;
@@ -76,37 +83,37 @@ public class RpcRequest implements Serializable {
         private Class<?> returnType;
         private Boolean heartBeat;
 
-        public Builder requestId(String requestId) {
+        public Builder requestId( String requestId ) {
             this.requestId = requestId;
             return this;
         }
 
-        public Builder interfaceName(String interfaceName) {
+        public Builder interfaceName( String interfaceName ) {
             this.interfaceName = interfaceName;
             return this;
         }
 
-        public Builder methodName(String methodName) {
+        public Builder methodName( String methodName ) {
             this.methodName = methodName;
             return this;
         }
 
-        public Builder parameters(Object[] parameters) {
+        public Builder parameters( Object[] parameters ) {
             this.parameters = parameters;
             return this;
         }
 
-        public Builder paramTypes(Class<?>[] paramTypes) {
+        public Builder paramTypes( Class<?>[] paramTypes ) {
             this.paramTypes = paramTypes;
             return this;
         }
 
-        public Builder returnType(Class<?> returnType) {
+        public Builder returnType( Class<?> returnType ) {
             this.returnType = returnType;
             return this;
         }
 
-        public Builder heartBeat(Boolean heartBeat) {
+        public Builder heartBeat( Boolean heartBeat ) {
             this.heartBeat = heartBeat;
             return this;
         }
@@ -124,7 +131,7 @@ public class RpcRequest implements Serializable {
         return interfaceName;
     }
 
-    public void setInterfaceName(String interfaceName) {
+    public void setInterfaceName( String interfaceName ) {
         this.interfaceName = interfaceName;
     }
 
@@ -144,7 +151,7 @@ public class RpcRequest implements Serializable {
         return returnType;
     }
 
-    public void setReturnType(Class<?> returnType) {
+    public void setReturnType( Class<?> returnType ) {
         this.returnType = returnType;
     }
 
@@ -152,7 +159,7 @@ public class RpcRequest implements Serializable {
         return group;
     }
 
-    public void setGroup(String group) {
+    public void setGroup( String group ) {
         this.group = group;
     }
 
@@ -160,7 +167,7 @@ public class RpcRequest implements Serializable {
         return heartBeat;
     }
 
-    public void setHeartBeat(Boolean heartBeat) {
+    public void setHeartBeat( Boolean heartBeat ) {
         this.heartBeat = heartBeat;
     }
 

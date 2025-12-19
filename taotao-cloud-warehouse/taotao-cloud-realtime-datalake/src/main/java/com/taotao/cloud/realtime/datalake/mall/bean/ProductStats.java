@@ -19,20 +19,28 @@ package com.taotao.cloud.realtime.datalake.mall.bean;
 /**
  *
  * Date: 2021/2/23
- * @Builder注解
- *      可以使用构造者方式创建对象，给属性赋值
  *
- *      在使用构造者方式给属性赋值的时候，属性的初始值会丢失
- *      该注解的作用就是修复这个问题
- *      例如：我们在属性上赋值了初始值为0L，如果不加这个注解，通过构造者创建的对象属性值会变为null
+ * @Builder注解 可以使用构造者方式创建对象，给属性赋值
+ *
+ * 在使用构造者方式给属性赋值的时候，属性的初始值会丢失 该注解的作用就是修复这个问题 例如：我们在属性上赋值了初始值为0L，如果不加这个注解，通过构造者创建的对象属性值会变为null
  */
+
 import com.taotao.cloud.realtime.mall.bean.TransientSink;
+
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
+
 import lombok.Builder;
 import lombok.Data;
 
+/**
+ * ProductStats
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @Builder
 public class ProductStats {
@@ -77,11 +85,14 @@ public class ProductStats {
 
     Long good_comment_ct = 0L; // 好评数
 
-    @TransientSink Set orderIdSet = new HashSet(); // 用于统计订单数
+    @TransientSink
+    Set orderIdSet = new HashSet(); // 用于统计订单数
 
-    @TransientSink Set paidOrderIdSet = new HashSet(); // 用于统计支付订单数
+    @TransientSink
+    Set paidOrderIdSet = new HashSet(); // 用于统计支付订单数
 
-    @TransientSink Set refundOrderIdSet = new HashSet(); // 用于退款支付订单数
+    @TransientSink
+    Set refundOrderIdSet = new HashSet(); // 用于退款支付订单数
 
     Long ts; // 统计时间戳
 }

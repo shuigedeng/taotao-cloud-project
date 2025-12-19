@@ -16,13 +16,20 @@
 
 package com.taotao.cloud.rpc.common.exception;
 
+/**
+ * SerializerNotSetException
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class SerializerNotSetException extends RpcException {
 
     public SerializerNotSetException() {
         super();
     }
 
-    public SerializerNotSetException(String message) {
+    public SerializerNotSetException( String message ) {
         super(message);
     }
 }

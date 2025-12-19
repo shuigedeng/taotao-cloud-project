@@ -32,11 +32,11 @@ public class ClientKVAck implements Serializable {
 
     Object result;
 
-    public ClientKVAck(Object result) {
+    public ClientKVAck( Object result ) {
         this.result = result;
     }
 
-    private ClientKVAck(Builder builder) {
+    private ClientKVAck( Builder builder ) {
         setResult(builder.result);
     }
 
@@ -52,13 +52,21 @@ public class ClientKVAck implements Serializable {
         return new Builder();
     }
 
+    /**
+     * Builder
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static final class Builder {
 
         private Object result;
 
-        private Builder() {}
+        private Builder() {
+        }
 
-        public Builder result(Object val) {
+        public Builder result( Object val ) {
             result = val;
             return this;
         }

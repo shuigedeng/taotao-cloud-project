@@ -16,13 +16,20 @@
 
 package com.taotao.cloud.rpc.common.exception;
 
+/**
+ * RegisterFailedException
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class RegisterFailedException extends RpcException {
 
     public RegisterFailedException() {
         super();
     }
 
-    public RegisterFailedException(String message) {
+    public RegisterFailedException( String message ) {
         super(message);
     }
 }

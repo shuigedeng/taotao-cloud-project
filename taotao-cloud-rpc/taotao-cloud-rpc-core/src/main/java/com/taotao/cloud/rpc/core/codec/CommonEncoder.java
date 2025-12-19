@@ -24,6 +24,13 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * CommonEncoder
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class CommonEncoder extends MessageToByteEncoder {
 
@@ -32,26 +39,21 @@ public class CommonEncoder extends MessageToByteEncoder {
 
     private final CommonSerializer serializer;
 
-    public CommonEncoder(CommonSerializer serializer) {
+    public CommonEncoder( CommonSerializer serializer ) {
         this.serializer = serializer;
     }
 
     /**
      * 自定义对象头 协议 16 字节 4 字节 魔数 4 字节 协议包类型 4 字节 序列化类型 4 字节 数据长度
      *
-     * @param ctx
-     * @param msg
-     * @param out
      * @throws Exception The transmission protocol is as follows :
-     *                   +---------------+---------------+-----------------+-------------+ | Magic
-     *                   Number  | Package Type  | Serializer Type | Data Length | | 4 bytes       |
-     *                   4 bytes       | 4 bytes         | 4 bytes     |
-     *                   +---------------+---------------+-----------------+-------------+ | Data
-     *                   Bytes                          | | Length: ${Data Length} |
-     *                   +---------------+---------------+-----------------+-------------+
+     * +---------------+---------------+-----------------+-------------+ | Magic Number  | Package Type  | Serializer
+     * Type | Data Length | | 4 bytes       | 4 bytes       | 4 bytes         | 4 bytes     |
+     * +---------------+---------------+-----------------+-------------+ | Data Bytes                          | |
+     * Length: ${Data Length} | +---------------+---------------+-----------------+-------------+
      */
     @Override
-    protected void encode(ChannelHandlerContext ctx, Object msg, ByteBuf out) throws Exception {
+    protected void encode( ChannelHandlerContext ctx, Object msg, ByteBuf out ) throws Exception {
         out.writeInt(MAGIC_NUMBER); // 写进的四个字节
         if (msg instanceof RpcRequest) {
             out.writeInt(PackageType.REQUEST_PACK.getCode()); // 写进的四个字节

@@ -22,6 +22,7 @@ import com.taotao.cloud.rpc.common.idworker.utils.JRedisHelper;
 import com.taotao.cloud.rpc.common.idworker.utils.LRedisHelper;
 import com.taotao.cloud.rpc.common.util.IpUtils;
 import com.taotao.cloud.rpc.common.util.PropertiesConstants;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -29,8 +30,16 @@ import java.io.InputStream;
 import java.util.MissingResourceException;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * WorkerIdServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class WorkerIdServer {
 
@@ -50,7 +59,7 @@ public class WorkerIdServer {
         PropertyResourceBundle configResource = null;
         try (BufferedReader bufferedReader =
                 new BufferedReader(
-                        new FileReader(currentWorkPath + "/config/resource.properties")); ) {
+                        new FileReader(currentWorkPath + "/config/resource.properties"));) {
 
             configResource = new PropertyResourceBundle(bufferedReader);
             redisClientWay = configResource.getString(PropertiesConstants.REDIS_CLIENT_WAY);
@@ -127,7 +136,7 @@ public class WorkerIdServer {
                     if (!JRedisHelper.existsWorkerId(hostName)) {
                         long oldWorkerId = workerId;
                         while (JRedisHelper.existsWorkerIdSet(workerId)) {
-                            workerId = (workerId + 1L) % 1024;
+                            workerId = ( workerId + 1L ) % 1024;
                             if (workerId == oldWorkerId) {
                                 log.error(
                                         "machine code node cannot be applied, nodes number has reached its maximum value");
@@ -160,7 +169,7 @@ public class WorkerIdServer {
                     if (LRedisHelper.exists(hostName) == 0L) {
                         long oldWorkerId = workerId;
                         while (LRedisHelper.existsWorkerIdSet(workerId)) {
-                            workerId = (workerId + 1L) % 1024;
+                            workerId = ( workerId + 1L ) % 1024;
                             if (workerId == oldWorkerId) {
                                 log.error(
                                         "machine code node cannot be applied, nodes number has reached its maximum value");
@@ -179,36 +188,31 @@ public class WorkerIdServer {
 
     /**
      * 获取 机器 id
-     *
-     * @param serverCode
-     * @return
      */
-    public static long getWorkerId(int serverCode) {
+    public static long getWorkerId( int serverCode ) {
 
         switch (serverCode) {
-            case 0:
-                {
-                    if ("jedis".equals(redisClientWay)
-                            || "default".equals(redisClientWay)
-                            || StringUtils.isBlank(redisClientWay)) {
-                        return Long.parseLong(JRedisHelper.getForHostName(IpUtils.getPubIpAddr()));
-                    } else {
-                        return Long.parseLong(LRedisHelper.getForHostName(IpUtils.getPubIpAddr()));
-                    }
+            case 0: {
+                if ("jedis".equals(redisClientWay)
+                        || "default".equals(redisClientWay)
+                        || StringUtils.isBlank(redisClientWay)) {
+                    return Long.parseLong(JRedisHelper.getForHostName(IpUtils.getPubIpAddr()));
+                } else {
+                    return Long.parseLong(LRedisHelper.getForHostName(IpUtils.getPubIpAddr()));
                 }
+            }
             case 1:
             case 2:
             case 3:
-            default:
-                {
-                    if ("jedis".equals(redisClientWay)
-                            || "default".equals(redisClientWay)
-                            || StringUtils.isBlank(redisClientWay)) {
-                        return Long.parseLong(JRedisHelper.getForHostName(IpUtils.getPubIpAddr()));
-                    } else {
-                        return Long.parseLong(LRedisHelper.getForHostName(IpUtils.getPubIpAddr()));
-                    }
+            default: {
+                if ("jedis".equals(redisClientWay)
+                        || "default".equals(redisClientWay)
+                        || StringUtils.isBlank(redisClientWay)) {
+                    return Long.parseLong(JRedisHelper.getForHostName(IpUtils.getPubIpAddr()));
+                } else {
+                    return Long.parseLong(LRedisHelper.getForHostName(IpUtils.getPubIpAddr()));
                 }
+            }
         }
     }
 }

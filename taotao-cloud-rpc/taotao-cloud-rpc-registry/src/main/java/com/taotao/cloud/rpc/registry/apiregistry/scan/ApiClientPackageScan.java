@@ -37,12 +37,19 @@ import org.springframework.core.type.filter.AnnotationTypeFilter;
 @SuppressWarnings("unchecked")
 public class ApiClientPackageScan {
 
+    /**
+     * ApiClientAnnotationPackageScan
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class ApiClientAnnotationPackageScan implements ImportBeanDefinitionRegistrar {
 
         @Override
         public void registerBeanDefinitions(
                 AnnotationMetadata annotationMetadata,
-                BeanDefinitionRegistry beanDefinitionRegistry) {
+                BeanDefinitionRegistry beanDefinitionRegistry ) {
             //			String[] basePackages = ApiRegistryProperties.getRpcClientBasePackages();
             //			if (basePackages.length > 0) {
             //				// 自定义的 包扫描器
@@ -54,10 +61,17 @@ public class ApiClientPackageScan {
         }
     }
 
+    /**
+     * ApiClientPackageScanHandle
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class ApiClientPackageScanHandle extends ClassPathBeanDefinitionScanner {
 
         public ApiClientPackageScanHandle(
-                BeanDefinitionRegistry registry, boolean useDefaultFilters) {
+                BeanDefinitionRegistry registry, boolean useDefaultFilters ) {
             super(registry, useDefaultFilters);
             //			if (ApiRegistryProperties.getRpcClientTypeBeanNameEnabled()) {
             //				this.setBeanNameGenerator(new FullyQualifiedAnnotationBeanNameGenerator());
@@ -65,7 +79,7 @@ public class ApiClientPackageScan {
         }
 
         @Override
-        protected Set<BeanDefinitionHolder> doScan(String... basePackages) {
+        protected Set<BeanDefinitionHolder> doScan( String... basePackages ) {
             // 添加过滤条件
             addIncludeFilter(new AnnotationTypeFilter(ApiClient.class));
             // 兼容@FeignClient
@@ -83,10 +97,8 @@ public class ApiClientPackageScan {
 
         /**
          * 给扫描出来的接口添加上代理对象
-         *
-         * @param beanDefinitions
          */
-        private void processBeanDefinitions(Set<BeanDefinitionHolder> beanDefinitions) {
+        private void processBeanDefinitions( Set<BeanDefinitionHolder> beanDefinitions ) {
             GenericBeanDefinition definition;
             for (BeanDefinitionHolder holder : beanDefinitions) {
                 definition = (GenericBeanDefinition) holder.getBeanDefinition();
@@ -110,12 +122,19 @@ public class ApiClientPackageScan {
         }
 
         @Override
-        protected boolean isCandidateComponent(AnnotatedBeanDefinition beanDefinition) {
+        protected boolean isCandidateComponent( AnnotatedBeanDefinition beanDefinition ) {
             return beanDefinition.getMetadata().isInterface()
                     && beanDefinition.getMetadata().isIndependent();
         }
     }
 
+    /**
+     * MethodProxyFactory
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class MethodProxyFactory<T> implements FactoryBean<T> {
 
         Class<T> interfaceClass; // 所对应的消费接口
@@ -124,7 +143,7 @@ public class ApiClientPackageScan {
             return interfaceClass;
         }
 
-        public void setInterfaceClass(Class<T> interfaceClass) {
+        public void setInterfaceClass( Class<T> interfaceClass ) {
             this.interfaceClass = interfaceClass;
         }
 
@@ -144,26 +163,33 @@ public class ApiClientPackageScan {
         }
 
         @SuppressWarnings("unchecked")
-        private static <T> T newInstance(Class<T> methodInterface) {
+        private static <T> T newInstance( Class<T> methodInterface ) {
             final MethodProxy<T> methodProxy = new MethodProxy<>(methodInterface);
             return (T)
                     Proxy.newProxyInstance(
                             Thread.currentThread().getContextClassLoader(),
-                            new Class[] {methodInterface},
+                            new Class[]{methodInterface},
                             methodProxy);
         }
     }
 
+    /**
+     * MethodProxy
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class MethodProxy<T> implements InvocationHandler {
 
         Class<T> interfaceClass;
 
-        public MethodProxy(Class<T> interfaceClass) {
+        public MethodProxy( Class<T> interfaceClass ) {
             this.interfaceClass = interfaceClass;
         }
 
         @Override
-        public Object invoke(Object proxy, Method method, Object[] args) {
+        public Object invoke( Object proxy, Method method, Object[] args ) {
             try {
                 // 支持接口default默认实现
                 //				if (ReflectUtils.isDefaultMethod(method)) {
@@ -182,7 +208,7 @@ public class ApiClientPackageScan {
             }
         }
 
-        private String getFullName(Method method) {
+        private String getFullName( Method method ) {
             return method.getDeclaringClass().getName() + method.getName();
         }
     }

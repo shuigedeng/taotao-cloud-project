@@ -16,7 +16,15 @@
 
 package com.taotao.cloud.realtime.warehouse;
 
+/**
+ * TaoTaoCloudRealtimeWarehouseApplicationTests
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 class TaoTaoCloudRealtimeWarehouseApplicationTests {
 
-    void contextLoads() {}
+    void contextLoads() {
+    }
 }

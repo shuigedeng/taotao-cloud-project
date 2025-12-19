@@ -24,12 +24,19 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 // 自定义的拦截器：负责传递事务组ID和事务数量的拦截器(其他RPC框架使用)
+/**
+ * RequestInterceptor
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class RequestInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(
-            HttpServletRequest request, HttpServletResponse response, Object handler) {
+            HttpServletRequest request, HttpServletResponse response, Object handler ) {
         String groupId = request.getHeader("groupId");
         String transactionalCount = request.getHeader("transactionalCount");
         // 如果上游服务传递了组ID，获取并放入自身的ThreadLocal中
@@ -47,7 +54,7 @@ public class RequestInterceptor implements HandlerInterceptor {
             HttpServletRequest request,
             HttpServletResponse response,
             Object handler,
-            ModelAndView modelAndView)
+            ModelAndView modelAndView )
             throws Exception {
         //        String groupId = request.getHeader("groupId");
         //        System.out.println("中置拦截器：" + groupId);
@@ -72,7 +79,7 @@ public class RequestInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(
-            HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+            HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex )
             throws Exception {
         //        // 当RPC调用结束后，会进入后置处理器
         //        System.out.println("我进入后置拦截器啦.......");

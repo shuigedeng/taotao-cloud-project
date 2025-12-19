@@ -20,7 +20,9 @@ import com.taotao.cloud.tx.rm.annotation.DistributedTransactional;
 import com.taotao.cloud.tx.rm.transactional.TransactionalType;
 import com.taotao.cloud.tx.rm.transactional.TtcTx;
 import com.taotao.cloud.tx.rm.transactional.TtcTxParticipant;
+
 import java.lang.reflect.Method;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -29,12 +31,19 @@ import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 
 // 负责拦截自定义注解的切面
+/**
+ * TtcTransactionalAspect
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Aspect
 @Component
 public class TtcTransactionalAspect implements Ordered {
 
     @Around("@annotation(com.taotao.cloud.tx.rm.annotation.DistributedTransactional)")
-    public Integer invoke(ProceedingJoinPoint proceedingJoinPoint) {
+    public Integer invoke( ProceedingJoinPoint proceedingJoinPoint ) {
         System.out.println("分布式事务注解生效，切面成功拦截............");
 
         // 获取对应注解的业务方法，以及方法上的注解对象

@@ -18,8 +18,16 @@ package com.taotao.cloud.realtime.warehouse.datageneration.userlog_code.model;
 
 import lombok.Data;
 
+/**
+ * Start
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 public class Start {
+
     private String entry;
     private String loading_time;
     private String open_ad_id;

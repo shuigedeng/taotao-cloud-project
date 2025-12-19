@@ -16,4 +16,13 @@
 
 package com.taotao.cloud.mq.cluster;
 
-public class BaseCluster {}
+/**
+ * BaseCluster
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
+public class BaseCluster {
+
+}

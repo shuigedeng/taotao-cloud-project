@@ -21,17 +21,26 @@ import com.taotao.cloud.rpc.common.exception.UnSupportBodyException;
 import com.taotao.cloud.rpc.common.protocol.RpcRequest;
 import com.taotao.cloud.rpc.common.protocol.RpcResponse;
 import com.taotao.cloud.rpc.common.serializer.CommonSerializer;
+
 import java.io.IOException;
 import java.io.OutputStream;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * ObjectWriter
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class ObjectWriter {
 
     private static int MAGIC_NUMBER = 0xCAFEBABE;
 
     public static void writeObject(
-            OutputStream outputStream, Object object, CommonSerializer serializer)
+            OutputStream outputStream, Object object, CommonSerializer serializer )
             throws IOException, UnSupportBodyException {
 
         outputStream.write(int2Bytes(MAGIC_NUMBER));
@@ -56,17 +65,14 @@ public class ObjectWriter {
 
     /**
      * int 4 字节 byte 1 字节
-     *
-     * @param value
-     * @return
      */
-    private static byte[] int2Bytes(int value) {
+    private static byte[] int2Bytes( int value ) {
         byte[] src = new byte[4];
         int mark = 0xFF;
-        src[0] = (byte) (value >> 24 & mark);
-        src[1] = (byte) (value >> 16 & mark);
-        src[2] = (byte) (value >> 8 & mark);
-        src[3] = (byte) (value & mark);
+        src[0] = (byte) ( value >> 24 & mark );
+        src[1] = (byte) ( value >> 16 & mark );
+        src[2] = (byte) ( value >> 8 & mark );
+        src[3] = (byte) ( value & mark );
         return src;
     }
 }

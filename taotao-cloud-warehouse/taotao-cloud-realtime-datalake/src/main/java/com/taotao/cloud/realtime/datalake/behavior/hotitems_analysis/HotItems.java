@@ -18,10 +18,12 @@ package com.taotao.cloud.realtime.datalake.behavior.hotitems_analysis;
 
 import com.taotao.cloud.realtime.behavior.analysis.hotitems_analysis.beans.ItemViewCount;
 import com.taotao.cloud.realtime.behavior.analysis.hotitems_analysis.beans.UserBehavior;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Properties;
+
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.api.common.state.ListState;
@@ -40,8 +42,16 @@ import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 import org.apache.flink.util.Collector;
 
+/**
+ * HotItems
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class HotItems {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         // 1. 创建执行环境
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
@@ -81,7 +91,7 @@ public class HotItems {
                         .assignTimestampsAndWatermarks(
                                 new AscendingTimestampExtractor<UserBehavior>() {
                                     @Override
-                                    public long extractAscendingTimestamp(UserBehavior element) {
+                                    public long extractAscendingTimestamp( UserBehavior element ) {
                                         return element.getTimestamp() * 1000L;
                                     }
                                 });
@@ -107,23 +117,24 @@ public class HotItems {
 
     // 实现自定义增量聚合函数
     public static class ItemCountAgg implements AggregateFunction<UserBehavior, Long, Long> {
+
         @Override
         public Long createAccumulator() {
             return 0L;
         }
 
         @Override
-        public Long add(UserBehavior value, Long accumulator) {
+        public Long add( UserBehavior value, Long accumulator ) {
             return accumulator + 1;
         }
 
         @Override
-        public Long getResult(Long accumulator) {
+        public Long getResult( Long accumulator ) {
             return accumulator;
         }
 
         @Override
-        public Long merge(Long a, Long b) {
+        public Long merge( Long a, Long b ) {
             return a + b;
         }
     }
@@ -131,9 +142,10 @@ public class HotItems {
     // 自定义全窗口函数
     public static class WindowItemCountResult
             implements WindowFunction<Long, ItemViewCount, Tuple, TimeWindow> {
+
         @Override
         public void apply(
-                Tuple tuple, TimeWindow window, Iterable<Long> input, Collector<ItemViewCount> out)
+                Tuple tuple, TimeWindow window, Iterable<Long> input, Collector<ItemViewCount> out )
                 throws Exception {
             Long itemId = tuple.getField(0);
             Long windowEnd = window.getEnd();
@@ -144,10 +156,11 @@ public class HotItems {
 
     // 实现自定义KeyedProcessFunction
     public static class TopNHotItems extends KeyedProcessFunction<Tuple, ItemViewCount, String> {
+
         // 定义属性，top n的大小
         private Integer topSize;
 
-        public TopNHotItems(Integer topSize) {
+        public TopNHotItems( Integer topSize ) {
             this.topSize = topSize;
         }
 
@@ -155,7 +168,7 @@ public class HotItems {
         ListState<ItemViewCount> itemViewCountListState;
 
         @Override
-        public void open(Configuration parameters) throws Exception {
+        public void open( Configuration parameters ) throws Exception {
             itemViewCountListState =
                     getRuntimeContext()
                             .getListState(
@@ -164,7 +177,7 @@ public class HotItems {
         }
 
         @Override
-        public void processElement(ItemViewCount value, Context ctx, Collector<String> out)
+        public void processElement( ItemViewCount value, Context ctx, Collector<String> out )
                 throws Exception {
             // 每来一条数据，存入List中，并注册定时器
             itemViewCountListState.add(value);
@@ -172,7 +185,7 @@ public class HotItems {
         }
 
         @Override
-        public void onTimer(long timestamp, OnTimerContext ctx, Collector<String> out)
+        public void onTimer( long timestamp, OnTimerContext ctx, Collector<String> out )
                 throws Exception {
             // 定时器触发，当前已收集到所有数据，排序输出
             ArrayList<ItemViewCount> itemViewCounts =
@@ -181,7 +194,7 @@ public class HotItems {
             itemViewCounts.sort(
                     new Comparator<ItemViewCount>() {
                         @Override
-                        public int compare(ItemViewCount o1, ItemViewCount o2) {
+                        public int compare( ItemViewCount o1, ItemViewCount o2 ) {
                             return o2.getCount().intValue() - o1.getCount().intValue();
                         }
                     });

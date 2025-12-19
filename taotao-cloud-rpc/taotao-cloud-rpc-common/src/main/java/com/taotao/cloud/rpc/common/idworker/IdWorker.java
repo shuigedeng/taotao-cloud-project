@@ -18,33 +18,27 @@ package com.taotao.cloud.rpc.common.idworker;
 
 import com.taotao.cloud.rpc.common.factory.ThreadPoolFactory;
 import com.taotao.cloud.rpc.common.idworker.exception.InvalidSystemClockException;
+
 import java.security.SecureRandom;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * IdWorker
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class IdWorker {
-    /**
-     * 自定义 分布式唯一号 id
-     *  1 位 符号位
-     * 41 位 时间戳
-     * 10 位 工作机器 id
-     * 12 位 并发序列号
-     *
-     *       The distribute unique id is as follows :
-     * +---------------++---------------+---------------+-----------------+
-     * |     Sign      |     epoch     |    workerId   |     sequence     |
-     * |    1 bits     |    41 bits    |    10 bits   |      12 bits      |
-     * +---------------++---------------+---------------+-----------------+
-     */
 
     /**
      * 服务器运行时 开始时间戳
      */
     protected long epoch = 1288834974657L;
-
-    //    protected long epoch = 1387886498127L; // 2013-12-24 20:01:38.127
     /**
      * 机器 id 所占位数
      */
@@ -53,7 +47,7 @@ public class IdWorker {
     /**
      * 最大机器 id 结果为 1023
      */
-    protected long maxWorkerId = -1L ^ (-1L << workerIdBits);
+    protected long maxWorkerId = -1L ^ ( -1L << workerIdBits );
 
     /**
      * 并发序列在 id 中占的位数
@@ -73,7 +67,7 @@ public class IdWorker {
     /**
      * 并发序列掩码 二进制表示为 12 位 1 (ob111111111111=0xfff=4095) 也表示序列号最大数
      */
-    protected long sequenceMask = -1L ^ (-1L << sequenceBits);
+    protected long sequenceMask = -1L ^ ( -1L << sequenceBits );
 
     /**
      * 上一次系统时间 时间戳 用于 判断系统 是否发生 时钟回拨 异常
@@ -113,7 +107,7 @@ public class IdWorker {
 
     protected Logger logger = LoggerFactory.getLogger(IdWorker.class);
 
-    public IdWorker(long workerId) {
+    public IdWorker( long workerId ) {
         this.workerId = checkWorkerId(workerId);
 
         logger.debug(
@@ -126,7 +120,7 @@ public class IdWorker {
         return epoch;
     }
 
-    private long checkWorkerId(long workerId) {
+    private long checkWorkerId( long workerId ) {
         // sanity check for workerId
         if (workerId > maxWorkerId || workerId < 0) {
             int rand = new SecureRandom().nextInt((int) maxWorkerId + 1);
@@ -199,7 +193,7 @@ public class IdWorker {
         }
         // 毫秒并发
         if (lastMillis == timestamp) {
-            sequence = (sequence + 1) & sequenceMask;
+            sequence = ( sequence + 1 ) & sequenceMask;
             // 序列号已经最大了，需要阻塞新的时间戳
             // 表示这一毫秒并发量已达上限，新的请求会阻塞到新的时间戳中去
             if (sequence == 0) {
@@ -234,16 +228,13 @@ public class IdWorker {
         }
 
         long diff = timestamp - getEpoch();
-        return (diff << timestampLeftShift) | (workerId << workerIdShift) | sequence;
+        return ( diff << timestampLeftShift ) | ( workerId << workerIdShift ) | sequence;
     }
 
     /**
      * 阻塞生成下一个更大的时间戳
-     *
-     * @param lastMillis
-     * @return
      */
-    protected long tilNextMillis(long lastMillis) {
+    protected long tilNextMillis( long lastMillis ) {
         long millis = millisGen();
         while (millis <= lastMillis) {
             millis = millisGen();

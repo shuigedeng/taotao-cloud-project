@@ -16,14 +16,23 @@
 
 package com.taotao.cloud.realtime.datalake.behavior.market_analysis.beans;
 
+/**
+ * BlackListUserWarning
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class BlackListUserWarning {
+
     private Long userId;
     private Long adId;
     private String warningMsg;
 
-    public BlackListUserWarning() {}
+    public BlackListUserWarning() {
+    }
 
-    public BlackListUserWarning(Long userId, Long adId, String warningMsg) {
+    public BlackListUserWarning( Long userId, Long adId, String warningMsg ) {
         this.userId = userId;
         this.adId = adId;
         this.warningMsg = warningMsg;
@@ -33,7 +42,7 @@ public class BlackListUserWarning {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId( Long userId ) {
         this.userId = userId;
     }
 
@@ -41,7 +50,7 @@ public class BlackListUserWarning {
         return adId;
     }
 
-    public void setAdId(Long adId) {
+    public void setAdId( Long adId ) {
         this.adId = adId;
     }
 
@@ -49,7 +58,7 @@ public class BlackListUserWarning {
         return warningMsg;
     }
 
-    public void setWarningMsg(String warningMsg) {
+    public void setWarningMsg( String warningMsg ) {
         this.warningMsg = warningMsg;
     }
 

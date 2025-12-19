@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.DbUtil;
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.RandomUtil;
 import org.slf4j.Logger;
@@ -27,18 +28,27 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * UserDataGenerator
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class UserDataGenerator {
+
     private static final Logger logger = LoggerFactory.getLogger(UserDataGenerator.class);
 
-    @Autowired private DbUtil dbUtil;
+    @Autowired
+    private DbUtil dbUtil;
 
-    public void generateUserData(int count) {
+    public void generateUserData( int count ) {
         generateUserInfo(count);
         generateUserAddress(count);
     }
 
-    private void generateUserInfo(int count) {
+    private void generateUserInfo( int count ) {
         logger.info("正在更新 user_info 表...");
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM user_info";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -67,26 +77,26 @@ public class UserDataGenerator {
             String gender = String.valueOf(RandomUtil.generateNumber(1, 2)); // 1-男，2-女
 
             params.add(
-                    new Object[] {
-                        id,
-                        loginName,
-                        nickName,
-                        "e10adc3949ba59abbe56e057f20f883e", // 123456的MD5
-                        name,
-                        phoneNum,
-                        email,
-                        headImg,
-                        userLevel,
-                        birthday,
-                        gender,
-                        now,
-                        now
+                    new Object[]{
+                            id,
+                            loginName,
+                            nickName,
+                            "e10adc3949ba59abbe56e057f20f883e", // 123456的MD5
+                            name,
+                            phoneNum,
+                            email,
+                            headImg,
+                            userLevel,
+                            birthday,
+                            gender,
+                            now,
+                            now
                     });
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateUserAddress(int count) {
+    private void generateUserAddress( int count ) {
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM user_address";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
 
@@ -108,7 +118,7 @@ public class UserDataGenerator {
             String isDefault = i % 5 == 0 ? "1" : "0"; // 每5个地址中有1个是默认地址
 
             params.add(
-                    new Object[] {id, userId, provinceId, address, consignee, phoneNum, isDefault});
+                    new Object[]{id, userId, provinceId, address, consignee, phoneNum, isDefault});
         }
         dbUtil.batchInsert(sql, params);
     }

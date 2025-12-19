@@ -16,14 +16,23 @@
 
 package com.taotao.cloud.realtime.datalake.behavior.orderpay_detect.beans;
 
+/**
+ * ReceiptEvent
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ReceiptEvent {
+
     private String txId;
     private String payChannel;
     private Long timestamp;
 
-    public ReceiptEvent() {}
+    public ReceiptEvent() {
+    }
 
-    public ReceiptEvent(String txId, String payChannel, Long timestamp) {
+    public ReceiptEvent( String txId, String payChannel, Long timestamp ) {
         this.txId = txId;
         this.payChannel = payChannel;
         this.timestamp = timestamp;
@@ -33,7 +42,7 @@ public class ReceiptEvent {
         return txId;
     }
 
-    public void setTxId(String txId) {
+    public void setTxId( String txId ) {
         this.txId = txId;
     }
 
@@ -41,7 +50,7 @@ public class ReceiptEvent {
         return payChannel;
     }
 
-    public void setPayChannel(String payChannel) {
+    public void setPayChannel( String payChannel ) {
         this.payChannel = payChannel;
     }
 
@@ -49,7 +58,7 @@ public class ReceiptEvent {
         return timestamp;
     }
 
-    public void setTimestamp(Long timestamp) {
+    public void setTimestamp( Long timestamp ) {
         this.timestamp = timestamp;
     }
 

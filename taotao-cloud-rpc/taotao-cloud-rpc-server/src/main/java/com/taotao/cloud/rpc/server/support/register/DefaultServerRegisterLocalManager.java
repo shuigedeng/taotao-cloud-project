@@ -78,12 +78,19 @@ public class DefaultServerRegisterLocalManager implements ServerRegisterManager 
         heartbeatExecutor.scheduleAtFixedRate(new HeartbeatThread(), 5, 2, TimeUnit.SECONDS);
     }
 
+    /**
+     * HeartbeatThread
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     private class HeartbeatThread implements Runnable {
 
         @Override
         public void run() {
             // 1. 每 2 秒钟，向 channel 发送请求信息
-            LOG.debug(("[HEARTBEAT] 开始定时执行心跳"));
+            LOG.debug(( "[HEARTBEAT] 开始定时执行心跳" ));
             //			String currentIp = NetUtil.getLocalIp();
             ServerHeartbeatBody body = new ServerHeartbeatBody();
             body.ip("currentIp");
@@ -100,13 +107,13 @@ public class DefaultServerRegisterLocalManager implements ServerRegisterManager 
     }
 
     @Override
-    public DefaultServerRegisterLocalManager port(int port) {
+    public DefaultServerRegisterLocalManager port( int port ) {
         this.port = port;
         return this;
     }
 
     @Override
-    public void register(ServiceEntry serviceEntry) {
+    public void register( ServiceEntry serviceEntry ) {
         paramCheck(serviceEntry);
         //		log.info("[Rpc Server] add service: {}", serviceEntry);
 
@@ -122,7 +129,7 @@ public class DefaultServerRegisterLocalManager implements ServerRegisterManager 
     }
 
     @Override
-    public ServiceEntry unRegister(String serviceId) {
+    public ServiceEntry unRegister( String serviceId ) {
         //		ArgUtil.notEmpty(serviceId, "serviceId");
 
         // 本地信息清空
@@ -159,7 +166,7 @@ public class DefaultServerRegisterLocalManager implements ServerRegisterManager 
     }
 
     @Override
-    public void addRegisterChannel(RpcAddress rpcAddress, Channel channel) {
+    public void addRegisterChannel( RpcAddress rpcAddress, Channel channel ) {
         //		ArgUtil.notNull(rpcAddress, "rpcAddress");
         //		ArgUtil.notNull(channel, "channel");
 
@@ -188,7 +195,7 @@ public class DefaultServerRegisterLocalManager implements ServerRegisterManager 
     }
 
     @Override
-    public void removeRegisterChannel(RpcAddress rpcAddress) {
+    public void removeRegisterChannel( RpcAddress rpcAddress ) {
         //		ArgUtil.notNull(rpcAddress, "rpcAddress");
 
         String key = buildKey(rpcAddress);
@@ -210,7 +217,7 @@ public class DefaultServerRegisterLocalManager implements ServerRegisterManager 
      * @return 结果
      * @since 0.1.8
      */
-    private String buildKey(final RpcAddress rpcAddress) {
+    private String buildKey( final RpcAddress rpcAddress ) {
         String key = rpcAddress.address() + ":" + rpcAddress.port();
 
         return key;
@@ -222,7 +229,7 @@ public class DefaultServerRegisterLocalManager implements ServerRegisterManager 
      * @param serviceEntry 服务明细
      * @since 0.1.8
      */
-    private void paramCheck(final ServiceEntry serviceEntry) {
+    private void paramCheck( final ServiceEntry serviceEntry ) {
         //		ArgUtil.notNull(serviceEntry, "serviceEntry");
         final String serviceId = serviceEntry.serviceId();
         //		ArgUtil.notEmpty(serviceId, "serviceId");
@@ -235,7 +242,7 @@ public class DefaultServerRegisterLocalManager implements ServerRegisterManager 
      * @return 注册信息
      * @since 0.1.8
      */
-    private NotifyMessage buildRegisterMessage(final ServiceEntry serviceEntry) {
+    private NotifyMessage buildRegisterMessage( final ServiceEntry serviceEntry ) {
         return NotifyMessages.of(MessageTypeConst.SERVER_REGISTER_REQ, serviceEntry);
     }
 
@@ -246,7 +253,7 @@ public class DefaultServerRegisterLocalManager implements ServerRegisterManager 
      * @return 注册信息
      * @since 0.1.8
      */
-    private NotifyMessage buildUnRegisterMessage(final ServiceEntry serviceEntry) {
+    private NotifyMessage buildUnRegisterMessage( final ServiceEntry serviceEntry ) {
         return NotifyMessages.of(MessageTypeConst.SERVER_UN_REGISTER_REQ, serviceEntry);
     }
 }

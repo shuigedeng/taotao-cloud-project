@@ -51,27 +51,39 @@ import com.taotao.cloud.mq.consistency.raft1.server.support.replication.IRaftRep
 import com.taotao.cloud.mq.consistency.raft1.server.support.vote.VoteTask;
 import com.taotao.cloud.mq.consistency.raft1.server.util.InnerFutureList;
 import com.taotao.cloud.mq.consistency.raft1.server.util.InnerPeerUtil;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * DefaultNode
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class DefaultNode implements Node {
 
     private static final Logger log = LoggerFactory.getLogger(DefaultNode.class);
 
     /**
      * 配置信息
+     *
      * @since 1.0.0
      */
     private NodeConfig nodeConfig;
 
     /**
      * 上下文信息
+     *
      * @since 1.0.0
      */
     private final NodeInfoContext nodeInfoContext = new NodeInfoContext();
@@ -84,7 +96,7 @@ public class DefaultNode implements Node {
     private IClusterPeerManager clusterPeerManager;
 
     @Override
-    public void setConfig(NodeConfig config) {
+    public void setConfig( NodeConfig config ) {
         this.nodeConfig = config;
     }
 
@@ -137,29 +149,27 @@ public class DefaultNode implements Node {
     }
 
     @Override
-    public VoteResponse handlerRequestVote(VoteRequest param) {
+    public VoteResponse handlerRequestVote( VoteRequest param ) {
         // log.info("handlerRequestVote req={}", param);
         return nodeInfoContext.getConsensus().vote(param);
     }
 
     @Override
-    public AppendLogResponse handlerAppendEntries(AppendLogRequest param) {
+    public AppendLogResponse handlerAppendEntries( AppendLogRequest param ) {
         // log.info("handlerAppendEntries req={}", JSON.toJSONString(param));
         return nodeInfoContext.getConsensus().appendLog(param);
     }
 
     /**
-     * 客户端的每一个请求都包含一条被复制状态机执行的指令。
-     * 领导人把这条指令作为一条新的日志条目附加到日志中去，然后并行的发起附加条目 RPCs 给其他的服务器，让他们复制这条日志条目。
-     * 当这条日志条目被安全的复制（下面会介绍），领导人会应用这条日志条目到它的状态机中然后把执行的结果返回给客户端。
-     * 如果跟随者崩溃或者运行缓慢，再或者网络丢包，
-     * 领导人会不断的重复尝试附加日志条目 RPCs （尽管已经回复了客户端）直到所有的跟随者都最终存储了所有的日志条目。
+     * 客户端的每一个请求都包含一条被复制状态机执行的指令。 领导人把这条指令作为一条新的日志条目附加到日志中去，然后并行的发起附加条目 RPCs 给其他的服务器，让他们复制这条日志条目。
+     * 当这条日志条目被安全的复制（下面会介绍），领导人会应用这条日志条目到它的状态机中然后把执行的结果返回给客户端。 如果跟随者崩溃或者运行缓慢，再或者网络丢包， 领导人会不断的重复尝试附加日志条目 RPCs
+     * （尽管已经回复了客户端）直到所有的跟随者都最终存储了所有的日志条目。
      *
      * @param request 请求
      * @return 结果
      */
     @Override
-    public ClientKeyValueResponse handlerClientRequest(ClientKeyValueRequest request) {
+    public ClientKeyValueResponse handlerClientRequest( ClientKeyValueRequest request ) {
         log.info("[Raft] handlerClientRequest request={}", request);
 
         // 重定向到主节点
@@ -243,7 +253,7 @@ public class DefaultNode implements Node {
         }
 
         //  响应客户端(成功一半)
-        if (success.get() >= (count / 2)) {
+        if (success.get() >= ( count / 2 )) {
             // 更新
             nodeInfoContext.setCommitIndex(logEntry.getIndex());
 
@@ -265,7 +275,7 @@ public class DefaultNode implements Node {
     }
 
     @Override
-    public ClientKeyValueResponse redirect(ClientKeyValueRequest request) {
+    public ClientKeyValueResponse redirect( ClientKeyValueRequest request ) {
         final String leaderAddress = nodeInfoContext.getPeerManager().getLeader().getAddress();
         RpcRequest r = new RpcRequest();
         r.setObj(request);
@@ -277,12 +287,12 @@ public class DefaultNode implements Node {
     }
 
     @Override
-    public ClusterPeerResult addPeer(PeerInfoDto peerInfoDto) {
+    public ClusterPeerResult addPeer( PeerInfoDto peerInfoDto ) {
         return clusterPeerManager.addPeer(peerInfoDto);
     }
 
     @Override
-    public ClusterPeerResult removePeer(PeerInfoDto peerInfoDto) {
+    public ClusterPeerResult removePeer( PeerInfoDto peerInfoDto ) {
         return clusterPeerManager.removePeer(peerInfoDto);
     }
 }

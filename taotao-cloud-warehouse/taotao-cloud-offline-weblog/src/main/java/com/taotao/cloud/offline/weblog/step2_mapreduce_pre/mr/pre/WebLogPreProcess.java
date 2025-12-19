@@ -41,6 +41,13 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 public class WebLogPreProcess {
     // 日志预处理mr程序
 
+    /**
+     * WebLogPreProcessMapper
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     static class WebLogPreProcessMapper extends Mapper<LongWritable, Text, Text, NullWritable> {
 
         Set<String> pages = new HashSet<>();
@@ -48,14 +55,14 @@ public class WebLogPreProcess {
         NullWritable v = NullWritable.get();
 
         @Override
-        protected void setup(Context context) throws IOException, InterruptedException {
+        protected void setup( Context context ) throws IOException, InterruptedException {
             pages.add("/statics/");
             pages.add("/js/");
             pages.add("/css/");
         }
 
         @Override
-        protected void map(LongWritable key, Text value, Context context)
+        protected void map( LongWritable key, Text value, Context context )
                 throws IOException, InterruptedException {
             String lineStr = value.toString();
             WebLogBean webLogBean = WebLogParser.parser(lineStr);
@@ -67,7 +74,7 @@ public class WebLogPreProcess {
         }
     }
 
-    public static void main(String[] args)
+    public static void main( String[] args )
             throws IOException, ClassNotFoundException, InterruptedException {
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf);

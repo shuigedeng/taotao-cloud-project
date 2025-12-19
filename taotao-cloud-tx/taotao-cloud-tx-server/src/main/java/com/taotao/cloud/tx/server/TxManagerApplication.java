@@ -21,15 +21,22 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
+/**
+ * TxManagerApplication
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @SpringBootApplication
 public class TxManagerApplication extends SpringBootServletInitializer {
 
     @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+    protected SpringApplicationBuilder configure( SpringApplicationBuilder builder ) {
         return builder.sources(TxManagerApplication.class);
     }
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
 
         new StartupSpringApplication(TxManagerApplication.class)

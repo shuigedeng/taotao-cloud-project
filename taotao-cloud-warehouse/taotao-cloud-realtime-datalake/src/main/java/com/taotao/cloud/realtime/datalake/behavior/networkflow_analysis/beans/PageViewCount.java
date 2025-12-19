@@ -16,14 +16,23 @@
 
 package com.taotao.cloud.realtime.datalake.behavior.networkflow_analysis.beans;
 
+/**
+ * PageViewCount
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class PageViewCount {
+
     private String url;
     private Long windowEnd;
     private Long count;
 
-    public PageViewCount() {}
+    public PageViewCount() {
+    }
 
-    public PageViewCount(String url, Long windowEnd, Long count) {
+    public PageViewCount( String url, Long windowEnd, Long count ) {
         this.url = url;
         this.windowEnd = windowEnd;
         this.count = count;
@@ -33,7 +42,7 @@ public class PageViewCount {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl( String url ) {
         this.url = url;
     }
 
@@ -41,7 +50,7 @@ public class PageViewCount {
         return windowEnd;
     }
 
-    public void setWindowEnd(Long windowEnd) {
+    public void setWindowEnd( Long windowEnd ) {
         this.windowEnd = windowEnd;
     }
 
@@ -49,7 +58,7 @@ public class PageViewCount {
         return count;
     }
 
-    public void setCount(Long count) {
+    public void setCount( Long count ) {
         this.count = count;
     }
 

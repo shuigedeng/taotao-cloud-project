@@ -26,9 +26,18 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.ReferenceCountUtil;
+
 import java.net.InetSocketAddress;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * NettyClientHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class NettyClientHandler extends SimpleChannelInboundHandler<RpcResponse> {
 
@@ -39,7 +48,7 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<RpcResponse>
     }
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, RpcResponse msg) throws Exception {
+    protected void channelRead0( ChannelHandlerContext ctx, RpcResponse msg ) throws Exception {
         try {
             log.info(
                     String.format(
@@ -62,7 +71,7 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<RpcResponse>
     }
 
     @Override
-    public void channelWritabilityChanged(ChannelHandlerContext ctx) throws Exception {
+    public void channelWritabilityChanged( ChannelHandlerContext ctx ) throws Exception {
         // super.channelWritabilityChanged(ctx);
         log.warn(
                 "trigger hi-lo channel buffer，now channel status:[active {}, writable: {}]",
@@ -71,15 +80,15 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<RpcResponse>
     }
 
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+    public void exceptionCaught( ChannelHandlerContext ctx, Throwable cause ) throws Exception {
         log.error("error occurred while invoking, error information:", cause);
         ctx.close();
     }
 
     @Override
-    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+    public void userEventTriggered( ChannelHandlerContext ctx, Object evt ) throws Exception {
         if (evt instanceof IdleStateEvent) {
-            IdleState state = ((IdleStateEvent) evt).state();
+            IdleState state = ( (IdleStateEvent) evt ).state();
             // 客户端 没有发送 数据了，设置 写超时总会被 触发，从而 发送心跳包 给 服务端
             if (state == IdleState.WRITER_IDLE) {
                 log.debug("Send heartbeat packets to server[{}]", ctx.channel().remoteAddress());

@@ -46,24 +46,24 @@ public class RaftThreadPool {
         return new ScheduledThreadPoolExecutor(CUP, new NameThreadFactory());
     }
 
-    public static void scheduleAtFixedRate(Runnable r, long initDelay, long delayMills) {
+    public static void scheduleAtFixedRate( Runnable r, long initDelay, long delayMills ) {
         ss.scheduleAtFixedRate(r, initDelay, delayMills, TimeUnit.MILLISECONDS);
     }
 
-    public static void scheduleWithFixedDelay(Runnable r, long delayMills) {
+    public static void scheduleWithFixedDelay( Runnable r, long delayMills ) {
         ss.scheduleWithFixedDelay(r, 0, delayMills, TimeUnit.MILLISECONDS);
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> Future<T> submit(Callable r) {
+    public static <T> Future<T> submit( Callable r ) {
         return te.submit(r);
     }
 
-    public static void execute(Runnable r) {
+    public static void execute( Runnable r ) {
         te.execute(r);
     }
 
-    public static void execute(Runnable r, boolean sync) {
+    public static void execute( Runnable r, boolean sync ) {
         if (sync) {
             r.run();
         } else {
@@ -71,10 +71,17 @@ public class RaftThreadPool {
         }
     }
 
+    /**
+     * NameThreadFactory
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     static class NameThreadFactory implements ThreadFactory {
 
         @Override
-        public Thread newThread(Runnable r) {
+        public Thread newThread( Runnable r ) {
             Thread t = new RaftThread("Raft thread", r);
             t.setDaemon(true);
             t.setPriority(5);

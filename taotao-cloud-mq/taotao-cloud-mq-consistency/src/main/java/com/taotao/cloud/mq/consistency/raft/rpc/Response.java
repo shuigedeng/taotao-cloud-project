@@ -30,11 +30,11 @@ public class Response<T> implements Serializable {
 
     private T result;
 
-    public Response(T result) {
+    public Response( T result ) {
         this.result = result;
     }
 
-    private Response(Builder builder) {
+    private Response( Builder builder ) {
         setResult((T) builder.result);
     }
 
@@ -55,13 +55,21 @@ public class Response<T> implements Serializable {
         return "Response{" + "result=" + result + '}';
     }
 
+    /**
+     * Builder
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static final class Builder {
 
         private Object result;
 
-        private Builder() {}
+        private Builder() {
+        }
 
-        public Builder result(Object val) {
+        public Builder result( Object val ) {
             result = val;
             return this;
         }

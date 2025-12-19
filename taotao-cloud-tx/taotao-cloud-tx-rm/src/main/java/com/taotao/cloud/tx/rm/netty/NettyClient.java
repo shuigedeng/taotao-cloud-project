@@ -22,11 +22,20 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
+/**
+ * NettyClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class NettyClient implements InitializingBean {
 
@@ -40,7 +49,7 @@ public class NettyClient implements InitializingBean {
     }
 
     // 根据IP、端口地址，向服务端注册客户端
-    public void start(String host, int port) {
+    public void start( String host, int port ) {
         client = new NettyClientHandler();
         Bootstrap bootstrap = new Bootstrap();
         EventLoopGroup group = new NioEventLoopGroup();
@@ -56,7 +65,7 @@ public class NettyClient implements InitializingBean {
         }
     }
 
-    public void send(JSONObject sendData) {
+    public void send( JSONObject sendData ) {
         try {
             client.sendData(sendData);
         } catch (Exception e) {

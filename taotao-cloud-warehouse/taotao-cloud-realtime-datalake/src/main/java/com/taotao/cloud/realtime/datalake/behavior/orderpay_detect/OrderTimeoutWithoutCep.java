@@ -19,7 +19,9 @@ package com.taotao.cloud.realtime.datalake.behavior.orderpay_detect;
 import com.taotao.cloud.realtime.behavior.analysis.orderpay_detect.OrderPayTimeout;
 import com.taotao.cloud.realtime.behavior.analysis.orderpay_detect.beans.OrderEvent;
 import com.taotao.cloud.realtime.behavior.analysis.orderpay_detect.beans.OrderResult;
+
 import java.net.URL;
+
 import org.apache.flink.api.common.state.ValueState;
 import org.apache.flink.api.common.state.ValueStateDescriptor;
 import org.apache.flink.configuration.Configuration;
@@ -32,12 +34,21 @@ import org.apache.flink.streaming.api.functions.timestamps.AscendingTimestampExt
 import org.apache.flink.util.Collector;
 import org.apache.flink.util.OutputTag;
 
+/**
+ * OrderTimeoutWithoutCep
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class OrderTimeoutWithoutCep {
+
     // 定义超时事件的侧输出流标签
     private static final OutputTag<OrderResult> orderTimeoutTag =
-            new OutputTag<OrderResult>("order-timeout") {};
+            new OutputTag<OrderResult>("order-timeout") {
+            };
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
         env.setParallelism(1);
@@ -58,7 +69,7 @@ public class OrderTimeoutWithoutCep {
                         .assignTimestampsAndWatermarks(
                                 new AscendingTimestampExtractor<OrderEvent>() {
                                     @Override
-                                    public long extractAscendingTimestamp(OrderEvent element) {
+                                    public long extractAscendingTimestamp( OrderEvent element ) {
                                         return element.getTimestamp() * 1000L;
                                     }
                                 });
@@ -76,6 +87,7 @@ public class OrderTimeoutWithoutCep {
     // 实现自定义KeyedProcessFunction
     public static class OrderPayMatchDetect
             extends KeyedProcessFunction<Long, OrderEvent, OrderResult> {
+
         // 定义状态，保存之前点单是否已经来过create、pay的事件
         ValueState<Boolean> isPayedState;
         ValueState<Boolean> isCreatedState;
@@ -83,7 +95,7 @@ public class OrderTimeoutWithoutCep {
         ValueState<Long> timerTsState;
 
         @Override
-        public void open(Configuration parameters) throws Exception {
+        public void open( Configuration parameters ) throws Exception {
             isPayedState =
                     getRuntimeContext()
                             .getState(new ValueStateDescriptor<Boolean>("is-payed", Boolean.class));
@@ -97,7 +109,7 @@ public class OrderTimeoutWithoutCep {
         }
 
         @Override
-        public void processElement(OrderEvent value, Context ctx, Collector<OrderResult> out)
+        public void processElement( OrderEvent value, Context ctx, Collector<OrderResult> out )
                 throws Exception {
             // 先获取当前状态
             Boolean isPayed = isPayedState.value();
@@ -117,7 +129,7 @@ public class OrderTimeoutWithoutCep {
                     ctx.timerService().deleteEventTimeTimer(timerTs);
                 } else {
                     // 1.2 如果没有支付过，注册15分钟后的定时器，开始等待支付事件
-                    Long ts = (value.getTimestamp() + 15 * 60) * 1000L;
+                    Long ts = ( value.getTimestamp() + 15 * 60 ) * 1000L;
                     ctx.timerService().registerEventTimeTimer(ts);
                     // 更新状态
                     timerTsState.update(ts);
@@ -152,7 +164,7 @@ public class OrderTimeoutWithoutCep {
         }
 
         @Override
-        public void onTimer(long timestamp, OnTimerContext ctx, Collector<OrderResult> out)
+        public void onTimer( long timestamp, OnTimerContext ctx, Collector<OrderResult> out )
                 throws Exception {
             // 定时器触发，说明一定有一个事件没来
             if (isPayedState.value()) {

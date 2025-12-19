@@ -16,14 +16,23 @@
 
 package com.taotao.cloud.realtime.datalake.behavior.market_analysis.beans;
 
+/**
+ * AdCountViewByProvince
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class AdCountViewByProvince {
+
     private String province;
     private String windowEnd;
     private Long count;
 
-    public AdCountViewByProvince() {}
+    public AdCountViewByProvince() {
+    }
 
-    public AdCountViewByProvince(String province, String windowEnd, Long count) {
+    public AdCountViewByProvince( String province, String windowEnd, Long count ) {
         this.province = province;
         this.windowEnd = windowEnd;
         this.count = count;
@@ -33,7 +42,7 @@ public class AdCountViewByProvince {
         return province;
     }
 
-    public void setProvince(String province) {
+    public void setProvince( String province ) {
         this.province = province;
     }
 
@@ -41,7 +50,7 @@ public class AdCountViewByProvince {
         return windowEnd;
     }
 
-    public void setWindowEnd(String windowEnd) {
+    public void setWindowEnd( String windowEnd ) {
         this.windowEnd = windowEnd;
     }
 
@@ -49,7 +58,7 @@ public class AdCountViewByProvince {
         return count;
     }
 
-    public void setCount(Long count) {
+    public void setCount( Long count ) {
         this.count = count;
     }
 

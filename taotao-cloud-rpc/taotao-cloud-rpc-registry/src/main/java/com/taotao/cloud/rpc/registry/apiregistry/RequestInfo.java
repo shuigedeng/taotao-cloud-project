@@ -19,17 +19,26 @@ package com.taotao.cloud.rpc.registry.apiregistry;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * RequestInfo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class RequestInfo {
+
     String appName;
     Map<String, String> header = new HashMap<>();
     String url;
     byte[] body;
     String method;
 
-    public RequestInfo() {}
+    public RequestInfo() {
+    }
 
     public RequestInfo(
-            String appName, Map<String, String> header, String url, byte[] body, String method) {
+            String appName, Map<String, String> header, String url, byte[] body, String method ) {
         this.appName = appName;
         this.header = header;
         this.url = url;
@@ -41,7 +50,7 @@ public class RequestInfo {
         return appName;
     }
 
-    public void setAppName(String appName) {
+    public void setAppName( String appName ) {
         this.appName = appName;
     }
 
@@ -49,7 +58,7 @@ public class RequestInfo {
         return header;
     }
 
-    public void setHeader(Map<String, String> header) {
+    public void setHeader( Map<String, String> header ) {
         this.header = header;
     }
 
@@ -57,7 +66,7 @@ public class RequestInfo {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl( String url ) {
         this.url = url;
     }
 
@@ -65,7 +74,7 @@ public class RequestInfo {
         return body;
     }
 
-    public void setBody(byte[] body) {
+    public void setBody( byte[] body ) {
         this.body = body;
     }
 
@@ -73,7 +82,7 @@ public class RequestInfo {
         return method;
     }
 
-    public void setMethod(String method) {
+    public void setMethod( String method ) {
         this.method = method;
     }
 }

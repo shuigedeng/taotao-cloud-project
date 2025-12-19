@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.DbUtil;
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.RandomUtil;
 import org.slf4j.Logger;
@@ -27,14 +28,23 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * PaymentGenerator
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class PaymentGenerator {
+
     private static final Logger logger = LoggerFactory.getLogger(PaymentGenerator.class);
     private static final int BATCH_SIZE = 500;
 
-    @Autowired private DbUtil dbUtil;
+    @Autowired
+    private DbUtil dbUtil;
 
-    public void generatePaymentData(int count) {
+    public void generatePaymentData( int count ) {
         String sql =
                 "INSERT INTO payment_info (id, out_trade_no, order_id, user_id, payment_type, "
                         + "trade_no, total_amount, subject, payment_status, create_time, callback_time, "
@@ -65,19 +75,19 @@ public class PaymentGenerator {
                         "{\"trade_no\":\"" + tradeNo + "\",\"status\":\"success\"}";
 
                 params.add(
-                        new Object[] {
-                            id,
-                            outTradeNo,
-                            orderId,
-                            userId,
-                            paymentType,
-                            tradeNo,
-                            totalAmount,
-                            subject,
-                            paymentStatus,
-                            now,
-                            callbackTime,
-                            callbackContent
+                        new Object[]{
+                                id,
+                                outTradeNo,
+                                orderId,
+                                userId,
+                                paymentType,
+                                tradeNo,
+                                totalAmount,
+                                subject,
+                                paymentStatus,
+                                now,
+                                callbackTime,
+                                callbackContent
                         });
             }
 

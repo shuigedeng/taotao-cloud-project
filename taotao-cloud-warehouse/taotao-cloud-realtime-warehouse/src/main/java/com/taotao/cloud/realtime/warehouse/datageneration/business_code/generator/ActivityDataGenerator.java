@@ -18,22 +18,33 @@ package com.taotao.cloud.realtime.warehouse.datageneration.business_code.generat
 
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.DbUtil;
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.RandomUtil;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * ActivityDataGenerator
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class ActivityDataGenerator {
+
     private static final Logger logger = LoggerFactory.getLogger(ActivityDataGenerator.class);
 
-    @Autowired private DbUtil dbUtil;
+    @Autowired
+    private DbUtil dbUtil;
 
-    public void generateActivityData(int activityCount, int skuCount) {
+    public void generateActivityData( int activityCount, int skuCount ) {
         logger.info("开始生成活动数据...");
 
         logger.info("正在更新 activity_info 表...");
@@ -51,7 +62,7 @@ public class ActivityDataGenerator {
         logger.info("活动数据生成完成");
     }
 
-    private void generateActivityInfo(int count) {
+    private void generateActivityInfo( int count ) {
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM activity_info";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
 
@@ -67,20 +78,20 @@ public class ActivityDataGenerator {
             LocalDateTime endTime = startTime.plusDays(RandomUtil.generateNumber(3, 7));
 
             params.add(
-                    new Object[] {
-                        id,
-                        "活动" + id,
-                        RandomUtil.generateNumber(1, 3), // 活动类型：1-满减，2-折扣，3-秒杀
-                        "活动描述" + id,
-                        startTime,
-                        endTime,
-                        now
+                    new Object[]{
+                            id,
+                            "活动" + id,
+                            RandomUtil.generateNumber(1, 3), // 活动类型：1-满减，2-折扣，3-秒杀
+                            "活动描述" + id,
+                            startTime,
+                            endTime,
+                            now
                     });
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateActivityRule(int count) {
+    private void generateActivityRule( int count ) {
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM activity_rule";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
 
@@ -98,20 +109,20 @@ public class ActivityDataGenerator {
             int benefitLevel = RandomUtil.generateNumber(1, 3);
 
             params.add(
-                    new Object[] {
-                        id,
-                        RandomUtil.generateNumber(1, 10), // 关联已存在的活动
-                        conditionAmount,
-                        conditionNum,
-                        benefitAmount,
-                        benefitDiscount,
-                        benefitLevel
+                    new Object[]{
+                            id,
+                            RandomUtil.generateNumber(1, 10), // 关联已存在的活动
+                            conditionAmount,
+                            conditionNum,
+                            benefitAmount,
+                            benefitDiscount,
+                            benefitLevel
                     });
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateActivitySku(int count) {
+    private void generateActivitySku( int count ) {
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM activity_sku";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
 
@@ -122,17 +133,17 @@ public class ActivityDataGenerator {
         for (int i = 0; i < count; i++) {
             int id = startId + i;
             params.add(
-                    new Object[] {
-                        id,
-                        RandomUtil.generateNumber(1, 10), // 关联已存在的活动
-                        RandomUtil.generateNumber(1, 100), // 关联已存在的SKU
-                        LocalDateTime.now()
+                    new Object[]{
+                            id,
+                            RandomUtil.generateNumber(1, 10), // 关联已存在的活动
+                            RandomUtil.generateNumber(1, 100), // 关联已存在的SKU
+                            LocalDateTime.now()
                     });
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateSeckillGoods(int count) {
+    private void generateSeckillGoods( int count ) {
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM seckill_goods";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
 
@@ -154,22 +165,22 @@ public class ActivityDataGenerator {
             int num = RandomUtil.generateNumber(100, 1000);
 
             params.add(
-                    new Object[] {
-                        id,
-                        RandomUtil.generateNumber(1, 100), // 关联已存在的SPU
-                        RandomUtil.generateNumber(1, 1000), // 关联已存在的SKU
-                        "秒杀商品" + id,
-                        "秒杀商品" + id + "的详细描述",
-                        price,
-                        costPrice,
-                        now,
-                        checkTime,
-                        1, // 状态：1-待审核
-                        startTime,
-                        endTime,
-                        num,
-                        num, // 初始库存等于总数量
-                        "http://example.com/seckill/" + id + ".jpg"
+                    new Object[]{
+                            id,
+                            RandomUtil.generateNumber(1, 100), // 关联已存在的SPU
+                            RandomUtil.generateNumber(1, 1000), // 关联已存在的SKU
+                            "秒杀商品" + id,
+                            "秒杀商品" + id + "的详细描述",
+                            price,
+                            costPrice,
+                            now,
+                            checkTime,
+                            1, // 状态：1-待审核
+                            startTime,
+                            endTime,
+                            num,
+                            num, // 初始库存等于总数量
+                            "http://example.com/seckill/" + id + ".jpg"
                     });
         }
         dbUtil.batchInsert(sql, params);

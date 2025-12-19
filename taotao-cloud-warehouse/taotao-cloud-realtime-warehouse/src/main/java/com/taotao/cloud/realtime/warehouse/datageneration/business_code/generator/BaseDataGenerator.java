@@ -18,23 +18,35 @@ package com.taotao.cloud.realtime.warehouse.datageneration.business_code.generat
 
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.DbUtil;
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.RandomUtil;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * BaseDataGenerator
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class BaseDataGenerator {
+
     private static final Logger logger = LoggerFactory.getLogger(BaseDataGenerator.class);
 
-    @Autowired private DbUtil dbUtil;
+    @Autowired
+    private DbUtil dbUtil;
 
-    @Autowired private RandomUtil randomUtil;
+    @Autowired
+    private RandomUtil randomUtil;
 
-    public void generateBaseData(int batchSize) {
+    public void generateBaseData( int batchSize ) {
         generateCategory1(batchSize);
         generateCategory2(batchSize);
         generateCategory3(batchSize);
@@ -48,7 +60,7 @@ public class BaseDataGenerator {
         generateFrontendParam();
     }
 
-    private void generateCategory1(int batchSize) {
+    private void generateCategory1( int batchSize ) {
         logger.info("正在更新 base_category1 表...");
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM base_category1";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -58,12 +70,12 @@ public class BaseDataGenerator {
         List<Object[]> params = new ArrayList<>();
         for (int i = 0; i < batchSize; i++) {
             int id = startId + i;
-            params.add(new Object[] {id, "一级分类" + id});
+            params.add(new Object[]{id, "一级分类" + id});
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateCategory2(int batchSize) {
+    private void generateCategory2( int batchSize ) {
         logger.info("正在更新 base_category2 表...");
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM base_category2";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -74,14 +86,14 @@ public class BaseDataGenerator {
         for (int i = 0; i < batchSize; i++) {
             int id = startId + i;
             params.add(
-                    new Object[] {
-                        id, "二级分类" + id, randomUtil.generateNumber(1, 100) // 关联已存在的一级分类
+                    new Object[]{
+                            id, "二级分类" + id, randomUtil.generateNumber(1, 100) // 关联已存在的一级分类
                     });
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateCategory3(int batchSize) {
+    private void generateCategory3( int batchSize ) {
         logger.info("正在更新 base_category3 表...");
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM base_category3";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -92,14 +104,14 @@ public class BaseDataGenerator {
         for (int i = 0; i < batchSize; i++) {
             int id = startId + i;
             params.add(
-                    new Object[] {
-                        id, "三级分类" + id, randomUtil.generateNumber(1, 100) // 关联已存在的二级分类
+                    new Object[]{
+                            id, "三级分类" + id, randomUtil.generateNumber(1, 100) // 关联已存在的二级分类
                     });
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateTrademark(int batchSize) {
+    private void generateTrademark( int batchSize ) {
         logger.info("正在更新 base_trademark 表...");
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM base_trademark";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -109,12 +121,12 @@ public class BaseDataGenerator {
         List<Object[]> params = new ArrayList<>();
         for (int i = 0; i < batchSize; i++) {
             int id = startId + i;
-            params.add(new Object[] {id, "品牌" + id});
+            params.add(new Object[]{id, "品牌" + id});
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateAttrInfo(int batchSize) {
+    private void generateAttrInfo( int batchSize ) {
         logger.info("正在更新 base_attr_info 表...");
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM base_attr_info";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -128,17 +140,17 @@ public class BaseDataGenerator {
         for (int i = 0; i < batchSize; i++) {
             int id = startId + i;
             params.add(
-                    new Object[] {
-                        id,
-                        attrNames[i % attrNames.length],
-                        randomUtil.generateNumber(1, 100), // 关联已存在的分类
-                        randomUtil.generateNumber(1, 3)
+                    new Object[]{
+                            id,
+                            attrNames[i % attrNames.length],
+                            randomUtil.generateNumber(1, 100), // 关联已存在的分类
+                            randomUtil.generateNumber(1, 3)
                     });
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateAttrValue(int batchSize) {
+    private void generateAttrValue( int batchSize ) {
         logger.info("正在更新 base_attr_value 表...");
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM base_attr_value";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -151,8 +163,8 @@ public class BaseDataGenerator {
         for (int i = 0; i < batchSize; i++) {
             int id = startId + i;
             params.add(
-                    new Object[] {
-                        id, colors[i % colors.length], randomUtil.generateNumber(1, 100) // 关联已存在的属性
+                    new Object[]{
+                            id, colors[i % colors.length], randomUtil.generateNumber(1, 100) // 关联已存在的属性
                     });
         }
         dbUtil.batchInsert(sql, params);
@@ -170,12 +182,12 @@ public class BaseDataGenerator {
 
         for (int i = 0; i < saleAttrs.length; i++) {
             int id = startId + i;
-            params.add(new Object[] {id, saleAttrs[i]});
+            params.add(new Object[]{id, saleAttrs[i]});
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateProvince(int batchSize) {
+    private void generateProvince( int batchSize ) {
         logger.info("正在更新 base_province 表...");
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM base_province";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -188,13 +200,13 @@ public class BaseDataGenerator {
         for (int i = 0; i < batchSize; i++) {
             int id = startId + i;
             params.add(
-                    new Object[] {
-                        id,
-                        randomUtil.PROVINCES[i % randomUtil.PROVINCES.length],
-                        randomUtil.generateNumber(1, 7), // 关联已存在的地区
-                        randomUtil.generateNumber(100000, 999999),
-                        "CN-" + String.format("%02d", id),
-                        "CN-" + String.format("%02d", id)
+                    new Object[]{
+                            id,
+                            randomUtil.PROVINCES[i % randomUtil.PROVINCES.length],
+                            randomUtil.generateNumber(1, 7), // 关联已存在的地区
+                            randomUtil.generateNumber(100000, 999999),
+                            "CN-" + String.format("%02d", id),
+                            "CN-" + String.format("%02d", id)
                     });
         }
         dbUtil.batchInsert(sql, params);
@@ -212,7 +224,7 @@ public class BaseDataGenerator {
 
         for (int i = 0; i < regions.length; i++) {
             int id = startId + i;
-            params.add(new Object[] {id, regions[i]});
+            params.add(new Object[]{id, regions[i]});
         }
         dbUtil.batchInsert(sql, params);
     }
@@ -227,23 +239,23 @@ public class BaseDataGenerator {
         LocalDateTime now = LocalDateTime.now();
 
         // 添加父级字典
-        params.add(new Object[] {1001, "年龄段", 0, now, now});
-        params.add(new Object[] {1002, "性别", 0, now, now});
-        params.add(new Object[] {1003, "支付方式", 0, now, now});
+        params.add(new Object[]{1001, "年龄段", 0, now, now});
+        params.add(new Object[]{1002, "性别", 0, now, now});
+        params.add(new Object[]{1003, "支付方式", 0, now, now});
 
         // 添加年龄段子项
-        params.add(new Object[] {1001001, "0-15岁", 1001, now, now});
-        params.add(new Object[] {1001002, "16-25岁", 1001, now, now});
-        params.add(new Object[] {1001003, "26-35岁", 1001, now, now});
+        params.add(new Object[]{1001001, "0-15岁", 1001, now, now});
+        params.add(new Object[]{1001002, "16-25岁", 1001, now, now});
+        params.add(new Object[]{1001003, "26-35岁", 1001, now, now});
 
         // 添加性别子项
-        params.add(new Object[] {1002001, "男", 1002, now, now});
-        params.add(new Object[] {1002002, "女", 1002, now, now});
+        params.add(new Object[]{1002001, "男", 1002, now, now});
+        params.add(new Object[]{1002002, "女", 1002, now, now});
 
         // 添加支付方式子项
-        params.add(new Object[] {1003001, "支付宝", 1003, now, now});
-        params.add(new Object[] {1003002, "微信", 1003, now, now});
-        params.add(new Object[] {1003003, "银联", 1003, now, now});
+        params.add(new Object[]{1003001, "支付宝", 1003, now, now});
+        params.add(new Object[]{1003002, "微信", 1003, now, now});
+        params.add(new Object[]{1003003, "银联", 1003, now, now});
 
         dbUtil.batchInsert(sql, params);
     }
@@ -256,7 +268,7 @@ public class BaseDataGenerator {
         String[] frontendParams = {"color", "size", "style", "season", "material"};
 
         for (String param : frontendParams) {
-            params.add(new Object[] {param});
+            params.add(new Object[]{param});
         }
         dbUtil.batchInsert(sql, params);
     }

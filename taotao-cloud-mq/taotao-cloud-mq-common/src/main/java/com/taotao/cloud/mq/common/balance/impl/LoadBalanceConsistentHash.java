@@ -22,18 +22,26 @@ import com.taotao.boot.common.support.hash.ConsistentHashingBs;
 import com.taotao.boot.common.support.hash.IConsistentHashing;
 import com.taotao.boot.common.support.hash.api.IHashCode;
 
+/**
+ * LoadBalanceConsistentHash
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class LoadBalanceConsistentHash<T extends IServer> extends AbstractLoadBalanceHash<T> {
-    public LoadBalanceConsistentHash(IHashCode hashCode) {
+
+    public LoadBalanceConsistentHash( IHashCode hashCode ) {
         super(hashCode);
     }
 
-    protected T doSelect(ILoadBalanceContext<T> context) {
+    protected T doSelect( ILoadBalanceContext<T> context ) {
         IConsistentHashing<T> consistentHashing =
                 ConsistentHashingBs.<T>newInstance()
                         .hashCode(this.hashCode)
                         .nodes(context.servers())
                         .build();
         String hashKey = context.hashKey();
-        return (T) (consistentHashing.get(hashKey));
+        return (T) ( consistentHashing.get(hashKey) );
     }
 }

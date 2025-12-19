@@ -18,13 +18,20 @@ package com.taotao.cloud.rpc.common.tmp;
 
 import java.util.List;
 
+/**
+ * LoadBalanceContext
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class LoadBalanceContext<T> {
 
     public static <T> LoadBalanceContext<T> newInstance() {
         return null;
     }
 
-    public LoadBalanceContext<T> servers(List<T> list) {
+    public LoadBalanceContext<T> servers( List<T> list ) {
         return null;
     }
 }

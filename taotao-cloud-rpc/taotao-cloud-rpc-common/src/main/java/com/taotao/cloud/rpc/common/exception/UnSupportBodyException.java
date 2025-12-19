@@ -16,13 +16,20 @@
 
 package com.taotao.cloud.rpc.common.exception;
 
+/**
+ * UnSupportBodyException
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class UnSupportBodyException extends RpcException {
 
     public UnSupportBodyException() {
         super();
     }
 
-    public UnSupportBodyException(String message) {
+    public UnSupportBodyException( String message ) {
         super(message);
     }
 }

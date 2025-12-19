@@ -19,6 +19,7 @@ package com.taotao.cloud.realtime.warehouse.datageneration.business_code.generat
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.DbUtil;
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.RandomUtil;
 import org.slf4j.Logger;
@@ -26,14 +27,23 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * WarehouseDataGenerator
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class WarehouseDataGenerator {
+
     private static final Logger logger = LoggerFactory.getLogger(WarehouseDataGenerator.class);
     private static final int BATCH_SIZE = 500;
 
-    @Autowired private DbUtil dbUtil;
+    @Autowired
+    private DbUtil dbUtil;
 
-    public void generateWarehouseData(int count) {
+    public void generateWarehouseData( int count ) {
         logger.info("开始生成仓库数据...");
 
         logger.info("正在更新 ware_info 表...");
@@ -51,7 +61,7 @@ public class WarehouseDataGenerator {
         logger.info("仓库数据生成完成");
     }
 
-    private void generateWareInfo(int count) {
+    private void generateWareInfo( int count ) {
         String sql = "INSERT INTO ware_info (id, name, address, areacode) VALUES (?, ?, ?, ?)";
 
         int remainingCount = count;
@@ -69,7 +79,7 @@ public class WarehouseDataGenerator {
                 String address = RandomUtil.generateAddress();
                 String areacode = String.format("%06d", RandomUtil.generateNumber(100000, 999999));
 
-                params.add(new Object[] {id, name, address, areacode});
+                params.add(new Object[]{id, name, address, areacode});
             }
 
             dbUtil.batchInsert(sql, params);
@@ -77,7 +87,7 @@ public class WarehouseDataGenerator {
         }
     }
 
-    private void generateWareSku(int count) {
+    private void generateWareSku( int count ) {
         String sql =
                 "INSERT INTO ware_sku (id, sku_id, warehouse_id, stock, stock_name, stock_locked) "
                         + "VALUES (?, ?, ?, ?, ?, ?)";
@@ -99,7 +109,7 @@ public class WarehouseDataGenerator {
                 String stockName = "库存" + id;
                 int stockLocked = RandomUtil.generateNumber(0, 100);
 
-                params.add(new Object[] {id, skuId, warehouseId, stock, stockName, stockLocked});
+                params.add(new Object[]{id, skuId, warehouseId, stock, stockName, stockLocked});
             }
 
             dbUtil.batchInsert(sql, params);
@@ -107,7 +117,7 @@ public class WarehouseDataGenerator {
         }
     }
 
-    private void generateWareOrderTask(int count) {
+    private void generateWareOrderTask( int count ) {
         String sql =
                 "INSERT INTO ware_order_task (id, order_id, consignee, consignee_tel, delivery_address, "
                         + "order_comment, payment_way, task_status, order_body, tracking_no, create_time, "
@@ -138,20 +148,20 @@ public class WarehouseDataGenerator {
                 String taskComment = "任务备注" + id;
 
                 params.add(
-                        new Object[] {
-                            id,
-                            orderId,
-                            consignee,
-                            consigneeTel,
-                            deliveryAddress,
-                            orderComment,
-                            paymentWay,
-                            taskStatus,
-                            orderBody,
-                            trackingNo,
-                            now,
-                            wareId,
-                            taskComment
+                        new Object[]{
+                                id,
+                                orderId,
+                                consignee,
+                                consigneeTel,
+                                deliveryAddress,
+                                orderComment,
+                                paymentWay,
+                                taskStatus,
+                                orderBody,
+                                trackingNo,
+                                now,
+                                wareId,
+                                taskComment
                         });
             }
 
@@ -160,7 +170,7 @@ public class WarehouseDataGenerator {
         }
     }
 
-    private void generateWareOrderTaskDetail(int count) {
+    private void generateWareOrderTaskDetail( int count ) {
         String sql =
                 "INSERT INTO ware_order_task_detail (id, sku_id, sku_name, sku_num, task_id, refund_status) "
                         + "VALUES (?, ?, ?, ?, ?, ?)";
@@ -182,7 +192,7 @@ public class WarehouseDataGenerator {
                 int taskId = RandomUtil.generateNumber(-10, 0); // 使用负数作为任务ID
                 String refundStatus = String.valueOf(RandomUtil.generateNumber(701, 706)); // 退款状态
 
-                params.add(new Object[] {id, skuId, skuName, skuNum, taskId, refundStatus});
+                params.add(new Object[]{id, skuId, skuName, skuNum, taskId, refundStatus});
             }
 
             dbUtil.batchInsert(sql, params);

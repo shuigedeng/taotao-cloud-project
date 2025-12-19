@@ -20,8 +20,10 @@ import tools.jackson.core.JsonGenerator;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.json.JsonMapper;
 import tools.jackson.databind.node.ObjectNode;
+
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
+
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import com.taotao.cloud.realtime.warehouse.datageneration.userlog_code.generator.UserLogGenerator;
@@ -38,9 +40,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+/**
+ * UserLogCommandRunner
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Configuration
 @Order(2)
 public class UserLogCommandRunner implements CommandLineRunner {
+
     private static final Logger logger = LoggerFactory.getLogger(UserLogCommandRunner.class);
     private static final JsonMapper jsonMapper = new JsonMapper();
 
@@ -53,12 +63,12 @@ public class UserLogCommandRunner implements CommandLineRunner {
     @Value("${generator.interval}")
     private long interval;
 
-	@Autowired
-	@Qualifier(value = "asyncThreadPoolTaskExecutor")
-	private ThreadPoolTaskExecutor threadPoolTaskExecutor;
+    @Autowired
+    @Qualifier(value = "asyncThreadPoolTaskExecutor")
+    private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
     @Override
-    public void run(String... args) {
+    public void run( String... args ) {
         Properties props = new Properties();
         props.put("bootstrap.servers", bootstrapServers);
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
@@ -81,61 +91,61 @@ public class UserLogCommandRunner implements CommandLineRunner {
                     "Failed to connect to Kafka: {}. Will print logs locally.", e.getMessage());
         }
 
-		KafkaProducer<String, String> finalProducer = producer;
-		boolean finalUseKafka = useKafka;
-		threadPoolTaskExecutor.submit(()->{
-			try {
+        KafkaProducer<String, String> finalProducer = producer;
+        boolean finalUseKafka = useKafka;
+        threadPoolTaskExecutor.submit(() -> {
+            try {
 
-				while (true) {
-					UserLog log = UserLogGenerator.generateLog();
-					String jsonLog = processNestedJson(log);
+                while (true) {
+                    UserLog log = UserLogGenerator.generateLog();
+                    String jsonLog = processNestedJson(log);
 
-					if (finalUseKafka && finalProducer != null) {
-						try {
-							finalProducer.send(
-									new ProducerRecord<>(topic, jsonLog),
-									(metadata, exception) -> {
-										if (exception != null) {
-											logger.error(
-												"Error sending message to Kafka",
-												exception);
-											System.out.println(
-												"Generated log (failed to send to Kafka): "
-													+ jsonLog);
-										} else {
-											logger.info(
-												"Message sent to partition {} with offset {}",
-												metadata.partition(),
-												metadata.offset());
-										}
-									})
-								.get(); // 使用get()来确保消息发送成功
-						} catch (InterruptedException | ExecutionException e) {
-							logger.error("Failed to send message to Kafka", e);
-							System.out.println("Generated log (failed to send to Kafka): " + jsonLog);
-						}
-					} else {
-						// 本地打印日志
-						System.out.println("Generated log (local print mode): " + jsonLog);
-					}
+                    if (finalUseKafka && finalProducer != null) {
+                        try {
+                            finalProducer.send(
+                                            new ProducerRecord<>(topic, jsonLog),
+                                            ( metadata, exception ) -> {
+                                                if (exception != null) {
+                                                    logger.error(
+                                                            "Error sending message to Kafka",
+                                                            exception);
+                                                    System.out.println(
+                                                            "Generated log (failed to send to Kafka): "
+                                                                    + jsonLog);
+                                                } else {
+                                                    logger.info(
+                                                            "Message sent to partition {} with offset {}",
+                                                            metadata.partition(),
+                                                            metadata.offset());
+                                                }
+                                            })
+                                    .get(); // 使用get()来确保消息发送成功
+                        } catch (InterruptedException | ExecutionException e) {
+                            logger.error("Failed to send message to Kafka", e);
+                            System.out.println("Generated log (failed to send to Kafka): " + jsonLog);
+                        }
+                    } else {
+                        // 本地打印日志
+                        System.out.println("Generated log (local print mode): " + jsonLog);
+                    }
 
-					Thread.sleep(interval);
-				}
-			} catch (Exception e) {
-				logger.error("Error in log generation", e);
-			} finally {
-				if (finalProducer != null) {
-					finalProducer.close();
-				}
-			}
-		});
+                    Thread.sleep(interval);
+                }
+            } catch (Exception e) {
+                logger.error("Error in log generation", e);
+            } finally {
+                if (finalProducer != null) {
+                    finalProducer.close();
+                }
+            }
+        });
 
     }
 
     /**
      * 处理嵌套的JSON字符串，避免转义
      */
-    private String processNestedJson(UserLog log) throws Exception {
+    private String processNestedJson( UserLog log ) throws Exception {
         // 先将对象转换为JSON节点
         JsonNode rootNode = jsonMapper.valueToTree(log);
 
@@ -145,7 +155,7 @@ public class UserLogCommandRunner implements CommandLineRunner {
             if (actionsStr != null && !actionsStr.isEmpty() && !actionsStr.equals("[]")) {
                 // 解析actions字符串为JSON数组
                 JsonNode actionsNode = jsonMapper.readTree(actionsStr);
-                ((ObjectNode) rootNode).set("actions", actionsNode);
+                ( (ObjectNode) rootNode ).set("actions", actionsNode);
             }
         }
 
@@ -155,7 +165,7 @@ public class UserLogCommandRunner implements CommandLineRunner {
             if (displaysStr != null && !displaysStr.isEmpty() && !displaysStr.equals("[]")) {
                 // 解析displays字符串为JSON数组
                 JsonNode displaysNode = jsonMapper.readTree(displaysStr);
-                ((ObjectNode) rootNode).set("displays", displaysNode);
+                ( (ObjectNode) rootNode ).set("displays", displaysNode);
             }
         }
 

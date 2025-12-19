@@ -23,17 +23,27 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.util.StringUtils;
+
 import java.io.IOException;
 
+/**
+ * ApiRegistryHealthFilter
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ApiRegistryHealthFilter implements Filter {
+
     @Override
     public void doFilter(
-            ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain)
+            ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain )
             throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String contextPath =
-                org.springframework.util.StringUtils.trimTrailingCharacter(
+                StringUtils.trimTrailingCharacter(
                         request.getContextPath(), '/');
         String uri = request.getRequestURI();
         /*下线apiRegistry,一般在k8s CICD中使用*/
@@ -65,7 +75,7 @@ public class ApiRegistryHealthFilter implements Filter {
         }
     }
 
-    private void write(HttpServletResponse response, String text) throws IOException {
+    private void write( HttpServletResponse response, String text ) throws IOException {
         response.setHeader("Content-type", "text/html;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().append(text);
@@ -74,5 +84,6 @@ public class ApiRegistryHealthFilter implements Filter {
     }
 
     @Override
-    public void destroy() {}
+    public void destroy() {
+    }
 }

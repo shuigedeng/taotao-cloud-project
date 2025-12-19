@@ -23,45 +23,54 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Random;
 import java.util.UUID;
+
 import org.springframework.stereotype.Component;
 
+/**
+ * RandomUtil
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class RandomUtil {
+
     private static final Random random = new Random();
     private static final String[] FIRST_NAMES = {"张", "王", "李", "赵", "刘", "陈", "杨", "黄", "周", "吴"};
     private static final String[] LAST_NAMES = {"伟", "芳", "娜", "秀英", "敏", "静", "丽", "强", "磊", "洋"};
     private static final String[] NICK_PREFIXES = {
-        "快乐", "阳光", "微笑", "温暖", "幸福", "美好", "甜蜜", "开心", "快乐", "幸福"
+            "快乐", "阳光", "微笑", "温暖", "幸福", "美好", "甜蜜", "开心", "快乐", "幸福"
     };
     private static final String[] NICK_SUFFIXES = {
-        "小天使", "小太阳", "小星星", "小月亮", "小彩虹", "小花朵", "小蝴蝶", "小蜜蜂", "小海豚", "小猫咪"
+            "小天使", "小太阳", "小星星", "小月亮", "小彩虹", "小花朵", "小蝴蝶", "小蜜蜂", "小海豚", "小猫咪"
     };
     private static final String[] PRODUCT_PREFIXES = {
-        "时尚", "经典", "潮流", "优雅", "简约", "现代", "复古", "奢华", "清新", "自然"
+            "时尚", "经典", "潮流", "优雅", "简约", "现代", "复古", "奢华", "清新", "自然"
     };
     private static final String[] PRODUCT_SUFFIXES = {
-        "连衣裙", "T恤", "衬衫", "外套", "裤子", "鞋子", "包包", "帽子", "围巾", "手套"
+            "连衣裙", "T恤", "衬衫", "外套", "裤子", "鞋子", "包包", "帽子", "围巾", "手套"
     };
     private static final String[] COLORS = {
-        "红色", "蓝色", "绿色", "黄色", "紫色", "粉色", "白色", "黑色", "灰色", "棕色"
+            "红色", "蓝色", "绿色", "黄色", "紫色", "粉色", "白色", "黑色", "灰色", "棕色"
     };
     private static final String[] BRANDS = {
-        "Nike",
-        "Adidas",
-        "Puma",
-        "New Balance",
-        "Under Armour",
-        "Reebok",
-        "Converse",
-        "Vans",
-        "Fila",
-        "Asics"
+            "Nike",
+            "Adidas",
+            "Puma",
+            "New Balance",
+            "Under Armour",
+            "Reebok",
+            "Converse",
+            "Vans",
+            "Fila",
+            "Asics"
     };
     public static final String[] PROVINCES = {
-        "北京", "上海", "广东", "江苏", "浙江", "山东", "河南", "四川", "湖北", "湖南"
+            "北京", "上海", "广东", "江苏", "浙江", "山东", "河南", "四川", "湖北", "湖南"
     };
     public static final String[] CITIES = {
-        "北京", "上海", "广州", "深圳", "杭州", "南京", "成都", "武汉", "长沙", "郑州"
+            "北京", "上海", "广州", "深圳", "杭州", "南京", "成都", "武汉", "长沙", "郑州"
     };
 
     public static String generateName() {
@@ -123,12 +132,12 @@ public class RandomUtil {
                 + PRODUCT_SUFFIXES[random.nextInt(PRODUCT_SUFFIXES.length)];
     }
 
-    public static BigDecimal generatePrice(double min, double max) {
-        double randomValue = min + (max - min) * random.nextDouble();
+    public static BigDecimal generatePrice( double min, double max ) {
+        double randomValue = min + ( max - min ) * random.nextDouble();
         return new BigDecimal(randomValue).setScale(2, RoundingMode.HALF_UP);
     }
 
-    public static int generateNumber(int min, int max) {
+    public static int generateNumber( int min, int max ) {
         return random.nextInt(max - min + 1) + min;
     }
 
@@ -169,7 +178,7 @@ public class RandomUtil {
         return categories[random.nextInt(categories.length)];
     }
 
-    public static double generateDouble(int min, int max) {
-        return min + (max - min) * random.nextDouble();
+    public static double generateDouble( int min, int max ) {
+        return min + ( max - min ) * random.nextDouble();
     }
 }

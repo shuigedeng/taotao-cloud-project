@@ -19,6 +19,7 @@ package com.taotao.cloud.realtime.warehouse.datageneration.business_code.generat
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.DbUtil;
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.RandomUtil;
 import org.slf4j.Logger;
@@ -26,13 +27,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * ProductDetailGenerator
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class ProductDetailGenerator {
+
     private static final Logger logger = LoggerFactory.getLogger(ProductDetailGenerator.class);
 
-    @Autowired private DbUtil dbUtil;
+    @Autowired
+    private DbUtil dbUtil;
 
-    public void generateProductDetailData(int skuCount, int spuCount) {
+    public void generateProductDetailData( int skuCount, int spuCount ) {
         generateSkuAttrValue(skuCount);
         generateSkuImage(skuCount);
         generateSkuSaleAttrValue(skuCount);
@@ -42,7 +52,7 @@ public class ProductDetailGenerator {
         generateSpuSaleAttrValue(spuCount);
     }
 
-    private void generateSkuAttrValue(int count) {
+    private void generateSkuAttrValue( int count ) {
         // 获取最大ID
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM sku_attr_value";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -53,7 +63,7 @@ public class ProductDetailGenerator {
 
         List<Object[]> params = new ArrayList<>();
         for (int i = 1; i <= count; i++) {
-            int baseId = startId + (i - 1) * 4; // 每个SKU生成4个属性值，所以ID要间隔4
+            int baseId = startId + ( i - 1 ) * 4; // 每个SKU生成4个属性值，所以ID要间隔4
 
             // 为每个SKU生成4个属性值
             for (int j = 0; j < 4; j++) {
@@ -76,13 +86,13 @@ public class ProductDetailGenerator {
                         attrId = 107;
                         valueId = RandomUtil.generateNumber(177, 179);
                         attrName = "二级手机";
-                        valueName = valueId == 177 ? "小米" : (valueId == 178 ? "华为" : "苹果");
+                        valueName = valueId == 177 ? "小米" : ( valueId == 178 ? "华为" : "苹果" );
                         break;
                     case 2: // 运行内存
                         attrId = 23;
                         valueId = RandomUtil.generateNumber(14, 169);
                         attrName = "运行内存";
-                        valueName = valueId == 14 ? "4G" : (valueId == 83 ? "8G" : "6G");
+                        valueName = valueId == 14 ? "4G" : ( valueId == 83 ? "8G" : "6G" );
                         break;
                     default: // 机身内存
                         attrId = 24;
@@ -92,13 +102,13 @@ public class ProductDetailGenerator {
                         break;
                 }
 
-                params.add(new Object[] {id, attrId, valueId, skuId, attrName, valueName});
+                params.add(new Object[]{id, attrId, valueId, skuId, attrName, valueName});
             }
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateSkuImage(int count) {
+    private void generateSkuImage( int count ) {
         // 获取最大ID
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM sku_image";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -116,12 +126,12 @@ public class ProductDetailGenerator {
             int spuImgId = RandomUtil.generateNumber(1, 96); // 根据spu_image表的实际数据
             String isDefault = i == 1 ? "1" : "0";
 
-            params.add(new Object[] {id, skuId, imgName, imgUrl, spuImgId, isDefault});
+            params.add(new Object[]{id, skuId, imgName, imgUrl, spuImgId, isDefault});
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateSkuSaleAttrValue(int count) {
+    private void generateSkuSaleAttrValue( int count ) {
         // 获取最大ID
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM sku_sale_attr_value";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -132,7 +142,7 @@ public class ProductDetailGenerator {
 
         List<Object[]> params = new ArrayList<>();
         for (int i = 1; i <= count; i++) {
-            int baseId = startId + (i - 1) * 2; // 每个SKU生成2个销售属性值，所以ID要间隔2
+            int baseId = startId + ( i - 1 ) * 2; // 每个SKU生成2个销售属性值，所以ID要间隔2
             int skuId = RandomUtil.generateNumber(1, 35); // 根据sku_info表的实际数据
             int spuId = RandomUtil.generateNumber(1, 12); // 根据spu_info表的实际数据
 
@@ -153,21 +163,21 @@ public class ProductDetailGenerator {
                 }
 
                 params.add(
-                        new Object[] {
-                            id,
-                            skuId,
-                            spuId,
-                            saleAttrValueId,
-                            saleAttrId,
-                            saleAttrName,
-                            saleAttrValueName
+                        new Object[]{
+                                id,
+                                skuId,
+                                spuId,
+                                saleAttrValueId,
+                                saleAttrId,
+                                saleAttrName,
+                                saleAttrValueName
                         });
             }
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateSpuImage(int count) {
+    private void generateSpuImage( int count ) {
         // 获取最大ID
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM spu_image";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -181,12 +191,12 @@ public class ProductDetailGenerator {
             String imgName = "SPU图片" + i;
             String imgUrl = "http://example.com/images/spu" + spuId + "_" + i + ".jpg";
 
-            params.add(new Object[] {id, spuId, imgName, imgUrl});
+            params.add(new Object[]{id, spuId, imgName, imgUrl});
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateSpuPoster(int count) {
+    private void generateSpuPoster( int count ) {
         // 获取最大ID
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM spu_poster";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -203,12 +213,12 @@ public class ProductDetailGenerator {
             String imgUrl = "http://example.com/posters/spu" + spuId + "_" + i + ".jpg";
             LocalDateTime now = LocalDateTime.now();
 
-            params.add(new Object[] {id, spuId, imgName, imgUrl, now, now, 0});
+            params.add(new Object[]{id, spuId, imgName, imgUrl, now, now, 0});
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateSpuSaleAttr(int count) {
+    private void generateSpuSaleAttr( int count ) {
         // 获取最大ID
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM spu_sale_attr";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -224,12 +234,12 @@ public class ProductDetailGenerator {
             int baseSaleAttrId = RandomUtil.generateNumber(1, 4);
             String saleAttrName = "销售属性" + baseSaleAttrId;
 
-            params.add(new Object[] {id, spuId, baseSaleAttrId, saleAttrName});
+            params.add(new Object[]{id, spuId, baseSaleAttrId, saleAttrName});
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateSpuSaleAttrValue(int count) {
+    private void generateSpuSaleAttrValue( int count ) {
         // 获取最大ID
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM spu_sale_attr_value";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -246,12 +256,12 @@ public class ProductDetailGenerator {
             String saleAttrValueName = "销售属性值" + id;
             String saleAttrName = getSaleAttrName(baseSaleAttrId);
 
-            params.add(new Object[] {id, spuId, baseSaleAttrId, saleAttrValueName, saleAttrName});
+            params.add(new Object[]{id, spuId, baseSaleAttrId, saleAttrValueName, saleAttrName});
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private String getSaleAttrName(int baseSaleAttrId) {
+    private String getSaleAttrName( int baseSaleAttrId ) {
         switch (baseSaleAttrId) {
             case 1:
                 return "颜色";

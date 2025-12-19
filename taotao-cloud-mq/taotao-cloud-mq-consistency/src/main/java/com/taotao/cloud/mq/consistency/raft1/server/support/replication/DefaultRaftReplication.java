@@ -29,16 +29,25 @@ import com.taotao.cloud.mq.consistency.raft1.server.dto.NodeInfoContext;
 import com.taotao.cloud.mq.consistency.raft1.server.dto.PeerInfoDto;
 import com.taotao.cloud.mq.consistency.raft1.server.support.concurrent.RaftThreadPool;
 import com.taotao.cloud.mq.consistency.raft1.server.support.peer.PeerManager;
+
 import java.util.LinkedList;
 import java.util.concurrent.Future;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * DefaultRaftReplication
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class DefaultRaftReplication implements IRaftReplication {
 
     private static final Logger log = LoggerFactory.getLogger(DefaultNode.class);
 
-    private LogEntry getPreLog(NodeInfoContext nodeInfoContext, LogEntry logEntry) {
+    private LogEntry getPreLog( NodeInfoContext nodeInfoContext, LogEntry logEntry ) {
         final LogManager logManager = nodeInfoContext.getLogManager();
         LogEntry entry = logManager.read(logEntry.getIndex() - 1);
 
@@ -51,7 +60,7 @@ public class DefaultRaftReplication implements IRaftReplication {
 
     @Override
     public Future<Boolean> replication(
-            NodeInfoContext nodeInfoContext, PeerInfoDto peer, LogEntry entry) {
+            NodeInfoContext nodeInfoContext, PeerInfoDto peer, LogEntry entry ) {
         final RpcClient rpcClient = nodeInfoContext.getRpcClient();
         final PeerManager peerManager = nodeInfoContext.getPeerManager();
         final LogManager logManager = nodeInfoContext.getLogManager();

@@ -241,15 +241,23 @@ cn.fyupeng.nacos.cluster.nodes=192.168.43.33:8847|192.168.43.33.1:8848;192.168.4
 
 使用注解`@Reference`获取代理必须将该注解所在类传递给代理，否则该注解将失效
 ```java
+/**
+ * Client
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class Client {
-  private static RandomLoadBalancer randomLoadBalancer = new RandomLoadBalancer();
-  private static NettyClient nettyClient = new NettyClient(randomLoadBalancer, CommonSerializer.HESSIAN_SERIALIZER);
-  private static RpcClientProxy rpcClientProxy = new RpcClientProxy(nettyClient);
-  /**
-   * 传递 Client.class 给代理，代理才能捕获到注解 @Reference
-   */
-  @Reference(name = "helloService", group = "1.0.0", retries = 2, timeout = 2000, asyncTime = 18000)
-  private static HelloWorldService service = rpcClientProxy.getProxy(HelloWorldService.class, Client.class);
+
+    private static RandomLoadBalancer randomLoadBalancer = new RandomLoadBalancer();
+    private static NettyClient nettyClient = new NettyClient(randomLoadBalancer, CommonSerializer.HESSIAN_SERIALIZER);
+    private static RpcClientProxy rpcClientProxy = new RpcClientProxy(nettyClient);
+    /**
+     * 传递 Client.class 给代理，代理才能捕获到注解 @Reference
+     */
+    @Reference(name = "helloService", group = "1.0.0", retries = 2, timeout = 2000, asyncTime = 18000)
+    private static HelloWorldService service = rpcClientProxy.getProxy(HelloWorldService.class, Client.class);
 }
 ```
 
@@ -331,19 +339,35 @@ public interface HelloService {
 ### 4. 启动服务
 - 真实服务
 ```java
+/**
+ * HelloServiceImpl
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Service
 public class HelloServiceImpl implements HelloService {
+
     @Override
-    public String sayHello(String message) {
+    public String sayHello( String message ) {
         return "hello, here is service！";
     }
 }
 ```
 - 服务启动器
 ```java
+/**
+ * MyServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @ServiceScan
 public class MyServer {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         try {
             NettyServer nettyServer = new NettyServer("127.0.0.1", 5000, SerializerCode.KRYO.getCode());
             nettyServer.start();
@@ -364,8 +388,16 @@ public class MyServer {
 - 直连
 - 使用负载均衡
 ```java
+/**
+ * MyClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MyClient {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         RoundRobinLoadBalancer roundRobinLoadBalancer = new RoundRobinLoadBalancer();
         NettyClient nettyClient = new NettyClient(roundRobinLoadBalancer, CommonSerializer.KRYO_SERIALIZER);
 
@@ -509,20 +541,36 @@ cn.fyupeng.nacos.cluster.nodes=192.168.10.1:8847,192.168.10.1:8848,192.168.10.1:
 
 > 示例：
 ```java
-private static RandomLoadBalancer randomLoadBalancer = new RandomLoadBalancer();
-    private static NettyClient nettyClient = new NettyClient(randomLoadBalancer, CommonSerializer.KRYO_SERIALIZER);
-    private static RpcClientProxy rpcClientProxy = new RpcClientProxy(nettyClient);
+/**
+ * README.CN.md
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
+class private static RandomLoadBalancer randomLoadBalancer = new RandomLoadBalancer();
+private static NettyClient nettyClient = new NettyClient(randomLoadBalancer, CommonSerializer.KRYO_SERIALIZER);
+private static RpcClientProxy rpcClientProxy = new RpcClientProxy(nettyClient);
 
-    @Reference(retries = 2, timeout = 3000, asyncTime = 5000)
-    private static HelloWorldService service = rpcClientProxy.getProxy(HelloWorldService.class, Client.class);
+@Reference(retries = 2, timeout = 3000, asyncTime = 5000)
+private static HelloWorldService service = rpcClientProxy.getProxy(HelloWorldService.class, Client.class){
+}
 ```
 重试的实现也不难，采用`代理 + for + 参数`来实现即可。
 > 核心代码实现：
 ```java
-for (int i = 0; i <= retries; i++) {
+for( /**
+ * README.CN.md
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
+class int i = 0;i <=retries;i++){
     long startTime = System.currentTimeMillis();
 
-    CompletableFuture<RpcResponse> completableFuture = (CompletableFuture<RpcResponse>) rpcClient.sendRequest(rpcRequest);
+    CompletableFuture<RpcResponse> completableFuture = (CompletableFuture<RpcResponse>) rpcClient.sendRequest(
+            rpcRequest);
     try {
         rpcResponse = completableFuture.get(asyncTime, TimeUnit.MILLISECONDS);
     } catch (TimeoutException e) {
@@ -547,6 +595,7 @@ for (int i = 0; i <= retries; i++) {
             return rpcResponse.getData();
         }
     }
+}{
 }
 ```
 
@@ -660,125 +709,140 @@ LRedisHelper
 这里读取之快又涉及到零拷贝，数据在用户态是不用拷贝的，直接透明使用。
 
 ```java
+/**
+ * NettyServerHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> {
 
     private static RequestHandler requestHandler;
-  
+
     /**
      * Lettuce 分布式缓存采用 HESSIAN 序列化方式
      */
     private static CommonSerializer serializer = CommonSerializer.getByCode(CommonSerializer.HESSIAN_SERIALIZER);
-  
+
     /**
      * netty 服务端采用 线程池处理耗时任务
      */
     private static final EventExecutorGroup group = new DefaultEventExecutorGroup(16);
-  
+
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, RpcRequest msg) throws Exception {
-      /**
-       * 心跳包 只 作为 检测包，不做处理
-       */
-      if (msg.getHeartBeat()) {
-        log.debug("receive hearBeatPackage from customer...");
-        return;
-      }
-      group.submit(new Runnable() {
-        @Override
-        public void run() {
-          try {
-            log.info("server has received request package: {}", msg);
-  
-            // 到了这一步，如果请求包在上一次已经被 服务器成功执行，接下来要做幂等性处理，也就是客户端设置超时重试处理
-  
-            /**
-             * 改良
-             * 使用 Redis 实现分布式缓存
-             *
-             */
-            Object result = null;
-  
-            if ("jedis".equals(redisServerWay) || "default".equals(redisServerWay) || StringUtils.isBlank(redisServerWay)) {
-              if (!JRedisHelper.existsRetryResult(msg.getRequestId())) {
-                log.info("requestId[{}] does not exist, store the result in the distributed cache", msg.getRequestId());
-                result = requestHandler.handler(msg);
-                if (result != null)
-                  JRedisHelper.setRetryRequestResult(msg.getRequestId(), JsonUtils.objectToJson(result));
-                else {
-                  JRedisHelper.setRetryRequestResult(msg.getRequestId(), null);
-                }
-              } else {
-                result = JRedisHelper.getForRetryRequestId(msg.getRequestId());
-                if (result != null) {
-                  result = JsonUtils.jsonToPojo((String) result, msg.getReturnType());
-                }
-                log.info("Previous results:{} ", result);
-                log.info(" >>> Capture the timeout packet and call the previous result successfully <<< ");
-              }
-            } else {
-  
-              if (LRedisHelper.existsRetryResult(msg.getRequestId()) == 0L) {
-                log.info("requestId[{}] does not exist, store the result in the distributed cache", msg.getRequestId());
-                result = requestHandler.handler(msg);
-  
-                if ("true".equals(redisServerAsync) && result != null) {
-                  LRedisHelper.asyncSetRetryRequestResult(msg.getRequestId(), serializer.serialize(result));
-                } else {
-                  if (result != null)
-                    LRedisHelper.syncSetRetryRequestResult(msg.getRequestId(), serializer.serialize(result));
-                  else {
-                    LRedisHelper.syncSetRetryRequestResult(msg.getRequestId(), null);
-                  }
-                }
-              } else {
-                result = LRedisHelper.getForRetryRequestId(msg.getRequestId());
-                if (result != null) {
-                  result = serializer.deserialize((byte[]) result, msg.getReturnType());
-                }
-                log.info("Previous results:{} ", result);
-                log.info(" >>> Capture the timeout packet and call the previous result successfully <<< ");
-              }
-            }
-  
-            // 生成 校验码，客户端收到后 会 对 数据包 进行校验
-            if (ctx.channel().isActive() && ctx.channel().isWritable()) {
-              /**
-               * 这里要分两种情况：
-               * 1. 当数据无返回值时，保证 checkCode 与 result 可以检验，客户端 也要判断 result 为 null 时 checkCode 是否也为 null，才能认为非他人修改
-               * 2. 当数据有返回值时，校验 checkCode 与 result 的 md5 码 是否相同
-               */
-              String checkCode = "";
-              // 这里做了 当 data为 null checkCode 为 null，checkCode可作为 客户端的判断 返回值 依据
-              if (result != null) {
-                try {
-                  checkCode = new String(DigestUtils.md5(result.toString().getBytes("UTF-8")));
-                } catch (UnsupportedEncodingException e) {
-                  log.error("binary stream conversion failure: ", e);
-                  //e.printStackTrace();
-                }
-              } else {
-                checkCode = null;
-              }
-              RpcResponse rpcResponse = RpcResponse.success(result, msg.getRequestId(), checkCode);
-              log.info(String.format("server send back response package {requestId: %s, message: %s, statusCode: %s ]}", rpcResponse.getRequestId(), rpcResponse.getMessage(), rpcResponse.getStatusCode()));
-              ChannelFuture future = ctx.writeAndFlush(rpcResponse);
-  
-  
-            } else {
-              log.info("channel status [active: {}, writable: {}]", ctx.channel().isActive(), ctx.channel().isWritable());
-              log.error("channel is not writable");
-            }
-            /**
-             * 1. 通道关闭后，对于 心跳包 将不可用
-             * 2. 由于客户端 使用了 ChannelProvider 来 缓存 channel，这里关闭后，无法 发挥 channel 缓存的作用
-             */
-            //future.addListener(ChannelFutureListener.CLOSE);
-          } finally {
-            ReferenceCountUtil.release(msg);
-          }
+    protected void channelRead0( ChannelHandlerContext ctx, RpcRequest msg ) throws Exception {
+        /**
+         * 心跳包 只 作为 检测包，不做处理
+         */
+        if (msg.getHeartBeat()) {
+            log.debug("receive hearBeatPackage from customer...");
+            return;
         }
-      });
+        group.submit(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    log.info("server has received request package: {}", msg);
+
+                    // 到了这一步，如果请求包在上一次已经被 服务器成功执行，接下来要做幂等性处理，也就是客户端设置超时重试处理
+
+                    /**
+                     * 改良
+                     * 使用 Redis 实现分布式缓存
+                     *
+                     */
+                    Object result = null;
+
+                    if ("jedis".equals(redisServerWay) || "default".equals(redisServerWay) || StringUtils.isBlank(
+                            redisServerWay)) {
+                        if (!JRedisHelper.existsRetryResult(msg.getRequestId())) {
+                            log.info("requestId[{}] does not exist, store the result in the distributed cache",
+                                    msg.getRequestId());
+                            result = requestHandler.handler(msg);
+                            if (result != null)
+                                JRedisHelper.setRetryRequestResult(msg.getRequestId(), JsonUtils.objectToJson(result));
+                            else {
+                                JRedisHelper.setRetryRequestResult(msg.getRequestId(), null);
+                            }
+                        } else {
+                            result = JRedisHelper.getForRetryRequestId(msg.getRequestId());
+                            if (result != null) {
+                                result = JsonUtils.jsonToPojo((String) result, msg.getReturnType());
+                            }
+                            log.info("Previous results:{} ", result);
+                            log.info(" >>> Capture the timeout packet and call the previous result successfully <<< ");
+                        }
+                    } else {
+
+                        if (LRedisHelper.existsRetryResult(msg.getRequestId()) == 0L) {
+                            log.info("requestId[{}] does not exist, store the result in the distributed cache",
+                                    msg.getRequestId());
+                            result = requestHandler.handler(msg);
+
+                            if ("true".equals(redisServerAsync) && result != null) {
+                                LRedisHelper.asyncSetRetryRequestResult(msg.getRequestId(),
+                                        serializer.serialize(result));
+                            } else {
+                                if (result != null)
+                                    LRedisHelper.syncSetRetryRequestResult(msg.getRequestId(),
+                                            serializer.serialize(result));
+                                else {
+                                    LRedisHelper.syncSetRetryRequestResult(msg.getRequestId(), null);
+                                }
+                            }
+                        } else {
+                            result = LRedisHelper.getForRetryRequestId(msg.getRequestId());
+                            if (result != null) {
+                                result = serializer.deserialize((byte[]) result, msg.getReturnType());
+                            }
+                            log.info("Previous results:{} ", result);
+                            log.info(" >>> Capture the timeout packet and call the previous result successfully <<< ");
+                        }
+                    }
+
+                    // 生成 校验码，客户端收到后 会 对 数据包 进行校验
+                    if (ctx.channel().isActive() && ctx.channel().isWritable()) {
+                        /**
+                         * 这里要分两种情况：
+                         * 1. 当数据无返回值时，保证 checkCode 与 result 可以检验，客户端 也要判断 result 为 null 时 checkCode 是否也为 null，才能认为非他人修改
+                         * 2. 当数据有返回值时，校验 checkCode 与 result 的 md5 码 是否相同
+                         */
+                        String checkCode = "";
+                        // 这里做了 当 data为 null checkCode 为 null，checkCode可作为 客户端的判断 返回值 依据
+                        if (result != null) {
+                            try {
+                                checkCode = new String(DigestUtils.md5(result.toString().getBytes("UTF-8")));
+                            } catch (UnsupportedEncodingException e) {
+                                log.error("binary stream conversion failure: ", e);
+                                //e.printStackTrace();
+                            }
+                        } else {
+                            checkCode = null;
+                        }
+                        RpcResponse rpcResponse = RpcResponse.success(result, msg.getRequestId(), checkCode);
+                        log.info(String.format(
+                                "server send back response package {requestId: %s, message: %s, statusCode: %s ]}",
+                                rpcResponse.getRequestId(), rpcResponse.getMessage(), rpcResponse.getStatusCode()));
+                        ChannelFuture future = ctx.writeAndFlush(rpcResponse);
+
+
+                    } else {
+                        log.info("channel status [active: {}, writable: {}]", ctx.channel().isActive(),
+                                ctx.channel().isWritable());
+                        log.error("channel is not writable");
+                    }
+                    /**
+                     * 1. 通道关闭后，对于 心跳包 将不可用
+                     * 2. 由于客户端 使用了 ChannelProvider 来 缓存 channel，这里关闭后，无法 发挥 channel 缓存的作用
+                     */
+                    //future.addListener(ChannelFutureListener.CLOSE);
+                } finally {
+                    ReferenceCountUtil.release(msg);
+                }
+            }
+        });
     }
 }
 ```
@@ -865,9 +929,17 @@ cn.fyupeng.net.AbstractRpcServer [main] - mainClassName: jdk.internal.reflect.Di
 例如：KryoSerializer可以重写`serialize`方法中写缓存的大小，默认为`4096`，超出该大小会很容易报数组越界异常问题。
 ```java
 /**
- * bufferSize: 缓存大小
+ * README.CN.md
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
  */
-Output output = new Output(byteArrayOutputStream,100000))
+class /**
+         * bufferSize: 缓存大小
+         */
+Output output =new Output( byteArrayOutputStream,100000 )){
+}
 ```
 
 - RetryTimeoutExcepton
@@ -932,6 +1004,13 @@ Output output = new Output(byteArrayOutputStream,100000))
 - 关闭钩子
 
 ```java
+/**
+ * ShutdownHook
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ShutdownHook {
 
     private static final ShutdownHook shutdownHook = new ClientShutdownHook();
@@ -946,14 +1025,14 @@ public class ShutdownHook {
      */
     public void addClearAllHook() {
         log.info("All services will be cancel after shutdown");
-        Runtime.getRuntime().addShutdownHook(new Thread(()->{
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             // 服务端，由服务端钩子执行
             JRedisHelper.remWorkerId(IpUtils.getPubIpAddr());
             log.info("the cache for workId has bean cleared successfully");
             NacosUtils.clearRegistry();
             NettyServer.shutdownAll();
             ThreadPoolFactory.shutdownAll();
-            
+
             // 客户端，由客户端钩子执行
             ChannelProvider.shutdownAll();
             ThreadPoolFactory.shutdownAll();
@@ -968,16 +1047,23 @@ public class ShutdownHook {
 在服务端或者客户端代理启动时调用
 
 ```java
+/**
+ * NettyServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NettyServer extends AbstractRpcServer {
-    
-  @Override
-  public void start() {
-    /**
-     *  封装了 之前 使用的 线程吃 和 任务队列
-     *  实现了 ExecutorService 接口
-     */
-    ShutdownHook.getShutdownHook().addClearAllHook();
-  }
+
+    @Override
+    public void start() {
+        /**
+         *  封装了 之前 使用的 线程吃 和 任务队列
+         *  实现了 ExecutorService 接口
+         */
+        ShutdownHook.getShutdownHook().addClearAllHook();
+    }
 }
 ```
 

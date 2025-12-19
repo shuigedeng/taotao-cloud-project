@@ -24,12 +24,20 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 // 分布式事务的核心处理器
+/**
+ * NettyServerHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
     private static ChannelGroup channelGroup =
@@ -43,7 +51,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     private static Map<String, Integer> transactionCountMap = new ConcurrentHashMap<>();
 
     @Override
-    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+    public void handlerAdded( ChannelHandlerContext ctx ) throws Exception {
         Channel channel = ctx.channel();
         channelGroup.add(channel);
     }
@@ -55,7 +63,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
      *      如果其中有一个事务需要回滚，那么通知所有客户进行回滚，否则则通知所有客户端进行提交
      */
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void channelRead( ChannelHandlerContext ctx, Object msg ) throws Exception {
         System.out.println("接受数据：" + msg.toString());
 
         JSONObject jsonObject = JSON.parseObject((String) msg);
@@ -102,8 +110,8 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
             // 如果已经接收到结束事务的标记，则判断事务是否已经全部到达
             if (isEndMap.get(groupId)
                     && transactionCountMap
-                            .get(groupId)
-                            .equals(transactionTypeMap.get(groupId).size())) {
+                    .get(groupId)
+                    .equals(transactionTypeMap.get(groupId).size())) {
 
                 // 如果已经全部到达则看是否需要回滚
                 if (transactionTypeMap.get(groupId).contains("rollback")) {
@@ -121,7 +129,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     }
 
     // 向客户端（事务参与者）发送最终处理结果的方法
-    private void sendResult(JSONObject result) {
+    private void sendResult( JSONObject result ) {
         System.out.println("事务最终处理结果：" + result.toJSONString());
         for (Channel channel : channelGroup) {
             channel.writeAndFlush(result.toJSONString());

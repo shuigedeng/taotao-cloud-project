@@ -24,6 +24,7 @@ import com.alibaba.nacos.common.utils.StringUtils;
 import com.taotao.cloud.rpc.common.enums.LoadBalancerCode;
 import com.taotao.cloud.rpc.common.exception.RpcException;
 import com.taotao.cloud.rpc.common.loadbalancer.LoadBalancer;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -36,8 +37,16 @@ import java.util.Properties;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.Set;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * NacosUtils
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class NacosUtils {
 
@@ -61,7 +70,7 @@ public class NacosUtils {
         String balancer = "round";
         try (BufferedReader bufferedReader =
                 new BufferedReader(
-                        new FileReader(currentWorkPath + "/config/resource.properties")); ) {
+                        new FileReader(currentWorkPath + "/config/resource.properties"));) {
 
             configResource = new PropertyResourceBundle(bufferedReader);
             useCluster = configResource.getString(PropertiesConstants.NACOS_CLUSTER_USE);
@@ -198,7 +207,7 @@ public class NacosUtils {
                 node = loadBalancer.selectNode(nodes);
                 log.info("waiting for connection to the registration center...");
 
-                if ((pre = node.indexOf(":")) > 0 && pre == node.lastIndexOf(":")) {
+                if (( pre = node.indexOf(":") ) > 0 && pre == node.lastIndexOf(":")) {
                     boolean valid = IpUtils.valid(host = node.substring(0, pre));
                     if (valid) {
                         host = node.substring(0, pre);
@@ -261,9 +270,8 @@ public class NacosUtils {
      *
      * @param serviceName 服务名
      * @return 实例列表
-     * @throws NacosException
      */
-    public static List<Instance> getAllInstance(String serviceName) throws NacosException {
+    public static List<Instance> getAllInstance( String serviceName ) throws NacosException {
         return namingService.getAllInstances(serviceName);
     }
 
@@ -271,11 +279,10 @@ public class NacosUtils {
      * 获取配置中心中与服务名匹配的所有实例，可以通过使用负载均衡选择其中一个实例
      *
      * @param serviceName 服务名
-     * @param groupName   组名
+     * @param groupName 组名
      * @return 实例列表
-     * @throws NacosException
      */
-    public static List<Instance> getAllInstance(String serviceName, String groupName)
+    public static List<Instance> getAllInstance( String serviceName, String groupName )
             throws NacosException {
         return namingService.getAllInstances(serviceName, groupName);
     }
@@ -284,10 +291,9 @@ public class NacosUtils {
      * 将服务名与对应服务所在的地址注册到注册中心
      *
      * @param serviceName 服务名
-     * @param address     服务所在机器地址
-     * @throws NacosException
+     * @param address 服务所在机器地址
      */
-    public static void registerService(String serviceName, InetSocketAddress address)
+    public static void registerService( String serviceName, InetSocketAddress address )
             throws NacosException {
         namingService.registerInstance(serviceName, address.getHostName(), address.getPort());
         log.info(
@@ -302,11 +308,10 @@ public class NacosUtils {
      * 将服务名与对应服务所在的地址注册到注册中心
      *
      * @param serviceName 服务名
-     * @param address     服务所在机器地址
-     * @throws NacosException
+     * @param address 服务所在机器地址
      */
     public static void registerService(
-            String serviceName, String groupName, InetSocketAddress address) throws NacosException {
+            String serviceName, String groupName, InetSocketAddress address ) throws NacosException {
         namingService.registerInstance(
                 serviceName, groupName, address.getHostName(), address.getPort());
         log.info(

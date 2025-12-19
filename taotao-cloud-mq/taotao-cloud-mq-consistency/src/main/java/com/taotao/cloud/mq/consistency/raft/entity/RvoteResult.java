@@ -29,17 +29,21 @@ import lombok.Setter;
 @Setter
 public class RvoteResult implements Serializable {
 
-    /** 当前任期号，以便于候选人去更新自己的任期 */
+    /**
+     * 当前任期号，以便于候选人去更新自己的任期
+     */
     long term;
 
-    /** 候选人赢得了此张选票时为真 */
+    /**
+     * 候选人赢得了此张选票时为真
+     */
     boolean voteGranted;
 
-    public RvoteResult(boolean voteGranted) {
+    public RvoteResult( boolean voteGranted ) {
         this.voteGranted = voteGranted;
     }
 
-    private RvoteResult(Builder builder) {
+    private RvoteResult( Builder builder ) {
         setTerm(builder.term);
         setVoteGranted(builder.voteGranted);
     }
@@ -56,19 +60,27 @@ public class RvoteResult implements Serializable {
         return new Builder();
     }
 
+    /**
+     * Builder
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static final class Builder {
 
         private long term;
         private boolean voteGranted;
 
-        private Builder() {}
+        private Builder() {
+        }
 
-        public Builder term(long term) {
+        public Builder term( long term ) {
             this.term = term;
             return this;
         }
 
-        public Builder voteGranted(boolean voteGranted) {
+        public Builder voteGranted( boolean voteGranted ) {
             this.voteGranted = voteGranted;
             return this;
         }

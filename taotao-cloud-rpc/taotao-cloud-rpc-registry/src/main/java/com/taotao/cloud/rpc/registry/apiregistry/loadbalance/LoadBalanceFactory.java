@@ -18,7 +18,15 @@ package com.taotao.cloud.rpc.registry.apiregistry.loadbalance;
 
 import com.taotao.cloud.rpc.registry.apiregistry.base.ApiRegistryException;
 
+/**
+ * LoadBalanceFactory
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class LoadBalanceFactory {
+
     public static BaseLoadBalance create() {
         //
         // if(RoundRobinLoadBalance.class.getSimpleName().equalsIgnoreCase(ApiRegistryProperties.getRegistryLoadBalanceType())){

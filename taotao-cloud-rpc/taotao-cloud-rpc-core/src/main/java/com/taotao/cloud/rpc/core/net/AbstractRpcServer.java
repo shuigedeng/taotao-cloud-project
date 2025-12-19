@@ -23,11 +23,20 @@ import com.taotao.cloud.rpc.common.exception.RpcException;
 import com.taotao.cloud.rpc.common.util.ReflectUtil;
 import com.taotao.cloud.rpc.core.provider.ServiceProvider;
 import com.taotao.cloud.rpc.core.registry.ServiceRegistry;
+
 import java.lang.annotation.Annotation;
 import java.net.InetSocketAddress;
 import java.util.Set;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * AbstractRpcServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public abstract class AbstractRpcServer implements RpcServer {
 
@@ -42,8 +51,6 @@ public abstract class AbstractRpcServer implements RpcServer {
 
     /**
      * 启动服务后，扫描所有service类，并自动发布到注册中心
-     *
-     * @throws RpcException
      */
     public void scanServices() throws RpcException {
         // 获取调用者 start 服务时所在的主类名, 即 调用者 调用 AbstractRpcServer 的子类 类名
@@ -122,13 +129,11 @@ public abstract class AbstractRpcServer implements RpcServer {
     /**
      * 默认组名为“DEFAULT_GROUP”, 向注册中心发布服务
      *
-     * @param service     服务
+     * @param service 服务
      * @param serviceName 服务名
-     * @param <T>
-     * @throws RpcException
      */
     @Override
-    public <T> void publishService(T service, String serviceName) throws RpcException {
+    public <T> void publishService( T service, String serviceName ) throws RpcException {
         serviceProvider.addServiceProvider(service, serviceName);
         serviceRegistry.register(serviceName, new InetSocketAddress(hostName, port));
     }
@@ -136,14 +141,12 @@ public abstract class AbstractRpcServer implements RpcServer {
     /**
      * 组名下向注册中心发布服务
      *
-     * @param service     服务
-     * @param groupName   组名
+     * @param service 服务
+     * @param groupName 组名
      * @param serviceName 服务名
-     * @param <T>
-     * @throws RpcException
      */
     @Override
-    public <T> void publishService(T service, String groupName, String serviceName)
+    public <T> void publishService( T service, String groupName, String serviceName )
             throws RpcException {
         serviceProvider.addServiceProvider(service, serviceName);
         serviceRegistry.register(serviceName, groupName, new InetSocketAddress(hostName, port));
@@ -152,17 +155,14 @@ public abstract class AbstractRpcServer implements RpcServer {
     /**
      * 保留 类名，扩展 自定义 创建实例
      *
-     * @param fullName         全类名
-     * @param simpleName       忽略包类名
+     * @param fullName 全类名
+     * @param simpleName 忽略包类名
      * @param firstLowCaseName 首字母小写类名
-     * @param clazz            Class 类，可用于发射
-     * @return
-     * @throws InstantiationException
-     * @throws IllegalAccessException
+     * @param clazz Class 类，可用于发射
      */
     @Override
     public Object newInstance(
-            String fullName, String simpleName, String firstLowCaseName, Class<?> clazz)
+            String fullName, String simpleName, String firstLowCaseName, Class<?> clazz )
             throws InstantiationException, IllegalAccessException {
         return clazz.newInstance();
     }

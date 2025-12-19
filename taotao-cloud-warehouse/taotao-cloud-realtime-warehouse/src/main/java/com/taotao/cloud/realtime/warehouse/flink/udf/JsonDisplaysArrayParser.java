@@ -30,11 +30,19 @@ import org.apache.flink.types.Row;
  * 5. 查询 select json_array_parser(`actions`).`action_id` as action_id, json_array_parser(`actions`).`item` as item,json_array_parser(`actions`).`item_type` as item_type,json_array_parser(`actions`).`ts` as ts from ods.ods_log_inc;
  */
 
+/**
+ * JsonDisplaysArrayParser
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class JsonDisplaysArrayParser extends ScalarFunction {
+
     private static final JsonMapper mapper = new JsonMapper();
 
     @DataTypeHint("ROW<display_type STRING, item STRING, item_type STRING, order INT, pos_id INT>")
-    public Row eval(String jsonStr) {
+    public Row eval( String jsonStr ) {
         if (jsonStr == null || jsonStr.isEmpty()) {
             return new Row(5); // 返回一个空的Row，所有字段为null
         }
@@ -69,5 +77,7 @@ public class JsonDisplaysArrayParser extends ScalarFunction {
     }
 
     @DataTypeHint("ROW<action_id STRING, item STRING, item_type STRING, ts BIGINT>")
-    public static class ReturnType {}
+    public static class ReturnType {
+
+    }
 }

@@ -16,13 +16,20 @@
 
 package com.taotao.cloud.rpc.common.exception;
 
+/**
+ * RpcException
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class RpcException extends Exception {
 
     public RpcException() {
         super();
     }
 
-    public RpcException(String message) {
+    public RpcException( String message ) {
         super(message);
     }
 }

@@ -17,7 +17,9 @@
 package com.taotao.cloud.rpc.registry.apiregistry.apiclient;
 
 import com.taotao.cloud.rpc.registry.apiregistry.base.*;
+
 import java.lang.reflect.Method;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -25,18 +27,29 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 
+/**
+ * Aspects
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class Aspects {
+
     @Order(2)
     @Aspect
     public static class ApiClientAspect {
+
         private ClientAspect clientAspect = new ClientAspect();
 
         @Pointcut("@within(com.taotao.cloud.rpc.registry.apiregistry.anno.ApiClient)")
-        public void pointCut() {}
+        public void pointCut() {
+        }
+
         ;
 
         @Around("pointCut()")
-        public Object handle(ProceedingJoinPoint joinPoint) throws Throwable {
+        public Object handle( ProceedingJoinPoint joinPoint ) throws Throwable {
             return clientAspect.aop(joinPoint);
         }
     }
@@ -44,26 +57,30 @@ public class Aspects {
     @Order(2)
     @Aspect
     public static class AllClientAspect {
+
         private ClientAspect clientAspect = new ClientAspect();
 
         @Pointcut(
                 "@within(com.taotao.cloud.rpc.registry.apiregistry.anno.ApiClient) || @within(org.springframework.cloud.openfeign.FeignClient)")
-        public void pointCut() {}
+        public void pointCut() {
+        }
+
         ;
 
         @Around("pointCut()")
-        public Object handle(ProceedingJoinPoint joinPoint) throws Throwable {
+        public Object handle( ProceedingJoinPoint joinPoint ) throws Throwable {
             return clientAspect.aop(joinPoint);
         }
     }
 
     public static class ClientAspect {
-        public Object aop(ProceedingJoinPoint joinPoint) throws Throwable {
+
+        public Object aop( ProceedingJoinPoint joinPoint ) throws Throwable {
             //            if(!ApiRegistryProperties.getApiClientAspectEnabled()||
             //                    !ApiRegistryProperties.getEnabled()){
             //                return joinPoint.proceed();
             //            }
-            Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
+            Method method = ( (MethodSignature) joinPoint.getSignature() ).getMethod();
             //			ApiClientInfo apiClientInfo = ApiUtils.getApiClient(method);
             //            if(apiClientInfo ==null){
             //                throw new ApiRegistryException("未找到ApiClient或FeignClient注解信息");
@@ -102,7 +119,7 @@ public class Aspects {
         }
 
         protected Object rpc(
-                ApiClientInfo apiClientInfo, Method method, ProceedingJoinPoint joinPoint) {
+                ApiClientInfo apiClientInfo, Method method, ProceedingJoinPoint joinPoint ) {
             //            return this.retryExecute(()->{
             ////				BaseLoadBalance loadBalance = ContextUtils.getBean(
             // BaseLoadBalance.class,false);
@@ -110,7 +127,7 @@ public class Aspects {
             ////                String url = ApiUtils.getUrl(hostPort,apiClientInfo.getPath());
             ////                if(StringUtils.isEmpty(url)) {
             ////					throw new ApiRegistryException("未找到服务host信息");
-            ////				}
+            ////                                }
             //
             //                //解析
             //				BaseApiClientParser.ApiClientParserInfo requestParserInfo = new

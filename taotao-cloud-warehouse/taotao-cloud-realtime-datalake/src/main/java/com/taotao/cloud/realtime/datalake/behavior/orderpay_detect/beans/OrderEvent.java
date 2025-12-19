@@ -16,15 +16,24 @@
 
 package com.taotao.cloud.realtime.datalake.behavior.orderpay_detect.beans;
 
+/**
+ * OrderEvent
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class OrderEvent {
+
     private Long orderId;
     private String eventType;
     private String txId;
     private Long timestamp;
 
-    public OrderEvent() {}
+    public OrderEvent() {
+    }
 
-    public OrderEvent(Long orderId, String eventType, String txId, Long timestamp) {
+    public OrderEvent( Long orderId, String eventType, String txId, Long timestamp ) {
         this.orderId = orderId;
         this.eventType = eventType;
         this.txId = txId;
@@ -35,7 +44,7 @@ public class OrderEvent {
         return orderId;
     }
 
-    public void setOrderId(Long orderId) {
+    public void setOrderId( Long orderId ) {
         this.orderId = orderId;
     }
 
@@ -43,7 +52,7 @@ public class OrderEvent {
         return eventType;
     }
 
-    public void setEventType(String eventType) {
+    public void setEventType( String eventType ) {
         this.eventType = eventType;
     }
 
@@ -51,7 +60,7 @@ public class OrderEvent {
         return txId;
     }
 
-    public void setTxId(String txId) {
+    public void setTxId( String txId ) {
         this.txId = txId;
     }
 
@@ -59,7 +68,7 @@ public class OrderEvent {
         return timestamp;
     }
 
-    public void setTimestamp(Long timestamp) {
+    public void setTimestamp( Long timestamp ) {
         this.timestamp = timestamp;
     }
 

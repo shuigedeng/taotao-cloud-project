@@ -18,7 +18,15 @@ package com.taotao.cloud.rpc.registry.apiregistry.rpcclient;
 
 import com.taotao.cloud.rpc.registry.apiregistry.base.ApiRegistryException;
 
+/**
+ * RpcClientFactory
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class RpcClientFactory {
+
     public static IRpcClient create() {
         //
         // if(HttpUrlConnectionRpcClient.class.getSimpleName().equalsIgnoreCase(ApiRegistryProperties.getRpcClientType())){

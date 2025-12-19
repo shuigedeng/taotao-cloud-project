@@ -43,6 +43,13 @@ public class RedisStateMachine implements StateMachine {
         return RedisStateMachineLazyHolder.INSTANCE;
     }
 
+    /**
+     * RedisStateMachineLazyHolder
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     private static class RedisStateMachineLazyHolder {
 
         private static final RedisStateMachine INSTANCE = new RedisStateMachine();
@@ -66,7 +73,7 @@ public class RedisStateMachine implements StateMachine {
     }
 
     @Override
-    public void apply(LogEntry logEntry) {
+    public void apply( LogEntry logEntry ) {
         try (Jedis jedis = jedisPool.getResource()) {
             Command command = logEntry.getCommand();
             if (command == null) {
@@ -82,7 +89,7 @@ public class RedisStateMachine implements StateMachine {
     }
 
     @Override
-    public LogEntry get(String key) {
+    public LogEntry get( String key ) {
         LogEntry result = null;
         try (Jedis jedis = jedisPool.getResource()) {
             result = JSON.parseObject(jedis.get(key), LogEntry.class);
@@ -93,7 +100,7 @@ public class RedisStateMachine implements StateMachine {
     }
 
     @Override
-    public String getString(String key) {
+    public String getString( String key ) {
         String result = null;
         try (Jedis jedis = jedisPool.getResource()) {
             result = jedis.get(key);
@@ -104,7 +111,7 @@ public class RedisStateMachine implements StateMachine {
     }
 
     @Override
-    public void setString(String key, String value) {
+    public void setString( String key, String value ) {
         try (Jedis jedis = jedisPool.getResource()) {
             jedis.set(key, value);
         } catch (Exception e) {
@@ -113,7 +120,7 @@ public class RedisStateMachine implements StateMachine {
     }
 
     @Override
-    public void delString(String... keys) {
+    public void delString( String... keys ) {
         try (Jedis jedis = jedisPool.getResource()) {
             jedis.del(keys);
         } catch (Exception e) {

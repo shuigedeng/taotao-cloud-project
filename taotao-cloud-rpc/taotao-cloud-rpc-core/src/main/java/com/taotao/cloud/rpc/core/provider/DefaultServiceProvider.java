@@ -18,11 +18,20 @@ package com.taotao.cloud.rpc.core.provider;
 
 import com.taotao.cloud.rpc.common.exception.ServiceNotFoundException;
 import com.taotao.cloud.rpc.common.exception.ServiceNotImplException;
+
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * DefaultServiceProvider
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class DefaultServiceProvider implements ServiceProvider {
 
@@ -32,7 +41,7 @@ public class DefaultServiceProvider implements ServiceProvider {
     private static final Set<String> registeredService = ConcurrentHashMap.newKeySet();
 
     @Override
-    public synchronized <T> void addServiceProvider(T service, String serviceName)
+    public synchronized <T> void addServiceProvider( T service, String serviceName )
             throws ServiceNotImplException {
         // 服务名
         if (registeredService.contains(serviceName)) {
@@ -49,7 +58,7 @@ public class DefaultServiceProvider implements ServiceProvider {
     }
 
     @Override
-    public synchronized Object getServiceProvider(String serviceName)
+    public synchronized Object getServiceProvider( String serviceName )
             throws ServiceNotFoundException {
         Object service = serviceMap.get(serviceName);
         log.debug("getServiceProvider - service [{}]", service);

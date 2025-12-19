@@ -19,19 +19,29 @@ package com.taotao.cloud.mq.consistency.raft1.server.util;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 import com.taotao.cloud.mq.consistency.raft1.server.support.concurrent.RaftThreadPool;
+
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * InnerFutureList
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class InnerFutureList {
 
     private static final Logger log = LoggerFactory.getLogger(InnerFutureList.class);
 
     public static List<Boolean> getRPCAppendResult(
-            List<Future<Boolean>> futureList, CountDownLatch latch) {
+            List<Future<Boolean>> futureList, CountDownLatch latch ) {
         final List<Boolean> resultList = new CopyOnWriteArrayList<>();
         for (Future<Boolean> future : futureList) {
             RaftThreadPool.execute(

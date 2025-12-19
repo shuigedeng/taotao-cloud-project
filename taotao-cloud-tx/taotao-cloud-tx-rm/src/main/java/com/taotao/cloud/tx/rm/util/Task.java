@@ -21,7 +21,15 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 // 子事务的等待队列：基于此实现事务控制权
+/**
+ * Task
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class Task {
+
     // 通过ReentrantLock的Condition条件等待队列实现线程阻塞/唤醒
     private Lock lock = new ReentrantLock();
     private Condition condition = lock.newCondition();

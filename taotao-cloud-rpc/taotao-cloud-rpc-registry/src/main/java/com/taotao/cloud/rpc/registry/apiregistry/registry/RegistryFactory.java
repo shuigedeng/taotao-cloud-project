@@ -18,7 +18,15 @@ package com.taotao.cloud.rpc.registry.apiregistry.registry;
 
 import com.taotao.cloud.rpc.registry.apiregistry.base.ApiRegistryException;
 
+/**
+ * RegistryFactory
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class RegistryFactory {
+
     public static BaseRegistry create() {
         //		String type = ApiRegistryProperties.getRegistryType();
         String type = "";

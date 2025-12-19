@@ -16,13 +16,20 @@
 
 package com.taotao.cloud.rpc.common.exception;
 
+/**
+ * ReceiveResponseException
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ReceiveResponseException extends RpcException {
 
     public ReceiveResponseException() {
         super();
     }
 
-    public ReceiveResponseException(String message) {
+    public ReceiveResponseException( String message ) {
         super(message);
     }
 }

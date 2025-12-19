@@ -18,10 +18,12 @@ package com.taotao.cloud.realtime.datalake.behavior.market_analysis;
 
 import com.taotao.cloud.realtime.behavior.analysis.market_analysis.beans.ChannelPromotionCount;
 import com.taotao.cloud.realtime.behavior.analysis.market_analysis.beans.MarketingUserBehavior;
+
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.java.tuple.Tuple;
 import org.apache.flink.streaming.api.TimeCharacteristic;
@@ -35,8 +37,16 @@ import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
+/**
+ * AppMarketingByChannel
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class AppMarketingByChannel {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
@@ -48,7 +58,7 @@ public class AppMarketingByChannel {
                                 new AscendingTimestampExtractor<MarketingUserBehavior>() {
                                     @Override
                                     public long extractAscendingTimestamp(
-                                            MarketingUserBehavior element) {
+                                            MarketingUserBehavior element ) {
                                         return element.getTimestamp();
                                     }
                                 });
@@ -69,6 +79,7 @@ public class AppMarketingByChannel {
     // 实现自定义的模拟市场用户行为数据源
     public static class SimulatedMarketingUserBehaviorSource
             implements SourceFunction<MarketingUserBehavior> {
+
         // 控制是否正常运行的标识位
         Boolean running = true;
 
@@ -79,7 +90,7 @@ public class AppMarketingByChannel {
         Random random = new Random();
 
         @Override
-        public void run(SourceContext<MarketingUserBehavior> ctx) throws Exception {
+        public void run( SourceContext<MarketingUserBehavior> ctx ) throws Exception {
             while (running) {
                 // 随机生成所有字段
                 Long id = random.nextLong();
@@ -103,23 +114,24 @@ public class AppMarketingByChannel {
     // 实现自定义的增量聚合函数
     public static class MarketingCountAgg
             implements AggregateFunction<MarketingUserBehavior, Long, Long> {
+
         @Override
         public Long createAccumulator() {
             return 0L;
         }
 
         @Override
-        public Long add(MarketingUserBehavior value, Long accumulator) {
+        public Long add( MarketingUserBehavior value, Long accumulator ) {
             return accumulator + 1;
         }
 
         @Override
-        public Long getResult(Long accumulator) {
+        public Long getResult( Long accumulator ) {
             return accumulator;
         }
 
         @Override
-        public Long merge(Long a, Long b) {
+        public Long merge( Long a, Long b ) {
             return a + b;
         }
     }
@@ -127,12 +139,13 @@ public class AppMarketingByChannel {
     // 实现自定义的全窗口函数
     public static class MarketingCountResult
             extends ProcessWindowFunction<Long, ChannelPromotionCount, Tuple, TimeWindow> {
+
         @Override
         public void process(
                 Tuple tuple,
                 Context context,
                 Iterable<Long> elements,
-                Collector<ChannelPromotionCount> out)
+                Collector<ChannelPromotionCount> out )
                 throws Exception {
             String channel = tuple.getField(0);
             String behavior = tuple.getField(1);

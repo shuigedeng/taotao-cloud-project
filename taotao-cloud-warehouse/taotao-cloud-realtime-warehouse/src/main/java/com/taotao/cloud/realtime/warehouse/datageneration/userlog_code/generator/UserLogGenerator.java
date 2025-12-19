@@ -16,29 +16,40 @@
 
 package com.taotao.cloud.realtime.warehouse.datageneration.userlog_code.generator;
 
+import com.taotao.cloud.realtime.warehouse.datageneration.userlog_code.model.Error;
 import tools.jackson.databind.json.JsonMapper;
+
 import java.time.Instant;
 import java.util.*;
+
 import com.taotao.cloud.realtime.warehouse.datageneration.userlog_code.model.*;
 
+/**
+ * UserLogGenerator
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class UserLogGenerator {
+
     private static final Random random = new Random();
     private static final JsonMapper jsonMapper = new JsonMapper();
 
     private static final String[] AREAS = {"北京", "上海", "广州", "深圳", "杭州", "成都", "武汉"};
     private static final String[] BRANDS = {"华为", "小米", "OPPO", "vivo", "Apple", "三星", "魅族"};
     private static final String[] CHANNELS = {
-        "小米商城", "华为商城", "oppo商城", "vivo商城", "苹果商城", "京东", "天猫"
+            "小米商城", "华为商城", "oppo商城", "vivo商城", "苹果商城", "京东", "天猫"
     };
     private static final String[] OS = {
-        "Android 11", "Android 12", "Android 13", "iOS 15", "iOS 16"
+            "Android 11", "Android 12", "Android 13", "iOS 15", "iOS 16"
     };
     private static final String[] VERSIONS = {"1.0.0", "1.1.0", "1.2.0", "2.0.0", "2.1.0"};
     private static final String[] PAGE_IDS = {
-        "home", "category", "cart", "detail", "pay", "order", "search", "user"
+            "home", "category", "cart", "detail", "pay", "order", "search", "user"
     };
     private static final String[] SOURCE_TYPES = {
-        "promotion", "recommend", "search", "self", "advertisement"
+            "promotion", "recommend", "search", "self", "advertisement"
     };
     private static final String[] ITEM_TYPES = {"sku", "spu", "category", "brand", "shop"};
 
@@ -80,7 +91,7 @@ public class UserLogGenerator {
 
     private static Page generatePage() {
         Page page = new Page();
-        page.setDuring_time((long) (random.nextInt(300000) + 1000));
+        page.setDuring_time((long) ( random.nextInt(300000) + 1000 ));
         page.setItem(String.format("item_%06d", random.nextInt(1000000)));
         page.setItem_type(ITEM_TYPES[random.nextInt(ITEM_TYPES.length)]);
         page.setLast_page_id(PAGE_IDS[random.nextInt(PAGE_IDS.length)]);
@@ -126,13 +137,13 @@ public class UserLogGenerator {
         }
     }
 
-    private static com.taotao.cloud.realtime.warehouse.datageneration.userlog_code.model.Error
-            generateError() {
+    private static Error
+    generateError() {
         if (random.nextInt(100) < 95) {
             return null;
         }
-        com.taotao.cloud.realtime.warehouse.datageneration.userlog_code.model.Error error =
-                new com.taotao.cloud.realtime.warehouse.datageneration.userlog_code.model.Error();
+        Error error =
+                new Error();
         error.setError_code((long) random.nextInt(1000));
         error.setMsg("Error: " + UUID.randomUUID().toString().substring(0, 8));
         return error;

@@ -18,6 +18,7 @@ package com.taotao.cloud.tx.rm.connection;
 
 import com.taotao.cloud.tx.rm.transactional.TransactionalType;
 import com.taotao.cloud.tx.rm.transactional.TtcTx;
+
 import java.sql.Array;
 import java.sql.Blob;
 import java.sql.CallableStatement;
@@ -40,6 +41,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 // 自定义的数据库连接类（必须要实现JDBC的Connection接口）
+/**
+ * TtcConnection
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TtcConnection implements Connection {
 
     // 原本应该返回的数据库连接对象
@@ -52,7 +60,7 @@ public class TtcConnection implements Connection {
     // 负责回滚事务的线程
     private ExecutorService rollbackT = Executors.newSingleThreadExecutor();
 
-    public TtcConnection(Connection connection, TtcTx ttcTx) {
+    public TtcConnection( Connection connection, TtcTx ttcTx ) {
         this.connection = connection;
         this.ttcTx = ttcTx;
     }
@@ -124,17 +132,17 @@ public class TtcConnection implements Connection {
     }
 
     @Override
-    public PreparedStatement prepareStatement(String sql) throws SQLException {
+    public PreparedStatement prepareStatement( String sql ) throws SQLException {
         return connection.prepareStatement(sql);
     }
 
     @Override
-    public CallableStatement prepareCall(String sql) throws SQLException {
+    public CallableStatement prepareCall( String sql ) throws SQLException {
         return connection.prepareCall(sql);
     }
 
     @Override
-    public String nativeSQL(String sql) throws SQLException {
+    public String nativeSQL( String sql ) throws SQLException {
         return connection.nativeSQL(sql);
     }
 
@@ -154,7 +162,7 @@ public class TtcConnection implements Connection {
     }
 
     @Override
-    public void setReadOnly(boolean readOnly) throws SQLException {
+    public void setReadOnly( boolean readOnly ) throws SQLException {
         connection.setReadOnly(readOnly);
     }
 
@@ -164,7 +172,7 @@ public class TtcConnection implements Connection {
     }
 
     @Override
-    public void setCatalog(String catalog) throws SQLException {
+    public void setCatalog( String catalog ) throws SQLException {
         connection.setCatalog(catalog);
     }
 
@@ -174,7 +182,7 @@ public class TtcConnection implements Connection {
     }
 
     @Override
-    public void setTransactionIsolation(int level) throws SQLException {
+    public void setTransactionIsolation( int level ) throws SQLException {
         connection.setTransactionIsolation(level);
     }
 
@@ -194,19 +202,19 @@ public class TtcConnection implements Connection {
     }
 
     @Override
-    public Statement createStatement(int resultSetType, int resultSetConcurrency)
+    public Statement createStatement( int resultSetType, int resultSetConcurrency )
             throws SQLException {
         return connection.createStatement(resultSetType, resultSetConcurrency);
     }
 
     @Override
     public PreparedStatement prepareStatement(
-            String sql, int resultSetType, int resultSetConcurrency) throws SQLException {
+            String sql, int resultSetType, int resultSetConcurrency ) throws SQLException {
         return connection.prepareStatement(sql, resultSetType, resultSetConcurrency);
     }
 
     @Override
-    public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency)
+    public CallableStatement prepareCall( String sql, int resultSetType, int resultSetConcurrency )
             throws SQLException {
         return connection.prepareCall(sql, resultSetType, resultSetConcurrency);
     }
@@ -217,12 +225,12 @@ public class TtcConnection implements Connection {
     }
 
     @Override
-    public void setTypeMap(Map<String, Class<?>> map) throws SQLException {
+    public void setTypeMap( Map<String, Class<?>> map ) throws SQLException {
         connection.setTypeMap(map);
     }
 
     @Override
-    public void setHoldability(int holdability) throws SQLException {
+    public void setHoldability( int holdability ) throws SQLException {
         connection.setHoldability(holdability);
     }
 
@@ -237,23 +245,23 @@ public class TtcConnection implements Connection {
     }
 
     @Override
-    public Savepoint setSavepoint(String name) throws SQLException {
+    public Savepoint setSavepoint( String name ) throws SQLException {
         return connection.setSavepoint(name);
     }
 
     @Override
-    public void rollback(Savepoint savepoint) throws SQLException {
+    public void rollback( Savepoint savepoint ) throws SQLException {
         connection.rollback(savepoint);
     }
 
     @Override
-    public void releaseSavepoint(Savepoint savepoint) throws SQLException {
+    public void releaseSavepoint( Savepoint savepoint ) throws SQLException {
         connection.releaseSavepoint(savepoint);
     }
 
     @Override
     public Statement createStatement(
-            int resultSetType, int resultSetConcurrency, int resultSetHoldability)
+            int resultSetType, int resultSetConcurrency, int resultSetHoldability )
             throws SQLException {
         return connection.createStatement(
                 resultSetType, resultSetConcurrency, resultSetHoldability);
@@ -261,7 +269,7 @@ public class TtcConnection implements Connection {
 
     @Override
     public PreparedStatement prepareStatement(
-            String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability)
+            String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability )
             throws SQLException {
         return connection.prepareStatement(
                 sql, resultSetType, resultSetConcurrency, resultSetHoldability);
@@ -269,25 +277,25 @@ public class TtcConnection implements Connection {
 
     @Override
     public CallableStatement prepareCall(
-            String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability)
+            String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability )
             throws SQLException {
         return connection.prepareCall(
                 sql, resultSetType, resultSetConcurrency, resultSetHoldability);
     }
 
     @Override
-    public PreparedStatement prepareStatement(String sql, int autoGeneratedKeys)
+    public PreparedStatement prepareStatement( String sql, int autoGeneratedKeys )
             throws SQLException {
         return connection.prepareStatement(sql, autoGeneratedKeys);
     }
 
     @Override
-    public PreparedStatement prepareStatement(String sql, int[] columnIndexes) throws SQLException {
+    public PreparedStatement prepareStatement( String sql, int[] columnIndexes ) throws SQLException {
         return connection.prepareStatement(sql, columnIndexes);
     }
 
     @Override
-    public PreparedStatement prepareStatement(String sql, String[] columnNames)
+    public PreparedStatement prepareStatement( String sql, String[] columnNames )
             throws SQLException {
         return connection.prepareStatement(sql, columnNames);
     }
@@ -313,22 +321,22 @@ public class TtcConnection implements Connection {
     }
 
     @Override
-    public boolean isValid(int timeout) throws SQLException {
+    public boolean isValid( int timeout ) throws SQLException {
         return connection.isValid(timeout);
     }
 
     @Override
-    public void setClientInfo(String name, String value) throws SQLClientInfoException {
+    public void setClientInfo( String name, String value ) throws SQLClientInfoException {
         connection.setClientInfo(name, value);
     }
 
     @Override
-    public void setClientInfo(Properties properties) throws SQLClientInfoException {
+    public void setClientInfo( Properties properties ) throws SQLClientInfoException {
         connection.setClientInfo(properties);
     }
 
     @Override
-    public String getClientInfo(String name) throws SQLException {
+    public String getClientInfo( String name ) throws SQLException {
         return connection.getClientInfo(name);
     }
 
@@ -338,17 +346,17 @@ public class TtcConnection implements Connection {
     }
 
     @Override
-    public Array createArrayOf(String typeName, Object[] elements) throws SQLException {
+    public Array createArrayOf( String typeName, Object[] elements ) throws SQLException {
         return connection.createArrayOf(typeName, elements);
     }
 
     @Override
-    public Struct createStruct(String typeName, Object[] attributes) throws SQLException {
+    public Struct createStruct( String typeName, Object[] attributes ) throws SQLException {
         return connection.createStruct(typeName, attributes);
     }
 
     @Override
-    public void setSchema(String schema) throws SQLException {
+    public void setSchema( String schema ) throws SQLException {
         connection.setSchema(schema);
     }
 
@@ -358,12 +366,12 @@ public class TtcConnection implements Connection {
     }
 
     @Override
-    public void abort(Executor executor) throws SQLException {
+    public void abort( Executor executor ) throws SQLException {
         connection.abort(executor);
     }
 
     @Override
-    public void setNetworkTimeout(Executor executor, int milliseconds) throws SQLException {
+    public void setNetworkTimeout( Executor executor, int milliseconds ) throws SQLException {
         connection.setNetworkTimeout(executor, milliseconds);
     }
 
@@ -373,17 +381,17 @@ public class TtcConnection implements Connection {
     }
 
     @Override
-    public <T> T unwrap(Class<T> iface) throws SQLException {
+    public <T> T unwrap( Class<T> iface ) throws SQLException {
         return connection.unwrap(iface);
     }
 
     @Override
-    public boolean isWrapperFor(Class<?> iface) throws SQLException {
+    public boolean isWrapperFor( Class<?> iface ) throws SQLException {
         return connection.isWrapperFor(iface);
     }
 
     @Override
-    public void setAutoCommit(boolean autoCommit) throws SQLException {
+    public void setAutoCommit( boolean autoCommit ) throws SQLException {
         if (connection != null) {
             connection.setAutoCommit(false);
         }

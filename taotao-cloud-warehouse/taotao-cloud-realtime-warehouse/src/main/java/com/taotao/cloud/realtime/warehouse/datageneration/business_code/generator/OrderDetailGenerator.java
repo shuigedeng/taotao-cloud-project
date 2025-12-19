@@ -19,6 +19,7 @@ package com.taotao.cloud.realtime.warehouse.datageneration.business_code.generat
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.DbUtil;
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.RandomUtil;
 import org.slf4j.Logger;
@@ -26,20 +27,29 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * OrderDetailGenerator
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class OrderDetailGenerator {
+
     private static final Logger logger = LoggerFactory.getLogger(OrderDetailGenerator.class);
     private static final int BATCH_SIZE = 500;
 
-    @Autowired private DbUtil dbUtil;
+    @Autowired
+    private DbUtil dbUtil;
 
-    public void generateOrderDetailData(int count) {
+    public void generateOrderDetailData( int count ) {
         generateOrderDetail(count);
         generateOrderDetailActivity(count);
         generateOrderDetailCoupon(count);
     }
 
-    private void generateOrderDetail(int count) {
+    private void generateOrderDetail( int count ) {
         String sql =
                 "INSERT INTO order_detail (id, order_id, sku_id, sku_name, img_url, order_price, "
                         + "sku_num, create_time, source_type, source_id, split_total_amount, "
@@ -70,20 +80,20 @@ public class OrderDetailGenerator {
                 double splitCouponAmount = RandomUtil.generateDouble(5, 50);
 
                 params.add(
-                        new Object[] {
-                            id,
-                            orderId,
-                            skuId,
-                            skuName,
-                            imgUrl,
-                            orderPrice,
-                            skuNum,
-                            now,
-                            sourceType,
-                            sourceId,
-                            splitTotalAmount,
-                            splitActivityAmount,
-                            splitCouponAmount
+                        new Object[]{
+                                id,
+                                orderId,
+                                skuId,
+                                skuName,
+                                imgUrl,
+                                orderPrice,
+                                skuNum,
+                                now,
+                                sourceType,
+                                sourceId,
+                                splitTotalAmount,
+                                splitActivityAmount,
+                                splitCouponAmount
                         });
             }
 
@@ -92,7 +102,7 @@ public class OrderDetailGenerator {
         }
     }
 
-    private void generateOrderDetailActivity(int count) {
+    private void generateOrderDetailActivity( int count ) {
         String sql =
                 "INSERT INTO order_detail_activity (id, order_id, order_detail_id, activity_id, "
                         + "activity_rule_id, sku_id, create_time) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -116,8 +126,8 @@ public class OrderDetailGenerator {
                 LocalDateTime now = LocalDateTime.now();
 
                 params.add(
-                        new Object[] {
-                            id, orderId, orderDetailId, activityId, activityRuleId, skuId, now
+                        new Object[]{
+                                id, orderId, orderDetailId, activityId, activityRuleId, skuId, now
                         });
             }
 
@@ -126,7 +136,7 @@ public class OrderDetailGenerator {
         }
     }
 
-    private void generateOrderDetailCoupon(int count) {
+    private void generateOrderDetailCoupon( int count ) {
         String sql =
                 "INSERT INTO order_detail_coupon (id, order_id, order_detail_id, coupon_id, "
                         + "coupon_use_id, sku_id, create_time) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -150,8 +160,8 @@ public class OrderDetailGenerator {
                 LocalDateTime now = LocalDateTime.now();
 
                 params.add(
-                        new Object[] {
-                            id, orderId, orderDetailId, couponId, couponUseId, skuId, now
+                        new Object[]{
+                                id, orderId, orderDetailId, couponId, couponUseId, skuId, now
                         });
             }
 

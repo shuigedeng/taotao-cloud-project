@@ -16,14 +16,23 @@
 
 package com.taotao.cloud.realtime.datalake.behavior.hotitems_analysis.beans;
 
+/**
+ * ItemViewCount
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ItemViewCount {
+
     private Long itemId;
     private Long windowEnd;
     private Long count;
 
-    public ItemViewCount() {}
+    public ItemViewCount() {
+    }
 
-    public ItemViewCount(Long itemId, Long windowEnd, Long count) {
+    public ItemViewCount( Long itemId, Long windowEnd, Long count ) {
         this.itemId = itemId;
         this.windowEnd = windowEnd;
         this.count = count;
@@ -33,7 +42,7 @@ public class ItemViewCount {
         return itemId;
     }
 
-    public void setItemId(Long itemId) {
+    public void setItemId( Long itemId ) {
         this.itemId = itemId;
     }
 
@@ -41,7 +50,7 @@ public class ItemViewCount {
         return windowEnd;
     }
 
-    public void setWindowEnd(Long windowEnd) {
+    public void setWindowEnd( Long windowEnd ) {
         this.windowEnd = windowEnd;
     }
 
@@ -49,7 +58,7 @@ public class ItemViewCount {
         return count;
     }
 
-    public void setCount(Long count) {
+    public void setCount( Long count ) {
         this.count = count;
     }
 

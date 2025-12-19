@@ -17,9 +17,17 @@
 package com.taotao.cloud.mq.consistency.raft1.server.support.peer;
 
 import com.taotao.cloud.mq.consistency.raft1.server.dto.PeerInfoDto;
+
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * PeerManager
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class PeerManager {
 
     /**
@@ -41,7 +49,7 @@ public class PeerManager {
         return list;
     }
 
-    public void setList(List<PeerInfoDto> list) {
+    public void setList( List<PeerInfoDto> list ) {
         this.list = list;
     }
 
@@ -49,7 +57,7 @@ public class PeerManager {
         return leader;
     }
 
-    public void setLeader(PeerInfoDto leader) {
+    public void setLeader( PeerInfoDto leader ) {
         this.leader = leader;
     }
 
@@ -57,7 +65,7 @@ public class PeerManager {
         return self;
     }
 
-    public void setSelf(PeerInfoDto self) {
+    public void setSelf( PeerInfoDto self ) {
         this.self = self;
     }
 

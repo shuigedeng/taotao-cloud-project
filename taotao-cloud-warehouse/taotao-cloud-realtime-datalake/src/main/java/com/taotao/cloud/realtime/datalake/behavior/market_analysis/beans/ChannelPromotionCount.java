@@ -16,15 +16,24 @@
 
 package com.taotao.cloud.realtime.datalake.behavior.market_analysis.beans;
 
+/**
+ * ChannelPromotionCount
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ChannelPromotionCount {
+
     private String channel;
     private String behavior;
     private String windowEnd;
     private Long count;
 
-    public ChannelPromotionCount() {}
+    public ChannelPromotionCount() {
+    }
 
-    public ChannelPromotionCount(String channel, String behavior, String windowEnd, Long count) {
+    public ChannelPromotionCount( String channel, String behavior, String windowEnd, Long count ) {
         this.channel = channel;
         this.behavior = behavior;
         this.windowEnd = windowEnd;
@@ -35,7 +44,7 @@ public class ChannelPromotionCount {
         return channel;
     }
 
-    public void setChannel(String channel) {
+    public void setChannel( String channel ) {
         this.channel = channel;
     }
 
@@ -43,7 +52,7 @@ public class ChannelPromotionCount {
         return behavior;
     }
 
-    public void setBehavior(String behavior) {
+    public void setBehavior( String behavior ) {
         this.behavior = behavior;
     }
 
@@ -51,7 +60,7 @@ public class ChannelPromotionCount {
         return windowEnd;
     }
 
-    public void setWindowEnd(String windowEnd) {
+    public void setWindowEnd( String windowEnd ) {
         this.windowEnd = windowEnd;
     }
 
@@ -59,7 +68,7 @@ public class ChannelPromotionCount {
         return count;
     }
 
-    public void setCount(Long count) {
+    public void setCount( Long count ) {
         this.count = count;
     }
 

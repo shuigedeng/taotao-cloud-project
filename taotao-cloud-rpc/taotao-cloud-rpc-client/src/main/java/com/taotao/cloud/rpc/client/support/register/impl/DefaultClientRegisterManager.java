@@ -114,7 +114,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
             Executors.newSingleThreadScheduledExecutor();
 
     public DefaultClientRegisterManager(
-            InvokeManager invokeManager, ResourceManager resourceManager) {
+            InvokeManager invokeManager, ResourceManager resourceManager ) {
         this.invokeManager = invokeManager;
         this.resourceManager = resourceManager;
 
@@ -129,6 +129,13 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
         EXECUTOR_SERVICE.schedule(runnable, 60, TimeUnit.SECONDS);
     }
 
+    /**
+     * LocalChannelFutureThread
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     private class LocalChannelFutureThread implements Runnable {
 
         @Override
@@ -198,16 +205,16 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
     /**
      * 查询服务端地址信息列表 （1）registerCenterTimeOut 超时时间内部直接指定
      *
-     * @param serviceId          服务唯一标识
+     * @param serviceId 服务唯一标识
      * @param registerCenterList 注册中心列表
-     * @param config             配置信息
+     * @param config 配置信息
      * @return 服务端地址信息列表
      * @since 2024.06
      */
     private List<RpcAddress> queryServerAddressList(
             String serviceId,
             List<RpcAddress> registerCenterList,
-            ClientQueryServerChannelConfig config) {
+            ClientQueryServerChannelConfig config ) {
         // 1. 参数校验
         //		ArgUtil.notEmpty(serviceId, "serviceId");
         //		ArgUtil.notEmpty(registerCenterList, "registerCenterList");
@@ -229,7 +236,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
     }
 
     @Override
-    public void initServerChannelFutureList(ClientQueryServerChannelConfig config) {
+    public void initServerChannelFutureList( ClientQueryServerChannelConfig config ) {
         // 1. 查询
         List<RpcAddress> serverAddressList = getRpcAddresses(config);
 
@@ -249,7 +256,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
     }
 
     @Override
-    public List<RpcChannelFuture> queryServerChannelFutures(String serviceId) {
+    public List<RpcChannelFuture> queryServerChannelFutures( String serviceId ) {
         return serverChannelFutureMap.get(serviceId);
     }
 
@@ -281,7 +288,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
     }
 
     @Override
-    public void subscribeServer(String serviceId) {
+    public void subscribeServer( String serviceId ) {
         Collection<RpcChannelFuture> registerChannelFutureList = registerCenterChannelMap.values();
         //		if (CollectionUtil.isEmpty(registerChannelFutureList)) {
         //			log.warn("注册中心连接列表为空，忽略处理。");
@@ -303,11 +310,11 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
     /**
      * 关注服务
      *
-     * @param serviceId        服务标识
+     * @param serviceId 服务标识
      * @param rpcChannelFuture 注册中心的 channel
      * @since 0.1.8
      */
-    private void subscribeServer(String serviceId, RpcChannelFuture rpcChannelFuture) {
+    private void subscribeServer( String serviceId, RpcChannelFuture rpcChannelFuture ) {
         //		log.info("开始推送关注，serviceId: {}, rpcAddress: {}", serviceId,
         //			rpcChannelFuture.address());
         ServiceEntry serviceEntry = ServiceEntryBuilder.of(serviceId);
@@ -321,7 +328,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
     }
 
     @Override
-    public void serverRegisterNotify(ServiceEntry serviceEntry) {
+    public void serverRegisterNotify( ServiceEntry serviceEntry ) {
         // 新增
         //		log.info("客户端接收到服务端注册通知:{}", serviceEntry);
 
@@ -361,7 +368,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
      * @return 是否
      * @since 0.1.8
      */
-    private boolean containsServerEntry(ServiceEntry serviceEntry) {
+    private boolean containsServerEntry( ServiceEntry serviceEntry ) {
         // 移除
         String serviceId = serviceEntry.serviceId();
 
@@ -381,7 +388,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
     }
 
     @Override
-    public void serverUnRegisterNotify(ServiceEntry serviceEntry) {
+    public void serverUnRegisterNotify( ServiceEntry serviceEntry ) {
         //		log.info("客户端接收到服务端注销通知 :{}", serviceEntry);
         // 移除
         String serviceId = serviceEntry.serviceId();
@@ -411,7 +418,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
     }
 
     @Override
-    public void addRegisterChannel(RegisterCenterAddNotifyBody body, Channel channel) {
+    public void addRegisterChannel( RegisterCenterAddNotifyBody body, Channel channel ) {
         //		log.info("接收到注册中心新增机器的通知 {}", body);
         String ip = body.ip();
         int port = body.port();
@@ -435,7 +442,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
     }
 
     @Override
-    public void removeRegisterChannel(RegisterCenterRemoveNotifyBody body) {
+    public void removeRegisterChannel( RegisterCenterRemoveNotifyBody body ) {
         //		log.info("接收到注册中心移除机器的通知 {}", body);
         String ip = body.ip();
         int port = body.port();
@@ -455,12 +462,12 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
     /**
      * 是否包含指定的地址和端口
      *
-     * @param ip   地址
+     * @param ip 地址
      * @param port 端口
      * @return 是否
      * @since 0.1.8
      */
-    private boolean containsIpPort(String ip, int port) {
+    private boolean containsIpPort( String ip, int port ) {
         Collection<RpcChannelFuture> futures = registerCenterChannelMap.values();
         for (RpcChannelFuture future : futures) {
             if (isSameIpPort(future, ip, port)) {
@@ -475,12 +482,12 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
      * 是否为相同的 ip
      *
      * @param rpcChannelFuture channel
-     * @param ip               地址
-     * @param port             端口
+     * @param ip 地址
+     * @param port 端口
      * @return 是否
      * @since 0.1.8
      */
-    private boolean isSameIpPort(RpcChannelFuture rpcChannelFuture, String ip, int port) {
+    private boolean isSameIpPort( RpcChannelFuture rpcChannelFuture, String ip, int port ) {
         RpcAddress rpcAddress = rpcChannelFuture.address();
         if (rpcAddress.address().equals(ip) && rpcAddress.port() == port) {
             return true;
@@ -491,12 +498,12 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
     /**
      * 是否为相同的地址端口
      *
-     * @param rpcAddress   地址
+     * @param rpcAddress 地址
      * @param serviceEntry 服务信息
      * @return 结果
      * @since 0.1.8
      */
-    private boolean isTheSameIpPort(final RpcAddress rpcAddress, final ServiceEntry serviceEntry) {
+    private boolean isTheSameIpPort( final RpcAddress rpcAddress, final ServiceEntry serviceEntry ) {
         String ipPort = rpcAddress.address() + ":" + rpcAddress.port();
         String ipPortEntry = serviceEntry.ip() + ":" + serviceEntry.port();
 
@@ -507,12 +514,12 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
      * 初始化列表
      *
      * @param rpcAddressList 地址
-     * @param config         配置
+     * @param config 配置
      * @return 结果
      * @since 0.1.6
      */
     private List<RpcChannelFuture> initChannelFutureList(
-            List<RpcAddress> rpcAddressList, ClientQueryServerChannelConfig config) {
+            List<RpcAddress> rpcAddressList, ClientQueryServerChannelConfig config ) {
         final boolean check = config.check();
         // 检测可用性
         if (check) {
@@ -571,7 +578,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
      * @return rpc 地址信息列表
      * @since 2024.06
      */
-    private List<RpcAddress> getRpcAddresses(ClientQueryServerChannelConfig config) {
+    private List<RpcAddress> getRpcAddresses( ClientQueryServerChannelConfig config ) {
         final List<RpcAddress> rpcAddresses = config.rpcAddresses();
         final List<RpcAddress> registerCenterList = config.registerCenterList();
         final String serviceId = config.serviceId();
@@ -593,7 +600,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
      *
      * @since 2024.06
      */
-    private void registerCenterParamCheck(ClientQueryServerChannelConfig config) {
+    private void registerCenterParamCheck( ClientQueryServerChannelConfig config ) {
         final boolean subscribe = config.subscribe();
         final String serviceId = config.serviceId();
         if (!subscribe) {
@@ -614,7 +621,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
     private List<ServiceEntry> lookUpServiceEntryList(
             final String serviceId,
             final List<RpcAddress> registerCenterList,
-            ClientQueryServerChannelConfig config) {
+            ClientQueryServerChannelConfig config ) {
         // 1. 连接到注册中心
         List<RpcChannelFuture> channelFutureList = connectRegisterCenter(registerCenterList);
 
@@ -656,7 +663,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
      * @since 2024.06
      */
     private List<RpcChannelFuture> connectRegisterCenter(
-            final List<RpcAddress> registerCenterList) {
+            final List<RpcAddress> registerCenterList ) {
         List<RpcChannelFuture> rpcChannelFutures = new ArrayList<>();
 
         for (RpcAddress rpcAddress : registerCenterList) {
@@ -682,7 +689,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
      * @return 结果
      * @since 0.1.8
      */
-    private RpcChannelFuture createNewRegisterChannel(final RpcAddress rpcAddress) {
+    private RpcChannelFuture createNewRegisterChannel( final RpcAddress rpcAddress ) {
         final ChannelHandler channelHandler = new RpcClientRegisterHandler(invokeManager, this);
         // 重新创建
         RpcChannelFuture channelFuture =
@@ -704,7 +711,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
         return channelFuture;
     }
 
-    private String buildKey(final RpcAddress rpcAddress) {
+    private String buildKey( final RpcAddress rpcAddress ) {
         return rpcAddress.address() + ":" + rpcAddress.port();
     }
 }

@@ -16,7 +16,15 @@
 
 package com.taotao.cloud.realtime.datalake.behavior.hotitems_analysis.beans;
 
+/**
+ * UserBehavior
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class UserBehavior {
+
     // 定义私有属性
     private Long userId;
     private Long itemId;
@@ -24,10 +32,11 @@ public class UserBehavior {
     private String behavior;
     private Long timestamp;
 
-    public UserBehavior() {}
+    public UserBehavior() {
+    }
 
     public UserBehavior(
-            Long userId, Long itemId, Integer categoryId, String behavior, Long timestamp) {
+            Long userId, Long itemId, Integer categoryId, String behavior, Long timestamp ) {
         this.userId = userId;
         this.itemId = itemId;
         this.categoryId = categoryId;
@@ -39,7 +48,7 @@ public class UserBehavior {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId( Long userId ) {
         this.userId = userId;
     }
 
@@ -47,7 +56,7 @@ public class UserBehavior {
         return itemId;
     }
 
-    public void setItemId(Long itemId) {
+    public void setItemId( Long itemId ) {
         this.itemId = itemId;
     }
 
@@ -55,7 +64,7 @@ public class UserBehavior {
         return categoryId;
     }
 
-    public void setCategoryId(Integer categoryId) {
+    public void setCategoryId( Integer categoryId ) {
         this.categoryId = categoryId;
     }
 
@@ -63,7 +72,7 @@ public class UserBehavior {
         return behavior;
     }
 
-    public void setBehavior(String behavior) {
+    public void setBehavior( String behavior ) {
         this.behavior = behavior;
     }
 
@@ -71,7 +80,7 @@ public class UserBehavior {
         return timestamp;
     }
 
-    public void setTimestamp(Long timestamp) {
+    public void setTimestamp( Long timestamp ) {
         this.timestamp = timestamp;
     }
 

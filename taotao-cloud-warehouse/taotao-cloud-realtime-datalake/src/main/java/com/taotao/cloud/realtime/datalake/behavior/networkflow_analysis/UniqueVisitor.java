@@ -18,8 +18,10 @@ package com.taotao.cloud.realtime.datalake.behavior.networkflow_analysis;
 
 import com.taotao.cloud.realtime.behavior.analysis.networkflow_analysis.beans.PageViewCount;
 import com.taotao.cloud.realtime.behavior.analysis.networkflow_analysis.beans.UserBehavior;
+
 import java.net.URL;
 import java.util.HashSet;
+
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
@@ -30,8 +32,16 @@ import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
+/**
+ * UniqueVisitor
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class UniqueVisitor {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         // 1. 创建执行环境
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
@@ -57,7 +67,7 @@ public class UniqueVisitor {
                         .assignTimestampsAndWatermarks(
                                 new AscendingTimestampExtractor<UserBehavior>() {
                                     @Override
-                                    public long extractAscendingTimestamp(UserBehavior element) {
+                                    public long extractAscendingTimestamp( UserBehavior element ) {
                                         return element.getTimestamp() * 1000L;
                                     }
                                 });
@@ -77,9 +87,10 @@ public class UniqueVisitor {
     // 实现自定义全窗口函数
     public static class UvCountResult
             implements AllWindowFunction<UserBehavior, PageViewCount, TimeWindow> {
+
         @Override
         public void apply(
-                TimeWindow window, Iterable<UserBehavior> values, Collector<PageViewCount> out)
+                TimeWindow window, Iterable<UserBehavior> values, Collector<PageViewCount> out )
                 throws Exception {
             // 定义一个Set结构，保存窗口中的所有userId，自动去重
             HashSet<Long> uidSet = new HashSet<>();

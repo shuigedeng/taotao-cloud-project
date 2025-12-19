@@ -19,9 +19,17 @@ package com.taotao.cloud.realtime.warehouse.datageneration.userlog_code.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
+/**
+ * UserLog
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserLog {
+
     private Common common;
     private Start start;
     private Page page;

@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.DbUtil;
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.RandomUtil;
 import org.slf4j.Logger;
@@ -27,13 +28,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * SeckillDataGenerator
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class SeckillDataGenerator {
+
     private static final Logger logger = LoggerFactory.getLogger(SeckillDataGenerator.class);
 
-    @Autowired private DbUtil dbUtil;
+    @Autowired
+    private DbUtil dbUtil;
 
-    public void generateSeckillData(int count) {
+    public void generateSeckillData( int count ) {
         // 获取最大ID
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM seckill_goods";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
@@ -64,10 +74,10 @@ public class SeckillDataGenerator {
             String skuDesc = "秒杀商品" + id + "的详细描述";
 
             params.add(
-                    new Object[] {
-                        id, spuId, skuId, skuName, skuDefaultImg,
-                        price, costPrice, now, checkTime, status,
-                        startTime, endTime, num, stockCount, skuDesc
+                    new Object[]{
+                            id, spuId, skuId, skuName, skuDefaultImg,
+                            price, costPrice, now, checkTime, status,
+                            startTime, endTime, num, stockCount, skuDesc
                     });
         }
         dbUtil.batchInsert(sql, params);

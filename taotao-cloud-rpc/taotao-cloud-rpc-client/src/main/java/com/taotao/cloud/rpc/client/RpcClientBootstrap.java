@@ -16,9 +16,16 @@
 
 package com.taotao.cloud.rpc.client;
 
+/**
+ * RpcClientBootstrap
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class RpcClientBootstrap {
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         new RpcClient().start();
     }
 }

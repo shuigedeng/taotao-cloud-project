@@ -29,11 +29,19 @@ import org.apache.flink.types.Row;
  * 4. 创建临时方法  CREATE TEMPORARY FUNCTION json_actions_array_parser AS 'com.taotao.cloud.realtime.warehouse.flink.udf.JsonActionsArrayParser';
  * 5. 查询 select json_actions_array_parser(`actions`).`action_id` as action_id, json_actions_array_parser(`actions`).`item` as item,json_actions_array_parser(`actions`).`item_type` as item_type,json_actions_array_parser(`actions`).`ts` as ts from ods.ods_log_inc;
  */
+/**
+ * JsonActionsArrayParser
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class JsonActionsArrayParser extends ScalarFunction {
+
     private static final JsonMapper mapper = new JsonMapper();
 
     @DataTypeHint("ROW<action_id STRING, item STRING, item_type STRING, ts BIGINT>")
-    public Row eval(String jsonStr) {
+    public Row eval( String jsonStr ) {
         if (jsonStr == null || jsonStr.isEmpty()) {
             return new Row(4); // 返回一个空的Row，所有字段为null
         }
@@ -66,5 +74,7 @@ public class JsonActionsArrayParser extends ScalarFunction {
     }
 
     @DataTypeHint("ROW<action_id STRING, item STRING, item_type STRING, ts BIGINT>")
-    public static class ReturnType {}
+    public static class ReturnType {
+
+    }
 }

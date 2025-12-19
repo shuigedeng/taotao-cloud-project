@@ -18,7 +18,9 @@ package com.taotao.cloud.realtime.datalake.behavior.orderpay_detect;
 
 import com.taotao.cloud.realtime.behavior.analysis.orderpay_detect.beans.OrderEvent;
 import com.taotao.cloud.realtime.behavior.analysis.orderpay_detect.beans.ReceiptEvent;
+
 import java.net.URL;
+
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -29,8 +31,16 @@ import org.apache.flink.streaming.api.functions.timestamps.AscendingTimestampExt
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.util.Collector;
 
+/**
+ * TxPayMatchByJoin
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TxPayMatchByJoin {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
         env.setParallelism(1);
@@ -52,7 +62,7 @@ public class TxPayMatchByJoin {
                         .assignTimestampsAndWatermarks(
                                 new AscendingTimestampExtractor<OrderEvent>() {
                                     @Override
-                                    public long extractAscendingTimestamp(OrderEvent element) {
+                                    public long extractAscendingTimestamp( OrderEvent element ) {
                                         return element.getTimestamp() * 1000L;
                                     }
                                 })
@@ -71,7 +81,7 @@ public class TxPayMatchByJoin {
                         .assignTimestampsAndWatermarks(
                                 new AscendingTimestampExtractor<ReceiptEvent>() {
                                     @Override
-                                    public long extractAscendingTimestamp(ReceiptEvent element) {
+                                    public long extractAscendingTimestamp( ReceiptEvent element ) {
                                         return element.getTimestamp() * 1000L;
                                     }
                                 });
@@ -92,13 +102,14 @@ public class TxPayMatchByJoin {
     // 实现自定义ProcessJoinFunction
     public static class TxPayMatchDetectByJoin
             extends ProcessJoinFunction<
-                    OrderEvent, ReceiptEvent, Tuple2<OrderEvent, ReceiptEvent>> {
+            OrderEvent, ReceiptEvent, Tuple2<OrderEvent, ReceiptEvent>> {
+
         @Override
         public void processElement(
                 OrderEvent left,
                 ReceiptEvent right,
                 Context ctx,
-                Collector<Tuple2<OrderEvent, ReceiptEvent>> out)
+                Collector<Tuple2<OrderEvent, ReceiptEvent>> out )
                 throws Exception {
             out.collect(new Tuple2<>(left, right));
         }

@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.DbUtil;
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.RandomUtil;
 import org.slf4j.Logger;
@@ -27,13 +28,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * CouponDataGenerator
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class CouponDataGenerator {
+
     private static final Logger logger = LoggerFactory.getLogger(CouponDataGenerator.class);
 
-    @Autowired private DbUtil dbUtil;
+    @Autowired
+    private DbUtil dbUtil;
 
-    public void generateCouponData(int couponCount, int userCount) {
+    public void generateCouponData( int couponCount, int userCount ) {
         logger.info("开始生成优惠券数据...");
 
         logger.info("正在更新 coupon_info 表...");
@@ -48,7 +58,7 @@ public class CouponDataGenerator {
         logger.info("优惠券数据生成完成");
     }
 
-    private void generateCouponInfo(int count) {
+    private void generateCouponInfo( int count ) {
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM coupon_info";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
 
@@ -74,27 +84,27 @@ public class CouponDataGenerator {
             LocalDateTime expireTime = now.plusDays(30); // 30天有效期
 
             params.add(
-                    new Object[] {
-                        id,
-                        "优惠券" + id,
-                        couponType,
-                        conditionAmount,
-                        conditionNum,
-                        activityId,
-                        benefitAmount,
-                        benefitDiscount,
-                        now,
-                        rangeType,
-                        limitNum,
-                        now,
-                        expireTime,
-                        "指定品类商品"
+                    new Object[]{
+                            id,
+                            "优惠券" + id,
+                            couponType,
+                            conditionAmount,
+                            conditionNum,
+                            activityId,
+                            benefitAmount,
+                            benefitDiscount,
+                            now,
+                            rangeType,
+                            limitNum,
+                            now,
+                            expireTime,
+                            "指定品类商品"
                     });
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateCouponRange(int count) {
+    private void generateCouponRange( int count ) {
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM coupon_range";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
 
@@ -106,17 +116,17 @@ public class CouponDataGenerator {
         for (int i = 0; i < count; i++) {
             int id = startId + i;
             params.add(
-                    new Object[] {
-                        id,
-                        RandomUtil.generateNumber(1, 10), // 关联已存在的优惠券
-                        "CATEGORY", // 按品类使用
-                        RandomUtil.generateNumber(1, 10) // 随机关联一个品类
+                    new Object[]{
+                            id,
+                            RandomUtil.generateNumber(1, 10), // 关联已存在的优惠券
+                            "CATEGORY", // 按品类使用
+                            RandomUtil.generateNumber(1, 10) // 随机关联一个品类
                     });
         }
         dbUtil.batchInsert(sql, params);
     }
 
-    private void generateCouponUse(int count) {
+    private void generateCouponUse( int count ) {
         String maxIdSql = "SELECT COALESCE(MAX(id), 0) FROM coupon_use";
         int startId = dbUtil.queryForInt(maxIdSql) + 1;
 
@@ -151,16 +161,16 @@ public class CouponDataGenerator {
             }
 
             params.add(
-                    new Object[] {
-                        id,
-                        couponId,
-                        userId,
-                        orderId,
-                        status,
-                        getTime,
-                        usingTime,
-                        usedTime,
-                        expireTime
+                    new Object[]{
+                            id,
+                            couponId,
+                            userId,
+                            orderId,
+                            status,
+                            getTime,
+                            usingTime,
+                            usedTime,
+                            expireTime
                     });
         }
         dbUtil.batchInsert(sql, params);

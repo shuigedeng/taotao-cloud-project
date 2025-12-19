@@ -21,26 +21,35 @@ import com.taotao.cloud.rpc.common.exception.ReceiveResponseException;
 import com.taotao.cloud.rpc.common.exception.RpcException;
 import com.taotao.cloud.rpc.common.protocol.RpcRequest;
 import com.taotao.cloud.rpc.common.protocol.RpcResponse;
+
 import java.io.UnsupportedEncodingException;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 
+/**
+ * RpcMessageChecker
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class RpcMessageChecker {
 
     private static final String INTERFACE_NAME = "interfaceName";
 
-    public RpcMessageChecker() {}
+    public RpcMessageChecker() {
+    }
 
     /**
      * true 通过校验 false 校验失败
      *
-     * @param rpcRequest  rpc 待校验 请求包
+     * @param rpcRequest rpc 待校验 请求包
      * @param rpcResponse rpc 待校验 响应包
      * @return boolean
-     * @throws RpcException
      */
-    public static boolean check(RpcRequest rpcRequest, RpcResponse rpcResponse)
+    public static boolean check( RpcRequest rpcRequest, RpcResponse rpcResponse )
             throws RpcException {
 
         if (rpcResponse == null) {
@@ -123,11 +132,10 @@ public class RpcMessageChecker {
     /**
      * 校验失败直接抛出异常，外层逻辑则会将该包抛弃不处理
      *
-     * @param rpcRequest  rpc 校验 请求包
+     * @param rpcRequest rpc 校验 请求包
      * @param rpcResponse rpc 校验 响应包
-     * @throws RpcException
      */
-    public static void checkAndThrow(RpcRequest rpcRequest, RpcResponse rpcResponse)
+    public static void checkAndThrow( RpcRequest rpcRequest, RpcResponse rpcResponse )
             throws RpcException {
 
         if (rpcResponse == null) {

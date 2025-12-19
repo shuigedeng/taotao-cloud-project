@@ -16,11 +16,19 @@
 
 package com.taotao.cloud.rpc.registry.apiregistry.base;
 
+/**
+ * ApiClientInfo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ApiClientInfo {
+
     String name;
     String path;
 
-    public ApiClientInfo(String name, String path) {
+    public ApiClientInfo( String name, String path ) {
         this.name = name;
         this.path = path;
     }
@@ -29,7 +37,7 @@ public class ApiClientInfo {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName( String name ) {
         this.name = name;
     }
 
@@ -37,7 +45,7 @@ public class ApiClientInfo {
         return path;
     }
 
-    public void setPath(String path) {
+    public void setPath( String path ) {
         this.path = path;
     }
 }

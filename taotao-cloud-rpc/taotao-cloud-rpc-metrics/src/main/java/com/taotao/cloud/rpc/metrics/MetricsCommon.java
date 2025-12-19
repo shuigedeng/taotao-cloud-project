@@ -16,4 +16,13 @@
 
 package com.taotao.cloud.rpc.metrics;
 
-public class MetricsCommon {}
+/**
+ * MetricsCommon
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
+public class MetricsCommon {
+
+}

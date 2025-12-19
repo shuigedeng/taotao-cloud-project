@@ -34,9 +34,10 @@ public class Result {
 
     String leaderHint;
 
-    public Result() {}
+    public Result() {
+    }
 
-    public Result(Builder builder) {
+    public Result( Builder builder ) {
         setStatus(builder.status);
         setLeaderHint(builder.leaderHint);
     }
@@ -57,11 +58,11 @@ public class Result {
 
         int code;
 
-        Status(int code) {
+        Status( int code ) {
             this.code = code;
         }
 
-        public static Status value(int v) {
+        public static Status value( int v ) {
             for (Status i : values()) {
                 if (i.code == v) {
                     return i;
@@ -71,19 +72,27 @@ public class Result {
         }
     }
 
+    /**
+     * Builder
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static final class Builder {
 
         private int status;
         private String leaderHint;
 
-        private Builder() {}
+        private Builder() {
+        }
 
-        public Builder status(int val) {
+        public Builder status( int val ) {
             status = val;
             return this;
         }
 
-        public Builder leaderHint(String val) {
+        public Builder leaderHint( String val ) {
             leaderHint = val;
             return this;
         }

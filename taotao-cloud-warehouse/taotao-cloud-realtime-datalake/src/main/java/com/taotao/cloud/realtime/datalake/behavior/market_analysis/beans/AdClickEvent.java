@@ -16,16 +16,25 @@
 
 package com.taotao.cloud.realtime.datalake.behavior.market_analysis.beans;
 
+/**
+ * AdClickEvent
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class AdClickEvent {
+
     private Long userId;
     private Long adId;
     private String province;
     private String city;
     private Long timestamp;
 
-    public AdClickEvent() {}
+    public AdClickEvent() {
+    }
 
-    public AdClickEvent(Long userId, Long adId, String province, String city, Long timestamp) {
+    public AdClickEvent( Long userId, Long adId, String province, String city, Long timestamp ) {
         this.userId = userId;
         this.adId = adId;
         this.province = province;
@@ -37,7 +46,7 @@ public class AdClickEvent {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId( Long userId ) {
         this.userId = userId;
     }
 
@@ -45,7 +54,7 @@ public class AdClickEvent {
         return adId;
     }
 
-    public void setAdId(Long adId) {
+    public void setAdId( Long adId ) {
         this.adId = adId;
     }
 
@@ -53,7 +62,7 @@ public class AdClickEvent {
         return province;
     }
 
-    public void setProvince(String province) {
+    public void setProvince( String province ) {
         this.province = province;
     }
 
@@ -61,7 +70,7 @@ public class AdClickEvent {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity( String city ) {
         this.city = city;
     }
 
@@ -69,7 +78,7 @@ public class AdClickEvent {
         return timestamp;
     }
 
-    public void setTimestamp(Long timestamp) {
+    public void setTimestamp( Long timestamp ) {
         this.timestamp = timestamp;
     }
 

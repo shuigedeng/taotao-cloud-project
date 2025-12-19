@@ -16,13 +16,20 @@
 
 package com.taotao.cloud.rpc.common.exception;
 
+/**
+ * AnnotationMissingException
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class AnnotationMissingException extends RpcException {
 
     public AnnotationMissingException() {
         super();
     }
 
-    public AnnotationMissingException(String message) {
+    public AnnotationMissingException( String message ) {
         super(message);
     }
 }

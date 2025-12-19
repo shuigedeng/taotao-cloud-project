@@ -18,9 +18,18 @@ package com.taotao.cloud.mq.common.balance.impl;
 
 import com.taotao.cloud.mq.common.balance.ILoadBalanceContext;
 import com.taotao.cloud.mq.common.balance.IServer;
+
 import java.util.List;
 
+/**
+ * LoadBalanceContext
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class LoadBalanceContext<T extends IServer> implements ILoadBalanceContext<T> {
+
     private String hashKey;
     private List<T> servers;
 
@@ -32,7 +41,7 @@ public class LoadBalanceContext<T extends IServer> implements ILoadBalanceContex
         return this.hashKey;
     }
 
-    public LoadBalanceContext<T> hashKey(String hashKey) {
+    public LoadBalanceContext<T> hashKey( String hashKey ) {
         this.hashKey = hashKey;
         return this;
     }
@@ -41,7 +50,7 @@ public class LoadBalanceContext<T extends IServer> implements ILoadBalanceContex
         return this.servers;
     }
 
-    public LoadBalanceContext<T> servers(List<T> servers) {
+    public LoadBalanceContext<T> servers( List<T> servers ) {
         this.servers = servers;
         return this;
     }

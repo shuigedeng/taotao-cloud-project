@@ -16,15 +16,24 @@
 
 package com.taotao.cloud.realtime.datalake.behavior.market_analysis.beans;
 
+/**
+ * MarketingUserBehavior
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MarketingUserBehavior {
+
     private Long userId;
     private String behavior;
     private String channel;
     private Long timestamp;
 
-    public MarketingUserBehavior() {}
+    public MarketingUserBehavior() {
+    }
 
-    public MarketingUserBehavior(Long userId, String behavior, String channel, Long timestamp) {
+    public MarketingUserBehavior( Long userId, String behavior, String channel, Long timestamp ) {
         this.userId = userId;
         this.behavior = behavior;
         this.channel = channel;
@@ -35,7 +44,7 @@ public class MarketingUserBehavior {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId( Long userId ) {
         this.userId = userId;
     }
 
@@ -43,7 +52,7 @@ public class MarketingUserBehavior {
         return behavior;
     }
 
-    public void setBehavior(String behavior) {
+    public void setBehavior( String behavior ) {
         this.behavior = behavior;
     }
 
@@ -51,7 +60,7 @@ public class MarketingUserBehavior {
         return channel;
     }
 
-    public void setChannel(String channel) {
+    public void setChannel( String channel ) {
         this.channel = channel;
     }
 
@@ -59,7 +68,7 @@ public class MarketingUserBehavior {
         return timestamp;
     }
 
-    public void setTimestamp(Long timestamp) {
+    public void setTimestamp( Long timestamp ) {
         this.timestamp = timestamp;
     }
 

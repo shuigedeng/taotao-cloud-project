@@ -52,15 +52,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.TimeoutException;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import lombok.Getter;
 import lombok.Setter;
@@ -177,12 +169,20 @@ public class DefaultNode implements Node, ClusterMembershipChanges {
 
     /* ============================== */
 
-    private DefaultNode() {}
+    private DefaultNode() {
+    }
 
     public static DefaultNode getInstance() {
         return DefaultNodeLazyHolder.INSTANCE;
     }
 
+    /**
+     * DefaultNodeLazyHolder
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     private static class DefaultNodeLazyHolder {
 
         private static final DefaultNode INSTANCE = new DefaultNode();
@@ -210,7 +210,7 @@ public class DefaultNode implements Node, ClusterMembershipChanges {
     }
 
     @Override
-    public void setConfig(NodeConfig config) {
+    public void setConfig( NodeConfig config ) {
         this.config = config;
         stateMachine = config.getStateMachineSaveType().getStateMachine();
         logModule = DefaultLogModule.getInstance();
@@ -228,13 +228,13 @@ public class DefaultNode implements Node, ClusterMembershipChanges {
     }
 
     @Override
-    public RvoteResult handlerRequestVote(RvoteParam param) {
+    public RvoteResult handlerRequestVote( RvoteParam param ) {
         log.warn("handlerRequestVote will be invoke, param info : {}", param);
         return consensus.requestVote(param);
     }
 
     @Override
-    public AentryResult handlerAppendEntries(AentryParam param) {
+    public AentryResult handlerAppendEntries( AentryParam param ) {
         if (param.getEntries() != null) {
             log.warn(
                     "node receive node {} append entry, entry content = {}",
@@ -246,7 +246,7 @@ public class DefaultNode implements Node, ClusterMembershipChanges {
     }
 
     @Override
-    public ClientKVAck redirect(ClientKVReq request) {
+    public ClientKVAck redirect( ClientKVReq request ) {
         Request r =
                 Request.builder()
                         .obj(request)
@@ -259,14 +259,11 @@ public class DefaultNode implements Node, ClusterMembershipChanges {
 
     /**
      * 客户端的每一个请求都包含一条被复制状态机执行的指令。 领导人把这条指令作为一条新的日志条目附加到日志中去，然后并行的发起附加条目 RPCs 给其他的服务器，让他们复制这条日志条目。
-     * 当这条日志条目被安全的复制（下面会介绍），领导人会应用这条日志条目到它的状态机中然后把执行的结果返回给客户端。 如果跟随者崩溃或者运行缓慢，再或者网络丢包，
-     * 领导人会不断的重复尝试附加日志条目 RPCs （尽管已经回复了客户端）直到所有的跟随者都最终存储了所有的日志条目。
-     *
-     * @param request
-     * @return
+     * 当这条日志条目被安全的复制（下面会介绍），领导人会应用这条日志条目到它的状态机中然后把执行的结果返回给客户端。 如果跟随者崩溃或者运行缓慢，再或者网络丢包， 领导人会不断的重复尝试附加日志条目 RPCs
+     * （尽管已经回复了客户端）直到所有的跟随者都最终存储了所有的日志条目。
      */
     @Override
-    public synchronized ClientKVAck handlerClientRequest(ClientKVReq request) {
+    public synchronized ClientKVAck handlerClientRequest( ClientKVReq request ) {
 
         log.warn(
                 "handlerClientRequest handler {} operation,  and key : [{}], value : [{}]",
@@ -355,7 +352,7 @@ public class DefaultNode implements Node, ClusterMembershipChanges {
         }
 
         //  响应客户端(成功一半)
-        if (success.get() >= (count / 2)) {
+        if (success.get() >= ( count / 2 )) {
             // 更新
             commitIndex = logEntry.getIndex();
             //  应用到状态机
@@ -376,7 +373,7 @@ public class DefaultNode implements Node, ClusterMembershipChanges {
     }
 
     private void getRPCAppendResult(
-            List<Future<Boolean>> futureList, CountDownLatch latch, List<Boolean> resultList) {
+            List<Future<Boolean>> futureList, CountDownLatch latch, List<Boolean> resultList ) {
         for (Future<Boolean> future : futureList) {
             RaftThreadPool.execute(
                     () -> {
@@ -395,7 +392,7 @@ public class DefaultNode implements Node, ClusterMembershipChanges {
     /**
      * 复制到其他机器
      */
-    public Future<Boolean> replication(Peer peer, LogEntry entry) {
+    public Future<Boolean> replication( Peer peer, LogEntry entry ) {
 
         return RaftThreadPool.submit(
                 () -> {
@@ -500,7 +497,7 @@ public class DefaultNode implements Node, ClusterMembershipChanges {
                 });
     }
 
-    private LogEntry getPreLog(LogEntry logEntry) {
+    private LogEntry getPreLog( LogEntry logEntry ) {
         LogEntry entry = logModule.read(logEntry.getIndex() - 1);
 
         if (entry == null) {
@@ -510,6 +507,13 @@ public class DefaultNode implements Node, ClusterMembershipChanges {
         return entry;
     }
 
+    /**
+     * ReplicationFailQueueConsumer
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     class ReplicationFailQueueConsumer implements Runnable {
 
         /**
@@ -556,7 +560,7 @@ public class DefaultNode implements Node, ClusterMembershipChanges {
         }
     }
 
-    private void tryApplyStateMachine(ReplicationFailModel model) {
+    private void tryApplyStateMachine( ReplicationFailModel model ) {
 
         String success = stateMachine.getString(model.successKey);
         stateMachine.setString(model.successKey, String.valueOf(Integer.parseInt(success) + 1));
@@ -579,8 +583,8 @@ public class DefaultNode implements Node, ClusterMembershipChanges {
     }
 
     /**
-     * 1. 在转变成候选人后就立即开始选举过程 自增当前的任期号（currentTerm） 给自己投票 重置选举超时计时器 发送请求投票的 RPC 给其他所有服务器 2.
-     * 如果接收到大多数服务器的选票，那么就变成领导人 3. 如果接收到来自新的领导人的附加日志 RPC，转变成跟随者 4. 如果选举过程超时，再次发起一轮选举
+     * 1. 在转变成候选人后就立即开始选举过程 自增当前的任期号（currentTerm） 给自己投票 重置选举超时计时器 发送请求投票的 RPC 给其他所有服务器 2. 如果接收到大多数服务器的选票，那么就变成领导人 3.
+     * 如果接收到来自新的领导人的附加日志 RPC，转变成跟随者 4. 如果选举过程超时，再次发起一轮选举
      */
     class ElectionTask implements Runnable {
 
@@ -726,8 +730,8 @@ public class DefaultNode implements Node, ClusterMembershipChanges {
     }
 
     /**
-     * 初始化所有的 nextIndex 值为自己的最后一条日志的 index + 1. 如果下次 RPC 时, 跟随者和leader 不一致,就会失败. 那么 leader 尝试递减
-     * nextIndex 并进行重试.最终将达成一致.
+     * 初始化所有的 nextIndex 值为自己的最后一条日志的 index + 1. 如果下次 RPC 时, 跟随者和leader 不一致,就会失败. 那么 leader 尝试递减 nextIndex
+     * 并进行重试.最终将达成一致.
      */
     private void becomeLeaderToDoThing() {
         nextIndexs = new ConcurrentHashMap<>();
@@ -795,7 +799,7 @@ public class DefaultNode implements Node, ClusterMembershipChanges {
         }
 
         //  响应客户端(成功一半)
-        if (success.get() >= (count / 2)) {
+        if (success.get() >= ( count / 2 )) {
             // 更新
             commitIndex = logEntry.getIndex();
             //  应用到状态机
@@ -816,6 +820,13 @@ public class DefaultNode implements Node, ClusterMembershipChanges {
         }
     }
 
+    /**
+     * HeartBeatTask
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     class HeartBeatTask implements Runnable {
 
         @Override
@@ -877,12 +888,12 @@ public class DefaultNode implements Node, ClusterMembershipChanges {
     }
 
     @Override
-    public Result addPeer(Peer newPeer) {
+    public Result addPeer( Peer newPeer ) {
         return delegate.addPeer(newPeer);
     }
 
     @Override
-    public Result removePeer(Peer oldPeer) {
+    public Result removePeer( Peer oldPeer ) {
         return delegate.removePeer(oldPeer);
     }
 }

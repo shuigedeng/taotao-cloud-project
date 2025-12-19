@@ -19,10 +19,18 @@ package com.taotao.cloud.mq.common.balance.impl;
 import com.taotao.cloud.mq.common.balance.IServer;
 import com.taotao.boot.common.support.hash.api.IHashCode;
 
+/**
+ * AbstractLoadBalanceHash
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public abstract class AbstractLoadBalanceHash<T extends IServer> extends AbstractLoadBalance<T> {
+
     protected final IHashCode hashCode;
 
-    public AbstractLoadBalanceHash(IHashCode hashCode) {
+    public AbstractLoadBalanceHash( IHashCode hashCode ) {
         this.hashCode = hashCode;
     }
 }

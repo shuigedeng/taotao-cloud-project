@@ -18,7 +18,15 @@ package com.taotao.cloud.mq.common.balance;
 
 import java.util.Objects;
 
+/**
+ * Server
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class Server implements IServer {
+
     private String url;
     private int weight;
 
@@ -26,11 +34,11 @@ public class Server implements IServer {
         return new Server();
     }
 
-    public static Server of(String url, int weight) {
+    public static Server of( String url, int weight ) {
         return newInstance().url(url).weight(weight);
     }
 
-    public static Server of(String url) {
+    public static Server of( String url ) {
         return of(url, 1);
     }
 
@@ -38,7 +46,7 @@ public class Server implements IServer {
         return this.url;
     }
 
-    public Server url(String url) {
+    public Server url( String url ) {
         this.url = url;
         return this;
     }
@@ -47,7 +55,7 @@ public class Server implements IServer {
         return this.weight;
     }
 
-    public Server weight(int weight) {
+    public Server weight( int weight ) {
         this.weight = weight;
         return this;
     }
@@ -56,7 +64,7 @@ public class Server implements IServer {
         return "Server{url='" + this.url + '\'' + ", weight=" + this.weight + '}';
     }
 
-    public boolean equals(Object object) {
+    public boolean equals( Object object ) {
         if (this == object) {
             return true;
         } else if (object != null && this.getClass() == object.getClass()) {
@@ -68,6 +76,6 @@ public class Server implements IServer {
     }
 
     public int hashCode() {
-        return Objects.hash(new Object[] {this.url, this.weight});
+        return Objects.hash(new Object[]{this.url, this.weight});
     }
 }

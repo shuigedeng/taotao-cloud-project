@@ -24,12 +24,21 @@ import com.taotao.cloud.rpc.common.serializer.CommonSerializer;
 import com.taotao.cloud.rpc.core.net.RpcClient;
 import com.taotao.cloud.rpc.core.util.ObjectReader;
 import com.taotao.cloud.rpc.core.util.ObjectWriter;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * SocketClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class SocketClient implements RpcClient {
 
@@ -38,14 +47,14 @@ public class SocketClient implements RpcClient {
 
     private final CommonSerializer serializer;
 
-    public SocketClient(String hostName, int port, Integer serializerCode) {
+    public SocketClient( String hostName, int port, Integer serializerCode ) {
         this.hostName = hostName;
         this.port = port;
         this.serializer = CommonSerializer.getByCode(serializerCode);
     }
 
     @Override
-    public Object sendRequest(RpcRequest rpcRequest) throws RpcException {
+    public Object sendRequest( RpcRequest rpcRequest ) throws RpcException {
         if (serializer == null) {
             log.error("Serializer not set");
             throw new SerializerNotSetException("Serializer not set Exception");

@@ -18,12 +18,22 @@ package com.taotao.cloud.mq.common.balance;
 
 import com.taotao.cloud.mq.common.balance.impl.LoadBalances;
 import com.taotao.boot.common.support.hash.api.IHashCode;
+
 import java.util.List;
 
+/**
+ * LoadBalanceHelper
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public final class LoadBalanceHelper {
-    private LoadBalanceHelper() {}
 
-    public static <T extends IServer> T random(List<T> servers) {
+    private LoadBalanceHelper() {
+    }
+
+    public static <T extends IServer> T random( List<T> servers ) {
         return (T)
                 LoadBalanceBs.<T>newInstance()
                         .servers(servers)
@@ -31,7 +41,7 @@ public final class LoadBalanceHelper {
                         .select();
     }
 
-    public static <T extends IServer> T roundRobbin(List<T> servers) {
+    public static <T extends IServer> T roundRobbin( List<T> servers ) {
         return (T)
                 LoadBalanceBs.<T>newInstance()
                         .servers(servers)
@@ -39,7 +49,7 @@ public final class LoadBalanceHelper {
                         .select();
     }
 
-    public static <T extends IServer> T weightRoundRobbin(List<T> servers) {
+    public static <T extends IServer> T weightRoundRobbin( List<T> servers ) {
         return (T)
                 LoadBalanceBs.<T>newInstance()
                         .servers(servers)
@@ -48,7 +58,7 @@ public final class LoadBalanceHelper {
     }
 
     public static <T extends IServer> T commonHash(
-            List<T> servers, IHashCode hash, String hashKey) {
+            List<T> servers, IHashCode hash, String hashKey ) {
         return (T)
                 LoadBalanceBs.<T>newInstance()
                         .servers(servers)
@@ -58,7 +68,7 @@ public final class LoadBalanceHelper {
     }
 
     public static <T extends IServer> T consistentHash(
-            List<T> servers, IHashCode hash, String hashKey) {
+            List<T> servers, IHashCode hash, String hashKey ) {
         return (T)
                 LoadBalanceBs.<T>newInstance()
                         .servers(servers)

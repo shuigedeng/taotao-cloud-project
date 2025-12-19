@@ -21,10 +21,18 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 // 添加一个自定义的拦截器
+/**
+ * WebAppConfig
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Configuration
 public class WebAppConfig implements WebMvcConfigurer {
+
     @Override
-    public void addInterceptors(InterceptorRegistry registry) {
+    public void addInterceptors( InterceptorRegistry registry ) {
         registry.addInterceptor(new RequestInterceptor());
     }
 }

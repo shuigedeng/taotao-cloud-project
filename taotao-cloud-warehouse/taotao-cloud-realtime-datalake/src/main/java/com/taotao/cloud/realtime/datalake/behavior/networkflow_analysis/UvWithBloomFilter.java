@@ -18,7 +18,9 @@ package com.taotao.cloud.realtime.datalake.behavior.networkflow_analysis;
 
 import com.taotao.cloud.realtime.behavior.analysis.networkflow_analysis.beans.PageViewCount;
 import com.taotao.cloud.realtime.behavior.analysis.networkflow_analysis.beans.UserBehavior;
+
 import java.net.URL;
+
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -33,8 +35,16 @@ import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 import redis.clients.jedis.Jedis;
 
+/**
+ * UvWithBloomFilter
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class UvWithBloomFilter {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         // 1. 创建执行环境
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
@@ -60,7 +70,7 @@ public class UvWithBloomFilter {
                         .assignTimestampsAndWatermarks(
                                 new AscendingTimestampExtractor<UserBehavior>() {
                                     @Override
-                                    public long extractAscendingTimestamp(UserBehavior element) {
+                                    public long extractAscendingTimestamp( UserBehavior element ) {
                                         return element.getTimestamp() * 1000L;
                                     }
                                 });
@@ -80,65 +90,69 @@ public class UvWithBloomFilter {
 
     // 自定义触发器
     public static class MyTrigger extends Trigger<UserBehavior, TimeWindow> {
+
         @Override
         public TriggerResult onElement(
-                UserBehavior element, long timestamp, TimeWindow window, TriggerContext ctx)
+                UserBehavior element, long timestamp, TimeWindow window, TriggerContext ctx )
                 throws Exception {
             // 每一条数据来到，直接触发窗口计算，并且直接清空窗口
             return TriggerResult.FIRE_AND_PURGE;
         }
 
         @Override
-        public TriggerResult onProcessingTime(long time, TimeWindow window, TriggerContext ctx)
+        public TriggerResult onProcessingTime( long time, TimeWindow window, TriggerContext ctx )
                 throws Exception {
             return TriggerResult.CONTINUE;
         }
 
         @Override
-        public TriggerResult onEventTime(long time, TimeWindow window, TriggerContext ctx)
+        public TriggerResult onEventTime( long time, TimeWindow window, TriggerContext ctx )
                 throws Exception {
             return TriggerResult.CONTINUE;
         }
 
         @Override
-        public void clear(TimeWindow window, TriggerContext ctx) throws Exception {}
+        public void clear( TimeWindow window, TriggerContext ctx ) throws Exception {
+        }
     }
 
     // 自定义一个布隆过滤器
     public static class MyBloomFilter {
+
         // 定义位图的大小，一般需要定义为2的整次幂
         private Integer cap;
 
-        public MyBloomFilter(Integer cap) {
+        public MyBloomFilter( Integer cap ) {
             this.cap = cap;
         }
 
         // 实现一个hash函数
-        public Long hashCode(String value, Integer seed) {
+        public Long hashCode( String value, Integer seed ) {
             Long result = 0L;
             for (int i = 0; i < value.length(); i++) {
                 result = result * seed + value.charAt(i);
             }
-            return result & (cap - 1);
+            return result & ( cap - 1 );
         }
     }
 
     // 实现自定义的处理函数
     public static class UvCountResultWithBloomFliter
             extends ProcessAllWindowFunction<UserBehavior, PageViewCount, TimeWindow> {
+
         // 定义jedis连接和布隆过滤器
         Jedis jedis;
         MyBloomFilter myBloomFilter;
 
         @Override
-        public void open(Configuration parameters) throws Exception {
+        public void open( Configuration parameters ) throws Exception {
             jedis = new Jedis("localhost", 6379);
             myBloomFilter = new MyBloomFilter(1 << 29); // 要处理1亿个数据，用64MB大小的位图
         }
 
         @Override
         public void process(
-                Context context, Iterable<UserBehavior> elements, Collector<PageViewCount> out)
+                Context context, Iterable<UserBehavior> elements, Collector<PageViewCount> out )
                 throws Exception {
             // 将位图和窗口count值全部存入redis，用windowEnd作为key
             Long windowEnd = context.window().getEnd();

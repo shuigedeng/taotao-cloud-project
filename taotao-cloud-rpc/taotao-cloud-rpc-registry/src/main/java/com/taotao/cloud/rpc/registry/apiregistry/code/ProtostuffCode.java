@@ -17,16 +17,25 @@
 package com.taotao.cloud.rpc.registry.apiregistry.code;
 
 import com.taotao.cloud.rpc.registry.apiregistry.base.ApiRegistryException;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+/**
+ * ProtostuffCode
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ProtostuffCode implements ICode {
-    public <T> byte[] encode(T data) {
+
+    public <T> byte[] encode( T data ) {
         // return ProtostuffUtils.serialize(data);
         return null;
     }
 
-    public <T> T decode(byte[] data, Type type) {
+    public <T> T decode( byte[] data, Type type ) {
         if (type instanceof ParameterizedType) {
             // return
             // ProtostuffUtils.deserialize(data,(Class<T>)((ParameterizedType)type).getRawType());

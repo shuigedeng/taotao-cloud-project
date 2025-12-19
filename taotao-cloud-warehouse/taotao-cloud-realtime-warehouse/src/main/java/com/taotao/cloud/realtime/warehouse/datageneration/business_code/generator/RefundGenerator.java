@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.DbUtil;
 import com.taotao.cloud.realtime.warehouse.datageneration.business_code.util.RandomUtil;
 import org.slf4j.Logger;
@@ -28,19 +29,28 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * RefundGenerator
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class RefundGenerator {
+
     private static final Logger logger = LoggerFactory.getLogger(RefundGenerator.class);
     private static final int BATCH_SIZE = 500;
 
-    @Autowired private DbUtil dbUtil;
+    @Autowired
+    private DbUtil dbUtil;
 
-    public void generateRefundData(int count) {
+    public void generateRefundData( int count ) {
         generateOrderRefundInfo(count);
         generateRefundPayment(count);
     }
 
-    private void generateOrderRefundInfo(int count) {
+    private void generateOrderRefundInfo( int count ) {
         String sql =
                 "INSERT INTO order_refund_info (id, user_id, order_id, sku_id, refund_type, "
                         + "refund_num, refund_amount, refund_reason_type, refund_reason_txt, refund_status, "
@@ -69,18 +79,18 @@ public class RefundGenerator {
                 LocalDateTime now = LocalDateTime.now();
 
                 params.add(
-                        new Object[] {
-                            id,
-                            userId,
-                            orderId,
-                            skuId,
-                            refundType,
-                            refundNum,
-                            refundAmount,
-                            refundReasonType,
-                            refundReasonTxt,
-                            refundStatus,
-                            now
+                        new Object[]{
+                                id,
+                                userId,
+                                orderId,
+                                skuId,
+                                refundType,
+                                refundNum,
+                                refundAmount,
+                                refundReasonType,
+                                refundReasonTxt,
+                                refundStatus,
+                                now
                         });
             }
 
@@ -89,7 +99,7 @@ public class RefundGenerator {
         }
     }
 
-    private void generateRefundPayment(int count) {
+    private void generateRefundPayment( int count ) {
         String sql =
                 "INSERT INTO refund_payment (id, out_trade_no, order_id, sku_id, payment_type, "
                         + "trade_no, total_amount, subject, refund_status, create_time, callback_time) "
@@ -112,24 +122,24 @@ public class RefundGenerator {
                 int paymentType = RandomUtil.generateNumber(1, 3);
                 String tradeNo = UUID.randomUUID().toString();
                 double totalAmount = RandomUtil.generateDouble(50, 1000);
-                String subject = "退款" + (i + 1);
+                String subject = "退款" + ( i + 1 );
                 int refundStatus = RandomUtil.generateNumber(1, 3);
                 LocalDateTime now = LocalDateTime.now();
                 LocalDateTime callbackTime = now.plusMinutes(RandomUtil.generateNumber(2, 30));
 
                 params.add(
-                        new Object[] {
-                            id,
-                            outTradeNo,
-                            orderId,
-                            skuId,
-                            paymentType,
-                            tradeNo,
-                            totalAmount,
-                            subject,
-                            refundStatus,
-                            now,
-                            callbackTime
+                        new Object[]{
+                                id,
+                                outTradeNo,
+                                orderId,
+                                skuId,
+                                paymentType,
+                                tradeNo,
+                                totalAmount,
+                                subject,
+                                refundStatus,
+                                now,
+                                callbackTime
                         });
             }
 

@@ -48,12 +48,20 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  */
 public class ClickStreamPageViews {
 
+    /**
+     * PageViewsStreamThreeMapper
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     static class PageViewsStreamThreeMapper extends Mapper<LongWritable, Text, Text, WebLogBean> {
+
         Text k = new Text();
         WebLogBean v = new WebLogBean();
 
         @Override
-        protected void map(LongWritable key, Text value, Context context)
+        protected void map( LongWritable key, Text value, Context context )
                 throws IOException, InterruptedException {
             String line = value.toString();
             String[] fields = line.split(",");
@@ -80,10 +88,17 @@ public class ClickStreamPageViews {
         }
     }
 
+    /**
+     * PageViewsStreamThreeReducer
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     static class PageViewsStreamThreeReducer extends Reducer<Text, WebLogBean, NullWritable, Text> {
 
         @Override
-        protected void reduce(Text key, Iterable<WebLogBean> values, Context context)
+        protected void reduce( Text key, Iterable<WebLogBean> values, Context context )
                 throws IOException, InterruptedException {
             List<WebLogBean> beans = new ArrayList<>();
             Text v = new Text();
@@ -106,7 +121,7 @@ public class ClickStreamPageViews {
                         beans,
                         new Comparator<WebLogBean>() {
                             @Override
-                            public int compare(WebLogBean o1, WebLogBean o2) {
+                            public int compare( WebLogBean o1, WebLogBean o2 ) {
                                 try {
                                     Date date = toDate(o1.getRemote_time_local());
                                     Date date2 = toDate(o2.getRemote_time_local());
@@ -145,7 +160,7 @@ public class ClickStreamPageViews {
                                         + ","
                                         + step
                                         + ","
-                                        + (60)
+                                        + ( 60 )
                                         + ","
                                         + bean.getHttp_referer()
                                         + ","
@@ -185,7 +200,7 @@ public class ClickStreamPageViews {
                                         + ","
                                         + step
                                         + ","
-                                        + (time / 1000)
+                                        + ( time / 1000 )
                                         + ","
                                         + beans.get(i - 1).getHttp_referer()
                                         + ","
@@ -209,9 +224,9 @@ public class ClickStreamPageViews {
                                         + ","
                                         + beans.get(i - 1).getRequest_method_url()
                                         + ","
-                                        + (step)
+                                        + ( step )
                                         + ","
-                                        + (60)
+                                        + ( 60 )
                                         + ","
                                         + beans.get(i - 1).getHttp_referer()
                                         + ","
@@ -242,7 +257,7 @@ public class ClickStreamPageViews {
                                         + ","
                                         + step
                                         + ","
-                                        + (60)
+                                        + ( 60 )
                                         + ","
                                         + bean.getHttp_referer()
                                         + ","
@@ -259,17 +274,17 @@ public class ClickStreamPageViews {
             }
         }
 
-        private long timeDiff(Date time1, Date time2) throws ParseException {
+        private long timeDiff( Date time1, Date time2 ) throws ParseException {
             return time1.getTime() - time2.getTime();
         }
 
-        private Date toDate(String timeStr) throws ParseException {
+        private Date toDate( String timeStr ) throws ParseException {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
             return df.parse(timeStr);
         }
     }
 
-    public static void main(String[] args)
+    public static void main( String[] args )
             throws IOException, ClassNotFoundException, InterruptedException {
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf);
