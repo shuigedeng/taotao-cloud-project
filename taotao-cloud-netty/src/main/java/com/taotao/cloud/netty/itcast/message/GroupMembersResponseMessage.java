@@ -17,16 +17,24 @@
 package com.taotao.cloud.netty.itcast.message;
 
 import java.util.Set;
+
 import lombok.Data;
 import lombok.ToString;
 
+/**
+ * GroupMembersResponseMessage
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @ToString(callSuper = true)
 public class GroupMembersResponseMessage extends Message {
 
     private Set<String> members;
 
-    public GroupMembersResponseMessage(Set<String> members) {
+    public GroupMembersResponseMessage( Set<String> members ) {
         this.members = members;
     }
 

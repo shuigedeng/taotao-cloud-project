@@ -21,8 +21,16 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.nio.channels.SocketChannel;
 
+/**
+ * Client
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class Client {
-    public static void main(String[] args) throws IOException {
+
+    public static void main( String[] args ) throws IOException {
         SocketChannel sc = SocketChannel.open();
         sc.connect(new InetSocketAddress("localhost", 8080));
         SocketAddress address = sc.getLocalAddress();

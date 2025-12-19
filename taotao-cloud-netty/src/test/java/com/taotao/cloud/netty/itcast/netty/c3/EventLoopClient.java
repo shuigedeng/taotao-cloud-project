@@ -24,12 +24,22 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringEncoder;
+
 import java.net.InetSocketAddress;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * EventLoopClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class EventLoopClient {
-    public static void main(String[] args) throws InterruptedException {
+
+    public static void main( String[] args ) throws InterruptedException {
         // 2. 带有 Future，Promise 的类型都是和异步方法配套使用，用来处理结果
         ChannelFuture channelFuture =
                 new Bootstrap()
@@ -38,7 +48,7 @@ public class EventLoopClient {
                         .handler(
                                 new ChannelInitializer<NioSocketChannel>() {
                                     @Override // 在连接建立后被调用
-                                    protected void initChannel(NioSocketChannel ch)
+                                    protected void initChannel( NioSocketChannel ch )
                                             throws Exception {
                                         ch.pipeline().addLast(new StringEncoder());
                                     }
@@ -58,7 +68,7 @@ public class EventLoopClient {
                 new ChannelFutureListener() {
                     @Override
                     // 在 nio 线程连接建立好之后，会调用 operationComplete
-                    public void operationComplete(ChannelFuture future) throws Exception {
+                    public void operationComplete( ChannelFuture future ) throws Exception {
                         Channel channel = future.channel();
                         log.debug("{}", channel);
                         channel.writeAndFlush("hello, world");

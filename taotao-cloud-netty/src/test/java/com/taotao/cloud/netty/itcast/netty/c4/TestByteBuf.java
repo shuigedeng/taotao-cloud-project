@@ -21,9 +21,19 @@ import static io.netty.util.internal.StringUtil.NEWLINE;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
+import io.netty.buffer.ByteBufUtil;
+import io.netty.util.internal.StringUtil;
 
+/**
+ * TestByteBuf
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestByteBuf {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
 
         ByteBuf buf = ByteBufAllocator.DEFAULT.buffer();
         System.out.println(buf.getClass());
@@ -37,9 +47,9 @@ public class TestByteBuf {
         log(buf);
     }
 
-    public static void log(ByteBuf buffer) {
+    public static void log( ByteBuf buffer ) {
         int length = buffer.readableBytes();
-        int rows = length / 16 + (length % 15 == 0 ? 0 : 1) + 4;
+        int rows = length / 16 + ( length % 15 == 0 ? 0 : 1 ) + 4;
         StringBuilder buf =
                 new StringBuilder(rows * 80 * 2)
                         .append("read index:")

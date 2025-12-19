@@ -27,20 +27,30 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+
 import java.util.Arrays;
 import java.util.Random;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Client2
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class Client2 {
+
     static final Logger log = LoggerFactory.getLogger(Client1.class);
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         send();
         System.out.println("finish");
     }
 
-    public static byte[] fill10Bytes(char c, int len) {
+    public static byte[] fill10Bytes( char c, int len ) {
         byte[] bytes = new byte[10];
         Arrays.fill(bytes, (byte) '_');
         for (int i = 0; i < len; i++) {
@@ -59,7 +69,7 @@ public class Client2 {
             bootstrap.handler(
                     new ChannelInitializer<SocketChannel>() {
                         @Override
-                        protected void initChannel(SocketChannel ch) {
+                        protected void initChannel( SocketChannel ch ) {
                             ch.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG));
                             ch.pipeline()
                                     .addLast(
@@ -67,7 +77,7 @@ public class Client2 {
                                                 // 会在连接 channel 建立成功后，会触发 active 事件
                                                 @Override
                                                 public void channelActive(
-                                                        ChannelHandlerContext ctx) {
+                                                        ChannelHandlerContext ctx ) {
                                                     ByteBuf buf = ctx.alloc().buffer();
                                                     char c = '0';
                                                     Random r = new Random();

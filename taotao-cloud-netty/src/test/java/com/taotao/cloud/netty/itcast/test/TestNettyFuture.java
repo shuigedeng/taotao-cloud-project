@@ -20,9 +20,17 @@ import io.netty.channel.DefaultEventLoop;
 import io.netty.util.concurrent.DefaultPromise;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * TestNettyFuture
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class TestNettyFuture {
-    public static void main(String[] args) throws InterruptedException {
+
+    public static void main( String[] args ) throws InterruptedException {
         DefaultEventLoop eventExecutors = new DefaultEventLoop();
         DefaultPromise<Integer> promise = new DefaultPromise<>(eventExecutors);
         log.debug("enter...");

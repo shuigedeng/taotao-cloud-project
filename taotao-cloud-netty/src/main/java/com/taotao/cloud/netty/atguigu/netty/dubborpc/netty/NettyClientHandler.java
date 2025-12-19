@@ -18,8 +18,16 @@ package com.taotao.cloud.netty.atguigu.netty.dubborpc.netty;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+
 import java.util.concurrent.Callable;
 
+/**
+ * NettyClientHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NettyClientHandler extends ChannelInboundHandlerAdapter implements Callable {
 
     private ChannelHandlerContext context; // 上下文
@@ -28,7 +36,7 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter implements 
 
     // 与服务器的连接创建后，就会被调用, 这个方法是第一个被调用(1)
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+    public void channelActive( ChannelHandlerContext ctx ) throws Exception {
         System.out.println(" channelActive 被调用  ");
         context = ctx; // 因为我们在其它方法会使用到 ctx
     }
@@ -36,14 +44,14 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter implements 
     // 收到服务器的数据后，调用方法 (4)
     //
     @Override
-    public synchronized void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public synchronized void channelRead( ChannelHandlerContext ctx, Object msg ) throws Exception {
         System.out.println(" channelRead 被调用  ");
         result = msg.toString();
         notify(); // 唤醒等待的线程
     }
 
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+    public void exceptionCaught( ChannelHandlerContext ctx, Throwable cause ) throws Exception {
         ctx.close();
     }
 
@@ -59,7 +67,7 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter implements 
     }
 
     // (2)
-    void setPara(String para) {
+    void setPara( String para ) {
         System.out.println(" setPara  ");
         this.para = para;
     }

@@ -24,11 +24,18 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
+/**
+ * GroupJoinRequestMessageHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @ChannelHandler.Sharable
-public class GroupJoinRequestMessageHandler
-        extends SimpleChannelInboundHandler<GroupJoinRequestMessage> {
+public class GroupJoinRequestMessageHandler extends SimpleChannelInboundHandler<GroupJoinRequestMessage> {
+
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, GroupJoinRequestMessage msg)
+    protected void channelRead0( ChannelHandlerContext ctx, GroupJoinRequestMessage msg )
             throws Exception {
         Group group =
                 GroupSessionFactory.getGroupSession()

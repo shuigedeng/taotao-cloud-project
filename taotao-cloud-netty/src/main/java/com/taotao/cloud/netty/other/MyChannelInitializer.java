@@ -19,10 +19,17 @@ package com.taotao.cloud.netty.other;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 
+/**
+ * MyChannelInitializer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MyChannelInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
-    protected void initChannel(SocketChannel channel) {
+    protected void initChannel( SocketChannel channel ) {
         System.out.println("链接报告开始");
         System.out.println("链接报告信息：有一客户端链接到本服务端");
         System.out.println("链接报告IP:" + channel.localAddress().getHostString());

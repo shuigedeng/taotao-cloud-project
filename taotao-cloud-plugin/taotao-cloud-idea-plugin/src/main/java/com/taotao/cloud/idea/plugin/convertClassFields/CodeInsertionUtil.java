@@ -10,6 +10,13 @@ import com.intellij.psi.codeStyle.CodeStyleManager;
 
 import java.util.List;
 
+/**
+ * CodeInsertionUtil
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class CodeInsertionUtil {
 
     /**
@@ -19,7 +26,7 @@ public class CodeInsertionUtil {
      * @param editor 当前编辑器
      * @param codeLines 要插入的代码行列表
      */
-    public static void insertCodeBelowCursor(Project project, Editor editor, List<String> codeLines) {
+    public static void insertCodeBelowCursor( Project project, Editor editor, List<String> codeLines ) {
         WriteCommandAction.runWriteCommandAction(project, () -> {
             Document document = editor.getDocument();
             int currentOffset = editor.getCaretModel().getOffset();
@@ -28,7 +35,7 @@ public class CodeInsertionUtil {
 
             // 生成要插入的文本
             String insertText = String.join("\n", codeLines) + "\n";
-            
+
             // 插入文本
             document.insertString(nextLineStartOffset, insertText);
 

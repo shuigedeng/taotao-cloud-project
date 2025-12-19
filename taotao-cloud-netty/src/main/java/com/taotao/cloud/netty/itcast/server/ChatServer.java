@@ -34,9 +34,17 @@ import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * ChatServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class ChatServer {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         NioEventLoopGroup boss = new NioEventLoopGroup();
         NioEventLoopGroup worker = new NioEventLoopGroup();
         LoggingHandler LOGGING_HANDLER = new LoggingHandler(LogLevel.DEBUG);
@@ -58,7 +66,7 @@ public class ChatServer {
             serverBootstrap.childHandler(
                     new ChannelInitializer<SocketChannel>() {
                         @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
+                        protected void initChannel( SocketChannel ch ) throws Exception {
                             ch.pipeline().addLast(new ProcotolFrameDecoder());
                             ch.pipeline().addLast(LOGGING_HANDLER);
                             ch.pipeline().addLast(MESSAGE_CODEC);
@@ -72,7 +80,7 @@ public class ChatServer {
                                                 // 用来触发特殊事件
                                                 @Override
                                                 public void userEventTriggered(
-                                                        ChannelHandlerContext ctx, Object evt)
+                                                        ChannelHandlerContext ctx, Object evt )
                                                         throws Exception {
                                                     IdleStateEvent event = (IdleStateEvent) evt;
                                                     // 触发了读空闲事件

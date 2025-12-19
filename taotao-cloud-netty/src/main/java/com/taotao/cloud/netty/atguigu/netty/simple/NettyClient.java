@@ -24,8 +24,16 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
+/**
+ * NettyClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NettyClient {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
 
         // 客户端需要一个事件循环组
         EventLoopGroup group = new NioEventLoopGroup();
@@ -42,7 +50,7 @@ public class NettyClient {
                     .handler(
                             new ChannelInitializer<SocketChannel>() {
                                 @Override
-                                protected void initChannel(SocketChannel ch) throws Exception {
+                                protected void initChannel( SocketChannel ch ) throws Exception {
                                     ch.pipeline().addLast(new NettyClientHandler()); // 加入自己的处理器
                                 }
                             });

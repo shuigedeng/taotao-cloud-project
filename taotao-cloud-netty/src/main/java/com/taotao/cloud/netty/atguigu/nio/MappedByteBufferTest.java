@@ -24,8 +24,16 @@ import java.nio.channels.FileChannel;
 说明
 1. MappedByteBuffer 可让文件直接在内存(堆外内存)修改, 操作系统不需要拷贝一次
  */
+/**
+ * MappedByteBufferTest
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MappedByteBufferTest {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
 
         RandomAccessFile randomAccessFile = new RandomAccessFile("1.txt", "rw");
         // 获取对应的通道

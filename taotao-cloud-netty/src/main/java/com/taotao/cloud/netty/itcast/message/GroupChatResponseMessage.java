@@ -19,17 +19,25 @@ package com.taotao.cloud.netty.itcast.message;
 import lombok.Data;
 import lombok.ToString;
 
+/**
+ * GroupChatResponseMessage
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @ToString(callSuper = true)
 public class GroupChatResponseMessage extends AbstractResponseMessage {
+
     private String from;
     private String content;
 
-    public GroupChatResponseMessage(boolean success, String reason) {
+    public GroupChatResponseMessage( boolean success, String reason ) {
         super(success, reason);
     }
 
-    public GroupChatResponseMessage(String from, String content) {
+    public GroupChatResponseMessage( String from, String content ) {
         this.from = from;
         this.content = content;
     }

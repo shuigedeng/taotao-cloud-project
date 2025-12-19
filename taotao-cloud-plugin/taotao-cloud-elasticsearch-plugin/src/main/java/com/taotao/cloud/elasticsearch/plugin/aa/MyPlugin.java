@@ -18,20 +18,29 @@ package com.taotao.cloud.elasticsearch.plugin.aa;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import org.elasticsearch.index.IndexModule;
 import org.elasticsearch.indices.analysis.AnalysisModule;
 import org.elasticsearch.plugins.Plugin;
+import org.elasticsearch.plugins.SearchPlugin;
 import org.elasticsearch.plugins.SearchPlugin.AggregationSpec;
 
+/**
+ * MyPlugin
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MyPlugin extends Plugin {
 
     @Override
-    public void onModule(AnalysisModule analysisModule) {
+    public void onModule( AnalysisModule analysisModule ) {
         analysisModule.addTokenizer("lowercase", LowercaseTokenizerFactory::new);
     }
 
     @Override
-    public void onIndexModule(IndexModule indexModule) {
+    public void onIndexModule( IndexModule indexModule ) {
         indexModule.addIndexStore("file", FileIndexStorePlugin::new);
     }
 

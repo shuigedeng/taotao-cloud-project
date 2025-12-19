@@ -29,8 +29,16 @@ import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Server1
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class Server1 {
+
     void start() {
         NioEventLoopGroup boss = new NioEventLoopGroup();
         NioEventLoopGroup worker = new NioEventLoopGroup();
@@ -46,7 +54,7 @@ public class Server1 {
             serverBootstrap.childHandler(
                     new ChannelInitializer<SocketChannel>() {
                         @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
+                        protected void initChannel( SocketChannel ch ) throws Exception {
                             ch.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG));
                         }
                     });
@@ -65,7 +73,7 @@ public class Server1 {
         start();
     }
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         new Server1().start();
     }
 }

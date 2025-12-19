@@ -19,15 +19,24 @@ package com.taotao.cloud.elasticsearch.plugin;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.apache.lucene.analysis.Analyzer;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.env.Environment;
 import org.elasticsearch.index.IndexSettings;
 import org.elasticsearch.index.analysis.AnalyzerProvider;
+import org.elasticsearch.indices.analysis.AnalysisModule;
 import org.elasticsearch.indices.analysis.AnalysisModule.AnalysisProvider;
 import org.elasticsearch.plugins.AnalysisPlugin;
 import org.elasticsearch.plugins.Plugin;
 
+/**
+ * MyAnalysisPlugin
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MyAnalysisPlugin extends Plugin implements AnalysisPlugin {
 
     @Override
@@ -42,7 +51,7 @@ public class MyAnalysisPlugin extends Plugin implements AnalysisPlugin {
                             IndexSettings indexSettings,
                             Environment environment,
                             String name,
-                            Settings settings)
+                            Settings settings )
                             throws IOException {
                         return MyTokenizerFactory.getTokenizerFactory(
                                 indexSettings, environment, name, settings);
@@ -64,7 +73,7 @@ public class MyAnalysisPlugin extends Plugin implements AnalysisPlugin {
                             IndexSettings indexSettings,
                             Environment environment,
                             String name,
-                            Settings settings)
+                            Settings settings )
                             throws IOException {
                         return MyAnalyzerProvider.getAnalyzerProvider(
                                 indexSettings, environment, name, settings);

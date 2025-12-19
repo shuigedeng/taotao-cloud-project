@@ -16,9 +16,16 @@
 
 package com.taotao.cloud.netty.decorator;
 
+/**
+ * Client
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class Client {
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
 
         Component component =
                 new ConcreteDecorator2(new ConcreteDecorator1(new ConcreteComponent()));

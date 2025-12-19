@@ -22,13 +22,21 @@ import com.taotao.cloud.netty.itcast.server.session.GroupSessionFactory;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+
 import java.util.Set;
 
+/**
+ * GroupMembersRequestMessageHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @ChannelHandler.Sharable
-public class GroupMembersRequestMessageHandler
-        extends SimpleChannelInboundHandler<GroupMembersRequestMessage> {
+public class GroupMembersRequestMessageHandler extends SimpleChannelInboundHandler<GroupMembersRequestMessage> {
+
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, GroupMembersRequestMessage msg)
+    protected void channelRead0( ChannelHandlerContext ctx, GroupMembersRequestMessage msg )
             throws Exception {
         Set<String> members = GroupSessionFactory.getGroupSession().getMembers(msg.getGroupName());
         ctx.writeAndFlush(new GroupMembersResponseMessage(members));

@@ -20,12 +20,22 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.embedded.EmbeddedChannel;
 import io.netty.channel.nio.NioEventLoopGroup;
+
 import java.io.IOException;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * TestChannel
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class TestChannel {
-    public static void main(String[] args) throws IOException {
+
+    public static void main( String[] args ) throws IOException {
         NioEventLoopGroup group = new NioEventLoopGroup();
         EmbeddedChannel c1 =
                 new EmbeddedChannel(
@@ -33,7 +43,7 @@ public class TestChannel {
                         false,
                         new ChannelInboundHandlerAdapter() {
                             @Override
-                            public void channelRead(ChannelHandlerContext ctx, Object msg)
+                            public void channelRead( ChannelHandlerContext ctx, Object msg )
                                     throws Exception {
                                 log.debug("{}", msg);
                                 super.channelRead(ctx, msg);
@@ -43,7 +53,7 @@ public class TestChannel {
                 new EmbeddedChannel(
                         new ChannelInboundHandlerAdapter() {
                             @Override
-                            public void channelRead(ChannelHandlerContext ctx, Object msg)
+                            public void channelRead( ChannelHandlerContext ctx, Object msg )
                                     throws Exception {
                                 log.debug("{}", msg);
                                 super.channelRead(ctx, msg);
@@ -53,7 +63,7 @@ public class TestChannel {
                 new EmbeddedChannel(
                         new ChannelInboundHandlerAdapter() {
                             @Override
-                            public void channelRead(ChannelHandlerContext ctx, Object msg)
+                            public void channelRead( ChannelHandlerContext ctx, Object msg )
                                     throws Exception {
                                 log.debug("{}", msg);
                                 super.channelRead(ctx, msg);

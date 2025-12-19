@@ -26,7 +26,15 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.List;
 
+/**
+ * DatabaseConfigDialog
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class DatabaseConfigDialog implements Configurable {
+
     private JPanel myMainPanel;
     private JBTextField hostField;
     private JBTextField portField;
@@ -58,9 +66,10 @@ public class DatabaseConfigDialog implements Configurable {
             "Boolean"
     };
 
-    private static final String[] ANNOTATION_OPTIONS = {"No annotations", "JPA annotations", "MyBatis-Plus annotations"};
+    private static final String[] ANNOTATION_OPTIONS = {"No annotations", "JPA annotations",
+            "MyBatis-Plus annotations"};
 
-    public DatabaseConfigDialog(Project project) {
+    public DatabaseConfigDialog( Project project ) {
         this.project = project;
         settings = DatabaseSettings.getInstance(project);
     }
@@ -86,7 +95,7 @@ public class DatabaseConfigDialog implements Configurable {
         String[] columnNames = {"SQL Type", "Java Type"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0) {
             @Override
-            public boolean isCellEditable(int row, int column) {
+            public boolean isCellEditable( int row, int column ) {
                 return true;
             }
         };
@@ -170,11 +179,11 @@ public class DatabaseConfigDialog implements Configurable {
 
         List<String> sortedPackages = new ArrayList<>(packages);
         Collections.sort(sortedPackages);
-        sortedPackages.add(0,"NO SELECT PACKAGE");
+        sortedPackages.add(0, "NO SELECT PACKAGE");
         return sortedPackages.toArray(new String[0]);
     }
 
-    private void addPackagesRecursively(PsiDirectory directory, String parentPackage, Set<String> packages) {
+    private void addPackagesRecursively( PsiDirectory directory, String parentPackage, Set<String> packages ) {
         PsiPackage psiPackage = JavaDirectoryService.getInstance().getPackage(directory);
         if (psiPackage != null) {
             String packageName = psiPackage.getQualifiedName();

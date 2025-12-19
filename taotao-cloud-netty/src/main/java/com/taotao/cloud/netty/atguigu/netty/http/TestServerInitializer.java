@@ -21,10 +21,17 @@ import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.http.HttpServerCodec;
 
+/**
+ * TestServerInitializer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestServerInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
-    protected void initChannel(SocketChannel ch) throws Exception {
+    protected void initChannel( SocketChannel ch ) throws Exception {
 
         // 向管道加入处理器
 

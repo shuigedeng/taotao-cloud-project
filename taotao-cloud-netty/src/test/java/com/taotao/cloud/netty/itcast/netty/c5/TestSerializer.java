@@ -26,9 +26,16 @@ import io.netty.buffer.ByteBufAllocator;
 import io.netty.channel.embedded.EmbeddedChannel;
 import io.netty.handler.logging.LoggingHandler;
 
+/**
+ * TestSerializer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestSerializer {
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         MessageCodecSharable CODEC = new MessageCodecSharable();
         LoggingHandler LOGGING = new LoggingHandler();
         EmbeddedChannel channel = new EmbeddedChannel(LOGGING, CODEC, LOGGING);
@@ -39,10 +46,10 @@ public class TestSerializer {
         channel.writeInbound(buf);
     }
 
-    public static ByteBuf messageToByteBuf(Message msg) {
+    public static ByteBuf messageToByteBuf( Message msg ) {
         int algorithm = Config.getSerializerAlgorithm().ordinal();
         ByteBuf out = ByteBufAllocator.DEFAULT.buffer();
-        out.writeBytes(new byte[] {1, 2, 3, 4});
+        out.writeBytes(new byte[]{1, 2, 3, 4});
         out.writeByte(1);
         out.writeByte(algorithm);
         out.writeByte(msg.getMessageType());

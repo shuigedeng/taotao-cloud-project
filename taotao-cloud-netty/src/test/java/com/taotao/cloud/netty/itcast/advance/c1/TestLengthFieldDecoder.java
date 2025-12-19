@@ -23,8 +23,16 @@ import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
+/**
+ * TestLengthFieldDecoder
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestLengthFieldDecoder {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         EmbeddedChannel channel =
                 new EmbeddedChannel(
                         new LengthFieldBasedFrameDecoder(1024, 0, 4, 1, 4),
@@ -37,7 +45,7 @@ public class TestLengthFieldDecoder {
         channel.writeInbound(buffer);
     }
 
-    private static void send(ByteBuf buffer, String content) {
+    private static void send( ByteBuf buffer, String content ) {
         byte[] bytes = content.getBytes(); // 实际内容
         int length = bytes.length; // 实际内容长度
         buffer.writeInt(length);

@@ -16,11 +16,18 @@
 
 package com.taotao.cloud.netty.decorator;
 
+/**
+ * Decorator
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class Decorator implements Component {
 
     private Component component;
 
-    public Decorator(Component component) {
+    public Decorator( Component component ) {
         this.component = component;
     }
 

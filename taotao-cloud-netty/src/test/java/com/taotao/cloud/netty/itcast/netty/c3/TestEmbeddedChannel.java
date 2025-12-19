@@ -24,13 +24,21 @@ import io.netty.channel.ChannelPromise;
 import io.netty.channel.embedded.EmbeddedChannel;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * TestEmbeddedChannel
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class TestEmbeddedChannel {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         ChannelInboundHandlerAdapter h1 =
                 new ChannelInboundHandlerAdapter() {
                     @Override
-                    public void channelRead(ChannelHandlerContext ctx, Object msg)
+                    public void channelRead( ChannelHandlerContext ctx, Object msg )
                             throws Exception {
                         log.debug("1");
                         super.channelRead(ctx, msg);
@@ -39,7 +47,7 @@ public class TestEmbeddedChannel {
         ChannelInboundHandlerAdapter h2 =
                 new ChannelInboundHandlerAdapter() {
                     @Override
-                    public void channelRead(ChannelHandlerContext ctx, Object msg)
+                    public void channelRead( ChannelHandlerContext ctx, Object msg )
                             throws Exception {
                         log.debug("2");
                         super.channelRead(ctx, msg);
@@ -48,7 +56,7 @@ public class TestEmbeddedChannel {
         ChannelOutboundHandlerAdapter h3 =
                 new ChannelOutboundHandlerAdapter() {
                     @Override
-                    public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise)
+                    public void write( ChannelHandlerContext ctx, Object msg, ChannelPromise promise )
                             throws Exception {
                         log.debug("3");
                         super.write(ctx, msg, promise);
@@ -57,7 +65,7 @@ public class TestEmbeddedChannel {
         ChannelOutboundHandlerAdapter h4 =
                 new ChannelOutboundHandlerAdapter() {
                     @Override
-                    public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise)
+                    public void write( ChannelHandlerContext ctx, Object msg, ChannelPromise promise )
                             throws Exception {
                         log.debug("4");
                         super.write(ctx, msg, promise);

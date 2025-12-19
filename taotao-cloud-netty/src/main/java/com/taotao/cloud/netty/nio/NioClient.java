@@ -29,9 +29,16 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * NioClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NioClient {
 
-    public static void main(String[] args) throws IOException {
+    public static void main( String[] args ) throws IOException {
         try {
             SocketChannel socketChannel = SocketChannel.open();
             socketChannel.configureBlocking(false);
@@ -53,7 +60,7 @@ public class NioClient {
 
                             ByteBuffer writeBuffer = ByteBuffer.allocate(1024);
 
-                            writeBuffer.put((LocalDateTime.now() + " 连接成功").getBytes());
+                            writeBuffer.put(( LocalDateTime.now() + " 连接成功" ).getBytes());
                             writeBuffer.flip();
                             client.write(writeBuffer);
 

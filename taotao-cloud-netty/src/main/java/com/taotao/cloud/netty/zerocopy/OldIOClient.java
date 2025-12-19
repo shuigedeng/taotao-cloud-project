@@ -21,9 +21,16 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.Socket;
 
+/**
+ * OldIOClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class OldIOClient {
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         Socket socket = new Socket("localhost", 8899);
 
         String fileName = "/Users/zhanglong/Desktop/spark-2.2.0-bin-hadoop2.7.tgz";
@@ -37,13 +44,13 @@ public class OldIOClient {
 
         long startTime = System.currentTimeMillis();
 
-        while ((readCount = inputStream.read(buffer)) >= 0) {
+        while (( readCount = inputStream.read(buffer) ) >= 0) {
             total += readCount;
             dataOutputStream.write(buffer);
         }
 
         System.out.println(
-                "发送总字节数： " + total + ", 耗时： " + (System.currentTimeMillis() - startTime));
+                "发送总字节数： " + total + ", 耗时： " + ( System.currentTimeMillis() - startTime ));
 
         dataOutputStream.close();
         socket.close();

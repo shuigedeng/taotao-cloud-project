@@ -19,11 +19,18 @@ package com.taotao.cloud.netty.itcast.message;
 import lombok.Data;
 import lombok.ToString;
 
+/**
+ * GroupJoinResponseMessage
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @ToString(callSuper = true)
 public class GroupJoinResponseMessage extends AbstractResponseMessage {
 
-    public GroupJoinResponseMessage(boolean success, String reason) {
+    public GroupJoinResponseMessage( boolean success, String reason ) {
         super(success, reason);
     }
 

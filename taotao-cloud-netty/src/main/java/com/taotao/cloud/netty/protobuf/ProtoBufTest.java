@@ -18,9 +18,16 @@ package com.taotao.cloud.netty.protobuf;
 
 import com.taotao.cloud.netty.grpc.code2.Student;
 
+/**
+ * ProtoBufTest
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ProtoBufTest {
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         Student student = Student.newBuilder().setName("张三").setAge(20).setAddress("北京").build();
 
         byte[] student2ByteArray = student.toByteArray();

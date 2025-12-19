@@ -16,8 +16,16 @@
 
 package com.taotao.cloud.netty.atguigu.netty.heartbeat;
 
+/**
+ * Test
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class Test {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
 
         System.out.println(System.nanoTime()); // 纳秒  10亿分之1
         Thread.sleep(1000);

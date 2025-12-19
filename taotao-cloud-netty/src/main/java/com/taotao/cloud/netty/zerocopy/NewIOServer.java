@@ -22,9 +22,16 @@ import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
+/**
+ * NewIOServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NewIOServer {
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         InetSocketAddress address = new InetSocketAddress(8899);
 
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();

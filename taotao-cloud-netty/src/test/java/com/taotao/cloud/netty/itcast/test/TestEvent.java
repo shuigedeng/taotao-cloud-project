@@ -19,9 +19,17 @@ package com.taotao.cloud.netty.itcast.test;
 import io.netty.channel.nio.NioEventLoopGroup;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * TestEvent
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class TestEvent {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         NioEventLoopGroup group = new NioEventLoopGroup();
 
         group.next()

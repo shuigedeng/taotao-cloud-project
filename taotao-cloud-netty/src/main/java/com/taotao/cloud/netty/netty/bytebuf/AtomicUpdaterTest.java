@@ -18,12 +18,21 @@ package com.taotao.cloud.netty.netty.bytebuf;
 
 import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 
+/**
+ * AtomicUpdaterTest
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class AtomicUpdaterTest {
+
     public static class Person {
+
         volatile int age = 1;
     }
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         //        Person person = new Person();
         //
         //        for (int i = 0; i < 10; ++i) {

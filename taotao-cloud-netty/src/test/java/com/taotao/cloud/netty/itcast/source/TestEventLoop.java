@@ -19,8 +19,16 @@ package com.taotao.cloud.netty.itcast.source;
 import io.netty.channel.EventLoop;
 import io.netty.channel.nio.NioEventLoopGroup;
 
+/**
+ * TestEventLoop
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestEventLoop {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         EventLoop eventLoop = new NioEventLoopGroup().next();
         eventLoop.execute(
                 () -> {

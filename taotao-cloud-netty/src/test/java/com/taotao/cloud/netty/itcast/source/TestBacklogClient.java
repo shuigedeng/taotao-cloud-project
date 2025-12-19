@@ -27,9 +27,17 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * TestBacklogClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class TestBacklogClient {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         NioEventLoopGroup worker = new NioEventLoopGroup();
         try {
             Bootstrap bootstrap = new Bootstrap();
@@ -39,13 +47,13 @@ public class TestBacklogClient {
                     new ChannelInitializer<SocketChannel>() {
 
                         @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
+                        protected void initChannel( SocketChannel ch ) throws Exception {
                             ch.pipeline().addLast(new LoggingHandler());
                             ch.pipeline()
                                     .addLast(
                                             new ChannelInboundHandlerAdapter() {
                                                 @Override
-                                                public void channelActive(ChannelHandlerContext ctx)
+                                                public void channelActive( ChannelHandlerContext ctx )
                                                         throws Exception {
                                                     ctx.writeAndFlush(
                                                             ctx.alloc()

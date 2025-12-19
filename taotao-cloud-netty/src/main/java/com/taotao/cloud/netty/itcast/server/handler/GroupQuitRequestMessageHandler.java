@@ -24,11 +24,18 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
+/**
+ * GroupQuitRequestMessageHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @ChannelHandler.Sharable
-public class GroupQuitRequestMessageHandler
-        extends SimpleChannelInboundHandler<GroupQuitRequestMessage> {
+public class GroupQuitRequestMessageHandler extends SimpleChannelInboundHandler<GroupQuitRequestMessage> {
+
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, GroupQuitRequestMessage msg)
+    protected void channelRead0( ChannelHandlerContext ctx, GroupQuitRequestMessage msg )
             throws Exception {
         Group group =
                 GroupSessionFactory.getGroupSession()

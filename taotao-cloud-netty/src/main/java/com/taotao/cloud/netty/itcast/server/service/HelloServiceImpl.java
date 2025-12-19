@@ -16,9 +16,17 @@
 
 package com.taotao.cloud.netty.itcast.server.service;
 
+/**
+ * HelloServiceImpl
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class HelloServiceImpl implements HelloService {
+
     @Override
-    public String sayHello(String msg) {
+    public String sayHello( String msg ) {
         int i = 1 / 0;
         return "你好, " + msg;
     }

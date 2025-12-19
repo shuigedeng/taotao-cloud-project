@@ -19,16 +19,25 @@ package com.taotao.cloud.netty.itcast.message;
 import lombok.Data;
 import lombok.ToString;
 
+/**
+ * ChatRequestMessage
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @ToString(callSuper = true)
 public class ChatRequestMessage extends Message {
+
     private String content;
     private String to;
     private String from;
 
-    public ChatRequestMessage() {}
+    public ChatRequestMessage() {
+    }
 
-    public ChatRequestMessage(String from, String to, String content) {
+    public ChatRequestMessage( String from, String to, String content ) {
         this.from = from;
         this.to = to;
         this.content = content;

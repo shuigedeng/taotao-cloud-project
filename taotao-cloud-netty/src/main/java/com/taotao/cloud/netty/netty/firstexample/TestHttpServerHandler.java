@@ -22,12 +22,20 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.*;
 import io.netty.util.CharsetUtil;
+
 import java.net.URI;
 
+/**
+ * TestHttpServerHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, HttpObject msg) throws Exception {
+    protected void channelRead0( ChannelHandlerContext ctx, HttpObject msg ) throws Exception {
 
         System.out.println(msg.getClass());
 
@@ -59,31 +67,31 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
     }
 
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+    public void channelActive( ChannelHandlerContext ctx ) throws Exception {
         System.out.println("channel active");
         super.channelActive(ctx);
     }
 
     @Override
-    public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
+    public void channelRegistered( ChannelHandlerContext ctx ) throws Exception {
         System.out.println("channel registered");
         super.channelRegistered(ctx);
     }
 
     @Override
-    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+    public void handlerAdded( ChannelHandlerContext ctx ) throws Exception {
         System.out.println("handler added");
         super.handlerAdded(ctx);
     }
 
     @Override
-    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+    public void channelInactive( ChannelHandlerContext ctx ) throws Exception {
         System.out.println("channel inactive");
         super.channelInactive(ctx);
     }
 
     @Override
-    public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
+    public void channelUnregistered( ChannelHandlerContext ctx ) throws Exception {
         System.out.println("channel unregistered");
         super.channelUnregistered(ctx);
     }

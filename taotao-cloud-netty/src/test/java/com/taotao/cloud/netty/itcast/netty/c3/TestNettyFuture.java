@@ -20,13 +20,23 @@ import io.netty.channel.EventLoop;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
+
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * TestNettyFuture
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class TestNettyFuture {
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+
+    public static void main( String[] args ) throws ExecutionException, InterruptedException {
         NioEventLoopGroup group = new NioEventLoopGroup();
         EventLoop eventLoop = group.next();
         Future<Integer> future =
@@ -44,7 +54,7 @@ public class TestNettyFuture {
         future.addListener(
                 new GenericFutureListener<Future<? super Integer>>() {
                     @Override
-                    public void operationComplete(Future<? super Integer> future) throws Exception {
+                    public void operationComplete( Future<? super Integer> future ) throws Exception {
                         log.debug("接收结果:{}", future.getNow());
                     }
                 });

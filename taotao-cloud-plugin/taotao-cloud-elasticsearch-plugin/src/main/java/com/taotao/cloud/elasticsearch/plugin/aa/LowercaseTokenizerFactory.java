@@ -17,16 +17,24 @@
 package com.taotao.cloud.elasticsearch.plugin.aa;
 
 import java.io.IOException;
+
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.elasticsearch.env.Environment;
 import org.elasticsearch.index.IndexSettings;
 import org.elasticsearch.index.analysis.AbstractTokenizerFactory;
 
+/**
+ * LowercaseTokenizerFactory
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class LowercaseTokenizerFactory extends AbstractTokenizerFactory {
 
     public LowercaseTokenizerFactory(
-            IndexSettings indexSettings, Environment environment, String name, Settings settings) {
+            IndexSettings indexSettings, Environment environment, String name, Settings settings ) {
         super(indexSettings, settings, name);
     }
 

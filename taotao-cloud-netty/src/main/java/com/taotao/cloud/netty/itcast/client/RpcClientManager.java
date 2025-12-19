@@ -31,13 +31,22 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.util.concurrent.DefaultPromise;
+
 import java.lang.reflect.Proxy;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * RpcClientManager
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class RpcClientManager {
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         HelloService service = getProxyService(HelloService.class);
         System.out.println(service.sayHello("zhangsan"));
         //        System.out.println(service.sayHello("lisi"));
@@ -45,15 +54,15 @@ public class RpcClientManager {
     }
 
     // 创建代理类
-    public static <T> T getProxyService(Class<T> serviceClass) {
+    public static <T> T getProxyService( Class<T> serviceClass ) {
         ClassLoader loader = serviceClass.getClassLoader();
-        Class<?>[] interfaces = new Class[] {serviceClass};
+        Class<?>[] interfaces = new Class[]{serviceClass};
         //                                                            sayHello  "张三"
         Object o =
                 Proxy.newProxyInstance(
                         loader,
                         interfaces,
-                        (proxy, method, args) -> {
+                        ( proxy, method, args ) -> {
                             // 1. 将方法调用转换为 消息对象
                             int sequenceId = SequenceIdGenerator.nextId();
                             RpcRequestMessage msg =
@@ -118,7 +127,7 @@ public class RpcClientManager {
         bootstrap.handler(
                 new ChannelInitializer<SocketChannel>() {
                     @Override
-                    protected void initChannel(SocketChannel ch) throws Exception {
+                    protected void initChannel( SocketChannel ch ) throws Exception {
                         ch.pipeline().addLast(new ProcotolFrameDecoder());
                         ch.pipeline().addLast(LOGGING_HANDLER);
                         ch.pipeline().addLast(MESSAGE_CODEC);

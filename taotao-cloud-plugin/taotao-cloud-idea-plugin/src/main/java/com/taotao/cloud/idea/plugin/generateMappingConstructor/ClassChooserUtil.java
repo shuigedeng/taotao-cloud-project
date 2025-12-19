@@ -30,6 +30,13 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.*;
 
+/**
+ * ClassChooserUtil
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ClassChooserUtil {
 
     private static final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
@@ -37,7 +44,7 @@ public class ClassChooserUtil {
     private static final Map<Project, SoftReference<List<PsiClass>>> projectClassCache = new ConcurrentHashMap<>();
     private static final Map<Project, ScheduledFuture<?>> refreshTasks = new ConcurrentHashMap<>();
 
-    public static void initialize(Project project) {
+    public static void initialize( Project project ) {
         projectInitQueue.offer(project);
         if (projectInitQueue.size() == 1) {
             scheduleNextInitialization();
@@ -55,12 +62,13 @@ public class ClassChooserUtil {
         }, 100, TimeUnit.MILLISECONDS);
     }
 
-    private static void refreshProjectClassCache(Project project) {
+    private static void refreshProjectClassCache( Project project ) {
         DumbService.getInstance(project).runWhenSmart(() -> {
             List<PsiClass> newClasses = new ArrayList<>();
             PsiManager psiManager = PsiManager.getInstance(project);
             ProjectRootManager.getInstance(project).getFileIndex().iterateContent(fileOrDir -> {
-                if (fileOrDir.isValid() && !fileOrDir.isDirectory() && JavaFileType.INSTANCE.equals(fileOrDir.getFileType())) {
+                if (fileOrDir.isValid() && !fileOrDir.isDirectory() && JavaFileType.INSTANCE.equals(
+                        fileOrDir.getFileType())) {
                     PsiFile psiFile = psiManager.findFile(fileOrDir);
                     if (psiFile instanceof PsiJavaFile) {
                         PsiJavaFile psiJavaFile = (PsiJavaFile) psiFile;
@@ -74,21 +82,22 @@ public class ClassChooserUtil {
         });
     }
 
-    private static void cacheClasses(Project project, List<PsiClass> classes) {
+    private static void cacheClasses( Project project, List<PsiClass> classes ) {
         projectClassCache.put(project, new SoftReference<>(classes));
     }
 
-    private static List<PsiClass> getCachedClasses(Project project) {
+    private static List<PsiClass> getCachedClasses( Project project ) {
         SoftReference<List<PsiClass>> ref = projectClassCache.get(project);
         return ref != null ? ref.get() : null;
     }
 
-    private static void setupVirtualFileListener(Project project) {
+    private static void setupVirtualFileListener( Project project ) {
         project.getMessageBus().connect().subscribe(VirtualFileManager.VFS_CHANGES, new BulkFileListener() {
             @Override
-            public void after(@NotNull List<? extends VFileEvent> events) {
+            public void after( @NotNull List<? extends VFileEvent> events ) {
                 for (VFileEvent event : events) {
-                    if (event instanceof VFileContentChangeEvent || event instanceof VFileCreateEvent || event instanceof VFileDeleteEvent) {
+                    if (event instanceof VFileContentChangeEvent || event instanceof VFileCreateEvent
+                            || event instanceof VFileDeleteEvent) {
                         VirtualFile file = event.getFile();
                         if (file != null && file.getFileType() instanceof JavaFileType) {
                             debounceRefresh(project);
@@ -99,7 +108,8 @@ public class ClassChooserUtil {
             }
         });
     }
-    private static void debounceRefresh(Project project) {
+
+    private static void debounceRefresh( Project project ) {
         ScheduledFuture<?> existingTask = refreshTasks.get(project);
         if (existingTask != null) {
             existingTask.cancel(false);
@@ -111,7 +121,7 @@ public class ClassChooserUtil {
         refreshTasks.put(project, newTask);
     }
 
-    public static ClassChoiceResult chooseClass(Project project) {
+    public static ClassChoiceResult chooseClass( Project project ) {
         ensureProjectClassesLoaded(project);
         ClassChooserDialog dialog = new ClassChooserDialog(project);
         dialog.show();
@@ -121,13 +131,14 @@ public class ClassChooserUtil {
         return null;
     }
 
-    private static void ensureProjectClassesLoaded(Project project) {
+    private static void ensureProjectClassesLoaded( Project project ) {
         if (getCachedClasses(project) == null) {
             refreshProjectClassCache(project);
         }
     }
 
-    private static Map<String, List<PsiClass>> findMatchingClasses(Project project, String className, boolean fuzzyMatch) {
+    private static Map<String, List<PsiClass>> findMatchingClasses( Project project, String className,
+            boolean fuzzyMatch ) {
         List<PsiClass> allClasses = getCachedClasses(project);
         if (allClasses == null) {
             return Collections.emptyMap();
@@ -141,7 +152,8 @@ public class ClassChooserUtil {
                         ? psiClass.getName().toLowerCase().contains(className.toLowerCase())
                         : psiClass.getName().equalsIgnoreCase(className))
                 .forEach(psiClass -> {
-                    String packageName = psiClass.getQualifiedName().substring(0, psiClass.getQualifiedName().lastIndexOf('.'));
+                    String packageName = psiClass.getQualifiedName()
+                            .substring(0, psiClass.getQualifiedName().lastIndexOf('.'));
                     packageToClassesMap.computeIfAbsent(packageName, k -> new ArrayList<>()).add(psiClass);
                 });
 
@@ -149,6 +161,7 @@ public class ClassChooserUtil {
     }
 
     private static class ClassChooserDialog extends DialogWrapper {
+
         private final JBTextField searchField;
         private final JTree classTree;
         private final DefaultTreeModel treeModel;
@@ -156,7 +169,7 @@ public class ClassChooserUtil {
         private final JComboBox<String> matchTypeComboBox;
         private final JTextField dtoParamNameField;
 
-        protected ClassChooserDialog(@NotNull Project project) {
+        protected ClassChooserDialog( @NotNull Project project ) {
             super(project);
             this.project = project;
             this.searchField = new JBTextField();
@@ -190,7 +203,7 @@ public class ClassChooserUtil {
             return panel;
         }
 
-        private void setupMatchTypeComboBox(JPanel panel, GridBagConstraints gbc) {
+        private void setupMatchTypeComboBox( JPanel panel, GridBagConstraints gbc ) {
             JPanel matchTypePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
             matchTypePanel.add(new JBLabel("Match Type:"));
             matchTypePanel.add(matchTypeComboBox);
@@ -203,7 +216,7 @@ public class ClassChooserUtil {
             panel.add(matchTypePanel, gbc);
         }
 
-        private void setupSearchComponents(JPanel panel, GridBagConstraints gbc) {
+        private void setupSearchComponents( JPanel panel, GridBagConstraints gbc ) {
             gbc.gridy++;
             gbc.gridwidth = 1;
             panel.add(createStyledLabel("Search:"), gbc);
@@ -212,14 +225,14 @@ public class ClassChooserUtil {
             panel.add(createSearchPanel(), gbc);
         }
 
-        private void setupClassTreeComponents(JPanel panel, GridBagConstraints gbc) {
+        private void setupClassTreeComponents( JPanel panel, GridBagConstraints gbc ) {
             setupClassTree();
             gbc.gridy++;
             gbc.weighty = 1.0;
             panel.add(new JBScrollPane(classTree), gbc);
         }
 
-        private void setupDtoParamNameComponents(JPanel panel, GridBagConstraints gbc) {
+        private void setupDtoParamNameComponents( JPanel panel, GridBagConstraints gbc ) {
             gbc.gridy++;
             gbc.weighty = 0.0;
             JPanel paramNamePanel = new JPanel(new BorderLayout());
@@ -228,7 +241,7 @@ public class ClassChooserUtil {
             panel.add(paramNamePanel, gbc);
         }
 
-        private JComponent createStyledLabel(String text) {
+        private JComponent createStyledLabel( String text ) {
             JBLabel label = new JBLabel(text);
             label.setFont(label.getFont().deriveFont(Font.BOLD, 14f));
             label.setForeground(UIUtil.getLabelForeground());
@@ -247,7 +260,7 @@ public class ClassChooserUtil {
         private void setupSearchField() {
             searchField.getDocument().addDocumentListener(new DocumentAdapter() {
                 @Override
-                protected void textChanged(@NotNull DocumentEvent e) {
+                protected void textChanged( @NotNull DocumentEvent e ) {
                     updateClassTree();
                 }
             });
@@ -285,7 +298,7 @@ public class ClassChooserUtil {
             int expandedCount = 0;
             for (int i = 0; i < root.getChildCount() && expandedCount < maxExpandedNodes; i++) {
                 TreeNode node = root.getChildAt(i);
-                TreePath path = new TreePath(((DefaultMutableTreeNode) node).getPath());
+                TreePath path = new TreePath(( (DefaultMutableTreeNode) node ).getPath());
                 classTree.expandPath(path);
                 expandedCount++;
             }
@@ -302,7 +315,7 @@ public class ClassChooserUtil {
             if (selectionPath != null) {
                 Object lastPathComponent = selectionPath.getLastPathComponent();
                 if (lastPathComponent instanceof DefaultMutableTreeNode) {
-                    Object userObject = ((DefaultMutableTreeNode) lastPathComponent).getUserObject();
+                    Object userObject = ( (DefaultMutableTreeNode) lastPathComponent ).getUserObject();
                     if (userObject instanceof PsiClass) {
                         return (PsiClass) userObject;
                     }
@@ -319,8 +332,8 @@ public class ClassChooserUtil {
         protected void doOKAction() {
             if (getSelectedClass() == null) {
                 JOptionPane.showMessageDialog(getContentPanel(),
-                    "Please select a class.",
-                    "Invalid Selection", JOptionPane.ERROR_MESSAGE);
+                        "Please select a class.",
+                        "Invalid Selection", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             super.doOKAction();
@@ -328,11 +341,13 @@ public class ClassChooserUtil {
     }
 
     private static class ClassTreeCellRenderer extends DefaultTreeCellRenderer {
+
         @Override
-        public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
+        public Component getTreeCellRendererComponent( JTree tree, Object value, boolean selected, boolean expanded,
+                boolean leaf, int row, boolean hasFocus ) {
             super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
             if (value instanceof DefaultMutableTreeNode) {
-                Object userObject = ((DefaultMutableTreeNode) value).getUserObject();
+                Object userObject = ( (DefaultMutableTreeNode) value ).getUserObject();
                 if (userObject instanceof PsiClass) {
                     PsiClass psiClass = (PsiClass) userObject;
                     setText(psiClass.getName());
@@ -346,10 +361,11 @@ public class ClassChooserUtil {
     }
 
     public static class ClassChoiceResult {
+
         private final PsiClass selectedClass;
         private final String dtoParamName;
 
-        public ClassChoiceResult(PsiClass selectedClass, String dtoParamName) {
+        public ClassChoiceResult( PsiClass selectedClass, String dtoParamName ) {
             this.selectedClass = selectedClass;
             this.dtoParamName = dtoParamName;
         }

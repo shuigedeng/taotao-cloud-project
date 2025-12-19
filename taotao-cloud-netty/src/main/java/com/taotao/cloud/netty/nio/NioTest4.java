@@ -21,9 +21,16 @@ import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
+/**
+ * NioTest4
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NioTest4 {
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         FileInputStream inputStream = new FileInputStream("input.txt");
         FileOutputStream outputStream = new FileOutputStream("output.txt");
 

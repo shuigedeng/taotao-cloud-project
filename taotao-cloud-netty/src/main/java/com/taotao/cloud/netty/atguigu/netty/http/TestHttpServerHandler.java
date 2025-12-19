@@ -22,6 +22,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.*;
 import io.netty.util.CharsetUtil;
+
 import java.net.URI;
 
 /*
@@ -29,11 +30,18 @@ import java.net.URI;
 1. SimpleChannelInboundHandler 是 ChannelInboundHandlerAdapter
 2. HttpObject 客户端和服务器端相互通讯的数据被封装成 HttpObject
  */
+/**
+ * TestHttpServerHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
 
     // channelRead0 读取客户端数据
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, HttpObject msg) throws Exception {
+    protected void channelRead0( ChannelHandlerContext ctx, HttpObject msg ) throws Exception {
 
         System.out.println(
                 "对应的channel="

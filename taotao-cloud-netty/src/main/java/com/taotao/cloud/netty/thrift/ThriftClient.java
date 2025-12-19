@@ -23,9 +23,16 @@ import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 import org.apache.thrift.transport.layered.TFramedTransport;
 
+/**
+ * ThriftClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ThriftClient {
 
-    public static void main(String[] args) throws TTransportException {
+    public static void main( String[] args ) throws TTransportException {
         TTransport transport = new TFramedTransport(new TSocket("localhost", 8899), 600);
         TProtocol protocol = new TCompactProtocol(transport);
         // PersonService.Client client = new PersonService.Client(protocol);

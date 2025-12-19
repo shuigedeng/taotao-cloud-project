@@ -29,8 +29,16 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Server3
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class Server3 {
+
     void start() {
         NioEventLoopGroup boss = new NioEventLoopGroup();
         NioEventLoopGroup worker = new NioEventLoopGroup();
@@ -46,7 +54,7 @@ public class Server3 {
             serverBootstrap.childHandler(
                     new ChannelInitializer<SocketChannel>() {
                         @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
+                        protected void initChannel( SocketChannel ch ) throws Exception {
                             ch.pipeline().addLast(new LineBasedFrameDecoder(1024));
                             ch.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG));
                         }
@@ -61,7 +69,7 @@ public class Server3 {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         new Server3().start();
     }
 }

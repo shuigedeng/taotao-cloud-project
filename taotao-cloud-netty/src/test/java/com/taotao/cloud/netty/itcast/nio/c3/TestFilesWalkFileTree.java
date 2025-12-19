@@ -21,21 +21,29 @@ import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * TestFilesWalkFileTree
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestFilesWalkFileTree {
-    public static void main(String[] args) throws IOException {
+
+    public static void main( String[] args ) throws IOException {
         //        Files.delete(Paths.get("D:\\Snipaste-1.16.2-x64 - 副本"));
         Files.walkFileTree(
                 Paths.get("D:\\Snipaste-1.16.2-x64 - 副本"),
                 new SimpleFileVisitor<Path>() {
                     @Override
-                    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
+                    public FileVisitResult visitFile( Path file, BasicFileAttributes attrs )
                             throws IOException {
                         Files.delete(file);
                         return super.visitFile(file, attrs);
                     }
 
                     @Override
-                    public FileVisitResult postVisitDirectory(Path dir, IOException exc)
+                    public FileVisitResult postVisitDirectory( Path dir, IOException exc )
                             throws IOException {
                         Files.delete(dir);
                         return super.postVisitDirectory(dir, exc);
@@ -49,7 +57,7 @@ public class TestFilesWalkFileTree {
                 Paths.get("C:\\Program Files\\Java\\jdk1.8.0_91"),
                 new SimpleFileVisitor<Path>() {
                     @Override
-                    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
+                    public FileVisitResult visitFile( Path file, BasicFileAttributes attrs )
                             throws IOException {
                         if (file.toString().endsWith(".jar")) {
                             System.out.println(file);
@@ -68,7 +76,7 @@ public class TestFilesWalkFileTree {
                 Paths.get("C:\\Program Files\\Java\\jdk1.8.0_91"),
                 new SimpleFileVisitor<Path>() {
                     @Override
-                    public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs)
+                    public FileVisitResult preVisitDirectory( Path dir, BasicFileAttributes attrs )
                             throws IOException {
                         System.out.println("====>" + dir);
                         dirCount.incrementAndGet();
@@ -76,7 +84,7 @@ public class TestFilesWalkFileTree {
                     }
 
                     @Override
-                    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
+                    public FileVisitResult visitFile( Path file, BasicFileAttributes attrs )
                             throws IOException {
                         System.out.println(file);
                         fileCount.incrementAndGet();

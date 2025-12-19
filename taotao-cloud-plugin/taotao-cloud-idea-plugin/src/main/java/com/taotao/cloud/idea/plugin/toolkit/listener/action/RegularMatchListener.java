@@ -2,20 +2,31 @@ package com.taotao.cloud.idea.plugin.toolkit.listener.action;
 
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.EditorTextField;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JCheckBox;
+
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * RegularMatchListener
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class RegularMatchListener implements ActionListener {
+
     private EditorTextField textField;
     private EditorTextField regularTextField;
     private EditorTextField resultTextField;
     private JCheckBox ignore;
 
-    public RegularMatchListener(EditorTextField textField, EditorTextField regularTextField, EditorTextField resultTextField, JCheckBox ignore) {
+    public RegularMatchListener( EditorTextField textField, EditorTextField regularTextField,
+            EditorTextField resultTextField, JCheckBox ignore ) {
         this.textField = textField;
         this.regularTextField = regularTextField;
         this.resultTextField = resultTextField;
@@ -23,7 +34,7 @@ public class RegularMatchListener implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed( ActionEvent e ) {
         String text = this.textField.getText();
         if (StringUtils.isBlank(text)) {
             return;
@@ -42,7 +53,7 @@ public class RegularMatchListener implements ActionListener {
     }
 
 
-    private String patternMatch(String text, String pattern, boolean ignoreCase) {
+    private String patternMatch( String text, String pattern, boolean ignoreCase ) {
         Pattern r;
         if (ignoreCase) {
             r = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);

@@ -24,10 +24,17 @@ import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
 
+/**
+ * WebSocketChannelInitializer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class WebSocketChannelInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
-    protected void initChannel(SocketChannel ch) throws Exception {
+    protected void initChannel( SocketChannel ch ) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
 
         pipeline.addLast(new HttpServerCodec());

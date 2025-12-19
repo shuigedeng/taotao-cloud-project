@@ -22,12 +22,20 @@ import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.nio.charset.Charset;
 import java.util.Iterator;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Server
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class Server {
 
-    public static void main(String[] args) throws IOException {
+    public static void main( String[] args ) throws IOException {
         // 1. 创建 selector, 管理多个 channel
         Selector selector = Selector.open();
         ServerSocketChannel ssc = ServerSocketChannel.open();

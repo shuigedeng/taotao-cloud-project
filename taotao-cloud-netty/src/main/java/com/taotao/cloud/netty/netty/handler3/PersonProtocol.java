@@ -16,6 +16,13 @@
 
 package com.taotao.cloud.netty.netty.handler3;
 
+/**
+ * PersonProtocol
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class PersonProtocol {
 
     private int length;
@@ -26,7 +33,7 @@ public class PersonProtocol {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength( int length ) {
         this.length = length;
     }
 
@@ -34,7 +41,7 @@ public class PersonProtocol {
         return content;
     }
 
-    public void setContent(byte[] content) {
+    public void setContent( byte[] content ) {
         this.content = content;
     }
 }

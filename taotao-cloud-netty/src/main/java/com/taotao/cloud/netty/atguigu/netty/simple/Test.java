@@ -18,8 +18,16 @@ package com.taotao.cloud.netty.atguigu.netty.simple;
 
 import io.netty.util.NettyRuntime;
 
+/**
+ * Test
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class Test {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         System.out.println(NettyRuntime.availableProcessors());
     }
 }

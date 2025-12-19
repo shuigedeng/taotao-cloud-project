@@ -22,21 +22,31 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageCodec;
+
 import java.util.List;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * MessageCodecSharable
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 @ChannelHandler.Sharable
 /**
  * 必须和 LengthFieldBasedFrameDecoder 一起使用，确保接到的 ByteBuf 消息是完整的
  */
 public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message> {
+
     @Override
-    public void encode(ChannelHandlerContext ctx, Message msg, List<Object> outList)
+    public void encode( ChannelHandlerContext ctx, Message msg, List<Object> outList )
             throws Exception {
         ByteBuf out = ctx.alloc().buffer();
         // 1. 4 字节的魔数
-        out.writeBytes(new byte[] {1, 2, 3, 4});
+        out.writeBytes(new byte[]{1, 2, 3, 4});
         // 2. 1 字节的版本,
         out.writeByte(1);
         // 3. 1 字节的序列化方式 jdk 0 , json 1
@@ -57,7 +67,7 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
     }
 
     @Override
-    protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out)
+    protected void decode( ChannelHandlerContext ctx, ByteBuf in, List<Object> out )
             throws Exception {
         int magicNum = in.readInt();
         byte version = in.readByte();

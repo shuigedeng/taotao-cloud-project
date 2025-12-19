@@ -7,16 +7,25 @@ import com.intellij.openapi.ui.popup.JBPopup;
 import com.intellij.util.ui.JBDimension;
 import com.taotao.cloud.idea.plugin.toolkit.domain.ToolkitCommand;
 import com.taotao.cloud.idea.plugin.toolkit.ui.QrcodeEncodeUI;
+
 import javax.swing.*;
 
+/**
+ * QrcodeEncodeToolkitCommandExecutor
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class QrcodeEncodeToolkitCommandExecutor extends AbstractToolkitCommandExecutor {
+
     @Override
-    public boolean support(ToolkitCommand command) {
+    public boolean support( ToolkitCommand command ) {
         return ToolkitCommand.QRCodeEncode.equals(command);
     }
 
     @Override
-    public void execute(ToolkitCommand command, DataContext dataContext) {
+    public void execute( ToolkitCommand command, DataContext dataContext ) {
         Project project = getProject(dataContext);
 
         JPanel panel = new QrcodeEncodeUI(project).getPanel();

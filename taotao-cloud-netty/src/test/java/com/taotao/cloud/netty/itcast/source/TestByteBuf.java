@@ -26,23 +26,31 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * TestByteBuf
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class TestByteBuf {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         new ServerBootstrap()
                 .group(new NioEventLoopGroup())
                 .channel(NioServerSocketChannel.class)
                 .childHandler(
                         new ChannelInitializer<NioSocketChannel>() {
                             @Override
-                            protected void initChannel(NioSocketChannel ch) {
+                            protected void initChannel( NioSocketChannel ch ) {
                                 ch.pipeline().addLast(new LoggingHandler());
                                 ch.pipeline()
                                         .addLast(
                                                 new ChannelInboundHandlerAdapter() {
                                                     @Override
                                                     public void channelRead(
-                                                            ChannelHandlerContext ctx, Object msg)
+                                                            ChannelHandlerContext ctx, Object msg )
                                                             throws Exception {
                                                         //                                ByteBuf
                                                         // buf = ctx.alloc().buffer();

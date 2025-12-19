@@ -6,11 +6,19 @@ import com.taotao.cloud.idea.plugin.toolkit.domain.executor.ToolkitCommandExecut
 import com.taotao.cloud.idea.plugin.toolkit.domain.executor.ToolkitCommandExecutorComposite;
 import com.taotao.cloud.idea.plugin.toolkit.service.ToolkitCommandService;
 
+/**
+ * ToolkitCommandServiceImpl
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ToolkitCommandServiceImpl implements ToolkitCommandService {
+
     private ToolkitCommandExecutor toolkitCommandExecutor = new ToolkitCommandExecutorComposite();
 
     @Override
-    public void execute(ToolkitCommand command, DataContext dataContext) {
+    public void execute( ToolkitCommand command, DataContext dataContext ) {
         toolkitCommandExecutor.execute(command, dataContext);
     }
 }

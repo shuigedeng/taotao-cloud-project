@@ -11,9 +11,16 @@ import com.intellij.psi.codeStyle.JavaCodeStyleManager;
 import com.taotao.cloud.idea.plugin.converter.exception.ConverterException;
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * ClassGenerator
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ClassGenerator extends ListGenerator {
 
-    public void generateCode(PsiClass psiClass, PsiClass fromPsiClass, PsiClass toPsiClass) {
+    public void generateCode( PsiClass psiClass, PsiClass fromPsiClass, PsiClass toPsiClass ) {
 
         new WriteCommandAction.Simple(psiClass.getProject(), psiClass.getContainingFile()) {
 
@@ -31,7 +38,8 @@ public class ClassGenerator extends ListGenerator {
         }.execute();
     }
 
-    private void createConvertMethod(PsiClass psiClass, PsiClass fromPsiClass, PsiClass toPsiClass) throws ConverterException {
+    private void createConvertMethod( PsiClass psiClass, PsiClass fromPsiClass, PsiClass toPsiClass )
+            throws ConverterException {
 
         String methodName = "to" + toPsiClass.getName() + "List";
 
@@ -61,7 +69,7 @@ public class ClassGenerator extends ListGenerator {
 
     }
 
-    private void createPrivateConstruct(PsiClass psiClass) {
+    private void createPrivateConstruct( PsiClass psiClass ) {
         if (psiClass.getConstructors().length > 0) {
             return;
         }

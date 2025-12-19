@@ -25,9 +25,16 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
+/**
+ * MyClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MyClient {
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
 
         try {
@@ -39,7 +46,7 @@ public class MyClient {
                             new ChannelInitializer<SocketChannel>() {
 
                                 @Override
-                                protected void initChannel(SocketChannel ch) throws Exception {
+                                protected void initChannel( SocketChannel ch ) throws Exception {
                                     ChannelPipeline pipeline = ch.pipeline();
 
                                     pipeline.addLast(new MyPersonDecoder());

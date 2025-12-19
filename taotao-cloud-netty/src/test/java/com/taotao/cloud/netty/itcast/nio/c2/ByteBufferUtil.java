@@ -19,10 +19,20 @@ package com.taotao.cloud.netty.itcast.nio.c2;
 import static io.netty.util.internal.MathUtil.isOutOfBounds;
 import static io.netty.util.internal.StringUtil.NEWLINE;
 
+import io.netty.util.internal.MathUtil;
 import io.netty.util.internal.StringUtil;
+
 import java.nio.ByteBuffer;
 
+/**
+ * ByteBufferUtil
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ByteBufferUtil {
+
     private static final char[] BYTE2CHAR = new char[256];
     private static final char[] HEXDUMP_TABLE = new char[256 * 4];
     private static final String[] HEXPADDING = new String[16];
@@ -34,7 +44,7 @@ public class ByteBufferUtil {
         final char[] DIGITS = "0123456789abcdef".toCharArray();
         for (int i = 0; i < 256; i++) {
             HEXDUMP_TABLE[i << 1] = DIGITS[i >>> 4 & 0x0F];
-            HEXDUMP_TABLE[(i << 1) + 1] = DIGITS[i & 0x0F];
+            HEXDUMP_TABLE[( i << 1 ) + 1] = DIGITS[i & 0x0F];
         }
 
         int i;
@@ -86,9 +96,8 @@ public class ByteBufferUtil {
 
     /**
      * 打印所有内容
-     * @param buffer
      */
-    public static void debugAll(ByteBuffer buffer) {
+    public static void debugAll( ByteBuffer buffer ) {
         int oldlimit = buffer.limit();
         buffer.limit(buffer.capacity());
         StringBuilder origin = new StringBuilder(256);
@@ -102,9 +111,8 @@ public class ByteBufferUtil {
 
     /**
      * 打印可读取内容
-     * @param buffer
      */
-    public static void debugRead(ByteBuffer buffer) {
+    public static void debugRead( ByteBuffer buffer ) {
         StringBuilder builder = new StringBuilder(256);
         appendPrettyHexDump(builder, buffer, buffer.position(), buffer.limit() - buffer.position());
         System.out.println(
@@ -113,14 +121,14 @@ public class ByteBufferUtil {
         System.out.println(builder);
     }
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         ByteBuffer buffer = ByteBuffer.allocate(10);
-        buffer.put(new byte[] {97, 98, 99, 100});
+        buffer.put(new byte[]{97, 98, 99, 100});
         debugAll(buffer);
     }
 
     private static void appendPrettyHexDump(
-            StringBuilder dump, ByteBuffer buf, int offset, int length) {
+            StringBuilder dump, ByteBuffer buf, int offset, int length ) {
         if (isOutOfBounds(offset, length, buf.capacity())) {
             throw new IndexOutOfBoundsException(
                     "expected: "
@@ -149,7 +157,7 @@ public class ByteBufferUtil {
 
         // Dump the rows which have 16 bytes.
         for (int row = 0; row < fullRows; row++) {
-            int rowStartIndex = (row << 4) + startIndex;
+            int rowStartIndex = ( row << 4 ) + startIndex;
 
             // Per-row prefix.
             appendHexDumpRowPrefix(dump, row, rowStartIndex);
@@ -170,7 +178,7 @@ public class ByteBufferUtil {
 
         // Dump the last row which has less than 16 bytes.
         if (remainder != 0) {
-            int rowStartIndex = (fullRows << 4) + startIndex;
+            int rowStartIndex = ( fullRows << 4 ) + startIndex;
             appendHexDumpRowPrefix(dump, fullRows, rowStartIndex);
 
             // Hex dump
@@ -194,7 +202,7 @@ public class ByteBufferUtil {
                         + "+--------+-------------------------------------------------+----------------+");
     }
 
-    private static void appendHexDumpRowPrefix(StringBuilder dump, int row, int rowStartIndex) {
+    private static void appendHexDumpRowPrefix( StringBuilder dump, int row, int rowStartIndex ) {
         if (row < HEXDUMP_ROWPREFIXES.length) {
             dump.append(HEXDUMP_ROWPREFIXES[row]);
         } else {
@@ -205,7 +213,7 @@ public class ByteBufferUtil {
         }
     }
 
-    public static short getUnsignedByte(ByteBuffer buffer, int index) {
-        return (short) (buffer.get(index) & 0xFF);
+    public static short getUnsignedByte( ByteBuffer buffer, int index ) {
+        return (short) ( buffer.get(index) & 0xFF );
     }
 }

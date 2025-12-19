@@ -1,9 +1,17 @@
 package com.taotao.cloud.idea.plugin.toolkit.utils;
 
+/**
+ * JsonFormatter
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class JsonFormatter {
+
     private static final int INDENT_SPACE = 2;
 
-    public static String format(String text) {
+    public static String format( String text ) {
         StringBuilder formattedText = new StringBuilder();
         int indentCount = 0;
 
@@ -30,7 +38,7 @@ public class JsonFormatter {
         return formattedText.toString();
     }
 
-    private static void appendIndent(StringBuilder text, int indentCount) {
+    private static void appendIndent( StringBuilder text, int indentCount ) {
         for (int i = 0; i < indentCount * INDENT_SPACE; ++i) {
             text.append(' ');
         }

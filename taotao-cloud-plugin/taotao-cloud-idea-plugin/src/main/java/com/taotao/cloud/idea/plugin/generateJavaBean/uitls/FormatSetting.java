@@ -11,7 +11,15 @@ import org.jetbrains.annotations.Nullable;
 //    id = "other",
 //    file = "$APP_CONFIG$/format.xml"
 //)})
+/**
+ * FormatSetting
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class FormatSetting implements PersistentStateComponent<Element> {
+
     private String setFormat;
     private String getFormat;
 
@@ -19,7 +27,7 @@ public class FormatSetting implements PersistentStateComponent<Element> {
     }
 
     public static FormatSetting getInstance() {
-        return (FormatSetting)ServiceManager.getService(FormatSetting.class);
+        return (FormatSetting) ServiceManager.getService(FormatSetting.class);
     }
 
     @Nullable
@@ -30,7 +38,7 @@ public class FormatSetting implements PersistentStateComponent<Element> {
         return element;
     }
 
-    public void loadState(Element state) {
+    public void loadState( Element state ) {
         this.setSetFormat(state.getAttributeValue("setFormat"));
         this.setGetFormat(state.getAttributeValue("getFormat"));
     }
@@ -39,7 +47,7 @@ public class FormatSetting implements PersistentStateComponent<Element> {
         return this.setFormat == null ? StatementGenerator.defaultSetFormat : this.setFormat;
     }
 
-    public void setSetFormat(String setFormat) {
+    public void setSetFormat( String setFormat ) {
         this.setFormat = setFormat;
     }
 
@@ -47,7 +55,7 @@ public class FormatSetting implements PersistentStateComponent<Element> {
         return this.getFormat == null ? StatementGenerator.defaultGetFormat : this.getFormat;
     }
 
-    public void setGetFormat(String getFormat) {
+    public void setGetFormat( String getFormat ) {
         this.getFormat = getFormat;
     }
 }

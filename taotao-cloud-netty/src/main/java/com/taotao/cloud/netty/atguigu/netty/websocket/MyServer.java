@@ -31,8 +31,16 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
 
+/**
+ * MyServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MyServer {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
 
         // 创建两个线程组
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
@@ -48,7 +56,7 @@ public class MyServer {
                     new ChannelInitializer<SocketChannel>() {
 
                         @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
+                        protected void initChannel( SocketChannel ch ) throws Exception {
                             ChannelPipeline pipeline = ch.pipeline();
 
                             // 因为基于http协议，使用http的编码和解码器

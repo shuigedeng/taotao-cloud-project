@@ -10,17 +10,24 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.util.PsiTreeUtil;
 
+/**
+ * ContextUtils
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ContextUtils {
 
-    public static PsiClass getPsiClass(AnActionEvent e) {
+    public static PsiClass getPsiClass( AnActionEvent e ) {
         return getPsiElement(e, PsiClass.class);
     }
 
-    public static PsiMethod getPsiMethod(AnActionEvent e) {
+    public static PsiMethod getPsiMethod( AnActionEvent e ) {
         return getPsiElement(e, PsiMethod.class);
     }
 
-    private static PsiElement getPsiElement(AnActionEvent e) {
+    private static PsiElement getPsiElement( AnActionEvent e ) {
         PsiFile psiFile = e.getData(LangDataKeys.PSI_FILE);
         Editor editor = e.getData(PlatformDataKeys.EDITOR);
         if (psiFile == null || editor == null) {
@@ -31,7 +38,7 @@ public class ContextUtils {
 
     }
 
-    private static <T extends PsiElement> T getPsiElement(AnActionEvent e, Class<T> clazz) {
+    private static <T extends PsiElement> T getPsiElement( AnActionEvent e, Class<T> clazz ) {
 
         PsiElement elementAt = getPsiElement(e);
         return PsiTreeUtil.getParentOfType(elementAt, clazz);

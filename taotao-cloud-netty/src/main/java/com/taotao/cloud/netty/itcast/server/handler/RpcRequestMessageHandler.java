@@ -23,16 +23,25 @@ import com.taotao.cloud.netty.itcast.server.service.ServicesFactory;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * RpcRequestMessageHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 @ChannelHandler.Sharable
 public class RpcRequestMessageHandler extends SimpleChannelInboundHandler<RpcRequestMessage> {
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, RpcRequestMessage message) {
+    protected void channelRead0( ChannelHandlerContext ctx, RpcRequestMessage message ) {
         RpcResponseMessage response = new RpcResponseMessage();
         response.setSequenceId(message.getSequenceId());
         try {
@@ -52,19 +61,19 @@ public class RpcRequestMessageHandler extends SimpleChannelInboundHandler<RpcReq
         ctx.writeAndFlush(response);
     }
 
-    public static void main(String[] args)
+    public static void main( String[] args )
             throws ClassNotFoundException,
-                    NoSuchMethodException,
-                    InvocationTargetException,
-                    IllegalAccessException {
+            NoSuchMethodException,
+            InvocationTargetException,
+            IllegalAccessException {
         RpcRequestMessage message =
                 new RpcRequestMessage(
                         1,
                         "com.taotao.cloud.netty.itcast.server.service.HelloService",
                         "sayHello",
                         String.class,
-                        new Class[] {String.class},
-                        new Object[] {"张三"});
+                        new Class[]{String.class},
+                        new Object[]{"张三"});
         HelloService service =
                 (HelloService)
                         ServicesFactory.getService(Class.forName(message.getInterfaceName()));

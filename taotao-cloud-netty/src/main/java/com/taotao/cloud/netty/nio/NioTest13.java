@@ -26,9 +26,16 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CharsetEncoder;
 
+/**
+ * NioTest13
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NioTest13 {
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         String inputFile = "NioTest13_In.txt";
         String outputFile = "NioTest13_Out.txt";
 
@@ -47,7 +54,7 @@ public class NioTest13 {
 
         Charset.availableCharsets()
                 .forEach(
-                        (k, v) -> {
+                        ( k, v ) -> {
                             System.out.println(k + ", " + v);
                         });
 

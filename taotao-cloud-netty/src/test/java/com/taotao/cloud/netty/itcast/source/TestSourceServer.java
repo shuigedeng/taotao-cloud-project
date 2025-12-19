@@ -23,15 +23,23 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LoggingHandler;
 
+/**
+ * TestSourceServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestSourceServer {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         new ServerBootstrap()
                 .group(new NioEventLoopGroup())
                 .channel(NioServerSocketChannel.class)
                 .childHandler(
                         new ChannelInitializer<NioSocketChannel>() {
                             @Override
-                            protected void initChannel(NioSocketChannel ch) {
+                            protected void initChannel( NioSocketChannel ch ) {
                                 ch.pipeline().addLast(new LoggingHandler());
                             }
                         })

@@ -16,7 +16,15 @@
 
 package com.taotao.cloud.netty.atguigu.netty.groupchat;
 
+/**
+ * User
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class User {
+
     private int id;
     private String pwd;
 }

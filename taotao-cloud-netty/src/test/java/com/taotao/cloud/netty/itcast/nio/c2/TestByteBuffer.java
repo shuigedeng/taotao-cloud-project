@@ -20,12 +20,20 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * TestByteBuffer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class TestByteBuffer {
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         // FileChannel
         // 1. 输入输出流， 2. RandomAccessFile
         try (FileChannel channel = new FileInputStream("data.txt").getChannel()) {

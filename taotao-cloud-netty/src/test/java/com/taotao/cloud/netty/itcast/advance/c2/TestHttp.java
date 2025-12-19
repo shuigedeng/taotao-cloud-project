@@ -26,17 +26,22 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.http.DefaultFullHttpResponse;
-import io.netty.handler.codec.http.HttpRequest;
-import io.netty.handler.codec.http.HttpResponseStatus;
-import io.netty.handler.codec.http.HttpServerCodec;
+import io.netty.handler.codec.http.*;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * TestHttp
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class TestHttp {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         NioEventLoopGroup boss = new NioEventLoopGroup();
         NioEventLoopGroup worker = new NioEventLoopGroup();
         try {
@@ -46,7 +51,7 @@ public class TestHttp {
             serverBootstrap.childHandler(
                     new ChannelInitializer<SocketChannel>() {
                         @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
+                        protected void initChannel( SocketChannel ch ) throws Exception {
                             ch.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG));
                             ch.pipeline().addLast(new HttpServerCodec());
                             ch.pipeline()
@@ -54,7 +59,7 @@ public class TestHttp {
                                             new SimpleChannelInboundHandler<HttpRequest>() {
                                                 @Override
                                                 protected void channelRead0(
-                                                        ChannelHandlerContext ctx, HttpRequest msg)
+                                                        ChannelHandlerContext ctx, HttpRequest msg )
                                                         throws Exception {
                                                     // 获取请求
                                                     log.debug(msg.uri());

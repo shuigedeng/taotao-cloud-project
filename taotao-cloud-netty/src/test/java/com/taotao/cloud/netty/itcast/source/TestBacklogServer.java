@@ -24,8 +24,16 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LoggingHandler;
 
+/**
+ * TestBacklogServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestBacklogServer {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         new ServerBootstrap()
                 .group(new NioEventLoopGroup())
                 .option(ChannelOption.SO_BACKLOG, 2) // 全队列满了
@@ -33,7 +41,7 @@ public class TestBacklogServer {
                 .childHandler(
                         new ChannelInitializer<NioSocketChannel>() {
                             @Override
-                            protected void initChannel(NioSocketChannel ch) {
+                            protected void initChannel( NioSocketChannel ch ) {
                                 ch.pipeline().addLast(new LoggingHandler());
                             }
                         })

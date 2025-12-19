@@ -18,8 +18,16 @@ package com.taotao.cloud.netty.itcast.advance.c2;
 
 import java.util.Collections;
 
+/**
+ * TestEmptySet
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestEmptySet {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         Collections.EMPTY_SET.add("o");
     }
 }

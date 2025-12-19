@@ -17,11 +17,20 @@
 package com.taotao.cloud.netty.itcast.test;
 
 import java.util.concurrent.*;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * TestFuture
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class TestFuture {
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+
+    public static void main( String[] args ) throws ExecutionException, InterruptedException {
         //        DefaultEventLoop eventExecutors = new DefaultEventLoop();
         ExecutorService eventExecutors = Executors.newFixedThreadPool(2);
         CompletableFuture<Integer> future = new CompletableFuture<>();

@@ -21,12 +21,20 @@ import io.netty.channel.Channel;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+/**
+ * MyChatClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MyChatClient {
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
 
         try {

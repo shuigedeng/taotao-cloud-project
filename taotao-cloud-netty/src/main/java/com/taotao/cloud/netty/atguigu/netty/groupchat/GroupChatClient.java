@@ -23,15 +23,23 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+
 import java.util.Scanner;
 
+/**
+ * GroupChatClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class GroupChatClient {
 
     // 属性
     private final String host;
     private final int port;
 
-    public GroupChatClient(String host, int port) {
+    public GroupChatClient( String host, int port ) {
         this.host = host;
         this.port = port;
     }
@@ -49,7 +57,7 @@ public class GroupChatClient {
                                     new ChannelInitializer<SocketChannel>() {
 
                                         @Override
-                                        protected void initChannel(SocketChannel ch)
+                                        protected void initChannel( SocketChannel ch )
                                                 throws Exception {
 
                                             // 得到pipeline
@@ -78,7 +86,7 @@ public class GroupChatClient {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         new GroupChatClient("127.0.0.1", 7000).run();
     }
 }

@@ -25,10 +25,17 @@ import io.netty.handler.codec.protobuf.ProtobufEncoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 
+/**
+ * TestClientInitializer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestClientInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
-    protected void initChannel(SocketChannel ch) throws Exception {
+    protected void initChannel( SocketChannel ch ) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
 
         pipeline.addLast(new ProtobufVarint32FrameDecoder());

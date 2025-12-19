@@ -24,9 +24,17 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * TestConnectionTimeout
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class TestConnectionTimeout {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         // 1. 客户端通过 .option() 方法配置参数 给 SocketChannel 配置参数
 
         // 2. 服务器端

@@ -20,10 +20,17 @@ import com.taotao.cloud.netty.grpc.code2.MyMessage;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
+/**
+ * TestServerHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestServerHandler extends SimpleChannelInboundHandler<MyMessage> {
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, MyMessage msg) throws Exception {
+    protected void channelRead0( ChannelHandlerContext ctx, MyMessage msg ) throws Exception {
         MyMessage.DataType dataType = msg.getDataType();
 
         // if (dataType == MyMessage.DataType.StudentType) {

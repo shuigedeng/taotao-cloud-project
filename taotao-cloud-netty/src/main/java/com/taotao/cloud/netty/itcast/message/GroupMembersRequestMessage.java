@@ -19,12 +19,20 @@ package com.taotao.cloud.netty.itcast.message;
 import lombok.Data;
 import lombok.ToString;
 
+/**
+ * GroupMembersRequestMessage
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @ToString(callSuper = true)
 public class GroupMembersRequestMessage extends Message {
+
     private String groupName;
 
-    public GroupMembersRequestMessage(String groupName) {
+    public GroupMembersRequestMessage( String groupName ) {
         this.groupName = groupName;
     }
 

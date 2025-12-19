@@ -21,9 +21,16 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 // java IO 的服务器
+/**
+ * OldIOServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class OldIOServer {
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         ServerSocket serverSocket = new ServerSocket(7001);
 
         while (true) {

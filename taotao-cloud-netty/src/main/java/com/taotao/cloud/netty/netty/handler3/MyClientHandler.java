@@ -18,14 +18,22 @@ package com.taotao.cloud.netty.netty.handler3;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+
 import java.nio.charset.Charset;
 
+/**
+ * MyClientHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MyClientHandler extends SimpleChannelInboundHandler<PersonProtocol> {
 
     private int count;
 
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+    public void channelActive( ChannelHandlerContext ctx ) throws Exception {
         for (int i = 0; i < 10; ++i) {
             String messageToBeSent = "sent from client ";
             byte[] content = messageToBeSent.getBytes(Charset.forName("utf-8"));
@@ -40,7 +48,7 @@ public class MyClientHandler extends SimpleChannelInboundHandler<PersonProtocol>
     }
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, PersonProtocol msg) throws Exception {
+    protected void channelRead0( ChannelHandlerContext ctx, PersonProtocol msg ) throws Exception {
         int length = msg.getLength();
         byte[] content = msg.getContent();
 
@@ -49,11 +57,11 @@ public class MyClientHandler extends SimpleChannelInboundHandler<PersonProtocol>
         System.out.println("长度: " + length);
         System.out.println("内容：" + new String(content, Charset.forName("utf-8")));
 
-        System.out.println("客户端接受到的消息数量：" + (++this.count));
+        System.out.println("客户端接受到的消息数量：" + ( ++this.count ));
     }
 
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+    public void exceptionCaught( ChannelHandlerContext ctx, Throwable cause ) throws Exception {
         cause.printStackTrace();
         ctx.close();
     }

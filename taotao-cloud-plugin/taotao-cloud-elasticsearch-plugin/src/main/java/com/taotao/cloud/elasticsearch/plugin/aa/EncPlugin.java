@@ -18,17 +18,23 @@ package com.taotao.cloud.elasticsearch.plugin.aa;
 
 import java.util.Map;
 import java.util.TreeMap;
+
 import org.elasticsearch.indices.analysis.AnalysisModule;
 import org.elasticsearch.plugins.AnalysisPlugin;
 import org.elasticsearch.plugins.MapperPlugin;
 import org.elasticsearch.plugins.Plugin;
 
+/**
+ * EncPlugin
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class EncPlugin extends Plugin implements AnalysisPlugin, MapperPlugin {
 
     /**
      * CharFilter
-     *
-     * @return
      */
     @Override
     public Map<String, AnalysisModule.AnalysisProvider<CharFilterFactory>> getCharFilters() {

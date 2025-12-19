@@ -20,11 +20,18 @@ import static com.taotao.cloud.netty.itcast.nio.c2.ByteBufferUtil.debugAll;
 
 import java.nio.ByteBuffer;
 
+/**
+ * TestByteBufferRead
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestByteBufferRead {
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         ByteBuffer buffer = ByteBuffer.allocate(10);
-        buffer.put(new byte[] {'a', 'b', 'c', 'd'});
+        buffer.put(new byte[]{'a', 'b', 'c', 'd'});
         buffer.flip();
 
         // rewind 从头开始读

@@ -4,27 +4,37 @@ import cn.hutool.http.HttpUtil;
 import com.intellij.rt.debugger.JsonUtils;
 import com.intellij.ui.EditorTextField;
 import com.taotao.cloud.idea.plugin.toolkit.notification.ToolkitNotifier;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
+
 import org.apache.commons.lang3.StringUtils;
 
 
+/**
+ * IPSearchActionListener
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class IPSearchActionListener implements ActionListener {
+
     private static final String URL = "http://whois.pconline.com.cn/ipJson.jsp";
 
     private EditorTextField editorTextField;
     private DefaultTableModel tableModel;
 
-    public IPSearchActionListener(EditorTextField editorTextField, DefaultTableModel tableModel) {
+    public IPSearchActionListener( EditorTextField editorTextField, DefaultTableModel tableModel ) {
         this.editorTextField = editorTextField;
         this.tableModel = tableModel;
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed( ActionEvent e ) {
         String text = editorTextField.getText().trim();
         if (StringUtils.isBlank(text)) {
             return;

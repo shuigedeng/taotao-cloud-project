@@ -19,10 +19,17 @@ package com.taotao.cloud.netty.netty.thirdexample;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
+/**
+ * MyChatClientHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MyChatClientHandler extends SimpleChannelInboundHandler<String> {
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
+    protected void channelRead0( ChannelHandlerContext ctx, String msg ) throws Exception {
         System.out.println(msg);
     }
 }

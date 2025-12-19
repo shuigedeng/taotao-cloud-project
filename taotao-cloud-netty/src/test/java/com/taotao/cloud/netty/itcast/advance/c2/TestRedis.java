@@ -26,11 +26,21 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LoggingHandler;
+
 import java.nio.charset.Charset;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * TestRedis
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class TestRedis {
+
     /*
     set name zhangsan
     *3
@@ -41,7 +51,7 @@ public class TestRedis {
     $8
     zhangsan
      */
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         final byte[] LINE = {13, 10};
         NioEventLoopGroup worker = new NioEventLoopGroup();
         try {
@@ -51,14 +61,14 @@ public class TestRedis {
             bootstrap.handler(
                     new ChannelInitializer<SocketChannel>() {
                         @Override
-                        protected void initChannel(SocketChannel ch) {
+                        protected void initChannel( SocketChannel ch ) {
                             ch.pipeline().addLast(new LoggingHandler());
                             ch.pipeline()
                                     .addLast(
                                             new ChannelInboundHandlerAdapter() {
                                                 @Override
                                                 public void channelActive(
-                                                        ChannelHandlerContext ctx) {
+                                                        ChannelHandlerContext ctx ) {
                                                     ByteBuf buf = ctx.alloc().buffer();
                                                     buf.writeBytes("*3".getBytes());
                                                     buf.writeBytes(LINE);
@@ -79,7 +89,7 @@ public class TestRedis {
 
                                                 @Override
                                                 public void channelRead(
-                                                        ChannelHandlerContext ctx, Object msg)
+                                                        ChannelHandlerContext ctx, Object msg )
                                                         throws Exception {
                                                     ByteBuf buf = (ByteBuf) msg;
                                                     System.out.println(

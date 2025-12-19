@@ -22,7 +22,15 @@ import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.util.Iterator;
 
+/**
+ * GroupChatServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class GroupChatServer {
+
     // 定义属性
     private Selector selector;
     private ServerSocketChannel listenChannel;
@@ -102,7 +110,7 @@ public class GroupChatServer {
     }
 
     // 读取客户端消息
-    private void readData(SelectionKey key) {
+    private void readData( SelectionKey key ) {
 
         // 取到关联的channle
         SocketChannel channel = null;
@@ -140,7 +148,7 @@ public class GroupChatServer {
     }
 
     // 转发消息给其它客户(通道)
-    private void sendInfoToOtherClients(String msg, SocketChannel self) throws IOException {
+    private void sendInfoToOtherClients( String msg, SocketChannel self ) throws IOException {
 
         System.out.println("服务器转发消息中...");
         System.out.println("服务器转发数据给客户端线程: " + Thread.currentThread().getName());
@@ -163,7 +171,7 @@ public class GroupChatServer {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
 
         // 创建服务器对象
         GroupChatServer groupChatServer = new GroupChatServer();
@@ -172,8 +180,11 @@ public class GroupChatServer {
 
     // 可以写一个Handler
     public static class MyHandler {
-        public void readData() {}
 
-        public void sendInfoToOtherClients() {}
+        public void readData() {
+        }
+
+        public void sendInfoToOtherClients() {
+        }
     }
 }

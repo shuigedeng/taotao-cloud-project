@@ -20,9 +20,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * TestFilesCopy
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestFilesCopy {
 
-    public static void main(String[] args) throws IOException {
+    public static void main( String[] args ) throws IOException {
         long start = System.currentTimeMillis();
         String source = "D:\\Snipaste-1.16.2-x64";
         String target = "D:\\Snipaste-1.16.2-x64aaa";

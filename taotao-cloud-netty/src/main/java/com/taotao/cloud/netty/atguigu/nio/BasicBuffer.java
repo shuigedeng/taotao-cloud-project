@@ -18,8 +18,16 @@ package com.taotao.cloud.netty.atguigu.nio;
 
 import java.nio.IntBuffer;
 
+/**
+ * BasicBuffer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class BasicBuffer {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
 
         // 举例说明Buffer 的使用 (简单说明)
         // 创建一个Buffer, 大小为 5, 即可以存放5个int

@@ -25,11 +25,20 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringEncoder;
+
 import java.nio.charset.Charset;
 import java.util.Scanner;
 
+/**
+ * EchoClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class EchoClient {
-    public static void main(String[] args) throws InterruptedException {
+
+    public static void main( String[] args ) throws InterruptedException {
         NioEventLoopGroup group = new NioEventLoopGroup();
         Channel channel =
                 new Bootstrap()
@@ -38,7 +47,7 @@ public class EchoClient {
                         .handler(
                                 new ChannelInitializer<NioSocketChannel>() {
                                     @Override
-                                    protected void initChannel(NioSocketChannel ch)
+                                    protected void initChannel( NioSocketChannel ch )
                                             throws Exception {
                                         ch.pipeline().addLast(new StringEncoder());
                                         ch.pipeline()
@@ -47,7 +56,7 @@ public class EchoClient {
                                                             @Override
                                                             public void channelRead(
                                                                     ChannelHandlerContext ctx,
-                                                                    Object msg)
+                                                                    Object msg )
                                                                     throws Exception {
                                                                 ByteBuf buffer = (ByteBuf) msg;
                                                                 System.out.println(
@@ -69,17 +78,17 @@ public class EchoClient {
                             group.shutdownGracefully();
                         });
         new Thread(
-                        () -> {
-                            Scanner scanner = new Scanner(System.in);
-                            while (true) {
-                                String line = scanner.nextLine();
-                                if ("q".equals(line)) {
-                                    channel.close();
-                                    break;
-                                }
-                                channel.writeAndFlush(line);
-                            }
-                        })
+                () -> {
+                    Scanner scanner = new Scanner(System.in);
+                    while (true) {
+                        String line = scanner.nextLine();
+                        if ("q".equals(line)) {
+                            channel.close();
+                            break;
+                        }
+                        channel.writeAndFlush(line);
+                    }
+                })
                 .start();
     }
 }

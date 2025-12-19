@@ -26,8 +26,16 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.logging.LoggingHandler;
 
+/**
+ * HelloServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class HelloServer {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         // 1. 启动器，负责组装 netty 组件，启动服务器
         new ServerBootstrap()
                 // 2. BossEventLoop, WorkerEventLoop(selector,thread), group 组
@@ -39,7 +47,7 @@ public class HelloServer {
                         // 5. channel 代表和客户端进行数据读写的通道 Initializer 初始化，负责添加别的 handler
                         new ChannelInitializer<NioSocketChannel>() {
                             @Override
-                            protected void initChannel(NioSocketChannel ch) throws Exception {
+                            protected void initChannel( NioSocketChannel ch ) throws Exception {
                                 // 6. 添加具体 handler
                                 ch.pipeline().addLast(new LoggingHandler());
                                 ch.pipeline().addLast(new StringDecoder()); // 将 ByteBuf 转换为字符串
@@ -48,7 +56,7 @@ public class HelloServer {
                                                 new ChannelInboundHandlerAdapter() { // 自定义 handler
                                                     @Override // 读事件
                                                     public void channelRead(
-                                                            ChannelHandlerContext ctx, Object msg)
+                                                            ChannelHandlerContext ctx, Object msg )
                                                             throws Exception {
                                                         System.out.println(msg); // 打印上一步转换好的字符串
                                                     }

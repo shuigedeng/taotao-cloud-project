@@ -19,15 +19,24 @@ package com.taotao.cloud.netty.itcast.message;
 import lombok.Data;
 import lombok.ToString;
 
+/**
+ * AbstractResponseMessage
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @ToString(callSuper = true)
 public abstract class AbstractResponseMessage extends Message {
+
     private boolean success;
     private String reason;
 
-    public AbstractResponseMessage() {}
+    public AbstractResponseMessage() {
+    }
 
-    public AbstractResponseMessage(boolean success, String reason) {
+    public AbstractResponseMessage( boolean success, String reason ) {
         this.success = success;
         this.reason = reason;
     }

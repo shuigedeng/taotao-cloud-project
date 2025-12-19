@@ -22,8 +22,16 @@ import java.nio.channels.*;
 import java.util.Iterator;
 import java.util.Set;
 
+/**
+ * NIOServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NIOServer {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
 
         // 创建ServerSocketChannel -> ServerSocket
 

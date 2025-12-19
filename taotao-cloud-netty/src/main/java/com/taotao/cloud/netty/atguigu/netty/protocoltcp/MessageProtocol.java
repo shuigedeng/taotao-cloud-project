@@ -17,7 +17,15 @@
 package com.taotao.cloud.netty.atguigu.netty.protocoltcp;
 
 // 协议包
+/**
+ * MessageProtocol
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MessageProtocol {
+
     private int len; // 关键
     private byte[] content;
 
@@ -25,7 +33,7 @@ public class MessageProtocol {
         return len;
     }
 
-    public void setLen(int len) {
+    public void setLen( int len ) {
         this.len = len;
     }
 
@@ -33,7 +41,7 @@ public class MessageProtocol {
         return content;
     }
 
-    public void setContent(byte[] content) {
+    public void setContent( byte[] content ) {
         this.content = content;
     }
 }

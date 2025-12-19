@@ -23,13 +23,21 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+
 import java.util.List;
 
+/**
+ * GroupChatRequestMessageHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @ChannelHandler.Sharable
-public class GroupChatRequestMessageHandler
-        extends SimpleChannelInboundHandler<GroupChatRequestMessage> {
+public class GroupChatRequestMessageHandler extends SimpleChannelInboundHandler<GroupChatRequestMessage> {
+
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, GroupChatRequestMessage msg)
+    protected void channelRead0( ChannelHandlerContext ctx, GroupChatRequestMessage msg )
             throws Exception {
         List<Channel> channels =
                 GroupSessionFactory.getGroupSession().getMembersChannel(msg.getGroupName());

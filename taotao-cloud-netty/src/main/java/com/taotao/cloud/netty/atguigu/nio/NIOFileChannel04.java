@@ -20,8 +20,16 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
 
+/**
+ * NIOFileChannel04
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NIOFileChannel04 {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
 
         // 创建相关流
         FileInputStream fileInputStream = new FileInputStream("d:\\a.jpg");

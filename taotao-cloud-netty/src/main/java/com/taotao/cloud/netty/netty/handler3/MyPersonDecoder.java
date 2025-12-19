@@ -19,12 +19,20 @@ package com.taotao.cloud.netty.netty.handler3;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ReplayingDecoder;
+
 import java.util.List;
 
+/**
+ * MyPersonDecoder
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MyPersonDecoder extends ReplayingDecoder<Void> {
 
     @Override
-    protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out)
+    protected void decode( ChannelHandlerContext ctx, ByteBuf in, List<Object> out )
             throws Exception {
         System.out.println("MyPersonDecoder decode invoked!");
 

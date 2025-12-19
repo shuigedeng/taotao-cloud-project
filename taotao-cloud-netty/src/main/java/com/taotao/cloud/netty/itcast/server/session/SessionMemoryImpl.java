@@ -17,9 +17,17 @@
 package com.taotao.cloud.netty.itcast.server.session;
 
 import io.netty.channel.Channel;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * SessionMemoryImpl
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class SessionMemoryImpl implements Session {
 
     private final Map<String, Channel> usernameChannelMap = new ConcurrentHashMap<>();
@@ -28,31 +36,31 @@ public class SessionMemoryImpl implements Session {
             new ConcurrentHashMap<>();
 
     @Override
-    public void bind(Channel channel, String username) {
+    public void bind( Channel channel, String username ) {
         usernameChannelMap.put(username, channel);
         channelUsernameMap.put(channel, username);
         channelAttributesMap.put(channel, new ConcurrentHashMap<>());
     }
 
     @Override
-    public void unbind(Channel channel) {
+    public void unbind( Channel channel ) {
         String username = channelUsernameMap.remove(channel);
         usernameChannelMap.remove(username);
         channelAttributesMap.remove(channel);
     }
 
     @Override
-    public Object getAttribute(Channel channel, String name) {
+    public Object getAttribute( Channel channel, String name ) {
         return channelAttributesMap.get(channel).get(name);
     }
 
     @Override
-    public void setAttribute(Channel channel, String name, Object value) {
+    public void setAttribute( Channel channel, String name, Object value ) {
         channelAttributesMap.get(channel).put(name, value);
     }
 
     @Override
-    public Channel getChannel(String username) {
+    public Channel getChannel( String username ) {
         return usernameChannelMap.get(username);
     }
 

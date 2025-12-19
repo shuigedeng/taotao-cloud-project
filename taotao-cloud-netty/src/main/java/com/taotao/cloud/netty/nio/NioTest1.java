@@ -19,9 +19,16 @@ package com.taotao.cloud.netty.nio;
 import java.nio.IntBuffer;
 import java.security.SecureRandom;
 
+/**
+ * NioTest1
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NioTest1 {
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         IntBuffer buffer = IntBuffer.allocate(10);
 
         System.out.println("capacity: " + buffer.capacity());

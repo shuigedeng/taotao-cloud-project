@@ -17,6 +17,7 @@
 package com.taotao.cloud.netty.itcast.server.service;
 
 import com.taotao.cloud.netty.itcast.config.Config;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
@@ -24,6 +25,13 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * ServicesFactory
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ServicesFactory {
 
     static Properties properties;
@@ -42,14 +50,14 @@ public class ServicesFactory {
                 }
             }
         } catch (IOException
-                | ClassNotFoundException
-                | InstantiationException
-                | IllegalAccessException e) {
+                 | ClassNotFoundException
+                 | InstantiationException
+                 | IllegalAccessException e) {
             throw new ExceptionInInitializerError(e);
         }
     }
 
-    public static <T> T getService(Class<T> interfaceClass) {
+    public static <T> T getService( Class<T> interfaceClass ) {
         return (T) map.get(interfaceClass);
     }
 }

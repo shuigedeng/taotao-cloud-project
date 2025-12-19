@@ -23,8 +23,16 @@ import java.nio.channels.*;
 import java.nio.charset.Charset;
 import java.util.Iterator;
 
+/**
+ * WriteServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class WriteServer {
-    public static void main(String[] args) throws IOException {
+
+    public static void main( String[] args ) throws IOException {
         ServerSocketChannel ssc = ServerSocketChannel.open();
         ssc.configureBlocking(false);
         Selector selector = Selector.open();

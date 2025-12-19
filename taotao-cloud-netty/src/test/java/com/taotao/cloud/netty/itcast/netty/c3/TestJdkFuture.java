@@ -17,11 +17,20 @@
 package com.taotao.cloud.netty.itcast.netty.c3;
 
 import java.util.concurrent.*;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * TestJdkFuture
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class TestJdkFuture {
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+
+    public static void main( String[] args ) throws ExecutionException, InterruptedException {
         // 1. 线程池
         ExecutorService service = Executors.newFixedThreadPool(2);
         // 2. 提交任务

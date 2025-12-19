@@ -11,6 +11,7 @@ import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+
 import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -25,7 +26,15 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 
+/**
+ * QRCodeUtils
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class QRCodeUtils {
+
     private static final String CHARSET = "utf-8";
     private static final String FORMAT_NAME = "JPG";
     // 二维码尺寸
@@ -35,8 +44,8 @@ public class QRCodeUtils {
     // LOGO高度
     private static final int HEIGHT = 60;
 
-    public static BufferedImage createImage(String content, String imgPath,
-                                            boolean needCompress) throws Exception {
+    public static BufferedImage createImage( String content, String imgPath,
+            boolean needCompress ) throws Exception {
         Hashtable<EncodeHintType, Object> hints = new Hashtable<>();
         hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
         hints.put(EncodeHintType.CHARACTER_SET, CHARSET);
@@ -62,13 +71,12 @@ public class QRCodeUtils {
     /**
      * 插入LOGO
      *
-     * @param source       二维码图片
-     * @param imgPath      LOGO图片地址
+     * @param source 二维码图片
+     * @param imgPath LOGO图片地址
      * @param needCompress 是否压缩
-     * @throws Exception
      */
-    public static void insertImage(BufferedImage source, String imgPath,
-                                   boolean needCompress) throws Exception {
+    public static void insertImage( BufferedImage source, String imgPath,
+            boolean needCompress ) throws Exception {
         File file = new File(imgPath);
         if (!file.exists()) {
             System.err.println("" + imgPath + "   该文件不存在！");
@@ -94,8 +102,8 @@ public class QRCodeUtils {
         }
         // 插入LOGO
         Graphics2D graph = source.createGraphics();
-        int x = (QRCODE_SIZE - width) / 2;
-        int y = (QRCODE_SIZE - height) / 2;
+        int x = ( QRCODE_SIZE - width ) / 2;
+        int y = ( QRCODE_SIZE - height ) / 2;
         graph.drawImage(src, x, y, width, height, null);
         Shape shape = new RoundRectangle2D.Float(x, y, width, width, 6, 6);
         graph.setStroke(new BasicStroke(3f));
@@ -106,14 +114,13 @@ public class QRCodeUtils {
     /**
      * 生成二维码(内嵌LOGO)
      *
-     * @param content      内容
-     * @param imgPath      LOGO地址
-     * @param destPath     存放目录
+     * @param content 内容
+     * @param imgPath LOGO地址
+     * @param destPath 存放目录
      * @param needCompress 是否压缩LOGO
-     * @throws Exception
      */
-    public static String encode(String content, String imgPath, String destPath,
-                                boolean needCompress) throws Exception {
+    public static String encode( String content, String imgPath, String destPath,
+            boolean needCompress ) throws Exception {
         BufferedImage image = QRCodeUtils.createImage(content, imgPath,
                 needCompress);
         mkdirs(destPath);
@@ -128,7 +135,7 @@ public class QRCodeUtils {
      * @param destPath 存放目录
      * @since 2013-12-11 上午10:16:36
      */
-    public static void mkdirs(String destPath) {
+    public static void mkdirs( String destPath ) {
         File file = new File(destPath);
         //当文件夹不存在时，mkdirs会自动创建多层目录，区别于mkdir．(mkdir如果父目录不存在则会抛出异常)
         if (!file.exists() && !file.isDirectory()) {
@@ -139,12 +146,11 @@ public class QRCodeUtils {
     /**
      * 生成二维码(内嵌LOGO)
      *
-     * @param content  内容
-     * @param imgPath  LOGO地址
+     * @param content 内容
+     * @param imgPath LOGO地址
      * @param destPath 存储地址
-     * @throws Exception
      */
-    public static void encode(String content, String imgPath, String destPath)
+    public static void encode( String content, String imgPath, String destPath )
             throws Exception {
         QRCodeUtils.encode(content, imgPath, destPath, false);
     }
@@ -152,38 +158,35 @@ public class QRCodeUtils {
     /**
      * 生成二维码
      *
-     * @param content      内容
-     * @param destPath     存储地址
+     * @param content 内容
+     * @param destPath 存储地址
      * @param needCompress 是否压缩LOGO
-     * @throws Exception
      */
-    public static void encode(String content, String destPath,
-                              boolean needCompress) throws Exception {
+    public static void encode( String content, String destPath,
+            boolean needCompress ) throws Exception {
         QRCodeUtils.encode(content, null, destPath, needCompress);
     }
 
     /**
      * 生成二维码
      *
-     * @param content  内容
+     * @param content 内容
      * @param destPath 存储地址
-     * @throws Exception
      */
-    public static void encode(String content, String destPath) throws Exception {
+    public static void encode( String content, String destPath ) throws Exception {
         QRCodeUtils.encode(content, null, destPath, false);
     }
 
     /**
      * 生成二维码(内嵌LOGO)
      *
-     * @param content      内容
-     * @param imgPath      LOGO地址
-     * @param output       输出流
+     * @param content 内容
+     * @param imgPath LOGO地址
+     * @param output 输出流
      * @param needCompress 是否压缩LOGO
-     * @throws Exception
      */
-    public static void encode(String content, String imgPath,
-                              OutputStream output, boolean needCompress) throws Exception {
+    public static void encode( String content, String imgPath,
+            OutputStream output, boolean needCompress ) throws Exception {
         BufferedImage image = QRCodeUtils.createImage(content, imgPath, needCompress);
         ImageIO.write(image, FORMAT_NAME, output);
     }
@@ -192,10 +195,9 @@ public class QRCodeUtils {
      * 生成二维码
      *
      * @param content 内容
-     * @param output  输出流
-     * @throws Exception
+     * @param output 输出流
      */
-    public static void encode(String content, OutputStream output)
+    public static void encode( String content, OutputStream output )
             throws Exception {
         QRCodeUtils.encode(content, null, output, false);
     }
@@ -204,10 +206,8 @@ public class QRCodeUtils {
      * 解析二维码
      *
      * @param file 二维码图片
-     * @return
-     * @throws Exception
      */
-    public static String decode(File file) throws Exception {
+    public static String decode( File file ) throws Exception {
         BufferedImage image;
         image = ImageIO.read(file);
         if (image == null) {
@@ -228,10 +228,8 @@ public class QRCodeUtils {
      * 解析二维码
      *
      * @param path 二维码图片地址
-     * @return
-     * @throws Exception
      */
-    public static String decode(String path) throws Exception {
+    public static String decode( String path ) throws Exception {
         return QRCodeUtils.decode(new File(path));
     }
 

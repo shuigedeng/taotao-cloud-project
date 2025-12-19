@@ -18,7 +18,15 @@ package com.taotao.cloud.netty.itcast.protocol;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * SequenceIdGenerator
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public abstract class SequenceIdGenerator {
+
     private static final AtomicInteger id = new AtomicInteger();
 
     public static int nextId() {

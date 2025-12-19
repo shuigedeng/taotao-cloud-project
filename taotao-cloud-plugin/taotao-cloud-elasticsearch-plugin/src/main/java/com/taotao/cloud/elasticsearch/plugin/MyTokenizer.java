@@ -18,12 +18,21 @@ package com.taotao.cloud.elasticsearch.plugin;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
 
+/**
+ * MyTokenizer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public final class MyTokenizer extends Tokenizer {
+
     // 词元文本属性
     private final CharTermAttribute termAtt;
     // 词元位移属性
@@ -38,7 +47,7 @@ public final class MyTokenizer extends Tokenizer {
 
     private AnalyzeContext analyzeContext;
 
-    public MyTokenizer(Configuration configuration) {
+    public MyTokenizer( Configuration configuration ) {
         super();
         offsetAtt = addAttribute(OffsetAttribute.class);
         termAtt = addAttribute(CharTermAttribute.class);
@@ -49,7 +58,6 @@ public final class MyTokenizer extends Tokenizer {
 
     /**
      * @return 返会true告知还有下个词元，返会false告知词元输出完毕
-     * @throws IOException
      */
     @Override
     public boolean incrementToken() throws IOException {

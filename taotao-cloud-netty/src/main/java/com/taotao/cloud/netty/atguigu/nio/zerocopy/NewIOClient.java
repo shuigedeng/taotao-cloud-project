@@ -21,8 +21,16 @@ import java.net.InetSocketAddress;
 import java.nio.channels.FileChannel;
 import java.nio.channels.SocketChannel;
 
+/**
+ * NewIOClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NewIOClient {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
 
         SocketChannel socketChannel = SocketChannel.open();
         socketChannel.connect(new InetSocketAddress("localhost", 7001));
@@ -41,7 +49,7 @@ public class NewIOClient {
         long transferCount = fileChannel.transferTo(0, fileChannel.size(), socketChannel);
 
         System.out.println(
-                "发送的总的字节数 =" + transferCount + " 耗时:" + (System.currentTimeMillis() - startTime));
+                "发送的总的字节数 =" + transferCount + " 耗时:" + ( System.currentTimeMillis() - startTime ));
 
         // 关闭
         fileChannel.close();

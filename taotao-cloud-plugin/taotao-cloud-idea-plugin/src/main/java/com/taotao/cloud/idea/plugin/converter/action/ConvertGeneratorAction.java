@@ -18,12 +18,19 @@ import com.taotao.cloud.idea.plugin.converter.generator.impl.ListGenerator;
 import com.taotao.cloud.idea.plugin.converter.generator.impl.MethodGenerator;
 import com.taotao.cloud.idea.plugin.converter.util.ContextUtils;
 
+/**
+ * ConvertGeneratorAction
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ConvertGeneratorAction extends AnAction {
 
     private static final String LIST_TYPE_PREFIX = "List<";
 
     @Override
-    public void actionPerformed(AnActionEvent e) {
+    public void actionPerformed( AnActionEvent e ) {
 
         PsiMethod method = ContextUtils.getPsiMethod(e);
         PsiClass psiClass = ContextUtils.getPsiClass(e);
@@ -45,7 +52,7 @@ public class ConvertGeneratorAction extends AnAction {
         }
     }
 
-    private PsiClass[] getFromDialog(PsiClass psiClass) {
+    private PsiClass[] getFromDialog( PsiClass psiClass ) {
 
         PsiClass[] psiClasses;
 
@@ -53,7 +60,7 @@ public class ConvertGeneratorAction extends AnAction {
         PsiClass toClass = getClassDialog(psiClass, "Choose To class");
 
         if (fromClass == null || toClass == null) {
-            return new PsiClass[] {};
+            return new PsiClass[]{};
         } else {
             psiClasses = new PsiClass[2];
             psiClasses[0] = fromClass;
@@ -63,7 +70,7 @@ public class ConvertGeneratorAction extends AnAction {
         return psiClasses;
     }
 
-    private PsiClass getClassDialog(PsiClass psiClass, String title) {
+    private PsiClass getClassDialog( PsiClass psiClass, String title ) {
         TreeClassChooserFactory factory = TreeClassChooserFactory.getInstance(psiClass.getProject());
 
         Module module = ModuleUtilCore.findModuleForPsiElement(psiClass);
@@ -81,12 +88,12 @@ public class ConvertGeneratorAction extends AnAction {
     }
 
     @Override
-    public void update(AnActionEvent e) {
+    public void update( AnActionEvent e ) {
         PsiClass psiClass = ContextUtils.getPsiClass(e);
         e.getPresentation().setEnabled(psiClass != null);
     }
 
-    private ConverterGenerator getGenerator(PsiMethod method) throws ConverterException {
+    private ConverterGenerator getGenerator( PsiMethod method ) throws ConverterException {
         PsiTypeElement returnType = method.getReturnTypeElement();
         if (null == returnType) {
             throw new ConverterException("This method does not have return type");

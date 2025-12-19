@@ -16,7 +16,15 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * CombinedConversionDialog
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class CombinedConversionDialog extends DialogWrapper {
+
     private final Project project;
     private final PsiClass sourceClass;
     private final ClassChooserPanel targetClassChooser;
@@ -27,7 +35,7 @@ public class CombinedConversionDialog extends DialogWrapper {
     private final JButton fieldMappingButton;
     private Map<String, String> fieldMapping;
 
-    public CombinedConversionDialog(Project project, String sourceVariableName, PsiClass sourceClass) {
+    public CombinedConversionDialog( Project project, String sourceVariableName, PsiClass sourceClass ) {
         super(project);
         this.project = project;
         this.sourceClass = sourceClass;
@@ -48,12 +56,13 @@ public class CombinedConversionDialog extends DialogWrapper {
 
     private void initializeFieldMapping() {
         PsiClass targetClass = getTargetClass();
-        if (targetClass == null) return;
+        if (targetClass == null)
+            return;
 
         fieldMapping.clear();
         String[] sourceFieldNames = Arrays.stream(sourceClass.getFields())
-                                         .map(PsiField::getName)
-                                         .toArray(String[]::new);
+                .map(PsiField::getName)
+                .toArray(String[]::new);
 
         for (PsiField targetField : targetClass.getFields()) {
             String targetFieldName = targetField.getName();
@@ -98,11 +107,11 @@ public class CombinedConversionDialog extends DialogWrapper {
         group.add(singleObjectButton);
         group.add(listButton);
         singleObjectButton.setSelected(true);
-        
+
         // Add listeners for radio buttons
         singleObjectButton.addActionListener(e -> updateTargetNameSuffix());
         listButton.addActionListener(e -> updateTargetNameSuffix());
-        
+
         conversionTypePanel.add(singleObjectButton);
         conversionTypePanel.add(listButton);
 
@@ -136,14 +145,15 @@ public class CombinedConversionDialog extends DialogWrapper {
 
     private void updateTargetNameSuffix() {
         String currentName = targetNameField.getText();
-        if (currentName.isEmpty()) return;
-        
+        if (currentName.isEmpty())
+            return;
+
         String baseName = currentName;
         // Remove "List" suffix if present
         if (baseName.endsWith("List")) {
             baseName = baseName.substring(0, baseName.length() - 4);
         }
-        
+
         // Add or remove "List" suffix based on selection
         if (listButton.isSelected()) {
             targetNameField.setText(baseName + "List");
@@ -156,8 +166,8 @@ public class CombinedConversionDialog extends DialogWrapper {
         PsiClass targetClass = getTargetClass();
         if (targetClass == null) {
             JOptionPane.showMessageDialog(getContentPanel(),
-                "Please select a target class first.",
-                "Target Class Not Selected", JOptionPane.WARNING_MESSAGE);
+                    "Please select a target class first.",
+                    "Target Class Not Selected", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -192,27 +202,28 @@ public class CombinedConversionDialog extends DialogWrapper {
     protected void doOKAction() {
         if (getTargetClass() == null) {
             JOptionPane.showMessageDialog(getContentPanel(),
-                "Please select a target class.",
-                "Invalid Selection", JOptionPane.ERROR_MESSAGE);
+                    "Please select a target class.",
+                    "Invalid Selection", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (getTargetName().isEmpty()) {
             JOptionPane.showMessageDialog(getContentPanel(),
-                "Please enter a target variable name.",
-                "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                    "Please enter a target variable name.",
+                    "Invalid Input", JOptionPane.ERROR_MESSAGE);
             return;
         }
         super.doOKAction();
     }
 
     private class ClassChooserPanel extends JPanel {
+
         private final Project project;
         private ClassChooserUtil.ClassChooserDialog classChooser;
         private final JBTextField selectedClassField;
         private final String dialogTitle;
         private Runnable targetClassChangeListener;
 
-        public ClassChooserPanel(Project project, String labelText) {
+        public ClassChooserPanel( Project project, String labelText ) {
             super(new BorderLayout());
             this.project = project;
             this.dialogTitle = "";
@@ -230,7 +241,7 @@ public class CombinedConversionDialog extends DialogWrapper {
             add(selectionPanel, BorderLayout.CENTER);
         }
 
-        public void addTargetClassChangeListener(Runnable listener) {
+        public void addTargetClassChangeListener( Runnable listener ) {
             this.targetClassChangeListener = listener;
         }
 
@@ -245,7 +256,7 @@ public class CombinedConversionDialog extends DialogWrapper {
                     }
                 }
             };
-            
+
             if (classChooser.showAndGet()) {
                 updateSelectedClassField();
                 if (targetClassChangeListener != null) {
@@ -282,13 +293,15 @@ public class CombinedConversionDialog extends DialogWrapper {
     }
 
     private class FieldMappingDialog extends DialogWrapper {
+
         private final PsiClass sourceClass;
         private final PsiClass targetClass;
         private final Map<String, JComboBox<String>> mappingFields;
         private final Map<String, JBCheckBox> fieldCheckboxes;
         private final Map<String, String> fieldMapping;
 
-        public FieldMappingDialog(Project project, PsiClass sourceClass, PsiClass targetClass, Map<String, String> initialMapping) {
+        public FieldMappingDialog( Project project, PsiClass sourceClass, PsiClass targetClass,
+                Map<String, String> initialMapping ) {
             super(project);
             this.sourceClass = sourceClass;
             this.targetClass = targetClass;
@@ -319,8 +332,8 @@ public class CombinedConversionDialog extends DialogWrapper {
             panel.add(new JBLabel("Source Field"), gbc);
 
             String[] sourceFieldNames = Arrays.stream(sourceClass.getFields())
-                                             .map(PsiField::getName)
-                                             .toArray(String[]::new);
+                    .map(PsiField::getName)
+                    .toArray(String[]::new);
 
             for (PsiField targetField : targetClass.getFields()) {
                 String targetFieldName = targetField.getName();

@@ -4,27 +4,37 @@ import cn.hutool.http.HttpUtil;
 import com.intellij.ui.EditorTextField;
 import com.taotao.cloud.idea.plugin.toolkit.notification.ToolkitNotifier;
 import com.taotao.cloud.idea.plugin.toolkit.utils.ParseJsonStrUtils;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
+
 import org.apache.commons.lang3.StringUtils;
 
 
+/**
+ * PhoneAddressSearchActionListener
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class PhoneAddressSearchActionListener implements ActionListener {
+
     private static final String URL = "https://tcc.taobao.com/cc/json/mobile_tel_segment.htm?tel=";
 
     private EditorTextField editorTextField;
     private DefaultTableModel tableModel;
 
-    public PhoneAddressSearchActionListener(EditorTextField editorTextField, DefaultTableModel tableModel) {
+    public PhoneAddressSearchActionListener( EditorTextField editorTextField, DefaultTableModel tableModel ) {
         this.editorTextField = editorTextField;
         this.tableModel = tableModel;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed( ActionEvent e ) {
         String text = editorTextField.getText().trim();
         if (StringUtils.isBlank(text)) {
             return;

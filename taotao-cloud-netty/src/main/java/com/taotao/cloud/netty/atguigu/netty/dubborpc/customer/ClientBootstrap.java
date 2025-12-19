@@ -19,12 +19,19 @@ package com.taotao.cloud.netty.atguigu.netty.dubborpc.customer;
 import com.taotao.cloud.netty.atguigu.netty.dubborpc.netty.NettyClient;
 import com.taotao.cloud.netty.atguigu.netty.dubborpc.publicinterface.HelloService;
 
+/**
+ * ClientBootstrap
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ClientBootstrap {
 
     // 这里定义协议头
     public static final String providerName = "HelloService#hello#";
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
 
         // 创建一个消费者
         NettyClient customer = new NettyClient();

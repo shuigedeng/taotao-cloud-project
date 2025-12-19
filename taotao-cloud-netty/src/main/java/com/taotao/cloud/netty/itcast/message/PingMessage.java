@@ -16,7 +16,15 @@
 
 package com.taotao.cloud.netty.itcast.message;
 
+/**
+ * PingMessage
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class PingMessage extends Message {
+
     @Override
     public int getMessageType() {
         return PingMessage;

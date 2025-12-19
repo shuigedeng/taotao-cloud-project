@@ -20,10 +20,17 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 
+/**
+ * MyPersonEncoder
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MyPersonEncoder extends MessageToByteEncoder<PersonProtocol> {
 
     @Override
-    protected void encode(ChannelHandlerContext ctx, PersonProtocol msg, ByteBuf out)
+    protected void encode( ChannelHandlerContext ctx, PersonProtocol msg, ByteBuf out )
             throws Exception {
         System.out.println("MyPersonEncoder encode invoked!");
 

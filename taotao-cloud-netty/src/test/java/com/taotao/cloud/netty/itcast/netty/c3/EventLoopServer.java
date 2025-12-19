@@ -22,12 +22,22 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+
 import java.nio.charset.Charset;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * EventLoopServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class EventLoopServer {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         // 细分2：创建一个独立的 EventLoopGroup
         EventLoopGroup group = new DefaultEventLoopGroup();
         new ServerBootstrap()
@@ -38,14 +48,14 @@ public class EventLoopServer {
                 .childHandler(
                         new ChannelInitializer<NioSocketChannel>() {
                             @Override
-                            protected void initChannel(NioSocketChannel ch) throws Exception {
+                            protected void initChannel( NioSocketChannel ch ) throws Exception {
                                 ch.pipeline()
                                         .addLast(
                                                 "handler1",
                                                 new ChannelInboundHandlerAdapter() {
                                                     @Override // ByteBuf
                                                     public void channelRead(
-                                                            ChannelHandlerContext ctx, Object msg)
+                                                            ChannelHandlerContext ctx, Object msg )
                                                             throws Exception {
                                                         ByteBuf buf = (ByteBuf) msg;
                                                         log.debug(

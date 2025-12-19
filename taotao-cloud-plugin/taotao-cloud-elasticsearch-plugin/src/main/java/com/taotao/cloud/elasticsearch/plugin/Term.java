@@ -18,7 +18,15 @@ package com.taotao.cloud.elasticsearch.plugin;
 
 import java.io.Serializable;
 
+/**
+ * Term
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class Term implements Serializable {
+
     // 词元的起始位移
     private int offset;
     // 词元的相对起始位置

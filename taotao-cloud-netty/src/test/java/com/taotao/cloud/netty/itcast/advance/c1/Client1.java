@@ -28,10 +28,18 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Client1
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class Client1 {
+
     static final Logger log = LoggerFactory.getLogger(Client1.class);
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         for (int i = 0; i < 10; i++) {
             send();
         }
@@ -47,19 +55,19 @@ public class Client1 {
             bootstrap.handler(
                     new ChannelInitializer<SocketChannel>() {
                         @Override
-                        protected void initChannel(SocketChannel ch) {
+                        protected void initChannel( SocketChannel ch ) {
                             ch.pipeline()
                                     .addLast(
                                             new ChannelInboundHandlerAdapter() {
                                                 // 会在连接 channel 建立成功后，会触发 active 事件
                                                 @Override
                                                 public void channelActive(
-                                                        ChannelHandlerContext ctx) {
+                                                        ChannelHandlerContext ctx ) {
                                                     ByteBuf buf = ctx.alloc().buffer(16);
                                                     buf.writeBytes(
-                                                            new byte[] {
-                                                                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-                                                                11, 12, 13, 14, 15, 16, 17
+                                                            new byte[]{
+                                                                    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+                                                                    11, 12, 13, 14, 15, 16, 17
                                                             });
                                                     ctx.writeAndFlush(buf);
                                                     ctx.channel().close();

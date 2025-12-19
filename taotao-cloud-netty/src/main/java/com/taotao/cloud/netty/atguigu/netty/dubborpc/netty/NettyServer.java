@@ -27,15 +27,20 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
+/**
+ * NettyServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NettyServer {
 
-    public static void startServer(String hostName, int port) {
+    public static void startServer( String hostName, int port ) {
         startServer0(hostName, port);
     }
 
-    // 编写一个方法，完成对NettyServer的初始化和启动
-
-    private static void startServer0(String hostname, int port) {
+    private static void startServer0( String hostname, int port ) {
 
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -50,7 +55,7 @@ public class NettyServer {
                     .childHandler(
                             new ChannelInitializer<SocketChannel>() {
                                 @Override
-                                protected void initChannel(SocketChannel ch) throws Exception {
+                                protected void initChannel( SocketChannel ch ) throws Exception {
                                     ChannelPipeline pipeline = ch.pipeline();
                                     pipeline.addLast(new StringDecoder());
                                     pipeline.addLast(new StringEncoder());

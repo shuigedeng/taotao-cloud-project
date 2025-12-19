@@ -18,8 +18,16 @@ package com.taotao.cloud.idea.plugin;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * TaoTaoCloudIdeaPluginApplicationTests
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 class TaoTaoCloudIdeaPluginApplicationTests {
 
     @Test
-    void contextLoads() {}
+    void contextLoads() {
+    }
 }

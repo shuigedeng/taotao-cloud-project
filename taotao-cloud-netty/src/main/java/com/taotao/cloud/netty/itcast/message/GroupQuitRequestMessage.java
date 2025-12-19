@@ -19,14 +19,22 @@ package com.taotao.cloud.netty.itcast.message;
 import lombok.Data;
 import lombok.ToString;
 
+/**
+ * GroupQuitRequestMessage
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @ToString(callSuper = true)
 public class GroupQuitRequestMessage extends Message {
+
     private String groupName;
 
     private String username;
 
-    public GroupQuitRequestMessage(String username, String groupName) {
+    public GroupQuitRequestMessage( String username, String groupName ) {
         this.groupName = groupName;
         this.username = username;
     }

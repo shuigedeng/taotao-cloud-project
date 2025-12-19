@@ -29,8 +29,16 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.protobuf.ProtobufDecoder;
 
+/**
+ * NettyServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NettyServer {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
 
         // 创建BossGroup 和 WorkerGroup
         // 说明
@@ -58,7 +66,7 @@ public class NettyServer {
                             new ChannelInitializer<SocketChannel>() { // 创建一个通道初始化对象(匿名对象)
                                 // 给pipeline 设置处理器
                                 @Override
-                                protected void initChannel(SocketChannel ch) throws Exception {
+                                protected void initChannel( SocketChannel ch ) throws Exception {
 
                                     ChannelPipeline pipeline = ch.pipeline();
                                     // 在pipeline加入ProtoBufDecoder
@@ -81,7 +89,7 @@ public class NettyServer {
             cf.addListener(
                     new ChannelFutureListener() {
                         @Override
-                        public void operationComplete(ChannelFuture future) throws Exception {
+                        public void operationComplete( ChannelFuture future ) throws Exception {
                             if (cf.isSuccess()) {
                                 System.out.println("监听端口 6668 成功");
                             } else {

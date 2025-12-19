@@ -23,12 +23,20 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
+/**
+ * NettyServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NettyServer {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         new NettyServer().bing(8888);
     }
 
-    private void bing(int port) {
+    private void bing( int port ) {
         // 配置服务端NIO线程组
         EventLoopGroup parentGroup =
                 new NioEventLoopGroup(); // NioEventLoopGroup extends MultithreadEventLoopGroup

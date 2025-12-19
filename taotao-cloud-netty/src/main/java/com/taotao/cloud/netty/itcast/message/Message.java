@@ -19,17 +19,26 @@ package com.taotao.cloud.netty.itcast.message;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+
 import lombok.Data;
 
+/**
+ * Message
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 public abstract class Message implements Serializable {
 
     /**
      * 根据消息类型字节，获得对应的消息 class
+     *
      * @param messageType 消息类型字节
      * @return 消息 class
      */
-    public static Class<? extends Message> getMessageClass(int messageType) {
+    public static Class<? extends Message> getMessageClass( int messageType ) {
         return messageClasses.get(messageType);
     }
 

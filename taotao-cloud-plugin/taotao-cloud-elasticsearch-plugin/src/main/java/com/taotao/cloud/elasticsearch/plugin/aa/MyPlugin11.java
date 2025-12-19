@@ -18,10 +18,17 @@ package com.taotao.cloud.elasticsearch.plugin.aa;
 
 import org.elasticsearch.plugins.Plugin;
 
+/**
+ * MyPlugin11
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MyPlugin11 extends Plugin {
 
     @Override
-    public void onModule(RestModule restModule) {
+    public void onModule( RestModule restModule ) {
         restModule.addRestAction(MyRestAction.class);
     }
 }

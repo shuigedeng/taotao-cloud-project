@@ -19,15 +19,24 @@ package com.taotao.cloud.netty.netty.sixthexample;
 import com.taotao.cloud.netty.grpc.code2.MyMessage;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+
 import java.util.Random;
 
+/**
+ * TestClientHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestClientHandler extends SimpleChannelInboundHandler<MyMessage> {
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, MyMessage msg) throws Exception {}
+    protected void channelRead0( ChannelHandlerContext ctx, MyMessage msg ) throws Exception {
+    }
 
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+    public void channelActive( ChannelHandlerContext ctx ) throws Exception {
         int randomInt = new Random().nextInt(3);
 
         MyMessage myMessage = null;

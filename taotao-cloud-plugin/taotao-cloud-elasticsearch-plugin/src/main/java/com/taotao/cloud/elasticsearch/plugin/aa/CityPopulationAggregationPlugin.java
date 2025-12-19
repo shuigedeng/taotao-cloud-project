@@ -19,15 +19,24 @@ package com.taotao.cloud.elasticsearch.plugin.aa;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.plugins.Plugin;
+import org.elasticsearch.plugins.SearchPlugin;
 import org.elasticsearch.plugins.SearchPlugin.AggregationSpec;
 import org.elasticsearch.search.aggregations.InternalAggregation;
 import org.elasticsearch.search.aggregations.bucket.terms.InternalTerms;
 
+/**
+ * CityPopulationAggregationPlugin
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class CityPopulationAggregationPlugin extends Plugin {
 
-    public CityPopulationAggregationPlugin(Settings settings) {
+    public CityPopulationAggregationPlugin( Settings settings ) {
         // do nothing
     }
 
@@ -41,7 +50,7 @@ public class CityPopulationAggregationPlugin extends Plugin {
     private static class CityPopulationAggregationSpec implements AggregationSpec {
 
         @Override
-        public InternalAggregation reduce(ReduceContext reduceContext) {
+        public InternalAggregation reduce( ReduceContext reduceContext ) {
             Map<String, Long> cityCounts = new HashMap<>();
             for (ShardReduceContext shardReduceContext : reduceContext) {
                 for (String city : shardReduceContext.data().keySet()) {

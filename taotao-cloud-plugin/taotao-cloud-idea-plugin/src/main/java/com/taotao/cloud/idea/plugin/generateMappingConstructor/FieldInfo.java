@@ -1,10 +1,18 @@
 package com.taotao.cloud.idea.plugin.generateMappingConstructor;
 
+/**
+ * FieldInfo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class FieldInfo {
+
     String name;
     String type;
 
-    FieldInfo(String name, String type) {
+    FieldInfo( String name, String type ) {
         this.name = name;
         this.type = type;
     }
@@ -13,7 +21,7 @@ public class FieldInfo {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName( String name ) {
         this.name = name;
     }
 
@@ -21,7 +29,7 @@ public class FieldInfo {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType( String type ) {
         this.type = type;
     }
 }

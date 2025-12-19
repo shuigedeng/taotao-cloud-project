@@ -24,11 +24,21 @@ import java.nio.channels.AsynchronousFileChannel;
 import java.nio.channels.CompletionHandler;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+
+import com.taotao.cloud.netty.itcast.nio.c2.ByteBufferUtil;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * AioFileChannel
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class AioFileChannel {
-    public static void main(String[] args) throws IOException {
+
+    public static void main( String[] args ) throws IOException {
         try (AsynchronousFileChannel channel =
                 AsynchronousFileChannel.open(Paths.get("data.txt"), StandardOpenOption.READ)) {
             // 参数1 ByteBuffer
@@ -43,14 +53,14 @@ public class AioFileChannel {
                     buffer,
                     new CompletionHandler<Integer, ByteBuffer>() {
                         @Override // read 成功
-                        public void completed(Integer result, ByteBuffer attachment) {
+                        public void completed( Integer result, ByteBuffer attachment ) {
                             log.debug("read completed...{}", result);
                             attachment.flip();
                             debugAll(attachment);
                         }
 
                         @Override // read 失败
-                        public void failed(Throwable exc, ByteBuffer attachment) {
+                        public void failed( Throwable exc, ByteBuffer attachment ) {
                             exc.printStackTrace();
                         }
                     });

@@ -19,15 +19,24 @@ package com.taotao.cloud.netty.itcast.message;
 import lombok.Data;
 import lombok.ToString;
 
+/**
+ * LoginRequestMessage
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @ToString(callSuper = true)
 public class LoginRequestMessage extends Message {
+
     private String username;
     private String password;
 
-    public LoginRequestMessage() {}
+    public LoginRequestMessage() {
+    }
 
-    public LoginRequestMessage(String username, String password) {
+    public LoginRequestMessage( String username, String password ) {
         this.username = username;
         this.password = password;
     }

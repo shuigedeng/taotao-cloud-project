@@ -23,6 +23,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import org.apache.lucene.store.IndexInput;
 import org.apache.lucene.store.IndexOutput;
 import org.elasticsearch.client.internal.Client;
@@ -34,11 +35,18 @@ import org.elasticsearch.threadpool.ThreadPool;
 import org.elasticsearch.watcher.ResourceWatcherService;
 import org.elasticsearch.xcontent.NamedXContentRegistry;
 
+/**
+ * FileIndexStorePlugin
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class FileIndexStorePlugin extends Plugin {
 
     private final Settings settings;
 
-    public FileIndexStorePlugin(Settings settings) {
+    public FileIndexStorePlugin( Settings settings ) {
         this.settings = settings;
     }
 
@@ -49,7 +57,7 @@ public class FileIndexStorePlugin extends Plugin {
             ThreadPool threadPool,
             ResourceWatcherService resourceWatcherService,
             ScriptService scriptService,
-            NamedXContentRegistry xContentRegistry) {
+            NamedXContentRegistry xContentRegistry ) {
         List<Object> components = new ArrayList<>();
         components.add(new FileIndexStore());
         return components;
@@ -72,26 +80,26 @@ public class FileIndexStorePlugin extends Plugin {
         }
 
         @Override
-        public void delete(String index, String id) throws IOException {
+        public void delete( String index, String id ) throws IOException {
             File file = new File(dataDir, index + "/" + id);
             Files.deleteIfExists(file.toPath());
         }
 
         @Override
-        public void delete(String index) throws IOException {
+        public void delete( String index ) throws IOException {
             File file = new File(dataDir, index);
             FileUtils.deleteDirectory(file);
         }
 
         @Override
-        public IndexOutput createOutput(String index, String id) throws IOException {
+        public IndexOutput createOutput( String index, String id ) throws IOException {
             File file = new File(dataDir, index + "/" + id);
             file.getParentFile().mkdirs();
             return new FileOutputStreamIndexOutput(file);
         }
 
         @Override
-        public IndexInput openInput(String index, String id) throws IOException {
+        public IndexInput openInput( String index, String id ) throws IOException {
             File file = new File(dataDir, index + "/" + id);
             if (!file.exists()) {
                 throw new FileNotFoundException(file.getAbsolutePath());

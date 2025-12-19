@@ -15,10 +15,18 @@ import com.intellij.psi.util.PsiTypesUtil;
 import com.taotao.cloud.idea.plugin.converter.exception.ConverterException;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
+
+/**
+ * ListGenerator
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ListGenerator extends MethodGenerator {
 
     @Override
-    void generateCode(PsiClass psiClass, PsiMethod psiMethod) throws ConverterException {
+    void generateCode( PsiClass psiClass, PsiMethod psiMethod ) throws ConverterException {
 
         if (null == psiMethod.getBody()) {
             throw new ConverterException("Method body is null");
@@ -41,14 +49,19 @@ public class ListGenerator extends MethodGenerator {
         String singleConvertMethodName = singleMethod.getName();
         String returnListName = StringUtils.uncapitalize(returnGenericClassName) + "List";
 
-        psiMethod.getBody().add(createPsiStatement(psiClass, "if(" + paramVariableName + " == null) {\nreturn java.util.Collections.emptyList();\n}"));
+        psiMethod.getBody().add(createPsiStatement(psiClass,
+                "if(" + paramVariableName + " == null) {\nreturn java.util.Collections.emptyList();\n}"));
 
-        psiMethod.getBody().add(createPsiStatement(psiClass, "List<" + returnGenericClassName + "> " + returnListName + "= new java.util.ArrayList<>();"));
+        psiMethod.getBody().add(createPsiStatement(psiClass,
+                "List<" + returnGenericClassName + "> " + returnListName + "= new java.util.ArrayList<>();"));
         psiMethod.getBody()
-                .add(createPsiStatement(psiClass, "for (" + paramGenericClassName + " " + camelParamGenericClassName + " : " + paramVariableName + ")"));
+                .add(createPsiStatement(psiClass,
+                        "for (" + paramGenericClassName + " " + camelParamGenericClassName + " : " + paramVariableName
+                                + ")"));
 
         PsiBlockStatement blockStatement = (PsiBlockStatement) elementFactory.createStatementFromText("{}", psiClass);
-        blockStatement.getCodeBlock().add(createPsiStatement(psiClass, returnListName + ".add(" + singleConvertMethodName + "(" + camelParamGenericClassName + "));"));
+        blockStatement.getCodeBlock().add(createPsiStatement(psiClass,
+                returnListName + ".add(" + singleConvertMethodName + "(" + camelParamGenericClassName + "));"));
         psiMethod.getBody().add(blockStatement);
 
         psiMethod.getBody().add(createPsiStatement(psiClass, "return " + returnListName + ";"));
@@ -57,12 +70,13 @@ public class ListGenerator extends MethodGenerator {
     }
 
     @NotNull
-    private PsiStatement createPsiStatement(PsiClass psiClass, String codeLine) {
+    private PsiStatement createPsiStatement( PsiClass psiClass, String codeLine ) {
         PsiElementFactory elementFactory = JavaPsiFacade.getElementFactory(psiClass.getProject());
         return elementFactory.createStatementFromText(codeLine, psiClass);
     }
 
-    private PsiMethod createSingleConvertMethod(PsiClass psiClass, String paramGenericClassName, String returnGenericClassName) throws ConverterException {
+    private PsiMethod createSingleConvertMethod( PsiClass psiClass, String paramGenericClassName,
+            String returnGenericClassName ) throws ConverterException {
         PsiElementFactory elementFactory = JavaPsiFacade.getElementFactory(psiClass.getProject());
 
         String singleConvertMethodContent = "public static ";
@@ -84,7 +98,7 @@ public class ListGenerator extends MethodGenerator {
 
     }
 
-    private PsiMethod findSingleConvertMethod(PsiMethod psiMethod) throws ConverterException {
+    private PsiMethod findSingleConvertMethod( PsiMethod psiMethod ) throws ConverterException {
         PsiClass paramPsiClass = getGenericParamPsiClass(psiMethod);
         PsiClass returnPsiClass = getGenericReturnPsiClass(psiMethod);
 
@@ -108,18 +122,18 @@ public class ListGenerator extends MethodGenerator {
         return null;
     }
 
-    private PsiClass getGenericParamPsiClass(PsiMethod method) throws ConverterException {
+    private PsiClass getGenericParamPsiClass( PsiMethod method ) throws ConverterException {
 
         PsiParameter[] parameters = method.getParameterList().getParameters();
         if (parameters.length == 0) {
             throw new ConverterException("The method does not have any parameter");
         }
 
-        PsiType paramPsiType = ((PsiClassType) parameters[0].getType()).getParameters()[0];
+        PsiType paramPsiType = ( (PsiClassType) parameters[0].getType() ).getParameters()[0];
         return PsiTypesUtil.getPsiClass(paramPsiType);
     }
 
-    private PsiClass getGenericReturnPsiClass(PsiMethod method) throws ConverterException {
+    private PsiClass getGenericReturnPsiClass( PsiMethod method ) throws ConverterException {
 
         final PsiType returnType = method.getReturnType();
         if (null == returnType) {
@@ -130,7 +144,7 @@ public class ListGenerator extends MethodGenerator {
             throw new ConverterException("The return of method is void");
         }
 
-        PsiType returnPsiType = ((PsiClassType) returnType).getParameters()[0];
+        PsiType returnPsiType = ( (PsiClassType) returnType ).getParameters()[0];
         return PsiTypesUtil.getPsiClass(returnPsiType);
     }
 

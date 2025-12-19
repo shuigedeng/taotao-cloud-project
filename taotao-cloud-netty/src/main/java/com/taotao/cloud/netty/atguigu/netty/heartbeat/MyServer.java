@@ -27,10 +27,19 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.timeout.IdleStateHandler;
+
 import java.util.concurrent.TimeUnit;
 
+/**
+ * MyServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MyServer {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
 
         // 创建两个线程组
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
@@ -46,7 +55,7 @@ public class MyServer {
                     new ChannelInitializer<SocketChannel>() {
 
                         @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
+                        protected void initChannel( SocketChannel ch ) throws Exception {
                             ChannelPipeline pipeline = ch.pipeline();
                             // 加入一个netty 提供 IdleStateHandler
                             /*

@@ -20,9 +20,16 @@ import java.io.FileInputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
+/**
+ * NioTest2
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NioTest2 {
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
 
         FileInputStream fileInputStream = new FileInputStream("NioTest2.txt");
         FileChannel fileChannel = fileInputStream.getChannel();

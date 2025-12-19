@@ -22,6 +22,13 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+/**
+ * AnalyzeContext
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class AnalyzeContext {
 
     /**
@@ -79,17 +86,15 @@ public class AnalyzeContext {
                 }
             };
 
-    public AnalyzeContext(Reader reader, Configuration configuration) {
+    public AnalyzeContext( Reader reader, Configuration configuration ) {
         this.input = reader;
         this.configuration = configuration;
     }
 
     /**
      * 重置分词器
-     *
-     * @param reader
      */
-    public void reset(Reader reader) {
+    public void reset( Reader reader ) {
         input = reader;
         offset = 0;
         iterator = null;
@@ -155,12 +160,8 @@ public class AnalyzeContext {
 
     /**
      * 根据句子分隔符，找到这一段文本中的最后一句话所在位置。
-     *
-     * @param buffer
-     * @param length
-     * @return
      */
-    private int lastIndexOfEos(char[] buffer, int length) {
+    private int lastIndexOfEos( char[] buffer, int length ) {
         if (length < BUFFER_SIZE) {
             return length;
         }

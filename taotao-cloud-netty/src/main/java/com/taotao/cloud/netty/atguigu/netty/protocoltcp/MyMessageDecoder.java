@@ -19,11 +19,20 @@ package com.taotao.cloud.netty.atguigu.netty.protocoltcp;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ReplayingDecoder;
+
 import java.util.List;
 
+/**
+ * MyMessageDecoder
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MyMessageDecoder extends ReplayingDecoder<Void> {
+
     @Override
-    protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out)
+    protected void decode( ChannelHandlerContext ctx, ByteBuf in, List<Object> out )
             throws Exception {
         System.out.println("MyMessageDecoder decode 被调用");
         // 需要将得到二进制字节码-> MessageProtocol 数据包(对象)

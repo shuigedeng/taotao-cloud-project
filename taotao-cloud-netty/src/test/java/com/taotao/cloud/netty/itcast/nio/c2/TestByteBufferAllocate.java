@@ -18,8 +18,16 @@ package com.taotao.cloud.netty.itcast.nio.c2;
 
 import java.nio.ByteBuffer;
 
+/**
+ * TestByteBufferAllocate
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestByteBufferAllocate {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         System.out.println(ByteBuffer.allocate(16).getClass());
         System.out.println(ByteBuffer.allocateDirect(16).getClass());
         /*

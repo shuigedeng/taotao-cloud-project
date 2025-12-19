@@ -18,8 +18,16 @@ package com.taotao.cloud.netty.atguigu.nio;
 
 import java.nio.ByteBuffer;
 
+/**
+ * ReadOnlyBuffer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ReadOnlyBuffer {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
 
         // 创建一个buffer
         ByteBuffer buffer = ByteBuffer.allocate(64);

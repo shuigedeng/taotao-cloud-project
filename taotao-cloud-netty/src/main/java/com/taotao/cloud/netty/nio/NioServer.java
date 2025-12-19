@@ -30,11 +30,18 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * NioServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NioServer {
 
     private static Map<String, SocketChannel> clientMap = new HashMap();
 
-    public static void main(String[] args) throws IOException {
+    public static void main( String[] args ) throws IOException {
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         serverSocketChannel.configureBlocking(false);
         ServerSocket serverSocket = serverSocketChannel.socket();
@@ -96,7 +103,7 @@ public class NioServer {
                                             ByteBuffer writeBuffer = ByteBuffer.allocate(1024);
 
                                             writeBuffer.put(
-                                                    (senderKey + ": " + receivedMessage)
+                                                    ( senderKey + ": " + receivedMessage )
                                                             .getBytes());
                                             writeBuffer.flip();
 

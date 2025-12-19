@@ -27,15 +27,22 @@ import java.nio.charset.StandardCharsets;
 public interface Serializer {
 
     // 反序列化方法
-    <T> T deserialize(Class<T> clazz, byte[] bytes);
+    <T> T deserialize( Class<T> clazz, byte[] bytes );
 
     // 序列化方法
-    <T> byte[] serialize(T object);
+    <T> byte[] serialize( T object );
 
     enum Algorithm implements Serializer {
-        Java {
+        Java /**
+         * null
+         *
+         * @author shuigedeng
+         * @version 2026.01
+         * @since 2025-12-19 09:30:45
+         */
+                class{
             @Override
-            public <T> T deserialize(Class<T> clazz, byte[] bytes) {
+            public <T > T deserialize(Class < T > clazz, byte[] bytes){
                 try {
                     ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(bytes));
                     return (T) ois.readObject();
@@ -45,7 +52,7 @@ public interface Serializer {
             }
 
             @Override
-            public <T> byte[] serialize(T object) {
+            public <T > byte[] serialize ( T object){
                 try {
                     ByteArrayOutputStream bos = new ByteArrayOutputStream();
                     ObjectOutputStream oos = new ObjectOutputStream(bos);
@@ -55,11 +62,19 @@ public interface Serializer {
                     throw new RuntimeException("序列化失败", e);
                 }
             }
+        }{
         },
 
-        Json {
+        Json /**
+         * null
+         *
+         * @author shuigedeng
+         * @version 2026.01
+         * @since 2025-12-19 09:30:45
+         */
+                class{
             @Override
-            public <T> T deserialize(Class<T> clazz, byte[] bytes) {
+            public <T > T deserialize(Class < T > clazz, byte[] bytes){
                 Gson gson =
                         new GsonBuilder()
                                 .registerTypeAdapter(Class.class, new ClassCodec())
@@ -69,7 +84,7 @@ public interface Serializer {
             }
 
             @Override
-            public <T> byte[] serialize(T object) {
+            public <T > byte[] serialize ( T object){
                 Gson gson =
                         new GsonBuilder()
                                 .registerTypeAdapter(Class.class, new ClassCodec())
@@ -77,14 +92,22 @@ public interface Serializer {
                 String json = gson.toJson(object);
                 return json.getBytes(StandardCharsets.UTF_8);
             }
+        }{
         }
     }
 
+    /**
+     * ClassCodec
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     class ClassCodec implements JsonSerializer<Class<?>>, JsonDeserializer<Class<?>> {
 
         @Override
         public Class<?> deserialize(
-                JsonElement json, Type typeOfT, JsonDeserializationContext context)
+                JsonElement json, Type typeOfT, JsonDeserializationContext context )
                 throws JsonParseException {
             try {
                 String str = json.getAsString();
@@ -96,7 +119,7 @@ public interface Serializer {
 
         @Override //   String.class
         public JsonElement serialize(
-                Class<?> src, Type typeOfSrc, JsonSerializationContext context) {
+                Class<?> src, Type typeOfSrc, JsonSerializationContext context ) {
             // class -> json
             return new JsonPrimitive(src.getName());
         }

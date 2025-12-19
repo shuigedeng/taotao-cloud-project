@@ -8,17 +8,25 @@ import com.intellij.util.ui.JBDimension;
 
 import com.taotao.cloud.idea.plugin.toolkit.domain.ToolkitCommand;
 import com.taotao.cloud.idea.plugin.toolkit.ui.Base64EncodeAndDecodeUI;
+
 import javax.swing.*;
 
+/**
+ * Base64EncodeAndDecodeToolkitCommandExecutor
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class Base64EncodeAndDecodeToolkitCommandExecutor extends AbstractToolkitCommandExecutor {
 
     @Override
-    public boolean support(ToolkitCommand command) {
+    public boolean support( ToolkitCommand command ) {
         return ToolkitCommand.Base64Encode.equals(command) || ToolkitCommand.Base64Decode.equals(command);
     }
 
     @Override
-    public void execute(ToolkitCommand command, DataContext dataContext) {
+    public void execute( ToolkitCommand command, DataContext dataContext ) {
         Project project = getProject(dataContext);
 
         JPanel panel = new Base64EncodeAndDecodeUI(project, command).getPanel();

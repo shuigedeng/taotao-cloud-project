@@ -24,17 +24,26 @@ import io.netty.channel.embedded.EmbeddedChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+
 import java.nio.charset.Charset;
 
+/**
+ * TestLengthDecoder
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestLengthDecoder {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         EmbeddedChannel channel =
                 new EmbeddedChannel(
                         new LengthFieldBasedFrameDecoder(1024, 0, 4, 0, 4),
                         new LoggingHandler(LogLevel.DEBUG),
                         new ChannelInboundHandlerAdapter() {
                             @Override
-                            public void channelRead(ChannelHandlerContext ctx, Object msg)
+                            public void channelRead( ChannelHandlerContext ctx, Object msg )
                                     throws Exception {
                                 ByteBuf buf = (ByteBuf) msg;
                                 System.out.println(buf.toString(Charset.defaultCharset()));

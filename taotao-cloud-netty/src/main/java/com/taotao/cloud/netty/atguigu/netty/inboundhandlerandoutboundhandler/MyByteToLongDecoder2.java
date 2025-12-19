@@ -19,11 +19,20 @@ package com.taotao.cloud.netty.atguigu.netty.inboundhandlerandoutboundhandler;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ReplayingDecoder;
+
 import java.util.List;
 
+/**
+ * MyByteToLongDecoder2
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MyByteToLongDecoder2 extends ReplayingDecoder<Void> {
+
     @Override
-    protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out)
+    protected void decode( ChannelHandlerContext ctx, ByteBuf in, List<Object> out )
             throws Exception {
 
         System.out.println("MyByteToLongDecoder2 被调用");

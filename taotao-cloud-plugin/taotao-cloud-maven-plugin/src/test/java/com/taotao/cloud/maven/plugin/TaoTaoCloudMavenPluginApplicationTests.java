@@ -18,8 +18,16 @@ package com.taotao.cloud.maven.plugin;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * TaoTaoCloudMavenPluginApplicationTests
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 class TaoTaoCloudMavenPluginApplicationTests {
 
     @Test
-    void contextLoads() {}
+    void contextLoads() {
+    }
 }

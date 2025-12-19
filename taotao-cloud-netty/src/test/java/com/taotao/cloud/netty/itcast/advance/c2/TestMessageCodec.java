@@ -24,8 +24,16 @@ import io.netty.channel.embedded.EmbeddedChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.logging.LoggingHandler;
 
+/**
+ * TestMessageCodec
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestMessageCodec {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         EmbeddedChannel channel =
                 new EmbeddedChannel(
                         new LoggingHandler(),

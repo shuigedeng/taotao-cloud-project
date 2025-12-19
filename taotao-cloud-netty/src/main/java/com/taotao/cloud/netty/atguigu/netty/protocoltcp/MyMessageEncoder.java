@@ -20,9 +20,17 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 
+/**
+ * MyMessageEncoder
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MyMessageEncoder extends MessageToByteEncoder<MessageProtocol> {
+
     @Override
-    protected void encode(ChannelHandlerContext ctx, MessageProtocol msg, ByteBuf out)
+    protected void encode( ChannelHandlerContext ctx, MessageProtocol msg, ByteBuf out )
             throws Exception {
         System.out.println("MyMessageEncoder encode 方法被调用");
         out.writeInt(msg.getLen());

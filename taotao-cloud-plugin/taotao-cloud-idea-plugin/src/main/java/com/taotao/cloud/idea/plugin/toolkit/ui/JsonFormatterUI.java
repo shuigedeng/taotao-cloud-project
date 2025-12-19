@@ -8,9 +8,18 @@ import com.intellij.ui.LanguageTextField;
 import com.taotao.cloud.idea.plugin.toolkit.listener.action.CopyContentActionListener;
 import com.taotao.cloud.idea.plugin.toolkit.listener.action.FormatJsonActionListener;
 import com.taotao.cloud.idea.plugin.toolkit.listener.action.MinifyJsonActionListener;
+
 import javax.swing.*;
 
+/**
+ * JsonFormatterUI
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class JsonFormatterUI {
+
     private JPanel panel;
     private LanguageTextField textField;
     private JButton format;
@@ -22,7 +31,7 @@ public class JsonFormatterUI {
     /**
      * 编辑器对象
      */
-    public JsonFormatterUI(Project project) {
+    public JsonFormatterUI( Project project ) {
         this.project = project;
         format.addActionListener(new FormatJsonActionListener(this.textField));
         copy.addActionListener(new CopyContentActionListener(this.textField));

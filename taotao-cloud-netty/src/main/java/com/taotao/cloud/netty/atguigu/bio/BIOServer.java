@@ -22,8 +22,16 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * BIOServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class BIOServer {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
 
         // 线程池机制
 
@@ -62,7 +70,7 @@ public class BIOServer {
     }
 
     // 编写一个handler方法，和客户端通讯
-    public static void handler(Socket socket) {
+    public static void handler( Socket socket ) {
 
         try {
             System.out.println(

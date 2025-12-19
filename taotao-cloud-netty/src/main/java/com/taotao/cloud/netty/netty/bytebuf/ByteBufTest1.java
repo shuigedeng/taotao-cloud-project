@@ -18,11 +18,19 @@ package com.taotao.cloud.netty.netty.bytebuf;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+
 import java.nio.charset.Charset;
 
+/**
+ * ByteBufTest1
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ByteBufTest1 {
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         ByteBuf byteBuf = Unpooled.copiedBuffer("张hello world", Charset.forName("utf-8"));
 
         if (byteBuf.hasArray()) {

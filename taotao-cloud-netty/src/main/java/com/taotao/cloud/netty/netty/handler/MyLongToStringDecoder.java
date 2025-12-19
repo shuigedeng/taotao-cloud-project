@@ -18,12 +18,20 @@ package com.taotao.cloud.netty.netty.handler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageDecoder;
+
 import java.util.List;
 
+/**
+ * MyLongToStringDecoder
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MyLongToStringDecoder extends MessageToMessageDecoder<Long> {
 
     @Override
-    protected void decode(ChannelHandlerContext ctx, Long msg, List<Object> out) throws Exception {
+    protected void decode( ChannelHandlerContext ctx, Long msg, List<Object> out ) throws Exception {
         System.out.println("MyLongToStringDecoder decode invoked!");
         out.add(String.valueOf(msg));
     }

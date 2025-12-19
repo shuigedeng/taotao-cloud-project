@@ -19,7 +19,15 @@ package com.taotao.cloud.netty.itcast.server.service;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * UserServiceMemoryImpl
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class UserServiceMemoryImpl implements UserService {
+
     private Map<String, String> allUserMap = new ConcurrentHashMap<>();
 
     {
@@ -31,7 +39,7 @@ public class UserServiceMemoryImpl implements UserService {
     }
 
     @Override
-    public boolean login(String username, String password) {
+    public boolean login( String username, String password ) {
         String pass = allUserMap.get(username);
         if (pass == null) {
             return false;

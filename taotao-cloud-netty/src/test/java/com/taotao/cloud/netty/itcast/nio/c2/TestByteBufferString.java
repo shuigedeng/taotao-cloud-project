@@ -21,8 +21,16 @@ import static com.taotao.cloud.netty.itcast.nio.c2.ByteBufferUtil.debugAll;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * TestByteBufferString
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestByteBufferString {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         // 1. 字符串转为 ByteBuffer
         ByteBuffer buffer1 = ByteBuffer.allocate(16);
         buffer1.put("hello".getBytes());

@@ -8,17 +8,25 @@ import com.intellij.util.ui.JBDimension;
 
 import com.taotao.cloud.idea.plugin.toolkit.domain.ToolkitCommand;
 import com.taotao.cloud.idea.plugin.toolkit.ui.IPAndPhoneAddressUI;
+
 import javax.swing.*;
 
+/**
+ * IPAndPhoneToolkitCommandExecutor
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class IPAndPhoneToolkitCommandExecutor extends AbstractToolkitCommandExecutor {
 
     @Override
-    public boolean support(ToolkitCommand command) {
+    public boolean support( ToolkitCommand command ) {
         return ToolkitCommand.Phone.equals(command) || ToolkitCommand.IP.equals(command);
     }
 
     @Override
-    public void execute(ToolkitCommand command, DataContext dataContext) {
+    public void execute( ToolkitCommand command, DataContext dataContext ) {
         Project project = getProject(dataContext);
 
         JPanel panel = new IPAndPhoneAddressUI(project, command).getPanel();

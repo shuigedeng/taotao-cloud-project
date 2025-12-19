@@ -24,10 +24,18 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
+/**
+ * ChatRequestMessageHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @ChannelHandler.Sharable
 public class ChatRequestMessageHandler extends SimpleChannelInboundHandler<ChatRequestMessage> {
+
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, ChatRequestMessage msg)
+    protected void channelRead0( ChannelHandlerContext ctx, ChatRequestMessage msg )
             throws Exception {
         String to = msg.getTo();
         Channel channel = SessionFactory.getSession().getChannel(to);

@@ -21,10 +21,18 @@ import static com.taotao.cloud.netty.itcast.netty.c4.TestByteBuf.log;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 
+/**
+ * TestSlice
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestSlice {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         ByteBuf buf = ByteBufAllocator.DEFAULT.buffer(10);
-        buf.writeBytes(new byte[] {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'});
+        buf.writeBytes(new byte[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'});
         log(buf);
 
         // 在切片过程中，没有发生数据复制

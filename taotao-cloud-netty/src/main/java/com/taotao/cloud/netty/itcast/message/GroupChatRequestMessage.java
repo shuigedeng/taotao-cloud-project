@@ -19,14 +19,22 @@ package com.taotao.cloud.netty.itcast.message;
 import lombok.Data;
 import lombok.ToString;
 
+/**
+ * GroupChatRequestMessage
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @ToString(callSuper = true)
 public class GroupChatRequestMessage extends Message {
+
     private String content;
     private String groupName;
     private String from;
 
-    public GroupChatRequestMessage(String from, String groupName, String content) {
+    public GroupChatRequestMessage( String from, String groupName, String content ) {
         this.content = content;
         this.groupName = groupName;
         this.from = from;

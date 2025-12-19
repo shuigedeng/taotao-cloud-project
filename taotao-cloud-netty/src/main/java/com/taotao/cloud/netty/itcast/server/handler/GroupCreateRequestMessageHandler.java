@@ -25,14 +25,22 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+
 import java.util.List;
 import java.util.Set;
 
+/**
+ * GroupCreateRequestMessageHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @ChannelHandler.Sharable
-public class GroupCreateRequestMessageHandler
-        extends SimpleChannelInboundHandler<GroupCreateRequestMessage> {
+public class GroupCreateRequestMessageHandler extends SimpleChannelInboundHandler<GroupCreateRequestMessage> {
+
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, GroupCreateRequestMessage msg)
+    protected void channelRead0( ChannelHandlerContext ctx, GroupCreateRequestMessage msg )
             throws Exception {
         String groupName = msg.getGroupName();
         Set<String> members = msg.getMembers();

@@ -18,8 +18,16 @@ package com.taotao.cloud.netty.atguigu.nio;
 
 import java.nio.ByteBuffer;
 
+/**
+ * NIOByteBufferPutGet
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NIOByteBufferPutGet {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
 
         // 创建一个Buffer
         ByteBuffer buffer = ByteBuffer.allocate(64);

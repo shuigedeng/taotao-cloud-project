@@ -16,8 +16,16 @@
 
 package com.taotao.cloud.netty.atguigu.netty.source.echo;
 
+/**
+ * Test
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class Test {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         System.out.println(System.nanoTime());
         Thread.sleep(1000);
         System.out.println(System.nanoTime());

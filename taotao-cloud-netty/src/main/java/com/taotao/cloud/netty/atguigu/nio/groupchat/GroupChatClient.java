@@ -25,6 +25,13 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Scanner;
 
+/**
+ * GroupChatClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class GroupChatClient {
 
     // 定义相关的属性
@@ -50,7 +57,7 @@ public class GroupChatClient {
     }
 
     // 向服务器发送消息
-    public void sendInfo(String info) {
+    public void sendInfo( String info ) {
 
         info = username + " 说：" + info;
 
@@ -96,7 +103,7 @@ public class GroupChatClient {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
 
         // 启动我们客户端
         GroupChatClient chatClient = new GroupChatClient();

@@ -17,8 +17,16 @@
 package com.taotao.cloud.netty.grpc;
 
 import io.grpc.Server;
+
 import java.io.IOException;
 
+/**
+ * GrpcServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class GrpcServer {
 
     private Server server;
@@ -47,7 +55,7 @@ public class GrpcServer {
         }
     }
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main( String[] args ) throws IOException, InterruptedException {
         GrpcServer server = new GrpcServer();
 
         server.start();

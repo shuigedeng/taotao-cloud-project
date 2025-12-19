@@ -19,11 +19,19 @@ package com.taotao.cloud.netty.netty.bytebuf;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.CompositeByteBuf;
 import io.netty.buffer.Unpooled;
+
 import java.util.Iterator;
 
+/**
+ * ByteBufTest2
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ByteBufTest2 {
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         CompositeByteBuf compositeByteBuf = Unpooled.compositeBuffer();
 
         ByteBuf heapBuf = Unpooled.buffer(10);

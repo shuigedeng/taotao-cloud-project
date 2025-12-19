@@ -18,6 +18,13 @@ package com.taotao.cloud.netty.itcast.protocol;
 
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 
+/**
+ * ProcotolFrameDecoder
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ProcotolFrameDecoder extends LengthFieldBasedFrameDecoder {
 
     public ProcotolFrameDecoder() {
@@ -29,7 +36,7 @@ public class ProcotolFrameDecoder extends LengthFieldBasedFrameDecoder {
             int lengthFieldOffset,
             int lengthFieldLength,
             int lengthAdjustment,
-            int initialBytesToStrip) {
+            int initialBytesToStrip ) {
         super(
                 maxFrameLength,
                 lengthFieldOffset,

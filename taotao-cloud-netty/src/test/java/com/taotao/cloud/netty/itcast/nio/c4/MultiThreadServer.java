@@ -25,11 +25,21 @@ import java.nio.channels.*;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import com.taotao.cloud.netty.itcast.nio.c2.ByteBufferUtil;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * MultiThreadServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class MultiThreadServer {
-    public static void main(String[] args) throws IOException {
+
+    public static void main( String[] args ) throws IOException {
         Thread.currentThread().setName("boss");
         ServerSocketChannel ssc = ServerSocketChannel.open();
         ssc.configureBlocking(false);
@@ -65,18 +75,19 @@ public class MultiThreadServer {
     }
 
     static class Worker implements Runnable {
+
         private Thread thread;
         private Selector selector;
         private String name;
         private volatile boolean start = false; // 还未初始化
         private ConcurrentLinkedQueue<Runnable> queue = new ConcurrentLinkedQueue<>();
 
-        public Worker(String name) {
+        public Worker( String name ) {
             this.name = name;
         }
 
         // 初始化线程，和 selector
-        public void register(SocketChannel sc) throws IOException {
+        public void register( SocketChannel sc ) throws IOException {
             if (!start) {
                 selector = Selector.open();
                 thread = new Thread(this, name);

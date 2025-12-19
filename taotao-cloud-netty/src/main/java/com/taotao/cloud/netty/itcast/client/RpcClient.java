@@ -29,9 +29,17 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * RpcClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class RpcClient {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         NioEventLoopGroup group = new NioEventLoopGroup();
         LoggingHandler LOGGING_HANDLER = new LoggingHandler(LogLevel.DEBUG);
         MessageCodecSharable MESSAGE_CODEC = new MessageCodecSharable();
@@ -43,7 +51,7 @@ public class RpcClient {
             bootstrap.handler(
                     new ChannelInitializer<SocketChannel>() {
                         @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
+                        protected void initChannel( SocketChannel ch ) throws Exception {
                             ch.pipeline().addLast(new ProcotolFrameDecoder());
                             ch.pipeline().addLast(LOGGING_HANDLER);
                             ch.pipeline().addLast(MESSAGE_CODEC);
@@ -59,8 +67,8 @@ public class RpcClient {
                                             "com.taotao.cloud.netty.itcast.server.service.HelloService",
                                             "sayHello",
                                             String.class,
-                                            new Class[] {String.class},
-                                            new Object[] {"张三"}))
+                                            new Class[]{String.class},
+                                            new Object[]{"张三"}))
                             .addListener(
                                     promise -> {
                                         if (!promise.isSuccess()) {

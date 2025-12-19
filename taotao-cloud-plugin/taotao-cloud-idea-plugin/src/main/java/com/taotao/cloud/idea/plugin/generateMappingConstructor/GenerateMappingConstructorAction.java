@@ -9,15 +9,22 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import com.intellij.psi.util.PsiTreeUtil;
 
+/**
+ * GenerateMappingConstructorAction
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class GenerateMappingConstructorAction extends AnAction {
 
     @Override
-    public void actionPerformed(AnActionEvent e) {
+    public void actionPerformed( AnActionEvent e ) {
         Project project = e.getProject();
         Editor editor = e.getData(CommonDataKeys.EDITOR);
         PsiFile psiFile = e.getData(CommonDataKeys.PSI_FILE);
 
-        if (project == null || editor == null || !(psiFile instanceof PsiJavaFile)) {
+        if (project == null || editor == null || !( psiFile instanceof PsiJavaFile )) {
             return;
         }
 
@@ -36,12 +43,12 @@ public class GenerateMappingConstructorAction extends AnAction {
         generateConstructor(project, psiClass, result.getSelectedClass(), result.getDtoParamName());
     }
 
-    private void generateConstructor(Project project, PsiClass psiClass, PsiClass inputClass, String dtoParamName) {
+    private void generateConstructor( Project project, PsiClass psiClass, PsiClass inputClass, String dtoParamName ) {
         PsiElementFactory factory = JavaPsiFacade.getInstance(project).getElementFactory();
         StringBuilder constructorBuilder = new StringBuilder();
 
         constructorBuilder.append("public ").append(psiClass.getName()).append("(")
-            .append(inputClass.getName()).append(" ").append(dtoParamName).append(") {\n");
+                .append(inputClass.getName()).append(" ").append(dtoParamName).append(") {\n");
 
         boolean hasLombokData = hasLombokAnnotation(inputClass, "Data");
         boolean hasLombokGetter = hasLombokAnnotation(inputClass, "Getter");
@@ -59,14 +66,14 @@ public class GenerateMappingConstructorAction extends AnAction {
 
                 if (hasGetter) {
                     constructorBuilder.append("    this.").append(fieldName)
-                        .append(" = ").append(dtoParamName).append(".").append(getterName).append("();\n");
+                            .append(" = ").append(dtoParamName).append(".").append(getterName).append("();\n");
                 } else {
                     constructorBuilder.append("    this.").append(fieldName)
-                        .append(" = ").append(dtoParamName).append(".").append(fieldName).append(";\n");
+                            .append(" = ").append(dtoParamName).append(".").append(fieldName).append(";\n");
                 }
             } else {
                 constructorBuilder.append("    // this.").append(fieldName)
-                    .append(" = // No matching field found in input class\n");
+                        .append(" = // No matching field found in input class\n");
             }
         }
 
@@ -79,7 +86,7 @@ public class GenerateMappingConstructorAction extends AnAction {
         });
     }
 
-    private boolean hasLombokAnnotation(PsiModifierListOwner element, String annotationName) {
+    private boolean hasLombokAnnotation( PsiModifierListOwner element, String annotationName ) {
         PsiModifierList modifierList = element.getModifierList();
         return modifierList != null && modifierList.findAnnotation("lombok." + annotationName) != null;
     }

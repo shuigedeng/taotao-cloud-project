@@ -16,4 +16,13 @@
 
 package com.taotao.cloud.elasticsearch.plugin.aa;
 
-public class EncNormalizerImpl extends EncNormalizer {}
+/**
+ * EncNormalizerImpl
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
+public class EncNormalizerImpl extends EncNormalizer {
+
+}

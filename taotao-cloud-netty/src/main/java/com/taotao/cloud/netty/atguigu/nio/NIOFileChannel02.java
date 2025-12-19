@@ -21,8 +21,16 @@ import java.io.FileInputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
+/**
+ * NIOFileChannel02
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NIOFileChannel02 {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
 
         // 创建文件的输入流
         File file = new File("d:\\file01.txt");

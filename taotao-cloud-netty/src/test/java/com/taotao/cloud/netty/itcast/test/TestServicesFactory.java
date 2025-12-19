@@ -19,8 +19,16 @@ package com.taotao.cloud.netty.itcast.test;
 import com.taotao.cloud.netty.itcast.server.service.HelloService;
 import com.taotao.cloud.netty.itcast.server.service.ServicesFactory;
 
+/**
+ * TestServicesFactory
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestServicesFactory {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         HelloService service = ServicesFactory.getService(HelloService.class);
         System.out.println(service.sayHello("hi"));
     }

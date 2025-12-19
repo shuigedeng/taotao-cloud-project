@@ -19,9 +19,16 @@ package com.taotao.cloud.netty.thrift;
 import org.apache.thrift.server.THsHaServer;
 import org.apache.thrift.transport.TNonblockingServerSocket;
 
+/**
+ * ThriftServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ThriftServer {
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         TNonblockingServerSocket socket = new TNonblockingServerSocket(8899);
         THsHaServer.Args arg = new THsHaServer.Args(socket).minWorkerThreads(2).maxWorkerThreads(4);
         // PersonService.Processor<PersonServiceImpl> processor = new PersonService.Processor<>(new

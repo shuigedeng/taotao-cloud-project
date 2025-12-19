@@ -29,9 +29,17 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * RpcServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class RpcServer {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         NioEventLoopGroup boss = new NioEventLoopGroup();
         NioEventLoopGroup worker = new NioEventLoopGroup();
         LoggingHandler LOGGING_HANDLER = new LoggingHandler(LogLevel.DEBUG);
@@ -44,7 +52,7 @@ public class RpcServer {
             serverBootstrap.childHandler(
                     new ChannelInitializer<SocketChannel>() {
                         @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
+                        protected void initChannel( SocketChannel ch ) throws Exception {
                             ch.pipeline().addLast(new ProcotolFrameDecoder());
                             ch.pipeline().addLast(LOGGING_HANDLER);
                             ch.pipeline().addLast(MESSAGE_CODEC);

@@ -22,10 +22,17 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
 // 服务器这边handler比较简单
+/**
+ * NettyServerHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void channelRead( ChannelHandlerContext ctx, Object msg ) throws Exception {
         // 获取客户端发送的消息，并调用服务
         System.out.println("msg=" + msg);
         // 客户端在调用服务器的api 时，我们需要定义一个协议
@@ -40,7 +47,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+    public void exceptionCaught( ChannelHandlerContext ctx, Throwable cause ) throws Exception {
         ctx.close();
     }
 }

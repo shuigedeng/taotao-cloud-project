@@ -22,14 +22,18 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
+
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
+/**
+ * GroupChatServerHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class GroupChatServerHandler extends SimpleChannelInboundHandler<String> {
-
-    // public static List<Channel> channels = new ArrayList<Channel>();
-
-    // 使用一个hashmap 管理
-    // public static Map<String, Channel> channels = new HashMap<String,Channel>();
 
     // 定义一个channle 组，管理所有的channel
     // GlobalEventExecutor.INSTANCE) 是全局的事件执行器，是一个单例
@@ -40,7 +44,7 @@ public class GroupChatServerHandler extends SimpleChannelInboundHandler<String> 
     // handlerAdded 表示连接建立，一旦连接，第一个被执行
     // 将当前channel 加入到  channelGroup
     @Override
-    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+    public void handlerAdded( ChannelHandlerContext ctx ) throws Exception {
         Channel channel = ctx.channel();
         // 将该客户加入聊天的信息推送给其它在线的客户端
         /*
@@ -51,14 +55,14 @@ public class GroupChatServerHandler extends SimpleChannelInboundHandler<String> 
                 "[客户端]"
                         + channel.remoteAddress()
                         + " 加入聊天"
-                        + sdf.format(new java.util.Date())
+                        + sdf.format(new Date())
                         + " \n");
         channelGroup.add(channel);
     }
 
     // 断开连接, 将xx客户离开信息推送给当前在线的客户
     @Override
-    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+    public void handlerRemoved( ChannelHandlerContext ctx ) throws Exception {
 
         Channel channel = ctx.channel();
         channelGroup.writeAndFlush("[客户端]" + channel.remoteAddress() + " 离开了\n");
@@ -67,21 +71,21 @@ public class GroupChatServerHandler extends SimpleChannelInboundHandler<String> 
 
     // 表示channel 处于活动状态, 提示 xx上线
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+    public void channelActive( ChannelHandlerContext ctx ) throws Exception {
 
         System.out.println(ctx.channel().remoteAddress() + " 上线了~");
     }
 
     // 表示channel 处于不活动状态, 提示 xx离线了
     @Override
-    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+    public void channelInactive( ChannelHandlerContext ctx ) throws Exception {
 
         System.out.println(ctx.channel().remoteAddress() + " 离线了~");
     }
 
     // 读取数据
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
+    protected void channelRead0( ChannelHandlerContext ctx, String msg ) throws Exception {
 
         // 获取到当前channel
         Channel channel = ctx.channel();
@@ -98,7 +102,7 @@ public class GroupChatServerHandler extends SimpleChannelInboundHandler<String> 
     }
 
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+    public void exceptionCaught( ChannelHandlerContext ctx, Throwable cause ) throws Exception {
         // 关闭通道
         ctx.close();
     }

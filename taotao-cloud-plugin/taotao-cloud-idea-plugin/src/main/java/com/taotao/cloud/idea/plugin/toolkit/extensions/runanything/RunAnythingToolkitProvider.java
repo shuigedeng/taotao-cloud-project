@@ -10,12 +10,20 @@ import com.intellij.util.ObjectUtils;
 import com.taotao.cloud.idea.plugin.toolkit.domain.ToolkitCommand;
 import com.taotao.cloud.idea.plugin.toolkit.actions.ToolkitCommandAction;
 import com.taotao.cloud.idea.plugin.toolkit.service.CacheService;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import javax.swing.Icon;
 
+/**
+ * RunAnythingToolkitProvider
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class RunAnythingToolkitProvider extends RunAnythingAnActionProvider<AnAction> {
 
     private static final String CACHE_KEY = "ToolkitCommandActionInstances";
@@ -28,7 +36,7 @@ public class RunAnythingToolkitProvider extends RunAnythingAnActionProvider<AnAc
 
     @Override
     @SuppressWarnings("unchecked")
-    public Collection<AnAction> getValues(DataContext dataContext, String pattern) {
+    public Collection<AnAction> getValues( DataContext dataContext, String pattern ) {
         Object value = cacheService.get(CACHE_KEY);
         if (Objects.nonNull(value)) {
             return (Collection<AnAction>) value;
@@ -40,15 +48,15 @@ public class RunAnythingToolkitProvider extends RunAnythingAnActionProvider<AnAc
 
     private Collection<AnAction> createActions() {
         return Arrays.stream(ToolkitCommand.values())
-            .map(ToolkitCommandAction::new)
-            .collect(Collectors.toList());
+                .map(ToolkitCommandAction::new)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public String getCommand(AnAction value) {
+    public String getCommand( AnAction value ) {
         return this.getHelpCommand() + " " + ObjectUtils.notNull(
-            value.getTemplatePresentation().getText(),
-            IdeBundle.message("run.anything.actions.undefined"));
+                value.getTemplatePresentation().getText(),
+                IdeBundle.message("run.anything.actions.undefined"));
     }
 
     @Override
@@ -77,8 +85,4 @@ public class RunAnythingToolkitProvider extends RunAnythingAnActionProvider<AnAc
         return "toolkit"; //过滤界面中的名称
     }
 
-//    @Override
-//    public @Nullable String getAdText() {
-//        return "fwfwefwef";
-//    }
 }

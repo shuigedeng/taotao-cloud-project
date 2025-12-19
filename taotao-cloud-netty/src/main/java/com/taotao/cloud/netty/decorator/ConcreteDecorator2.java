@@ -16,9 +16,16 @@
 
 package com.taotao.cloud.netty.decorator;
 
+/**
+ * ConcreteDecorator2
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ConcreteDecorator2 extends Decorator {
 
-    public ConcreteDecorator2(Component component) {
+    public ConcreteDecorator2( Component component ) {
         super(component);
     }
 

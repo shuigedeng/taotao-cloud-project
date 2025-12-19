@@ -19,9 +19,16 @@ package com.taotao.cloud.netty.netty.test;
 import io.netty.util.NettyRuntime;
 import io.netty.util.internal.SystemPropertyUtil;
 
+/**
+ * Test
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class Test {
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         int result =
                 Math.max(
                         1,

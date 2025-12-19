@@ -19,8 +19,16 @@ package com.taotao.cloud.netty.atguigu.netty.dubborpc.provider;
 import com.taotao.cloud.netty.atguigu.netty.dubborpc.netty.NettyServer;
 
 // ServerBootstrap 会启动一个服务提供者，就是 NettyServer
+/**
+ * ServerBootstrap
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ServerBootstrap {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
 
         // 代码代填..
         NettyServer.startServer("127.0.0.1", 7000);

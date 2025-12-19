@@ -19,9 +19,17 @@ package com.taotao.cloud.netty.atguigu.netty.inboundhandlerandoutboundhandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
+/**
+ * MyServerHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MyServerHandler extends SimpleChannelInboundHandler<Long> {
+
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, Long msg) throws Exception {
+    protected void channelRead0( ChannelHandlerContext ctx, Long msg ) throws Exception {
 
         System.out.println("从客户端" + ctx.channel().remoteAddress() + " 读取到long " + msg);
 
@@ -30,7 +38,7 @@ public class MyServerHandler extends SimpleChannelInboundHandler<Long> {
     }
 
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+    public void exceptionCaught( ChannelHandlerContext ctx, Throwable cause ) throws Exception {
         cause.printStackTrace();
         ctx.close();
     }

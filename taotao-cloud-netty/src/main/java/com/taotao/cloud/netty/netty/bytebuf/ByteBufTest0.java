@@ -19,9 +19,16 @@ package com.taotao.cloud.netty.netty.bytebuf;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 
+/**
+ * ByteBufTest0
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ByteBufTest0 {
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         ByteBuf buffer = Unpooled.buffer(10);
 
         for (int i = 0; i < 10; ++i) {

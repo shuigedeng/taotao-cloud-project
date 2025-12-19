@@ -26,12 +26,22 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LoggingHandler;
+
 import java.nio.charset.Charset;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * TestRedis
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class TestRedis {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         NioEventLoopGroup worker = new NioEventLoopGroup();
         byte[] LINE = {13, 10};
         try {
@@ -41,7 +51,7 @@ public class TestRedis {
             bootstrap.handler(
                     new ChannelInitializer<SocketChannel>() {
                         @Override
-                        protected void initChannel(SocketChannel ch) {
+                        protected void initChannel( SocketChannel ch ) {
                             ch.pipeline().addLast(new LoggingHandler());
                             ch.pipeline()
                                     .addLast(
@@ -49,12 +59,12 @@ public class TestRedis {
                                                 // 会在连接 channel 建立成功后，会触发 active 事件
                                                 @Override
                                                 public void channelActive(
-                                                        ChannelHandlerContext ctx) {
+                                                        ChannelHandlerContext ctx ) {
                                                     set(ctx);
                                                     get(ctx);
                                                 }
 
-                                                private void get(ChannelHandlerContext ctx) {
+                                                private void get( ChannelHandlerContext ctx ) {
                                                     ByteBuf buf = ctx.alloc().buffer();
                                                     buf.writeBytes("*2".getBytes());
                                                     buf.writeBytes(LINE);
@@ -69,7 +79,7 @@ public class TestRedis {
                                                     ctx.writeAndFlush(buf);
                                                 }
 
-                                                private void set(ChannelHandlerContext ctx) {
+                                                private void set( ChannelHandlerContext ctx ) {
                                                     ByteBuf buf = ctx.alloc().buffer();
                                                     buf.writeBytes("*3".getBytes());
                                                     buf.writeBytes(LINE);
@@ -90,7 +100,7 @@ public class TestRedis {
 
                                                 @Override
                                                 public void channelRead(
-                                                        ChannelHandlerContext ctx, Object msg)
+                                                        ChannelHandlerContext ctx, Object msg )
                                                         throws Exception {
                                                     ByteBuf buf = (ByteBuf) msg;
                                                     System.out.println(

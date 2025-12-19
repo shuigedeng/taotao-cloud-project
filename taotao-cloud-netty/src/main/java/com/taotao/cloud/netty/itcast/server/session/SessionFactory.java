@@ -16,6 +16,13 @@
 
 package com.taotao.cloud.netty.itcast.server.session;
 
+/**
+ * SessionFactory
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public abstract class SessionFactory {
 
     private static Session session = new SessionMemoryImpl();

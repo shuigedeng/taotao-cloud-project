@@ -24,10 +24,18 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
+/**
+ * LoginRequestMessageHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @ChannelHandler.Sharable
 public class LoginRequestMessageHandler extends SimpleChannelInboundHandler<LoginRequestMessage> {
+
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, LoginRequestMessage msg)
+    protected void channelRead0( ChannelHandlerContext ctx, LoginRequestMessage msg )
             throws Exception {
         String username = msg.getUsername();
         String password = msg.getPassword();

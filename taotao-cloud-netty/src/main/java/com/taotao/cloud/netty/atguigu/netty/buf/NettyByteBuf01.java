@@ -19,8 +19,16 @@ package com.taotao.cloud.netty.atguigu.netty.buf;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 
+/**
+ * NettyByteBuf01
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NettyByteBuf01 {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
 
         // 创建一个ByteBuf
         // 说明

@@ -21,10 +21,19 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringEncoder;
+
 import java.net.InetSocketAddress;
 
+/**
+ * HelloClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class HelloClient {
-    public static void main(String[] args) throws InterruptedException {
+
+    public static void main( String[] args ) throws InterruptedException {
         // 1. 启动类
         new Bootstrap()
                 // 2. 添加 EventLoop
@@ -35,7 +44,7 @@ public class HelloClient {
                 .handler(
                         new ChannelInitializer<NioSocketChannel>() {
                             @Override // 在连接建立后被调用
-                            protected void initChannel(NioSocketChannel ch) throws Exception {
+                            protected void initChannel( NioSocketChannel ch ) throws Exception {
                                 ch.pipeline().addLast(new StringEncoder());
                             }
                         })

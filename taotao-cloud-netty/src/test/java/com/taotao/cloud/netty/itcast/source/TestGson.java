@@ -19,8 +19,16 @@ package com.taotao.cloud.netty.itcast.source;
 import com.google.gson.*;
 import com.taotao.cloud.netty.itcast.protocol.Serializer;
 
+/**
+ * TestGson
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestGson {
-    public static void main(String[] args) {
+
+    public static void main( String[] args ) {
         Gson gson =
                 new GsonBuilder()
                         .registerTypeAdapter(Class.class, new Serializer.ClassCodec())

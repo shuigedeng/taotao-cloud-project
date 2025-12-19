@@ -17,16 +17,25 @@
 package com.taotao.cloud.netty.itcast.message;
 
 import java.util.Set;
+
 import lombok.Data;
 import lombok.ToString;
 
+/**
+ * GroupCreateRequestMessage
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @ToString(callSuper = true)
 public class GroupCreateRequestMessage extends Message {
+
     private String groupName;
     private Set<String> members;
 
-    public GroupCreateRequestMessage(String groupName, Set<String> members) {
+    public GroupCreateRequestMessage( String groupName, Set<String> members ) {
         this.groupName = groupName;
         this.members = members;
     }

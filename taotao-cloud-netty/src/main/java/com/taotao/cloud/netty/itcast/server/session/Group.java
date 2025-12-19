@@ -18,13 +18,22 @@ package com.taotao.cloud.netty.itcast.server.session;
 
 import java.util.Collections;
 import java.util.Set;
+
 import lombok.Data;
 
+/**
+ * Group
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 /**
  * 聊天组，即聊天室
  */
 public class Group {
+
     // 聊天室名称
     private String name;
     // 聊天室成员
@@ -32,7 +41,7 @@ public class Group {
 
     public static final Group EMPTY_GROUP = new Group("empty", Collections.emptySet());
 
-    public Group(String name, Set<String> members) {
+    public Group( String name, Set<String> members ) {
         this.name = name;
         this.members = members;
     }

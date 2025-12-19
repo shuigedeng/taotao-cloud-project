@@ -11,10 +11,17 @@ import com.taotao.cloud.idea.plugin.converter.exception.ConverterException;
 import com.taotao.cloud.idea.plugin.converter.generator.ConverterGenerator;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * AbstractGenerator
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public abstract class AbstractGenerator implements ConverterGenerator {
 
     @Override
-    public void generate(@NotNull PsiMethod psiMethod) {
+    public void generate( @NotNull PsiMethod psiMethod ) {
 
         PsiClass psiClass = (PsiClass) psiMethod.getParent();
 
@@ -35,13 +42,14 @@ public abstract class AbstractGenerator implements ConverterGenerator {
 
     /**
      * Generate code
+     *
      * @param psiClass class
      * @param psiMethod method
      * @throws ConverterException exception
      */
-    abstract void generateCode(PsiClass psiClass, PsiMethod psiMethod) throws ConverterException;
+    abstract void generateCode( PsiClass psiClass, PsiMethod psiMethod ) throws ConverterException;
 
-    PsiClass getParamPsiClass(PsiMethod method) throws ConverterException {
+    PsiClass getParamPsiClass( PsiMethod method ) throws ConverterException {
 
         PsiParameter[] parameters = method.getParameterList().getParameters();
 
@@ -52,7 +60,7 @@ public abstract class AbstractGenerator implements ConverterGenerator {
         return PsiTypesUtil.getPsiClass(parameters[0].getType());
     }
 
-    PsiClass getReturnPsiClass(PsiMethod method) throws ConverterException {
+    PsiClass getReturnPsiClass( PsiMethod method ) throws ConverterException {
 
         final PsiType returnType = method.getReturnType();
         if (PsiType.VOID.equals(returnType)) {

@@ -20,9 +20,16 @@ import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 
+/**
+ * NioTest10
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NioTest10 {
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         RandomAccessFile randomAccessFile = new RandomAccessFile("NioTest10.txt", "rw");
         FileChannel fileChannel = randomAccessFile.getChannel();
 

@@ -20,10 +20,17 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 
+/**
+ * MyClientInitializer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MyClientInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
-    protected void initChannel(SocketChannel ch) throws Exception {
+    protected void initChannel( SocketChannel ch ) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
 
         pipeline.addLast(new MyByteToLongDecoder2());
