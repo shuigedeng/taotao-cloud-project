@@ -19,9 +19,17 @@ package com.taotao.cloud.message.biz.event.message;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+/**
+ * MessageFailEventListener
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class MessageFailEventListener {
 
     @EventListener(MessageFailEvent.class)
-    public void messageFailEventListener(MessageFailEvent event) {}
+    public void messageFailEventListener( MessageFailEvent event ) {
+    }
 }

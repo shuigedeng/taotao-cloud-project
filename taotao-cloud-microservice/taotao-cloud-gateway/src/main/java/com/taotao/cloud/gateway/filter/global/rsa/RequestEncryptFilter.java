@@ -18,8 +18,10 @@ package com.taotao.cloud.gateway.filter.global.rsa;
 
 import com.alibaba.cloud.commons.lang.StringUtils;
 import com.taotao.boot.common.utils.secure.RSAUtils;
+
 import java.lang.reflect.Field;
 import java.net.URI;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -42,11 +44,18 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 // @Component
+/**
+ * RequestEncryptFilter
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class RequestEncryptFilter implements GlobalFilter, Ordered {
 
     @Override
-    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+    public Mono<Void> filter( ServerWebExchange exchange, GatewayFilterChain chain ) {
 
         log.info(
                 "============================RequestEncryptFilter start===================================");
@@ -123,7 +132,7 @@ public class RequestEncryptFilter implements GlobalFilter, Ordered {
     /**
      * 修改前端传的参数
      */
-    private void updateRequestParam(ServerWebExchange exchange)
+    private void updateRequestParam( ServerWebExchange exchange )
             throws NoSuchFieldException, IllegalAccessException {
         ServerHttpRequest request = exchange.getRequest();
         // 请求链接

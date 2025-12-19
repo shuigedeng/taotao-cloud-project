@@ -4,33 +4,36 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * WebSSEUser
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class WebSSEUser {
-	private static Map<String, Chater> userChaterMap = new ConcurrentHashMap<>();
 
-	public static void add(String userName, Chater chater) {
-		userChaterMap.put(userName, chater);
-	}
+    private static Map<String, Chater> userChaterMap = new ConcurrentHashMap<>();
 
-	/**
-	 * 根据昵称拿Chater
-	 * 
-	 * @param nickName
-	 * @return
-	 */
-	public static Chater getChater(String userName) {
-		return userChaterMap.get(userName);
-	}
+    public static void add( String userName, Chater chater ) {
+        userChaterMap.put(userName, chater);
+    }
 
-	/**
-	 * 移除失效的Chater
-	 * 
-	 * @param Chater
-	 */
-	public static void removeUser(String userName) {
-		userChaterMap.remove(userName);
-	}
+    /**
+     * 根据昵称拿Chater
+     */
+    public static Chater getChater( String userName ) {
+        return userChaterMap.get(userName);
+    }
 
-	public static Set<String> getUserList() {
-		return userChaterMap.keySet();
-	}
+    /**
+     * 移除失效的Chater
+     */
+    public static void removeUser( String userName ) {
+        userChaterMap.remove(userName);
+    }
+
+    public static Set<String> getUserList() {
+        return userChaterMap.keySet();
+    }
 }

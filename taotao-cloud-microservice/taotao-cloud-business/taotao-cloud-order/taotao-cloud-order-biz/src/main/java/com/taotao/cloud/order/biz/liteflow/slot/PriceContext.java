@@ -10,6 +10,13 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * PriceContext
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class PriceContext {
 
     /**
@@ -67,11 +74,11 @@ public class PriceContext {
      */
     private String printLog;
 
-    public PriceStepVO getLastestPriceStep(){
-        if(CollectionUtils.isEmpty(priceStepList)){
+    public PriceStepVO getLastestPriceStep() {
+        if (CollectionUtils.isEmpty(priceStepList)) {
             return null;
-        }else{
-            return priceStepList.get(priceStepList.size()-1);
+        } else {
+            return priceStepList.get(priceStepList.size() - 1);
         }
     }
 
@@ -79,7 +86,7 @@ public class PriceContext {
         return orderNo;
     }
 
-    public void setOrderNo(String orderNo) {
+    public void setOrderNo( String orderNo ) {
         this.orderNo = orderNo;
     }
 
@@ -87,7 +94,7 @@ public class PriceContext {
         return productPackList;
     }
 
-    public void setProductPackList(List<ProductPackVO> productPackList) {
+    public void setProductPackList( List<ProductPackVO> productPackList ) {
         this.productPackList = productPackList;
     }
 
@@ -95,7 +102,7 @@ public class PriceContext {
         return orderChannel;
     }
 
-    public void setOrderChannel(OrderChannelEnum orderChannel) {
+    public void setOrderChannel( OrderChannelEnum orderChannel ) {
         this.orderChannel = orderChannel;
     }
 
@@ -103,7 +110,7 @@ public class PriceContext {
         return memberCode;
     }
 
-    public void setMemberCode(String memberCode) {
+    public void setMemberCode( String memberCode ) {
         this.memberCode = memberCode;
     }
 
@@ -111,7 +118,7 @@ public class PriceContext {
         return couponId;
     }
 
-    public void setCouponId(Long couponId) {
+    public void setCouponId( Long couponId ) {
         this.couponId = couponId;
     }
 
@@ -119,11 +126,11 @@ public class PriceContext {
         return priceStepList;
     }
 
-    public void setPriceStepList(List<PriceStepVO> priceStepList) {
+    public void setPriceStepList( List<PriceStepVO> priceStepList ) {
         this.priceStepList = priceStepList;
     }
 
-    public void addPriceStep(PriceStepVO step){
+    public void addPriceStep( PriceStepVO step ) {
         this.priceStepList.add(step);
     }
 
@@ -131,7 +138,7 @@ public class PriceContext {
         return promotionPackList;
     }
 
-    public void setPromotionPackList(List<PromotionPackVO> promotionPackList) {
+    public void setPromotionPackList( List<PromotionPackVO> promotionPackList ) {
         this.promotionPackList = promotionPackList;
     }
 
@@ -139,7 +146,7 @@ public class PriceContext {
         return oversea;
     }
 
-    public void setOversea(boolean oversea) {
+    public void setOversea( boolean oversea ) {
         this.oversea = oversea;
     }
 
@@ -147,7 +154,7 @@ public class PriceContext {
         return finalOrderPrice;
     }
 
-    public void setFinalOrderPrice(BigDecimal finalOrderPrice) {
+    public void setFinalOrderPrice( BigDecimal finalOrderPrice ) {
         this.finalOrderPrice = finalOrderPrice;
     }
 
@@ -155,7 +162,7 @@ public class PriceContext {
         return originalOrderPrice;
     }
 
-    public void setOriginalOrderPrice(BigDecimal originalOrderPrice) {
+    public void setOriginalOrderPrice( BigDecimal originalOrderPrice ) {
         this.originalOrderPrice = originalOrderPrice;
     }
 
@@ -163,7 +170,7 @@ public class PriceContext {
         return printLog;
     }
 
-    public void setPrintLog(String printLog) {
+    public void setPrintLog( String printLog ) {
         this.printLog = printLog;
     }
 }

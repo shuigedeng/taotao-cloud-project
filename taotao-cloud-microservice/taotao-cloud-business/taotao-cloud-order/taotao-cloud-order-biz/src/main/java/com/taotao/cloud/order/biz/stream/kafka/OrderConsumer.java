@@ -33,24 +33,25 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+/**
+ * OrderConsumer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Service
 public class OrderConsumer {
 
     // , @Payload String msg
     @StreamListener(value = TaoTaoCloudSink.ORDER_MESSAGE_INPUT)
     @SendTo(Processor.OUTPUT)
-    public Message<?> test(Message<String> message) {
+    public Message<?> test( Message<String> message ) {
         String payload = message.getPayload();
         LogUtils.info("order Consumer" + payload);
 
         return MessageBuilder.fromMessage(message).build();
     }
-
-    // @StreamListener(value=TaoTaoCloudSink.ORDER_MESSAGE_INPUT)
-    // public void in(String in, @Header(KafkaHeaders.CONSUMER) Consumer<?, ?> consumer) {
-    //	LogUtils.info(in);
-    //	consumer.pause(Collections.singleton(new TopicPartition("myTopic", 0)));
-    // }
 
     @Bean
     public ApplicationListener<ListenerContainerIdleEvent> idleListener() {
@@ -65,19 +66,19 @@ public class OrderConsumer {
     @Component
     public static class NoOpBindingMeters {
 
-        NoOpBindingMeters(MeterRegistry registry) {
+        NoOpBindingMeters( MeterRegistry registry ) {
             registry.config().meterFilter(MeterFilter.denyNameStartsWith(KafkaBinderMetrics.OFFSET_LAG_METRIC_NAME));
         }
     }
 
     @Bean
     public DlqPartitionFunction partitionFunction() {
-        return (group, record, ex) -> 0;
+        return ( group, record, ex ) -> 0;
     }
 
     @Bean
     public DlqDestinationResolver dlqDestinationResolver() {
-        return (rec, ex) -> {
+        return ( rec, ex ) -> {
             if ("word1".equals(rec.topic())) {
                 return "topic1-dlq";
             } else {

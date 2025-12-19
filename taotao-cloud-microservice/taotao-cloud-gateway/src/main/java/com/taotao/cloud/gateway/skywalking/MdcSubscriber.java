@@ -24,6 +24,13 @@ import org.slf4j.MDC;
 import reactor.core.CoreSubscriber;
 import reactor.util.context.Context;
 
+/**
+ * MdcSubscriber
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MdcSubscriber implements CoreSubscriber {
 
     private static final String TRACE_ID = "traceId";
@@ -32,17 +39,17 @@ public class MdcSubscriber implements CoreSubscriber {
 
     private final CoreSubscriber<Object> actual;
 
-    public MdcSubscriber(CoreSubscriber<Object> actual) {
+    public MdcSubscriber( CoreSubscriber<Object> actual ) {
         this.actual = actual;
     }
 
     @Override
-    public void onSubscribe(Subscription s) {
+    public void onSubscribe( Subscription s ) {
         actual.onSubscribe(s);
     }
 
     @Override
-    public void onNext(Object o) {
+    public void onNext( Object o ) {
         Context c = actual.currentContext();
         Optional<String> traceIdOptional = Optional.empty();
         if (!c.isEmpty() && c.hasKey(SKYWALKING_CTX_SNAPSHOT)) {
@@ -60,7 +67,7 @@ public class MdcSubscriber implements CoreSubscriber {
     }
 
     @Override
-    public void onError(Throwable throwable) {
+    public void onError( Throwable throwable ) {
         actual.onError(throwable);
     }
 

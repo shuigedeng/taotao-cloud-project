@@ -20,12 +20,14 @@ import com.taotao.cloud.gateway.anti_reptile.module.VerifyImageDTO;
 import com.taotao.cloud.gateway.anti_reptile.module.VerifyImageVO;
 import com.taotao.cloud.gateway.anti_reptile.rule.RuleActuator;
 import com.taotao.cloud.gateway.anti_reptile.util.VerifyImageUtil;
+
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -33,17 +35,24 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.server.ServerWebExchange;
 
+/**
+ * ValidateFormService
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ValidateFormService {
 
     private final RuleActuator actuator;
     private final VerifyImageUtil verifyImageUtil;
 
-    public ValidateFormService(RuleActuator actuator, VerifyImageUtil verifyImageUtil) {
+    public ValidateFormService( RuleActuator actuator, VerifyImageUtil verifyImageUtil ) {
         this.actuator = actuator;
         this.verifyImageUtil = verifyImageUtil;
     }
 
-    public String validate(ServerWebExchange exchange) throws UnsupportedEncodingException {
+    public String validate( ServerWebExchange exchange ) throws UnsupportedEncodingException {
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
         upload.setHeaderEncoding("UTF-8");
@@ -77,7 +86,7 @@ public class ValidateFormService {
         return "{\"result\":false}";
     }
 
-    public String refresh(ServerRequest request) {
+    public String refresh( ServerRequest request ) {
         String verifyId = request.queryParam("verifyId").get();
         verifyImageUtil.deleteVerifyCodeFromRedis(verifyId);
         VerifyImageDTO verifyImage = verifyImageUtil.generateVerifyImg();

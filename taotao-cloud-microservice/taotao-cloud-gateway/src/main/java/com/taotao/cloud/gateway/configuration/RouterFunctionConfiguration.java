@@ -99,7 +99,7 @@ public class RouterFunctionConfiguration {
             FaviconHandler faviconHandler,
             HealthReportHandler healthReportHandler,
             K8sHandler k8sHandler,
-            ApiProperties apiProperties) {
+            ApiProperties apiProperties ) {
         RouterFunction<ServerResponse> routerFunction =
                 RouterFunctions.route(
                                 RequestPredicates.path(FALLBACK)
@@ -123,14 +123,14 @@ public class RouterFunctionConfiguration {
                                 k8sHandler);
 
         refreshFormHandlerObjectProvider.ifAvailable(
-                (validateFormHandler) -> {
+                ( validateFormHandler ) -> {
                     routerFunction.andRoute(
                             RequestPredicates.GET(AntiReptileConsts.VALIDATE_REQUEST_URI)
                                     .and(RequestPredicates.accept(MediaType.ALL)),
                             validateFormHandler);
                 });
         validateFormHandlerObjectProvider.ifAvailable(
-                (refreshFormHandler) -> {
+                ( refreshFormHandler ) -> {
                     routerFunction.andRoute(
                             RequestPredicates.GET(AntiReptileConsts.REFRESH_REQUEST_URI)
                                     .and(RequestPredicates.accept(MediaType.ALL)),
@@ -153,7 +153,7 @@ public class RouterFunctionConfiguration {
         private static final int DEFAULT_PORT = 9700;
 
         @Override
-        public Mono<ServerResponse> handle(ServerRequest serverRequest) {
+        public Mono<ServerResponse> handle( ServerRequest serverRequest ) {
             Route route = serverRequest.exchange().getAttribute(GATEWAY_ROUTE_ATTR);
             System.out.printf("路由元数据: %s%n", route.getMetadata());
 
@@ -187,7 +187,7 @@ public class RouterFunctionConfiguration {
                     .body(BodyInserters.fromValue(Result.fail("funciton访问频繁,请稍后重试")));
         }
 
-        private String buildMessage(ServerRequest request) {
+        private String buildMessage( ServerRequest request ) {
             StringBuilder message = new StringBuilder("[");
             message.append(request.method().name());
             message.append(" ");
@@ -222,7 +222,7 @@ public class RouterFunctionConfiguration {
     public static class K8sHandler implements HandlerFunction<ServerResponse> {
 
         @Override
-        public Mono<ServerResponse> handle(ServerRequest request) {
+        public Mono<ServerResponse> handle( ServerRequest request ) {
             try {
                 String hostName = InetAddress.getLoopbackAddress().getHostAddress();
 
@@ -250,12 +250,12 @@ public class RouterFunctionConfiguration {
         private static final String PARAM_T = "t";
         private final RedisRepository redisRepository;
 
-        public ImageCodeHandler(RedisRepository redisRepository) {
+        public ImageCodeHandler( RedisRepository redisRepository ) {
             this.redisRepository = redisRepository;
         }
 
         @Override
-        public Mono<ServerResponse> handle(ServerRequest request) {
+        public Mono<ServerResponse> handle( ServerRequest request ) {
             try {
                 ArithmeticCaptcha captcha = CaptchaUtils.getArithmeticCaptcha();
                 String text = captcha.text();
@@ -288,7 +288,7 @@ public class RouterFunctionConfiguration {
     public static class FaviconHandler implements HandlerFunction<ServerResponse> {
 
         @Override
-        public Mono<ServerResponse> handle(ServerRequest request) {
+        public Mono<ServerResponse> handle( ServerRequest request ) {
             try {
                 ClassPathResource classPathResource = new ClassPathResource("favicon/favicon.ico");
                 InputStream inputStream = classPathResource.getInputStream();
@@ -306,11 +306,18 @@ public class RouterFunctionConfiguration {
         }
     }
 
+    /**
+     * HealthReportHandler
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     @Component
     public static class HealthReportHandler implements HandlerFunction<ServerResponse> {
 
         @Override
-        public Mono<ServerResponse> handle(ServerRequest request) {
+        public Mono<ServerResponse> handle( ServerRequest request ) {
             try {
                 String uri = request.uri().getPath();
 

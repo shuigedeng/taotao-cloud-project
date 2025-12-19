@@ -22,22 +22,40 @@ import com.taotao.cloud.generator.config.GenConfig;
 import com.taotao.cloud.generator.config.GenConstants;
 import com.taotao.cloud.generator.entity.GenTable;
 import com.taotao.cloud.generator.entity.GenTableColumn;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+
 import org.apache.velocity.VelocityContext;
 
+/**
+ * VelocityUtils
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class VelocityUtils {
-    /** 项目空间路径 */
+
+    /**
+     * 项目空间路径
+     */
     private static final String PROJECT_PATH = "main/java";
 
-    /** mybatis空间路径 */
+    /**
+     * mybatis空间路径
+     */
     private static final String MYBATIS_PATH = "main/resources/mapper";
 
-    /** html空间路径 */
+    /**
+     * html空间路径
+     */
     private static final String TEMPLATES_PATH = "main/resources/templates";
 
-    /** 默认上级菜单，系统工具 */
+    /**
+     * 默认上级菜单，系统工具
+     */
     private static final String DEFAULT_PARENT_MENU_ID = "3";
 
     /**
@@ -45,7 +63,7 @@ public class VelocityUtils {
      *
      * @return 模板列表
      */
-    public static VelocityContext prepareContext(GenTable genTable) {
+    public static VelocityContext prepareContext( GenTable genTable ) {
         String moduleName = genTable.getModuleName();
         String businessName = genTable.getBusinessName();
         String packageName = genTable.getPackageName();
@@ -80,14 +98,14 @@ public class VelocityUtils {
         return velocityContext;
     }
 
-    public static void setMenuVelocityContext(VelocityContext context, GenTable genTable) {
+    public static void setMenuVelocityContext( VelocityContext context, GenTable genTable ) {
         String options = genTable.getOptions();
         JSONObject paramsObj = JSONObject.parseObject(options);
         String parentMenuId = getParentMenuId(paramsObj);
         context.put("parentMenuId", parentMenuId);
     }
 
-    public static void setTreeVelocityContext(VelocityContext context, GenTable genTable) {
+    public static void setTreeVelocityContext( VelocityContext context, GenTable genTable ) {
         String options = genTable.getOptions();
         JSONObject paramsObj = JSONObject.parseObject(options);
         String treeCode = getTreecode(paramsObj);
@@ -106,7 +124,7 @@ public class VelocityUtils {
         }
     }
 
-    public static void setSubVelocityContext(VelocityContext context, GenTable genTable) {
+    public static void setSubVelocityContext( VelocityContext context, GenTable genTable ) {
         GenTable subTable = genTable.getSubTable();
         String subTableName = genTable.getSubTableName();
         String subTableFkName = genTable.getSubTableFkName();
@@ -128,7 +146,7 @@ public class VelocityUtils {
      *
      * @return 模板列表
      */
-    public static List<String> getTemplateList(String tplCategory) {
+    public static List<String> getTemplateList( String tplCategory ) {
         List<String> templates = new ArrayList<String>();
         templates.add("vm/java/domain.java.vm");
         templates.add("vm/java/mapper.java.vm");
@@ -154,7 +172,7 @@ public class VelocityUtils {
     /**
      * 获取文件名
      */
-    public static String getFileName(String template, GenTable genTable) {
+    public static String getFileName( String template, GenTable genTable ) {
         // 文件名称
         String fileName = "";
         // 包路径
@@ -225,7 +243,7 @@ public class VelocityUtils {
      * @param packageName 包名称
      * @return 包前缀名称
      */
-    public static String getPackagePrefix(String packageName) {
+    public static String getPackagePrefix( String packageName ) {
         int lastIndex = packageName.lastIndexOf(".");
         return StringUtils.substring(packageName, 0, lastIndex);
     }
@@ -236,7 +254,7 @@ public class VelocityUtils {
      * @param genTable 业务表对象
      * @return 返回需要导入的包列表
      */
-    public static HashSet<String> getImportList(GenTable genTable) {
+    public static HashSet<String> getImportList( GenTable genTable ) {
         List<GenTableColumn> columns = genTable.getColumns();
         GenTable subGenTable = genTable.getSubTable();
         HashSet<String> importList = new HashSet<String>();
@@ -262,7 +280,7 @@ public class VelocityUtils {
      * @param businessName 业务名称
      * @return 返回权限前缀
      */
-    public static String getPermissionPrefix(String moduleName, String businessName) {
+    public static String getPermissionPrefix( String moduleName, String businessName ) {
         return StringUtils.format("{}:{}", moduleName, businessName);
     }
 
@@ -272,7 +290,7 @@ public class VelocityUtils {
      * @param paramsObj 生成其他选项
      * @return 上级菜单ID字段
      */
-    public static String getParentMenuId(JSONObject paramsObj) {
+    public static String getParentMenuId( JSONObject paramsObj ) {
         if (ObjectUtil.isNotEmpty(paramsObj)
                 && paramsObj.containsKey(GenConstants.PARENT_MENU_ID)
                 && StringUtils.isNotEmpty(paramsObj.getString(GenConstants.PARENT_MENU_ID))) {
@@ -287,7 +305,7 @@ public class VelocityUtils {
      * @param paramsObj 生成其他选项
      * @return 树编码
      */
-    public static String getTreecode(JSONObject paramsObj) {
+    public static String getTreecode( JSONObject paramsObj ) {
         if (paramsObj.containsKey(GenConstants.TREE_CODE)) {
             return StringUtils.toCamelCase(paramsObj.getString(GenConstants.TREE_CODE));
         }
@@ -300,7 +318,7 @@ public class VelocityUtils {
      * @param paramsObj 生成其他选项
      * @return 树父编码
      */
-    public static String getTreeParentCode(JSONObject paramsObj) {
+    public static String getTreeParentCode( JSONObject paramsObj ) {
         if (paramsObj.containsKey(GenConstants.TREE_PARENT_CODE)) {
             return StringUtils.toCamelCase(paramsObj.getString(GenConstants.TREE_PARENT_CODE));
         }
@@ -313,7 +331,7 @@ public class VelocityUtils {
      * @param paramsObj 生成其他选项
      * @return 树名称
      */
-    public static String getTreeName(JSONObject paramsObj) {
+    public static String getTreeName( JSONObject paramsObj ) {
         if (paramsObj.containsKey(GenConstants.TREE_NAME)) {
             return StringUtils.toCamelCase(paramsObj.getString(GenConstants.TREE_NAME));
         }
@@ -326,7 +344,7 @@ public class VelocityUtils {
      * @param genTable 业务表对象
      * @return 展开按钮列序号
      */
-    public static int getExpandColumn(GenTable genTable) {
+    public static int getExpandColumn( GenTable genTable ) {
         String options = genTable.getOptions();
         JSONObject paramsObj = JSONObject.parseObject(options);
         String treeName = paramsObj.getString(GenConstants.TREE_NAME);

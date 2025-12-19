@@ -26,9 +26,11 @@ import lombok.Data;
 import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
-/** 规格值 */
+/**
+ * 规格值
+ */
 @Data
-@Accessors(chain=true)
+@Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class SpecValueApiRequest implements Serializable {
@@ -48,6 +50,13 @@ public class SpecValueApiRequest implements Serializable {
     @Schema(description = "规格的图片")
     private List<SpecImages> specImage;
 
+    /**
+     * SpecImages
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     @Data
     public static class SpecImages implements Serializable {
 

@@ -5,7 +5,14 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.List;
 
-public class PromotionPackVO extends PromotionInfoVO{
+/**
+ * PromotionPackVO
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
+public class PromotionPackVO extends PromotionInfoVO {
 
     /**
      * 这个优惠活动关联的商品包
@@ -16,21 +23,21 @@ public class PromotionPackVO extends PromotionInfoVO{
         return relatedProductPackList;
     }
 
-    public void setRelatedProductPackList(List<ProductPackVO> relatedProductPackList) {
+    public void setRelatedProductPackList( List<ProductPackVO> relatedProductPackList ) {
         this.relatedProductPackList = relatedProductPackList;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null){
+    public boolean equals( Object obj ) {
+        if (obj == null) {
             return false;
-        }else{
-            if(getClass() != obj.getClass()){
+        } else {
+            if (getClass() != obj.getClass()) {
                 return false;
-            }else{
-                if(((PromotionPackVO)obj).getId().equals(this.getId())){
+            } else {
+                if (( (PromotionPackVO) obj ).getId().equals(this.getId())) {
                     return true;
-                }else{
+                } else {
                     return false;
                 }
             }

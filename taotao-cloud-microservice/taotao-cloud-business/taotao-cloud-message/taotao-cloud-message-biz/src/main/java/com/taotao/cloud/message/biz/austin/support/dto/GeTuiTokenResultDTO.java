@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
-@Accessors(chain=true)
+@Accessors(chain = true)
 public class GeTuiTokenResultDTO {
 
 
@@ -27,9 +27,17 @@ public class GeTuiTokenResultDTO {
     @JSONField(name = "data")
     private DataDTO data;
 
+    /**
+     * DataDTO
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     @NoArgsConstructor
     @Data
     public static class DataDTO {
+
         @JSONField(name = "expire_time")
         private String expireTime;
         @JSONField(name = "token")

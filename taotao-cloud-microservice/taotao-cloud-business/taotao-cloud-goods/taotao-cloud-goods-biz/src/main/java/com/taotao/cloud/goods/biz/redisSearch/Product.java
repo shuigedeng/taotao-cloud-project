@@ -19,11 +19,19 @@ import redis.clients.jedis.search.schemafields.VectorField;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Product
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @RequiredArgsConstructor(staticName = "of")
 @NoArgsConstructor
 @RedisHash
 public class Product {
+
     @Id
     private String id;
 
@@ -92,7 +100,7 @@ public class Product {
     @NonNull
     private String productText;
 
-    public static Product fromCSV(String line, boolean useLocalImages) {
+    public static Product fromCSV( String line, boolean useLocalImages ) {
         // CSV columns
         // id, gender, masterCategory, subCategory, articleType, baseColour, season, year, usage, productDisplayName, link
         String[] values = line.split(",");
@@ -107,10 +115,12 @@ public class Product {
         String usage = values[8];
         String productDisplayName = values[9];
         String imagePath = useLocalImages ? "classpath:/static/product-images/" + id + ".jpg" : values[10];
-        String productText = Stream.of(productDisplayName, "category", masterCategory, "subcategory", subCategory, "color", baseColour, "gender", gender).map(String::toLowerCase).collect(
+        String productText = Stream.of(productDisplayName, "category", masterCategory, "subcategory", subCategory,
+                "color", baseColour, "gender", gender).map(String::toLowerCase).collect(
                 Collectors.joining(" "));
 
-        Product p = Product.of(gender, masterCategory, subCategory, articleType, baseColour, season, year, usage, productDisplayName, imagePath, productText);
+        Product p = Product.of(gender, masterCategory, subCategory, articleType, baseColour, season, year, usage,
+                productDisplayName, imagePath, productText);
         p.setId(id);
         return p;
     }

@@ -63,7 +63,7 @@ public class AntiReptileProperties {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled( boolean enabled ) {
         this.enabled = enabled;
     }
 
@@ -71,7 +71,7 @@ public class AntiReptileProperties {
         return includeUrls;
     }
 
-    public void setIncludeUrls(List<String> includeUrls) {
+    public void setIncludeUrls( List<String> includeUrls ) {
         this.includeUrls = includeUrls;
     }
 
@@ -79,7 +79,7 @@ public class AntiReptileProperties {
         return ipRule;
     }
 
-    public void setIpRule(IpRule ipRule) {
+    public void setIpRule( IpRule ipRule ) {
         this.ipRule = ipRule;
     }
 
@@ -87,7 +87,7 @@ public class AntiReptileProperties {
         return uaRule;
     }
 
-    public void setUaRule(UaRule uaRule) {
+    public void setUaRule( UaRule uaRule ) {
         this.uaRule = uaRule;
     }
 
@@ -95,10 +95,17 @@ public class AntiReptileProperties {
         return globalFilterMode;
     }
 
-    public void setGlobalFilterMode(boolean globalFilterMode) {
+    public void setGlobalFilterMode( boolean globalFilterMode ) {
         this.globalFilterMode = globalFilterMode;
     }
 
+    /**
+     * IpRule
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class IpRule {
 
         /**
@@ -130,7 +137,7 @@ public class AntiReptileProperties {
             return lockExpire;
         }
 
-        public void setLockExpire(long lockExpire) {
+        public void setLockExpire( long lockExpire ) {
             this.lockExpire = lockExpire;
         }
 
@@ -138,7 +145,7 @@ public class AntiReptileProperties {
             return enabled;
         }
 
-        public void setEnabled(boolean enabled) {
+        public void setEnabled( boolean enabled ) {
             this.enabled = enabled;
         }
 
@@ -146,7 +153,7 @@ public class AntiReptileProperties {
             return expirationTime;
         }
 
-        public void setExpirationTime(Integer expirationTime) {
+        public void setExpirationTime( Integer expirationTime ) {
             this.expirationTime = expirationTime;
         }
 
@@ -154,7 +161,7 @@ public class AntiReptileProperties {
             return requestMaxSize;
         }
 
-        public void setRequestMaxSize(Integer requestMaxSize) {
+        public void setRequestMaxSize( Integer requestMaxSize ) {
             this.requestMaxSize = requestMaxSize;
         }
 
@@ -162,11 +169,18 @@ public class AntiReptileProperties {
             return ignoreIp;
         }
 
-        public void setIgnoreIp(List<String> ignoreIp) {
+        public void setIgnoreIp( List<String> ignoreIp ) {
             this.ignoreIp = ignoreIp;
         }
     }
 
+    /**
+     * UaRule
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class UaRule {
 
         /**
@@ -203,7 +217,7 @@ public class AntiReptileProperties {
             return enabled;
         }
 
-        public void setEnabled(boolean enabled) {
+        public void setEnabled( boolean enabled ) {
             this.enabled = enabled;
         }
 
@@ -211,7 +225,7 @@ public class AntiReptileProperties {
             return allowedLinux;
         }
 
-        public void setAllowedLinux(boolean allowedLinux) {
+        public void setAllowedLinux( boolean allowedLinux ) {
             this.allowedLinux = allowedLinux;
         }
 
@@ -219,7 +233,7 @@ public class AntiReptileProperties {
             return allowedMobile;
         }
 
-        public void setAllowedMobile(boolean allowedMobile) {
+        public void setAllowedMobile( boolean allowedMobile ) {
             this.allowedMobile = allowedMobile;
         }
 
@@ -227,7 +241,7 @@ public class AntiReptileProperties {
             return allowedPc;
         }
 
-        public void setAllowedPc(boolean allowedPc) {
+        public void setAllowedPc( boolean allowedPc ) {
             this.allowedPc = allowedPc;
         }
 
@@ -235,7 +249,7 @@ public class AntiReptileProperties {
             return allowedIot;
         }
 
-        public void setAllowedIot(boolean allowedIot) {
+        public void setAllowedIot( boolean allowedIot ) {
             this.allowedIot = allowedIot;
         }
 
@@ -243,7 +257,7 @@ public class AntiReptileProperties {
             return allowedProxy;
         }
 
-        public void setAllowedProxy(boolean allowedProxy) {
+        public void setAllowedProxy( boolean allowedProxy ) {
             this.allowedProxy = allowedProxy;
         }
     }

@@ -24,16 +24,23 @@ import eu.bitwalker.useragentutils.OperatingSystem;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.springframework.web.server.ServerWebExchange;
 
+/**
+ * UaRule
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class UaRule extends AbstractRule {
 
     private final AntiReptileProperties properties;
 
-    public UaRule(AntiReptileProperties properties) {
+    public UaRule( AntiReptileProperties properties ) {
         this.properties = properties;
     }
 
     @Override
-    protected boolean doExecute(ServerWebExchange exchange) {
+    protected boolean doExecute( ServerWebExchange exchange ) {
         AntiReptileProperties.UaRule uaRule = properties.getUaRule();
         String requestUrl = exchange.getRequest().getURI().getRawPath();
 
@@ -63,7 +70,7 @@ public class UaRule extends AbstractRule {
         }
 
         if (!uaRule.isAllowedLinux()
-                && (OperatingSystem.LINUX.equals(osGroup) || OperatingSystem.LINUX.equals(os))) {
+                && ( OperatingSystem.LINUX.equals(osGroup) || OperatingSystem.LINUX.equals(os) )) {
             LogUtils.info(
                     "Intercepted request, uri: "
                             + requestUrl
@@ -73,7 +80,7 @@ public class UaRule extends AbstractRule {
         }
 
         if (!uaRule.isAllowedMobile()
-                && (DeviceType.MOBILE.equals(deviceType) || DeviceType.TABLET.equals(deviceType))) {
+                && ( DeviceType.MOBILE.equals(deviceType) || DeviceType.TABLET.equals(deviceType) )) {
             LogUtils.info(
                     "Intercepted request, uri: "
                             + requestUrl
@@ -92,9 +99,9 @@ public class UaRule extends AbstractRule {
         }
 
         if (!uaRule.isAllowedIot()
-                && (DeviceType.DMR.equals(deviceType)
-                        || DeviceType.GAME_CONSOLE.equals(deviceType)
-                        || DeviceType.WEARABLE.equals(deviceType))) {
+                && ( DeviceType.DMR.equals(deviceType)
+                || DeviceType.GAME_CONSOLE.equals(deviceType)
+                || DeviceType.WEARABLE.equals(deviceType) )) {
             LogUtils.info(
                     "Intercepted request, uri: "
                             + requestUrl
@@ -115,7 +122,7 @@ public class UaRule extends AbstractRule {
     }
 
     @Override
-    public void reset(ServerWebExchange exchange, String realRequestUri) {
+    public void reset( ServerWebExchange exchange, String realRequestUri ) {
         return;
     }
 

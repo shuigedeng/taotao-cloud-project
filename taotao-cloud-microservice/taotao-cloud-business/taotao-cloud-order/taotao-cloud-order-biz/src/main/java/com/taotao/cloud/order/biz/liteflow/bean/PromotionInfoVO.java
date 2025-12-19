@@ -2,6 +2,13 @@ package com.yomahub.liteflow.example.bean;
 
 import com.yomahub.liteflow.example.enums.PromotionTypeEnum;
 
+/**
+ * PromotionInfoVO
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class PromotionInfoVO {
 
     /**
@@ -27,7 +34,7 @@ public class PromotionInfoVO {
     public PromotionInfoVO() {
     }
 
-    public PromotionInfoVO(Long id, String promotionCode, String promotionName, PromotionTypeEnum promotionType) {
+    public PromotionInfoVO( Long id, String promotionCode, String promotionName, PromotionTypeEnum promotionType ) {
         this.id = id;
         this.promotionCode = promotionCode;
         this.promotionName = promotionName;
@@ -38,7 +45,7 @@ public class PromotionInfoVO {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId( Long id ) {
         this.id = id;
     }
 
@@ -46,7 +53,7 @@ public class PromotionInfoVO {
         return promotionCode;
     }
 
-    public void setPromotionCode(String promotionCode) {
+    public void setPromotionCode( String promotionCode ) {
         this.promotionCode = promotionCode;
     }
 
@@ -54,7 +61,7 @@ public class PromotionInfoVO {
         return promotionName;
     }
 
-    public void setPromotionName(String promotionName) {
+    public void setPromotionName( String promotionName ) {
         this.promotionName = promotionName;
     }
 
@@ -62,7 +69,7 @@ public class PromotionInfoVO {
         return promotionType;
     }
 
-    public void setPromotionType(PromotionTypeEnum promotionType) {
+    public void setPromotionType( PromotionTypeEnum promotionType ) {
         this.promotionType = promotionType;
     }
 }

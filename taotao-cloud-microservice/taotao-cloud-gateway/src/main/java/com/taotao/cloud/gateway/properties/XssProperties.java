@@ -18,17 +18,26 @@ package com.taotao.cloud.gateway.properties;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import lombok.Data;
 import lombok.experimental.*;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * XssProperties
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Configuration
 @RefreshScope
 @ConfigurationProperties(prefix = "security.xss")
 @Data
 public class XssProperties {
+
     /**
      * Xss开关
      */

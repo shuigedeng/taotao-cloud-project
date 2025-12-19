@@ -6,11 +6,14 @@ import com.yomahub.liteflow.example.enums.SkuSourceEnum;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * ProductPackVO
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ProductPackVO {
-
-    /**
-     * 这里注意下，product和sku的关系，一个商品可能有很多规格，比如Product是"NIKE运动鞋"，SKU就是"NIKE运动鞋黑色40码"
-     */
 
     /**
      * 商品ID
@@ -66,7 +69,7 @@ public class ProductPackVO {
         return productId;
     }
 
-    public void setProductId(Long productId) {
+    public void setProductId( Long productId ) {
         this.productId = productId;
     }
 
@@ -74,7 +77,7 @@ public class ProductPackVO {
         return productCode;
     }
 
-    public void setProductCode(String productCode) {
+    public void setProductCode( String productCode ) {
         this.productCode = productCode;
     }
 
@@ -82,7 +85,7 @@ public class ProductPackVO {
         return skuId;
     }
 
-    public void setSkuId(Long skuId) {
+    public void setSkuId( Long skuId ) {
         this.skuId = skuId;
     }
 
@@ -90,7 +93,7 @@ public class ProductPackVO {
         return skuCode;
     }
 
-    public void setSkuCode(String skuCode) {
+    public void setSkuCode( String skuCode ) {
         this.skuCode = skuCode;
     }
 
@@ -98,7 +101,7 @@ public class ProductPackVO {
         return skuName;
     }
 
-    public void setSkuName(String skuName) {
+    public void setSkuName( String skuName ) {
         this.skuName = skuName;
     }
 
@@ -106,7 +109,7 @@ public class ProductPackVO {
         return skuSource;
     }
 
-    public void setSkuSource(SkuSourceEnum skuSource) {
+    public void setSkuSource( SkuSourceEnum skuSource ) {
         this.skuSource = skuSource;
     }
 
@@ -114,7 +117,7 @@ public class ProductPackVO {
         return salePrice;
     }
 
-    public void setSalePrice(BigDecimal salePrice) {
+    public void setSalePrice( BigDecimal salePrice ) {
         this.salePrice = salePrice;
     }
 
@@ -122,7 +125,7 @@ public class ProductPackVO {
         return count;
     }
 
-    public void setCount(Integer count) {
+    public void setCount( Integer count ) {
         this.count = count;
     }
 
@@ -130,7 +133,7 @@ public class ProductPackVO {
         return category;
     }
 
-    public void setCategory(CategoryEnum category) {
+    public void setCategory( CategoryEnum category ) {
         this.category = category;
     }
 
@@ -138,21 +141,21 @@ public class ProductPackVO {
         return promotionList;
     }
 
-    public void setPromotionList(List<PromotionInfoVO> promotionList) {
+    public void setPromotionList( List<PromotionInfoVO> promotionList ) {
         this.promotionList = promotionList;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null){
+    public boolean equals( Object obj ) {
+        if (obj == null) {
             return false;
-        }else{
-            if(getClass() != obj.getClass()){
+        } else {
+            if (getClass() != obj.getClass()) {
                 return false;
-            }else{
-                if(((ProductPackVO)obj).getSkuId().equals(this.getSkuId())){
+            } else {
+                if (( (ProductPackVO) obj ).getSkuId().equals(this.getSkuId())) {
                     return true;
-                }else{
+                } else {
                     return false;
                 }
             }

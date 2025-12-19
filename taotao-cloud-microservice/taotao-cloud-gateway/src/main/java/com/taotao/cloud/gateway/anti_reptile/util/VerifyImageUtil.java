@@ -18,20 +18,29 @@ package com.taotao.cloud.gateway.anti_reptile.util;
 
 import com.taotao.boot.captcha.captcha.utils.CaptchaUtil;
 import com.taotao.cloud.gateway.anti_reptile.module.VerifyImageDTO;
+
 import java.io.ByteArrayOutputStream;
 import java.time.Duration;
 import java.util.Base64;
 import java.util.UUID;
+
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 
+/**
+ * VerifyImageUtil
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class VerifyImageUtil {
 
     private static final String VERIFY_CODE_KEY = "tt_antireptile_verifycdoe_";
 
     private final RedissonClient redissonClient;
 
-    public VerifyImageUtil(RedissonClient redissonClient) {
+    public VerifyImageUtil( RedissonClient redissonClient ) {
         this.redissonClient = redissonClient;
     }
 
@@ -45,18 +54,18 @@ public class VerifyImageUtil {
         return new VerifyImageDTO(verifyId, null, base64Image, result);
     }
 
-    public void saveVerifyCodeToRedis(VerifyImageDTO verifyImage) {
+    public void saveVerifyCodeToRedis( VerifyImageDTO verifyImage ) {
         RBucket<String> rBucket =
                 redissonClient.getBucket(VERIFY_CODE_KEY + verifyImage.getVerifyId());
         rBucket.set(verifyImage.getResult(), Duration.ofSeconds(60L));
     }
 
-    public void deleteVerifyCodeFromRedis(String verifyId) {
+    public void deleteVerifyCodeFromRedis( String verifyId ) {
         RBucket<String> rBucket = redissonClient.getBucket(VERIFY_CODE_KEY + verifyId);
         rBucket.delete();
     }
 
-    public String getVerifyCodeFromRedis(String verifyId) {
+    public String getVerifyCodeFromRedis( String verifyId ) {
         String result = null;
         RBucket<String> rBucket = redissonClient.getBucket(VERIFY_CODE_KEY + verifyId);
         result = rBucket.get();

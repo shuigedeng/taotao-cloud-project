@@ -45,7 +45,7 @@ import lombok.experimental.*;
  * @since 2022-04-28 09:17:07
  */
 @Data
-@Accessors(chain=true)
+@Accessors(chain = true)
 @AllArgsConstructor
 @Schema(description = "购物车视图")
 public class TradeDTO implements Serializable {
@@ -80,10 +80,14 @@ public class TradeDTO implements Serializable {
     @Schema(description = "不支持配送方式")
     private List<CartSkuVO> notSupportFreight;
 
-    /** 购物车类型 */
+    /**
+     * 购物车类型
+     */
     private CartTypeEnum cartTypeEnum;
 
-    /** 店铺备注 */
+    /**
+     * 店铺备注
+     */
     private List<StoreRemarkDTO> storeRemark;
 
     /**
@@ -95,37 +99,57 @@ public class TradeDTO implements Serializable {
      */
     private Map<String, String> skuPromotionDetail;
 
-    /** 使用平台优惠券，一笔订单只能使用一个平台优惠券 */
+    /**
+     * 使用平台优惠券，一笔订单只能使用一个平台优惠券
+     */
     private MemberCouponDTO platformCoupon;
 
-    /** key 为商家id value 为商家优惠券 店铺优惠券 */
+    /**
+     * key 为商家id value 为商家优惠券 店铺优惠券
+     */
     private Map<String, MemberCouponDTO> storeCoupons;
 
-    /** 可用优惠券列表 */
+    /**
+     * 可用优惠券列表
+     */
     private List<MemberCouponDTO> canUseCoupons;
 
-    /** 无法使用优惠券无法使用的原因 */
+    /**
+     * 无法使用优惠券无法使用的原因
+     */
     private List<MemberCouponDTO> cantUseCoupons;
 
-    /** 收货地址 */
+    /**
+     * 收货地址
+     */
     private MemberAddressDTO memberAddress;
 
-    /** 客户端类型 */
+    /**
+     * 客户端类型
+     */
     private String clientType;
 
-    /** 买家名称 */
+    /**
+     * 买家名称
+     */
     private String memberName;
 
-    /** 买家id */
+    /**
+     * 买家id
+     */
     private Long memberId;
 
-    /** 分销商id */
+    /**
+     * 分销商id
+     */
     private Long distributionId;
 
-    /** 订单vo */
+    /**
+     * 订单vo
+     */
     private List<OrderVO> orderVO;
 
-    public TradeDTO(CartTypeEnum cartTypeEnum) {
+    public TradeDTO( CartTypeEnum cartTypeEnum ) {
         this.cartTypeEnum = cartTypeEnum;
         this.skuList = new ArrayList<>();
         this.cartList = new ArrayList<>();
@@ -142,7 +166,9 @@ public class TradeDTO implements Serializable {
         this(CartTypeEnum.CART);
     }
 
-    /** 过滤购物车中已选择的sku */
+    /**
+     * 过滤购物车中已选择的sku
+     */
     public List<CartSkuVO> getCheckedSkuList() {
         if (skuList != null && !skuList.isEmpty()) {
             return skuList.stream().filter(CartSkuVO::checked).toList();
@@ -150,5 +176,14 @@ public class TradeDTO implements Serializable {
         return skuList;
     }
 
-    public static class MemberAddressDTO {}
+    /**
+     * MemberAddressDTO
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class MemberAddressDTO {
+
+    }
 }

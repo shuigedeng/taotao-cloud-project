@@ -18,15 +18,24 @@ package com.taotao.cloud.order.biz.model.page.store;
 
 import com.taotao.boot.common.model.request.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.io.Serial;
+
 import lombok.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * StorePageQuery
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Setter
 @Getter
-@Accessors(chain=true)
+@Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "售后搜索参数")

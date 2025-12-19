@@ -14,6 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
+/**
+ * ColaStatemachinDemoApplicationTests
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @SpringBootTest
 class ColaStatemachinDemoApplicationTests {
 
@@ -49,8 +56,6 @@ class ColaStatemachinDemoApplicationTests {
         order.setStatus(OrderStatus.WAIT_SIGN_SEAL);
         orderService.confirm(order);
     }
-
-
 
 
 }

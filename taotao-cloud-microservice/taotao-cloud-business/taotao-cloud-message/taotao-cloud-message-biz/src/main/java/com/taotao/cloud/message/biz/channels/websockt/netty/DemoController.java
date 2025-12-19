@@ -12,38 +12,45 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * DemoController
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @RestController
 public class DemoController {
 
-	@Autowired
-	private ChatService chatService;
+    @Autowired
+    private ChatService chatService;
 
-	@PostMapping("/push")
-	public ResponseEntity<String> pushToWeb(@RequestBody Chat chat) {
-		chat.setCreateTime(LocalDateTime.now());
-		chatService.save(chat);
-		chatService.sendInfo(chat);
+    @PostMapping("/push")
+    public ResponseEntity<String> pushToWeb( @RequestBody Chat chat ) {
+        chat.setCreateTime(LocalDateTime.now());
+        chatService.save(chat);
+        chatService.sendInfo(chat);
 
-		return ResponseEntity.ok("MSG SEND SUCCESS");
-	}
+        return ResponseEntity.ok("MSG SEND SUCCESS");
+    }
 
-	@GetMapping("/close")
-	public String close(String userId) {
-		NettyWebSocket.close(userId);
-		return "ok";
-	}
+    @GetMapping("/close")
+    public String close( String userId ) {
+        NettyWebSocket.close(userId);
+        return "ok";
+    }
 
-	@GetMapping("/getOnlineUser")
-	public Map getOnlineUser() {
-		return NettyWebSocket.getOnlineUser();
-	}
+    @GetMapping("/getOnlineUser")
+    public Map getOnlineUser() {
+        return NettyWebSocket.getOnlineUser();
+    }
 
-	@GetMapping("/getMessage")
-	public ResponseEntity<List<Chat>> getMessage(String userId) {
-		QueryWrapper<Chat> queryWrapper = new QueryWrapper();
-		List<Chat> list = chatService.
-			list(queryWrapper.lambda().eq(Chat::getTargetUserId, userId).or().eq(Chat::getUserId, userId));
-		return ResponseEntity.ok(list);
-	}
+    @GetMapping("/getMessage")
+    public ResponseEntity<List<Chat>> getMessage( String userId ) {
+        QueryWrapper<Chat> queryWrapper = new QueryWrapper();
+        List<Chat> list = chatService.
+                list(queryWrapper.lambda().eq(Chat::getTargetUserId, userId).or().eq(Chat::getUserId, userId));
+        return ResponseEntity.ok(list);
+    }
 
 }

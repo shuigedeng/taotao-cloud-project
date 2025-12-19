@@ -18,9 +18,11 @@ package com.taotao.cloud.order.biz.stream.producer.service.impl;
 
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.stream.producer.service.ITransactionOrderService;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
+
 import lombok.*;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.apache.rocketmq.spring.support.RocketMQHeaders;
@@ -30,6 +32,13 @@ import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
+/**
+ * TransactionOrderServiceImpl
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Service
 @AllArgsConstructor
 public class TransactionOrderServiceImpl implements ITransactionOrderService {
@@ -39,8 +48,7 @@ public class TransactionOrderServiceImpl implements ITransactionOrderService {
     private final StreamBridge streamBridge;
 
     /**
-     * 这里消息发送只是half发送，
-     * 后面消息队列中half成功后，在TestTransactionListener中的executeLocalTransaction的方法中决定是否要提交本地事务
+     * 这里消息发送只是half发送， 后面消息队列中half成功后，在TestTransactionListener中的executeLocalTransaction的方法中决定是否要提交本地事务
      */
     @StreamListener(Sink.INPUT)
     @Override

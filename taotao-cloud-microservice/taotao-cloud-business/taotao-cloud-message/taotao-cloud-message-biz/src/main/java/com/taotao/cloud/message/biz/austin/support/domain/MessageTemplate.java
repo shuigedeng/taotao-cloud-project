@@ -12,8 +12,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
 import java.io.Serializable;
 
+/**
+ * MessageTemplate
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -86,9 +94,7 @@ public class MessageTemplate implements Serializable {
     private Integer msgType;
 
     /**
-     * 推送消息的时间
-     * 0：立即发送
-     * else：crontab 表达式
+     * 推送消息的时间 0：立即发送 else：crontab 表达式
      */
     private String expectPushTime;
 
@@ -128,9 +134,7 @@ public class MessageTemplate implements Serializable {
     private String proposer;
 
     /**
-     * 是否删除
-     * 0：未删除
-     * 1：已删除
+     * 是否删除 0：未删除 1：已删除
      */
     private Integer isDeleted;
 

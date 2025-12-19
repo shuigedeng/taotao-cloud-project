@@ -35,7 +35,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Accessors(chain=true)
+@Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "店铺流水查询DTO")
@@ -59,8 +59,16 @@ public class StoreFlowPageQuery extends PageQuery {
     @Schema(description = "结算单")
     private BillDTO bill;
 
+    /**
+     * BillDTO
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     @Data
     public static class BillDTO {
+
         private LocalDateTime startTime;
 
         private LocalDateTime endTime;

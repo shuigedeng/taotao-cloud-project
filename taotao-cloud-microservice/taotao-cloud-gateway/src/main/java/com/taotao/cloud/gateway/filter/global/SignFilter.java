@@ -75,12 +75,12 @@ public class SignFilter implements GlobalFilter, Ordered {
 
     private final RedisRepository redisRepository;
 
-    public SignFilter(RedisRepository redisRepository) {
+    public SignFilter( RedisRepository redisRepository ) {
         this.redisRepository = redisRepository;
     }
 
     @Override
-    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+    public Mono<Void> filter( ServerWebExchange exchange, GatewayFilterChain chain ) {
         ServerHttpRequest request = exchange.getRequest();
         LogUtils.info("访问地址：" + request.getURI());
 
@@ -165,7 +165,7 @@ public class SignFilter implements GlobalFilter, Ordered {
     }
 
     public void checkSign(
-            String sign, Long dateTimestamp, String requestId, Map<String, Object> paramMap) {
+            String sign, Long dateTimestamp, String requestId, Map<String, Object> paramMap ) {
         String str = JSON.toJSONString(paramMap) + requestId + dateTimestamp;
         String tempSign = MD5Utils.encrypt(str);
         assert tempSign != null;
@@ -177,7 +177,7 @@ public class SignFilter implements GlobalFilter, Ordered {
     /**
      * 修改前端传的参数
      */
-    private Map<String, Object> updateRequestParam(ServerWebExchange exchange)
+    private Map<String, Object> updateRequestParam( ServerWebExchange exchange )
             throws NoSuchFieldException, IllegalAccessException {
         ServerHttpRequest request = exchange.getRequest();
         URI uri = request.getURI();
@@ -196,7 +196,7 @@ public class SignFilter implements GlobalFilter, Ordered {
         return new TreeMap<>();
     }
 
-    private Map<String, Object> getParamMap(String param) {
+    private Map<String, Object> getParamMap( String param ) {
         Map<String, Object> map = new TreeMap<>();
         String[] split = param.split("&");
         for (String str : split) {
@@ -206,7 +206,7 @@ public class SignFilter implements GlobalFilter, Ordered {
         return map;
     }
 
-    private String getSign(HttpHeaders headers) {
+    private String getSign( HttpHeaders headers ) {
         List<String> list = headers.get("sign");
         if (CollectionUtils.isEmpty(list)) {
             throw new IllegalArgumentException(ERROR_MESSAGE);
@@ -214,7 +214,7 @@ public class SignFilter implements GlobalFilter, Ordered {
         return list.get(0);
     }
 
-    private Long getDateTimestamp(HttpHeaders httpHeaders) {
+    private Long getDateTimestamp( HttpHeaders httpHeaders ) {
         List<String> list = httpHeaders.get("timestamp");
         if (CollectionUtils.isEmpty(list)) {
             throw new IllegalArgumentException(ERROR_MESSAGE);
@@ -229,7 +229,7 @@ public class SignFilter implements GlobalFilter, Ordered {
         return timestamp;
     }
 
-    private String getRequestId(HttpHeaders headers) {
+    private String getRequestId( HttpHeaders headers ) {
         List<String> list = headers.get("requestId");
         if (CollectionUtils.isEmpty(list)) {
             throw new IllegalArgumentException(ERROR_MESSAGE);
@@ -250,6 +250,13 @@ public class SignFilter implements GlobalFilter, Ordered {
         return Ordered.HIGHEST_PRECEDENCE + 10;
     }
 
+    /**
+     * MyCachedBodyOutputMessage
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class MyCachedBodyOutputMessage extends CachedBodyOutputMessage {
 
         private Map<String, Object> paramMap;
@@ -260,12 +267,12 @@ public class SignFilter implements GlobalFilter, Ordered {
 
         private String sign;
 
-        public MyCachedBodyOutputMessage(ServerWebExchange exchange, HttpHeaders httpHeaders) {
+        public MyCachedBodyOutputMessage( ServerWebExchange exchange, HttpHeaders httpHeaders ) {
             super(exchange, httpHeaders);
         }
 
         public void initial(
-                Map<String, Object> paramMap, String requestId, String sign, Long dateTimestamp) {
+                Map<String, Object> paramMap, String requestId, String sign, Long dateTimestamp ) {
             this.paramMap = paramMap;
             this.requestId = requestId;
             this.sign = sign;

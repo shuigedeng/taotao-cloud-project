@@ -93,7 +93,25 @@ public record CartVO(
     // 	return skuList;
     // }
 
-    public static class CartMemberCouponVO {}
+    /**
+     * CartMemberCouponVO
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class CartMemberCouponVO {
 
-    public static class CartCouponVO {}
+    }
+
+    /**
+     * CartCouponVO
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class CartCouponVO {
+
+    }
 }

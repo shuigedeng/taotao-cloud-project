@@ -4,6 +4,13 @@ import com.yomahub.liteflow.example.enums.OrderChannelEnum;
 
 import java.util.List;
 
+/**
+ * PriceCalcReqVO
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class PriceCalcReqVO {
 
     private Long id;
@@ -42,7 +49,7 @@ public class PriceCalcReqVO {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId( Long id ) {
         this.id = id;
     }
 
@@ -50,7 +57,7 @@ public class PriceCalcReqVO {
         return orderNo;
     }
 
-    public void setOrderNo(String orderNo) {
+    public void setOrderNo( String orderNo ) {
         this.orderNo = orderNo;
     }
 
@@ -58,7 +65,7 @@ public class PriceCalcReqVO {
         return productPackList;
     }
 
-    public void setProductPackList(List<ProductPackVO> productPackList) {
+    public void setProductPackList( List<ProductPackVO> productPackList ) {
         this.productPackList = productPackList;
     }
 
@@ -66,7 +73,7 @@ public class PriceCalcReqVO {
         return orderChannel;
     }
 
-    public void setOrderChannel(OrderChannelEnum orderChannel) {
+    public void setOrderChannel( OrderChannelEnum orderChannel ) {
         this.orderChannel = orderChannel;
     }
 
@@ -74,7 +81,7 @@ public class PriceCalcReqVO {
         return memberCode;
     }
 
-    public void setMemberCode(String memberCode) {
+    public void setMemberCode( String memberCode ) {
         this.memberCode = memberCode;
     }
 
@@ -82,7 +89,7 @@ public class PriceCalcReqVO {
         return couponId;
     }
 
-    public void setCouponId(Long couponId) {
+    public void setCouponId( Long couponId ) {
         this.couponId = couponId;
     }
 
@@ -90,7 +97,7 @@ public class PriceCalcReqVO {
         return oversea;
     }
 
-    public void setOversea(boolean oversea) {
+    public void setOversea( boolean oversea ) {
         this.oversea = oversea;
     }
 }

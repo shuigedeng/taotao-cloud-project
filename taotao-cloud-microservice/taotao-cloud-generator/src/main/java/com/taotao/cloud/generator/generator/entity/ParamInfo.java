@@ -27,13 +27,21 @@ import lombok.Data;
 @Data
 public class ParamInfo {
 
-    private String tableSql;
-    private Map<String, Object> options;
+	private String tableSql;
+	private Map<String, Object> options;
 
-    @Data
-    public static class NAME_CASE_TYPE {
-        public static String CAMEL_CASE = "CamelCase";
-        public static String UNDER_SCORE_CASE = "UnderScoreCase";
-        public static String UPPER_UNDER_SCORE_CASE = "UpperUnderScoreCase";
-    }
+	/**
+	 * NAME_CASE_TYPE
+	 *
+	 * @author shuigedeng
+	 * @version 2026.01
+	 * @since 2025-12-19 09:30:45
+	 */
+	@Data
+	public static class NAME_CASE_TYPE {
+
+		public static String CAMEL_CASE = "CamelCase";
+		public static String UNDER_SCORE_CASE = "UnderScoreCase";
+		public static String UPPER_UNDER_SCORE_CASE = "UpperUnderScoreCase";
+	}
 }

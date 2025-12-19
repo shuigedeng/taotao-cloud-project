@@ -21,18 +21,21 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
+/**
+ * EmailConsumer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Service
 public class EmailConsumer {
 
     @StreamListener(TaoTaoCloudSink.EMAIL_MESSAGE_INPUT)
-    public void onMessage(@Payload String message) {
+    public void onMessage( @Payload String message ) {
         // LogUtils.info(
         //	"[onMessage][线程编号:{} 消息内容：{}]" + Thread.currentThread().getId() + message);
         LogUtils.info("email Consumer" + message);
     }
 
-    // @StreamListener(MySink.TREK_INPUT)
-    // public void onTrekMessage(@Payload Demo01Message message) {
-    //    logger.info("[onMessage][线程编号:{} 消息内容：{}]", Thread.currentThread().getId(), message);
-    // }
 }

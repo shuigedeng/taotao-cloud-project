@@ -10,11 +10,19 @@ import org.springframework.data.geo.Point;
 
 import java.util.Set;
 
+/**
+ * Person
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @RequiredArgsConstructor(staticName = "of")
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Data
 @Document
 public class Person {
+
     // Id Field, also indexed
     @Id
     @Indexed
@@ -43,11 +51,6 @@ public class Person {
     @Indexed
     @NonNull
     private Point homeLoc;
-
-    // Nest indexed object
-    // @Indexed
-    // @NonNull
-    // private Address address;
 
     @Indexed
     @NonNull

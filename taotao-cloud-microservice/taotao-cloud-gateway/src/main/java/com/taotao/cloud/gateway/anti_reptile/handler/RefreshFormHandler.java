@@ -27,13 +27,20 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+/**
+ * RefreshFormHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @AllArgsConstructor
 public class RefreshFormHandler implements HandlerFunction<ServerResponse> {
 
     private final ValidateFormService validateFormService;
 
     @Override
-    public Mono<ServerResponse> handle(ServerRequest request) {
+    public Mono<ServerResponse> handle( ServerRequest request ) {
         try {
             String result = validateFormService.refresh(request);
 

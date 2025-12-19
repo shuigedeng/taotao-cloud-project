@@ -18,6 +18,13 @@ package com.taotao.cloud.gateway.anti_reptile.module;
 
 import java.io.Serializable;
 
+/**
+ * VerifyImageDTO
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class VerifyImageDTO implements Serializable {
 
     private static final long serialVersionUID = 6741944800448697513L;
@@ -27,7 +34,7 @@ public class VerifyImageDTO implements Serializable {
     private String verifyImgStr;
     private String result;
 
-    public VerifyImageDTO(String verifyId, String verifyType, String verifyImgStr, String result) {
+    public VerifyImageDTO( String verifyId, String verifyType, String verifyImgStr, String result ) {
         this.verifyId = verifyId;
         this.verifyType = verifyType;
         this.verifyImgStr = verifyImgStr;
@@ -38,7 +45,7 @@ public class VerifyImageDTO implements Serializable {
         return verifyId;
     }
 
-    public void setVerifyId(String verifyId) {
+    public void setVerifyId( String verifyId ) {
         this.verifyId = verifyId;
     }
 
@@ -46,7 +53,7 @@ public class VerifyImageDTO implements Serializable {
         return verifyType;
     }
 
-    public void setVerifyType(String verifyType) {
+    public void setVerifyType( String verifyType ) {
         this.verifyType = verifyType;
     }
 
@@ -54,7 +61,7 @@ public class VerifyImageDTO implements Serializable {
         return verifyImgStr;
     }
 
-    public void setVerifyImgStr(String verifyImgStr) {
+    public void setVerifyImgStr( String verifyImgStr ) {
         this.verifyImgStr = verifyImgStr;
     }
 
@@ -62,7 +69,7 @@ public class VerifyImageDTO implements Serializable {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult( String result ) {
         this.result = result;
     }
 

@@ -18,6 +18,13 @@ package com.taotao.cloud.gateway.anti_reptile.module;
 
 import java.io.Serializable;
 
+/**
+ * VerifyImageVO
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class VerifyImageVO implements Serializable {
 
     private static final long serialVersionUID = 345634706484343777L;
@@ -30,7 +37,7 @@ public class VerifyImageVO implements Serializable {
         return verifyId;
     }
 
-    public void setVerifyId(String verifyId) {
+    public void setVerifyId( String verifyId ) {
         this.verifyId = verifyId;
     }
 
@@ -38,7 +45,7 @@ public class VerifyImageVO implements Serializable {
         return verifyType;
     }
 
-    public void setVerifyType(String verifyType) {
+    public void setVerifyType( String verifyType ) {
         this.verifyType = verifyType;
     }
 
@@ -46,7 +53,7 @@ public class VerifyImageVO implements Serializable {
         return verifyImgStr;
     }
 
-    public void setVerifyImgStr(String verifyImgStr) {
+    public void setVerifyImgStr( String verifyImgStr ) {
         this.verifyImgStr = verifyImgStr;
     }
 

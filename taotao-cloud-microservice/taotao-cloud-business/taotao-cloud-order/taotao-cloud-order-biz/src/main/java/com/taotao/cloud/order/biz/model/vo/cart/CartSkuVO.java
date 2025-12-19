@@ -25,7 +25,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-/** 购物车中的产品 */
+/**
+ * 购物车中的产品
+ */
 @RecordBuilder
 @Schema(description = "购物车中的产品")
 public record CartSkuVO(
@@ -41,7 +43,8 @@ public record CartSkuVO(
         @Schema(description = "是否失效 ") Boolean invalid,
         @Schema(description = "购物车商品错误消息") String errorMessage,
         @Schema(description = "是否可配送") Boolean isShip,
-        @Schema(description = "拼团id 如果是拼团购买 此值为拼团活动id，" + "当pintuanId为空，则表示普通购买（或者拼团商品，单独购买）") String pintuanId,
+        @Schema(description = "拼团id 如果是拼团购买 此值为拼团活动id，"
+                + "当pintuanId为空，则表示普通购买（或者拼团商品，单独购买）") String pintuanId,
         @Schema(description = "砍价ID") String kanjiaId,
         @Schema(description = "积分兑换ID") String pointsId,
         @Schema(description = "积分购买 积分数量") Long point,
@@ -77,9 +80,36 @@ public record CartSkuVO(
     // 	this.setStoreName(goodsSku.getStoreName());
     // }
 
-    public static class CartGoodsSkuVO {}
+    /**
+     * CartGoodsSkuVO
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class CartGoodsSkuVO {
 
-    public static class DistributionGoodsVO {}
+    }
 
-    public static class PromotionGoodsVO {}
+    /**
+     * DistributionGoodsVO
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class DistributionGoodsVO {
+
+    }
+
+    /**
+     * PromotionGoodsVO
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class PromotionGoodsVO {
+
+    }
 }

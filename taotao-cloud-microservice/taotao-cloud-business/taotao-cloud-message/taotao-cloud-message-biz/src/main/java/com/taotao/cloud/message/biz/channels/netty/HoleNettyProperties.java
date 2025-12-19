@@ -5,10 +5,18 @@ import lombok.experimental.*;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * HoleNettyProperties
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @ConfigurationProperties(prefix = "netty")
 @Data
 @Configuration
 public class HoleNettyProperties {
+
     /**
      * boss线程数量 默认为cpu线程数*2
      */

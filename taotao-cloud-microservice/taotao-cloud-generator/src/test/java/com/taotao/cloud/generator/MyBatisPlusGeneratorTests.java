@@ -78,7 +78,7 @@ class MyBatisPlusGeneratorTests {
 
         private final String explain;
 
-        DataSource(String url, String username, String password, String explain) {
+        DataSource( String url, String username, String password, String explain ) {
             this.url = url;
             this.username = username;
             this.password = password;
@@ -86,7 +86,7 @@ class MyBatisPlusGeneratorTests {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
 
         DataSource[] values = DataSource.values();
 
@@ -122,7 +122,7 @@ class MyBatisPlusGeneratorTests {
 
         DataSourceConfig.Builder dataSourceConfig =
                 new DataSourceConfig.Builder(
-                                dataSource.url, dataSource.username, dataSource.password)
+                        dataSource.url, dataSource.username, dataSource.password)
                         .dbQuery(new MySqlQuery())
                         .typeConvert(new MySqlTypeConvert())
                         .keyWordsHandler(new MySqlKeyWordsHandler());
@@ -191,7 +191,7 @@ class MyBatisPlusGeneratorTests {
         FastAutoGenerator.create(dataSourceConfig)
                 // 全局配置
                 .globalConfig(
-                        (scanner, builder) -> {
+                        ( scanner, builder ) -> {
                             builder.author(scanner.apply("请输入作者名称？"));
 
                             // 禁止打开输出目录
@@ -201,14 +201,14 @@ class MyBatisPlusGeneratorTests {
                         })
                 // 包配置
                 .packageConfig(
-                        (scanner, builder) -> {
+                        ( scanner, builder ) -> {
                             builder.parent(packageName);
 
                             builder.pathInfo(Collections.singletonMap(OutputFile.xml, xmlDir));
                         })
                 // 策略配置
                 .strategyConfig(
-                        (scanner, builder) ->
+                        ( scanner, builder ) ->
                                 builder.addInclude(
                                                 getTables(scanner.apply("请输入表名，多个英文逗号分隔？所有输入 all")))
                                         .controllerBuilder()
@@ -238,6 +238,13 @@ class MyBatisPlusGeneratorTests {
                 .execute();
     }
 
+    /**
+     * Module
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     @Data
     @AllArgsConstructor
     private static class Module {
@@ -250,9 +257,9 @@ class MyBatisPlusGeneratorTests {
     /**
      * 读取控制台内容
      */
-    private static String scanner(String tip) {
+    private static String scanner( String tip ) {
         Scanner scanner = new Scanner(System.in);
-        LogUtils.info(("请输入" + tip + "："));
+        LogUtils.info(( "请输入" + tip + "：" ));
         if (scanner.hasNext()) {
             String ipt = scanner.next();
             if (StringUtils.isNotBlank(ipt)) {
@@ -265,9 +272,9 @@ class MyBatisPlusGeneratorTests {
     /**
      * 读取控制台内容
      */
-    private static int scannerInt(String tip) {
+    private static int scannerInt( String tip ) {
         Scanner scanner = new Scanner(System.in);
-        LogUtils.info(("请输入" + tip + "："));
+        LogUtils.info(( "请输入" + tip + "：" ));
         if (scanner.hasNext()) {
             return scanner.nextInt();
         }
@@ -276,10 +283,11 @@ class MyBatisPlusGeneratorTests {
 
     /**
      * 处理 all 情况
+     *
      * @param tables 表
      * @return 返回表名
      */
-    private static List<String> getTables(String tables) {
+    private static List<String> getTables( String tables ) {
         return "all".equals(tables) ? Collections.emptyList() : Arrays.asList(tables.split(","));
     }
 }

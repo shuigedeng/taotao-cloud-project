@@ -7,25 +7,24 @@ import org.springframework.stereotype.Service;
 
 import com.redis.om.spring.search.stream.EntityStream;
 
+/**
+ * PeopleService
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Service
 public class PeopleService {
-  @Autowired
-  EntityStream entityStream;
 
-  // Find all people
-  public Iterable<Person> findAllPeople() {
-    return entityStream //
-        .of(Person.class) //
-        .collect(Collectors.toList());
-  }
+    @Autowired
+    EntityStream entityStream;
 
-  // Find people by age range
-//  public Iterable<Person> findByAgeBetween(int minAge, int maxAge) {
-//    return entityStream //
-//            .of(Person.class) //
-//            .filter(Person$.AGE.between(minAge, maxAge)) //
-//            .sorted(Person$.AGE, SortOrder.ASC) //
-//            .collect(Collectors.toList());
-//  }
+    // Find all people
+    public Iterable<Person> findAllPeople() {
+        return entityStream //
+                .of(Person.class) //
+                .collect(Collectors.toList());
+    }
 
 }

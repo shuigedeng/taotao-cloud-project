@@ -18,12 +18,19 @@ package com.taotao.cloud.gateway.anti_reptile.rule;
 
 import org.springframework.web.server.ServerWebExchange;
 
+/**
+ * AbstractRule
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public abstract class AbstractRule implements AntiReptileRule {
 
     @Override
-    public boolean execute(ServerWebExchange exchange) {
+    public boolean execute( ServerWebExchange exchange ) {
         return doExecute(exchange);
     }
 
-    protected abstract boolean doExecute(ServerWebExchange exchange);
+    protected abstract boolean doExecute( ServerWebExchange exchange );
 }

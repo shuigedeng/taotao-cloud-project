@@ -5,6 +5,13 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/**
+ * DataContent
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -13,6 +20,7 @@ import java.io.Serializable;
  * 保留action和userid即可
  * */
 public class DataContent implements Serializable {
+
     private Integer action;
     private String userid;
 }

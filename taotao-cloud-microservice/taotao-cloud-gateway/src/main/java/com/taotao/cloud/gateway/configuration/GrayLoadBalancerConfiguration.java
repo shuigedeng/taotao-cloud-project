@@ -59,27 +59,33 @@ public class GrayLoadBalancerConfiguration {
     @Bean
     public ReactiveLoadBalancerClientFilter grayReactiveLoadBalancerClientFilter(
             LoadBalancerClientFactory clientFactory,
-            GatewayLoadBalancerProperties gatewayLoadBalancerProperties) {
+            GatewayLoadBalancerProperties gatewayLoadBalancerProperties ) {
         return new GrayReactiveLoadBalancerClientFilter(
                 clientFactory, gatewayLoadBalancerProperties);
     }
 
+    /**
+     * CustomLoadBalancerLifecycle
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     @Component
-    public static class CustomLoadBalancerLifecycle
-            implements LoadBalancerLifecycle<Object, Object, ServiceInstance> {
+    public static class CustomLoadBalancerLifecycle implements LoadBalancerLifecycle<Object, Object, ServiceInstance> {
 
         @Override
-        public void onStart(Request request) {
+        public void onStart( Request request ) {
             LogUtils.info("LoadBalancerLifecycle start=========================");
         }
 
         @Override
-        public void onStartRequest(Request request, Response lbResponse) {
+        public void onStartRequest( Request request, Response lbResponse ) {
             LogUtils.info("LoadBalancerLifecycle onStartRequest=========================");
         }
 
         @Override
-        public void onComplete(CompletionContext completionContext) {
+        public void onComplete( CompletionContext completionContext ) {
             LogUtils.info("LoadBalancerLifecycle onComplete=========================");
         }
     }
@@ -90,7 +96,7 @@ public class GrayLoadBalancerConfiguration {
     public LoadBalancerClientRequestTransformer transformer() {
         return new LoadBalancerClientRequestTransformer() {
             @Override
-            public ClientRequest transformRequest(ClientRequest request, ServiceInstance instance) {
+            public ClientRequest transformRequest( ClientRequest request, ServiceInstance instance ) {
                 return ClientRequest.from(request)
                         .header("X-InstanceId", instance.getInstanceId())
                         .build();

@@ -66,5 +66,14 @@ public record AfterSalePriceDetailDTO(
     @Serial
     private static final long serialVersionUID = 8808470688518188146L;
 
-    public static class BasePromotionsDTO {}
+    /**
+     * BasePromotionsDTO
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class BasePromotionsDTO {
+
+    }
 }

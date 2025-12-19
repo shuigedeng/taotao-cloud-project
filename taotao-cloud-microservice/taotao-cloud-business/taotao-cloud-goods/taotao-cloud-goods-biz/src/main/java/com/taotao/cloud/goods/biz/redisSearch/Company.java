@@ -11,13 +11,21 @@ import org.springframework.data.geo.Point;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Company
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor(staticName = "of")
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Document
 public class Company {
-  //@Id：声明主键，RedisOM将会通过全类名:ID这样的键来存储数据；
+
+    //@Id：声明主键，RedisOM将会通过全类名:ID这样的键来存储数据；
     @Id
     private String id;
     //@Searchable：声明可以搜索的索引，通常用在文本类型上。
@@ -35,5 +43,4 @@ public class Company {
     private String url;
     private boolean publiclyListed;
 
-    // ...
 }

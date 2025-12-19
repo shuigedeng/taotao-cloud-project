@@ -61,6 +61,13 @@ import reactor.core.publisher.Mono;
         havingValue = "true")
 public class DynamicRouteConfiguration {
 
+    /**
+     * NacosDynamicRoute
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     @Configuration
     @ConditionalOnProperty(
             prefix = DynamicRouteProperties.PREFIX,
@@ -74,7 +81,7 @@ public class DynamicRouteConfiguration {
         public NacosRouteDefinitionRepository nacosRouteDefinitionRepository(
                 ApplicationEventPublisher publisher,
                 NacosConfigProperties nacosConfigProperties,
-                DynamicRouteProperties dynamicRouteProperties) {
+                DynamicRouteProperties dynamicRouteProperties ) {
             return new NacosRouteDefinitionRepository(
                     publisher, nacosConfigProperties, dynamicRouteProperties);
         }
@@ -96,7 +103,7 @@ public class DynamicRouteConfiguration {
         public NacosRouteDefinitionRepository(
                 ApplicationEventPublisher publisher,
                 NacosConfigProperties nacosConfigProperties,
-                DynamicRouteProperties dynamicRouteProperties) {
+                DynamicRouteProperties dynamicRouteProperties ) {
             this.publisher = publisher;
             this.dynamicRouteProperties = dynamicRouteProperties;
             this.nacosConfigProperties = nacosConfigProperties;
@@ -140,7 +147,7 @@ public class DynamicRouteConfiguration {
                                     }
 
                                     @Override
-                                    public void receiveConfigInfo(String configInfo) {
+                                    public void receiveConfigInfo( String configInfo ) {
                                         publisher.publishEvent(new RefreshRoutesEvent(this));
                                     }
                                 });
@@ -150,16 +157,16 @@ public class DynamicRouteConfiguration {
         }
 
         @Override
-        public Mono<Void> save(Mono<RouteDefinition> route) {
+        public Mono<Void> save( Mono<RouteDefinition> route ) {
             return null;
         }
 
         @Override
-        public Mono<Void> delete(Mono<String> routeId) {
+        public Mono<Void> delete( Mono<String> routeId ) {
             return null;
         }
 
-        private List<RouteDefinition> getListByStr(String content) {
+        private List<RouteDefinition> getListByStr( String content ) {
             if (StrUtil.isNotEmpty(content)) {
                 return JSONArray.parseArray(content, RouteDefinition.class);
             }
@@ -182,23 +189,21 @@ public class DynamicRouteConfiguration {
 
         public DynamicRouteComponent(
                 RouteDefinitionWriter routeDefinitionWriter,
-                RouteDefinitionLocator routeDefinitionLocator) {
+                RouteDefinitionLocator routeDefinitionLocator ) {
             this.routeDefinitionWriter = routeDefinitionWriter;
             this.routeDefinitionLocator = routeDefinitionLocator;
         }
 
         @Override
         public void setApplicationEventPublisher(
-                ApplicationEventPublisher applicationEventPublisher) {
+                ApplicationEventPublisher applicationEventPublisher ) {
             this.publisher = applicationEventPublisher;
         }
 
         /**
          * 删除路由
-         *
-         * @param id
          */
-        public String delete(String id) {
+        public String delete( String id ) {
             try {
                 LogUtils.info("gateway delete route id {}", id);
                 this.routeDefinitionWriter.delete(Mono.just(id)).subscribe();
@@ -211,10 +216,8 @@ public class DynamicRouteConfiguration {
 
         /**
          * 更新路由
-         *
-         * @param definitions
          */
-        public String updateList(List<RouteDefinition> definitions) {
+        public String updateList( List<RouteDefinition> definitions ) {
             LogUtils.info("gateway update route {}", definitions);
             // 删除缓存routerDefinition
             List<RouteDefinition> routeDefinitionsExits =
@@ -232,10 +235,8 @@ public class DynamicRouteConfiguration {
 
         /**
          * 更新路由
-         *
-         * @param definition
          */
-        public String updateById(RouteDefinition definition) {
+        public String updateById( RouteDefinition definition ) {
             try {
                 LogUtils.info("gateway update route {}", definition);
                 this.routeDefinitionWriter.delete(Mono.just(definition.getId()));
@@ -254,10 +255,8 @@ public class DynamicRouteConfiguration {
 
         /**
          * 增加路由
-         *
-         * @param definition
          */
-        public String add(RouteDefinition definition) {
+        public String add( RouteDefinition definition ) {
             LogUtils.info("gateway add route {}", definition);
             routeDefinitionWriter.save(Mono.just(definition)).subscribe();
             this.publisher.publishEvent(new RefreshRoutesEvent(this));

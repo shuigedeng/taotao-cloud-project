@@ -17,14 +17,23 @@
 package com.taotao.cloud.message.biz.event.message;
 
 import java.time.Clock;
+
 import org.springframework.context.ApplicationEvent;
 
+/**
+ * MessageFailEvent
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MessageFailEvent extends ApplicationEvent {
-    public MessageFailEvent(Object source) {
+
+    public MessageFailEvent( Object source ) {
         super(source);
     }
 
-    public MessageFailEvent(Object source, Clock clock) {
+    public MessageFailEvent( Object source, Clock clock ) {
         super(source, clock);
     }
 }

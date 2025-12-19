@@ -18,10 +18,18 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.annotation.Resource;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * PriceExampleController
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Controller
 public class PriceExampleController {
 
@@ -29,28 +37,28 @@ public class PriceExampleController {
     private FlowExecutor flowExecutor;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(ModelMap modelMap){
+    public String index( ModelMap modelMap ) {
         PriceCalcReqVO req = mockReq();
         String json = JSON.toJSONString(req);
-        modelMap.put("req",json);
+        modelMap.put("req", json);
         return "index";
     }
 
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
     @ResponseBody
-    public String submit(@Nullable @RequestBody String reqData){
-        try{
-            PriceCalcReqVO req = JSON.parseObject(reqData,PriceCalcReqVO.class);
+    public String submit( @Nullable @RequestBody String reqData ) {
+        try {
+            PriceCalcReqVO req = JSON.parseObject(reqData, PriceCalcReqVO.class);
             LiteflowResponse response = flowExecutor.execute2Resp("mainChain", req, PriceContext.class);
 
             return response.getContextBean(PriceContext.class).getPrintLog();
-        }catch (Throwable t){
+        } catch (Throwable t) {
             t.printStackTrace();
             return "error";
         }
     }
 
-    private PriceCalcReqVO mockReq(){
+    private PriceCalcReqVO mockReq() {
         PriceCalcReqVO req = new PriceCalcReqVO();
         req.setOrderNo("SO2020070611120001");
         req.setOversea(false);
@@ -71,8 +79,8 @@ public class PriceExampleController {
         productPack.setSalePrice(new BigDecimal("139.00"));
         productPack.setCount(2);
         productPack.setPromotionList(ListUtil.toList(
-                new PromotionInfoVO(1001L,"PM1001","夏季满减活动", PromotionTypeEnum.FULL_CUT),
-                new PromotionInfoVO(1002L,"PM1002","夏季满折活动", PromotionTypeEnum.FULL_DISCOUNT)));
+                new PromotionInfoVO(1001L, "PM1001", "夏季满减活动", PromotionTypeEnum.FULL_CUT),
+                new PromotionInfoVO(1002L, "PM1002", "夏季满折活动", PromotionTypeEnum.FULL_DISCOUNT)));
         productPackList.add(productPack);
 
         productPack = new ProductPackVO();
@@ -86,7 +94,7 @@ public class PriceExampleController {
         productPack.setSalePrice(new BigDecimal("59.00"));
         productPack.setCount(3);
         productPack.setPromotionList(ListUtil.toList(
-                new PromotionInfoVO(1001L,"PM1001","夏季满减活动", PromotionTypeEnum.FULL_CUT)));
+                new PromotionInfoVO(1001L, "PM1001", "夏季满减活动", PromotionTypeEnum.FULL_CUT)));
         productPackList.add(productPack);
 
         productPack = new ProductPackVO();
@@ -100,7 +108,7 @@ public class PriceExampleController {
         productPack.setSalePrice(new BigDecimal("28.00"));
         productPack.setCount(5);
         productPack.setPromotionList(ListUtil.toList(
-                new PromotionInfoVO(1002L,"PM1002","夏季满折活动", PromotionTypeEnum.FULL_DISCOUNT)));
+                new PromotionInfoVO(1002L, "PM1002", "夏季满折活动", PromotionTypeEnum.FULL_DISCOUNT)));
         productPackList.add(productPack);
 
         productPack = new ProductPackVO();
@@ -114,7 +122,7 @@ public class PriceExampleController {
         productPack.setSalePrice(new BigDecimal("30"));
         productPack.setCount(2);
         productPack.setPromotionList(ListUtil.toList(
-                new PromotionInfoVO(1003L,"PM1003","618抢购活动", PromotionTypeEnum.RUSH_BUY)));
+                new PromotionInfoVO(1003L, "PM1003", "618抢购活动", PromotionTypeEnum.RUSH_BUY)));
         productPackList.add(productPack);
 
         return req;

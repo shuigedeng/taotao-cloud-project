@@ -21,17 +21,24 @@ import io.github.majusko.pulsar.PulsarMessage;
 import io.github.majusko.pulsar.annotation.PulsarConsumer;
 import org.springframework.stereotype.Service;
 
+/**
+ * ProductConsumer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Service
 public class ProductConsumer {
 
     @PulsarConsumer(topic = Product.PRODUCT_TOPIC, clazz = Product.class)
-    void consume(Product product) {
+    void consume( Product product ) {
         // TODO process your message
         LogUtils.info(product.getData());
     }
 
     @PulsarConsumer(topic = Product.PRODUCT_TOPIC, clazz = Product.class)
-    void consume(PulsarMessage<Product> message) {
+    void consume( PulsarMessage<Product> message ) {
         LogUtils.info(message.getValue().toString());
         // producer.send(TOPIC, msg.getValue());
     }

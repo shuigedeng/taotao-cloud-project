@@ -18,8 +18,16 @@ package com.taotao.cloud.message.biz.event.email;
 
 import org.springframework.context.ApplicationEvent;
 
+/**
+ * EmailSendEvent
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class EmailSendEvent extends ApplicationEvent {
-    public EmailSendEvent(Object source) {
+
+    public EmailSendEvent( Object source ) {
         super(source);
     }
 }

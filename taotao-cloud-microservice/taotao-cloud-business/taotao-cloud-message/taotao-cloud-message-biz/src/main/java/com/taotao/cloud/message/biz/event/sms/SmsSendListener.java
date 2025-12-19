@@ -23,18 +23,28 @@ import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
+/**
+ * SmsSendListener
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class SmsSendListener {
 
     @Async
     @EventListener(SmsSendFailEvent.class)
-    public void smsSendFailEventListener(SmsSendFailEvent event) {}
+    public void smsSendFailEventListener( SmsSendFailEvent event ) {
+    }
 
     @Async
     @EventListener(SmsSendSuccessEvent.class)
-    public void smsSendSuccessEventListener(SmsSendSuccessEvent event) {}
+    public void smsSendSuccessEventListener( SmsSendSuccessEvent event ) {
+    }
 
     @Async
     @EventListener(SmsSendFinallyEvent.class)
-    public void smsSendFinallyEventListener(SmsSendFinallyEvent event) {}
+    public void smsSendFinallyEventListener( SmsSendFinallyEvent event ) {
+    }
 }

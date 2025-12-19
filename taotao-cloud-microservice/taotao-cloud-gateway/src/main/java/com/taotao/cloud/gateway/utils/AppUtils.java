@@ -17,6 +17,7 @@
 package com.taotao.cloud.gateway.utils;
 
 import com.google.common.collect.Maps;
+
 import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
@@ -24,9 +25,17 @@ import java.security.interfaces.RSAPublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.*;
+
 import lombok.SneakyThrows;
 import org.apache.commons.codec.binary.Hex;
 
+/**
+ * AppUtils
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class AppUtils {
 
     /**
@@ -35,12 +44,11 @@ public class AppUtils {
     static Map<String, String> appMap = Maps.newConcurrentMap();
 
     /**
-     * 分别保存生成的公私钥对
-     * key:appId，value:公私钥对
+     * 分别保存生成的公私钥对 key:appId，value:公私钥对
      */
     static Map<String, Map<String, String>> appKeyPair = Maps.newConcurrentMap();
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         // 模拟生成appId、appSecret
         String appId = initAppInfo();
 
@@ -62,7 +70,7 @@ public class AppUtils {
         return appId;
     }
 
-    private static void serverVerify(String requestParam) throws Exception {
+    private static void serverVerify( String requestParam ) throws Exception {
         //        APIRequestEntity apiRequestEntity = JSONObject.parseObject(requestParam,
         // APIRequestEntity.class);
         //        Header header = apiRequestEntity.getHeader();
@@ -169,12 +177,8 @@ public class AppUtils {
 
     /**
      * 私钥签名
-     *
-     * @param privateKeyStr
-     * @param dataStr
-     * @return
      */
-    public static String sha256withRSASignature(String privateKeyStr, String dataStr) {
+    public static String sha256withRSASignature( String privateKeyStr, String dataStr ) {
         try {
             byte[] key = Base64.getDecoder().decode(privateKeyStr);
             byte[] data = dataStr.getBytes();
@@ -192,14 +196,8 @@ public class AppUtils {
 
     /**
      * 公钥验签
-     *
-     * @param dataStr
-     * @param publicKeyStr
-     * @param signStr
-     * @return
-     * @throws Exception
      */
-    public static boolean rsaVerifySignature(String dataStr, String publicKeyStr, String signStr)
+    public static boolean rsaVerifySignature( String dataStr, String publicKeyStr, String signStr )
             throws Exception {
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         X509EncodedKeySpec x509EncodedKeySpec =
@@ -213,10 +211,8 @@ public class AppUtils {
 
     /**
      * 生成公私钥对
-     *
-     * @throws Exception
      */
-    public static void initKeyPair(String appId) throws Exception {
+    public static void initKeyPair( String appId ) throws Exception {
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
         keyPairGenerator.initialize(2048);
         KeyPair keyPair = keyPairGenerator.generateKeyPair();
@@ -228,12 +224,12 @@ public class AppUtils {
         appKeyPair.put(appId, keyMap);
     }
 
-    private static String getAppSecret(String appId) {
+    private static String getAppSecret( String appId ) {
         return String.valueOf(appMap.get(appId));
     }
 
     @SneakyThrows
-    public static String getSHA256Str(String str) {
+    public static String getSHA256Str( String str ) {
         MessageDigest messageDigest;
         messageDigest = MessageDigest.getInstance("SHA-256");
         byte[] hash = messageDigest.digest(str.getBytes(StandardCharsets.UTF_8));

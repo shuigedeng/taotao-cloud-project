@@ -37,12 +37,12 @@ public class GatewayRateLimiter extends AbstractRateLimiter<GatewayRateLimiter.C
 
     public static final String CONFIG_PROPERTY_NAME = "taotao-cloud-gateway-rate-limiter";
 
-    protected GatewayRateLimiter(ConfigurationService configurationService) {
+    protected GatewayRateLimiter( ConfigurationService configurationService ) {
         super(Config.class, CONFIG_PROPERTY_NAME, configurationService);
     }
 
     @Override
-    public Mono<Response> isAllowed(String routeId, String id) {
+    public Mono<Response> isAllowed( String routeId, String id ) {
         Config config = getConfig().get(routeId);
         if (Objects.nonNull(config)) {
             return Mono.fromSupplier(
@@ -59,6 +59,13 @@ public class GatewayRateLimiter extends AbstractRateLimiter<GatewayRateLimiter.C
         }
     }
 
+    /**
+     * Config
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class Config {
 
         // 每次请求多少个token
@@ -68,7 +75,7 @@ public class GatewayRateLimiter extends AbstractRateLimiter<GatewayRateLimiter.C
             return requestedToken;
         }
 
-        public void setRequestedToken(Integer requestedToken) {
+        public void setRequestedToken( Integer requestedToken ) {
             this.requestedToken = requestedToken;
         }
     }

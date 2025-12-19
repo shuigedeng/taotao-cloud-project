@@ -19,15 +19,24 @@ package com.taotao.cloud.gateway.model;
 import java.io.Serializable;
 import java.net.URI;
 import java.time.LocalDateTime;
+
 import lombok.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.*;
 
+/**
+ * AccessRecord
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class AccessRecord implements Serializable {
+
     private String formData;
     private URI targetUri;
     private String method;

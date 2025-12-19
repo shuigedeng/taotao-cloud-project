@@ -21,6 +21,13 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Service;
 
+/**
+ * SmsConsumer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Service
 public class SmsConsumer {
 
@@ -28,7 +35,7 @@ public class SmsConsumer {
     // @StreamListener(value=TaoTaoCloudSink.SMS_MESSAGE_INPUT, condition =
     // "headers['version']=='1.0'")
     @StreamListener(value = TaoTaoCloudSink.SMS_MESSAGE_INPUT)
-    public void test(Message<String> message) {
+    public void test( Message<String> message ) {
         String payload = message.getPayload();
         LogUtils.info("sms Consumer" + payload);
     }

@@ -20,10 +20,12 @@ import com.alibaba.fastjson2.JSON;
 import com.google.common.base.Charsets;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.common.utils.secure.RSAUtils;
+
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Objects;
+
 import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Publisher;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -44,11 +46,18 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 // @Component
+/**
+ * ResponseEncryptFilter
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class ResponseEncryptFilter implements GlobalFilter, Ordered {
 
     @Override
-    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+    public Mono<Void> filter( ServerWebExchange exchange, GatewayFilterChain chain ) {
         log.info(
                 "============================ResponseEncryptFilter start===================================");
 
@@ -69,11 +78,8 @@ public class ResponseEncryptFilter implements GlobalFilter, Ordered {
 
     /**
      * 修改响应体
-     * @param exchange
-     * @param chain
-     * @return
      */
-    private Mono<Void> modifyResponseBody(ServerWebExchange exchange, GatewayFilterChain chain) {
+    private Mono<Void> modifyResponseBody( ServerWebExchange exchange, GatewayFilterChain chain ) {
         ServerHttpResponse originalResponse = exchange.getResponse();
         originalResponse.getHeaders().setContentType(MediaType.APPLICATION_JSON);
         DataBufferFactory bufferFactory = originalResponse.bufferFactory();
@@ -87,10 +93,10 @@ public class ResponseEncryptFilter implements GlobalFilter, Ordered {
     }
 
     private ServerHttpResponseDecorator buildResponse(
-            ServerHttpResponse originalResponse, DataBufferFactory bufferFactory) {
+            ServerHttpResponse originalResponse, DataBufferFactory bufferFactory ) {
         return new ServerHttpResponseDecorator(originalResponse) {
             @Override
-            public Mono<Void> writeWith(Publisher<? extends DataBuffer> body) {
+            public Mono<Void> writeWith( Publisher<? extends DataBuffer> body ) {
                 if (getStatusCode().equals(HttpStatus.OK) && body instanceof Flux) {
                     Flux<? extends DataBuffer> fluxBody = Flux.from(body);
                     return super.writeWith(
@@ -137,7 +143,7 @@ public class ResponseEncryptFilter implements GlobalFilter, Ordered {
 
             @Override
             public Mono<Void> writeAndFlushWith(
-                    Publisher<? extends Publisher<? extends DataBuffer>> body) {
+                    Publisher<? extends Publisher<? extends DataBuffer>> body ) {
                 return writeWith(Flux.from(body).flatMapSequential(p -> p));
             }
         };

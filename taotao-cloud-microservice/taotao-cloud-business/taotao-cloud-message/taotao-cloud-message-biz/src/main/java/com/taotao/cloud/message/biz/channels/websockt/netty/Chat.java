@@ -7,22 +7,29 @@ import lombok.experimental.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * Chat
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 public class Chat {
 
-	@TableId(type = IdType.AUTO)
-	private Long id;
+    @TableId(type = IdType.AUTO)
+    private Long id;
 
-	private Long userId;
+    private Long userId;
 
-	private Long targetUserId;
+    private Long targetUserId;
 
-	private LocalDateTime createTime;
+    private LocalDateTime createTime;
 
-	private String userName;
+    private String userName;
 
-	private String targetUserName;
+    private String targetUserName;
 
-	private String content;
+    private String content;
 
 }

@@ -4,6 +4,13 @@ import com.yomahub.liteflow.example.enums.PriceTypeEnum;
 
 import java.math.BigDecimal;
 
+/**
+ * PriceStepVO
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class PriceStepVO {
 
     /**
@@ -36,7 +43,8 @@ public class PriceStepVO {
      */
     private String stepDesc;
 
-    public PriceStepVO(PriceTypeEnum priceType, String extId, BigDecimal prePrice, BigDecimal priceChange, BigDecimal currPrice, String stepDesc) {
+    public PriceStepVO( PriceTypeEnum priceType, String extId, BigDecimal prePrice, BigDecimal priceChange,
+            BigDecimal currPrice, String stepDesc ) {
         this.priceType = priceType;
         this.extId = extId;
         this.prePrice = prePrice;
@@ -49,7 +57,7 @@ public class PriceStepVO {
         return priceType;
     }
 
-    public void setPriceType(PriceTypeEnum priceType) {
+    public void setPriceType( PriceTypeEnum priceType ) {
         this.priceType = priceType;
     }
 
@@ -57,7 +65,7 @@ public class PriceStepVO {
         return extId;
     }
 
-    public void setExtId(String extId) {
+    public void setExtId( String extId ) {
         this.extId = extId;
     }
 
@@ -65,7 +73,7 @@ public class PriceStepVO {
         return prePrice;
     }
 
-    public void setPrePrice(BigDecimal prePrice) {
+    public void setPrePrice( BigDecimal prePrice ) {
         this.prePrice = prePrice;
     }
 
@@ -73,7 +81,7 @@ public class PriceStepVO {
         return priceChange;
     }
 
-    public void setPriceChange(BigDecimal priceChange) {
+    public void setPriceChange( BigDecimal priceChange ) {
         this.priceChange = priceChange;
     }
 
@@ -81,7 +89,7 @@ public class PriceStepVO {
         return currPrice;
     }
 
-    public void setCurrPrice(BigDecimal currPrice) {
+    public void setCurrPrice( BigDecimal currPrice ) {
         this.currPrice = currPrice;
     }
 
@@ -89,7 +97,7 @@ public class PriceStepVO {
         return stepDesc;
     }
 
-    public void setStepDesc(String stepDesc) {
+    public void setStepDesc( String stepDesc ) {
         this.stepDesc = stepDesc;
     }
 }

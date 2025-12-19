@@ -7,37 +7,45 @@ import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
 
+/**
+ * GenOrderCode
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 @Component
 public class GenOrderCode {
 
-	// 创建Redisson客户端实例
-	private final RedissonClient redissonClient;
+    // 创建Redisson客户端实例
+    private final RedissonClient redissonClient;
 
-	public GenOrderCode(RedissonClient redissonClient) {
-		this.redissonClient = redissonClient;
-	}
+    public GenOrderCode( RedissonClient redissonClient ) {
+        this.redissonClient = redissonClient;
+    }
 
-	/**
-	 * 生成指定长度的订单号
-	 *
-	 * {@snippet :
-	 * public ResultResponse<String> orderNo() {
-	 * 		ResultResponse<String> resultResponse = ResultResponse.newSuccessInstance();
-	 * 		LocalDate currentDate = LocalDate.now();
-	 * 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMdd");
-	 * 		String orderPrefix = currentDate.format(formatter);
-	 * 		//redisKey = Enum + ":" + orderPrefix;=> order:231201，每天的key都不一样，生成的订单号以天区分
-	 * 		String key = "com" + orderPrefix;
-	 * 		String orderCode = genOrderCode.genOrderCode(25, orderPrefix, key);
-	 * }
-	 * }
-	 * @param length   订单总长度
-	 * @param prefix   前缀 当天日期-yyMMdd
-	 * @param lockKey 分布式锁id
-	 * @return 订单号
-	 */
-	public String genOrderCode(int length, String prefix, String lockKey) {
+    /**
+     * 生成指定长度的订单号
+     *
+     * {@snippet :
+     * public ResultResponse<String> orderNo() {
+     * 		ResultResponse<String> resultResponse = ResultResponse.newSuccessInstance();
+     * 		LocalDate currentDate = LocalDate.now();
+     * 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMdd");
+     * 		String orderPrefix = currentDate.format(formatter);
+     * 		//redisKey = Enum + ":" + orderPrefix;=> order:231201，每天的key都不一样，生成的订单号以天区分
+     * 		String key = "com" + orderPrefix;
+     * 		String orderCode = genOrderCode.genOrderCode(25, orderPrefix, key);
+     * }
+     *}
+     *
+     * @param length 订单总长度
+     * @param prefix 前缀 当天日期-yyMMdd
+     * @param lockKey 分布式锁id
+     * @return 订单号
+     */
+	public String genOrderCode(int length, String prefix, String lockKe y) {
 		// 检查参数合法性
 		if (length <= 0) {
 			log.warn("获取订单号：订单总长度不能小于0");

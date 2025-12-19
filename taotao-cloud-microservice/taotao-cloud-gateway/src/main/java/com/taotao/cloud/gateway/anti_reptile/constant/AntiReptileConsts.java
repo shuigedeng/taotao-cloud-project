@@ -16,6 +16,13 @@
 
 package com.taotao.cloud.gateway.anti_reptile.constant;
 
+/**
+ * AntiReptileConsts
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class AntiReptileConsts {
 
     public static final String VALIDATE_REQUEST_URI = "/ttc-anti-reptile/validate";

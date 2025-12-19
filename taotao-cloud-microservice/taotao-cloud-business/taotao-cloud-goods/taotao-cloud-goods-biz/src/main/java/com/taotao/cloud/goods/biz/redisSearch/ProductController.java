@@ -18,9 +18,17 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * ProductController
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Controller
 @RequestMapping("/")
 public class ProductController {
+
     Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     private static final int K = 15;
@@ -32,7 +40,7 @@ public class ProductController {
     private EntityStream entityStream;
 
     @GetMapping
-    public String index(Model model) {
+    public String index( Model model ) {
         logger.info("index :: Showing first {} products...", K);
 
         List<Product> products = entityStream.of(Product.class)
@@ -84,7 +92,8 @@ public class ProductController {
         Optional<Product> maybeProduct = repository.findById(id);
         if (maybeProduct.isPresent()) {
             Product product = maybeProduct.get();
-            logger.info("🔎 vss :: Finding products with text similar to product {} ({})...", id, product.getProductDisplayName());
+            logger.info("🔎 vss :: Finding products with text similar to product {} ({})...", id,
+                    product.getProductDisplayName());
 
             SearchStream<Product> stream = entityStream.of(Product.class);
 
@@ -95,7 +104,7 @@ public class ProductController {
             //         .sorted(Product$._SENTENCE_EMBEDDING_SCORE) //
             //         .limit(K) //
             //         .collect(Collectors.toList());
-			List<Product> products = new ArrayList<>();
+            List<Product> products = new ArrayList<>();
             setModelProperties(model, products, skip, gender, category);
         } else {
             logger.warn("🔎 vss :: There is no product with id {}", id);
@@ -115,7 +124,8 @@ public class ProductController {
         Optional<Product> maybeProduct = repository.findById(id);
         if (maybeProduct.isPresent()) {
             Product product = maybeProduct.get();
-            logger.info("🔎 vss :: Finding products with images similar to product {} ({})...", id, product.getProductDisplayName());
+            logger.info("🔎 vss :: Finding products with images similar to product {} ({})...", id,
+                    product.getProductDisplayName());
 
             SearchStream<Product> stream = entityStream.of(Product.class);
 
@@ -126,7 +136,7 @@ public class ProductController {
             //         .sorted(Product$._IMAGE_EMBEDDING_SCORE) //
             //         .limit(K) //
             //         .collect(Collectors.toList());
-			List<Product> products = new ArrayList<>();
+            List<Product> products = new ArrayList<>();
             setModelProperties(model, products, skip, gender, category);
         } else {
             logger.warn("🔎 vss :: There is no product with id {}", id);
@@ -149,19 +159,22 @@ public class ProductController {
         return "fragments :: filters";
     }
 
-    private void setModelProperties(Model model, List<Product> products) {
+    private void setModelProperties( Model model, List<Product> products ) {
         setModelProperties(model, Optional.of(products), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    private void setModelProperties(Model model, Optional<Long> skip, Optional<String> gender, Optional<String> category) {
+    private void setModelProperties( Model model, Optional<Long> skip, Optional<String> gender,
+            Optional<String> category ) {
         setModelProperties(model, Optional.empty(), skip, gender, category);
     }
 
-    private void setModelProperties(Model model, List<Product> products, Optional<Long> skip, Optional<String> gender, Optional<String> category) {
+    private void setModelProperties( Model model, List<Product> products, Optional<Long> skip, Optional<String> gender,
+            Optional<String> category ) {
         setModelProperties(model, Optional.of(products), skip, gender, category);
     }
 
-    private void setModelProperties(Model model, Optional<List<Product>> products, Optional<Long> skip, Optional<String> gender, Optional<String> category) {
+    private void setModelProperties( Model model, Optional<List<Product>> products, Optional<Long> skip,
+            Optional<String> gender, Optional<String> category ) {
         model.addAttribute("totalNumberOfProducts", repository.count());
 
         if (skip.isPresent()) {
@@ -181,12 +194,13 @@ public class ProductController {
         }
     }
 
-    private SearchStream<Product> applyFilters(SearchStream<Product> stream, Optional<String> gender, Optional<String> category) {
+    private SearchStream<Product> applyFilters( SearchStream<Product> stream, Optional<String> gender,
+            Optional<String> category ) {
 
         // if (gender.isPresent() && !gender.get().equalsIgnoreCase("all")) {
         //     stream.filter(GENDER.eq(gender.get()));
         // }
-		//
+        //
         // if (category.isPresent() && !category.get().equalsIgnoreCase("all")) {
         //     stream.filter(Product$.MASTER_CATEGORY.eq(category.get()));
         // }

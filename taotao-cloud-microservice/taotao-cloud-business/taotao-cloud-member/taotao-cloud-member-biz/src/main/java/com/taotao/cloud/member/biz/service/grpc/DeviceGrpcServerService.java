@@ -23,15 +23,19 @@ import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
 
+/**
+ * DeviceGrpcServerService
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 @GrpcService
 public class DeviceGrpcServerService extends DeviceFixServiceGrpc.DeviceFixServiceImplBase {
 
-    // @Autowired
-    // private IDevicesFixService deviceService;
-
     @Override
-    public void insertDeviceFix(DeviceFix request, StreamObserver<BooleanReply> responseObserver) {
+    public void insertDeviceFix( DeviceFix request, StreamObserver<BooleanReply> responseObserver ) {
         // DevicesFix deviceFix = DevicesFix.builder().id(request.getId())
         //	.serialNum(request.getSerialNum())
         //	.address(request.getAddress())

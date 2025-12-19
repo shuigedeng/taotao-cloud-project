@@ -67,9 +67,36 @@ public record FullDiscountVO(
     // 	return stringBuffer.toString();
     // }
 
-    public static class PromotionGoodsVO {}
+    /**
+     * PromotionGoodsVO
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class PromotionGoodsVO {
 
-    public static class GoodsSkuVO {}
+    }
 
-    public static class FullDiscountBaseVO {}
+    /**
+     * GoodsSkuVO
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class GoodsSkuVO {
+
+    }
+
+    /**
+     * FullDiscountBaseVO
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class FullDiscountBaseVO {
+
+    }
 }

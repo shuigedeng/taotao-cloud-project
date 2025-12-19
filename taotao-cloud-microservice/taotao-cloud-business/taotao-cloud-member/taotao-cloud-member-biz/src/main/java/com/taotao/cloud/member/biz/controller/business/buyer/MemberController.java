@@ -57,7 +57,8 @@ public class MemberController {
     @RequestMapping(
             value = "/home/index",
             method = {RequestMethod.POST, RequestMethod.GET})
-    public String homeIndex(@RequestParam(required = false) String userId, @RequestParam(value = "lang") String lang) {
+    public String homeIndex( @RequestParam(required = false) String userId,
+            @RequestParam(value = "lang") String lang ) {
         ResultData<HomeVO> result = new ResultData<>();
 
         // 获取Banner轮播图信息
@@ -101,55 +102,110 @@ public class MemberController {
     }
 
     @SneakyThrows
-    public List<BannerVO> buildBanners(String userId, String lang) {
+    public List<BannerVO> buildBanners( String userId, String lang ) {
         // 模拟请求耗时0.5秒
         Thread.sleep(500);
         return new ArrayList<BannerVO>();
     }
 
     @SneakyThrows
-    public List<NotificationVO> buildNotifications(String userId, String lang) {
+    public List<NotificationVO> buildNotifications( String userId, String lang ) {
         // 模拟请求耗时0.5秒
         Thread.sleep(500);
         return new ArrayList<NotificationVO>();
     }
 
     @SneakyThrows
-    public List<BenefitVO> buildBenefits(String userId, String lang) {
+    public List<BenefitVO> buildBenefits( String userId, String lang ) {
         // 模拟请求耗时0.5秒
         Thread.sleep(500);
         return new ArrayList<BenefitVO>();
     }
 
     @SneakyThrows
-    public List<CouponVO> buildCoupons(String userId) {
+    public List<CouponVO> buildCoupons( String userId ) {
         // 模拟请求耗时0.5秒
         Thread.sleep(500);
         return new ArrayList<>();
     }
 
+    /**
+     * HomeVO
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class HomeVO {
 
-        public void setBanners(List<BannerVO> bannerVOS) {}
+        public void setBanners( List<BannerVO> bannerVOS ) {
+        }
 
-        public void setNotifications(List<NotificationVO> notificationVOS) {}
+        public void setNotifications( List<NotificationVO> notificationVOS ) {
+        }
 
-        public void setBenefits(List<BenefitVO> benefitVOS) {}
+        public void setBenefits( List<BenefitVO> benefitVOS ) {
+        }
 
-        public void setCoupons(List<CouponVO> couponVOS) {}
+        public void setCoupons( List<CouponVO> couponVOS ) {
+        }
     }
 
-    public static class NotificationVO {}
+    /**
+     * NotificationVO
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class NotificationVO {
 
-    public static class BenefitVO {}
+    }
 
-    public static class CouponVO {}
+    /**
+     * BenefitVO
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class BenefitVO {
 
-    public static class BannerVO {}
+    }
 
+    /**
+     * CouponVO
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class CouponVO {
+
+    }
+
+    /**
+     * BannerVO
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class BannerVO {
+
+    }
+
+    /**
+     * ResultData
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class ResultData<T> {
 
-        public void setData(T homeVO) {}
+        public void setData( T homeVO ) {
+        }
     }
 
     // private final IMemberService memberService;

@@ -30,10 +30,18 @@ public class LinTongSendResult {
     @JSONField(name = "data")
     List<DataDTO> dtoList;
 
+    /**
+     * DataDTO
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
     public static class DataDTO {
+
         Integer code;
         String message;
         Long msgId;

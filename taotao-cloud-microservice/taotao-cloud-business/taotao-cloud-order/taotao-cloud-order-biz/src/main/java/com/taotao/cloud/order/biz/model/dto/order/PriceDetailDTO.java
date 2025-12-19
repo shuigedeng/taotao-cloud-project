@@ -23,7 +23,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-/** 商城流水，细节到orderItem */
+/**
+ * 商城流水，细节到orderItem
+ */
 @RecordBuilder
 @Schema(description = "商城流水，细节到orderItem")
 public record PriceDetailDTO(
@@ -60,8 +62,9 @@ public record PriceDetailDTO(
 
         // =========end update price==========
 
-        @Schema(description = "流水金额(入账 出帐金额) = goodsPrice + freight - discountPrice - couponPrice" + " + updatePrice")
-                BigDecimal flowPrice,
+        @Schema(description = "流水金额(入账 出帐金额) = goodsPrice + freight - discountPrice - couponPrice"
+                + " + updatePrice")
+        BigDecimal flowPrice,
         @Schema(description = "结算价格 与 商家/供应商 结算价格（例如积分商品/砍价商品）") BigDecimal settlementPrice,
         @Schema(description = "最终结算金额 = flowPrice - platFormCommission - distributionCommission") BigDecimal billPrice,
 
@@ -346,5 +349,14 @@ public record PriceDetailDTO(
     // 	this.recount();
     // }
 
-    public static class PromotionSkuVO {}
+    /**
+     * PromotionSkuVO
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class PromotionSkuVO {
+
+    }
 }

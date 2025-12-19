@@ -22,12 +22,14 @@ import com.taotao.cloud.gateway.anti_reptile.AntiReptileProperties;
 import com.taotao.cloud.gateway.anti_reptile.module.VerifyImageDTO;
 import com.taotao.cloud.gateway.anti_reptile.rule.RuleActuator;
 import com.taotao.cloud.gateway.anti_reptile.util.VerifyImageUtil;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Pattern;
+
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -39,6 +41,13 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
+/**
+ * AntiReptileFilter
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class AntiReptileFilter implements WebFilter, ApplicationContextAware {
 
     private final RuleActuator actuator;
@@ -60,7 +69,7 @@ public class AntiReptileFilter implements WebFilter, ApplicationContextAware {
     public AntiReptileFilter(
             RuleActuator actuator,
             VerifyImageUtil verifyImageUtil,
-            AntiReptileProperties antiReptileProperties) {
+            AntiReptileProperties antiReptileProperties ) {
         this.actuator = actuator;
         this.verifyImageUtil = verifyImageUtil;
         this.antiReptileProperties = antiReptileProperties;
@@ -91,7 +100,7 @@ public class AntiReptileFilter implements WebFilter, ApplicationContextAware {
     }
 
     @Override
-    public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
+    public Mono<Void> filter( ServerWebExchange exchange, WebFilterChain chain ) {
         if (!initialized.get()) {
             init();
             initialized.set(true);
@@ -144,11 +153,11 @@ public class AntiReptileFilter implements WebFilter, ApplicationContextAware {
     /**
      * 是否拦截
      *
-     * @param requestUrl              请求uri
+     * @param requestUrl 请求uri
      * @param isAntiReptileAnnotation 是否有AntiReptile注解
      * @return 是否拦截
      */
-    public boolean isIntercept(String requestUrl, Boolean isAntiReptileAnnotation) {
+    public boolean isIntercept( String requestUrl, Boolean isAntiReptileAnnotation ) {
         if (this.globalFilterMode
                 || isAntiReptileAnnotation
                 || this.includeUrls.contains(requestUrl)) {
@@ -164,6 +173,7 @@ public class AntiReptileFilter implements WebFilter, ApplicationContextAware {
     }
 
     @Override
-    public void setApplicationContext(ApplicationContext applicationContext)
-            throws BeansException {}
+    public void setApplicationContext( ApplicationContext applicationContext )
+            throws BeansException {
+    }
 }

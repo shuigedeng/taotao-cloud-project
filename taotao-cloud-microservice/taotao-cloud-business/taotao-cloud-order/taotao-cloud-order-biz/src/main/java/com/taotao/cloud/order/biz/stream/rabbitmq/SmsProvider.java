@@ -21,13 +21,20 @@ import jakarta.annotation.Resource;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
+/**
+ * SmsProvider
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Service
 public class SmsProvider {
 
     @Resource
     private TaoTaoCloudSource source;
 
-    public String send(String content) {
+    public String send( String content ) {
         source.smsOutput()
                 .send(MessageBuilder.withPayload(content)
                         // .setHeader("routingKey", "login.user.succeed")

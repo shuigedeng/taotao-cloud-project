@@ -19,8 +19,10 @@ package com.taotao.cloud.gateway.anti_reptile.rule.rulers;
 import com.taotao.boot.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.gateway.anti_reptile.AntiReptileProperties;
 import com.taotao.cloud.gateway.anti_reptile.rule.AbstractRule;
+
 import java.time.Duration;
 import java.util.List;
+
 import org.redisson.api.RAtomicLong;
 import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
@@ -28,6 +30,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.server.ServerWebExchange;
 
+/**
+ * IpRule
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class IpRule extends AbstractRule {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(IpRule.class);
@@ -39,13 +48,13 @@ public class IpRule extends AbstractRule {
     private static final String RATELIMITER_EXPIRATIONTIME_PREFIX = "ratelimiter_expirationtime";
     private static final String RATELIMITER_HIT_CRAWLERSTRATEGY = "ratelimiter_hit_crawlerstrategy";
 
-    public IpRule(RedissonClient redissonClient, AntiReptileProperties properties) {
+    public IpRule( RedissonClient redissonClient, AntiReptileProperties properties ) {
         this.redissonClient = redissonClient;
         this.properties = properties;
     }
 
     @Override
-    protected boolean doExecute(ServerWebExchange exchange) {
+    protected boolean doExecute( ServerWebExchange exchange ) {
         String ipAddress = RequestUtils.getServerHttpRequestIpAddress(exchange.getRequest());
         List<String> ignoreIpList = properties.getIpRule().getIgnoreIp();
         if (ignoreIpList != null && ignoreIpList.size() > 0) {
@@ -76,7 +85,7 @@ public class IpRule extends AbstractRule {
             rExpirationTime.expire(Duration.ofMillis(expirationTime));
         } else {
             RMap<String, String> rHitMap = redissonClient.getMap(RATELIMITER_HIT_CRAWLERSTRATEGY);
-            if ((rRequestCount.incrementAndGet() > requestMaxSize)
+            if (( rRequestCount.incrementAndGet() > requestMaxSize )
                     || rHitMap.containsKey(ipAddress)) {
                 // 触发爬虫策略 ，默认10天后可重新访问
                 long lockExpire = properties.getIpRule().getLockExpire();
@@ -99,11 +108,11 @@ public class IpRule extends AbstractRule {
     /**
      * 重置已记录规则
      *
-     * @param exchange       请求
+     * @param exchange 请求
      * @param realRequestUri 原始请求uri
      */
     @Override
-    public void reset(ServerWebExchange exchange, String realRequestUri) {
+    public void reset( ServerWebExchange exchange, String realRequestUri ) {
         String ipAddress = RequestUtils.getServerHttpRequestIpAddress(exchange.getRequest());
         // 重置计数器
         int expirationTime = properties.getIpRule().getExpirationTime();

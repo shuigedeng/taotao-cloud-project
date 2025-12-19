@@ -17,30 +17,35 @@
 package com.taotao.cloud.gateway.skywalking;
 
 import cn.hutool.core.util.ObjectUtil;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.web.server.ServerWebExchange;
 
+/**
+ * SkywalkingUtil
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class SkywalkingUtil {
 
     /**
      * tid放入MDC
-     *
-     * @param exchange
      */
-    public static void putTidIntoMdc(ServerWebExchange exchange) {
+    public static void putTidIntoMdc( ServerWebExchange exchange ) {
         putTidIntoMdc(exchange, "tid");
     }
 
     /**
      * tid放入MDC
-     *
-     * @param exchange
      */
-    public static void putTidIntoMdc(ServerWebExchange exchange, String key) {
+    public static void putTidIntoMdc( ServerWebExchange exchange, String key ) {
         try {
             Object entrySpanInstance = exchange.getAttributes().get("SKYWALKING_SPAN");
             if (ObjectUtil.isEmpty(entrySpanInstance)) {

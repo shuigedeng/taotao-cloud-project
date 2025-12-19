@@ -23,18 +23,27 @@ import lombok.Data;
 import lombok.ToString;
 import lombok.experimental.*;
 
+/**
+ * VisitRecord
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 public class VisitRecord {
 
     /**
      * 主键
      */
-    @ToString.Exclude Long id;
+    @ToString.Exclude
+    Long id;
 
     /**
      * ip地址
      */
-    @ToString.Exclude Long ip;
+    @ToString.Exclude
+    Long ip;
 
     /**
      * 请求方法
@@ -64,9 +73,10 @@ public class VisitRecord {
     /**
      * 请求发起时间
      */
-    @ToString.Exclude LocalDateTime creatTime;
+    @ToString.Exclude
+    LocalDateTime creatTime;
 
-    public void setIp(String ip) {
+    public void setIp( String ip ) {
         this.ip = Ipv4Util.ipv4ToLong(ip);
     }
 
