@@ -30,8 +30,16 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import shorturl.server.server.application.dto.UrlRequest;
 
+/**
+ * ShortUrlControllerTest
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = ShortUrlServerApplication.class)
 @AutoConfigureMockMvc
 public class ShortUrlControllerTest {
@@ -39,7 +47,8 @@ public class ShortUrlControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    public ShortUrlControllerTest() {}
+    public ShortUrlControllerTest() {
+    }
 
     private String shortUrl = null;
 

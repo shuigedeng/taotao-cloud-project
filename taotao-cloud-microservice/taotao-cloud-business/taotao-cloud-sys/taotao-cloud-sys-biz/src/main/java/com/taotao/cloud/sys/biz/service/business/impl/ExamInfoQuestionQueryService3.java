@@ -9,99 +9,106 @@ import java.util.stream.Collectors;
 // getStudentQuestionAnswerPerQuestion 其实是传了2 个参数，一个是 examId，一个是 question。能否把函数柯里化，改
 // 成 getStudentQuestionAnswerPerQuestion(examId)(question) 呢? 好处就是通过 getStudentQuestionAnswerPerQuestion(examId)
 // 提前把所有 question 都查出来，再利用这个函数去筛选出单个 question 的值。
+/**
+ * ExamInfoQuestionQueryService3
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ExamInfoQuestionQueryService3 {
 
-	private ExamQuestionMapper questionMapper;
-	private StudentQuestionAnswerMapper studentQuestionAnswerMapper;
-	private ExamMapper examMapper;
-	private StudentMapper studentMapper;
+    private ExamQuestionMapper questionMapper;
+    private StudentQuestionAnswerMapper studentQuestionAnswerMapper;
+    private ExamMapper examMapper;
+    private StudentMapper studentMapper;
 
-	/**
-	 * 获取测验和题目的正确率和参与率
-	 */
-	public ExamDto getQuestionByExamId(String examId) {
+    /**
+     * 获取测验和题目的正确率和参与率
+     */
+    public ExamDto getQuestionByExamId( String examId ) {
 
-		ExamDto examDto = new ExamDto();
+        ExamDto examDto = new ExamDto();
 
-		examDto.setCorrectRate(calculateExamCorrectRate(examId));
+        examDto.setCorrectRate(calculateExamCorrectRate(examId));
 
-		examDto.setSubmittedRate(calculateExamSubmittedRate(examId));
+        examDto.setSubmittedRate(calculateExamSubmittedRate(examId));
 
-		examDto.setQuestions(getExamQuestions(examId).stream().map(question -> {
+        examDto.setQuestions(getExamQuestions(examId).stream().map(question -> {
 
-			QuestionDto questionDto = new QuestionDto();
-			// 计算题目正确率
-			questionDto.setCorrectRate(calculateQuestionCorrectRate(examId).apply(question));
-			// 计算题目参与率
-			questionDto.setSubmittedRate(calculateQuestionSubmittedRate(examId).apply(question));
+            QuestionDto questionDto = new QuestionDto();
+            // 计算题目正确率
+            questionDto.setCorrectRate(calculateQuestionCorrectRate(examId).apply(question));
+            // 计算题目参与率
+            questionDto.setSubmittedRate(calculateQuestionSubmittedRate(examId).apply(question));
 
-			return questionDto;
-		}).collect(Collectors.toList()));
-		return examDto;
-	}
+            return questionDto;
+        }).collect(Collectors.toList()));
+        return examDto;
+    }
 
-	private double calculateExamSubmittedRate(String examId) {
-		return 1.0 * getStudentQuestionAnswers(examId).size() / getStudents(examId).size();
-	}
+    private double calculateExamSubmittedRate( String examId ) {
+        return 1.0 * getStudentQuestionAnswers(examId).size() / getStudents(examId).size();
+    }
 
-	private long calculateExamCorrectRate(String examId) {
-		return getCorrectStudentAnswerCount(examId) / getStudentQuestionAnswers(examId).size();
-	}
+    private long calculateExamCorrectRate( String examId ) {
+        return getCorrectStudentAnswerCount(examId) / getStudentQuestionAnswers(examId).size();
+    }
 
-	private long getCorrectStudentAnswerCount(String examId) {
-		return getStudentQuestionAnswers(examId).stream().filter(StudentQuestionAnswer::isCorrect)
-			.count();
-	}
+    private long getCorrectStudentAnswerCount( String examId ) {
+        return getStudentQuestionAnswers(examId).stream().filter(StudentQuestionAnswer::isCorrect)
+                .count();
+    }
 
-	private List<Student> getStudents(String examId) {
-		return studentMapper.selectByClassroom(getExam(examId).getClassroomId());
-	}
+    private List<Student> getStudents( String examId ) {
+        return studentMapper.selectByClassroom(getExam(examId).getClassroomId());
+    }
 
-	private Exam getExam(String examId) {
-		return examMapper.selectById(examId);
-	}
+    private Exam getExam( String examId ) {
+        return examMapper.selectById(examId);
+    }
 
-	private List<StudentQuestionAnswer> getStudentQuestionAnswers(String examId) {
-		return studentQuestionAnswerMapper.selectByExamQuestionIds(
-			getExamQuestionIds(getExamQuestions(examId)));
-	}
+    private List<StudentQuestionAnswer> getStudentQuestionAnswers( String examId ) {
+        return studentQuestionAnswerMapper.selectByExamQuestionIds(
+                getExamQuestionIds(getExamQuestions(examId)));
+    }
 
-	private static List<String> getExamQuestionIds(List<Question> questions) {
-		return questions.stream().map(Question::getId).collect(Collectors.toList());
-	}
+    private static List<String> getExamQuestionIds( List<Question> questions ) {
+        return questions.stream().map(Question::getId).collect(Collectors.toList());
+    }
 
-	private Function<Question, Double> calculateQuestionSubmittedRate(String examId) {
-		return question -> 1.0 * getStudentQuestionAnswerPerQuestion(examId).apply(question).size()
-			/ getStudents(examId).size();
-	}
+    private Function<Question, Double> calculateQuestionSubmittedRate( String examId ) {
+        return question -> 1.0 * getStudentQuestionAnswerPerQuestion(examId).apply(question).size()
+                / getStudents(examId).size();
+    }
 
-	private Function<Question, Double> calculateQuestionCorrectRate(String examId) {
-		return question -> 1.0 * getCorrectCountPerQuestion(examId).apply(question)
-			/ getAnswerCount(examId).apply(question);
-	}
+    private Function<Question, Double> calculateQuestionCorrectRate( String examId ) {
+        return question -> 1.0 * getCorrectCountPerQuestion(examId).apply(question)
+                / getAnswerCount(examId).apply(question);
+    }
 
-	private Function<Question, Integer> getAnswerCount(String examId) {
-		return question -> getStudentQuestionAnswerPerQuestion(examId).apply(question).size();
+    private Function<Question, Integer> getAnswerCount( String examId ) {
+        return question -> getStudentQuestionAnswerPerQuestion(examId).apply(question).size();
 
-	}
+    }
 
-	private Function<Question, Long> getCorrectCountPerQuestion(String examId) {
-		return question -> getStudentQuestionAnswerPerQuestion(examId).apply(question).stream()
-			.filter(StudentQuestionAnswer::isCorrect).count();
-	}
+    private Function<Question, Long> getCorrectCountPerQuestion( String examId ) {
+        return question -> getStudentQuestionAnswerPerQuestion(examId).apply(question).stream()
+                .filter(StudentQuestionAnswer::isCorrect).count();
+    }
 
-	private Function<Question, List<StudentQuestionAnswer>> getStudentQuestionAnswerPerQuestion(
-		String examId) {
+    private Function<Question, List<StudentQuestionAnswer>> getStudentQuestionAnswerPerQuestion(
+            String examId ) {
 
-		Map<String, List<StudentQuestionAnswer>> studentQuestionAnswerMap = getStudentQuestionAnswers(
-			examId).stream()
-			.collect(Collectors.groupingBy(StudentQuestionAnswer::getExamQuestionId));
+        Map<String, List<StudentQuestionAnswer>> studentQuestionAnswerMap = getStudentQuestionAnswers(
+                examId).stream()
+                .collect(Collectors.groupingBy(StudentQuestionAnswer::getExamQuestionId));
 
-		return question -> studentQuestionAnswerMap.getOrDefault(question.getId(),
-			Collections.emptyList());
-	}
+        return question -> studentQuestionAnswerMap.getOrDefault(question.getId(),
+                Collections.emptyList());
+    }
 
-	private List<Question> getExamQuestions(String examId) {
-		return questionMapper.selectByExamId(examId);
-	}
+    private List<Question> getExamQuestions( String examId ) {
+        return questionMapper.selectByExamId(examId);
+    }
 }

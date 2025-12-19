@@ -30,14 +30,21 @@ import org.springframework.transaction.annotation.Transactional;
 // import org.springframework.cache.annotation.CacheEvict;
 // import org.springframework.cache.annotation.Cacheable;
 
+/**
+ * AlipayConfigServiceImpl
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Service
 // @CacheConfig(cacheNames = "alipayConfig")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class AlipayConfigServiceImpl extends ServiceImpl<IAlipayConfigMapper, AlipayConfig>
-        implements IAlipayConfigService {
+public class AlipayConfigServiceImpl extends ServiceImpl<IAlipayConfigMapper, AlipayConfig> implements
+        IAlipayConfigService {
 
     @Override
-    public String toPayAsPc(AlipayConfig alipay, TradeVO trade) throws Exception {
+    public String toPayAsPc( AlipayConfig alipay, TradeVO trade ) throws Exception {
 
         // if (alipay.getId() == null) {
         //    throw new BadRequestException("请先添加相应配置，再操作");
@@ -70,7 +77,7 @@ public class AlipayConfigServiceImpl extends ServiceImpl<IAlipayConfigMapper, Al
     }
 
     @Override
-    public String toPayAsWeb(AlipayConfig alipay, TradeVO trade) throws Exception {
+    public String toPayAsWeb( AlipayConfig alipay, TradeVO trade ) throws Exception {
         // if (alipay.getId() == null) {
         //    throw new BadRequestException("请先添加相应配置，再操作");
         // }
@@ -111,7 +118,7 @@ public class AlipayConfigServiceImpl extends ServiceImpl<IAlipayConfigMapper, Al
     @Override
     //    @CachePut(key = "'1'")
     @Transactional(rollbackFor = Exception.class)
-    public Boolean update(AlipayConfig alipayConfig) {
+    public Boolean update( AlipayConfig alipayConfig ) {
         return this.save(alipayConfig);
     }
 }

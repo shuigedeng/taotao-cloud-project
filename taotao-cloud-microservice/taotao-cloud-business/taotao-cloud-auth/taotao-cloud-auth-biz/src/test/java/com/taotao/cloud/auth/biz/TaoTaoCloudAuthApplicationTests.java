@@ -19,9 +19,17 @@ package com.taotao.cloud.auth.biz;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+/**
+ * TaoTaoCloudAuthApplicationTests
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @SpringBootTest
 class TaoTaoCloudAuthApplicationTests {
 
     @Test
-    void contextLoads() {}
+    void contextLoads() {
+    }
 }

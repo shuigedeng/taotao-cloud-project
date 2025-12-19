@@ -28,42 +28,34 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * AggregateTestController
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @RestController
 public class AggregateTestController {
-	/**
-	 * 聚合查询
-	 * {
-	 *   "queries": {
-	 *       "phone":"16688880818"
-	 *   },
-	 *   "pagination": {
-	 *     "page": 1,
-	 *     "size": 3
-	 *   },
-	 *   "condition":{
-	 *       "city":"南市"
-	 *   },
-	 *   "fuzzyQueries": {
-	 *       "phone": "166",
-	 *       "address": "CCC写字楼"
-	 *   },
-	 *   "sortField": "id",
-	 *   "sortType": 1
-	 * }
-	 *
-	 * @param aggregate 聚合查询对象
-	 */
-	@PostMapping("/get")
-	public Result<List<Address>> get(@RequestBody AggregateQueries<AddressQueries, AddressCondition, AddressFuzzyQueries> aggregate) {
-		if (!aggregate.hasPagination()) {
-			return Result.fail("");
-		}
-		PaginationDTO pagination = aggregate.getPagination();
-		QueryWrapper<Address> wrapper = AggregateQueries.splicingAggregateQueries(new QueryWrapper<>(), aggregate);
-		Page<Address> page = new Page<>(pagination.getPage(), pagination.getSize());
+
+    /**
+     * 聚合查询 { "queries": { "phone":"16688880818" }, "pagination": { "page": 1, "size": 3 }, "condition":{ "city":"南市" },
+     * "fuzzyQueries": { "phone": "166", "address": "CCC写字楼" }, "sortField": "id", "sortType": 1 }
+     *
+     * @param aggregate 聚合查询对象
+     */
+    @PostMapping("/get")
+    public Result<List<Address>> get(
+            @RequestBody AggregateQueries<AddressQueries, AddressCondition, AddressFuzzyQueries> aggregate ) {
+        if (!aggregate.hasPagination()) {
+            return Result.fail("");
+        }
+        PaginationDTO pagination = aggregate.getPagination();
+        QueryWrapper<Address> wrapper = AggregateQueries.splicingAggregateQueries(new QueryWrapper<>(), aggregate);
+        Page<Address> page = new Page<>(pagination.getPage(), pagination.getSize());
 //		return Result.ok(addressService.page(page, wrapper).getRecords());
-		return Result.success(new ArrayList<>());
-	}
+        return Result.success(new ArrayList<>());
+    }
 
 
 }

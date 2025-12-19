@@ -18,6 +18,7 @@ package com.taotao.cloud.sys.biz.supports.largefile.po;
 
 import java.util.List;
 import java.util.Map;
+
 import lombok.*;
 import lombok.Builder;
 import lombok.Data;
@@ -25,7 +26,14 @@ import lombok.experimental.*;
 import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
-@Accessors(chain=true)
+/**
+ * FileUpload
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
+@Accessors(chain = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -19,14 +19,26 @@ package com.taotao.cloud.sys.biz.supports.largefile.util;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
 import org.yaml.snakeyaml.Yaml;
 
+/**
+ * YmlUtil
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class YmlUtil {
 
-    /** key:文件名索引 value:配置文件内容 */
+    /**
+     * key:文件名索引 value:配置文件内容
+     */
     private static Map<String, LinkedHashMap> ymls = new HashMap<>();
 
-    /** string:当前线程需要查询的文件名 */
+    /**
+     * string:当前线程需要查询的文件名
+     */
     private static ThreadLocal<String> nowFileName = new ThreadLocal<>();
 
     static {
@@ -35,10 +47,8 @@ public class YmlUtil {
 
     /**
      * 加载配置文件
-     *
-     * @param fileName
      */
-    public static void loadYml(String fileName) {
+    public static void loadYml( String fileName ) {
         nowFileName.set(fileName);
         if (!ymls.containsKey(fileName)) {
             ymls.put(
@@ -47,7 +57,7 @@ public class YmlUtil {
         }
     }
 
-    public static Object getValue(String key) {
+    public static Object getValue( String key ) {
         // 首先将key进行拆分
         String[] keys = key.split("[.]");
 
@@ -67,13 +77,10 @@ public class YmlUtil {
         return null;
     }
 
-    public static Object getValue(String fileName, String key) {
+    public static Object getValue( String fileName, String key ) {
         // 首先加载配置文件
         loadYml(fileName);
         return getValue(key);
     }
 
-//    public static void main(String[] args) {
-//        LogUtils.info(getValue("hello.desc"));
-//    }
 }

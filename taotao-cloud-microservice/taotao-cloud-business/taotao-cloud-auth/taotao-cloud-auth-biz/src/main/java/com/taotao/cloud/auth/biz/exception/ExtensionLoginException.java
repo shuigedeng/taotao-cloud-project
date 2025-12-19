@@ -18,13 +18,20 @@ package com.taotao.cloud.auth.biz.exception;
 
 import org.springframework.security.core.AuthenticationException;
 
+/**
+ * ExtensionLoginException
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ExtensionLoginException extends AuthenticationException {
 
-    public ExtensionLoginException(String msg, Throwable cause) {
+    public ExtensionLoginException( String msg, Throwable cause ) {
         super(msg, cause);
     }
 
-    public ExtensionLoginException(String msg) {
+    public ExtensionLoginException( String msg ) {
         super(msg);
     }
 }

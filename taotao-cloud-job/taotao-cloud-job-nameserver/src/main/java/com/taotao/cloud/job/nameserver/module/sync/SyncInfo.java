@@ -18,9 +18,17 @@ package com.taotao.cloud.job.nameserver.module.sync;
 
 import lombok.Data;
 
+/**
+ * SyncInfo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 public class SyncInfo {
-    SyncInfo(String clientIP) {
+
+    SyncInfo( String clientIP ) {
         this.clientIp = clientIP;
     }
 

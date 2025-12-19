@@ -21,10 +21,17 @@ import tech.powerjob.worker.core.processor.TaskContext;
 import tech.powerjob.worker.core.processor.sdk.BasicProcessor;
 import tech.powerjob.worker.log.OmsLogger;
 
+/**
+ * SimpleProcessor
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class SimpleProcessor implements BasicProcessor {
 
     @Override
-    public ProcessResult process(TaskContext context) throws Exception {
+    public ProcessResult process( TaskContext context ) throws Exception {
 
         OmsLogger logger = context.getOmsLogger();
 

@@ -17,26 +17,33 @@
 package com.taotao.cloud.sys.biz.supports.test;
 
 import com.taotao.boot.common.utils.log.LogUtils;
+
 import java.util.Queue;
 import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * TestController
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @RestController
 public class TestController {
 
     @Autowired
-		TestThreadPoolManager testThreadPoolManager;
+    TestThreadPoolManager testThreadPoolManager;
 
     /**
      * 测试模拟下单请求 入口
-     *
-     * @param id
-     * @return
      */
     @GetMapping("/start/{id}")
-    public String start(@PathVariable Long id) {
+    public String start( @PathVariable Long id ) {
         // 模拟的随机数
         String orderNo = System.currentTimeMillis() + UUID.randomUUID().toString();
 
@@ -47,12 +54,9 @@ public class TestController {
 
     /**
      * 停止服务
-     *
-     * @param id
-     * @return
      */
     @GetMapping("/end/{id}")
-    public String end(@PathVariable Long id) {
+    public String end( @PathVariable Long id ) {
 
         testThreadPoolManager.shutdown();
 

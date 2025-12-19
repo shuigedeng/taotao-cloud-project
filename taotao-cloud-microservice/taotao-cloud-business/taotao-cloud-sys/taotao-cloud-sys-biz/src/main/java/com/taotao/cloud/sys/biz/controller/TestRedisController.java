@@ -27,6 +27,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * TestRedisController
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @RestController
 @Tag(name = "管理端-TestRediscontroller", description = "管理端-测试redis")
 public class TestRedisController {
@@ -44,7 +51,7 @@ public class TestRedisController {
      * 查询一些异常数据：这种情况通常发生在数据服务出现故障或异常时，从而造成缓存系统无法访问相关数据，从而导致缓存穿透。
      */
     @GetMapping("/user/{id}")
-    public User getUserById(@PathVariable Long id) {
+    public User getUserById( @PathVariable Long id ) {
         // 先从布隆过滤器中判断此id是否存在
         // if (!BloomFilterUtil.mightContain(id.toString())) {
         //	return null;
@@ -77,7 +84,7 @@ public class TestRedisController {
      * <p>在遇到缓存击穿问题时，我们可以在查询数据库之前，先判断一下缓存中是否已有数据，如果没有数据则使用Redis的单线程特性，先查询数据库然后将数据写入缓存中。
      */
     @GetMapping("/getUserById1/{id}")
-    public User getUserById1(@PathVariable Long id) {
+    public User getUserById1( @PathVariable Long id ) {
         // 先从缓存中获取值
         String userKey = "user_" + id.toString();
         User user = (User) redisTemplate.opsForValue().get(userKey);
@@ -119,10 +126,9 @@ public class TestRedisController {
      */
     //@Autowired
     // private CacheManager ehCacheManager;
-
     @GetMapping("/getUserById2/{id}")
     @Cacheable(value = "userCache", key = "#id")
-    public User getUserById2(@PathVariable Long id) {
+    public User getUserById2( @PathVariable Long id ) {
         // 先从Ehcache缓存中获取
         String userKey = "user_" + id.toString();
         // User user = (User) ehCacheManager.getCache("userCache").get(userKey).get();
@@ -161,5 +167,7 @@ public class TestRedisController {
         // }
     }
 
-    public static class User {}
+    public static class User {
+
+    }
 }

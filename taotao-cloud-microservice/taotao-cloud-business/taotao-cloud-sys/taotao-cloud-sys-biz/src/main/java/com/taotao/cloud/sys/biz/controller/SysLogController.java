@@ -28,6 +28,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * SysLogController
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @RestController
 @RequestMapping("/sys/log")
 @AllArgsConstructor
@@ -45,15 +52,15 @@ public class SysLogController {
      */
     @GetMapping("/page")
     // @ApiOperation(value = "分页查询", notes = "分页查询")
-    public Result<Page> page(Page page, SysLog sysLog) {
+    public Result<Page> page( Page page, SysLog sysLog ) {
 //        return Result.success(sysLogService.page(page, Wrappers.query(sysLog).orderByDesc("id")));
-		return null;
+        return null;
     }
 
     // @Anonymous
     @PostMapping("/save")
-    public Result save(@RequestBody SysLog sysLog) {
+    public Result save( @RequestBody SysLog sysLog ) {
 //        return Result.success(sysLogService.save(sysLog));
-		return null;
+        return null;
     }
 }

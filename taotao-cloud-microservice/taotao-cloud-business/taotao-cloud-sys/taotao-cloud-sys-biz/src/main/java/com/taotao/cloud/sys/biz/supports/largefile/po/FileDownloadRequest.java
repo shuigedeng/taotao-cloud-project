@@ -22,6 +22,13 @@ import lombok.experimental.*;
 import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
+/**
+ * FileDownloadRequest
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

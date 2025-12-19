@@ -28,36 +28,47 @@ import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * ServerDiscoverGrpcService
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @GrpcService
 @Slf4j
 public class ServerDiscoverGrpcService extends ServerDiscoverGrpc.ServerDiscoverImplBase {
 
-    @Autowired HeartbeatHandler heartbeatHandler;
-    @Autowired AppInfoHandler appInfoHandler;
-    @Autowired PongHandler pongHandler;
-    @Autowired ServerChangeHandler serverChangeHandler;
+    @Autowired
+    HeartbeatHandler heartbeatHandler;
+    @Autowired
+    AppInfoHandler appInfoHandler;
+    @Autowired
+    PongHandler pongHandler;
+    @Autowired
+    ServerChangeHandler serverChangeHandler;
 
     public void heartbeatCheck(
             ServerDiscoverCausa.HeartbeatCheck request,
-            StreamObserver<CommonCausa.Response> responseObserver) {
+            StreamObserver<CommonCausa.Response> responseObserver ) {
         heartbeatHandler.handle(request, responseObserver);
     }
 
     public void assertApp(
             ServerDiscoverCausa.AppName request,
-            StreamObserver<CommonCausa.Response> responseObserver) {
+            StreamObserver<CommonCausa.Response> responseObserver ) {
         appInfoHandler.handle(request, responseObserver);
     }
 
     public void pingServer(
             ServerDiscoverCausa.Ping request,
-            StreamObserver<CommonCausa.Response> responseObserver) {
+            StreamObserver<CommonCausa.Response> responseObserver ) {
         pongHandler.handle(request, responseObserver);
     }
 
     public void serverChange(
             ServerDiscoverCausa.ServerChangeReq request,
-            StreamObserver<CommonCausa.Response> responseObserver) {
+            StreamObserver<CommonCausa.Response> responseObserver ) {
         serverChangeHandler.handle(request, responseObserver);
     }
 }

@@ -17,12 +17,21 @@
 package com.taotao.cloud.sys.biz.config.aop.execl;
 
 import java.util.Date;
+
 import lombok.Data;
 import lombok.experimental.*;
 import lombok.experimental.*;
 
+/**
+ * ExcelUploadLog
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 public class ExcelUploadLog {
+
     private Integer id;
     // 唯一编码
     private String batchNo;

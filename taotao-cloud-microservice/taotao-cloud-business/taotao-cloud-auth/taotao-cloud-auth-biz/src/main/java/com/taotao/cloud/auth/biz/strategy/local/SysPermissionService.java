@@ -17,11 +17,21 @@
 package com.taotao.cloud.auth.biz.strategy.local;
 
 import com.taotao.cloud.auth.biz.strategy.user.SysPermission;
+
 import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+/**
+ * SysPermissionService
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Service
 public class SysPermissionService {
+
     public List<SysPermission> findAll() {
         return null;
     }

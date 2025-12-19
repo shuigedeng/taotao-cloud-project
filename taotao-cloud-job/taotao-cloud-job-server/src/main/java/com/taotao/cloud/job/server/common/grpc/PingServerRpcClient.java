@@ -21,16 +21,25 @@ import com.taotao.cloud.job.remote.protos.CommonCausa;
 import com.taotao.cloud.job.remote.protos.ServerDiscoverCausa;
 import com.taotao.cloud.job.server.extension.singletonpool.GrpcStubSingletonPool;
 import com.taotao.cloud.remote.api.ServerDiscoverGrpc;
+
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+
 import org.springframework.stereotype.Component;
 
+/**
+ * PingServerRpcClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class PingServerRpcClient implements RpcServiceCaller {
 
     @Override
-    public Object call(Object params) {
+    public Object call( Object params ) {
         ServerDiscoverCausa.Ping ping = (ServerDiscoverCausa.Ping) params;
         ServerDiscoverGrpc.ServerDiscoverFutureStub serverDiscoverFutureStub =
                 GrpcStubSingletonPool.getStubSingleton(

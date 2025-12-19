@@ -34,7 +34,7 @@ public class UnusualLoginRiskHandle extends AbstractLoginHandle {
 
     @Override
     public void filterRisk(
-            List<RiskRule> filter, Map<Integer, RiskRule> ruleMap, UserAccount account) {
+            List<RiskRule> filter, Map<Integer, RiskRule> ruleMap, UserAccount account ) {
         if (MapUtil.isNotEmpty(ruleMap)) {
             RiskRule loginTimeExe = ruleMap.get(2);
             if (loginTimeExe != null) {
@@ -65,6 +65,13 @@ public class UnusualLoginRiskHandle extends AbstractLoginHandle {
         }
     }
 
+    /**
+     * UnusualLoginTime
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     @Data
     public static class UnusualLoginTime {
 

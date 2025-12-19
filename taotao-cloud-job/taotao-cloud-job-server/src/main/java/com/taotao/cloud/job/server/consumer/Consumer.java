@@ -25,18 +25,30 @@ import com.taotao.cloud.job.remote.protos.MqCausa;
 import com.taotao.cloud.job.server.core.schedule.TimingStrategyService;
 import com.taotao.cloud.job.server.persistence.domain.JobInfo;
 import com.taotao.cloud.job.server.persistence.service.JobInfoService;
+
 import java.util.Date;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Consumer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Service
 @Slf4j
 public class Consumer {
-    @Autowired JobInfoService jobInfoService;
-    @Autowired TimingStrategyService timingStrategyService;
 
-    private void createJob(MqCausa.Message message) {
+    @Autowired
+    JobInfoService jobInfoService;
+    @Autowired
+    TimingStrategyService timingStrategyService;
+
+    private void createJob( MqCausa.Message message ) {
         MqCausa.CreateJobReq jobReq = message.getCreateJobReq();
         try {
             LifeCycle lifeCycle = LifeCycle.parse(jobReq.getLifeCycle());
@@ -76,7 +88,7 @@ public class Consumer {
         }
     }
 
-    private void deleteJob(MqCausa.Message message) {
+    private void deleteJob( MqCausa.Message message ) {
         try {
             MqCausa.DeleteJobReq jobReq = message.getDeleteJobReq();
             jobInfoService.remove(
@@ -87,7 +99,7 @@ public class Consumer {
         }
     }
 
-    private void updateJob(MqCausa.Message message) {
+    private void updateJob( MqCausa.Message message ) {
         try {
             MqCausa.UpdateJobReq jobReq = message.getUpdateJobReq();
             LifeCycle lifeCycle = LifeCycle.parse(jobReq.getLifeCycle());
@@ -129,7 +141,7 @@ public class Consumer {
         }
     }
 
-    public void consume(MqCausa.Message message) {
+    public void consume( MqCausa.Message message ) {
         switch (message.getMessageType()) {
             case JOB_CREATE:
                 createJob(message);

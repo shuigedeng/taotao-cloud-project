@@ -21,6 +21,13 @@ import org.junit.jupiter.api.Test;
 import shorturl.server.server.application.util.IdWorker;
 import shorturl.server.server.application.util.IdWorkerInstance;
 
+/**
+ * IdWorkerTest
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class IdWorkerTest {
 
     IdWorker idWorker = IdWorkerInstance.INSTANCE.IdWorkerInstance();

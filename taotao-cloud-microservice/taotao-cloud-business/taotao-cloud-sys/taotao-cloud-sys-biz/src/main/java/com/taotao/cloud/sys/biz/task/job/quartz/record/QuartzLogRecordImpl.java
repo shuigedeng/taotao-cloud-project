@@ -22,16 +22,23 @@ import com.taotao.boot.job.quartz.utils.QuartzLogRecord;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+/**
+ * QuartzLogRecordImpl
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 @AllArgsConstructor
 public class QuartzLogRecordImpl implements QuartzLogRecord {
 
-	private final QuartzJobLogService quartzJobLogService;
+    private final QuartzJobLogService quartzJobLogService;
 
-	@Override
-	public void addLog(QuartzTaskLog quartzJobLog) {
-		LogUtils.info("quartz1  QuartzLogRecordImpl : {}", quartzJobLog);
+    @Override
+    public void addLog( QuartzTaskLog quartzJobLog ) {
+        LogUtils.info("quartz1  QuartzLogRecordImpl : {}", quartzJobLog);
 
-		quartzJobLogService.save(BeanUtil.copyProperties(quartzJobLog, QuartzJobLog.class));
-	}
+        quartzJobLogService.save(BeanUtil.copyProperties(quartzJobLog, QuartzJobLog.class));
+    }
 }

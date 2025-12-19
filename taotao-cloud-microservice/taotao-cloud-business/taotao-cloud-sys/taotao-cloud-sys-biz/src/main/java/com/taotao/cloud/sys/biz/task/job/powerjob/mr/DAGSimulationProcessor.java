@@ -31,7 +31,7 @@ import tech.powerjob.worker.core.processor.sdk.MapReduceProcessor;
 public class DAGSimulationProcessor implements MapReduceProcessor {
 
     @Override
-    public ProcessResult process(TaskContext context) throws Exception {
+    public ProcessResult process( TaskContext context ) throws Exception {
 
         if (isRootTask()) {
             // L1. 执行根任务
@@ -73,7 +73,7 @@ public class DAGSimulationProcessor implements MapReduceProcessor {
     }
 
     @Override
-    public ProcessResult reduce(TaskContext context, List<TaskResult> taskResults) {
+    public ProcessResult reduce( TaskContext context, List<TaskResult> taskResults ) {
         // L4. 执行最终 Reduce 任务，taskResults保存了之前所有任务的结果
         taskResults.forEach(taskResult -> {
             // do something...
@@ -81,9 +81,36 @@ public class DAGSimulationProcessor implements MapReduceProcessor {
         return new ProcessResult(true, "reduce success");
     }
 
-    private static class TaskA {}
+    /**
+     * TaskA
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    private static class TaskA {
 
-    private static class TaskB {}
+    }
 
-    private static class TaskC {}
+    /**
+     * TaskB
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    private static class TaskB {
+
+    }
+
+    /**
+     * TaskC
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    private static class TaskC {
+
+    }
 }

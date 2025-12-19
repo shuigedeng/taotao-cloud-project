@@ -23,19 +23,29 @@ import com.taotao.cloud.job.remote.protos.RegisterCausa;
 import com.taotao.cloud.job.server.common.config.TtcJobServerConfig;
 import com.taotao.cloud.job.server.extension.singletonpool.GrpcStubSingletonPool;
 import com.taotao.cloud.remote.api.RegisterToNameServerGrpc;
+
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * ServerRegisterStarter
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 @Slf4j
 public class ServerRegisterStarter implements InitializingBean {
 
-    @Autowired TtcJobServerConfig ttcJobServerConfig;
+    @Autowired
+    TtcJobServerConfig ttcJobServerConfig;
 
     @Override
     public void afterPropertiesSet() throws Exception {

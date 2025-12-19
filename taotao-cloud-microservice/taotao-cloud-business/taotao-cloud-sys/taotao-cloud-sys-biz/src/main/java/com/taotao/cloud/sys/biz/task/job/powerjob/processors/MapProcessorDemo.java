@@ -28,20 +28,26 @@ import tech.powerjob.worker.core.processor.ProcessResult;
 import tech.powerjob.worker.core.processor.TaskContext;
 import tech.powerjob.worker.core.processor.sdk.MapProcessor;
 
-/** Map处理器 示例 */
+/**
+ * Map处理器 示例
+ */
 @Component
 public class MapProcessorDemo implements MapProcessor {
 
     @Autowired
     private MysteryService mysteryService;
 
-    /** 每一批发送任务大小 */
+    /**
+     * 每一批发送任务大小
+     */
     private static final int BATCH_SIZE = 100;
-    /** 发送的批次 */
+    /**
+     * 发送的批次
+     */
     private static final int BATCH_NUM = 5;
 
     @Override
-    public ProcessResult process(TaskContext context) throws Exception {
+    public ProcessResult process( TaskContext context ) throws Exception {
 
         LogUtils.info("============== MapProcessorDemo#process ==============");
         LogUtils.info("isRootTask:" + isRootTask());
@@ -89,14 +95,22 @@ public class MapProcessorDemo implements MapProcessor {
         }
     }
 
+    /**
+     * SubTask
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class SubTask {
 
         private Integer siteId;
         private List<Integer> itemIds;
 
-        public SubTask() {}
+        public SubTask() {
+        }
 
-        public SubTask(Integer siteId, List<Integer> itemIds) {
+        public SubTask( Integer siteId, List<Integer> itemIds ) {
             this.siteId = siteId;
             this.itemIds = itemIds;
         }
@@ -105,7 +119,7 @@ public class MapProcessorDemo implements MapProcessor {
             return siteId;
         }
 
-        public void setSiteId(Integer siteId) {
+        public void setSiteId( Integer siteId ) {
             this.siteId = siteId;
         }
 
@@ -113,7 +127,7 @@ public class MapProcessorDemo implements MapProcessor {
             return itemIds;
         }
 
-        public void setItemIds(List<Integer> itemIds) {
+        public void setItemIds( List<Integer> itemIds ) {
             this.itemIds = itemIds;
         }
     }

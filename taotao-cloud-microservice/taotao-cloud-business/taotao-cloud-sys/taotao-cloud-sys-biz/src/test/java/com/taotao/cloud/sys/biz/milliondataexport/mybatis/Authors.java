@@ -1,6 +1,14 @@
 package com.taotao.cloud.sys.biz.milliondataexport.mybatis;
 
+/**
+ * Authors
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class Authors {
+
     private Integer id;
     private String firstName;
 
@@ -16,7 +24,7 @@ public class Authors {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId( Integer id ) {
         this.id = id;
     }
 
@@ -24,7 +32,7 @@ public class Authors {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName( String firstName ) {
         this.firstName = firstName == null ? null : firstName.trim();
     }
 
@@ -32,7 +40,7 @@ public class Authors {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName( String lastName ) {
         this.lastName = lastName == null ? null : lastName.trim();
     }
 
@@ -40,7 +48,7 @@ public class Authors {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail( String email ) {
         this.email = email == null ? null : email.trim();
     }
 
@@ -48,7 +56,7 @@ public class Authors {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate( Date birthdate ) {
         this.birthdate = birthdate;
     }
 
@@ -56,12 +64,13 @@ public class Authors {
         return added;
     }
 
-    public void setAdded(Date added) {
+    public void setAdded( Date added ) {
         this.added = added;
     }
 
     @Override
     public String toString() {
-        return this.id + "," + this.firstName + "," + this.lastName + "," + this.email + "," + this.birthdate + "," + this.added;
+        return this.id + "," + this.firstName + "," + this.lastName + "," + this.email + "," + this.birthdate + ","
+                + this.added;
     }
 }

@@ -16,13 +16,20 @@
 
 package com.taotao.cloud.auth.biz.exception;
 
+/**
+ * IllegalParameterExtensionLoginException
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class IllegalParameterExtensionLoginException extends ExtensionLoginException {
 
-    public IllegalParameterExtensionLoginException(String msg, Throwable cause) {
+    public IllegalParameterExtensionLoginException( String msg, Throwable cause ) {
         super(msg, cause);
     }
 
-    public IllegalParameterExtensionLoginException(String msg) {
+    public IllegalParameterExtensionLoginException( String msg ) {
         super(msg);
     }
 }

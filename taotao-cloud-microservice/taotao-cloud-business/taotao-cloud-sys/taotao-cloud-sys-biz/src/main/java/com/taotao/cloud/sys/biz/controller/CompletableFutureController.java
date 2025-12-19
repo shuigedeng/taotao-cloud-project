@@ -19,16 +19,25 @@ package com.taotao.cloud.sys.biz.controller;
 import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import jakarta.annotation.Resource;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadPoolExecutor;
+
 import lombok.SneakyThrows;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * CompletableFutureController
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @RestController
 @RequestMapping("/index")
 public class CompletableFutureController {
@@ -39,7 +48,8 @@ public class CompletableFutureController {
     @RequestMapping(
             value = "/homeIndex",
             method = {RequestMethod.POST, RequestMethod.GET})
-    public String homeIndex(@RequestParam(required = false) String userId, @RequestParam(value = "lang") String lang) {
+    public String homeIndex( @RequestParam(required = false) String userId,
+            @RequestParam(value = "lang") String lang ) {
         ResultData<HomeVO> result = new ResultData<>();
 
         // 获取Banner轮播图信息
@@ -83,28 +93,28 @@ public class CompletableFutureController {
     }
 
     @SneakyThrows
-    public List<BannerVO> buildBanners(String userId, String lang) {
+    public List<BannerVO> buildBanners( String userId, String lang ) {
         // 模拟请求耗时0.5秒
         Thread.sleep(500);
         return new ArrayList<BannerVO>();
     }
 
     @SneakyThrows
-    public List<NotificationVO> buildNotifications(String userId, String lang) {
+    public List<NotificationVO> buildNotifications( String userId, String lang ) {
         // 模拟请求耗时0.5秒
         Thread.sleep(500);
         return new ArrayList<NotificationVO>();
     }
 
     @SneakyThrows
-    public List<BenefitVO> buildBenefits(String userId, String lang) {
+    public List<BenefitVO> buildBenefits( String userId, String lang ) {
         // 模拟请求耗时0.5秒
         Thread.sleep(500);
         return new ArrayList<BenefitVO>();
     }
 
     @SneakyThrows
-    public List<CouponVO> buildCoupons(String userId) {
+    public List<CouponVO> buildCoupons( String userId ) {
         // 模拟请求耗时0.5秒
         Thread.sleep(500);
         return new ArrayList<>();
@@ -112,25 +122,38 @@ public class CompletableFutureController {
 
     public static class HomeVO {
 
-        public void setBanners(List<BannerVO> bannerVOS) {}
+        public void setBanners( List<BannerVO> bannerVOS ) {
+        }
 
-        public void setNotifications(List<NotificationVO> notificationVOS) {}
+        public void setNotifications( List<NotificationVO> notificationVOS ) {
+        }
 
-        public void setBenefits(List<BenefitVO> benefitVOS) {}
+        public void setBenefits( List<BenefitVO> benefitVOS ) {
+        }
 
-        public void setCoupons(List<CouponVO> couponVOS) {}
+        public void setCoupons( List<CouponVO> couponVOS ) {
+        }
     }
 
-    public static class NotificationVO {}
+    public static class NotificationVO {
 
-    public static class BenefitVO {}
+    }
 
-    public static class CouponVO {}
+    public static class BenefitVO {
 
-    public static class BannerVO {}
+    }
+
+    public static class CouponVO {
+
+    }
+
+    public static class BannerVO {
+
+    }
 
     public static class ResultData<T> {
 
-        public void setData(T homeVO) {}
+        public void setData( T homeVO ) {
+        }
     }
 }

@@ -24,6 +24,13 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import org.junit.jupiter.api.Test;
 import shorturl.server.server.application.util.DefaultIdWorker;
 
+/**
+ * ConversionUtilTest
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ConversionUtilTest {
 
     @Test
@@ -34,7 +41,7 @@ public class ConversionUtilTest {
         String encodeStr = encode(l, 11);
         int length = encodeStr.length();
         LogUtils.info("62进制：" + encodeStr);
-        if ((length <= 8)) {
+        if (( length <= 8 )) {
             LogUtils.info("62进制：" + encodeStr);
         }
         String substring = encodeStr.substring(length - 8, length);

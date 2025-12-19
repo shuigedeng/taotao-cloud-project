@@ -30,12 +30,14 @@ import tech.powerjob.worker.core.processor.TaskResult;
 import tech.powerjob.worker.core.processor.sdk.MapReduceProcessor;
 import tech.powerjob.worker.log.OmsLogger;
 
-/** MapReduce 处理器示例 控制台参数：{"batchSize": 100, "batchNum": 2} */
+/**
+ * MapReduce 处理器示例 控制台参数：{"batchSize": 100, "batchNum": 2}
+ */
 @Component
 public class MapReduceProcessorDemo implements MapReduceProcessor {
 
     @Override
-    public ProcessResult process(TaskContext context) throws Exception {
+    public ProcessResult process( TaskContext context ) throws Exception {
 
         OmsLogger omsLogger = context.getOmsLogger();
 
@@ -77,7 +79,7 @@ public class MapReduceProcessorDemo implements MapReduceProcessor {
     }
 
     @Override
-    public ProcessResult reduce(TaskContext context, List<TaskResult> taskResults) {
+    public ProcessResult reduce( TaskContext context, List<TaskResult> taskResults ) {
         log.info("================ MapReduceProcessorDemo#reduce ================");
         log.info("TaskContext: {}", JSONObject.toJSONString(context));
         log.info("List<TaskResult>: {}", JSONObject.toJSONString(taskResults));
@@ -87,14 +89,22 @@ public class MapReduceProcessorDemo implements MapReduceProcessor {
         return new ProcessResult(success, context + ": " + success);
     }
 
+    /**
+     * TestSubTask
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class TestSubTask {
 
         private String name;
         private int age;
 
-        public TestSubTask() {}
+        public TestSubTask() {
+        }
 
-        public TestSubTask(String name, int age) {
+        public TestSubTask( String name, int age ) {
             this.name = name;
             this.age = age;
         }
@@ -103,7 +113,7 @@ public class MapReduceProcessorDemo implements MapReduceProcessor {
             return name;
         }
 
-        public void setName(String name) {
+        public void setName( String name ) {
             this.name = name;
         }
 
@@ -111,7 +121,7 @@ public class MapReduceProcessorDemo implements MapReduceProcessor {
             return age;
         }
 
-        public void setAge(int age) {
+        public void setAge( int age ) {
             this.age = age;
         }
     }

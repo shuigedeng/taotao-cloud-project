@@ -21,6 +21,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * QuartzJobLogPageQuery
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Schema(title = "定时任务日志查询")

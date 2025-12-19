@@ -27,14 +27,14 @@ import org.springframework.beans.factory.FactoryBean;
 public class TestFactoryBean implements FactoryBean<TestFactoryInnerBean> {
 
     @Override
-    public TestFactoryBean.TestFactoryInnerBean getObject() throws Exception {
+    public TestFactoryInnerBean getObject() throws Exception {
         LogUtils.info("[FactoryBean] getObject");
-        return new TestFactoryBean.TestFactoryInnerBean();
+        return new TestFactoryInnerBean();
     }
 
     @Override
     public Class<?> getObjectType() {
-        return TestFactoryBean.TestFactoryInnerBean.class;
+        return TestFactoryInnerBean.class;
     }
 
     @Override
@@ -42,5 +42,14 @@ public class TestFactoryBean implements FactoryBean<TestFactoryInnerBean> {
         return true;
     }
 
-    public static class TestFactoryInnerBean {}
+    /**
+     * TestFactoryInnerBean
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class TestFactoryInnerBean {
+
+    }
 }

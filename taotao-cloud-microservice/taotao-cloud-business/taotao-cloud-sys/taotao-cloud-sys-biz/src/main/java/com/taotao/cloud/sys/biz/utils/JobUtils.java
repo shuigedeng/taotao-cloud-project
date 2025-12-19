@@ -19,9 +19,17 @@ package com.taotao.cloud.sys.biz.utils;
 import com.taotao.boot.job.quartz.utils.CronUtils;
 import com.taotao.boot.job.schedule.constant.CycleTypeConstant;
 import com.taotao.cloud.sys.api.model.dto.ScheduledJobDTO;
+
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * JobUtils
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class JobUtils {
 
     /**
@@ -29,7 +37,7 @@ public class JobUtils {
      *
      * @return str
      */
-    public static String dateConvertToCron(ScheduledJobDTO param) {
+    public static String dateConvertToCron( ScheduledJobDTO param ) {
         // 秒 分 时 日 月 默认为'*'，周为'?'
         // 特殊处理，选择周 就不能拼接月、日；选择月就不能拼接周；选择日不能拼接周,并且默认每月
         // 周不能选择为每周

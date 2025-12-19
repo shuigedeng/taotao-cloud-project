@@ -21,10 +21,18 @@ import com.taotao.cloud.job.remote.protos.CommonCausa;
 import io.grpc.stub.StreamObserver;
 import org.springframework.stereotype.Component;
 
+/**
+ * PongHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class PongHandler implements RpcHandler {
+
     @Override
-    public void handle(Object req, StreamObserver<CommonCausa.Response> responseObserver) {
+    public void handle( Object req, StreamObserver<CommonCausa.Response> responseObserver ) {
         CommonCausa.Response build =
                 CommonCausa.Response.newBuilder().setCode(RemoteConstant.SUCCESS).build();
         responseObserver.onNext(build);

@@ -20,8 +20,10 @@ import com.taotao.boot.common.model.ValidationGroups;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
 import lombok.*;
 import lombok.Builder;
 import lombok.Data;
@@ -29,8 +31,15 @@ import lombok.experimental.*;
 import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
+/**
+ * AppDTO
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
-@Accessors(chain=true)
+@Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(title = "系统应用")

@@ -15,43 +15,51 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * MonitorApplicationService
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Service
 @RequiredArgsConstructor
 public class MonitorApplicationService {
 
-	@NonNull
-	private RedisRepository redisUtil;
+    @NonNull
+    private RedisRepository redisUtil;
 
-	public RedisCacheInfoDTO getRedisCacheInfo() {
-		Properties info = (Properties) redisUtil.getRedisTemplate().execute((RedisCallback<Object>) RedisServerCommands::info);
-		Properties commandStats = (Properties) redisUtil.getRedisTemplate().execute(
-			(RedisCallback<Object>) connection -> connection.info("commandstats"));
-		Object dbSize = redisUtil.getRedisTemplate().execute((RedisCallback<Object>) RedisServerCommands::dbSize);
+    public RedisCacheInfoDTO getRedisCacheInfo() {
+        Properties info = (Properties) redisUtil.getRedisTemplate()
+                .execute((RedisCallback<Object>) RedisServerCommands::info);
+        Properties commandStats = (Properties) redisUtil.getRedisTemplate().execute(
+                (RedisCallback<Object>) connection -> connection.info("commandstats"));
+        Object dbSize = redisUtil.getRedisTemplate().execute((RedisCallback<Object>) RedisServerCommands::dbSize);
 
-		if (commandStats == null) {
-			throw new RuntimeException("找不到对应的redis信息。");
-		}
+        if (commandStats == null) {
+            throw new RuntimeException("找不到对应的redis信息。");
+        }
 
-		RedisCacheInfoDTO cacheInfo = new RedisCacheInfoDTO();
+        RedisCacheInfoDTO cacheInfo = new RedisCacheInfoDTO();
 
-		cacheInfo.setInfo(info);
-		cacheInfo.setDbSize(dbSize);
-		cacheInfo.setCommandStats(new ArrayList<>());
+        cacheInfo.setInfo(info);
+        cacheInfo.setDbSize(dbSize);
+        cacheInfo.setCommandStats(new ArrayList<>());
 
-		commandStats.stringPropertyNames().forEach(key -> {
-			String property = commandStats.getProperty(key);
+        commandStats.stringPropertyNames().forEach(key -> {
+            String property = commandStats.getProperty(key);
 
-			RedisCacheInfoDTO.CommonStatusDTO commonStatus = new RedisCacheInfoDTO.CommonStatusDTO();
-			commonStatus.setName(StrUtil.removePrefix(key, "cmdstat_"));
-			commonStatus.setValue(StrUtil.subBetween(property, "calls=", ",usec"));
+            RedisCacheInfoDTO.CommonStatusDTO commonStatus = new RedisCacheInfoDTO.CommonStatusDTO();
+            commonStatus.setName(StrUtil.removePrefix(key, "cmdstat_"));
+            commonStatus.setValue(StrUtil.subBetween(property, "calls=", ",usec"));
 
-			cacheInfo.getCommandStats().add(commonStatus);
-		});
+            cacheInfo.getCommandStats().add(commonStatus);
+        });
 
-		return cacheInfo;
-	}
+        return cacheInfo;
+    }
 
-	public List<OnlineUserInfo> getOnlineUserList(String userName, String ipaddr) {
+    public List<OnlineUserInfo> getOnlineUserList( String userName, String ipaddr ) {
 //		Collection<String> keys = redisUtil.keys(CacheKeyEnum.LOGIN_USER_KEY.key() + "*");
 //
 //		Stream<OnlineUserInfo> onlineUserStream = keys.stream().map(o ->
@@ -67,12 +75,12 @@ public class MonitorApplicationService {
 //
 //		Collections.reverse(filteredOnlineUsers);
 //		return filteredOnlineUsers;
-		return null;
-	}
+        return null;
+    }
 
-	public ServerInfo getServerInfo() {
-		return ServerInfo.fillInfo();
-	}
+    public ServerInfo getServerInfo() {
+        return ServerInfo.fillInfo();
+    }
 
 
 }

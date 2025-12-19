@@ -1,12 +1,22 @@
 package com.taotao.cloud.sys.biz.supports.mbg;
 
 import jakarta.annotation.Generated;
+
 import java.sql.JDBCType;
 import java.time.LocalDateTime;
+
 import org.mybatis.dynamic.sql.AliasableSqlTable;
 import org.mybatis.dynamic.sql.SqlColumn;
 
+/**
+ * AppDynamicSqlSupport
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public final class AppDynamicSqlSupport {
+
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public static final App app = new App();
 
@@ -45,6 +55,7 @@ public final class AppDynamicSqlSupport {
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public static final class App extends AliasableSqlTable<App> {
+
         public final SqlColumn<Long> id = column("id", JDBCType.BIGINT);
 
         public final SqlColumn<Long> createBy = column("create_by", JDBCType.BIGINT);

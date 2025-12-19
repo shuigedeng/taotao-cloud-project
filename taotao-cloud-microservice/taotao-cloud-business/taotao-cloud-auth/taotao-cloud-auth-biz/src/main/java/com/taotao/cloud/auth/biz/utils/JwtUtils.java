@@ -20,6 +20,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.Set;
+
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
 import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
@@ -29,9 +30,17 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+/**
+ * JwtUtils
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class JwtUtils {
 
-    private JwtUtils() {}
+    private JwtUtils() {
+    }
 
     public static JwsHeader.Builder headers() {
         return JwsHeader.with(SignatureAlgorithm.RS256);
@@ -41,7 +50,7 @@ public class JwtUtils {
             RegisteredClient registeredClient,
             String issuer,
             String subject,
-            Set<String> authorizedScopes) {
+            Set<String> authorizedScopes ) {
 
         Instant issuedAt = Instant.now();
         Instant expiresAt =
@@ -67,7 +76,7 @@ public class JwtUtils {
     }
 
     public static JwtClaimsSet.Builder idTokenClaims(
-            RegisteredClient registeredClient, String issuer, String subject, String nonce) {
+            RegisteredClient registeredClient, String issuer, String subject, String nonce ) {
 
         Instant issuedAt = Instant.now();
         // TODO Allow configuration for ID Token time-to-live

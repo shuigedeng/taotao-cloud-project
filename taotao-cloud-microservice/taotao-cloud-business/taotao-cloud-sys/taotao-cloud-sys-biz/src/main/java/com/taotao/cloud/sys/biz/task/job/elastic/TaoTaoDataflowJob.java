@@ -36,7 +36,7 @@ import org.springframework.stereotype.Component;
 public class TaoTaoDataflowJob implements DataflowJob<TaoTaoDataflowJob.Foo> {
 
     @Override
-    public List<Foo> fetchData(final ShardingContext shardingContext) {
+    public List<Foo> fetchData( final ShardingContext shardingContext ) {
         // 获取数据
         LogUtils.info("MyDataflowJob *******************");
         LogUtils.info(
@@ -50,7 +50,7 @@ public class TaoTaoDataflowJob implements DataflowJob<TaoTaoDataflowJob.Foo> {
     }
 
     @Override
-    public void processData(final ShardingContext shardingContext, final List<Foo> data) {
+    public void processData( final ShardingContext shardingContext, final List<Foo> data ) {
         // 处理数据
         LogUtils.info(
                 "Item : {}, Time: {}, Thread: {}, type:  {}",
@@ -60,13 +60,20 @@ public class TaoTaoDataflowJob implements DataflowJob<TaoTaoDataflowJob.Foo> {
                 "DATAFLOW");
     }
 
+    /**
+     * Foo
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class Foo implements Serializable {
 
         private final long id;
         private final String location;
         private final String status;
 
-        public Foo(long id, String location, String status) {
+        public Foo( long id, String location, String status ) {
             this.id = id;
             this.location = location;
             this.status = status;

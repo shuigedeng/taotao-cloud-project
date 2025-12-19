@@ -17,15 +17,23 @@
 package com.taotao.cloud.job.common.domain;
 
 import java.io.Serializable;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * WorkerAppInfo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @NoArgsConstructor
 public class WorkerAppInfo implements Serializable {
 
-    /**
-     * 应用唯一 ID
-     */
-    private Long appId;
+	/**
+	 * 应用唯一 ID
+	 */
+	private Long appId;
 }

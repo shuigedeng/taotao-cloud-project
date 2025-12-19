@@ -18,10 +18,19 @@ package com.taotao.cloud.auth.biz.management.compliance.processor.loginrisk;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.util.Date;
+
 import lombok.Data;
 import lombok.experimental.*;
 
+/**
+ * LoginLog
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 public class LoginLog {
 

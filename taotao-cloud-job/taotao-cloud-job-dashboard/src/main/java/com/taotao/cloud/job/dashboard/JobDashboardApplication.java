@@ -21,22 +21,29 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
+/**
+ * JobDashboardApplication
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @SpringBootApplication
 public class JobDashboardApplication extends SpringBootServletInitializer {
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(JobDashboardApplication.class);
-    }
+	@Override
+	protected SpringApplicationBuilder configure( SpringApplicationBuilder builder ) {
+		return builder.sources(JobDashboardApplication.class);
+	}
 
-    public static void main(String[] args) {
-        System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
+	public static void main( String[] args ) {
+		System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
 
-        new StartupSpringApplication(JobDashboardApplication.class)
-                .setTtcBanner()
-                .setTtcProfileIfNotExists("dev")
-                .setTtcApplicationProperty("taotao-cloud-job-dashboard")
-                .setTtcAllowBeanDefinitionOverriding(true)
-                .run(args);
-    }
+		new StartupSpringApplication(JobDashboardApplication.class)
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-job-dashboard")
+			.setTtcAllowBeanDefinitionOverriding(true)
+			.run(args);
+	}
 }

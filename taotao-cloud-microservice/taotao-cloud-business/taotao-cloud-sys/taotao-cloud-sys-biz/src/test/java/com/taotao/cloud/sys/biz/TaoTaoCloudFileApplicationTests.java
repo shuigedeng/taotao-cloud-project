@@ -19,9 +19,17 @@ package com.taotao.cloud.sys.biz;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+/**
+ * TaoTaoCloudFileApplicationTests
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @SpringBootTest
 class TaoTaoCloudFileApplicationTests {
 
     @Test
-    void contextLoads() {}
+    void contextLoads() {
+    }
 }

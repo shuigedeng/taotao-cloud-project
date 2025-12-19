@@ -16,4 +16,13 @@
 
 package com.taotao.cloud.auth.biz.management.compliance.processor.loginrisk;
 
-public class OperateEnum {}
+/**
+ * OperateEnum
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
+public class OperateEnum {
+
+}

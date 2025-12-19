@@ -2,10 +2,19 @@ package com.taotao.cloud.sys.biz.supports.mbg;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.annotation.Generated;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * App
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class App implements Serializable {
+
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     private Long id;
 
@@ -48,7 +57,7 @@ public class App implements Serializable {
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setId(Long id) {
+    public void setId( Long id ) {
         this.id = id;
     }
 
@@ -58,7 +67,7 @@ public class App implements Serializable {
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setCreateBy(Long createBy) {
+    public void setCreateBy( Long createBy ) {
         this.createBy = createBy;
     }
 
@@ -68,7 +77,7 @@ public class App implements Serializable {
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setCreateTime(LocalDateTime createTime) {
+    public void setCreateTime( LocalDateTime createTime ) {
         this.createTime = createTime;
     }
 
@@ -78,7 +87,7 @@ public class App implements Serializable {
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setDelFlag(Boolean delFlag) {
+    public void setDelFlag( Boolean delFlag ) {
         this.delFlag = delFlag;
     }
 
@@ -88,7 +97,7 @@ public class App implements Serializable {
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setUpdateBy(Long updateBy) {
+    public void setUpdateBy( Long updateBy ) {
         this.updateBy = updateBy;
     }
 
@@ -98,7 +107,7 @@ public class App implements Serializable {
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setUpdateTime(LocalDateTime updateTime) {
+    public void setUpdateTime( LocalDateTime updateTime ) {
         this.updateTime = updateTime;
     }
 
@@ -108,7 +117,7 @@ public class App implements Serializable {
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setVersion(Integer version) {
+    public void setVersion( Integer version ) {
         this.version = version;
     }
 
@@ -118,7 +127,7 @@ public class App implements Serializable {
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setCode(String code) {
+    public void setCode( String code ) {
         this.code = code == null ? null : code.trim();
     }
 
@@ -128,7 +137,7 @@ public class App implements Serializable {
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setIcon(String icon) {
+    public void setIcon( String icon ) {
         this.icon = icon == null ? null : icon.trim();
     }
 
@@ -138,7 +147,7 @@ public class App implements Serializable {
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setName(String name) {
+    public void setName( String name ) {
         this.name = name == null ? null : name.trim();
     }
 
@@ -148,7 +157,7 @@ public class App implements Serializable {
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setSort(Integer sort) {
+    public void setSort( Integer sort ) {
         this.sort = sort;
     }
 

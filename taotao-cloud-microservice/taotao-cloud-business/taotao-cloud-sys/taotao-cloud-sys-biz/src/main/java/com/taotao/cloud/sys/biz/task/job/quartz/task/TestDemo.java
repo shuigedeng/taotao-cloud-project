@@ -19,10 +19,17 @@ package com.taotao.cloud.sys.biz.task.job.quartz.task;
 import com.taotao.boot.common.utils.log.LogUtils;
 import org.springframework.stereotype.Component;
 
+/**
+ * TestDemo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component("TestDemo")
 public class TestDemo {
 
-    public void doExecute(String params) throws Exception {
+    public void doExecute( String params ) throws Exception {
         LogUtils.info("quartz1 TestDemo,方法参数:{}", params);
     }
 }

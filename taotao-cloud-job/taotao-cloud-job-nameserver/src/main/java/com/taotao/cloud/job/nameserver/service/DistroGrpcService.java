@@ -25,15 +25,25 @@ import com.taotao.cloud.job.remote.protos.DistroCausa;
 import com.taotao.cloud.job.remote.protos.RegisterCausa;
 import com.taotao.cloud.remote.api.DistroGrpc;
 import io.grpc.stub.StreamObserver;
+
 import java.util.HashSet;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
 
+/**
+ * DistroGrpcService
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @GrpcService
 @AllArgsConstructor
 @Slf4j
 public class DistroGrpcService extends DistroGrpc.DistroImplBase {
+
     private final ServerIpAddressManager serverIpAddressManager;
 
     private final DistroClientDataProcessor process;
@@ -43,7 +53,7 @@ public class DistroGrpcService extends DistroGrpc.DistroImplBase {
     @Override
     public void clusterDataCheck(
             DistroCausa.DataCheckReq request,
-            StreamObserver<CommonCausa.Response> responseObserver) {
+            StreamObserver<CommonCausa.Response> responseObserver ) {
         String checkSum = request.getCheckSum();
         if (!serverIpAddressManager.calculateChecksum().equals(checkSum)) {
             responseObserver.onNext(
@@ -60,7 +70,7 @@ public class DistroGrpcService extends DistroGrpc.DistroImplBase {
     @Override
     public void syncNodeInfo(
             DistroCausa.SyncNodeInfoReq request,
-            StreamObserver<CommonCausa.Response> responseObserver) {
+            StreamObserver<CommonCausa.Response> responseObserver ) {
         syncCurNode(request);
         CommonCausa.Response build = CommonCausa.Response.newBuilder().build();
         responseObserver.onNext(build);
@@ -70,7 +80,7 @@ public class DistroGrpcService extends DistroGrpc.DistroImplBase {
     @Override
     public void redirectSyncInfo(
             DistroCausa.SyncNodeInfoReq request,
-            StreamObserver<CommonCausa.Response> responseObserver) {
+            StreamObserver<CommonCausa.Response> responseObserver ) {
         boolean b1 = syncCurNode(request);
         boolean b2 = process.syncNodeInfoToOthers(request);
         if (b1 && b2) {
@@ -83,7 +93,7 @@ public class DistroGrpcService extends DistroGrpc.DistroImplBase {
         responseObserver.onCompleted();
     }
 
-    private boolean syncCurNode(DistroCausa.SyncNodeInfoReq request) {
+    private boolean syncCurNode( DistroCausa.SyncNodeInfoReq request ) {
         try {
             switch (request.getOperation()) {
                 case RemoteConstant.INCREMENTAL_ADD_SERVER:

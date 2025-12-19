@@ -24,11 +24,18 @@ import lombok.experimental.*;
 import java.io.Serial;
 import java.io.Serializable;
 
+/**
+ * UserExport
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 public class UserExport implements Serializable {
 
     @Serial
-	private static final long serialVersionUID = -5298570444065758538L;
+    private static final long serialVersionUID = -5298570444065758538L;
 
     @Excel(name = "用户编号", orderNum = "0", width = 30, isImportField = "true_st")
     private Long id;

@@ -18,10 +18,19 @@ package com.taotao.cloud.sys.biz.supports.netty;
 
 import io.netty.util.HashedWheelTimer;
 import io.netty.util.Timeout;
+
 import java.util.concurrent.TimeUnit;
+
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * HashedWheelTimerTester
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class HashedWheelTimerTester {
 
@@ -66,7 +75,7 @@ public class HashedWheelTimerTester {
         timer.newTimeout(tm.task(), 3, TimeUnit.SECONDS);
     }
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         simpleHashedWheelTimer();
 
         reScheduleHashedWheelTimer();

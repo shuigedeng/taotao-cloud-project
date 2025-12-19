@@ -18,8 +18,16 @@ package com.taotao.cloud.sys.biz.config.event.sys;
 
 import org.springframework.context.ApplicationEvent;
 
+/**
+ * SysEvent
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class SysEvent extends ApplicationEvent {
-    public SysEvent(Object source) {
+
+    public SysEvent( Object source ) {
         super(source);
     }
 }

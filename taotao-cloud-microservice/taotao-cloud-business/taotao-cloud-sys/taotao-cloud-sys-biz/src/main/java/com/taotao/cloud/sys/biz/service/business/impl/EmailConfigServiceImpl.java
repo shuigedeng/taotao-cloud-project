@@ -30,24 +30,24 @@ import org.springframework.transaction.annotation.Transactional;
 // import org.springframework.cache.annotation.CacheEvict;
 // import org.springframework.cache.annotation.Cacheable;
 
+/**
+ * EmailConfigServiceImpl
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Service
 @AllArgsConstructor
 // @CacheConfig(cacheNames = "emailConfig")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class EmailConfigServiceImpl extends ServiceImpl<IEmailConfigMapper, EmailConfig>
-        implements IEmailConfigService {
-
-    // private final IGenerator generator;
-    //
-    // public EmailConfigServiceImpl(IGenerator generator) {
-    //
-    //	this.generator = generator;
-    // }
+public class EmailConfigServiceImpl extends ServiceImpl<IEmailConfigMapper, EmailConfig> implements
+        IEmailConfigService {
 
     @Override
     //    @CachePut(key = "'1'")
     @Transactional(rollbackFor = Exception.class)
-    public Boolean update(EmailConfig emailConfig, EmailConfig old) {
+    public Boolean update( EmailConfig emailConfig, EmailConfig old ) {
         // try {
         //    if (!emailConfig.getPass().equals(old.getPass())) {
         //        // 对称加密
@@ -69,7 +69,7 @@ public class EmailConfigServiceImpl extends ServiceImpl<IEmailConfigMapper, Emai
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void send(EmailVO emailVo, EmailConfig emailConfig) {
+    public void send( EmailVO emailVo, EmailConfig emailConfig ) {
         // if (emailConfig == null) {
         //    throw new BadRequestException("请先配置，再操作");
         // }

@@ -19,6 +19,13 @@ package com.taotao.cloud.sys.api.model.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import com.taotao.boot.common.utils.lang.StringUtils;
 
+/**
+ * ScheduledJobDTO
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Schema(title = "scheduled定时任务")
 public class ScheduledJobDTO {
 
@@ -69,7 +76,7 @@ public class ScheduledJobDTO {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId( String id ) {
         this.id = id;
     }
 
@@ -80,7 +87,7 @@ public class ScheduledJobDTO {
         return remark;
     }
 
-    public void setRemark(String remark) {
+    public void setRemark( String remark ) {
         this.remark = remark;
     }
 
@@ -88,7 +95,7 @@ public class ScheduledJobDTO {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName( String name ) {
         this.name = name;
     }
 
@@ -96,7 +103,7 @@ public class ScheduledJobDTO {
         return invokeTarget;
     }
 
-    public void setInvokeTarget(String invokeTarget) {
+    public void setInvokeTarget( String invokeTarget ) {
         this.invokeTarget = invokeTarget;
     }
 
@@ -104,7 +111,7 @@ public class ScheduledJobDTO {
         return cycle;
     }
 
-    public void setCycle(String cycle) {
+    public void setCycle( String cycle ) {
         this.cycle = cycle;
     }
 
@@ -112,7 +119,7 @@ public class ScheduledJobDTO {
         return policy;
     }
 
-    public void setPolicy(Integer policy) {
+    public void setPolicy( Integer policy ) {
         this.policy = policy;
     }
 
@@ -120,7 +127,7 @@ public class ScheduledJobDTO {
         return week;
     }
 
-    public void setWeek(String week) {
+    public void setWeek( String week ) {
         this.week = week;
     }
 
@@ -128,7 +135,7 @@ public class ScheduledJobDTO {
         return month;
     }
 
-    public void setMonth(String month) {
+    public void setMonth( String month ) {
         this.month = month;
     }
 
@@ -136,7 +143,7 @@ public class ScheduledJobDTO {
         return day;
     }
 
-    public void setDay(String day) {
+    public void setDay( String day ) {
         this.day = day;
     }
 
@@ -144,7 +151,7 @@ public class ScheduledJobDTO {
         return hour;
     }
 
-    public void setHour(String hour) {
+    public void setHour( String hour ) {
         this.hour = hour;
     }
 
@@ -152,7 +159,7 @@ public class ScheduledJobDTO {
         return minute;
     }
 
-    public void setMinute(String minute) {
+    public void setMinute( String minute ) {
         this.minute = StringUtils.isBlank(minute) ? "0" : minute;
     }
 
@@ -160,7 +167,7 @@ public class ScheduledJobDTO {
         return secods;
     }
 
-    public void setSecods(String secods) {
+    public void setSecods( String secods ) {
         this.secods = StringUtils.isBlank(secods) ? "0" : secods;
     }
 }

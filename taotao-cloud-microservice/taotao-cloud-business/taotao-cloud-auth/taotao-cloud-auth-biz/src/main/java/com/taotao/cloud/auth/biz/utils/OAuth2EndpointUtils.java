@@ -17,11 +17,13 @@
 package com.taotao.cloud.auth.biz.utils;
 
 import jakarta.servlet.http.HttpServletRequest;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Supplier;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.*;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
@@ -30,18 +32,26 @@ import org.springframework.security.oauth2.server.authorization.authentication.O
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+/**
+ * OAuth2EndpointUtils
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class OAuth2EndpointUtils {
 
     public static final String ACCESS_TOKEN_REQUEST_ERROR_URI =
             "https://datatracker.ietf.org/doc/html/rfc6749#section-5.2";
 
-    private OAuth2EndpointUtils() {}
+    private OAuth2EndpointUtils() {
+    }
 
-    public static MultiValueMap<String, String> getParameters(HttpServletRequest request) {
+    public static MultiValueMap<String, String> getParameters( HttpServletRequest request ) {
         Map<String, String[]> parameterMap = request.getParameterMap();
         MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>(parameterMap.size());
         parameterMap.forEach(
-                (key, values) -> {
+                ( key, values ) -> {
                     for (String value : values) {
                         parameters.add(key, value);
                     }
@@ -49,21 +59,21 @@ public class OAuth2EndpointUtils {
         return parameters;
     }
 
-    public static boolean matchesPkceTokenRequest(HttpServletRequest request) {
+    public static boolean matchesPkceTokenRequest( HttpServletRequest request ) {
         return AuthorizationGrantType.AUTHORIZATION_CODE
-                        .getValue()
-                        .equals(request.getParameter(OAuth2ParameterNames.GRANT_TYPE))
+                .getValue()
+                .equals(request.getParameter(OAuth2ParameterNames.GRANT_TYPE))
                 && request.getParameter(OAuth2ParameterNames.CODE) != null
                 && request.getParameter(PkceParameterNames.CODE_VERIFIER) != null;
     }
 
-    public static void throwError(String errorCode, String description, String errorUri) {
+    public static void throwError( String errorCode, String description, String errorUri ) {
         OAuth2Error error = new OAuth2Error(errorCode, description, errorUri);
         throw new OAuth2AuthenticationException(error);
     }
 
     public static OAuth2ClientAuthenticationToken getAuthenticatedClientElseThrowInvalidClient(
-            Authentication authentication) {
+            Authentication authentication ) {
         if (Objects.nonNull(authentication)) {
             // if (authentication instanceof PasswordAuthenticationToken passwordAuthentication) {
             //
@@ -100,7 +110,7 @@ public class OAuth2EndpointUtils {
     }
 
     public static OAuth2RefreshToken generateRefreshToken(
-            Duration tokenTimeToLive, Supplier<String> refreshTokenGenerator) {
+            Duration tokenTimeToLive, Supplier<String> refreshTokenGenerator ) {
         Instant issuedAt = Instant.now();
         Instant expiresAt = issuedAt.plus(tokenTimeToLive);
         return new OAuth2RefreshToken(refreshTokenGenerator.get(), issuedAt, expiresAt);

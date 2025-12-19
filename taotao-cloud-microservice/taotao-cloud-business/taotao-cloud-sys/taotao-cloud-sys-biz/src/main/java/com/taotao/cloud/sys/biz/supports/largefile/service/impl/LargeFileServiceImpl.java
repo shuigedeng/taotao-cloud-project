@@ -33,123 +33,131 @@ import java.util.Objects;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * LargeFileServiceImpl
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Service
 @Slf4j
 public class LargeFileServiceImpl implements LargeFileService, InitializingBean {
 
-	@Autowired
-	private RedisUtil redisUtil;
+    @Autowired
+    private RedisUtil redisUtil;
 
-	@Autowired
-	private FilePathUtil filePathUtil;
+    @Autowired
+    private FilePathUtil filePathUtil;
 
-	@Autowired
-	private LargefileProperties largefileProperties;
+    @Autowired
+    private LargefileProperties largefileProperties;
 
-	private AtomicInteger atomicInteger = new AtomicInteger(0);
+    private AtomicInteger atomicInteger = new AtomicInteger(0);
 
-	private ExecutorService executorService;
-	private CompletionService<FileUpload> completionService;
+    private ExecutorService executorService;
+    private CompletionService<FileUpload> completionService;
 
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		executorService = Executors.newFixedThreadPool(
-			largefileProperties.getThreadMaxSize(), (r) -> {
-				String threadName = "uploadPool-" + atomicInteger.getAndIncrement();
-				Thread thread = new Thread(r);
-				thread.setName(threadName);
-				return thread;
-			});
-		completionService = new ExecutorCompletionService<>(
-			executorService,
-			new LinkedBlockingDeque<>(
-				largefileProperties.getQueueMaxSize()));
-	}
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        executorService = Executors.newFixedThreadPool(
+                largefileProperties.getThreadMaxSize(), ( r ) -> {
+                    String threadName = "uploadPool-" + atomicInteger.getAndIncrement();
+                    Thread thread = new Thread(r);
+                    thread.setName(threadName);
+                    return thread;
+                });
+        completionService = new ExecutorCompletionService<>(
+                executorService,
+                new LinkedBlockingDeque<>(
+                        largefileProperties.getQueueMaxSize()));
+    }
 
-	@Override
-	public FileUpload upload(FileUploadRequest param) throws IOException {
-		if (Objects.isNull(param.getFile())) {
-			throw new RuntimeException("file can not be empty");
-		}
+    @Override
+    public FileUpload upload( FileUploadRequest param ) throws IOException {
+        if (Objects.isNull(param.getFile())) {
+            throw new RuntimeException("file can not be empty");
+        }
 
-		param.setPath(FileUtil.withoutHeadAndTailDiagonal(param.getPath()));
-		String md5 = FileMD5Util.getFileMD5(param.getFile());
-		param.setMd5(md5);
+        param.setPath(FileUtil.withoutHeadAndTailDiagonal(param.getPath()));
+        String md5 = FileMD5Util.getFileMD5(param.getFile());
+        param.setMd5(md5);
 
-		String filePath = filePathUtil.getPath(param);
-		File targetFile = new File(filePath);
-		if (!targetFile.exists()) {
-			targetFile.mkdirs();
-		}
+        String filePath = filePathUtil.getPath(param);
+        File targetFile = new File(filePath);
+        if (!targetFile.exists()) {
+            targetFile.mkdirs();
+        }
 
-		String path =
-			filePath + FileConstant.FILE_SEPARATORCHAR + param.getFile().getOriginalFilename();
-		FileOutputStream out = new FileOutputStream(path);
-		out.write(param.getFile().getBytes());
-		out.flush();
-		FileUtil.close(out);
+        String path =
+                filePath + FileConstant.FILE_SEPARATORCHAR + param.getFile().getOriginalFilename();
+        FileOutputStream out = new FileOutputStream(path);
+        out.write(param.getFile().getBytes());
+        out.flush();
+        FileUtil.close(out);
 
-		redisUtil.hset(FileConstant.FILE_UPLOAD_STATUS, md5, "true");
+        redisUtil.hset(FileConstant.FILE_UPLOAD_STATUS, md5, "true");
 
-		return FileUpload.builder()
-			.path(path)
-			.mtime(DateUtil.getCurrentTimeStamp())
-			.uploadComplete(true)
-			.build();
-	}
+        return FileUpload.builder()
+                .path(path)
+                .mtime(DateUtil.getCurrentTimeStamp())
+                .uploadComplete(true)
+                .build();
+    }
 
-	@Override
-	public FileUpload sliceUpload(FileUploadRequest fileUploadRequestDTO) {
-		try {
-			completionService.submit(new FileCallable(UploadModeEnum.RANDOM_ACCESS, fileUploadRequestDTO));
+    @Override
+    public FileUpload sliceUpload( FileUploadRequest fileUploadRequestDTO ) {
+        try {
+            completionService.submit(new FileCallable(UploadModeEnum.RANDOM_ACCESS, fileUploadRequestDTO));
 
-			return completionService.take().get();
-		} catch (InterruptedException | ExecutionException e) {
-			log.error(e.getMessage(), e);
-			throw new RuntimeException(e.getMessage());
-		}
-	}
+            return completionService.take().get();
+        } catch (InterruptedException | ExecutionException e) {
+            log.error(e.getMessage(), e);
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 
-	@Override
-	public FileUpload checkFileMd5(FileUploadRequest param) throws IOException {
-		Object uploadProgressObj = redisUtil.hget(FileConstant.FILE_UPLOAD_STATUS, param.getMd5());
-		if (uploadProgressObj == null) {
-			FileUpload fileMd5DTO = FileUpload.builder()
-				.code(FileCheckMd5Status.FILE_NO_UPLOAD.getValue())
-				.build();
-			return fileMd5DTO;
-		}
-		String processingStr = uploadProgressObj.toString();
-		boolean processing = Boolean.parseBoolean(processingStr);
-		String value = String.valueOf(redisUtil.get(FileConstant.FILE_MD5_KEY + param.getMd5()));
-		return fillFileUploadDTO(param, processing, value);
-	}
+    @Override
+    public FileUpload checkFileMd5( FileUploadRequest param ) throws IOException {
+        Object uploadProgressObj = redisUtil.hget(FileConstant.FILE_UPLOAD_STATUS, param.getMd5());
+        if (uploadProgressObj == null) {
+            FileUpload fileMd5DTO = FileUpload.builder()
+                    .code(FileCheckMd5Status.FILE_NO_UPLOAD.getValue())
+                    .build();
+            return fileMd5DTO;
+        }
+        String processingStr = uploadProgressObj.toString();
+        boolean processing = Boolean.parseBoolean(processingStr);
+        String value = String.valueOf(redisUtil.get(FileConstant.FILE_MD5_KEY + param.getMd5()));
+        return fillFileUploadDTO(param, processing, value);
+    }
 
-	/**
-	 * 填充返回文件内容信息
-	 */
-	private FileUpload fillFileUploadDTO(FileUploadRequest param, boolean processing, String value) throws IOException {
+    /**
+     * 填充返回文件内容信息
+     */
+    private FileUpload fillFileUploadDTO( FileUploadRequest param, boolean processing, String value )
+            throws IOException {
 
-		if (processing) {
-			param.setPath(FileUtil.withoutHeadAndTailDiagonal(param.getPath()));
-			String path = filePathUtil.getPath(param);
-			return FileUpload.builder()
-				.code(FileCheckMd5Status.FILE_UPLOADED.getValue())
-				.path(path)
-				.build();
-		} else {
-			File confFile = new File(value);
-			byte[] completeList = FileUtils.readFileToByteArray(confFile);
-			List<Integer> missChunkList = new LinkedList<>();
-			for (int i = 0; i < completeList.length; i++) {
-				if (completeList[i] != Byte.MAX_VALUE) {
-					missChunkList.add(i);
-				}
-			}
-			return FileUpload.builder()
-				.code(FileCheckMd5Status.FILE_UPLOAD_SOME.getValue())
-				.missChunks(missChunkList)
-				.build();
-		}
-	}
+        if (processing) {
+            param.setPath(FileUtil.withoutHeadAndTailDiagonal(param.getPath()));
+            String path = filePathUtil.getPath(param);
+            return FileUpload.builder()
+                    .code(FileCheckMd5Status.FILE_UPLOADED.getValue())
+                    .path(path)
+                    .build();
+        } else {
+            File confFile = new File(value);
+            byte[] completeList = FileUtils.readFileToByteArray(confFile);
+            List<Integer> missChunkList = new LinkedList<>();
+            for (int i = 0; i < completeList.length; i++) {
+                if (completeList[i] != Byte.MAX_VALUE) {
+                    missChunkList.add(i);
+                }
+            }
+            return FileUpload.builder()
+                    .code(FileCheckMd5Status.FILE_UPLOAD_SOME.getValue())
+                    .missChunks(missChunkList)
+                    .build();
+        }
+    }
 }

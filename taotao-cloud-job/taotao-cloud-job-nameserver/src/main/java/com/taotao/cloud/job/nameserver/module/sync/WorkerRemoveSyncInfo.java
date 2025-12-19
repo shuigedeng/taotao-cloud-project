@@ -18,9 +18,17 @@ package com.taotao.cloud.job.nameserver.module.sync;
 
 import lombok.Getter;
 
+/**
+ * WorkerRemoveSyncInfo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Getter
 public class WorkerRemoveSyncInfo extends SyncInfo {
-    public WorkerRemoveSyncInfo(String clientIp, String appName) {
+
+    public WorkerRemoveSyncInfo( String clientIp, String appName ) {
         super(clientIp);
         this.appName = appName;
     }

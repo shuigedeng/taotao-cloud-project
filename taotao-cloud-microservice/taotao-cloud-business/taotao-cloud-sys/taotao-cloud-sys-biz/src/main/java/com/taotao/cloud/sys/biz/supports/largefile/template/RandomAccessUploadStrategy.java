@@ -18,14 +18,23 @@ package com.taotao.cloud.sys.biz.supports.largefile.template;
 
 import com.taotao.cloud.sys.biz.supports.largefile.po.FileUploadRequest;
 import com.taotao.cloud.sys.biz.supports.largefile.util.FilePathUtil;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Objects;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
+/**
+ * RandomAccessUploadStrategy
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class RandomAccessUploadStrategy extends SliceUploadTemplate {
 
@@ -36,7 +45,7 @@ public class RandomAccessUploadStrategy extends SliceUploadTemplate {
     private long defaultChunkSize;
 
     @Override
-    public boolean upload(FileUploadRequest param) {
+    public boolean upload( FileUploadRequest param ) {
         RandomAccessFile accessTmpFile = null;
         try {
             String uploadDirPath = filePathUtil.getPath(param);

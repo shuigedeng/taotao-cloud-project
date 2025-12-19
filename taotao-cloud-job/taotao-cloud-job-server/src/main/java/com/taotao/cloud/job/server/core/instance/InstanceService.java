@@ -20,15 +20,25 @@ import com.taotao.cloud.job.common.enums.InstanceStatus;
 import com.taotao.cloud.job.server.core.uid.IdGenerateService;
 import com.taotao.cloud.job.server.persistence.domain.InstanceInfo;
 import com.taotao.cloud.job.server.persistence.mapper.InstanceInfoMapper;
+
 import java.util.Date;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+/**
+ * InstanceService
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class InstanceService {
+
     private final InstanceInfoMapper instanceInfoMapper;
     private final IdGenerateService idGenerateService;
 
@@ -38,7 +48,7 @@ public class InstanceService {
             String jobParams,
             String instanceParams,
             Long wfInstanceId,
-            Long expectTriggerTime) {
+            Long expectTriggerTime ) {
 
         Long instanceId = idGenerateService.allocate();
         Date now = new Date();

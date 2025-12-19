@@ -20,20 +20,29 @@ import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.biz.supports.largefile.po.FileUploadRequest;
 import com.taotao.cloud.sys.biz.supports.largefile.strategy.SliceUploadStrategy;
 import com.taotao.cloud.sys.biz.supports.largefile.util.FilePathUtil;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.HashMap;
 import java.util.Map;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 
+/**
+ * SliceUploadTemplate
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public abstract class SliceUploadTemplate implements SliceUploadStrategy {
 
-    public abstract boolean upload(FileUploadRequest param);
+    public abstract boolean upload( FileUploadRequest param );
 
-    protected File createTmpFile(FileUploadRequest param) {
+    protected File createTmpFile( FileUploadRequest param ) {
         FilePathUtil filePathUtil = SpringContextHolder.getBean(FilePathUtil.class);
         param.setPath(FileUtil.withoutHeadAndTailDiagonal(param.getPath()));
 
@@ -49,7 +58,7 @@ public abstract class SliceUploadTemplate implements SliceUploadStrategy {
     }
 
     @Override
-    public FileUpload sliceUpload(FileUploadRequest param) {
+    public FileUpload sliceUpload( FileUploadRequest param ) {
 
         boolean isOk = this.upload(param);
         if (isOk) {
@@ -64,8 +73,10 @@ public abstract class SliceUploadTemplate implements SliceUploadStrategy {
         return FileUpload.builder().chunkMd5Info(map).build();
     }
 
-    /** 检查并修改文件上传进度 */
-    public boolean checkAndSetUploadProgress(FileUploadRequest param, String uploadDirPath) {
+    /**
+     * 检查并修改文件上传进度
+     */
+    public boolean checkAndSetUploadProgress( FileUploadRequest param, String uploadDirPath ) {
 
         String fileName = param.getFile().getOriginalFilename();
         File confFile = new File(uploadDirPath, fileName + ".conf");
@@ -85,7 +96,7 @@ public abstract class SliceUploadTemplate implements SliceUploadStrategy {
             isComplete = Byte.MAX_VALUE;
             for (int i = 0; i < completeList.length && isComplete == Byte.MAX_VALUE; i++) {
                 // 与运算, 如果有部分没有完成则 isComplete 不是 Byte.MAX_VALUE
-                isComplete = (byte) (isComplete & completeList[i]);
+                isComplete = (byte) ( isComplete & completeList[i] );
                 LogUtils.info("check part " + i + " complete?:" + completeList[i]);
             }
 
@@ -98,9 +109,11 @@ public abstract class SliceUploadTemplate implements SliceUploadStrategy {
         return isOk;
     }
 
-    /** 把上传进度信息存进redis */
+    /**
+     * 把上传进度信息存进redis
+     */
     private boolean setUploadProgress2Redis(
-            FileUploadRequest param, String uploadDirPath, String fileName, File confFile, byte isComplete) {
+            FileUploadRequest param, String uploadDirPath, String fileName, File confFile, byte isComplete ) {
 
         RedisUtil redisUtil = SpringContextHolder.getBean(RedisUtil.class);
         if (isComplete == Byte.MAX_VALUE) {
@@ -120,8 +133,10 @@ public abstract class SliceUploadTemplate implements SliceUploadStrategy {
         }
     }
 
-    /** 保存文件操作 */
-    public FileUpload saveAndFileUploadDTO(String fileName, File tmpFile) {
+    /**
+     * 保存文件操作
+     */
+    public FileUpload saveAndFileUploadDTO( String fileName, File tmpFile ) {
 
         FileUpload fileUploadDTO = null;
 
@@ -148,7 +163,7 @@ public abstract class SliceUploadTemplate implements SliceUploadStrategy {
      * @param toBeRenamed 将要修改名字的文件
      * @param toFileNewName 新的名字
      */
-    private FileUpload renameFile(File toBeRenamed, String toFileNewName) {
+    private FileUpload renameFile( File toBeRenamed, String toFileNewName ) {
         // 检查要重命名的文件是否存在，是否是文件
         FileUpload fileUploadDTO = new FileUpload();
         if (!toBeRenamed.exists() || toBeRenamed.isDirectory()) {

@@ -28,12 +28,11 @@ import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 使用DelayedQueue实际上用一个队列就可以实现多级延迟
- * 但是为了支持高并发，使用多个delayQueue
- * 实际上也可以用普通队列，避免优先级排序的复杂度，但是要做线程安全保证
+ * 使用DelayedQueue实际上用一个队列就可以实现多级延迟 但是为了支持高并发，使用多个delayQueue 实际上也可以用普通队列，避免优先级排序的复杂度，但是要做线程安全保证
  */
 @Slf4j
 public class DelayedQueueManager {
+
     private static final Deque<MqCausa.Message> deadMessageQueue = new ArrayDeque<>();
 
     private static final List<DelayQueue<DelayedMessage>> delayQueueList = new ArrayList<>(2);
@@ -43,7 +42,7 @@ public class DelayedQueueManager {
      */
     private static List<Long> delayTimes = Lists.newArrayList(10000L, 5000L);
 
-    public static void init(Consumer consumer) {
+    public static void init( Consumer consumer ) {
         delayQueueList.add(new DelayQueue<>());
         delayQueueList.add(new DelayQueue<>());
         Thread consumerThread1 =
@@ -98,7 +97,7 @@ public class DelayedQueueManager {
         consumerThread2.start();
     }
 
-    public static void reConsume(MqCausa.Message msg) {
+    public static void reConsume( MqCausa.Message msg ) {
         if (msg.getRetryTime() == 0) {
             log.error("msg : {} is dead", msg);
             deadMessageQueue.add(msg);
@@ -111,11 +110,19 @@ public class DelayedQueueManager {
     }
 
     // 定义一个延时消息类，实现 Delayed 接口
+    /**
+     * DelayedMessage
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     static class DelayedMessage implements Delayed {
+
         private final MqCausa.Message message;
         private final long triggerTime; // 到期时间
 
-        public DelayedMessage(MqCausa.Message message, long delayTime) {
+        public DelayedMessage( MqCausa.Message message, long delayTime ) {
             this.message = message;
             // 当前时间加上延时时间，设置消息的触发时间
             this.triggerTime = System.currentTimeMillis() + delayTime;
@@ -123,16 +130,16 @@ public class DelayedQueueManager {
 
         // 获取剩余的延时时间
         @Override
-        public long getDelay(TimeUnit unit) {
+        public long getDelay( TimeUnit unit ) {
             return unit.convert(triggerTime - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
         }
 
         // 比较方法，用于确定消息的顺序
         @Override
-        public int compareTo(Delayed other) {
-            if (this.triggerTime < ((DelayedMessage) other).triggerTime) {
+        public int compareTo( Delayed other ) {
+            if (this.triggerTime < ( (DelayedMessage) other ).triggerTime) {
                 return -1;
-            } else if (this.triggerTime > ((DelayedMessage) other).triggerTime) {
+            } else if (this.triggerTime > ( (DelayedMessage) other ).triggerTime) {
                 return 1;
             }
             return 0;

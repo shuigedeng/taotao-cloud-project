@@ -26,7 +26,6 @@ import org.springframework.security.web.authentication.ui.DefaultLoginPageGenera
 /**
  * <p>OAuth2 合规性配置参数 </p>
  *
- *
  * @since : 2022/7/7 0:16
  */
 @ConfigurationProperties(prefix = OAuth2Constants.PROPERTY_OAUTH2_AUTHENTICATION)
@@ -55,7 +54,7 @@ public class OAuth2AuthenticationProperties {
         return signInEndpointLimited;
     }
 
-    public void setSignInEndpointLimited(SignInEndpointLimited signInEndpointLimited) {
+    public void setSignInEndpointLimited( SignInEndpointLimited signInEndpointLimited ) {
         this.signInEndpointLimited = signInEndpointLimited;
     }
 
@@ -63,7 +62,7 @@ public class OAuth2AuthenticationProperties {
         return signInFailureLimited;
     }
 
-    public void setSignInFailureLimited(SignInFailureLimited signInFailureLimited) {
+    public void setSignInFailureLimited( SignInFailureLimited signInFailureLimited ) {
         this.signInFailureLimited = signInFailureLimited;
     }
 
@@ -71,7 +70,7 @@ public class OAuth2AuthenticationProperties {
         return signInKickOutLimited;
     }
 
-    public void setSignInKickOutLimited(SignInKickOutLimited signInKickOutLimited) {
+    public void setSignInKickOutLimited( SignInKickOutLimited signInKickOutLimited ) {
         this.signInKickOutLimited = signInKickOutLimited;
     }
 
@@ -79,11 +78,19 @@ public class OAuth2AuthenticationProperties {
         return formLogin;
     }
 
-    public void setFormLogin(FormLogin formLogin) {
+    public void setFormLogin( FormLogin formLogin ) {
         this.formLogin = formLogin;
     }
 
+    /**
+     * SignInFailureLimited
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class SignInFailureLimited {
+
         /**
          * 是否开启登录失败检测，默认开启
          */
@@ -108,7 +115,7 @@ public class OAuth2AuthenticationProperties {
             return enabled;
         }
 
-        public void setEnabled(Boolean enabled) {
+        public void setEnabled( Boolean enabled ) {
             this.enabled = enabled;
         }
 
@@ -116,7 +123,7 @@ public class OAuth2AuthenticationProperties {
             return maxTimes;
         }
 
-        public void setMaxTimes(Integer maxTimes) {
+        public void setMaxTimes( Integer maxTimes ) {
             this.maxTimes = maxTimes;
         }
 
@@ -124,7 +131,7 @@ public class OAuth2AuthenticationProperties {
             return expire;
         }
 
-        public void setExpire(Duration expire) {
+        public void setExpire( Duration expire ) {
             this.expire = expire;
         }
 
@@ -132,7 +139,7 @@ public class OAuth2AuthenticationProperties {
             return autoUnlock;
         }
 
-        public void setAutoUnlock(Boolean autoUnlock) {
+        public void setAutoUnlock( Boolean autoUnlock ) {
             this.autoUnlock = autoUnlock;
         }
 
@@ -147,7 +154,15 @@ public class OAuth2AuthenticationProperties {
         }
     }
 
+    /**
+     * SignInEndpointLimited
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class SignInEndpointLimited {
+
         /**
          * 同一终端登录限制是否开启，默认开启。
          */
@@ -162,7 +177,7 @@ public class OAuth2AuthenticationProperties {
             return enabled;
         }
 
-        public void setEnabled(Boolean enabled) {
+        public void setEnabled( Boolean enabled ) {
             this.enabled = enabled;
         }
 
@@ -170,7 +185,7 @@ public class OAuth2AuthenticationProperties {
             return maximum;
         }
 
-        public void setMaximum(Integer maximum) {
+        public void setMaximum( Integer maximum ) {
             this.maximum = maximum;
         }
 
@@ -183,7 +198,15 @@ public class OAuth2AuthenticationProperties {
         }
     }
 
+    /**
+     * SignInKickOutLimited
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class SignInKickOutLimited {
+
         /**
          * 是否开启 Session 踢出功能，默认开启
          */
@@ -193,7 +216,7 @@ public class OAuth2AuthenticationProperties {
             return enabled;
         }
 
-        public void setEnabled(Boolean enabled) {
+        public void setEnabled( Boolean enabled ) {
             this.enabled = enabled;
         }
 
@@ -203,7 +226,15 @@ public class OAuth2AuthenticationProperties {
         }
     }
 
+    /**
+     * FormLogin
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class FormLogin {
+
         /**
          * UI 界面用户名标输入框 name 属性值
          */
@@ -259,7 +290,7 @@ public class OAuth2AuthenticationProperties {
             return usernameParameter;
         }
 
-        public void setUsernameParameter(String usernameParameter) {
+        public void setUsernameParameter( String usernameParameter ) {
             this.usernameParameter = usernameParameter;
         }
 
@@ -267,7 +298,7 @@ public class OAuth2AuthenticationProperties {
             return passwordParameter;
         }
 
-        public void setPasswordParameter(String passwordParameter) {
+        public void setPasswordParameter( String passwordParameter ) {
             this.passwordParameter = passwordParameter;
         }
 
@@ -275,7 +306,7 @@ public class OAuth2AuthenticationProperties {
             return rememberMeParameter;
         }
 
-        public void setRememberMeParameter(String rememberMeParameter) {
+        public void setRememberMeParameter( String rememberMeParameter ) {
             this.rememberMeParameter = rememberMeParameter;
         }
 
@@ -283,7 +314,7 @@ public class OAuth2AuthenticationProperties {
             return captchaParameter;
         }
 
-        public void setCaptchaParameter(String captchaParameter) {
+        public void setCaptchaParameter( String captchaParameter ) {
             this.captchaParameter = captchaParameter;
         }
 
@@ -291,7 +322,7 @@ public class OAuth2AuthenticationProperties {
             return loginPageUrl;
         }
 
-        public void setLoginPageUrl(String loginPageUrl) {
+        public void setLoginPageUrl( String loginPageUrl ) {
             this.loginPageUrl = loginPageUrl;
         }
 
@@ -299,7 +330,7 @@ public class OAuth2AuthenticationProperties {
             return failureForwardUrl;
         }
 
-        public void setFailureForwardUrl(String failureForwardUrl) {
+        public void setFailureForwardUrl( String failureForwardUrl ) {
             this.failureForwardUrl = failureForwardUrl;
         }
 
@@ -307,7 +338,7 @@ public class OAuth2AuthenticationProperties {
             return successForwardUrl;
         }
 
-        public void setSuccessForwardUrl(String successForwardUrl) {
+        public void setSuccessForwardUrl( String successForwardUrl ) {
             this.successForwardUrl = successForwardUrl;
         }
 
@@ -315,7 +346,7 @@ public class OAuth2AuthenticationProperties {
             return closeCaptcha;
         }
 
-        public void setCloseCaptcha(Boolean closeCaptcha) {
+        public void setCloseCaptcha( Boolean closeCaptcha ) {
             this.closeCaptcha = closeCaptcha;
         }
 
@@ -323,7 +354,7 @@ public class OAuth2AuthenticationProperties {
             return category;
         }
 
-        public void setCategory(String category) {
+        public void setCategory( String category ) {
             this.category = category;
         }
 

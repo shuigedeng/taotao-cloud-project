@@ -19,14 +19,22 @@ package com.taotao.cloud.job.server.consumer.entity;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+/**
+ * Response
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 public class Response {
+
     public ResponseEnum getRes() {
         return res;
     }
 
-    public void setRes(ResponseEnum res) {
+    public void setRes( ResponseEnum res ) {
         this.res = res;
     }
 

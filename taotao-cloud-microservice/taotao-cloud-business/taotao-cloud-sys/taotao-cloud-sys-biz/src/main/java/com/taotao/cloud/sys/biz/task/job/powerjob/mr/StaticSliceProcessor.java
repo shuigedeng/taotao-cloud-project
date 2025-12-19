@@ -27,12 +27,14 @@ import tech.powerjob.worker.core.processor.TaskResult;
 import tech.powerjob.worker.core.processor.sdk.MapReduceProcessor;
 import tech.powerjob.worker.log.OmsLogger;
 
-/** MapReduce 模拟 静态分片 典型的杀鸡焉用牛刀～ */
+/**
+ * MapReduce 模拟 静态分片 典型的杀鸡焉用牛刀～
+ */
 @Component
 public class StaticSliceProcessor implements MapReduceProcessor {
 
     @Override
-    public ProcessResult process(TaskContext context) throws Exception {
+    public ProcessResult process( TaskContext context ) throws Exception {
         OmsLogger omsLogger = context.getOmsLogger();
 
         // root task 负责分发任务
@@ -43,7 +45,7 @@ public class StaticSliceProcessor implements MapReduceProcessor {
                     Splitter.on("&").withKeyValueSeparator("=").split(jobParams);
 
             List<SubTask> subTasks = Lists.newLinkedList();
-            paramsMap.forEach((k, v) -> subTasks.add(new SubTask(Integer.parseInt(k), v)));
+            paramsMap.forEach(( k, v ) -> subTasks.add(new SubTask(Integer.parseInt(k), v)));
             map(subTasks, "SLICE_TASK");
             return new ProcessResult(true, "map successfully");
         }
@@ -53,23 +55,30 @@ public class StaticSliceProcessor implements MapReduceProcessor {
             // 实际处理
             // 当然，如果觉得 subTask 还是很大，也可以继续分发哦
 
-            return new ProcessResult(true, "subTask:" + ((SubTask) subTask).getIndex() + " process successfully");
+            return new ProcessResult(true, "subTask:" + ( (SubTask) subTask ).getIndex() + " process successfully");
         }
         return new ProcessResult(false, "UNKNOWN BUG");
     }
 
     @Override
-    public ProcessResult reduce(TaskContext context, List<TaskResult> taskResults) {
+    public ProcessResult reduce( TaskContext context, List<TaskResult> taskResults ) {
         // 按需求做一些统计工作... 不需要的话，直接使用 Map 处理器即可
         return new ProcessResult(true, "xxxx");
     }
 
+    /**
+     * SubTask
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     private static class SubTask {
 
         private int index;
         private String params;
 
-        public SubTask(int index, String params) {
+        public SubTask( int index, String params ) {
             this.index = index;
             this.params = params;
         }
@@ -78,7 +87,7 @@ public class StaticSliceProcessor implements MapReduceProcessor {
             return index;
         }
 
-        public void setIndex(int index) {
+        public void setIndex( int index ) {
             this.index = index;
         }
 
@@ -86,7 +95,7 @@ public class StaticSliceProcessor implements MapReduceProcessor {
             return params;
         }
 
-        public void setParams(String params) {
+        public void setParams( String params ) {
             this.params = params;
         }
     }

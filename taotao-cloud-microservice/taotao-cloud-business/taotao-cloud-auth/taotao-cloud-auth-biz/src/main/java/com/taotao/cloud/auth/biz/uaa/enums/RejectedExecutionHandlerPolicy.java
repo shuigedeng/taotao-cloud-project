@@ -27,38 +27,70 @@ public enum RejectedExecutionHandlerPolicy {
     /**
      * @see ThreadPoolExecutor.CallerRunsPolicy
      */
-    CALLER_RUNS {
+    CALLER_RUNS /**
+     * null
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+            class{
         @Override
-        public RejectedExecutionHandler getRejectedHandler() {
+        public RejectedExecutionHandler getRejectedHandler ( ) {
             return new ThreadPoolExecutor.CallerRunsPolicy();
         }
+    }{
     },
     /**
      * @see ThreadPoolExecutor.AbortPolicy
      */
-    ABORT {
+    ABORT /**
+     * null
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+            class{
         @Override
-        public RejectedExecutionHandler getRejectedHandler() {
+        public RejectedExecutionHandler getRejectedHandler ( ) {
             return new ThreadPoolExecutor.AbortPolicy();
         }
+    }{
     },
     /**
      * @see ThreadPoolExecutor.DiscardOldestPolicy
      */
-    DISCARD_OLDEST {
+    DISCARD_OLDEST /**
+     * null
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+            class{
         @Override
-        public RejectedExecutionHandler getRejectedHandler() {
+        public RejectedExecutionHandler getRejectedHandler ( ) {
             return new ThreadPoolExecutor.DiscardOldestPolicy();
         }
+    }{
     },
     /**
      * @see ThreadPoolExecutor.DiscardPolicy
      */
-    DISCARD {
+    DISCARD /**
+     * null
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+            class{
         @Override
-        public RejectedExecutionHandler getRejectedHandler() {
+        public RejectedExecutionHandler getRejectedHandler ( ) {
             return new ThreadPoolExecutor.DiscardPolicy();
         }
+    }{
     };
 
     public abstract RejectedExecutionHandler getRejectedHandler();

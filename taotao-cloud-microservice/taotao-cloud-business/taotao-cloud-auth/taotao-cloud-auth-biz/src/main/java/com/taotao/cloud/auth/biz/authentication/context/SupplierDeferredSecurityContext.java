@@ -17,7 +17,9 @@
 package com.taotao.cloud.auth.biz.authentication.context;
 
 import com.taotao.boot.core.runtime.report.ConditionEvaluationReportLogger;
+
 import java.util.function.Supplier;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.log.LogMessage;
@@ -25,9 +27,16 @@ import org.springframework.security.core.context.DeferredSecurityContext;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
 
+/**
+ * SupplierDeferredSecurityContext
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public final class SupplierDeferredSecurityContext implements DeferredSecurityContext {
 
-	private static final Logger logger = LoggerFactory.getLogger(SupplierDeferredSecurityContext.class);
+    private static final Logger logger = LoggerFactory.getLogger(SupplierDeferredSecurityContext.class);
 
     private final Supplier<SecurityContext> supplier;
 
@@ -38,7 +47,7 @@ public final class SupplierDeferredSecurityContext implements DeferredSecurityCo
     private boolean missingContext;
 
     public SupplierDeferredSecurityContext(
-            Supplier<SecurityContext> supplier, SecurityContextHolderStrategy strategy) {
+            Supplier<SecurityContext> supplier, SecurityContextHolderStrategy strategy ) {
         this.supplier = supplier;
         this.strategy = strategy;
     }
@@ -61,7 +70,7 @@ public final class SupplierDeferredSecurityContext implements DeferredSecurityCo
         }
 
         this.securityContext = this.supplier.get();
-        this.missingContext = (this.securityContext == null);
+        this.missingContext = ( this.securityContext == null );
         if (this.missingContext) {
             this.securityContext = this.strategy.createEmptyContext();
             if (logger.isTraceEnabled()) {

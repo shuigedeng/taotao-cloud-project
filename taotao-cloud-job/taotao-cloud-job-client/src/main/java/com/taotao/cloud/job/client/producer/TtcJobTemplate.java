@@ -23,21 +23,30 @@ import com.taotao.cloud.job.common.enums.TimeExpressionType;
 import com.taotao.cloud.job.common.module.LifeCycle;
 import com.taotao.cloud.job.common.utils.JsonUtils;
 import com.taotao.cloud.job.remote.protos.MqCausa;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * TtcJobTemplate
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TtcJobTemplate {
+
     MessageSendClient messageSendClient;
     IdGenerateService idGenerateService;
 
     /**
      * @param nameServerAddress 127.0.0.1:9083,127.0.0.2:9083...
      */
-    public TtcJobTemplate(String nameServerAddress) {
+    public TtcJobTemplate( String nameServerAddress ) {
         messageSendClient = new MessageSendClient(nameServerAddress);
         idGenerateService = new IdGenerateService();
     }
 
-    public Long createJob(JobUpdateReq JobUpdateReq) {
+    public Long createJob( JobUpdateReq JobUpdateReq ) {
         // 生成jobId
         long jobId = idGenerateService.allocate();
 
@@ -67,7 +76,7 @@ public class TtcJobTemplate {
         return jobId;
     }
 
-    public void updateJob(JobUpdateReq jobUpdateReq) {
+    public void updateJob( JobUpdateReq jobUpdateReq ) {
         MqCausa.UpdateJobReq build =
                 MqCausa.UpdateJobReq.newBuilder()
                         .setJobId(jobUpdateReq.getJobId())
@@ -92,7 +101,7 @@ public class TtcJobTemplate {
         messageSendClient.sendMessageAsync(new AtomicInteger(0), build1);
     }
 
-    public void deleteJob(JobDeleteReq jobDeleteReq) {
+    public void deleteJob( JobDeleteReq jobDeleteReq ) {
         MqCausa.DeleteJobReq build =
                 MqCausa.DeleteJobReq.newBuilder().setJobId(jobDeleteReq.getJobId()).build();
         MqCausa.Message build1 =
@@ -104,7 +113,7 @@ public class TtcJobTemplate {
         messageSendClient.sendMessageAsync(new AtomicInteger(0), build1);
     }
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         TtcJobTemplate ttcJobTemplate = new TtcJobTemplate("127.0.0.1:9083");
         JobUpdateReq build =
                 JobUpdateReq.builder()

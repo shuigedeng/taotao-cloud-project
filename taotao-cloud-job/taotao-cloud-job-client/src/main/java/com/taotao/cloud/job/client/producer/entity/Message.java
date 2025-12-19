@@ -20,9 +20,17 @@ import com.taotao.cloud.job.common.enums.MessageType;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+/**
+ * Message
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 public class Message {
+
     MessageType type;
     byte[] body;
 }

@@ -26,13 +26,22 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * ServerChangeHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 @Slf4j
 public class ServerChangeHandler implements RpcHandler {
-    @Autowired AppInfoMapper appInfoMapper;
+
+    @Autowired
+    AppInfoMapper appInfoMapper;
 
     @Override
-    public void handle(Object req, StreamObserver<CommonCausa.Response> responseObserver) {
+    public void handle( Object req, StreamObserver<CommonCausa.Response> responseObserver ) {
         ServerDiscoverCausa.ServerChangeReq serverChangeReq =
                 (ServerDiscoverCausa.ServerChangeReq) req;
         AppInfo appInfo =

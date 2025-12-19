@@ -27,15 +27,24 @@ import me.zhyd.oauth.request.AuthDefaultRequest;
  */
 public enum ExtendSource implements AuthSource {
 
-    /** 测试 */
-    TEST {
+    /**
+     * 测试
+     */
+    TEST /**
+     * null
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+            class{
         /**
          * 授权的api
          *
          * @return url
          */
         @Override
-        public String authorize() {
+        public String authorize ( ) {
             return "http://authorize";
         }
 
@@ -45,7 +54,7 @@ public enum ExtendSource implements AuthSource {
          * @return url
          */
         @Override
-        public String accessToken() {
+        public String accessToken ( ) {
             return "http://accessToken";
         }
 
@@ -55,7 +64,7 @@ public enum ExtendSource implements AuthSource {
          * @return url
          */
         @Override
-        public String userInfo() {
+        public String userInfo ( ) {
             return null;
         }
 
@@ -65,7 +74,7 @@ public enum ExtendSource implements AuthSource {
          * @return url
          */
         @Override
-        public String revoke() {
+        public String revoke ( ) {
             return null;
         }
 
@@ -75,18 +84,19 @@ public enum ExtendSource implements AuthSource {
          * @return url
          */
         @Override
-        public String refresh() {
+        public String refresh ( ) {
             return null;
         }
 
         @Override
-        public String getName() {
+        public String getName ( ) {
             return super.getName();
         }
 
         @Override
-        public Class<? extends AuthDefaultRequest> getTargetClass() {
+        public Class<? extends AuthDefaultRequest> getTargetClass ( ) {
             return null;
         }
+    }{
     }
 }

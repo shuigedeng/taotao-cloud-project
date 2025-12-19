@@ -25,11 +25,18 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.*;
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * FileUploadRequest
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-@Accessors(chain=true)
+@Accessors(chain = true)
 public class FileUploadRequest {
 
     // 上传文件到指定目录

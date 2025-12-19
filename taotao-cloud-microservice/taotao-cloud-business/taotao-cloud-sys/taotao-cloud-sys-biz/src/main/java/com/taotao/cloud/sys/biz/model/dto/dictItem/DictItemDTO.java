@@ -16,4 +16,13 @@
 
 package com.taotao.cloud.sys.biz.model.dto.dictItem;
 
-public class DictItemDTO {}
+/**
+ * DictItemDTO
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
+public class DictItemDTO {
+
+}

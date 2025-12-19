@@ -21,12 +21,21 @@ import com.taotao.boot.common.model.ValidationGroups;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
 import java.io.Serializable;
+
 import lombok.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+/**
+ * AppPageDTO
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
@@ -53,9 +62,5 @@ public class AppPageDTO extends PageQuery implements Serializable {
     @Schema(description = "图标")
     @NotNull(message = "图标不能为空!", groups = ValidationGroups.Create.class)
     private String icon;
-
-    /*@Schema(description = "排序")
-    @NotNull(message = "排序不能为空!", groups = ValidationGroups.Create.class)
-    private Integer sort;*/
 
 }

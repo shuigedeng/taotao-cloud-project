@@ -17,8 +17,10 @@
 package com.taotao.cloud.job.server.core.schedule;
 
 import com.taotao.cloud.job.common.enums.TimeExpressionType;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.DisposableBean;
@@ -26,11 +28,20 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * CoreScheduleTaskManager
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Service
 @Slf4j
 public class CoreScheduleTaskManager implements InitializingBean, DisposableBean {
+
     private final List<Thread> coreThreadContainer = new ArrayList<>();
-    @Autowired TtcJobScheduleService ttcJobScheduleService;
+    @Autowired
+    TtcJobScheduleService ttcJobScheduleService;
 
     @SuppressWarnings("AlibabaAvoidManuallyCreateThread")
     @Override

@@ -20,22 +20,30 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * ClientNodeInfo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClientNodeInfo {
-    private String type;
-    private String appName;
-    private long lastActiveTime;
-    private static final long CLIENT_TIMEOUT_MS = 60000;
 
-    public void refresh(ClientHeartbeat clientHeartbeat) {
-        lastActiveTime = clientHeartbeat.getHeartbeatTime();
-        appName = clientHeartbeat.getAppName();
-    }
+	private String type;
+	private String appName;
+	private long lastActiveTime;
+	private static final long CLIENT_TIMEOUT_MS = 60000;
 
-    public boolean timeout() {
-        long timeout = System.currentTimeMillis() - lastActiveTime;
-        return timeout > CLIENT_TIMEOUT_MS;
-    }
+	public void refresh( ClientHeartbeat clientHeartbeat ) {
+		lastActiveTime = clientHeartbeat.getHeartbeatTime();
+		appName = clientHeartbeat.getAppName();
+	}
+
+	public boolean timeout() {
+		long timeout = System.currentTimeMillis() - lastActiveTime;
+		return timeout > CLIENT_TIMEOUT_MS;
+	}
 }

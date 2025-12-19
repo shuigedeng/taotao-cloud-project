@@ -19,13 +19,22 @@ package com.taotao.cloud.sys.biz.supports.largefile.util;
 import com.taotao.cloud.file.biz.largefile.constant.FileConstant;
 import com.taotao.cloud.file.biz.largefile.po.FileUploadRequest;
 import com.taotao.cloud.sys.biz.file.src.main.java.com.taotao.cloud.file.biz.largefile.util.SystemUtil;
+
 import java.io.File;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+/**
+ * FilePathUtil
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 @Slf4j
 public class FilePathUtil implements ApplicationRunner {
@@ -37,7 +46,7 @@ public class FilePathUtil implements ApplicationRunner {
     private String uploadWindowRoot;
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run( ApplicationArguments args ) throws Exception {
         createUploadRootDir();
     }
 
@@ -62,7 +71,7 @@ public class FilePathUtil implements ApplicationRunner {
         return path;
     }
 
-    public String getPath(FileUploadRequest param) {
+    public String getPath( FileUploadRequest param ) {
         String path = this.getBasePath()
                 + FileConstant.FILE_SEPARATORCHAR
                 + param.getPath()

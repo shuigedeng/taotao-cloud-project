@@ -18,12 +18,20 @@ package com.taotao.cloud.auth.biz.authentication.utils;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+/**
+ * AuthorityUtils
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class AuthorityUtils {
 
-    public static Set<GrantedAuthority> createAuthorityList(String... authorities) {
+    public static Set<GrantedAuthority> createAuthorityList( String... authorities ) {
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>(authorities.length);
         for (String authority : authorities) {
             grantedAuthorities.add(new SimpleGrantedAuthority(authority));

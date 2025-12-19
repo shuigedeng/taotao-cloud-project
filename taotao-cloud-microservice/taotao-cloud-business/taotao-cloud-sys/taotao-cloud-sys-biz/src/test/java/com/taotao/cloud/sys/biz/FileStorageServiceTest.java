@@ -19,12 +19,21 @@ package com.taotao.cloud.sys.biz;
 import com.taotao.boot.oss.common.storage.FileInfo;
 import com.taotao.boot.oss.common.storage.FileStorageService;
 import com.taotao.boot.oss.common.storage.UploadPretreatment;
+
 import java.io.InputStream;
+
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+/**
+ * FileStorageServiceTest
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 @SpringBootTest
 class FileStorageServiceTest {
@@ -32,7 +41,9 @@ class FileStorageServiceTest {
     @Autowired
     private FileStorageService fileStorageService;
 
-    /** 单独对文件上传进行测试 */
+    /**
+     * 单独对文件上传进行测试
+     */
     @Test
     public void upload() {
         String filename = "image.jpg";
@@ -50,7 +61,9 @@ class FileStorageServiceTest {
         log.info("文件上传成功：{}", fileInfo.toString());
     }
 
-    /** 测试根据 url 上传文件 */
+    /**
+     * 测试根据 url 上传文件
+     */
     @Test
     public void uploadByURL() {
         String url = "https://www.xuyanwu.cn/file/upload/1566046282790-1.png";
@@ -64,7 +77,9 @@ class FileStorageServiceTest {
         log.info("文件上传成功：{}", fileInfo.toString());
     }
 
-    /** 测试上传并删除文件 */
+    /**
+     * 测试上传并删除文件
+     */
     @Test
     public void delete() {
         String filename = "image.jpg";
@@ -93,7 +108,9 @@ class FileStorageServiceTest {
         log.info("文件删除成功：{}", fileInfo);
     }
 
-    /** 测试上传并验证文件是否存在 */
+    /**
+     * 测试上传并验证文件是否存在
+     */
     @Test
     public void exists() {
         String filename = "image.jpg";
@@ -117,7 +134,9 @@ class FileStorageServiceTest {
         Assertions.isFalse(exists, "文件是否存在，不该存在，实际为：{}，文件：{}", exists, fileInfo);
     }
 
-    /** 测试上传并下载文件 */
+    /**
+     * 测试上传并下载文件
+     */
     @Test
     public void download() {
         String filename = "image.jpg";
@@ -135,7 +154,7 @@ class FileStorageServiceTest {
 
         byte[] bytes = fileStorageService
                 .download(fileInfo)
-                .setProgressMonitor((progressSize, allSize) ->
+                .setProgressMonitor(( progressSize, allSize ) ->
                         log.info("文件下载进度：{} {}%", progressSize, progressSize * 100 / allSize))
                 .bytes();
         Assertions.notNull(bytes, "文件下载失败！");
@@ -143,7 +162,7 @@ class FileStorageServiceTest {
 
         byte[] thBytes = fileStorageService
                 .downloadTh(fileInfo)
-                .setProgressMonitor((progressSize, allSize) ->
+                .setProgressMonitor(( progressSize, allSize ) ->
                         log.info("缩略图文件下载进度：{} {}%", progressSize, progressSize * 100 / allSize))
                 .bytes();
         Assertions.notNull(thBytes, "缩略图文件下载失败！");

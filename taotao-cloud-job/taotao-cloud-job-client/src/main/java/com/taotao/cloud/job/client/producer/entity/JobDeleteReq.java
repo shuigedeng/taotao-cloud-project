@@ -21,10 +21,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * JobDeleteReq
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class JobDeleteReq {
-    private Long jobId;
+
+	private Long jobId;
 }

@@ -49,6 +49,13 @@ public class DistributedArchitectureConfiguration {
         log.debug(" Module [Distributed Architecture] Auto Configure.");
     }
 
+    /**
+     * DataAccessStrategyLocalConfiguration
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     @Configuration(proxyBeanMethods = false)
     @ConditionalOnProperty(
             prefix = "taotao.cloud.auth.local",
@@ -60,7 +67,7 @@ public class DistributedArchitectureConfiguration {
         @ConditionalOnMissingBean
         public StrategyUserDetailsService localUserDetailsService(
                 SysUserService sysUserService,
-                SocialAuthenticationHandler socialAuthenticationHandler) {
+                SocialAuthenticationHandler socialAuthenticationHandler ) {
             log.debug(" Strategy [Local User Details Service] Auto Configure.");
             return new LocalUserDetailsService(sysUserService, socialAuthenticationHandler);
         }
@@ -68,7 +75,7 @@ public class DistributedArchitectureConfiguration {
         @Bean
         @ConditionalOnMissingBean
         public StrategyPermissionDetailsService localPermissionDetailsService(
-                SysPermissionService sysPermissionService) {
+                SysPermissionService sysPermissionService ) {
             LocalPermissionDetailsService localPermissionDetailsService =
                     new LocalPermissionDetailsService(sysPermissionService);
             log.debug(" Strategy [Local Permission Details Service] Auto Configure.");
@@ -77,6 +84,13 @@ public class DistributedArchitectureConfiguration {
     }
 
     // 默认使用feign方式
+    /**
+     * DataAccessStrategyRemoteConfiguration
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     @Configuration(proxyBeanMethods = false)
     @ConditionalOnProperty(
             prefix = "taotao.cloud.auth.remote",
@@ -87,7 +101,7 @@ public class DistributedArchitectureConfiguration {
 
         @Bean
         @ConditionalOnMissingBean
-        public StrategyUserDetailsService remoteUserDetailsService(UserApi userApi) {
+        public StrategyUserDetailsService remoteUserDetailsService( UserApi userApi ) {
             log.debug(" Strategy [Remote User Details Service] Auto Configure.");
             return new RemoteUserDetailsService(userApi);
         }

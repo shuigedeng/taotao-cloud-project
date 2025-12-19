@@ -17,13 +17,22 @@
 package com.taotao.cloud.auth.biz.authentication.pcke;
 
 import com.taotao.boot.common.utils.log.LogUtils;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+
 import org.springframework.security.crypto.keygen.Base64StringKeyGenerator;
 import org.springframework.security.crypto.keygen.StringKeyGenerator;
 
+/**
+ * GenUtils
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class GenUtils {
 
     public static String genCode() throws NoSuchAlgorithmException {
@@ -41,23 +50,7 @@ public class GenUtils {
         return codeChallenge;
     }
 
-    /*    public static String t() throws NoSuchAlgorithmException {
-        // Dependency: Apache Commons Codec
-        // https://commons.apache.org/proper/commons-codec/
-        // Import the Base64 class.
-        // import org.apache.commons.codec.binary.Base64;
-        byte[] bytes = verifier.getBytes("US-ASCII");
-
-
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        md.update(bytes,0,bytes.length);
-        byte[] digest = md.digest();
-        String challenge = Base64.getEncoder().encodeToString(digest);
-        LogUtils.info(challenge);
-        return challenge;
-    }*/
-
-    public static void main(String[] args) throws NoSuchAlgorithmException {
+    public static void main( String[] args ) throws NoSuchAlgorithmException {
         genCode();
     }
 }

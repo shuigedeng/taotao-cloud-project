@@ -21,15 +21,22 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+/**
+ * TaoTaoCloudSysApplicationTests
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @SpringBootTest
 class TaoTaoCloudSysApplicationTests {
 
     @Autowired
     private IRegionService regionService;
 
-	@Test
-	public void synchronizationData() {
-		System.out.println("sdfasdfs");
-		System.out.println("sdfasdfs");
-	}
+    @Test
+    public void synchronizationData() {
+        System.out.println("sdfasdfs");
+        System.out.println("sdfasdfs");
+    }
 }

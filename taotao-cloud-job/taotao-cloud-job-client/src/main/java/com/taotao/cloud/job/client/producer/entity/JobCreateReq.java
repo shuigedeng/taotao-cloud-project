@@ -23,11 +23,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * JobCreateReq
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class JobCreateReq {
+
     /**
      * 以appName为分组，被该app下的某个subApp所调度
      */

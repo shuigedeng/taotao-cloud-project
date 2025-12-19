@@ -53,7 +53,7 @@ import javax.sql.DataSource;
 public class ExcelTest {
 
     // 导出逻辑代码
-    public void dataExport300w(HttpServletResponse response) {
+    public void dataExport300w( HttpServletResponse response ) {
         {
             OutputStream outputStream = null;
             try {
@@ -65,7 +65,7 @@ public class ExcelTest {
                 writeWorkbook.setOutputStream(outputStream);
                 writeWorkbook.setExcelType(ExcelTypeEnum.XLSX);
                 ExcelWriter writer = new ExcelWriter(writeWorkbook);
-                String fileName = new String(("excel100w").getBytes(), StandardCharsets.UTF_8);
+                String fileName = new String(( "excel100w" ).getBytes(), StandardCharsets.UTF_8);
 
                 // title
                 WriteTable table = new WriteTable();
@@ -93,16 +93,16 @@ public class ExcelTest {
                 Integer writeDataRows = 20 * 10000;
                 // 计算需要的Sheet数量
                 int sheetNum = totalCount % sheetDataRows == 0
-                        ? (totalCount / sheetDataRows)
-                        : (totalCount / sheetDataRows + 1);
+                        ? ( totalCount / sheetDataRows )
+                        : ( totalCount / sheetDataRows + 1 );
                 // 计算一般情况下每一个Sheet需要写入的次数(一般情况不包含最后一个sheet,因为最后一个sheet不确定会写入多少条数据)
                 int oneSheetWriteCount = sheetDataRows / writeDataRows;
                 // 计算最后一个sheet需要写入的次数
                 int lastSheetWriteCount = totalCount % sheetDataRows == 0
                         ? oneSheetWriteCount
-                        : (totalCount % sheetDataRows % writeDataRows == 0
-                                ? (totalCount / sheetDataRows / writeDataRows)
-                                : (totalCount / sheetDataRows / writeDataRows + 1));
+                        : ( totalCount % sheetDataRows % writeDataRows == 0
+                                ? ( totalCount / sheetDataRows / writeDataRows )
+                                : ( totalCount / sheetDataRows / writeDataRows + 1 ) );
 
                 // 开始分批查询分次写入
                 // 注意这次的循环就需要进行嵌套循环了,外层循环是Sheet数目,内层循环是写入次数
@@ -115,7 +115,7 @@ public class ExcelTest {
 
                     // 循环写入次数:
                     // j的自增条件是当不是最后一个Sheet的时候写入次数为正常的每个Sheet写入的次数,如果是最后一个就需要使用计算的次数lastSheetWriteCount
-                    for (int j = 0; j < (i != sheetNum - 1 ? oneSheetWriteCount : lastSheetWriteCount); j++) {
+                    for (int j = 0; j < ( i != sheetNum - 1 ? oneSheetWriteCount : lastSheetWriteCount ); j++) {
                         // 集合复用,便于GC清理
                         dataList.clear();
                         // 分页查询一次20w
@@ -141,7 +141,7 @@ public class ExcelTest {
                 // 下载EXCEL
                 response.setHeader(
                         "Content-Disposition",
-                        "attachment;filename=" + new String((fileName).getBytes("gb2312"), "ISO-8859-1") + ".xlsx");
+                        "attachment;filename=" + new String(( fileName ).getBytes("gb2312"), "ISO-8859-1") + ".xlsx");
                 response.setContentType("multipart/form-data");
                 response.setCharacterEncoding("utf-8");
                 writer.finish();
@@ -149,7 +149,7 @@ public class ExcelTest {
                 // 导出时间结束
                 long endTime = System.currentTimeMillis();
                 LogUtils.info("导出结束时间:" + endTime + "ms");
-                LogUtils.info("导出所用时间:" + (endTime - startTime) / 1000 + "秒");
+                LogUtils.info("导出所用时间:" + ( endTime - startTime ) / 1000 + "秒");
             } catch (FileNotFoundException e) {
                 LogUtils.error(e);
             } catch (IOException e) {
@@ -180,21 +180,25 @@ public class ExcelTest {
     }
 
     // 事件监听
+    /**
+     * EasyExceGeneralDatalListener
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class EasyExceGeneralDatalListener extends AnalysisEventListener<Map<Integer, String>> {
 
-        /** 处理业务逻辑的Service,也可以是Mapper */
-        // private ActResultLogService2 actResultLogService2;
-        /** 用于存储读取的数据 */
+        /**
+         * 用于存储读取的数据
+         */
         private List<Map<Integer, String>> dataList = new ArrayList<Map<Integer, String>>();
 
-        public EasyExceGeneralDatalListener() {}
-
-        // public EasyExceGeneralDatalListener(ActResultLogService2 actResultLogService2) {
-        //	this.actResultLogService2 = actResultLogService2;
-        // }
+        public EasyExceGeneralDatalListener() {
+        }
 
         @Override
-        public void invoke(Map<Integer, String> data, AnalysisContext context) {
+        public void invoke( Map<Integer, String> data, AnalysisContext context ) {
             // 数据add进入集合
             dataList.add(data);
             // size是否为100000条:这里其实就是分批.当数据等于10w的时候执行一次插入
@@ -224,13 +228,20 @@ public class ExcelTest {
          * @return: void
          */
         @Override
-        public void doAfterAllAnalysed(AnalysisContext context) {
+        public void doAfterAllAnalysed( AnalysisContext context ) {
             saveData();
             dataList.clear();
         }
     }
 
     // JDBC工具类
+    /**
+     * JDBCDruidUtils
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class JDBCDruidUtils {
 
         private static DataSource dataSource;
@@ -260,11 +271,10 @@ public class ExcelTest {
         /**
          * 关闭conn,和 statement独对象资源
          *
-         * @param connection
          * @param statement @MethodName: close
          * @return: void
          */
-        public static void close(Connection connection, Statement statement) {
+        public static void close( Connection connection, Statement statement ) {
             if (connection != null) {
                 try {
                     connection.close();
@@ -284,12 +294,10 @@ public class ExcelTest {
         /**
          * 关闭 conn , statement 和resultset三个对象资源
          *
-         * @param connection
-         * @param statement
          * @param resultSet @MethodName: close
          * @return: void
          */
-        public static void close(Connection connection, Statement statement, ResultSet resultSet) {
+        public static void close( Connection connection, Statement statement, ResultSet resultSet ) {
             close(connection, statement);
             if (resultSet != null) {
                 try {
@@ -316,7 +324,7 @@ public class ExcelTest {
      * @param @MethodName: import2DBFromExcel10w
      * @return: java.util.Map<java.lang.String, java.lang.Object>
      */
-    public Map<String, Object> import2DBFromExcel10w(List<Map<Integer, String>> dataList) {
+    public Map<String, Object> import2DBFromExcel10w( List<Map<Integer, String>> dataList ) {
         HashMap<String, Object> result = new HashMap<>();
         // 结果集中数据为0时,结束方法.进行下一次调用
         if (dataList.size() == 0) {
@@ -358,7 +366,7 @@ public class ExcelTest {
             conn.commit();
             long endTime = System.currentTimeMillis();
             LogUtils.info(dataList.size() + "条,结束导入到数据库时间:" + endTime + "ms");
-            LogUtils.info(dataList.size() + "条,导入用时:" + (endTime - startTime) + "ms");
+            LogUtils.info(dataList.size() + "条,导入用时:" + ( endTime - startTime ) + "ms");
             result.put("success", "1111");
         } catch (Exception e) {
             result.put("exception", "0000");

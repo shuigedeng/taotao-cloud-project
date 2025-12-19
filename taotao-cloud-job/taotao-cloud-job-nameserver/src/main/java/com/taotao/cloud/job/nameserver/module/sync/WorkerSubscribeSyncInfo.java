@@ -18,10 +18,18 @@ package com.taotao.cloud.job.nameserver.module.sync;
 
 import lombok.Getter;
 
+/**
+ * WorkerSubscribeSyncInfo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Getter
 public class WorkerSubscribeSyncInfo extends SyncInfo {
+
     public WorkerSubscribeSyncInfo(
-            String workerIpAddress, String appName, long scheduleTime, String serverIpAddress) {
+            String workerIpAddress, String appName, long scheduleTime, String serverIpAddress ) {
         super(workerIpAddress);
         this.workerIpAddress = workerIpAddress;
         this.appName = appName;

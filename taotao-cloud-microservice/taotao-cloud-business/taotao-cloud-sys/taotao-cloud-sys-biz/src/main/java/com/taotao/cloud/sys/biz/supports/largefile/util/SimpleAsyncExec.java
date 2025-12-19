@@ -17,9 +17,17 @@
 package com.taotao.cloud.sys.biz.supports.largefile.util;
 
 import java.util.concurrent.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * SimpleAsyncExec
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class SimpleAsyncExec {
 
     private static final SimpleAsyncExec inst = new SimpleAsyncExec();
@@ -30,7 +38,7 @@ public class SimpleAsyncExec {
         return inst;
     }
 
-    public <T> T exec(Callable callable) {
+    public <T> T exec( Callable callable ) {
         T t = null;
         // logger.info("SimpleAsyncExec exec start。。。");
         Future<T> future = executor.submit(callable);
@@ -45,7 +53,7 @@ public class SimpleAsyncExec {
         return t;
     }
 
-    public void exec(Runnable run) {
+    public void exec( Runnable run ) {
         // logger.info("SimpleAsyncExec exec start。。。");
         executor.submit(run);
     }

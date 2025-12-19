@@ -15,15 +15,23 @@
  */
 
 package com.taotao.cloud.sys.biz.supports.test;
+
 import com.taotao.boot.common.utils.log.LogUtils;
 
 //@Component
 // @Scope("prototype")//spring 多例
+/**
+ * BusinessThread
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class BusinessThread implements Runnable {
 
     private String acceptStr;
 
-    public BusinessThread(String acceptStr) {
+    public BusinessThread( String acceptStr ) {
         this.acceptStr = acceptStr;
     }
 
@@ -31,7 +39,7 @@ public class BusinessThread implements Runnable {
         return acceptStr;
     }
 
-    public void setAcceptStr(String acceptStr) {
+    public void setAcceptStr( String acceptStr ) {
         this.acceptStr = acceptStr;
     }
 

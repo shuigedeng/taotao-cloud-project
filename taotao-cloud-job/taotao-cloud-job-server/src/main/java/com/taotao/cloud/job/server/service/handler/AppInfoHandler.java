@@ -26,15 +26,23 @@ import io.grpc.stub.StreamObserver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * AppInfoHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class AppInfoHandler implements RpcHandler {
 
-    @Autowired AppInfoMapper appInfoMapper;
+    @Autowired
+    AppInfoMapper appInfoMapper;
 
     @Override
-    public void handle(Object req, StreamObserver<CommonCausa.Response> responseObserver) {
+    public void handle( Object req, StreamObserver<CommonCausa.Response> responseObserver ) {
         ServerDiscoverCausa.AppName request = (ServerDiscoverCausa.AppName) req;
-        System.out.println(("请求中的参数为msg:{},code:{}" + request.getAppName()));
+        System.out.println(( "请求中的参数为msg:{},code:{}" + request.getAppName() ));
         AppInfo appInfo =
                 appInfoMapper.selectOne(
                         new QueryWrapper<AppInfo>()

@@ -19,8 +19,10 @@ package com.taotao.cloud.sa.just.biz.just;
 import cn.dev33.satoken.stp.StpUtil;
 import com.taotao.boot.security.justauth.factory.AuthRequestFactory;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.List;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.zhyd.oauth.model.AuthCallback;
@@ -33,6 +35,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * JustAuthController
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 @RestController
 @RequestMapping("/oauth")
@@ -47,13 +56,13 @@ public class JustAuthController {
     }
 
     @GetMapping("/login/{type}")
-    public void login(@PathVariable String type, HttpServletResponse response) throws IOException {
+    public void login( @PathVariable String type, HttpServletResponse response ) throws IOException {
         AuthRequest authRequest = factory.get(type);
         response.sendRedirect(authRequest.authorize(AuthStateUtils.createState()));
     }
 
     @RequestMapping("/{type}/callback")
-    public AuthResponse login(@PathVariable String type, AuthCallback callback) {
+    public AuthResponse login( @PathVariable String type, AuthCallback callback ) {
         AuthRequest authRequest = factory.get(type);
         AuthResponse response = authRequest.login(callback);
         log.info("【response】= {}", JSONUtil.toJsonStr(response));

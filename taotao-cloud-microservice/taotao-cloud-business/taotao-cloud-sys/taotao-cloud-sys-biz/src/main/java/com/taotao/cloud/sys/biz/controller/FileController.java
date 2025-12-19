@@ -91,13 +91,11 @@ public class FileController {
     }
 
 
-
-
-
     @NotAuth
     @Operation(summary = "测试校验", description = "测试校验")
     @PostMapping("/qqqqqq/batch")
-    public Result<Boolean> qqqqqqBatch(@Valid @NotEmpty(message = "数据不能为空") @RequestBody ValidList<Student> ids) {
+    public Result<Boolean> qqqqqqBatch(
+            @Valid @NotEmpty(message = "数据不能为空") @RequestBody ValidList<Student> ids ) {
         return Result.success(true);
     }
 
@@ -107,8 +105,9 @@ public class FileController {
             @Parameter(name = "ids", required = true, description = "id列表"),
     })
     @DeleteMapping("/11111/batch")
-    public Result<Boolean> delAllByIds(@Valid @NotNull(message = "id列表不能为空") @Size(min = 1, max = 3, message = "id个数只能在1至3个")
-                                       @RequestParam List<Long> ids) {
+    public Result<Boolean> delAllByIds(
+            @Valid @NotNull(message = "id列表不能为空") @Size(min = 1, max = 3, message = "id个数只能在1至3个")
+            @RequestParam List<Long> ids ) {
         return Result.success(true);
     }
 
@@ -118,15 +117,15 @@ public class FileController {
             @Parameter(name = "id", required = true, description = "id", in = ParameterIn.PATH),
     })
     @PutMapping("/2222/{id}")
-    public Result<Boolean> update(@Valid @RequestBody Student specificationDTO,
-                                  @NotNull(message = "id不能为空") @PathVariable Long id) {
+    public Result<Boolean> update( @Valid @RequestBody Student specificationDTO,
+            @NotNull(message = "id不能为空") @PathVariable Long id ) {
         return Result.success(true);
     }
 
     @NotAuth
     @Operation(summary = "更改规格222", description = "更改规格222")
     @PutMapping("/33334")
-    public Result<Boolean> updateBatch(@Valid @RequestBody List<Student> specificationDTO) {
+    public Result<Boolean> updateBatch( @Valid @RequestBody List<Student> specificationDTO ) {
         return Result.success(true);
     }
 
@@ -140,8 +139,8 @@ public class FileController {
             @Parameter(name = "file", required = true, description = "文件信息", schema = @Schema(type = "file"))
     })
     @PostMapping(value = "/upload")
-    public Result<UploadFileVO> upload(@NotNull(message = "类型不能为空") @RequestParam("type") Integer type,
-                                       @NotNull(message = "文件不能为空") @RequestPart("file") MultipartFile file) {
+    public Result<UploadFileVO> upload( @NotNull(message = "类型不能为空") @RequestParam("type") Integer type,
+            @NotNull(message = "文件不能为空") @RequestPart("file") MultipartFile file ) {
 //        return Result.success(fileService.uploadFile(String.valueOf(type), file));
         return null;
     }
@@ -152,8 +151,8 @@ public class FileController {
             @Parameter(name = "attributeId", required = true, description = "attributeId"),
     })
     @PutMapping("/xxxxxx")
-    public Result<String> assign(@RequestParam(name = "attributeId") String attributeId,
-                                 @Validated @NotEmpty(message = "权限不能为空") @RequestBody String[] permissions) {
+    public Result<String> assign( @RequestParam(name = "attributeId") String attributeId,
+            @Validated @NotEmpty(message = "权限不能为空") @RequestBody String[] permissions ) {
         return Result.success("sdfasdf");
     }
 
@@ -163,8 +162,9 @@ public class FileController {
     })
     @PutMapping("/roles/{userId}")
     @NotAuth
-    public Result<Boolean> updateUserRoles(@NotNull(message = "用户id不能为空") @PathVariable(name = "userId") Long userId,
-                                           @Validated @NotEmpty(message = "角色id列表不能为空") @RequestBody List<String> roleIds) {
+    public Result<Boolean> updateUserRoles(
+            @NotNull(message = "用户id不能为空") @PathVariable(name = "userId") Long userId,
+            @Validated @NotEmpty(message = "角色id列表不能为空") @RequestBody List<String> roleIds ) {
         LogUtils.info("请求参数： name = {}, age = {}", userId, roleIds);
         return Result.success();
     }
@@ -176,8 +176,8 @@ public class FileController {
             @Parameter(name = "roles", required = true, description = "角色对象组成的数组")
     })
     @GetMapping("/sss")
-    public Result<String> assign1111(@RequestParam(name = "userId") String userId,
-                                     @RequestParam(name = "roles") List<String> roles) {
+    public Result<String> assign1111( @RequestParam(name = "userId") String userId,
+            @RequestParam(name = "roles") List<String> roles ) {
         return Result.success("sdfasdf");
     }
 
@@ -191,12 +191,13 @@ public class FileController {
             @Parameter(name = "plays2", required = true, description = "plays2玩家")
     })
     @GetMapping(value = "/helloParam")
-    public Result<String> hello(@RequestParam("name") String name,
-                                @RequestParam("age") Integer age,
-                                @RequestParam("birthDay") @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime birthDay,
-                                @RequestParam("plays") String[] plays,
-                                @RequestParam("plays2") List<String> plays2) {
-        LogUtils.info("请求参数： name = {}, age = {}, birthDay = {}, plays = {}, plays2 = {}", name, age, birthDay, plays, plays2);
+    public Result<String> hello( @RequestParam("name") String name,
+            @RequestParam("age") Integer age,
+            @RequestParam("birthDay") @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime birthDay,
+            @RequestParam("plays") String[] plays,
+            @RequestParam("plays2") List<String> plays2 ) {
+        LogUtils.info("请求参数： name = {}, age = {}, birthDay = {}, plays = {}, plays2 = {}", name, age, birthDay,
+                plays, plays2);
         return Result.success("scesccc");
     }
 
@@ -205,7 +206,7 @@ public class FileController {
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = "application/json")),
             responses = {@ApiResponse(description = "helloParam", content = @Content(mediaType = "application/json"))})
     @GetMapping(value = "/helloParam3")
-    public Result<String> hello(@Validated Page page) {
+    public Result<String> hello( @Validated Page page ) {
         LogUtils.info("请求参数： name = {}, age = {}, birthDay = {}, 分页参数：page = {}", "", "", "", page);
         return Result.success("scesccc");
     }
@@ -214,14 +215,14 @@ public class FileController {
     @RequestLogger("分页获取商品列表")
     @NotAuth
     @GetMapping(value = "/sku/page")
-    public Result<PageResult<Integer>> getSkuByPage(@Validated GoodsPageQuery goodsPageQuery) {
+    public Result<PageResult<Integer>> getSkuByPage( @Validated GoodsPageQuery goodsPageQuery ) {
         return Result.success(new PageResult<Integer>());
     }
 
     @Operation(summary = "helloParam2", description = "helloParam2")
     @NotAuth
     @GetMapping(value = "/helloParam2")
-    public Result<String> hello(Page page, Student student) {
+    public Result<String> hello( Page page, Student student ) {
         LogUtils.info("请求对象参数： student = {}, 分页参数 = {}", student, page);
         return Result.success("scesccc");
     }
@@ -235,7 +236,7 @@ public class FileController {
 //            @Parameter(name = "birthDay", required = true, description = "birthDay", schema = @Schema(implementation = LocalDateTime.class)),
 //            @Parameter(name = "plays", required = true, description = "plays"),
 //    })
-    public Result<String> form(Student student) {
+    public Result<String> form( Student student ) {
         LogUtils.info("obj请求参数： name = {}, age = {}", student.getName(), student.getAge());
         return Result.success("scesccc");
     }
@@ -243,9 +244,10 @@ public class FileController {
     @NotAuth
     @Operation(summary = "application", description = "application",
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = APPLICATION_JSON_VALUE)),
-            responses = {@ApiResponse(description = "application", responseCode = "200", content = @Content(mediaType = APPLICATION_JSON_VALUE))})
+            responses = {
+                    @ApiResponse(description = "application", responseCode = "200", content = @Content(mediaType = APPLICATION_JSON_VALUE))})
     @PostMapping("/application")
-    public Result<String> hello(@RequestBody Student student) {
+    public Result<String> hello( @RequestBody Student student ) {
         LogUtils.info("请求参数： student对象：{}", student);
         return Result.success("success" + student.getBirthDay());
     }
@@ -258,9 +260,17 @@ public class FileController {
 //        return Result.success(new PageResult<Integer>());
 //    }
 
+    /**
+     * Page
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     @Data
     @Schema(description = "Page参数")
     public static class Page {
+
         @Schema(name = "pageSize", type = "integer", description = "当前页", requiredMode = Schema.RequiredMode.REQUIRED)
         private Integer pageSize;
 
@@ -268,8 +278,16 @@ public class FileController {
         private Integer size;
     }
 
+    /**
+     * Student
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     @Data
     public static class Student {
+
         @NotEmpty(message = "名称不能为空")
         @Schema(name = "name", title = "名称")
         private String name;

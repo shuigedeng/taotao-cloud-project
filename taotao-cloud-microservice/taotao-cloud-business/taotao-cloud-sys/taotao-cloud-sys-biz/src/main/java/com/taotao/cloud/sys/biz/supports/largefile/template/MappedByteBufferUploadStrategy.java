@@ -22,10 +22,18 @@ import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.Objects;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
+/**
+ * MappedByteBufferUploadStrategy
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class MappedByteBufferUploadStrategy extends SliceUploadTemplate {
 
@@ -36,7 +44,7 @@ public class MappedByteBufferUploadStrategy extends SliceUploadTemplate {
     private long defaultChunkSize;
 
     @Override
-    public boolean upload(FileUploadRequest param) {
+    public boolean upload( FileUploadRequest param ) {
 
         RandomAccessFile tempRaf = null;
         FileChannel fileChannel = null;

@@ -30,6 +30,13 @@ import java.io.Serializable;
  * @version 2023.12
  * @since 2023-12-19 09:40:47
  */
+/**
+ * UserImport
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 public class UserImport implements Serializable {
 

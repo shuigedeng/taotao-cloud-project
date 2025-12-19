@@ -16,12 +16,17 @@
 
 package com.taotao.cloud.sys.biz.supports.largefile.util;
 
+/**
+ * SystemUtil
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class SystemUtil {
 
     /**
      * 判断是否为window系统
-     *
-     * @return
      */
     public static boolean isWinOs() {
         String os = System.getProperty("os.name");
@@ -34,8 +39,6 @@ public class SystemUtil {
 
     /**
      * 获取用户当前工作目录
-     *
-     * @return
      */
     public static String getUserCurrentDir() {
         return System.getProperty("user.dir");
