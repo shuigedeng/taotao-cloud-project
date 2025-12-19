@@ -27,6 +27,13 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ResourceLoader;
 
+/**
+ * CcsrServerAutoConfiguration
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Configuration // 这里加不加这个注解都不影响，只是表示他是一个配置类
 @Conditional(EnableCcsrCondition.class) // 核心控制
 public class CcsrServerAutoConfiguration {
@@ -39,7 +46,7 @@ public class CcsrServerAutoConfiguration {
 
     @Bean(name = "rpcServer")
     @ConditionalOnProperty(value = "ccsr.rpc-type")
-    public RpcServer rpcServer(CcsrConfig config) {
+    public RpcServer rpcServer( CcsrConfig config ) {
         RpcServer rpcServer =
                 SpiExtensionFactory.getExtension(config.getRpcType(), RpcServer.class);
         rpcServer.init(config);
@@ -51,17 +58,15 @@ public class CcsrServerAutoConfiguration {
      */
     @Bean
     public CcsrServerInitializer ccsrServerInitializer(
-            RpcServer rpcServer, CcsrConfig config, BannerUtils bannerUtils) {
+            RpcServer rpcServer, CcsrConfig config, BannerUtils bannerUtils ) {
         return new CcsrServerInitializer(rpcServer, config, bannerUtils);
     }
 
     /**
      * Banner Logo打印，支持自定义，和SpringBoot Banner用法一样
-     * @param resourceLoader
-     * @return
      */
     @Bean
-    public BannerUtils bannerUtils(ResourceLoader resourceLoader) {
+    public BannerUtils bannerUtils( ResourceLoader resourceLoader ) {
         return new BannerUtils(resourceLoader);
     }
 }

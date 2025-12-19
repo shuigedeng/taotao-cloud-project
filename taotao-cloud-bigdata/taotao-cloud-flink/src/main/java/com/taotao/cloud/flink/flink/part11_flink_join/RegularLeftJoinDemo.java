@@ -19,8 +19,16 @@ package com.taotao.cloud.flink.flink.part11_flink_join;
 import org.apache.flink.table.api.EnvironmentSettings;
 import org.apache.flink.table.api.TableEnvironment;
 
+/**
+ * RegularLeftJoinDemo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class RegularLeftJoinDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         EnvironmentSettings settings = EnvironmentSettings.newInstance().inStreamingMode().build();
         TableEnvironment tableEnv = TableEnvironment.create(settings);
         tableEnv.executeSql(

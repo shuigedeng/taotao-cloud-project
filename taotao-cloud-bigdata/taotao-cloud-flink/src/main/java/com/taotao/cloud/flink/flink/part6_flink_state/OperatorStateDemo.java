@@ -20,6 +20,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.state.ListState;
@@ -34,10 +35,19 @@ import org.apache.flink.streaming.api.checkpoint.CheckpointedFunction;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.sink.SinkFunction;
+import org.apache.flink.streaming.api.watermark.Watermark;
 
 
+/**
+ * OperatorStateDemo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class OperatorStateDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
         DataStream<String> text =
@@ -48,25 +58,25 @@ public class OperatorStateDemo {
                             private final Random random = new Random();
 
                             @Override
-                            public void run(SourceContext<String> ctx) throws Exception {
+                            public void run( SourceContext<String> ctx ) throws Exception {
                                 while (running) {
                                     int randomNum = random.nextInt(5) + 1;
                                     long timestamp = System.currentTimeMillis();
 
                                     if (randomNum == 2) {
                                         new Thread(
-                                                        () -> {
-                                                            try {
-                                                                int delay = random.nextInt(10) + 1;
-                                                                Thread.sleep(delay * 1000);
-                                                                ctx.collectWithTimestamp(
-                                                                        "key" + randomNum + "," + 1
-                                                                                + "," + timestamp,
-                                                                        timestamp);
-                                                            } catch (InterruptedException e) {
-                                                                Thread.currentThread().interrupt();
-                                                            }
-                                                        })
+                                                () -> {
+                                                    try {
+                                                        int delay = random.nextInt(10) + 1;
+                                                        Thread.sleep(delay * 1000);
+                                                        ctx.collectWithTimestamp(
+                                                                "key" + randomNum + "," + 1
+                                                                        + "," + timestamp,
+                                                                timestamp);
+                                                    } catch (InterruptedException e) {
+                                                        Thread.currentThread().interrupt();
+                                                    }
+                                                })
                                                 .start();
                                     } else {
                                         ctx.collectWithTimestamp(
@@ -76,8 +86,7 @@ public class OperatorStateDemo {
 
                                     if (++count % 200 == 0) {
                                         ctx.emitWatermark(
-                                                new org.apache.flink.streaming.api.watermark
-                                                        .Watermark(timestamp));
+                                                new Watermark(timestamp));
                                         System.out.println(
                                                 "Manual Watermark emitted: " + timestamp);
                                     }
@@ -96,7 +105,7 @@ public class OperatorStateDemo {
                 text.map(
                                 new MapFunction<String, Tuple3<String, Integer, Long>>() {
                                     @Override
-                                    public Tuple3<String, Integer, Long> map(String value) {
+                                    public Tuple3<String, Integer, Long> map( String value ) {
                                         String[] words = value.split(",");
                                         return new Tuple3<>(
                                                 words[0],
@@ -110,7 +119,7 @@ public class OperatorStateDemo {
                 tuplesWithTimestamp.assignTimestampsAndWatermarks(
                         WatermarkStrategy.<Tuple3<String, Integer, Long>>forBoundedOutOfOrderness(
                                         Duration.ofSeconds(0))
-                                .withTimestampAssigner((element, recordTimestamp) -> element.f2));
+                                .withTimestampAssigner(( element, recordTimestamp ) -> element.f2));
 
         withWatermarks.addSink(new BufferingSink());
 
@@ -124,12 +133,13 @@ public class OperatorStateDemo {
         private List<Tuple3<String, Integer, Long>> bufferedElements = new ArrayList<>();
 
         @Override
-        public void initializeState(FunctionInitializationContext context) throws Exception {
+        public void initializeState( FunctionInitializationContext context ) throws Exception {
 
             ListStateDescriptor<Tuple3<String, Integer, Long>> descriptor =
                     new ListStateDescriptor<Tuple3<String, Integer, Long>>(
                             "bufferedSinkState",
-                            TypeInformation.of(new TypeHint<Tuple3<String, Integer, Long>>() {}));
+                            TypeInformation.of(new TypeHint<Tuple3<String, Integer, Long>>() {
+                            }));
 
             listState = context.getOperatorStateStore().getListState(descriptor);
 
@@ -141,14 +151,14 @@ public class OperatorStateDemo {
         }
 
         @Override
-        public void snapshotState(FunctionSnapshotContext context) throws Exception {
+        public void snapshotState( FunctionSnapshotContext context ) throws Exception {
             for (Tuple3<String, Integer, Long> element : bufferedElements) {
                 listState.add(element);
             }
         }
 
         @Override
-        public void invoke(Tuple3<String, Integer, Long> value, Context context) throws Exception {
+        public void invoke( Tuple3<String, Integer, Long> value, Context context ) throws Exception {
 
             bufferedElements.add(value);
             System.out.println("invoke>>> " + value);

@@ -26,14 +26,21 @@ import com.taotao.cloud.ccsr.common.enums.ResponseCode;
 import com.taotao.cloud.ccsr.common.utils.GsonUtils;
 import com.taotao.cloud.ccsr.common.utils.MD5Utils;
 
+/**
+ * ConvertFilter
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ConvertFilter<OPTION extends RequestOption> extends AbstractFilter<OPTION> {
 
-    public ConvertFilter(AbstractClient<OPTION> client) {
+    public ConvertFilter( AbstractClient<OPTION> client ) {
         super(client);
     }
 
     @Override
-    protected Response doPreFilter(CcsrContext context, OPTION option, Payload request) {
+    protected Response doPreFilter( CcsrContext context, OPTION option, Payload request ) {
 
         try {
             String configDataString = GsonUtils.getInstance().toJson(request.getConfigData());
@@ -50,7 +57,7 @@ public class ConvertFilter<OPTION extends RequestOption> extends AbstractFilter<
 
     @Override
     protected Response doPostFilter(
-            CcsrContext context, OPTION option, Payload request, Response response) {
+            CcsrContext context, OPTION option, Payload request, Response response ) {
         // TODO
         return response;
     }

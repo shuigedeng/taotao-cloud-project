@@ -20,9 +20,17 @@ import com.taotao.cloud.ccsr.api.event.EventType;
 import com.taotao.cloud.ccsr.client.dto.ServerAddress;
 import com.taotao.cloud.ccsr.common.log.Log;
 
+/**
+ * ServerAddressConfigListener
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ServerAddressConfigListener extends AbstractConfigListener<ServerAddress> {
+
     @Override
-    public void receive(String dataStr, ServerAddress data, EventType eventType) {
+    public void receive( String dataStr, ServerAddress data, EventType eventType ) {
         // TODO: Implement the logic to handle the received ServerAddress configuration
         Log.print(
                 "[INNER]ServerAddressConfigListener->客户端收到配置变更: eventType=%s, data=%s",

@@ -18,11 +18,20 @@ package com.taotao.cloud.doris.spring.datasource;
 
 import java.util.Map;
 import javax.sql.DataSource;
+
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
+/**
+ * DynamicDataSource
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class DynamicDataSource extends AbstractRoutingDataSource {
+
     public DynamicDataSource(
-            DataSource defaultTargetDataSource, Map<Object, Object> targetDataSources) {
+            DataSource defaultTargetDataSource, Map<Object, Object> targetDataSources ) {
         super.setDefaultTargetDataSource(defaultTargetDataSource);
         super.setTargetDataSources(targetDataSources);
         super.afterPropertiesSet();

@@ -29,7 +29,8 @@ import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
  * @version 1.0
  */
 public class SinkCustom {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
@@ -40,12 +41,19 @@ public class SinkCustom {
         env.execute();
     }
 
+    /**
+     * MySink
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class MySink extends RichSinkFunction<String> {
 
         Connection conn = null;
 
         @Override
-        public void open(OpenContext openContext) throws Exception {
+        public void open( OpenContext openContext ) throws Exception {
             super.open(openContext);
             // 在这里 创建连接
             // conn = new xxxx
@@ -59,12 +67,9 @@ public class SinkCustom {
 
         /**
          * sink的核心逻辑，写出的逻辑就写在这个方法里
-         * @param value
-         * @param context
-         * @throws Exception
          */
         @Override
-        public void invoke(String value, Context context) throws Exception {
+        public void invoke( String value, Context context ) throws Exception {
             // 写出逻辑
             // 这个方法是 来一条数据，调用一次,所以不要在这里创建 连接对象
 

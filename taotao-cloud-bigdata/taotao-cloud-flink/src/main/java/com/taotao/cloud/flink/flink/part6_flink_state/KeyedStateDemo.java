@@ -19,6 +19,7 @@ package com.taotao.cloud.flink.flink.part6_flink_state;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Random;
+
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.state.ValueState;
@@ -36,13 +37,22 @@ import org.apache.flink.streaming.api.environment.CheckpointConfig;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction;
+import org.apache.flink.streaming.api.watermark.Watermark;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
 
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
+/**
+ * KeyedStateDemo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class KeyedStateDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         Configuration conf = new Configuration();
         conf.set(RestOptions.BIND_PORT, "8081");
         final StreamExecutionEnvironment env =
@@ -73,25 +83,25 @@ public class KeyedStateDemo {
                             private final Random random = new Random();
 
                             @Override
-                            public void run(SourceContext<String> ctx) throws Exception {
+                            public void run( SourceContext<String> ctx ) throws Exception {
                                 while (running) {
                                     int randomNum = random.nextInt(5) + 1;
                                     long timestamp = System.currentTimeMillis();
 
                                     if (randomNum == 2) {
                                         new Thread(
-                                                        () -> {
-                                                            try {
-                                                                int delay = random.nextInt(10) + 1;
-                                                                Thread.sleep(delay * 1000);
-                                                                ctx.collectWithTimestamp(
-                                                                        "key" + randomNum + "," + 1
-                                                                                + "," + timestamp,
-                                                                        timestamp);
-                                                            } catch (InterruptedException e) {
-                                                                Thread.currentThread().interrupt();
-                                                            }
-                                                        })
+                                                () -> {
+                                                    try {
+                                                        int delay = random.nextInt(10) + 1;
+                                                        Thread.sleep(delay * 1000);
+                                                        ctx.collectWithTimestamp(
+                                                                "key" + randomNum + "," + 1
+                                                                        + "," + timestamp,
+                                                                timestamp);
+                                                    } catch (InterruptedException e) {
+                                                        Thread.currentThread().interrupt();
+                                                    }
+                                                })
                                                 .start();
                                     } else {
                                         ctx.collectWithTimestamp(
@@ -101,8 +111,7 @@ public class KeyedStateDemo {
 
                                     if (++count % 200 == 0) {
                                         ctx.emitWatermark(
-                                                new org.apache.flink.streaming.api.watermark
-                                                        .Watermark(timestamp));
+                                                new Watermark(timestamp));
                                         System.out.println(
                                                 "Manual Watermark emitted: " + timestamp);
                                     }
@@ -121,7 +130,7 @@ public class KeyedStateDemo {
                 text.map(
                                 new MapFunction<String, Tuple3<String, Integer, Long>>() {
                                     @Override
-                                    public Tuple3<String, Integer, Long> map(String value) {
+                                    public Tuple3<String, Integer, Long> map( String value ) {
                                         String[] words = value.split(",");
                                         return new Tuple3<>(
                                                 words[0],
@@ -135,7 +144,7 @@ public class KeyedStateDemo {
                 tuplesWithTimestamp.assignTimestampsAndWatermarks(
                         WatermarkStrategy.<Tuple3<String, Integer, Long>>forBoundedOutOfOrderness(
                                         Duration.ofSeconds(0))
-                                .withTimestampAssigner((element, recordTimestamp) -> element.f2));
+                                .withTimestampAssigner(( element, recordTimestamp ) -> element.f2));
 
         DataStream<Tuple2<String, Integer>> keyedStream =
                 withWatermarks
@@ -150,7 +159,7 @@ public class KeyedStateDemo {
                                     private ValueState<Integer> countState;
 
                                     @Override
-                                    public void open(OpenContext openContext) {
+                                    public void open( OpenContext openContext ) {
                                         ValueStateDescriptor<Integer> descriptor =
                                                 new ValueStateDescriptor<>("count", Types.INT);
                                         countState = getRuntimeContext().getState(descriptor);
@@ -161,7 +170,7 @@ public class KeyedStateDemo {
                                             String key,
                                             Context context,
                                             Iterable<Tuple3<String, Integer, Long>> elements,
-                                            Collector<Tuple2<String, Integer>> out)
+                                            Collector<Tuple2<String, Integer>> out )
                                             throws IOException {
                                         int count = 0;
                                         for (Tuple3<String, Integer, Long> element : elements) {

@@ -30,28 +30,45 @@ import com.taotao.cloud.job.server.persistence.domain.AppInfo;
 import com.taotao.cloud.job.server.persistence.domain.JobInfo;
 import com.taotao.cloud.job.server.persistence.mapper.AppInfoMapper;
 import com.taotao.cloud.job.server.persistence.mapper.JobInfoMapper;
+
 import java.util.*;
 import java.util.stream.Collectors;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+/**
+ * TtcJobScheduleService
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 @Service
 public class TtcJobScheduleService {
+
     private static final int MAX_APP_NUM = 10;
     public static final long SCHEDULE_RATE = 10000;
-    @Autowired AppInfoMapper appInfoMapper;
-    @Autowired TtcJobServerConfig ttcJobServerConfig;
-    @Autowired JobInfoMapper jobInfoMapper;
-    @Autowired InstanceService instanceService;
-    @Autowired DispatchService dispatchService;
-    @Autowired TimingStrategyService timingStrategyService;
-    @Autowired LockService lockService;
+    @Autowired
+    AppInfoMapper appInfoMapper;
+    @Autowired
+    TtcJobServerConfig ttcJobServerConfig;
+    @Autowired
+    JobInfoMapper jobInfoMapper;
+    @Autowired
+    InstanceService instanceService;
+    @Autowired
+    DispatchService dispatchService;
+    @Autowired
+    TimingStrategyService timingStrategyService;
+    @Autowired
+    LockService lockService;
 
-    public void scheduleNormalJob(TimeExpressionType timeExpressionType) {
+    public void scheduleNormalJob( TimeExpressionType timeExpressionType ) {
         long start = System.currentTimeMillis();
         // 调度 CRON 表达式 JOB
         try {
@@ -83,7 +100,7 @@ public class TtcJobScheduleService {
     }
 
     private void scheduleNormalJob0(
-            TimeExpressionType timeExpressionType, Map<Long, String> allAppInfos) {
+            TimeExpressionType timeExpressionType, Map<Long, String> allAppInfos ) {
 
         long nowTime = System.currentTimeMillis();
         long timeThreshold = nowTime + 2 * SCHEDULE_RATE;
@@ -146,7 +163,7 @@ public class TtcJobScheduleService {
                                             appName2JobNum.put(
                                                     jobInfo.getAppName(),
                                                     appName2JobNum.getOrDefault(
-                                                                    jobInfo.getAppName(), 0)
+                                                            jobInfo.getAppName(), 0)
                                                             + 1);
                                         });
 
@@ -202,7 +219,7 @@ public class TtcJobScheduleService {
                         });
     }
 
-    private void refreshJob(TimeExpressionType timeExpressionType, JobInfo jobInfo) {
+    private void refreshJob( TimeExpressionType timeExpressionType, JobInfo jobInfo ) {
 
         LifeCycle lifeCycle = LifeCycle.parse(jobInfo.getLifecycle());
         Long nextTriggerTime =

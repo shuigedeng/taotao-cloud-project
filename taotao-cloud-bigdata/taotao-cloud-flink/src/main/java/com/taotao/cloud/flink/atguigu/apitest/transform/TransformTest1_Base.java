@@ -23,8 +23,16 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.util.Collector;
 
+/**
+ * TransformTest1_Base
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TransformTest1_Base {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
@@ -38,7 +46,7 @@ public class TransformTest1_Base {
                 inputStream.map(
                         new MapFunction<String, Integer>() {
                             @Override
-                            public Integer map(String value) throws Exception {
+                            public Integer map( String value ) throws Exception {
                                 return value.length();
                             }
                         });
@@ -48,10 +56,11 @@ public class TransformTest1_Base {
                 inputStream.flatMap(
                         new FlatMapFunction<String, String>() {
                             @Override
-                            public void flatMap(String value, Collector<String> out)
+                            public void flatMap( String value, Collector<String> out )
                                     throws Exception {
                                 String[] fields = value.split(",");
-                                for (String field : fields) out.collect(field);
+                                for (String field : fields)
+                                    out.collect(field);
                             }
                         });
 
@@ -60,7 +69,7 @@ public class TransformTest1_Base {
                 inputStream.filter(
                         new FilterFunction<String>() {
                             @Override
-                            public boolean filter(String value) throws Exception {
+                            public boolean filter( String value ) throws Exception {
                                 return value.startsWith("sensor_1");
                             }
                         });

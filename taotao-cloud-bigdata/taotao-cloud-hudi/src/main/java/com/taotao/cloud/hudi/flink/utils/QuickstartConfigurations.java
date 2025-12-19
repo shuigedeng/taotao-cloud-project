@@ -39,7 +39,9 @@ import org.apache.hudi.streamer.FlinkStreamerConfig;
  * Configurations for the test.
  */
 public class QuickstartConfigurations {
-    private QuickstartConfigurations() {}
+
+    private QuickstartConfigurations() {
+    }
 
     public static final DataType ROW_DATA_TYPE =
             DataTypes.ROW(
@@ -74,7 +76,7 @@ public class QuickstartConfigurations {
 
     public static final RowType ROW_TYPE_WIDER = (RowType) ROW_DATA_TYPE_WIDER.getLogicalType();
 
-    public static String getCreateHoodieTableDDL(String tableName, Map<String, String> options) {
+    public static String getCreateHoodieTableDDL( String tableName, Map<String, String> options ) {
         return getCreateHoodieTableDDL(tableName, options, true, "partition");
     }
 
@@ -82,7 +84,7 @@ public class QuickstartConfigurations {
             String tableName,
             Map<String, String> options,
             boolean havePartition,
-            String partitionField) {
+            String partitionField ) {
         return getCreateHoodieTableDDL(
                 tableName, FIELDS, options, havePartition, "uuid", partitionField);
     }
@@ -93,7 +95,7 @@ public class QuickstartConfigurations {
             Map<String, String> options,
             boolean havePartition,
             String pkField,
-            String partitionField) {
+            String partitionField ) {
         StringBuilder builder = new StringBuilder();
         builder.append("create table ").append(tableName).append("(\n");
         for (String field : fields) {
@@ -106,7 +108,7 @@ public class QuickstartConfigurations {
         final String connector = options.computeIfAbsent("connector", k -> "hudi");
         builder.append("with (\n" + "  'connector' = '").append(connector).append("'");
         options.forEach(
-                (k, v) ->
+                ( k, v ) ->
                         builder.append(",\n")
                                 .append("  '")
                                 .append(k)
@@ -118,7 +120,7 @@ public class QuickstartConfigurations {
     }
 
     public static String getCreateHudiCatalogDDL(
-            final String catalogName, final String catalogPath) {
+            final String catalogName, final String catalogPath ) {
         StringBuilder builder = new StringBuilder();
         builder.append("create catalog ").append(catalogName).append(" with (\n");
         builder.append("  'type' = 'hudi',\n" + "  'catalog.path' = '")
@@ -128,19 +130,19 @@ public class QuickstartConfigurations {
         return builder.toString();
     }
 
-    public static String getFileSourceDDL(String tableName) {
+    public static String getFileSourceDDL( String tableName ) {
         return getFileSourceDDL(tableName, "source-file.json");
     }
 
-    public static String getFileSourceDDL(String tableName, int checkpoints) {
+    public static String getFileSourceDDL( String tableName, int checkpoints ) {
         return getFileSourceDDL(tableName, "source-file.json", checkpoints);
     }
 
-    public static String getFileSourceDDL(String tableName, String fileName) {
+    public static String getFileSourceDDL( String tableName, String fileName ) {
         return getFileSourceDDL(tableName, fileName, 2);
     }
 
-    public static String getFileSourceDDL(String tableName, String fileName, int checkpoints) {
+    public static String getFileSourceDDL( String tableName, String fileName, int checkpoints ) {
         String sourcePath =
                 Objects.requireNonNull(
                                 Thread.currentThread()
@@ -168,7 +170,7 @@ public class QuickstartConfigurations {
                 + ")";
     }
 
-    public static String getCollectSinkDDL(String tableName) {
+    public static String getCollectSinkDDL( String tableName ) {
         return "create table "
                 + tableName
                 + "(\n"
@@ -184,7 +186,7 @@ public class QuickstartConfigurations {
                 + ")";
     }
 
-    public static String getCollectSinkDDL(String tableName, ResolvedSchema tableSchema) {
+    public static String getCollectSinkDDL( String tableName, ResolvedSchema tableSchema ) {
         final StringBuilder builder = new StringBuilder("create table " + tableName + "(\n");
         List<Column> columns = tableSchema.getColumns();
         for (int i = 0; i < columns.size(); i++) {
@@ -209,7 +211,7 @@ public class QuickstartConfigurations {
         return builder.toString();
     }
 
-    public static String getCsvSourceDDL(String tableName, String fileName) {
+    public static String getCsvSourceDDL( String tableName, String fileName ) {
         String sourcePath =
                 Objects.requireNonNull(
                                 Thread.currentThread()
@@ -235,7 +237,7 @@ public class QuickstartConfigurations {
 
     public static final RowDataSerializer SERIALIZER = new RowDataSerializer(ROW_TYPE);
 
-    public static Configuration getDefaultConf(String tablePath) {
+    public static Configuration getDefaultConf( String tablePath ) {
         Configuration conf = new Configuration();
         conf.setString(FlinkOptions.PATH, tablePath);
         conf.setString(
@@ -250,7 +252,7 @@ public class QuickstartConfigurations {
         return conf;
     }
 
-    public static FlinkStreamerConfig getDefaultStreamerConf(String tablePath) {
+    public static FlinkStreamerConfig getDefaultStreamerConf( String tablePath ) {
         FlinkStreamerConfig streamerConf = new FlinkStreamerConfig();
         streamerConf.targetBasePath = tablePath;
         streamerConf.sourceAvroSchemaPath =
@@ -269,11 +271,11 @@ public class QuickstartConfigurations {
     /**
      * Creates the tool to build hoodie table DDL.
      */
-    public static Sql sql(String tableName) {
+    public static Sql sql( String tableName ) {
         return new Sql(tableName);
     }
 
-    public static Catalog catalog(String catalogName) {
+    public static Catalog catalog( String catalogName ) {
         return new Catalog(catalogName);
     }
 
@@ -285,6 +287,7 @@ public class QuickstartConfigurations {
      * Tool to build hoodie table DDL with schema {@link #TABLE_SCHEMA}.
      */
     public static class Sql {
+
         private final Map<String, String> options;
         private final String tableName;
         private List<String> fields = new ArrayList<>();
@@ -292,22 +295,22 @@ public class QuickstartConfigurations {
         private String pkField = "uuid";
         private String partitionField = "partition";
 
-        public Sql(String tableName) {
+        public Sql( String tableName ) {
             options = new HashMap<>();
             this.tableName = tableName;
         }
 
-        public Sql option(ConfigOption<?> option, Object val) {
+        public Sql option( ConfigOption<?> option, Object val ) {
             this.options.put(option.key(), val.toString());
             return this;
         }
 
-        public Sql option(String key, Object val) {
+        public Sql option( String key, Object val ) {
             this.options.put(key, val.toString());
             return this;
         }
 
-        public Sql options(Map<String, String> options) {
+        public Sql options( Map<String, String> options ) {
             this.options.putAll(options);
             return this;
         }
@@ -317,17 +320,17 @@ public class QuickstartConfigurations {
             return this;
         }
 
-        public Sql pkField(String pkField) {
+        public Sql pkField( String pkField ) {
             this.pkField = pkField;
             return this;
         }
 
-        public Sql partitionField(String partitionField) {
+        public Sql partitionField( String partitionField ) {
             this.partitionField = partitionField;
             return this;
         }
 
-        public Sql field(String fieldSchema) {
+        public Sql field( String fieldSchema ) {
             fields.add(fieldSchema);
             return this;
         }
@@ -346,15 +349,23 @@ public class QuickstartConfigurations {
         }
     }
 
+    /**
+     * Catalog
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class Catalog {
+
         private final String catalogName;
         private String catalogPath = ".";
 
-        public Catalog(String catalogName) {
+        public Catalog( String catalogName ) {
             this.catalogName = catalogName;
         }
 
-        public Catalog catalogPath(String catalogPath) {
+        public Catalog catalogPath( String catalogPath ) {
             this.catalogPath = catalogPath;
             return this;
         }

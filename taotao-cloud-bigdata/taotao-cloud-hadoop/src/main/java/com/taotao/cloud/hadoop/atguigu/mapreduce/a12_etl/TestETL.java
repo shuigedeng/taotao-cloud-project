@@ -16,9 +16,16 @@
 
 package com.taotao.cloud.hadoop.atguigu.mapreduce.a12_etl;
 
+/**
+ * TestETL
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TestETL {
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
 
         String check = "^((13[0-9])|(14[0-9])|(15[0-9])|(17[0-9])|(18[0-9]))\\d{8}$";
 

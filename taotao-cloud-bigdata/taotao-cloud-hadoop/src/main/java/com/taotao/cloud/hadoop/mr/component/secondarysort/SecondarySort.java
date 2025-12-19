@@ -39,12 +39,19 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  */
 public class SecondarySort {
 
+    /**
+     * SecondarySortMapper
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     static class SecondarySortMapper extends Mapper<LongWritable, Text, OrderBean, NullWritable> {
 
         OrderBean bean = new OrderBean();
 
         @Override
-        protected void map(LongWritable key, Text value, Context context)
+        protected void map( LongWritable key, Text value, Context context )
                 throws IOException, InterruptedException {
             String line = value.toString();
             String[] fields = StringUtils.split(line, ",");
@@ -54,18 +61,24 @@ public class SecondarySort {
         }
     }
 
-    static class SecondarySortReducer
-            extends Reducer<OrderBean, NullWritable, OrderBean, NullWritable> {
+    /**
+     * SecondarySortReducer
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    static class SecondarySortReducer extends Reducer<OrderBean, NullWritable, OrderBean, NullWritable> {
 
         // 到达reduce时，相同id的所有bean已经被看成一组，且金额最大的那个一排在第一位
         @Override
-        protected void reduce(OrderBean key, Iterable<NullWritable> values, Context context)
+        protected void reduce( OrderBean key, Iterable<NullWritable> values, Context context )
                 throws IOException, InterruptedException {
             context.write(key, NullWritable.get());
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf);
 

@@ -30,8 +30,16 @@ import org.apache.flink.util.Collector;
  * nc -lp 8888
  *
  * */
+/**
+ * SocketWordCountDemo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class SocketWordCountDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         Configuration conf = new Configuration();
         // 设置WebUI绑定的本地端口
         conf.set(RestOptions.BIND_PORT, "8081");
@@ -46,7 +54,7 @@ public class SocketWordCountDemo {
         // 3.准备K,V格式数据
         SingleOutputStreamOperator<Tuple2<String, Integer>> tupleDS =
                 ds.flatMap(
-                                (String line, Collector<Tuple2<String, Integer>> out) -> {
+                                ( String line, Collector<Tuple2<String, Integer>> out ) -> {
                                     String[] words = line.split(",");
                                     for (String word : words) {
                                         out.collect(Tuple2.of(word, 1));

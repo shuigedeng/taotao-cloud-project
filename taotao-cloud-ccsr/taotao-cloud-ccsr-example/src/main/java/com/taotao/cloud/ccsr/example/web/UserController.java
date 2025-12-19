@@ -30,11 +30,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * UserController
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @RestController
 @RequestMapping("/user/config")
 public class UserController {
 
-    @Resource private CcsrService ccsrService;
+    @Resource
+    private CcsrService ccsrService;
 
     @GetMapping("/get")
     public String get() {
@@ -55,7 +63,7 @@ public class UserController {
     }
 
     @GetMapping("/put")
-    public String put(@RequestParam("name") String name, @RequestParam("age") String age) {
+    public String put( @RequestParam("name") String name, @RequestParam("age") String age ) {
         Payload payload = Payload.builder().build();
         payload.setConfigData(new User(name, Integer.parseInt(age)));
         payload.setNamespace("default");

@@ -34,7 +34,8 @@ import org.apache.flink.types.Row;
  * @version 1.0
  */
 public class MyTableFunctionDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
         DataStreamSource<String> strDS =
@@ -66,11 +67,18 @@ public class MyTableFunctionDemo {
 
     // TODO 1.继承 TableFunction<返回的类型>
     // 类型标注： Row包含两个字段：word和length
+    /**
+     * SplitFunction
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     @FunctionHint(output = @DataTypeHint("ROW<word STRING,length INT>"))
     public static class SplitFunction extends TableFunction<Row> {
 
         // 返回是 void，用 collect方法输出
-        public void eval(String str) {
+        public void eval( String str ) {
             for (String word : str.split(" ")) {
                 collect(Row.of(word, word.length()));
             }

@@ -26,8 +26,16 @@ import org.apache.flink.table.api.java.StreamTableEnvironment;
 import org.apache.flink.table.functions.AggregateFunction;
 import org.apache.flink.types.Row;
 
+/**
+ * UdfTest3_AggregateFunction
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class UdfTest3_AggregateFunction {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
@@ -77,8 +85,9 @@ public class UdfTest3_AggregateFunction {
 
     // 实现自定义的AggregateFunction
     public static class AvgTemp extends AggregateFunction<Double, Tuple2<Double, Integer>> {
+
         @Override
-        public Double getValue(Tuple2<Double, Integer> accumulator) {
+        public Double getValue( Tuple2<Double, Integer> accumulator ) {
             return accumulator.f0 / accumulator.f1;
         }
 
@@ -88,7 +97,7 @@ public class UdfTest3_AggregateFunction {
         }
 
         // 必须实现一个accumulate方法，来数据之后更新状态
-        public void accumulate(Tuple2<Double, Integer> accumulator, Double temp) {
+        public void accumulate( Tuple2<Double, Integer> accumulator, Double temp ) {
             accumulator.f0 += temp;
             accumulator.f1 += 1;
         }

@@ -18,6 +18,7 @@ package com.taotao.cloud.paimon.kafka.common;
 
 import java.util.List;
 import java.util.Map;
+
 import org.apache.paimon.catalog.Catalog;
 import org.apache.paimon.catalog.CatalogContext;
 import org.apache.paimon.catalog.CatalogFactory;
@@ -26,14 +27,19 @@ import org.apache.paimon.options.Options;
 import org.apache.paimon.schema.Schema;
 import org.apache.paimon.schema.SchemaChange;
 
+/**
+ * CatalogUtils
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class CatalogUtils {
 
     /**
      * create catalog
-     * @param catalogProps
-     * @return
      */
-    public static Catalog createCataLog(Map<String, String> catalogProps) {
+    public static Catalog createCataLog( Map<String, String> catalogProps ) {
         Options options = new Options(catalogProps);
         CatalogContext context = CatalogContext.create(options);
         return CatalogFactory.createCatalog(context);
@@ -41,49 +47,32 @@ public class CatalogUtils {
 
     /**
      * create database
-     * @param catalog
-     * @param databaseName
-     * @param ignoreIfExists
-     * @throws Catalog.DatabaseAlreadyExistException
      */
-    public static void createDatabase(Catalog catalog, String databaseName, boolean ignoreIfExists)
+    public static void createDatabase( Catalog catalog, String databaseName, boolean ignoreIfExists )
             throws Catalog.DatabaseAlreadyExistException {
         catalog.createDatabase(databaseName, ignoreIfExists);
     }
 
     /**
      * create table
-     * @param catalog
-     * @param schema
-     * @param identifier
-     * @param ignoreIfExists
-     * @throws Catalog.TableAlreadyExistException
-     * @throws Catalog.DatabaseNotExistException
      */
     public static void createTable(
-            Catalog catalog, Schema schema, Identifier identifier, boolean ignoreIfExists)
+            Catalog catalog, Schema schema, Identifier identifier, boolean ignoreIfExists )
             throws Catalog.TableAlreadyExistException, Catalog.DatabaseNotExistException {
         catalog.createTable(identifier, schema, ignoreIfExists);
     }
 
     /**
      * alter table
-     * @param catalog
-     * @param identifier
-     * @param schemaChanges
-     * @param ignoreIfNotExists
-     * @throws Catalog.ColumnAlreadyExistException
-     * @throws Catalog.TableNotExistException
-     * @throws Catalog.ColumnNotExistException
      */
     public static void alterTable(
             Catalog catalog,
             Identifier identifier,
             List<SchemaChange> schemaChanges,
-            boolean ignoreIfNotExists)
+            boolean ignoreIfNotExists )
             throws Catalog.ColumnAlreadyExistException,
-                    Catalog.TableNotExistException,
-                    Catalog.ColumnNotExistException {
+            Catalog.TableNotExistException,
+            Catalog.ColumnNotExistException {
         catalog.alterTable(identifier, schemaChanges, ignoreIfNotExists);
     }
 }

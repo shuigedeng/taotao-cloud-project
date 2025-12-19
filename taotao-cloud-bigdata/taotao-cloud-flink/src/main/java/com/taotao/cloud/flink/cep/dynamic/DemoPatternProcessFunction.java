@@ -18,21 +18,30 @@ package com.taotao.cloud.flink.cep.dynamic;
 
 import java.util.List;
 import java.util.Map;
+
 import org.apache.flink.cep.functions.PatternProcessFunction;
 import org.apache.flink.util.Collector;
 
+/**
+ * DemoPatternProcessFunction
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class DemoPatternProcessFunction<IN> extends PatternProcessFunction<IN, String> {
+
     String id;
     int version;
 
-    public DemoPatternProcessFunction(String id, int version) {
+    public DemoPatternProcessFunction( String id, int version ) {
         this.id = id;
         this.version = version;
     }
 
     @Override
     public void processMatch(
-            final Map<String, List<IN>> match, final Context ctx, final Collector<String> out) {
+            final Map<String, List<IN>> match, final Context ctx, final Collector<String> out ) {
         StringBuilder sb = new StringBuilder();
         sb.append("A match for Pattern of (id, version): (")
                 .append(id)

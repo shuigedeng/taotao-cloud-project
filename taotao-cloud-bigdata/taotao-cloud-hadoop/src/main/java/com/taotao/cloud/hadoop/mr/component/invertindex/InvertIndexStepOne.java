@@ -38,13 +38,20 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  */
 public class InvertIndexStepOne {
 
+    /**
+     * InverIndexStepOneMapper
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     static class InverIndexStepOneMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
 
         Text k = new Text();
         IntWritable v = new IntWritable(1);
 
         @Override
-        protected void map(LongWritable key, Text value, Context context)
+        protected void map( LongWritable key, Text value, Context context )
                 throws IOException, InterruptedException {
             String line = value.toString();
             String[] words = line.split(" ");
@@ -57,10 +64,17 @@ public class InvertIndexStepOne {
         }
     }
 
+    /**
+     * InverIndexStepOneReducer
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     static class InverIndexStepOneReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
 
         @Override
-        protected void reduce(Text key, Iterable<IntWritable> values, Context context)
+        protected void reduce( Text key, Iterable<IntWritable> values, Context context )
                 throws IOException, InterruptedException {
             int count = 0;
             for (IntWritable value : values) {
@@ -70,7 +84,7 @@ public class InvertIndexStepOne {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         Configuration conf = new Configuration();
 
         Job job = Job.getInstance(conf);

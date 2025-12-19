@@ -64,10 +64,18 @@ public class MetadataConfigServiceImpl extends MetadataServiceGrpc.MetadataServi
         raftClientWorker = new RaftClientWorker(factory);
     }
 
+    /**
+     * MetadataChangeListener
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public class MetadataChangeListener implements Listener<MetadataChangeEvent> {
+
         @Override
         @Subscribe
-        public void onSubscribe(MetadataChangeEvent event) {
+        public void onSubscribe( MetadataChangeEvent event ) {
             // Handle the metadata change event
             Log.print(
                     "MetadataChangeListener->收到监听消息, type=%s metadata=%s",
@@ -76,13 +84,21 @@ public class MetadataConfigServiceImpl extends MetadataServiceGrpc.MetadataServi
         }
     }
 
+    /**
+     * SubscribeObserver
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     @Getter
     private static class SubscribeObserver {
+
         String namespace;
         StreamObserver<MetadataSubscribeResponse> responseObserver;
 
         SubscribeObserver(
-                String namespace, StreamObserver<MetadataSubscribeResponse> responseObserver) {
+                String namespace, StreamObserver<MetadataSubscribeResponse> responseObserver ) {
             this.namespace = namespace != null ? namespace : DEFAULT_NAMESPACE;
             this.responseObserver = responseObserver;
         }
@@ -94,7 +110,7 @@ public class MetadataConfigServiceImpl extends MetadataServiceGrpc.MetadataServi
     @Override
     public void subscribe(
             MetadataSubscribeRequest request,
-            StreamObserver<MetadataSubscribeResponse> responseObserver) {
+            StreamObserver<MetadataSubscribeResponse> responseObserver ) {
         SubscribeObserver subscribeObserver =
                 new SubscribeObserver(request.getNamespace(), responseObserver);
         subscribers.add(subscribeObserver);
@@ -107,7 +123,7 @@ public class MetadataConfigServiceImpl extends MetadataServiceGrpc.MetadataServi
     }
 
     @Override
-    public void get(MetadataReadRequest request, StreamObserver<Response> responseObserver) {
+    public void get( MetadataReadRequest request, StreamObserver<Response> responseObserver ) {
         try {
             // TODO 这里应该改成从多级缓存中取
             MetadaStorage storage = StorageHolder.getInstance("metadata");
@@ -130,7 +146,7 @@ public class MetadataConfigServiceImpl extends MetadataServiceGrpc.MetadataServi
     }
 
     @Override
-    public void put(MetadataWriteRequest request, StreamObserver<Response> responseObserver) {
+    public void put( MetadataWriteRequest request, StreamObserver<Response> responseObserver ) {
         try {
             Response response = raftClientWorker.invoke(request);
 
@@ -144,7 +160,7 @@ public class MetadataConfigServiceImpl extends MetadataServiceGrpc.MetadataServi
     }
 
     @Override
-    public void delete(MetadataDeleteRequest request, StreamObserver<Response> responseObserver) {
+    public void delete( MetadataDeleteRequest request, StreamObserver<Response> responseObserver ) {
         try {
             Response response = raftClientWorker.invoke(request);
             responseObserver.onNext(response);
@@ -157,7 +173,7 @@ public class MetadataConfigServiceImpl extends MetadataServiceGrpc.MetadataServi
     /**
      * broadcast to all subscribers
      */
-    private void broadcast(EventType eventType, Metadata metadata) {
+    private void broadcast( EventType eventType, Metadata metadata ) {
         // TODO 这里通过长链接持有，进行向客户端广播的时候。如果客户端数量较多，可能会阻塞Raft主线程
         Iterator<SubscribeObserver> it = subscribers.iterator();
         while (it.hasNext()) {
@@ -178,12 +194,12 @@ public class MetadataConfigServiceImpl extends MetadataServiceGrpc.MetadataServi
         }
     }
 
-    private static boolean isMatch(Metadata metadata, SubscribeObserver subscribe) {
+    private static boolean isMatch( Metadata metadata, SubscribeObserver subscribe ) {
         return subscribe.getNamespace().equals(metadata.getNamespace());
     }
 
     private MetadataSubscribeResponse buildSubscribeResponse(
-            Metadata metadata, EventType eventType) {
+            Metadata metadata, EventType eventType ) {
         return MetadataSubscribeResponse.newBuilder()
                 .setNamespace(metadata.getNamespace())
                 .setMsg(ResponseCode.SUCCESS.getMsg())

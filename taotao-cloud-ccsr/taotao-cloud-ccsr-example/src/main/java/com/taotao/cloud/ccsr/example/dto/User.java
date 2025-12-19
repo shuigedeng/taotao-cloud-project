@@ -21,10 +21,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * User
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements ConfigData {
+
     private String name;
     private Integer age;
 }

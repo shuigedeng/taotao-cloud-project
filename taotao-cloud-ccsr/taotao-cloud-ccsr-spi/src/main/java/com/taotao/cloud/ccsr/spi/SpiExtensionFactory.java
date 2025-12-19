@@ -19,9 +19,16 @@ package com.taotao.cloud.ccsr.spi;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * SpiExtensionFactory
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class SpiExtensionFactory {
 
-    public static <T> T getDefaultExtension(final Class<T> clazz) {
+    public static <T> T getDefaultExtension( final Class<T> clazz ) {
         return Optional.ofNullable(clazz)
                 // 入参clazz必须是接口
                 .filter(Class::isInterface)
@@ -34,11 +41,11 @@ public class SpiExtensionFactory {
                 .orElse(null);
     }
 
-    public static <T> T getExtension(String key, final Class<T> clazz) {
+    public static <T> T getExtension( String key, final Class<T> clazz ) {
         return ExtensionLoader.getExtensionLoader(clazz).getJoin(key);
     }
 
-    public static <T> List<T> getExtensions(final Class<T> clazz) {
+    public static <T> List<T> getExtensions( final Class<T> clazz ) {
         return ExtensionLoader.getExtensionLoader(clazz).getJoins();
     }
 }

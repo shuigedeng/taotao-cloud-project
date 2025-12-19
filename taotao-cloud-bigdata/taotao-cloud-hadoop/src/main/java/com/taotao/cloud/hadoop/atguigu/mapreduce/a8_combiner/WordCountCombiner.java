@@ -17,16 +17,24 @@
 package com.taotao.cloud.hadoop.atguigu.mapreduce.a8_combiner;
 
 import java.io.IOException;
+
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
+/**
+ * WordCountCombiner
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class WordCountCombiner extends Reducer<Text, IntWritable, Text, IntWritable> {
 
     private IntWritable outV = new IntWritable();
 
     @Override
-    protected void reduce(Text key, Iterable<IntWritable> values, Context context)
+    protected void reduce( Text key, Iterable<IntWritable> values, Context context )
             throws IOException, InterruptedException {
 
         int sum = 0;

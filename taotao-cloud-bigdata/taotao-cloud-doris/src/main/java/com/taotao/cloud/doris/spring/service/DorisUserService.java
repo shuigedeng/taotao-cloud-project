@@ -19,14 +19,24 @@ package com.taotao.cloud.doris.spring.service;
 import com.taotao.cloud.clickhouse.mapper.CkUserMapper;
 import com.taotao.cloud.clickhouse.model.CkUser;
 import com.taotao.cloud.datasource.ck.ClickHouseJdbcBaseDaoImpl;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * DorisUserService
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Service
 public class DorisUserService extends ClickHouseJdbcBaseDaoImpl {
 
-    @Autowired private CkUserMapper userMapper;
+    @Autowired
+    private CkUserMapper userMapper;
 
     public void testUseJdbcTemplate() {
         getJdbcTemplate()

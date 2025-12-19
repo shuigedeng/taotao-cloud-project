@@ -28,27 +28,41 @@ import com.taotao.cloud.job.server.extension.lock.LockService;
 import com.taotao.cloud.job.server.persistence.domain.AppInfo;
 import com.taotao.cloud.job.server.persistence.mapper.AppInfoMapper;
 import io.grpc.stub.StreamObserver;
+
 import java.util.Objects;
 import java.util.Set;
+
 import lombok.extern.slf4j.Slf4j;
 import com.taotao.boot.common.utils.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * HeartbeatHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 @Slf4j
 public class HeartbeatHandler implements RpcHandler {
+
     private static final int RETRY_TIMES = 10;
     private static final String SERVER_ELECT_LOCK = "server_elect_%d";
     private String ownerIp;
 
-    @Autowired private LockService lockService;
-    @Autowired AppInfoMapper appInfoMapper;
-    @Autowired PingServerRpcClient pingServerRpcService;
-    @Autowired TtcJobServerConfig ttcJobServerConfig;
+    @Autowired
+    private LockService lockService;
+    @Autowired
+    AppInfoMapper appInfoMapper;
+    @Autowired
+    PingServerRpcClient pingServerRpcService;
+    @Autowired
+    TtcJobServerConfig ttcJobServerConfig;
 
     @Override
-    public void handle(Object req, StreamObserver<CommonCausa.Response> responseObserver) {
+    public void handle( Object req, StreamObserver<CommonCausa.Response> responseObserver ) {
         ServerDiscoverCausa.HeartbeatCheck request = (ServerDiscoverCausa.HeartbeatCheck) req;
         // if is local ,return now
         if (checkLocalServer(request.getCurrentServer())) {
@@ -123,7 +137,7 @@ public class HeartbeatHandler implements RpcHandler {
         throw new TtcJobException("server elect failed for app " + appId);
     }
 
-    private String activeAddress(String serverAddress, Set<String> downServerCache) {
+    private String activeAddress( String serverAddress, Set<String> downServerCache ) {
 
         if (downServerCache.contains(serverAddress)) {
             return null;
@@ -145,7 +159,7 @@ public class HeartbeatHandler implements RpcHandler {
     }
 
     private void parseResponse(
-            String currentServer, StreamObserver<CommonCausa.Response> responseObserver) {
+            String currentServer, StreamObserver<CommonCausa.Response> responseObserver ) {
         CommonCausa.Response response =
                 CommonCausa.Response.newBuilder()
                         .setCode(RemoteConstant.SUCCESS)
@@ -158,7 +172,7 @@ public class HeartbeatHandler implements RpcHandler {
         responseObserver.onCompleted();
     }
 
-    private boolean checkLocalServer(String currentServer) {
+    private boolean checkLocalServer( String currentServer ) {
         // 获取本机的InetAddress对象
         ownerIp = ttcJobServerConfig.getAddress();
         return Objects.equals(ownerIp, currentServer);

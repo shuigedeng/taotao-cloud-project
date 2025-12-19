@@ -26,8 +26,16 @@ import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
 
 import org.apache.flink.util.Collector;
 
+/**
+ * ProcessFunctionDemo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ProcessFunctionDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1); // 设置并行度为1，便于调试
 
@@ -43,7 +51,7 @@ public class ProcessFunctionDemo {
                         .assignTimestampsAndWatermarks(
                                 WatermarkStrategy.<Event>forMonotonousTimestamps()
                                         .withTimestampAssigner(
-                                                (event, timestamp) -> event.timestamp));
+                                                ( event, timestamp ) -> event.timestamp));
 
         events.keyBy(Event::getId).process(new MyProcessFunction()).print();
 
@@ -51,11 +59,12 @@ public class ProcessFunctionDemo {
     }
 
     static class Event {
+
         String id;
         long timestamp;
         int value;
 
-        public Event(String id, long timestamp, int value) {
+        public Event( String id, long timestamp, int value ) {
             this.id = id;
             this.timestamp = timestamp;
             this.value = value;
@@ -92,7 +101,7 @@ public class ProcessFunctionDemo {
         private ValueState<Integer> lastValue;
 
         @Override
-        public void open(OpenContext openContext) throws Exception {
+        public void open( OpenContext openContext ) throws Exception {
             super.open(openContext);
             lastValue =
                     getRuntimeContext()
@@ -100,7 +109,7 @@ public class ProcessFunctionDemo {
         }
 
         @Override
-        public void processElement(Event value, Context ctx, Collector<String> out)
+        public void processElement( Event value, Context ctx, Collector<String> out )
                 throws Exception {
             if (lastValue.value() == null) {
                 lastValue.update(value.getValue());
@@ -116,7 +125,7 @@ public class ProcessFunctionDemo {
         }
 
         @Override
-        public void onTimer(long timestamp, OnTimerContext ctx, Collector<String> out)
+        public void onTimer( long timestamp, OnTimerContext ctx, Collector<String> out )
                 throws Exception {
             out.collect("Timer fired at " + timestamp + " for key " + ctx.getCurrentKey());
         }

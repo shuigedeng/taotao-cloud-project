@@ -36,13 +36,20 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  */
 public class WeblogPreProcess {
 
+    /**
+     * WeblogPreProcessMapper
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     static class WeblogPreProcessMapper extends Mapper<LongWritable, Text, Text, NullWritable> {
 
         Text k = new Text();
         NullWritable v = NullWritable.get();
 
         @Override
-        protected void map(LongWritable key, Text value, Context context)
+        protected void map( LongWritable key, Text value, Context context )
                 throws IOException, InterruptedException {
             String line = value.toString();
             WebLogBean webLogBean = WebLogParser.parser(line);
@@ -56,7 +63,7 @@ public class WeblogPreProcess {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf);
 

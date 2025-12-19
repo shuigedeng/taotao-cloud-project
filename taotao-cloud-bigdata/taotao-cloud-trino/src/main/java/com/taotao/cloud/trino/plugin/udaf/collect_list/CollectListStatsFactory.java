@@ -50,20 +50,26 @@ public class CollectListStatsFactory
         return GroupState.class;
     }
 
-    public static class GroupState
-            implements GroupedAccumulatorState, CollectListAggregationFunctions.CollectState {
+    /**
+     * GroupState
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class GroupState implements GroupedAccumulatorState, CollectListAggregationFunctions.CollectState {
 
         private final ObjectBigArray<CollectListStats> collectStatsList = new ObjectBigArray<>();
         private int size;
         private int groupId;
 
         @Override
-        public void setGroupId(int groupId) {
+        public void setGroupId( int groupId ) {
             this.groupId = groupId;
         }
 
         @Override
-        public void ensureCapacity(int size) {
+        public void ensureCapacity( int size ) {
             collectStatsList.ensureCapacity(size);
         }
 
@@ -73,7 +79,7 @@ public class CollectListStatsFactory
         }
 
         @Override
-        public void set(CollectListStats value) {
+        public void set( CollectListStats value ) {
             CollectListStats previous = get();
             if (previous != null) {
                 size -= previous.estimatedInMemorySize();
@@ -88,6 +94,13 @@ public class CollectListStatsFactory
         }
     }
 
+    /**
+     * SingleState
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class SingleState implements CollectListAggregationFunctions.CollectState {
 
         private CollectListStats stats;
@@ -98,7 +111,7 @@ public class CollectListStatsFactory
         }
 
         @Override
-        public void set(CollectListStats value) {
+        public void set( CollectListStats value ) {
             stats = value;
         }
 

@@ -40,6 +40,13 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  */
 public class LogEnhance {
 
+    /**
+     * LogEnhanceMapper
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     static class LogEnhanceMapper extends Mapper<LongWritable, Text, Text, NullWritable> {
 
         Map<String, String> ruleMap = new HashMap<>();
@@ -48,7 +55,7 @@ public class LogEnhance {
 
         // 从数据库中加载规则信息倒ruleMap中
         @Override
-        protected void setup(Context context) throws IOException, InterruptedException {
+        protected void setup( Context context ) throws IOException, InterruptedException {
             try {
                 DBLoader.dbLoader(ruleMap);
             } catch (Exception e) {
@@ -57,7 +64,7 @@ public class LogEnhance {
         }
 
         @Override
-        protected void map(LongWritable key, Text value, Context context)
+        protected void map( LongWritable key, Text value, Context context )
                 throws IOException, InterruptedException {
             // 获取一个计数器用来记录不合法的日志行数, 组名, 计数器名称
             Counter counter = context.getCounter("malformed", "malformedline");
@@ -81,7 +88,7 @@ public class LogEnhance {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf);
 

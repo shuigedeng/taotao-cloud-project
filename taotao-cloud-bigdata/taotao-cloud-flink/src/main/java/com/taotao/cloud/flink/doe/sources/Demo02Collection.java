@@ -46,7 +46,8 @@ import org.apache.flink.util.LongValueSequenceIterator;
  * @Description:
  */
 public class Demo02Collection {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         Configuration conf = new Configuration();
         // conf.set("rest.port", 8888);
         conf.set(RestOptions.PORT, 8888);
@@ -73,12 +74,12 @@ public class Demo02Collection {
                             public RandomDataGenerator generator;
 
                             @Override
-                            public void open(SourceReaderContext readerContext) throws Exception {
+                            public void open( SourceReaderContext readerContext ) throws Exception {
                                 generator = new RandomDataGenerator();
                             }
 
                             @Override
-                            public FlinkUser map(Long value) throws Exception {
+                            public FlinkUser map( Long value ) throws Exception {
                                 // 使用 随机数数据生成器 来创建 FlinkUser实例
                                 return new FlinkUser(
                                         value,
@@ -102,12 +103,12 @@ public class Demo02Collection {
                 stringDataStreamSource.map(
                         new RichMapFunction<FlinkUser, FlinkUser>() {
                             @Override
-                            public void open(OpenContext openContext) throws Exception {
+                            public void open( OpenContext openContext ) throws Exception {
                                 super.open(openContext);
                             }
 
                             @Override
-                            public FlinkUser map(FlinkUser value) throws Exception {
+                            public FlinkUser map( FlinkUser value ) throws Exception {
                                 return value;
                             }
 
@@ -121,7 +122,7 @@ public class Demo02Collection {
                 map.keyBy(
                         new KeySelector<FlinkUser, Integer>() {
                             @Override
-                            public Integer getKey(FlinkUser value) throws Exception {
+                            public Integer getKey( FlinkUser value ) throws Exception {
                                 return value.getGender();
                             }
                         });
@@ -135,7 +136,7 @@ public class Demo02Collection {
      * 通过集合 创建一个并行的source
      */
     private static DataStreamSource<LongValue> getLongValueDataStreamSource(
-            StreamExecutionEnvironment see) {
+            StreamExecutionEnvironment see ) {
         LongValueSequenceIterator longValueSequenceIterator =
                 new LongValueSequenceIterator(1L, 10L);
         DataStreamSource<LongValue> ds =
@@ -148,12 +149,9 @@ public class Demo02Collection {
 
     /**
      * 创建测试数据集合并行度为  1
-     *
-     * @param see
-     * @return
      */
     private static DataStreamSource<OrdersBean> getBeanDataStreamSource(
-            StreamExecutionEnvironment see) {
+            StreamExecutionEnvironment see ) {
         /**
          *  创建测试数据集合
          *  并行度为  1   不能修改并行度
@@ -173,12 +171,9 @@ public class Demo02Collection {
 
     /**
      * 测试数据元素  创建数据源
-     *
-     * @param see
-     * @return
      */
     private static DataStreamSource<OrdersBean> getOrdersBeanDataStreamSource(
-            StreamExecutionEnvironment see) {
+            StreamExecutionEnvironment see ) {
         /**
          * 测试数据  批处理  元素创建数据源
          * 并行度为  1
@@ -194,16 +189,25 @@ public class Demo02Collection {
         return ds2;
     }
 
+    /**
+     * FlinkUser
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class FlinkUser {
+
         public Long id;
         public String name;
         public Integer gender;
         public Long createtime;
 
         // 一定要提供一个 空参 的构造器(反射的时候要使用)
-        public FlinkUser() {}
+        public FlinkUser() {
+        }
 
-        public FlinkUser(Long id, String name, Long createtime, Integer gender) {
+        public FlinkUser( Long id, String name, Long createtime, Integer gender ) {
             this.id = id;
             this.name = name;
             this.createtime = createtime;
@@ -214,7 +218,7 @@ public class Demo02Collection {
             return id;
         }
 
-        public void setId(Long id) {
+        public void setId( Long id ) {
             this.id = id;
         }
 
@@ -222,7 +226,7 @@ public class Demo02Collection {
             return name;
         }
 
-        public void setName(String name) {
+        public void setName( String name ) {
             this.name = name;
         }
 
@@ -230,7 +234,7 @@ public class Demo02Collection {
             return createtime;
         }
 
-        public void setCreatetime(Long createtime) {
+        public void setCreatetime( Long createtime ) {
             this.createtime = createtime;
         }
 
@@ -238,7 +242,7 @@ public class Demo02Collection {
             return gender;
         }
 
-        public void setGender(Integer gender) {
+        public void setGender( Integer gender ) {
             this.gender = gender;
         }
 

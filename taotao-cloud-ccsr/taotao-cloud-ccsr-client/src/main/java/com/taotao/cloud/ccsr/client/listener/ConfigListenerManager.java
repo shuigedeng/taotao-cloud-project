@@ -20,14 +20,22 @@ import com.taotao.cloud.ccsr.api.event.EventType;
 import com.taotao.cloud.ccsr.api.grpc.auto.Metadata;
 import com.taotao.cloud.ccsr.common.exception.CcsrClientException;
 import com.taotao.cloud.ccsr.common.utils.GsonUtils;
+
 import java.util.*;
 
+/**
+ * ConfigListenerManager
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ConfigListenerManager {
 
     private static final Map<String, ConfigListenerWrapper> listenerMap = new HashMap<>();
 
     public static <T extends ConfigData> void registerListener(
-            Class<T> dataClass, ConfigListener<T> listener) {
+            Class<T> dataClass, ConfigListener<T> listener ) {
         try {
             T instance = dataClass.getDeclaredConstructor().newInstance();
             listenerMap.put(instance.key(), new ConfigListenerWrapper(dataClass, listener));
@@ -37,7 +45,7 @@ public class ConfigListenerManager {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T extends ConfigData> void fireEvent(Metadata metadata, EventType eventType) {
+    public static <T extends ConfigData> void fireEvent( Metadata metadata, EventType eventType ) {
         String dataKey = metadata.getDataKey();
         String content = metadata.getContent();
         ConfigListenerWrapper wrapper = listenerMap.get(dataKey);
@@ -54,5 +62,7 @@ public class ConfigListenerManager {
     }
 
     public record ConfigListenerWrapper(
-            Class<? extends ConfigData> dataClass, ConfigListener<? extends ConfigData> listener) {}
+            Class<? extends ConfigData> dataClass, ConfigListener<? extends ConfigData> listener) {
+
+    }
 }

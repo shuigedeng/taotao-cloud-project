@@ -17,14 +17,23 @@
 package com.taotao.cloud.hadoop.atguigu.mapreduce.a2_writable;
 
 import java.io.IOException;
+
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
+/**
+ * FlowReducer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class FlowReducer extends Reducer<Text, FlowBean, Text, FlowBean> {
+
     private FlowBean outV = new FlowBean();
 
     @Override
-    protected void reduce(Text key, Iterable<FlowBean> values, Context context)
+    protected void reduce( Text key, Iterable<FlowBean> values, Context context )
             throws IOException, InterruptedException {
 
         // 1 遍历集合累加值

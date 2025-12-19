@@ -19,10 +19,17 @@ package com.taotao.cloud.ccsr.core.utils;
 import com.taotao.cloud.ccsr.core.storage.Storage;
 import com.taotao.cloud.ccsr.spi.SpiExtensionFactory;
 
+/**
+ * StorageHolder
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class StorageHolder {
 
     @SuppressWarnings("unchecked")
-    public static <T extends Storage<?>> T getInstance(String key) {
+    public static <T extends Storage<?>> T getInstance( String key ) {
         Storage<?> extension = SpiExtensionFactory.getExtension(key, Storage.class);
         return (T) extension;
     }

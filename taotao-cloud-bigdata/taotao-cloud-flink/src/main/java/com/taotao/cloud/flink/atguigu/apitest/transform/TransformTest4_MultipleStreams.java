@@ -17,7 +17,9 @@
 package com.taotao.cloud.flink.atguigu.apitest.transform;
 
 import com.taotao.cloud.flink.atguigu.apitest.beans.SensorReading;
+
 import java.util.Collections;
+
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
@@ -28,8 +30,16 @@ import org.apache.flink.streaming.api.datastream.SplitStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.co.CoMapFunction;
 
+/**
+ * TransformTest4_MultipleStreams
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TransformTest4_MultipleStreams {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
@@ -52,8 +62,8 @@ public class TransformTest4_MultipleStreams {
                 dataStream.split(
                         new OutputSelector<SensorReading>() {
                             @Override
-                            public Iterable<String> select(SensorReading value) {
-                                return (value.getTemperature() > 30)
+                            public Iterable<String> select( SensorReading value ) {
+                                return ( value.getTemperature() > 30 )
                                         ? Collections.singletonList("high")
                                         : Collections.singletonList("low");
                             }
@@ -72,7 +82,7 @@ public class TransformTest4_MultipleStreams {
                 highTempStream.map(
                         new MapFunction<SensorReading, Tuple2<String, Double>>() {
                             @Override
-                            public Tuple2<String, Double> map(SensorReading value)
+                            public Tuple2<String, Double> map( SensorReading value )
                                     throws Exception {
                                 return new Tuple2<>(value.getId(), value.getTemperature());
                             }
@@ -85,12 +95,12 @@ public class TransformTest4_MultipleStreams {
                 connectedStreams.map(
                         new CoMapFunction<Tuple2<String, Double>, SensorReading, Object>() {
                             @Override
-                            public Object map1(Tuple2<String, Double> value) throws Exception {
+                            public Object map1( Tuple2<String, Double> value ) throws Exception {
                                 return new Tuple3<>(value.f0, value.f1, "high temp warning");
                             }
 
                             @Override
-                            public Object map2(SensorReading value) throws Exception {
+                            public Object map2( SensorReading value ) throws Exception {
                                 return new Tuple2<>(value.getId(), "normal");
                             }
                         });

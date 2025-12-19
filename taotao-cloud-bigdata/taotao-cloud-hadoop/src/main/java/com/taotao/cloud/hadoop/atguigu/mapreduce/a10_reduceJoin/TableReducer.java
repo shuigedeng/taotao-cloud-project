@@ -19,15 +19,23 @@ package com.taotao.cloud.hadoop.atguigu.mapreduce.a10_reduceJoin;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
+/**
+ * TableReducer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TableReducer extends Reducer<Text, TableBean, TableBean, NullWritable> {
 
     @Override
-    protected void reduce(Text key, Iterable<TableBean> values, Context context)
+    protected void reduce( Text key, Iterable<TableBean> values, Context context )
             throws IOException, InterruptedException {
         //        01 	1001	1   order
         //        01 	1004	4   order

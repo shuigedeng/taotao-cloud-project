@@ -17,7 +17,9 @@
 package com.taotao.cloud.flink.atguigu.apitest.sink;
 
 import com.taotao.cloud.flink.atguigu.apitest.beans.SensorReading;
+
 import java.util.ArrayList;
+
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.http.HttpHost;
@@ -28,8 +30,16 @@ import org.apache.http.HttpHost;
 // import org.elasticsearch.action.index.IndexRequest;
 // import org.elasticsearch.client.Requests;
 
+/**
+ * SinkTest3_Es
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class SinkTest3_Es {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
@@ -57,24 +67,4 @@ public class SinkTest3_Es {
         env.execute();
     }
 
-    // 实现自定义的ES写入操作
-    // public static class MyEsSinkFunction implements ElasticsearchSinkFunction<SensorReading>{
-    //     @Override
-    //     public void process(SensorReading element, RuntimeContext ctx, RequestIndexer indexer) {
-    //         // 定义写入的数据source
-    //         HashMap<String, String> dataSource = new HashMap<>();
-    //         dataSource.put("id", element.getId());
-    //         dataSource.put("temp", element.getTemperature().toString());
-    //         dataSource.put("ts", element.getTimestamp().toString());
-    //
-    //         // 创建请求，作为向es发起的写入命令
-    //         IndexRequest indexRequest = Requests.indexRequest()
-    //                 .index("sensor")
-    //                 .type("readingdata")
-    //                 .source(dataSource);
-    //
-    //         // 用index发送请求
-    //         indexer.add(indexRequest);
-    //     }
-    // }
 }

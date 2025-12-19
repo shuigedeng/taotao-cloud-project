@@ -21,8 +21,16 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
+/**
+ * TtcJobProperties
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @ConfigurationProperties(prefix = "ttcjob")
 public class TtcJobProperties {
+
     private final Worker worker = new Worker();
 
     public Worker getWorker() {
@@ -36,7 +44,7 @@ public class TtcJobProperties {
     }
 
     @Deprecated
-    public void setAppName(String appName) {
+    public void setAppName( String appName ) {
         getWorker().setAppName(appName);
     }
 
@@ -45,7 +53,7 @@ public class TtcJobProperties {
         return getWorker().getPort();
     }
 
-    public void setGrpcPort(int grpcPort) {
+    public void setGrpcPort( int grpcPort ) {
         getWorker().setPort(grpcPort);
     }
 
@@ -56,7 +64,7 @@ public class TtcJobProperties {
     }
 
     @Deprecated
-    public void setServerAddress(String serverAddress) {
+    public void setServerAddress( String serverAddress ) {
         getWorker().setServerAddress(serverAddress);
     }
 
@@ -67,7 +75,7 @@ public class TtcJobProperties {
     }
 
     @Deprecated
-    public void setNameServerAddress(String address) {
+    public void setNameServerAddress( String address ) {
         getWorker().setNameServerAddress(address);
     }
 
@@ -90,9 +98,9 @@ public class TtcJobProperties {
         private boolean enabled = true;
 
         /**
-         * Name of application, String type. Total length of this property should be no more than 255
-         * characters. This is one of the required properties when registering a new application. This
-         * property should be assigned with the same value as what you entered for the appName.
+         * Name of application, String type. Total length of this property should be no more than 255 characters. This
+         * is one of the required properties when registering a new application. This property should be assigned with
+         * the same value as what you entered for the appName.
          */
         private String appName;
 

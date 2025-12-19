@@ -31,9 +31,8 @@ import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 /**
- * 订单表和商品表合到一起 order.txt(订单id, 日期, 商品编号, 数量) 1001	20150710	P0001	2 1002	20150710	P0001	3
- * 1002	20150710	P0002	3 1003	20150710	P0003	3 product.txt(商品编号, 商品名字, 价格, 数量) P0001	小米5	1001	2
- * P0002	锤子T1	1000	3 P0003	锤子	1002	4
+ * 订单表和商品表合到一起 order.txt(订单id, 日期, 商品编号, 数量) 1001	20150710	P0001	2 1002	20150710	P0001	3 1002	20150710	P0002	3
+ * 1003	20150710	P0003	3 product.txt(商品编号, 商品名字, 价格, 数量) P0001	小米5	1001	2 P0002	锤子T1	1000	3 P0003	锤子	1002	4
  *
  * @author shuigedeng
  * @version 2022.04
@@ -41,13 +40,20 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  */
 public class RJoin {
 
+    /**
+     * RJoinMapper
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     static class RJoinMapper extends Mapper<LongWritable, Text, Text, InfoBean> {
 
         InfoBean bean = new InfoBean();
         Text k = new Text();
 
         @Override
-        protected void map(LongWritable key, Text value, Context context)
+        protected void map( LongWritable key, Text value, Context context )
                 throws IOException, InterruptedException {
             String line = value.toString();
 
@@ -88,10 +94,17 @@ public class RJoin {
         }
     }
 
+    /**
+     * RJoinReducer
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     static class RJoinReducer extends Reducer<Text, InfoBean, InfoBean, NullWritable> {
 
         @Override
-        protected void reduce(Text pid, Iterable<InfoBean> beans, Context context)
+        protected void reduce( Text pid, Iterable<InfoBean> beans, Context context )
                 throws IOException, InterruptedException {
             InfoBean pdBean = new InfoBean();
             ArrayList<InfoBean> orderBeans = new ArrayList<>();
@@ -125,7 +138,7 @@ public class RJoin {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         Configuration conf = new Configuration();
 
         conf.set("mapred.textoutputformat.separator", "\t");

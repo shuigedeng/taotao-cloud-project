@@ -37,13 +37,20 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  */
 public class SharedFriendsStepTwo {
 
+    /**
+     * SharedFriendsStepTwoMapper
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     static class SharedFriendsStepTwoMapper extends Mapper<LongWritable, Text, Text, Text> {
 
         // 拿到的数据是上一个步骤的输出结果
         // A I,K,C,B,G,F,H,O,D,
         // 友 人，人，人
         @Override
-        protected void map(LongWritable key, Text value, Context context)
+        protected void map( LongWritable key, Text value, Context context )
                 throws IOException, InterruptedException {
             String line = value.toString();
             String[] friendPersons = line.split("\t");
@@ -62,10 +69,17 @@ public class SharedFriendsStepTwo {
         }
     }
 
+    /**
+     * SharedFriendsStepTwoReducer
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     static class SharedFriendsStepTwoReducer extends Reducer<Text, Text, Text, Text> {
 
         @Override
-        protected void reduce(Text person_person, Iterable<Text> friends, Context context)
+        protected void reduce( Text person_person, Iterable<Text> friends, Context context )
                 throws IOException, InterruptedException {
             StringBuilder sb = new StringBuilder();
 
@@ -76,7 +90,7 @@ public class SharedFriendsStepTwo {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         Configuration conf = new Configuration();
 
         Job job = Job.getInstance(conf);

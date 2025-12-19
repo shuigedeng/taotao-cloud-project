@@ -22,13 +22,24 @@ import static org.apache.hudi.config.HoodieWriteConfig.TABLE_NAME;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+
 import org.apache.hudi.DataSourceWriteOptions;
+import org.apache.hudi.QuickstartUtils;
+import org.apache.hudi.config.HoodieWriteConfig;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SaveMode;
 import org.apache.spark.sql.SparkSession;
 
+/**
+ * PartitionDemo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class PartitionDemo {
+
     private String tableName;
     private String partitionFields;
     private String hivePartitionFields;
@@ -47,11 +58,11 @@ public class PartitionDemo {
                     .config("spark.sql.hive.convertMetastoreParquet", "false")
                     .getOrCreate();
 
-    public PartitionDemo(ConfigBuilder configBuilder) {
+    public PartitionDemo( ConfigBuilder configBuilder ) {
         this(configBuilder, new HashMap<>());
     }
 
-    public PartitionDemo(ConfigBuilder configBuilder, Map<String, String> properties) {
+    public PartitionDemo( ConfigBuilder configBuilder, Map<String, String> properties ) {
         this.tableName = configBuilder.tableName;
         this.partitionFields = configBuilder.partitionFields;
         this.keyGenerator = configBuilder.keyGenerator;
@@ -62,7 +73,7 @@ public class PartitionDemo {
         this.properties = properties;
     }
 
-    public void writeHudi(Dataset<Row> df) {
+    public void writeHudi( Dataset<Row> df ) {
         df.write()
                 .format("org.apache.hudi")
                 .options(getQuickstartWriteConfigs())
@@ -89,6 +100,7 @@ public class PartitionDemo {
     }
 
     static class ConfigBuilder {
+
         private String tableName;
         private String partitionFields;
         private String keyGenerator;
@@ -98,44 +110,45 @@ public class PartitionDemo {
         private String basePath;
         private Properties properties;
 
-        public ConfigBuilder() {}
+        public ConfigBuilder() {
+        }
 
-        public ConfigBuilder tableName(String tableName) {
+        public ConfigBuilder tableName( String tableName ) {
             this.tableName = tableName;
             return this;
         }
 
-        public ConfigBuilder partitionFields(String partitionFields) {
+        public ConfigBuilder partitionFields( String partitionFields ) {
             this.partitionFields = partitionFields;
             return this;
         }
 
-        public ConfigBuilder keyGenerator(String keyGenerator) {
+        public ConfigBuilder keyGenerator( String keyGenerator ) {
             this.keyGenerator = keyGenerator;
             return this;
         }
 
-        public ConfigBuilder hivePartitionFields(String hivePartitionFields) {
+        public ConfigBuilder hivePartitionFields( String hivePartitionFields ) {
             this.hivePartitionFields = hivePartitionFields;
             return this;
         }
 
-        public ConfigBuilder hivePartitionExtractorClass(String hivePartitionExtractorClass) {
+        public ConfigBuilder hivePartitionExtractorClass( String hivePartitionExtractorClass ) {
             this.hivePartitionExtractorClass = hivePartitionExtractorClass;
             return this;
         }
 
-        public ConfigBuilder properties(Properties properties) {
+        public ConfigBuilder properties( Properties properties ) {
             this.properties = properties;
             return this;
         }
 
-        public ConfigBuilder saveMode(SaveMode saveMode) {
+        public ConfigBuilder saveMode( SaveMode saveMode ) {
             this.saveMode = saveMode;
             return this;
         }
 
-        public ConfigBuilder basePath(String basePath) {
+        public ConfigBuilder basePath( String basePath ) {
             this.basePath = basePath;
             return this;
         }

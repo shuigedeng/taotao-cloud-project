@@ -23,8 +23,16 @@ import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.util.Collector;
 
 // 批处理word count
+/**
+ * WordCount
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class WordCount {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         // 创建执行环境
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
 
@@ -44,8 +52,9 @@ public class WordCount {
 
     // 自定义类，实现FlatMapFunction接口
     public static class MyFlatMapper implements FlatMapFunction<String, Tuple2<String, Integer>> {
+
         @Override
-        public void flatMap(String value, Collector<Tuple2<String, Integer>> out) throws Exception {
+        public void flatMap( String value, Collector<Tuple2<String, Integer>> out ) throws Exception {
             // 按空格分词
             String[] words = value.split(" ");
             // 遍历所有word，包成二元组输出

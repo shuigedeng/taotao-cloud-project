@@ -24,15 +24,23 @@ import com.taotao.cloud.job.worker.core.schedule.tracker.task.light.LightTaskTra
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * ScheduleJobHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class ScheduleJobHandler implements RpcHandler {
+
     TtcJobWorkerConfig config;
 
-    public ScheduleJobHandler(TtcJobWorkerConfig ttcJobWorkerConfig) {
+    public ScheduleJobHandler( TtcJobWorkerConfig ttcJobWorkerConfig ) {
         config = ttcJobWorkerConfig;
     }
 
-    public void handle(Object req, StreamObserver<CommonCausa.Response> responseObserver) {
+    public void handle( Object req, StreamObserver<CommonCausa.Response> responseObserver ) {
         ScheduleCausa.ServerScheduleJobReq scheduleJobReq =
                 (ScheduleCausa.ServerScheduleJobReq) req;
         final LightTaskTracker taskTracker =

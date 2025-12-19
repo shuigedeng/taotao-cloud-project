@@ -22,11 +22,19 @@ import com.taotao.cloud.job.worker.processor.type.BasicProcessor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+/**
+ * MyProcess
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 @Component(value = "testProcessor")
 public class MyProcess implements BasicProcessor {
+
     @Override
-    public ProcessResult process(TaskContext context) throws Exception {
+    public ProcessResult process( TaskContext context ) throws Exception {
         log.info("单机处理器正在处理");
         log.info(context.getJobParams());
         System.out.println("用户:" + context.getJobParams() + "该吃药啦！");

@@ -26,8 +26,16 @@ import org.apache.flink.table.api.java.StreamTableEnvironment;
 import org.apache.flink.table.functions.TableFunction;
 import org.apache.flink.types.Row;
 
+/**
+ * UdfTest2_TableFunction
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class UdfTest2_TableFunction {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
@@ -78,15 +86,16 @@ public class UdfTest2_TableFunction {
 
     // 实现自定义TableFunction
     public static class Split extends TableFunction<Tuple2<String, Integer>> {
+
         // 定义属性，分隔符
         private String separator = ",";
 
-        public Split(String separator) {
+        public Split( String separator ) {
             this.separator = separator;
         }
 
         // 必须实现一个eval方法，没有返回值
-        public void eval(String str) {
+        public void eval( String str ) {
             for (String s : str.split(separator)) {
                 collect(new Tuple2<>(s, s.length()));
             }

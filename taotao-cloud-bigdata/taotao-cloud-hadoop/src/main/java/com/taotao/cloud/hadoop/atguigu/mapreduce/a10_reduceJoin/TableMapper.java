@@ -17,11 +17,19 @@
 package com.taotao.cloud.hadoop.atguigu.mapreduce.a10_reduceJoin;
 
 import java.io.IOException;
+
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 
+/**
+ * TableMapper
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TableMapper extends Mapper<LongWritable, Text, Text, TableBean> {
 
     private String fileName;
@@ -29,7 +37,7 @@ public class TableMapper extends Mapper<LongWritable, Text, Text, TableBean> {
     private TableBean outV = new TableBean();
 
     @Override
-    protected void setup(Context context) throws IOException, InterruptedException {
+    protected void setup( Context context ) throws IOException, InterruptedException {
         // 初始化  order  pd
         FileSplit split = (FileSplit) context.getInputSplit();
 
@@ -37,7 +45,7 @@ public class TableMapper extends Mapper<LongWritable, Text, Text, TableBean> {
     }
 
     @Override
-    protected void map(LongWritable key, Text value, Context context)
+    protected void map( LongWritable key, Text value, Context context )
             throws IOException, InterruptedException {
         // 1 获取一行
         String line = value.toString();

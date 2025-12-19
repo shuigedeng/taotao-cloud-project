@@ -26,20 +26,28 @@ import com.taotao.cloud.ccsr.client.request.Payload;
 import com.taotao.cloud.ccsr.common.enums.ResponseCode;
 import com.taotao.cloud.ccsr.common.exception.CcsrClientException;
 import com.taotao.cloud.ccsr.common.log.Log;
+
 import java.text.MessageFormat;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * AbstractInvokerFilter
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class AbstractInvokerFilter<OPTION extends RequestOption> extends AbstractFilter<OPTION> {
 
     private final ConcurrentHashMap<String, AbstractInvoker<?, OPTION>> invokers =
             new ConcurrentHashMap<>();
 
-    protected AbstractInvokerFilter(AbstractClient<OPTION> client) {
+    protected AbstractInvokerFilter( AbstractClient<OPTION> client ) {
         super(client);
     }
 
     @Override
-    protected Response doPreFilter(CcsrContext context, OPTION option, Payload request) {
+    protected Response doPreFilter( CcsrContext context, OPTION option, Payload request ) {
         try {
 
             return getInvoker(option.protocol()).invoke(context, request);
@@ -54,11 +62,11 @@ public class AbstractInvokerFilter<OPTION extends RequestOption> extends Abstrac
 
     @Override
     protected Response doPostFilter(
-            CcsrContext context, OPTION option, Payload request, Response response) {
+            CcsrContext context, OPTION option, Payload request, Response response ) {
         return response;
     }
 
-    protected AbstractInvoker<?, OPTION> getInvoker(String protocol) {
+    protected AbstractInvoker<?, OPTION> getInvoker( String protocol ) {
         AbstractInvoker<?, OPTION> invoker = this.invokers.get(protocol);
         if (invoker == null) {
             throw new CcsrClientException(
@@ -68,7 +76,7 @@ public class AbstractInvokerFilter<OPTION extends RequestOption> extends Abstrac
     }
 
     @SuppressWarnings("all")
-    protected void registerInvoker(AbstractInvoker invoker) {
+    protected void registerInvoker( AbstractInvoker invoker ) {
         this.invokers.put(invoker.protocol(), invoker);
     }
 }

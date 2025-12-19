@@ -25,10 +25,18 @@ import com.taotao.cloud.ccsr.client.request.Payload;
 import com.taotao.cloud.ccsr.common.exception.DestroyException;
 import com.taotao.cloud.ccsr.common.exception.InitializationException;
 import com.taotao.cloud.ccsr.common.log.Log;
+
 import java.text.MessageFormat;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * AbstractClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public abstract class AbstractClient<OPTION extends RequestOption> implements LeftCycle {
 
     private final AtomicBoolean started = new AtomicBoolean(false);
@@ -49,14 +57,14 @@ public abstract class AbstractClient<OPTION extends RequestOption> implements Le
      */
     private OPTION option;
 
-    protected AbstractClient(String namespace) {
+    protected AbstractClient( String namespace ) {
         this.namespace = namespace;
         this.filterChain = null;
         this.tailFilter = null;
         buildFilterChain();
     }
 
-    public Response request(Payload request) {
+    public Response request( Payload request ) {
         setOption(option);
         return doRequest(request, option);
     }
@@ -95,7 +103,7 @@ public abstract class AbstractClient<OPTION extends RequestOption> implements Le
     }
 
     @Override
-    public void destroy(Integer timeout, TimeUnit unit) {
+    public void destroy( Integer timeout, TimeUnit unit ) {
         Log.info("[Client-Main-Destroy] Destroy LinkClient...");
 
         if (!this.started.get()) {
@@ -127,7 +135,7 @@ public abstract class AbstractClient<OPTION extends RequestOption> implements Le
         Log.info("[Client-Main-Destroy] LinkClient destroyed.");
     }
 
-    public Response doRequest(Payload request, OPTION option) {
+    public Response doRequest( Payload request, OPTION option ) {
         if (request == null) {
             throw new IllegalArgumentException("Request is empty.");
         }
@@ -145,9 +153,11 @@ public abstract class AbstractClient<OPTION extends RequestOption> implements Le
         return response;
     }
 
-    protected void doInit() throws Exception {}
+    protected void doInit() throws Exception {
+    }
 
-    protected void doDestroy(Integer timeout, TimeUnit unit) throws Exception {}
+    protected void doDestroy( Integer timeout, TimeUnit unit ) throws Exception {
+    }
 
     private void buildFilterChain() throws InitializationException {
         try {
@@ -160,7 +170,7 @@ public abstract class AbstractClient<OPTION extends RequestOption> implements Le
         }
     }
 
-    protected AbstractClient<OPTION> addNext(Filter<Response, OPTION> next) {
+    protected AbstractClient<OPTION> addNext( Filter<Response, OPTION> next ) {
         // thread-safe
         if (this.filterChain == null) {
             this.filterChain = next;
@@ -175,22 +185,23 @@ public abstract class AbstractClient<OPTION extends RequestOption> implements Le
     protected abstract void buildChain() throws Exception;
 
     public abstract static class AbstractBuilder<E, C extends AbstractClient<?>> {
+
         private String namespace;
         private RequestOption option;
 
-        protected AbstractBuilder(String namespace, RequestOption option) {
+        protected AbstractBuilder( String namespace, RequestOption option ) {
             this.namespace = namespace;
             this.option = option;
         }
 
         @SuppressWarnings("unchecked")
-        public E namespace(String namespace) {
+        public E namespace( String namespace ) {
             this.namespace = namespace;
             return (E) this;
         }
 
         @SuppressWarnings("unchecked")
-        public E option(RequestOption option) {
+        public E option( RequestOption option ) {
             this.option = option;
             return (E) this;
         }
@@ -202,7 +213,7 @@ public abstract class AbstractClient<OPTION extends RequestOption> implements Le
             return client;
         }
 
-        protected abstract C create(String namespace);
+        protected abstract C create( String namespace );
 
         public String namespace() {
             return this.namespace;
@@ -213,7 +224,7 @@ public abstract class AbstractClient<OPTION extends RequestOption> implements Le
         return namespace;
     }
 
-    public void setNamespace(String namespace) {
+    public void setNamespace( String namespace ) {
         this.namespace = namespace;
     }
 
@@ -222,7 +233,7 @@ public abstract class AbstractClient<OPTION extends RequestOption> implements Le
     }
 
     @SuppressWarnings("unchecked")
-    public void setOption(RequestOption option) {
+    public void setOption( RequestOption option ) {
         if (option == null) {
             throw new IllegalArgumentException("RequestOption can not be null.");
         }

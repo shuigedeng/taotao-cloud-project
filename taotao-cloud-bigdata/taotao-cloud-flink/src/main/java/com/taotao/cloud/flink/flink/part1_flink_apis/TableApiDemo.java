@@ -22,14 +22,24 @@ import static org.apache.flink.table.api.Expressions.range;
 import static org.apache.flink.table.api.Expressions.withColumns;
 
 import java.time.LocalDate;
+
 import org.apache.flink.table.api.EnvironmentSettings;
+import org.apache.flink.table.api.Expressions;
 import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.TableEnvironment;
 import org.apache.flink.table.functions.ScalarFunction;
 import org.apache.flink.types.Row;
 
+/**
+ * TableApiDemo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TableApiDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
 
         // 初始化Flink的运行环境，设置为批处理模式
         final EnvironmentSettings settings =
@@ -138,11 +148,11 @@ public class TableApiDemo {
 
     public static class AddressNormalizer extends ScalarFunction {
 
-        public String eval(String street, String zipCode, String city) {
+        public String eval( String street, String zipCode, String city ) {
             return normalize(street) + ", " + normalize(zipCode) + ", " + normalize(city);
         }
 
-        private String normalize(String s) {
+        private String normalize( String s ) {
             return s.toUpperCase().replaceAll("\\W", " ").replaceAll("\\s+", " ").trim();
         }
     }

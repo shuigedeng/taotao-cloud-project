@@ -18,6 +18,7 @@ package com.taotao.cloud.doris.spring.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import org.apache.doris.demo.spring.service.DemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,14 +26,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * DemoController
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @RestController
 @RequestMapping("/rest/demo")
 public class DemoController {
 
-    @Autowired private DemoService demoService;
+    @Autowired
+    private DemoService demoService;
 
     @GetMapping("/skulist/{skuId}")
-    public Object getSkuList(@PathVariable(value = "skuId") String skuId) {
+    public Object getSkuList( @PathVariable(value = "skuId") String skuId ) {
         Map<String, Object> params = new HashMap<>();
         if (skuId != null) {
             params.put("skuId", skuId);

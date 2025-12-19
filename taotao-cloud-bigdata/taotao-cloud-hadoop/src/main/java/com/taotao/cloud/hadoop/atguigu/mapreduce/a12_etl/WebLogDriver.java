@@ -25,12 +25,19 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
+/**
+ * WebLogDriver
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class WebLogDriver {
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
 
         // 输入输出路径需要根据自己电脑上实际的输入输出路径设置
-        args = new String[] {"D:/input/inputlog", "D:/hadoop/output11111"};
+        args = new String[]{"D:/input/inputlog", "D:/hadoop/output11111"};
 
         // 1 获取job信息
         Configuration conf = new Configuration();

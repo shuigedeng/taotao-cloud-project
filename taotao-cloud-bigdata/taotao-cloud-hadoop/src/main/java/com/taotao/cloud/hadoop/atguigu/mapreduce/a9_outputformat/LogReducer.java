@@ -17,14 +17,22 @@
 package com.taotao.cloud.hadoop.atguigu.mapreduce.a9_outputformat;
 
 import java.io.IOException;
+
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
+/**
+ * LogReducer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class LogReducer extends Reducer<Text, NullWritable, Text, NullWritable> {
 
     @Override
-    protected void reduce(Text key, Iterable<NullWritable> values, Context context)
+    protected void reduce( Text key, Iterable<NullWritable> values, Context context )
             throws IOException, InterruptedException {
 
         // http://www.baidu.com

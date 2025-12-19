@@ -23,17 +23,25 @@ import com.taotao.cloud.job.worker.service.handler.ScheduleJobHandler;
 import com.taotao.cloud.remote.api.ScheduleGrpc;
 import io.grpc.stub.StreamObserver;
 
+/**
+ * WorkerScheduleGrpcService
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class WorkerScheduleGrpcService extends ScheduleGrpc.ScheduleImplBase {
+
     ScheduleJobHandler scheduleJobHandler;
 
-    public WorkerScheduleGrpcService(TtcJobWorkerConfig ttcJobWorkerConfig) {
+    public WorkerScheduleGrpcService( TtcJobWorkerConfig ttcJobWorkerConfig ) {
         this.scheduleJobHandler = new ScheduleJobHandler(ttcJobWorkerConfig);
     }
 
     @Override
     public void serverScheduleJob(
             ScheduleCausa.ServerScheduleJobReq request,
-            StreamObserver<CommonCausa.Response> responseObserver) {
+            StreamObserver<CommonCausa.Response> responseObserver ) {
         scheduleJobHandler.handle(request, responseObserver);
     }
 }

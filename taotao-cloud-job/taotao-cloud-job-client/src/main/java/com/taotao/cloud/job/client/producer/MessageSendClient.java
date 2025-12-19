@@ -21,13 +21,23 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.taotao.cloud.job.client.producer.entity.ResponseFuture;
 import com.taotao.cloud.job.remote.protos.CommonCausa;
 import com.taotao.cloud.job.remote.protos.MqCausa;
+
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicInteger;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * MessageSendClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class MessageSendClient {
+
     private final ProducerManager producerManager;
 
     /**
@@ -35,26 +45,21 @@ public class MessageSendClient {
      */
     private final int retryTime;
 
-    public MessageSendClient(String nameServerAddress) {
+    public MessageSendClient( String nameServerAddress ) {
         ArrayList<String> nameServerAddressList = Lists.newArrayList(nameServerAddress);
         producerManager = new ProducerManager(nameServerAddressList);
         retryTime = producerManager.getRetryTime();
     }
 
     /**
-     * 其实跟netty的addListener类似，都是封装了Future（这里是ResponseFuture）
-     * 在异步得到数据后触发封装Future的回调
-     * 回调后判断结果，再进行重试
-     *
-     * @param curTryTimes
-     * @param msg
+     * 其实跟netty的addListener类似，都是封装了Future（这里是ResponseFuture） 在异步得到数据后触发封装Future的回调 回调后判断结果，再进行重试
      */
-    public void sendMessageAsync(AtomicInteger curTryTimes, MqCausa.Message msg) {
+    public void sendMessageAsync( AtomicInteger curTryTimes, MqCausa.Message msg ) {
         invokeAsync(
                 msg,
                 new InvokeCallback() {
                     @Override
-                    public void operationComplete(ResponseFuture responseFuture) {
+                    public void operationComplete( ResponseFuture responseFuture ) {
                         if (responseFuture.isTimeout()) {
                             log.error("[TtcJobProducer] send message timeout");
                             onExceptionImpl(retryTime, curTryTimes, msg);
@@ -69,7 +74,7 @@ public class MessageSendClient {
                 });
     }
 
-    private void onExceptionImpl(int retryTime, AtomicInteger curRetryTimes, MqCausa.Message msg) {
+    private void onExceptionImpl( int retryTime, AtomicInteger curRetryTimes, MqCausa.Message msg ) {
         curRetryTimes.incrementAndGet();
         if (curRetryTimes.get() < retryTime) {
             try {
@@ -80,7 +85,7 @@ public class MessageSendClient {
         }
     }
 
-    private void invokeAsync(MqCausa.Message msg, InvokeCallback invokeCallback) {
+    private void invokeAsync( MqCausa.Message msg, InvokeCallback invokeCallback ) {
 
         ListenableFuture<CommonCausa.Response> future = producerManager.getStub().send(msg);
         ResponseFuture responseFuture = new ResponseFuture(invokeCallback);

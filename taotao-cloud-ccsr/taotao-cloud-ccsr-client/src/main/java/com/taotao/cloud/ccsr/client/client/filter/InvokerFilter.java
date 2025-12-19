@@ -19,13 +19,21 @@ package com.taotao.cloud.ccsr.client.client.filter;
 import com.taotao.cloud.ccsr.client.client.CcsrClient;
 import com.taotao.cloud.ccsr.client.client.invoke.GrpcInvoker;
 import com.taotao.cloud.ccsr.client.option.RequestOption;
+
 import java.util.concurrent.TimeUnit;
 
+/**
+ * InvokerFilter
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class InvokerFilter extends AbstractInvokerFilter<RequestOption> {
 
     private final CcsrClient client;
 
-    public InvokerFilter(CcsrClient client) {
+    public InvokerFilter( CcsrClient client ) {
         super(client);
         this.client = client;
     }
@@ -37,7 +45,7 @@ public class InvokerFilter extends AbstractInvokerFilter<RequestOption> {
     }
 
     @Override
-    protected void doDestroy(Integer timeout, TimeUnit unit) {
+    protected void doDestroy( Integer timeout, TimeUnit unit ) {
         String protocol = client.getOption().protocol();
         getInvoker(protocol).shutdown();
     }

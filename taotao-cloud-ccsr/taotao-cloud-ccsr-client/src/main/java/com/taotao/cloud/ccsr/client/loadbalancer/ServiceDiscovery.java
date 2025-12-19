@@ -18,10 +18,19 @@ package com.taotao.cloud.ccsr.client.loadbalancer;
 
 import com.taotao.cloud.ccsr.client.dto.ServerAddress;
 import com.taotao.cloud.ccsr.spi.SpiExtensionFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * ServiceDiscovery
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ServiceDiscovery {
+
     private final List<ServerAddress> servers = new ArrayList<>();
     private final LoadBalancer loadBalancer;
 
@@ -32,12 +41,12 @@ public class ServiceDiscovery {
         // LoadBalancer.class);
     }
 
-    public ServiceDiscovery(LoadBalancer loadBalancer) {
+    public ServiceDiscovery( LoadBalancer loadBalancer ) {
         this.loadBalancer = loadBalancer;
     }
 
     // 添加或更新服务地址
-    public void update(List<ServerAddress> newServers) {
+    public void update( List<ServerAddress> newServers ) {
         servers.clear();
         servers.addAll(newServers);
     }
@@ -48,7 +57,7 @@ public class ServiceDiscovery {
     }
 
     // 标记某个服务不可用（例如健康检查失败）
-    public void markServerDown(String host, int port) {
+    public void markServerDown( String host, int port ) {
         servers.stream()
                 .filter(s -> s.getHost().equals(host) && s.getPort() == port)
                 .findFirst()

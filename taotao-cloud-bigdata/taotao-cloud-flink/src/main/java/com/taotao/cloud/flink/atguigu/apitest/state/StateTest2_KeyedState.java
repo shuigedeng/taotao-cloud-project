@@ -24,8 +24,16 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
+/**
+ * StateTest2_KeyedState
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class StateTest2_KeyedState {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
@@ -52,6 +60,7 @@ public class StateTest2_KeyedState {
 
     // 自定义RichMapFunction
     public static class MyKeyCountMapper extends RichMapFunction<SensorReading, Integer> {
+
         private ValueState<Integer> keyCountState;
 
         // 其它类型状态的声明
@@ -60,7 +69,7 @@ public class StateTest2_KeyedState {
         private ReducingState<SensorReading> myReducingState;
 
         @Override
-        public void open(OpenContext openContext) throws Exception {
+        public void open( OpenContext openContext ) throws Exception {
             keyCountState =
                     getRuntimeContext()
                             .getState(
@@ -80,7 +89,7 @@ public class StateTest2_KeyedState {
         }
 
         @Override
-        public Integer map(SensorReading value) throws Exception {
+        public Integer map( SensorReading value ) throws Exception {
             // 其它状态API调用
             // list state
             for (String str : myListState.get()) {

@@ -19,9 +19,17 @@ package com.taotao.cloud.job.nameserver.module;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * ClientHeartbeat
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @AllArgsConstructor
 public class ClientHeartbeat {
+
     String ip;
     String clientType;
     Long heartbeatTime;

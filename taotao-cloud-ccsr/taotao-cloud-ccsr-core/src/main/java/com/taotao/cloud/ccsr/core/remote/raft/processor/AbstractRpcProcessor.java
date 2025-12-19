@@ -39,11 +39,20 @@ import com.taotao.cloud.ccsr.core.remote.raft.RaftClosure;
 import com.taotao.cloud.ccsr.core.remote.raft.RaftServer;
 import com.taotao.cloud.ccsr.core.remote.raft.handler.RequestDispatcher;
 import com.taotao.cloud.ccsr.core.serializer.Serializer;
+
 import java.nio.ByteBuffer;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
+
 import org.apache.commons.lang3.SerializationException;
 
+/**
+ * AbstractRpcProcessor
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public abstract class AbstractRpcProcessor<T extends Message> implements RpcProcessor<T> {
 
     protected final RaftServer server;
@@ -54,7 +63,7 @@ public abstract class AbstractRpcProcessor<T extends Message> implements RpcProc
 
     private final RequestDispatcher dispatcher;
 
-    public AbstractRpcProcessor(RaftServer server, Serializer serializer, boolean isWriteMode) {
+    public AbstractRpcProcessor( RaftServer server, Serializer serializer, boolean isWriteMode ) {
         this.server = server;
         this.serializer = serializer;
         this.isWriteMode = isWriteMode;
@@ -62,7 +71,7 @@ public abstract class AbstractRpcProcessor<T extends Message> implements RpcProc
     }
 
     @Override
-    public void handleRequest(RpcContext ctx, T request) {
+    public void handleRequest( RpcContext ctx, T request ) {
         try {
             Log.print("====接收到客户端请求====> ctx=%s request=%s", ctx, request);
 
@@ -119,7 +128,7 @@ public abstract class AbstractRpcProcessor<T extends Message> implements RpcProc
                         Throwable ex;
 
                         @Override
-                        public void run(Status status) {
+                        public void run( Status status ) {
                             if (Objects.nonNull(ex)) {
                                 ctx.sendResponse(
                                         ResponseHelper.error(
@@ -130,12 +139,12 @@ public abstract class AbstractRpcProcessor<T extends Message> implements RpcProc
                         }
 
                         @Override
-                        public void setResponse(Response response) {
+                        public void setResponse( Response response ) {
                             this.data = response;
                         }
 
                         @Override
-                        public void setThrowable(Throwable throwable) {
+                        public void setThrowable( Throwable throwable ) {
                             this.ex = throwable;
                         }
                     };
@@ -147,7 +156,7 @@ public abstract class AbstractRpcProcessor<T extends Message> implements RpcProc
     }
 
     @Deprecated
-    private void handleReadRequest(Node node, RpcContext ctx, T request) {
+    private void handleReadRequest( Node node, RpcContext ctx, T request ) {
         try {
             // 1. 查询本地状态机
             Log.print("查询模式，由本地状态机器执行，不向leader发起请求, request=%s", request);
@@ -158,7 +167,7 @@ public abstract class AbstractRpcProcessor<T extends Message> implements RpcProc
         }
     }
 
-    private Response handleReadRequest(Node node, T request) {
+    private Response handleReadRequest( Node node, T request ) {
         CompletableFuture<Response> future = readIndex(node, request);
         try {
             return future.get();
@@ -170,18 +179,14 @@ public abstract class AbstractRpcProcessor<T extends Message> implements RpcProc
 
     /**
      * 线性一致读
-     *
-     * @param node
-     * @param request
-     * @return
      */
-    private CompletableFuture<Response> readIndex(Node node, T request) {
+    private CompletableFuture<Response> readIndex( Node node, T request ) {
         CompletableFuture<Response> future = new CompletableFuture<>();
         node.readIndex(
                 BytesUtil.EMPTY_BYTES,
                 new ReadIndexClosure() {
                     @Override
-                    public void run(Status status, long index, byte[] reqCtx) {
+                    public void run( Status status, long index, byte[] reqCtx ) {
                         if (status.isOk()) {
                             try {
                                 Log.print("查询模式，由本地状态机器执行，不向leader发起请求, request=%s", request);
@@ -205,12 +210,13 @@ public abstract class AbstractRpcProcessor<T extends Message> implements RpcProc
     }
 
     public interface FailoverClosure extends Closure {
-        void setResponse(Response response);
 
-        void setThrowable(Throwable throwable);
+        void setResponse( Response response );
+
+        void setThrowable( Throwable throwable );
     }
 
-    private void apply(Node node, Message msg, byte[] serialized, FailoverClosure closure) {
+    private void apply( Node node, Message msg, byte[] serialized, FailoverClosure closure ) {
         // 创建一个新的任务对象，用于封装要处理的数据和回调
         final Task task = new Task();
         task.setDone(
@@ -228,23 +234,23 @@ public abstract class AbstractRpcProcessor<T extends Message> implements RpcProc
     }
 
     // ---------- 抽象方法 ----------
-    protected abstract String extractRaftGroup(T request);
+    protected abstract String extractRaftGroup( T request );
 
-    private void groupNotFound(RpcContext ctx, String group) {
+    private void groupNotFound( RpcContext ctx, String group ) {
         Log.print("===handleRequest===> ctx=%s, group=%s", ctx, group);
         ctx.sendResponse(
                 ResponseHelper.error(
                         ResponseCode.GROUP_NOT_FOUND.getCode(), "Raft group not found: " + group));
     }
 
-    private void noLeader(RpcContext ctx) {
+    private void noLeader( RpcContext ctx ) {
         Log.print("===sendNoLeaderError方法执行===> ctx=%s", ctx);
         ctx.sendResponse(
                 ResponseHelper.error(
                         ResponseCode.NO_LEADER.getCode(), "【Cluster has no leader currently】"));
     }
 
-    private void redirect(RpcContext ctx, PeerId leaderId) {
+    private void redirect( RpcContext ctx, PeerId leaderId ) {
         String leaderAddr = leaderId.getIp() + ":" + leaderId.getPort();
 
         // TODO 是否需要重定向时返回 namespace/group/tag 等信息?
@@ -261,14 +267,14 @@ public abstract class AbstractRpcProcessor<T extends Message> implements RpcProc
                         ResponseCode.REDIRECT.getCode(), "Request redirect to leader node", pack));
     }
 
-    private void serializationError(RpcContext ctx, SerializationException e) {
+    private void serializationError( RpcContext ctx, SerializationException e ) {
         ctx.sendResponse(
                 ResponseHelper.error(
                         ResponseCode.SERIALIZATION_ERROR.getCode(),
                         "Serialization failed: " + e.getMessage()));
     }
 
-    protected void systemError(RpcContext ctx, Exception e) {
+    protected void systemError( RpcContext ctx, Exception e ) {
         ctx.sendResponse(
                 ResponseHelper.error(
                         SYSTEM_ERROR.getCode(), "Internal server error: " + e.getMessage()));

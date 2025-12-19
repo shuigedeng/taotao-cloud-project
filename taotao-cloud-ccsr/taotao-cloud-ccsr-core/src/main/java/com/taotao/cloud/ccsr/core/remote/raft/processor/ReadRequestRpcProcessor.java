@@ -21,19 +21,26 @@ import com.taotao.cloud.ccsr.api.grpc.auto.MetadataReadRequest;
 import com.taotao.cloud.ccsr.core.remote.raft.RaftServer;
 import com.taotao.cloud.ccsr.core.serializer.Serializer;
 
+/**
+ * ReadRequestRpcProcessor
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ReadRequestRpcProcessor extends AbstractRpcProcessor<MetadataReadRequest> {
 
-    public ReadRequestRpcProcessor(RaftServer server, Serializer serializer) {
+    public ReadRequestRpcProcessor( RaftServer server, Serializer serializer ) {
         super(server, serializer, false);
     }
 
     @Override
-    public void handleRequest(RpcContext ctx, MetadataReadRequest request) {
+    public void handleRequest( RpcContext ctx, MetadataReadRequest request ) {
         super.handleRequest(ctx, request);
     }
 
     @Override
-    protected String extractRaftGroup(MetadataReadRequest request) {
+    protected String extractRaftGroup( MetadataReadRequest request ) {
         return request.getRaftGroup();
     }
 

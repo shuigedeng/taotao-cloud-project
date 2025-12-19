@@ -43,17 +43,25 @@ public class RaftClientFactory {
         GlobalEventBus.register(new LeaderRefreshListener());
     }
 
+    /**
+     * LeaderRefreshListener
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public class LeaderRefreshListener implements Listener<LeaderRefreshEvent> {
 
         @Override
         @Subscribe
-        public void onSubscribe(LeaderRefreshEvent event) {
+        public void onSubscribe( LeaderRefreshEvent event ) {
             Log.print("LeaderRefreshListener->收到监听消息, leaderId=%s", event.peerId());
             leaderId = event.peerId();
         }
     }
 
-    private RaftClientFactory() {}
+    private RaftClientFactory() {
+    }
 
     public static RaftClientFactory getInstance() {
         if (INSTANCE == null) {

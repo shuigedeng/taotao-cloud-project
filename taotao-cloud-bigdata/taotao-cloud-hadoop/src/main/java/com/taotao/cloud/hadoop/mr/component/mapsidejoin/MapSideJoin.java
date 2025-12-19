@@ -43,6 +43,13 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  */
 public class MapSideJoin {
 
+    /**
+     * MapSideJoinMapper
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class MapSideJoinMapper extends Mapper<LongWritable, Text, Text, NullWritable> {
 
         // 用一个hashmap来加载保存产品信息表
@@ -53,7 +60,7 @@ public class MapSideJoin {
          * 通过阅读父类Mapper的源码，发现 setup方法是在maptask处理数据之前调用一次 可以用来做一些初始化工作
          */
         @Override
-        protected void setup(Context context) throws IOException, InterruptedException {
+        protected void setup( Context context ) throws IOException, InterruptedException {
             BufferedReader br =
                     new BufferedReader(new InputStreamReader(new FileInputStream("pdts.txt")));
             String line;
@@ -66,7 +73,7 @@ public class MapSideJoin {
 
         // 由于已经持有完整的产品信息表，所以在map方法中就能实现join逻辑了
         @Override
-        protected void map(LongWritable key, Text value, Context context)
+        protected void map( LongWritable key, Text value, Context context )
                 throws IOException, InterruptedException {
             String orderLine = value.toString();
             String[] fields = orderLine.split("\t");
@@ -76,7 +83,7 @@ public class MapSideJoin {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf);
 

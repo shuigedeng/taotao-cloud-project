@@ -22,21 +22,28 @@ import com.taotao.cloud.ccsr.client.context.CcsrContext;
 import com.taotao.cloud.ccsr.client.option.RequestOption;
 import com.taotao.cloud.ccsr.client.request.Payload;
 
+/**
+ * SignFilter
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class SignFilter<OPTION extends RequestOption> extends AbstractFilter<OPTION> {
 
-    public SignFilter(AbstractClient<OPTION> client) {
+    public SignFilter( AbstractClient<OPTION> client ) {
         super(client);
     }
 
     @Override
-    protected Response doPreFilter(CcsrContext context, OPTION option, Payload request) {
+    protected Response doPreFilter( CcsrContext context, OPTION option, Payload request ) {
         // TODO 待后续实现客户端和服务端的签名校验
         return null;
     }
 
     @Override
     protected Response doPostFilter(
-            CcsrContext context, OPTION option, Payload request, Response response) {
+            CcsrContext context, OPTION option, Payload request, Response response ) {
         // TODO
         return response;
     }

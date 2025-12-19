@@ -27,11 +27,20 @@ import com.taotao.cloud.job.worker.common.grpc.strategies.GrpcStrategy;
 import com.taotao.cloud.job.worker.subscribe.WorkerSubscribeManager;
 import com.taotao.cloud.remote.api.ServerDiscoverGrpc;
 import io.grpc.ManagedChannel;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * AssertAppRpcService
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class AssertAppRpcService implements GrpcStrategy<TransportTypeEnum> {
 
@@ -46,7 +55,7 @@ public class AssertAppRpcService implements GrpcStrategy<TransportTypeEnum> {
     }
 
     @Override
-    public Object execute(Object params) {
+    public Object execute( Object params ) {
         ServerDiscoverCausa.AppName appNameInfo = (ServerDiscoverCausa.AppName) params;
         for (ServerDiscoverGrpc.ServerDiscoverBlockingStub serverDiscoverStub :
                 serverDiscoverStubs) {

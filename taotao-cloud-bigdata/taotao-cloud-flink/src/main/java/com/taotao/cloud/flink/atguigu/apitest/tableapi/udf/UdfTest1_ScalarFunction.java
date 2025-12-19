@@ -25,8 +25,16 @@ import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 import org.apache.flink.table.functions.ScalarFunction;
 import org.apache.flink.types.Row;
 
+/**
+ * UdfTest1_ScalarFunction
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class UdfTest1_ScalarFunction {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
@@ -70,13 +78,14 @@ public class UdfTest1_ScalarFunction {
 
     // 实现自定义的ScalarFunction
     public static class HashCode extends ScalarFunction {
+
         private int factor = 13;
 
-        public HashCode(int factor) {
+        public HashCode( int factor ) {
             this.factor = factor;
         }
 
-        public int eval(String str) {
+        public int eval( String str ) {
             return str.hashCode() * factor;
         }
     }

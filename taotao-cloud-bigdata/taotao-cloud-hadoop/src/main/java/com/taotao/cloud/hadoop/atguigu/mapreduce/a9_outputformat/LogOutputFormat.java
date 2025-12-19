@@ -17,15 +17,24 @@
 package com.taotao.cloud.hadoop.atguigu.mapreduce.a9_outputformat;
 
 import java.io.IOException;
+
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.RecordWriter;
 import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
+/**
+ * LogOutputFormat
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class LogOutputFormat extends FileOutputFormat<Text, NullWritable> {
+
     @Override
-    public RecordWriter<Text, NullWritable> getRecordWriter(TaskAttemptContext job)
+    public RecordWriter<Text, NullWritable> getRecordWriter( TaskAttemptContext job )
             throws IOException, InterruptedException {
 
         LogRecordWriter lrw = new LogRecordWriter(job);

@@ -20,11 +20,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.hadoop.hive.ql.exec.UDF;
 
+/**
+ * DateCaseTest
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class DateCaseTest extends UDF {
 
-    public String evaluate(LocalDate startDate, Integer start, Integer end) {
+    public String evaluate( LocalDate startDate, Integer start, Integer end ) {
         if (startDate == null || start == null || end == null) {
             return null;
         }
@@ -33,7 +41,8 @@ public class DateCaseTest extends UDF {
         List<String> result = new ArrayList<>();
         for (int i = start; i <= end - 1; i++) {
             LocalDate oneDate = startDate.plusDays(i);
-            if (oneDate.isAfter(yesterday)) break;
+            if (oneDate.isAfter(yesterday))
+                break;
             String dateString = formatter.format(oneDate);
             result.add(dateString);
         }

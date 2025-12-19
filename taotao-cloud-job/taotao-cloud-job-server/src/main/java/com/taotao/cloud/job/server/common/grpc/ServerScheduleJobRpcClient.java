@@ -23,10 +23,18 @@ import com.taotao.cloud.job.server.extension.singletonpool.GrpcStubSingletonPool
 import com.taotao.cloud.remote.api.ScheduleGrpc;
 import org.springframework.stereotype.Component;
 
+/**
+ * ServerScheduleJobRpcClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 public class ServerScheduleJobRpcClient implements RpcServiceCaller {
+
     @Override
-    public Object call(Object params) {
+    public Object call( Object params ) {
         ScheduleCausa.ServerScheduleJobReq req = (ScheduleCausa.ServerScheduleJobReq) params;
         ScheduleGrpc.ScheduleBlockingStub stubSingleton =
                 GrpcStubSingletonPool.getStubSingleton(

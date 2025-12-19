@@ -36,10 +36,17 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  */
 public class FlowCount {
 
+    /**
+     * FlowCountMapper
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     static class FlowCountMapper extends Mapper<LongWritable, Text, Text, FlowBean> {
 
         @Override
-        protected void map(LongWritable key, Text value, Context context)
+        protected void map( LongWritable key, Text value, Context context )
                 throws IOException, InterruptedException {
             // 将一行内容转成string
             String line = value.toString();
@@ -55,11 +62,18 @@ public class FlowCount {
         }
     }
 
+    /**
+     * FlowCountReducer
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     static class FlowCountReducer extends Reducer<Text, FlowBean, Text, FlowBean> {
 
         // <183323,bean1><183323,bean2><183323,bean3><183323,bean4>.......
         @Override
-        protected void reduce(Text key, Iterable<FlowBean> values, Context context)
+        protected void reduce( Text key, Iterable<FlowBean> values, Context context )
                 throws IOException, InterruptedException {
             long sum_upFlow = 0;
             long sum_dFlow = 0;
@@ -75,7 +89,7 @@ public class FlowCount {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         Configuration conf = new Configuration();
         /*conf.set("mapreduce.framework.name", "yarn");
         conf.set("yarn.resoucemanager.hostname", "mini1");*/

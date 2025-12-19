@@ -49,7 +49,7 @@ public class HoodieExampleDataGenerator<T extends HoodieRecordPayload<T>> {
     public static final String DEFAULT_THIRD_PARTITION_PATH = "2020/01/03";
 
     public static final String[] DEFAULT_PARTITION_PATHS = {
-        DEFAULT_FIRST_PARTITION_PATH, DEFAULT_SECOND_PARTITION_PATH, DEFAULT_THIRD_PARTITION_PATH
+            DEFAULT_FIRST_PARTITION_PATH, DEFAULT_SECOND_PARTITION_PATH, DEFAULT_THIRD_PARTITION_PATH
     };
     public static String TRIP_EXAMPLE_SCHEMA =
             "{\"type\": \"record\",\"name\": \"triprec\",\"fields\": [ "
@@ -66,7 +66,7 @@ public class HoodieExampleDataGenerator<T extends HoodieRecordPayload<T>> {
     private final String[] partitionPaths;
     private int numExistingKeys;
 
-    public HoodieExampleDataGenerator(String[] partitionPaths) {
+    public HoodieExampleDataGenerator( String[] partitionPaths ) {
         this(partitionPaths, new HashMap<>());
     }
 
@@ -75,7 +75,7 @@ public class HoodieExampleDataGenerator<T extends HoodieRecordPayload<T>> {
     }
 
     public HoodieExampleDataGenerator(
-            String[] partitionPaths, Map<Integer, KeyPartition> keyPartitionMap) {
+            String[] partitionPaths, Map<Integer, KeyPartition> keyPartitionMap ) {
         this.partitionPaths = Arrays.copyOf(partitionPaths, partitionPaths.length);
         this.existingKeys = keyPartitionMap;
     }
@@ -84,7 +84,7 @@ public class HoodieExampleDataGenerator<T extends HoodieRecordPayload<T>> {
      * Generates a new avro record of the above schema format, retaining the key if optionally provided.
      */
     @SuppressWarnings("unchecked")
-    public T generateRandomValue(HoodieKey key, String commitTime) {
+    public T generateRandomValue( HoodieKey key, String commitTime ) {
         GenericRecord rec =
                 generateGenericRecord(
                         key.getRecordKey(), "rider-" + commitTime, "driver-" + commitTime, 0);
@@ -92,7 +92,7 @@ public class HoodieExampleDataGenerator<T extends HoodieRecordPayload<T>> {
     }
 
     public GenericRecord generateGenericRecord(
-            String rowKey, String riderName, String driverName, long timestamp) {
+            String rowKey, String riderName, String driverName, long timestamp ) {
         GenericRecord rec = new GenericData.Record(avroSchema);
         rec.put("uuid", rowKey);
         rec.put("ts", timestamp);
@@ -109,14 +109,14 @@ public class HoodieExampleDataGenerator<T extends HoodieRecordPayload<T>> {
     /**
      * Generates new inserts, uniformly across the partition paths above. It also updates the list of existing keys.
      */
-    public List<HoodieRecord<T>> generateInserts(String commitTime, Integer n) {
+    public List<HoodieRecord<T>> generateInserts( String commitTime, Integer n ) {
         return generateInsertsStream(commitTime, n).collect(Collectors.toList());
     }
 
     /**
      * Generates new inserts, uniformly across the partition paths above. It also updates the list of existing keys.
      */
-    public Stream<HoodieRecord<T>> generateInsertsStream(String commitTime, Integer n) {
+    public Stream<HoodieRecord<T>> generateInsertsStream( String commitTime, Integer n ) {
         int currSize = getNumExistingKeys();
 
         return IntStream.range(0, n)
@@ -141,7 +141,7 @@ public class HoodieExampleDataGenerator<T extends HoodieRecordPayload<T>> {
      * Generates new inserts, across a single partition path. It also updates the list of existing keys.
      */
     public List<HoodieRecord<T>> generateInsertsOnPartition(
-            String commitTime, Integer n, String partitionPath) {
+            String commitTime, Integer n, String partitionPath ) {
         return generateInsertsStreamOnPartition(commitTime, n, partitionPath)
                 .collect(Collectors.toList());
     }
@@ -150,7 +150,7 @@ public class HoodieExampleDataGenerator<T extends HoodieRecordPayload<T>> {
      * Generates new inserts, across a single partition path. It also updates the list of existing keys.
      */
     public Stream<HoodieRecord<T>> generateInsertsStreamOnPartition(
-            String commitTime, Integer n, String partitionPath) {
+            String commitTime, Integer n, String partitionPath ) {
         int currSize = getNumExistingKeys();
 
         return IntStream.range(0, n)
@@ -174,10 +174,10 @@ public class HoodieExampleDataGenerator<T extends HoodieRecordPayload<T>> {
      * list
      *
      * @param commitTime Commit Timestamp
-     * @param n          Number of updates (including dups)
+     * @param n Number of updates (including dups)
      * @return list of hoodie record updates
      */
-    public List<HoodieRecord<T>> generateUpdates(String commitTime, Integer n) {
+    public List<HoodieRecord<T>> generateUpdates( String commitTime, Integer n ) {
         List<HoodieRecord<T>> updates = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             KeyPartition kp = existingKeys.get(RAND.nextInt(numExistingKeys - 1));
@@ -188,13 +188,12 @@ public class HoodieExampleDataGenerator<T extends HoodieRecordPayload<T>> {
     }
 
     /**
-     * Generates new updates, one for each of the keys above
-     * list
+     * Generates new updates, one for each of the keys above list
      *
      * @param commitTime Commit Timestamp
      * @return list of hoodie record updates
      */
-    public List<HoodieRecord<T>> generateUniqueUpdates(String commitTime) {
+    public List<HoodieRecord<T>> generateUniqueUpdates( String commitTime ) {
         List<HoodieRecord<T>> updates = new ArrayList<>();
         for (int i = 0; i < numExistingKeys; i++) {
             KeyPartition kp = existingKeys.get(i);
@@ -204,15 +203,15 @@ public class HoodieExampleDataGenerator<T extends HoodieRecordPayload<T>> {
         return updates;
     }
 
-    public HoodieRecord<T> generateUpdateRecord(HoodieKey key, String commitTime) {
+    public HoodieRecord<T> generateUpdateRecord( HoodieKey key, String commitTime ) {
         return new HoodieAvroRecord<>(key, generateRandomValue(key, commitTime));
     }
 
-    private Option<String> convertToString(HoodieRecord<T> record) {
+    private Option<String> convertToString( HoodieRecord<T> record ) {
         try {
             String str =
                     HoodieAvroUtils.bytesToAvro(
-                                    ((HoodieAvroPayload) record.getData()).getRecordBytes(),
+                                    ( (HoodieAvroPayload) record.getData() ).getRecordBytes(),
                                     avroSchema)
                             .toString();
             str = "{" + str.substring(str.indexOf("\"ts\":"));
@@ -224,7 +223,7 @@ public class HoodieExampleDataGenerator<T extends HoodieRecordPayload<T>> {
         }
     }
 
-    public List<String> convertToStringList(List<HoodieRecord<T>> records) {
+    public List<String> convertToStringList( List<HoodieRecord<T>> records ) {
         return records.stream()
                 .map(this::convertToString)
                 .filter(Option::isPresent)
@@ -236,6 +235,13 @@ public class HoodieExampleDataGenerator<T extends HoodieRecordPayload<T>> {
         return numExistingKeys;
     }
 
+    /**
+     * KeyPartition
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class KeyPartition implements Serializable {
 
         HoodieKey key;

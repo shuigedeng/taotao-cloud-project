@@ -19,7 +19,15 @@ package com.taotao.cloud.job.common.utils.net;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+/**
+ * MyNetUtil
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MyNetUtil {
+
     public static String address;
 
     static {

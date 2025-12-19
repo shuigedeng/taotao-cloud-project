@@ -20,10 +20,17 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
+/**
+ * DorisApplication
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class DorisApplication {
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         SpringApplication.run(DorisApplication.class, args);
     }
 }

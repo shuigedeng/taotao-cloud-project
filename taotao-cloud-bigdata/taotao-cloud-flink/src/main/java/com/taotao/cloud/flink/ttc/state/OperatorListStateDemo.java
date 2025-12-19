@@ -32,7 +32,8 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
  * @version 1.0
  */
 public class OperatorListStateDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(2);
 
@@ -42,25 +43,28 @@ public class OperatorListStateDemo {
     }
 
     // TODO 1.实现 CheckpointedFunction 接口
-    public static class MyCountMapFunction
-            implements MapFunction<String, Long>, CheckpointedFunction {
+    /**
+     * MyCountMapFunction
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class MyCountMapFunction implements MapFunction<String, Long>, CheckpointedFunction {
 
         private Long count = 0L;
         private ListState<Long> state;
 
         @Override
-        public Long map(String value) throws Exception {
+        public Long map( String value ) throws Exception {
             return ++count;
         }
 
         /**
          * TODO 2.本地变量持久化：将 本地变量 拷贝到 算子状态中,开启checkpoint时才会调用
-         *
-         * @param context
-         * @throws Exception
          */
         @Override
-        public void snapshotState(FunctionSnapshotContext context) throws Exception {
+        public void snapshotState( FunctionSnapshotContext context ) throws Exception {
             System.out.println("snapshotState...");
             // 2.1 清空算子状态
             state.clear();
@@ -70,12 +74,9 @@ public class OperatorListStateDemo {
 
         /**
          * TODO 3.初始化本地变量：程序启动和恢复时， 从状态中 把数据添加到 本地变量，每个子任务调用一次
-         *
-         * @param context
-         * @throws Exception
          */
         @Override
-        public void initializeState(FunctionInitializationContext context) throws Exception {
+        public void initializeState( FunctionInitializationContext context ) throws Exception {
             System.out.println("initializeState...");
             // 3.1 从 上下文 初始化 算子状态
             state =

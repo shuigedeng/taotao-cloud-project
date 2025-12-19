@@ -17,12 +17,20 @@
 package com.taotao.cloud.flink.cep.event;
 
 import java.io.IOException;
+
 import org.apache.flink.api.common.serialization.DeserializationSchema;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.connector.kafka.source.reader.deserializer.KafkaRecordDeserializationSchema;
 import org.apache.flink.util.Collector;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
+/**
+ * EventDeSerializationSchema
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class EventDeSerializationSchema implements KafkaRecordDeserializationSchema<Event> {
 
     private static final long serialVersionUID = 6154188370181669758L;
@@ -33,13 +41,13 @@ public class EventDeSerializationSchema implements KafkaRecordDeserializationSch
     }
 
     @Override
-    public void open(DeserializationSchema.InitializationContext context) throws Exception {
+    public void open( DeserializationSchema.InitializationContext context ) throws Exception {
         KafkaRecordDeserializationSchema.super.open(context);
     }
 
     @Override
     public void deserialize(
-            ConsumerRecord<byte[], byte[]> consumerRecord, Collector<Event> collector)
+            ConsumerRecord<byte[], byte[]> consumerRecord, Collector<Event> collector )
             throws IOException {
         collector.collect(Event.fromString(new String(consumerRecord.value())));
     }

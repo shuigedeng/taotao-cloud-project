@@ -23,8 +23,16 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor;
 import org.apache.flink.util.OutputTag;
 
+/**
+ * WindowTest3_EventTimeWindow
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class WindowTest3_EventTimeWindow {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         //        env.setParallelism(1);
         //         //env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
@@ -56,12 +64,13 @@ public class WindowTest3_EventTimeWindow {
                                 new BoundedOutOfOrdernessTimestampExtractor<SensorReading>(
                                         Duration.ofSeconds(2)) {
                                     @Override
-                                    public long extractTimestamp(SensorReading element) {
+                                    public long extractTimestamp( SensorReading element ) {
                                         return element.getTimestamp() * 1000L;
                                     }
                                 });
 
-        OutputTag<SensorReading> outputTag = new OutputTag<SensorReading>("late") {};
+        OutputTag<SensorReading> outputTag = new OutputTag<SensorReading>("late") {
+        };
 
         // 基于事件时间的开窗聚合，统计15秒内温度的最小值
         SingleOutputStreamOperator<SensorReading> minTempStream =

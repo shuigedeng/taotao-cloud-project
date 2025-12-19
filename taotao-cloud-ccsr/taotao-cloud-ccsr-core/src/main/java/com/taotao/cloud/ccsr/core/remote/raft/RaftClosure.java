@@ -34,20 +34,20 @@ public class RaftClosure implements Closure {
 
     private RaftStatus _status = new RaftStatus();
 
-    public RaftClosure(Message message) {
+    public RaftClosure( Message message ) {
         this.message = message;
     }
 
-    public RaftClosure(Message message, Closure closure) {
+    public RaftClosure( Message message, Closure closure ) {
         this.message = message;
         this.closure = closure;
     }
 
-    public void setResponse(Response response) {
+    public void setResponse( Response response ) {
         this._status.setResponse(response);
     }
 
-    public void setThrowable(Throwable throwable) {
+    public void setThrowable( Throwable throwable ) {
         this._status.setThrowable(throwable);
     }
 
@@ -62,7 +62,7 @@ public class RaftClosure implements Closure {
     }
 
     @Override
-    public void run(Status status) {
+    public void run( Status status ) {
         if (status == null) {
             Log.print("RaftClosure#run方法的【status】是空值");
         }
@@ -71,6 +71,13 @@ public class RaftClosure implements Closure {
         clear();
     }
 
+    /**
+     * RaftStatus
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class RaftStatus extends Status {
 
         private Status status;
@@ -79,7 +86,7 @@ public class RaftClosure implements Closure {
 
         private Throwable throwable = null;
 
-        public void setStatus(Status status) {
+        public void setStatus( Status status ) {
             this.status = status;
         }
 
@@ -99,7 +106,7 @@ public class RaftClosure implements Closure {
         }
 
         @Override
-        public void setCode(int code) {
+        public void setCode( int code ) {
             status.setCode(code);
         }
 
@@ -109,12 +116,12 @@ public class RaftClosure implements Closure {
         }
 
         @Override
-        public void setError(int code, String fmt, Object... args) {
+        public void setError( int code, String fmt, Object... args ) {
             status.setError(code, fmt, args);
         }
 
         @Override
-        public void setError(RaftError error, String fmt, Object... args) {
+        public void setError( RaftError error, String fmt, Object... args ) {
             status.setError(error, fmt, args);
         }
 
@@ -138,7 +145,7 @@ public class RaftClosure implements Closure {
         }
 
         @Override
-        public void setErrorMsg(String errMsg) {
+        public void setErrorMsg( String errMsg ) {
             status.setErrorMsg(errMsg);
         }
 
@@ -146,7 +153,7 @@ public class RaftClosure implements Closure {
             return response;
         }
 
-        public void setResponse(Response response) {
+        public void setResponse( Response response ) {
             this.response = response;
         }
 
@@ -154,7 +161,7 @@ public class RaftClosure implements Closure {
             return throwable;
         }
 
-        public void setThrowable(Throwable throwable) {
+        public void setThrowable( Throwable throwable ) {
             this.throwable = throwable;
         }
     }

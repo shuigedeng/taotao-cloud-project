@@ -18,19 +18,27 @@ package com.taotao.cloud.ccsr.common.exception;
 
 import java.io.Serial;
 
+/**
+ * InitializationException
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class InitializationException extends RuntimeException {
 
-    @Serial private static final long serialVersionUID = -6123954847415222614L;
+    @Serial
+    private static final long serialVersionUID = -6123954847415222614L;
 
-    public InitializationException(final Throwable e) {
+    public InitializationException( final Throwable e ) {
         super(e);
     }
 
-    public InitializationException(final String message) {
+    public InitializationException( final String message ) {
         super(message);
     }
 
-    public InitializationException(final String message, final Throwable throwable) {
+    public InitializationException( final String message, final Throwable throwable ) {
         super(message, throwable);
     }
 }

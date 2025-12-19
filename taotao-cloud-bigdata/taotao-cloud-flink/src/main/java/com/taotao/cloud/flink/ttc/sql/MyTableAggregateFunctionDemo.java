@@ -34,7 +34,8 @@ import org.apache.flink.util.Collector;
  * @version 1.0
  */
 public class MyTableAggregateFunctionDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
         //  姓名，分数，权重
@@ -57,8 +58,14 @@ public class MyTableAggregateFunctionDemo {
     // TODO 1.继承 TableAggregateFunction< 返回类型，累加器类型<加权总和，权重总和> >
     // 返回类型 (数值，排名) =》 (12,1) (9,2)
     // 累加器类型 (第一大的数，第二大的数) ===》 （12,9）
-    public static class Top2
-            extends TableAggregateFunction<Tuple2<Integer, Integer>, Tuple2<Integer, Integer>> {
+    /**
+     * Top2
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class Top2 extends TableAggregateFunction<Tuple2<Integer, Integer>, Tuple2<Integer, Integer>> {
 
         @Override
         public Tuple2<Integer, Integer> createAccumulator() {
@@ -71,7 +78,7 @@ public class MyTableAggregateFunctionDemo {
          * @param acc 累加器
          * @param num 过来的数据
          */
-        public void accumulate(Tuple2<Integer, Integer> acc, Integer num) {
+        public void accumulate( Tuple2<Integer, Integer> acc, Integer num ) {
             if (num > acc.f0) {
                 // 新来的变第一，原来的第一变第二
                 acc.f1 = acc.f0;
@@ -89,7 +96,7 @@ public class MyTableAggregateFunctionDemo {
          * @param out 采集器<返回类型>
          */
         public void emitValue(
-                Tuple2<Integer, Integer> acc, Collector<Tuple2<Integer, Integer>> out) {
+                Tuple2<Integer, Integer> acc, Collector<Tuple2<Integer, Integer>> out ) {
             if (acc.f0 != 0) {
                 out.collect(Tuple2.of(acc.f0, 1));
             }

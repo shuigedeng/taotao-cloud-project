@@ -19,20 +19,28 @@ package com.taotao.cloud.doris.spring.datasource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * DynamicDataSourceContextHolder
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class DynamicDataSourceContextHolder {
 
     public static final Logger log = LoggerFactory.getLogger(DynamicDataSourceContextHolder.class);
 
     /**
-     * Use ThreadLocal to maintain variables. ThreadLocal provides an independent copy of the variable for each thread that uses the variable.
-     * Therefore, each thread can independently change its own copy without affecting the copies corresponding to other threads.
+     * Use ThreadLocal to maintain variables. ThreadLocal provides an independent copy of the variable for each thread
+     * that uses the variable. Therefore, each thread can independently change its own copy without affecting the copies
+     * corresponding to other threads.
      */
     private static final ThreadLocal<String> CONTEXT_HOLDER = new ThreadLocal<>();
 
     /**
      * Set the variables of the data source
      */
-    public static void setDataSourceType(String dsType) {
+    public static void setDataSourceType( String dsType ) {
         log.info("Switch to {} data source", dsType);
         CONTEXT_HOLDER.set(dsType);
     }

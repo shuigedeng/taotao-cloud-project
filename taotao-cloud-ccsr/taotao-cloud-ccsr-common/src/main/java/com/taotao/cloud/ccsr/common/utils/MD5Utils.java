@@ -18,9 +18,16 @@ package com.taotao.cloud.ccsr.common.utils;
 
 import java.security.MessageDigest;
 
+/**
+ * MD5Utils
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MD5Utils {
 
-    public static String calculateMD5(String content) {
+    public static String calculateMD5( String content ) {
         try {
             // 创建 MD5 摘要实例
             MessageDigest md = MessageDigest.getInstance("MD5");

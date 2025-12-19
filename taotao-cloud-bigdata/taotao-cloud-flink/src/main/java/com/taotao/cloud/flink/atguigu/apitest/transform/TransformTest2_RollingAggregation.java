@@ -23,8 +23,16 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
+/**
+ * TransformTest2_RollingAggregation
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TransformTest2_RollingAggregation {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(4);
 
@@ -61,7 +69,7 @@ public class TransformTest2_RollingAggregation {
                 dataStream1.keyBy(
                         new KeySelector<Long, Integer>() {
                             @Override
-                            public Integer getKey(Long value) throws Exception {
+                            public Integer getKey( Long value ) throws Exception {
                                 return value.intValue() % 2;
                             }
                         });

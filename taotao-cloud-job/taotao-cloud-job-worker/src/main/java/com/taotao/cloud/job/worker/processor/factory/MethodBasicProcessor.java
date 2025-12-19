@@ -20,23 +20,32 @@ import com.taotao.cloud.job.common.utils.JsonUtils;
 import com.taotao.cloud.job.worker.processor.ProcessResult;
 import com.taotao.cloud.job.worker.processor.task.TaskContext;
 import com.taotao.cloud.job.worker.processor.type.BasicProcessor;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
+/**
+ * MethodBasicProcessor
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 class MethodBasicProcessor implements BasicProcessor {
 
     private final Object bean;
 
     private final Method method;
 
-    public MethodBasicProcessor(Object bean, Method method) {
+    public MethodBasicProcessor( Object bean, Method method ) {
         this.bean = bean;
         this.method = method;
     }
 
     @Override
-    public ProcessResult process(TaskContext context) throws Exception {
+    public ProcessResult process( TaskContext context ) throws Exception {
         try {
             Object result = method.invoke(bean, context);
             return new ProcessResult(true, JsonUtils.toJSONString(result));

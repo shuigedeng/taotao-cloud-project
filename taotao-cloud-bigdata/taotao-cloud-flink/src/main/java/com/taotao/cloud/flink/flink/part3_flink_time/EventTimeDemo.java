@@ -17,6 +17,7 @@
 package com.taotao.cloud.flink.flink.part3_flink_time;
 
 import java.time.Duration;
+
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -27,8 +28,16 @@ import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindo
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
+/**
+ * EventTimeDemo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class EventTimeDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         // 创建流处理环境
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
@@ -45,7 +54,7 @@ public class EventTimeDemo {
                 events.assignTimestampsAndWatermarks(
                         WatermarkStrategy.<Event>forBoundedOutOfOrderness(Duration.ofSeconds(0))
                                 .withTimestampAssigner(
-                                        (event, recordTimestamp) -> event.timestamp));
+                                        ( event, recordTimestamp ) -> event.timestamp));
 
         // 定义窗口逻辑
         DataStream<Tuple2<String, Integer>> result =
@@ -59,14 +68,14 @@ public class EventTimeDemo {
                                     public void process(
                                             String s,
                                             ProcessWindowFunction<
-                                                                    Event,
-                                                                    Tuple2<String, Integer>,
-                                                                    String,
-                                                                    TimeWindow>
-                                                            .Context
+                                                    Event,
+                                                    Tuple2<String, Integer>,
+                                                    String,
+                                                    TimeWindow>
+                                                    .Context
                                                     context,
                                             Iterable<Event> iterable,
-                                            Collector<Tuple2<String, Integer>> collector)
+                                            Collector<Tuple2<String, Integer>> collector )
                                             throws Exception {
                                         int count = 0;
                                         for (Event event : iterable) {
@@ -84,13 +93,15 @@ public class EventTimeDemo {
     }
 
     public static class Event {
+
         public String user;
         public String page;
         public long timestamp;
 
-        public Event() {}
+        public Event() {
+        }
 
-        public Event(String user, String page, long timestamp) {
+        public Event( String user, String page, long timestamp ) {
             this.user = user;
             this.page = page;
             this.timestamp = timestamp;

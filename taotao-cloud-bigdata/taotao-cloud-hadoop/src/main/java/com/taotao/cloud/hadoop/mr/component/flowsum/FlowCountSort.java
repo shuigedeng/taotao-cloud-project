@@ -36,13 +36,20 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  */
 public class FlowCountSort {
 
+    /**
+     * FlowCountSortMapper
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     static class FlowCountSortMapper extends Mapper<LongWritable, Text, FlowBean, Text> {
 
         FlowBean bean = new FlowBean();
         Text v = new Text();
 
         @Override
-        protected void map(LongWritable key, Text value, Context context)
+        protected void map( LongWritable key, Text value, Context context )
                 throws IOException, InterruptedException {
             // 拿到的是上一个统计程序的输出结果，已经是各手机号的总流量信息
             String line = value.toString();
@@ -70,13 +77,13 @@ public class FlowCountSort {
 
         // <bean(),phonenbr>
         @Override
-        protected void reduce(FlowBean bean, Iterable<Text> values, Context context)
+        protected void reduce( FlowBean bean, Iterable<Text> values, Context context )
                 throws IOException, InterruptedException {
             context.write(values.iterator().next(), bean);
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         Configuration conf = new Configuration();
         /*conf.set("mapreduce.framework.name", "yarn");
         conf.set("yarn.resoucemanager.hostname", "mini1");*/

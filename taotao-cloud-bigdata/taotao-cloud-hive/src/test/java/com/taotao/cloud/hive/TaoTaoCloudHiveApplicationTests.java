@@ -16,7 +16,15 @@
 
 package com.taotao.cloud.hive;
 
+/**
+ * TaoTaoCloudHiveApplicationTests
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 class TaoTaoCloudHiveApplicationTests {
 
-    void contextLoads() {}
+    void contextLoads() {
+    }
 }

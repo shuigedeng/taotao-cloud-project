@@ -28,8 +28,16 @@ import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction.Context;
 import org.apache.flink.util.Collector;
 
+/**
+ * ProcessTest1_KeyedProcessFunction
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ProcessTest1_KeyedProcessFunction {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
@@ -53,17 +61,18 @@ public class ProcessTest1_KeyedProcessFunction {
 
     // 实现自定义的处理函数
     public static class MyProcess extends KeyedProcessFunction<String, SensorReading, Integer> {
+
         ValueState<Long> tsTimerState;
 
         @Override
-        public void open(OpenContext openContext) throws Exception {
+        public void open( OpenContext openContext ) throws Exception {
             tsTimerState =
                     getRuntimeContext()
                             .getState(new ValueStateDescriptor<Long>("ts-timer", Long.class));
         }
 
         @Override
-        public void processElement(SensorReading value, Context ctx, Collector<Integer> out)
+        public void processElement( SensorReading value, Context ctx, Collector<Integer> out )
                 throws Exception {
             out.collect(value.getId().length());
 
@@ -83,7 +92,7 @@ public class ProcessTest1_KeyedProcessFunction {
         }
 
         @Override
-        public void onTimer(long timestamp, OnTimerContext ctx, Collector<Integer> out)
+        public void onTimer( long timestamp, OnTimerContext ctx, Collector<Integer> out )
                 throws Exception {
             System.out.println(timestamp + " 定时器触发");
             ctx.getCurrentKey();

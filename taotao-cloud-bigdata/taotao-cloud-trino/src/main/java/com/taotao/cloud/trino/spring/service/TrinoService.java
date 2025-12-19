@@ -19,6 +19,13 @@ package com.taotao.cloud.trino.spring.service;
 import com.taotao.cloud.datasource.trino.TrinoJdbcBaseDaoImpl;
 import org.springframework.stereotype.Service;
 
+/**
+ * TrinoService
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Service
 public class TrinoService extends TrinoJdbcBaseDaoImpl {
 

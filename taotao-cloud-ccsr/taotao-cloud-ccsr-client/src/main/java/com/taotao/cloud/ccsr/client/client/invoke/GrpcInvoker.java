@@ -32,11 +32,18 @@ import com.taotao.cloud.ccsr.spi.SpiExtensionFactory;
 import org.apache.commons.collections4.CollectionUtils;
 import com.taotao.boot.common.utils.lang.StringUtils;
 
+/**
+ * GrpcInvoker
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class GrpcInvoker extends AbstractInvoker<Message, GrpcOption> {
 
     private final GrpcClient grpcClient;
 
-    public GrpcInvoker(CcsrClient client) {
+    public GrpcInvoker( CcsrClient client ) {
         super(client);
         GrpcOption grpcOption = (GrpcOption) client.getOption();
         if (grpcOption == null) {
@@ -52,7 +59,7 @@ public class GrpcInvoker extends AbstractInvoker<Message, GrpcOption> {
         grpcClient.init(client.getNamespace(), grpcOption.getServerAddresses());
     }
 
-    public Response innerInvoke(Message request, EventType eventType) {
+    public Response innerInvoke( Message request, EventType eventType ) {
         return switch (eventType) {
             case PUT -> grpcClient.put((MetadataWriteRequest) request);
             case DELETE -> grpcClient.delete((MetadataDeleteRequest) request);
@@ -62,7 +69,7 @@ public class GrpcInvoker extends AbstractInvoker<Message, GrpcOption> {
     }
 
     @Override
-    public Response invoke(CcsrContext context, Payload request) {
+    public Response invoke( CcsrContext context, Payload request ) {
         GrpcOption option = getOption();
         Message message = convert(context, option, request);
         return innerInvoke(message, request.getEventType());
@@ -74,40 +81,36 @@ public class GrpcInvoker extends AbstractInvoker<Message, GrpcOption> {
     }
 
     @Override
-    public Message convert(CcsrContext context, GrpcOption option, Payload request) {
+    public Message convert( CcsrContext context, GrpcOption option, Payload request ) {
         return switch (request.getEventType()) {
-            case PUT ->
-                    MetadataWriteRequest.newBuilder()
-                            .setRaftGroup(RaftGroup.CONFIG_CENTER_GROUP.getName())
-                            .setNamespace(context.getNamespace())
-                            .setGroup(request.getGroup())
-                            .setTag(request.getTag())
-                            .setDataId(request.getDataId())
-                            .setMetadata(buildMetadata(context, option, request))
-                            .build();
-            case DELETE ->
-                    MetadataDeleteRequest.newBuilder()
-                            .setRaftGroup(RaftGroup.CONFIG_CENTER_GROUP.getName())
-                            .setNamespace(context.getNamespace())
-                            .setGroup(request.getGroup())
-                            .setTag(request.getTag())
-                            .setDataId(request.getDataId())
-                            .build();
-            case GET ->
-                    MetadataReadRequest.newBuilder()
-                            .setRaftGroup(RaftGroup.CONFIG_CENTER_GROUP.getName())
-                            .setNamespace(context.getNamespace())
-                            .setGroup(request.getGroup())
-                            .setTag(request.getTag())
-                            .setDataId(request.getDataId())
-                            .build();
-            default ->
-                    throw new IllegalArgumentException(
-                            "Unsupported event type: " + request.getEventType());
+            case PUT -> MetadataWriteRequest.newBuilder()
+                    .setRaftGroup(RaftGroup.CONFIG_CENTER_GROUP.getName())
+                    .setNamespace(context.getNamespace())
+                    .setGroup(request.getGroup())
+                    .setTag(request.getTag())
+                    .setDataId(request.getDataId())
+                    .setMetadata(buildMetadata(context, option, request))
+                    .build();
+            case DELETE -> MetadataDeleteRequest.newBuilder()
+                    .setRaftGroup(RaftGroup.CONFIG_CENTER_GROUP.getName())
+                    .setNamespace(context.getNamespace())
+                    .setGroup(request.getGroup())
+                    .setTag(request.getTag())
+                    .setDataId(request.getDataId())
+                    .build();
+            case GET -> MetadataReadRequest.newBuilder()
+                    .setRaftGroup(RaftGroup.CONFIG_CENTER_GROUP.getName())
+                    .setNamespace(context.getNamespace())
+                    .setGroup(request.getGroup())
+                    .setTag(request.getTag())
+                    .setDataId(request.getDataId())
+                    .build();
+            default -> throw new IllegalArgumentException(
+                    "Unsupported event type: " + request.getEventType());
         };
     }
 
-    private Metadata buildMetadata(CcsrContext context, GrpcOption option, Payload request) {
+    private Metadata buildMetadata( CcsrContext context, GrpcOption option, Payload request ) {
         return Metadata.newBuilder()
                 .setNamespace(context.getNamespace())
                 .setGroup(request.getGroup())

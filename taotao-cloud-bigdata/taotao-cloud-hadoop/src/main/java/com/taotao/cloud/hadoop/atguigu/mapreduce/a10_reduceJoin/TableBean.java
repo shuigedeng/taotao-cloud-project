@@ -19,8 +19,16 @@ package com.taotao.cloud.hadoop.atguigu.mapreduce.a10_reduceJoin;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+
 import org.apache.hadoop.io.Writable;
 
+/**
+ * TableBean
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TableBean implements Writable {
 
     private String id; // 订单id
@@ -30,13 +38,14 @@ public class TableBean implements Writable {
     private String flag; // 标记是什么表 order pd
 
     // 空参构造
-    public TableBean() {}
+    public TableBean() {
+    }
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId( String id ) {
         this.id = id;
     }
 
@@ -44,7 +53,7 @@ public class TableBean implements Writable {
         return pid;
     }
 
-    public void setPid(String pid) {
+    public void setPid( String pid ) {
         this.pid = pid;
     }
 
@@ -52,7 +61,7 @@ public class TableBean implements Writable {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount( int amount ) {
         this.amount = amount;
     }
 
@@ -60,7 +69,7 @@ public class TableBean implements Writable {
         return pname;
     }
 
-    public void setPname(String pname) {
+    public void setPname( String pname ) {
         this.pname = pname;
     }
 
@@ -68,12 +77,12 @@ public class TableBean implements Writable {
         return flag;
     }
 
-    public void setFlag(String flag) {
+    public void setFlag( String flag ) {
         this.flag = flag;
     }
 
     @Override
-    public void write(DataOutput out) throws IOException {
+    public void write( DataOutput out ) throws IOException {
         out.writeUTF(id);
         out.writeUTF(pid);
         out.writeInt(amount);
@@ -82,7 +91,7 @@ public class TableBean implements Writable {
     }
 
     @Override
-    public void readFields(DataInput in) throws IOException {
+    public void readFields( DataInput in ) throws IOException {
 
         this.id = in.readUTF();
         this.pid = in.readUTF();

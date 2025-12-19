@@ -24,8 +24,16 @@ import org.apache.flink.table.descriptors.Csv;
 import org.apache.flink.table.descriptors.FileSystem;
 import org.apache.flink.table.descriptors.Schema;
 
+/**
+ * TableTest3_FileOutput
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TableTest3_FileOutput {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         // 1. 创建环境
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);

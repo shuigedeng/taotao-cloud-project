@@ -21,9 +21,16 @@ import com.google.protobuf.Empty;
 import com.taotao.cloud.ccsr.api.grpc.auto.Response;
 import com.taotao.cloud.ccsr.common.enums.ResponseCode;
 
+/**
+ * ResponseHelper
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ResponseHelper {
 
-    public static Response error(int code, String msg, Any data) {
+    public static Response error( int code, String msg, Any data ) {
         return Response.newBuilder()
                 .setSuccess(false)
                 .setData(data)
@@ -32,11 +39,11 @@ public class ResponseHelper {
                 .build();
     }
 
-    public static Response error(int code, String msg) {
+    public static Response error( int code, String msg ) {
         return error(code, msg, Any.pack(Empty.newBuilder().build()));
     }
 
-    public static Response success(String msg, Any data) {
+    public static Response success( String msg, Any data ) {
         return Response.newBuilder()
                 .setSuccess(true)
                 .setData(data)
@@ -45,11 +52,11 @@ public class ResponseHelper {
                 .build();
     }
 
-    public static Response success(Any data) {
+    public static Response success( Any data ) {
         return success(ResponseCode.SUCCESS.getMsg(), data);
     }
 
-    public static Response success(String msg) {
+    public static Response success( String msg ) {
         return success(msg, Any.pack(Empty.newBuilder().build()));
     }
 

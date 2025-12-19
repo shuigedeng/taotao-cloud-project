@@ -20,10 +20,17 @@ import com.taotao.cloud.ccsr.api.grpc.auto.Metadata;
 import com.taotao.cloud.ccsr.spi.Join;
 import com.taotao.boot.common.utils.lang.StringUtils;
 
+/**
+ * MetadaStorage
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Join(order = 1, isSingleton = true)
 public class MetadaStorage extends AbstractStorage<Metadata> {
 
-    public String key(String namespace, String group, String tag, String dataId) {
+    public String key( String namespace, String group, String tag, String dataId ) {
         StringBuilder builder = new StringBuilder();
         if (StringUtils.isNotBlank(namespace)) {
             builder.append(namespace).append("#");
@@ -45,12 +52,12 @@ public class MetadaStorage extends AbstractStorage<Metadata> {
     }
 
     @Override
-    public String key(Metadata data) {
+    public String key( Metadata data ) {
         return key(data.getNamespace(), data.getGroup(), data.getTag(), data.getDataId());
     }
 
     @Override
-    public boolean check(Metadata data) throws IllegalArgumentException {
+    public boolean check( Metadata data ) throws IllegalArgumentException {
         if (data == null) {
             throw new IllegalArgumentException("data is null");
         }

@@ -23,16 +23,23 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
+/**
+ * JobServerApplication
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @SpringBootApplication
 @EnableConfigurationProperties(TtcJobServerConfig.class)
 public class JobServerApplication extends SpringBootServletInitializer {
 
     @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+    protected SpringApplicationBuilder configure( SpringApplicationBuilder builder ) {
         return builder.sources(JobServerApplication.class);
     }
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         new StartupSpringApplication(JobServerApplication.class)
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")

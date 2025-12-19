@@ -22,21 +22,31 @@ import com.taotao.cloud.job.server.extension.lock.LockService;
 import com.taotao.cloud.job.server.persistence.domain.DistributedLock;
 import com.taotao.cloud.job.server.persistence.mapper.DistributedLockMapper;
 import jakarta.annotation.PostConstruct;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.Optional;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * DBLockService
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 @Service
-public class DBLockService extends ServiceImpl<DistributedLockMapper, DistributedLock>
-        implements LockService {
+public class DBLockService extends ServiceImpl<DistributedLockMapper, DistributedLock> implements LockService {
+
     private String ownerIp;
 
-    @Autowired DistributedLockMapper distributedLockMapper;
+    @Autowired
+    DistributedLockMapper distributedLockMapper;
 
     @PostConstruct
     public void init() throws UnknownHostException {
@@ -45,7 +55,7 @@ public class DBLockService extends ServiceImpl<DistributedLockMapper, Distribute
     }
 
     @Override
-    public boolean tryLock(String name, long maxLockTime) {
+    public boolean tryLock( String name, long maxLockTime ) {
 
         Date now = new Date();
         long fiveSecondsLaterInMillis = now.getTime() + 5000;
@@ -74,7 +84,7 @@ public class DBLockService extends ServiceImpl<DistributedLockMapper, Distribute
     }
 
     @Override
-    public void unlock(String name) {
+    public void unlock( String name ) {
 
         QueryWrapper<DistributedLock> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("lock_name", name);

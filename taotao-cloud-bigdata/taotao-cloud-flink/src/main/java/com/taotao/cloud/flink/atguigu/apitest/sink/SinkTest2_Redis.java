@@ -26,8 +26,16 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 // import org.apache.flink.streaming.connectors.redis.common.mapper.RedisCommandDescription;
 // import org.apache.flink.streaming.connectors.redis.common.mapper.RedisMapper;
 
+/**
+ * SinkTest2_Redis
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class SinkTest2_Redis {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 

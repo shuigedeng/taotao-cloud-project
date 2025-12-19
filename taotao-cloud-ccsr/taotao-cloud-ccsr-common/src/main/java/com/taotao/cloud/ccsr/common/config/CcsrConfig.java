@@ -17,11 +17,20 @@
 package com.taotao.cloud.ccsr.common.config;
 
 import com.alipay.sofa.jraft.option.NodeOptions;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import lombok.*;
 
+/**
+ * CcsrConfig
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @ToString
 @NoArgsConstructor
@@ -59,13 +68,14 @@ public class CcsrConfig implements Serializable {
 
         private final String type;
 
-        RpcType(String type) {
+        RpcType( String type ) {
             this.type = type;
         }
     }
 
     @Data
     public static class GrpcConfig {
+
         private int maxInboundMessageSize = 1024 * 1024 * 10;
         private long keepAliveTime = 10000;
         private long keepAliveTimeout = 10000;
@@ -144,8 +154,7 @@ public class CcsrConfig implements Serializable {
         private int maxElectionDelayMs = 1000;
 
         /**
-         * 指定选举超时时间和心跳间隔时间之间的比值。心跳间隔等于
-         * electionTimeoutMs/electionHeartbeatFactor，默认10分之一。
+         * 指定选举超时时间和心跳间隔时间之间的比值。心跳间隔等于 electionTimeoutMs/electionHeartbeatFactor，默认10分之一。
          */
         private int electionHeartbeatFactor = 10;
 
@@ -160,8 +169,7 @@ public class CcsrConfig implements Serializable {
         private boolean sync = true;
 
         /**
-         * 写入 snapshot/raft 元信息是否调用 fsync，默认为 false，
-         * 在 sync 为 true 的情况下，优选尊重 sync
+         * 写入 snapshot/raft 元信息是否调用 fsync，默认为 false， 在 sync 为 true 的情况下，优选尊重 sync
          */
         private boolean syncMeta = false;
 

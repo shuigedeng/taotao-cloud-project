@@ -23,10 +23,17 @@ import com.taotao.cloud.ccsr.client.option.RequestOption;
 import com.taotao.cloud.ccsr.client.request.Payload;
 import com.taotao.cloud.ccsr.common.exception.InitializationException;
 import com.taotao.cloud.ccsr.common.log.Log;
+
 import java.util.concurrent.TimeUnit;
 
-public abstract class AbstractFilter<OPTION extends RequestOption>
-        implements Filter<Response, OPTION> {
+/**
+ * AbstractFilter
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
+public abstract class AbstractFilter<OPTION extends RequestOption> implements Filter<Response, OPTION> {
 
     private Filter<Response, OPTION> pre;
 
@@ -34,7 +41,7 @@ public abstract class AbstractFilter<OPTION extends RequestOption>
 
     private final AbstractClient<OPTION> client;
 
-    protected AbstractFilter(AbstractClient<OPTION> client) {
+    protected AbstractFilter( AbstractClient<OPTION> client ) {
         this.client = client;
     }
 
@@ -60,7 +67,7 @@ public abstract class AbstractFilter<OPTION extends RequestOption>
     }
 
     @Override
-    public Response preFilter(CcsrContext context, OPTION option, Payload request) {
+    public Response preFilter( CcsrContext context, OPTION option, Payload request ) {
         Response response = doPreFilter(context, option, request);
         return this.next() == null || response != null
                 // End: execute post filter
@@ -71,7 +78,7 @@ public abstract class AbstractFilter<OPTION extends RequestOption>
 
     @Override
     public Response postFilter(
-            CcsrContext context, OPTION option, Payload request, Response response) {
+            CcsrContext context, OPTION option, Payload request, Response response ) {
         Response resp = doPostFilter(context, option, request, response);
         return this.pre() == null
                 // End: return response.
@@ -81,7 +88,7 @@ public abstract class AbstractFilter<OPTION extends RequestOption>
     }
 
     @Override
-    public void destroy(Integer timeout, TimeUnit unit) {
+    public void destroy( Integer timeout, TimeUnit unit ) {
 
         Log.info("[Client-Filter-Destroy] Destroy Filter {}", this.getClass().getCanonicalName());
         try {
@@ -96,7 +103,7 @@ public abstract class AbstractFilter<OPTION extends RequestOption>
     }
 
     @Override
-    public Filter<Response, OPTION> next(Filter<Response, OPTION> filter) {
+    public Filter<Response, OPTION> next( Filter<Response, OPTION> filter ) {
         Log.debug(
                 "[Client-Filter-Start] Add next filter to FilterChain, pre: {} -> next: {}",
                 this.getClass().getCanonicalName(),
@@ -113,7 +120,7 @@ public abstract class AbstractFilter<OPTION extends RequestOption>
     }
 
     @Override
-    public Filter<Response, OPTION> pre(Filter<Response, OPTION> filter) {
+    public Filter<Response, OPTION> pre( Filter<Response, OPTION> filter ) {
         this.pre = filter;
         return this;
     }
@@ -123,12 +130,14 @@ public abstract class AbstractFilter<OPTION extends RequestOption>
         return this.pre;
     }
 
-    protected void doInit() throws Exception {}
+    protected void doInit() throws Exception {
+    }
 
-    protected void doDestroy(Integer timeout, TimeUnit unit) {}
+    protected void doDestroy( Integer timeout, TimeUnit unit ) {
+    }
 
-    protected abstract Response doPreFilter(CcsrContext context, OPTION option, Payload request);
+    protected abstract Response doPreFilter( CcsrContext context, OPTION option, Payload request );
 
     protected abstract Response doPostFilter(
-            CcsrContext context, OPTION option, Payload request, Response response);
+            CcsrContext context, OPTION option, Payload request, Response response );
 }

@@ -29,8 +29,16 @@ import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 import org.apache.flink.util.OutputTag;
 
+/**
+ * WindowTest1_TimeWindow
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class WindowTest1_TimeWindow {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
@@ -69,17 +77,17 @@ public class WindowTest1_TimeWindow {
                                     }
 
                                     @Override
-                                    public Integer add(SensorReading value, Integer accumulator) {
+                                    public Integer add( SensorReading value, Integer accumulator ) {
                                         return accumulator + 1;
                                     }
 
                                     @Override
-                                    public Integer getResult(Integer accumulator) {
+                                    public Integer getResult( Integer accumulator ) {
                                         return accumulator;
                                     }
 
                                     @Override
-                                    public Integer merge(Integer a, Integer b) {
+                                    public Integer merge( Integer a, Integer b ) {
                                         return a + b;
                                     }
                                 });
@@ -103,7 +111,7 @@ public class WindowTest1_TimeWindow {
                                             Tuple tuple,
                                             TimeWindow window,
                                             Iterable<SensorReading> input,
-                                            Collector<Tuple3<String, Long, Integer>> out)
+                                            Collector<Tuple3<String, Long, Integer>> out )
                                             throws Exception {
                                         String id = tuple.getField(0);
                                         Long windowEnd = window.getEnd();
@@ -114,7 +122,8 @@ public class WindowTest1_TimeWindow {
                                 });
 
         // 3. 其它可选API
-        OutputTag<SensorReading> outputTag = new OutputTag<SensorReading>("late") {};
+        OutputTag<SensorReading> outputTag = new OutputTag<SensorReading>("late") {
+        };
 
         SingleOutputStreamOperator<SensorReading> sumStream =
                 dataStream

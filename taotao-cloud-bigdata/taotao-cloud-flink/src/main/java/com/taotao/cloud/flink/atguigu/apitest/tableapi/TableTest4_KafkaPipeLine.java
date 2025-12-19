@@ -24,8 +24,16 @@ import org.apache.flink.table.descriptors.Csv;
 import org.apache.flink.table.descriptors.Kafka;
 import org.apache.flink.table.descriptors.Schema;
 
+/**
+ * TableTest4_KafkaPipeLine
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TableTest4_KafkaPipeLine {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         // 1. 创建环境
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);

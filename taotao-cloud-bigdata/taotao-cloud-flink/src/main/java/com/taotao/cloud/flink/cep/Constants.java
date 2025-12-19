@@ -16,7 +16,15 @@
 
 package com.taotao.cloud.flink.cep;
 
+/**
+ * Constants
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public final class Constants {
+
     // Required configurations constants for connecting to Database
     public static final String JDBC_URL_ARG = "jdbcUrl";
     public static final String JDBC_DRIVE = "com.mysql.cj.jdbc.Driver";

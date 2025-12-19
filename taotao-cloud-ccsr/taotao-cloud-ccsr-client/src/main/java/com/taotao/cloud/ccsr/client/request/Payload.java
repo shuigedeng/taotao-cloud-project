@@ -19,10 +19,19 @@ package com.taotao.cloud.ccsr.client.request;
 import com.taotao.cloud.ccsr.api.event.EventType;
 import com.taotao.cloud.ccsr.api.grpc.auto.MetadataType;
 import com.taotao.cloud.ccsr.client.listener.ConfigData;
+
 import java.util.Map;
+
 import lombok.Builder;
 import lombok.Data;
 
+/**
+ * Payload
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @Builder
 public class Payload {

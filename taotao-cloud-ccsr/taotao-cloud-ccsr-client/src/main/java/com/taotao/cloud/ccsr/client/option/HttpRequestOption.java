@@ -19,6 +19,13 @@ package com.taotao.cloud.ccsr.client.option;
 import java.util.Map;
 
 // TODO
+/**
+ * HttpRequestOption
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class HttpRequestOption extends RequestOption {
 
     private String url;

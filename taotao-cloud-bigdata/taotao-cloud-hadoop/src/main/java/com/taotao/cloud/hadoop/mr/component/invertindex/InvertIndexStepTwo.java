@@ -36,10 +36,17 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  */
 public class InvertIndexStepTwo {
 
+    /**
+     * IndexStepTwoMapper
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class IndexStepTwoMapper extends Mapper<LongWritable, Text, Text, Text> {
 
         @Override
-        protected void map(LongWritable key, Text value, Context context)
+        protected void map( LongWritable key, Text value, Context context )
                 throws IOException, InterruptedException {
             String line = value.toString();
             String[] files = line.split("--");
@@ -47,10 +54,17 @@ public class InvertIndexStepTwo {
         }
     }
 
+    /**
+     * IndexStepTwoReducer
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class IndexStepTwoReducer extends Reducer<Text, Text, Text, Text> {
 
         @Override
-        protected void reduce(Text key, Iterable<Text> values, Context context)
+        protected void reduce( Text key, Iterable<Text> values, Context context )
                 throws IOException, InterruptedException {
             StringBuilder sb = new StringBuilder();
             for (Text text : values) {
@@ -60,9 +74,9 @@ public class InvertIndexStepTwo {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         if (args.length < 1) {
-            args = new String[] {"D:/temp/out/part-r-00000", "D:/temp/out2"};
+            args = new String[]{"D:/temp/out/part-r-00000", "D:/temp/out2"};
         }
 
         Configuration config = new Configuration();

@@ -17,15 +17,25 @@
 package com.taotao.cloud.job.server.consumer.entity;
 
 import com.taotao.cloud.job.remote.protos.MqCausa;
+
 import java.util.concurrent.CompletableFuture;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * FlushRequest
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class FlushRequest {
+
     MqCausa.Message message;
     CompletableFuture<Response> future;
 

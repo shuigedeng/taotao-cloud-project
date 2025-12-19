@@ -19,8 +19,10 @@ package com.taotao.cloud.paimon.kafka.cdc;
 import static org.apache.paimon.utils.JsonSerdeUtil.writeValueAsString;
 
 import com.taotao.cloud.paimon.kafka.data.CdcRecord;
+
 import java.util.*;
 import java.util.stream.Collectors;
+
 import org.apache.kafka.connect.data.Field;
 import org.apache.kafka.connect.data.Struct;
 import org.apache.kafka.connect.errors.ConnectException;
@@ -31,10 +33,18 @@ import org.apache.paimon.shade.jackson2.com.fasterxml.jackson.core.JacksonExcept
 import org.apache.paimon.types.DataField;
 import org.apache.paimon.types.DataType;
 import org.apache.paimon.types.RowKind;
+import org.apache.paimon.utils.JsonSerdeUtil;
 import org.apache.paimon.utils.TypeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * DebeziumRecordParser
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class DebeziumRecordParser {
 
     private static final String FIELD_BEFORE = "before";
@@ -49,10 +59,8 @@ public class DebeziumRecordParser {
 
     /**
      * Build schema for create table
-     * @param record
-     * @return
      */
-    public static Schema buildSchema(SinkRecord record) {
+    public static Schema buildSchema( SinkRecord record ) {
         org.apache.kafka.connect.data.Schema schema = record.valueSchema();
         if (schema.type() != org.apache.kafka.connect.data.Schema.Type.STRUCT) {
             throw new ConnectException("Record value schema must be struct!");
@@ -68,7 +76,7 @@ public class DebeziumRecordParser {
     }
 
     public static Optional<GenericRow> toGenericRow(
-            CdcRecord cdcRecord, List<DataField> dataFields) {
+            CdcRecord cdcRecord, List<DataField> dataFields ) {
         Struct struct = cdcRecord.value();
         GenericRow genericRow = new GenericRow(cdcRecord.kind(), dataFields.size());
         List<String> fieldNames =
@@ -107,7 +115,7 @@ public class DebeziumRecordParser {
         return Optional.of(genericRow);
     }
 
-    private static String getValueAsString(Object value) {
+    private static String getValueAsString( Object value ) {
         if (Objects.nonNull(value) && !TypeUtils.isBasicType(value)) {
             try {
                 return writeValueAsString(value);
@@ -119,7 +127,7 @@ public class DebeziumRecordParser {
         return Objects.toString(value);
     }
 
-    public static List<CdcRecord> extractRecords(SinkRecord record) {
+    public static List<CdcRecord> extractRecords( SinkRecord record ) {
         List<CdcRecord> cdcRecords = new ArrayList<>();
         Struct value = (Struct) record.value();
         String op = (String) value.get(FIELD_TYPE);
@@ -141,15 +149,15 @@ public class DebeziumRecordParser {
         return cdcRecords;
     }
 
-    private static Struct getData(Struct value) {
+    private static Struct getData( Struct value ) {
         return (Struct) value.get(FIELD_AFTER);
     }
 
-    private static Struct getBefore(Struct value) {
+    private static Struct getBefore( Struct value ) {
         return (Struct) value.get(FIELD_BEFORE);
     }
 
-    private static void processRecords(Struct value, RowKind rowKind, List<CdcRecord> cdcRecords) {
+    private static void processRecords( Struct value, RowKind rowKind, List<CdcRecord> cdcRecords ) {
         cdcRecords.add(new CdcRecord(rowKind, value));
     }
 }

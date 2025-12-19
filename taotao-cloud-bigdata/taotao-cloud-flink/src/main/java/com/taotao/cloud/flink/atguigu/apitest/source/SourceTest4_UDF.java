@@ -27,7 +27,8 @@ import org.apache.flink.streaming.api.functions.source.SourceFunction;
  * @author Administrator
  */
 public class SourceTest4_UDF {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
@@ -41,19 +42,27 @@ public class SourceTest4_UDF {
     }
 
     // 实现自定义的SourceFunction
+    /**
+     * MySensorSource
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class MySensorSource implements SourceFunction<SensorReading> {
+
         // 定义一个标识位，用来控制数据的产生
         private boolean running = true;
 
         @Override
-        public void run(SourceContext<SensorReading> ctx) throws Exception {
+        public void run( SourceContext<SensorReading> ctx ) throws Exception {
             // 定义一个随机数发生器
             Random random = new Random();
 
             // 设置10个传感器的初始温度
             HashMap<String, Double> sensorTempMap = new HashMap<>();
             for (int i = 0; i < 10; i++) {
-                sensorTempMap.put("sensor_" + (i + 1), 60 + random.nextGaussian() * 20);
+                sensorTempMap.put("sensor_" + ( i + 1 ), 60 + random.nextGaussian() * 20);
             }
 
             while (running) {

@@ -17,6 +17,7 @@
 package com.taotao.cloud.hadoop.atguigu.yarn;
 
 import java.io.IOException;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -29,13 +30,20 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 
+/**
+ * WordCount
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class WordCount implements Tool {
 
     private Configuration conf;
 
     // 核心驱动（conf 需要传入）
     @Override
-    public int run(String[] args) throws Exception {
+    public int run( String[] args ) throws Exception {
 
         Job job = Job.getInstance(conf);
 
@@ -57,7 +65,7 @@ public class WordCount implements Tool {
     }
 
     @Override
-    public void setConf(Configuration conf) {
+    public void setConf( Configuration conf ) {
         this.conf = conf;
     }
 
@@ -74,7 +82,7 @@ public class WordCount implements Tool {
         private IntWritable outV = new IntWritable(1);
 
         @Override
-        protected void map(LongWritable key, Text value, Context context)
+        protected void map( LongWritable key, Text value, Context context )
                 throws IOException, InterruptedException {
             // ss  cls
             // 1 获取一行
@@ -98,7 +106,7 @@ public class WordCount implements Tool {
         private IntWritable outV = new IntWritable();
 
         @Override
-        protected void reduce(Text key, Iterable<IntWritable> values, Context context)
+        protected void reduce( Text key, Iterable<IntWritable> values, Context context )
                 throws IOException, InterruptedException {
 
             int sum = 0;

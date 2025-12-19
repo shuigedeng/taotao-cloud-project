@@ -19,10 +19,17 @@ package com.taotao.cloud.flink.cep.condition;
 import com.taotao.cloud.flink.cep.event.Event;
 import org.apache.flink.cep.pattern.conditions.SimpleCondition;
 
+/**
+ * MiddleCondition
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MiddleCondition extends SimpleCondition<Event> {
 
     @Override
-    public boolean filter(Event value) throws Exception {
+    public boolean filter( Event value ) throws Exception {
         return value.getName().contains("middle");
     }
 }

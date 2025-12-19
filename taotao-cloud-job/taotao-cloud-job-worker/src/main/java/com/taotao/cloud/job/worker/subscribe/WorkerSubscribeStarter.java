@@ -21,15 +21,24 @@ import com.taotao.cloud.job.common.utils.net.MyNetUtil;
 import com.taotao.cloud.job.remote.protos.RegisterCausa;
 import com.taotao.cloud.job.worker.common.constant.TransportTypeEnum;
 import com.taotao.cloud.job.worker.common.grpc.strategies.StrategyCaller;
+
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * WorkerSubscribeStarter
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class WorkerSubscribeStarter {
 
-    public static void start(String appName) {
+    public static void start( String appName ) {
         ThreadFactory registerThreadFactory =
                 new ThreadFactoryBuilder().setNameFormat("TtcJob-server-register-%d").build();
         ScheduledThreadPoolExecutor scheduledThreadPoolExecutor =

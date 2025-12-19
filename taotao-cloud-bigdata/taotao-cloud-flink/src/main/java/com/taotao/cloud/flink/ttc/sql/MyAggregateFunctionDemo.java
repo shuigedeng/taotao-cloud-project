@@ -33,7 +33,8 @@ import org.apache.flink.table.functions.AggregateFunction;
  * @version 1.0
  */
 public class MyAggregateFunctionDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
         //  姓名，分数，权重
@@ -66,10 +67,17 @@ public class MyAggregateFunctionDemo {
     }
 
     // TODO 1.继承 AggregateFunction< 返回类型，累加器类型<加权总和，权重总和> >
+    /**
+     * WeightedAvg
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class WeightedAvg extends AggregateFunction<Double, Tuple2<Integer, Integer>> {
 
         @Override
-        public Double getValue(Tuple2<Integer, Integer> integerIntegerTuple2) {
+        public Double getValue( Tuple2<Integer, Integer> integerIntegerTuple2 ) {
             return integerIntegerTuple2.f0 * 1D / integerIntegerTuple2.f1;
         }
 
@@ -80,11 +88,12 @@ public class MyAggregateFunctionDemo {
 
         /**
          * 累加计算的方法，每来一行数据都会调用一次
+         *
          * @param acc 累加器类型
          * @param score 第一个参数：分数
          * @param weight 第二个参数：权重
          */
-        public void accumulate(Tuple2<Integer, Integer> acc, Integer score, Integer weight) {
+        public void accumulate( Tuple2<Integer, Integer> acc, Integer score, Integer weight ) {
             acc.f0 += score * weight; // 加权总和 =  分数1 * 权重1 + 分数2 * 权重2 +....
             acc.f1 += weight; // 权重和 = 权重1 + 权重2 +....
         }

@@ -23,21 +23,26 @@ import com.taotao.cloud.ccsr.client.lifecycle.Closeable;
 import com.taotao.cloud.ccsr.client.option.RequestOption;
 import com.taotao.cloud.ccsr.client.request.Payload;
 
+/**
+ * AbstractInvoker
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public abstract class AbstractInvoker<R, OPTION extends RequestOption> implements Closeable {
 
     private final AbstractClient<?> client;
 
-    public AbstractInvoker(AbstractClient<?> client) {
+    public AbstractInvoker( AbstractClient<?> client ) {
         this.client = client;
     }
 
-    public abstract Response invoke(CcsrContext context, Payload request);
-
-    // TODO 异步 future invoke
+    public abstract Response invoke( CcsrContext context, Payload request );
 
     public abstract String protocol();
 
-    public abstract R convert(CcsrContext context, OPTION option, Payload request);
+    public abstract R convert( CcsrContext context, OPTION option, Payload request );
 
     protected String getNamespace() {
         return this.client.getNamespace();

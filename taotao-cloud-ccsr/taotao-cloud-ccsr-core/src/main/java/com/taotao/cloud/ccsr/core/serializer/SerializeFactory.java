@@ -17,10 +17,18 @@
 package com.taotao.cloud.ccsr.core.serializer;
 
 import com.taotao.cloud.ccsr.spi.SpiExtensionFactory;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * SerializeFactory
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class SerializeFactory {
 
     public static final String HESSIAN_INDEX = "Hessian".toLowerCase();
@@ -38,7 +46,7 @@ public class SerializeFactory {
         return SERIALIZER_MAP.get(DEFAULT_SERIALIZER);
     }
 
-    public static Serializer getSerializer(String type) {
+    public static Serializer getSerializer( String type ) {
         return SERIALIZER_MAP.get(type.toLowerCase());
     }
 }

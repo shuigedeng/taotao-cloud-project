@@ -59,7 +59,8 @@ public class GsonUtils {
             new GsonBuilder()
                     .serializeNulls()
                     .registerTypeHierarchyAdapter(
-                            new TypeToken<Map<String, Object>>() {}.getRawType(),
+                            new TypeToken<Map<String, Object>>() {
+                            }.getRawType(),
                             new MapDeserializer<String, Object>())
                     .create();
 
@@ -105,55 +106,55 @@ public class GsonUtils {
      * @param object the object
      * @return the string
      */
-    public String toJson(final Object object) {
+    public String toJson( final Object object ) {
         return GSON.toJson(object);
     }
 
     /**
      * From json t.
      *
-     * @param <T>    the type parameter
-     * @param json   the json
+     * @param <T> the type parameter
+     * @param json the json
      * @param tClass the t class
      * @return the t
      */
-    public <T> T fromJson(final String json, final Class<T> tClass) {
+    public <T> T fromJson( final String json, final Class<T> tClass ) {
         return GSON.fromJson(json, tClass);
     }
 
     /**
      * From json t.
      *
-     * @param <T>         the type parameter
+     * @param <T> the type parameter
      * @param jsonElement the json element
-     * @param tClass      the t class
+     * @param tClass the t class
      * @return the t
      */
-    public <T> T fromJson(final JsonElement jsonElement, final Class<T> tClass) {
+    public <T> T fromJson( final JsonElement jsonElement, final Class<T> tClass ) {
         return GSON.fromJson(jsonElement, tClass);
     }
 
     /**
      * From list.
      *
-     * @param <T>   the type parameter
-     * @param json  the json
+     * @param <T> the type parameter
+     * @param json the json
      * @param clazz the clazz
      * @return the list
      */
-    public <T> List<T> fromList(final String json, final Class<T> clazz) {
+    public <T> List<T> fromList( final String json, final Class<T> clazz ) {
         return GSON.fromJson(json, TypeToken.getParameterized(List.class, clazz).getType());
     }
 
     /**
      * From current list.
      *
-     * @param <T>   the type parameter
-     * @param json  the json
+     * @param <T> the type parameter
+     * @param json the json
      * @param clazz the clazz
      * @return the list
      */
-    public <T> List<T> fromCurrentList(final String json, final Class<T> clazz) {
+    public <T> List<T> fromCurrentList( final String json, final Class<T> clazz ) {
         return GSON.fromJson(
                 json, TypeToken.getParameterized(CopyOnWriteArrayList.class, clazz).getType());
     }
@@ -164,8 +165,9 @@ public class GsonUtils {
      * @param json json
      * @return hashMap map
      */
-    private Map<String, String> toStringMap(final String json) {
-        return GSON.fromJson(json, new TypeToken<Map<String, String>>() {}.getType());
+    private Map<String, String> toStringMap( final String json ) {
+        return GSON.fromJson(json, new TypeToken<Map<String, String>>() {
+        }.getType());
     }
 
     /**
@@ -174,8 +176,9 @@ public class GsonUtils {
      * @param json json
      * @return hashMap list
      */
-    public List<Map<String, Object>> toListMap(final String json) {
-        return GSON.fromJson(json, new TypeToken<List<Map<String, Object>>>() {}.getType());
+    public List<Map<String, Object>> toListMap( final String json ) {
+        return GSON.fromJson(json, new TypeToken<List<Map<String, Object>>>() {
+        }.getType());
     }
 
     /**
@@ -184,19 +187,20 @@ public class GsonUtils {
      * @param json the json
      * @return the map
      */
-    public Map<String, Object> toObjectMap(final String json) {
-        return GSON_MAP.fromJson(json, new TypeToken<LinkedHashMap<String, Object>>() {}.getType());
+    public Map<String, Object> toObjectMap( final String json ) {
+        return GSON_MAP.fromJson(json, new TypeToken<LinkedHashMap<String, Object>>() {
+        }.getType());
     }
 
     /**
      * To object map.
      *
-     * @param <T>   the class
-     * @param json  the json
+     * @param <T> the class
+     * @param json the json
      * @param clazz the class
      * @return the map
      */
-    public <T> Map<String, T> toObjectMap(final String json, final Class<T> clazz) {
+    public <T> Map<String, T> toObjectMap( final String json, final Class<T> clazz ) {
         return GSON.fromJson(
                 json, TypeToken.getParameterized(Map.class, String.class, clazz).getType());
     }
@@ -204,12 +208,12 @@ public class GsonUtils {
     /**
      * To object map list.
      *
-     * @param <T>   the class
-     * @param json  the json
+     * @param <T> the class
+     * @param json the json
      * @param clazz the class
      * @return the map
      */
-    public <T> Map<String, List<T>> toObjectMapList(final String json, final Class<T> clazz) {
+    public <T> Map<String, List<T>> toObjectMapList( final String json, final Class<T> clazz ) {
         return GSON.fromJson(
                 json,
                 TypeToken.getParameterized(
@@ -225,9 +229,10 @@ public class GsonUtils {
      * @param json the json
      * @return the tree map
      */
-    public ConcurrentNavigableMap<String, Object> toTreeMap(final String json) {
+    public ConcurrentNavigableMap<String, Object> toTreeMap( final String json ) {
         return GSON_MAP.fromJson(
-                json, new TypeToken<ConcurrentSkipListMap<String, Object>>() {}.getType());
+                json, new TypeToken<ConcurrentSkipListMap<String, Object>>() {
+                }.getType());
     }
 
     /**
@@ -236,9 +241,10 @@ public class GsonUtils {
      * @param json the json
      * @return the map
      */
-    public Map<String, Object> convertToMap(final String json) {
+    public Map<String, Object> convertToMap( final String json ) {
         Map<String, Object> map =
-                GSON_MAP.fromJson(json, new TypeToken<Map<String, Object>>() {}.getType());
+                GSON_MAP.fromJson(json, new TypeToken<Map<String, Object>>() {
+                }.getType());
 
         if (MapUtils.isEmpty(map)) {
             return map;
@@ -248,7 +254,7 @@ public class GsonUtils {
             String key = entry.getKey();
             Object value = entry.getValue();
             if (value instanceof String) {
-                String valueStr = ((String) value).trim();
+                String valueStr = ( (String) value ).trim();
                 if (valueStr.startsWith(LEFT_ANGLE_BRACKETS)
                         && valueStr.endsWith(RIGHT_ANGLE_BRACKETS)) {
                     Map<String, Object> mv = convertToMap(value.toString());
@@ -273,7 +279,7 @@ public class GsonUtils {
      * @param jsonArray the Gson's Object {@link JsonArray}
      * @return list about translating jsonArray
      */
-    private List<Object> jsonArrayToListInConvertToMap(final JsonArray jsonArray) {
+    private List<Object> jsonArrayToListInConvertToMap( final JsonArray jsonArray ) {
         List<Object> list = new ArrayList<>(jsonArray.size());
         for (JsonElement jsonElement : jsonArray) {
             if (jsonElement.isJsonNull()) {
@@ -297,15 +303,23 @@ public class GsonUtils {
         return list;
     }
 
+    /**
+     * MapDeserializer
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     private static class MapDeserializer<T, U> implements JsonDeserializer<Map<T, U>> {
+
         @SuppressWarnings("unchecked")
         @Override
         public Map<T, U> deserialize(
-                final JsonElement json, final Type type, final JsonDeserializationContext context) {
+                final JsonElement json, final Type type, final JsonDeserializationContext context ) {
             if (!json.isJsonObject()) {
                 return null;
             }
-            String className = ((ParameterizedType) type).getRawType().getTypeName();
+            String className = ( (ParameterizedType) type ).getRawType().getTypeName();
             Class<Map<?, ?>> mapClass = null;
             try {
                 mapClass = (Class<Map<?, ?>>) Class.forName(className);
@@ -321,9 +335,9 @@ public class GsonUtils {
                 try {
                     resultMap = (Map<T, U>) mapClass.getConstructor().newInstance();
                 } catch (InstantiationException
-                        | IllegalAccessException
-                        | InvocationTargetException
-                        | NoSuchMethodException e) {
+                         | IllegalAccessException
+                         | InvocationTargetException
+                         | NoSuchMethodException e) {
                     LOG.error("failed to get constructor", e);
                 }
             }
@@ -350,7 +364,7 @@ public class GsonUtils {
          * @param element the element
          * @return Class the class
          */
-        public Class<?> getType(final JsonElement element) {
+        public Class<?> getType( final JsonElement element ) {
             if (!element.isJsonPrimitive()) {
                 return element.getClass();
             }
@@ -375,10 +389,17 @@ public class GsonUtils {
         }
     }
 
+    /**
+     * PairTypeAdapter
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     private static class PairTypeAdapter extends TypeAdapter<Pair<String, String>> {
 
         @Override
-        public void write(final JsonWriter out, final Pair<String, String> value)
+        public void write( final JsonWriter out, final Pair<String, String> value )
                 throws IOException {
             out.beginObject();
             out.name(LEFT).value(value.getLeft());
@@ -387,7 +408,7 @@ public class GsonUtils {
         }
 
         @Override
-        public Pair<String, String> read(final JsonReader in) throws IOException {
+        public Pair<String, String> read( final JsonReader in ) throws IOException {
             in.beginObject();
 
             String left = null;
@@ -412,8 +433,14 @@ public class GsonUtils {
         }
     }
 
-    private static class TimestampTypeAdapter
-            implements JsonSerializer<Timestamp>, JsonDeserializer<Timestamp> {
+    /**
+     * TimestampTypeAdapter
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    private static class TimestampTypeAdapter implements JsonSerializer<Timestamp>, JsonDeserializer<Timestamp> {
 
         private final DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -421,9 +448,9 @@ public class GsonUtils {
         public Timestamp deserialize(
                 final JsonElement json,
                 final Type typeOfT,
-                final JsonDeserializationContext context)
+                final JsonDeserializationContext context )
                 throws JsonParseException {
-            if (!(json instanceof JsonPrimitive)) {
+            if (!( json instanceof JsonPrimitive )) {
                 throw new JsonParseException("The date should be a string value");
             }
             try {
@@ -436,7 +463,7 @@ public class GsonUtils {
 
         @Override
         public JsonElement serialize(
-                final Timestamp src, final Type typeOfSrc, final JsonSerializationContext context) {
+                final Timestamp src, final Type typeOfSrc, final JsonSerializationContext context ) {
             String dfString = format.format(new Date(src.getTime()));
             return new JsonPrimitive(dfString);
         }

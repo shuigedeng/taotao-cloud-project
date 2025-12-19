@@ -22,6 +22,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
+
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.typeinfo.Types;
@@ -38,8 +39,16 @@ import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindo
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
+/**
+ * TumblingWindowDemo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TumblingWindowDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         Configuration conf = new Configuration();
         // 设置WebUI绑定的本地端口
         conf.set(RestOptions.BIND_PORT, "8081");
@@ -61,7 +70,7 @@ public class TumblingWindowDemo {
                             private Random random = new Random();
 
                             @Override
-                            public void run(SourceContext<String> ctx) throws Exception {
+                            public void run( SourceContext<String> ctx ) throws Exception {
                                 while (running) {
                                     int randomNum = random.nextInt(5) + 1; // 生成1到5之间的随机数
                                     long timestamp = System.currentTimeMillis(); // 获取当前时间作为时间戳
@@ -98,7 +107,7 @@ public class TumblingWindowDemo {
                 text.map(
                                 new MapFunction<String, Tuple3<String, Integer, Long>>() {
                                     @Override
-                                    public Tuple3<String, Integer, Long> map(String value) {
+                                    public Tuple3<String, Integer, Long> map( String value ) {
                                         String[] words = value.split(",");
                                         return new Tuple3<>(
                                                 words[0],
@@ -113,7 +122,7 @@ public class TumblingWindowDemo {
                 tuplesWithTimestamp.assignTimestampsAndWatermarks(
                         WatermarkStrategy.<Tuple3<String, Integer, Long>>forBoundedOutOfOrderness(
                                         Duration.ofSeconds(0))
-                                .withTimestampAssigner((element, recordTimestamp) -> element.f2));
+                                .withTimestampAssigner(( element, recordTimestamp ) -> element.f2));
 
         // 窗口逻辑
         DataStream<Tuple2<String, Integer>> keyedStream =
@@ -130,14 +139,14 @@ public class TumblingWindowDemo {
                                     public void process(
                                             String s,
                                             ProcessWindowFunction<
-                                                                    Tuple3<String, Integer, Long>,
-                                                                    Tuple2<String, Integer>,
-                                                                    String,
-                                                                    TimeWindow>
-                                                            .Context
+                                                    Tuple3<String, Integer, Long>,
+                                                    Tuple2<String, Integer>,
+                                                    String,
+                                                    TimeWindow>
+                                                    .Context
                                                     context,
                                             Iterable<Tuple3<String, Integer, Long>> iterable,
-                                            Collector<Tuple2<String, Integer>> collector)
+                                            Collector<Tuple2<String, Integer>> collector )
                                             throws Exception {
                                         int count = 0;
 

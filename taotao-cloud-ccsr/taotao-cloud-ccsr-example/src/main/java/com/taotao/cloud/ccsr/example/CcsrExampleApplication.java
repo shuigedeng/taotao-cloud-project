@@ -22,16 +22,23 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
+/**
+ * CcsrExampleApplication
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @SpringBootApplication
 @EnableCcsrClient(enable = true)
 public class CcsrExampleApplication extends SpringBootServletInitializer {
 
     @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+    protected SpringApplicationBuilder configure( SpringApplicationBuilder builder ) {
         return builder.sources(CcsrExampleApplication.class);
     }
 
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         System.setProperty("com.google.protobuf.use_unsafe_pre22_gencode", "true");
 
         new StartupSpringApplication(CcsrExampleApplication.class)

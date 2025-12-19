@@ -23,19 +23,28 @@ import com.taotao.cloud.ccsr.client.listener.ConfigListener;
 import com.taotao.cloud.ccsr.client.request.Payload;
 import com.taotao.cloud.ccsr.common.log.Log;
 import com.taotao.cloud.ccsr.spi.SpiExtensionFactory;
+
 import java.util.concurrent.TimeUnit;
+
 import org.springframework.beans.factory.DisposableBean;
 
+/**
+ * CcsrService
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class CcsrService implements DisposableBean {
 
     private final CcsrClient ccsrClient;
 
-    public CcsrService(CcsrClient ccsrClient) {
+    public CcsrService( CcsrClient ccsrClient ) {
         SpiExtensionFactory.getExtensions(ConfigListener.class).forEach(ConfigListener::register);
         this.ccsrClient = ccsrClient;
     }
 
-    public Response request(Payload request, EventType eventType) {
+    public Response request( Payload request, EventType eventType ) {
         request.setEventType(eventType);
         return ccsrClient.request(request);
     }

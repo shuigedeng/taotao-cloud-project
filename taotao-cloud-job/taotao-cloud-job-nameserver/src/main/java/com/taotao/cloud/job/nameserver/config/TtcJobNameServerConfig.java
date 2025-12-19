@@ -17,14 +17,23 @@
 package com.taotao.cloud.job.nameserver.config;
 
 import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+/**
+ * TtcJobNameServerConfig
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Getter
 @Setter
 @ConfigurationProperties(prefix = "ttcjob.name-server")
 public class TtcJobNameServerConfig {
+
     private Integer maxWorkerNum = 2;
     private List<String> serverAddressList;
 }

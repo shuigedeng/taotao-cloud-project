@@ -28,9 +28,17 @@ import com.taotao.cloud.ccsr.client.remote.RpcClient;
 import com.taotao.cloud.ccsr.common.exception.CcsrClientException;
 import com.taotao.cloud.ccsr.common.exception.CcsrException;
 import com.taotao.cloud.ccsr.spi.Join;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * GrpcClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Join(order = 1, isSingleton = true)
 public class GrpcClient extends GrpcConnection implements RpcClient<Message, Response> {
 
@@ -41,12 +49,12 @@ public class GrpcClient extends GrpcConnection implements RpcClient<Message, Res
         super();
     }
 
-    public GrpcClient(String namespace, List<ServerAddress> serverAddresses) {
+    public GrpcClient( String namespace, List<ServerAddress> serverAddresses ) {
         super(namespace, serverAddresses);
     }
 
     @Override
-    public Response request(Message request) {
+    public Response request( Message request ) {
         if (request instanceof MetadataWriteRequest) {
             return put((MetadataWriteRequest) request);
         } else if (request instanceof MetadataDeleteRequest) {
@@ -59,7 +67,7 @@ public class GrpcClient extends GrpcConnection implements RpcClient<Message, Res
     }
 
     @Override
-    public RequestFuture<Response> requestFuture(Message request) {
+    public RequestFuture<Response> requestFuture( Message request ) {
         if (request instanceof MetadataWriteRequest) {
             return putAsync((MetadataWriteRequest) request);
         } else if (request instanceof MetadataDeleteRequest) {
@@ -70,34 +78,34 @@ public class GrpcClient extends GrpcConnection implements RpcClient<Message, Res
         return null;
     }
 
-    public Response put(MetadataWriteRequest request) {
+    public Response put( MetadataWriteRequest request ) {
         return blockingStub.put(request);
     }
 
-    public Response delete(MetadataDeleteRequest request) {
+    public Response delete( MetadataDeleteRequest request ) {
         return blockingStub.delete(request);
     }
 
-    public Response get(MetadataReadRequest request) {
+    public Response get( MetadataReadRequest request ) {
         return blockingStub.get(request);
     }
 
-    public RequestFuture<Response> deleteAsync(MetadataDeleteRequest request) throws CcsrException {
+    public RequestFuture<Response> deleteAsync( MetadataDeleteRequest request ) throws CcsrException {
         ListenableFuture<Response> future = futureStub.delete(request);
         return createRequestFuture(future);
     }
 
-    public RequestFuture<Response> getAsync(MetadataReadRequest request) throws CcsrException {
+    public RequestFuture<Response> getAsync( MetadataReadRequest request ) throws CcsrException {
         ListenableFuture<Response> future = futureStub.get(request);
         return createRequestFuture(future);
     }
 
-    public RequestFuture<Response> putAsync(MetadataWriteRequest request) throws CcsrException {
+    public RequestFuture<Response> putAsync( MetadataWriteRequest request ) throws CcsrException {
         ListenableFuture<Response> future = futureStub.put(request);
         return createRequestFuture(future);
     }
 
-    private RequestFuture<Response> createRequestFuture(ListenableFuture<Response> future) {
+    private RequestFuture<Response> createRequestFuture( ListenableFuture<Response> future ) {
         return new RequestFuture<>() {
             @Override
             public boolean isDone() {
@@ -112,7 +120,7 @@ public class GrpcClient extends GrpcConnection implements RpcClient<Message, Res
             }
 
             @Override
-            public Response get(long timeout) throws Exception {
+            public Response get( long timeout ) throws Exception {
                 Response response = future.get(timeout, TimeUnit.MILLISECONDS);
                 handleResponse(response);
                 return response;
@@ -120,7 +128,7 @@ public class GrpcClient extends GrpcConnection implements RpcClient<Message, Res
         };
     }
 
-    private void handleResponse(Response response) throws CcsrException {
+    private void handleResponse( Response response ) throws CcsrException {
         if (!response.getSuccess()) {
             throw new CcsrException(response.getMsg());
         }

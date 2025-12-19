@@ -25,8 +25,16 @@ import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTime
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
+/**
+ * ProcessTimeDemo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ProcessTimeDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         // 创建流处理环境
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
@@ -55,7 +63,7 @@ public class ProcessTimeDemo {
                                             String s,
                                             Context context,
                                             Iterable<Event> elements,
-                                            Collector<Tuple3<String, Integer, Long>> out)
+                                            Collector<Tuple3<String, Integer, Long>> out )
                                             throws Exception {
                                         int count = 0;
                                         for (Event event : elements) {
@@ -75,12 +83,14 @@ public class ProcessTimeDemo {
     }
 
     public static class Event {
+
         public String user;
         public String page;
 
-        public Event() {}
+        public Event() {
+        }
 
-        public Event(String user, String page) {
+        public Event( String user, String page ) {
             this.user = user;
             this.page = page;
         }

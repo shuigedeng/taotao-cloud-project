@@ -24,12 +24,19 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
+/**
+ * HeartHealthReportHandler
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 @Slf4j
 public class HeartHealthReportHandler implements RpcHandler {
 
     @Override
-    public void handle(Object req, StreamObserver<CommonCausa.Response> responseObserver) {
+    public void handle( Object req, StreamObserver<CommonCausa.Response> responseObserver ) {
         WorkerHeartbeat workerHeartbeat = new WorkerHeartbeat();
         BeanUtils.copyProperties(req, workerHeartbeat);
         WorkerClusterManagerService.updateStatus(workerHeartbeat);

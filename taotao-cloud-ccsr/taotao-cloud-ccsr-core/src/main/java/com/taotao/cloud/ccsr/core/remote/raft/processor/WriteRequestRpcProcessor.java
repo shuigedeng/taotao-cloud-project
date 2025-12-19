@@ -21,19 +21,26 @@ import com.taotao.cloud.ccsr.api.grpc.auto.MetadataWriteRequest;
 import com.taotao.cloud.ccsr.core.remote.raft.RaftServer;
 import com.taotao.cloud.ccsr.core.serializer.Serializer;
 
+/**
+ * WriteRequestRpcProcessor
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class WriteRequestRpcProcessor extends AbstractRpcProcessor<MetadataWriteRequest> {
 
-    public WriteRequestRpcProcessor(RaftServer server, Serializer serializer) {
+    public WriteRequestRpcProcessor( RaftServer server, Serializer serializer ) {
         super(server, serializer, true);
     }
 
     @Override
-    public void handleRequest(RpcContext ctx, MetadataWriteRequest request) {
+    public void handleRequest( RpcContext ctx, MetadataWriteRequest request ) {
         super.handleRequest(ctx, request);
     }
 
     @Override
-    protected String extractRaftGroup(MetadataWriteRequest request) {
+    protected String extractRaftGroup( MetadataWriteRequest request ) {
         return request.getRaftGroup();
     }
 

@@ -17,10 +17,19 @@
 package com.taotao.cloud.flink.atguigu.apitest.sink;
 
 import java.util.Properties;
+
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
+/**
+ * SinkTest1_Kafka
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class SinkTest1_Kafka {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 

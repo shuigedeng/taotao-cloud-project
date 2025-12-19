@@ -17,16 +17,24 @@
 package com.taotao.cloud.paimon.kafka.data;
 
 import java.util.Objects;
+
 import org.apache.kafka.connect.data.Struct;
 import org.apache.paimon.types.RowKind;
 
+/**
+ * CdcRecord
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class CdcRecord {
 
     private RowKind kind;
 
     private final Struct value;
 
-    public CdcRecord(RowKind kind, Struct value) {
+    public CdcRecord( RowKind kind, Struct value ) {
         this.kind = kind;
         this.value = value;
     }
@@ -44,9 +52,11 @@ public class CdcRecord {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals( Object o ) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         CdcRecord cdcRecord = (CdcRecord) o;
         return kind == cdcRecord.kind && Objects.equals(value, cdcRecord.value);
     }

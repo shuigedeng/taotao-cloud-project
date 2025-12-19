@@ -17,12 +17,22 @@
 package com.taotao.cloud.flink.atguigu.apitest.source;
 
 import com.taotao.cloud.flink.atguigu.apitest.beans.SensorReading;
+
 import java.util.Arrays;
+
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
+/**
+ * SourceTest1_Collection
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class SourceTest1_Collection {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         // 创建执行环境
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);

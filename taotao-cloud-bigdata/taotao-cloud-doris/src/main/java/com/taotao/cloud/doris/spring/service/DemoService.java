@@ -18,15 +18,25 @@ package com.taotao.cloud.doris.spring.service;
 
 import java.util.List;
 import java.util.Map;
+
 import org.apache.doris.demo.spring.mapper.DemoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * DemoService
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Service
 public class DemoService {
-    @Autowired private DemoMapper demoMapper;
 
-    public List<Map<String, Object>> getSkuList(Map<String, Object> params) {
+    @Autowired
+    private DemoMapper demoMapper;
+
+    public List<Map<String, Object>> getSkuList( Map<String, Object> params ) {
         return demoMapper.selectSkuList(params);
     }
 }

@@ -17,17 +17,25 @@
 package com.taotao.cloud.hadoop.atguigu.mapreduce.a2_writable;
 
 import java.io.IOException;
+
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
+/**
+ * FlowMapper
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class FlowMapper extends Mapper<LongWritable, Text, Text, FlowBean> {
 
     private Text outK = new Text();
     private FlowBean outV = new FlowBean();
 
     @Override
-    protected void map(LongWritable key, Text value, Context context)
+    protected void map( LongWritable key, Text value, Context context )
             throws IOException, InterruptedException {
 
         // 1 获取一行

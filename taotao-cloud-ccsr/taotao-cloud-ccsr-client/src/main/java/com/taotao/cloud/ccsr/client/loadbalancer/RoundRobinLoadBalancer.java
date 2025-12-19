@@ -18,15 +18,24 @@ package com.taotao.cloud.ccsr.client.loadbalancer;
 
 import com.taotao.cloud.ccsr.client.dto.ServerAddress;
 import com.taotao.cloud.ccsr.spi.Join;
+
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * RoundRobinLoadBalancer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Join
 public class RoundRobinLoadBalancer implements LoadBalancer {
+
     private final AtomicInteger currentIndex = new AtomicInteger(0);
 
     @Override
-    public ServerAddress select(List<ServerAddress> servers) {
+    public ServerAddress select( List<ServerAddress> servers ) {
         if (servers.isEmpty()) {
             throw new IllegalStateException("No available servers");
         }
@@ -38,7 +47,7 @@ public class RoundRobinLoadBalancer implements LoadBalancer {
             throw new IllegalStateException("No active servers available");
         }
 
-        int nextIndex = currentIndex.getAndUpdate(idx -> (idx + 1) % activeServers.size());
+        int nextIndex = currentIndex.getAndUpdate(idx -> ( idx + 1 ) % activeServers.size());
 
         return activeServers.get(nextIndex);
     }

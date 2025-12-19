@@ -23,9 +23,18 @@ import com.taotao.cloud.job.worker.common.grpc.RpcInitializer;
 import com.taotao.cloud.job.worker.common.grpc.strategies.GrpcStrategy;
 import com.taotao.cloud.remote.api.ScheduleGrpc;
 import io.grpc.ManagedChannel;
+
 import java.util.HashMap;
 
+/**
+ * HeartHealthReportRpcService
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class HeartHealthReportRpcService implements GrpcStrategy<TransportTypeEnum> {
+
     HashMap<String, ScheduleGrpc.ScheduleBlockingStub> ip2Stubs = new HashMap<>();
 
     @Override
@@ -37,7 +46,7 @@ public class HeartHealthReportRpcService implements GrpcStrategy<TransportTypeEn
     }
 
     @Override
-    public Object execute(Object params) {
+    public Object execute( Object params ) {
         ScheduleCausa.WorkerHeartbeat workerHeartbeat = (ScheduleCausa.WorkerHeartbeat) params;
         ScheduleGrpc.ScheduleBlockingStub stub = ip2Stubs.get(workerHeartbeat.getServerIpAddress());
         CommonCausa.Response response = stub.reportWorkerHeartbeat(workerHeartbeat);

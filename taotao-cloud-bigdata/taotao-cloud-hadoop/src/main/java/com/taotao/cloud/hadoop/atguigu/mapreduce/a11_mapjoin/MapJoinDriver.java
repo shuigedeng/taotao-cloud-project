@@ -19,6 +19,7 @@ package com.taotao.cloud.hadoop.atguigu.mapreduce.a11_mapjoin;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.NullWritable;
@@ -27,8 +28,16 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
+/**
+ * MapJoinDriver
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MapJoinDriver {
-    public static void main(String[] args)
+
+    public static void main( String[] args )
             throws IOException, URISyntaxException, ClassNotFoundException, InterruptedException {
 
         // 1 获取job信息

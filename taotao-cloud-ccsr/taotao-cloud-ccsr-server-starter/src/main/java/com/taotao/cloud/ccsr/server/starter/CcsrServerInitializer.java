@@ -27,8 +27,14 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.web.context.WebApplicationContext;
 
-public class CcsrServerInitializer
-        implements ApplicationListener<ContextRefreshedEvent>, DisposableBean {
+/**
+ * CcsrServerInitializer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
+public class CcsrServerInitializer implements ApplicationListener<ContextRefreshedEvent>, DisposableBean {
 
     private final RpcServer rpcServer;
 
@@ -38,7 +44,7 @@ public class CcsrServerInitializer
 
     private final CcsrConfig config;
 
-    public CcsrServerInitializer(RpcServer rpcServer, CcsrConfig config, BannerUtils bannerUtils) {
+    public CcsrServerInitializer( RpcServer rpcServer, CcsrConfig config, BannerUtils bannerUtils ) {
         this.config = config;
         this.rpcServer = rpcServer;
         this.bannerUtils = bannerUtils;
@@ -55,7 +61,7 @@ public class CcsrServerInitializer
     }
 
     @Override
-    public void onApplicationEvent(ContextRefreshedEvent event) {
+    public void onApplicationEvent( ContextRefreshedEvent event ) {
         if (event.getApplicationContext().getParent() == null) {
             ApplicationContext ctx = event.getApplicationContext();
             RpcServer rpcServer = ctx.getBean(RpcServer.class);
@@ -66,7 +72,7 @@ public class CcsrServerInitializer
             startRaftNode();
 
             // 如果在 SpringBoot Web 容器环境运行，可以不需要让主线程阻塞
-            if (!(ctx instanceof WebApplicationContext)) {
+            if (!( ctx instanceof WebApplicationContext )) {
                 rpcServer.await();
             }
         }

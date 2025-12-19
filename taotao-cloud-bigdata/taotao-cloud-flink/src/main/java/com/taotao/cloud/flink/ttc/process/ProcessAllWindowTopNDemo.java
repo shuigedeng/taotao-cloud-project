@@ -37,7 +37,8 @@ import org.apache.flink.util.Collector;
  * @version 1.0
  */
 public class ProcessAllWindowTopNDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
@@ -48,7 +49,7 @@ public class ProcessAllWindowTopNDemo {
                                 WatermarkStrategy.<WaterSensor>forBoundedOutOfOrderness(
                                                 Duration.ofSeconds(3))
                                         .withTimestampAssigner(
-                                                (element, ts) -> element.getTs() * 1000L));
+                                                ( element, ts ) -> element.getTs() * 1000L));
 
         // 最近10秒= 窗口长度， 每5秒输出 = 滑动步长
         // TODO 思路一： 所有数据到一起， 用hashmap存， key=vc，value=count值
@@ -59,11 +60,17 @@ public class ProcessAllWindowTopNDemo {
         env.execute();
     }
 
-    public static class MyTopNPAWF
-            extends ProcessAllWindowFunction<WaterSensor, String, TimeWindow> {
+    /**
+     * MyTopNPAWF
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class MyTopNPAWF extends ProcessAllWindowFunction<WaterSensor, String, TimeWindow> {
 
         @Override
-        public void process(Context context, Iterable<WaterSensor> elements, Collector<String> out)
+        public void process( Context context, Iterable<WaterSensor> elements, Collector<String> out )
                 throws Exception {
             // 定义一个hashmap用来存，key=vc，value=count值
             Map<Integer, Integer> vcCountMap = new HashMap<>();
@@ -89,7 +96,7 @@ public class ProcessAllWindowTopNDemo {
                     new Comparator<Tuple2<Integer, Integer>>() {
                         @Override
                         public int compare(
-                                Tuple2<Integer, Integer> o1, Tuple2<Integer, Integer> o2) {
+                                Tuple2<Integer, Integer> o1, Tuple2<Integer, Integer> o2 ) {
                             // 降序， 后 减 前
                             return o2.f1 - o1.f1;
                         }
@@ -102,13 +109,13 @@ public class ProcessAllWindowTopNDemo {
             // 遍历 排序后的 List，取出前2个， 考虑可能List不够2个的情况  ==》 List中元素的个数 和 2 取最小值
             for (int i = 0; i < Math.min(2, datas.size()); i++) {
                 Tuple2<Integer, Integer> vcCount = datas.get(i);
-                outStr.append("Top" + (i + 1) + "\n");
+                outStr.append("Top" + ( i + 1 ) + "\n");
                 outStr.append("vc=" + vcCount.f0 + "\n");
                 outStr.append("count=" + vcCount.f1 + "\n");
                 outStr.append(
                         "窗口结束时间="
                                 + DateFormatUtils.format(
-                                        context.window().getEnd(), "yyyy-MM-dd HH:mm:ss.SSS")
+                                context.window().getEnd(), "yyyy-MM-dd HH:mm:ss.SSS")
                                 + "\n");
                 outStr.append("================================\n");
             }

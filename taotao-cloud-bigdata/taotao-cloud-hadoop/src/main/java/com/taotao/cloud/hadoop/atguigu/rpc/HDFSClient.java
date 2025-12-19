@@ -18,12 +18,20 @@ package com.taotao.cloud.hadoop.atguigu.rpc;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.ipc.RPC;
 
+/**
+ * HDFSClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class HDFSClient {
 
-    public static void main(String[] args) throws IOException {
+    public static void main( String[] args ) throws IOException {
 
         // 获取客户端对象
         RPCProtocol client =

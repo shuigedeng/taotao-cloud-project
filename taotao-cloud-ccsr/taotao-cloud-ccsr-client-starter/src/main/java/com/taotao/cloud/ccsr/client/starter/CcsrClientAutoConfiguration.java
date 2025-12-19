@@ -25,6 +25,13 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+/**
+ * CcsrClientAutoConfiguration
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Configuration
 @Conditional(EnableCcsrCondition.class) // 核心控制
 public class CcsrClientAutoConfiguration {
@@ -37,7 +44,7 @@ public class CcsrClientAutoConfiguration {
 
     @Bean
     @Scope("singleton") // 显式声明单例
-    public CcsrService ccsrClient(CcsrConfig config) {
+    public CcsrService ccsrClient( CcsrConfig config ) {
         GrpcOption option = new GrpcOption();
         // 初始化服务端集群地址
         option.initServers(config.getClusterAddress());

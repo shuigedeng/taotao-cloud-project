@@ -25,6 +25,7 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -32,20 +33,31 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.reflections.Reflections;
 
+/**
+ * RpcInitializer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class RpcInitializer {
+
     private final int serverPort;
     private final int workerPort;
     private List<String> serverList;
-    @Getter private static String nameServerAddress;
-    @Getter private static final HashMap<String, ManagedChannel> ip2ChannelsMap = new HashMap<>();
+    @Getter
+    private static String nameServerAddress;
+    @Getter
+    private static final HashMap<String, ManagedChannel> ip2ChannelsMap = new HashMap<>();
 
     public RpcInitializer(
-            int serverPort, int workerPort, List<String> serverList, String nameServerAddress) {
+            int serverPort, int workerPort, List<String> serverList, String nameServerAddress ) {
         this.serverPort = serverPort;
         this.workerPort = workerPort;
         this.serverList = new ArrayList<>(serverList);
@@ -89,35 +101,35 @@ public class RpcInitializer {
         }
     }
 
-    public void initRpcServer(TtcJobWorkerConfig config) {
+    public void initRpcServer( TtcJobWorkerConfig config ) {
         new Thread(
-                        () -> {
-                            try {
-                                WorkerScheduleGrpcService myService =
-                                        new WorkerScheduleGrpcService(config);
+                () -> {
+                    try {
+                        WorkerScheduleGrpcService myService =
+                                new WorkerScheduleGrpcService(config);
 
-                                Server server =
-                                        ServerBuilder.forPort(workerPort)
-                                                .addService(myService)
-                                                .build()
-                                                .start();
+                        Server server =
+                                ServerBuilder.forPort(workerPort)
+                                        .addService(myService)
+                                        .build()
+                                        .start();
 
-                                log.info("GrpcServer started, listening on " + workerPort);
+                        log.info("GrpcServer started, listening on " + workerPort);
 
-                                // 等待服务器关闭
-                                Runtime.getRuntime()
-                                        .addShutdownHook(
-                                                new Thread(
-                                                        () -> {
-                                                            server.shutdown();
-                                                            System.out.println("Server stopped");
-                                                        }));
+                        // 等待服务器关闭
+                        Runtime.getRuntime()
+                                .addShutdownHook(
+                                        new Thread(
+                                                () -> {
+                                                    server.shutdown();
+                                                    System.out.println("Server stopped");
+                                                }));
 
-                                server.awaitTermination();
-                            } catch (IOException | InterruptedException e) {
-                                log.error("GrpcServer started error");
-                            }
-                        })
+                        server.awaitTermination();
+                    } catch (IOException | InterruptedException e) {
+                        log.error("GrpcServer started error");
+                    }
+                })
                 .start();
     }
 }

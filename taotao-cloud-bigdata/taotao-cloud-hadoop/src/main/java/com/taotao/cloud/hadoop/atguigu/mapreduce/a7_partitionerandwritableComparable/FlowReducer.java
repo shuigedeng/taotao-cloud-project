@@ -17,13 +17,21 @@
 package com.taotao.cloud.hadoop.atguigu.mapreduce.a7_partitionerandwritableComparable;
 
 import java.io.IOException;
+
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
+/**
+ * FlowReducer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class FlowReducer extends Reducer<FlowBean, Text, Text, FlowBean> {
 
     @Override
-    protected void reduce(FlowBean key, Iterable<Text> values, Context context)
+    protected void reduce( FlowBean key, Iterable<Text> values, Context context )
             throws IOException, InterruptedException {
 
         for (Text value : values) {

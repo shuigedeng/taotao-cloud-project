@@ -24,6 +24,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.typeinfo.Types;
@@ -41,8 +42,16 @@ import org.apache.flink.streaming.api.windowing.triggers.CountTrigger;
 import org.apache.flink.streaming.api.windowing.windows.GlobalWindow;
 import org.apache.flink.util.Collector;
 
+/**
+ * GlobalWindowDemo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class GlobalWindowDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         Configuration conf = new Configuration();
         // 设置WebUI绑定的本地端口
         conf.set(RestOptions.BIND_PORT, "8081");
@@ -67,7 +76,7 @@ public class GlobalWindowDemo {
                 text.map(
                                 new MapFunction<String, Tuple3<String, Integer, Long>>() {
                                     @Override
-                                    public Tuple3<String, Integer, Long> map(String value) {
+                                    public Tuple3<String, Integer, Long> map( String value ) {
                                         String[] words = value.split(",");
                                         return new Tuple3<>(
                                                 words[0],
@@ -82,7 +91,7 @@ public class GlobalWindowDemo {
                 tuplesWithTimestamp.assignTimestampsAndWatermarks(
                         WatermarkStrategy.<Tuple3<String, Integer, Long>>forBoundedOutOfOrderness(
                                         Duration.ofSeconds(5))
-                                .withTimestampAssigner((element, recordTimestamp) -> element.f2));
+                                .withTimestampAssigner(( element, recordTimestamp ) -> element.f2));
 
         // 应用全局窗口
         DataStream<Tuple2<String, Integer>> globalWindowedStream =
@@ -103,17 +112,18 @@ public class GlobalWindowDemo {
 
     public static class CountProcessFunction
             extends ProcessAllWindowFunction<
-                    Tuple3<String, Integer, Long>, Tuple2<String, Integer>, GlobalWindow> {
+            Tuple3<String, Integer, Long>, Tuple2<String, Integer>, GlobalWindow> {
+
         @Override
         public void process(
                 ProcessAllWindowFunction<
-                                        Tuple3<String, Integer, Long>,
-                                        Tuple2<String, Integer>,
-                                        GlobalWindow>
-                                .Context
+                        Tuple3<String, Integer, Long>,
+                        Tuple2<String, Integer>,
+                        GlobalWindow>
+                        .Context
                         context,
                 Iterable<Tuple3<String, Integer, Long>> iterable,
-                Collector<Tuple2<String, Integer>> collector)
+                Collector<Tuple2<String, Integer>> collector )
                 throws Exception {
             Map<String, Integer> counts = new HashMap<>();
 
@@ -129,11 +139,12 @@ public class GlobalWindowDemo {
     }
 
     public static class DataGeneratorSourceFunction extends RichParallelSourceFunction<String> {
+
         private volatile boolean isRunning = true;
         private Random random = new Random();
 
         @Override
-        public void run(SourceContext<String> ctx) throws Exception {
+        public void run( SourceContext<String> ctx ) throws Exception {
             while (isRunning) {
                 int randomNum = random.nextInt(5) + 1;
                 long timestamp = System.currentTimeMillis();
@@ -157,7 +168,7 @@ public class GlobalWindowDemo {
             isRunning = false;
         }
 
-        private String getCurrentFormattedDateTime(long timestamp) {
+        private String getCurrentFormattedDateTime( long timestamp ) {
             ZonedDateTime generateDataDateTime =
                     Instant.ofEpochMilli(timestamp).atZone(ZoneId.systemDefault());
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");

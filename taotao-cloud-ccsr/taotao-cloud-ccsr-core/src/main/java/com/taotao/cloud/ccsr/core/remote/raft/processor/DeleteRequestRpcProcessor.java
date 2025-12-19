@@ -21,19 +21,26 @@ import com.taotao.cloud.ccsr.api.grpc.auto.MetadataDeleteRequest;
 import com.taotao.cloud.ccsr.core.remote.raft.RaftServer;
 import com.taotao.cloud.ccsr.core.serializer.Serializer;
 
+/**
+ * DeleteRequestRpcProcessor
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class DeleteRequestRpcProcessor extends AbstractRpcProcessor<MetadataDeleteRequest> {
 
-    public DeleteRequestRpcProcessor(RaftServer server, Serializer serializer) {
+    public DeleteRequestRpcProcessor( RaftServer server, Serializer serializer ) {
         super(server, serializer, true);
     }
 
     @Override
-    public void handleRequest(RpcContext ctx, MetadataDeleteRequest request) {
+    public void handleRequest( RpcContext ctx, MetadataDeleteRequest request ) {
         super.handleRequest(ctx, request);
     }
 
     @Override
-    protected String extractRaftGroup(MetadataDeleteRequest request) {
+    protected String extractRaftGroup( MetadataDeleteRequest request ) {
         return request.getRaftGroup();
     }
 

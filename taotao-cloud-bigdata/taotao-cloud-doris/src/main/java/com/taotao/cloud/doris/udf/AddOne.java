@@ -18,8 +18,16 @@ package com.taotao.cloud.doris.udf;
 
 import org.apache.hadoop.hive.ql.exec.UDF;
 
+/**
+ * AddOne
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class AddOne extends UDF {
-    public Integer evaluate(Integer value) {
+
+    public Integer evaluate( Integer value ) {
         return value == null ? null : value + 1;
     }
 }

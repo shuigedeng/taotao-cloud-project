@@ -17,6 +17,7 @@
 package com.taotao.cloud.flink.flink.util;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
+
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,7 +26,15 @@ import java.sql.SQLException;
 import java.util.Properties;
 import javax.sql.DataSource;
 
+/**
+ * DruidUtil
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class DruidUtil {
+
     // 连接池对象
     private static DataSource dataSource = null;
 
@@ -46,7 +55,6 @@ public class DruidUtil {
 
     /**
      * 获取连接池对象
-     * @return
      */
     public static DataSource getDataSource() {
         return DruidUtil.dataSource;
@@ -54,7 +62,6 @@ public class DruidUtil {
 
     /**
      * 获取连接对象
-     * @return
      */
     public static Connection getConnection() {
         Connection connection = null;
@@ -69,9 +76,8 @@ public class DruidUtil {
 
     /**
      * 关闭结果集
-     * @param res
      */
-    public static void closeRes(ResultSet res) {
+    public static void closeRes( ResultSet res ) {
         try {
             res.close();
         } catch (SQLException e) {
@@ -81,9 +87,8 @@ public class DruidUtil {
 
     /**
      * 关闭预处理对象
-     * @param stmt
      */
-    public static void closeStmt(PreparedStatement stmt) {
+    public static void closeStmt( PreparedStatement stmt ) {
         try {
             stmt.close();
         } catch (SQLException e) {
@@ -93,9 +98,8 @@ public class DruidUtil {
 
     /**
      * 关闭连接资源
-     * @param connection
      */
-    public static void closeCon(Connection connection) {
+    public static void closeCon( Connection connection ) {
         try {
             connection.close();
         } catch (SQLException e) {

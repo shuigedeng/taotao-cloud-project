@@ -26,9 +26,16 @@ import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindo
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
+/**
+ * IngestionTimeDemo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class IngestionTimeDemo {
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         // 创建流处理环境
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
@@ -48,7 +55,7 @@ public class IngestionTimeDemo {
                 events.assignTimestampsAndWatermarks(
                         WatermarkStrategy.<Event>forMonotonousTimestamps()
                                 .withTimestampAssigner(
-                                        (event, timestamp) -> System.currentTimeMillis()));
+                                        ( event, timestamp ) -> System.currentTimeMillis()));
 
         // 定义窗口逻辑
         DataStream<Tuple3<String, Integer, Long>> result =
@@ -66,7 +73,7 @@ public class IngestionTimeDemo {
                                             String s,
                                             Context context,
                                             Iterable<Event> elements,
-                                            Collector<Tuple3<String, Integer, Long>> out)
+                                            Collector<Tuple3<String, Integer, Long>> out )
                                             throws Exception {
                                         int count = 0;
                                         for (Event event : elements) {
@@ -86,12 +93,14 @@ public class IngestionTimeDemo {
     }
 
     public static class Event {
+
         public String user;
         public String page;
 
-        public Event() {}
+        public Event() {
+        }
 
-        public Event(String user, String page) {
+        public Event( String user, String page ) {
             this.user = user;
             this.page = page;
         }

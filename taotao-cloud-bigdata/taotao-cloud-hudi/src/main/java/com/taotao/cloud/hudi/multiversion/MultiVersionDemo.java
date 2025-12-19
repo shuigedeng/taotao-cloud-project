@@ -20,12 +20,22 @@ import static org.apache.hudi.QuickstartUtils.getQuickstartWriteConfigs;
 import static org.apache.hudi.config.HoodieWriteConfig.TABLE_NAME;
 
 import java.util.Map;
+
 import org.apache.hudi.DataSourceWriteOptions;
+import org.apache.hudi.QuickstartUtils;
+import org.apache.hudi.config.HoodieWriteConfig;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SaveMode;
 import org.apache.spark.sql.SparkSession;
 
+/**
+ * MultiVersionDemo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public abstract class MultiVersionDemo {
 
     protected Map<String, String> properties;
@@ -40,12 +50,12 @@ public abstract class MultiVersionDemo {
                     .config("spark.sql.hive.convertMetastoreParquet", "false")
                     .getOrCreate();
 
-    public MultiVersionDemo(Map<String, String> properties, String basePath) {
+    public MultiVersionDemo( Map<String, String> properties, String basePath ) {
         this.properties = properties;
         this.basePath = basePath;
     }
 
-    public void writeHudi(Dataset<Row> df, SaveMode saveMode) {
+    public void writeHudi( Dataset<Row> df, SaveMode saveMode ) {
         df.write()
                 .format("org.apache.hudi")
                 .options(getQuickstartWriteConfigs())

@@ -36,19 +36,26 @@ import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
+/**
+ * CepDemo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class CepDemo {
 
-    public static void printTestPattern(Pattern<?, ?> pattern) throws JacksonException {
+    public static void printTestPattern( Pattern<?, ?> pattern ) throws JacksonException {
         System.out.println(CepJsonUtils.convertPatternToJSONString(pattern));
     }
 
-    public static void checkArg(String argName, MultipleParameterTool params) {
+    public static void checkArg( String argName, MultipleParameterTool params ) {
         if (!params.has(argName)) {
             throw new IllegalArgumentException(argName + " must be set!");
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         // Process args
         //		final MultipleParameterTool params = MultipleParameterTool.fromArgs(args);
 
@@ -87,7 +94,7 @@ public class CepDemo {
                 socketTextStream.map(
                         new RichMapFunction<String, Event>() {
                             @Override
-                            public Event map(String value) throws Exception {
+                            public Event map( String value ) throws Exception {
                                 // private final int id;
                                 // private final String name;
                                 // private final int productionId;
@@ -113,7 +120,7 @@ public class CepDemo {
                         new KeySelector<Event, Tuple2<Integer, Integer>>() {
 
                             @Override
-                            public Tuple2<Integer, Integer> getKey(Event value) throws Exception {
+                            public Tuple2<Integer, Integer> getKey( Event value ) throws Exception {
                                 return Tuple2.of(value.getId(), value.getProductionId());
                             }
                         });
@@ -142,7 +149,8 @@ public class CepDemo {
                                 null,
                                 Long.parseLong(jdbcIntervalMs)),
                         TimeBehaviour.ProcessingTime,
-                        TypeInformation.of(new TypeHint<String>() {}));
+                        TypeInformation.of(new TypeHint<String>() {
+                        }));
         // Print output stream in taskmanager's stdout
         output.print();
 

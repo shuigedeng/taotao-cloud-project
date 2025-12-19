@@ -18,16 +18,26 @@ package com.taotao.cloud.flink.atguigu.apitest.sink;
 
 import com.taotao.cloud.flink.atguigu.apitest.beans.SensorReading;
 import com.taotao.cloud.flink.atguigu.apitest.source.SourceTest4_UDF;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
 
+/**
+ * SinkTest4_Jdbc
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class SinkTest4_Jdbc {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
@@ -51,13 +61,14 @@ public class SinkTest4_Jdbc {
 
     // 实现自定义的SinkFunction
     public static class MyJdbcSink extends RichSinkFunction<SensorReading> {
+
         // 声明连接和预编译语句
         Connection connection = null;
         PreparedStatement insertStmt = null;
         PreparedStatement updateStmt = null;
 
         @Override
-        public void open(OpenContext openContext) throws Exception {
+        public void open( OpenContext openContext ) throws Exception {
             connection =
                     DriverManager.getConnection(
                             "jdbc:mysql://127.0.0.1:3306/test", "root", "123456");
@@ -69,7 +80,7 @@ public class SinkTest4_Jdbc {
 
         // 每来一条数据，调用连接，执行sql
         @Override
-        public void invoke(SensorReading value, Context context) throws Exception {
+        public void invoke( SensorReading value, Context context ) throws Exception {
             // 直接执行更新语句，如果没有更新那么就插入
             updateStmt.setDouble(1, value.getTemperature());
             updateStmt.setString(2, value.getId());

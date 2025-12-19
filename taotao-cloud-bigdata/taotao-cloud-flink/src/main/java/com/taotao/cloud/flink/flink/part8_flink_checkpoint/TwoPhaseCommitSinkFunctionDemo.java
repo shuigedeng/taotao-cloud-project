@@ -27,6 +27,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.MapFunction;
@@ -55,8 +56,16 @@ import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 import org.bigdatatechcir.learn_flink.util.DruidUtil;
 
+/**
+ * TwoPhaseCommitSinkFunctionDemo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TwoPhaseCommitSinkFunctionDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         Configuration conf = new Configuration();
         conf.set(RestOptions.BIND_PORT, "8081");
         final StreamExecutionEnvironment env =
@@ -94,7 +103,7 @@ public class TwoPhaseCommitSinkFunctionDemo {
                             private final Random random = new Random();
 
                             @Override
-                            public void run(SourceContext<String> ctx) throws Exception {
+                            public void run( SourceContext<String> ctx ) throws Exception {
                                 while (running) {
                                     int randomNum = random.nextInt(5) + 1;
                                     long timestamp = System.currentTimeMillis();
@@ -102,21 +111,21 @@ public class TwoPhaseCommitSinkFunctionDemo {
                                     // 如果生成的是 key2，则在一个新线程中处理延迟
                                     if (randomNum == 2) {
                                         new Thread(
-                                                        () -> {
-                                                            try {
-                                                                int delay =
-                                                                        random.nextInt(10)
-                                                                                + 1; // 随机数范围从1到10
-                                                                Thread.sleep(
-                                                                        delay * 1000); // 增加1到10秒的延迟
-                                                                ctx.collectWithTimestamp(
-                                                                        "key" + randomNum + "," + 1
-                                                                                + "," + timestamp,
-                                                                        timestamp);
-                                                            } catch (InterruptedException e) {
-                                                                Thread.currentThread().interrupt();
-                                                            }
-                                                        })
+                                                () -> {
+                                                    try {
+                                                        int delay =
+                                                                random.nextInt(10)
+                                                                        + 1; // 随机数范围从1到10
+                                                        Thread.sleep(
+                                                                delay * 1000); // 增加1到10秒的延迟
+                                                        ctx.collectWithTimestamp(
+                                                                "key" + randomNum + "," + 1
+                                                                        + "," + timestamp,
+                                                                timestamp);
+                                                    } catch (InterruptedException e) {
+                                                        Thread.currentThread().interrupt();
+                                                    }
+                                                })
                                                 .start();
                                     } else {
                                         ctx.collectWithTimestamp(
@@ -162,7 +171,7 @@ public class TwoPhaseCommitSinkFunctionDemo {
                 text.map(
                                 new MapFunction<String, Tuple3<String, Integer, Long>>() {
                                     @Override
-                                    public Tuple3<String, Integer, Long> map(String value) {
+                                    public Tuple3<String, Integer, Long> map( String value ) {
                                         String[] words = value.split(",");
                                         return new Tuple3<>(
                                                 words[0],
@@ -177,7 +186,7 @@ public class TwoPhaseCommitSinkFunctionDemo {
                 tuplesWithTimestamp.assignTimestampsAndWatermarks(
                         WatermarkStrategy.<Tuple3<String, Integer, Long>>forBoundedOutOfOrderness(
                                         Duration.ofSeconds(0))
-                                .withTimestampAssigner((element, recordTimestamp) -> element.f2));
+                                .withTimestampAssigner(( element, recordTimestamp ) -> element.f2));
 
         // 窗口逻辑
         DataStream<Tuple2<String, Integer>> keyedStream =
@@ -193,7 +202,7 @@ public class TwoPhaseCommitSinkFunctionDemo {
                                     private ValueState<Integer> countState;
 
                                     @Override
-                                    public void open(OpenContext openContext) {
+                                    public void open( OpenContext openContext ) {
                                         countState =
                                                 getRuntimeContext()
                                                         .getState(
@@ -206,7 +215,7 @@ public class TwoPhaseCommitSinkFunctionDemo {
                                             String s,
                                             Context context,
                                             Iterable<Tuple3<String, Integer, Long>> elements,
-                                            Collector<Tuple2<String, Integer>> out)
+                                            Collector<Tuple2<String, Integer>> out )
                                             throws Exception {
                                         int count = 0;
                                         for (Tuple3<String, Integer, Long> element : elements) {
@@ -304,7 +313,7 @@ public class TwoPhaseCommitSinkFunctionDemo {
         protected void invoke(
                 YRCanbusTransaction yrCanbusTransaction,
                 YRcanbusStore yRcanbusStore,
-                Context context)
+                Context context )
                 throws Exception {
             yrCanbusTransaction.store(yRcanbusStore);
         }
@@ -315,10 +324,11 @@ public class TwoPhaseCommitSinkFunctionDemo {
         }
 
         @Override
-        protected void preCommit(YRCanbusTransaction yrCanbusTransaction) throws Exception {}
+        protected void preCommit( YRCanbusTransaction yrCanbusTransaction ) throws Exception {
+        }
 
         @Override
-        protected void commit(YRCanbusTransaction yrCanbusTransaction) {
+        protected void commit( YRCanbusTransaction yrCanbusTransaction ) {
             try {
                 yrCanbusTransaction.commit();
             } catch (SQLException e) {
@@ -327,7 +337,7 @@ public class TwoPhaseCommitSinkFunctionDemo {
         }
 
         @Override
-        protected void abort(YRCanbusTransaction yrCanbusTransaction) {
+        protected void abort( YRCanbusTransaction yrCanbusTransaction ) {
             try {
                 yrCanbusTransaction.rollback();
             } catch (SQLException e) {
@@ -337,10 +347,11 @@ public class TwoPhaseCommitSinkFunctionDemo {
     }
 
     public class YRCanbusTransaction {
+
         private transient Connection connection;
         private List<YRcanbusStore> list = new ArrayList<>();
 
-        public void store(YRcanbusStore yrcanbusStore) {
+        public void store( YRcanbusStore yrcanbusStore ) {
             list.add(yrcanbusStore);
         }
 
@@ -371,12 +382,13 @@ public class TwoPhaseCommitSinkFunctionDemo {
     }
 
     public class YRcanbusStore {
+
         private String platform;
         private String type;
         private String day;
         private String hour;
 
-        public YRcanbusStore(String platform, String type, String day, String hour) {
+        public YRcanbusStore( String platform, String type, String day, String hour ) {
             this.platform = platform;
             this.type = type;
             this.day = day;
@@ -387,7 +399,7 @@ public class TwoPhaseCommitSinkFunctionDemo {
             return platform;
         }
 
-        public void setPlatform(String platform) {
+        public void setPlatform( String platform ) {
             this.platform = platform;
         }
 
@@ -395,7 +407,7 @@ public class TwoPhaseCommitSinkFunctionDemo {
             return type;
         }
 
-        public void setType(String type) {
+        public void setType( String type ) {
             this.type = type;
         }
 
@@ -403,7 +415,7 @@ public class TwoPhaseCommitSinkFunctionDemo {
             return day;
         }
 
-        public void setDay(String day) {
+        public void setDay( String day ) {
             this.day = day;
         }
 
@@ -411,7 +423,7 @@ public class TwoPhaseCommitSinkFunctionDemo {
             return hour;
         }
 
-        public void setHour(String hour) {
+        public void setHour( String hour ) {
             this.hour = hour;
         }
     }

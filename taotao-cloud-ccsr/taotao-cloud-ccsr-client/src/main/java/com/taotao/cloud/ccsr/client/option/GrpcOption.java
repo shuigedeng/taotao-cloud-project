@@ -18,25 +18,32 @@ package com.taotao.cloud.ccsr.client.option;
 
 import com.taotao.cloud.ccsr.client.dto.ServerAddress;
 import com.taotao.cloud.ccsr.client.utils.ServerAddressConverter;
+
 import java.util.List;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.apache.commons.collections4.CollectionUtils;
 
+/**
+ * GrpcOption
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class GrpcOption extends RequestOption {
 
     private List<ServerAddress> serverAddresses;
 
-    // private EventType eventType;
-
     @Override
     public String protocol() {
         return "grpc";
     }
 
-    public void initServers(List<String> addresses) {
+    public void initServers( List<String> addresses ) {
         this.serverAddresses = ServerAddressConverter.convert(addresses);
         if (CollectionUtils.isEmpty(serverAddresses)) {
             throw new IllegalArgumentException("Invalid params: the server address is empty");

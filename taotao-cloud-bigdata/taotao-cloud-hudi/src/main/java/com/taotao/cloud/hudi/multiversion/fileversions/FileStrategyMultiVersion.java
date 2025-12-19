@@ -17,11 +17,19 @@
 package com.taotao.cloud.hudi.multiversion.fileversions;
 
 import com.taotao.cloud.hudi.multiversion.MultiVersionDemo;
+
 import java.util.Map;
 
+/**
+ * FileStrategyMultiVersion
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public abstract class FileStrategyMultiVersion extends MultiVersionDemo {
 
-    public FileStrategyMultiVersion(Map<String, String> properties, String basePath) {
+    public FileStrategyMultiVersion( Map<String, String> properties, String basePath ) {
         super(properties, basePath);
     }
 }

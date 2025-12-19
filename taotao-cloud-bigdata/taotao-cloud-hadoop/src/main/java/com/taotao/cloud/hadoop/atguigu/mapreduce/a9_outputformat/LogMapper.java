@@ -17,15 +17,23 @@
 package com.taotao.cloud.hadoop.atguigu.mapreduce.a9_outputformat;
 
 import java.io.IOException;
+
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
+/**
+ * LogMapper
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class LogMapper extends Mapper<LongWritable, Text, Text, NullWritable> {
 
     @Override
-    protected void map(LongWritable key, Text value, Context context)
+    protected void map( LongWritable key, Text value, Context context )
             throws IOException, InterruptedException {
         // http://www.baidu.com
         // http://www.google.com

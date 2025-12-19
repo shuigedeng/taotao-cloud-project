@@ -18,9 +18,17 @@ package com.taotao.cloud.job.nameserver.module.sync;
 
 import lombok.Getter;
 
+/**
+ * ServerRegisterSyncInfo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Getter
 public class ServerRegisterSyncInfo extends SyncInfo {
-    public ServerRegisterSyncInfo(String scheduleServerIp) {
+
+    public ServerRegisterSyncInfo( String scheduleServerIp ) {
         super(scheduleServerIp);
         this.scheduleServerIp = scheduleServerIp;
     }

@@ -27,8 +27,16 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
 import org.apache.flink.util.Collector;
 
+/**
+ * ProcessTest2_ApplicationCase
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ProcessTest2_ApplicationCase {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
@@ -53,10 +61,11 @@ public class ProcessTest2_ApplicationCase {
     // 实现自定义处理函数，检测一段时间内的温度连续上升，输出报警
     public static class TempConsIncreWarning
             extends KeyedProcessFunction<String, SensorReading, String> {
+
         // 定义私有属性，当前统计的时间间隔
         private Integer interval;
 
-        public TempConsIncreWarning(Integer interval) {
+        public TempConsIncreWarning( Integer interval ) {
             this.interval = interval;
         }
 
@@ -65,7 +74,7 @@ public class ProcessTest2_ApplicationCase {
         private ValueState<Long> timerTsState;
 
         @Override
-        public void open(OpenContext openContext) throws Exception {
+        public void open( OpenContext openContext ) throws Exception {
             lastTempState =
                     getRuntimeContext()
                             .getState(
@@ -77,7 +86,7 @@ public class ProcessTest2_ApplicationCase {
         }
 
         @Override
-        public void processElement(SensorReading value, Context ctx, Collector<String> out)
+        public void processElement( SensorReading value, Context ctx, Collector<String> out )
                 throws Exception {
             // 取出状态
             Double lastTemp = lastTempState.value();
@@ -101,7 +110,7 @@ public class ProcessTest2_ApplicationCase {
         }
 
         @Override
-        public void onTimer(long timestamp, OnTimerContext ctx, Collector<String> out)
+        public void onTimer( long timestamp, OnTimerContext ctx, Collector<String> out )
                 throws Exception {
             // 定时器触发，输出报警信息
             out.collect("传感器" + ctx.getCurrentKey() + "温度值连续" + interval + "s上升");

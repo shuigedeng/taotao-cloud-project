@@ -17,6 +17,7 @@
 package com.taotao.cloud.hadoop.atguigu.mapreduce.a2_writable;
 
 import java.io.IOException;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
@@ -24,11 +25,18 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
+/**
+ * FlowDriver
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class FlowDriver {
 
     private static String PATH = "/Users/shuigedeng/Downloads/尚硅谷大数据/尚硅谷-hadoop3资料/11_input";
 
-    public static void main(String[] args)
+    public static void main( String[] args )
             throws IOException, ClassNotFoundException, InterruptedException {
 
         // 1 获取job

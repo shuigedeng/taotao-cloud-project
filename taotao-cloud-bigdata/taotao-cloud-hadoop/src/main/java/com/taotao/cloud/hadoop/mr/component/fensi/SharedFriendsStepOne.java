@@ -36,10 +36,17 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  */
 public class SharedFriendsStepOne {
 
+    /**
+     * SharedFriendsStepOneMapper
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     static class SharedFriendsStepOneMapper extends Mapper<LongWritable, Text, Text, Text> {
 
         @Override
-        protected void map(LongWritable key, Text value, Context context)
+        protected void map( LongWritable key, Text value, Context context )
                 throws IOException, InterruptedException {
             // A:B,C,D,F,E,O
             String line = value.toString();
@@ -54,10 +61,17 @@ public class SharedFriendsStepOne {
         }
     }
 
+    /**
+     * SharedFriendsStepOneReducer
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     static class SharedFriendsStepOneReducer extends Reducer<Text, Text, Text, Text> {
 
         @Override
-        protected void reduce(Text friend, Iterable<Text> persons, Context context)
+        protected void reduce( Text friend, Iterable<Text> persons, Context context )
                 throws IOException, InterruptedException {
             StringBuilder sb = new StringBuilder();
             for (Text person : persons) {
@@ -67,7 +81,7 @@ public class SharedFriendsStepOne {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         Configuration conf = new Configuration();
 
         Job job = Job.getInstance(conf);

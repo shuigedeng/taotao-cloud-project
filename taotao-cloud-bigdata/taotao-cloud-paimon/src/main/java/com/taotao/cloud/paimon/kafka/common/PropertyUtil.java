@@ -22,14 +22,24 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
 import org.apache.paimon.shade.guava30.com.google.common.collect.Maps;
 import org.apache.paimon.utils.Preconditions;
 
+/**
+ * PropertyUtil
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class PropertyUtil {
-    private PropertyUtil() {}
+
+    private PropertyUtil() {
+    }
 
     public static boolean propertyAsBoolean(
-            Map<String, String> properties, String property, boolean defaultValue) {
+            Map<String, String> properties, String property, boolean defaultValue ) {
         String value = properties.get(property);
         if (value != null) {
             return Boolean.parseBoolean(value);
@@ -38,7 +48,7 @@ public class PropertyUtil {
     }
 
     public static Boolean propertyAsNullableBoolean(
-            Map<String, String> properties, String property) {
+            Map<String, String> properties, String property ) {
         String value = properties.get(property);
         if (value != null) {
             return Boolean.parseBoolean(value);
@@ -47,7 +57,7 @@ public class PropertyUtil {
     }
 
     public static double propertyAsDouble(
-            Map<String, String> properties, String property, double defaultValue) {
+            Map<String, String> properties, String property, double defaultValue ) {
         String value = properties.get(property);
         if (value != null) {
             return Double.parseDouble(value);
@@ -56,7 +66,7 @@ public class PropertyUtil {
     }
 
     public static int propertyAsInt(
-            Map<String, String> properties, String property, int defaultValue) {
+            Map<String, String> properties, String property, int defaultValue ) {
         String value = properties.get(property);
         if (value != null) {
             return Integer.parseInt(value);
@@ -64,7 +74,7 @@ public class PropertyUtil {
         return defaultValue;
     }
 
-    public static Integer propertyAsNullableInt(Map<String, String> properties, String property) {
+    public static Integer propertyAsNullableInt( Map<String, String> properties, String property ) {
         String value = properties.get(property);
         if (value != null) {
             return Integer.parseInt(value);
@@ -73,7 +83,7 @@ public class PropertyUtil {
     }
 
     public static long propertyAsLong(
-            Map<String, String> properties, String property, long defaultValue) {
+            Map<String, String> properties, String property, long defaultValue ) {
         String value = properties.get(property);
         if (value != null) {
             return Long.parseLong(value);
@@ -81,7 +91,7 @@ public class PropertyUtil {
         return defaultValue;
     }
 
-    public static Long propertyAsNullableLong(Map<String, String> properties, String property) {
+    public static Long propertyAsNullableLong( Map<String, String> properties, String property ) {
         String value = properties.get(property);
         if (value != null) {
             return Long.parseLong(value);
@@ -90,7 +100,7 @@ public class PropertyUtil {
     }
 
     public static String propertyAsString(
-            Map<String, String> properties, String property, String defaultValue) {
+            Map<String, String> properties, String property, String defaultValue ) {
         String value = properties.get(property);
         if (value != null) {
             return value;
@@ -99,15 +109,15 @@ public class PropertyUtil {
     }
 
     /**
-     * Returns subset of provided map with keys matching the provided prefix. Matching is
-     * case-sensitive and the matching prefix is removed from the keys in returned map.
+     * Returns subset of provided map with keys matching the provided prefix. Matching is case-sensitive and the
+     * matching prefix is removed from the keys in returned map.
      *
      * @param properties input map
      * @param prefix prefix to choose keys from input map
      * @return subset of input map with keys starting with provided prefix and prefix trimmed out
      */
     public static Map<String, String> propertiesWithPrefix(
-            Map<String, String> properties, String prefix) {
+            Map<String, String> properties, String prefix ) {
         if (properties == null || properties.isEmpty()) {
             return Collections.emptyMap();
         }
@@ -129,7 +139,7 @@ public class PropertyUtil {
      * @return subset of input map with keys satisfying the predicate
      */
     public static Map<String, String> filterProperties(
-            Map<String, String> properties, Predicate<String> keyPredicate) {
+            Map<String, String> properties, Predicate<String> keyPredicate ) {
         if (properties == null || properties.isEmpty()) {
             return Collections.emptyMap();
         }
@@ -145,7 +155,7 @@ public class PropertyUtil {
             Map<String, String> properties,
             List<String> deletedColumns,
             Map<String, String> renamedColumns,
-            Set<String> columnProperties) {
+            Set<String> columnProperties ) {
         if (properties.keySet().stream()
                 .noneMatch(key -> columnProperties.stream().anyMatch(key::startsWith))) {
             return properties;

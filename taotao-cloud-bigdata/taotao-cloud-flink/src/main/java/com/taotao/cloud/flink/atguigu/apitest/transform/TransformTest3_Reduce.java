@@ -24,8 +24,16 @@ import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
+/**
+ * TransformTest3_Reduce
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TransformTest3_Reduce {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
@@ -51,7 +59,7 @@ public class TransformTest3_Reduce {
                 keyedStream.reduce(
                         new ReduceFunction<SensorReading>() {
                             @Override
-                            public SensorReading reduce(SensorReading value1, SensorReading value2)
+                            public SensorReading reduce( SensorReading value1, SensorReading value2 )
                                     throws Exception {
                                 return new SensorReading(
                                         value1.getId(),
@@ -61,7 +69,7 @@ public class TransformTest3_Reduce {
                         });
 
         keyedStream.reduce(
-                (curState, newData) -> {
+                ( curState, newData ) -> {
                     return new SensorReading(
                             curState.getId(),
                             newData.getTimestamp(),

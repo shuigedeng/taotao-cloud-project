@@ -17,12 +17,20 @@
 package com.taotao.cloud.ccsr.client.utils;
 
 import com.taotao.cloud.ccsr.client.dto.ServerAddress;
+
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * ServerAddressConverter
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ServerAddressConverter {
 
-    public static List<ServerAddress> convert(List<String> addressStrings) {
+    public static List<ServerAddress> convert( List<String> addressStrings ) {
         List<ServerAddress> serverAddresses = new ArrayList<>();
         for (String addr : addressStrings) {
             // 使用 ":" 分割字符串，获取主机和端口

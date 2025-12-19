@@ -18,21 +18,30 @@ package com.taotao.cloud.job.worker.common.grpc.strategies;
 
 import com.taotao.cloud.job.common.exception.TtcJobException;
 import com.taotao.cloud.job.worker.common.constant.TransportTypeEnum;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * StrategyManager
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class StrategyManager {
 
     public static Map<TransportTypeEnum, GrpcStrategy<?>> strategyMap = new HashMap<>();
 
-    public static <T> void registerCausa(TransportTypeEnum ruleType, GrpcStrategy<?> strategy) {
+    public static <T> void registerCausa( TransportTypeEnum ruleType, GrpcStrategy<?> strategy ) {
         strategyMap.put(ruleType, strategy);
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> GrpcStrategy<T> match(TransportTypeEnum ruleType) {
+    public static <T> GrpcStrategy<T> match( TransportTypeEnum ruleType ) {
 
         if (!strategyMap.containsKey(ruleType)) {
             throw new TtcJobException("There's no strategy defined for this type: \"");

@@ -26,17 +26,27 @@ import com.taotao.cloud.job.remote.protos.RegisterCausa;
 import com.taotao.cloud.remote.api.DistroGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+/**
+ * GrpcClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Component
 @Slf4j
 public class GrpcClient {
+
     private final Map<String, DistroGrpc.DistroFutureStub> clusterFutureStubMap = new HashMap<>();
     private final Map<String, DistroGrpc.DistroBlockingStub> clusterBlockingStubMap =
             new HashMap<>();
@@ -44,7 +54,7 @@ public class GrpcClient {
 
     private final int RETRY_TIMES = 3;
 
-    public GrpcClient(TtcJobNameServerConfig ttcJobNameServerConfig) {
+    public GrpcClient( TtcJobNameServerConfig ttcJobNameServerConfig ) {
         for (String ip : ttcJobNameServerConfig.getServerAddressList()) {
             String[] split = ip.split(":");
             ManagedChannel channel =
@@ -60,30 +70,22 @@ public class GrpcClient {
 
     /**
      * send async
-     *
-     * @param syncInfo
-     * @param target
-     * @param operation
      */
-    public void sendSyncInfo(SyncInfo syncInfo, String target, String operation) {
+    public void sendSyncInfo( SyncInfo syncInfo, String target, String operation ) {
         DistroCausa.SyncNodeInfoReq req = buildReq(syncInfo, operation);
         DistroGrpc.DistroFutureStub distroFutureStub = clusterFutureStubMap.get(target);
         ListenableFuture<CommonCausa.Response> future = distroFutureStub.syncNodeInfo(req);
     }
 
-    public void sendSyncInfo(DistroCausa.SyncNodeInfoReq syncInfo, String target) {
+    public void sendSyncInfo( DistroCausa.SyncNodeInfoReq syncInfo, String target ) {
         DistroGrpc.DistroFutureStub distroFutureStub = clusterFutureStubMap.get(target);
         ListenableFuture<CommonCausa.Response> future = distroFutureStub.syncNodeInfo(syncInfo);
     }
 
     /**
      * send sync and retry
-     *
-     * @param syncInfo
-     * @param targetNode
-     * @param operation
      */
-    public void redirectSyncInfo(SyncInfo syncInfo, String targetNode, String operation) {
+    public void redirectSyncInfo( SyncInfo syncInfo, String targetNode, String operation ) {
         try {
             DistroCausa.SyncNodeInfoReq req = buildReq(syncInfo, operation);
             DistroGrpc.DistroBlockingStub distroBlockingStub =
@@ -104,7 +106,7 @@ public class GrpcClient {
         }
     }
 
-    public void dataCheck(String checkSum, String target, FullSyncInfo info, Executor executor) {
+    public void dataCheck( String checkSum, String target, FullSyncInfo info, Executor executor ) {
         DistroGrpc.DistroFutureStub distroFutureStub = clusterFutureStubMap.get(target);
 
         ListenableFuture<CommonCausa.Response> future =
@@ -134,14 +136,14 @@ public class GrpcClient {
                 executor);
     }
 
-    private DistroCausa.SyncNodeInfoReq buildReq(SyncInfo syncInfo, String operation) {
+    private DistroCausa.SyncNodeInfoReq buildReq( SyncInfo syncInfo, String operation ) {
         DistroCausa.SyncNodeInfoReq.Builder builder = DistroCausa.SyncNodeInfoReq.newBuilder();
         switch (operation) {
             case RemoteConstant.INCREMENTAL_ADD_SERVER:
                 return builder.setScheduleServerRegisterInfo(
                                 RegisterCausa.ServerRegisterReporter.newBuilder()
                                         .setServerIpAddress(
-                                                ((ServerRegisterSyncInfo) syncInfo)
+                                                ( (ServerRegisterSyncInfo) syncInfo )
                                                         .getScheduleServerIp())
                                         .build())
                         .setOperation(operation)
@@ -162,7 +164,7 @@ public class GrpcClient {
                 return builder.setScheduleServerRemoveInfo(
                                 DistroCausa.ServerRemoveInfo.newBuilder()
                                         .setServerAddress(
-                                                ((ServerRemoveSyncInfo) syncInfo)
+                                                ( (ServerRemoveSyncInfo) syncInfo )
                                                         .getServerIpAddress())
                                         .build())
                         .setOperation(operation)
@@ -171,7 +173,7 @@ public class GrpcClient {
             case RemoteConstant.INCREMENTAL_REMOVE_WORKER:
                 return builder.setWorkerRemoveInfo(
                                 DistroCausa.WorkerRemoveInfo.newBuilder()
-                                        .setAppName(((WorkerRemoveSyncInfo) syncInfo).getAppName())
+                                        .setAppName(( (WorkerRemoveSyncInfo) syncInfo ).getAppName())
                                         .build())
                         .setOperation(operation)
                         .build();

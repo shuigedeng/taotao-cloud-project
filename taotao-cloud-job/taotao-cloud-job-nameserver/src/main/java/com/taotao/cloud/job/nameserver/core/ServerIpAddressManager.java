@@ -19,18 +19,29 @@ package com.taotao.cloud.job.nameserver.core;
 import com.google.common.collect.Maps;
 import com.taotao.cloud.job.nameserver.module.ReBalanceInfo;
 import com.taotao.cloud.job.nameserver.module.sync.FullSyncInfo;
+
 import java.util.*;
 import java.util.stream.Collectors;
+
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+/**
+ * ServerIpAddressManager
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Service
 public class ServerIpAddressManager {
+
     @Value("${ttcjob.name-server.max-worker-num}")
     private int maxWorkerNum;
 
-    @Getter private Set<String> serverAddressSet = new HashSet<>();
+    @Getter
+    private Set<String> serverAddressSet = new HashSet<>();
     private Set<String> workerIpAddressSet = new HashSet<>();
 
     /**
@@ -43,15 +54,15 @@ public class ServerIpAddressManager {
      */
     private Map<String, Long> serverAddress2ScheduleTimesMap = Maps.newConcurrentMap();
 
-    public void add2ServerAddressSet(String serverIpAddress) {
+    public void add2ServerAddressSet( String serverIpAddress ) {
         serverAddressSet.add(serverIpAddress);
     }
 
-    public void removeServerAddress(String serverIpAddress) {
+    public void removeServerAddress( String serverIpAddress ) {
         serverAddressSet.remove(serverIpAddress);
     }
 
-    public void addScheduleTimes(String serverIpAddress, long scheduleTime) {
+    public void addScheduleTimes( String serverIpAddress, long scheduleTime ) {
         if (!serverIpAddress.isEmpty()) {
             serverAddress2ScheduleTimesMap.put(
                     serverIpAddress,
@@ -60,14 +71,14 @@ public class ServerIpAddressManager {
         }
     }
 
-    public void addAppName2WorkerNumMap(String workerIpAddress, String appName) {
+    public void addAppName2WorkerNumMap( String workerIpAddress, String appName ) {
         if (!workerIpAddressSet.contains(workerIpAddress)) {
             workerIpAddressSet.add(workerIpAddress);
             appName2WorkerNumMap.put(appName, appName2WorkerNumMap.getOrDefault(appName, 0) + 1);
         }
     }
 
-    public void cleanAppName2WorkerNumMap(String appName) {
+    public void cleanAppName2WorkerNumMap( String appName ) {
         if (appName2WorkerNumMap.containsKey(appName)) {
             appName2WorkerNumMap.put(appName, appName2WorkerNumMap.get(appName) - 1);
         }
@@ -77,7 +88,7 @@ public class ServerIpAddressManager {
             Set<String> serverAddressSet,
             Set<String> workerIpAddressSet,
             Map<String, Integer> appName2WorkerNumMap,
-            Map<String, Long> serverAddress2ScheduleTimesMap) {
+            Map<String, Long> serverAddress2ScheduleTimesMap ) {
         this.serverAddressSet = serverAddressSet;
         this.workerIpAddressSet = workerIpAddressSet;
         this.appName2WorkerNumMap = appName2WorkerNumMap;
@@ -98,18 +109,18 @@ public class ServerIpAddressManager {
     public String calculateChecksum() {
         StringBuilder build = new StringBuilder();
         appName2WorkerNumMap.forEach(
-                (k, v) -> {
+                ( k, v ) -> {
                     build.append(k).append(v.toString());
                 });
         // scheduleTime no include
         serverAddress2ScheduleTimesMap.forEach(
-                (k, v) -> {
+                ( k, v ) -> {
                     build.append(k);
                 });
         return Integer.toHexString(build.toString().hashCode()); // 使用哈希值作为校验和
     }
 
-    public ReBalanceInfo getServerAddressReBalanceList(String serverAddress, String appName) {
+    public ReBalanceInfo getServerAddressReBalanceList( String serverAddress, String appName ) {
         // first req, serverAddress is empty
         if (serverAddress.isEmpty()) {
             ReBalanceInfo reBalanceInfo = new ReBalanceInfo();
@@ -125,10 +136,10 @@ public class ServerIpAddressManager {
                         .sorted(
                                 new Comparator<String>() {
                                     @Override
-                                    public int compare(String o1, String o2) {
+                                    public int compare( String o1, String o2 ) {
                                         return (int)
-                                                (serverAddress2ScheduleTimesMap.get(o1)
-                                                        - serverAddress2ScheduleTimesMap.get(o2));
+                                                ( serverAddress2ScheduleTimesMap.get(o1)
+                                                        - serverAddress2ScheduleTimesMap.get(o2) );
                                     }
                                 })
                         .collect(Collectors.toList());

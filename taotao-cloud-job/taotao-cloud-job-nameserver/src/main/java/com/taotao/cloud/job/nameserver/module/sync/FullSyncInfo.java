@@ -18,15 +18,24 @@ package com.taotao.cloud.job.nameserver.module.sync;
 
 import java.util.Map;
 import java.util.Set;
+
 import lombok.Getter;
 
+/**
+ * FullSyncInfo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Getter
 public class FullSyncInfo extends SyncInfo {
+
     public FullSyncInfo(
             Set<String> serverAddressSet,
             Set<String> workerIpAddressSet,
             Map<String, Integer> appName2WorkerNumMap,
-            Map<String, Long> serverAddress2ScheduleTimesMap) {
+            Map<String, Long> serverAddress2ScheduleTimesMap ) {
         super(null);
         this.serverAddressSet = serverAddressSet;
         this.workerIpAddressSet = workerIpAddressSet;

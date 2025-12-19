@@ -25,8 +25,16 @@ import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.Tumble;
 import org.apache.flink.types.Row;
 
+/**
+ * TableTest5_TimeAndWindow
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class TableTest5_TimeAndWindow {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         // 1. 创建环境
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
@@ -52,7 +60,7 @@ public class TableTest5_TimeAndWindow {
                                 new BoundedOutOfOrdernessTimestampExtractor<SensorReading>(
                                         Duration.ofSeconds(2)) {
                                     @Override
-                                    public long extractTimestamp(SensorReading element) {
+                                    public long extractTimestamp( SensorReading element ) {
                                         return element.getTimestamp() * 1000L;
                                     }
                                 });

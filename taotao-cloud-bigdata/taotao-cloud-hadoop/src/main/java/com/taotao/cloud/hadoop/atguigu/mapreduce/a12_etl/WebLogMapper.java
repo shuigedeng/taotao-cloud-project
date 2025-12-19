@@ -17,15 +17,23 @@
 package com.taotao.cloud.hadoop.atguigu.mapreduce.a12_etl;
 
 import java.io.IOException;
+
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
+/**
+ * WebLogMapper
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class WebLogMapper extends Mapper<LongWritable, Text, Text, NullWritable> {
 
     @Override
-    protected void map(LongWritable key, Text value, Context context)
+    protected void map( LongWritable key, Text value, Context context )
             throws IOException, InterruptedException {
 
         // 1 获取一行
@@ -42,7 +50,7 @@ public class WebLogMapper extends Mapper<LongWritable, Text, Text, NullWritable>
         context.write(value, NullWritable.get());
     }
 
-    private boolean parseLog(String line, Context context) {
+    private boolean parseLog( String line, Context context ) {
         // 切割
         // 1.206.126.5 - - [19/Sep/2013:05:41:41 +0000] "-" 400 0 "-" "-"
         String[] fields = line.split(" ");

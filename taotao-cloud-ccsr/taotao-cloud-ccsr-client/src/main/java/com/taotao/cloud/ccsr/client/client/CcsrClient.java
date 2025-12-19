@@ -26,13 +26,21 @@ import com.taotao.cloud.ccsr.client.listener.ConfigListener;
 import com.taotao.cloud.ccsr.client.option.GrpcOption;
 import com.taotao.cloud.ccsr.client.option.RequestOption;
 import com.taotao.cloud.ccsr.client.request.Payload;
+
 import java.util.List;
 import java.util.ServiceLoader;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * CcsrClient
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class CcsrClient extends AbstractClient<RequestOption> {
 
-    protected CcsrClient(String namespace) {
+    protected CcsrClient( String namespace ) {
         super(namespace);
     }
 
@@ -44,23 +52,23 @@ public class CcsrClient extends AbstractClient<RequestOption> {
                 .addNext(new InvokerFilter(this));
     }
 
-    public static Builder builder(String namespace, RequestOption option) {
+    public static Builder builder( String namespace, RequestOption option ) {
         return new Builder(namespace, option);
     }
 
     public static class Builder extends AbstractBuilder<Builder, CcsrClient> {
 
-        protected Builder(String namespace, RequestOption option) {
+        protected Builder( String namespace, RequestOption option ) {
             super(namespace, option);
         }
 
         @Override
-        protected CcsrClient create(String namespace) {
+        protected CcsrClient create( String namespace ) {
             return new CcsrClient(namespace);
         }
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main( String[] args ) throws InterruptedException {
         ServiceLoader.load(ConfigListener.class).forEach(ConfigListener::register);
 
         // 这个客户端全局只加载一次

@@ -37,14 +37,12 @@ import java.util.concurrent.locks.ReentrantLock;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * CONSUMER_QUEUE_FILE在消息队列中的设计是为了避免所有的消费者访问同一个commitLog，并且记录消费者访问到的位置
- * 同时也为了Topic的隔离
- * 本项目借鉴其设计，实际上可以用一个COMMIT_LOG_FILE也可以完成
- * question1：内存加载是一块整块的内存吗？
- * question2：所有的消费者访问同一个commitLog效率会低吗？
+ * CONSUMER_QUEUE_FILE在消息队列中的设计是为了避免所有的消费者访问同一个commitLog，并且记录消费者访问到的位置 同时也为了Topic的隔离
+ * 本项目借鉴其设计，实际上可以用一个COMMIT_LOG_FILE也可以完成 question1：内存加载是一块整块的内存吗？ question2：所有的消费者访问同一个commitLog效率会低吗？
  */
 @Slf4j
 public class DefaultMessageStore {
+
     private static final String COMMIT_LOG_FILE;
     private static final String CONSUMER_QUEUE_FILE;
 
@@ -98,7 +96,7 @@ public class DefaultMessageStore {
     ThreadPoolExecutor consumerthreadPoolExecutor;
 
     // 启动线程监视commitlog并写入consumerQueue
-    public void startWatcher(Consumer consumer) {
+    public void startWatcher( Consumer consumer ) {
         // 在启动时，将整个文件映射到内存中
         try {
             mapFilesToMemory();
@@ -152,7 +150,7 @@ public class DefaultMessageStore {
                         availableProcessors * 10,
                         120L,
                         TimeUnit.SECONDS,
-                        new ArrayBlockingQueue<>((1024 * 2), true),
+                        new ArrayBlockingQueue<>(( 1024 * 2 ), true),
                         consumerThreadPoolFactory,
                         new ThreadPoolExecutor.AbortPolicy());
     }
@@ -215,7 +213,7 @@ public class DefaultMessageStore {
     }
 
     // 将消息的大小和偏移量写入consumerQueue
-    private void writeToConsumerQueue(int messageSize, long offset) {
+    private void writeToConsumerQueue( int messageSize, long offset ) {
         // 确保有足够的空间来写入消息的大小和偏移量
         consumerQueueBuffer.putInt(messageSize); // 4字节表示消息大小
         consumerQueueBuffer.putLong(offset); // 8字节表示消息的偏移量
@@ -225,7 +223,7 @@ public class DefaultMessageStore {
 
     // 向commitLog文件写入消息
     public void writeToCommitLog(
-            MqCausa.Message message, RemotingResponseCallback responseCallback) {
+            MqCausa.Message message, RemotingResponseCallback responseCallback ) {
         byte[] messageBytes = message.toByteArray();
         int messageSize = messageBytes.length;
         writeLock.lock();
@@ -246,7 +244,8 @@ public class DefaultMessageStore {
         long currentConsumerPosition = consumerPosition.get();
         while (currentConsumerPosition < currentConsumerQueuePosition.get()) {
             // 如果剩余数据不足以表示完整的消息条目（4字节大小 + 8字节偏移量），则退出循环
-            if (currentConsumerQueuePosition.get() - currentConsumerPosition < 12) break;
+            if (currentConsumerQueuePosition.get() - currentConsumerPosition < 12)
+                break;
             int messageSize = consumerQueueBuffer.getInt((int) currentConsumerPosition);
             long messageOffset = consumerQueueBuffer.getLong((int) currentConsumerPosition + 4);
             System.out.println(
@@ -254,7 +253,7 @@ public class DefaultMessageStore {
 
             // 根据 offset 和 size 从 commitLog 中读取消息内容
             byte[] messageBytes = new byte[messageSize];
-            commitLogBuffer.position((int) (messageOffset + 4)); // 设置位置到指定偏移量
+            commitLogBuffer.position((int) ( messageOffset + 4 )); // 设置位置到指定偏移量
             commitLogBuffer.get(messageBytes, 0, messageSize); // 读取消息内容
 
             // 处理消息
@@ -276,6 +275,13 @@ public class DefaultMessageStore {
         consumerPosition.set(currentConsumerPosition);
     }
 
+    /**
+     * SyncFlushService
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     class SyncFlushService implements Runnable {
 
         LinkedList<FlushRequest> requestList = new LinkedList<>();
@@ -292,12 +298,12 @@ public class DefaultMessageStore {
                             availableProcessors * 10,
                             120L,
                             TimeUnit.SECONDS,
-                            new ArrayBlockingQueue<>((1024 * 2), true),
+                            new ArrayBlockingQueue<>(( 1024 * 2 ), true),
                             callbackThreadPoolFactory,
                             new ThreadPoolExecutor.AbortPolicy());
         }
 
-        public synchronized CompletableFuture<Response> addFlushRequest(MqCausa.Message message) {
+        public synchronized CompletableFuture<Response> addFlushRequest( MqCausa.Message message ) {
             FlushRequest flushRequest = new FlushRequest(message, new CompletableFuture<>());
             requestList.add(flushRequest);
             return flushRequest.getFuture();

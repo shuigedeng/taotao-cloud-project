@@ -18,26 +18,38 @@ package com.taotao.cloud.job.worker.subscribe;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
+
 import lombok.Getter;
 
+/**
+ * WorkerSubscribeManager
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class WorkerSubscribeManager {
 
     private static boolean splitStatus;
     private static boolean changeServerStatus;
-    @Getter private static String subAppName;
-    @Getter private static List<String> serverIpList;
-    @Getter private static AtomicLong scheduleTimes = new AtomicLong(0);
-    @Getter private static String currentServerIp = "";
+    @Getter
+    private static String subAppName;
+    @Getter
+    private static List<String> serverIpList;
+    @Getter
+    private static AtomicLong scheduleTimes = new AtomicLong(0);
+    @Getter
+    private static String currentServerIp = "";
 
-    public static void setCurrentServerIp(String currentServerIp) {
+    public static void setCurrentServerIp( String currentServerIp ) {
         WorkerSubscribeManager.currentServerIp = currentServerIp;
     }
 
-    public static void setChangeServerStatus(boolean changeServerStatus) {
+    public static void setChangeServerStatus( boolean changeServerStatus ) {
         WorkerSubscribeManager.changeServerStatus = changeServerStatus;
     }
 
-    public static void setServerIpList(List<String> serverIpList) {
+    public static void setServerIpList( List<String> serverIpList ) {
         WorkerSubscribeManager.serverIpList = serverIpList;
     }
 
@@ -49,11 +61,11 @@ public class WorkerSubscribeManager {
         return changeServerStatus;
     }
 
-    public static void setSplitStatus(boolean splitStatus) {
+    public static void setSplitStatus( boolean splitStatus ) {
         WorkerSubscribeManager.splitStatus = splitStatus;
     }
 
-    public static void setSubAppName(String subAppName) {
+    public static void setSubAppName( String subAppName ) {
         WorkerSubscribeManager.subAppName = subAppName;
     }
 

@@ -16,11 +16,19 @@
 
 package com.taotao.cloud.hudi;
 
+/**
+ * TaoTaoCloudHudiApplicationTests
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 class TaoTaoCloudHudiApplicationTests {
 
-    void contextLoads() {}
+    void contextLoads() {
+    }
 
-	static void main() {
+    static void main() {
 
-	}
+    }
 }

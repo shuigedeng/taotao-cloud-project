@@ -21,14 +21,23 @@ import com.google.common.collect.Sets;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.taotao.cloud.job.common.utils.CommonUtils;
 import com.taotao.cloud.job.server.extension.threadpool.RejectedExecutionHandlerFactory;
+
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * HashedWheelTimer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class HashedWheelTimer implements Timer {
 
@@ -45,18 +54,18 @@ public class HashedWheelTimer implements Timer {
 
     private final ExecutorService taskProcessPool;
 
-    public HashedWheelTimer(long tickDuration, int ticksPerWheel) {
+    public HashedWheelTimer( long tickDuration, int ticksPerWheel ) {
         this(tickDuration, ticksPerWheel, 0);
     }
 
     /**
      * 新建时间轮定时器
      *
-     * @param tickDuration     时间间隔，单位毫秒（ms）
-     * @param ticksPerWheel    轮盘个数
+     * @param tickDuration 时间间隔，单位毫秒（ms）
+     * @param ticksPerWheel 轮盘个数
      * @param processThreadNum 处理任务的线程个数，0代表不启用新线程（如果定时任务需要耗时操作，请启用线程池）
      */
-    public HashedWheelTimer(long tickDuration, int ticksPerWheel, int processThreadNum) {
+    public HashedWheelTimer( long tickDuration, int ticksPerWheel, int processThreadNum ) {
 
         this.tickDuration = tickDuration;
 
@@ -99,7 +108,7 @@ public class HashedWheelTimer implements Timer {
     }
 
     @Override
-    public TimerFuture schedule(TimerTask task, long delay, TimeUnit unit) {
+    public TimerFuture schedule( TimerTask task, long delay, TimeUnit unit ) {
 
         long targetTime = System.currentTimeMillis() + unit.toMillis(delay);
         HashedWheelTimerFuture timerFuture = new HashedWheelTimerFuture(task, targetTime);
@@ -150,7 +159,7 @@ public class HashedWheelTimer implements Timer {
         private static final int FINISHED = 2;
         private static final int CANCELED = 3;
 
-        public HashedWheelTimerFuture(TimerTask timerTask, long targetTime) {
+        public HashedWheelTimerFuture( TimerTask timerTask, long targetTime ) {
 
             this.targetTime = targetTime;
             this.timerTask = timerTask;
@@ -188,7 +197,7 @@ public class HashedWheelTimer implements Timer {
      */
     private final class HashedWheelBucket extends LinkedList<HashedWheelTimerFuture> {
 
-        public void expireTimerTasks(long currentTick) {
+        public void expireTimerTasks( long currentTick ) {
 
             removeIf(
                     timerFuture -> {
@@ -226,7 +235,7 @@ public class HashedWheelTimer implements Timer {
         }
     }
 
-    private void runTask(HashedWheelTimerFuture timerFuture) {
+    private void runTask( HashedWheelTimerFuture timerFuture ) {
         timerFuture.status = HashedWheelTimerFuture.RUNNING;
         if (taskProcessPool == null) {
             timerFuture.timerTask.run();
@@ -257,7 +266,7 @@ public class HashedWheelTimer implements Timer {
                 // 3. 等待指针跳向下一刻
                 tickTack();
                 // 4. 执行定时任务
-                int currentIndex = (int) (tick & mask);
+                int currentIndex = (int) ( tick & mask );
                 HashedWheelBucket bucket = wheel[currentIndex];
                 bucket.expireTimerTasks(tick);
 
@@ -272,7 +281,7 @@ public class HashedWheelTimer implements Timer {
         private void tickTack() {
 
             // 下一次调度的绝对时间
-            long nextTime = startTime + (tick + 1) * tickDuration;
+            long nextTime = startTime + ( tick + 1 ) * tickDuration;
             long sleepTime = nextTime - System.currentTimeMillis();
 
             if (sleepTime > 0) {
@@ -315,7 +324,7 @@ public class HashedWheelTimer implements Timer {
                 // 总共需要走的指针步数
                 timerTask.totalTicks = offset / tickDuration;
                 // 取余计算 bucket index
-                int index = (int) (timerTask.totalTicks & mask);
+                int index = (int) ( timerTask.totalTicks & mask );
                 HashedWheelBucket bucket = wheel[index];
 
                 // TimerTask 维护 Bucket 引用，用于删除该任务

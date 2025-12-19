@@ -19,9 +19,16 @@ package com.taotao.cloud.doris.udf;
 import com.taotao.boot.common.utils.lang.StringUtils;
 import org.apache.hadoop.hive.ql.exec.UDF;
 
+/**
+ * AESDecrypt
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class AESDecrypt extends UDF {
 
-    public String evaluate(String content, String secret) throws Exception {
+    public String evaluate( String content, String secret ) throws Exception {
         if (StringUtils.isBlank(content)) {
             throw new Exception("content not is null");
         }

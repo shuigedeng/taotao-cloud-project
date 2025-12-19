@@ -20,16 +20,25 @@ import com.taotao.cloud.job.client.producer.InvokeCallback;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * ResponseFuture
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Getter
 public class ResponseFuture {
+
     private final long beginTimestamp = System.currentTimeMillis();
-    @Setter private boolean sendResponseOK;
+    @Setter
+    private boolean sendResponseOK;
 
     private final InvokeCallback invokeCallback;
 
     private final long timeoutMillis = 5000;
 
-    public ResponseFuture(InvokeCallback invokeCallback) {
+    public ResponseFuture( InvokeCallback invokeCallback ) {
         this.invokeCallback = invokeCallback;
     }
 

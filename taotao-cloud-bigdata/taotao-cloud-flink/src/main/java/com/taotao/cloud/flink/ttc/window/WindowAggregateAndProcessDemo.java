@@ -37,7 +37,8 @@ import org.apache.flink.util.Collector;
  * @version 1.0
  */
 public class WindowAggregateAndProcessDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
@@ -72,6 +73,13 @@ public class WindowAggregateAndProcessDemo {
         env.execute();
     }
 
+    /**
+     * MyAgg
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class MyAgg implements AggregateFunction<WaterSensor, Integer, String> {
 
         @Override
@@ -81,31 +89,37 @@ public class WindowAggregateAndProcessDemo {
         }
 
         @Override
-        public Integer add(WaterSensor value, Integer accumulator) {
+        public Integer add( WaterSensor value, Integer accumulator ) {
             System.out.println("调用add方法,value=" + value);
             return accumulator + value.getVc();
         }
 
         @Override
-        public String getResult(Integer accumulator) {
+        public String getResult( Integer accumulator ) {
             System.out.println("调用getResult方法");
             return accumulator.toString();
         }
 
         @Override
-        public Integer merge(Integer a, Integer b) {
+        public Integer merge( Integer a, Integer b ) {
             System.out.println("调用merge方法");
             return null;
         }
     }
 
     // 全窗口函数的输入类型 = 增量聚合函数的输出类型
-    public static class MyProcess
-            extends ProcessWindowFunction<String, String, String, TimeWindow> {
+    /**
+     * MyProcess
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class MyProcess extends ProcessWindowFunction<String, String, String, TimeWindow> {
 
         @Override
         public void process(
-                String s, Context context, Iterable<String> elements, Collector<String> out)
+                String s, Context context, Iterable<String> elements, Collector<String> out )
                 throws Exception {
             long startTs = context.window().getStart();
             long endTs = context.window().getEnd();

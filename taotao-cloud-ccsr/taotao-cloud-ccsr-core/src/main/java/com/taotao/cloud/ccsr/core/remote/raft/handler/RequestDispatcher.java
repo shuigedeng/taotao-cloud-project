@@ -20,15 +20,23 @@ import com.google.protobuf.Message;
 import com.taotao.cloud.ccsr.api.grpc.auto.Response;
 import com.taotao.cloud.ccsr.common.log.Log;
 
+/**
+ * RequestDispatcher
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class RequestDispatcher {
 
     private static RequestDispatcher INSTANCE;
 
     private RequestHandlerFactory handlerFactory;
 
-    private RequestDispatcher() {}
+    private RequestDispatcher() {
+    }
 
-    private RequestDispatcher(RequestHandlerFactory factory) {
+    private RequestDispatcher( RequestHandlerFactory factory ) {
         this.handlerFactory = factory;
     }
 
@@ -39,7 +47,7 @@ public class RequestDispatcher {
         return INSTANCE;
     }
 
-    public Response dispatch(Message request, Class<?> clazz) {
+    public Response dispatch( Message request, Class<?> clazz ) {
 
         Log.print("===请求dispatch开始===> clazz:%s", clazz);
 

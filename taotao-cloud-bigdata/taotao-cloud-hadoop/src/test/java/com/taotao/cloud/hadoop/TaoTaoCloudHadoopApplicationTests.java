@@ -18,8 +18,16 @@ package com.taotao.cloud.hadoop;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * TaoTaoCloudHadoopApplicationTests
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 class TaoTaoCloudHadoopApplicationTests {
 
-	@Test
-    void contextLoads() {}
+    @Test
+    void contextLoads() {
+    }
 }

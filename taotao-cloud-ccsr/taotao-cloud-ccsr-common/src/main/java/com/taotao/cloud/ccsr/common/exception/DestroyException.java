@@ -18,19 +18,27 @@ package com.taotao.cloud.ccsr.common.exception;
 
 import java.io.Serial;
 
+/**
+ * DestroyException
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class DestroyException extends RuntimeException {
 
-    @Serial private static final long serialVersionUID = -6123954866415409614L;
+    @Serial
+    private static final long serialVersionUID = -6123954866415409614L;
 
-    public DestroyException(final Throwable e) {
+    public DestroyException( final Throwable e ) {
         super(e);
     }
 
-    public DestroyException(final String message) {
+    public DestroyException( final String message ) {
         super(message);
     }
 
-    public DestroyException(final String message, final Throwable throwable) {
+    public DestroyException( final String message, final Throwable throwable ) {
         super(message, throwable);
     }
 }

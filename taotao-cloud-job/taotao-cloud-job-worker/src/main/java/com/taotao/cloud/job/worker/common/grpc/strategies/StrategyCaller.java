@@ -18,9 +18,16 @@ package com.taotao.cloud.job.worker.common.grpc.strategies;
 
 import com.taotao.cloud.job.worker.common.constant.TransportTypeEnum;
 
+/**
+ * StrategyCaller
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class StrategyCaller {
 
-    public static Object call(TransportTypeEnum rule, Object params) {
+    public static Object call( TransportTypeEnum rule, Object params ) {
         GrpcStrategy<Object> match = StrategyManager.match(rule);
         return match.execute(params);
     }

@@ -17,6 +17,7 @@
 package com.taotao.cloud.hadoop.atguigu.mapreduce.a9_outputformat;
 
 import java.io.IOException;
+
 import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -26,12 +27,19 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.RecordWriter;
 import org.apache.hadoop.mapreduce.TaskAttemptContext;
 
+/**
+ * LogRecordWriter
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class LogRecordWriter extends RecordWriter<Text, NullWritable> {
 
     private FSDataOutputStream atguiguOut;
     private FSDataOutputStream otherOut;
 
-    public LogRecordWriter(TaskAttemptContext job) {
+    public LogRecordWriter( TaskAttemptContext job ) {
         // 创建两条流
         try {
             FileSystem fs = FileSystem.get(job.getConfiguration());
@@ -45,7 +53,7 @@ public class LogRecordWriter extends RecordWriter<Text, NullWritable> {
     }
 
     @Override
-    public void write(Text key, NullWritable value) throws IOException, InterruptedException {
+    public void write( Text key, NullWritable value ) throws IOException, InterruptedException {
         String log = key.toString();
 
         // 具体写
@@ -57,7 +65,7 @@ public class LogRecordWriter extends RecordWriter<Text, NullWritable> {
     }
 
     @Override
-    public void close(TaskAttemptContext context) throws IOException, InterruptedException {
+    public void close( TaskAttemptContext context ) throws IOException, InterruptedException {
         // 关流
         IOUtils.closeStream(atguiguOut);
         IOUtils.closeStream(otherOut);

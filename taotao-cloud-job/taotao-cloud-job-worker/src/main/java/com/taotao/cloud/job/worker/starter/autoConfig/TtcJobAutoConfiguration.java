@@ -20,8 +20,10 @@ package com.taotao.cloud.job.worker.starter.autoConfig;
 
 import com.taotao.cloud.job.worker.TtcJobSpringWorker;
 import com.taotao.cloud.job.worker.common.TtcJobWorkerConfig;
+
 import java.util.Arrays;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -29,6 +31,13 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * TtcJobAutoConfiguration
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Configuration
 @EnableConfigurationProperties(TtcJobProperties.class)
 @ConditionalOnProperty(
@@ -38,7 +47,8 @@ import org.springframework.context.annotation.Configuration;
         matchIfMissing = true)
 public class TtcJobAutoConfiguration {
 
-    @Autowired TtcJobProperties properties;
+    @Autowired
+    TtcJobProperties properties;
 
     @Bean
     @ConditionalOnMissingBean

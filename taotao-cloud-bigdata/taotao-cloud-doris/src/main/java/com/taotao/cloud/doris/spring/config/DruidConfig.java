@@ -20,15 +20,13 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.alibaba.druid.spring.boot.autoconfigure.properties.DruidStatProperties;
 import com.alibaba.druid.util.Utils;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.sql.DataSource;
+
 import org.apache.doris.demo.spring.datasource.DataSourceType;
 import org.apache.doris.demo.spring.datasource.DynamicDataSource;
 import org.apache.doris.demo.spring.util.SpringUtil;
@@ -39,11 +37,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
+/**
+ * DruidConfig
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Configuration
 public class DruidConfig {
+
     @Bean
     @ConfigurationProperties("spring.datasource.druid.master")
-    public DataSource masterDataSource(DruidProperties druidProperties) {
+    public DataSource masterDataSource( DruidProperties druidProperties ) {
         DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
         return druidProperties.dataSource(dataSource);
     }
@@ -54,14 +60,14 @@ public class DruidConfig {
             prefix = "spring.datasource.druid.slave",
             name = "enabled",
             havingValue = "true")
-    public DataSource slaveDataSource(DruidProperties druidProperties) {
+    public DataSource slaveDataSource( DruidProperties druidProperties ) {
         DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
         return druidProperties.dataSource(dataSource);
     }
 
     @Bean(name = "dynamicDataSource")
     @Primary
-    public DynamicDataSource dataSource(DataSource masterDataSource) {
+    public DynamicDataSource dataSource( DataSource masterDataSource ) {
         Map<Object, Object> targetDataSources = new HashMap<>();
         targetDataSources.put(DataSourceType.MASTER.name(), masterDataSource);
         setDataSource(targetDataSources, DataSourceType.SLAVE.name(), "slaveDataSource");
@@ -70,13 +76,9 @@ public class DruidConfig {
 
     /**
      * Set up the data source
-     *
-     * @param targetDataSources
-     * @param sourceName
-     * @param beanName
      */
     public void setDataSource(
-            Map<Object, Object> targetDataSources, String sourceName, String beanName) {
+            Map<Object, Object> targetDataSources, String sourceName, String beanName ) {
         try {
             DataSource dataSource = SpringUtil.getBean(beanName);
             targetDataSources.put(sourceName, dataSource);
@@ -93,7 +95,7 @@ public class DruidConfig {
             name = "spring.datasource.druid.statViewServlet.enabled",
             havingValue = "true")
     public FilterRegistrationBean removeDruidFilterRegistrationBean(
-            DruidStatProperties properties) {
+            DruidStatProperties properties ) {
         // Get the parameters of the web monitoring page
         DruidStatProperties.StatViewServlet config = properties.getStatViewServlet();
         // Extract the configuration path of common.js
@@ -104,12 +106,13 @@ public class DruidConfig {
         Filter filter =
                 new Filter() {
                     @Override
-                    public void init(javax.servlet.FilterConfig filterConfig)
-                            throws ServletException {}
+                    public void init( FilterConfig filterConfig )
+                            throws ServletException {
+                    }
 
                     @Override
                     public void doFilter(
-                            ServletRequest request, ServletResponse response, FilterChain chain)
+                            ServletRequest request, ServletResponse response, FilterChain chain )
                             throws IOException, ServletException {
                         chain.doFilter(request, response);
                         // Reset the buffer, the response header will not be reset
@@ -124,7 +127,8 @@ public class DruidConfig {
                     }
 
                     @Override
-                    public void destroy() {}
+                    public void destroy() {
+                    }
                 };
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(filter);

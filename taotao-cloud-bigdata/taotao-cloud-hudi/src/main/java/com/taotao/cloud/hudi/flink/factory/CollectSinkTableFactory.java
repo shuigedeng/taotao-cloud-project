@@ -36,13 +36,14 @@ import org.apache.spark.sql.streaming.ListState;
  * so the tests should executed in single thread and the table name should be the same.
  */
 public class CollectSinkTableFactory implements DynamicTableSinkFactory {
+
     public static final String FACTORY_ID = "collect";
 
     // global results to collect and query
     public static final Map<Integer, List<Row>> RESULT = new HashMap<>();
 
     @Override
-    public DynamicTableSink createDynamicTableSink(Context context) {
+    public DynamicTableSink createDynamicTableSink( Context context ) {
         FactoryUtil.TableFactoryHelper helper = FactoryUtil.createTableFactoryHelper(this, context);
         helper.validate();
 
@@ -78,13 +79,13 @@ public class CollectSinkTableFactory implements DynamicTableSinkFactory {
         private final ResolvedSchema schema;
         private final String tableName;
 
-        private CollectTableSink(ResolvedSchema schema, String tableName) {
+        private CollectTableSink( ResolvedSchema schema, String tableName ) {
             this.schema = schema;
             this.tableName = tableName;
         }
 
         @Override
-        public ChangelogMode getChangelogMode(ChangelogMode requestedMode) {
+        public ChangelogMode getChangelogMode( ChangelogMode requestedMode ) {
             return ChangelogMode.newBuilder()
                     .addContainedKind(RowKind.INSERT)
                     .addContainedKind(RowKind.DELETE)
@@ -93,7 +94,7 @@ public class CollectSinkTableFactory implements DynamicTableSinkFactory {
         }
 
         @Override
-        public SinkRuntimeProvider getSinkRuntimeProvider(Context context) {
+        public SinkRuntimeProvider getSinkRuntimeProvider( Context context ) {
             final DataType rowType = schema.toPhysicalRowDataType();
             final RowTypeInfo rowTypeInfo =
                     (RowTypeInfo) TypeConversions.fromDataTypeToLegacyInfo(rowType);
@@ -113,8 +114,14 @@ public class CollectSinkTableFactory implements DynamicTableSinkFactory {
         }
     }
 
-    static class CollectSinkFunction extends RichSinkFunction<RowData>
-            implements CheckpointedFunction {
+    /**
+     * CollectSinkFunction
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    static class CollectSinkFunction extends RichSinkFunction<RowData> implements CheckpointedFunction {
 
         private static final long serialVersionUID = 1L;
         private final DynamicTableSink.DataStructureConverter converter;
@@ -126,13 +133,13 @@ public class CollectSinkTableFactory implements DynamicTableSinkFactory {
         private int taskID;
 
         protected CollectSinkFunction(
-                DynamicTableSink.DataStructureConverter converter, RowTypeInfo rowTypeInfo) {
+                DynamicTableSink.DataStructureConverter converter, RowTypeInfo rowTypeInfo ) {
             this.converter = converter;
             this.rowTypeInfo = rowTypeInfo;
         }
 
         @Override
-        public void invoke(RowData value, Context context) {
+        public void invoke( RowData value, Context context ) {
             Row row = (Row) converter.toExternal(value);
             assert row != null;
             row.setKind(value.getRowKind());
@@ -140,7 +147,7 @@ public class CollectSinkTableFactory implements DynamicTableSinkFactory {
         }
 
         @Override
-        public void initializeState(FunctionInitializationContext context) throws Exception {
+        public void initializeState( FunctionInitializationContext context ) throws Exception {
             this.resultState =
                     context.getOperatorStateStore()
                             .getListState(new ListStateDescriptor<>("sink-results", rowTypeInfo));
@@ -157,7 +164,7 @@ public class CollectSinkTableFactory implements DynamicTableSinkFactory {
         }
 
         @Override
-        public void snapshotState(FunctionSnapshotContext context) throws Exception {
+        public void snapshotState( FunctionSnapshotContext context ) throws Exception {
             resultState.clear();
             resultState.addAll(RESULT.get(taskID));
         }

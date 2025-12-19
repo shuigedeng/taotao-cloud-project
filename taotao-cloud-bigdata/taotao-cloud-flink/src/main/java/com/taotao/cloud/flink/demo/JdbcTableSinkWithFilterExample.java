@@ -24,6 +24,13 @@ import org.apache.flink.table.connector.sink.DynamicTableSink;
 import org.apache.flink.table.legacy.api.TableSchema;
 import org.apache.flink.table.types.DataType;
 
+/**
+ * JdbcTableSinkWithFilterExample
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class JdbcTableSinkWithFilterExample {
 
     public static DynamicTableSink createJdbcTableSink(
@@ -34,7 +41,7 @@ public class JdbcTableSinkWithFilterExample {
             String[] partitionFields,
             String[] staticPartitions,
             String[] computedColumns,
-            String[] watermark) {
+            String[] watermark ) {
         JdbcDialect jdbcDialect =
                 JdbcDialects.get(sinkDialectName)
                         .orElseThrow(

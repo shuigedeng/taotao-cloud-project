@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.core.execution.JobClient;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -44,19 +45,28 @@ import org.apache.hudi.examples.quickstart.utils.QuickstartConfigurations;
 import org.apache.spark.sql.classic.Catalog$;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * HoodieFlinkQuickstart
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public final class HoodieFlinkQuickstart {
+
     private EnvironmentSettings settings = null;
     private TableEnvironment streamTableEnv = null;
 
     private String tableName;
 
-    private HoodieFlinkQuickstart() {}
+    private HoodieFlinkQuickstart() {
+    }
 
     public static HoodieFlinkQuickstart instance() {
         return new HoodieFlinkQuickstart();
     }
 
-    public static void main(String[] args) throws TableNotExistException, InterruptedException {
+    public static void main( String[] args ) throws TableNotExistException, InterruptedException {
         if (args.length < 3) {
             System.err.println(
                     "Usage: HoodieWriteClientExample <tablePath> <tableName> <tableType>");
@@ -137,7 +147,7 @@ public final class HoodieFlinkQuickstart {
         return batchTableEnv;
     }
 
-    public void createHudiTable(String tablePath, String tableName, HoodieTableType tableType) {
+    public void createHudiTable( String tablePath, String tableName, HoodieTableType tableType ) {
         this.tableName = tableName;
 
         // create hudi table
@@ -178,7 +188,7 @@ public final class HoodieFlinkQuickstart {
         return queryData();
     }
 
-    public static void execInsertSql(TableEnvironment tEnv, String insert) {
+    public static void execInsertSql( TableEnvironment tEnv, String insert ) {
         TableResult tableResult = tEnv.executeSql(insert);
         // wait to finish
         try {
@@ -188,13 +198,13 @@ public final class HoodieFlinkQuickstart {
         }
     }
 
-    public static List<Row> execSelectSql(TableEnvironment tEnv, String select, long timeout)
+    public static List<Row> execSelectSql( TableEnvironment tEnv, String select, long timeout )
             throws InterruptedException, TableNotExistException {
         return execSelectSql(tEnv, select, timeout, null);
     }
 
     public static List<Row> execSelectSql(
-            TableEnvironment tEnv, String select, long timeout, String sourceTable)
+            TableEnvironment tEnv, String select, long timeout, String sourceTable )
             throws InterruptedException, TableNotExistException {
         final String sinkDDL;
         if (sourceTable != null) {
@@ -212,7 +222,7 @@ public final class HoodieFlinkQuickstart {
     }
 
     public static List<Row> execSelectSql(
-            TableEnvironment tEnv, String select, String sinkDDL, long timeout)
+            TableEnvironment tEnv, String select, String sinkDDL, long timeout )
             throws InterruptedException {
         tEnv.executeSql("DROP TABLE IF EXISTS sink");
         tEnv.executeSql(sinkDDL);

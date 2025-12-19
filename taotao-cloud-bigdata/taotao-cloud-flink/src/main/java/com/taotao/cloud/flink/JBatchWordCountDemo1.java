@@ -41,7 +41,7 @@ import org.apache.flink.util.Collector;
  */
 public class JBatchWordCountDemo1 {
 
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         Configuration conf = new Configuration();
         conf.set(RestOptions.PORT, 8050);
 
@@ -54,7 +54,7 @@ public class JBatchWordCountDemo1 {
                 dss.map(
                         new RichMapFunction<String, FlinkUser>() {
                             @Override
-                            public FlinkUser map(String value) throws Exception {
+                            public FlinkUser map( String value ) throws Exception {
                                 String[] split = value.split(",");
                                 return new FlinkUser(
                                         Long.valueOf(split[0]),
@@ -78,7 +78,7 @@ public class JBatchWordCountDemo1 {
                 streamOperatorMain.filter(
                         new FilterFunction<FlinkUser>() {
                             @Override
-                            public boolean filter(FlinkUser value) throws Exception {
+                            public boolean filter( FlinkUser value ) throws Exception {
                                 return value.getGender() == 1;
                             }
                         });
@@ -92,9 +92,9 @@ public class JBatchWordCountDemo1 {
                             public void processElement(
                                     FlinkUser flinkUser,
                                     BroadcastProcessFunction<FlinkUser, String, FlinkUser>
-                                                    .ReadOnlyContext
+                                            .ReadOnlyContext
                                             readOnlyContext,
-                                    Collector<FlinkUser> collector)
+                                    Collector<FlinkUser> collector )
                                     throws Exception {
                                 if (broadcastState != null) {
                                     String value = broadcastState.iterator().next().getValue();
@@ -108,7 +108,7 @@ public class JBatchWordCountDemo1 {
                                     String s,
                                     BroadcastProcessFunction<FlinkUser, String, FlinkUser>.Context
                                             context,
-                                    Collector<FlinkUser> collector)
+                                    Collector<FlinkUser> collector )
                                     throws Exception {
                                 broadcastState =
                                         context.getBroadcastState(stringshipMapStateDescriptor);
@@ -120,7 +120,7 @@ public class JBatchWordCountDemo1 {
                 singleOutputStreamOperator.map(
                         new RichMapFunction<FlinkUser, String>() {
                             @Override
-                            public String map(FlinkUser value) throws Exception {
+                            public String map( FlinkUser value ) throws Exception {
                                 return value.getKey();
                             }
                         });
@@ -134,9 +134,9 @@ public class JBatchWordCountDemo1 {
                             public void processElement(
                                     String s,
                                     BroadcastProcessFunction<String, String, Tuple2<String, String>>
-                                                    .ReadOnlyContext
+                                            .ReadOnlyContext
                                             readOnlyContext,
-                                    Collector<Tuple2<String, String>> collector)
+                                    Collector<Tuple2<String, String>> collector )
                                     throws Exception {
                                 if (broadcastState != null) {
                                     String value = broadcastState.iterator().next().getValue();
@@ -153,9 +153,9 @@ public class JBatchWordCountDemo1 {
                             public void processBroadcastElement(
                                     String s,
                                     BroadcastProcessFunction<String, String, Tuple2<String, String>>
-                                                    .Context
+                                            .Context
                                             context,
-                                    Collector<Tuple2<String, String>> collector)
+                                    Collector<Tuple2<String, String>> collector )
                                     throws Exception {
                                 broadcastState =
                                         context.getBroadcastState(stringshipMapStateDescriptor);
@@ -265,6 +265,13 @@ public class JBatchWordCountDemo1 {
         env.execute("JBatchWordCount");
     }
 
+    /**
+     * FlinkUser
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class FlinkUser {
 
         public Long id;
@@ -274,9 +281,10 @@ public class JBatchWordCountDemo1 {
         public String key;
 
         // 一定要提供一个 空参 的构造器(反射的时候要使用)
-        public FlinkUser() {}
+        public FlinkUser() {
+        }
 
-        public FlinkUser(Long id, String name, Long createtime, Integer gender) {
+        public FlinkUser( Long id, String name, Long createtime, Integer gender ) {
             this.id = id;
             this.name = name;
             this.createtime = createtime;
@@ -287,7 +295,7 @@ public class JBatchWordCountDemo1 {
             return id;
         }
 
-        public void setId(Long id) {
+        public void setId( Long id ) {
             this.id = id;
         }
 
@@ -295,7 +303,7 @@ public class JBatchWordCountDemo1 {
             return name;
         }
 
-        public void setName(String name) {
+        public void setName( String name ) {
             this.name = name;
         }
 
@@ -303,7 +311,7 @@ public class JBatchWordCountDemo1 {
             return createtime;
         }
 
-        public void setCreatetime(Long createtime) {
+        public void setCreatetime( Long createtime ) {
             this.createtime = createtime;
         }
 
@@ -311,7 +319,7 @@ public class JBatchWordCountDemo1 {
             return gender;
         }
 
-        public void setGender(Integer gender) {
+        public void setGender( Integer gender ) {
             this.gender = gender;
         }
 
@@ -319,7 +327,7 @@ public class JBatchWordCountDemo1 {
             return key;
         }
 
-        public void setKey(String key) {
+        public void setKey( String key ) {
             this.key = key;
         }
 

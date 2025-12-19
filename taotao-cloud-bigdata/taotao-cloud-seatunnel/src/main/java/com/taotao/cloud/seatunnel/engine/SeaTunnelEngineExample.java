@@ -20,14 +20,22 @@ import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
+
 import org.apache.seatunnel.core.starter.SeaTunnel;
 import org.apache.seatunnel.core.starter.enums.MasterType;
 import org.apache.seatunnel.core.starter.exception.CommandException;
 import org.apache.seatunnel.core.starter.seatunnel.args.ClientCommandArgs;
 
+/**
+ * SeaTunnelEngineExample
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class SeaTunnelEngineExample {
 
-    public static void main(String[] args)
+    public static void main( String[] args )
             throws FileNotFoundException, URISyntaxException, CommandException {
         String configurePath = args.length > 0 ? args[0] : "/examples/fake_to_console.conf";
         String configFile = getTestConfigFile(configurePath);
@@ -41,7 +49,7 @@ public class SeaTunnelEngineExample {
         SeaTunnel.run(clientCommandArgs.buildCommand());
     }
 
-    public static String getTestConfigFile(String configFile)
+    public static String getTestConfigFile( String configFile )
             throws FileNotFoundException, URISyntaxException {
         URL resource = SeaTunnelEngineExample.class.getResource(configFile);
         if (resource == null) {

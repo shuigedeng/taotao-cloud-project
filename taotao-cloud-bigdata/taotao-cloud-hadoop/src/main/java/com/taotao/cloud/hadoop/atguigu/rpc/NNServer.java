@@ -17,13 +17,21 @@
 package com.taotao.cloud.hadoop.atguigu.rpc;
 
 import java.io.IOException;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.ipc.RPC;
 
 // 实现通信接口
+/**
+ * NNServer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NNServer implements RPCProtocol {
 
-    public static void main(String[] args) throws IOException {
+    public static void main( String[] args ) throws IOException {
         // 启动服务
         RPC.Server server =
                 new RPC.Builder(new Configuration())
@@ -38,7 +46,7 @@ public class NNServer implements RPCProtocol {
     }
 
     @Override
-    public void mkdirs(String path) {
+    public void mkdirs( String path ) {
         System.out.println("服务器接收到了客户端请求" + path);
     }
 }

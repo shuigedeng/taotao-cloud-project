@@ -19,14 +19,22 @@ package com.taotao.cloud.ccsr.server.starter.utils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
+/**
+ * BannerUtils
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class BannerUtils {
 
     private final ResourceLoader resourceLoader;
 
-    public BannerUtils(ResourceLoader resourceLoader) {
+    public BannerUtils( ResourceLoader resourceLoader ) {
         this.resourceLoader = resourceLoader;
     }
 
@@ -36,7 +44,7 @@ public class BannerUtils {
         try (BufferedReader reader =
                 new BufferedReader(new InputStreamReader(defaultBannerResource.getInputStream()))) {
             String line;
-            while ((line = reader.readLine()) != null) {
+            while (( line = reader.readLine() ) != null) {
                 System.out.println(line);
             }
         } catch (IOException ignored) {

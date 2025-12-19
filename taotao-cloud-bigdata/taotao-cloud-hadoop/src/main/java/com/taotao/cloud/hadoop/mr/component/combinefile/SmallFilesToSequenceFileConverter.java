@@ -43,27 +43,33 @@ import org.apache.hadoop.util.ToolRunner;
  */
 public class SmallFilesToSequenceFileConverter extends Configured implements Tool {
 
-    static class SequenceFileMapper
-            extends Mapper<NullWritable, BytesWritable, Text, BytesWritable> {
+    /**
+     * SequenceFileMapper
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    static class SequenceFileMapper extends Mapper<NullWritable, BytesWritable, Text, BytesWritable> {
 
         private Text filenameKey;
 
         @Override
-        protected void setup(Context context) {
+        protected void setup( Context context ) {
             InputSplit split = context.getInputSplit();
-            Path path = ((FileSplit) split).getPath();
+            Path path = ( (FileSplit) split ).getPath();
             filenameKey = new Text(path.toString());
         }
 
         @Override
-        protected void map(NullWritable key, BytesWritable value, Context context)
+        protected void map( NullWritable key, BytesWritable value, Context context )
                 throws IOException, InterruptedException {
             context.write(filenameKey, value);
         }
     }
 
     @Override
-    public int run(String[] args) throws Exception {
+    public int run( String[] args ) throws Exception {
         Configuration conf = new Configuration();
         /*System.setProperty("HADOOP_USER_NAME", "hadoop");*/
 
@@ -88,8 +94,8 @@ public class SmallFilesToSequenceFileConverter extends Configured implements Too
         return job.waitForCompletion(true) ? 0 : 1;
     }
 
-    public static void main(String[] args) throws Exception {
-        args = new String[] {"c:/wordcount/smallinput", "c:/wordcount/smallout"};
+    public static void main( String[] args ) throws Exception {
+        args = new String[]{"c:/wordcount/smallinput", "c:/wordcount/smallout"};
         int exitCode = ToolRunner.run(new SmallFilesToSequenceFileConverter(), args);
         System.exit(exitCode);
     }

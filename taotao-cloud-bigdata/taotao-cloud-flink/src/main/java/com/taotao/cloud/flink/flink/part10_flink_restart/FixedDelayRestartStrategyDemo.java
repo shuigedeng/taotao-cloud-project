@@ -22,6 +22,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
+
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
@@ -46,8 +47,16 @@ import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindo
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
+/**
+ * FixedDelayRestartStrategyDemo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class FixedDelayRestartStrategyDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         Configuration conf = new Configuration();
         conf.set(RestOptions.BIND_PORT, "8081");
         final StreamExecutionEnvironment env =
@@ -59,7 +68,7 @@ public class FixedDelayRestartStrategyDemo {
                         3, // 尝试重启的次数
                         org.apache.flink.api.common.time.Time.fromDuration(
                                 Duration.ofSeconds(5)) // 延时
-                        ));
+                ));
 
         env.setStateBackend(new HashMapStateBackend());
         env.getCheckpointConfig().setCheckpointStorage("file:///D:/flink-state");
@@ -94,7 +103,7 @@ public class FixedDelayRestartStrategyDemo {
                             private final Random random = new Random();
 
                             @Override
-                            public void run(SourceContext<String> ctx) throws Exception {
+                            public void run( SourceContext<String> ctx ) throws Exception {
                                 while (running) {
                                     int randomNum = random.nextInt(5) + 1;
                                     long timestamp = System.currentTimeMillis();
@@ -102,21 +111,21 @@ public class FixedDelayRestartStrategyDemo {
                                     // 如果生成的是 key2，则在一个新线程中处理延迟
                                     if (randomNum == 2) {
                                         new Thread(
-                                                        () -> {
-                                                            try {
-                                                                int delay =
-                                                                        random.nextInt(10)
-                                                                                + 1; // 随机数范围从1到10
-                                                                Thread.sleep(
-                                                                        delay * 1000); // 增加1到10秒的延迟
-                                                                ctx.collectWithTimestamp(
-                                                                        "key" + randomNum + "," + 1
-                                                                                + "," + timestamp,
-                                                                        timestamp);
-                                                            } catch (InterruptedException e) {
-                                                                Thread.currentThread().interrupt();
-                                                            }
-                                                        })
+                                                () -> {
+                                                    try {
+                                                        int delay =
+                                                                random.nextInt(10)
+                                                                        + 1; // 随机数范围从1到10
+                                                        Thread.sleep(
+                                                                delay * 1000); // 增加1到10秒的延迟
+                                                        ctx.collectWithTimestamp(
+                                                                "key" + randomNum + "," + 1
+                                                                        + "," + timestamp,
+                                                                timestamp);
+                                                    } catch (InterruptedException e) {
+                                                        Thread.currentThread().interrupt();
+                                                    }
+                                                })
                                                 .start();
                                     } else {
                                         ctx.collectWithTimestamp(
@@ -162,7 +171,7 @@ public class FixedDelayRestartStrategyDemo {
                 text.map(
                                 new MapFunction<String, Tuple3<String, Integer, Long>>() {
                                     @Override
-                                    public Tuple3<String, Integer, Long> map(String value) {
+                                    public Tuple3<String, Integer, Long> map( String value ) {
                                         String[] words = value.split(",");
                                         return new Tuple3<>(
                                                 words[0],
@@ -177,7 +186,7 @@ public class FixedDelayRestartStrategyDemo {
                 tuplesWithTimestamp.assignTimestampsAndWatermarks(
                         WatermarkStrategy.<Tuple3<String, Integer, Long>>forBoundedOutOfOrderness(
                                         Duration.ofSeconds(0))
-                                .withTimestampAssigner((element, recordTimestamp) -> element.f2));
+                                .withTimestampAssigner(( element, recordTimestamp ) -> element.f2));
 
         // 窗口逻辑
         DataStream<Tuple2<String, Integer>> keyedStream =
@@ -193,7 +202,7 @@ public class FixedDelayRestartStrategyDemo {
                                     private ValueState<Integer> countState;
 
                                     @Override
-                                    public void open(OpenContext openContext) {
+                                    public void open( OpenContext openContext ) {
                                         countState =
                                                 getRuntimeContext()
                                                         .getState(
@@ -206,7 +215,7 @@ public class FixedDelayRestartStrategyDemo {
                                             String s,
                                             Context context,
                                             Iterable<Tuple3<String, Integer, Long>> elements,
-                                            Collector<Tuple2<String, Integer>> out)
+                                            Collector<Tuple2<String, Integer>> out )
                                             throws Exception {
                                         int count = 0;
                                         for (Tuple3<String, Integer, Long> element : elements) {

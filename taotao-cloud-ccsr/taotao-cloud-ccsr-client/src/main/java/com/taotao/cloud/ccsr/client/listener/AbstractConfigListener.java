@@ -17,9 +17,17 @@
 package com.taotao.cloud.ccsr.client.listener;
 
 import com.taotao.cloud.ccsr.common.exception.CcsrClientException;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+/**
+ * AbstractConfigListener
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public abstract class AbstractConfigListener<T extends ConfigData> implements ConfigListener<T> {
 
     private final Class<T> type;
@@ -28,7 +36,7 @@ public abstract class AbstractConfigListener<T extends ConfigData> implements Co
     protected AbstractConfigListener() {
         Type superClass = getClass().getGenericSuperclass();
         if (superClass instanceof ParameterizedType) {
-            this.type = (Class<T>) ((ParameterizedType) superClass).getActualTypeArguments()[0];
+            this.type = (Class<T>) ( (ParameterizedType) superClass ).getActualTypeArguments()[0];
         } else {
             throw new CcsrClientException("Unable to determine generic type for listener.");
         }

@@ -17,10 +17,19 @@
 package com.taotao.cloud.hudi.multiversion.commits;
 
 import com.taotao.cloud.hudi.multiversion.MultiVersionDemo;
+
 import java.util.Map;
 
+/**
+ * CommitStrategyMultiVersion
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public abstract class CommitStrategyMultiVersion extends MultiVersionDemo {
-    public CommitStrategyMultiVersion(Map<String, String> properties, String basePath) {
+
+    public CommitStrategyMultiVersion( Map<String, String> properties, String basePath ) {
         super(properties, basePath);
     }
 }

@@ -22,6 +22,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
+
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.typeinfo.Types;
@@ -40,8 +41,16 @@ import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindo
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
+/**
+ * WithIdLenessDemo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class WithIdLenessDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         Configuration conf = new Configuration();
         conf.set(RestOptions.BIND_PORT, "8081");
         final StreamExecutionEnvironment env =
@@ -58,7 +67,7 @@ public class WithIdLenessDemo {
                             private final Random random = new Random();
 
                             @Override
-                            public void run(SourceContext<String> ctx) throws Exception {
+                            public void run( SourceContext<String> ctx ) throws Exception {
                                 while (running) {
                                     int randomNum = random.nextInt(5) + 1;
                                     long timestamp = System.currentTimeMillis();
@@ -103,7 +112,7 @@ public class WithIdLenessDemo {
                 text.map(
                                 new MapFunction<String, Tuple3<String, Integer, Long>>() {
                                     @Override
-                                    public Tuple3<String, Integer, Long> map(String value) {
+                                    public Tuple3<String, Integer, Long> map( String value ) {
                                         String[] words = value.split(",");
                                         return new Tuple3<>(
                                                 words[0],
@@ -120,7 +129,7 @@ public class WithIdLenessDemo {
                                         Duration.ofSeconds(5))
                                 // 处理空闲数据源
                                 .withIdleness(Duration.ofSeconds(15))
-                                .withTimestampAssigner((element, recordTimestamp) -> element.f2));
+                                .withTimestampAssigner(( element, recordTimestamp ) -> element.f2));
 
         // 窗口逻辑
         DataStream<Tuple2<String, Integer>> keyedStream =
@@ -138,7 +147,7 @@ public class WithIdLenessDemo {
                                             String s,
                                             Context context,
                                             Iterable<Tuple3<String, Integer, Long>> elements,
-                                            Collector<Tuple2<String, Integer>> out)
+                                            Collector<Tuple2<String, Integer>> out )
                                             throws Exception {
                                         int count = 0;
                                         for (Tuple3<String, Integer, Long> element : elements) {

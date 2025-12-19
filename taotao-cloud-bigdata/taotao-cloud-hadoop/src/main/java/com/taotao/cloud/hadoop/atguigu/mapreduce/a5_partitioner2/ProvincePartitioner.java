@@ -19,9 +19,17 @@ package com.taotao.cloud.hadoop.atguigu.mapreduce.a5_partitioner2;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Partitioner;
 
+/**
+ * ProvincePartitioner
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ProvincePartitioner extends Partitioner<Text, FlowBean> {
+
     @Override
-    public int getPartition(Text text, FlowBean flowBean, int numPartitions) {
+    public int getPartition( Text text, FlowBean flowBean, int numPartitions ) {
         // text 是手机号
 
         String phone = text.toString();

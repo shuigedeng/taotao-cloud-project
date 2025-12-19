@@ -22,10 +22,17 @@ import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
+/**
+ * EnableCcsrCondition
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class EnableCcsrCondition implements Condition {
 
     @Override
-    public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+    public boolean matches( ConditionContext context, AnnotatedTypeMetadata metadata ) {
         try {
             for (String beanName : context.getRegistry().getBeanDefinitionNames()) {
                 if (context.getBeanFactory() == null) {

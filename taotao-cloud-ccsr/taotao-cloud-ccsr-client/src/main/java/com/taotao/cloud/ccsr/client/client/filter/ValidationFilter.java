@@ -25,14 +25,21 @@ import com.taotao.cloud.ccsr.client.option.RequestOption;
 import com.taotao.cloud.ccsr.client.request.Payload;
 import com.taotao.cloud.ccsr.common.enums.ResponseCode;
 
+/**
+ * ValidationFilter
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ValidationFilter<OPTION extends RequestOption> extends AbstractFilter<OPTION> {
 
-    public ValidationFilter(AbstractClient<OPTION> client) {
+    public ValidationFilter( AbstractClient<OPTION> client ) {
         super(client);
     }
 
     @Override
-    protected Response doPreFilter(CcsrContext context, OPTION option, Payload request) {
+    protected Response doPreFilter( CcsrContext context, OPTION option, Payload request ) {
         try {
             validate(request);
         } catch (Exception e) {
@@ -43,7 +50,7 @@ public class ValidationFilter<OPTION extends RequestOption> extends AbstractFilt
 
     @Override
     protected Response doPostFilter(
-            CcsrContext context, OPTION option, Payload request, Response response) {
+            CcsrContext context, OPTION option, Payload request, Response response ) {
         try {
             validate(response);
         } catch (Exception e) {
@@ -52,7 +59,7 @@ public class ValidationFilter<OPTION extends RequestOption> extends AbstractFilt
         return response;
     }
 
-    private void validate(Payload request) {
+    private void validate( Payload request ) {
         if (request == null) {
             throw new IllegalArgumentException("request is null");
         }
@@ -85,7 +92,7 @@ public class ValidationFilter<OPTION extends RequestOption> extends AbstractFilt
         }
     }
 
-    private void validate(Response response) {
+    private void validate( Response response ) {
         if (response == null) {
             throw new IllegalArgumentException("response is null");
         }

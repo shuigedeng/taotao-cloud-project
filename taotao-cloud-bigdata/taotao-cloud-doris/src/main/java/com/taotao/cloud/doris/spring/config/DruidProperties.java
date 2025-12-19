@@ -20,8 +20,16 @@ import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * DruidProperties
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Configuration
 public class DruidProperties {
+
     @Value("${spring.datasource.druid.initialSize}")
     private int initialSize;
 
@@ -55,7 +63,7 @@ public class DruidProperties {
     @Value("${spring.datasource.druid.testOnReturn}")
     private boolean testOnReturn;
 
-    public DruidDataSource dataSource(DruidDataSource datasource) {
+    public DruidDataSource dataSource( DruidDataSource datasource ) {
         /** Configure initial size, minimum, maximum */
         datasource.setInitialSize(initialSize);
         datasource.setMaxActive(maxActive);

@@ -17,14 +17,23 @@
 package com.taotao.cloud.doris.spring.config;
 
 import java.util.TimeZone;
+
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.jackson.Jackson2JsonMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * ApplicationConfig
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Configuration
 @MapperScan("org.apache.doris.demo.spring.**.mapper")
 public class ApplicationConfig {
+
     /**
      * Time zone configuration
      */

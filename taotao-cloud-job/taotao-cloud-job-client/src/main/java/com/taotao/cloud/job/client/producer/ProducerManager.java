@@ -24,25 +24,36 @@ import com.taotao.cloud.remote.api.MqGrpc;
 import com.taotao.cloud.remote.api.RegisterToNameServerGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * ProducerManager
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class ProducerManager {
+
     private List<String> serverAddressList;
     private Long index = 0L;
     private final List<MqGrpc.MqFutureStub> stubs = new ArrayList<>();
     private List<ResponseFuture> responseList = new LinkedList<>();
-    @Getter private ThreadPoolExecutor threadPoolExecutor;
+    @Getter
+    private ThreadPoolExecutor threadPoolExecutor;
     private ThreadPoolExecutor invokeCallbackExecute;
     private final Timer timer = new Timer("ClientHouseKeepingService", true);
 
-    public ProducerManager(List<String> nameServerAddressList) {
+    public ProducerManager( List<String> nameServerAddressList ) {
         // 初始化stub
         for (String server : nameServerAddressList) {
             ManagedChannel channel =
@@ -75,7 +86,7 @@ public class ProducerManager {
                         availableProcessors * 10,
                         120L,
                         TimeUnit.SECONDS,
-                        new ArrayBlockingQueue<>((1024 * 2), true),
+                        new ArrayBlockingQueue<>(( 1024 * 2 ), true),
                         producerExecuteFactory,
                         new ThreadPoolExecutor.AbortPolicy());
         ThreadFactory invokeCallbackExecuteFactory =
@@ -86,7 +97,7 @@ public class ProducerManager {
                         availableProcessors * 10,
                         120L,
                         TimeUnit.SECONDS,
-                        new ArrayBlockingQueue<>((1024 * 2), true),
+                        new ArrayBlockingQueue<>(( 1024 * 2 ), true),
                         invokeCallbackExecuteFactory,
                         new ThreadPoolExecutor.AbortPolicy());
 
@@ -107,13 +118,12 @@ public class ProducerManager {
     }
 
     /**
-     * 可能会在下一次扫描的时候才被检测到过期
-     * 误差只有1秒，这样设置是因为执行时间可能超过 1 秒，导致新一轮的检测稍微延迟
+     * 可能会在下一次扫描的时候才被检测到过期 误差只有1秒，这样设置是因为执行时间可能超过 1 秒，导致新一轮的检测稍微延迟
      */
     private void scanResponseTable() {
         final List<ResponseFuture> rfList = new LinkedList<ResponseFuture>();
         for (ResponseFuture rep : responseList) {
-            if ((rep.getBeginTimestamp() + rep.getTimeoutMillis() + 1000)
+            if (( rep.getBeginTimestamp() + rep.getTimeoutMillis() + 1000 )
                     <= System.currentTimeMillis()) {
                 responseList.remove(rep);
                 rfList.add(rep);
@@ -129,7 +139,7 @@ public class ProducerManager {
         }
     }
 
-    private void executeInvokeCallback(ResponseFuture rf) {
+    private void executeInvokeCallback( ResponseFuture rf ) {
         invokeCallbackExecute.execute(
                 new Runnable() {
                     @Override
@@ -157,14 +167,14 @@ public class ProducerManager {
     }
 
     public MqGrpc.MqFutureStub getStub() {
-        return stubs.get((int) (index++ % stubs.size()));
+        return stubs.get((int) ( index++ % stubs.size() ));
     }
 
     public int getRetryTime() {
         return stubs.size();
     }
 
-    public void addResponseFuture(ResponseFuture responseFuture) {
+    public void addResponseFuture( ResponseFuture responseFuture ) {
         responseList.add(responseFuture);
     }
 }

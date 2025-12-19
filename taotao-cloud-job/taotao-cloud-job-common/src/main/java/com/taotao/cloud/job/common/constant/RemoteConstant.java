@@ -16,6 +16,13 @@
 
 package com.taotao.cloud.job.common.constant;
 
+/**
+ * RemoteConstant
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class RemoteConstant {
 
     public static final int DEFAULT_WORKER_GRPC_PORT = 9082;

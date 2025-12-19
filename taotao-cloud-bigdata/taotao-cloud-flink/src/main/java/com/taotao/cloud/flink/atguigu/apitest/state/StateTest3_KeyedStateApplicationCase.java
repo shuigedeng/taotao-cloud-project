@@ -27,8 +27,16 @@ import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.util.Collector;
 
+/**
+ * StateTest3_KeyedStateApplicationCase
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class StateTest3_KeyedStateApplicationCase {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
@@ -56,10 +64,11 @@ public class StateTest3_KeyedStateApplicationCase {
     // 实现自定义函数类
     public static class TempChangeWarning
             extends RichFlatMapFunction<SensorReading, Tuple3<String, Double, Double>> {
+
         // 私有属性，温度跳变阈值
         private Double threshold;
 
-        public TempChangeWarning(Double threshold) {
+        public TempChangeWarning( Double threshold ) {
             this.threshold = threshold;
         }
 
@@ -67,14 +76,14 @@ public class StateTest3_KeyedStateApplicationCase {
         private ValueState<Double> lastTempState;
 
         @Override
-        public void open(OpenContext openContext) throws Exception {
+        public void open( OpenContext openContext ) throws Exception {
             lastTempState =
                     getRuntimeContext()
                             .getState(new ValueStateDescriptor<Double>("last-temp", Double.class));
         }
 
         @Override
-        public void flatMap(SensorReading value, Collector<Tuple3<String, Double, Double>> out)
+        public void flatMap( SensorReading value, Collector<Tuple3<String, Double, Double>> out )
                 throws Exception {
             // 获取状态
             Double lastTemp = lastTempState.value();

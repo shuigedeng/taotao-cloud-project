@@ -17,6 +17,7 @@
 package com.taotao.cloud.hadoop.atguigu.mapreduce.a4_partitioner;
 
 import java.io.IOException;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -25,9 +26,16 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
+/**
+ * WordCountDriver
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class WordCountDriver {
 
-    public static void main(String[] args)
+    public static void main( String[] args )
             throws IOException, ClassNotFoundException, InterruptedException {
 
         // 1 获取job

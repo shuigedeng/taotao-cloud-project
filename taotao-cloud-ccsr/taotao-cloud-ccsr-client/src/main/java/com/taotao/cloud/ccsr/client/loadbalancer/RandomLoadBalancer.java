@@ -18,15 +18,24 @@ package com.taotao.cloud.ccsr.client.loadbalancer;
 
 import com.taotao.cloud.ccsr.client.dto.ServerAddress;
 import com.taotao.cloud.ccsr.spi.Join;
+
 import java.util.List;
 import java.util.Random;
 
+/**
+ * RandomLoadBalancer
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Join
 public class RandomLoadBalancer implements LoadBalancer {
+
     private final Random random = new Random();
 
     @Override
-    public ServerAddress select(List<ServerAddress> servers) {
+    public ServerAddress select( List<ServerAddress> servers ) {
         if (servers.isEmpty()) {
             throw new IllegalStateException("No available servers");
         }

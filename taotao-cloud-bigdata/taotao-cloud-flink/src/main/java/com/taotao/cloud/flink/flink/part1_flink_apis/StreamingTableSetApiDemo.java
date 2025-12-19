@@ -23,13 +23,22 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.util.Collector;
 
+/**
+ * StreamingTableSetApiDemo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class StreamingTableSetApiDemo {
+
     /**
      * 主函数，执行WordCount示例程序。
+     *
      * @param args 命令行参数，通过CLI库解析为程序参数。
      * @throws Exception 如果程序执行过程中遇到异常。
      */
-    public static void main(String[] args) throws Exception {
+    public static void main( String[] args ) throws Exception {
         // 获取流执行环境。
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         // 从内存中读取单词数据流。
@@ -54,14 +63,13 @@ public class StreamingTableSetApiDemo {
             implements FlatMapFunction<String, Tuple2<String, Integer>> {
 
         /**
-         * 对输入的字符串进行分词，并为每个词生成一个计数为1的元组。
-         * 这是flatMap函数的实现，用于MapReduce模型中的映射阶段。
+         * 对输入的字符串进行分词，并为每个词生成一个计数为1的元组。 这是flatMap函数的实现，用于MapReduce模型中的映射阶段。
          *
          * @param value 输入的字符串，通常是从上游操作符接收的数据。
          * @param out Collector对象，用于收集和输出处理后的数据。
          */
         @Override
-        public void flatMap(String value, Collector<Tuple2<String, Integer>> out) {
+        public void flatMap( String value, Collector<Tuple2<String, Integer>> out ) {
             // 将输入字符串转换为小写并按非单词字符分割，以进行分词
             String[] tokens = value.toLowerCase().split("\\W+");
 

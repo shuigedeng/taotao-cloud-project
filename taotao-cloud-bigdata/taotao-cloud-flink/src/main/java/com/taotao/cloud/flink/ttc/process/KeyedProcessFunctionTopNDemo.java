@@ -39,7 +39,8 @@ import org.apache.flink.util.Collector;
  * @version 1.0
  */
 public class KeyedProcessFunctionTopNDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
@@ -50,7 +51,7 @@ public class KeyedProcessFunctionTopNDemo {
                                 WatermarkStrategy.<WaterSensor>forBoundedOutOfOrderness(
                                                 Duration.ofSeconds(3))
                                         .withTimestampAssigner(
-                                                (element, ts) -> element.getTs() * 1000L));
+                                                ( element, ts ) -> element.getTs() * 1000L));
 
         // 最近10秒= 窗口长度， 每5秒输出 = 滑动步长
         /**
@@ -79,6 +80,13 @@ public class KeyedProcessFunctionTopNDemo {
         env.execute();
     }
 
+    /**
+     * VcCountAgg
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class VcCountAgg implements AggregateFunction<WaterSensor, Integer, Integer> {
 
         @Override
@@ -87,38 +95,35 @@ public class KeyedProcessFunctionTopNDemo {
         }
 
         @Override
-        public Integer add(WaterSensor value, Integer accumulator) {
+        public Integer add( WaterSensor value, Integer accumulator ) {
             return accumulator + 1;
         }
 
         @Override
-        public Integer getResult(Integer accumulator) {
+        public Integer getResult( Integer accumulator ) {
             return accumulator;
         }
 
         @Override
-        public Integer merge(Integer a, Integer b) {
+        public Integer merge( Integer a, Integer b ) {
             return null;
         }
     }
 
     /**
-     * 泛型如下：
-     * 第一个：输入类型 = 增量函数的输出  count值，Integer
-     * 第二个：输出类型 = Tuple3(vc，count，windowEnd) ,带上 窗口结束时间 的标签
-     * 第三个：key类型 ， vc，Integer
-     * 第四个：窗口类型
+     * 泛型如下： 第一个：输入类型 = 增量函数的输出  count值，Integer 第二个：输出类型 = Tuple3(vc，count，windowEnd) ,带上 窗口结束时间 的标签 第三个：key类型 ，
+     * vc，Integer 第四个：窗口类型
      */
     public static class WindowResult
             extends ProcessWindowFunction<
-                    Integer, Tuple3<Integer, Integer, Long>, Integer, TimeWindow> {
+            Integer, Tuple3<Integer, Integer, Long>, Integer, TimeWindow> {
 
         @Override
         public void process(
                 Integer key,
                 Context context,
                 Iterable<Integer> elements,
-                Collector<Tuple3<Integer, Integer, Long>> out)
+                Collector<Tuple3<Integer, Integer, Long>> out )
                 throws Exception {
             // 迭代器里面只有一条数据，next一次即可
             Integer count = elements.iterator().next();
@@ -127,21 +132,28 @@ public class KeyedProcessFunctionTopNDemo {
         }
     }
 
-    public static class TopN
-            extends KeyedProcessFunction<Long, Tuple3<Integer, Integer, Long>, String> {
+    /**
+     * TopN
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
+    public static class TopN extends KeyedProcessFunction<Long, Tuple3<Integer, Integer, Long>, String> {
+
         // 存不同窗口的 统计结果，key=windowEnd，value=list数据
         private Map<Long, List<Tuple3<Integer, Integer, Long>>> dataListMap;
         // 要取的Top数量
         private int threshold;
 
-        public TopN(int threshold) {
+        public TopN( int threshold ) {
             this.threshold = threshold;
             dataListMap = new HashMap<>();
         }
 
         @Override
         public void processElement(
-                Tuple3<Integer, Integer, Long> value, Context ctx, Collector<String> out)
+                Tuple3<Integer, Integer, Long> value, Context ctx, Collector<String> out )
                 throws Exception {
             // 进入这个方法，只是一条数据，要排序，得到齐才行 ===》 存起来，不同窗口分开存
             // 1. 存到HashMap中
@@ -163,7 +175,7 @@ public class KeyedProcessFunctionTopNDemo {
         }
 
         @Override
-        public void onTimer(long timestamp, OnTimerContext ctx, Collector<String> out)
+        public void onTimer( long timestamp, OnTimerContext ctx, Collector<String> out )
                 throws Exception {
             super.onTimer(timestamp, ctx, out);
             // 定时器触发，同一个窗口范围的计算结果攒齐了，开始 排序、取TopN
@@ -175,7 +187,7 @@ public class KeyedProcessFunctionTopNDemo {
                         @Override
                         public int compare(
                                 Tuple3<Integer, Integer, Long> o1,
-                                Tuple3<Integer, Integer, Long> o2) {
+                                Tuple3<Integer, Integer, Long> o2 ) {
                             // 降序， 后 减 前
                             return o2.f1 - o1.f1;
                         }
@@ -188,7 +200,7 @@ public class KeyedProcessFunctionTopNDemo {
             // 遍历 排序后的 List，取出前 threshold 个， 考虑可能List不够2个的情况  ==》 List中元素的个数 和 2 取最小值
             for (int i = 0; i < Math.min(threshold, dataList.size()); i++) {
                 Tuple3<Integer, Integer, Long> vcCount = dataList.get(i);
-                outStr.append("Top" + (i + 1) + "\n");
+                outStr.append("Top" + ( i + 1 ) + "\n");
                 outStr.append("vc=" + vcCount.f0 + "\n");
                 outStr.append("count=" + vcCount.f1 + "\n");
                 outStr.append("窗口结束时间=" + vcCount.f2 + "\n");

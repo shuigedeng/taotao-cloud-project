@@ -21,12 +21,20 @@ import com.taotao.cloud.ccsr.api.grpc.auto.MetadataDeleteRequest;
 import com.taotao.cloud.ccsr.api.grpc.auto.MetadataReadRequest;
 import com.taotao.cloud.ccsr.api.grpc.auto.MetadataWriteRequest;
 import com.taotao.cloud.ccsr.core.serializer.Serializer;
+
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * ProtoMessageUtils
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class ProtoMessageUtils {
 
-    public static Message parse(Serializer serializer, byte[] bytes) {
+    public static Message parse( Serializer serializer, byte[] bytes ) {
         List<Class<? extends Message>> messages =
                 List.of(
                         MetadataReadRequest.class,

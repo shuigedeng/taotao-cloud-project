@@ -19,13 +19,20 @@ package com.taotao.cloud.ccsr.core.executor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * NameThreadFactory
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class NameThreadFactory implements ThreadFactory {
 
     private final AtomicInteger id = new AtomicInteger(0);
 
     private final String name;
 
-    public NameThreadFactory(String name) {
+    public NameThreadFactory( String name ) {
         if (!name.endsWith(".")) {
             name += ".";
         }
@@ -33,7 +40,7 @@ public class NameThreadFactory implements ThreadFactory {
     }
 
     @Override
-    public Thread newThread(Runnable r) {
+    public Thread newThread( Runnable r ) {
         String threadName = name + id.getAndIncrement();
         Thread thread = new Thread(r, threadName);
         thread.setDaemon(true);

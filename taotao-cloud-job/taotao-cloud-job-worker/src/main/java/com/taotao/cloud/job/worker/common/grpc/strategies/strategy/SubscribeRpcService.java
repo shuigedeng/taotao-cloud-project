@@ -28,9 +28,18 @@ import com.taotao.cloud.remote.api.RegisterToNameServerGrpc;
 import com.taotao.cloud.remote.api.ServerDiscoverGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+
 import java.util.HashMap;
+
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * SubscribeRpcService
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 public class SubscribeRpcService implements GrpcStrategy<TransportTypeEnum> {
 
@@ -57,7 +66,7 @@ public class SubscribeRpcService implements GrpcStrategy<TransportTypeEnum> {
     }
 
     @Override
-    public Object execute(Object params) {
+    public Object execute( Object params ) {
         RegisterCausa.WorkerSubscribeReq workerSubscribeReq =
                 (RegisterCausa.WorkerSubscribeReq) params;
         // add serverIp and scheduleTime to req

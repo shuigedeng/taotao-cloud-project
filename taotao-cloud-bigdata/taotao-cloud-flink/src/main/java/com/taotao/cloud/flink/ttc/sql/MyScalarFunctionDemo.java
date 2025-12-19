@@ -35,7 +35,8 @@ import org.apache.flink.table.functions.ScalarFunction;
  * @version 1.0
  */
 public class MyScalarFunctionDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
         DataStreamSource<WaterSensor> sensorDS =
@@ -65,10 +66,17 @@ public class MyScalarFunctionDemo {
     }
 
     // TODO 1.定义 自定义函数的实现类
+    /**
+     * HashFunction
+     *
+     * @author shuigedeng
+     * @version 2026.01
+     * @since 2025-12-19 09:30:45
+     */
     public static class HashFunction extends ScalarFunction {
 
         // 接受任意类型的输入，返回 INT型输出
-        public int eval(@DataTypeHint(inputGroup = InputGroup.ANY) Object o) {
+        public int eval( @DataTypeHint(inputGroup = InputGroup.ANY) Object o ) {
             return o.hashCode();
         }
     }

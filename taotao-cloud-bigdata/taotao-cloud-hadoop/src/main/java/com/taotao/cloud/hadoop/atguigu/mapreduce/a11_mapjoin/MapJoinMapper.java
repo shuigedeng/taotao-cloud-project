@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.HashMap;
+
 import com.taotao.boot.common.utils.lang.StringUtils;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FileSystem;
@@ -31,12 +32,20 @@ import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
+/**
+ * MapJoinMapper
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class MapJoinMapper extends Mapper<LongWritable, Text, Text, NullWritable> {
+
     private HashMap<String, String> pdMap = new HashMap<>();
     private Text outK = new Text();
 
     @Override
-    protected void setup(Context context) throws IOException, InterruptedException {
+    protected void setup( Context context ) throws IOException, InterruptedException {
         // 获取缓存的文件，并把文件内容封装到集合 pd.txt
         URI[] cacheFiles = context.getCacheFiles();
 
@@ -60,7 +69,7 @@ public class MapJoinMapper extends Mapper<LongWritable, Text, Text, NullWritable
     }
 
     @Override
-    protected void map(LongWritable key, Text value, Context context)
+    protected void map( LongWritable key, Text value, Context context )
             throws IOException, InterruptedException {
 
         // 处理 order.txt

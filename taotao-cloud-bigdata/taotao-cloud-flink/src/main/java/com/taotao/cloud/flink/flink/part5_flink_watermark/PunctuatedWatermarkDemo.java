@@ -21,6 +21,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
+
 import org.apache.flink.api.common.eventtime.TimestampAssigner;
 import org.apache.flink.api.common.eventtime.TimestampAssignerSupplier;
 import org.apache.flink.api.common.eventtime.Watermark;
@@ -44,8 +45,16 @@ import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindo
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
+/**
+ * PunctuatedWatermarkDemo
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class PunctuatedWatermarkDemo {
-    public static void main(String[] args) throws Exception {
+
+    public static void main( String[] args ) throws Exception {
         Configuration conf = new Configuration();
         conf.set(RestOptions.BIND_PORT, "8081");
         final StreamExecutionEnvironment env =
@@ -62,7 +71,7 @@ public class PunctuatedWatermarkDemo {
                             private final Random random = new Random();
 
                             @Override
-                            public void run(SourceContext<String> ctx) throws Exception {
+                            public void run( SourceContext<String> ctx ) throws Exception {
                                 while (running) {
                                     int randomNum = random.nextInt(5) + 1;
                                     long timestamp = System.currentTimeMillis();
@@ -101,7 +110,7 @@ public class PunctuatedWatermarkDemo {
                 text.map(
                                 new MapFunction<String, Tuple3<String, Integer, Long>>() {
                                     @Override
-                                    public Tuple3<String, Integer, Long> map(String value) {
+                                    public Tuple3<String, Integer, Long> map( String value ) {
                                         String[] words = value.split(",");
                                         return new Tuple3<>(
                                                 words[0],
@@ -117,15 +126,15 @@ public class PunctuatedWatermarkDemo {
                         new WatermarkStrategy<Tuple3<String, Integer, Long>>() {
                             @Override
                             public WatermarkGenerator<Tuple3<String, Integer, Long>>
-                                    createWatermarkGenerator(
-                                            WatermarkGeneratorSupplier.Context context) {
+                            createWatermarkGenerator(
+                                    WatermarkGeneratorSupplier.Context context ) {
                                 return new PunctuatedWatermarkGenerator();
                             }
 
                             @Override
                             public TimestampAssigner<Tuple3<String, Integer, Long>>
-                                    createTimestampAssigner(
-                                            TimestampAssignerSupplier.Context context) {
+                            createTimestampAssigner(
+                                    TimestampAssignerSupplier.Context context ) {
                                 return new PunctuatedWatermarkGenerator();
                             }
                         });
@@ -146,7 +155,7 @@ public class PunctuatedWatermarkDemo {
                                             String key,
                                             Context context,
                                             Iterable<Tuple3<String, Integer, Long>> elements,
-                                            Collector<Tuple2<String, Integer>> out)
+                                            Collector<Tuple2<String, Integer>> out )
                                             throws Exception {
                                         int count = 0;
                                         for (Tuple3<String, Integer, Long> element : elements) {
@@ -201,11 +210,12 @@ public class PunctuatedWatermarkDemo {
 
     private static class PunctuatedWatermarkGenerator
             implements WatermarkGenerator<Tuple3<String, Integer, Long>>,
-                    TimestampAssigner<Tuple3<String, Integer, Long>> {
+            TimestampAssigner<Tuple3<String, Integer, Long>> {
+
         private long maxTimestamp = Long.MIN_VALUE;
 
         @Override
-        public long extractTimestamp(Tuple3<String, Integer, Long> element, long recordTimestamp) {
+        public long extractTimestamp( Tuple3<String, Integer, Long> element, long recordTimestamp ) {
             // 提前事件时间要先判断时间戳字段是否为-1
             if (element.f2 != -1) {
                 return element.f2;
@@ -217,7 +227,7 @@ public class PunctuatedWatermarkDemo {
 
         @Override
         public void onEvent(
-                Tuple3<String, Integer, Long> event, long eventTimestamp, WatermarkOutput output) {
+                Tuple3<String, Integer, Long> event, long eventTimestamp, WatermarkOutput output ) {
             maxTimestamp = Math.max(maxTimestamp, eventTimestamp);
             if (event.f0.equals("key2")) {
                 System.out.println("Event: " + event.f0 + "," + event.f1 + "," + event.f2);
@@ -232,7 +242,7 @@ public class PunctuatedWatermarkDemo {
         }
 
         @Override
-        public void onPeriodicEmit(WatermarkOutput output) {
+        public void onPeriodicEmit( WatermarkOutput output ) {
             // nothing
         }
     }

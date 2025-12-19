@@ -17,15 +17,24 @@
 package com.taotao.cloud.flink.atguigu.apitest.beans;
 
 // 传感器温度读数的数据类型
+/**
+ * SensorReading
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class SensorReading {
+
     // 属性：id，时间戳，温度值
     private String id;
     private Long timestamp;
     private Double temperature;
 
-    public SensorReading() {}
+    public SensorReading() {
+    }
 
-    public SensorReading(String id, Long timestamp, Double temperature) {
+    public SensorReading( String id, Long timestamp, Double temperature ) {
         this.id = id;
         this.timestamp = timestamp;
         this.temperature = temperature;
@@ -35,7 +44,7 @@ public class SensorReading {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId( String id ) {
         this.id = id;
     }
 
@@ -43,7 +52,7 @@ public class SensorReading {
         return timestamp;
     }
 
-    public void setTimestamp(Long timestamp) {
+    public void setTimestamp( Long timestamp ) {
         this.timestamp = timestamp;
     }
 
@@ -51,7 +60,7 @@ public class SensorReading {
         return temperature;
     }
 
-    public void setTemperature(Double temperature) {
+    public void setTemperature( Double temperature ) {
         this.temperature = temperature;
     }
 
