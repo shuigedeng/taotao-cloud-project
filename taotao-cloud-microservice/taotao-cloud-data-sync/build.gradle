@@ -26,9 +26,9 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-batch'
     implementation 'org.springframework.boot:spring-boot-starter-batch-jdbc'
-    implementation 'org.springframework.batch:spring-batch-infrastructure:6.0.0'
-    implementation 'org.springframework.batch:spring-batch-integration:6.0.0'
-    testImplementation 'org.springframework.batch:spring-batch-test:6.0.0'
+    implementation 'org.springframework.batch:spring-batch-infrastructure:6.0.1'
+    implementation 'org.springframework.batch:spring-batch-integration:6.0.1'
+    testImplementation 'org.springframework.batch:spring-batch-test:6.0.1'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"
