@@ -99,7 +99,7 @@ dependencies {
     //implementation 'com.ververica:flink-cdc-pipeline-connector-values:3.0.1'
 
     implementation 'com.mysql:mysql-connector-j:9.5.0'
-    implementation 'redis.clients:jedis:7.1.0'
+    implementation 'redis.clients:jedis:7.2.0'
     implementation 'org.apache.hive:hive-exec:4.2.0'
 
     implementation 'org.apache.hadoop:hadoop-common:3.4.2'
@@ -109,26 +109,27 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.flink/flink-shaded-hadoop-3-uber
     //implementation group: 'org.apache.flink', name: 'flink-shaded-hadoop-3-uber', version: '3.1.1.7.2.9.0-173-9.0'
 
-    //implementation("org.apache.hudi:hudi-common:1.1.0")
-    //implementation("org.apache.hudi:hudi-client:1.1.0")
-    //implementation("org.apache.hudi:hudi-flink-client:1.1.0")
-    //implementation("org.apache.hudi:hudi-flink1.20-bundle:1.1.0")
-    //implementation("org.apache.hudi:hudi-flink1.20.x:1.1.0")
-    //implementation("org.apache.hudi:hudi-cli-bundle_2.13:1.1.0")
-    //implementation("org.apache.hudi:hudi-gcp-bundle:1.1.0")
-    //implementation("org.apache.hudi:hudi-datahub-sync-bundle:1.1.0")
-    //implementation("org.apache.hudi:hudi-hadoop-mr-bundle:1.1.0")
-    //implementation("org.apache.hudi:hudi-hive-sync-bundle:1.1.0")
-    //implementation("org.apache.hudi:hudi-kafka-connect-bundle:1.1.0")
-    //implementation("org.apache.hudi:hudi-metaserver-server-bundle:1.1.0")
-    //implementation("org.apache.hudi:hudi-metaserver-client:1.1.0")
-    //implementation("org.apache.hudi:hudi-presto-bundle:1.1.0")
-    //implementation("org.apache.hudi:hudi-trino-bundle:1.1.0")
-    //implementation("org.apache.hudi:hudi-timeline-server-bundle:1.1.0")
-    //implementation("org.apache.hudi:hudi-utilities-bundle_2.13:1.1.0")
-    //implementation("org.apache.hudi:hudi-utilities-slim-bundle_2.13:1.1.0")
-    ////implementation("org.apache.hudi:hudi-utilities_2.13:1.1.0")
-    //implementation("org.apache.hudi:hudi-sync:1.1.0")
+    //implementation("org.apache.hudi:hudi-common:1.1.1")
+    //implementation("org.apache.hudi:hudi-client:1.1.1")
+    //implementation("org.apache.hudi:hudi-flink-client:1.1.1")
+    //implementation("org.apache.hudi:hudi-flink1.20-bundle:1.1.1")
+    //implementation("org.apache.hudi:hudi-flink1.20.x:1.1.1")
+    //implementation("org.apache.hudi:hudi-spark4.0.x_2.13:1.1.1")
+    //implementation("org.apache.hudi:hudi-cli-bundle_2.13:1.1.1")
+    //implementation("org.apache.hudi:hudi-gcp-bundle:1.1.1")
+    //implementation("org.apache.hudi:hudi-datahub-sync-bundle:1.1.1")
+    //implementation("org.apache.hudi:hudi-hadoop-mr-bundle:1.1.1")
+    //implementation("org.apache.hudi:hudi-hive-sync-bundle:1.1.1")
+    //implementation("org.apache.hudi:hudi-kafka-connect-bundle:1.1.1")
+    //implementation("org.apache.hudi:hudi-metaserver-server-bundle:1.1.1")
+    //implementation("org.apache.hudi:hudi-metaserver-client:1.1.1")
+    //implementation("org.apache.hudi:hudi-presto-bundle:1.1.1")
+    //implementation("org.apache.hudi:hudi-trino-bundle:1.1.1")
+    //implementation("org.apache.hudi:hudi-timeline-server-bundle:1.1.1")
+    //implementation("org.apache.hudi:hudi-utilities-bundle_2.13:1.1.1")
+    //implementation("org.apache.hudi:hudi-utilities-slim-bundle_2.13:1.1.1")
+    ////implementation("org.apache.hudi:hudi-utilities_2.13:1.1.1")
+    //implementation("org.apache.hudi:hudi-sync:1.1.1")
 
     implementation("org.apache.paimon:paimon-bundle:1.3.1")
     implementation("org.apache.paimon:paimon-format:1.3.1")

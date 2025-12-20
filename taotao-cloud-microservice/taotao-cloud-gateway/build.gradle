@@ -8,7 +8,7 @@ dependencies {
     implementation "com.alibaba.csp:sentinel-datasource-nacos"
     implementation "com.alibaba.cloud:spring-cloud-alibaba-sentinel-gateway"
     implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"
-    implementation 'org.apache.skywalking:apm-spring-cloud-gateway-3.x-plugin'
+    implementation 'org.apache.skywalking:apm-spring-cloud-gateway-4.x-plugin'
     implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
     //implementation 'org.springframework.cloud:spring-cloud-starter-function-webflux'
     //支持mvc

@@ -30,7 +30,7 @@ dependencies {
     //开源OCR识别框架Tess4j
     //https://tess4j.sourceforge.net/
     //https://search.maven.org/artifact/net.sourceforge.tess4j/tess4j
-    implementation "net.sourceforge.tess4j:tess4j:5.16.0"
+    implementation "net.sourceforge.tess4j:tess4j:5.17.0"
     implementation "com.google.zxing:core:3.5.4"
     implementation "com.google.zxing:javase:3.5.4"
 

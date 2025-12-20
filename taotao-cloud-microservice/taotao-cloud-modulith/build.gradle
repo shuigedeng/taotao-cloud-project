@@ -24,21 +24,21 @@ dependencies {
 
     //https://github.com/spring-projects/spring-modulith
     //https://central.sonatype.com/artifact/org.springframework.modulith/spring-modulith-starter-core
-    implementation 'org.springframework.modulith:spring-modulith-starter-core:2.0.0'
-    implementation 'org.springframework.modulith:spring-modulith-starter-insight:2.0.0'
-    implementation 'org.springframework.modulith:spring-modulith-starter-jdbc:2.0.0'
-    implementation 'org.springframework.modulith:spring-modulith-starter-jpa:2.0.0'
-    //implementation 'org.springframework.modulith:spring-modulith-starter-mongodb:2.0.0'
-    implementation 'org.springframework.modulith:spring-modulith-events-kafka:2.0.0'
-    implementation 'org.springframework.modulith:spring-modulith-events-amqp:2.0.0'
-    implementation 'org.springframework.modulith:spring-modulith-events-jpa:2.0.0'
-    implementation 'org.springframework.modulith:spring-modulith-events-jdbc:2.0.0'
-    //implementation 'org.springframework.modulith:spring-modulith-events-mongodb:2.0.0'
-    implementation 'org.springframework.modulith:spring-modulith-moments:2.0.0'
-    implementation 'org.springframework.modulith:spring-modulith-observability:2.0.0'
-    implementation 'org.springframework.modulith:spring-modulith-docs:2.0.0'
-    implementation 'org.springframework.modulith:spring-modulith-actuator:2.0.0'
-    testImplementation 'org.springframework.modulith:spring-modulith-starter-test:2.0.0'
+    implementation 'org.springframework.modulith:spring-modulith-starter-core:2.0.1'
+    implementation 'org.springframework.modulith:spring-modulith-starter-insight:2.0.1'
+    implementation 'org.springframework.modulith:spring-modulith-starter-jdbc:2.0.1'
+    implementation 'org.springframework.modulith:spring-modulith-starter-jpa:2.0.1'
+    //implementation 'org.springframework.modulith:spring-modulith-starter-mongodb:2.0.1'
+    implementation 'org.springframework.modulith:spring-modulith-events-kafka:2.0.1'
+    implementation 'org.springframework.modulith:spring-modulith-events-amqp:2.0.1'
+    implementation 'org.springframework.modulith:spring-modulith-events-jpa:2.0.1'
+    implementation 'org.springframework.modulith:spring-modulith-events-jdbc:2.0.1'
+    //implementation 'org.springframework.modulith:spring-modulith-events-mongodb:2.0.1'
+    implementation 'org.springframework.modulith:spring-modulith-moments:2.0.1'
+    implementation 'org.springframework.modulith:spring-modulith-observability:2.0.1'
+    implementation 'org.springframework.modulith:spring-modulith-docs:2.0.1'
+    implementation 'org.springframework.modulith:spring-modulith-actuator:2.0.1'
+    testImplementation 'org.springframework.modulith:spring-modulith-starter-test:2.0.1'
 
     //https://github.com/xmolecules/jmolecules
     //https://central.sonatype.com/artifact/org.jmolecules/jmolecules-ddd
@@ -50,13 +50,13 @@ dependencies {
 
     //https://github.com/xmolecules/jmolecules-integrations
     //https://central.sonatype.com/artifact/org.jmolecules.integrations/jmolecules-spring
-    implementation 'org.jmolecules.integrations:jmolecules-bytebuddy:0.32.0'
-    implementation 'org.jmolecules.integrations:jmolecules-jackson:0.32.0'
-    implementation 'org.jmolecules.integrations:jmolecules-jpa:0.32.0'
-    implementation 'org.jmolecules.integrations:jmolecules-spring:0.32.0'
-    implementation 'org.jmolecules.integrations:jmolecules-starter-ddd:0.32.0'
-    testImplementation 'org.jmolecules.integrations:jmolecules-archunit:0.32.0'
-    testImplementation 'org.jmolecules.integrations:jmolecules-starter-test:0.32.0'
+    implementation 'org.jmolecules.integrations:jmolecules-bytebuddy:0.33.0'
+    implementation 'org.jmolecules.integrations:jmolecules-jackson:0.33.0'
+    implementation 'org.jmolecules.integrations:jmolecules-jpa:0.33.0'
+    implementation 'org.jmolecules.integrations:jmolecules-spring:0.33.0'
+    implementation 'org.jmolecules.integrations:jmolecules-starter-ddd:0.33.0'
+    testImplementation 'org.jmolecules.integrations:jmolecules-archunit:0.33.0'
+    testImplementation 'org.jmolecules.integrations:jmolecules-starter-test:0.33.0'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

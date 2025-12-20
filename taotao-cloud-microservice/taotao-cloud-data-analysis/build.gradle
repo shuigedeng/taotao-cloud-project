@@ -17,7 +17,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-web"
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
     //https://search.maven.org/artifact/com.clickhouse/clickhouse-jdbc
-    implementation "com.clickhouse:clickhouse-jdbc:0.9.4"
+    implementation "com.clickhouse:clickhouse-jdbc:0.9.5"
 
     //implementation "org.hibernate.common:hibernate-commons-annotations:6.0.5.Final"
     //implementation "jakarta.xml.bind:jakarta.xml.bind-api:4.0.0"

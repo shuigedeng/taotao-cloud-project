@@ -33,7 +33,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-statemachine"
     implementation "io.github.shuigedeng:taotao-boot-starter-flowengine"
 
-    implementation 'org.apache.rocketmq:rocketmq-spring-boot-starter:2.3.4'
+    implementation 'org.apache.rocketmq:rocketmq-spring-boot-starter:2.3.5'
     implementation("com.aliyun:alibaba-dingtalk-service-sdk:2.0.0") {
         exclude group: "com.sun.jmx", module: "jmxri"
     }
@@ -52,7 +52,7 @@ dependencies {
     //implementation "org.apache.flink:flink-streaming-java_2.11:1.14.3"
     //implementation "org.apache.flink:flink-walkthrough-common_2.11:1.14.3"
     implementation "com.xuxueli:xxl-job-core:3.3.1"
-    implementation 'de.siegmar:logback-gelf:6.1.1'
+    implementation 'de.siegmar:logback-gelf:6.1.2'
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
     implementation 'com.sun.mail:javax.mail:1.6.2'
     implementation 'cn.monitor4all:log-record-springboot3-starter:1.7.0'

@@ -26,7 +26,7 @@ dependencies {
     //}
 
     //https://central.sonatype.com/artifact/org.springframework.shell/spring-shell-starter
-    implementation 'org.springframework.shell:spring-shell-starter:4.0.0-M2'
+    implementation 'org.springframework.shell:spring-shell-starter:4.0.0-RC1'
 
     //，jcommander 是一个只有几十 kb 的 Java 命令行参数解析工具，可以通过注解的方式快速实现命令行参数解析。
     //https://search.maven.org/artifact/com.beust/jcommander
@@ -36,8 +36,8 @@ dependencies {
     //implementation "com.github.whvcse:easy-captcha:1.6.2"
     implementation "jakarta.servlet:jakarta.servlet-api"
 
-    implementation "org.eclipse.jgit:org.eclipse.jgit:7.4.0.202509020913-r"
-    implementation "org.eclipse.jgit:org.eclipse.jgit.archive:7.4.0.202509020913-r"
+    implementation "org.eclipse.jgit:org.eclipse.jgit:7.5.0.202512021534-r"
+    implementation "org.eclipse.jgit:org.eclipse.jgit.archive:7.5.0.202512021534-r"
 
     implementation "org.springframework.boot:spring-boot-autoconfigure"
 
