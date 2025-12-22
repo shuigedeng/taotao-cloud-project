@@ -146,7 +146,7 @@ dependencies {
     //implementation("org.apache.hudi:hudi-flink-client:1.1.1")
     //implementation("org.apache.hudi:hudi-flink1.20-bundle:1.1.1")
     //implementation("org.apache.hudi:hudi-flink1.20.x:1.1.1")
-    //implementation("org.apache.hudi:hudi-spark4.0.x_2.12:1.1.1")
+    //implementation("org.apache.hudi:hudi-spark4.0.x_2.13:1.1.1")
     //implementation("org.apache.hudi:hudi-gcp-bundle:1.1.1")
     //implementation("org.apache.hudi:hudi-cli-bundle_2.13:1.1.1")
     //implementation("org.apache.hudi:hudi-datahub-sync-bundle:1.1.1")
