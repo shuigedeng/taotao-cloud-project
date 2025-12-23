@@ -36,7 +36,7 @@ public class TaoTaoCloudDataSyncApplication {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-data-sync")
-                .setTtcAllowBeanDefinitionOverriding(true)
+                //.setTtcAllowBeanDefinitionOverriding(true)
                 .run(args);
     }
 }

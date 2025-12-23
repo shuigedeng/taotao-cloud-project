@@ -89,7 +89,7 @@ spring:
   application:
     name: taotao-cloud-coupon
   main:
-    allow-bean-definition-overriding: true
+    allow-bean-definition-overriding: false
     banner-mode: off
   mvc:
     servlet:

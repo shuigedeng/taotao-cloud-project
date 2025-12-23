@@ -8,7 +8,7 @@ server:
 
 spring:
   main:
-    allow-bean-definition-overriding: true
+    allow-bean-definition-overriding: false
   application:
     name: taotao-cloud-coupon
   cloud:

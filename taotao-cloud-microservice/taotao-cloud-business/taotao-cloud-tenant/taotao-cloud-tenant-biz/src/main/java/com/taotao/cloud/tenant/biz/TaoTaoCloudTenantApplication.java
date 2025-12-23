@@ -39,7 +39,7 @@ public class TaoTaoCloudTenantApplication {
 			.setTtcBanner()
 			.setTtcProfileIfNotExists("dev")
 			.setTtcApplicationProperty("taotao-cloud-tenant")
-			.setTtcAllowBeanDefinitionOverriding(true)
+			//.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 	}
 }

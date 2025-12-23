@@ -17,7 +17,7 @@
 package com.taotao.cloud.sa.just.biz;
 
 import com.taotao.boot.common.utils.common.PropertyUtils;
-import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
+//import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -61,7 +61,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 // @EnableJpaRepositories(basePackages = {"com.taotao.cloud.auth.biz.repository"})
 // @EnableFeignClients(basePackages = {"com.taotao.cloud.*.api.feign"})
-@EnableEncryptableProperties
+//@EnableEncryptableProperties
 @EnableDiscoveryClient
 @SpringBootApplication
 public class TaoTaoCloudSaJustApplication {

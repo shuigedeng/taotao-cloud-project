@@ -43,7 +43,7 @@ public class TaoTaoCloudGeneratorApplication {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-generator")
-                .setTtcAllowBeanDefinitionOverriding(true)
+                //.setTtcAllowBeanDefinitionOverriding(true)
                 .run(args);
     }
 }

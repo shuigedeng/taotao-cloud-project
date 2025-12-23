@@ -44,7 +44,7 @@ public class JobNameServerApplication extends SpringBootServletInitializer {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-job-nameserver")
-                .setTtcAllowBeanDefinitionOverriding(true)
+                //.setTtcAllowBeanDefinitionOverriding(true)
                 .run(args);
     }
 }

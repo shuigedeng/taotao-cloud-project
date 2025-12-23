@@ -16,7 +16,7 @@
 #  pid:
 #    file: ${user.home}/logs/${spring.application.name}/${spring.application.name}.pid
 #  main:
-#    allow-bean-definition-overriding: true
+#    allow-bean-definition-overriding: false
 #    web-application-type: reactive
 #    banner-mode: off
 #  application:

@@ -19,7 +19,7 @@ package com.taotao.cloud.auth.biz;
 import com.taotao.boot.core.startup.StartupSpringApplication;
 import com.taotao.boot.data.jpa.extend.JpaExtendRepositoryFactoryBean;
 import com.taotao.boot.security.spring.annotation.EnableSecurityConfiguration;
-import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
+//import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
@@ -81,8 +81,8 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
             "com.taotao.cloud.auth.biz.management.repository"
         },
         repositoryFactoryBeanClass = JpaExtendRepositoryFactoryBean.class)
-@EnableFeignClients(basePackages = {"com.taotao.cloud.*.api.feign"})
-@EnableEncryptableProperties
+//@EnableFeignClients(basePackages = {"com.taotao.cloud.*.api.feign"})
+//@EnableEncryptableProperties
 @EnableDiscoveryClient
 @ConfigurationPropertiesScan
 @EnableSecurityConfiguration
@@ -95,7 +95,7 @@ public class TaoTaoCloudAuthApplication {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-auth")
-                .setTtcAllowBeanDefinitionOverriding(true)
+                //.setTtcAllowBeanDefinitionOverriding(true)
                 .run(args);
     }
 }

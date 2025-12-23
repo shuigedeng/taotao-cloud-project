@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.flowable.server;
 
-import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
+//import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.laokou.common.swagger.config.CorsConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,7 +29,7 @@ import org.springframework.context.annotation.Import;
 @SpringBootApplication(
         scanBasePackages = {"org.laokou.flowable", "org.laokou.common.core", "org.laokou.common.swagger"})
 @EnableDiscoveryClient
-@EnableEncryptableProperties
+//@EnableEncryptableProperties
 @Import({CorsConfig.class})
 public class FlowableApplication {
 

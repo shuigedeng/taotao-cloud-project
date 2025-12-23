@@ -135,7 +135,7 @@
 #    activate:
 #      on-profile: zookeeper
 #  main:
-#    allow-bean-definition-overriding: true
+#    allow-bean-definition-overriding: false
 #    web-application-type: reactive
 #    banner-mode: off
 #  application:

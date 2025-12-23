@@ -44,7 +44,7 @@ public class TaoTaoCloudOrderApplication {
 			.setTtcBanner()
 			.setTtcProfileIfNotExists("dev")
 			.setTtcApplicationProperty("taotao-cloud-order")
-			.setTtcAllowBeanDefinitionOverriding(true)
+			//.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
     }
 

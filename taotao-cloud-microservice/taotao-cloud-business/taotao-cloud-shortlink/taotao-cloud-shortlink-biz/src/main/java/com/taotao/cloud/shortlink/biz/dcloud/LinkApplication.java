@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @MapperScan("net.xdclass.mapper")
 @EnableTransactionManagement
-@EnableFeignClients
+//@EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
 public class LinkApplication {

@@ -103,6 +103,9 @@ arthas:
   tunnel-server: ws://192.168.218.2:7777/ws
 
 spring:
+  threads:
+    virtual:
+      enabled: true
   config:
     activate:
       on-profile: dev
@@ -112,7 +115,7 @@ spring:
   lifecycle:
     timeout-per-shutdown-phase: 30s
   main:
-    allow-bean-definition-overriding: true
+    allow-bean-definition-overriding: false
     banner-mode: off
   application:
     name: taotao-cloud-monitor

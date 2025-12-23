@@ -42,7 +42,7 @@ public class TaoTaoCloudRecommendApplication {
 			.setTtcBanner()
 			.setTtcProfileIfNotExists("dev")
 			.setTtcApplicationProperty("taotao-cloud-recommend")
-			.setTtcAllowBeanDefinitionOverriding(true)
+			//.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 
         LogUtils.info("------基于用户协同过滤推荐---------------下列电影");

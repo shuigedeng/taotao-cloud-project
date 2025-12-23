@@ -43,7 +43,7 @@ public class TxManagerApplication extends SpringBootServletInitializer {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-tx-server")
-                .setTtcAllowBeanDefinitionOverriding(true)
+                //.setTtcAllowBeanDefinitionOverriding(true)
                 .run(args);
 
         // 这个是自定义的一个服务端

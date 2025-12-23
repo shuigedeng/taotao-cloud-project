@@ -45,7 +45,7 @@ seata:
 
 spring:
   main:
-    allow-bean-definition-overriding: true
+    allow-bean-definition-overriding: false
   application:
     name: taotao-cloud-operation-service
   cloud:

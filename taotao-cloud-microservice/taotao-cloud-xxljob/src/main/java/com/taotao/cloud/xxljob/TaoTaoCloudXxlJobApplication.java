@@ -17,7 +17,7 @@
 package com.taotao.cloud.xxljob;
 
 import com.taotao.boot.core.startup.StartupSpringApplication;
-import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
+//import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -32,7 +32,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  */
 @MapperScan("com.taotao.cloud.xxljob.mapper")
 @EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)
-@EnableEncryptableProperties
+//@EnableEncryptableProperties
 @EnableDiscoveryClient
 @SpringBootApplication
 public class TaoTaoCloudXxlJobApplication {
@@ -45,7 +45,7 @@ public class TaoTaoCloudXxlJobApplication {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-xxljob")
-                .setTtcAllowBeanDefinitionOverriding(true)
+                //.setTtcAllowBeanDefinitionOverriding(true)
                 .run(args);
     }
 }

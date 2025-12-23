@@ -7,14 +7,17 @@ server:
     direct-buffers: true
 
 spring:
+  threads:
+    virtual:
+      enabled: true
   config:
     activate:
       on-profile: dev
   pid:
     file: ${user.home}/logs/${spring.application.name}/${spring.application.name}.pid
   main:
-    allow-circular-references: true
-    allow-bean-definition-overriding: true
+    allow-circular-references: false
+    allow-bean-definition-overriding: false
     banner-mode: OFF
     register-shutdown-hook: true
   application:

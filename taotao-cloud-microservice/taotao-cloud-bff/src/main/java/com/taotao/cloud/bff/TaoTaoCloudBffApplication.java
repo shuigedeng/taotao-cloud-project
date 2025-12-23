@@ -26,7 +26,7 @@ import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 // @EnableTaoTaoCloudLogger
 // @EnableTaoTaoCloudSeata
 // @EnableTaoTaoCloudSentinel
-// @EnableEncryptableProperties
+// //@EnableEncryptableProperties
 // @EnableTransactionManagement(proxyTargetClass = true)
 // @EnableDiscoveryClient
 @TaoTaoBootApplication
@@ -39,7 +39,7 @@ public class TaoTaoCloudBffApplication {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-bff")
-                .setTtcAllowBeanDefinitionOverriding(true)
+                //.setTtcAllowBeanDefinitionOverriding(true)
                 .run(args);
     }
 }

@@ -1,3 +1,6 @@
 spring:
+  threads:
+    virtual:
+      enabled: true
   profiles:
     active: @activeProfile@

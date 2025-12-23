@@ -11,8 +11,8 @@ spring:
     activate:
       on-profile: test
   main:
-    allow-circular-references: true
-    allow-bean-definition-overriding: true
+    allow-circular-references: false
+    allow-bean-definition-overriding: false
     banner-mode: off
     register-shutdown-hook: true
   application:

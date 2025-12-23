@@ -13,8 +13,11 @@ server:
       enabled: true
 
 spring:
+  threads:
+    virtual:
+      enabled: true
   main:
-    allow-bean-definition-overriding: true
+    allow-bean-definition-overriding: false
   application:
     name: taotao-cloud-sys-service
   cloud:
