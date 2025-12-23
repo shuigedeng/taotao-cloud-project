@@ -17,7 +17,7 @@
 package com.taotao.cloud.data.analysis.hive.service;
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.boot.data.datasource.ext.hive.HiveJdbcBaseDaoImpl;
+import com.taotao.boot.data.datasource.multiple.hive.HiveJdbcBaseDaoImpl;
 import org.springframework.stereotype.Service;
 
 @Service

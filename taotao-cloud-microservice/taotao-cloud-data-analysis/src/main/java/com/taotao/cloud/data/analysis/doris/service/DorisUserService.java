@@ -17,7 +17,7 @@
 package com.taotao.cloud.data.analysis.doris.service;
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.boot.data.datasource.ext.ck.ClickHouseJdbcBaseDaoImpl;
+import com.taotao.boot.data.datasource.multiple.ck.ClickHouseJdbcBaseDaoImpl;
 import com.taotao.cloud.data.analysis.clickhouse.mapper.CkUserMapper;
 import com.taotao.cloud.data.analysis.clickhouse.model.CkUser;
 import java.util.List;
