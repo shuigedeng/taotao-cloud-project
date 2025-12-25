@@ -275,7 +275,7 @@ Maven:
 | Elasticsearch        | 9.2.1         |
 | Xxl-job              | 3.2.0         |
 | Guava                | 33.5.8-jre    |
-| Grpc                 | 1.77.0        |
+| Grpc                 | 1.78.0        |
 | Arthas               | 4.0.3         |
 | Netty                | 4.2.7.Final   |
 
