@@ -29,7 +29,7 @@ import java.util.List;
  * <a href="https://maku.net">MAKU</a>
  */
 public class JsonUtils {
-    private static final JsonMapper jsonMapper = new JsonMapper();
+    private static final JsonMapper jsonMapper = JsonMapper.builder().build();
 
     public static String toJsonString(Object object) {
         try {

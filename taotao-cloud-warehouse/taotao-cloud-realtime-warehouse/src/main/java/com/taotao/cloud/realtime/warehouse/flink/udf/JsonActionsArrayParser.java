@@ -38,7 +38,7 @@ import org.apache.flink.types.Row;
  */
 public class JsonActionsArrayParser extends ScalarFunction {
 
-    private static final JsonMapper mapper = new JsonMapper();
+    private static final JsonMapper mapper = JsonMapper.builder().build();
 
     @DataTypeHint("ROW<action_id STRING, item STRING, item_type STRING, ts BIGINT>")
     public Row eval( String jsonStr ) {

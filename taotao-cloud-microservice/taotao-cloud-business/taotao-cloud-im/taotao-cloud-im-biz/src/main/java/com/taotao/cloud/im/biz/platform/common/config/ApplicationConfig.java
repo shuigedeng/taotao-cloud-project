@@ -18,6 +18,7 @@ package com.taotao.cloud.im.biz.platform.common.config;
 
 import tools.jackson.core.JsonGenerator;
 import tools.jackson.databind.*;
+import tools.jackson.databind.json.JsonMapper;
 import tools.jackson.databind.module.SimpleModule;
 import tools.jackson.databind.ser.std.ToStringSerializer;
 import java.io.IOException;
@@ -57,7 +58,7 @@ public class ApplicationConfig {
 
     @Bean
     public JsonMapper jsonMapper() {
-        final JsonMapper jsonMapper = new JsonMapper();
+        final JsonMapper jsonMapper = JsonMapper.builder().build();
         // 忽略未知的枚举字段
         jsonMapper.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL);
         // 忽略多余的字段不参与序列化

@@ -31,7 +31,7 @@ public class FileDetailService extends ServiceImpl<FileDetailMapper, FileDetail>
 
 		//这是手动获 取附加属性字典 并转成 json 字符串，方便存储在数据库中
 		if (info.getAttr() != null) {
-			detail.setAttr(new JsonMapper().writeValueAsString(info.getAttr()));
+			detail.setAttr(JsonMapper.builder().build().writeValueAsString(info.getAttr()));
 		}
 		boolean b = save(detail);
 		if (b) {
@@ -56,7 +56,7 @@ public class FileDetailService extends ServiceImpl<FileDetailMapper, FileDetail>
 
 		//这是手动获取数据库中的 json 字符串 并转成 附加属性字典，方便使用
 		if (StrUtil.isNotBlank(detail.getAttr())) {
-			info.setAttr(new JsonMapper().readValue(detail.getAttr(),Dict.class));
+			info.setAttr(JsonMapper.builder().build().readValue(detail.getAttr(),Dict.class));
 		}
 		return info;
 	}

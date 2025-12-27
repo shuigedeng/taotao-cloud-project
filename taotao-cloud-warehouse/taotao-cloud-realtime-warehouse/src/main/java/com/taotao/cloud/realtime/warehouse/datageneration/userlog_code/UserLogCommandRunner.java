@@ -52,7 +52,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 public class UserLogCommandRunner implements CommandLineRunner {
 
     private static final Logger logger = LoggerFactory.getLogger(UserLogCommandRunner.class);
-    private static final JsonMapper jsonMapper = new JsonMapper();
+    private static final JsonMapper jsonMapper = JsonMapper.builder().build();
 
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;

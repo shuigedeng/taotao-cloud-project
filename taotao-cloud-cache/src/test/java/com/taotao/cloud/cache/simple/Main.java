@@ -9,7 +9,7 @@ import tools.jackson.databind.module.SimpleModule;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        JsonMapper jsonMapper = new JsonMapper();
+        JsonMapper jsonMapper = JsonMapper.builder().build();
         
         // 注册自定义模块
 //        SimpleModule module = new SimpleModule();

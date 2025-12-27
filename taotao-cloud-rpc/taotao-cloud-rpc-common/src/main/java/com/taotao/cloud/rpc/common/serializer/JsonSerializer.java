@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class JsonSerializer implements CommonSerializer {
 
-    private JsonMapper jsonMapper = new JsonMapper();
+    private JsonMapper jsonMapper = JsonMapper.builder().build();
 
     @Override
     public byte[] serialize(Object obj) {

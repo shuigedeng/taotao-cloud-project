@@ -42,7 +42,7 @@ public class WeatherTools {
 
     private final WebClient webClient;
 
-    private final JsonMapper jsonMapper = new JsonMapper();
+    private final JsonMapper jsonMapper = JsonMapper.builder().build();
 
     public WeatherTools(WeatherProperties properties) {
         this.webClient =

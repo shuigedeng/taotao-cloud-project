@@ -61,7 +61,7 @@ public class ParallelStepJob {
 
     @Bean
     public JsonItemReader<User> jsonItemReader() {
-        JsonMapper jsonMapper = new JsonMapper();
+        JsonMapper jsonMapper = JsonMapper.builder().build();
         JacksonJsonObjectReader<User> jsonObjectReader = new JacksonJsonObjectReader<>(User.class);
         jsonObjectReader.setMapper(jsonMapper);
 

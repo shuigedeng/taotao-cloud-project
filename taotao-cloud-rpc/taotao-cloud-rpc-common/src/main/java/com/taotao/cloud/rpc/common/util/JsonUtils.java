@@ -27,7 +27,7 @@ import java.util.List;
 public class JsonUtils {
 
     // 定义jackson对象
-    private static final JsonMapper MAPPER = new JsonMapper();
+    private static final JsonMapper MAPPER = JsonMapper.builder().build();
 
     /**
      * 将对象转换成json字符串。

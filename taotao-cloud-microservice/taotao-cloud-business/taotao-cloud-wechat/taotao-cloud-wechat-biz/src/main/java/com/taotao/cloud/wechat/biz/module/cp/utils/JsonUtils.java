@@ -25,7 +25,7 @@ import tools.jackson.databind.SerializationFeature;
  * @author Binary Wang(https://github.com/binarywang)
  */
 public class JsonUtils {
-    private static final JsonMapper JSON = new JsonMapper();
+    private static final JsonMapper JSON =JsonMapper.builder().build();
 
     static {
         JSON.setSerializationInclusion(Include.NON_NULL);

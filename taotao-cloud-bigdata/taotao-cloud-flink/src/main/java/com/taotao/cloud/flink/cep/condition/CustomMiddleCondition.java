@@ -84,7 +84,7 @@ public class CustomMiddleCondition extends CustomArgsCondition<Event> {
         for (String variableName : variableNames) {
             Object variableValue = getVariableValue(event, variableName);
             if (variableName.equals("eventArgs")) {
-                JsonMapper mapper = new JsonMapper();
+                JsonMapper mapper =JsonMapper.builder().build();
                 JsonFactory factory = mapper.getFactory();
                 JsonParser parser = factory.createParser((String) variableValue);
                 JsonNode actualObj = mapper.readTree(parser);

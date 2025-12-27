@@ -45,7 +45,7 @@ public class WeatherService implements Function<WeatherService.Request, WeatherS
 
     private final WebClient webClient;
 
-    private final JsonMapper jsonMapper = new JsonMapper();
+    private final JsonMapper jsonMapper = JsonMapper.builder().build();
 
     public WeatherService(WeatherProperties properties) {
         this.webClient =

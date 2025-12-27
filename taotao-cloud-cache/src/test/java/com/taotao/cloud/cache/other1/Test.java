@@ -8,7 +8,7 @@ import tools.jackson.databind.module.SimpleModule;
 public class Test {
 
 	public static void main(String[] args) throws JacksonException {
-		JsonMapper mapper = new JsonMapper();
+		JsonMapper mapper = JsonMapper.builder().build();
 		SimpleModule module = new SimpleModule();
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		module.setDeserializerModifier(new CustomBeanDeserializerModifier());

@@ -41,7 +41,7 @@ public class OAuth2JacksonProcessor {
 
     public OAuth2JacksonProcessor() {
 
-        jsonMapper = new JsonMapper();
+        jsonMapper =JsonMapper.builder().build();
 
         ClassLoader classLoader = OAuth2JacksonProcessor.class.getClassLoader();
         List<Module> securityModules = SecurityJackson2Modules.getModules(classLoader);

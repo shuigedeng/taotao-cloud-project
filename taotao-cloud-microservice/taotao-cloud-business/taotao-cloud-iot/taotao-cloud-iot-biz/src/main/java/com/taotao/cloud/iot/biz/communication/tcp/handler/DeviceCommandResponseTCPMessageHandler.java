@@ -56,7 +56,7 @@ public class DeviceCommandResponseTCPMessageHandler implements TCPMessageHandler
 
     private DeviceCommandResponseDTO parseCommandReplyMessage(String topic, Object message) {
         try {
-            JsonMapper mapper = new JsonMapper();
+            JsonMapper mapper = JsonMapper.builder().build();
             DeviceCommandResponseDTO commandResponse =  mapper.convertValue(message, DeviceCommandResponseDTO.class);
             if (StrUtil.isBlank(commandResponse.getCommandId())) {
                 log.error(StrUtil.format("主题'{}'的消息,缺失指令ID", topic));

@@ -39,16 +39,17 @@ import org.apache.flink.types.Row;
  */
 public class JsonDisplaysArrayParser extends ScalarFunction {
 
-    private static final JsonMapper mapper = new JsonMapper();
+    private static final JsonMapper MAPPER = JsonMapper.builder().build();
 
     @DataTypeHint("ROW<display_type STRING, item STRING, item_type STRING, order INT, pos_id INT>")
     public Row eval( String jsonStr ) {
         if (jsonStr == null || jsonStr.isEmpty()) {
-            return new Row(5); // 返回一个空的Row，所有字段为null
+			// 返回一个空的Row，所有字段为null
+            return new Row(5);
         }
 
         try {
-            JsonNode rootNode = mapper.readTree(jsonStr);
+            JsonNode rootNode = MAPPER.readTree(jsonStr);
             if (!rootNode.isArray() || rootNode.size() != 1) {
                 throw new IllegalArgumentException("Expected a single-element JSON array.");
             }

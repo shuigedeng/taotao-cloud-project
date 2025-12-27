@@ -6,7 +6,7 @@ import tools.jackson.databind.module.SimpleModule;
 public class CustomJsonMapperConfig {
 
     public static JsonMapper createCustomJsonMapper() {
-        JsonMapper mapper = new JsonMapper();
+        JsonMapper mapper = JsonMapper.builder().build();
         
         SimpleModule module = new SimpleModule();
         module.setDeserializerModifier(new CustomBeanDeserializerModifier());
