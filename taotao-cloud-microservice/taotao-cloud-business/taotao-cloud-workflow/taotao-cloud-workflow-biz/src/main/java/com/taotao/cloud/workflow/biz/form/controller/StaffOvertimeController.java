@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.staffovertime.StaffOvertimeForm;
 import com.taotao.cloud.workflow.biz.common.model.form.staffovertime.StaffOvertimeInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
@@ -61,14 +61,14 @@ public class StaffOvertimeController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), StaffOvertimeInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), StaffOvertimeInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             StaffOvertimeEntity entity = staffOvertimeService.getInfo(id);
-            vo = JsonUtils.getJsonToBean(entity, StaffOvertimeInfoVO.class);
+            vo = JacksonUtils.getJsonToBean(entity, StaffOvertimeInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -85,7 +85,7 @@ public class StaffOvertimeController {
         if (staffOvertimeForm.getStartTime() > staffOvertimeForm.getEndTime()) {
             return Result.fail("结束时间不能小于起始时间");
         }
-        StaffOvertimeEntity entity = JsonUtils.getJsonToBean(staffOvertimeForm, StaffOvertimeEntity.class);
+        StaffOvertimeEntity entity = JacksonUtils.getJsonToBean(staffOvertimeForm, StaffOvertimeEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(staffOvertimeForm.getStatus())) {
             staffOvertimeService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -108,7 +108,7 @@ public class StaffOvertimeController {
         if (staffOvertimeForm.getStartTime() > staffOvertimeForm.getEndTime()) {
             return Result.fail("结束时间不能小于起始时间");
         }
-        StaffOvertimeEntity entity = JsonUtils.getJsonToBean(staffOvertimeForm, StaffOvertimeEntity.class);
+        StaffOvertimeEntity entity = JacksonUtils.getJsonToBean(staffOvertimeForm, StaffOvertimeEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(staffOvertimeForm.getStatus())) {
             staffOvertimeService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

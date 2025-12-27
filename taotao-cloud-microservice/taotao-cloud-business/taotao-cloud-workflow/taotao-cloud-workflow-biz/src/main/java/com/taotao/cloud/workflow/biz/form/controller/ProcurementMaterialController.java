@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.procurementmaterial.ProcurementEntryEntityInfoModel;
 import com.taotao.cloud.workflow.biz.common.model.form.procurementmaterial.ProcurementMaterialForm;
 import com.taotao.cloud.workflow.biz.common.model.form.procurementmaterial.ProcurementMaterialInfoVO;
@@ -65,7 +65,7 @@ public class ProcurementMaterialController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), ProcurementMaterialInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), ProcurementMaterialInfoVO.class);
                     isData = false;
                 }
             }
@@ -73,8 +73,8 @@ public class ProcurementMaterialController {
         if (isData) {
             ProcurementMaterialEntity entity = procurementMaterialService.getInfo(id);
             List<ProcurementEntryEntity> entityList = procurementMaterialService.getProcurementEntryList(id);
-            vo = JsonUtils.getJsonToBean(entity, ProcurementMaterialInfoVO.class);
-            vo.setEntryList(JsonUtils.getJsonToList(entityList, ProcurementEntryEntityInfoModel.class));
+            vo = JacksonUtils.getJsonToBean(entity, ProcurementMaterialInfoVO.class);
+            vo.setEntryList(JacksonUtils.getJsonToList(entityList, ProcurementEntryEntityInfoModel.class));
         }
         return Result.success(vo);
     }
@@ -90,9 +90,9 @@ public class ProcurementMaterialController {
     @PostMapping
     public Result create(@RequestBody ProcurementMaterialForm procurementMaterialForm) throws WorkFlowException {
         ProcurementMaterialEntity procurement =
-                JsonUtils.getJsonToBean(procurementMaterialForm, ProcurementMaterialEntity.class);
+                JacksonUtils.getJsonToBean(procurementMaterialForm, ProcurementMaterialEntity.class);
         List<ProcurementEntryEntity> procurementEntryList =
-                JsonUtils.getJsonToList(procurementMaterialForm.getEntryList(), ProcurementEntryEntity.class);
+                JacksonUtils.getJsonToList(procurementMaterialForm.getEntryList(), ProcurementEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(procurementMaterialForm.getStatus())) {
             procurementMaterialService.save(procurement.getId(), procurement, procurementEntryList);
             return Result.success(MsgCode.SU002.get());
@@ -115,9 +115,9 @@ public class ProcurementMaterialController {
     public Result update(@RequestBody ProcurementMaterialForm procurementMaterialForm, @PathVariable("id") String id)
             throws WorkFlowException {
         ProcurementMaterialEntity procurement =
-                JsonUtils.getJsonToBean(procurementMaterialForm, ProcurementMaterialEntity.class);
+                JacksonUtils.getJsonToBean(procurementMaterialForm, ProcurementMaterialEntity.class);
         List<ProcurementEntryEntity> procurementEntryList =
-                JsonUtils.getJsonToList(procurementMaterialForm.getEntryList(), ProcurementEntryEntity.class);
+                JacksonUtils.getJsonToList(procurementMaterialForm.getEntryList(), ProcurementEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(procurementMaterialForm.getStatus())) {
             procurementMaterialService.save(id, procurement, procurementEntryList);
             return Result.success(MsgCode.SU002.get());

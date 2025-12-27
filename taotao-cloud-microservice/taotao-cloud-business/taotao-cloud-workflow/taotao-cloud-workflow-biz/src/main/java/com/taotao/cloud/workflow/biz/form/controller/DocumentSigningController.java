@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.documentsigning.DocumentSigningForm;
 import com.taotao.cloud.workflow.biz.common.model.form.documentsigning.DocumentSigningInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
@@ -63,14 +63,14 @@ public class DocumentSigningController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), DocumentSigningInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), DocumentSigningInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             DocumentSigningEntity entity = documentSigningService.getInfo(id);
-            vo = JsonUtils.getJsonToBean(entity, DocumentSigningInfoVO.class);
+            vo = JacksonUtils.getJsonToBean(entity, DocumentSigningInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -84,7 +84,7 @@ public class DocumentSigningController {
     @Operation("新建文件签阅表")
     @PostMapping
     public Result create(@RequestBody @Valid DocumentSigningForm documentSigningForm) throws WorkFlowException {
-        DocumentSigningEntity entity = JsonUtils.getJsonToBean(documentSigningForm, DocumentSigningEntity.class);
+        DocumentSigningEntity entity = JacksonUtils.getJsonToBean(documentSigningForm, DocumentSigningEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(documentSigningForm.getStatus())) {
             documentSigningService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -104,7 +104,7 @@ public class DocumentSigningController {
     @PutMapping("/{id}")
     public Result update(@RequestBody @Valid DocumentSigningForm documentSigningForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        DocumentSigningEntity entity = JsonUtils.getJsonToBean(documentSigningForm, DocumentSigningEntity.class);
+        DocumentSigningEntity entity = JacksonUtils.getJsonToBean(documentSigningForm, DocumentSigningEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(documentSigningForm.getStatus())) {
             documentSigningService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

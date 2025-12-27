@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.taotao.boot.common.model.request.PageQuery;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.sys.api.constant.I18nRedisKeyConstants;
 import com.taotao.cloud.sys.biz.model.dto.I18nDataDTO;
 import com.taotao.cloud.sys.biz.model.dto.I18nDataUnique;
@@ -191,7 +191,7 @@ public class I18nDataServiceImpl extends ServiceImpl<I18nDataMapper, I18nData> i
      */
     private void pushUpdateMessage( String code, String languageTag ) {
         I18nDataUnique channelBody = new I18nDataUnique(code, languageTag);
-        String str = JsonUtils.toJson(channelBody);
+        String str = JacksonUtils.toJson(channelBody);
         stringRedisTemplate.convertAndSend(I18nRedisKeyConstants.CHANNEL_I18N_DATA_UPDATED, str);
     }
 

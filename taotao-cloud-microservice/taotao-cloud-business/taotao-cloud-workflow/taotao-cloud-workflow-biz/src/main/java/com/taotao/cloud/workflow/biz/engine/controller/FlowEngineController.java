@@ -20,7 +20,7 @@ package com.taotao.cloud.workflow.biz.engine.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.api.vo.entity.DictionaryDataEntity;
 import com.taotao.cloud.workflow.biz.common.base.vo.DownloadVO;
 import com.taotao.cloud.workflow.biz.common.base.vo.PaginationVO;
@@ -137,7 +137,7 @@ public class FlowEngineController {
         FlowEngineEntity entity = flowEngineService.getInfo(id);
         List<FormDataField> formDataFieldList = new ArrayList<>();
         if (entity.getFormType() == 1) {
-            List<FlowEngineModel> list = JsonUtils.toList(entity.getFormData(), FlowEngineModel.class);
+            List<FlowEngineModel> list = JacksonUtils.toList(entity.getFormData(), FlowEngineModel.class);
             for (FlowEngineModel model : list) {
                 FormDataField formDataField = new FormDataField();
                 formDataField.setLabel(model.getFiledName());
@@ -146,9 +146,9 @@ public class FlowEngineController {
             }
         } else {
             // formTempJson
-            FormDataModel formData = JsonUtils.toObject(entity.getFormData(), FormDataModel.class);
-            List<FieLdsModel> list = JsonUtils.toList(formData.getFields(), FieLdsModel.class);
-            List<TableModel> tableModelList = JsonUtils.toList(entity.getFlowTables(), TableModel.class);
+            FormDataModel formData = JacksonUtils.toObject(entity.getFormData(), FormDataModel.class);
+            List<FieLdsModel> list = JacksonUtils.toList(formData.getFields(), FieLdsModel.class);
+            List<TableModel> tableModelList = JacksonUtils.toList(entity.getFlowTables(), TableModel.class);
 
             List<FormAllModel> formAllModel = new ArrayList<>();
             RecursionForm recursionForm = new RecursionForm(list, tableModelList);
@@ -185,7 +185,7 @@ public class FlowEngineController {
 
         List<FlowEngineSelectVO> vo = new ArrayList<>();
         for (FlowTaskEntity taskEntity : flowTaskList) {
-            FlowEngineSelectVO selectVO = JsonUtils.toObject(taskEntity, FlowEngineSelectVO.class);
+            FlowEngineSelectVO selectVO = JacksonUtils.toObject(taskEntity, FlowEngineSelectVO.class);
             selectVO.setFullName(taskEntity.getFullName() + "/" + taskEntity.getEnCode());
             vo.add(selectVO);
         }
@@ -205,8 +205,8 @@ public class FlowEngineController {
     public Result<PageResult<FlowPageListVO>> listAll(FlowPagination pagination) {
         List<FlowEngineEntity> list = flowEngineService.getListAll(pagination, true);
 
-        PaginationVO paginationVO = JsonUtils.getJsonToBean(pagination, PaginationVO.class);
-        List<FlowPageListVO> listVO = JsonUtils.getJsonToList(list, FlowPageListVO.class);
+        PaginationVO paginationVO = JacksonUtils.getJsonToBean(pagination, PaginationVO.class);
+        List<FlowPageListVO> listVO = JacksonUtils.getJsonToList(list, FlowPageListVO.class);
         return Result.page(listVO, paginationVO);
     }
 
@@ -214,14 +214,14 @@ public class FlowEngineController {
     @GetMapping("/{id}")
     public Result<FlowEngineInfoVO> info(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity flowEntity = flowEngineService.getInfo(id);
-        FlowEngineInfoVO vo = JsonUtils.toObject(flowEntity, FlowEngineInfoVO.class);
+        FlowEngineInfoVO vo = JacksonUtils.toObject(flowEntity, FlowEngineInfoVO.class);
         return Result.success(vo);
     }
 
     @Operation(summary = "新建流程引擎", description = "新建流程引擎")
     @PostMapping
     public Result<Boolean> create(@Valid @RequestBody FlowEngineCrForm flowEngineCrForm) throws WorkFlowException {
-        FlowEngineEntity flowEngineEntity = JsonUtils.toObject(flowEngineCrForm, FlowEngineEntity.class);
+        FlowEngineEntity flowEngineEntity = JacksonUtils.toObject(flowEngineCrForm, FlowEngineEntity.class);
         if (flowEngineService.isExistByFullName(flowEngineEntity.getFullName(), flowEngineEntity.getId())) {
             throw new WorkFlowException("流程名称不能重复");
         }
@@ -231,10 +231,10 @@ public class FlowEngineController {
         }
 
         if (flowEngineEntity.getFormType() != 1) {
-            FormDataModel formData = JsonUtils.toObject(flowEngineEntity.getFormData(), FormDataModel.class);
+            FormDataModel formData = JacksonUtils.toObject(flowEngineEntity.getFormData(), FormDataModel.class);
 
-            List<FieLdsModel> list = JsonUtils.toList(formData.getFields(), FieLdsModel.class);
-            List<TableModel> tableModelList = JsonUtils.toList(flowEngineEntity.getFlowTables(), TableModel.class);
+            List<FieLdsModel> list = JacksonUtils.toList(formData.getFields(), FieLdsModel.class);
+            List<TableModel> tableModelList = JacksonUtils.toList(flowEngineEntity.getFlowTables(), TableModel.class);
             RecursionForm recursionForm = new RecursionForm(list, tableModelList);
             List<FormAllModel> formAllModel = new ArrayList<>();
             if (FormCloumnUtil.repetition(recursionForm, formAllModel)) {
@@ -248,7 +248,7 @@ public class FlowEngineController {
     @PutMapping("/{id}")
     public Result<Boolean> update(@PathVariable("id") String id, @RequestBody @Valid FlowEngineUpForm flowEngineUpForm)
             throws WorkFlowException {
-        FlowEngineEntity flowEngineEntity = JsonUtils.toObject(flowEngineUpForm, FlowEngineEntity.class);
+        FlowEngineEntity flowEngineEntity = JacksonUtils.toObject(flowEngineUpForm, FlowEngineEntity.class);
         if (flowEngineService.isExistByFullName(flowEngineUpForm.getFullName(), id)) {
             throw new WorkFlowException("流程名称不能重复");
         }
@@ -257,9 +257,9 @@ public class FlowEngineController {
         }
 
         if (flowEngineEntity.getFormType() != 1) {
-            FormDataModel formData = JsonUtils.toObject(flowEngineEntity.getFormData(), FormDataModel.class);
-            List<FieLdsModel> list = JsonUtils.toList(formData.getFields(), FieLdsModel.class);
-            List<TableModel> tableModelList = JsonUtils.toList(flowEngineEntity.getFlowTables(), TableModel.class);
+            FormDataModel formData = JacksonUtils.toObject(flowEngineEntity.getFormData(), FormDataModel.class);
+            List<FieLdsModel> list = JacksonUtils.toList(formData.getFields(), FieLdsModel.class);
+            List<TableModel> tableModelList = JacksonUtils.toList(flowEngineEntity.getFlowTables(), TableModel.class);
             RecursionForm recursionForm = new RecursionForm(list, tableModelList);
             List<FormAllModel> formAllModel = new ArrayList<>();
             if (FormCloumnUtil.repetition(recursionForm, formAllModel)) {
@@ -352,7 +352,7 @@ public class FlowEngineController {
         }
         // 获取文件内容
         String fileContent = FileUtil.getFileContent(multipartFile, configValueUtil.getTemporaryFilePath());
-        FlowExportModel vo = JsonUtils.getJsonToBean(fileContent, FlowExportModel.class);
+        FlowExportModel vo = JacksonUtils.getJsonToBean(fileContent, FlowExportModel.class);
         return flowEngineService.ImportData(vo.getFlowEngine(), vo.getVisibleList());
     }
 }

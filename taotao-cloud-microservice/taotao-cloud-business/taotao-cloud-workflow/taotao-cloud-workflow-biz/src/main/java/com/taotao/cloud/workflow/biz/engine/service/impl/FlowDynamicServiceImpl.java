@@ -17,7 +17,7 @@
 package com.taotao.cloud.workflow.biz.engine.service.impl;
 
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.base.UserInfo;
 import com.taotao.cloud.workflow.biz.common.database.model.entity.DbLinkEntity;
 import com.taotao.cloud.workflow.biz.common.model.FormAllModel;
@@ -72,7 +72,7 @@ public class FlowDynamicServiceImpl implements FlowDynamicService {
     @Override
     public FlowTaskInfoVO info(FlowTaskEntity entity, String taskOperatorId) throws WorkFlowException {
         FlowEngineEntity flowEntity = flowEngineService.getInfo(entity.getFlowId());
-        List<TableModel> tableModelList = JsonUtils.toList(flowEntity.getFlowTables(), TableModel.class);
+        List<TableModel> tableModelList = JacksonUtils.toList(flowEntity.getFlowTables(), TableModel.class);
         FlowTaskInfoVO vo = FlowTaskConvert.INSTANCE.convert(entity);
         boolean infoData = true;
         if (StrUtil.isNotEmpty(taskOperatorId)) {
@@ -86,11 +86,11 @@ public class FlowDynamicServiceImpl implements FlowDynamicService {
         }
         if (infoData) {
             // formTempJson
-            FormDataModel formData = JsonUtils.toObject(entity.getFlowForm(), FormDataModel.class);
-            List<FieLdsModel> list = JsonUtils.toList(formData.getFields(), FieLdsModel.class);
+            FormDataModel formData = JacksonUtils.toObject(entity.getFlowForm(), FormDataModel.class);
+            List<FieLdsModel> list = JacksonUtils.toList(formData.getFields(), FieLdsModel.class);
             DbLinkEntity link = serviceUtil.getDbLink(flowEntity.getDbLinkId());
             Map<String, Object> result = flowDataUtil.info(list, entity, tableModelList, false, link);
-            vo.setData(JsonUtils.toJSONString(result));
+            vo.setData(JacksonUtils.toJSONString(result));
         }
         return vo;
     }
@@ -105,10 +105,10 @@ public class FlowDynamicServiceImpl implements FlowDynamicService {
         String title = info.getUserName() + "的" + entity.getFullName();
         String formId = RandomUtil.uuId();
         // tableJson
-        List<TableModel> tableModelList = JsonUtils.toList(entity.getFlowTables(), TableModel.class);
+        List<TableModel> tableModelList = JacksonUtils.toList(entity.getFlowTables(), TableModel.class);
         // formTempJson
-        FormDataModel formData = JsonUtils.toObject(entity.getFormData(), FormDataModel.class);
-        List<FieLdsModel> list = JsonUtils.toList(formData.getFields(), FieLdsModel.class);
+        FormDataModel formData = JacksonUtils.toObject(entity.getFormData(), FormDataModel.class);
+        List<FieLdsModel> list = JacksonUtils.toList(formData.getFields(), FieLdsModel.class);
         RecursionForm recursionForm = new RecursionForm(list, tableModelList);
         List<FormAllModel> formAllModel = new ArrayList<>();
         FormCloumnUtil.recursionForm(recursionForm, formAllModel);
@@ -119,7 +119,7 @@ public class FlowDynamicServiceImpl implements FlowDynamicService {
             formId = id;
         }
         // 表单值
-        Map<String, Object> dataMap = JsonUtils.toMap(data);
+        Map<String, Object> dataMap = JacksonUtils.toMap(data);
         Map<String, Object> result = new HashMap<>(16);
         DbLinkEntity link = serviceUtil.getDbLink(entity.getDbLinkId());
         if (type) {
@@ -143,10 +143,10 @@ public class FlowDynamicServiceImpl implements FlowDynamicService {
         String title = info.getUserName() + "的" + entity.getFullName();
         String formId = RandomUtil.uuId();
         // tableJson
-        List<TableModel> tableModelList = JsonUtils.toList(entity.getFlowTables(), TableModel.class);
+        List<TableModel> tableModelList = JacksonUtils.toList(entity.getFlowTables(), TableModel.class);
         // formTempJson
-        FormDataModel formData = JsonUtils.toObject(entity.getFormData(), FormDataModel.class);
-        List<FieLdsModel> list = JsonUtils.toList(formData.getFields(), FieLdsModel.class);
+        FormDataModel formData = JacksonUtils.toObject(entity.getFormData(), FormDataModel.class);
+        List<FieLdsModel> list = JacksonUtils.toList(formData.getFields(), FieLdsModel.class);
         List<FormAllModel> formAllModel = new ArrayList<>();
         RecursionForm recursionForm = new RecursionForm(list, tableModelList);
         FormCloumnUtil.recursionForm(recursionForm, formAllModel);
@@ -157,7 +157,7 @@ public class FlowDynamicServiceImpl implements FlowDynamicService {
             formId = id;
         }
         // 表单值
-        Map<String, Object> dataMap = JsonUtils.toMap(data);
+        Map<String, Object> dataMap = JacksonUtils.toMap(data);
         Map<String, Object> result = new HashMap<>(16);
         DbLinkEntity link = serviceUtil.getDbLink(entity.getDbLinkId());
         if (type) {
@@ -173,10 +173,10 @@ public class FlowDynamicServiceImpl implements FlowDynamicService {
     public Map<String, Object> getData(String flowId, String id) throws WorkFlowException {
         FlowTaskEntity entity = flowTaskService.getInfo(id);
         FlowEngineEntity flowentity = flowEngineService.getInfo(flowId);
-        List<TableModel> tableModelList = JsonUtils.toList(flowentity.getFlowTables(), TableModel.class);
+        List<TableModel> tableModelList = JacksonUtils.toList(flowentity.getFlowTables(), TableModel.class);
         // formTempJson
-        FormDataModel formData = JsonUtils.toObject(entity.getFlowForm(), FormDataModel.class);
-        List<FieLdsModel> list = JsonUtils.toList(formData.getFields(), FieLdsModel.class);
+        FormDataModel formData = JacksonUtils.toObject(entity.getFlowForm(), FormDataModel.class);
+        List<FieLdsModel> list = JacksonUtils.toList(formData.getFields(), FieLdsModel.class);
         DbLinkEntity link = serviceUtil.getDbLink(flowentity.getDbLinkId());
         return flowDataUtil.info(list, entity, tableModelList, true, link);
     }

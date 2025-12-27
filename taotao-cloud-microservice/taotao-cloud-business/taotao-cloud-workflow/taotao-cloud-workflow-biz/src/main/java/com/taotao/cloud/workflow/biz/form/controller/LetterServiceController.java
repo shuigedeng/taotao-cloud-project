@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.letterservice.LetterServiceForm;
 import com.taotao.cloud.workflow.biz.common.model.form.letterservice.LetterServiceInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
@@ -62,14 +62,14 @@ public class LetterServiceController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), LetterServiceInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), LetterServiceInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             LetterServiceEntity entity = letterServiceService.getInfo(id);
-            vo = JsonUtils.getJsonToBean(entity, LetterServiceInfoVO.class);
+            vo = JacksonUtils.getJsonToBean(entity, LetterServiceInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -88,7 +88,7 @@ public class LetterServiceController {
                 && !RegexUtils.checkDigit2(letterServiceForm.getShareNum())) {
             return Result.fail("份数只能输入正整数");
         }
-        LetterServiceEntity entity = JsonUtils.getJsonToBean(letterServiceForm, LetterServiceEntity.class);
+        LetterServiceEntity entity = JacksonUtils.getJsonToBean(letterServiceForm, LetterServiceEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(letterServiceForm.getStatus())) {
             letterServiceService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -113,7 +113,7 @@ public class LetterServiceController {
                 && !RegexUtils.checkDigit2(letterServiceForm.getShareNum())) {
             return Result.fail("份数只能输入正整数");
         }
-        LetterServiceEntity entity = JsonUtils.getJsonToBean(letterServiceForm, LetterServiceEntity.class);
+        LetterServiceEntity entity = JacksonUtils.getJsonToBean(letterServiceForm, LetterServiceEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(letterServiceForm.getStatus())) {
             letterServiceService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

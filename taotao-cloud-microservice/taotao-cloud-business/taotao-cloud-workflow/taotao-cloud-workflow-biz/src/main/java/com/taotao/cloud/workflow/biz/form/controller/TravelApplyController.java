@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.travelapply.TravelApplyForm;
 import com.taotao.cloud.workflow.biz.common.model.form.travelapply.TravelApplyInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
@@ -61,14 +61,14 @@ public class TravelApplyController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), TravelApplyInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), TravelApplyInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             TravelApplyEntity entity = travelApplyService.getInfo(id);
-            vo = JsonUtils.getJsonToBean(entity, TravelApplyInfoVO.class);
+            vo = JacksonUtils.getJsonToBean(entity, TravelApplyInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -82,7 +82,7 @@ public class TravelApplyController {
     @Operation("新建出差预支申请单")
     @PostMapping
     public Result create(@RequestBody TravelApplyForm travelApplyForm) throws WorkFlowException {
-        TravelApplyEntity entity = JsonUtils.getJsonToBean(travelApplyForm, TravelApplyEntity.class);
+        TravelApplyEntity entity = JacksonUtils.getJsonToBean(travelApplyForm, TravelApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(travelApplyForm.getStatus())) {
             travelApplyService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -102,7 +102,7 @@ public class TravelApplyController {
     @PutMapping("/{id}")
     public Result update(@RequestBody TravelApplyForm travelApplyForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        TravelApplyEntity entity = JsonUtils.getJsonToBean(travelApplyForm, TravelApplyEntity.class);
+        TravelApplyEntity entity = JacksonUtils.getJsonToBean(travelApplyForm, TravelApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(travelApplyForm.getStatus())) {
             travelApplyService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

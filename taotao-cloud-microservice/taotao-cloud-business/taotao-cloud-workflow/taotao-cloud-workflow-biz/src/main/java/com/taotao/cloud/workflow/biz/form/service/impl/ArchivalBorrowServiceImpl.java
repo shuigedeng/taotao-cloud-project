@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.form.service.impl;
 import com.baomidou.dynamic.datasource.annotation.DSTransactional;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.archivalborrow.ArchivalBorrowForm;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
@@ -100,8 +100,8 @@ public class ArchivalBorrowServiceImpl extends ServiceImpl<ArchivalBorrowMapper,
 
     @Override
     public void data(String id, String data) {
-        ArchivalBorrowForm archivalBorrowForm = JsonUtils.getJsonToBean(data, ArchivalBorrowForm.class);
-        ArchivalBorrowEntity entity = JsonUtils.getJsonToBean(archivalBorrowForm, ArchivalBorrowEntity.class);
+        ArchivalBorrowForm archivalBorrowForm = JacksonUtils.getJsonToBean(data, ArchivalBorrowForm.class);
+        ArchivalBorrowEntity entity = JacksonUtils.getJsonToBean(archivalBorrowForm, ArchivalBorrowEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

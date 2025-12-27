@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.vehicleapply.VehicleApplyForm;
 import com.taotao.cloud.workflow.biz.common.model.form.vehicleapply.VehicleApplyInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
@@ -63,14 +63,14 @@ public class VehicleApplyController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), VehicleApplyInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), VehicleApplyInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             VehicleApplyEntity entity = vehicleApplyService.getInfo(id);
-            vo = JsonUtils.getJsonToBean(entity, VehicleApplyInfoVO.class);
+            vo = JacksonUtils.getJsonToBean(entity, VehicleApplyInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -84,7 +84,7 @@ public class VehicleApplyController {
     @Operation("新建车辆申请")
     @PostMapping
     public Result create(@RequestBody VehicleApplyForm vehicleApplyForm) throws WorkFlowException {
-        VehicleApplyEntity entity = JsonUtils.getJsonToBean(vehicleApplyForm, VehicleApplyEntity.class);
+        VehicleApplyEntity entity = JacksonUtils.getJsonToBean(vehicleApplyForm, VehicleApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(vehicleApplyForm.getStatus())) {
             vehicleApplyService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -104,7 +104,7 @@ public class VehicleApplyController {
     @PutMapping("/{id}")
     public Result update(@RequestBody VehicleApplyForm vehicleApplyForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        VehicleApplyEntity entity = JsonUtils.getJsonToBean(vehicleApplyForm, VehicleApplyEntity.class);
+        VehicleApplyEntity entity = JacksonUtils.getJsonToBean(vehicleApplyForm, VehicleApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(vehicleApplyForm.getStatus())) {
             vehicleApplyService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.applydelivergoods.ApplyDeliverGoodsEntryInfoModel;
 import com.taotao.cloud.workflow.biz.common.model.form.applydelivergoods.ApplyDeliverGoodsForm;
 import com.taotao.cloud.workflow.biz.common.model.form.applydelivergoods.ApplyDeliverGoodsInfoVO;
@@ -66,7 +66,7 @@ public class ApplyDeliverGoodsController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), ApplyDeliverGoodsInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), ApplyDeliverGoodsInfoVO.class);
                     isData = false;
                 }
             }
@@ -74,8 +74,8 @@ public class ApplyDeliverGoodsController {
         if (isData) {
             ApplyDeliverGoodsEntity entity = applyDeliverGoodsService.getInfo(id);
             List<ApplyDeliverGoodsEntryEntity> entityList = applyDeliverGoodsService.getDeliverEntryList(id);
-            vo = JsonUtils.getJsonToBean(entity, ApplyDeliverGoodsInfoVO.class);
-            vo.setEntryList(JsonUtils.getJsonToList(entityList, ApplyDeliverGoodsEntryInfoModel.class));
+            vo = JacksonUtils.getJsonToBean(entity, ApplyDeliverGoodsInfoVO.class);
+            vo.setEntryList(JacksonUtils.getJsonToList(entityList, ApplyDeliverGoodsEntryInfoModel.class));
         }
         return Result.success(vo);
     }
@@ -90,9 +90,9 @@ public class ApplyDeliverGoodsController {
     @Operation("新建发货申请单")
     @PostMapping
     public Result create(@RequestBody @Valid ApplyDeliverGoodsForm applyDeliverGoodsForm) throws WorkFlowException {
-        ApplyDeliverGoodsEntity deliver = JsonUtils.getJsonToBean(applyDeliverGoodsForm, ApplyDeliverGoodsEntity.class);
+        ApplyDeliverGoodsEntity deliver = JacksonUtils.getJsonToBean(applyDeliverGoodsForm, ApplyDeliverGoodsEntity.class);
         List<ApplyDeliverGoodsEntryEntity> deliverEntryList =
-                JsonUtils.getJsonToList(applyDeliverGoodsForm.getEntryList(), ApplyDeliverGoodsEntryEntity.class);
+                JacksonUtils.getJsonToList(applyDeliverGoodsForm.getEntryList(), ApplyDeliverGoodsEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(applyDeliverGoodsForm.getStatus())) {
             applyDeliverGoodsService.save(deliver.getId(), deliver, deliverEntryList);
             return Result.success(MsgCode.SU002.get());
@@ -114,9 +114,9 @@ public class ApplyDeliverGoodsController {
     @PutMapping("/{id}")
     public Result update(@RequestBody @Valid ApplyDeliverGoodsForm applyDeliverGoodsForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        ApplyDeliverGoodsEntity deliver = JsonUtils.getJsonToBean(applyDeliverGoodsForm, ApplyDeliverGoodsEntity.class);
+        ApplyDeliverGoodsEntity deliver = JacksonUtils.getJsonToBean(applyDeliverGoodsForm, ApplyDeliverGoodsEntity.class);
         List<ApplyDeliverGoodsEntryEntity> deliverEntryList =
-                JsonUtils.getJsonToList(applyDeliverGoodsForm.getEntryList(), ApplyDeliverGoodsEntryEntity.class);
+                JacksonUtils.getJsonToList(applyDeliverGoodsForm.getEntryList(), ApplyDeliverGoodsEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(applyDeliverGoodsForm.getStatus())) {
             applyDeliverGoodsService.save(id, deliver, deliverEntryList);
             return Result.success(MsgCode.SU002.get());

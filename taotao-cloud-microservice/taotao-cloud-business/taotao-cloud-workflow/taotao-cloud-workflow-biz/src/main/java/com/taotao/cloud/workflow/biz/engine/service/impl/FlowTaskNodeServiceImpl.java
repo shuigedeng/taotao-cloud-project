@@ -20,7 +20,7 @@ package com.taotao.cloud.workflow.biz.engine.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.shuntjson.nodejson.ChildNodeList;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskNodeEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowNodeEnum;
@@ -30,7 +30,7 @@ import com.taotao.cloud.workflow.biz.engine.util.FlowNature;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 /** 流程节点 */
@@ -121,7 +121,7 @@ public class FlowTaskNodeServiceImpl extends ServiceImpl<FlowTaskNodeMapper, Flo
                     if (endCount.size() > 1) {
                         if (nodeNext.equals(entity.getNodeNext())) {
                             ChildNodeList modelList =
-                                    JsonUtils.toObject(entity.getNodePropertyJson(), ChildNodeList.class);
+                                    JacksonUtils.toObject(entity.getNodePropertyJson(), ChildNodeList.class);
                             // 添加指向下一节点的id
                             List<String> nextEndList =
                                     endCount.stream().map(t -> t.getNodeCode()).toList();
@@ -130,12 +130,12 @@ public class FlowTaskNodeServiceImpl extends ServiceImpl<FlowTaskNodeMapper, Flo
                             modelList.getCustom().setInterflow(true);
                             modelList.getCustom().setInterflowId(String.join(",", nextEndList));
                             modelList.getCustom().setInterflowNextId(nodeNext);
-                            entity.setNodePropertyJson(JsonUtils.toJSONString(modelList));
+                            entity.setNodePropertyJson(JacksonUtils.toJSONString(modelList));
                         }
                     }
                     // 至少2条下一节点一样,才有可能是分流
                     if (nextNum.size() > 1) {
-                        ChildNodeList modelList = JsonUtils.toObject(entity.getNodePropertyJson(), ChildNodeList.class);
+                        ChildNodeList modelList = JacksonUtils.toObject(entity.getNodePropertyJson(), ChildNodeList.class);
                         // 添加指向下一节点的id
                         List<String> nextEndList = nextNum.stream()
                                 .map(FlowTaskNodeEntity::getNodeCode)
@@ -145,7 +145,7 @@ public class FlowTaskNodeServiceImpl extends ServiceImpl<FlowTaskNodeMapper, Flo
                         modelList.getCustom().setInterflowId(String.join(",", nextEndList));
                         modelList.getCustom().setInterflowNextId(next);
                         modelList.getCustom().setInterflow(true);
-                        entity.setNodePropertyJson(JsonUtils.toJSONString(modelList));
+                        entity.setNodePropertyJson(JacksonUtils.toJSONString(modelList));
                     }
                     this.save(entity);
                 }

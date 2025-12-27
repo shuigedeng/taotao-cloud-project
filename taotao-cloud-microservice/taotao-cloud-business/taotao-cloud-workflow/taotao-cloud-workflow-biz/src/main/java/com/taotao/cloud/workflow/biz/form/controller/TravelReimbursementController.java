@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.travelreimbursement.TravelReimbursementForm;
 import com.taotao.cloud.workflow.biz.common.model.form.travelreimbursement.TravelReimbursementInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
@@ -62,14 +62,14 @@ public class TravelReimbursementController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), TravelReimbursementInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), TravelReimbursementInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             TravelReimbursementEntity entity = travelReimbursementService.getInfo(id);
-            vo = JsonUtils.getJsonToBean(entity, TravelReimbursementInfoVO.class);
+            vo = JacksonUtils.getJsonToBean(entity, TravelReimbursementInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -87,7 +87,7 @@ public class TravelReimbursementController {
             return Result.fail("结束时间不能小于起始时间");
         }
         TravelReimbursementEntity entity =
-                JsonUtils.getJsonToBean(travelReimbursementForm, TravelReimbursementEntity.class);
+                JacksonUtils.getJsonToBean(travelReimbursementForm, TravelReimbursementEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(travelReimbursementForm.getStatus())) {
             travelReimbursementService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -111,7 +111,7 @@ public class TravelReimbursementController {
             return Result.fail("结束时间不能小于起始时间");
         }
         TravelReimbursementEntity entity =
-                JsonUtils.getJsonToBean(travelReimbursementForm, TravelReimbursementEntity.class);
+                JacksonUtils.getJsonToBean(travelReimbursementForm, TravelReimbursementEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(travelReimbursementForm.getStatus())) {
             travelReimbursementService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.engine.util;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.shuntjson.childnode.ChildNode;
 import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.shuntjson.childnode.ProperCond;
 import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.shuntjson.childnode.Properties;
@@ -31,11 +31,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import lombok.Data;
-import lombok.experimental.*;
 import com.taotao.boot.common.utils.lang.StringUtils;
 
 /** 在线工作流开发 */
@@ -180,7 +178,7 @@ public class FlowJsonUtil {
         boolean flag = false;
         ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
         ScriptEngine scriptEngine = scriptEngineManager.getEngineByName("js");
-        Map<String, Object> map = JsonUtils.toMap(formDataJson);
+        Map<String, Object> map = JacksonUtils.toMap(formDataJson);
         StringBuilder expression = new StringBuilder();
         for (int i = 0; i < conditionList.size(); i++) {
             String logic = conditionList.get(i).getLogic();
@@ -243,7 +241,7 @@ public class FlowJsonUtil {
             ChildNodeList childNodeList = new ChildNodeList();
             childNodeList.setProperties(properties);
             // 定时器
-            DateProperties model = JsonUtils.toObject(properties, DateProperties.class);
+            DateProperties model = JacksonUtils.toObject(properties, DateProperties.class);
             childNodeList.setTimer(model);
             // 自定义属性
             Custom customModel = new Custom();
@@ -303,7 +301,7 @@ public class FlowJsonUtil {
             ChildNodeList childNodeList = new ChildNodeList();
             childNodeList.setProperties(properModel);
             // 定时器
-            DateProperties model = JsonUtils.toObject(properModel, DateProperties.class);
+            DateProperties model = JacksonUtils.toObject(properModel, DateProperties.class);
             childNodeList.setTimer(model);
             // 自定义属性
             Custom customModel = new Custom();
@@ -451,7 +449,7 @@ public class FlowJsonUtil {
             ChildNodeList childNodeList = new ChildNodeList();
             childNodeList.setProperties(properties);
             // 定时器
-            DateProperties model = JsonUtils.toObject(properties, DateProperties.class);
+            DateProperties model = JacksonUtils.toObject(properties, DateProperties.class);
             childNodeList.setTimer(model);
             // 自定义属性
             Custom customModel = new Custom();

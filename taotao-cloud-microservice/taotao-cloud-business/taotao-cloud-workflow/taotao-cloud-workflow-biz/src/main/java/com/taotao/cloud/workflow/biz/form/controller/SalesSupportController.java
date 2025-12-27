@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.salessupport.SalesSupportForm;
 import com.taotao.cloud.workflow.biz.common.model.form.salessupport.SalesSupportInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
@@ -61,14 +61,14 @@ public class SalesSupportController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), SalesSupportInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), SalesSupportInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             SalesSupportEntity entity = salesSupportService.getInfo(id);
-            vo = JsonUtils.getJsonToBean(entity, SalesSupportInfoVO.class);
+            vo = JacksonUtils.getJsonToBean(entity, SalesSupportInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -82,7 +82,7 @@ public class SalesSupportController {
     @Operation("新建保存销售支持表")
     @PostMapping
     public Result create(@RequestBody SalesSupportForm salesSupportForm) throws WorkFlowException {
-        SalesSupportEntity entity = JsonUtils.getJsonToBean(salesSupportForm, SalesSupportEntity.class);
+        SalesSupportEntity entity = JacksonUtils.getJsonToBean(salesSupportForm, SalesSupportEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(salesSupportForm.getStatus())) {
             salesSupportService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -102,7 +102,7 @@ public class SalesSupportController {
     @PutMapping("/{id}")
     public Result update(@RequestBody SalesSupportForm salesSupportForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        SalesSupportEntity entity = JsonUtils.getJsonToBean(salesSupportForm, SalesSupportEntity.class);
+        SalesSupportEntity entity = JacksonUtils.getJsonToBean(salesSupportForm, SalesSupportEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(salesSupportForm.getStatus())) {
             salesSupportService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

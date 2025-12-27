@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.finishedproduct.FinishedProductEntryEntityInfoModel;
 import com.taotao.cloud.workflow.biz.common.model.form.finishedproduct.FinishedProductForm;
 import com.taotao.cloud.workflow.biz.common.model.form.finishedproduct.FinishedProductInfoVO;
@@ -66,7 +66,7 @@ public class FinishedProductController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), FinishedProductInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), FinishedProductInfoVO.class);
                     isData = false;
                 }
             }
@@ -74,8 +74,8 @@ public class FinishedProductController {
         if (isData) {
             FinishedProductEntity entity = finishedProductService.getInfo(id);
             List<FinishedProductEntryEntity> entityList = finishedProductService.getFinishedEntryList(id);
-            vo = JsonUtils.getJsonToBean(entity, FinishedProductInfoVO.class);
-            vo.setEntryList(JsonUtils.getJsonToList(entityList, FinishedProductEntryEntityInfoModel.class));
+            vo = JacksonUtils.getJsonToBean(entity, FinishedProductInfoVO.class);
+            vo.setEntryList(JacksonUtils.getJsonToList(entityList, FinishedProductEntryEntityInfoModel.class));
         }
         return Result.success(vo);
     }
@@ -90,9 +90,9 @@ public class FinishedProductController {
     @Operation("新建成品入库单")
     @PostMapping
     public Result create(@RequestBody @Valid FinishedProductForm finishedProductForm) throws WorkFlowException {
-        FinishedProductEntity finished = JsonUtils.getJsonToBean(finishedProductForm, FinishedProductEntity.class);
+        FinishedProductEntity finished = JacksonUtils.getJsonToBean(finishedProductForm, FinishedProductEntity.class);
         List<FinishedProductEntryEntity> finishedEntryList =
-                JsonUtils.getJsonToList(finishedProductForm.getEntryList(), FinishedProductEntryEntity.class);
+                JacksonUtils.getJsonToList(finishedProductForm.getEntryList(), FinishedProductEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(finishedProductForm.getStatus())) {
             finishedProductService.save(finished.getId(), finished, finishedEntryList);
             return Result.success(MsgCode.SU002.get());
@@ -114,9 +114,9 @@ public class FinishedProductController {
     @PutMapping("/{id}")
     public Result update(@RequestBody @Valid FinishedProductForm finishedProductForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        FinishedProductEntity finished = JsonUtils.getJsonToBean(finishedProductForm, FinishedProductEntity.class);
+        FinishedProductEntity finished = JacksonUtils.getJsonToBean(finishedProductForm, FinishedProductEntity.class);
         List<FinishedProductEntryEntity> finishedEntryList =
-                JsonUtils.getJsonToList(finishedProductForm.getEntryList(), FinishedProductEntryEntity.class);
+                JacksonUtils.getJsonToList(finishedProductForm.getEntryList(), FinishedProductEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(finishedProductForm.getStatus())) {
             finishedProductService.save(id, finished, finishedEntryList);
             return Result.success(MsgCode.SU002.get());

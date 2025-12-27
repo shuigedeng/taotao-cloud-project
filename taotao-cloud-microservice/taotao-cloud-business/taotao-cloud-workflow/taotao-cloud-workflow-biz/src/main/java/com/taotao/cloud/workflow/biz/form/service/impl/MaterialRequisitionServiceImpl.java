@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.form.service.impl;
 import com.baomidou.dynamic.datasource.annotation.DSTransactional;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.materialrequisition.MaterialEntryEntityInfoModel;
 import com.taotao.cloud.workflow.biz.common.model.form.materialrequisition.MaterialRequisitionForm;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
@@ -153,14 +153,14 @@ public class MaterialRequisitionServiceImpl extends ServiceImpl<MaterialRequisit
 
     @Override
     public void data(String id, String data) {
-        MaterialRequisitionForm materialRequisitionForm = JsonUtils.getJsonToBean(data, MaterialRequisitionForm.class);
+        MaterialRequisitionForm materialRequisitionForm = JacksonUtils.getJsonToBean(data, MaterialRequisitionForm.class);
         MaterialRequisitionEntity entity =
-                JsonUtils.getJsonToBean(materialRequisitionForm, MaterialRequisitionEntity.class);
+                JacksonUtils.getJsonToBean(materialRequisitionForm, MaterialRequisitionEntity.class);
         List<MaterialEntryEntityInfoModel> entryList = materialRequisitionForm.getEntryList() != null
                 ? materialRequisitionForm.getEntryList()
                 : new ArrayList<>();
         List<MaterialEntryEntity> materialEntryEntityList =
-                JsonUtils.getJsonToList(entryList, MaterialEntryEntity.class);
+                JacksonUtils.getJsonToList(entryList, MaterialEntryEntity.class);
         entity.setId(id);
         QueryWrapper<MaterialEntryEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(MaterialEntryEntity::getLeadeId, entity.getId());

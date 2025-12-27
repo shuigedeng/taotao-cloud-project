@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.monthlyreport.MonthlyReportForm;
 import com.taotao.cloud.workflow.biz.common.model.form.monthlyreport.MonthlyReportInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
@@ -61,14 +61,14 @@ public class MonthlyReportController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), MonthlyReportInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), MonthlyReportInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             MonthlyReportEntity entity = monthlyReportService.getInfo(id);
-            vo = JsonUtils.getJsonToBean(entity, MonthlyReportInfoVO.class);
+            vo = JacksonUtils.getJsonToBean(entity, MonthlyReportInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -82,7 +82,7 @@ public class MonthlyReportController {
     @Operation("新建月工作总结")
     @PostMapping
     public Result create(@RequestBody MonthlyReportForm monthlyReportForm) throws WorkFlowException {
-        MonthlyReportEntity entity = JsonUtils.getJsonToBean(monthlyReportForm, MonthlyReportEntity.class);
+        MonthlyReportEntity entity = JacksonUtils.getJsonToBean(monthlyReportForm, MonthlyReportEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(monthlyReportForm.getStatus())) {
             monthlyReportService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -102,7 +102,7 @@ public class MonthlyReportController {
     @PutMapping("/{id}")
     public Result update(@RequestBody MonthlyReportForm monthlyReportForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        MonthlyReportEntity entity = JsonUtils.getJsonToBean(monthlyReportForm, MonthlyReportEntity.class);
+        MonthlyReportEntity entity = JacksonUtils.getJsonToBean(monthlyReportForm, MonthlyReportEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(monthlyReportForm.getStatus())) {
             monthlyReportService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

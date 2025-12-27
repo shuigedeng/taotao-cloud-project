@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.form.service.impl;
 import com.baomidou.dynamic.datasource.annotation.DSTransactional;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.expenseexpenditure.ExpenseExpenditureForm;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
@@ -100,9 +100,9 @@ public class ExpenseExpenditureServiceImpl extends ServiceImpl<ExpenseExpenditur
 
     @Override
     public void data(String id, String data) {
-        ExpenseExpenditureForm expenseExpenditureForm = JsonUtils.getJsonToBean(data, ExpenseExpenditureForm.class);
+        ExpenseExpenditureForm expenseExpenditureForm = JacksonUtils.getJsonToBean(data, ExpenseExpenditureForm.class);
         ExpenseExpenditureEntity entity =
-                JsonUtils.getJsonToBean(expenseExpenditureForm, ExpenseExpenditureEntity.class);
+                JacksonUtils.getJsonToBean(expenseExpenditureForm, ExpenseExpenditureEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

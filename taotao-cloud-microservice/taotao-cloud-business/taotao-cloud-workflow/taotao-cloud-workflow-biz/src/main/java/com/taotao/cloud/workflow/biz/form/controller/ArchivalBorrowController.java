@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.archivalborrow.ArchivalBorrowForm;
 import com.taotao.cloud.workflow.biz.common.model.form.archivalborrow.ArchivalBorrowInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
@@ -63,14 +63,14 @@ public class ArchivalBorrowController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), ArchivalBorrowInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), ArchivalBorrowInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             ArchivalBorrowEntity entity = archivalBorrowService.getInfo(id);
-            vo = JsonUtils.getJsonToBean(entity, ArchivalBorrowInfoVO.class);
+            vo = JacksonUtils.getJsonToBean(entity, ArchivalBorrowInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -87,7 +87,7 @@ public class ArchivalBorrowController {
         if (archivalBorrowForm.getBorrowingDate() > archivalBorrowForm.getReturnDate()) {
             return Result.fail("归还时间不能小于借阅时间");
         }
-        ArchivalBorrowEntity entity = JsonUtils.getJsonToBean(archivalBorrowForm, ArchivalBorrowEntity.class);
+        ArchivalBorrowEntity entity = JacksonUtils.getJsonToBean(archivalBorrowForm, ArchivalBorrowEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(archivalBorrowForm.getStatus())) {
             archivalBorrowService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -110,7 +110,7 @@ public class ArchivalBorrowController {
         if (archivalBorrowForm.getBorrowingDate() > archivalBorrowForm.getReturnDate()) {
             return Result.fail("归还时间不能小于借阅时间");
         }
-        ArchivalBorrowEntity entity = JsonUtils.getJsonToBean(archivalBorrowForm, ArchivalBorrowEntity.class);
+        ArchivalBorrowEntity entity = JacksonUtils.getJsonToBean(archivalBorrowForm, ArchivalBorrowEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(archivalBorrowForm.getStatus())) {
             archivalBorrowService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

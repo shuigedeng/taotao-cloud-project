@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import jakarta.annotation.Resource;
 
@@ -89,7 +89,7 @@ public class CompletableFutureController {
 
         HomeVO homeVO = resultFuture.join();
         result.setData(homeVO);
-        return JsonUtils.toJSONString(result);
+        return JacksonUtils.toJSONString(result);
     }
 
     @SneakyThrows

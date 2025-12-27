@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.biz.controller.business.buyer;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
@@ -98,7 +98,7 @@ public class MemberController {
 
         HomeVO homeVO = resultFuture.join();
         result.setData(homeVO);
-        return JsonUtils.toJSONString(result);
+        return JacksonUtils.toJSONString(result);
     }
 
     @SneakyThrows

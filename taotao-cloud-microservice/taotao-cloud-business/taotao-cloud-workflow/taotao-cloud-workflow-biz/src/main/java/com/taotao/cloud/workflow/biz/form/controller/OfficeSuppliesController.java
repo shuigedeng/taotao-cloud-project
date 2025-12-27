@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.officesupplies.OfficeSuppliesForm;
 import com.taotao.cloud.workflow.biz.common.model.form.officesupplies.OfficeSuppliesInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
@@ -62,14 +62,14 @@ public class OfficeSuppliesController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), OfficeSuppliesInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), OfficeSuppliesInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             OfficeSuppliesEntity entity = officeSuppliesService.getInfo(id);
-            vo = JsonUtils.getJsonToBean(entity, OfficeSuppliesInfoVO.class);
+            vo = JacksonUtils.getJsonToBean(entity, OfficeSuppliesInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -83,7 +83,7 @@ public class OfficeSuppliesController {
     @Operation("新建领用办公用品申请表")
     @PostMapping
     public Result create(@RequestBody OfficeSuppliesForm officeSuppliesForm) throws WorkFlowException {
-        OfficeSuppliesEntity entity = JsonUtils.getJsonToBean(officeSuppliesForm, OfficeSuppliesEntity.class);
+        OfficeSuppliesEntity entity = JacksonUtils.getJsonToBean(officeSuppliesForm, OfficeSuppliesEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(officeSuppliesForm.getStatus())) {
             officeSuppliesService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -103,7 +103,7 @@ public class OfficeSuppliesController {
     @PutMapping("/{id}")
     public Result update(@RequestBody OfficeSuppliesForm officeSuppliesForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        OfficeSuppliesEntity entity = JsonUtils.getJsonToBean(officeSuppliesForm, OfficeSuppliesEntity.class);
+        OfficeSuppliesEntity entity = JacksonUtils.getJsonToBean(officeSuppliesForm, OfficeSuppliesEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(officeSuppliesForm.getStatus())) {
             officeSuppliesService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

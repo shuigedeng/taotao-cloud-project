@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.biz.engine.controller;
 
 import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.cloud.workflow.biz.common.base.Pagination;
 import com.taotao.cloud.workflow.biz.common.base.vo.PaginationVO;
@@ -60,8 +60,8 @@ public class FlowDelegateController {
     @GetMapping("/page")
     public Result<PageResult<FlowDelegatListVO>> list(Pagination pagination) {
         List<FlowDelegateEntity> list = flowDelegateService.getList(pagination);
-        PaginationVO paginationVO = JsonUtils.getJsonToBean(pagination, PaginationVO.class);
-        List<FlowDelegatListVO> listVO = JsonUtils.getJsonToList(list, FlowDelegatListVO.class);
+        PaginationVO paginationVO = JacksonUtils.getJsonToBean(pagination, PaginationVO.class);
+        List<FlowDelegatListVO> listVO = JacksonUtils.getJsonToList(list, FlowDelegatListVO.class);
         return Result.page(listVO, paginationVO);
     }
 

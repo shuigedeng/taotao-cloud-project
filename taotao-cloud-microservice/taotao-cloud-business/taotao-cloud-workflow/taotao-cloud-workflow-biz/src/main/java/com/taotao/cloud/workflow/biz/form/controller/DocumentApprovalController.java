@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.documentapproval.DocumentApprovalForm;
 import com.taotao.cloud.workflow.biz.common.model.form.documentapproval.DocumentApprovalInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
@@ -63,14 +63,14 @@ public class DocumentApprovalController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), DocumentApprovalInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), DocumentApprovalInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             DocumentApprovalEntity entity = documentApprovalService.getInfo(id);
-            vo = JsonUtils.getJsonToBean(entity, DocumentApprovalInfoVO.class);
+            vo = JacksonUtils.getJsonToBean(entity, DocumentApprovalInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -84,7 +84,7 @@ public class DocumentApprovalController {
     @Operation("新建文件签批意见表")
     @PostMapping
     public Result create(@RequestBody @Valid DocumentApprovalForm documentApprovalForm) throws WorkFlowException {
-        DocumentApprovalEntity entity = JsonUtils.getJsonToBean(documentApprovalForm, DocumentApprovalEntity.class);
+        DocumentApprovalEntity entity = JacksonUtils.getJsonToBean(documentApprovalForm, DocumentApprovalEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(documentApprovalForm.getStatus())) {
             documentApprovalService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -104,7 +104,7 @@ public class DocumentApprovalController {
     @PutMapping("/{id}")
     public Result update(@RequestBody @Valid DocumentApprovalForm documentApprovalForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        DocumentApprovalEntity entity = JsonUtils.getJsonToBean(documentApprovalForm, DocumentApprovalEntity.class);
+        DocumentApprovalEntity entity = JacksonUtils.getJsonToBean(documentApprovalForm, DocumentApprovalEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(documentApprovalForm.getStatus())) {
             documentApprovalService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

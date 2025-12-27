@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.batchpack.BatchPackForm;
 import com.taotao.cloud.workflow.biz.common.model.form.batchpack.BatchPackInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
@@ -62,14 +62,14 @@ public class BatchPackController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), BatchPackInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), BatchPackInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             BatchPackEntity entity = batchPackService.getInfo(id);
-            vo = JsonUtils.getJsonToBean(entity, BatchPackInfoVO.class);
+            vo = JacksonUtils.getJsonToBean(entity, BatchPackInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -88,7 +88,7 @@ public class BatchPackController {
                 && !RegexUtils.checkDigit2(batchPackForm.getProductionQuty())) {
             return Result.fail("批产数量只能输入正整数");
         }
-        BatchPackEntity entity = JsonUtils.getJsonToBean(batchPackForm, BatchPackEntity.class);
+        BatchPackEntity entity = JacksonUtils.getJsonToBean(batchPackForm, BatchPackEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(batchPackForm.getStatus())) {
             batchPackService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -113,7 +113,7 @@ public class BatchPackController {
                 && !RegexUtils.checkDigit2(batchPackForm.getProductionQuty())) {
             return Result.fail("批产数量只能输入正整数");
         }
-        BatchPackEntity entity = JsonUtils.getJsonToBean(batchPackForm, BatchPackEntity.class);
+        BatchPackEntity entity = JacksonUtils.getJsonToBean(batchPackForm, BatchPackEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(batchPackForm.getStatus())) {
             batchPackService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

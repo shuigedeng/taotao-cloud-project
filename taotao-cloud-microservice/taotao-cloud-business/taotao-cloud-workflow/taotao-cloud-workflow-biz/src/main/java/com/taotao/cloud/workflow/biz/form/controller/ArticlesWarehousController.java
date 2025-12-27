@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.articleswarehous.ArticlesWarehousForm;
 import com.taotao.cloud.workflow.biz.common.model.form.articleswarehous.ArticlesWarehousInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
@@ -62,14 +62,14 @@ public class ArticlesWarehousController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), ArticlesWarehousInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), ArticlesWarehousInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             ArticlesWarehousEntity entity = articlesWarehousService.getInfo(id);
-            vo = JsonUtils.getJsonToBean(entity, ArticlesWarehousInfoVO.class);
+            vo = JacksonUtils.getJsonToBean(entity, ArticlesWarehousInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -88,7 +88,7 @@ public class ArticlesWarehousController {
                 && !RegexUtils.checkDigit2(articlesWarehousForm.getEstimatePeople())) {
             return Result.fail("数量只能输入正整数");
         }
-        ArticlesWarehousEntity entity = JsonUtils.getJsonToBean(articlesWarehousForm, ArticlesWarehousEntity.class);
+        ArticlesWarehousEntity entity = JacksonUtils.getJsonToBean(articlesWarehousForm, ArticlesWarehousEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(articlesWarehousForm.getStatus())) {
             articlesWarehousService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -113,7 +113,7 @@ public class ArticlesWarehousController {
                 && !RegexUtils.checkDigit2(articlesWarehousForm.getEstimatePeople())) {
             return Result.fail("数量只能输入正整数");
         }
-        ArticlesWarehousEntity entity = JsonUtils.getJsonToBean(articlesWarehousForm, ArticlesWarehousEntity.class);
+        ArticlesWarehousEntity entity = JacksonUtils.getJsonToBean(articlesWarehousForm, ArticlesWarehousEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(articlesWarehousForm.getStatus())) {
             articlesWarehousService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

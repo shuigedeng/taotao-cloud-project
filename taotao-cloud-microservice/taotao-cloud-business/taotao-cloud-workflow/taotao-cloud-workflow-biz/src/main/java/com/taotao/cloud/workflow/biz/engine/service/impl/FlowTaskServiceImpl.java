@@ -23,7 +23,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.boot.data.mybatis.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.workflow.api.vo.UserRelationEntity;
 import com.taotao.cloud.workflow.biz.common.constant.MsgCode;
@@ -309,7 +309,7 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
         List<FlowTaskListModel> result = new LinkedList<>();
         for (FlowTaskListModel entity : data) {
             List<Date> list = StringUtils.isNotEmpty(entity.getDescription())
-                    ? JsonUtils.getJsonToList(entity.getDescription(), Date.class)
+                    ? JacksonUtils.getJsonToList(entity.getDescription(), Date.class)
                     : new ArrayList<>();
             boolean delegate = true;
             boolean isuser = entity.getHandleId().equals(userId);
@@ -429,7 +429,7 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
         }
         List<FlowTaskListModel> data = this.baseMapper.getWaitList(dbSql.toString());
         // 返回数据
-        List<FlowTaskEntity> result = JsonUtils.getJsonToList(data, FlowTaskEntity.class);
+        List<FlowTaskEntity> result = JacksonUtils.getJsonToList(data, FlowTaskEntity.class);
         return result;
     }
 
@@ -458,7 +458,7 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
         }
         List<FlowTaskListModel> data = this.baseMapper.getWaitList(dbSql.toString());
         // 返回数据
-        List<FlowTaskEntity> result = JsonUtils.toList(data, FlowTaskEntity.class);
+        List<FlowTaskEntity> result = JacksonUtils.toList(data, FlowTaskEntity.class);
         return result;
     }
 
@@ -470,7 +470,7 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
         dbSql.append(" AND (");
         dbSql.append("o.F_HandleId = '" + userId + "' )  Order by F_CreatorTime DESC");
         List<FlowTaskListModel> data = this.baseMapper.getWaitList(dbSql.toString());
-        List<FlowTaskEntity> result = JsonUtils.toList(data, FlowTaskEntity.class);
+        List<FlowTaskEntity> result = JacksonUtils.toList(data, FlowTaskEntity.class);
         return result;
     }
 
@@ -482,7 +482,7 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
         dbSql.append(" AND (");
         dbSql.append("o.F_HandleId = '" + userId + "' )  Order by F_CreatorTime DESC");
         List<FlowTaskListModel> data = this.baseMapper.getWaitList(dbSql.toString());
-        List<FlowTaskEntity> result = JsonUtils.getJsonToList(data, FlowTaskEntity.class);
+        List<FlowTaskEntity> result = JacksonUtils.getJsonToList(data, FlowTaskEntity.class);
         if (result.size() > 20) {
             return result.subList(0, 20);
         }

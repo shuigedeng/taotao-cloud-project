@@ -26,7 +26,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.common.CodeUtil;
 import com.taotao.boot.common.utils.id.IdGeneratorUtils;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.boot.common.utils.common.RandomUtils;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.cloud.workflow.api.vo.entity.DictionaryDataEntity;
@@ -454,7 +454,7 @@ public class FlowEngineServiceImpl extends ServiceImpl<FlowEngineMapper, FlowEng
     private List<FlowEngineVisibleEntity> visibleList(FlowEngineEntity entity) {
         List<FlowEngineVisibleEntity> visibleList = new ArrayList<>();
         if (entity.getFlowTemplateJson() != null) {
-            ChildNode childNode = JsonUtils.toObject(entity.getFlowTemplateJson(), ChildNode.class);
+            ChildNode childNode = JacksonUtils.toObject(entity.getFlowTemplateJson(), ChildNode.class);
             Properties properties = childNode.getProperties();
             // 可见的用户
             for (String user : properties.getInitiator()) {

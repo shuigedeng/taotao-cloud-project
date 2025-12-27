@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.config.redis.delegate;
 
 import tools.jackson.core.JacksonException;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.biz.service.ILogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class RequestLogTopicMessageDelegate {
 
     public void handleRequestLog(String message, String channel) {
         try {
-            Log log = JsonUtils.MAPPER.readValue(message, Log.class);
+            Log log = JacksonUtils.MAPPER.readValue(message, Log.class);
             logService.save(log);
         } catch (JacksonException e) {
             LogUtils.error(e);

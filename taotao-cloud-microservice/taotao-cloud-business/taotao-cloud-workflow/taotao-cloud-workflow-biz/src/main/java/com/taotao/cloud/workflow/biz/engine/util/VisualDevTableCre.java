@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.engine.util;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.database.model.DbTableFieldModel;
 import com.taotao.cloud.workflow.biz.common.model.FormAllModel;
 import com.taotao.cloud.workflow.biz.common.model.FormColumnTableModel;
@@ -34,7 +34,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -266,7 +266,7 @@ public class VisualDevTableCre {
         tableModel.setTableName(isforeign ? "子表" : "主表");
         tableModel.setTableField(isforeign ? "f_foreignId" : "");
         tableModel.setTypeId(isforeign ? "0" : "1");
-        tableModel.setFields(JsonUtils.toList(dbtable, TableFields.class));
+        tableModel.setFields(JacksonUtils.toList(dbtable, TableFields.class));
         tableModelList.add(tableModel);
     }
 

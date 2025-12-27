@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.conbilling.ConBillingForm;
 import com.taotao.cloud.workflow.biz.common.model.form.conbilling.ConBillingInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
@@ -62,14 +62,14 @@ public class ConBillingController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), ConBillingInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), ConBillingInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             ConBillingEntity entity = conBillingService.getInfo(id);
-            vo = JsonUtils.getJsonToBean(entity, ConBillingInfoVO.class);
+            vo = JacksonUtils.getJsonToBean(entity, ConBillingInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -93,7 +93,7 @@ public class ConBillingController {
                 && !RegexUtils.checkDecimals2(String.valueOf(conBillingForm.getPayAmount()))) {
             return Result.fail("付款金额必须大于0，最多可以精确到小数点后两位");
         }
-        ConBillingEntity entity = JsonUtils.getJsonToBean(conBillingForm, ConBillingEntity.class);
+        ConBillingEntity entity = JacksonUtils.getJsonToBean(conBillingForm, ConBillingEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(conBillingForm.getStatus())) {
             conBillingService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -123,7 +123,7 @@ public class ConBillingController {
                 && !RegexUtils.checkDecimals2(String.valueOf(conBillingForm.getPayAmount()))) {
             return Result.fail("付款金额必须大于0，最多可以精确到小数点后两位");
         }
-        ConBillingEntity entity = JsonUtils.getJsonToBean(conBillingForm, ConBillingEntity.class);
+        ConBillingEntity entity = JacksonUtils.getJsonToBean(conBillingForm, ConBillingEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(conBillingForm.getStatus())) {
             conBillingService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

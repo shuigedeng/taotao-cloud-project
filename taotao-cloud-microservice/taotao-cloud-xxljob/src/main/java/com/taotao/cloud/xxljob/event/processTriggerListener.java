@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.xxljob.event;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.dingtalk.entity.DingerRequest;
 import com.taotao.boot.dingtalk.enums.MessageSubType;
@@ -25,7 +25,6 @@ import com.taotao.cloud.xxljob.model.XxlJobGroup;
 import com.taotao.cloud.xxljob.model.XxlJobInfo;
 import com.taotao.cloud.xxljob.model.XxlJobLog;
 import com.taotao.cloud.xxljob.scheduler.config.XxlJobAdminBootstrap;
-import com.xxl.tool.response.Response;
 import com.xxl.tool.response.ResponseCode;
 import jakarta.mail.internet.MimeMessage;
 import java.text.MessageFormat;
@@ -71,7 +70,7 @@ public class processTriggerListener {
 		data.put("执行job信息", info);
 		data.put("执行时间", time);
 
-		String jsonData = JsonUtils.toJSONString(data);
+		String jsonData = JacksonUtils.toJSONString(data);
 
 		dingerSender.send(MessageSubType.TEXT, DingerRequest.request(jsonData));
 	}

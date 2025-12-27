@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.supports.core.mongo.service;
 
 import com.taotao.boot.common.model.result.PageResult;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -76,13 +76,13 @@ public class DataVersionLogMongoService implements DataVersionLogService {
         if (param.getDataContent() instanceof String) {
             dataVersionLog.setDataContent((String) param.getDataContent());
         } else {
-            dataVersionLog.setDataContent(JsonUtils.toJson(param.getDataContent()));
+            dataVersionLog.setDataContent(JacksonUtils.toJson(param.getDataContent()));
         }
         if (param.getChangeContent() instanceof String) {
             dataVersionLog.setChangeContent(param.getChangeContent());
         } else {
             if (Objects.nonNull(param.getChangeContent())) {
-                dataVersionLog.setChangeContent(JsonUtils.toJson(param.getChangeContent()));
+                dataVersionLog.setChangeContent(JacksonUtils.toJson(param.getChangeContent()));
             }
         }
         dataVersionLog.setId(IdUtil.getSnowflakeNextId());

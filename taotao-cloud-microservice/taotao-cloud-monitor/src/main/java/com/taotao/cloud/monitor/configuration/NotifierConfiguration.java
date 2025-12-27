@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.monitor.configuration;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.boot.common.utils.date.DateUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.dingtalk.entity.DingerRequest;
@@ -180,7 +180,7 @@ public class NotifierConfiguration {
                                     ((InstanceStatusChangedEvent) event)
                                             .getStatusInfo()
                                             .getDetails();
-                            str.append("[服务详情]: ").append(JsonUtils.toJSONString(details));
+                            str.append("[服务详情]: ").append(JacksonUtils.toJSONString(details));
 
                             LogUtils.info(
                                     "微服务监控回调数据 event: {}, instance: {}, message: {}",

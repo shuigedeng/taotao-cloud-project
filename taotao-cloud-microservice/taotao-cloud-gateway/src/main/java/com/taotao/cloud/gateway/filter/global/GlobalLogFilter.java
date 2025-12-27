@@ -17,7 +17,7 @@
 package com.taotao.cloud.gateway.filter.global;
 
 import cn.hutool.core.map.MapUtil;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;
 import com.taotao.cloud.gateway.utils.WebFluxUtils;
@@ -66,7 +66,7 @@ public class GlobalLogFilter implements GlobalFilter, Ordered {
         } else {
             MultiValueMap<String, String> parameterMap = request.getQueryParams();
             if (MapUtil.isNotEmpty(parameterMap)) {
-                String parameters = JsonUtils.toJSONString(parameterMap);
+                String parameters = JacksonUtils.toJSONString(parameterMap);
                 LogUtils.info("[PLUS]开始请求 => URL[{}],参数类型[param],参数:[{}]", url, parameters);
             } else {
                 LogUtils.info("[PLUS]开始请求 => URL[{}],无参数", url);

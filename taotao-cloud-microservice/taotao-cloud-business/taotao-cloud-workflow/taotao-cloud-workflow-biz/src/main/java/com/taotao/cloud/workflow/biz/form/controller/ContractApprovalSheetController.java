@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.contractapprovalsheet.ContractApprovalSheetForm;
 import com.taotao.cloud.workflow.biz.common.model.form.contractapprovalsheet.ContractApprovalSheetInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
@@ -64,14 +64,14 @@ public class ContractApprovalSheetController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), ContractApprovalSheetInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), ContractApprovalSheetInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             ContractApprovalSheetEntity entity = contractApprovalSheetService.getInfo(id);
-            vo = JsonUtils.getJsonToBean(entity, ContractApprovalSheetInfoVO.class);
+            vo = JacksonUtils.getJsonToBean(entity, ContractApprovalSheetInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -100,7 +100,7 @@ public class ContractApprovalSheetController {
             return Result.fail("支出金额必须大于0，最多可以输入两位小数点");
         }
         ContractApprovalSheetEntity entity =
-                JsonUtils.getJsonToBean(contractApprovalSheetForm, ContractApprovalSheetEntity.class);
+                JacksonUtils.getJsonToBean(contractApprovalSheetForm, ContractApprovalSheetEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(contractApprovalSheetForm.getStatus())) {
             contractApprovalSheetService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -135,7 +135,7 @@ public class ContractApprovalSheetController {
             return Result.fail("支出金额必须大于0，最多可以输入两位小数点");
         }
         ContractApprovalSheetEntity entity =
-                JsonUtils.getJsonToBean(contractApprovalSheetForm, ContractApprovalSheetEntity.class);
+                JacksonUtils.getJsonToBean(contractApprovalSheetForm, ContractApprovalSheetEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(contractApprovalSheetForm.getStatus())) {
             contractApprovalSheetService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

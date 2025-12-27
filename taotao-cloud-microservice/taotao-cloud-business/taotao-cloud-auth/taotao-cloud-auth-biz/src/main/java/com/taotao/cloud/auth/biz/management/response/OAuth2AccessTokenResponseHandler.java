@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.biz.management.response;
 
 import static com.taotao.cloud.auth.biz.utils.JsonNodeUtils.STRING_OBJECT_MAP;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.boot.common.utils.servlet.ResponseUtils;
 import com.taotao.boot.security.spring.constants.BaseConstants;
 import com.taotao.boot.security.spring.constants.HttpHeaders;
@@ -109,7 +109,7 @@ public class OAuth2AccessTokenResponseHandler implements AuthenticationSuccessHa
             Object details = authentication.getDetails();
             if (isTtcUserInfoPattern(sessionId, details)) {
                 PrincipalDetails authenticationDetails = (PrincipalDetails) details;
-                String data = JsonUtils.toJson(authenticationDetails);
+                String data = JacksonUtils.toJson(authenticationDetails);
                 String encryptData = httpCryptoProcessor.encrypt(sessionId, data);
                 Map<String, Object> parameters = new HashMap<>(additionalParameters);
                 parameters.put(BaseConstants.OPEN_ID, encryptData);

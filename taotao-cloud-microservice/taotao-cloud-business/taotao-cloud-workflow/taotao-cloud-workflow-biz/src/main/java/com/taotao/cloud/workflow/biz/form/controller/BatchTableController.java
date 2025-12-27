@@ -17,7 +17,7 @@
 package com.taotao.cloud.workflow.biz.form.controller;
 
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.constant.MsgCode;
 import com.taotao.cloud.workflow.biz.common.model.form.batchtable.BatchTableForm;
 import com.taotao.cloud.workflow.biz.common.model.form.batchtable.BatchTableInfoVO;
@@ -66,14 +66,14 @@ public class BatchTableController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), BatchTableInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), BatchTableInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             BatchTableEntity entity = batchTableService.getInfo(id);
-            vo = JsonUtils.getJsonToBean(entity, BatchTableInfoVO.class);
+            vo = JacksonUtils.getJsonToBean(entity, BatchTableInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -92,7 +92,7 @@ public class BatchTableController {
                 && !RegexUtils.checkDigit2(batchTableForm.getShareNum())) {
             return Result.fail("份数只能输入正整数");
         }
-        BatchTableEntity entity = JsonUtils.getJsonToBean(batchTableForm, BatchTableEntity.class);
+        BatchTableEntity entity = JacksonUtils.getJsonToBean(batchTableForm, BatchTableEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(batchTableForm.getStatus())) {
             batchTableService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -117,7 +117,7 @@ public class BatchTableController {
                 && !RegexUtils.checkDigit2(batchTableForm.getShareNum())) {
             return Result.fail("份数只能输入正整数");
         }
-        BatchTableEntity entity = JsonUtils.getJsonToBean(batchTableForm, BatchTableEntity.class);
+        BatchTableEntity entity = JacksonUtils.getJsonToBean(batchTableForm, BatchTableEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(batchTableForm.getStatus())) {
             batchTableService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

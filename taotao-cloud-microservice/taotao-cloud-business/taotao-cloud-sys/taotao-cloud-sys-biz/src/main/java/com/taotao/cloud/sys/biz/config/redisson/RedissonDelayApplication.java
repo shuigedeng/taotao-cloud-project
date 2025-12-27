@@ -25,12 +25,10 @@ import com.taotao.boot.cache.redis.delay.message.QueueMessage;
 import com.taotao.boot.cache.redis.delay.message.QueueMessageBuilder;
 import com.taotao.boot.cache.redis.delay.message.RedissonHeaders;
 import com.taotao.boot.cache.redis.delay.message.RedissonMessage;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import java.util.Map;
 import lombok.Data;
-import lombok.experimental.*;
-import lombok.experimental.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.handler.annotation.Header;
@@ -66,7 +64,7 @@ public class RedissonDelayApplication {
             public Object fromMessage( RedissonMessage redissonMessage ) throws MessageConversionException {
                 String payload = redissonMessage.getPayload();
                 String payloadStr = new String(payload);
-                return JsonUtils.toObject(payloadStr, CarLbsDto.class);
+                return JacksonUtils.toObject(payloadStr, CarLbsDto.class);
             }
         };
     }

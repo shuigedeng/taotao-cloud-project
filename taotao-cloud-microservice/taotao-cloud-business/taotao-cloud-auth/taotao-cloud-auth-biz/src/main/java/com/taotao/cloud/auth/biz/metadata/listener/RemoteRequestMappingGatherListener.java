@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.metadata.listener;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.boot.security.spring.event.RemoteRequestMappingGatherEvent;
 import com.taotao.boot.security.spring.event.domain.RequestMapping;
 import com.taotao.cloud.auth.biz.metadata.processor.RequestMappingStoreProcessor;
@@ -57,7 +57,7 @@ public class RemoteRequestMappingGatherListener
         log.debug(" Fetch data [{}]", requestMapping);
         if (ObjectUtils.isNotEmpty(requestMapping)) {
             List<RequestMapping> requestMappings =
-                    JsonUtils.toList(requestMapping, RequestMapping.class);
+                    JacksonUtils.toList(requestMapping, RequestMapping.class);
             if (CollectionUtils.isNotEmpty(requestMappings)) {
                 requestMappingStoreProcessor.postProcess(requestMappings);
             }

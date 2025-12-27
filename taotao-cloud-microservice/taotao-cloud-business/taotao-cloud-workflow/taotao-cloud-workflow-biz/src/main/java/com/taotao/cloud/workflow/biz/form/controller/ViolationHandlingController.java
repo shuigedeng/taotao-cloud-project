@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.violationhandling.ViolationHandlingForm;
 import com.taotao.cloud.workflow.biz.common.model.form.violationhandling.ViolationHandlingInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
@@ -63,14 +63,14 @@ public class ViolationHandlingController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), ViolationHandlingInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), ViolationHandlingInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             ViolationHandlingEntity entity = violationHandlingService.getInfo(id);
-            vo = JsonUtils.getJsonToBean(entity, ViolationHandlingInfoVO.class);
+            vo = JacksonUtils.getJsonToBean(entity, ViolationHandlingInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -84,7 +84,7 @@ public class ViolationHandlingController {
     @Operation("新建违章处理申请表")
     @PostMapping
     public Result create(@RequestBody ViolationHandlingForm violationHandlingForm) throws WorkFlowException {
-        ViolationHandlingEntity entity = JsonUtils.getJsonToBean(violationHandlingForm, ViolationHandlingEntity.class);
+        ViolationHandlingEntity entity = JacksonUtils.getJsonToBean(violationHandlingForm, ViolationHandlingEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(violationHandlingForm.getStatus())) {
             violationHandlingService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -104,7 +104,7 @@ public class ViolationHandlingController {
     @PutMapping("/{id}")
     public Result update(@RequestBody ViolationHandlingForm violationHandlingForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        ViolationHandlingEntity entity = JsonUtils.getJsonToBean(violationHandlingForm, ViolationHandlingEntity.class);
+        ViolationHandlingEntity entity = JacksonUtils.getJsonToBean(violationHandlingForm, ViolationHandlingEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(violationHandlingForm.getStatus())) {
             violationHandlingService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

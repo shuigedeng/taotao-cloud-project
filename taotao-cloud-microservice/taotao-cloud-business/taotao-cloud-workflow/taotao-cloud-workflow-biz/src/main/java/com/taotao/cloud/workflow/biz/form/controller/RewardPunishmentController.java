@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.rewardpunishment.RewardPunishmentForm;
 import com.taotao.cloud.workflow.biz.common.model.form.rewardpunishment.RewardPunishmentInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
@@ -64,14 +64,14 @@ public class RewardPunishmentController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), RewardPunishmentInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), RewardPunishmentInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             RewardPunishmentEntity entity = rewardPunishmentService.getInfo(id);
-            vo = JsonUtils.getJsonToBean(entity, RewardPunishmentInfoVO.class);
+            vo = JacksonUtils.getJsonToBean(entity, RewardPunishmentInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -85,7 +85,7 @@ public class RewardPunishmentController {
     @Operation("新建行政赏罚单")
     @PostMapping
     public Result create(@RequestBody RewardPunishmentForm rewardPunishmentForm) throws WorkFlowException {
-        RewardPunishmentEntity entity = JsonUtils.getJsonToBean(rewardPunishmentForm, RewardPunishmentEntity.class);
+        RewardPunishmentEntity entity = JacksonUtils.getJsonToBean(rewardPunishmentForm, RewardPunishmentEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(rewardPunishmentForm.getStatus())) {
             rewardPunishmentService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -105,7 +105,7 @@ public class RewardPunishmentController {
     @PutMapping("/{id}")
     public Result update(@RequestBody RewardPunishmentForm rewardPunishmentForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        RewardPunishmentEntity entity = JsonUtils.getJsonToBean(rewardPunishmentForm, RewardPunishmentEntity.class);
+        RewardPunishmentEntity entity = JacksonUtils.getJsonToBean(rewardPunishmentForm, RewardPunishmentEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(rewardPunishmentForm.getStatus())) {
             rewardPunishmentService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

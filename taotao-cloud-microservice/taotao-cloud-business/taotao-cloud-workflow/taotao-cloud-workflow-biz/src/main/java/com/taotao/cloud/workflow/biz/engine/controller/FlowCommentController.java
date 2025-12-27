@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.biz.engine.controller;
 
 import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.cloud.workflow.api.vo.UserEntity;
 import com.taotao.cloud.workflow.biz.common.base.vo.PaginationVO;
@@ -82,7 +82,7 @@ public class FlowCommentController {
                 commentModel.setCreatorUserHeadIcon(UploaderUtil.uploaderImg(userEntity.getHeadIcon()));
             }
         }
-        PaginationVO vo = JsonUtils.getJsonToBean(pagination, PaginationVO.class);
+        PaginationVO vo = JacksonUtils.getJsonToBean(pagination, PaginationVO.class);
         return Result.success(null);
     }
 

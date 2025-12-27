@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.debitbill.DebitBillForm;
 import com.taotao.cloud.workflow.biz.common.model.form.debitbill.DebitBillInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
@@ -62,14 +62,14 @@ public class DebitBillController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), DebitBillInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), DebitBillInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             DebitBillEntity entity = debitBillService.getInfo(id);
-            vo = JsonUtils.getJsonToBean(entity, DebitBillInfoVO.class);
+            vo = JacksonUtils.getJsonToBean(entity, DebitBillInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -88,7 +88,7 @@ public class DebitBillController {
                 && !RegexUtils.checkDecimals2(String.valueOf(debitBillForm.getAmountDebit()))) {
             return Result.fail("借支金额必须大于0，最多可以输入两位小数点");
         }
-        DebitBillEntity entity = JsonUtils.getJsonToBean(debitBillForm, DebitBillEntity.class);
+        DebitBillEntity entity = JacksonUtils.getJsonToBean(debitBillForm, DebitBillEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(debitBillForm.getStatus())) {
             debitBillService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -113,7 +113,7 @@ public class DebitBillController {
                 && !RegexUtils.checkDecimals2(String.valueOf(debitBillForm.getAmountDebit()))) {
             return Result.fail("借支金额必须大于0，最多可以输入两位小数点");
         }
-        DebitBillEntity entity = JsonUtils.getJsonToBean(debitBillForm, DebitBillEntity.class);
+        DebitBillEntity entity = JacksonUtils.getJsonToBean(debitBillForm, DebitBillEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(debitBillForm.getStatus())) {
             debitBillService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

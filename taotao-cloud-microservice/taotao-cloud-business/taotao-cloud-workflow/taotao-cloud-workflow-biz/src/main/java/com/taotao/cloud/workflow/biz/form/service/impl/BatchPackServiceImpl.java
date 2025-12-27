@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.form.service.impl;
 import com.baomidou.dynamic.datasource.annotation.DSTransactional;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.batchpack.BatchPackForm;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
@@ -99,8 +99,8 @@ public class BatchPackServiceImpl extends ServiceImpl<BatchPackMapper, BatchPack
 
     @Override
     public void data(String id, String data) {
-        BatchPackForm batchPackForm = JsonUtils.getJsonToBean(data, BatchPackForm.class);
-        BatchPackEntity entity = JsonUtils.getJsonToBean(batchPackForm, BatchPackEntity.class);
+        BatchPackForm batchPackForm = JacksonUtils.getJsonToBean(data, BatchPackForm.class);
+        BatchPackEntity entity = JacksonUtils.getJsonToBean(batchPackForm, BatchPackEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

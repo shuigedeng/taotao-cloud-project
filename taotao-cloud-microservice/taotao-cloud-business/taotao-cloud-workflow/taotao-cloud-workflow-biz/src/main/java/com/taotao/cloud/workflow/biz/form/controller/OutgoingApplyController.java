@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.outgoingapply.OutgoingApplyForm;
 import com.taotao.cloud.workflow.biz.common.model.form.outgoingapply.OutgoingApplyInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
@@ -61,14 +61,14 @@ public class OutgoingApplyController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), OutgoingApplyInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), OutgoingApplyInfoVO.class);
                     isData = false;
                 }
             }
         }
         if (isData) {
             OutgoingApplyEntity entity = outgoingApplyService.getInfo(id);
-            vo = JsonUtils.getJsonToBean(entity, OutgoingApplyInfoVO.class);
+            vo = JacksonUtils.getJsonToBean(entity, OutgoingApplyInfoVO.class);
         }
         return Result.success(vo);
     }
@@ -85,7 +85,7 @@ public class OutgoingApplyController {
         if (outgoingApplyForm.getStartTime() > outgoingApplyForm.getEndTime()) {
             return Result.fail("结束时间不能小于起始时间");
         }
-        OutgoingApplyEntity entity = JsonUtils.getJsonToBean(outgoingApplyForm, OutgoingApplyEntity.class);
+        OutgoingApplyEntity entity = JacksonUtils.getJsonToBean(outgoingApplyForm, OutgoingApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(outgoingApplyForm.getStatus())) {
             outgoingApplyService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -108,7 +108,7 @@ public class OutgoingApplyController {
         if (outgoingApplyForm.getStartTime() > outgoingApplyForm.getEndTime()) {
             return Result.fail("结束时间不能小于起始时间");
         }
-        OutgoingApplyEntity entity = JsonUtils.getJsonToBean(outgoingApplyForm, OutgoingApplyEntity.class);
+        OutgoingApplyEntity entity = JacksonUtils.getJsonToBean(outgoingApplyForm, OutgoingApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(outgoingApplyForm.getStatus())) {
             outgoingApplyService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

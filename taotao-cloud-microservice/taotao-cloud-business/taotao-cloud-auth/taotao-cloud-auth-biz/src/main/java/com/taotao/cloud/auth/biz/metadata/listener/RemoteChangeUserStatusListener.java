@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.metadata.listener;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.boot.security.spring.event.RemoteChangeUserStatusEvent;
 import com.taotao.boot.security.spring.event.domain.UserStatus;
 import com.taotao.cloud.auth.biz.strategy.local.SysUserService;
@@ -52,7 +52,7 @@ public class RemoteChangeUserStatusListener
         String data = event.getData();
         log.debug(" Fetch data [{}]", data);
         if (ObjectUtils.isNotEmpty(data)) {
-            UserStatus userStatus = JsonUtils.toObject(data, UserStatus.class);
+            UserStatus userStatus = JacksonUtils.toObject(data, UserStatus.class);
             if (ObjectUtils.isNotEmpty(userStatus)) {
                 DataItemStatus dataItemStatus = DataItemStatus.valueOf(userStatus.getStatus());
                 if (ObjectUtils.isNotEmpty(dataItemStatus)) {

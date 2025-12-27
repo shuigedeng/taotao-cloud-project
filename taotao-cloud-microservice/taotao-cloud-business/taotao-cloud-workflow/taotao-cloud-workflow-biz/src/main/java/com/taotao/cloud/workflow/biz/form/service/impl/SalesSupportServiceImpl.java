@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.form.service.impl;
 import com.baomidou.dynamic.datasource.annotation.DSTransactional;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.salessupport.SalesSupportForm;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
@@ -61,13 +61,13 @@ public class SalesSupportServiceImpl extends ServiceImpl<SalesSupportMapper, Sal
             save(entity);
             billRuleService.useBillNumber("WF_SalesSupportNo");
             // 添加附件
-            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JacksonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.createFile(data);
         } else {
             entity.setId(id);
             this.updateById(entity);
             // 更新附件
-            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JacksonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.updateFile(data);
         }
         // 流程信息
@@ -91,13 +91,13 @@ public class SalesSupportServiceImpl extends ServiceImpl<SalesSupportMapper, Sal
             save(entity);
             billRuleService.useBillNumber("WF_SalesSupportNo");
             // 添加附件
-            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JacksonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.createFile(data);
         } else {
             entity.setId(id);
             this.updateById(entity);
             // 更新附件
-            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JacksonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.updateFile(data);
         }
         // 流程信息
@@ -115,8 +115,8 @@ public class SalesSupportServiceImpl extends ServiceImpl<SalesSupportMapper, Sal
 
     @Override
     public void data(String id, String data) {
-        SalesSupportForm salesSupportForm = JsonUtils.getJsonToBean(data, SalesSupportForm.class);
-        SalesSupportEntity entity = JsonUtils.getJsonToBean(salesSupportForm, SalesSupportEntity.class);
+        SalesSupportForm salesSupportForm = JacksonUtils.getJsonToBean(data, SalesSupportForm.class);
+        SalesSupportEntity entity = JacksonUtils.getJsonToBean(salesSupportForm, SalesSupportEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

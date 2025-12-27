@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.form.service.impl;
 import com.baomidou.dynamic.datasource.annotation.DSTransactional;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.travelapply.TravelApplyForm;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
@@ -100,8 +100,8 @@ public class TravelApplyServiceImpl extends ServiceImpl<TravelApplyMapper, Trave
 
     @Override
     public void data(String id, String data) {
-        TravelApplyForm travelApplyForm = JsonUtils.getJsonToBean(data, TravelApplyForm.class);
-        TravelApplyEntity entity = JsonUtils.getJsonToBean(travelApplyForm, TravelApplyEntity.class);
+        TravelApplyForm travelApplyForm = JacksonUtils.getJsonToBean(data, TravelApplyForm.class);
+        TravelApplyEntity entity = JacksonUtils.getJsonToBean(travelApplyForm, TravelApplyEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

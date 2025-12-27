@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.materialrequisition.MaterialEntryEntityInfoModel;
 import com.taotao.cloud.workflow.biz.common.model.form.materialrequisition.MaterialRequisitionForm;
 import com.taotao.cloud.workflow.biz.common.model.form.materialrequisition.MaterialRequisitionInfoVO;
@@ -66,7 +66,7 @@ public class MaterialRequisitionController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), MaterialRequisitionInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), MaterialRequisitionInfoVO.class);
                     isData = false;
                 }
             }
@@ -74,8 +74,8 @@ public class MaterialRequisitionController {
         if (isData) {
             MaterialRequisitionEntity entity = materialRequisitionService.getInfo(id);
             List<MaterialEntryEntity> entityList = materialRequisitionService.getMaterialEntryList(id);
-            vo = JsonUtils.getJsonToBean(entity, MaterialRequisitionInfoVO.class);
-            vo.setEntryList(JsonUtils.getJsonToList(entityList, MaterialEntryEntityInfoModel.class));
+            vo = JacksonUtils.getJsonToBean(entity, MaterialRequisitionInfoVO.class);
+            vo.setEntryList(JacksonUtils.getJsonToList(entityList, MaterialEntryEntityInfoModel.class));
         }
         return Result.success(vo);
     }
@@ -91,9 +91,9 @@ public class MaterialRequisitionController {
     @PostMapping
     public Result create(@RequestBody @Valid MaterialRequisitionForm materialRequisitionForm) throws WorkFlowException {
         MaterialRequisitionEntity material =
-                JsonUtils.getJsonToBean(materialRequisitionForm, MaterialRequisitionEntity.class);
+                JacksonUtils.getJsonToBean(materialRequisitionForm, MaterialRequisitionEntity.class);
         List<MaterialEntryEntity> materialEntryList =
-                JsonUtils.getJsonToList(materialRequisitionForm.getEntryList(), MaterialEntryEntity.class);
+                JacksonUtils.getJsonToList(materialRequisitionForm.getEntryList(), MaterialEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(materialRequisitionForm.getStatus())) {
             materialRequisitionService.save(material.getId(), material, materialEntryList);
             return Result.success(MsgCode.SU002.get());
@@ -117,9 +117,9 @@ public class MaterialRequisitionController {
             @RequestBody @Valid MaterialRequisitionForm materialRequisitionForm, @PathVariable("id") String id)
             throws WorkFlowException {
         MaterialRequisitionEntity material =
-                JsonUtils.getJsonToBean(materialRequisitionForm, MaterialRequisitionEntity.class);
+                JacksonUtils.getJsonToBean(materialRequisitionForm, MaterialRequisitionEntity.class);
         List<MaterialEntryEntity> materialEntryList =
-                JsonUtils.getJsonToList(materialRequisitionForm.getEntryList(), MaterialEntryEntity.class);
+                JacksonUtils.getJsonToList(materialRequisitionForm.getEntryList(), MaterialEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(materialRequisitionForm.getStatus())) {
             materialRequisitionService.save(id, material, materialEntryList);
             return Result.success(MsgCode.SU002.get());

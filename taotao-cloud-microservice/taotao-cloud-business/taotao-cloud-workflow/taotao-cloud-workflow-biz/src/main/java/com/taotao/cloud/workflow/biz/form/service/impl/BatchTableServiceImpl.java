@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.form.service.impl;
 import com.baomidou.dynamic.datasource.annotation.DSTransactional;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.form.entity.BatchTableEntity;
 import com.taotao.cloud.workflow.biz.form.mapper.BatchTableMapper;
@@ -59,13 +59,13 @@ public class BatchTableServiceImpl extends ServiceImpl<BatchTableMapper, BatchTa
             this.save(entity);
             billRuleService.useBillNumber("WF_BatchTableNo");
             // 添加附件
-            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JacksonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.createFile(data);
         } else {
             entity.setId(id);
             this.updateById(entity);
             // 更新附件
-            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JacksonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.updateFile(data);
         }
         // 流程信息
@@ -89,13 +89,13 @@ public class BatchTableServiceImpl extends ServiceImpl<BatchTableMapper, BatchTa
             this.save(entity);
             billRuleService.useBillNumber("WF_BatchTableNo");
             // 添加附件
-            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JacksonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.createFile(data);
         } else {
             entity.setId(id);
             this.updateById(entity);
             // 更新附件
-            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JacksonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.updateFile(data);
         }
         // 流程信息
@@ -113,8 +113,8 @@ public class BatchTableServiceImpl extends ServiceImpl<BatchTableMapper, BatchTa
 
     @Override
     public void data(String id, String data) {
-        BatchTableForm batchTableForm = JsonUtils.getJsonToBean(data, BatchTableForm.class);
-        BatchTableEntity entity = JsonUtils.getJsonToBean(batchTableForm, BatchTableEntity.class);
+        BatchTableForm batchTableForm = JacksonUtils.getJsonToBean(data, BatchTableForm.class);
+        BatchTableEntity entity = JacksonUtils.getJsonToBean(batchTableForm, BatchTableEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

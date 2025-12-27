@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.engine.controller;
 
 import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.base.vo.PaginationVO;
 import com.taotao.cloud.workflow.biz.common.constant.MsgCode;
 import com.taotao.cloud.workflow.biz.common.model.engine.FlowHandleModel;
@@ -85,7 +85,7 @@ public class FlowLaunchController {
             }
             listVO.add(vo);
         }
-        PaginationVO paginationVO = JsonUtils.getJsonToBean(paginationFlowTask, PaginationVO.class);
+        PaginationVO paginationVO = JacksonUtils.getJsonToBean(paginationFlowTask, PaginationVO.class);
         return Result.page(listVO, paginationVO);
     }
 

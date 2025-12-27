@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.boot.common.utils.lang.StringUtils;
 import com.taotao.cloud.workflow.api.vo.UserEntity;
@@ -144,9 +144,9 @@ public class FlowBeforeController {
                         .ifPresent(engine -> vo.setFormType(engine.getFormType()));
 
                 if (isBatch) {
-                    ChildNodeList childNode = JsonUtils.toObject(vo.getApproversProperties(), ChildNodeList.class);
+                    ChildNodeList childNode = JacksonUtils.toObject(vo.getApproversProperties(), ChildNodeList.class);
                     assert childNode != null;
-                    vo.setApproversProperties(JsonUtils.toJSONString(childNode.getProperties()));
+                    vo.setApproversProperties(JacksonUtils.toJSONString(childNode.getProperties()));
                 }
 
                 vo.setFlowVersion(StringUtils.isEmpty(vo.getFlowVersion()) ? "" : "v" + vo.getFlowVersion());
@@ -201,10 +201,10 @@ public class FlowBeforeController {
             if (FlowNature.CUSTOM.equals(engine.getFormType())) {
                 Object data = formDataAll.get("data");
                 if (data != null) {
-                    formDataAll = JsonUtils.toMap(String.valueOf(data));
+                    formDataAll = JacksonUtils.toMap(String.valueOf(data));
                 }
             }
-            flowTaskOperatorEntity.setDraftData(JsonUtils.toJSONString(formDataAll));
+            flowTaskOperatorEntity.setDraftData(JacksonUtils.toJSONString(formDataAll));
             flowTaskOperatorService.updateById(flowTaskOperatorEntity);
             return Result.success(true);
         }
@@ -313,7 +313,7 @@ public class FlowBeforeController {
     public Result<PageResult<FlowCandidateUserModel>> candidateUser(
             @PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel) throws WorkFlowException {
         List<FlowCandidateUserModel> candidate = flowTaskNewService.candidateUser(id, flowHandleModel);
-        PaginationVO paginationVO = JsonUtils.getJsonToBean(flowHandleModel, PaginationVO.class);
+        PaginationVO paginationVO = JacksonUtils.getJsonToBean(flowHandleModel, PaginationVO.class);
         return Result.page(candidate, paginationVO);
     }
 
@@ -329,7 +329,7 @@ public class FlowBeforeController {
     public Result<List<FlowBatchModel>> nodeSelector(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity engine = flowEngineService.getInfo(id);
         List<FlowBatchModel> batchList = new ArrayList<>();
-        ChildNode childNodeAll = JsonUtils.toObject(engine.getFlowTemplateJson(), ChildNode.class);
+        ChildNode childNodeAll = JacksonUtils.toObject(engine.getFlowTemplateJson(), ChildNode.class);
         // 获取流程节点
         List<ChildNodeList> nodeListAll = new ArrayList<>();
         List<ConditionList> conditionListAll = new ArrayList<>();

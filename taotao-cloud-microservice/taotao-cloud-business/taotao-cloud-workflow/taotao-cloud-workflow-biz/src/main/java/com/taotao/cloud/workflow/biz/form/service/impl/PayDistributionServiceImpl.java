@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.form.service.impl;
 import com.baomidou.dynamic.datasource.annotation.DSTransactional;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.paydistribution.PayDistributionForm;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
@@ -100,8 +100,8 @@ public class PayDistributionServiceImpl extends ServiceImpl<PayDistributionMappe
 
     @Override
     public void data(String id, String data) {
-        PayDistributionForm payDistributionForm = JsonUtils.getJsonToBean(data, PayDistributionForm.class);
-        PayDistributionEntity entity = JsonUtils.getJsonToBean(payDistributionForm, PayDistributionEntity.class);
+        PayDistributionForm payDistributionForm = JacksonUtils.getJsonToBean(data, PayDistributionForm.class);
+        PayDistributionEntity entity = JacksonUtils.getJsonToBean(payDistributionForm, PayDistributionEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

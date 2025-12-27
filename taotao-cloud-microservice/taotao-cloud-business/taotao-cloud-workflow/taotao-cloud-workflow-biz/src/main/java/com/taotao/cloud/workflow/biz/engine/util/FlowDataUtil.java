@@ -17,7 +17,7 @@
 package com.taotao.cloud.workflow.biz.engine.util;
 
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.api.vo.OrganizeEntity;
 import com.taotao.cloud.workflow.api.vo.PositionEntity;
 import com.taotao.cloud.workflow.api.vo.UserEntity;
@@ -178,7 +178,7 @@ public class FlowDataUtil {
             DbLinkEntity link)
             throws WorkFlowException {
         Map<String, Object> data = StrUtil.isNotEmpty(entity.getFlowFormContentJson())
-                ? JsonUtils.stringToMap(entity.getFlowFormContentJson())
+                ? JacksonUtils.stringToMap(entity.getFlowFormContentJson())
                 : new HashMap<>(16);
         DataModel dataModel = new DataModel(data, fieLdslist, tableList, entity.getId(), link, convert);
         return this.info(dataModel);
@@ -501,7 +501,7 @@ public class FlowDataUtil {
                     value = new ArrayList<>();
                 } else {
                     if (isTable) {
-                        value = JsonUtils.toMap(String.valueOf(value));
+                        value = JacksonUtils.toMap(String.valueOf(value));
                     }
                 }
                 break;
@@ -512,7 +512,7 @@ public class FlowDataUtil {
                     value = new ArrayList<>();
                 } else {
                     if (isTable) {
-                        value = JsonUtils.toList(String.valueOf(value), String.class);
+                        value = JacksonUtils.toList(String.valueOf(value), String.class);
                     }
                 }
                 break;
@@ -520,9 +520,9 @@ public class FlowDataUtil {
             case WorkflowKeyConsts.ADDRESS:
                 if (isTable) {
                     if (multiple) {
-                        value = JsonUtils.toObject(String.valueOf(value), String[][].class);
+                        value = JacksonUtils.toObject(String.valueOf(value), String[][].class);
                     } else {
-                        value = JsonUtils.toList(String.valueOf(value), String.class);
+                        value = JacksonUtils.toList(String.valueOf(value), String.class);
                     }
                 }
                 break;
@@ -532,7 +532,7 @@ public class FlowDataUtil {
             case WorkflowKeyConsts.POSSELECT:
                 if (isTable) {
                     if (multiple) {
-                        value = JsonUtils.toList(String.valueOf(value), String.class);
+                        value = JacksonUtils.toList(String.valueOf(value), String.class);
                     }
                 }
                 break;
@@ -562,11 +562,11 @@ public class FlowDataUtil {
                 } else {
                     if (isTable) {
                         PropsBeanModel propsModel =
-                                JsonUtils.toObject(fieLdsModel.getProps().getProps(), PropsBeanModel.class);
+                                JacksonUtils.toObject(fieLdsModel.getProps().getProps(), PropsBeanModel.class);
                         if (propsModel.getMultiple()) {
-                            value = JsonUtils.toObject(String.valueOf(value), String[][].class);
+                            value = JacksonUtils.toObject(String.valueOf(value), String[][].class);
                         } else {
-                            value = JsonUtils.toObject(String.valueOf(value), String.class);
+                            value = JacksonUtils.toObject(String.valueOf(value), String.class);
                         }
                     }
                 }

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.outboundorder.OutboundEntryEntityInfoModel;
 import com.taotao.cloud.workflow.biz.common.model.form.outboundorder.OutboundOrderInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;
@@ -63,7 +63,7 @@ public class OutboundOrderController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), OutboundOrderInfoVO.class);
+                    vo = JacksonUtils.getJsonToBean(operator.getDraftData(), OutboundOrderInfoVO.class);
                     isData = false;
                 }
             }
@@ -71,8 +71,8 @@ public class OutboundOrderController {
         if (isData) {
             OutboundOrderEntity entity = outboundOrderService.getInfo(id);
             List<OutboundEntryEntity> entityList = outboundOrderService.getOutboundEntryList(id);
-            vo = JsonUtils.getJsonToBean(entity, OutboundOrderInfoVO.class);
-            vo.setEntryList(JsonUtils.getJsonToList(entityList, OutboundEntryEntityInfoModel.class));
+            vo = JacksonUtils.getJsonToBean(entity, OutboundOrderInfoVO.class);
+            vo.setEntryList(JacksonUtils.getJsonToList(entityList, OutboundEntryEntityInfoModel.class));
         }
         return Result.success(vo);
     }
@@ -87,9 +87,9 @@ public class OutboundOrderController {
     @Operation("新建出库单")
     @PostMapping
     public Result create(@RequestBody OutboundOrderForm outboundOrderForm) throws WorkFlowException {
-        OutboundOrderEntity outbound = JsonUtils.getJsonToBean(outboundOrderForm, OutboundOrderEntity.class);
+        OutboundOrderEntity outbound = JacksonUtils.getJsonToBean(outboundOrderForm, OutboundOrderEntity.class);
         List<OutboundEntryEntity> outboundEntryList =
-                JsonUtils.getJsonToList(outboundOrderForm.getEntryList(), OutboundEntryEntity.class);
+                JacksonUtils.getJsonToList(outboundOrderForm.getEntryList(), OutboundEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(outboundOrderForm.getStatus())) {
             outboundOrderService.save(outbound.getId(), outbound, outboundEntryList);
             return Result.success(MsgCode.SU002.get());
@@ -111,9 +111,9 @@ public class OutboundOrderController {
     @PutMapping("/{id}")
     public Result update(@RequestBody OutboundOrderForm outboundOrderForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        OutboundOrderEntity outbound = JsonUtils.getJsonToBean(outboundOrderForm, OutboundOrderEntity.class);
+        OutboundOrderEntity outbound = JacksonUtils.getJsonToBean(outboundOrderForm, OutboundOrderEntity.class);
         List<OutboundEntryEntity> outboundEntryList =
-                JsonUtils.getJsonToList(outboundOrderForm.getEntryList(), OutboundEntryEntity.class);
+                JacksonUtils.getJsonToList(outboundOrderForm.getEntryList(), OutboundEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(outboundOrderForm.getStatus())) {
             outboundOrderService.save(id, outbound, outboundEntryList);
             return Result.success(MsgCode.SU002.get());

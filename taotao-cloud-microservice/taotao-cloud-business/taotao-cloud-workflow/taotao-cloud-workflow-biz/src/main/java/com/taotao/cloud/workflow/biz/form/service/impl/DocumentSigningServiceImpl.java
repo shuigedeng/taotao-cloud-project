@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.form.service.impl;
 import com.baomidou.dynamic.datasource.annotation.DSTransactional;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskService;
 import com.taotao.cloud.workflow.biz.engine.util.ModelUtil;
 import com.taotao.cloud.workflow.biz.form.entity.DocumentSigningEntity;
@@ -64,13 +64,13 @@ public class DocumentSigningServiceImpl extends ServiceImpl<DocumentSigningMappe
             this.save(entity);
             billRuleService.useBillNumber("WF_DocumentSigningNo");
             // 添加附件
-            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JacksonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.createFile(data);
         } else {
             entity.setId(id);
             this.updateById(entity);
             // 更新附件
-            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JacksonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.updateFile(data);
         }
         // 流程信息
@@ -94,13 +94,13 @@ public class DocumentSigningServiceImpl extends ServiceImpl<DocumentSigningMappe
             this.save(entity);
             billRuleService.useBillNumber("WF_DocumentSigningNo");
             // 添加附件
-            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JacksonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.createFile(data);
         } else {
             entity.setId(id);
             this.updateById(entity);
             // 更新附件
-            List<FileModel> data = JsonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
+            List<FileModel> data = JacksonUtils.getJsonToList(entity.getFileJson(), FileModel.class);
             fileManageUtil.updateFile(data);
         }
         // 流程信息
@@ -118,8 +118,8 @@ public class DocumentSigningServiceImpl extends ServiceImpl<DocumentSigningMappe
 
     @Override
     public void data(String id, String data) {
-        DocumentSigningForm documentSigningForm = JsonUtils.getJsonToBean(data, DocumentSigningForm.class);
-        DocumentSigningEntity entity = JsonUtils.getJsonToBean(documentSigningForm, DocumentSigningEntity.class);
+        DocumentSigningForm documentSigningForm = JacksonUtils.getJsonToBean(data, DocumentSigningForm.class);
+        DocumentSigningEntity entity = JacksonUtils.getJsonToBean(documentSigningForm, DocumentSigningEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }
