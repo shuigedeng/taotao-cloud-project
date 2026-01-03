@@ -166,7 +166,7 @@ plugins {
 
     //用于运行 SonarQube 分析的 Gradle 插件。
     //https://plugins.gradle.org/plugin/org.sonarqube
-    id "org.sonarqube" version "7.2.1.6560"
+    id "org.sonarqube" version "7.2.2.6593"
 
     //Spring Boot 可以轻松创建独立的、生产级的基于 Spring 的应用程序，您可以“直接运行”
     // 我们对 Spring 平台和第三方库持固执己见的看法，
@@ -180,7 +180,7 @@ plugins {
 
     //Protobuf 插件为您的项目提供 protobuf 编译。
     //https://plugins.gradle.org/plugin/com.google.protobuf
-    id "com.google.protobuf" version "0.9.5"
+    id "com.google.protobuf" version "0.9.6"
 
     //https://github.com/diffplug/spotless/blob/main/plugin-gradle/README.md
     //https://plugins.gradle.org/plugin/com.diffplug.spotless

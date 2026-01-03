@@ -94,13 +94,13 @@ apply plugin: 'com.vanniktech.maven.publish'
 description = "Maven插件模块"
 
 dependencies {
-    implementation 'org.apache.maven:maven-core:3.9.11'
-    implementation 'org.apache.maven:maven-model:3.9.11'
-    implementation 'org.apache.maven:maven-plugin-api:3.9.11'
+    implementation 'org.apache.maven:maven-core:3.9.12'
+    implementation 'org.apache.maven:maven-model:3.9.12'
+    implementation 'org.apache.maven:maven-plugin-api:3.9.12'
 
     implementation "com.google.guava:guava:33.5.0-jre"
 
-    implementation 'org.apache.maven.plugin-tools:maven-plugin-annotations:3.15.1'
+    implementation 'org.apache.maven.plugin-tools:maven-plugin-annotations:3.15.2'
 
     testImplementation 'org.junit.jupiter:junit-jupiter:6.0.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:6.0.1'
