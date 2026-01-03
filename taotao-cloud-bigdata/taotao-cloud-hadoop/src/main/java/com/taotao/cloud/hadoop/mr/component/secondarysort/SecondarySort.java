@@ -43,7 +43,7 @@ public class SecondarySort {
      * SecondarySortMapper
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     static class SecondarySortMapper extends Mapper<LongWritable, Text, OrderBean, NullWritable> {
@@ -65,7 +65,7 @@ public class SecondarySort {
      * SecondarySortReducer
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     static class SecondarySortReducer extends Reducer<OrderBean, NullWritable, OrderBean, NullWritable> {

@@ -23,7 +23,7 @@ import com.taotao.boot.common.support.hash.api.IHashCode;
  * AbstractLoadBalanceHash
  *
  * @author shuigedeng
- * @version 2026.01
+ * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
 public abstract class AbstractLoadBalanceHash<T extends IServer> extends AbstractLoadBalance<T> {

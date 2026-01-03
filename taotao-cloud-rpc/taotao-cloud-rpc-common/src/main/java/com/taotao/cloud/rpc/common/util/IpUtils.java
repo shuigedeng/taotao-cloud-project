@@ -41,7 +41,7 @@ import org.apache.hc.core5.http.io.entity.EntityUtils;
  * IpUtils
  *
  * @author shuigedeng
- * @version 2026.01
+ * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
 @Slf4j
@@ -244,7 +244,7 @@ public class IpUtils {
  * CitySN
  *
  * @author shuigedeng
- * @version 2026.01
+ * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
 class CitySN {

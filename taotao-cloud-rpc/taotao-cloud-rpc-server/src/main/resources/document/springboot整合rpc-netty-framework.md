@@ -135,7 +135,7 @@
  * Test
  *
  * @author shuigedeng
- * @version 2026.01
+ * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
 public class Test {
@@ -160,7 +160,7 @@ public class Test {
  * SpringBootClientStarter
  *
  * @author shuigedeng
- * @version 2026.01
+ * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
 @SpringBootApplication
@@ -280,7 +280,7 @@ public class HelloController {
  * ResourceConfig
  *
  * @author shuigedeng
- * @version 2026.01
+ * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
 @Configuration
@@ -367,7 +367,7 @@ public class SpringContextUtil implements ApplicationContextAware {
  * RpcServerStarter
  *
  * @author shuigedeng
- * @version 2026.01
+ * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
 @Slf4j

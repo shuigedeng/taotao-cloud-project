@@ -44,7 +44,7 @@ public class RJoin {
      * RJoinMapper
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     static class RJoinMapper extends Mapper<LongWritable, Text, Text, InfoBean> {
@@ -98,7 +98,7 @@ public class RJoin {
      * RJoinReducer
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     static class RJoinReducer extends Reducer<Text, InfoBean, InfoBean, NullWritable> {

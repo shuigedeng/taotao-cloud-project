@@ -26,7 +26,7 @@ import com.taotao.boot.common.support.hash.api.IHashCode;
  * LoadBalanceConsistentHash
  *
  * @author shuigedeng
- * @version 2026.01
+ * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
 public class LoadBalanceConsistentHash<T extends IServer> extends AbstractLoadBalanceHash<T> {

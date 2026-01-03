@@ -66,8 +66,8 @@ tasks.register("releaseTarGz", Tar) {
 }
 
 tasks.register("generateMd5ForZip", Exec) {
-    def zipFile = file("${project.layout.buildDirectory.asFile.get()}/distributions/taotao-cloud-tx-distribution-2026.01.zip")
-    def md5File = file("${project.layout.buildDirectory.asFile.get()}/distributions/taotao-cloud-tx-distribution-2026.01.zip.md5")
+    def zipFile = file("${project.layout.buildDirectory.asFile.get()}/distributions/taotao-cloud-tx-distribution-2026.02.zip")
+    def md5File = file("${project.layout.buildDirectory.asFile.get()}/distributions/taotao-cloud-tx-distribution-2026.02.zip.md5")
 
     inputs.file zipFile
     outputs.file md5File
@@ -82,8 +82,8 @@ tasks.register("generateMd5ForZip", Exec) {
 }
 
 tasks.register("generateMd5ForTarGz", Exec) {
-    def zipFile = file("${project.layout.buildDirectory.asFile.get()}/distributions/taotao-cloud-tx-distribution-2026.01.tar.gz")
-    def md5File = file("${project.layout.buildDirectory.asFile.get()}/distributions/taotao-cloud-tx-distribution-2026.01.tar.gz.md5")
+    def zipFile = file("${project.layout.buildDirectory.asFile.get()}/distributions/taotao-cloud-tx-distribution-2026.02.tar.gz")
+    def md5File = file("${project.layout.buildDirectory.asFile.get()}/distributions/taotao-cloud-tx-distribution-2026.02.tar.gz.md5")
 
     inputs.file zipFile
     outputs.file md5File

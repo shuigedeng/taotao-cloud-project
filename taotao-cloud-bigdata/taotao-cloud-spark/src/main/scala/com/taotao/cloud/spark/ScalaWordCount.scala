@@ -37,7 +37,7 @@ import org.apache.spark.{SparkConf, SparkContext}
  * --executor-memory 1g \
  * --executor-cores 2 \
  * --queue default \
- * /opt/bigdata/spark-3.0.0-bin-hadoop3.2/jar/taotao-cloud-spark-2026.01.jar \
+ * /opt/bigdata/spark-3.0.0-bin-hadoop3.2/jar/taotao-cloud-spark-2026.02.jar \
  * /opt/spark/input /opt/spark/output
  * <p>
  *

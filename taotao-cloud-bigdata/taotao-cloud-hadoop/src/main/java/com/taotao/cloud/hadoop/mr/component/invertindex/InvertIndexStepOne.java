@@ -42,7 +42,7 @@ public class InvertIndexStepOne {
      * InverIndexStepOneMapper
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     static class InverIndexStepOneMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
@@ -68,7 +68,7 @@ public class InvertIndexStepOne {
      * InverIndexStepOneReducer
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     static class InverIndexStepOneReducer extends Reducer<Text, IntWritable, Text, IntWritable> {

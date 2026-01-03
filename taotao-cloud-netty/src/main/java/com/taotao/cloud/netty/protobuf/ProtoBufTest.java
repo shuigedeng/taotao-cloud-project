@@ -22,7 +22,7 @@ import com.taotao.cloud.netty.grpc.code2.Student;
  * ProtoBufTest
  *
  * @author shuigedeng
- * @version 2026.01
+ * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
 public class ProtoBufTest {

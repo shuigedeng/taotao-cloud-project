@@ -62,7 +62,7 @@ public class MyTableAggregateFunctionDemo {
      * Top2
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     public static class Top2 extends TableAggregateFunction<Tuple2<Integer, Integer>, Tuple2<Integer, Integer>> {

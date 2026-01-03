@@ -307,7 +307,7 @@ public class GsonUtils {
      * MapDeserializer
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     private static class MapDeserializer<T, U> implements JsonDeserializer<Map<T, U>> {
@@ -393,7 +393,7 @@ public class GsonUtils {
      * PairTypeAdapter
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     private static class PairTypeAdapter extends TypeAdapter<Pair<String, String>> {
@@ -437,7 +437,7 @@ public class GsonUtils {
      * TimestampTypeAdapter
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     private static class TimestampTypeAdapter implements JsonSerializer<Timestamp>, JsonDeserializer<Timestamp> {

@@ -71,7 +71,7 @@ public record FullDiscountVO(
      * PromotionGoodsVO
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     public static class PromotionGoodsVO {
@@ -82,7 +82,7 @@ public record FullDiscountVO(
      * GoodsSkuVO
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     public static class GoodsSkuVO {
@@ -93,7 +93,7 @@ public record FullDiscountVO(
      * FullDiscountBaseVO
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     public static class FullDiscountBaseVO {

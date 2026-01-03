@@ -85,7 +85,7 @@ public class DAGSimulationProcessor implements MapReduceProcessor {
      * TaskA
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     private static class TaskA {
@@ -96,7 +96,7 @@ public class DAGSimulationProcessor implements MapReduceProcessor {
      * TaskB
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     private static class TaskB {
@@ -107,7 +107,7 @@ public class DAGSimulationProcessor implements MapReduceProcessor {
      * TaskC
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     private static class TaskC {

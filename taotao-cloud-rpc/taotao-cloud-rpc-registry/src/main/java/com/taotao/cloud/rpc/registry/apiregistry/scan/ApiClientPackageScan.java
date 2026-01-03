@@ -41,7 +41,7 @@ public class ApiClientPackageScan {
      * ApiClientAnnotationPackageScan
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     public static class ApiClientAnnotationPackageScan implements ImportBeanDefinitionRegistrar {
@@ -65,7 +65,7 @@ public class ApiClientPackageScan {
      * ApiClientPackageScanHandle
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     public static class ApiClientPackageScanHandle extends ClassPathBeanDefinitionScanner {
@@ -132,7 +132,7 @@ public class ApiClientPackageScan {
      * MethodProxyFactory
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     public static class MethodProxyFactory<T> implements FactoryBean<T> {
@@ -177,7 +177,7 @@ public class ApiClientPackageScan {
      * MethodProxy
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     public static class MethodProxy<T> implements InvocationHandler {

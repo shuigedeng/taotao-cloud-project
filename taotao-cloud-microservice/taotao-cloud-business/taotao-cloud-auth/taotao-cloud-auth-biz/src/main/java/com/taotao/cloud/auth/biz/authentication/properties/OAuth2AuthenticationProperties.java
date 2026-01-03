@@ -86,7 +86,7 @@ public class OAuth2AuthenticationProperties {
      * SignInFailureLimited
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     public static class SignInFailureLimited {
@@ -158,7 +158,7 @@ public class OAuth2AuthenticationProperties {
      * SignInEndpointLimited
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     public static class SignInEndpointLimited {
@@ -202,7 +202,7 @@ public class OAuth2AuthenticationProperties {
      * SignInKickOutLimited
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     public static class SignInKickOutLimited {
@@ -230,7 +230,7 @@ public class OAuth2AuthenticationProperties {
      * FormLogin
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     public static class FormLogin {

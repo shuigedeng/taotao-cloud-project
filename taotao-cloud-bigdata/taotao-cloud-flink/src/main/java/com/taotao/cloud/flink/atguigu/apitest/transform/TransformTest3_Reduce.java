@@ -28,7 +28,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
  * TransformTest3_Reduce
  *
  * @author shuigedeng
- * @version 2026.01
+ * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
 public class TransformTest3_Reduce {

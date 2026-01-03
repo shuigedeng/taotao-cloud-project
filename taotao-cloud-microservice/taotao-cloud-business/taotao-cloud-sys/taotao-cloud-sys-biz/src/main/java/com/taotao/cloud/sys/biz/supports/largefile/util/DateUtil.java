@@ -37,7 +37,7 @@ import org.apache.commons.lang3.time.FastDateFormat;
  * DateUtil
  *
  * @author shuigedeng
- * @version 2026.01
+ * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
 @Slf4j

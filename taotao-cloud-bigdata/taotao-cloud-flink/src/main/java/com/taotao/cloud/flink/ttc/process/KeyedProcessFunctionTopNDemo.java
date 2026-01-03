@@ -84,7 +84,7 @@ public class KeyedProcessFunctionTopNDemo {
      * VcCountAgg
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     public static class VcCountAgg implements AggregateFunction<WaterSensor, Integer, Integer> {
@@ -136,7 +136,7 @@ public class KeyedProcessFunctionTopNDemo {
      * TopN
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     public static class TopN extends KeyedProcessFunction<Long, Tuple3<Integer, Integer, Long>, String> {

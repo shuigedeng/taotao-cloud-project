@@ -133,7 +133,7 @@ public class MemberController {
      * HomeVO
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     public static class HomeVO {
@@ -155,7 +155,7 @@ public class MemberController {
      * NotificationVO
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     public static class NotificationVO {
@@ -166,7 +166,7 @@ public class MemberController {
      * BenefitVO
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     public static class BenefitVO {
@@ -177,7 +177,7 @@ public class MemberController {
      * CouponVO
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     public static class CouponVO {
@@ -188,7 +188,7 @@ public class MemberController {
      * BannerVO
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     public static class BannerVO {
@@ -199,7 +199,7 @@ public class MemberController {
      * ResultData
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     public static class ResultData<T> {

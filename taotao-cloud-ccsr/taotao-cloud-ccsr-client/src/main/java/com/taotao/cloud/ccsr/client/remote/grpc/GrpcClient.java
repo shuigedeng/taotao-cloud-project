@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit;
  * GrpcClient
  *
  * @author shuigedeng
- * @version 2026.01
+ * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
 @Join(order = 1, isSingleton = true)

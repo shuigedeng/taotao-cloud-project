@@ -40,7 +40,7 @@ public class FlowCount {
      * FlowCountMapper
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     static class FlowCountMapper extends Mapper<LongWritable, Text, Text, FlowBean> {
@@ -66,7 +66,7 @@ public class FlowCount {
      * FlowCountReducer
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     static class FlowCountReducer extends Reducer<Text, FlowBean, Text, FlowBean> {

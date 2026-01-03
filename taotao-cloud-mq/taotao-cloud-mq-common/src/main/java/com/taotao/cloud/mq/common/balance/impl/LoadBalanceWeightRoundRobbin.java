@@ -31,7 +31,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * LoadBalanceWeightRoundRobbin
  *
  * @author shuigedeng
- * @version 2026.01
+ * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
 public class LoadBalanceWeightRoundRobbin<T extends IServer> extends AbstractLoadBalance<T> {

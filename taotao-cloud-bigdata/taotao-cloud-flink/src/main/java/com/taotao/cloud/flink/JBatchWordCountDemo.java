@@ -314,7 +314,7 @@ public class JBatchWordCountDemo {
 	 * FlinkUser
 	 *
 	 * @author shuigedeng
-	 * @version 2026.01
+	 * @version 2026.02
 	 * @since 2025-12-19 09:30:45
 	 */
 	public static class FlinkUser {
@@ -453,7 +453,7 @@ public class JBatchWordCountDemo {
 	 * FlinkUserContext
 	 *
 	 * @author shuigedeng
-	 * @version 2026.01
+	 * @version 2026.02
 	 * @since 2025-12-19 09:30:45
 	 */
 	public static class FlinkUserContext {

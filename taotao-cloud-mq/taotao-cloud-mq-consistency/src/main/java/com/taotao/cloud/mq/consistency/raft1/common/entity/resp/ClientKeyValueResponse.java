@@ -20,7 +20,7 @@ package com.taotao.cloud.mq.consistency.raft1.common.entity.resp;
  * ClientKeyValueResponse
  *
  * @author shuigedeng
- * @version 2026.01
+ * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
 public class ClientKeyValueResponse extends BaseRaftResponse {

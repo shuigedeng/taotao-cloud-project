@@ -30,8 +30,8 @@ dependencies {
 }
 
 tasks.register("generateMd5ForZip", Exec) {
-    def zipFile = file("${project.layout.buildDirectory.asFile.get()}/libs/taotao-cloud-cache-2026.01.jar")
-    def md5File = file("${project.layout.buildDirectory.asFile.get()}/libs/taotao-cloud-cache-2026.01.jar.md5")
+    def zipFile = file("${project.layout.buildDirectory.asFile.get()}/libs/taotao-cloud-cache-2026.02.jar")
+    def md5File = file("${project.layout.buildDirectory.asFile.get()}/libs/taotao-cloud-cache-2026.02.jar.md5")
 
     inputs.file zipFile
     outputs.file md5File

@@ -180,7 +180,7 @@ public class DefaultNode implements Node, ClusterMembershipChanges {
      * DefaultNodeLazyHolder
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     private static class DefaultNodeLazyHolder {
@@ -511,7 +511,7 @@ public class DefaultNode implements Node, ClusterMembershipChanges {
      * ReplicationFailQueueConsumer
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     class ReplicationFailQueueConsumer implements Runnable {
@@ -824,7 +824,7 @@ public class DefaultNode implements Node, ClusterMembershipChanges {
      * HeartBeatTask
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     class HeartBeatTask implements Runnable {

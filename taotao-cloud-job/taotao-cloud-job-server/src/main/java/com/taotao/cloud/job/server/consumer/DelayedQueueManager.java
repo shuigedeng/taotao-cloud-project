@@ -114,7 +114,7 @@ public class DelayedQueueManager {
      * DelayedMessage
      *
      * @author shuigedeng
-     * @version 2026.01
+     * @version 2026.02
      * @since 2025-12-19 09:30:45
      */
     static class DelayedMessage implements Delayed {

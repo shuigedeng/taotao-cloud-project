@@ -27,7 +27,7 @@ import io.netty.util.concurrent.GlobalEventExecutor;
  * MyChatServerHandler
  *
  * @author shuigedeng
- * @version 2026.01
+ * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
 public class MyChatServerHandler extends SimpleChannelInboundHandler<String> {

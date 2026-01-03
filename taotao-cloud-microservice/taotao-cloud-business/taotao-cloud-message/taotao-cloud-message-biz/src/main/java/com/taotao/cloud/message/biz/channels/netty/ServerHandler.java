@@ -12,7 +12,7 @@ import io.netty.handler.timeout.IdleStateHandler;
  * ServerHandler
  *
  * @author shuigedeng
- * @version 2026.01
+ * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
 public class ServerHandler extends ChannelInitializer<SocketChannel> {

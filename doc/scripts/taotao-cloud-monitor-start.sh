@@ -1,7 +1,7 @@
 #!/bin/bash
-docker pull registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor:2026.01
+docker pull registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor:2026.02
 
-docker tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor:2026.01 taotao-cloud-monitor:latest
+docker tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor:2026.02 taotao-cloud-monitor:latest
 
 docker stop monitor
 
