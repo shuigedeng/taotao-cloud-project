@@ -29,13 +29,12 @@ import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.biz.model.dto.CommodityDTO;
 import com.taotao.cloud.goods.biz.model.vo.CommoditySkuVO;
-import com.taotao.cloud.goods.biz.mapper.ICommodityMapper;
+import com.taotao.cloud.goods.biz.mapper.CommodityMapper;
 import com.taotao.cloud.goods.biz.model.entity.Commodity;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
 import com.taotao.cloud.goods.biz.repository.CommodityRepository;
-import com.taotao.cloud.goods.biz.repository.ICommodityRepository;
-import com.taotao.cloud.goods.biz.service.business.ICommodityService;
-import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
+import com.taotao.cloud.goods.biz.service.business.CommodityService;
+import com.taotao.cloud.goods.biz.service.business.GoodsSkuService;
 import com.taotao.cloud.goods.biz.util.WechatLivePlayerUtil;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.util.List;
@@ -53,12 +52,12 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service
 public class CommodityServiceImpl
-        extends BaseSuperServiceImpl<Commodity, Long, ICommodityMapper, CommodityRepository, ICommodityRepository>
-        implements ICommodityService {
+        extends BaseSuperServiceImpl<Commodity, Long, CommodityMapper, CommodityRepository, CommodityRepository>
+        implements CommodityService {
 
     private final WechatLivePlayerUtil wechatLivePlayerUtil;
 
-    private final IGoodsSkuService goodsSkuService;
+    private final GoodsSkuService goodsSkuService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)

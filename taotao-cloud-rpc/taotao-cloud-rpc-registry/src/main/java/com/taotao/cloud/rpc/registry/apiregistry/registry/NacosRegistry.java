@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.rpc.registry.apiregistry.registry;
 
-import com.taotao.cloud.rpc.registry.apiregistry.anno.INacosRegistry;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +31,7 @@ public class NacosRegistry extends BaseRegistry {
         super();
     }
 
-    private INacosRegistry getNacosRegistryImpl() {
+    private com.taotao.cloud.rpc.registry.apiregistry.anno.NacosRegistry getNacosRegistryImpl() {
         //		INacosRegistry o = ContextUtils.getBean(INacosRegistry.class, true);
         //		if (o == null) {
         //			throw new ApiRegistryException("nacos未开启或未加载实现包");

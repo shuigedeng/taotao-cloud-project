@@ -22,9 +22,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.order.sys.model.page.aftersale.AfterSaleReasonPageQuery;
-import com.taotao.cloud.order.biz.mapper.aftersale.IAfterSaleReasonMapper;
+import com.taotao.cloud.order.biz.mapper.aftersale.AfterSaleReasonMapper;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleReason;
-import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleReasonService;
+import com.taotao.cloud.order.biz.service.business.aftersale.AfterSaleReasonService;
 import java.util.List;
 import lombok.*;
 import org.springframework.stereotype.Service;
@@ -40,8 +40,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @AllArgsConstructor
 @Transactional(rollbackFor = Exception.class)
-public class AfterSaleReasonServiceImpl extends ServiceImpl<IAfterSaleReasonMapper, AfterSaleReason>
-        implements IAfterSaleReasonService {
+public class AfterSaleReasonServiceImpl extends ServiceImpl<AfterSaleReasonMapper, AfterSaleReason>
+        implements AfterSaleReasonService {
 
     @Override
     public List<AfterSaleReason> afterSaleReasonList(String serviceType) {

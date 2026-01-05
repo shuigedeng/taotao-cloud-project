@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.jdbcpool.datasource;
 
-import com.taotao.cloud.jdbcpool.api.ILifeCycle;
-import com.taotao.cloud.jdbcpool.api.IPooledDataSourceConfig;
+import com.taotao.cloud.jdbcpool.api.LifeCycle;
+import com.taotao.cloud.jdbcpool.api.PooledDataSourceConfig;
 import com.taotao.cloud.jdbcpool.constant.PooledConst;
 
 /**
@@ -25,7 +25,7 @@ import com.taotao.cloud.jdbcpool.constant.PooledConst;
  * @since 1.1.0
  */
 public abstract class AbstractPooledDataSourceConfig extends AbstractDataSourceConfig
-        implements IPooledDataSourceConfig, ILifeCycle {
+        implements PooledDataSourceConfig, LifeCycle {
 
     /**
      * 最小尺寸

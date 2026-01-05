@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
  * @author shuigedeng
  * @since 2024.05
  */
-public class LocalMqBrokerPersist implements IMqBrokerPersist {
+public class LocalMqBrokerPersist implements MqBrokerPersist {
 
     private static final Logger LOG = LoggerFactory.getLogger(LocalMqBrokerPersist.class);
 

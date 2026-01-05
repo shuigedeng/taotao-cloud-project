@@ -19,8 +19,8 @@ package com.taotao.cloud.cache.support.load;
 import com.alibaba.fastjson2.JSON;
 import com.taotao.boot.common.utils.io.FileUtils;
 import com.taotao.boot.common.utils.lang.ObjectUtils;
-import com.taotao.cloud.cache.api.ICache;
-import com.taotao.cloud.cache.api.ICacheLoad;
+import com.taotao.cloud.cache.api.Cache;
+import com.taotao.cloud.cache.api.CacheLoad;
 import com.taotao.cloud.cache.model.PersistRdbEntry;
 import com.xkzhangsan.time.utils.CollectionUtil;
 import com.xkzhangsan.time.utils.StringUtil;
@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
  * @author shuigedeng
  * @since 2024.06
  */
-public class CacheLoadDbJson<K, V> implements ICacheLoad<K, V> {
+public class CacheLoadDbJson<K, V> implements CacheLoad<K, V> {
 
     private static final Logger log = LoggerFactory.getLogger(CacheLoadDbJson.class);
 
@@ -48,7 +48,7 @@ public class CacheLoadDbJson<K, V> implements ICacheLoad<K, V> {
     }
 
     @Override
-    public void load(ICache<K, V> cache) {
+    public void load( Cache<K, V> cache) {
         List<String> lines = FileUtils.readAllLines(dbPath);
         log.info("[load] 开始处理 path: {}", dbPath);
         if (CollectionUtil.isEmpty(lines)) {

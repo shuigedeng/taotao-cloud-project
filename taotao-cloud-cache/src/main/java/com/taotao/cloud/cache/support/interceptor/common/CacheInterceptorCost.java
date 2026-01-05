@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.cache.support.interceptor.common;
 
-import com.taotao.cloud.cache.api.ICacheInterceptor;
-import com.taotao.cloud.cache.api.ICacheInterceptorContext;
-import com.taotao.cloud.cache.api.ICacheSlowListener;
+import com.taotao.cloud.cache.api.CacheInterceptor;
+import com.taotao.cloud.cache.api.CacheInterceptorContext;
+import com.taotao.cloud.cache.api.CacheSlowListener;
 import com.taotao.cloud.cache.support.listener.slow.CacheSlowListenerContext;
 import com.xkzhangsan.time.utils.CollectionUtil;
 import java.util.List;
@@ -35,23 +35,23 @@ import org.slf4j.LoggerFactory;
  * @param <K> key
  * @param <V> value
  */
-public class CacheInterceptorCost<K, V> implements ICacheInterceptor<K, V> {
+public class CacheInterceptorCost<K, V> implements CacheInterceptor<K, V> {
 
     private static final Logger log = LoggerFactory.getLogger(CacheInterceptorCost.class);
 
     @Override
-    public void before(ICacheInterceptorContext<K, V> context) {
+    public void before( CacheInterceptorContext<K, V> context) {
         log.debug("Cost start, method: {}", context.method().getName());
     }
 
     @Override
-    public void after(ICacheInterceptorContext<K, V> context) {
+    public void after( CacheInterceptorContext<K, V> context) {
         long costMills = context.endMills() - context.startMills();
         final String methodName = context.method().getName();
         log.debug("Cost end, method: {}, cost: {}ms", methodName, costMills);
 
         // 添加慢日志操作
-        List<ICacheSlowListener> slowListeners = context.cache().slowListeners();
+        List<CacheSlowListener> slowListeners = context.cache().slowListeners();
         if (CollectionUtil.isNotEmpty(slowListeners)) {
             CacheSlowListenerContext listenerContext =
                     CacheSlowListenerContext.newInstance()
@@ -63,7 +63,7 @@ public class CacheInterceptorCost<K, V> implements ICacheInterceptor<K, V> {
                             .result(context.result());
 
             // 设置多个，可以考虑不同的慢日志级别，做不同的处理
-            for (ICacheSlowListener slowListener : slowListeners) {
+            for (CacheSlowListener slowListener : slowListeners) {
                 long slowThanMills = slowListener.slowerThanMills();
                 if (costMills >= slowThanMills) {
                     slowListener.listen(listenerContext);

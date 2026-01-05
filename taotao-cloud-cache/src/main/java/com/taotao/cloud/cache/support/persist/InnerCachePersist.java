@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.cache.support.persist;
 
-import com.taotao.cloud.cache.api.ICache;
-import com.taotao.cloud.cache.api.ICachePersist;
+import com.taotao.cloud.cache.api.Cache;
+import com.taotao.cloud.cache.api.CachePersist;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import org.slf4j.Logger;
@@ -38,13 +38,13 @@ public class InnerCachePersist<K, V> {
      * 缓存信息
      * @since 2024.06
      */
-    private final ICache<K, V> cache;
+    private final Cache<K, V> cache;
 
     /**
      * 缓存持久化策略
      * @since 2024.06
      */
-    private final ICachePersist<K, V> persist;
+    private final CachePersist<K, V> persist;
 
     /**
      * 线程执行类
@@ -53,7 +53,7 @@ public class InnerCachePersist<K, V> {
     private static final ScheduledExecutorService EXECUTOR_SERVICE =
             Executors.newSingleThreadScheduledExecutor();
 
-    public InnerCachePersist(ICache<K, V> cache, ICachePersist<K, V> persist) {
+    public InnerCachePersist( Cache<K, V> cache, CachePersist<K, V> persist) {
         this.cache = cache;
         this.persist = persist;
 

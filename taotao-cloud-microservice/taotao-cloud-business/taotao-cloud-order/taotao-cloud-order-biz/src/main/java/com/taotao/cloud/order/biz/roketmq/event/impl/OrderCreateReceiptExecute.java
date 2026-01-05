@@ -22,7 +22,7 @@ import com.taotao.cloud.order.sys.model.vo.order.OrderVO;
 import com.taotao.cloud.order.sys.model.vo.order.ReceiptVO;
 import com.taotao.cloud.order.biz.model.entity.order.Receipt;
 import com.taotao.cloud.order.biz.roketmq.event.TradeEvent;
-import com.taotao.cloud.order.biz.service.business.order.IReceiptService;
+import com.taotao.cloud.order.biz.service.business.order.ReceiptService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ import org.springframework.stereotype.Service;
 public class OrderCreateReceiptExecute implements TradeEvent {
 
     @Autowired
-    private IReceiptService receiptService;
+    private ReceiptService receiptService;
 
     @Override
     public void orderCreate(TradeDTO tradeDTO) {

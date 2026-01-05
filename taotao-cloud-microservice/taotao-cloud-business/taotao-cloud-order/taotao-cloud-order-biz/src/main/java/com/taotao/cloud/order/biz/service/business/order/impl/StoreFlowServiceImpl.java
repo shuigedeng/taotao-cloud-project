@@ -32,14 +32,14 @@ import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.sys.model.page.distribution.DistributionPageQuery;
 import com.taotao.cloud.order.sys.model.page.order.StoreFlowPageQuery;
 import com.taotao.cloud.order.sys.model.page.store.StorePageQuery;
-import com.taotao.cloud.order.biz.mapper.order.IStoreFlowMapper;
+import com.taotao.cloud.order.biz.mapper.order.StoreFlowMapper;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
 import com.taotao.cloud.order.biz.model.entity.order.StoreFlow;
-import com.taotao.cloud.order.biz.service.business.order.IOrderItemService;
-import com.taotao.cloud.order.biz.service.business.order.IOrderService;
-import com.taotao.cloud.order.biz.service.business.order.IStoreFlowService;
+import com.taotao.cloud.order.biz.service.business.order.OrderItemService;
+import com.taotao.cloud.order.biz.service.business.order.OrderService;
+import com.taotao.cloud.order.biz.service.business.order.StoreFlowService;
 import com.taotao.cloud.payment.api.feign.RefundLogApi;
 import com.taotao.cloud.store.api.feign.IFeignBillApi;
 import com.taotao.cloud.store.api.model.vo.BillVO;
@@ -60,12 +60,12 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlow> implements IStoreFlowService {
+public class StoreFlowServiceImpl extends ServiceImpl<StoreFlowMapper, StoreFlow> implements StoreFlowService {
 
     /** 订单 */
-    private final IOrderService orderService;
+    private final OrderService orderService;
     /** 订单货物 */
-    private final IOrderItemService orderItemService;
+    private final OrderItemService orderItemService;
     /** 退款日志 */
     private final RefundLogApi feignRefundLogApi;
 

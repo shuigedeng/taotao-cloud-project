@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.cache.support.listener.remove;
 
-import com.taotao.cloud.cache.api.ICacheRemoveListener;
+import com.taotao.cloud.cache.api.CacheRemoveListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,9 +37,9 @@ public class CacheRemoveListeners {
      * @since 2024.06
      */
     @SuppressWarnings("all")
-    public static <K, V> List<ICacheRemoveListener<K, V>> defaults() {
-        List<ICacheRemoveListener<K, V>> listeners = new ArrayList<>();
-        listeners.add(new CacheRemoveListener());
+    public static <K, V> List<CacheRemoveListener<K, V>> defaults() {
+        List<CacheRemoveListener<K, V>> listeners = new ArrayList<>();
+        listeners.add(new com.taotao.cloud.cache.support.listener.remove.CacheRemoveListener());
         return listeners;
     }
 }

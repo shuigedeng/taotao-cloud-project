@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.cache.support.evict;
 
-import com.taotao.cloud.cache.api.ICacheEvict;
+import com.taotao.cloud.cache.api.CacheEvict;
 
 /**
  * 丢弃策略
@@ -36,7 +36,7 @@ public final class CacheEvicts {
      * @return 结果
      * @since 2024.06
      */
-    public static <K, V> ICacheEvict<K, V> none() {
+    public static <K, V> CacheEvict<K, V> none() {
         return new CacheEvictNone<>();
     }
 
@@ -48,7 +48,7 @@ public final class CacheEvicts {
      * @return 结果
      * @since 2024.06
      */
-    public static <K, V> ICacheEvict<K, V> fifo() {
+    public static <K, V> CacheEvict<K, V> fifo() {
         return new CacheEvictFifo<>();
     }
 
@@ -60,7 +60,7 @@ public final class CacheEvicts {
      * @return 结果
      * @since 2024.06
      */
-    public static <K, V> ICacheEvict<K, V> lru() {
+    public static <K, V> CacheEvict<K, V> lru() {
         return new CacheEvictLru<>();
     }
 
@@ -73,7 +73,7 @@ public final class CacheEvicts {
      * @return 结果
      * @since 2024.06
      */
-    public static <K, V> ICacheEvict<K, V> lruDoubleListMap() {
+    public static <K, V> CacheEvict<K, V> lruDoubleListMap() {
         return new CacheEvictLruDoubleListMap<>();
     }
 
@@ -86,7 +86,7 @@ public final class CacheEvicts {
      * @return 结果
      * @since 2024.06
      */
-    public static <K, V> ICacheEvict<K, V> lruLinkedHashMap() {
+    public static <K, V> CacheEvict<K, V> lruLinkedHashMap() {
         return new CacheEvictLruLinkedHashMap<>();
     }
 
@@ -99,7 +99,7 @@ public final class CacheEvicts {
      * @return 结果
      * @since 2024.06
      */
-    public static <K, V> ICacheEvict<K, V> lru2Q() {
+    public static <K, V> CacheEvict<K, V> lru2Q() {
         return new CacheEvictLru2Q<>();
     }
 
@@ -112,7 +112,7 @@ public final class CacheEvicts {
      * @return 结果
      * @since 2024.06
      */
-    public static <K, V> ICacheEvict<K, V> lru2() {
+    public static <K, V> CacheEvict<K, V> lru2() {
         return new CacheEvictLru2<>();
     }
 
@@ -125,7 +125,7 @@ public final class CacheEvicts {
      * @return 结果
      * @since 2024.06
      */
-    public static <K, V> ICacheEvict<K, V> lfu() {
+    public static <K, V> CacheEvict<K, V> lfu() {
         return new CacheEvictLfu<>();
     }
 
@@ -136,7 +136,7 @@ public final class CacheEvicts {
      * @return 结果
      * @since 2024.06
      */
-    public static <K, V> ICacheEvict<K, V> clock() {
+    public static <K, V> CacheEvict<K, V> clock() {
         return new CacheEvictClock<>();
     }
 }

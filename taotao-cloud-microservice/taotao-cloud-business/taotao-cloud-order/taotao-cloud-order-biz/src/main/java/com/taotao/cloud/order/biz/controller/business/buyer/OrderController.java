@@ -27,7 +27,7 @@ import com.taotao.cloud.order.sys.model.page.order.OrderPageQuery;
 import com.taotao.cloud.order.sys.model.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.sys.model.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
-import com.taotao.cloud.order.biz.service.business.order.IOrderService;
+import com.taotao.cloud.order.biz.service.business.order.OrderService;
 import com.taotao.boot.security.spring.model.SecurityUser;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.boot.web.request.annotation.RequestLogger;
@@ -62,7 +62,7 @@ import zipkin2.storage.Traces;
 @RequestMapping("/order/buyer/order")
 public class OrderController {
 
-    private final IOrderService orderService;
+    private final OrderService orderService;
 
     @Operation(summary = "查询会员订单列表", description = "查询会员订单列表")
     @RequestLogger

@@ -24,7 +24,7 @@ import org.apache.hc.client5.http.classic.methods.HttpUriRequest;
 /**
  * httpClient实现
  */
-public class HttpClientRpcClient implements IRpcClient {
+public class HttpClientRpcClient implements RpcClient {
     public <T> T execute(RequestInfo requestInfo, Type cls) {
         HttpUriRequest r = httpClientRequest(requestInfo);
         try {

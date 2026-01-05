@@ -16,13 +16,13 @@
 
 package com.taotao.cloud.mq.common.rpc;
 
-import com.taotao.cloud.mq.common.balance.IServer;
+import com.taotao.cloud.mq.common.balance.Server;
 
 /**
  * @author shuigedeng
  * @since 2024.05
  */
-public class RpcAddress implements IServer {
+public class RpcAddress implements Server {
 
     /**
      * address 信息

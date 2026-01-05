@@ -19,8 +19,8 @@ package com.taotao.cloud.order.biz.controller.business.seller;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.web.utils.OperationalJudgment;
 import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
-import com.taotao.cloud.order.biz.service.business.order.IOrderService;
-import com.taotao.cloud.order.biz.service.business.trade.IOrderLogService;
+import com.taotao.cloud.order.biz.service.business.order.OrderService;
+import com.taotao.cloud.order.biz.service.business.trade.OrderLogService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -47,9 +47,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/order/seller/order/log")
 public class OrderLogController {
 
-    private final IOrderLogService orderLogService;
+    private final OrderLogService orderLogService;
 
-    private final IOrderService orderService;
+    private final OrderService orderService;
 
     @Operation(summary = "通过订单编号获取订单日志", description = "通过订单编号获取订单日志")
     @RequestLogger

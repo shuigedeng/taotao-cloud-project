@@ -21,8 +21,8 @@ import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.goods.biz.model.vo.ParameterGroupVO;
 import com.taotao.cloud.goods.biz.model.entity.CategoryParameterGroup;
 import com.taotao.cloud.goods.biz.model.entity.Parameters;
-import com.taotao.cloud.goods.biz.service.business.ICategoryParameterGroupService;
-import com.taotao.cloud.goods.biz.service.business.IParametersService;
+import com.taotao.cloud.goods.biz.service.business.CategoryParameterGroupService;
+import com.taotao.cloud.goods.biz.service.business.ParametersService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -55,9 +55,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategoryParameterGroupManagerController {
 
     /** 商品参数组服务 */
-    private final IParametersService parametersService;
+    private final ParametersService parametersService;
     /** 分类绑定参数组服务 */
-    private final ICategoryParameterGroupService categoryParameterGroupService;
+    private final CategoryParameterGroupService categoryParameterGroupService;
 
     @Operation(summary = "查询某分类下绑定的参数信息", description = "查询某分类下绑定的参数信息")
     @io.swagger.v3.oas.annotations.Parameters({

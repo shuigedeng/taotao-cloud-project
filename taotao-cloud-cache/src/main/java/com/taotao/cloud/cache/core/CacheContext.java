@@ -16,8 +16,7 @@
 
 package com.taotao.cloud.cache.core;
 
-import com.taotao.cloud.cache.api.ICacheContext;
-import com.taotao.cloud.cache.api.ICacheEvict;
+import com.taotao.cloud.cache.api.CacheEvict;
 import java.util.Map;
 
 /**
@@ -25,7 +24,7 @@ import java.util.Map;
  * @author shuigedeng
  * @since 2024.06
  */
-public class CacheContext<K, V> implements ICacheContext<K, V> {
+public class CacheContext<K, V> implements com.taotao.cloud.cache.api.CacheContext<K, V> {
 
     /**
      * map 信息
@@ -43,7 +42,7 @@ public class CacheContext<K, V> implements ICacheContext<K, V> {
      * 驱除策略
      * @since 2024.06
      */
-    private ICacheEvict<K, V> cacheEvict;
+    private CacheEvict<K, V> cacheEvict;
 
     @Override
     public Map<K, V> map() {
@@ -66,11 +65,11 @@ public class CacheContext<K, V> implements ICacheContext<K, V> {
     }
 
     @Override
-    public ICacheEvict<K, V> cacheEvict() {
+    public CacheEvict<K, V> cacheEvict() {
         return cacheEvict;
     }
 
-    public CacheContext<K, V> cacheEvict(ICacheEvict<K, V> cacheEvict) {
+    public CacheContext<K, V> cacheEvict( CacheEvict<K, V> cacheEvict) {
         this.cacheEvict = cacheEvict;
         return this;
     }

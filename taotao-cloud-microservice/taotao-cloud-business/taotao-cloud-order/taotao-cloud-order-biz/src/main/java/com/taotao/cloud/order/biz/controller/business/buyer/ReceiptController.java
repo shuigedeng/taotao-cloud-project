@@ -22,7 +22,7 @@ import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.order.sys.model.dto.order.OrderReceiptDTO;
 import com.taotao.cloud.order.sys.model.page.order.ReceiptPageQuery;
 import com.taotao.cloud.order.biz.model.entity.order.Receipt;
-import com.taotao.cloud.order.biz.service.business.order.IReceiptService;
+import com.taotao.cloud.order.biz.service.business.order.ReceiptService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -50,7 +50,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/order/buyer/receipt")
 public class ReceiptController {
 
-    private final IReceiptService receiptService;
+    private final ReceiptService receiptService;
 
     @Operation(summary = "获取发票详情", description = "获取发票详情")
     @RequestLogger

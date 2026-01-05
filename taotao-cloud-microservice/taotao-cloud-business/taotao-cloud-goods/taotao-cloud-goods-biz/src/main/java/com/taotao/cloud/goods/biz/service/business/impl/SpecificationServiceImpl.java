@@ -23,14 +23,13 @@ import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.utils.lang.StringUtils;
 import com.taotao.cloud.goods.biz.model.page.SpecificationPageQuery;
-import com.taotao.cloud.goods.biz.mapper.ISpecificationMapper;
+import com.taotao.cloud.goods.biz.mapper.SpecificationMapper;
 import com.taotao.cloud.goods.biz.model.entity.CategorySpecification;
 import com.taotao.cloud.goods.biz.model.entity.Specification;
 import com.taotao.cloud.goods.biz.repository.SpecificationRepository;
-import com.taotao.cloud.goods.biz.repository.ISpecificationRepository;
-import com.taotao.cloud.goods.biz.service.business.ICategoryService;
-import com.taotao.cloud.goods.biz.service.business.ICategorySpecificationService;
-import com.taotao.cloud.goods.biz.service.business.ISpecificationService;
+import com.taotao.cloud.goods.biz.service.business.CategoryService;
+import com.taotao.cloud.goods.biz.service.business.CategorySpecificationService;
+import com.taotao.cloud.goods.biz.service.business.SpecificationService;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,13 +48,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class SpecificationServiceImpl
         extends BaseSuperServiceImpl<
-                 Specification, Long,ISpecificationMapper, SpecificationRepository, ISpecificationRepository>
-        implements ISpecificationService {
+                 Specification, Long, SpecificationMapper, SpecificationRepository, SpecificationRepository>
+        implements SpecificationService {
 
     /** 分类-规格绑定服务 */
-    private final ICategorySpecificationService categorySpecificationService;
+    private final CategorySpecificationService categorySpecificationService;
     /** 分类服务 */
-    private final ICategoryService categoryService;
+    private final CategoryService categoryService;
 
     @Override
     public boolean deleteSpecification(List<Long> ids) {

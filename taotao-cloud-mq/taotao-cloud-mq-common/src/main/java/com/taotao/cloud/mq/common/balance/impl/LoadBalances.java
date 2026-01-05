@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.mq.common.balance.impl;
 
-import com.taotao.cloud.mq.common.balance.ILoadBalance;
-import com.taotao.cloud.mq.common.balance.IServer;
+import com.taotao.cloud.mq.common.balance.LoadBalance;
+import com.taotao.cloud.mq.common.balance.Server;
 import com.taotao.boot.common.support.hash.api.IHashCode;
 
 /**
@@ -32,23 +32,23 @@ public final class LoadBalances {
     private LoadBalances() {
     }
 
-    public static <T extends IServer> ILoadBalance<T> random() {
+    public static <T extends Server> LoadBalance<T> random() {
         return new LoadBalanceRandom();
     }
 
-    public static <T extends IServer> ILoadBalance<T> roundRobbin() {
+    public static <T extends Server> LoadBalance<T> roundRobbin() {
         return new LoadBalanceRoundRobbin();
     }
 
-    public static <T extends IServer> ILoadBalance<T> weightRoundRobbin() {
+    public static <T extends Server> LoadBalance<T> weightRoundRobbin() {
         return new LoadBalanceWeightRoundRobbin();
     }
 
-    public static <T extends IServer> ILoadBalance<T> commonHash( IHashCode hashCode ) {
+    public static <T extends Server> LoadBalance<T> commonHash( IHashCode hashCode ) {
         return new LoadBalanceCommonHash(hashCode);
     }
 
-    public static <T extends IServer> ILoadBalance<T> consistentHash( IHashCode hashCode ) {
+    public static <T extends Server> LoadBalance<T> consistentHash( IHashCode hashCode ) {
         return new LoadBalanceConsistentHash(hashCode);
     }
 }

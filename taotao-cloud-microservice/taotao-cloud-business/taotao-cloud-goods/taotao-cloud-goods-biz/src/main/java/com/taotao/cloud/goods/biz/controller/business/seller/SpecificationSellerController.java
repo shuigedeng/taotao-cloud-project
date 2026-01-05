@@ -20,7 +20,7 @@ import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.goods.biz.model.vo.SpecificationVO;
 import com.taotao.cloud.goods.biz.model.convert.SpecificationConvert;
 import com.taotao.cloud.goods.biz.model.entity.Specification;
-import com.taotao.cloud.goods.biz.service.business.ICategorySpecificationService;
+import com.taotao.cloud.goods.biz.service.business.CategorySpecificationService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -51,7 +51,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SpecificationSellerController {
 
     /** 商品规格服务 */
-    private final ICategorySpecificationService categorySpecificationService;
+    private final CategorySpecificationService categorySpecificationService;
 
     @Operation(summary = "获取分类规格", description = "获取分类规格")
     @Parameters({

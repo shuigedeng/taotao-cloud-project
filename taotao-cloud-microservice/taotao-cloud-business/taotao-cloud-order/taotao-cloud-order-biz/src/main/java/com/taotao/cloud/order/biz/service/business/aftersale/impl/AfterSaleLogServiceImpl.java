@@ -19,9 +19,9 @@ package com.taotao.cloud.order.biz.service.business.aftersale.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.order.biz.mapper.aftersale.IAfterSaleLogMapper;
+import com.taotao.cloud.order.biz.mapper.aftersale.AfterSaleLogMapper;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
-import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleLogService;
+import com.taotao.cloud.order.biz.service.business.aftersale.AfterSaleLogService;
 import java.util.List;
 import lombok.*;
 import org.springframework.stereotype.Service;
@@ -37,8 +37,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @AllArgsConstructor
 @Transactional(rollbackFor = Exception.class)
-public class AfterSaleLogServiceImpl extends ServiceImpl<IAfterSaleLogMapper, AfterSaleLog>
-        implements IAfterSaleLogService {
+public class AfterSaleLogServiceImpl extends ServiceImpl<AfterSaleLogMapper, AfterSaleLog>
+        implements AfterSaleLogService {
 
     @Override
     public List<AfterSaleLog> getAfterSaleLog(String sn) {

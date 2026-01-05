@@ -26,11 +26,11 @@ import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.cloud.goods.biz.model.vo.CategoryTreeVO;
-import com.taotao.cloud.goods.biz.mapper.ICategoryMapper;
+import com.taotao.cloud.goods.biz.mapper.CategoryMapper;
 import com.taotao.cloud.goods.biz.model.convert.CategoryConvert;
 import com.taotao.cloud.goods.biz.model.entity.Category;
 import com.taotao.cloud.goods.biz.repository.CategorytRepository;
-import com.taotao.cloud.goods.biz.repository.ICategoryRepository;
+import com.taotao.cloud.goods.biz.repository.CategoryRepository;
 import com.taotao.cloud.goods.biz.service.business.*;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import lombok.*;
@@ -57,8 +57,8 @@ import static com.taotao.boot.common.enums.CachePrefixEnum.CATEGORY_ARRAY;
 @AllArgsConstructor
 @Service
 @CacheConfig(cacheNames = "{category}")
-public class CategoryServiceImpl extends BaseSuperServiceImpl<Category, Long, ICategoryMapper, CategorytRepository, ICategoryRepository>
-	implements ICategoryService {
+public class CategoryServiceImpl extends BaseSuperServiceImpl<Category, Long, CategoryMapper, CategorytRepository, CategoryRepository>
+	implements CategoryService {
 
 	private static final String DELETE_FLAG_COLUMN = "delete_flag";
 
@@ -66,19 +66,19 @@ public class CategoryServiceImpl extends BaseSuperServiceImpl<Category, Long, IC
 	/**
 	 * 商品品牌业务层
 	 */
-	private final IBrandService brandService;
+	private final BrandService brandService;
 	/**
 	 * 分类品牌服务
 	 */
-	private final ICategoryBrandService categoryBrandService;
+	private final CategoryBrandService categoryBrandService;
 	/**
 	 * 分类绑定参数服务
 	 */
-	private final ICategoryParameterGroupService categoryParameterGroupService;
+	private final CategoryParameterGroupService categoryParameterGroupService;
 	/**
 	 * 分类规格服务
 	 */
-	private final ICategorySpecificationService categorySpecificationService;
+	private final CategorySpecificationService categorySpecificationService;
 
 	@Override
 	public List<Category> childrenList(Long parentId) {

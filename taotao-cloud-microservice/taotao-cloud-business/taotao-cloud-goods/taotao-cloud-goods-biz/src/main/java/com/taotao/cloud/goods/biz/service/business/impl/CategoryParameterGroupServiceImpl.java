@@ -23,16 +23,15 @@ import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.goods.biz.model.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.biz.model.vo.ParameterGroupVO;
-import com.taotao.cloud.goods.biz.mapper.ICategoryParameterGroupMapper;
+import com.taotao.cloud.goods.biz.mapper.CategoryParameterGroupMapper;
 import com.taotao.cloud.goods.biz.model.convert.ParametersConvert;
 import com.taotao.cloud.goods.biz.model.entity.CategoryParameterGroup;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
 import com.taotao.cloud.goods.biz.model.entity.Parameters;
 import com.taotao.cloud.goods.biz.repository.CategoryParameterGroupRepository;
-import com.taotao.cloud.goods.biz.repository.ICategoryParameterGroupRepository;
-import com.taotao.cloud.goods.biz.service.business.ICategoryParameterGroupService;
-import com.taotao.cloud.goods.biz.service.business.IGoodsService;
-import com.taotao.cloud.goods.biz.service.business.IParametersService;
+import com.taotao.cloud.goods.biz.service.business.CategoryParameterGroupService;
+import com.taotao.cloud.goods.biz.service.business.GoodsService;
+import com.taotao.cloud.goods.biz.service.business.ParametersService;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import lombok.*;
 import org.springframework.stereotype.Service;
@@ -55,19 +54,19 @@ import java.util.Map;
 public class CategoryParameterGroupServiceImpl extends BaseSuperServiceImpl<
 	CategoryParameterGroup,
 	Long,
-	ICategoryParameterGroupMapper,
+        CategoryParameterGroupMapper,
 	CategoryParameterGroupRepository,
-	ICategoryParameterGroupRepository>
-	implements ICategoryParameterGroupService {
+	CategoryParameterGroupRepository>
+	implements CategoryParameterGroupService {
 
 	/**
 	 * 商品参数服务
 	 */
-	private final IParametersService parametersService;
+	private final ParametersService parametersService;
 	/**
 	 * 商品服务
 	 */
-	private final IGoodsService goodsService;
+	private final GoodsService goodsService;
 
 	@Override
 	public List<ParameterGroupVO> getCategoryParams(Long categoryId) {

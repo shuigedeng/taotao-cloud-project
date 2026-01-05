@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.cache.support.evict;
 
-import com.taotao.cloud.cache.api.ICacheEntry;
-import com.taotao.cloud.cache.api.ICacheEvictContext;
+import com.taotao.cloud.cache.api.CacheEntry;
+import com.taotao.cloud.cache.api.CacheEvictContext;
 
 /**
  * 丢弃策略
@@ -27,7 +27,7 @@ import com.taotao.cloud.cache.api.ICacheEvictContext;
 public class CacheEvictNone<K, V> extends AbstractCacheEvict<K, V> {
 
     @Override
-    protected ICacheEntry<K, V> doEvict(ICacheEvictContext<K, V> context) {
+    protected CacheEntry<K, V> doEvict( CacheEvictContext<K, V> context) {
         return null;
     }
 }

@@ -20,7 +20,7 @@ import static com.taotao.boot.common.utils.io.FileUtils.createFile;
 import static com.taotao.boot.common.utils.io.FileUtils.exists;
 
 import com.taotao.boot.common.utils.io.FileUtils;
-import com.taotao.cloud.cache.api.ICache;
+import com.taotao.cloud.cache.api.Cache;
 import com.xkzhangsan.time.utils.StringUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +60,7 @@ public class CachePersistAof<K, V> extends CachePersistAdaptor<K, V> {
      * @param cache 缓存
      */
     @Override
-    public void persist(ICache<K, V> cache) {
+    public void persist( Cache<K, V> cache) {
         log.info("开始 AOF 持久化到文件");
         // 1. 创建文件
         if (!exists(dbPath)) {

@@ -17,10 +17,10 @@
 package com.taotao.cloud.cache.support.interceptor.aof;
 
 import com.alibaba.fastjson2.JSON;
-import com.taotao.cloud.cache.api.ICache;
-import com.taotao.cloud.cache.api.ICacheInterceptor;
-import com.taotao.cloud.cache.api.ICacheInterceptorContext;
-import com.taotao.cloud.cache.api.ICachePersist;
+import com.taotao.cloud.cache.api.Cache;
+import com.taotao.cloud.cache.api.CacheInterceptor;
+import com.taotao.cloud.cache.api.CacheInterceptorContext;
+import com.taotao.cloud.cache.api.CachePersist;
 import com.taotao.cloud.cache.model.PersistAofEntry;
 import com.taotao.cloud.cache.support.persist.CachePersistAof;
 import org.slf4j.Logger;
@@ -33,18 +33,18 @@ import org.slf4j.LoggerFactory;
  * @author shuigedeng
  * @since 2024.06
  */
-public class CacheInterceptorAof<K, V> implements ICacheInterceptor<K, V> {
+public class CacheInterceptorAof<K, V> implements CacheInterceptor<K, V> {
 
     private static final Logger log = LoggerFactory.getLogger(CacheInterceptorAof.class);
 
     @Override
-    public void before(ICacheInterceptorContext<K, V> context) {}
+    public void before( CacheInterceptorContext<K, V> context) {}
 
     @Override
-    public void after(ICacheInterceptorContext<K, V> context) {
+    public void after( CacheInterceptorContext<K, V> context) {
         // 持久化类
-        ICache<K, V> cache = context.cache();
-        ICachePersist<K, V> persist = cache.persist();
+        Cache<K, V> cache = context.cache();
+        CachePersist<K, V> persist = cache.persist();
 
         if (persist instanceof CachePersistAof) {
             CachePersistAof<K, V> cachePersistAof = (CachePersistAof<K, V>) persist;

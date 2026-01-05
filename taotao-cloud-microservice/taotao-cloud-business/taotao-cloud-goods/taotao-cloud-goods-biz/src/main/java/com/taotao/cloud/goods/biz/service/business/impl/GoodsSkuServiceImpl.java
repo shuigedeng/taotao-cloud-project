@@ -39,18 +39,17 @@ import com.taotao.cloud.goods.biz.elasticsearch.entity.EsGoodsIndex;
 import com.taotao.cloud.goods.biz.listener.GeneratorEsGoodsIndexEvent;
 import com.taotao.cloud.goods.biz.manager.GoodsManager;
 import com.taotao.cloud.goods.biz.manager.GoodsSkuManager;
-import com.taotao.cloud.goods.biz.mapper.IGoodsSkuMapper;
+import com.taotao.cloud.goods.biz.mapper.GoodsSkuMapper;
 import com.taotao.cloud.goods.biz.model.convert.GoodsSkuConvert;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
 import com.taotao.cloud.goods.biz.model.entity.GoodsGallery;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
 import com.taotao.cloud.goods.biz.repository.GoodsSkuRepository;
-import com.taotao.cloud.goods.biz.repository.IGoodsSkuRepository;
-import com.taotao.cloud.goods.biz.service.business.ICategoryService;
-import com.taotao.cloud.goods.biz.service.business.IEsGoodsIndexService;
-import com.taotao.cloud.goods.biz.service.business.IGoodsGalleryService;
-import com.taotao.cloud.goods.biz.service.business.IGoodsService;
-import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
+import com.taotao.cloud.goods.biz.service.business.CategoryService;
+import com.taotao.cloud.goods.biz.service.business.EsGoodsIndexService;
+import com.taotao.cloud.goods.biz.service.business.GoodsGalleryService;
+import com.taotao.cloud.goods.biz.service.business.GoodsService;
+import com.taotao.cloud.goods.biz.service.business.GoodsSkuService;
 import com.taotao.cloud.goods.biz.util.EsIndexUtil;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
 import com.taotao.cloud.member.api.feign.MemberEvaluationApi;
@@ -94,20 +93,20 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service
 public class GoodsSkuServiceImpl
-        extends BaseSuperServiceImpl<GoodsSku, Long, IGoodsSkuMapper, GoodsSkuRepository, IGoodsSkuRepository>
-        implements IGoodsSkuService {
+        extends BaseSuperServiceImpl<GoodsSku, Long, GoodsSkuMapper, GoodsSkuRepository, GoodsSkuRepository>
+        implements GoodsSkuService {
 
     private final GoodsSkuManager goodsSkuManager;
     private final GoodsManager goodsManager;
 
     /** 分类服务 */
-    private final ICategoryService categoryService;
+    private final CategoryService categoryService;
     /** 商品相册服务 */
-    private final IGoodsGalleryService goodsGalleryService;
+    private final GoodsGalleryService goodsGalleryService;
     /** 商品服务 */
-    private final IGoodsService goodsService;
+    private final GoodsService goodsService;
     /** 商品索引服务 */
-    private final IEsGoodsIndexService goodsIndexService;
+    private final EsGoodsIndexService goodsIndexService;
 
     /** 会员评价服务 */
     private final MemberEvaluationApi memberEvaluationApi;

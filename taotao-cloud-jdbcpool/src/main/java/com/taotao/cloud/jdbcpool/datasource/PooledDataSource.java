@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.jdbcpool.datasource;
 
-import com.taotao.cloud.jdbcpool.connection.IPooledConnection;
 import com.taotao.cloud.jdbcpool.connection.PooledConnection;
+import com.taotao.cloud.jdbcpool.connection.DefaultPooledConnection;
 import com.taotao.cloud.jdbcpool.exception.JdbcPoolException;
 import com.taotao.cloud.jdbcpool.util.DriverClassUtil;
 import io.micrometer.common.util.StringUtils;
@@ -46,7 +46,7 @@ public class PooledDataSource extends AbstractPooledDataSourceConfig {
     /**
      * 内置的队列
      */
-    private List<IPooledConnection> pool = new ArrayList<>();
+    private List<PooledConnection> pool = new ArrayList<>();
 
     @Override
     public synchronized void init() {
@@ -61,7 +61,7 @@ public class PooledDataSource extends AbstractPooledDataSourceConfig {
     @Override
     public synchronized Connection getConnection() throws SQLException {
         // 1. 获取第一个不是 busy 的连接
-        Optional<IPooledConnection> connectionOptional = getFreeConnectionFromPool();
+        Optional<PooledConnection> connectionOptional = getFreeConnectionFromPool();
         if (connectionOptional.isPresent()) {
             return connectionOptional.get();
         }
@@ -78,7 +78,7 @@ public class PooledDataSource extends AbstractPooledDataSourceConfig {
             final long startWaitMills = System.currentTimeMillis();
             final long endWaitMills = startWaitMills + maxWaitMills;
             while (System.currentTimeMillis() < endWaitMills) {
-                Optional<IPooledConnection> optional = getFreeConnectionFromPool();
+                Optional<PooledConnection> optional = getFreeConnectionFromPool();
                 if (optional.isPresent()) {
                     return optional.get();
                 }
@@ -101,7 +101,7 @@ public class PooledDataSource extends AbstractPooledDataSourceConfig {
 
         // 3. 扩容（暂时只扩容一个）
         LOG.info("[JdbcPool] start to resize jdbc pool,step: 1");
-        IPooledConnection pooledConnection = createPooledConnection();
+        PooledConnection pooledConnection = createPooledConnection();
         pooledConnection.setBusy(true);
         this.pool.add(pooledConnection);
         LOG.info("[JdbcPool] end to resize jdbc pool");
@@ -109,7 +109,7 @@ public class PooledDataSource extends AbstractPooledDataSourceConfig {
     }
 
     @Override
-    public void returnConnection(IPooledConnection pooledConnection) {
+    public void returnConnection( PooledConnection pooledConnection) {
         // 验证状态
         if (testOnReturn) {
             checkValid(pooledConnection);
@@ -126,8 +126,8 @@ public class PooledDataSource extends AbstractPooledDataSourceConfig {
      * @return 连接
      * @since 1.3.0
      */
-    private Optional<IPooledConnection> getFreeConnectionFromPool() {
-        for (IPooledConnection pc : pool) {
+    private Optional<PooledConnection> getFreeConnectionFromPool() {
+        for (PooledConnection pc : pool) {
             if (!pc.isBusy()) {
                 pc.setBusy(true);
                 LOG.debug("从连接池中获取连接");
@@ -154,7 +154,7 @@ public class PooledDataSource extends AbstractPooledDataSourceConfig {
      * @param pooledConnection 连接池信息
      * @since 1.5.0
      */
-    private void checkValid(final IPooledConnection pooledConnection) {
+    private void checkValid(final PooledConnection pooledConnection) {
         if (StringUtils.isNotEmpty(super.validQuery)) {
             Connection connection = pooledConnection.getConnection();
             try {
@@ -186,7 +186,7 @@ public class PooledDataSource extends AbstractPooledDataSourceConfig {
         pool = new ArrayList<>(minSize);
 
         for (int i = 0; i < minSize; i++) {
-            IPooledConnection pooledConnection = createPooledConnection();
+            PooledConnection pooledConnection = createPooledConnection();
 
             pool.add(pooledConnection);
         }
@@ -198,10 +198,10 @@ public class PooledDataSource extends AbstractPooledDataSourceConfig {
      * @return 连接
      * @since 1.1.0
      */
-    private IPooledConnection createPooledConnection() {
+    private PooledConnection createPooledConnection() {
         Connection connection = createConnection();
 
-        IPooledConnection pooledConnection = new PooledConnection();
+        PooledConnection pooledConnection = new DefaultPooledConnection();
         pooledConnection.setBusy(false);
         pooledConnection.setConnection(connection);
         pooledConnection.setDataSource(this);
@@ -256,7 +256,7 @@ public class PooledDataSource extends AbstractPooledDataSourceConfig {
      */
     private void testOnIdleCheck() {
         LOG.debug("start check test on idle");
-        for (IPooledConnection pc : this.pool) {
+        for (PooledConnection pc : this.pool) {
             if (!pc.isBusy()) {
                 checkValid(pc);
             }

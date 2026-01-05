@@ -18,9 +18,8 @@ package com.taotao.cloud.rpc.registry.apiregistry.apiclient;
 
 import com.taotao.cloud.rpc.registry.apiregistry.RequestInfo;
 import com.taotao.cloud.rpc.registry.apiregistry.base.BaseApiClientParser;
-import com.taotao.cloud.rpc.registry.apiregistry.base.BaseApiClientParser.ApiClientParserInfo;
 import com.taotao.cloud.rpc.registry.apiregistry.code.CodeFactory;
-import com.taotao.cloud.rpc.registry.apiregistry.code.ICode;
+import com.taotao.cloud.rpc.registry.apiregistry.code.Code;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.Arrays;
@@ -116,7 +115,7 @@ public class ApiClientParser extends BaseApiClientParser {
             RequestBody requestBody = AnnotationUtils.getAnnotation(p, RequestBody.class);
             if (requestBody != null) {
                 Object value = info.getJoinPoint().getArgs()[i];
-                ICode code = CodeFactory.create(requestInfo.getHeader().get("Content-Type"));
+                Code code = CodeFactory.create(requestInfo.getHeader().get("Content-Type"));
                 requestInfo.setBody(code.encode(value));
                 return;
             }

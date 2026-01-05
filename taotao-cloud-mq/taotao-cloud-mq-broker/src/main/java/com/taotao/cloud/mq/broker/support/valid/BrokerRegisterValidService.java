@@ -19,18 +19,28 @@ package com.taotao.cloud.mq.broker.support.valid;
 import com.taotao.cloud.mq.broker.dto.BrokerRegisterReq;
 
 /**
+ * 注册验证方法
+ *
  * @author shuigedeng
  * @since 2024.05
  */
-public class BrokerRegisterValidService implements IBrokerRegisterValidService {
+public interface BrokerRegisterValidService {
 
-    @Override
-    public boolean producerValid(BrokerRegisterReq registerReq) {
-        return true;
-    }
+    /**
+     * 生产者验证合法性
+     *
+     * @param registerReq 注册信息
+     * @return 结果
+     * @since 2024.05
+     */
+    boolean producerValid(BrokerRegisterReq registerReq);
 
-    @Override
-    public boolean consumerValid(BrokerRegisterReq registerReq) {
-        return true;
-    }
+    /**
+     * 消费者验证合法性
+     *
+     * @param registerReq 注册信息
+     * @return 结果
+     * @since 2024.05
+     */
+    boolean consumerValid(BrokerRegisterReq registerReq);
 }

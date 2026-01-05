@@ -29,7 +29,7 @@ import com.taotao.cloud.rpc.common.common.rpc.domain.RpcChannelFuture;
 import com.taotao.cloud.rpc.common.common.rpc.domain.RpcRequest;
 import com.taotao.cloud.rpc.common.common.rpc.domain.RpcResponse;
 import com.taotao.cloud.rpc.common.common.support.invoke.InvokeManager;
-import com.taotao.cloud.rpc.common.tmp.ILoadBalance;
+import com.taotao.cloud.rpc.common.tmp.LoadBalance;
 import io.netty.channel.Channel;
 import java.util.List;
 import org.slf4j.Logger;
@@ -97,7 +97,7 @@ public class RemoteInvokeServiceImpl implements RemoteInvokeService {
         List<RpcChannelFuture> channelFutures =
                 clientRegisterManager.queryServerChannelFutures(serviceId);
 
-        final ILoadBalance loadBalance = serviceContext.loadBalance();
+        final LoadBalance loadBalance = serviceContext.loadBalance();
         //        List<IServer> servers = CollectionUtil.toList(channelFutures, new
         // IHandler<RpcChannelFuture, IServer>() {
         //            @Override

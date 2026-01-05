@@ -18,13 +18,12 @@ package com.taotao.cloud.cache.bs;
 
 import com.taotao.boot.common.utils.common.ArgUtils;
 import com.taotao.cloud.cache.api.*;
-import com.taotao.cloud.cache.core.Cache;
 import com.taotao.cloud.cache.support.evict.CacheEvicts;
 import com.taotao.cloud.cache.support.listener.remove.CacheRemoveListeners;
 import com.taotao.cloud.cache.support.listener.slow.CacheSlowListeners;
 import com.taotao.cloud.cache.support.load.CacheLoads;
 import com.taotao.cloud.cache.support.persist.CachePersists;
-import com.taotao.cloud.cache.support.proxy.CacheProxy;
+import com.taotao.cloud.cache.support.proxy.DefaultCacheProxy;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,28 +61,28 @@ public final class CacheBs<K, V> {
     /**
      * 驱除策略
      */
-    private ICacheEvict<K, V> evict = CacheEvicts.fifo();
+    private CacheEvict<K, V> evict = CacheEvicts.fifo();
 
     /**
      * 删除监听类
      */
-    private final List<ICacheRemoveListener<K, V>> removeListeners =
+    private final List<CacheRemoveListener<K, V>> removeListeners =
             CacheRemoveListeners.defaults();
 
     /**
      * 慢操作监听类
      */
-    private final List<ICacheSlowListener> slowListeners = CacheSlowListeners.none();
+    private final List<CacheSlowListener> slowListeners = CacheSlowListeners.none();
 
     /**
      * 加载策略
      */
-    private ICacheLoad<K, V> load = CacheLoads.none();
+    private CacheLoad<K, V> load = CacheLoads.none();
 
     /**
      * 持久化实现策略
      */
-    private ICachePersist<K, V> persist = CachePersists.none();
+    private CachePersist<K, V> persist = CachePersists.none();
 
     /**
      * map 实现
@@ -117,7 +116,7 @@ public final class CacheBs<K, V> {
      * @return this
      * @since 2024.06
      */
-    public CacheBs<K, V> evict(ICacheEvict<K, V> evict) {
+    public CacheBs<K, V> evict( CacheEvict<K, V> evict) {
         ArgUtils.notNull(evict, "evict");
 
         this.evict = evict;
@@ -130,7 +129,7 @@ public final class CacheBs<K, V> {
      * @return this
      * @since 2024.06
      */
-    public CacheBs<K, V> load(ICacheLoad<K, V> load) {
+    public CacheBs<K, V> load( CacheLoad<K, V> load) {
         ArgUtils.notNull(load, "load");
 
         this.load = load;
@@ -143,7 +142,7 @@ public final class CacheBs<K, V> {
      * @return this
      * @since 2024.06
      */
-    public CacheBs<K, V> addRemoveListener(ICacheRemoveListener<K, V> removeListener) {
+    public CacheBs<K, V> addRemoveListener( CacheRemoveListener<K, V> removeListener) {
         ArgUtils.notNull(removeListener, "removeListener");
 
         this.removeListeners.add(removeListener);
@@ -156,7 +155,7 @@ public final class CacheBs<K, V> {
      * @return this
      * @since 2024.06
      */
-    public CacheBs<K, V> addSlowListener(ICacheSlowListener slowListener) {
+    public CacheBs<K, V> addSlowListener( CacheSlowListener slowListener) {
         ArgUtils.notNull(slowListener, "slowListener");
 
         this.slowListeners.add(slowListener);
@@ -169,7 +168,7 @@ public final class CacheBs<K, V> {
      * @return this
      * @since 2024.06
      */
-    public CacheBs<K, V> persist(ICachePersist<K, V> persist) {
+    public CacheBs<K, V> persist( CachePersist<K, V> persist) {
         this.persist = persist;
         return this;
     }
@@ -179,8 +178,8 @@ public final class CacheBs<K, V> {
      * @return 缓存信息
      * @since 2024.06
      */
-    public ICache<K, V> build() {
-        Cache<K, V> cache = new Cache<>();
+    public Cache<K, V> build() {
+        com.taotao.cloud.cache.core.Cache<K, V> cache = new com.taotao.cloud.cache.core.Cache<>();
         cache.map(map);
         cache.evict(evict);
         cache.sizeLimit(size);
@@ -191,6 +190,6 @@ public final class CacheBs<K, V> {
 
         // 初始化
         cache.init();
-        return CacheProxy.getProxy(cache);
+        return DefaultCacheProxy.getProxy(cache);
     }
 }

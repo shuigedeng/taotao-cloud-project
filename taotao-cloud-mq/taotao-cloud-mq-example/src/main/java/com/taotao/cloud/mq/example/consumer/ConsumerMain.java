@@ -17,8 +17,8 @@
 package com.taotao.cloud.mq.example.consumer;
 
 import com.alibaba.fastjson2.JSON;
-import com.taotao.cloud.mq.client.consumer.api.IMqConsumerListener;
-import com.taotao.cloud.mq.client.consumer.api.IMqConsumerListenerContext;
+import com.taotao.cloud.mq.client.consumer.api.MqConsumerListener;
+import com.taotao.cloud.mq.client.consumer.api.MqConsumerListenerContext;
 import com.taotao.cloud.mq.client.consumer.core.MqConsumerPush;
 import com.taotao.cloud.mq.common.dto.req.MqMessage;
 import com.taotao.cloud.mq.common.resp.ConsumerStatus;
@@ -36,10 +36,10 @@ public class ConsumerMain {
 
         mqConsumerPush.subscribe("TOPIC", "TAGA");
         mqConsumerPush.registerListener(
-                new IMqConsumerListener() {
+                new MqConsumerListener() {
                     @Override
                     public ConsumerStatus consumer(
-                            MqMessage mqMessage, IMqConsumerListenerContext context) {
+                            MqMessage mqMessage, MqConsumerListenerContext context) {
                         System.out.println("---------- 自定义 " + JSON.toJSONString(mqMessage));
                         return ConsumerStatus.SUCCESS;
                     }

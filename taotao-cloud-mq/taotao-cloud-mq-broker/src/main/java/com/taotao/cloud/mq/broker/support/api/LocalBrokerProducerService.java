@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.mq.broker.support.api;
 
-import com.taotao.cloud.mq.broker.api.IBrokerProducerService;
+import com.taotao.cloud.mq.broker.api.BrokerProducerService;
 import com.taotao.cloud.mq.broker.dto.BrokerServiceEntryChannel;
 import com.taotao.cloud.mq.broker.dto.ServiceEntry;
 import com.taotao.cloud.mq.broker.resp.MqBrokerRespCode;
@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
  *
  * @since 2024.05
  */
-public class LocalBrokerProducerService implements IBrokerProducerService {
+public class LocalBrokerProducerService implements BrokerProducerService {
 
     private static final Logger LOG = LoggerFactory.getLogger(LocalBrokerProducerService.class);
 

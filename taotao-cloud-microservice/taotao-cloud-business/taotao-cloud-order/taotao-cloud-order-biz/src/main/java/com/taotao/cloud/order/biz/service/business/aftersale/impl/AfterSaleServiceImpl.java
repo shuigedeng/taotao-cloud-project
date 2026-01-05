@@ -47,13 +47,13 @@ import com.taotao.cloud.order.sys.model.vo.aftersale.AfterSaleApplyVO;
 import com.taotao.cloud.order.sys.model.vo.aftersale.AfterSaleApplyVOBuilder;
 import com.taotao.cloud.order.biz.aop.aftersale.AfterSaleLogPoint;
 import com.taotao.cloud.order.biz.manager.AfterSaleManager;
-import com.taotao.cloud.order.biz.mapper.aftersale.IAfterSaleMapper;
+import com.taotao.cloud.order.biz.mapper.aftersale.AfterSaleMapper;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
-import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleService;
-import com.taotao.cloud.order.biz.service.business.order.IOrderItemService;
-import com.taotao.cloud.order.biz.service.business.order.IOrderService;
+import com.taotao.cloud.order.biz.service.business.aftersale.AfterSaleService;
+import com.taotao.cloud.order.biz.service.business.order.OrderItemService;
+import com.taotao.cloud.order.biz.service.business.order.OrderService;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.api.feign.RefundSupportApi;
 import com.taotao.cloud.store.api.feign.IFeignStoreDetailApi;
@@ -82,17 +82,17 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 @Transactional(rollbackFor = Exception.class)
-public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSale> implements IAfterSaleService {
+public class AfterSaleServiceImpl extends ServiceImpl<AfterSaleMapper, AfterSale> implements AfterSaleService {
 	private final AfterSaleManager afterSaleManager;
 
 	/**
 	 * 订单
 	 */
-	private final IOrderService orderService;
+	private final OrderService orderService;
 	/**
 	 * 订单货物
 	 */
-	private final IOrderItemService orderItemService;
+	private final OrderItemService orderItemService;
 	/**
 	 * 物流公司
 	 */

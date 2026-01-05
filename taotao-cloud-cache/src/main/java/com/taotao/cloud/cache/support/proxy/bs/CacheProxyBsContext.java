@@ -17,88 +17,56 @@
 package com.taotao.cloud.cache.support.proxy.bs;
 
 import com.taotao.cloud.cache.annotation.CacheInterceptor;
-import com.taotao.cloud.cache.api.ICache;
+import com.taotao.cloud.cache.api.Cache;
 import java.lang.reflect.Method;
 
 /**
- * 代理引导类上下文
  * @author shuigedeng
  * @since 2024.06
  */
-public class CacheProxyBsContext implements ICacheProxyBsContext {
+public interface CacheProxyBsContext {
 
     /**
-     * 目标
+     * 拦截器信息
+     * @return 拦截器
      * @since 2024.06
      */
-    private ICache target;
+    CacheInterceptor interceptor();
 
     /**
-     * 入参
+     * 获取代理对象信息
+     * @return 代理
      * @since 2024.06
      */
-    private Object[] params;
+    Cache target();
 
     /**
-     * 方法
+     * 目标对象
+     * @param target 对象
+     * @return 结果
      * @since 2024.06
      */
-    private Method method;
+    CacheProxyBsContext target(final Cache target);
 
     /**
-     * 拦截器
+     * 参数信息
+     * @return 参数信息
      * @since 2024.06
      */
-    private CacheInterceptor interceptor;
+    Object[] params();
 
     /**
-     * 新建对象
-     * @return 对象
+     * 方法信息
+     * @return 方法信息
      * @since 2024.06
      */
-    public static CacheProxyBsContext newInstance() {
-        return new CacheProxyBsContext();
-    }
+    Method method();
 
-    @Override
-    public ICache target() {
-        return target;
-    }
-
-    @Override
-    public CacheProxyBsContext target(ICache target) {
-        this.target = target;
-        return this;
-    }
-
-    @Override
-    public Object[] params() {
-        return params;
-    }
-
-    public CacheProxyBsContext params(Object[] params) {
-        this.params = params;
-        return this;
-    }
-
-    @Override
-    public Method method() {
-        return method;
-    }
-
-    @Override
-    public Object process() throws Throwable {
-        return this.method.invoke(target, params);
-    }
-
-    public CacheProxyBsContext method(Method method) {
-        this.method = method;
-        this.interceptor = method.getAnnotation(CacheInterceptor.class);
-        return this;
-    }
-
-    @Override
-    public CacheInterceptor interceptor() {
-        return interceptor;
-    }
+    /**
+     * 方法执行
+     * @return 执行
+     * @since 2024.06
+     * @throws Throwable 异常信息
+     */
+    Object process() throws Throwable;
 }

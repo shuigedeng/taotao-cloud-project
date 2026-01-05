@@ -16,10 +16,9 @@
 
 package com.taotao.cloud.cache.support.proxy.bs;
 
-import com.taotao.cloud.cache.annotation.CacheInterceptor;
-import com.taotao.cloud.cache.api.ICache;
-import com.taotao.cloud.cache.api.ICacheInterceptor;
-import com.taotao.cloud.cache.api.ICachePersist;
+import com.taotao.cloud.cache.api.Cache;
+import com.taotao.cloud.cache.api.CacheInterceptor;
+import com.taotao.cloud.cache.api.CachePersist;
 import com.taotao.cloud.cache.support.interceptor.CacheInterceptorContext;
 import com.taotao.cloud.cache.support.interceptor.CacheInterceptors;
 import com.taotao.cloud.cache.support.persist.CachePersistAof;
@@ -38,7 +37,7 @@ public final class CacheProxyBs {
      * 代理上下文
      * @since 2024.06
      */
-    private ICacheProxyBsContext context;
+    private CacheProxyBsContext context;
 
     /**
      * 默认通用拦截器
@@ -47,7 +46,7 @@ public final class CacheProxyBs {
      * @since 2024.06
      */
     @SuppressWarnings("all")
-    private final List<ICacheInterceptor> commonInterceptors =
+    private final List<CacheInterceptor> commonInterceptors =
             CacheInterceptors.defaultCommonList();
 
     /**
@@ -55,7 +54,7 @@ public final class CacheProxyBs {
      * @since 2024.06
      */
     @SuppressWarnings("all")
-    private final List<ICacheInterceptor> refreshInterceptors =
+    private final List<CacheInterceptor> refreshInterceptors =
             CacheInterceptors.defaultRefreshList();
 
     /**
@@ -63,14 +62,14 @@ public final class CacheProxyBs {
      * @since 2024.06
      */
     @SuppressWarnings("all")
-    private final ICacheInterceptor persistInterceptors = CacheInterceptors.aof();
+    private final CacheInterceptor persistInterceptors = CacheInterceptors.aof();
 
     /**
      * 驱除拦截器
      * @since 2024.06
      */
     @SuppressWarnings("all")
-    private final ICacheInterceptor evictInterceptors = CacheInterceptors.evict();
+    private final CacheInterceptor evictInterceptors = CacheInterceptors.evict();
 
     /**
      * 新建对象实例
@@ -81,7 +80,7 @@ public final class CacheProxyBs {
         return new CacheProxyBs();
     }
 
-    public CacheProxyBs context(ICacheProxyBsContext context) {
+    public CacheProxyBs context( CacheProxyBsContext context) {
         this.context = context;
         return this;
     }
@@ -96,7 +95,7 @@ public final class CacheProxyBs {
     public Object execute() throws Throwable {
         // 1. 开始的时间
         final long startMills = System.currentTimeMillis();
-        final ICache cache = context.target();
+        final Cache cache = context.target();
         CacheInterceptorContext interceptorContext =
                 CacheInterceptorContext.newInstance()
                         .startMills(startMills)
@@ -105,7 +104,7 @@ public final class CacheProxyBs {
                         .cache(context.target());
 
         // 1. 获取刷新注解信息
-        CacheInterceptor cacheInterceptor = context.interceptor();
+        com.taotao.cloud.cache.annotation.CacheInterceptor cacheInterceptor = context.interceptor();
         this.interceptorHandler(cacheInterceptor, interceptorContext, cache, true);
 
         // 2. 正常执行
@@ -129,14 +128,14 @@ public final class CacheProxyBs {
      */
     @SuppressWarnings("all")
     private void interceptorHandler(
-            CacheInterceptor cacheInterceptor,
+            com.taotao.cloud.cache.annotation.CacheInterceptor cacheInterceptor,
             CacheInterceptorContext interceptorContext,
-            ICache cache,
+            Cache cache,
             boolean before) {
         if (cacheInterceptor != null) {
             // 1. 通用
             if (cacheInterceptor.common()) {
-                for (ICacheInterceptor interceptor : commonInterceptors) {
+                for (CacheInterceptor interceptor : commonInterceptors) {
                     if (before) {
                         interceptor.before(interceptorContext);
                     } else {
@@ -147,7 +146,7 @@ public final class CacheProxyBs {
 
             // 2. 刷新
             if (cacheInterceptor.refresh()) {
-                for (ICacheInterceptor interceptor : refreshInterceptors) {
+                for (CacheInterceptor interceptor : refreshInterceptors) {
                     if (before) {
                         interceptor.before(interceptorContext);
                     } else {
@@ -157,7 +156,7 @@ public final class CacheProxyBs {
             }
 
             // 3. AOF 追加
-            final ICachePersist cachePersist = cache.persist();
+            final CachePersist cachePersist = cache.persist();
             if (cacheInterceptor.aof() && (cachePersist instanceof CachePersistAof)) {
                 if (before) {
                     persistInterceptors.before(interceptorContext);

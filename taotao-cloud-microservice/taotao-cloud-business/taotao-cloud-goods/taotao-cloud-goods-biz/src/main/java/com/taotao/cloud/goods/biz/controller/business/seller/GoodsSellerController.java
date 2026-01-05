@@ -32,8 +32,8 @@ import com.taotao.cloud.goods.biz.model.vo.GoodsVO;
 import com.taotao.cloud.goods.biz.model.vo.StockWarningVO;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
-import com.taotao.cloud.goods.biz.service.business.IGoodsService;
-import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
+import com.taotao.cloud.goods.biz.service.business.GoodsService;
+import com.taotao.cloud.goods.biz.service.business.GoodsSkuService;
 import com.taotao.cloud.store.api.feign.IFeignStoreDetailApi;
 import com.taotao.cloud.store.api.model.vo.StoreDetailVO;
 import com.taotao.boot.web.request.annotation.RequestLogger;
@@ -73,9 +73,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class GoodsSellerController {
 
     /** 商品 */
-    private final IGoodsService goodsService;
+    private final GoodsService goodsService;
     /** 商品sku */
-    private final IGoodsSkuService goodsSkuService;
+    private final GoodsSkuService goodsSkuService;
     /** 店铺详情 */
     private final IFeignStoreDetailApi storeDetailApi;
 

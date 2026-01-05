@@ -24,12 +24,11 @@ import com.taotao.boot.common.model.request.PageQuery;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.goods.biz.model.vo.CustomWordsVO;
-import com.taotao.cloud.goods.biz.mapper.ICustomWordsMapper;
+import com.taotao.cloud.goods.biz.mapper.CustomWordsMapper;
 import com.taotao.cloud.goods.biz.model.convert.CustomWordsConvert;
 import com.taotao.cloud.goods.biz.model.entity.CustomWords;
 import com.taotao.cloud.goods.biz.repository.CustomWordsRepository;
-import com.taotao.cloud.goods.biz.repository.ICustomWordsRepository;
-import com.taotao.cloud.goods.biz.service.business.ICustomWordsService;
+import com.taotao.cloud.goods.biz.service.business.CustomWordsService;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import jakarta.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
@@ -46,8 +45,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class CustomWordsServiceImpl
-        extends BaseSuperServiceImpl<CustomWords, Long,ICustomWordsMapper, CustomWordsRepository, ICustomWordsRepository>
-        implements ICustomWordsService {
+        extends BaseSuperServiceImpl<CustomWords, Long, CustomWordsMapper, CustomWordsRepository, CustomWordsRepository>
+        implements CustomWordsService {
 
     @Override
     public String deploy() {

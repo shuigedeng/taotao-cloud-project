@@ -25,10 +25,10 @@ import com.taotao.cloud.order.sys.model.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.biz.aop.order.OrderLogPoint;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
-import com.taotao.cloud.order.biz.service.business.order.IOrderItemService;
-import com.taotao.cloud.order.biz.service.business.order.IOrderPriceService;
-import com.taotao.cloud.order.biz.service.business.order.IOrderService;
-import com.taotao.cloud.order.biz.service.business.order.ITradeService;
+import com.taotao.cloud.order.biz.service.business.order.OrderItemService;
+import com.taotao.cloud.order.biz.service.business.order.OrderPriceService;
+import com.taotao.cloud.order.biz.service.business.order.OrderService;
+import com.taotao.cloud.order.biz.service.business.order.TradeService;
 import java.math.BigDecimal;
 import java.util.List;
 import lombok.*;
@@ -45,16 +45,16 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class OrderPriceServiceImpl implements IOrderPriceService {
+public class OrderPriceServiceImpl implements OrderPriceService {
 
     /** 线下收款 */
     private final BankTransferPlugin bankTransferPlugin;
     /** 订单货物 */
-    private final IOrderItemService orderItemService;
+    private final OrderItemService orderItemService;
     /** 交易数据层 */
-    private final ITradeService tradeService;
+    private final TradeService tradeService;
     /** 订单 */
-    private final IOrderService orderService;
+    private final OrderService orderService;
 
     @Override
     @SystemLogPoint(description = "修改订单价格", customerLog = "'订单编号:'+#orderSn +'，价格修改为：'+#orderPrice")

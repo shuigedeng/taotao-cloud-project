@@ -21,7 +21,7 @@ import com.taotao.boot.job.xxl.timetask.EveryMinuteExecute;
 import com.taotao.boot.lock.support.DistributedLock;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
-import com.taotao.cloud.order.biz.service.business.order.IOrderService;
+import com.taotao.cloud.order.biz.service.business.order.OrderService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.OrderSettingVO;
@@ -41,7 +41,7 @@ public class CancelOrderTaskExecute implements EveryMinuteExecute {
 
     /** 订单 */
     @Autowired
-    private IOrderService orderService;
+    private OrderService orderService;
     /** 设置 */
     @Autowired
     private SettingApi settingApi;

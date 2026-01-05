@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.cache.support.interceptor;
 
-import com.taotao.cloud.cache.api.ICache;
-import com.taotao.cloud.cache.api.ICacheInterceptorContext;
+import com.taotao.cloud.cache.api.Cache;
+
 import java.lang.reflect.Method;
 
 /**
@@ -30,9 +30,9 @@ import java.lang.reflect.Method;
  * @param <K> key
  * @param <V> value
  */
-public class CacheInterceptorContext<K, V> implements ICacheInterceptorContext<K, V> {
+public class CacheInterceptorContext<K, V> implements com.taotao.cloud.cache.api.CacheInterceptorContext<K, V> {
 
-    private ICache<K, V> cache;
+    private Cache<K, V> cache;
 
     /**
      * 执行的方法信息
@@ -69,11 +69,11 @@ public class CacheInterceptorContext<K, V> implements ICacheInterceptorContext<K
     }
 
     @Override
-    public ICache<K, V> cache() {
+    public Cache<K, V> cache() {
         return cache;
     }
 
-    public CacheInterceptorContext<K, V> cache(ICache<K, V> cache) {
+    public CacheInterceptorContext<K, V> cache( Cache<K, V> cache) {
         this.cache = cache;
         return this;
     }

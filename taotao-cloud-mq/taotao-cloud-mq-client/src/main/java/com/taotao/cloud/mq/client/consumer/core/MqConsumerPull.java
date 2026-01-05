@@ -18,9 +18,8 @@ package com.taotao.cloud.mq.client.consumer.core;
 
 import com.alibaba.fastjson2.JSON;
 import com.taotao.boot.common.utils.collection.CollectionUtils;
-import com.taotao.cloud.mq.client.consumer.api.IMqConsumerListenerContext;
+import com.taotao.cloud.mq.client.consumer.api.MqConsumerListenerContext;
 import com.taotao.cloud.mq.client.consumer.dto.MqTopicTagDto;
-import com.taotao.cloud.mq.client.consumer.support.listener.MqConsumerListenerContext;
 import com.taotao.cloud.mq.common.constant.ConsumerTypeConst;
 import com.taotao.cloud.mq.common.dto.req.MqMessage;
 import com.taotao.cloud.mq.common.dto.req.component.MqConsumerUpdateStatusDto;
@@ -140,8 +139,8 @@ public class MqConsumerPull extends MqConsumerPush {
                                     List<MqConsumerUpdateStatusDto> statusDtoList =
                                             new ArrayList<>(mqMessageList.size());
                                     for (MqMessage mqMessage : mqMessageList) {
-                                        IMqConsumerListenerContext context =
-                                                new MqConsumerListenerContext();
+                                        MqConsumerListenerContext context =
+                                                new com.taotao.cloud.mq.client.consumer.support.listener.MqConsumerListenerContext();
                                         final String messageId = mqMessage.getTraceId();
                                         ConsumerStatus consumerStatus =
                                                 mqListenerService.consumer(mqMessage, context);

@@ -18,9 +18,8 @@ package com.taotao.cloud.mq.client.consumer.handler;
 
 import com.alibaba.fastjson2.JSON;
 import com.taotao.boot.common.utils.lang.StringUtils;
-import com.taotao.cloud.mq.client.consumer.api.IMqConsumerListenerContext;
-import com.taotao.cloud.mq.client.consumer.support.listener.IMqListenerService;
-import com.taotao.cloud.mq.client.consumer.support.listener.MqConsumerListenerContext;
+import com.taotao.cloud.mq.client.consumer.api.MqConsumerListenerContext;
+import com.taotao.cloud.mq.client.consumer.support.listener.MqListenerService;
 import com.taotao.cloud.mq.common.constant.MethodType;
 import com.taotao.cloud.mq.common.dto.req.MqMessage;
 import com.taotao.cloud.mq.common.dto.resp.MqCommonResp;
@@ -29,7 +28,7 @@ import com.taotao.cloud.mq.common.resp.ConsumerStatus;
 import com.taotao.cloud.mq.common.resp.MqCommonRespCode;
 import com.taotao.cloud.mq.common.resp.MqException;
 import com.taotao.cloud.mq.common.rpc.RpcMessageDto;
-import com.taotao.cloud.mq.common.support.invoke.IInvokeService;
+import com.taotao.cloud.mq.common.support.invoke.InvokeService;
 import com.taotao.cloud.mq.common.util.ChannelUtil;
 import com.taotao.cloud.mq.common.util.DelimiterUtil;
 import io.netty.buffer.ByteBuf;
@@ -50,19 +49,19 @@ public class MqConsumerHandler extends SimpleChannelInboundHandler {
      * 调用管理类
      * @since 2024.05
      */
-    private IInvokeService invokeService;
+    private InvokeService invokeService;
 
     /**
      * 消息监听服务类
      * @since 2024.05
      */
-    private IMqListenerService mqListenerService;
+    private MqListenerService mqListenerService;
 
-    public void setInvokeService(IInvokeService invokeService) {
+    public void setInvokeService( InvokeService invokeService) {
         this.invokeService = invokeService;
     }
 
-    public void setMqListenerService(IMqListenerService mqListenerService) {
+    public void setMqListenerService( MqListenerService mqListenerService) {
         this.mqListenerService = mqListenerService;
     }
 
@@ -137,7 +136,7 @@ public class MqConsumerHandler extends SimpleChannelInboundHandler {
         try {
             // 如果是 broker，应该进行处理化等操作。
             MqMessage mqMessage = JSON.parseObject(json, MqMessage.class);
-            IMqConsumerListenerContext context = new MqConsumerListenerContext();
+            MqConsumerListenerContext context = new com.taotao.cloud.mq.client.consumer.support.listener.MqConsumerListenerContext();
             ConsumerStatus consumerStatus = this.mqListenerService.consumer(mqMessage, context);
 
             MqConsumerResultResp resp = new MqConsumerResultResp();

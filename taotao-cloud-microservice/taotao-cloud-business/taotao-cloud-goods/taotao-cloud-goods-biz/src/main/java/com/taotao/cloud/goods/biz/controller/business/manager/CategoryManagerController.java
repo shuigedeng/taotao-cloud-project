@@ -23,8 +23,8 @@ import com.taotao.cloud.goods.biz.model.vo.CategoryTreeVO;
 import com.taotao.cloud.goods.biz.model.vo.CategoryVO;
 import com.taotao.cloud.goods.biz.model.convert.CategoryConvert;
 import com.taotao.cloud.goods.biz.model.entity.Category;
-import com.taotao.cloud.goods.biz.service.business.ICategoryService;
-import com.taotao.cloud.goods.biz.service.business.IGoodsService;
+import com.taotao.cloud.goods.biz.service.business.CategoryService;
+import com.taotao.cloud.goods.biz.service.business.GoodsService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -64,9 +64,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategoryManagerController {
 
     /** 分类服务 */
-    private final ICategoryService categoryService;
+    private final CategoryService categoryService;
     /** 商品服务 */
-    private final IGoodsService goodsService;
+    private final GoodsService goodsService;
 
     @Operation(summary = "查询某分类下的全部子分类列表", description = "查询某分类下的全部子分类列表")
     @Parameters({

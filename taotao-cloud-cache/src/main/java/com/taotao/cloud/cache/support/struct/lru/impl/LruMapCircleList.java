@@ -18,11 +18,10 @@ package com.taotao.cloud.cache.support.struct.lru.impl;
 
 
 import com.taotao.boot.common.utils.lang.ObjectUtils;
-import com.taotao.cloud.cache.api.ICacheEntry;
+import com.taotao.cloud.cache.api.CacheEntry;
 import com.taotao.cloud.cache.exception.CacheRuntimeException;
-import com.taotao.cloud.cache.model.CacheEntry;
 import com.taotao.cloud.cache.model.CircleListNode;
-import com.taotao.cloud.cache.support.struct.lru.ILruMap;
+import com.taotao.cloud.cache.support.struct.lru.LruMap;
 import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -35,7 +34,7 @@ import static cn.hutool.core.util.ObjectUtil.isNotNull;
  * @author shuigedeng
  * @since 2024.06
  */
-public class LruMapCircleList<K, V> implements ILruMap<K, V> {
+public class LruMapCircleList<K, V> implements LruMap<K, V> {
 
     private static final Logger LOG = LoggerFactory.getLogger(LruMapCircleList.class);
 
@@ -70,7 +69,7 @@ public class LruMapCircleList<K, V> implements ILruMap<K, V> {
      * @since 2024.06
      */
     @Override
-    public ICacheEntry<K, V> removeEldest() {
+    public CacheEntry<K, V> removeEldest() {
         // fast-fail
         if (isEmpty()) {
             LOG.error("当前列表为空，无法进行删除");
@@ -88,7 +87,7 @@ public class LruMapCircleList<K, V> implements ILruMap<K, V> {
                 K key = node.key();
 
                 this.removeKey(key);
-                return CacheEntry.of(key, node.value());
+                return com.taotao.cloud.cache.model.CacheEntry.of(key, node.value());
             } else {
                 // 设置当前 accessFlag = 0,继续下一个
                 node.accessFlag(false);
@@ -97,7 +96,7 @@ public class LruMapCircleList<K, V> implements ILruMap<K, V> {
 
         // 如果循环一遍都没找到，直接取第一个元素即可。
         CircleListNode<K, V> firstNode = this.head.next();
-        return CacheEntry.of(firstNode.key(), firstNode.value());
+        return com.taotao.cloud.cache.model.CacheEntry.of(firstNode.key(), firstNode.value());
     }
 
     /**

@@ -17,11 +17,10 @@
 package com.taotao.cloud.cache.support.evict;
 
 
-import com.taotao.cloud.cache.api.ICache;
-import com.taotao.cloud.cache.api.ICacheEntry;
-import com.taotao.cloud.cache.api.ICacheEvictContext;
+import com.taotao.cloud.cache.api.Cache;
+import com.taotao.cloud.cache.api.CacheEntry;
+import com.taotao.cloud.cache.api.CacheEvictContext;
 import com.taotao.cloud.cache.exception.CacheRuntimeException;
-import com.taotao.cloud.cache.model.CacheEntry;
 import com.taotao.cloud.cache.model.DoubleListNode;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -89,9 +88,9 @@ public class CacheEvictLru2Q<K, V> extends AbstractCacheEvict<K, V> {
     }
 
     @Override
-    protected ICacheEntry<K, V> doEvict(ICacheEvictContext<K, V> context) {
-        ICacheEntry<K, V> result = null;
-        final ICache<K, V> cache = context.cache();
+    protected CacheEntry<K, V> doEvict( CacheEvictContext<K, V> context) {
+        CacheEntry<K, V> result = null;
+        final Cache<K, V> cache = context.cache();
         // 超过限制，移除队尾的元素
         if (cache.size() >= context.size()) {
             K evictKey = null;
@@ -112,7 +111,7 @@ public class CacheEvictLru2Q<K, V> extends AbstractCacheEvict<K, V> {
 
             // 执行移除操作
             V evictValue = cache.remove(evictKey);
-            result = new CacheEntry<>(evictKey, evictValue);
+            result = new com.taotao.cloud.cache.model.CacheEntry<>(evictKey, evictValue);
         }
 
         return result;

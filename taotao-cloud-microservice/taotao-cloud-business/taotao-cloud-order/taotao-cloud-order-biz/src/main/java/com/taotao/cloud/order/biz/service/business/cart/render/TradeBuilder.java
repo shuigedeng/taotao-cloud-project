@@ -21,8 +21,8 @@ import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnum;
 import com.taotao.cloud.order.sys.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.biz.model.entity.order.Trade;
-import com.taotao.cloud.order.biz.service.business.cart.ICartService;
-import com.taotao.cloud.order.biz.service.business.order.ITradeService;
+import com.taotao.cloud.order.biz.service.business.cart.CartService;
+import com.taotao.cloud.order.biz.service.business.order.TradeService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,10 +42,10 @@ public class TradeBuilder {
     private List<ICartRenderStep> cartRenderSteps;
     /** 交易 */
     @Autowired
-    private ITradeService tradeService;
+    private TradeService tradeService;
     /** 购物车业务 */
     @Autowired
-    private ICartService cartService;
+    private CartService cartService;
 
     /**
      * 构造购物车 购物车与结算信息不一致的地方主要是优惠券计算和运费计算，其他规则都是一致都

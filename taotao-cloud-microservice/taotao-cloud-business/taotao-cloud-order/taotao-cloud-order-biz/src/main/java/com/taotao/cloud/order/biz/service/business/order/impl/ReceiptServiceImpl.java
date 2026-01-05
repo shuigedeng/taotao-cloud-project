@@ -24,9 +24,9 @@ import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.order.sys.model.dto.order.OrderReceiptDTO;
 import com.taotao.cloud.order.sys.model.page.order.ReceiptPageQuery;
-import com.taotao.cloud.order.biz.mapper.order.IReceiptMapper;
+import com.taotao.cloud.order.biz.mapper.order.ReceiptMapper;
 import com.taotao.cloud.order.biz.model.entity.order.Receipt;
-import com.taotao.cloud.order.biz.service.business.order.IReceiptService;
+import com.taotao.cloud.order.biz.service.business.order.ReceiptService;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +39,7 @@ import org.springframework.stereotype.Service;
  */
 @AllArgsConstructor
 @Service
-public class ReceiptServiceImpl extends ServiceImpl<IReceiptMapper, Receipt> implements IReceiptService {
+public class ReceiptServiceImpl extends ServiceImpl<ReceiptMapper, Receipt> implements ReceiptService {
 
     @Override
     public IPage<OrderReceiptDTO> pageQuery(ReceiptPageQuery receiptPageQuery) {

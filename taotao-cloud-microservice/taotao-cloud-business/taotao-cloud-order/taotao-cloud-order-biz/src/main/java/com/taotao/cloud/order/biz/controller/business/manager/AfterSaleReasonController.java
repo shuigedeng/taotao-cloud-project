@@ -24,7 +24,7 @@ import com.taotao.cloud.order.sys.model.page.aftersale.AfterSaleReasonPageQuery;
 import com.taotao.cloud.order.sys.model.vo.aftersale.AfterSaleReasonVO;
 import com.taotao.cloud.order.biz.model.convert.AfterSaleReasonConvert;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleReason;
-import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleReasonService;
+import com.taotao.cloud.order.biz.service.business.aftersale.AfterSaleReasonService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -55,7 +55,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AfterSaleReasonController {
 
     /** 售后原因 */
-    private final IAfterSaleReasonService afterSaleReasonService;
+    private final AfterSaleReasonService afterSaleReasonService;
 
     @Operation(summary = "查看售后原因", description = "查看售后原因")
     @RequestLogger

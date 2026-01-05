@@ -19,7 +19,7 @@ package com.taotao.cloud.mq.client.producer.handler;
 import com.alibaba.fastjson2.JSON;
 import com.taotao.boot.common.utils.lang.StringUtils;
 import com.taotao.cloud.mq.common.rpc.RpcMessageDto;
-import com.taotao.cloud.mq.common.support.invoke.IInvokeService;
+import com.taotao.cloud.mq.common.support.invoke.InvokeService;
 import com.taotao.cloud.mq.common.util.ChannelUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -38,9 +38,9 @@ public class MqProducerHandler extends SimpleChannelInboundHandler {
     /**
      * 调用管理类
      */
-    private IInvokeService invokeService;
+    private InvokeService invokeService;
 
-    public void setInvokeService(IInvokeService invokeService) {
+    public void setInvokeService( InvokeService invokeService) {
         this.invokeService = invokeService;
     }
 

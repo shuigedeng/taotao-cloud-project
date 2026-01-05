@@ -16,11 +16,11 @@
 
 package com.taotao.cloud.mq.client.consumer.support.broker;
 
-import com.taotao.cloud.mq.client.consumer.support.listener.IMqListenerService;
-import com.taotao.cloud.mq.common.balance.ILoadBalance;
+import com.taotao.cloud.mq.client.consumer.support.listener.MqListenerService;
+import com.taotao.cloud.mq.common.balance.LoadBalance;
 import com.taotao.cloud.mq.common.rpc.RpcChannelFuture;
-import com.taotao.cloud.mq.common.support.invoke.IInvokeService;
-import com.taotao.cloud.mq.common.support.status.IStatusManager;
+import com.taotao.cloud.mq.common.support.invoke.InvokeService;
+import com.taotao.cloud.mq.common.support.status.StatusManager;
 
 /**
  * @author shuigedeng
@@ -43,7 +43,7 @@ public class ConsumerBrokerConfig {
      *
      * @since 2024.05
      */
-    private IInvokeService invokeService;
+    private InvokeService invokeService;
 
     /**
      * 获取响应超时时间
@@ -64,21 +64,21 @@ public class ConsumerBrokerConfig {
      *
      * @since 2024.05
      */
-    private IStatusManager statusManager;
+    private StatusManager statusManager;
 
     /**
      * 监听服务类
      *
      * @since 2024.05
      */
-    private IMqListenerService mqListenerService;
+    private MqListenerService mqListenerService;
 
     /**
      * 负载均衡
      *
      * @since 2024.05
      */
-    private ILoadBalance<RpcChannelFuture> loadBalance;
+    private LoadBalance<RpcChannelFuture> loadBalance;
 
     /**
      * 订阅最大尝试次数
@@ -182,11 +182,11 @@ public class ConsumerBrokerConfig {
         return this;
     }
 
-    public IInvokeService invokeService() {
+    public InvokeService invokeService() {
         return invokeService;
     }
 
-    public ConsumerBrokerConfig invokeService(IInvokeService invokeService) {
+    public ConsumerBrokerConfig invokeService( InvokeService invokeService) {
         this.invokeService = invokeService;
         return this;
     }
@@ -209,29 +209,29 @@ public class ConsumerBrokerConfig {
         return this;
     }
 
-    public IStatusManager statusManager() {
+    public StatusManager statusManager() {
         return statusManager;
     }
 
-    public ConsumerBrokerConfig statusManager(IStatusManager statusManager) {
+    public ConsumerBrokerConfig statusManager( StatusManager statusManager) {
         this.statusManager = statusManager;
         return this;
     }
 
-    public IMqListenerService mqListenerService() {
+    public MqListenerService mqListenerService() {
         return mqListenerService;
     }
 
-    public ConsumerBrokerConfig mqListenerService(IMqListenerService mqListenerService) {
+    public ConsumerBrokerConfig mqListenerService( MqListenerService mqListenerService) {
         this.mqListenerService = mqListenerService;
         return this;
     }
 
-    public ILoadBalance<RpcChannelFuture> loadBalance() {
+    public LoadBalance<RpcChannelFuture> loadBalance() {
         return loadBalance;
     }
 
-    public ConsumerBrokerConfig loadBalance(ILoadBalance<RpcChannelFuture> loadBalance) {
+    public ConsumerBrokerConfig loadBalance( LoadBalance<RpcChannelFuture> loadBalance) {
         this.loadBalance = loadBalance;
         return this;
     }

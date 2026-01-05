@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.cache.bs;
 
-import com.taotao.cloud.cache.api.ICache;
+import com.taotao.cloud.cache.api.Cache;
 import com.taotao.cloud.cache.listener.MyRemoveListener;
 import com.taotao.cloud.cache.listener.MySlowListener;
 import com.taotao.cloud.cache.load.MyCacheLoad;
@@ -41,7 +41,7 @@ public class CacheBsTest {
      */
     @Test
     public void helloTest() {
-        ICache<String, String> cache = CacheBs.<String, String>newInstance().size(2).build();
+        Cache<String, String> cache = CacheBs.<String, String>newInstance().size(2).build();
 
         cache.put("1", "1");
         cache.put("2", "2");
@@ -58,7 +58,7 @@ public class CacheBsTest {
      */
     @Test
     public void configTest() {
-        ICache<String, String> cache =
+        Cache<String, String> cache =
                 CacheBs.<String, String>newInstance()
                         .map(Maps.<String, String>hashMap())
                         .evict(CacheEvicts.<String, String>fifo())
@@ -80,7 +80,7 @@ public class CacheBsTest {
      */
     @Test
     public void expireTest() throws InterruptedException {
-        ICache<String, String> cache = CacheBs.<String, String>newInstance().size(3).build();
+        Cache<String, String> cache = CacheBs.<String, String>newInstance().size(3).build();
 
         cache.put("1", "1");
         cache.put("2", "2");
@@ -99,7 +99,7 @@ public class CacheBsTest {
      */
     @Test
     public void cacheRemoveListenerTest() {
-        ICache<String, String> cache =
+        Cache<String, String> cache =
                 CacheBs.<String, String>newInstance()
                         .size(1)
                         .addRemoveListener(new MyRemoveListener<String, String>())
@@ -115,7 +115,7 @@ public class CacheBsTest {
      */
     @Test
     public void loadTest() {
-        ICache<String, String> cache =
+        Cache<String, String> cache =
                 CacheBs.<String, String>newInstance().load(new MyCacheLoad()).build();
 
         Assertions.assertEquals(2, cache.size());
@@ -127,7 +127,7 @@ public class CacheBsTest {
      */
     @Test
     public void persistRdbTest() throws InterruptedException {
-        ICache<String, String> cache =
+        Cache<String, String> cache =
                 CacheBs.<String, String>newInstance()
                         .load(new MyCacheLoad())
                         .persist(CachePersists.<String, String>dbJson("1.rdb"))
@@ -143,7 +143,7 @@ public class CacheBsTest {
      */
     @Test
     public void loadDbJsonTest() {
-        ICache<String, String> cache =
+        Cache<String, String> cache =
                 CacheBs.<String, String>newInstance()
                         .load(CacheLoads.<String, String>dbJson("1.rdb"))
                         .build();
@@ -157,7 +157,7 @@ public class CacheBsTest {
      */
     @Test
     public void slowLogTest() {
-        ICache<String, String> cache =
+        Cache<String, String> cache =
                 CacheBs.<String, String>newInstance().addSlowListener(new MySlowListener()).build();
 
         cache.put("1", "2");
@@ -170,7 +170,7 @@ public class CacheBsTest {
      */
     @Test
     public void persistAofTest() throws InterruptedException {
-        ICache<String, String> cache =
+        Cache<String, String> cache =
                 CacheBs.<String, String>newInstance()
                         .persist(CachePersists.<String, String>aof("1.aof"))
                         .build();
@@ -188,7 +188,7 @@ public class CacheBsTest {
      */
     @Test
     public void loadAofTest() throws InterruptedException {
-        ICache<String, String> cache =
+        Cache<String, String> cache =
                 CacheBs.<String, String>newInstance()
                         .load(CacheLoads.<String, String>aof("default.aof"))
                         .build();
@@ -203,7 +203,7 @@ public class CacheBsTest {
      */
     @Test
     public void lruEvictTest() throws InterruptedException {
-        ICache<String, String> cache =
+        Cache<String, String> cache =
                 CacheBs.<String, String>newInstance()
                         .size(3)
                         .evict(CacheEvicts.<String, String>lru())
@@ -223,7 +223,7 @@ public class CacheBsTest {
 
     @Test
     public void lruDoubleListMapTest() throws InterruptedException {
-        ICache<String, String> cache =
+        Cache<String, String> cache =
                 CacheBs.<String, String>newInstance()
                         .size(3)
                         .evict(CacheEvicts.<String, String>lruDoubleListMap())
@@ -247,7 +247,7 @@ public class CacheBsTest {
      */
     @Test
     public void lruLinkedHashMapTest() {
-        ICache<String, String> cache =
+        Cache<String, String> cache =
                 CacheBs.<String, String>newInstance()
                         .size(3)
                         .evict(CacheEvicts.<String, String>lruLinkedHashMap())
@@ -271,7 +271,7 @@ public class CacheBsTest {
      */
     @Test
     public void lruQ2Test() {
-        ICache<String, String> cache =
+        Cache<String, String> cache =
                 CacheBs.<String, String>newInstance()
                         .size(3)
                         .evict(CacheEvicts.<String, String>lru2Q())
@@ -295,7 +295,7 @@ public class CacheBsTest {
      */
     @Test
     public void lru2Test() {
-        ICache<String, String> cache =
+        Cache<String, String> cache =
                 CacheBs.<String, String>newInstance()
                         .size(3)
                         .evict(CacheEvicts.<String, String>lru2())
@@ -319,7 +319,7 @@ public class CacheBsTest {
      */
     @Test
     public void lfuTest() {
-        ICache<String, String> cache =
+        Cache<String, String> cache =
                 CacheBs.<String, String>newInstance()
                         .size(3)
                         .evict(CacheEvicts.<String, String>lfu())
@@ -343,7 +343,7 @@ public class CacheBsTest {
      */
     @Test
     public void clockTest() {
-        ICache<String, String> cache =
+        Cache<String, String> cache =
                 CacheBs.<String, String>newInstance()
                         .size(3)
                         .evict(CacheEvicts.<String, String>clock())

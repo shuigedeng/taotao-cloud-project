@@ -32,9 +32,9 @@ import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.sys.model.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
-import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleService;
-import com.taotao.cloud.order.biz.service.business.order.IOrderItemService;
-import com.taotao.cloud.order.biz.service.business.order.IOrderService;
+import com.taotao.cloud.order.biz.service.business.aftersale.AfterSaleService;
+import com.taotao.cloud.order.biz.service.business.order.OrderItemService;
+import com.taotao.cloud.order.biz.service.business.order.OrderService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.OrderSettingVO;
@@ -54,10 +54,10 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
 
     /** 订单 */
     @Autowired
-    private IOrderService orderService;
+    private OrderService orderService;
     /** 订单货物 */
     @Autowired
-    private IOrderItemService orderItemService;
+    private OrderItemService orderItemService;
     /** 设置 */
     @Autowired
     private SettingApi settingApi;
@@ -66,7 +66,7 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
     private MemberEvaluationApi memberEvaluationApi;
 
     @Autowired
-    private IAfterSaleService afterSaleService;
+    private AfterSaleService afterSaleService;
 
     /** 执行每日任务 */
     @Override

@@ -18,7 +18,7 @@ package com.taotao.cloud.goods.biz.controller.business.buyer;
 
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.goods.biz.model.vo.CategoryTreeVO;
-import com.taotao.cloud.goods.biz.service.business.ICategoryService;
+import com.taotao.cloud.goods.biz.service.business.CategoryService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -53,7 +53,7 @@ public class CategoryBuyerController {
 	/**
 	 * 商品分类
 	 */
-	private final ICategoryService categoryService;
+	private final CategoryService categoryService;
 
 	@RequestLogger
 	@Operation(summary = "根据父id获取商品分类列表", description = "根据父id获取商品分类列表")

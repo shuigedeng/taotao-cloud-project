@@ -24,7 +24,7 @@ import com.taotao.cloud.rpc.common.common.constant.enums.CallTypeEnum;
 import com.taotao.cloud.rpc.common.common.support.inteceptor.RpcInterceptor;
 import com.taotao.cloud.rpc.common.common.support.invoke.InvokeManager;
 import com.taotao.cloud.rpc.common.common.support.status.service.StatusManager;
-import com.taotao.cloud.rpc.common.tmp.ILoadBalance;
+import com.taotao.cloud.rpc.common.tmp.LoadBalance;
 
 /**
  * 反射调用上下文
@@ -104,7 +104,7 @@ public class DefaultServiceContext<T> implements ServiceContext<T> {
      * 负载均衡
      * @since 0.2.0
      */
-    private ILoadBalance loadBalance;
+    private LoadBalance loadBalance;
 
     @Override
     public String serviceId() {
@@ -218,11 +218,11 @@ public class DefaultServiceContext<T> implements ServiceContext<T> {
     }
 
     @Override
-    public ILoadBalance loadBalance() {
+    public LoadBalance loadBalance() {
         return loadBalance;
     }
 
-    public DefaultServiceContext<T> loadBalance(ILoadBalance loadBalance) {
+    public DefaultServiceContext<T> loadBalance( LoadBalance loadBalance) {
         this.loadBalance = loadBalance;
         return this;
     }

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.jdbcpool.datasource;
 
-import com.taotao.cloud.jdbcpool.api.IDataSourceConfig;
+import com.taotao.cloud.jdbcpool.api.DataSourceConfig;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -27,7 +27,7 @@ import java.util.logging.Logger;
  * @author shuigedeng
  * @since 1.0.0
  */
-public class DataSourceConfigAdaptor implements IDataSourceConfig {
+public class DataSourceConfigAdaptor implements DataSourceConfig {
 
     @Override
     public Connection getConnection() throws SQLException {

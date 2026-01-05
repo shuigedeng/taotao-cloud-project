@@ -26,7 +26,7 @@ import java.nio.charset.Charset;
  * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
-public class JsonCode implements ICode {
+public class JsonCode implements Code {
 
     private Charset charset = Charset.forName("utf-8");
 

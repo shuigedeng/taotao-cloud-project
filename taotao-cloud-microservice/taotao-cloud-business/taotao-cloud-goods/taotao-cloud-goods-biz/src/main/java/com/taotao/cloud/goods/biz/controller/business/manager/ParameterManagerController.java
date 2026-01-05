@@ -20,7 +20,7 @@ import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.goods.biz.model.dto.ParametersDTO;
 import com.taotao.cloud.goods.biz.model.convert.ParametersConvert;
 import com.taotao.cloud.goods.biz.model.entity.Parameters;
-import com.taotao.cloud.goods.biz.service.business.IParametersService;
+import com.taotao.cloud.goods.biz.service.business.ParametersService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -52,7 +52,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ParameterManagerController {
 
     /** 参数服务 */
-    private final IParametersService parametersService;
+    private final ParametersService parametersService;
 
     @Operation(summary = "添加参数", description = "添加参数")
     @RequestLogger("添加参数添加参数")

@@ -28,7 +28,7 @@ import java.lang.reflect.Type;
  * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
-public class ProtostuffCode implements ICode {
+public class ProtostuffCode implements Code {
 
     public <T> byte[] encode( T data ) {
         // return ProtostuffUtils.serialize(data);

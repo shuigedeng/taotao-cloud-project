@@ -27,7 +27,7 @@ import com.taotao.cloud.rpc.registry.apiregistry.base.ApiRegistryException;
  */
 public class RpcClientFactory {
 
-    public static IRpcClient create() {
+    public static RpcClient create() {
         //
         // if(HttpUrlConnectionRpcClient.class.getSimpleName().equalsIgnoreCase(ApiRegistryProperties.getRpcClientType())){
         //            return new HttpUrlConnectionRpcClient();

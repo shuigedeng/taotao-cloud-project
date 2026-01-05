@@ -17,11 +17,10 @@
 package com.taotao.cloud.cache.support.struct.lru.impl;
 
 import com.taotao.boot.common.utils.lang.ObjectUtils;
-import com.taotao.cloud.cache.api.ICacheEntry;
+import com.taotao.cloud.cache.api.CacheEntry;
 import com.taotao.cloud.cache.exception.CacheRuntimeException;
-import com.taotao.cloud.cache.model.CacheEntry;
 import com.taotao.cloud.cache.model.DoubleListNode;
-import com.taotao.cloud.cache.support.struct.lru.ILruMap;
+import com.taotao.cloud.cache.support.struct.lru.LruMap;
 import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -32,7 +31,7 @@ import org.slf4j.LoggerFactory;
  * @author shuigedeng
  * @since 2024.06
  */
-public class LruMapDoubleList<K, V> implements ILruMap<K, V> {
+public class LruMapDoubleList<K, V> implements LruMap<K, V> {
 
     private static final Logger log = LoggerFactory.getLogger(LruMapDoubleList.class);
 
@@ -67,7 +66,7 @@ public class LruMapDoubleList<K, V> implements ILruMap<K, V> {
     }
 
     @Override
-    public ICacheEntry<K, V> removeEldest() {
+    public CacheEntry<K, V> removeEldest() {
         // 获取尾巴节点的前一个元素
         DoubleListNode<K, V> tailPre = this.tail.pre();
         if (tailPre == this.head) {
@@ -81,7 +80,7 @@ public class LruMapDoubleList<K, V> implements ILruMap<K, V> {
         // 执行删除
         this.removeKey(evictKey);
 
-        return CacheEntry.of(evictKey, evictValue);
+        return com.taotao.cloud.cache.model.CacheEntry.of(evictKey, evictValue);
     }
 
     /**

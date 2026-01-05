@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.cache.support.proxy.none;
 
-import com.taotao.cloud.cache.support.proxy.ICacheProxy;
+import com.taotao.cloud.cache.support.proxy.CacheProxy;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
@@ -25,7 +25,7 @@ import java.lang.reflect.Method;
  *
  * @since 2024.06
  */
-public class NoneProxy implements InvocationHandler, ICacheProxy {
+public class NoneProxy implements InvocationHandler, CacheProxy {
 
     /**
      * 代理对象

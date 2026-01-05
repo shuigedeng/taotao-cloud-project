@@ -29,8 +29,8 @@ import com.taotao.cloud.goods.biz.elasticsearch.pojo.EsGoodsRelatedInfo;
 import com.taotao.cloud.goods.biz.elasticsearch.pojo.EsGoodsSearchDTO;
 import com.taotao.cloud.goods.biz.elasticsearch.pojo.ParamOptions;
 import com.taotao.cloud.goods.biz.elasticsearch.pojo.SelectorOptions;
-import com.taotao.cloud.goods.biz.service.business.IEsGoodsIndexService;
-import com.taotao.cloud.goods.biz.service.business.IEsGoodsSearchService;
+import com.taotao.cloud.goods.biz.service.business.EsGoodsIndexService;
+import com.taotao.cloud.goods.biz.service.business.EsGoodsSearchService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -81,7 +81,7 @@ import org.springframework.stereotype.Service;
  * @since 2022-04-27 17:02:32
  */
 @Service
-public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
+public class EsGoodsSearchServiceImpl implements EsGoodsSearchService {
 
     private static final String ATTR_PATH = "attrList";
     private static final String ATTR_VALUE = "attrList.value";
@@ -99,7 +99,7 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
     private ElasticsearchTemplate restTemplate;
 
     @Autowired
-    private IEsGoodsIndexService esGoodsIndexService;
+    private EsGoodsIndexService esGoodsIndexService;
     /** 缓存 */
     @Autowired
     private RedisRepository redisRepository;

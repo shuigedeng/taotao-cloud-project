@@ -16,11 +16,10 @@
 
 package com.taotao.cloud.goods.biz.service.business.impl;
 
-import com.taotao.cloud.goods.biz.mapper.IGoodsUnitMapper;
+import com.taotao.cloud.goods.biz.mapper.GoodsUnitMapper;
 import com.taotao.cloud.goods.biz.model.entity.GoodsUnit;
 import com.taotao.cloud.goods.biz.repository.GoodsUnitRepository;
-import com.taotao.cloud.goods.biz.repository.IGoodsUnitRepository;
-import com.taotao.cloud.goods.biz.service.business.IGoodsUnitService;
+import com.taotao.cloud.goods.biz.service.business.GoodsUnitService;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +32,5 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class GoodsUnitServiceImpl
-        extends BaseSuperServiceImpl<GoodsUnit, Long,IGoodsUnitMapper,  GoodsUnitRepository, IGoodsUnitRepository>
-        implements IGoodsUnitService {}
+        extends BaseSuperServiceImpl<GoodsUnit, Long, GoodsUnitMapper,  GoodsUnitRepository, GoodsUnitRepository>
+        implements GoodsUnitService {}

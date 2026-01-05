@@ -16,12 +16,11 @@
 
 package com.taotao.cloud.order.biz.service.feign.impl;
 
-import com.taotao.cloud.order.biz.mapper.order.IOrderMapper;
+import com.taotao.cloud.order.biz.mapper.order.OrderMapper;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.repository.order.OrderRepository;
-import com.taotao.cloud.order.biz.repository.order.IOrderRepository;
-import com.taotao.cloud.order.biz.service.business.order.IOrderService;
-import com.taotao.cloud.order.biz.service.feign.IFeignOrderService;
+import com.taotao.cloud.order.biz.service.business.order.OrderService;
+import com.taotao.cloud.order.biz.service.feign.FeignOrderService;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +36,11 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class FeignOrderServiceImpl
-        extends BaseSuperServiceImpl<Order, Long,IOrderMapper,  OrderRepository, IOrderRepository>
-        implements IFeignOrderService {
+        extends BaseSuperServiceImpl<Order, Long, OrderMapper,  OrderRepository, OrderRepository>
+        implements FeignOrderService {
 
     @Autowired
-    private IOrderService orderService;
+    private OrderService orderService;
 
     @Override
     public <T> T test123(T t) {

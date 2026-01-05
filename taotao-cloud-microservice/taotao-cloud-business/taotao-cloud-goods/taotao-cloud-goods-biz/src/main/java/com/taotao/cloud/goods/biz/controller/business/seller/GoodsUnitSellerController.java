@@ -23,7 +23,7 @@ import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.goods.biz.model.vo.GoodsUnitVO;
 import com.taotao.cloud.goods.biz.model.convert.GoodsUnitConvert;
 import com.taotao.cloud.goods.biz.model.entity.GoodsUnit;
-import com.taotao.cloud.goods.biz.service.business.IGoodsUnitService;
+import com.taotao.cloud.goods.biz.service.business.GoodsUnitService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -49,7 +49,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GoodsUnitSellerController {
 
     /** 商品计量单位服务 */
-    private final IGoodsUnitService goodsUnitService;
+    private final GoodsUnitService goodsUnitService;
 
     @Operation(summary = "分页获取商品计量单位", description = "分页获取商品计量单位")
     @RequestLogger

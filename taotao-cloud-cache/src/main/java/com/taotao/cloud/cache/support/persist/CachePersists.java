@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.cache.support.persist;
 
-import com.taotao.cloud.cache.api.ICachePersist;
+import com.taotao.cloud.cache.api.CachePersist;
 
 /**
  * 缓存持久化工具类
@@ -34,7 +34,7 @@ public final class CachePersists {
      * @return 结果
      * @since 2024.06
      */
-    public static <K, V> ICachePersist<K, V> none() {
+    public static <K, V> CachePersist<K, V> none() {
         return new CachePersistNone<>();
     }
 
@@ -46,7 +46,7 @@ public final class CachePersists {
      * @return 结果
      * @since 2024.06
      */
-    public static <K, V> ICachePersist<K, V> dbJson(final String path) {
+    public static <K, V> CachePersist<K, V> dbJson(final String path) {
         return new CachePersistDbJson<>(path);
     }
 
@@ -58,7 +58,7 @@ public final class CachePersists {
      * @return 结果
      * @since 2024.06
      */
-    public static <K, V> ICachePersist<K, V> aof(final String path) {
+    public static <K, V> CachePersist<K, V> aof(final String path) {
         return new CachePersistAof<>(path);
     }
 }

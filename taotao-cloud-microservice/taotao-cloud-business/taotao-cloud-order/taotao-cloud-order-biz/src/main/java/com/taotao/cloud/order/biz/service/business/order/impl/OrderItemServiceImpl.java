@@ -25,9 +25,9 @@ import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
-import com.taotao.cloud.order.biz.mapper.order.IOrderItemMapper;
+import com.taotao.cloud.order.biz.mapper.order.OrderItemMapper;
 import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
-import com.taotao.cloud.order.biz.service.business.order.IOrderItemService;
+import com.taotao.cloud.order.biz.service.business.order.OrderItemService;
 import java.util.List;
 import lombok.*;
 import org.springframework.stereotype.Service;
@@ -43,7 +43,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class OrderItemServiceImpl extends ServiceImpl<IOrderItemMapper, OrderItem> implements IOrderItemService {
+public class OrderItemServiceImpl extends ServiceImpl<OrderItemMapper, OrderItem> implements OrderItemService {
 
     @Override
     public Boolean updateCommentStatus(String orderItemSn, CommentStatusEnum commentStatusEnum) {

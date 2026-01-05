@@ -16,8 +16,7 @@
 
 package com.taotao.cloud.cache.support.evict;
 
-import com.taotao.cloud.cache.api.ICache;
-import com.taotao.cloud.cache.api.ICacheEvictContext;
+import com.taotao.cloud.cache.api.Cache;
 
 /**
  * 驱除策略
@@ -31,7 +30,7 @@ import com.taotao.cloud.cache.api.ICacheEvictContext;
  * @param <K> key
  * @param <V> value
  */
-public class CacheEvictContext<K, V> implements ICacheEvictContext<K, V> {
+public class CacheEvictContext<K, V> implements com.taotao.cloud.cache.api.CacheEvictContext<K, V> {
 
     /**
      * 新加的 key
@@ -43,7 +42,7 @@ public class CacheEvictContext<K, V> implements ICacheEvictContext<K, V> {
      * cache 实现
      * @since 2024.06
      */
-    private ICache<K, V> cache;
+    private Cache<K, V> cache;
 
     /**
      * 最大的大小
@@ -62,11 +61,11 @@ public class CacheEvictContext<K, V> implements ICacheEvictContext<K, V> {
     }
 
     @Override
-    public ICache<K, V> cache() {
+    public Cache<K, V> cache() {
         return cache;
     }
 
-    public CacheEvictContext<K, V> cache(ICache<K, V> cache) {
+    public CacheEvictContext<K, V> cache( Cache<K, V> cache) {
         this.cache = cache;
         return this;
     }

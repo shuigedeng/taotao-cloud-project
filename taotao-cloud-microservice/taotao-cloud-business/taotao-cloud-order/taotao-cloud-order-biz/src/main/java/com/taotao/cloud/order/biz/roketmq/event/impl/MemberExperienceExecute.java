@@ -23,7 +23,7 @@ import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.sys.model.message.OrderMessage;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
-import com.taotao.cloud.order.biz.service.business.order.IOrderService;
+import com.taotao.cloud.order.biz.service.business.order.OrderService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.ExperienceSettingVO;
@@ -49,7 +49,7 @@ public class MemberExperienceExecute implements OrderStatusChangeEvent {
     private MemberApi memberApi;
     /** 订单 */
     @Autowired
-    private IOrderService orderService;
+    private OrderService orderService;
 
     /**
      * 完成订单赠送经验值

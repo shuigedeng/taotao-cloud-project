@@ -5,7 +5,7 @@ import com.taotao.boot.common.enums.UserEnum;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.boot.common.utils.lang.StringUtils;
 import com.taotao.cloud.order.sys.model.page.aftersale.AfterSalePageQuery;
-import com.taotao.cloud.order.biz.mapper.aftersale.IAfterSaleMapper;
+import com.taotao.cloud.order.biz.mapper.aftersale.AfterSaleMapper;
 import com.taotao.boot.web.annotation.Manager;
 import com.taotao.boot.webagg.manager.BaseManager;
 import lombok.*;
@@ -16,7 +16,7 @@ import lombok.*;
 @AllArgsConstructor
 @Manager
 public class AfterSaleManager extends BaseManager {
-	private final IAfterSaleMapper afterSaleMapper;
+	private final AfterSaleMapper afterSaleMapper;
 
 	public <T> QueryWrapper<T> queryWrapper(AfterSalePageQuery afterSalePageQuery) {
 		QueryWrapper<T> queryWrapper = new QueryWrapper<>();

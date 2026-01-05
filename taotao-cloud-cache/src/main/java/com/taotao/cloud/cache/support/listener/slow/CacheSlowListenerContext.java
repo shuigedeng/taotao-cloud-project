@@ -16,13 +16,11 @@
 
 package com.taotao.cloud.cache.support.listener.slow;
 
-import com.taotao.cloud.cache.api.ICacheSlowListenerContext;
-
 /**
  * @author shuigedeng
  * @since 2024.06
  */
-public class CacheSlowListenerContext implements ICacheSlowListenerContext {
+public class CacheSlowListenerContext implements com.taotao.cloud.cache.api.CacheSlowListenerContext {
 
     /**
      * 方法名称

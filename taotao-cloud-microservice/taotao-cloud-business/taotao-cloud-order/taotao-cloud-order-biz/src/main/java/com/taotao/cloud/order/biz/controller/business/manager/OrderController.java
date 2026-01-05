@@ -25,8 +25,8 @@ import com.taotao.cloud.order.sys.model.vo.cart.OrderExportVO;
 import com.taotao.cloud.order.sys.model.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.sys.model.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
-import com.taotao.cloud.order.biz.service.business.order.IOrderPriceService;
-import com.taotao.cloud.order.biz.service.business.order.IOrderService;
+import com.taotao.cloud.order.biz.service.business.order.OrderPriceService;
+import com.taotao.cloud.order.biz.service.business.order.OrderService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -62,9 +62,9 @@ import zipkin2.storage.Traces;
 public class OrderController {
 
     /** 订单 */
-    private final IOrderService orderService;
+    private final OrderService orderService;
     /** 订单价格 */
-    private final IOrderPriceService orderPriceService;
+    private final OrderPriceService orderPriceService;
 
     @Operation(summary = "查询订单列表分页", description = "查询订单列表分页")
     @RequestLogger

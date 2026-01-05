@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.mq.broker.dto.consumer;
 
-import com.taotao.cloud.mq.common.balance.IServer;
+import com.taotao.cloud.mq.common.balance.Server;
 import com.taotao.cloud.mq.common.rpc.RpcAddress;
 import java.util.Objects;
 
@@ -26,7 +26,7 @@ import java.util.Objects;
  * @author shuigedeng
  * @since 2024.05
  */
-public class ConsumerSubscribeBo extends RpcAddress implements IServer {
+public class ConsumerSubscribeBo extends RpcAddress implements Server {
 
     /**
      * 分组名称

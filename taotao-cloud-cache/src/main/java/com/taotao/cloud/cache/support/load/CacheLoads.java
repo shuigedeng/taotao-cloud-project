@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.cache.support.load;
 
-import com.taotao.cloud.cache.api.ICacheLoad;
+import com.taotao.cloud.cache.api.CacheLoad;
 
 /**
  *
@@ -35,7 +35,7 @@ public final class CacheLoads {
      * @return 值
      * @since 2024.06
      */
-    public static <K, V> ICacheLoad<K, V> none() {
+    public static <K, V> CacheLoad<K, V> none() {
         return new CacheLoadNone<>();
     }
 
@@ -47,7 +47,7 @@ public final class CacheLoads {
      * @return 值
      * @since 2024.06
      */
-    public static <K, V> ICacheLoad<K, V> dbJson(final String dbPath) {
+    public static <K, V> CacheLoad<K, V> dbJson(final String dbPath) {
         return new CacheLoadDbJson<>(dbPath);
     }
 
@@ -59,7 +59,7 @@ public final class CacheLoads {
      * @return 值
      * @since 2024.06
      */
-    public static <K, V> ICacheLoad<K, V> aof(final String dbPath) {
+    public static <K, V> CacheLoad<K, V> aof(final String dbPath) {
         return new CacheLoadAof<>(dbPath);
     }
 }

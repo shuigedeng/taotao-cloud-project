@@ -25,8 +25,8 @@ import com.taotao.cloud.order.sys.model.message.OrderMessage;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
-import com.taotao.cloud.order.biz.service.business.order.IOrderItemService;
-import com.taotao.cloud.order.biz.service.business.order.IOrderService;
+import com.taotao.cloud.order.biz.service.business.order.OrderItemService;
+import com.taotao.cloud.order.biz.service.business.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -41,10 +41,10 @@ import org.springframework.stereotype.Component;
 public class VerificationOrderExecute implements OrderStatusChangeEvent {
 
     @Autowired
-    private IOrderService orderService;
+    private OrderService orderService;
 
     @Autowired
-    private IOrderItemService orderItemService;
+    private OrderItemService orderItemService;
 
     @Override
     public void orderChange(OrderMessage orderMessage) {

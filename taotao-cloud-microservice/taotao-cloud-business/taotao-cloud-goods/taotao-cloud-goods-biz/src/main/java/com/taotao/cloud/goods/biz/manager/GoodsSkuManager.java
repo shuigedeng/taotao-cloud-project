@@ -8,8 +8,8 @@ import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.biz.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.goods.biz.model.vo.GoodsSkuSpecVO;
-import com.taotao.cloud.goods.biz.mapper.IGoodsMapper;
-import com.taotao.cloud.goods.biz.mapper.IGoodsSkuMapper;
+import com.taotao.cloud.goods.biz.mapper.GoodsMapper;
+import com.taotao.cloud.goods.biz.mapper.GoodsSkuMapper;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
@@ -37,8 +37,8 @@ import org.apache.rocketmq.spring.core.RocketMQTemplate;
 @AllArgsConstructor
 public class GoodsSkuManager extends BaseManager {
 
-	private final IGoodsSkuMapper goodsSkuMapper;
-	private final IGoodsMapper goodsMapper;
+	private final GoodsSkuMapper goodsSkuMapper;
+	private final GoodsMapper goodsMapper;
 	/**
 	 * rocketMq服务
 	 */

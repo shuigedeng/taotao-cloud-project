@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.controller.feign;
 
 import com.taotao.cloud.goods.biz.model.entity.Goods;
-import com.taotao.cloud.goods.biz.service.business.IGoodsService;
+import com.taotao.cloud.goods.biz.service.business.GoodsService;
 import com.taotao.boot.webagg.controller.BaseBusinessController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
@@ -35,4 +35,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/feign/goods")
 @Tag(name = "内部服务-商品API", description = "内部服务-商品API")
-public class FeignGoodsController extends BaseBusinessController<IGoodsService, Goods, Long> {}
+public class FeignGoodsController extends BaseBusinessController<GoodsService, Goods, Long> {}

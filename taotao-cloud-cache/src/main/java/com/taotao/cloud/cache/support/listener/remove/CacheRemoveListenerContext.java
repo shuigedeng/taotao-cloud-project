@@ -16,14 +16,12 @@
 
 package com.taotao.cloud.cache.support.listener.remove;
 
-import com.taotao.cloud.cache.api.ICacheRemoveListenerContext;
-
 /**
  * 删除的监听器
  * @author shuigedeng
  * @since 2024.06
  */
-public class CacheRemoveListenerContext<K, V> implements ICacheRemoveListenerContext<K, V> {
+public class CacheRemoveListenerContext<K, V> implements com.taotao.cloud.cache.api.CacheRemoveListenerContext<K, V> {
 
     /**
      * key

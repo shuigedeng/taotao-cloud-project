@@ -22,7 +22,7 @@ import java.lang.reflect.Type;
 /**
  * HttpUrlConnection实现
  */
-public class HttpUrlConnectionRpcClient implements IRpcClient {
+public class HttpUrlConnectionRpcClient implements RpcClient {
     public <T> T execute(RequestInfo requestInfo, Type cls) {
         // val response = HttpUtils.request(new HttpUtils.HttpRequest(
         // 	requestInfo.getUrl(),

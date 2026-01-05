@@ -44,7 +44,7 @@ import com.taotao.cloud.rpc.common.common.support.resource.impl.DefaultResourceM
 import com.taotao.cloud.rpc.common.common.support.status.enums.StatusEnum;
 import com.taotao.cloud.rpc.common.common.support.status.service.StatusManager;
 import com.taotao.cloud.rpc.common.common.support.status.service.impl.DefaultStatusManager;
-import com.taotao.cloud.rpc.common.tmp.ILoadBalance;
+import com.taotao.cloud.rpc.common.tmp.LoadBalance;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -209,7 +209,7 @@ public class ClientBs<T> implements ReferenceConfig<T> {
      *
      * @since 0.2.0
      */
-    private ILoadBalance loadBalance;
+    private LoadBalance loadBalance;
 
     private ClientBs() {
         // 初始化信息
@@ -268,7 +268,7 @@ public class ClientBs<T> implements ReferenceConfig<T> {
     }
 
     @Override
-    public ClientBs<T> loadBalance(ILoadBalance loadBalance) {
+    public ClientBs<T> loadBalance( LoadBalance loadBalance) {
         this.loadBalance = loadBalance;
         return this;
     }

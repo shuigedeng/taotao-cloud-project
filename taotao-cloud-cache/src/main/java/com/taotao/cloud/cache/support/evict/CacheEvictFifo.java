@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.cache.support.evict;
 
-import com.taotao.cloud.cache.api.ICache;
-import com.taotao.cloud.cache.api.ICacheEvictContext;
+import com.taotao.cloud.cache.api.Cache;
+import com.taotao.cloud.cache.api.CacheEvictContext;
 import com.taotao.cloud.cache.model.CacheEntry;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -36,10 +36,10 @@ public class CacheEvictFifo<K, V> extends AbstractCacheEvict<K, V> {
     private final Queue<K> queue = new LinkedList<>();
 
     @Override
-    public CacheEntry<K, V> doEvict(ICacheEvictContext<K, V> context) {
+    public CacheEntry<K, V> doEvict( CacheEvictContext<K, V> context) {
         CacheEntry<K, V> result = null;
 
-        final ICache<K, V> cache = context.cache();
+        final Cache<K, V> cache = context.cache();
         // 超过限制，执行移除
         if (cache.size() >= context.size()) {
             K evictKey = queue.remove();

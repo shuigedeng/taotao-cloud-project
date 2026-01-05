@@ -18,8 +18,8 @@ package com.taotao.cloud.goods.biz.controller.business.manager;
 
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.goods.biz.model.entity.Specification;
-import com.taotao.cloud.goods.biz.service.business.ICategorySpecificationService;
-import com.taotao.cloud.goods.biz.service.business.ISpecificationService;
+import com.taotao.cloud.goods.biz.service.business.CategorySpecificationService;
+import com.taotao.cloud.goods.biz.service.business.SpecificationService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -52,9 +52,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategorySpecificationManagerController {
 
     /** 分类规格服务 */
-    private final ICategorySpecificationService categorySpecificationService;
+    private final CategorySpecificationService categorySpecificationService;
     /** 规格服务 */
-    private final ISpecificationService specificationService;
+    private final SpecificationService specificationService;
 
     @Operation(summary = "查询某分类下绑定的规格信息", description = "查询某分类下绑定的规格信息")
     @Parameters({

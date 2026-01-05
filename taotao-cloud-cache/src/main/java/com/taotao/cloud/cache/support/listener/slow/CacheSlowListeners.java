@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.cache.support.listener.slow;
 
-import com.taotao.cloud.cache.api.ICacheSlowListener;
+import com.taotao.cloud.cache.api.CacheSlowListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +34,7 @@ public final class CacheSlowListeners {
      * @return 监听类列表
      * @since 2024.06
      */
-    public static List<ICacheSlowListener> none() {
+    public static List<CacheSlowListener> none() {
         return new ArrayList<>();
     }
 
@@ -43,7 +43,7 @@ public final class CacheSlowListeners {
      * @return 默认
      * @since 2024.06
      */
-    public static ICacheSlowListener defaults() {
-        return new CacheSlowListener();
+    public static CacheSlowListener defaults() {
+        return new com.taotao.cloud.cache.support.listener.slow.CacheSlowListener();
     }
 }

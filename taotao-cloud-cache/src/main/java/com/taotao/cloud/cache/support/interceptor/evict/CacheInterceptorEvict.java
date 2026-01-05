@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.cache.support.interceptor.evict;
 
-import com.taotao.cloud.cache.api.ICacheEvict;
-import com.taotao.cloud.cache.api.ICacheInterceptor;
-import com.taotao.cloud.cache.api.ICacheInterceptorContext;
+import com.taotao.cloud.cache.api.CacheEvict;
+import com.taotao.cloud.cache.api.CacheInterceptor;
+import com.taotao.cloud.cache.api.CacheInterceptorContext;
 import java.lang.reflect.Method;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,17 +29,17 @@ import org.slf4j.LoggerFactory;
  * @author shuigedeng
  * @since 2024.06
  */
-public class CacheInterceptorEvict<K, V> implements ICacheInterceptor<K, V> {
+public class CacheInterceptorEvict<K, V> implements CacheInterceptor<K, V> {
 
     private static final Logger log = LoggerFactory.getLogger(CacheInterceptorEvict.class);
 
     @Override
-    public void before(ICacheInterceptorContext<K, V> context) {}
+    public void before( CacheInterceptorContext<K, V> context) {}
 
     @Override
     @SuppressWarnings("all")
-    public void after(ICacheInterceptorContext<K, V> context) {
-        ICacheEvict<K, V> evict = context.cache().evict();
+    public void after( CacheInterceptorContext<K, V> context) {
+        CacheEvict<K, V> evict = context.cache().evict();
 
         Method method = context.method();
         final K key = (K) context.params()[0];

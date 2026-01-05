@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.mq.common.util;
 
-import com.taotao.cloud.mq.common.balance.ILoadBalance;
-import com.taotao.cloud.mq.common.balance.IServer;
+import com.taotao.cloud.mq.common.balance.LoadBalance;
+import com.taotao.cloud.mq.common.balance.Server;
 import com.taotao.cloud.mq.common.balance.impl.LoadBalanceContext;
 import com.xkzhangsan.time.utils.CollectionUtil;
 import com.xkzhangsan.time.utils.StringUtil;
@@ -38,8 +38,8 @@ public class RandomUtils {
      * @return 结果
      * @since 2024.05
      */
-    public static <T extends IServer> T loadBalance(
-            final ILoadBalance<T> loadBalance, final List<T> list, String key) {
+    public static <T extends Server> T loadBalance(
+            final LoadBalance<T> loadBalance, final List<T> list, String key) {
         if (CollectionUtil.isEmpty(list)) {
             return null;
         }

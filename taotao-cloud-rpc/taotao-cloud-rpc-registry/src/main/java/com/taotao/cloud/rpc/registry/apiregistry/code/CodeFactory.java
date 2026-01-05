@@ -30,7 +30,7 @@ import java.util.Map;
  */
 public class CodeFactory {
 
-    public static ICode create( String contentType ) {
+    public static Code create( String contentType ) {
         //        contentType = StringUtils.nullToEmpty(contentType).toLowerCase();
         if (contentType.contains("json")) {
             return new JsonCode();
@@ -40,7 +40,7 @@ public class CodeFactory {
         return create();
     }
 
-    public static ICode create() {
+    public static Code create() {
         //		String codeType = ApiRegistryProperties.getRegistryCodeType();
         //        if("json".equalsIgnoreCase(codeType)){
         //            return new JsonCode();

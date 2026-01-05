@@ -23,7 +23,7 @@ import com.taotao.cloud.order.sys.model.page.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.sys.model.vo.aftersale.AfterSaleVO;
 import com.taotao.cloud.order.biz.model.convert.AfterSaleConvert;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
-import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleService;
+import com.taotao.cloud.order.biz.service.business.aftersale.AfterSaleService;
 import com.taotao.cloud.store.api.model.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.sys.api.model.vo.logistics.TracesVO;
 import com.taotao.boot.web.request.annotation.RequestLogger;
@@ -57,7 +57,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AfterSaleController {
 
     /** 售后 */
-    private final IAfterSaleService afterSaleService;
+    private final AfterSaleService afterSaleService;
 
     @Operation(summary = "分页获取售后服务", description = "分页获取售后服务")
     @RequestLogger

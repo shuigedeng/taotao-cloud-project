@@ -24,7 +24,7 @@ import com.taotao.cloud.goods.biz.model.page.BrandPageQuery;
 import com.taotao.cloud.goods.biz.model.vo.BrandVO;
 import com.taotao.cloud.goods.biz.model.convert.BrandConvert;
 import com.taotao.cloud.goods.biz.model.entity.Brand;
-import com.taotao.cloud.goods.biz.service.business.IBrandService;
+import com.taotao.cloud.goods.biz.service.business.BrandService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -61,7 +61,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BrandManagerController {
 
     /** 品牌 */
-    private final IBrandService brandService;
+    private final BrandService brandService;
 
     @Operation(summary = "通过id获取", description = "通过id获取")
     @Parameters({

@@ -17,12 +17,10 @@
 package com.taotao.cloud.cache.support.expire;
 
 import cn.hutool.core.map.MapUtil;
-import com.taotao.cloud.cache.api.ICache;
-import com.taotao.cloud.cache.api.ICacheExpire;
-import com.taotao.cloud.cache.api.ICacheRemoveListener;
-import com.taotao.cloud.cache.api.ICacheRemoveListenerContext;
+import com.taotao.cloud.cache.api.Cache;
+import com.taotao.cloud.cache.api.CacheRemoveListener;
+import com.taotao.cloud.cache.api.CacheRemoveListenerContext;
 import com.taotao.cloud.cache.constant.enums.CacheRemoveType;
-import com.taotao.cloud.cache.support.listener.remove.CacheRemoveListenerContext;
 import com.xkzhangsan.time.utils.CollectionUtil;
 import java.util.*;
 import java.util.concurrent.Executors;
@@ -37,7 +35,7 @@ import java.util.concurrent.TimeUnit;
  * @param <K> key
  * @param <V> value
  */
-public class CacheExpire<K, V> implements ICacheExpire<K, V> {
+public class CacheExpire<K, V> implements com.taotao.cloud.cache.api.CacheExpire<K, V> {
 
     /**
      * 单次清空的数量限制
@@ -57,7 +55,7 @@ public class CacheExpire<K, V> implements ICacheExpire<K, V> {
      * 缓存实现
      * @since 2024.06
      */
-    private final ICache<K, V> cache;
+    private final Cache<K, V> cache;
 
     /**
      * 线程执行类
@@ -66,7 +64,7 @@ public class CacheExpire<K, V> implements ICacheExpire<K, V> {
     private static final ScheduledExecutorService EXECUTOR_SERVICE =
             Executors.newSingleThreadScheduledExecutor();
 
-    public CacheExpire(ICache<K, V> cache) {
+    public CacheExpire( Cache<K, V> cache) {
         this.cache = cache;
         this.init();
     }
@@ -151,12 +149,12 @@ public class CacheExpire<K, V> implements ICacheExpire<K, V> {
             V removeValue = cache.remove(key);
 
             // 执行淘汰监听器
-            ICacheRemoveListenerContext<K, V> removeListenerContext =
-                    CacheRemoveListenerContext.<K, V>newInstance()
+            CacheRemoveListenerContext<K, V> removeListenerContext =
+                    com.taotao.cloud.cache.support.listener.remove.CacheRemoveListenerContext.<K, V>newInstance()
                             .key(key)
                             .value(removeValue)
                             .type(CacheRemoveType.EXPIRE.code());
-            for (ICacheRemoveListener<K, V> listener : cache.removeListeners()) {
+            for (CacheRemoveListener<K, V> listener : cache.removeListeners()) {
                 listener.listen(removeListenerContext);
             }
         }

@@ -21,7 +21,7 @@ import com.taotao.boot.common.model.request.PageQuery;
 import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.goods.biz.model.entity.GoodsUnit;
-import com.taotao.cloud.goods.biz.service.business.IGoodsUnitService;
+import com.taotao.cloud.goods.biz.service.business.GoodsUnitService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -52,7 +52,7 @@ import org.springframework.web.bind.annotation.*;
 public class GoodsUnitManagerController {
 
     /** 商品计量服务 */
-    private final IGoodsUnitService goodsUnitService;
+    private final GoodsUnitService goodsUnitService;
 
     @Operation(summary = "分页获取商品计量单位", description = "分页获取商品计量单位")
     @Parameters({

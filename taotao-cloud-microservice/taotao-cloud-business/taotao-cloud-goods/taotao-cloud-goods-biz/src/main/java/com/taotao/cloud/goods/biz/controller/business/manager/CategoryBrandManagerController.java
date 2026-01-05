@@ -18,7 +18,7 @@ package com.taotao.cloud.goods.biz.controller.business.manager;
 
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.goods.biz.model.vo.CategoryBrandVO;
-import com.taotao.cloud.goods.biz.service.business.ICategoryBrandService;
+import com.taotao.cloud.goods.biz.service.business.CategoryBrandService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -51,7 +51,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategoryBrandManagerController {
 
     /** 规格品牌管理服务 */
-    private final ICategoryBrandService categoryBrandService;
+    private final CategoryBrandService categoryBrandService;
 
     @Operation(summary = "查询某分类下绑定的品牌信息", description = "查询某分类下绑定的品牌信息")
     @Parameters({

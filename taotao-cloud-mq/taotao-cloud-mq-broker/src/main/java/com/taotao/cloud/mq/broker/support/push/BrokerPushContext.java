@@ -18,8 +18,8 @@ package com.taotao.cloud.mq.broker.support.push;
 
 import com.taotao.cloud.mq.broker.dto.ChannelGroupNameDto;
 import com.taotao.cloud.mq.broker.dto.persist.MqMessagePersistPut;
-import com.taotao.cloud.mq.broker.support.persist.IMqBrokerPersist;
-import com.taotao.cloud.mq.common.support.invoke.IInvokeService;
+import com.taotao.cloud.mq.broker.support.persist.MqBrokerPersist;
+import com.taotao.cloud.mq.common.support.invoke.InvokeService;
 import java.util.List;
 import java.util.Map;
 
@@ -29,13 +29,13 @@ import java.util.Map;
  */
 public class BrokerPushContext {
 
-    private IMqBrokerPersist mqBrokerPersist;
+    private MqBrokerPersist mqBrokerPersist;
 
     private MqMessagePersistPut mqMessagePersistPut;
 
     private List<ChannelGroupNameDto> channelList;
 
-    private IInvokeService invokeService;
+    private InvokeService invokeService;
 
     /**
      * 获取响应超时时间
@@ -62,11 +62,11 @@ public class BrokerPushContext {
         return new BrokerPushContext();
     }
 
-    public IMqBrokerPersist mqBrokerPersist() {
+    public MqBrokerPersist mqBrokerPersist() {
         return mqBrokerPersist;
     }
 
-    public BrokerPushContext mqBrokerPersist(IMqBrokerPersist mqBrokerPersist) {
+    public BrokerPushContext mqBrokerPersist( MqBrokerPersist mqBrokerPersist) {
         this.mqBrokerPersist = mqBrokerPersist;
         return this;
     }
@@ -89,11 +89,11 @@ public class BrokerPushContext {
         return this;
     }
 
-    public IInvokeService invokeService() {
+    public InvokeService invokeService() {
         return invokeService;
     }
 
-    public BrokerPushContext invokeService(IInvokeService invokeService) {
+    public BrokerPushContext invokeService( InvokeService invokeService) {
         this.invokeService = invokeService;
         return this;
     }

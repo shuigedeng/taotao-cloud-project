@@ -30,17 +30,16 @@ import com.taotao.boot.common.utils.date.DateUtils;
 import com.taotao.cloud.goods.api.enums.StudioStatusEnum;
 import com.taotao.cloud.goods.biz.model.vo.CommodityVO;
 import com.taotao.cloud.goods.biz.model.vo.StudioCommodityVO;
-import com.taotao.cloud.goods.biz.mapper.ICommodityMapper;
-import com.taotao.cloud.goods.biz.mapper.IStudioMapper;
+import com.taotao.cloud.goods.biz.mapper.CommodityMapper;
+import com.taotao.cloud.goods.biz.mapper.StudioMapper;
 import com.taotao.cloud.goods.biz.model.entity.Commodity;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
 import com.taotao.cloud.goods.biz.model.entity.Studio;
 import com.taotao.cloud.goods.biz.model.entity.StudioCommodity;
 import com.taotao.cloud.goods.biz.repository.StudioRepository;
-import com.taotao.cloud.goods.biz.repository.IStudioRepository;
-import com.taotao.cloud.goods.biz.service.business.IGoodsService;
-import com.taotao.cloud.goods.biz.service.business.IStudioCommodityService;
-import com.taotao.cloud.goods.biz.service.business.IStudioService;
+import com.taotao.cloud.goods.biz.service.business.GoodsService;
+import com.taotao.cloud.goods.biz.service.business.StudioCommodityService;
+import com.taotao.cloud.goods.biz.service.business.StudioService;
 import com.taotao.cloud.goods.biz.util.WechatLivePlayerUtil;
 import com.taotao.cloud.stream.framework.trigger.enums.DelayTypeEnums;
 import com.taotao.cloud.stream.framework.trigger.interfaces.TimeTrigger;
@@ -66,17 +65,17 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class StudioServiceImpl
-        extends BaseSuperServiceImpl< Studio, Long, IStudioMapper,StudioRepository, IStudioRepository>
-        implements IStudioService {
+        extends BaseSuperServiceImpl< Studio, Long, StudioMapper,StudioRepository, StudioRepository>
+        implements StudioService {
 
     @Autowired
     private WechatLivePlayerUtil wechatLivePlayerUtil;
 
     @Autowired
-    private IStudioCommodityService studioCommodityService;
+    private StudioCommodityService studioCommodityService;
 
     @Resource
-    private ICommodityMapper commodityMapper;
+    private CommodityMapper commodityMapper;
 
     @Autowired
     private TimeTrigger timeTrigger;
@@ -85,7 +84,7 @@ public class StudioServiceImpl
     private RocketmqCustomProperties rocketmqCustomProperties;
 
     @Autowired
-    private IGoodsService goodsService;
+    private GoodsService goodsService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)

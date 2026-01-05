@@ -17,11 +17,10 @@
 package com.taotao.cloud.cache.support.evict;
 
 import com.taotao.boot.common.utils.lang.ObjectUtils;
-import com.taotao.cloud.cache.api.ICache;
-import com.taotao.cloud.cache.api.ICacheEntry;
-import com.taotao.cloud.cache.api.ICacheEvictContext;
+import com.taotao.cloud.cache.api.Cache;
+import com.taotao.cloud.cache.api.CacheEntry;
+import com.taotao.cloud.cache.api.CacheEvictContext;
 import com.taotao.cloud.cache.exception.CacheRuntimeException;
-import com.taotao.cloud.cache.model.CacheEntry;
 import com.taotao.cloud.cache.model.FreqNode;
 import com.xkzhangsan.time.utils.CollectionUtil;
 import java.util.*;
@@ -63,9 +62,9 @@ public class CacheEvictLfu<K, V> extends AbstractCacheEvict<K, V> {
     }
 
     @Override
-    protected ICacheEntry<K, V> doEvict(ICacheEvictContext<K, V> context) {
-        ICacheEntry<K, V> result = null;
-        final ICache<K, V> cache = context.cache();
+    protected CacheEntry<K, V> doEvict( CacheEvictContext<K, V> context) {
+        CacheEntry<K, V> result = null;
+        final Cache<K, V> cache = context.cache();
         // 超过限制，移除频次最低的元素
         if (cache.size() >= context.size()) {
             FreqNode<K, V> evictNode = this.getMinFreqNode();
@@ -77,7 +76,7 @@ public class CacheEvictLfu<K, V> extends AbstractCacheEvict<K, V> {
                     evictKey,
                     evictValue,
                     evictNode.frequency());
-            result = new CacheEntry<>(evictKey, evictValue);
+            result = new com.taotao.cloud.cache.model.CacheEntry<>(evictKey, evictValue);
         }
 
         return result;

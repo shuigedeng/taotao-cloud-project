@@ -39,13 +39,13 @@ import com.taotao.cloud.order.sys.model.page.order.OrderComplaintPageQuery;
 import com.taotao.cloud.order.sys.model.vo.order.OrderComplaintVO;
 import com.taotao.cloud.order.sys.model.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.sys.model.vo.order.OrderItemVO;
-import com.taotao.cloud.order.biz.mapper.order.IOrderComplaintMapper;
+import com.taotao.cloud.order.biz.mapper.order.OrderComplaintMapper;
 import com.taotao.cloud.order.biz.model.entity.order.OrderComplaint;
 import com.taotao.cloud.order.biz.model.entity.order.OrderComplaintCommunication;
-import com.taotao.cloud.order.biz.service.business.order.IOrderComplaintCommunicationService;
-import com.taotao.cloud.order.biz.service.business.order.IOrderComplaintService;
-import com.taotao.cloud.order.biz.service.business.order.IOrderItemService;
-import com.taotao.cloud.order.biz.service.business.order.IOrderService;
+import com.taotao.cloud.order.biz.service.business.order.OrderComplaintCommunicationService;
+import com.taotao.cloud.order.biz.service.business.order.OrderComplaintService;
+import com.taotao.cloud.order.biz.service.business.order.OrderItemService;
+import com.taotao.cloud.order.biz.service.business.order.OrderService;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.*;
@@ -61,17 +61,17 @@ import org.springframework.stereotype.Service;
  */
 @AllArgsConstructor
 @Service
-public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper, OrderComplaint>
-        implements IOrderComplaintService {
+public class OrderComplaintServiceImpl extends ServiceImpl<OrderComplaintMapper, OrderComplaint>
+        implements OrderComplaintService {
 
     /** 订单 */
-    private final IOrderService orderService;
+    private final OrderService orderService;
     /** 订单货物 */
-    private final IOrderItemService orderItemService;
+    private final OrderItemService orderItemService;
     /** 商品规格 */
     private final GoodsSkuApi goodsSkuApi;
     /** 交易投诉沟通 */
-    private final IOrderComplaintCommunicationService orderComplaintCommunicationService;
+    private final OrderComplaintCommunicationService orderComplaintCommunicationService;
 
     @Override
     public IPage<OrderComplaint> pageQuery(OrderComplaintPageQuery pageQuery) {

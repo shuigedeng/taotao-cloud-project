@@ -32,8 +32,8 @@ import com.taotao.cloud.order.sys.model.vo.order.OrderComplaintVO;
 import com.taotao.cloud.order.biz.model.convert.OrderComplainConvert;
 import com.taotao.cloud.order.biz.model.entity.order.OrderComplaint;
 import com.taotao.cloud.order.biz.model.entity.order.OrderComplaintCommunication;
-import com.taotao.cloud.order.biz.service.business.order.IOrderComplaintCommunicationService;
-import com.taotao.cloud.order.biz.service.business.order.IOrderComplaintService;
+import com.taotao.cloud.order.biz.service.business.order.OrderComplaintCommunicationService;
+import com.taotao.cloud.order.biz.service.business.order.OrderComplaintService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import com.taotao.boot.web.utils.OperationalJudgment;
 import io.swagger.v3.oas.annotations.Operation;
@@ -64,10 +64,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderComplaintController {
 
     /** 交易投诉 */
-    private final IOrderComplaintService orderComplaintService;
+    private final OrderComplaintService orderComplaintService;
 
     /** 投诉沟通 */
-    private final IOrderComplaintCommunicationService orderComplaintCommunicationService;
+    private final OrderComplaintCommunicationService orderComplaintCommunicationService;
 
     @Operation(summary = "通过id获取", description = "通过id获取")
     @RequestLogger

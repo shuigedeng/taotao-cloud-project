@@ -35,17 +35,16 @@ import com.taotao.cloud.goods.biz.model.page.GoodsPageQuery;
 import com.taotao.cloud.goods.biz.model.vo.GoodsSkuParamsVO;
 import com.taotao.cloud.goods.biz.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.goods.biz.manager.GoodsManager;
-import com.taotao.cloud.goods.biz.mapper.IGoodsMapper;
+import com.taotao.cloud.goods.biz.mapper.GoodsMapper;
 import com.taotao.cloud.goods.biz.model.convert.GoodsConvert;
 import com.taotao.cloud.goods.biz.model.entity.Category;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
 import com.taotao.cloud.goods.biz.model.entity.GoodsGallery;
 import com.taotao.cloud.goods.biz.repository.GoodsRepository;
-import com.taotao.cloud.goods.biz.repository.IGoodsRepository;
-import com.taotao.cloud.goods.biz.service.business.ICategoryService;
-import com.taotao.cloud.goods.biz.service.business.IGoodsGalleryService;
-import com.taotao.cloud.goods.biz.service.business.IGoodsService;
-import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
+import com.taotao.cloud.goods.biz.service.business.CategoryService;
+import com.taotao.cloud.goods.biz.service.business.GoodsGalleryService;
+import com.taotao.cloud.goods.biz.service.business.GoodsService;
+import com.taotao.cloud.goods.biz.service.business.GoodsSkuService;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
 import com.taotao.cloud.member.api.feign.MemberEvaluationApi;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
@@ -80,16 +79,16 @@ import java.util.Objects;
  */
 @Service
 @AllArgsConstructor
-public class GoodsServiceImpl extends BaseSuperServiceImpl< Goods, Long,IGoodsMapper, GoodsRepository, IGoodsRepository>
-        implements IGoodsService {
+public class GoodsServiceImpl extends BaseSuperServiceImpl< Goods, Long, GoodsMapper, GoodsRepository, GoodsRepository>
+        implements GoodsService {
     private final GoodsManager goodsManager;
 
     /** 分类 */
-    private final ICategoryService categoryService;
+    private final CategoryService categoryService;
     /** 商品相册 */
-    private final IGoodsGalleryService goodsGalleryService;
+    private final GoodsGalleryService goodsGalleryService;
     /** 商品规格 */
-    private final IGoodsSkuService goodsSkuService;
+    private final GoodsSkuService goodsSkuService;
 
     /** 设置 */
     private final SettingApi settingApi;

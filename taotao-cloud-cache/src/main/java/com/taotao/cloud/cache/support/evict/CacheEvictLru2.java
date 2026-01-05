@@ -16,11 +16,10 @@
 
 package com.taotao.cloud.cache.support.evict;
 
-import com.taotao.cloud.cache.api.ICache;
-import com.taotao.cloud.cache.api.ICacheEntry;
-import com.taotao.cloud.cache.api.ICacheEvictContext;
-import com.taotao.cloud.cache.model.CacheEntry;
-import com.taotao.cloud.cache.support.struct.lru.ILruMap;
+import com.taotao.cloud.cache.api.Cache;
+import com.taotao.cloud.cache.api.CacheEntry;
+import com.taotao.cloud.cache.api.CacheEvictContext;
+import com.taotao.cloud.cache.support.struct.lru.LruMap;
 import com.taotao.cloud.cache.support.struct.lru.impl.LruMapDoubleList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,13 +39,13 @@ public class CacheEvictLru2<K, V> extends AbstractCacheEvict<K, V> {
      * 第一次访问的 lru
      * @since 2024.06
      */
-    private final ILruMap<K, V> firstLruMap;
+    private final LruMap<K, V> firstLruMap;
 
     /**
      * 2次及其以上的 lru
      * @since 2024.06
      */
-    private final ILruMap<K, V> moreLruMap;
+    private final LruMap<K, V> moreLruMap;
 
     public CacheEvictLru2() {
         this.firstLruMap = new LruMapDoubleList<>();
@@ -54,12 +53,12 @@ public class CacheEvictLru2<K, V> extends AbstractCacheEvict<K, V> {
     }
 
     @Override
-    protected ICacheEntry<K, V> doEvict(ICacheEvictContext<K, V> context) {
-        ICacheEntry<K, V> result = null;
-        final ICache<K, V> cache = context.cache();
+    protected CacheEntry<K, V> doEvict( CacheEvictContext<K, V> context) {
+        CacheEntry<K, V> result = null;
+        final Cache<K, V> cache = context.cache();
         // 超过限制，移除队尾的元素
         if (cache.size() >= context.size()) {
-            ICacheEntry<K, V> evictEntry = null;
+            CacheEntry<K, V> evictEntry = null;
 
             // 1. firstLruMap 不为空，优先移除队列中元素
             if (!firstLruMap.isEmpty()) {
@@ -74,7 +73,7 @@ public class CacheEvictLru2<K, V> extends AbstractCacheEvict<K, V> {
             // 执行缓存移除操作
             final K evictKey = evictEntry.key();
             V evictValue = cache.remove(evictKey);
-            result = new CacheEntry<>(evictKey, evictValue);
+            result = new com.taotao.cloud.cache.model.CacheEntry<>(evictKey, evictValue);
         }
 
         return result;

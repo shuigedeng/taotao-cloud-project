@@ -32,9 +32,9 @@ import com.taotao.cloud.order.biz.model.convert.AfterSaleReasonConvert;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleReason;
-import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleLogService;
-import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleReasonService;
-import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleService;
+import com.taotao.cloud.order.biz.service.business.aftersale.AfterSaleLogService;
+import com.taotao.cloud.order.biz.service.business.aftersale.AfterSaleReasonService;
+import com.taotao.cloud.order.biz.service.business.aftersale.AfterSaleService;
 import com.taotao.cloud.store.api.model.vo.StoreAfterSaleAddressVO;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import com.taotao.boot.web.utils.OperationalJudgment;
@@ -68,15 +68,15 @@ public class AfterSaleController {
 	/**
 	 * 售后
 	 */
-	private final IAfterSaleService afterSaleService;
+	private final AfterSaleService afterSaleService;
 	/**
 	 * 售后原因
 	 */
-	private final IAfterSaleReasonService afterSaleReasonService;
+	private final AfterSaleReasonService afterSaleReasonService;
 	/**
 	 * 售后日志
 	 */
-	private final IAfterSaleLogService afterSaleLogService;
+	private final AfterSaleLogService afterSaleLogService;
 
 	@Operation(summary = "查看售后服务详情", description = "查看售后服务详情")
 	@RequestLogger

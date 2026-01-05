@@ -31,7 +31,7 @@ import com.taotao.cloud.order.sys.model.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.sys.model.vo.cart.CartVO;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.service.business.cart.render.ICartRenderStep;
-import com.taotao.cloud.order.biz.service.business.order.IOrderService;
+import com.taotao.cloud.order.biz.service.business.order.OrderService;
 import com.taotao.cloud.promotion.api.feign.IFeignPintuanApi;
 import com.taotao.cloud.promotion.api.model.vo.PointsGoodsVO;
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ public class CheckDataRender implements ICartRenderStep {
 
     private final GoodsSkuApi goodsSkuApi;
 
-    private final IOrderService orderService;
+    private final OrderService orderService;
 
     private final IFeignPintuanApi pintuanApi;
 

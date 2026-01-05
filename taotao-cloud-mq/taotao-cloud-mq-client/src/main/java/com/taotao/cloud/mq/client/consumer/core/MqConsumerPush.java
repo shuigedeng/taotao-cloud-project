@@ -17,26 +17,26 @@
 package com.taotao.cloud.mq.client.consumer.core;
 
 import com.taotao.boot.common.utils.common.ArgUtils;
-import com.taotao.cloud.mq.client.consumer.api.IMqConsumer;
-import com.taotao.cloud.mq.client.consumer.api.IMqConsumerListener;
+import com.taotao.cloud.mq.client.consumer.api.MqConsumer;
+import com.taotao.cloud.mq.client.consumer.api.MqConsumerListener;
 import com.taotao.cloud.mq.client.consumer.constant.ConsumerConst;
 import com.taotao.cloud.mq.client.consumer.constant.ConsumerRespCode;
 import com.taotao.cloud.mq.client.consumer.support.broker.ConsumerBrokerConfig;
+import com.taotao.cloud.mq.client.consumer.support.broker.DefaultConsumerBrokerService;
 import com.taotao.cloud.mq.client.consumer.support.broker.ConsumerBrokerService;
-import com.taotao.cloud.mq.client.consumer.support.broker.IConsumerBrokerService;
-import com.taotao.cloud.mq.client.consumer.support.listener.IMqListenerService;
 import com.taotao.cloud.mq.client.consumer.support.listener.MqListenerService;
-import com.taotao.cloud.mq.common.balance.ILoadBalance;
+import com.taotao.cloud.mq.client.consumer.support.listener.DefaultMqListenerService;
+import com.taotao.cloud.mq.common.balance.LoadBalance;
 import com.taotao.cloud.mq.common.balance.impl.LoadBalances;
 import com.taotao.cloud.mq.common.constant.ConsumerTypeConst;
 import com.taotao.cloud.mq.common.resp.MqException;
 import com.taotao.cloud.mq.common.rpc.RpcChannelFuture;
 import com.taotao.cloud.mq.common.support.hook.DefaultShutdownHook;
 import com.taotao.cloud.mq.common.support.hook.ShutdownHooks;
-import com.taotao.cloud.mq.common.support.invoke.IInvokeService;
-import com.taotao.cloud.mq.common.support.invoke.impl.InvokeService;
-import com.taotao.cloud.mq.common.support.status.IStatusManager;
+import com.taotao.cloud.mq.common.support.invoke.InvokeService;
+import com.taotao.cloud.mq.common.support.invoke.impl.DefaultInvokeService;
 import com.taotao.cloud.mq.common.support.status.StatusManager;
+import com.taotao.cloud.mq.common.support.status.DefaultStatusManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  * @author shuigedeng
  * @since 2024.05
  */
-public class MqConsumerPush extends Thread implements IMqConsumer {
+public class MqConsumerPush extends Thread implements MqConsumer {
 
     private static final Logger log = LoggerFactory.getLogger(MqConsumerPush.class);
 
@@ -83,31 +83,31 @@ public class MqConsumerPush extends Thread implements IMqConsumer {
      *
      * @since 2024.05
      */
-    protected final IInvokeService invokeService = new InvokeService();
+    protected final InvokeService invokeService = new DefaultInvokeService();
 
     /**
      * 消息监听服务类
      * @since 2024.05
      */
-    protected final IMqListenerService mqListenerService = new MqListenerService();
+    protected final MqListenerService mqListenerService = new DefaultMqListenerService();
 
     /**
      * 状态管理类
      * @since 2024.05
      */
-    protected final IStatusManager statusManager = new StatusManager();
+    protected final StatusManager statusManager = new DefaultStatusManager();
 
     /**
      * 生产者-中间服务端服务类
      * @since 2024.05
      */
-    protected final IConsumerBrokerService consumerBrokerService = new ConsumerBrokerService();
+    protected final ConsumerBrokerService consumerBrokerService = new DefaultConsumerBrokerService();
 
     /**
      * 负载均衡策略
      * @since 2024.05
      */
-    protected ILoadBalance<RpcChannelFuture> loadBalance = LoadBalances.weightRoundRobbin();
+    protected LoadBalance<RpcChannelFuture> loadBalance = LoadBalances.weightRoundRobbin();
 
     /**
      * 订阅最大尝试次数
@@ -197,7 +197,7 @@ public class MqConsumerPush extends Thread implements IMqConsumer {
         return this;
     }
 
-    public MqConsumerPush loadBalance(ILoadBalance<RpcChannelFuture> loadBalance) {
+    public MqConsumerPush loadBalance( LoadBalance<RpcChannelFuture> loadBalance) {
         this.loadBalance = loadBalance;
         return this;
     }
@@ -284,7 +284,7 @@ public class MqConsumerPush extends Thread implements IMqConsumer {
     }
 
     @Override
-    public void registerListener(IMqConsumerListener listener) {
+    public void registerListener( MqConsumerListener listener) {
         this.mqListenerService.register(listener);
     }
 

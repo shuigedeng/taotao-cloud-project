@@ -28,8 +28,8 @@ import com.taotao.cloud.goods.biz.model.vo.GoodsVO;
 import com.taotao.cloud.goods.biz.model.convert.GoodsSkuConvert;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
-import com.taotao.cloud.goods.biz.service.business.IGoodsService;
-import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
+import com.taotao.cloud.goods.biz.service.business.GoodsService;
+import com.taotao.cloud.goods.biz.service.business.GoodsSkuService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -63,9 +63,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class GoodsManagerController {
 
     /** 商品服务 */
-    private final IGoodsService goodsService;
+    private final GoodsService goodsService;
     /** 规格商品服务 */
-    private final IGoodsSkuService goodsSkuService;
+    private final GoodsSkuService goodsSkuService;
 
     @Operation(summary = "分页获取", description = "分页获取")
     @Parameters({

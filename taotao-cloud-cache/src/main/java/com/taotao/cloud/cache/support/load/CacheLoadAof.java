@@ -21,9 +21,8 @@ import static com.taotao.boot.common.utils.io.PathUtils.readAllLines;
 
 import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.cache.annotation.CacheInterceptor;
-import com.taotao.cloud.cache.api.ICache;
-import com.taotao.cloud.cache.api.ICacheLoad;
-import com.taotao.cloud.cache.core.Cache;
+import com.taotao.cloud.cache.api.Cache;
+import com.taotao.cloud.cache.api.CacheLoad;
 import com.taotao.cloud.cache.model.PersistAofEntry;
 import com.xkzhangsan.time.utils.CollectionUtil;
 import com.xkzhangsan.time.utils.StringUtil;
@@ -39,7 +38,7 @@ import org.slf4j.LoggerFactory;
  * @author shuigedeng
  * @since 2024.06
  */
-public class CacheLoadAof<K, V> implements ICacheLoad<K, V> {
+public class CacheLoadAof<K, V> implements CacheLoad<K, V> {
 
     private static final Logger log = LoggerFactory.getLogger(CacheLoadAof.class);
 
@@ -52,7 +51,7 @@ public class CacheLoadAof<K, V> implements ICacheLoad<K, V> {
     private static final Map<String, Method> METHOD_MAP = new HashMap<>();
 
     static {
-        Method[] methods = Cache.class.getMethods();
+        Method[] methods = com.taotao.cloud.cache.core.Cache.class.getMethods();
 
         for (Method method : methods) {
             CacheInterceptor cacheInterceptor = method.getAnnotation(CacheInterceptor.class);
@@ -79,7 +78,7 @@ public class CacheLoadAof<K, V> implements ICacheLoad<K, V> {
     }
 
     @Override
-    public void load(ICache<K, V> cache) {
+    public void load( Cache<K, V> cache) {
         List<String> lines = readAllLines(dbPath);
         log.info("[load] 开始处理 path: {}", dbPath);
         if (CollectionUtil.isEmpty(lines)) {

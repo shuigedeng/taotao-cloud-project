@@ -17,25 +17,24 @@
 package com.taotao.cloud.mq.client.producer.core;
 
 import com.taotao.boot.common.utils.common.ArgUtils;
-import com.taotao.cloud.mq.client.producer.api.IMqProducer;
 import com.taotao.cloud.mq.client.producer.constant.ProducerConst;
 import com.taotao.cloud.mq.client.producer.constant.ProducerRespCode;
 import com.taotao.cloud.mq.client.producer.dto.SendBatchResult;
 import com.taotao.cloud.mq.client.producer.dto.SendResult;
-import com.taotao.cloud.mq.client.producer.support.broker.IProducerBrokerService;
-import com.taotao.cloud.mq.client.producer.support.broker.ProducerBrokerConfig;
 import com.taotao.cloud.mq.client.producer.support.broker.ProducerBrokerService;
-import com.taotao.cloud.mq.common.balance.ILoadBalance;
+import com.taotao.cloud.mq.client.producer.support.broker.ProducerBrokerConfig;
+import com.taotao.cloud.mq.client.producer.support.broker.DefaultProducerBrokerService;
+import com.taotao.cloud.mq.common.balance.LoadBalance;
 import com.taotao.cloud.mq.common.balance.impl.LoadBalances;
 import com.taotao.cloud.mq.common.dto.req.MqMessage;
 import com.taotao.cloud.mq.common.resp.MqException;
 import com.taotao.cloud.mq.common.rpc.RpcChannelFuture;
 import com.taotao.cloud.mq.common.support.hook.DefaultShutdownHook;
 import com.taotao.cloud.mq.common.support.hook.ShutdownHooks;
-import com.taotao.cloud.mq.common.support.invoke.IInvokeService;
-import com.taotao.cloud.mq.common.support.invoke.impl.InvokeService;
-import com.taotao.cloud.mq.common.support.status.IStatusManager;
+import com.taotao.cloud.mq.common.support.invoke.InvokeService;
+import com.taotao.cloud.mq.common.support.invoke.impl.DefaultInvokeService;
 import com.taotao.cloud.mq.common.support.status.StatusManager;
+import com.taotao.cloud.mq.common.support.status.DefaultStatusManager;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +45,7 @@ import org.slf4j.LoggerFactory;
  * @author shuigedeng
  * @since 2024.05
  */
-public class MqProducer extends Thread implements IMqProducer {
+public class MqProducer extends Thread implements com.taotao.cloud.mq.client.producer.api.MqProducer {
 
     private static final Logger log = LoggerFactory.getLogger(MqProducer.class);
 
@@ -79,21 +78,21 @@ public class MqProducer extends Thread implements IMqProducer {
      *
      * @since 2024.05
      */
-    private final IInvokeService invokeService = new InvokeService();
+    private final InvokeService invokeService = new DefaultInvokeService();
 
     /**
      * 状态管理类
      *
      * @since 2024.05
      */
-    private final IStatusManager statusManager = new StatusManager();
+    private final StatusManager statusManager = new DefaultStatusManager();
 
     /**
      * 生产者-中间服务端服务类
      *
      * @since 2024.05
      */
-    private final IProducerBrokerService producerBrokerService = new ProducerBrokerService();
+    private final ProducerBrokerService producerBrokerService = new DefaultProducerBrokerService();
 
     /**
      * 为剩余的请求等待时间
@@ -107,7 +106,7 @@ public class MqProducer extends Thread implements IMqProducer {
      *
      * @since 2024.05
      */
-    private ILoadBalance<RpcChannelFuture> loadBalance = LoadBalances.weightRoundRobbin();
+    private LoadBalance<RpcChannelFuture> loadBalance = LoadBalances.weightRoundRobbin();
 
     /**
      * 消息发送最大尝试次数
@@ -165,7 +164,7 @@ public class MqProducer extends Thread implements IMqProducer {
         return this;
     }
 
-    public MqProducer loadBalance(ILoadBalance<RpcChannelFuture> loadBalance) {
+    public MqProducer loadBalance( LoadBalance<RpcChannelFuture> loadBalance) {
         this.loadBalance = loadBalance;
         return this;
     }

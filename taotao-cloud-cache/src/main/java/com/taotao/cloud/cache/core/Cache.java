@@ -22,10 +22,8 @@ import com.taotao.cloud.cache.api.*;
 import com.taotao.cloud.cache.constant.enums.CacheRemoveType;
 import com.taotao.cloud.cache.exception.CacheRuntimeException;
 import com.taotao.cloud.cache.support.evict.CacheEvictContext;
-import com.taotao.cloud.cache.support.expire.CacheExpire;
-import com.taotao.cloud.cache.support.listener.remove.CacheRemoveListenerContext;
 import com.taotao.cloud.cache.support.persist.InnerCachePersist;
-import com.taotao.cloud.cache.support.proxy.CacheProxy;
+import com.taotao.cloud.cache.support.proxy.DefaultCacheProxy;
 import java.util.*;
 
 /**
@@ -36,7 +34,7 @@ import java.util.*;
  * @param <V> value
  * @since 2024.06
  */
-public class Cache<K, V> implements ICache<K, V> {
+public class Cache<K, V> implements com.taotao.cloud.cache.api.Cache<K, V> {
 
     /**
      * map 信息
@@ -54,38 +52,38 @@ public class Cache<K, V> implements ICache<K, V> {
      * 驱除策略
      * @since 2024.06
      */
-    private ICacheEvict<K, V> evict;
+    private CacheEvict<K, V> evict;
 
     /**
      * 过期策略
      * 暂时不做暴露
      * @since 2024.06
      */
-    private ICacheExpire<K, V> expire;
+    private CacheExpire<K, V> expire;
 
     /**
      * 删除监听类
      * @since 2024.06
      */
-    private List<ICacheRemoveListener<K, V>> removeListeners;
+    private List<CacheRemoveListener<K, V>> removeListeners;
 
     /**
      * 慢日志监听类
      * @since 2024.06
      */
-    private List<ICacheSlowListener> slowListeners;
+    private List<CacheSlowListener> slowListeners;
 
     /**
      * 加载类
      * @since 2024.06
      */
-    private ICacheLoad<K, V> load;
+    private CacheLoad<K, V> load;
 
     /**
      * 持久化
      * @since 2024.06
      */
-    private ICachePersist<K, V> persist;
+    private CachePersist<K, V> persist;
 
     /**
      * 设置 map 实现
@@ -113,7 +111,7 @@ public class Cache<K, V> implements ICache<K, V> {
      * @return this
      * @since 2024.06
      */
-    public Cache<K, V> evict(ICacheEvict<K, V> cacheEvict) {
+    public Cache<K, V> evict( CacheEvict<K, V> cacheEvict) {
         this.evict = cacheEvict;
         return this;
     }
@@ -124,7 +122,7 @@ public class Cache<K, V> implements ICache<K, V> {
      * @since 2024.06
      */
     @Override
-    public ICachePersist<K, V> persist() {
+    public CachePersist<K, V> persist() {
         return persist;
     }
 
@@ -134,7 +132,7 @@ public class Cache<K, V> implements ICache<K, V> {
      * @since 2024.06
      */
     @Override
-    public ICacheEvict<K, V> evict() {
+    public CacheEvict<K, V> evict() {
         return this.evict;
     }
 
@@ -143,36 +141,36 @@ public class Cache<K, V> implements ICache<K, V> {
      * @param persist 持久化
      * @since 2024.06
      */
-    public void persist(ICachePersist<K, V> persist) {
+    public void persist( CachePersist<K, V> persist) {
         this.persist = persist;
     }
 
     @Override
-    public List<ICacheRemoveListener<K, V>> removeListeners() {
+    public List<CacheRemoveListener<K, V>> removeListeners() {
         return removeListeners;
     }
 
-    public Cache<K, V> removeListeners(List<ICacheRemoveListener<K, V>> removeListeners) {
+    public Cache<K, V> removeListeners(List<CacheRemoveListener<K, V>> removeListeners) {
         this.removeListeners = removeListeners;
         return this;
     }
 
     @Override
-    public List<ICacheSlowListener> slowListeners() {
+    public List<CacheSlowListener> slowListeners() {
         return slowListeners;
     }
 
-    public Cache<K, V> slowListeners(List<ICacheSlowListener> slowListeners) {
+    public Cache<K, V> slowListeners(List<CacheSlowListener> slowListeners) {
         this.slowListeners = slowListeners;
         return this;
     }
 
     @Override
-    public ICacheLoad<K, V> load() {
+    public CacheLoad<K, V> load() {
         return load;
     }
 
-    public Cache<K, V> load(ICacheLoad<K, V> load) {
+    public Cache<K, V> load( CacheLoad<K, V> load) {
         this.load = load;
         return this;
     }
@@ -182,7 +180,7 @@ public class Cache<K, V> implements ICache<K, V> {
      * @since 2024.06
      */
     public void init() {
-        this.expire = new CacheExpire<>(this);
+        this.expire = new com.taotao.cloud.cache.support.expire.CacheExpire<>(this);
         this.load.load(this);
 
         // 初始化持久化
@@ -199,11 +197,11 @@ public class Cache<K, V> implements ICache<K, V> {
      */
     @Override
     @CacheInterceptor
-    public ICache<K, V> expire(K key, long timeInMills) {
+    public com.taotao.cloud.cache.api.Cache<K, V> expire(K key, long timeInMills) {
         long expireTime = System.currentTimeMillis() + timeInMills;
 
         // 使用代理调用
-        Cache<K, V> cachePoxy = (Cache<K, V>) CacheProxy.getProxy(this);
+        Cache<K, V> cachePoxy = (Cache<K, V>) DefaultCacheProxy.getProxy(this);
         return cachePoxy.expireAt(key, expireTime);
     }
 
@@ -215,14 +213,14 @@ public class Cache<K, V> implements ICache<K, V> {
      */
     @Override
     @CacheInterceptor(aof = true)
-    public ICache<K, V> expireAt(K key, long timeInMills) {
+    public com.taotao.cloud.cache.api.Cache<K, V> expireAt(K key, long timeInMills) {
         this.expire.expire(key, timeInMills);
         return this;
     }
 
     @Override
     @CacheInterceptor
-    public ICacheExpire<K, V> expire() {
+    public CacheExpire<K, V> expire() {
         return this.expire;
     }
 
@@ -268,17 +266,17 @@ public class Cache<K, V> implements ICache<K, V> {
         CacheEvictContext<K, V> context = new CacheEvictContext<>();
         context.key(key).size(sizeLimit).cache(this);
 
-        ICacheEntry<K, V> evictEntry = evict.evict(context);
+        CacheEntry<K, V> evictEntry = evict.evict(context);
 
         // 添加拦截器调用
         if (ObjectUtils.isNotNull(evictEntry)) {
             // 执行淘汰监听器
-            ICacheRemoveListenerContext<K, V> removeListenerContext =
-                    CacheRemoveListenerContext.<K, V>newInstance()
+            CacheRemoveListenerContext<K, V> removeListenerContext =
+                    com.taotao.cloud.cache.support.listener.remove.CacheRemoveListenerContext.<K, V>newInstance()
                             .key(evictEntry.key())
                             .value(evictEntry.value())
                             .type(CacheRemoveType.EVICT.code());
-            for (ICacheRemoveListener<K, V> listener : context.cache().removeListeners()) {
+            for (CacheRemoveListener<K, V> listener : context.cache().removeListeners()) {
                 listener.listen(removeListenerContext);
             }
         }

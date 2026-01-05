@@ -20,7 +20,7 @@ import com.taotao.cloud.rpc.client.support.fail.enums.FailTypeEnum;
 import com.taotao.cloud.rpc.client.support.filter.RpcFilter;
 import com.taotao.cloud.rpc.common.common.constant.enums.CallTypeEnum;
 import com.taotao.cloud.rpc.common.common.support.inteceptor.RpcInterceptor;
-import com.taotao.cloud.rpc.common.tmp.ILoadBalance;
+import com.taotao.cloud.rpc.common.tmp.LoadBalance;
 
 /**
  * 引用配置类
@@ -165,5 +165,5 @@ public interface ReferenceConfig<T> {
      * @return this
      * @since 0.2.0
      */
-    ReferenceConfig<T> loadBalance(final ILoadBalance loadBalance);
+    ReferenceConfig<T> loadBalance(final LoadBalance loadBalance);
 }

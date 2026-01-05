@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.cache.model;
 
-import com.taotao.cloud.cache.api.ICacheEntry;
-
 /**
  * key value 的明细信息
  * @author shuigedeng
@@ -25,7 +23,7 @@ import com.taotao.cloud.cache.api.ICacheEntry;
  * @param <K> key
  * @param <V> value
  */
-public class CacheEntry<K, V> implements ICacheEntry<K, V> {
+public class CacheEntry<K, V> implements com.taotao.cloud.cache.api.CacheEntry<K, V> {
 
     /**
      * key

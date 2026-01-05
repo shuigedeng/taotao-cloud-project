@@ -17,7 +17,7 @@
 package com.taotao.cloud.mq.broker.support.api;
 
 import com.alibaba.fastjson2.JSON;
-import com.taotao.cloud.mq.broker.api.IBrokerConsumerService;
+import com.taotao.cloud.mq.broker.api.BrokerConsumerService;
 import com.taotao.cloud.mq.broker.dto.BrokerServiceEntryChannel;
 import com.taotao.cloud.mq.broker.dto.ChannelGroupNameDto;
 import com.taotao.cloud.mq.broker.dto.ServiceEntry;
@@ -26,7 +26,7 @@ import com.taotao.cloud.mq.broker.dto.consumer.ConsumerSubscribeReq;
 import com.taotao.cloud.mq.broker.dto.consumer.ConsumerUnSubscribeReq;
 import com.taotao.cloud.mq.broker.resp.MqBrokerRespCode;
 import com.taotao.cloud.mq.broker.utils.InnerChannelUtils;
-import com.taotao.cloud.mq.common.balance.ILoadBalance;
+import com.taotao.cloud.mq.common.balance.LoadBalance;
 import com.taotao.cloud.mq.common.dto.req.MqHeartBeatReq;
 import com.taotao.cloud.mq.common.dto.req.MqMessage;
 import com.taotao.cloud.mq.common.dto.resp.MqCommonResp;
@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
  * @author shuigedeng
  * @since 2024.05
  */
-public class LocalBrokerConsumerService implements IBrokerConsumerService {
+public class LocalBrokerConsumerService implements BrokerConsumerService {
 
     private static final Logger LOG = LoggerFactory.getLogger(LocalBrokerConsumerService.class);
 
@@ -87,7 +87,7 @@ public class LocalBrokerConsumerService implements IBrokerConsumerService {
      *
      * @since 2024.05
      */
-    private ILoadBalance<ConsumerSubscribeBo> loadBalance;
+    private LoadBalance<ConsumerSubscribeBo> loadBalance;
 
     public LocalBrokerConsumerService() {
         // 120S 扫描一次
@@ -114,7 +114,7 @@ public class LocalBrokerConsumerService implements IBrokerConsumerService {
     }
 
     @Override
-    public void loadBalance(ILoadBalance<ConsumerSubscribeBo> loadBalance) {
+    public void loadBalance( LoadBalance<ConsumerSubscribeBo> loadBalance) {
         this.loadBalance = loadBalance;
     }
 

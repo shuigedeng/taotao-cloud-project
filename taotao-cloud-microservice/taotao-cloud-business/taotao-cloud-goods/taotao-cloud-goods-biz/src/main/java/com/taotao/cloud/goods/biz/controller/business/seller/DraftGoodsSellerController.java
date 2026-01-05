@@ -27,7 +27,7 @@ import com.taotao.cloud.goods.biz.model.page.DraftGoodsPageQuery;
 import com.taotao.cloud.goods.biz.model.vo.DraftGoodsSkuParamsVO;
 import com.taotao.cloud.goods.biz.model.vo.DraftGoodsVO;
 import com.taotao.cloud.goods.biz.model.entity.DraftGoods;
-import com.taotao.cloud.goods.biz.service.business.IDraftGoodsService;
+import com.taotao.cloud.goods.biz.service.business.DraftGoodsService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -57,7 +57,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DraftGoodsSellerController {
 
     /** 草稿商品服务 */
-    private final IDraftGoodsService draftGoodsService;
+    private final DraftGoodsService draftGoodsService;
 
     @Operation(summary = "分页获取草稿商品列表", description = "分页获取草稿商品列表")
     @RequestLogger("分页获取草稿商品列表")

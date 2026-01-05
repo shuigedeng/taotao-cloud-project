@@ -23,7 +23,7 @@ import com.taotao.cloud.goods.biz.model.vo.StoreGoodsLabelInfoVO;
 import com.taotao.cloud.goods.biz.model.vo.StoreGoodsLabelVO;
 import com.taotao.cloud.goods.biz.model.convert.GoodsLabelStoreConvert;
 import com.taotao.cloud.goods.biz.model.entity.StoreGoodsLabel;
-import com.taotao.cloud.goods.biz.service.business.IStoreGoodsLabelService;
+import com.taotao.cloud.goods.biz.service.business.StoreGoodsLabelService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -55,7 +55,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GoodsLabelSellerController {
 
     /** 店铺分类服务 */
-    private final IStoreGoodsLabelService storeGoodsLabelService;
+    private final StoreGoodsLabelService storeGoodsLabelService;
 
     @Operation(summary = "获取当前店铺商品分类列表", description = "获取当前店铺商品分类列表")
     @RequestLogger("获取当前店铺商品分类列表")

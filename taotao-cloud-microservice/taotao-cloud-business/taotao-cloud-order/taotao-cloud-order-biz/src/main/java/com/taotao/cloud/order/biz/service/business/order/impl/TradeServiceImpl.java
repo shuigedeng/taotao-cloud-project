@@ -31,11 +31,11 @@ import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.sys.model.dto.cart.MemberCouponDTO;
 import com.taotao.cloud.order.sys.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.sys.model.vo.cart.CartVO;
-import com.taotao.cloud.order.biz.mapper.order.ITradeMapper;
+import com.taotao.cloud.order.biz.mapper.order.TradeMapper;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.model.entity.order.Trade;
-import com.taotao.cloud.order.biz.service.business.order.IOrderService;
-import com.taotao.cloud.order.biz.service.business.order.ITradeService;
+import com.taotao.cloud.order.biz.service.business.order.OrderService;
+import com.taotao.cloud.order.biz.service.business.order.TradeService;
 import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
 import com.taotao.cloud.promotion.api.feign.IFeignCouponApi;
 import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityApi;
@@ -61,12 +61,12 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class TradeServiceImpl extends ServiceImpl<ITradeMapper, Trade> implements ITradeService {
+public class TradeServiceImpl extends ServiceImpl<TradeMapper, Trade> implements TradeService {
 
     /** 缓存 */
     private final RedisRepository redisRepository;
     /** 订单 */
-    private final IOrderService orderService;
+    private final OrderService orderService;
     /** 会员 */
     private final MemberApi memberApi;
     /** 优惠券 */

@@ -17,12 +17,11 @@
 package com.taotao.cloud.goods.biz.service.business.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.taotao.cloud.goods.biz.mapper.ICategorySpecificationMapper;
+import com.taotao.cloud.goods.biz.mapper.CategorySpecificationMapper;
 import com.taotao.cloud.goods.biz.model.entity.CategorySpecification;
 import com.taotao.cloud.goods.biz.model.entity.Specification;
 import com.taotao.cloud.goods.biz.repository.CategorySpecificationRepository;
-import com.taotao.cloud.goods.biz.repository.ICategorySpecificationRepository;
-import com.taotao.cloud.goods.biz.service.business.ICategorySpecificationService;
+import com.taotao.cloud.goods.biz.service.business.CategorySpecificationService;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import lombok.*;
 import org.springframework.stereotype.Service;
@@ -42,10 +41,10 @@ public class CategorySpecificationServiceImpl
 	extends BaseSuperServiceImpl<
 	CategorySpecification,
 	Long,
-	ICategorySpecificationMapper,
+        CategorySpecificationMapper,
 	CategorySpecificationRepository,
-	ICategorySpecificationRepository>
-	implements ICategorySpecificationService {
+	CategorySpecificationRepository>
+	implements CategorySpecificationService {
 
 	@Override
 	public List<Specification> getCategorySpecList(Long categoryId) {

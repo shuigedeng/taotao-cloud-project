@@ -16,11 +16,11 @@
 
 package com.taotao.cloud.cache.support.evict;
 
-import com.taotao.cloud.cache.api.ICache;
-import com.taotao.cloud.cache.api.ICacheEntry;
-import com.taotao.cloud.cache.api.ICacheEvict;
-import com.taotao.cloud.cache.api.ICacheEvictContext;
-import com.taotao.cloud.cache.model.CacheEntry;
+import com.taotao.cloud.cache.api.Cache;
+import com.taotao.cloud.cache.api.CacheEntry;
+import com.taotao.cloud.cache.api.CacheEvict;
+import com.taotao.cloud.cache.api.CacheEvictContext;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
  * @since 2024.06
  */
 public class CacheEvictLruLinkedHashMap<K, V> extends LinkedHashMap<K, V>
-        implements ICacheEvict<K, V> {
+        implements CacheEvict<K, V> {
 
     private static final Logger log = LoggerFactory.getLogger(CacheEvictLruDoubleListMap.class);
 
@@ -55,9 +55,9 @@ public class CacheEvictLruLinkedHashMap<K, V> extends LinkedHashMap<K, V>
     }
 
     @Override
-    public ICacheEntry<K, V> evict(ICacheEvictContext<K, V> context) {
-        ICacheEntry<K, V> result = null;
-        final ICache<K, V> cache = context.cache();
+    public CacheEntry<K, V> evict( CacheEvictContext<K, V> context) {
+        CacheEntry<K, V> result = null;
+        final Cache<K, V> cache = context.cache();
         // 超过限制，移除队尾的元素
         if (cache.size() >= context.size()) {
             removeFlag = true;
@@ -68,7 +68,7 @@ public class CacheEvictLruLinkedHashMap<K, V> extends LinkedHashMap<K, V>
             // 构建淘汰的元素
             K evictKey = eldest.getKey();
             V evictValue = cache.remove(evictKey);
-            result = new CacheEntry<>(evictKey, evictValue);
+            result = new com.taotao.cloud.cache.model.CacheEntry<>(evictKey, evictValue);
         } else {
             removeFlag = false;
         }

@@ -20,8 +20,8 @@ import com.taotao.boot.common.support.filter.Filter;
 import com.taotao.boot.common.support.handler.Handler;
 import com.taotao.boot.common.utils.collection.CollectionUtils;
 import com.taotao.boot.common.utils.number.MathUtils;
-import com.taotao.cloud.mq.common.balance.ILoadBalanceContext;
-import com.taotao.cloud.mq.common.balance.IServer;
+import com.taotao.cloud.mq.common.balance.LoadBalanceContext;
+import com.taotao.cloud.mq.common.balance.Server;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +34,11 @@ import java.util.concurrent.atomic.AtomicLong;
  * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
-public class LoadBalanceWeightRoundRobbin<T extends IServer> extends AbstractLoadBalance<T> {
+public class LoadBalanceWeightRoundRobbin<T extends Server> extends AbstractLoadBalance<T> {
 
     private final AtomicLong indexHolder = new AtomicLong();
 
-    protected T doSelect( ILoadBalanceContext<T> context ) {
+    protected T doSelect( LoadBalanceContext<T> context ) {
         List<T> servers = context.servers();
         List<T> actualList = this.buildActualList(servers);
         long index = this.indexHolder.getAndIncrement();
@@ -52,7 +52,7 @@ public class LoadBalanceWeightRoundRobbin<T extends IServer> extends AbstractLoa
                 CollectionUtils.filterList(
                         serverList,
                         new Filter<T>() {
-                            public boolean filter( IServer iServer ) {
+                            public boolean filter( Server iServer ) {
                                 return iServer.weight() <= 0;
                             }
                         });

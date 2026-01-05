@@ -42,7 +42,7 @@ import com.taotao.cloud.order.sys.model.vo.cart.CartSkuVOBuilder;
 import com.taotao.cloud.order.sys.model.vo.cart.CartVO;
 import com.taotao.cloud.order.sys.model.vo.order.ReceiptVO;
 import com.taotao.cloud.order.biz.model.entity.order.Trade;
-import com.taotao.cloud.order.biz.service.business.cart.ICartService;
+import com.taotao.cloud.order.biz.service.business.cart.CartService;
 import com.taotao.cloud.order.biz.service.business.cart.render.TradeBuilder;
 import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
 import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
@@ -75,7 +75,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @AllArgsConstructor
-public class CartServiceImpl implements ICartService {
+public class CartServiceImpl implements CartService {
 
     static String errorMessage = "购物车异常，请稍后重试";
 

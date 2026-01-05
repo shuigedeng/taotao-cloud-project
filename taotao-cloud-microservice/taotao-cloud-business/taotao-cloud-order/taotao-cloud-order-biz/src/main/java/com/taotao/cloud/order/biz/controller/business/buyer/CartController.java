@@ -21,7 +21,7 @@ import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.sys.model.dto.trade.TradeDTO;
 import com.taotao.cloud.order.sys.model.vo.order.ReceiptVO;
 import com.taotao.cloud.order.biz.model.entity.order.Trade;
-import com.taotao.cloud.order.biz.service.business.cart.ICartService;
+import com.taotao.cloud.order.biz.service.business.cart.CartService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -51,7 +51,7 @@ public class CartController {
 	/**
 	 * 购物车
 	 */
-	private final ICartService cartService;
+	private final CartService cartService;
 
 	@Operation(summary = "向购物车中添加一个产品", description = "向购物车中添加一个产品")
 	@RequestLogger

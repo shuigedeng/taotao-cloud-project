@@ -26,11 +26,10 @@ import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.security.spring.model.SecurityUser;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.cloud.goods.biz.model.vo.StoreGoodsLabelVO;
-import com.taotao.cloud.goods.biz.mapper.IStoreGoodsLabelMapper;
+import com.taotao.cloud.goods.biz.mapper.StoreGoodsLabelMapper;
 import com.taotao.cloud.goods.biz.model.entity.StoreGoodsLabel;
 import com.taotao.cloud.goods.biz.repository.StoreGoodsLabelRepository;
-import com.taotao.cloud.goods.biz.repository.IStoreGoodsLabelRepository;
-import com.taotao.cloud.goods.biz.service.business.IStoreGoodsLabelService;
+import com.taotao.cloud.goods.biz.service.business.StoreGoodsLabelService;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -50,8 +49,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class StoreGoodsLabelServiceImpl
         extends BaseSuperServiceImpl<
-                StoreGoodsLabel, Long, IStoreGoodsLabelMapper, StoreGoodsLabelRepository, IStoreGoodsLabelRepository>
-        implements IStoreGoodsLabelService {
+                StoreGoodsLabel, Long, StoreGoodsLabelMapper, StoreGoodsLabelRepository, StoreGoodsLabelRepository>
+        implements StoreGoodsLabelService {
 
     /** 缓存 */
     @Autowired

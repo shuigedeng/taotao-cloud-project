@@ -16,11 +16,11 @@
 
 package com.taotao.cloud.cache.support.proxy.cglib;
 
-import com.taotao.cloud.cache.api.ICache;
-import com.taotao.cloud.cache.support.proxy.ICacheProxy;
+import com.taotao.cloud.cache.api.Cache;
+import com.taotao.cloud.cache.support.proxy.CacheProxy;
 import com.taotao.cloud.cache.support.proxy.bs.CacheProxyBs;
+import com.taotao.cloud.cache.support.proxy.bs.DefaultCacheProxyBsContext;
 import com.taotao.cloud.cache.support.proxy.bs.CacheProxyBsContext;
-import com.taotao.cloud.cache.support.proxy.bs.ICacheProxyBsContext;
 import java.lang.reflect.Method;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
@@ -32,22 +32,22 @@ import net.sf.cglib.proxy.MethodProxy;
  * date 2019/3/7
  * @since 2024.06
  */
-public class CglibProxy implements MethodInterceptor, ICacheProxy {
+public class CglibProxy implements MethodInterceptor, CacheProxy {
 
     /**
      * 被代理的对象
      */
-    private final ICache target;
+    private final Cache target;
 
-    public CglibProxy(ICache target) {
+    public CglibProxy( Cache target) {
         this.target = target;
     }
 
     @Override
     public Object intercept(Object o, Method method, Object[] params, MethodProxy methodProxy)
             throws Throwable {
-        ICacheProxyBsContext context =
-                CacheProxyBsContext.newInstance().method(method).params(params).target(target);
+        CacheProxyBsContext context =
+                DefaultCacheProxyBsContext.newInstance().method(method).params(params).target(target);
 
         return CacheProxyBs.newInstance().context(context).execute();
     }

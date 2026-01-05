@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.cache.support.interceptor.refresh;
 
-import com.taotao.cloud.cache.api.ICache;
-import com.taotao.cloud.cache.api.ICacheInterceptor;
-import com.taotao.cloud.cache.api.ICacheInterceptorContext;
+import com.taotao.cloud.cache.api.Cache;
+import com.taotao.cloud.cache.api.CacheInterceptor;
+import com.taotao.cloud.cache.api.CacheInterceptorContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,17 +28,17 @@ import org.slf4j.LoggerFactory;
  * @author shuigedeng
  * @since 2024.06
  */
-public class CacheInterceptorRefresh<K, V> implements ICacheInterceptor<K, V> {
+public class CacheInterceptorRefresh<K, V> implements CacheInterceptor<K, V> {
 
     private static final Logger log = LoggerFactory.getLogger(CacheInterceptorRefresh.class);
 
     @Override
-    public void before(ICacheInterceptorContext<K, V> context) {
+    public void before( CacheInterceptorContext<K, V> context) {
         log.debug("Refresh start");
-        final ICache<K, V> cache = context.cache();
+        final Cache<K, V> cache = context.cache();
         cache.expire().refreshExpire(cache.keySet());
     }
 
     @Override
-    public void after(ICacheInterceptorContext<K, V> context) {}
+    public void after( CacheInterceptorContext<K, V> context) {}
 }

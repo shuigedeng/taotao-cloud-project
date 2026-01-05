@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.mq.common.balance.impl;
 
-import com.taotao.cloud.mq.common.balance.ILoadBalanceContext;
-import com.taotao.cloud.mq.common.balance.IServer;
+import com.taotao.cloud.mq.common.balance.LoadBalanceContext;
+import com.taotao.cloud.mq.common.balance.Server;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -29,11 +29,11 @@ import java.util.concurrent.atomic.AtomicLong;
  * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
-public class LoadBalanceRoundRobbin<T extends IServer> extends AbstractLoadBalance<T> {
+public class LoadBalanceRoundRobbin<T extends Server> extends AbstractLoadBalance<T> {
 
     private final AtomicLong indexHolder = new AtomicLong();
 
-    protected T doSelect( ILoadBalanceContext<T> context ) {
+    protected T doSelect( LoadBalanceContext<T> context ) {
         List<T> servers = context.servers();
         long index = this.indexHolder.getAndIncrement();
         int actual = (int) ( index % (long) servers.size() );

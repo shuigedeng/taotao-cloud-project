@@ -16,17 +16,17 @@
 
 package com.taotao.cloud.cache.listener;
 
-import com.taotao.cloud.cache.api.ICacheSlowListener;
-import com.taotao.cloud.cache.api.ICacheSlowListenerContext;
+import com.taotao.cloud.cache.api.CacheSlowListener;
+import com.taotao.cloud.cache.api.CacheSlowListenerContext;
 
 /**
  * @author shuigedeng
  * @since 2024.06
  */
-public class MySlowListener implements ICacheSlowListener {
+public class MySlowListener implements CacheSlowListener {
 
     @Override
-    public void listen(ICacheSlowListenerContext context) {
+    public void listen( CacheSlowListenerContext context) {
         System.out.println("【慢日志】name: " + context.methodName());
     }
 

@@ -33,7 +33,7 @@ public final class LoadBalanceHelper {
     private LoadBalanceHelper() {
     }
 
-    public static <T extends IServer> T random( List<T> servers ) {
+    public static <T extends Server> T random( List<T> servers ) {
         return (T)
                 LoadBalanceBs.<T>newInstance()
                         .servers(servers)
@@ -41,7 +41,7 @@ public final class LoadBalanceHelper {
                         .select();
     }
 
-    public static <T extends IServer> T roundRobbin( List<T> servers ) {
+    public static <T extends Server> T roundRobbin( List<T> servers ) {
         return (T)
                 LoadBalanceBs.<T>newInstance()
                         .servers(servers)
@@ -49,7 +49,7 @@ public final class LoadBalanceHelper {
                         .select();
     }
 
-    public static <T extends IServer> T weightRoundRobbin( List<T> servers ) {
+    public static <T extends Server> T weightRoundRobbin( List<T> servers ) {
         return (T)
                 LoadBalanceBs.<T>newInstance()
                         .servers(servers)
@@ -57,7 +57,7 @@ public final class LoadBalanceHelper {
                         .select();
     }
 
-    public static <T extends IServer> T commonHash(
+    public static <T extends Server> T commonHash(
             List<T> servers, IHashCode hash, String hashKey ) {
         return (T)
                 LoadBalanceBs.<T>newInstance()
@@ -67,7 +67,7 @@ public final class LoadBalanceHelper {
                         .select();
     }
 
-    public static <T extends IServer> T consistentHash(
+    public static <T extends Server> T consistentHash(
             List<T> servers, IHashCode hash, String hashKey ) {
         return (T)
                 LoadBalanceBs.<T>newInstance()

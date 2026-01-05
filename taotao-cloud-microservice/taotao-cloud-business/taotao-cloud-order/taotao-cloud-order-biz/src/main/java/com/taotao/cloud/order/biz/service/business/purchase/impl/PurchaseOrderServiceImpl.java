@@ -21,11 +21,11 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.order.biz.mapper.purchase.IPurchaseOrderMapper;
+import com.taotao.cloud.order.biz.mapper.purchase.PurchaseOrderMapper;
 import com.taotao.cloud.order.biz.model.entity.purchase.PurchaseOrder;
 import com.taotao.cloud.order.biz.model.entity.purchase.PurchaseOrderItem;
-import com.taotao.cloud.order.biz.service.business.purchase.IPurchaseOrderItemService;
-import com.taotao.cloud.order.biz.service.business.purchase.IPurchaseOrderService;
+import com.taotao.cloud.order.biz.service.business.purchase.PurchaseOrderItemService;
+import com.taotao.cloud.order.biz.service.business.purchase.PurchaseOrderService;
 import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,11 +39,11 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2022-04-28 08:55:40
  */
 @Service
-public class PurchaseOrderServiceImpl extends ServiceImpl<IPurchaseOrderMapper, PurchaseOrder>
-        implements IPurchaseOrderService {
+public class PurchaseOrderServiceImpl extends ServiceImpl<PurchaseOrderMapper, PurchaseOrder>
+        implements PurchaseOrderService {
 
     @Autowired
-    private IPurchaseOrderItemService purchaseOrderItemService;
+    private PurchaseOrderItemService purchaseOrderItemService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)

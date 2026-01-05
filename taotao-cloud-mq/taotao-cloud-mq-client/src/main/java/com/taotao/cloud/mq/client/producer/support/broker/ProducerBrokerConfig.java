@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.mq.client.producer.support.broker;
 
-import com.taotao.cloud.mq.common.balance.ILoadBalance;
+import com.taotao.cloud.mq.common.balance.LoadBalance;
 import com.taotao.cloud.mq.common.rpc.RpcChannelFuture;
-import com.taotao.cloud.mq.common.support.invoke.IInvokeService;
-import com.taotao.cloud.mq.common.support.status.IStatusManager;
+import com.taotao.cloud.mq.common.support.invoke.InvokeService;
+import com.taotao.cloud.mq.common.support.status.StatusManager;
 
 /**
  * @author shuigedeng
@@ -42,7 +42,7 @@ public class ProducerBrokerConfig {
      *
      * @since 2024.05
      */
-    private IInvokeService invokeService;
+    private InvokeService invokeService;
 
     /**
      * 获取响应超时时间
@@ -63,14 +63,14 @@ public class ProducerBrokerConfig {
      *
      * @since 2024.05
      */
-    private IStatusManager statusManager;
+    private StatusManager statusManager;
 
     /**
      * 负载均衡
      *
      * @since 2024.05
      */
-    private ILoadBalance<RpcChannelFuture> loadBalance;
+    private LoadBalance<RpcChannelFuture> loadBalance;
 
     /**
      * 最大尝试次数
@@ -142,11 +142,11 @@ public class ProducerBrokerConfig {
         return this;
     }
 
-    public IInvokeService invokeService() {
+    public InvokeService invokeService() {
         return invokeService;
     }
 
-    public ProducerBrokerConfig invokeService(IInvokeService invokeService) {
+    public ProducerBrokerConfig invokeService( InvokeService invokeService) {
         this.invokeService = invokeService;
         return this;
     }
@@ -169,20 +169,20 @@ public class ProducerBrokerConfig {
         return this;
     }
 
-    public IStatusManager statusManager() {
+    public StatusManager statusManager() {
         return statusManager;
     }
 
-    public ProducerBrokerConfig statusManager(IStatusManager statusManager) {
+    public ProducerBrokerConfig statusManager( StatusManager statusManager) {
         this.statusManager = statusManager;
         return this;
     }
 
-    public ILoadBalance<RpcChannelFuture> loadBalance() {
+    public LoadBalance<RpcChannelFuture> loadBalance() {
         return loadBalance;
     }
 
-    public ProducerBrokerConfig loadBalance(ILoadBalance<RpcChannelFuture> loadBalance) {
+    public ProducerBrokerConfig loadBalance( LoadBalance<RpcChannelFuture> loadBalance) {
         this.loadBalance = loadBalance;
         return this;
     }

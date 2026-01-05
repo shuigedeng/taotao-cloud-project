@@ -20,8 +20,8 @@ import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.cloud.goods.biz.model.vo.CategoryBrandVO;
 import com.taotao.cloud.goods.biz.model.vo.CategoryTreeVO;
-import com.taotao.cloud.goods.biz.service.business.ICategoryBrandService;
-import com.taotao.cloud.goods.biz.service.business.ICategoryService;
+import com.taotao.cloud.goods.biz.service.business.CategoryBrandService;
+import com.taotao.cloud.goods.biz.service.business.CategoryService;
 import com.taotao.cloud.store.api.feign.IFeignStoreDetailApi;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
@@ -50,9 +50,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategorySellerController {
 
     /** 分类服务 */
-    private final ICategoryService categoryService;
+    private final CategoryService categoryService;
     /** 分类品牌服务 */
-    private final ICategoryBrandService categoryBrandService;
+    private final CategoryBrandService categoryBrandService;
     /** 店铺详情服务 */
     private final IFeignStoreDetailApi storeDetailApi;
 

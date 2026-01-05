@@ -17,8 +17,8 @@
 package com.taotao.cloud.cache.support.expire;
 
 import cn.hutool.core.map.MapUtil;
-import com.taotao.cloud.cache.api.ICache;
-import com.taotao.cloud.cache.api.ICacheExpire;
+import com.taotao.cloud.cache.api.Cache;
+import com.taotao.cloud.cache.api.CacheExpire;
 import com.xkzhangsan.time.utils.CollectionUtil;
 import java.util.*;
 import java.util.concurrent.Executors;
@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit;
  * @param <K> key
  * @param <V> value
  */
-public class CacheExpireSort<K, V> implements ICacheExpire<K, V> {
+public class CacheExpireSort<K, V> implements CacheExpire<K, V> {
 
     /**
      * 单次清空的数量限制
@@ -71,7 +71,7 @@ public class CacheExpireSort<K, V> implements ICacheExpire<K, V> {
      * 缓存实现
      * @since 2024.06
      */
-    private final ICache<K, V> cache;
+    private final Cache<K, V> cache;
 
     /**
      * 线程执行类
@@ -80,7 +80,7 @@ public class CacheExpireSort<K, V> implements ICacheExpire<K, V> {
     private static final ScheduledExecutorService EXECUTOR_SERVICE =
             Executors.newSingleThreadScheduledExecutor();
 
-    public CacheExpireSort(ICache<K, V> cache) {
+    public CacheExpireSort( Cache<K, V> cache) {
         this.cache = cache;
         this.init();
     }

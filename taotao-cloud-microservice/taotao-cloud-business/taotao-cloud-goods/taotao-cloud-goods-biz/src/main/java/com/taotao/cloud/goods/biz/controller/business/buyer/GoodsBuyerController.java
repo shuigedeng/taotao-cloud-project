@@ -27,9 +27,9 @@ import com.taotao.cloud.goods.biz.model.vo.GoodsVO;
 import com.taotao.cloud.goods.biz.elasticsearch.entity.EsGoodsIndex;
 import com.taotao.cloud.goods.biz.elasticsearch.pojo.EsGoodsRelatedInfo;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
-import com.taotao.cloud.goods.biz.service.business.IEsGoodsSearchService;
-import com.taotao.cloud.goods.biz.service.business.IGoodsService;
-import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
+import com.taotao.cloud.goods.biz.service.business.EsGoodsSearchService;
+import com.taotao.cloud.goods.biz.service.business.GoodsService;
+import com.taotao.cloud.goods.biz.service.business.GoodsSkuService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -63,15 +63,15 @@ public class GoodsBuyerController {
     /**
      * 商品
      */
-    private final IGoodsService goodsService;
+    private final GoodsService goodsService;
     /**
      * 商品SKU
      */
-    private final IGoodsSkuService goodsSkuService;
+    private final GoodsSkuService goodsSkuService;
     /**
      * ES商品搜索
      */
-    private final IEsGoodsSearchService goodsSearchService;
+    private final EsGoodsSearchService goodsSearchService;
 
     @Operation(summary = "通过id获取商品信息", description = "通过id获取商品信息")
     @Parameters({

@@ -19,8 +19,8 @@ package com.taotao.cloud.mq.broker.handler;
 import com.alibaba.fastjson2.JSON;
 import com.taotao.boot.common.utils.collection.CollectionUtils;
 import com.taotao.boot.common.utils.lang.StringUtils;
-import com.taotao.cloud.mq.broker.api.IBrokerConsumerService;
-import com.taotao.cloud.mq.broker.api.IBrokerProducerService;
+import com.taotao.cloud.mq.broker.api.BrokerConsumerService;
+import com.taotao.cloud.mq.broker.api.BrokerProducerService;
 import com.taotao.cloud.mq.broker.dto.BrokerRegisterReq;
 import com.taotao.cloud.mq.broker.dto.ChannelGroupNameDto;
 import com.taotao.cloud.mq.broker.dto.ServiceEntry;
@@ -28,10 +28,10 @@ import com.taotao.cloud.mq.broker.dto.consumer.ConsumerSubscribeReq;
 import com.taotao.cloud.mq.broker.dto.consumer.ConsumerUnSubscribeReq;
 import com.taotao.cloud.mq.broker.dto.persist.MqMessagePersistPut;
 import com.taotao.cloud.mq.broker.resp.MqBrokerRespCode;
-import com.taotao.cloud.mq.broker.support.persist.IMqBrokerPersist;
+import com.taotao.cloud.mq.broker.support.persist.MqBrokerPersist;
 import com.taotao.cloud.mq.broker.support.push.BrokerPushContext;
-import com.taotao.cloud.mq.broker.support.push.IBrokerPushService;
-import com.taotao.cloud.mq.broker.support.valid.IBrokerRegisterValidService;
+import com.taotao.cloud.mq.broker.support.push.BrokerPushService;
+import com.taotao.cloud.mq.broker.support.valid.BrokerRegisterValidService;
 import com.taotao.cloud.mq.common.constant.MessageStatusConst;
 import com.taotao.cloud.mq.common.constant.MethodType;
 import com.taotao.cloud.mq.common.dto.req.MqConsumerPullReq;
@@ -45,7 +45,7 @@ import com.taotao.cloud.mq.common.dto.resp.MqCommonResp;
 import com.taotao.cloud.mq.common.resp.MqCommonRespCode;
 import com.taotao.cloud.mq.common.resp.MqException;
 import com.taotao.cloud.mq.common.rpc.RpcMessageDto;
-import com.taotao.cloud.mq.common.support.invoke.IInvokeService;
+import com.taotao.cloud.mq.common.support.invoke.InvokeService;
 import com.taotao.cloud.mq.common.util.ChannelUtil;
 import com.taotao.cloud.mq.common.util.DelimiterUtil;
 import io.netty.buffer.ByteBuf;
@@ -70,35 +70,35 @@ public class MqBrokerHandler extends SimpleChannelInboundHandler {
      *
      * @since 2024.05
      */
-    private IInvokeService invokeService;
+    private InvokeService invokeService;
 
     /**
      * 消费者管理
      *
      * @since 2024.05
      */
-    private IBrokerConsumerService registerConsumerService;
+    private BrokerConsumerService registerConsumerService;
 
     /**
      * 生产者管理
      *
      * @since 2024.05
      */
-    private IBrokerProducerService registerProducerService;
+    private BrokerProducerService registerProducerService;
 
     /**
      * 持久化类
      *
      * @since 2024.05
      */
-    private IMqBrokerPersist mqBrokerPersist;
+    private MqBrokerPersist mqBrokerPersist;
 
     /**
      * 推送服务
      *
      * @since 2024.05
      */
-    private IBrokerPushService brokerPushService;
+    private BrokerPushService brokerPushService;
 
     /**
      * 获取响应超时时间
@@ -119,35 +119,35 @@ public class MqBrokerHandler extends SimpleChannelInboundHandler {
      *
      * @since 2024.05
      */
-    private IBrokerRegisterValidService brokerRegisterValidService;
+    private BrokerRegisterValidService brokerRegisterValidService;
 
     public MqBrokerHandler brokerRegisterValidService(
-            IBrokerRegisterValidService brokerRegisterValidService) {
+            BrokerRegisterValidService brokerRegisterValidService) {
         this.brokerRegisterValidService = brokerRegisterValidService;
         return this;
     }
 
-    public MqBrokerHandler invokeService(IInvokeService invokeService) {
+    public MqBrokerHandler invokeService( InvokeService invokeService) {
         this.invokeService = invokeService;
         return this;
     }
 
-    public MqBrokerHandler registerConsumerService(IBrokerConsumerService registerConsumerService) {
+    public MqBrokerHandler registerConsumerService( BrokerConsumerService registerConsumerService) {
         this.registerConsumerService = registerConsumerService;
         return this;
     }
 
-    public MqBrokerHandler registerProducerService(IBrokerProducerService registerProducerService) {
+    public MqBrokerHandler registerProducerService( BrokerProducerService registerProducerService) {
         this.registerProducerService = registerProducerService;
         return this;
     }
 
-    public MqBrokerHandler mqBrokerPersist(IMqBrokerPersist mqBrokerPersist) {
+    public MqBrokerHandler mqBrokerPersist( MqBrokerPersist mqBrokerPersist) {
         this.mqBrokerPersist = mqBrokerPersist;
         return this;
     }
 
-    public MqBrokerHandler brokerPushService(IBrokerPushService brokerPushService) {
+    public MqBrokerHandler brokerPushService( BrokerPushService brokerPushService) {
         this.brokerPushService = brokerPushService;
         return this;
     }

@@ -16,8 +16,7 @@
 
 package com.taotao.cloud.mq.common.balance.impl;
 
-import com.taotao.cloud.mq.common.balance.ILoadBalanceContext;
-import com.taotao.cloud.mq.common.balance.IServer;
+import com.taotao.cloud.mq.common.balance.Server;
 
 import java.util.List;
 
@@ -28,12 +27,12 @@ import java.util.List;
  * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
-public class LoadBalanceContext<T extends IServer> implements ILoadBalanceContext<T> {
+public class LoadBalanceContext<T extends Server> implements com.taotao.cloud.mq.common.balance.LoadBalanceContext<T> {
 
     private String hashKey;
     private List<T> servers;
 
-    public static <T extends IServer> LoadBalanceContext<T> newInstance() {
+    public static <T extends Server> LoadBalanceContext<T> newInstance() {
         return new LoadBalanceContext<T>();
     }
 

@@ -16,11 +16,11 @@
 
 package com.taotao.cloud.cache.support.proxy.dynamic;
 
-import com.taotao.cloud.cache.api.ICache;
-import com.taotao.cloud.cache.support.proxy.ICacheProxy;
+import com.taotao.cloud.cache.api.Cache;
+import com.taotao.cloud.cache.support.proxy.CacheProxy;
 import com.taotao.cloud.cache.support.proxy.bs.CacheProxyBs;
+import com.taotao.cloud.cache.support.proxy.bs.DefaultCacheProxyBsContext;
 import com.taotao.cloud.cache.support.proxy.bs.CacheProxyBsContext;
-import com.taotao.cloud.cache.support.proxy.bs.ICacheProxyBsContext;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -34,14 +34,14 @@ import java.util.concurrent.CompletionService;
  * 3. 异步执行结果的获取，异常信息的获取。
  * @since 2024.06
  */
-public class DynamicProxy implements InvocationHandler, ICacheProxy {
+public class DynamicProxy implements InvocationHandler, CacheProxy {
 
     /**
      * 被代理的对象
      */
-    private final ICache target;
+    private final Cache target;
 
-    public DynamicProxy(ICache target) {
+    public DynamicProxy( Cache target) {
         this.target = target;
     }
 
@@ -59,8 +59,8 @@ public class DynamicProxy implements InvocationHandler, ICacheProxy {
     @Override
     @SuppressWarnings("all")
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        ICacheProxyBsContext context =
-                CacheProxyBsContext.newInstance().method(method).params(args).target(target);
+        CacheProxyBsContext context =
+                DefaultCacheProxyBsContext.newInstance().method(method).params(args).target(target);
         return CacheProxyBs.newInstance().context(context).execute();
     }
 

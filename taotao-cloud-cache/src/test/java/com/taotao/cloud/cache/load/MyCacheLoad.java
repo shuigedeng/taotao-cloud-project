@@ -16,17 +16,17 @@
 
 package com.taotao.cloud.cache.load;
 
-import com.taotao.cloud.cache.api.ICache;
-import com.taotao.cloud.cache.api.ICacheLoad;
+import com.taotao.cloud.cache.api.Cache;
+import com.taotao.cloud.cache.api.CacheLoad;
 
 /**
  * @author shuigedeng
  * @since 2024.06
  */
-public class MyCacheLoad implements ICacheLoad<String, String> {
+public class MyCacheLoad implements CacheLoad<String, String> {
 
     @Override
-    public void load(ICache<String, String> cache) {
+    public void load( Cache<String, String> cache) {
         cache.put("1", "1");
         cache.put("2", "2");
     }

@@ -21,7 +21,7 @@ import static com.taotao.boot.common.utils.io.FileUtils.truncate;
 import static com.taotao.boot.common.utils.io.FileUtils.write;
 
 import com.alibaba.fastjson2.JSON;
-import com.taotao.cloud.cache.api.ICache;
+import com.taotao.cloud.cache.api.Cache;
 import com.taotao.cloud.cache.model.PersistRdbEntry;
 import java.nio.file.StandardOpenOption;
 import java.util.Map;
@@ -52,7 +52,7 @@ public class CachePersistDbJson<K, V> extends CachePersistAdaptor<K, V> {
      * @param cache 缓存
      */
     @Override
-    public void persist(ICache<K, V> cache) {
+    public void persist( Cache<K, V> cache) {
         Set<Map.Entry<K, V>> entrySet = cache.entrySet();
 
         // 创建文件

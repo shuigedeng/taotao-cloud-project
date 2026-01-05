@@ -21,18 +21,17 @@ import com.taotao.cloud.goods.biz.model.dto.DraftGoodsSkuParamsDTO;
 import com.taotao.cloud.goods.biz.model.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.biz.model.page.DraftGoodsPageQuery;
 import com.taotao.cloud.goods.biz.model.vo.DraftGoodsSkuParamsVO;
-import com.taotao.cloud.goods.biz.mapper.IDraftGoodsMapper;
+import com.taotao.cloud.goods.biz.mapper.DraftGoodsMapper;
 import com.taotao.cloud.goods.biz.model.convert.DraftGoodsConvert;
 import com.taotao.cloud.goods.biz.model.entity.Category;
 import com.taotao.cloud.goods.biz.model.entity.DraftGoods;
 import com.taotao.cloud.goods.biz.model.entity.GoodsGallery;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
 import com.taotao.cloud.goods.biz.repository.DraftGoodsRepository;
-import com.taotao.cloud.goods.biz.repository.IDraftGoodsRepository;
-import com.taotao.cloud.goods.biz.service.business.ICategoryService;
-import com.taotao.cloud.goods.biz.service.business.IDraftGoodsService;
-import com.taotao.cloud.goods.biz.service.business.IGoodsGalleryService;
-import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
+import com.taotao.cloud.goods.biz.service.business.CategoryService;
+import com.taotao.cloud.goods.biz.service.business.DraftGoodsService;
+import com.taotao.cloud.goods.biz.service.business.GoodsGalleryService;
+import com.taotao.cloud.goods.biz.service.business.GoodsSkuService;
 import com.taotao.cloud.goods.biz.util.QueryUtil;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.util.ArrayList;
@@ -53,15 +52,15 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @Service
 public class DraftGoodsServiceImpl
-        extends BaseSuperServiceImpl<DraftGoods, Long,IDraftGoodsMapper,  DraftGoodsRepository, IDraftGoodsRepository>
-        implements IDraftGoodsService {
+        extends BaseSuperServiceImpl<DraftGoods, Long, DraftGoodsMapper,  DraftGoodsRepository, DraftGoodsRepository>
+        implements DraftGoodsService {
 
     /** 分类 */
-    private final ICategoryService categoryService;
+    private final CategoryService categoryService;
     /** 商品相册 */
-    private final IGoodsGalleryService goodsGalleryService;
+    private final GoodsGalleryService goodsGalleryService;
     /** 规格商品 */
-    private final IGoodsSkuService goodsSkuService;
+    private final GoodsSkuService goodsSkuService;
 
     @Override
     public boolean addGoodsDraft(DraftGoodsSkuParamsDTO draftGoods) {

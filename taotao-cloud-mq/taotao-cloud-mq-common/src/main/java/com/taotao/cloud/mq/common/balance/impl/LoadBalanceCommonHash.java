@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.mq.common.balance.impl;
 
-import com.taotao.cloud.mq.common.balance.ILoadBalanceContext;
-import com.taotao.cloud.mq.common.balance.IServer;
+import com.taotao.cloud.mq.common.balance.LoadBalanceContext;
+import com.taotao.cloud.mq.common.balance.Server;
 import com.taotao.boot.common.support.hash.api.IHashCode;
 
 import java.util.List;
@@ -29,13 +29,13 @@ import java.util.List;
  * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
-public class LoadBalanceCommonHash<T extends IServer> extends AbstractLoadBalanceHash<T> {
+public class LoadBalanceCommonHash<T extends Server> extends AbstractLoadBalanceHash<T> {
 
     public LoadBalanceCommonHash( IHashCode hashCode ) {
         super(hashCode);
     }
 
-    protected T doSelect( ILoadBalanceContext<T> context ) {
+    protected T doSelect( LoadBalanceContext<T> context ) {
         List<T> servers = context.servers();
         String hashKey = context.hashKey();
         int code = this.hashCode.hash(hashKey);

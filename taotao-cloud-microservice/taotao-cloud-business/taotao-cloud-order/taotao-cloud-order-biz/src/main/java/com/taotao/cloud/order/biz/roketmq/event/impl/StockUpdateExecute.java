@@ -27,7 +27,7 @@ import com.taotao.cloud.order.sys.model.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.sys.model.vo.order.OrderItemVO;
 import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
-import com.taotao.cloud.order.biz.service.business.order.IOrderService;
+import com.taotao.cloud.order.biz.service.business.order.OrderService;
 import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityApi;
 import com.taotao.cloud.promotion.api.feign.IFeignKanjiaActivityGoodsApi;
 import com.taotao.cloud.promotion.api.feign.IFeignPointsGoodsApi;
@@ -64,7 +64,7 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
     private DefaultRedisScript<Boolean> quantityScript;
     /** 订单 */
     @Autowired
-    private IOrderService orderService;
+    private OrderService orderService;
     /** 规格商品 */
     @Autowired
     private GoodsSkuApi goodsSkuApi;

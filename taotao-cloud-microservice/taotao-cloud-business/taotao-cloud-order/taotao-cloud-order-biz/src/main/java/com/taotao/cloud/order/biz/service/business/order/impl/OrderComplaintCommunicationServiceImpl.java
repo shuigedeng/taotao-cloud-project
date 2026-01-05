@@ -20,9 +20,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.order.sys.model.page.order.OrderComplaintCommunicationPageQuery;
-import com.taotao.cloud.order.biz.mapper.order.IOrderComplainCommunicationMapper;
+import com.taotao.cloud.order.biz.mapper.order.OrderComplainCommunicationMapper;
 import com.taotao.cloud.order.biz.model.entity.order.OrderComplaintCommunication;
-import com.taotao.cloud.order.biz.service.business.order.IOrderComplaintCommunicationService;
+import com.taotao.cloud.order.biz.service.business.order.OrderComplaintCommunicationService;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
@@ -36,8 +36,8 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class OrderComplaintCommunicationServiceImpl
-        extends ServiceImpl<IOrderComplainCommunicationMapper, OrderComplaintCommunication>
-        implements IOrderComplaintCommunicationService {
+        extends ServiceImpl<OrderComplainCommunicationMapper, OrderComplaintCommunication>
+        implements OrderComplaintCommunicationService {
 
     @Override
     public Boolean addCommunication(OrderComplaintCommunication orderComplaintCommunication) {

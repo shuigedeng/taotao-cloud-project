@@ -22,13 +22,12 @@ import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.goods.biz.model.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.biz.model.dto.GoodsParamsItemDTO;
-import com.taotao.cloud.goods.biz.mapper.IParametersMapper;
+import com.taotao.cloud.goods.biz.mapper.ParametersMapper;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
 import com.taotao.cloud.goods.biz.model.entity.Parameters;
 import com.taotao.cloud.goods.biz.repository.ParametersRepository;
-import com.taotao.cloud.goods.biz.repository.IParametersRepository;
-import com.taotao.cloud.goods.biz.service.business.IGoodsService;
-import com.taotao.cloud.goods.biz.service.business.IParametersService;
+import com.taotao.cloud.goods.biz.service.business.GoodsService;
+import com.taotao.cloud.goods.biz.service.business.ParametersService;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
@@ -36,7 +35,7 @@ import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
 import lombok.*;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 
@@ -55,11 +54,11 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service
 public class ParametersServiceImpl
-        extends BaseSuperServiceImpl<Parameters, Long,IParametersMapper,  ParametersRepository, IParametersRepository>
-        implements IParametersService {
+        extends BaseSuperServiceImpl<Parameters, Long, ParametersMapper,  ParametersRepository, ParametersRepository>
+        implements ParametersService {
 
     /** 商品服务 */
-    private final IGoodsService goodsService;
+    private final GoodsService goodsService;
 
     private final RocketmqCustomProperties rocketmqCustomProperties;
     private final RocketMQTemplate rocketMQTemplate;

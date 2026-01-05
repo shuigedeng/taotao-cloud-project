@@ -27,22 +27,21 @@ import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.data.mybatis.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.goods.biz.model.dto.BrandDTO;
 import com.taotao.cloud.goods.biz.model.page.BrandPageQuery;
-import com.taotao.cloud.goods.biz.mapper.IBrandMapper;
+import com.taotao.cloud.goods.biz.mapper.BrandMapper;
 import com.taotao.cloud.goods.biz.model.convert.BrandConvert;
 import com.taotao.cloud.goods.biz.model.entity.Brand;
 import com.taotao.cloud.goods.biz.model.entity.CategoryBrand;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
 import com.taotao.cloud.goods.biz.repository.BrandRepository;
-import com.taotao.cloud.goods.biz.repository.IBrandRepository;
-import com.taotao.cloud.goods.biz.service.business.IBrandService;
-import com.taotao.cloud.goods.biz.service.business.ICategoryBrandService;
-import com.taotao.cloud.goods.biz.service.business.ICategoryService;
-import com.taotao.cloud.goods.biz.service.business.IGoodsService;
+import com.taotao.cloud.goods.biz.service.business.BrandService;
+import com.taotao.cloud.goods.biz.service.business.CategoryBrandService;
+import com.taotao.cloud.goods.biz.service.business.CategoryService;
+import com.taotao.cloud.goods.biz.service.business.GoodsService;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
 import lombok.*;
 
 import org.springframework.stereotype.Service;
@@ -56,15 +55,15 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @AllArgsConstructor
-public class BrandServiceImpl extends BaseSuperServiceImpl<Brand, Long, IBrandMapper, BrandRepository, IBrandRepository>
-        implements IBrandService {
+public class BrandServiceImpl extends BaseSuperServiceImpl<Brand, Long, BrandMapper, BrandRepository, BrandRepository>
+        implements BrandService {
 
     /** 分类品牌绑定服务 */
-    private final ICategoryBrandService categoryBrandService;
+    private final CategoryBrandService categoryBrandService;
     /** 分类服务 */
-    private final ICategoryService categoryService;
+    private final CategoryService categoryService;
     /** 商品服务 */
-    private final IGoodsService goodsService;
+    private final GoodsService goodsService;
 
     @Override
     public IPage<Brand> brandsQueryPage(BrandPageQuery page) {

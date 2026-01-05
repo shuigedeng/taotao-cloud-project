@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.cache.support.persist;
 
-import com.taotao.cloud.cache.api.ICache;
-import com.taotao.cloud.cache.api.ICachePersist;
+import com.taotao.cloud.cache.api.Cache;
+import com.taotao.cloud.cache.api.CachePersist;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  * @author shuigedeng
  * @since 2024.06
  */
-public class CachePersistAdaptor<K, V> implements ICachePersist<K, V> {
+public class CachePersistAdaptor<K, V> implements CachePersist<K, V> {
 
     /**
      * 持久化
@@ -34,7 +34,7 @@ public class CachePersistAdaptor<K, V> implements ICachePersist<K, V> {
      * @param cache 缓存
      */
     @Override
-    public void persist(ICache<K, V> cache) {}
+    public void persist( Cache<K, V> cache) {}
 
     @Override
     public long delay() {

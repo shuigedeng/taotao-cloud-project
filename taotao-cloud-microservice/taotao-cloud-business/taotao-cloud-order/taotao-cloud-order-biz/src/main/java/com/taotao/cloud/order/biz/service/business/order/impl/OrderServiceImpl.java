@@ -51,20 +51,20 @@ import com.taotao.cloud.order.sys.model.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.sys.model.vo.order.OrderVO;
 import com.taotao.cloud.order.sys.model.vo.order.PaymentLogVO;
 import com.taotao.cloud.order.biz.aop.order.OrderLogPoint;
-import com.taotao.cloud.order.biz.mapper.order.IOrderMapper;
+import com.taotao.cloud.order.biz.mapper.order.OrderMapper;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
 import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
 import com.taotao.cloud.order.biz.model.entity.order.Receipt;
 import com.taotao.cloud.order.biz.model.entity.order.Trade;
-import com.taotao.cloud.order.biz.service.business.order.IOrderItemService;
-import com.taotao.cloud.order.biz.service.business.order.IOrderService;
-import com.taotao.cloud.order.biz.service.business.order.IReceiptService;
-import com.taotao.cloud.order.biz.service.business.order.IStoreFlowService;
-import com.taotao.cloud.order.biz.service.business.order.ITradeService;
+import com.taotao.cloud.order.biz.service.business.order.OrderItemService;
+import com.taotao.cloud.order.biz.service.business.order.OrderService;
+import com.taotao.cloud.order.biz.service.business.order.ReceiptService;
+import com.taotao.cloud.order.biz.service.business.order.StoreFlowService;
+import com.taotao.cloud.order.biz.service.business.order.TradeService;
 import com.taotao.cloud.order.biz.service.business.order.check.CheckService;
 import com.taotao.cloud.order.biz.service.business.order.check.ProductVO;
-import com.taotao.cloud.order.biz.service.business.trade.IOrderLogService;
+import com.taotao.cloud.order.biz.service.business.trade.OrderLogService;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.promotion.api.feign.IFeignPintuanApi;
 import com.taotao.cloud.promotion.api.model.vo.PintuanVO;
@@ -108,30 +108,30 @@ import zipkin2.storage.Traces;
 @AllArgsConstructor
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implements IOrderService {
+public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements OrderService {
 
     private static final String ORDER_SN_COLUMN = "order_sn";
 
     /** 延时任务 */
     private final TimeTrigger timeTrigger;
     /** 发票 */
-    private final IReceiptService receiptService;
+    private final ReceiptService receiptService;
     /** 订单货物 订单货物数据层 */
-    private final IOrderItemService orderItemService;
+    private final OrderItemService orderItemService;
     /** 物流公司 */
     private final LogisticsApi logisticsApi;
     /** 订单日志 */
-    private final IOrderLogService orderLogService;
+    private final OrderLogService orderLogService;
     /** RocketMQ */
     private final RocketMQTemplate rocketMQTemplate;
     /** RocketMQ配置 */
     private final RocketmqCustomProperties rocketmqCustomProperties;
     /** 订单流水 */
-    private final IStoreFlowService storeFlowService;
+    private final StoreFlowService storeFlowService;
     /** 拼团 */
     private final IFeignPintuanApi feignPintuanApi;
     /** 交易服务 */
-    private final ITradeService tradeService;
+    private final TradeService tradeService;
 
     private final CheckService checkService;
 

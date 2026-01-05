@@ -86,7 +86,7 @@ import static com.taotao.boot.common.enums.CachePrefixEnum.INIT_INDEX_PROCESS;
  * @since 2022-04-27 17:02:27
  */
 @Service
-public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements IEsGoodsIndexService {
+public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements EsGoodsIndexService {
 
 	private static final String IGNORE_FIELD = "serialVersionUID,promotionMap,id,goodsId";
 	private static final String KEY_SUCCESS = "success";
@@ -97,21 +97,21 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	@Autowired
 	private EsGoodsIndexRepository goodsIndexRepository;
 	@Autowired
-	private IEsGoodsSearchService goodsSearchService;
+	private EsGoodsSearchService goodsSearchService;
 	@Autowired
 	private IFeignPromotionApi promotionApi;
 	@Autowired
 	private IFeignPromotionGoodsApi promotionGoodsApi;
 	@Autowired
-	private ICustomWordsService customWordsService;
+	private CustomWordsService customWordsService;
 	@Autowired
-	private IGoodsSkuService goodsSkuService;
+	private GoodsSkuService goodsSkuService;
 	@Autowired
-	private IBrandService brandService;
+	private BrandService brandService;
 	@Autowired
-	private ICategoryService categoryService;
+	private CategoryService categoryService;
 	@Autowired
-	private IStoreGoodsLabelService storeGoodsLabelService;
+	private StoreGoodsLabelService storeGoodsLabelService;
 	@Autowired
 	private RedisRepository cache;
 	@Autowired

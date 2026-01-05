@@ -17,35 +17,38 @@
 package com.taotao.cloud.mq.common.support.status;
 
 /**
- * @author shuigedeng
+ * 状态管理
  * @since 2024.05
  */
-public class StatusManager implements IStatusManager {
+public interface StatusManager {
 
-    private boolean status;
+    /**
+     * 获取状态编码
+     * @return 状态编码
+     * @since 2024.05
+     */
+    boolean status();
 
-    private boolean initFailed;
+    /**
+     * 设置状态编码
+     * @param status 编码
+     * @return this
+     * @since 2024.05
+     */
+    StatusManager status(final boolean status);
 
-    @Override
-    public boolean status() {
-        return this.status;
-    }
+    /**
+     * 初始化失败
+     * @return 初始化失败
+     * @since 2024.05
+     */
+    boolean initFailed();
 
-    @Override
-    public IStatusManager status(boolean status) {
-        this.status = status;
-
-        return this;
-    }
-
-    @Override
-    public boolean initFailed() {
-        return initFailed;
-    }
-
-    @Override
-    public StatusManager initFailed(boolean initFailed) {
-        this.initFailed = initFailed;
-        return this;
-    }
+    /**
+     * 设置初始化失败
+     * @param failed 编码
+     * @return this
+     * @since 2024.05
+     */
+    StatusManager initFailed(final boolean failed);
 }

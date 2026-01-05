@@ -17,8 +17,8 @@
 package com.taotao.cloud.mq.common.support.hook;
 
 import com.taotao.cloud.mq.common.api.Destroyable;
-import com.taotao.cloud.mq.common.support.invoke.IInvokeService;
-import com.taotao.cloud.mq.common.support.status.IStatusManager;
+import com.taotao.cloud.mq.common.support.invoke.InvokeService;
+import com.taotao.cloud.mq.common.support.status.StatusManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +37,7 @@ public class DefaultShutdownHook extends AbstractShutdownHook {
      * 调用管理类
      * @since 2024.05
      */
-    private IInvokeService invokeService;
+    private InvokeService invokeService;
 
     /**
      * 销毁管理类
@@ -49,7 +49,7 @@ public class DefaultShutdownHook extends AbstractShutdownHook {
      * 状态管理类
      * @since 2024.05
      */
-    private IStatusManager statusManager;
+    private StatusManager statusManager;
 
     /**
      * 为剩余的请求等待时间
@@ -57,11 +57,11 @@ public class DefaultShutdownHook extends AbstractShutdownHook {
      */
     private long waitMillsForRemainRequest = 60 * 1000;
 
-    public IInvokeService getInvokeService() {
+    public InvokeService getInvokeService() {
         return invokeService;
     }
 
-    public void setInvokeService(IInvokeService invokeService) {
+    public void setInvokeService( InvokeService invokeService) {
         this.invokeService = invokeService;
     }
 
@@ -73,11 +73,11 @@ public class DefaultShutdownHook extends AbstractShutdownHook {
         this.destroyable = destroyable;
     }
 
-    public IStatusManager getStatusManager() {
+    public StatusManager getStatusManager() {
         return statusManager;
     }
 
-    public void setStatusManager(IStatusManager statusManager) {
+    public void setStatusManager( StatusManager statusManager) {
         this.statusManager = statusManager;
     }
 
@@ -91,7 +91,7 @@ public class DefaultShutdownHook extends AbstractShutdownHook {
 
     /**
      * （1）设置 status 状态为等待关闭
-     * （2）查看是否 {@link IInvokeService#remainsRequest()} 是否包含请求
+     * （2）查看是否 {@link InvokeService#remainsRequest()} 是否包含请求
      * （3）超时检测-可以不添加，如果难以关闭成功，直接强制关闭即可。
      * （4）关闭所有线程池资源信息
      * （5）设置状态为成功关闭

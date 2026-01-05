@@ -3,7 +3,7 @@ package com.taotao.cloud.goods.biz.manager;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.goods.biz.model.page.DraftGoodsPageQuery;
 import com.taotao.cloud.goods.biz.model.page.GoodsPageQuery;
-import com.taotao.cloud.goods.biz.mapper.IGoodsMapper;
+import com.taotao.cloud.goods.biz.mapper.GoodsMapper;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
 import com.taotao.boot.web.annotation.Manager;
 import com.taotao.boot.webagg.manager.BaseManager;
@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class GoodsManager extends BaseManager {
 
-	private final IGoodsMapper goodsMapper;
+	private final GoodsMapper goodsMapper;
 
 	//测试用
 	@Transactional(rollbackFor = Throwable.class)

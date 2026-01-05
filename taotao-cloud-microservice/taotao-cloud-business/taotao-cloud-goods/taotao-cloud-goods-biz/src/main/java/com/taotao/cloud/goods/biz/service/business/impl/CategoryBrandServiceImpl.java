@@ -18,11 +18,10 @@ package com.taotao.cloud.goods.biz.service.business.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.goods.biz.model.vo.CategoryBrandVO;
-import com.taotao.cloud.goods.biz.mapper.ICategoryBrandMapper;
+import com.taotao.cloud.goods.biz.mapper.CategoryBrandMapper;
 import com.taotao.cloud.goods.biz.model.entity.CategoryBrand;
 import com.taotao.cloud.goods.biz.repository.CategoryBrandRepository;
-import com.taotao.cloud.goods.biz.repository.ICategoryBrandRepository;
-import com.taotao.cloud.goods.biz.service.business.ICategoryBrandService;
+import com.taotao.cloud.goods.biz.service.business.CategoryBrandService;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,9 +40,9 @@ import java.util.List;
 public class CategoryBrandServiceImpl extends BaseSuperServiceImpl<
 	CategoryBrand,
 	Long,
-	ICategoryBrandMapper,
+        CategoryBrandMapper,
 	CategoryBrandRepository,
-	ICategoryBrandRepository> implements ICategoryBrandService {
+	CategoryBrandRepository> implements CategoryBrandService {
 
 	@Override
 	public List<CategoryBrandVO> getCategoryBrandList(Long categoryId) {

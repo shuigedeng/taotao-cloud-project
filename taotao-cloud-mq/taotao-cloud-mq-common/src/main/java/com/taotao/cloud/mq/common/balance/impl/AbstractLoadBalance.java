@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.mq.common.balance.impl;
 
-import com.taotao.cloud.mq.common.balance.ILoadBalance;
-import com.taotao.cloud.mq.common.balance.ILoadBalanceContext;
-import com.taotao.cloud.mq.common.balance.IServer;
+import com.taotao.cloud.mq.common.balance.LoadBalance;
+import com.taotao.cloud.mq.common.balance.LoadBalanceContext;
+import com.taotao.cloud.mq.common.balance.Server;
 
 import java.util.List;
 
@@ -29,12 +29,12 @@ import java.util.List;
  * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
-public abstract class AbstractLoadBalance<T extends IServer> implements ILoadBalance<T> {
+public abstract class AbstractLoadBalance<T extends Server> implements LoadBalance<T> {
 
-    public T select( ILoadBalanceContext<T> context ) {
+    public T select( LoadBalanceContext<T> context ) {
         List<T> servers = context.servers();
-        return (T) ( servers.size() <= 1 ? (IServer) servers.get(0) : this.doSelect(context) );
+        return (T) ( servers.size() <= 1 ? (Server) servers.get(0) : this.doSelect(context) );
     }
 
-    protected abstract T doSelect( ILoadBalanceContext<T> var1 );
+    protected abstract T doSelect( LoadBalanceContext<T> var1 );
 }
