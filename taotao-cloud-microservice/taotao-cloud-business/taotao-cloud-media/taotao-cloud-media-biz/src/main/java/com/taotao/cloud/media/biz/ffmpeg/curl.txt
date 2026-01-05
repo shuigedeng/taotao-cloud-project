@@ -1,0 +1,14 @@
+# 查看FFmpeg版本
+curl http://localhost:8080/api/video/version
+
+# 转换视频格式
+curl -X POST -F "file=@input.avi" -F "format=mp4" \
+     http://localhost:8080/api/video/convert --output output.mp4
+
+# 提取缩略图
+curl -X POST -F "file=@video.mp4" -F "second=10" \
+     http://localhost:8080/api/video/thumbnail --output thumbnail.jpg
+
+# 压缩视频
+curl -X POST -F "file=@large_video.mp4" -F "bitrate=500" \
+     http://localhost:8080/api/video/compress --output compressed.mp4

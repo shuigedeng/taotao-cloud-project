@@ -1,0 +1,8 @@
+# application.yml
+# FFmpeg 的基本心态：
+# "给我一个视频，我能还你一个世界"
+# 实际上它想说的是："ffmpeg -i input.mp4 [一堆参数] output.mp4"
+ffmpeg:
+  path: /usr/local/bin/ffmpeg  # 你的FFmpeg安装路径
+  timeout: 3600                # 1小时，足够看一集电视剧了
+  threads: 4                   # 4个线程，四核处理器的最爱
