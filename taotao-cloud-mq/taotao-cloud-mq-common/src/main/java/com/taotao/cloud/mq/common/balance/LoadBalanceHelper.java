@@ -17,7 +17,7 @@
 package com.taotao.cloud.mq.common.balance;
 
 import com.taotao.cloud.mq.common.balance.impl.LoadBalances;
-import com.taotao.boot.common.support.hash.api.IHashCode;
+import com.taotao.boot.common.support.hash.api.HashCode;
 
 import java.util.List;
 
@@ -58,7 +58,7 @@ public final class LoadBalanceHelper {
     }
 
     public static <T extends Server> T commonHash(
-            List<T> servers, IHashCode hash, String hashKey ) {
+            List<T> servers, HashCode hash, String hashKey ) {
         return (T)
                 LoadBalanceBs.<T>newInstance()
                         .servers(servers)
@@ -68,7 +68,7 @@ public final class LoadBalanceHelper {
     }
 
     public static <T extends Server> T consistentHash(
-            List<T> servers, IHashCode hash, String hashKey ) {
+            List<T> servers, HashCode hash, String hashKey ) {
         return (T)
                 LoadBalanceBs.<T>newInstance()
                         .servers(servers)

@@ -28,8 +28,8 @@ import com.taotao.cloud.distribution.api.model.vo.DistributionCashSearchVO;
 import com.taotao.cloud.distribution.biz.mapper.DistributionCashMapper;
 import com.taotao.cloud.distribution.biz.model.entity.Distribution;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionCash;
-import com.taotao.cloud.distribution.biz.service.IDistributionCashService;
-import com.taotao.cloud.distribution.biz.service.IDistributionService;
+import com.taotao.cloud.distribution.biz.service.DistributionCashService;
+import com.taotao.cloud.distribution.biz.service.DistributionService;
 import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
 import com.taotao.cloud.member.api.enums.MemberWithdrawalDestinationEnum;
 import com.taotao.cloud.member.api.enums.WithdrawStatusEnum;
@@ -49,11 +49,11 @@ import org.springframework.transaction.annotation.Transactional;
 /** 分销佣金业务层实现 */
 @Service
 public class DistributionCashServiceImpl extends ServiceImpl<DistributionCashMapper, DistributionCash>
-        implements IDistributionCashService {
+        implements DistributionCashService {
 
     /** 分销员 */
     @Autowired
-    private IDistributionService distributionService;
+    private DistributionService distributionService;
     /** 会员余额 */
     @Autowired
     private MemberWalletApi memberWalletApi;

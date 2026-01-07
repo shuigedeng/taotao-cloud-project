@@ -14,28 +14,31 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.mq.consistency.raft1.server.support.peer;
+package com.taotao.cloud.distribution.biz.service;
 
-import com.taotao.cloud.mq.consistency.raft1.server.dto.PeerInfoDto;
-
-/**
- * 分布式节点管理
- *
- * @since 1.1.0
- */
-public interface IClusterPeerManager {
+public interface RedPacketService {
 
     /**
-     * 添加
-     * @param peerInfoDto 临时对象
-     * @return 结果
+     * 获取红包
+     *
+     * @param redPacketId
+     * @return
      */
-    ClusterPeerResult addPeer(final PeerInfoDto peerInfoDto);
+    RedPacket get(long redPacketId);
+    /**
+     * 抢红包业务实现
+     *
+     * @param redPacketId
+     * @return
+     */
+    Result startSeckil(long redPacketId, int userId);
 
     /**
-     * 移除
-     * @param peerInfoDto 临时对象
-     * @return 结果
+     * 微信抢红包业务实现
+     *
+     * @param redPacketId
+     * @param userId
+     * @return
      */
-    ClusterPeerResult removePeer(final PeerInfoDto peerInfoDto);
+    Result startTwoSeckil(long redPacketId, int userId);
 }

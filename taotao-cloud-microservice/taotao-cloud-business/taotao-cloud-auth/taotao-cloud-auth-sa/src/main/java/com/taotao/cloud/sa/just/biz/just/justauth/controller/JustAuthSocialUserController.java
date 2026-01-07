@@ -19,7 +19,7 @@ package com.taotao.cloud.sa.just.biz.just.justauth.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.sa.just.biz.just.justauth.dto.JustAuthSocialUserDTO;
-import com.taotao.cloud.sa.just.biz.just.justauth.service.IJustAuthSocialUserService;
+import com.taotao.cloud.sa.just.biz.just.justauth.service.JustAuthSocialUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -49,7 +49,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope
 public class JustAuthSocialUserController {
 
-    private final IJustAuthSocialUserService justAuthSocialUserService;
+    private final JustAuthSocialUserService justAuthSocialUserService;
 
     /**
      * 查询第三方用户绑定列表

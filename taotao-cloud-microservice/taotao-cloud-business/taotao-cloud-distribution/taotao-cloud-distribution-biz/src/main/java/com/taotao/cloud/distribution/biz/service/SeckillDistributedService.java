@@ -16,29 +16,32 @@
 
 package com.taotao.cloud.distribution.biz.service;
 
-public interface IRedPacketService {
+public interface SeckillDistributedService {
 
     /**
-     * 获取红包
+     * 秒杀 一 单个商品
      *
-     * @param redPacketId
+     * @param seckillId 秒杀商品ID
+     * @param userId 用户ID
      * @return
      */
-    RedPacket get(long redPacketId);
+    Result startSeckilRedisLock(long seckillId, long userId);
     /**
-     * 抢红包业务实现
+     * 秒杀 一 单个商品
      *
-     * @param redPacketId
+     * @param seckillId 秒杀商品ID
+     * @param userId 用户ID
      * @return
      */
-    Result startSeckil(long redPacketId, int userId);
+    Result startSeckilZksLock(long seckillId, long userId);
 
     /**
-     * 微信抢红包业务实现
+     * 秒杀 二 多个商品
      *
-     * @param redPacketId
-     * @param userId
+     * @param seckillId 秒杀商品ID
+     * @param userId 用户ID
+     * @param number 秒杀商品数量
      * @return
      */
-    Result startTwoSeckil(long redPacketId, int userId);
+    Result startSeckilLock(long seckillId, long userId, long number);
 }

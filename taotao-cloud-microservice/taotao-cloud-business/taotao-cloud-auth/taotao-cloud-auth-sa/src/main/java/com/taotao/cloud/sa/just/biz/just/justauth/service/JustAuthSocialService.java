@@ -31,7 +31,7 @@ import org.apache.ibatis.annotations.Param;
  *
  * @since 2022-05-23
  */
-public interface IJustAuthSocialService extends IService<JustAuthSocial> {
+public interface JustAuthSocialService extends IService<JustAuthSocial> {
 
     /**
      * 分页查询第三方用户信息列表

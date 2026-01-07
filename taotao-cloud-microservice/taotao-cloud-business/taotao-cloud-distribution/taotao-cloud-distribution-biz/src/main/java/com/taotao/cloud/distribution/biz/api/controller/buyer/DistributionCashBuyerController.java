@@ -21,7 +21,7 @@ import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionCash;
-import com.taotao.cloud.distribution.biz.service.IDistributionCashService;
+import com.taotao.cloud.distribution.biz.service.DistributionCashService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -47,10 +47,10 @@ public class DistributionCashBuyerController {
 
     /** 分销佣金 */
     @Autowired
-    private IDistributionCashService distributionCashService;
+    private DistributionCashService distributionCashService;
     /** 分销员提现 */
     @Autowired
-    private IDistributionCashService distributorCashService;
+    private DistributionCashService distributorCashService;
 
     @Operation(summary = "分销员提现", description = "分销员提现")
     @RequestLogger

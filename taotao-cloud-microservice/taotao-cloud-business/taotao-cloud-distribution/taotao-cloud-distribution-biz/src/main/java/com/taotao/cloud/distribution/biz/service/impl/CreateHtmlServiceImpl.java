@@ -17,7 +17,7 @@
 package com.taotao.cloud.distribution.biz.service.impl;
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.distribution.biz.service.ICreateHtmlService;
+import com.taotao.cloud.distribution.biz.service.CreateHtmlService;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -36,7 +36,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CreateHtmlServiceImpl implements ICreateHtmlService {
+public class CreateHtmlServiceImpl implements CreateHtmlService {
 
     private static int corePoolSize = Runtime.getRuntime().availableProcessors();
     // 多线程生成静态页面

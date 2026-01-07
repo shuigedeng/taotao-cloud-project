@@ -22,8 +22,8 @@ import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.distribution.api.model.query.DistributionGoodsPageQuery;
 import com.taotao.cloud.distribution.api.model.vo.DistributionGoodsVO;
-import com.taotao.cloud.distribution.biz.service.IDistributionGoodsService;
-import com.taotao.cloud.distribution.biz.service.IDistributionSelectedGoodsService;
+import com.taotao.cloud.distribution.biz.service.DistributionGoodsService;
+import com.taotao.cloud.distribution.biz.service.DistributionSelectedGoodsService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -46,10 +46,10 @@ public class DistributionGoodsBuyerController {
 
     /** 分销商品 */
     @Autowired
-    private IDistributionGoodsService distributionGoodsService;
+    private DistributionGoodsService distributionGoodsService;
     /** 选择分销商品 */
     @Autowired
-    private IDistributionSelectedGoodsService distributionSelectedGoodsService;
+    private DistributionSelectedGoodsService distributionSelectedGoodsService;
 
     @Operation(summary = "获取分销商商品列表", description = "获取分销商商品列表")
     @RequestLogger

@@ -42,9 +42,9 @@ import com.taotao.cloud.mq.consistency.raft1.server.rpc.DefaultRpcServer;
 import com.taotao.cloud.mq.consistency.raft1.server.rpc.RpcServer;
 import com.taotao.cloud.mq.consistency.raft1.server.support.concurrent.RaftThreadPool;
 import com.taotao.cloud.mq.consistency.raft1.server.support.hearbeat.HeartbeatTask;
-import com.taotao.cloud.mq.consistency.raft1.server.support.peer.ClusterPeerManager;
+import com.taotao.cloud.mq.consistency.raft1.server.support.peer.DefaultClusterPeerManager;
 import com.taotao.cloud.mq.consistency.raft1.server.support.peer.ClusterPeerResult;
-import com.taotao.cloud.mq.consistency.raft1.server.support.peer.IClusterPeerManager;
+import com.taotao.cloud.mq.consistency.raft1.server.support.peer.ClusterPeerManager;
 import com.taotao.cloud.mq.consistency.raft1.server.support.peer.PeerManager;
 import com.taotao.cloud.mq.consistency.raft1.server.support.replication.DefaultRaftReplication;
 import com.taotao.cloud.mq.consistency.raft1.server.support.replication.IRaftReplication;
@@ -57,7 +57,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.slf4j.Logger;
@@ -93,7 +92,7 @@ public class DefaultNode implements Node {
      *
      * @since 1.1.0
      */
-    private IClusterPeerManager clusterPeerManager;
+    private ClusterPeerManager clusterPeerManager;
 
     @Override
     public void setConfig( NodeConfig config ) {
@@ -130,7 +129,7 @@ public class DefaultNode implements Node {
         nodeInfoContext.setConsensus(consensus);
 
         // delegate
-        clusterPeerManager = new ClusterPeerManager(nodeInfoContext);
+        clusterPeerManager = new DefaultClusterPeerManager(nodeInfoContext);
 
         // 2. 初始化调度
         RaftThreadPool.scheduleAtFixedRate(new HeartbeatTask(nodeInfoContext), 1000, 1000);

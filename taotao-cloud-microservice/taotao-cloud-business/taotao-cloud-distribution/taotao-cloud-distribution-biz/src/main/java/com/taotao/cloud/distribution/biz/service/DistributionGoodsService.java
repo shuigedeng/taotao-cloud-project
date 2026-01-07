@@ -25,7 +25,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /** 分销商品业务层 */
-public interface IDistributionGoodsService extends IService<DistributionGoods> {
+public interface DistributionGoodsService extends IService<DistributionGoods> {
 
     /**
      * 根据条件分页查询分销商品信息

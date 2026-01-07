@@ -19,7 +19,7 @@ package com.taotao.cloud.sa.just.biz.just.justauth.feign;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.sa.just.biz.just.justauth.entity.JustAuthSocial;
 import com.taotao.cloud.sa.just.biz.just.justauth.entity.JustAuthSocialUser;
-import com.taotao.cloud.sa.just.biz.just.justauth.service.IJustAuthService;
+import com.taotao.cloud.sa.just.biz.just.justauth.service.JustAuthService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import jakarta.validation.constraints.NotBlank;
@@ -48,7 +48,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope
 public class JustAuthFeign {
 
-    private final IJustAuthService justAuthService;
+    private final JustAuthService justAuthService;
 
     @GetMapping(value = "/user/bind/id")
     @ApiOperation(value = "查询第三方用户绑定关系", notes = "查询第三方用户绑定关系")

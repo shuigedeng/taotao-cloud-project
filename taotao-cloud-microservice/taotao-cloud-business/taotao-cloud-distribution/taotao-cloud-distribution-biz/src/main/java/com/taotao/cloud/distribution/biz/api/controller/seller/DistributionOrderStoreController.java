@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.distribution.api.model.query.DistributionOrderPageQuery;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionOrder;
-import com.taotao.cloud.distribution.biz.service.IDistributionOrderService;
+import com.taotao.cloud.distribution.biz.service.DistributionOrderService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -42,7 +42,7 @@ public class DistributionOrderStoreController {
 
     /** 分销订单 */
     @Autowired
-    private IDistributionOrderService distributionOrderService;
+    private DistributionOrderService distributionOrderService;
 
     @Operation(summary = "获取分销订单列表", description = "获取分销订单列表")
     @RequestLogger

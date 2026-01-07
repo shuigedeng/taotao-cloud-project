@@ -24,7 +24,7 @@ import com.taotao.cloud.sa.just.biz.just.justauth.dto.JustAuthSocialDTO;
 import com.taotao.cloud.sa.just.biz.just.justauth.dto.QueryJustAuthSocialDTO;
 import com.taotao.cloud.sa.just.biz.just.justauth.dto.UpdateJustAuthSocialDTO;
 import com.taotao.cloud.sa.just.biz.just.justauth.entity.JustAuthSocialExport;
-import com.taotao.cloud.sa.just.biz.just.justauth.service.IJustAuthSocialService;
+import com.taotao.cloud.sa.just.biz.just.justauth.service.JustAuthSocialService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -58,7 +58,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope
 public class JustAuthSocialController {
 
-    private final IJustAuthSocialService justAuthSocialService;
+    private final JustAuthSocialService justAuthSocialService;
 
     /**
      * 查询租户第三方登录功能配置表列表

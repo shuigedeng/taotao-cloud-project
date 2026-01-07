@@ -22,7 +22,7 @@ import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.distribution.api.model.query.DistributionPageQuery;
 import com.taotao.cloud.distribution.biz.model.entity.Distribution;
-import com.taotao.cloud.distribution.biz.service.IDistributionService;
+import com.taotao.cloud.distribution.biz.service.DistributionService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -45,7 +45,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DistributionManagerController {
 
     @Autowired
-    private IDistributionService distributionService;
+    private DistributionService distributionService;
 
     @Operation(summary = "分页获取", description = "分页获取")
     @RequestLogger

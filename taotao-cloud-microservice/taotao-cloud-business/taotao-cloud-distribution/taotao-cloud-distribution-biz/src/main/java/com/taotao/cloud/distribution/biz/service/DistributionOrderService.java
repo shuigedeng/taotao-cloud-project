@@ -22,7 +22,7 @@ import com.taotao.cloud.distribution.api.model.query.DistributionOrderPageQuery;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionOrder;
 
 /** 分销订单业务层 */
-public interface IDistributionOrderService extends IService<DistributionOrder> {
+public interface DistributionOrderService extends IService<DistributionOrder> {
 
     /**
      * 获取分销订单分页

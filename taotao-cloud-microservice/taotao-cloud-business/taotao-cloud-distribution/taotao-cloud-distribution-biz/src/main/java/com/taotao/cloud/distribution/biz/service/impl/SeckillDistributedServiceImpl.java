@@ -22,7 +22,7 @@ import com.taotao.cloud.distribution.biz.common.entity.SuccessKilled;
 import com.taotao.cloud.distribution.biz.common.exception.RrException;
 import com.taotao.cloud.distribution.biz.distributedlock.redis.RedissLockUtil;
 import com.taotao.cloud.distribution.biz.distributedlock.zookeeper.ZkLockUtil;
-import com.taotao.cloud.distribution.biz.service.ISeckillDistributedService;
+import com.taotao.cloud.distribution.biz.service.SeckillDistributedService;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -31,7 +31,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class SeckillDistributedServiceImpl implements ISeckillDistributedService {
+public class SeckillDistributedServiceImpl implements SeckillDistributedService {
 
     @Autowired
     private DynamicQuery dynamicQuery;

@@ -19,8 +19,8 @@ package com.taotao.cloud.mq.common.balance.impl;
 import com.taotao.cloud.mq.common.balance.LoadBalanceContext;
 import com.taotao.cloud.mq.common.balance.Server;
 import com.taotao.boot.common.support.hash.ConsistentHashingBs;
-import com.taotao.boot.common.support.hash.IConsistentHashing;
-import com.taotao.boot.common.support.hash.api.IHashCode;
+import com.taotao.boot.common.support.hash.ConsistentHashing;
+import com.taotao.boot.common.support.hash.api.HashCode;
 
 /**
  * LoadBalanceConsistentHash
@@ -31,12 +31,12 @@ import com.taotao.boot.common.support.hash.api.IHashCode;
  */
 public class LoadBalanceConsistentHash<T extends Server> extends AbstractLoadBalanceHash<T> {
 
-    public LoadBalanceConsistentHash( IHashCode hashCode ) {
+    public LoadBalanceConsistentHash( HashCode hashCode ) {
         super(hashCode);
     }
 
     protected T doSelect( LoadBalanceContext<T> context ) {
-        IConsistentHashing<T> consistentHashing =
+        ConsistentHashing<T> consistentHashing =
                 ConsistentHashingBs.<T>newInstance()
                         .hashCode(this.hashCode)
                         .nodes(context.servers())

@@ -24,7 +24,7 @@ import com.taotao.cloud.distribution.api.model.query.DistributionPageQuery;
 import com.taotao.cloud.distribution.biz.model.entity.Distribution;
 
 /** 分销员业务层 */
-public interface IDistributionService extends IService<Distribution> {
+public interface DistributionService extends IService<Distribution> {
 
     /**
      * 获取分销员分页列表

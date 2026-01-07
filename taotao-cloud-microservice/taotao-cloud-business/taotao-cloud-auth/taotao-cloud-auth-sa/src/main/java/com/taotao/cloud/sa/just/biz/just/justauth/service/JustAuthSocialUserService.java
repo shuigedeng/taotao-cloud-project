@@ -30,7 +30,7 @@ import java.util.List;
  *
  * @since 2022-05-19
  */
-public interface IJustAuthSocialUserService extends IService<JustAuthSocialUser> {
+public interface JustAuthSocialUserService extends IService<JustAuthSocialUser> {
 
     /**
      * 分页查询租户第三方登录功能配置表列表

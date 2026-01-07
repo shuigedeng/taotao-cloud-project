@@ -18,7 +18,7 @@ package com.taotao.cloud.mq.common.balance.impl;
 
 import com.taotao.cloud.mq.common.balance.LoadBalance;
 import com.taotao.cloud.mq.common.balance.Server;
-import com.taotao.boot.common.support.hash.api.IHashCode;
+import com.taotao.boot.common.support.hash.api.HashCode;
 
 /**
  * LoadBalances
@@ -44,11 +44,11 @@ public final class LoadBalances {
         return new LoadBalanceWeightRoundRobbin();
     }
 
-    public static <T extends Server> LoadBalance<T> commonHash( IHashCode hashCode ) {
+    public static <T extends Server> LoadBalance<T> commonHash( HashCode hashCode ) {
         return new LoadBalanceCommonHash(hashCode);
     }
 
-    public static <T extends Server> LoadBalance<T> consistentHash( IHashCode hashCode ) {
+    public static <T extends Server> LoadBalance<T> consistentHash( HashCode hashCode ) {
         return new LoadBalanceConsistentHash(hashCode);
     }
 }

@@ -32,7 +32,7 @@ import com.taotao.cloud.distribution.api.model.dto.DistributionApplyDTO;
 import com.taotao.cloud.distribution.api.model.query.DistributionPageQuery;
 import com.taotao.cloud.distribution.biz.mapper.DistributionMapper;
 import com.taotao.cloud.distribution.biz.model.entity.Distribution;
-import com.taotao.cloud.distribution.biz.service.IDistributionService;
+import com.taotao.cloud.distribution.biz.service.DistributionService;
 import com.taotao.cloud.sys.api.dto.DistributionSetting;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.IFeignSettingService;
@@ -46,7 +46,7 @@ import org.springframework.transaction.annotation.Transactional;
 /** 分销员接口实现 */
 @Service
 public class DistributionServiceImpl extends ServiceImpl<DistributionMapper, Distribution>
-        implements IDistributionService {
+        implements DistributionService {
 
     /** 会员 */
     @Autowired

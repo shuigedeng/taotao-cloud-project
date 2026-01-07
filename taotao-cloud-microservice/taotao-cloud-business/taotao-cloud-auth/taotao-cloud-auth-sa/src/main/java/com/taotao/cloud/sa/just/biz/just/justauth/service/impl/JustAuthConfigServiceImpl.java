@@ -24,7 +24,7 @@ import com.taotao.cloud.sa.just.biz.just.justauth.dto.QueryJustAuthConfigDTO;
 import com.taotao.cloud.sa.just.biz.just.justauth.dto.UpdateJustAuthConfigDTO;
 import com.taotao.cloud.sa.just.biz.just.justauth.entity.JustAuthConfig;
 import com.taotao.cloud.sa.just.biz.just.justauth.mapper.JustAuthConfigMapper;
-import com.taotao.cloud.sa.just.biz.just.justauth.service.IJustAuthConfigService;
+import com.taotao.cloud.sa.just.biz.just.justauth.service.JustAuthConfigService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +50,7 @@ import org.springframework.util.CollectionUtils;
 @Transactional
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class JustAuthConfigServiceImpl extends ServiceImpl<JustAuthConfigMapper, JustAuthConfig>
-        implements IJustAuthConfigService {
+        implements JustAuthConfigService {
 
     private final JustAuthConfigMapper justAuthConfigMapper;
 

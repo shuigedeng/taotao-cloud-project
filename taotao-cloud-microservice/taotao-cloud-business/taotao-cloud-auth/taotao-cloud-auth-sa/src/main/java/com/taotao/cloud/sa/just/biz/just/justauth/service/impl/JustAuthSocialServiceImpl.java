@@ -25,7 +25,7 @@ import com.taotao.cloud.sa.just.biz.just.justauth.dto.QueryJustAuthSocialDTO;
 import com.taotao.cloud.sa.just.biz.just.justauth.dto.UpdateJustAuthSocialDTO;
 import com.taotao.cloud.sa.just.biz.just.justauth.entity.JustAuthSocial;
 import com.taotao.cloud.sa.just.biz.just.justauth.mapper.JustAuthSocialMapper;
-import com.taotao.cloud.sa.just.biz.just.justauth.service.IJustAuthSocialService;
+import com.taotao.cloud.sa.just.biz.just.justauth.service.JustAuthSocialService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +41,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class JustAuthSocialServiceImpl extends ServiceImpl<JustAuthSocialMapper, JustAuthSocial>
-        implements IJustAuthSocialService {
+        implements JustAuthSocialService {
 
     private final JustAuthSocialMapper justAuthSocialMapper;
 

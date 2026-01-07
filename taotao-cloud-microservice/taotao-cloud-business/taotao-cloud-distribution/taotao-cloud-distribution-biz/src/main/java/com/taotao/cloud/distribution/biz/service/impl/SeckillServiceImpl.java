@@ -21,7 +21,7 @@ import com.taotao.cloud.distribution.biz.common.dynamicquery.DynamicQuery;
 import com.taotao.cloud.distribution.biz.common.entity.Result;
 import com.taotao.cloud.distribution.biz.common.entity.SuccessKilled;
 import com.taotao.cloud.distribution.biz.common.exception.RrException;
-import com.taotao.cloud.distribution.biz.service.ISeckillService;
+import com.taotao.cloud.distribution.biz.service.SeckillService;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
@@ -31,7 +31,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("seckillService")
-public class SeckillServiceImpl implements ISeckillService {
+public class SeckillServiceImpl implements SeckillService {
 
     /** 思考：为什么不用synchronized service 默认是单例的，并发下lock只有一个实例 互斥锁 参数默认false，不公平锁 */
     private Lock lock = new ReentrantLock(true);

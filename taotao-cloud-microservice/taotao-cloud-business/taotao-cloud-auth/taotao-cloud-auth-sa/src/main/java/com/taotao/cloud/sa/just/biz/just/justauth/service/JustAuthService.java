@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * @since 2022/6/18
  */
-public interface IJustAuthService {
+public interface JustAuthService {
 
     /** 查询第三方用户绑定关系 */
     Long userBindId(@NotBlank @RequestParam("uuid") String uuid, @NotBlank @RequestParam("source") String source);

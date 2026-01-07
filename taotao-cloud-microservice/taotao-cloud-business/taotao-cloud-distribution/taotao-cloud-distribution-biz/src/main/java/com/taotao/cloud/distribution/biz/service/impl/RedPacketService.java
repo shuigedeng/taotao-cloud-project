@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.distribution.biz.service.impl;
 
-import com.taotao.cloud.distribution.biz.service.IRedPacketService;
 import java.sql.Timestamp;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -26,7 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("redPacketService")
-public class RedPacketService implements IRedPacketService {
+public class RedPacketService implements com.taotao.cloud.distribution.biz.service.RedPacketService {
 
     @Autowired
     private RedisUtil redisUtil;

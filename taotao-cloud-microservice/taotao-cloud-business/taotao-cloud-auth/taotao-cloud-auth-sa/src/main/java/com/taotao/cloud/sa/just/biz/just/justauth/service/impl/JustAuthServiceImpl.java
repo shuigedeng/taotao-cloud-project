@@ -23,9 +23,9 @@ import com.taotao.cloud.sa.just.biz.just.justauth.dto.QueryJustAuthSocialUserDTO
 import com.taotao.cloud.sa.just.biz.just.justauth.dto.UpdateJustAuthSocialDTO;
 import com.taotao.cloud.sa.just.biz.just.justauth.entity.JustAuthSocial;
 import com.taotao.cloud.sa.just.biz.just.justauth.entity.JustAuthSocialUser;
-import com.taotao.cloud.sa.just.biz.just.justauth.service.IJustAuthService;
-import com.taotao.cloud.sa.just.biz.just.justauth.service.IJustAuthSocialService;
-import com.taotao.cloud.sa.just.biz.just.justauth.service.IJustAuthSocialUserService;
+import com.taotao.cloud.sa.just.biz.just.justauth.service.JustAuthService;
+import com.taotao.cloud.sa.just.biz.just.justauth.service.JustAuthSocialService;
+import com.taotao.cloud.sa.just.biz.just.justauth.service.JustAuthSocialUserService;
 import java.util.List;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -47,11 +47,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Service
 @Transactional
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class JustAuthServiceImpl implements IJustAuthService {
+public class JustAuthServiceImpl implements JustAuthService {
 
-    private final IJustAuthSocialService justAuthSocialService;
+    private final JustAuthSocialService justAuthSocialService;
 
-    private final IJustAuthSocialUserService justAuthSocialUserService;
+    private final JustAuthSocialUserService justAuthSocialUserService;
 
     /** 查询第三方用户绑定关系 */
     @Override

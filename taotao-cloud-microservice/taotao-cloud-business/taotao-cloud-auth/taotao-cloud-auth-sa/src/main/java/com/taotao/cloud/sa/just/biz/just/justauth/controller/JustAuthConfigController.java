@@ -26,7 +26,7 @@ import com.taotao.cloud.sa.just.biz.just.justauth.dto.UpdateJustAuthConfigDTO;
 import com.taotao.cloud.sa.just.biz.just.justauth.entity.JustAuthConfig;
 import com.taotao.cloud.sa.just.biz.just.justauth.entity.JustAuthConfigExport;
 import com.taotao.cloud.sa.just.biz.just.justauth.entity.JustAuthConfigImport;
-import com.taotao.cloud.sa.just.biz.just.justauth.service.IJustAuthConfigService;
+import com.taotao.cloud.sa.just.biz.just.justauth.service.JustAuthConfigService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -64,7 +64,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RefreshScope
 public class JustAuthConfigController {
 
-    private final IJustAuthConfigService justAuthConfigService;
+    private final JustAuthConfigService justAuthConfigService;
 
     /**
      * 查询租户第三方登录功能配置表列表

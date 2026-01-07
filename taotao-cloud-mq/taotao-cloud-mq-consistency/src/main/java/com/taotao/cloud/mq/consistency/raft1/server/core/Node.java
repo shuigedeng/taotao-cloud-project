@@ -24,7 +24,7 @@ import com.taotao.cloud.mq.consistency.raft1.common.entity.req.VoteRequest;
 import com.taotao.cloud.mq.consistency.raft1.common.entity.resp.AppendLogResponse;
 import com.taotao.cloud.mq.consistency.raft1.common.entity.resp.ClientKeyValueResponse;
 import com.taotao.cloud.mq.consistency.raft1.common.entity.resp.VoteResponse;
-import com.taotao.cloud.mq.consistency.raft1.server.support.peer.IClusterPeerManager;
+import com.taotao.cloud.mq.consistency.raft1.server.support.peer.ClusterPeerManager;
 
 /**
  * 节点
@@ -40,7 +40,7 @@ import com.taotao.cloud.mq.consistency.raft1.server.support.peer.IClusterPeerMan
  * 我们让每个节点都可以接收客户端的请求，但 follower 节点并不能处理请求，所以需要重定向到 leader 节点，因此，我们需要一个重定向接口。
  *
  */
-public interface Node extends LifeCycle, IClusterPeerManager {
+public interface Node extends LifeCycle, ClusterPeerManager {
 
     /**
      * 设置配置文件.

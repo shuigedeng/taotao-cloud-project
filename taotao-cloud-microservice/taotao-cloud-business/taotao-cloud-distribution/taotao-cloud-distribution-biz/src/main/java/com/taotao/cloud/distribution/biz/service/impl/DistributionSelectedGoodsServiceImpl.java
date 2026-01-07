@@ -20,8 +20,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.distribution.biz.mapper.DistributionSelectedGoodsMapper;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionSelectedGoods;
-import com.taotao.cloud.distribution.biz.service.IDistributionSelectedGoodsService;
-import com.taotao.cloud.distribution.biz.service.IDistributionService;
+import com.taotao.cloud.distribution.biz.service.DistributionSelectedGoodsService;
+import com.taotao.cloud.distribution.biz.service.DistributionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,11 +29,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class DistributionSelectedGoodsServiceImpl
         extends ServiceImpl<DistributionSelectedGoodsMapper, DistributionSelectedGoods>
-        implements IDistributionSelectedGoodsService {
+        implements DistributionSelectedGoodsService {
 
     /** 分销员 */
     @Autowired
-    private IDistributionService distributionService;
+    private DistributionService distributionService;
 
     @Override
     public boolean add(String distributionGoodsId) {

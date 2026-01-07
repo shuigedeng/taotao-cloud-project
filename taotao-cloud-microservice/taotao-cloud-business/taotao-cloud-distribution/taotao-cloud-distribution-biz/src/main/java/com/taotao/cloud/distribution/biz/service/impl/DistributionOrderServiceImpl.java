@@ -27,8 +27,8 @@ import com.taotao.cloud.distribution.api.model.query.DistributionOrderPageQuery;
 import com.taotao.cloud.distribution.biz.mapper.DistributionOrderMapper;
 import com.taotao.cloud.distribution.biz.model.entity.Distribution;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionOrder;
-import com.taotao.cloud.distribution.biz.service.IDistributionOrderService;
-import com.taotao.cloud.distribution.biz.service.IDistributionService;
+import com.taotao.cloud.distribution.biz.service.DistributionOrderService;
+import com.taotao.cloud.distribution.biz.service.DistributionService;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.feign.OrderApi;
 import com.taotao.cloud.order.api.model.page.order.StoreFlowPageQuery;
@@ -43,7 +43,7 @@ import org.springframework.transaction.annotation.Transactional;
 /** 分销订单接口实现 */
 @Service
 public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderMapper, DistributionOrder>
-        implements IDistributionOrderService {
+        implements DistributionOrderService {
 
     /** 订单 */
     @Autowired
@@ -53,7 +53,7 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
     private StoreFlowService storeFlowService;
     /** 分销员 */
     @Autowired
-    private IDistributionService distributionService;
+    private DistributionService distributionService;
     /** 系统设置 */
     @Autowired
     private IFeignSettingApi feignSettingApi;

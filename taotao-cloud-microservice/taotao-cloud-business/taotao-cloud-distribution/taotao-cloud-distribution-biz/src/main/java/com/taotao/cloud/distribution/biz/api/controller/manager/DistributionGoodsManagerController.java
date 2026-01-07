@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.distribution.api.model.query.DistributionGoodsPageQuery;
 import com.taotao.cloud.distribution.api.model.vo.DistributionGoodsVO;
-import com.taotao.cloud.distribution.biz.service.IDistributionGoodsService;
+import com.taotao.cloud.distribution.biz.service.DistributionGoodsService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -42,7 +42,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DistributionGoodsManagerController {
 
     @Autowired
-    private IDistributionGoodsService distributionGoodsService;
+    private DistributionGoodsService distributionGoodsService;
 
     @Operation(summary = "分页获取", description = "分页获取")
     @RequestLogger

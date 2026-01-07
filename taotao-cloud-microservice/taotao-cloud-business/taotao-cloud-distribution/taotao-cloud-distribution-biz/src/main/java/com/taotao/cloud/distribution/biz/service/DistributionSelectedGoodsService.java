@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionSelectedGoods;
 
 /** 分销选择商品业务层 */
-public interface IDistributionSelectedGoodsService extends IService<DistributionSelectedGoods> {
+public interface DistributionSelectedGoodsService extends IService<DistributionSelectedGoods> {
 
     /**
      * 分销员添加分销商品

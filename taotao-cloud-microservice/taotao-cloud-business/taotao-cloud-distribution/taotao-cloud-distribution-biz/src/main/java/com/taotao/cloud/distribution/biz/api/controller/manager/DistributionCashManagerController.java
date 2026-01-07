@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.distribution.api.model.vo.DistributionCashSearchVO;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionCash;
-import com.taotao.cloud.distribution.biz.service.IDistributionCashService;
+import com.taotao.cloud.distribution.biz.service.DistributionCashService;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -43,7 +43,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DistributionCashManagerController {
 
     @Autowired
-    private IDistributionCashService distributorCashService;
+    private DistributionCashService distributorCashService;
 
     @Operation(summary = "通过id获取分销佣金详情", description = "通过id获取分销佣金详情")
     @RequestLogger

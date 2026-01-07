@@ -18,7 +18,7 @@ package com.taotao.cloud.distribution.biz.service;
 
 import java.util.List;
 
-public interface ISeckillService {
+public interface SeckillService {
 
     /**
      * 查询全部的秒杀记录

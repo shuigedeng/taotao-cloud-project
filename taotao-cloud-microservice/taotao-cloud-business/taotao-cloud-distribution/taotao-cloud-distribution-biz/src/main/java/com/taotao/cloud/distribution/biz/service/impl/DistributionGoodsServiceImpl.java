@@ -28,8 +28,8 @@ import com.taotao.cloud.distribution.api.model.vo.DistributionGoodsVO;
 import com.taotao.cloud.distribution.biz.mapper.DistributionGoodsMapper;
 import com.taotao.cloud.distribution.biz.model.entity.Distribution;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionGoods;
-import com.taotao.cloud.distribution.biz.service.IDistributionGoodsService;
-import com.taotao.cloud.distribution.biz.service.IDistributionService;
+import com.taotao.cloud.distribution.biz.service.DistributionGoodsService;
+import com.taotao.cloud.distribution.biz.service.DistributionService;
 import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
 import java.math.BigDecimal;
 import java.util.List;
@@ -41,11 +41,11 @@ import org.springframework.stereotype.Service;
 /** 分销商品接口实现 */
 @Service
 public class DistributionGoodsServiceImpl extends ServiceImpl<DistributionGoodsMapper, DistributionGoods>
-        implements IDistributionGoodsService {
+        implements DistributionGoodsService {
 
     /** 分销员 */
     @Autowired
-    private IDistributionService distributionService;
+    private DistributionService distributionService;
     /** 规格商品 */
     @Autowired
     private GoodsSkuApi goodsSkuApi;

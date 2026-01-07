@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /** 分销佣金业务层 */
-public interface IDistributionCashService extends IService<DistributionCash> {
+public interface DistributionCashService extends IService<DistributionCash> {
 
     /**
      * 提交分销提现申请
