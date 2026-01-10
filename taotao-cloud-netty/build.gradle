@@ -69,8 +69,8 @@ apply plugin: "com.google.protobuf"
 
 dependencies {
     implementation "io.netty:netty-all:4.2.9.Final"
-    implementation "com.google.protobuf:protobuf-java:4.33.2"
-    implementation "com.google.protobuf:protobuf-java-util:4.33.2"
+    implementation "com.google.protobuf:protobuf-java:3.25.5"
+    implementation "com.google.protobuf:protobuf-java-util:3.25.5"
     implementation "org.apache.thrift:libthrift:0.21.0"
     implementation "io.grpc:grpc-api:1.78.0"
     implementation "io.grpc:grpc-context:1.78.0"
@@ -93,14 +93,14 @@ dependencies {
     api "jakarta.json.bind:jakarta.json.bind-api:3.0.1"
 
     implementation 'org.slf4j:slf4j-api:2.0.17'
-    implementation 'ch.qos.logback:logback-core:1.5.23'
-    implementation 'ch.qos.logback:logback-access:1.5.23'
-    implementation 'ch.qos.logback:logback-classic:1.5.23'
+    implementation 'ch.qos.logback:logback-core:1.5.24'
+    implementation 'ch.qos.logback:logback-access:1.5.24'
+    implementation 'ch.qos.logback:logback-classic:1.5.24'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter:6.0.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:6.0.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:6.0.1'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:6.0.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:6.0.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:6.0.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:6.0.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:6.0.2'
     testImplementation "org.assertj:assertj-core:3.27.6"
 
     compileOnly "org.projectlombok:lombok:1.18.42"
@@ -115,7 +115,7 @@ protobuf {
     protoc {
         //https://repo1.maven.org/maven2/com/google/protobuf/protoc/
         //直接使用Maven Central上已经编译好的protoc编译器，
-        artifact = "com.google.protobuf:protoc:4.33.2"
+        artifact = "com.google.protobuf:protoc:3.25.5"
         //指定本地已经安装的protoc编译器
         //path = '/usr/local/bin/protoc'
     }
@@ -145,7 +145,7 @@ protobuf {
 
 //protobuf {
 //    protoc {
-//        artifact = "com.google.protobuf:protoc:4.33.2"
+//        artifact = "com.google.protobuf:protoc:3.25.5"
 //    }
 //
 //    plugins {

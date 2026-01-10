@@ -225,9 +225,9 @@ dependencies {
     implementation "com.googlecode.aviator:aviator:5.4.3"
 
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
-    implementation "com.google.protobuf:protobuf-java:4.33.2"
+    implementation "com.google.protobuf:protobuf-java:3.25.5"
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java-util
-    implementation "com.google.protobuf:protobuf-java-util:4.33.2"
+    implementation "com.google.protobuf:protobuf-java-util:3.25.5"
     //https://search.maven.org/artifact/com.googlecode.protobuf-java-format/protobuf-java-format
     //implementation "com.googlecode.protobuf-java-format:protobuf-java-format:1.4"
 

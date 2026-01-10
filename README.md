@@ -17,7 +17,7 @@
   <img src="https://img.shields.io/badge/knife4j-4.5.0-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/swagger-3.0.0-red" alt="Downloads"/>
   <img src="https://img.shields.io/badge/redisson-4.0.0-lightgrey" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/hutool-5.8.42-gree" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/hutool-5.8.43-gree" alt="Downloads"/>
 </p>
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
@@ -265,7 +265,7 @@ Maven:
 | Roketmq              | 5.2.4        |
 | Spring Security      | 7.0.2        |
 | Mybatis Plus         | 3.5.16       |
-| Hutool               | 5.8.42       |
+| Hutool               | 5.8.43       |
 | Mysql                | 9.4.0        |
 | Querydsl             | 5.1.0        |
 | Swagger              | 3.0.0        |
