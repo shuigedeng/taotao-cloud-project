@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.common.enums.SexTypeEnum;
+import com.taotao.boot.common.enums.SexEnum;
 import com.taotao.boot.webagg.entity.BaseSuperEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,7 +25,6 @@ import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import lombok.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -79,7 +78,7 @@ public class User extends BaseSuperEntity<User, Long> {
     /**
      * 性别 1男 2女 0未知
      *
-     * @see SexTypeEnum
+     * @see SexEnum
      */
     @Column(name = "sex", columnDefinition = "int not null default 0 comment '性别 1男 2女 0未知'")
     private Integer sex;
