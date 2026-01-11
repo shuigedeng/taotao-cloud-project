@@ -11,7 +11,7 @@ public class CustomJsonMapperConfig {
         SimpleModule module = new SimpleModule();
         module.setDeserializerModifier(new CustomBeanDeserializerModifier());
         
-        mapper.registerModule(module);
+        mapper.registeredModules().add(module);
         return mapper;
     }
 

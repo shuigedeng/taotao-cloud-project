@@ -17,6 +17,8 @@
 package com.taotao.cloud.netty.itcast.protocol;
 
 import com.google.gson.*;
+import jakarta.json.Json;
+
 import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
@@ -33,14 +35,7 @@ public interface Serializer {
     <T> byte[] serialize( T object );
 
     enum Algorithm implements Serializer {
-        Java /**
-         * null
-         *
-         * @author shuigedeng
-         * @version 2026.02
-         * @since 2025-12-19 09:30:45
-         */
-                class{
+        Java {
             @Override
             public <T > T deserialize(Class < T > clazz, byte[] bytes){
                 try {
@@ -62,17 +57,9 @@ public interface Serializer {
                     throw new RuntimeException("序列化失败", e);
                 }
             }
-        }{
         },
 
-        Json /**
-         * null
-         *
-         * @author shuigedeng
-         * @version 2026.02
-         * @since 2025-12-19 09:30:45
-         */
-                class{
+        Json{
             @Override
             public <T > T deserialize(Class < T > clazz, byte[] bytes){
                 Gson gson =
@@ -92,8 +79,8 @@ public interface Serializer {
                 String json = gson.toJson(object);
                 return json.getBytes(StandardCharsets.UTF_8);
             }
-        }{
         }
+
     }
 
     /**
