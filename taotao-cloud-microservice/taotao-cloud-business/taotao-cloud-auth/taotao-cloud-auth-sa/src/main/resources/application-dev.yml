@@ -312,27 +312,7 @@ spring:
       file-size-threshold: 2KB
       max-file-size: 200MB
       max-request-size: 215MB
-  sleuth:
-    enabled: true
-    web:
-      client:
-        enabled: true
-      servlet:
-        enabled: true
-    sampler:
-      probability: 1.0
-      refresh:
-        enabled: true
-  zipkin:
-    enabled: true
-    base-url: http://127.0.0.1:9411/
-    discoveryClientEnabled: false
-    sender:
-      type: WEB
-    service:
-      name: ${spring.application.name}
-    compression:
-      enabled: true
+
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://127.0.0.1:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai

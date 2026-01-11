@@ -26,25 +26,23 @@ import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Ref;
-import org.springframework.shell.standard.ShellCommandGroup;
-import org.springframework.shell.standard.ShellComponent;
-import org.springframework.shell.standard.ShellMethod;
+import org.springframework.stereotype.Component;
+import org.springframework.shell.core.command.annotation.Command;
 
 /**
  * 时间命令
  */
-@ShellComponent
-@ShellCommandGroup("实用命令")
+@Component
 public class DemoCommands {
 
-    @ShellMethod("查询当前时间")
+    @Command(name = "changePassword", description = "查询当前时间")
     public String date() {
         LocalDateTime dateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return dateTime.format(formatter);
     }
 
-    @ShellMethod("读取指定文件夹内容")
+    @Command(name = "readDemo", description = "读取指定文件夹内容")
     public String readDemo() {
         File file = new File("D:\\shell.txt");
         StringBuffer stringBuffer = new StringBuffer();
@@ -63,7 +61,7 @@ public class DemoCommands {
         return stringBuffer.toString();
     }
 
-    @ShellMethod("读取指定文件夹内容")
+    @Command(name = "cloneGit", description = "读取指定文件夹内容")
     public String cloneGit(String url) {
         // 克隆代码库命令
         CloneCommand cloneCommand = Git.cloneRepository();
@@ -82,7 +80,7 @@ public class DemoCommands {
         return "finish";
     }
 
-    @ShellMethod("获取指定仓库的分支")
+    @Command(name = "getBranch", description = "获取指定仓库的分支")
     public String getBranch(String url) {
         StringBuffer stringBuffer = new StringBuffer();
         try {

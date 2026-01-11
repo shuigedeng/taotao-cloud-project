@@ -16,13 +16,13 @@
 
 package com.taotao.cloud.shell.commond;
 
-import org.springframework.shell.standard.ShellComponent;
-import org.springframework.shell.standard.ShellMethod;
+import org.springframework.stereotype.Component;
+import org.springframework.shell.core.command.annotation.Command;
 
 /**
  * 基础命令
  */
-@ShellComponent
+@Component
 public class BaseCommands {
 
     /**
@@ -33,7 +33,7 @@ public class BaseCommands {
      * 输出：5
      * @return
      */
-    @ShellMethod("输入两个整数，获取相加结果")
+    @Command(name = "changePassword", description = "输入两个整数，获取相加结果")
     public int add(int a, int b) {
         return a + b;
     }
@@ -45,7 +45,7 @@ public class BaseCommands {
      * 输出：8
      * @return
      */
-    @ShellMethod(value = "输入两个整数，获取相加结果", key = "sum")
+    @Command(name = "changePassword", description ="输入两个整数，获取相加结果")
     public int add2(int a, int b) {
         return a + b;
     }

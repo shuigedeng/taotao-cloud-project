@@ -703,26 +703,7 @@ spring:
       file-size-threshold: 2KB
       max-file-size: 200MB
       max-request-size: 215MB
-  sleuth:
-    enabled: true
-    web:
-      client:
-        enabled: true
-    sampler:
-      probability: 1.0
-      refresh:
-        enabled: true
-  zipkin:
-    enabled: true
-    base-url: http://127.0.0.1:9411/
-    discoveryClientEnabled: false
-    sender:
-      type: WEB
-    service:
-      name: ${spring.application.name}
-    compression:
-      enabled: true
-    encoder: proto3
+
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     #    url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:127.0.0.1}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true

@@ -52,7 +52,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import zipkin2.storage.Traces;
 
 /**
  * 店铺端,订单API

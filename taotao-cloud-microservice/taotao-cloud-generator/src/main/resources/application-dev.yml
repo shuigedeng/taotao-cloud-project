@@ -95,211 +95,6 @@ redisson:
 #  app-name: ${spring.application.name}
 #  tunnel-server: ws://192.168.218.2:7777/ws
 
-dubbo:
-  enabled: true
-  scan:
-    base-packages: com.taotao.cloud.generator.biz.service.dubbo
-  application:
-    name: ${spring.application.name}     #当前应用名称
-    compiler: javassist     #Java字节码编译器，用于动态类的生成，可选：jdk或javassist
-    version: ${ttcVersion}
-    owner: 981376577
-    architecture: china
-    organization: taotao-cloud
-    metadata-type: local
-    environment: develop
-    qos-port: 20880     #禁用qos同一台集群可能会有端口冲突现象
-    qos-enable: false
-    qos-accept-foreign-ip: true
-    logger: slf4j
-    shutwait: 3000
-    dump-directory: ${user.home}/logs/${spring.application.name}/dubbo/
-  registry:
-    address: nacos://192.168.218.2:8848
-    group: DUBBO_REGISTRY_GROUP
-    cluster: CQ
-    parameters:
-      namespace: taotao-cloud-dubbo
-      cluster-name: CQ
-    timeout: 15000
-    username: nacos
-    password: nacos
-    protocol: dubbo
-    version: ${ttcVersion}
-    check: false
-    register: true
-    weight: 10
-    subscribe: true
-    use-as-config-center: false
-    use-as-metadata-center: false
-  protocol:
-    name: dubbo
-    port: 20883
-    ssl-enabled: false
-    accesslog: ${user.home}/logs/${spring.application.name}/dubbo/access.log
-    #serialization: kryo
-    status: server
-    payload: 83886080
-    threadpool: fixed
-    threadname: taotao-cloud-generator-dubbo-protocol-executor
-    threads: 200
-  provider:
-    timeout: 3000
-    version: ${ttcVersion}
-    threads: 500
-    group: taotao-cloud-generator-dev
-    #delay: 3000     #延时注册服务（毫秒）
-    protocol: dubbo
-    retries: 3
-    loadbalance: shortestresponse
-    async: true
-    accesslog: ${user.home}/logs/${spring.application.name}/dubbo/provider.log
-    owner: 981376577
-    threadpool: fixed
-    threadname: taotao-cloud-generator-dubbo-provider-executor
-  consumer:
-    check: false
-    timeout: 3000
-    loadbalance: shortestresponse
-    version: ${ttcVersion}
-    threads: 100
-    retries: 3
-    async: true
-    connections: 200
-    owner: 981376577
-    actives: 10
-    cluster: failover
-    validation: true
-    protocol: dubbo
-    group: taotao-cloud-dev
-  module:
-    name: ${spring.application.name}
-    version: ${ttcVersion}
-    owner: 981376577
-    organization: taotao-cloud
-    background: false
-    refer-async: true
-    export-async: true
-  monitor:
-    id: ${spring.application.name}
-    address: 192.168.218.2:18080
-    username: admin
-    password: 123456
-    group: taotao-cloud-dev
-    version: ${ttcVersion}
-  metadata-report:
-    id: ${spring.application.name}
-    address: nacos://192.168.218.2:8848
-    username: nacos
-    password: nacos
-    group: DUBBO_REGISTRY_GROUP
-    parameters:
-      namespace: taotao-cloud-dubbo
-      cluster-name: CQ
-  config-center:
-    id: ${spring.application.name}
-    address: nacos://192.168.218.2:8848
-    username: nacos
-    password: nacos
-    group: DUBBO_REGISTRY_GROUP
-    parameters:
-      namespace: taotao-cloud-dubbo
-    check: false
-  #metrics:
-  #  default: false
-  #  id: ${spring.application.name}
-  #  port: 9091
-  #  enable-jvm-metrics: true
-  #  protocol: prometheus
-  #  aggregation:
-  #    enabled: true
-  #    bucketNum: 100
-  #    timeWindowSeconds: 30
-  #  prometheus:
-  #    exporter:
-  #      enabled: false
-  #      enableHttpServiceDiscovery: true
-  #      metricsPort: 18081
-  #      metricsPath: /test
-  #    pushgateway:
-  #      enabled: false
-
-seata:
-  enabled: true
-  application-id: ${spring.application.name}
-  tx-service-group: taotao_cloud_tx_group   # 事务群组（可以每个应用独立取名，也可以使用相同的名字）
-  enable-auto-data-source-proxy: true
-  use-jdk-proxy: false
-  data-source-proxy-mode: AT
-  service:
-    grouplist:
-      SC: 192.168.218.2:8091
-    vgroupMapping:
-      taotao_cloud_tx_group: SC   # TC 集群（必须与seata-server保持一致）
-    enable-degrade: false     # 降级开关
-    disable-global-transaction: false     # 禁用全局事务（默认false）
-  config:
-    type: nacos
-    nacos:
-      namespace: taotao-cloud-seata
-      server-addr: 192.168.218.2:8848
-      group: SEATA_GROUP
-      username: nacos
-      password: nacos
-      data-id: seataServer.properties
-  registry:
-    type: nacos
-    nacos:
-      namespace: taotao-cloud-seata
-      application: seata-server
-      server-addr: 192.168.218.2:8848
-      group: SEATA_GROUP
-      username: nacos
-      password: nacos
-      cluster: SC
-  client:
-    rm:
-      async-commit-buffer-limit: 10000       # 异步提交缓存队列长度（默认10000）
-      report-retry-count: 5       # 一阶段结果上报TC重试次数（默认5）
-      table-meta-check-enable: false       # 自动刷新缓存中的表结构（默认false）
-      report-success-enable: true
-      saga-branch-register-enable: false
-      lock:
-        retry-interval: 10         # 校验或占用全局锁重试间隔（默认10ms）
-        retry-times: 30         # 校验或占用全局锁重试次数（默认30）
-        retry-policy-branch-rollback-on-conflict: true         # 分支事务与其它全局回滚事务冲突时锁策略（优先释放本地锁让回滚成功）
-    tm:
-      commit-retry-count: 5       # 一阶段全局提交结果上报TC重试次数（默认1次，建议大于1）
-      rollback-retry-count: 5       # 一阶段全局回滚结果上报TC重试次数（默认1次，建议大于1）
-      degrade-check: false
-      degrade-check-period: 2000
-      degrade-check-allow-times: 10
-    undo:
-      data-validation: true       # 二阶段回滚镜像校验（默认true开启）
-      log-serialization: jackson       # undo序列化方式（默认jackson 不支持 LocalDateTime）
-      only-care-update-columns: true
-      log-table: undo_log       # 自定义undo表名（默认undo_log）
-  log:
-    exception-rate: 100     # 日志异常输出概率（默认100）
-  transport:
-    shutdown:
-      wait: 3
-    thread-factory:
-      boss-thread-prefix: TaoTaoCloudSysNettyBoss
-      worker-thread-prefix: TaoTaoCloudSysNettyServerNIOWorker
-      server-executor-thread-prefix: TaoTaoCloudSysNettyServerBizHandler
-      share-boss-worker: false
-      client-selector-thread-prefix: TaoTaoCloudSysNettyClientSelector
-      client-selector-thread-size: 1
-      client-worker-thread-prefix: TaoTaoCloudSysNettyClientWorkerThread
-    type: TCP
-    server: NIO
-    heartbeat: true
-    serialization: seata
-    compressor: none
-    enable-client-batch-send-request: true     # 客户端事务消息请求是否批量合并发送（默认true）
-
-
 spring:
   config:
     activate:
@@ -481,43 +276,11 @@ spring:
           transportMode : "NIO"
           # 配置看门狗的默认超时时间为30s，这里改为 10s
           lockWatchdogTimeout: 10000
-  kafka:
-    enabled: true
-    bootstrap-servers: 192.168.218.2:9092
-    producer:
-      retries: 1
-      batch-size: 16384
-      buffer-memory: 33554432
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      acks: 0
-      compression-type: gzip
-      properties:
-        linger.ms: 100
-        partitioner.class: org.apache.kafka.clients.producer.RoundRobinPartitioner
-    consumer:
-      auto-commit-interval: 1S
-      auto-offset-reset: earliest
-      enable-auto-commit: false
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    listener:
-      concurrency: 5
-      ack-mode: manual_immediate
-      missing-topics-fatal: false
   security:
     oauth2:
       resourceserver:
         jwt:
           jwk-set-uri: http://192.168.218.2:33401/oauth2/jwks
-  cloud:
-
-    compatibility-verifier:
-      enabled: false
-    loadbalancer:
-      #nacos:
-      #  enabled: true
-      enabled: true
 
 taotao:
   boot:
@@ -532,9 +295,6 @@ taotao:
         dingtalk:
           tokenId: ${DINGDING_TOKEN_ID:xxx}
           secret: ${DINGDING_SECRET:xxxx}
-    zookeeper:
-      enabled: false
-      connectString: 192.168.218.2:2181
     sensitive:
       enabled: false
     lock:
@@ -585,18 +345,6 @@ taotao:
         enabled: true
       seata:
         enabled: true
-    mq:
-      enabled: true
-      rocketmq:
-        enabled: false
-      rabbitmq:
-        enabled: false
-      kafka:
-        enabled: true
-      pulsar:
-        enabled: false
-      stream:
-        enabled: false
     cache:
       jetcache:
         enabled: false
@@ -608,17 +356,6 @@ taotao:
           enabled: true
           type: redis
     data:
-      elasticsearch:
-        enabled: true
-      mybatis-plus:
-        enabled: true
-        auto-fill:
-          enabled: true
-        dynamic:
-          enabled: false
-        tenant:
-          enabled: false
-        snowFlakeIdGenerator: true
       jpa:
         enabled: false
         packages: com.taotao.cloud.generator.biz.model.entity
@@ -665,22 +402,15 @@ taotao:
         enabled: true
       warn:
         enabled: true
-
     encrypt:
       enabled: false
       filter:
         enabled: false
-    dubbo:
-      enabled: true
     core:
       enabled: true
     security:
       ignore-url:
         - /maku-generator/**
-
-mybatis-plus-join:
-  banner: true
-  sub-table-logic: true
 
 mybatis-plus:
   typeAliasesPackage: com.taotao.cloud.generator.entity,net.maku.generator.entity  #实体扫描 多个package用户逗号或者分号分割
@@ -751,15 +481,45 @@ management:
     metrics:
       export:
         enabled: true
-  zipkin:
+  opentelemetry:
+    logging:
+      export:
+        otlp:
+          compression: none
+          endpoint: http://192.168.218.2:4318/v1/logs
+          timeout: 10s
+          headers:
+            version: 2026.02
     tracing:
-      connect-timeout: 60s
-      read-timeout: 60s
-      endpoint: http://192.168.218.2:9411/api/v2/spans
-  tracing:
-    enabled: true
-    sampling:
-      probability: 1.0
+      export:
+        otlp:
+          compression: none
+          endpoint: http://192.168.218.2:4318/v1/traces
+          timeout: 10s
+          headers:
+            version: 2026.02
+  otlp:
+    metrics:
+      export:
+        url: http://192.168.218.2:4318/v1/metrics
+        enabled: true
+        batch-size: 10000
+        connect-timeout: 10s
+        headers:
+          version: 2026.02
+  observations:
+    annotations:
+      enabled: true
+    http:
+      client:
+        requests:
+          name: "ttc-request-name"
+      server:
+        requests:
+          name: "ttc.server.name"
+    key-values:
+      application: ${spring.application.name}
+      
 logging:
   file:
     path: ${user.home}/logs/${spring.application.name}

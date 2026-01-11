@@ -17,11 +17,11 @@
 package com.taotao.cloud.shell.commond;
 
 import java.util.Locale;
-import org.springframework.shell.standard.ShellComponent;
-import org.springframework.shell.standard.ShellMethod;
-import org.springframework.shell.standard.ShellOption;
+import org.springframework.stereotype.Component;
+import org.springframework.shell.core.command.annotation.Command;
+import org.springframework.shell.core.command.annotation.Option;
 
-@ShellComponent
+@Component
 public class TranslationCommands {
 
     //	private final TranslationService service;
@@ -31,11 +31,11 @@ public class TranslationCommands {
     //		this.service = service;
     //	}
 
-    @ShellMethod("Translate text from one language to another.")
+    @Command(name = "changePassword", description = "Translate text from one language to another.")
     public String translate(
-            @ShellOption(optOut = true) String text,
-            @ShellOption(optOut = true, defaultValue = "en_US") Locale from
-            //		@ShellOption(optOut = true) Locate to
+            @Option(optOut = true) String text,
+            @Option(optOut = true, defaultValue = "en_US") Locale from
+            //		@Option(optOut = true) Locate to
             ) {
 
         // invoke service

@@ -374,26 +374,7 @@ spring:
       file-size-threshold: 2KB
       max-file-size: 200MB
       max-request-size: 215MB
-  sleuth:
-    enabled: true
-    web:
-      client:
-        enabled: true
-    sampler:
-      probability: 1.0
-      refresh:
-        enabled: true
-  zipkin:
-    enabled: true
-    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:127.0.0.1}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
-    discoveryClientEnabled: false
-    sender:
-      type: WEB
-    service:
-      name: ${spring.application.name}
-    compression:
-      enabled: true
-    encoder: proto3
+
   data:
     elasticsearch:
       repositories:

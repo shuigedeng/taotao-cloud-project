@@ -168,20 +168,9 @@ spring:
 #    pretty-printing: true
 #    serialize-nulls: true
 #    long-serialization-policy: string
-#  sleuth:
-#    web:
-#      client:
-#        # sleuth 开发阶段关闭
-#        enabled: true
-#    sampler:
-#      probability: 1.0
-#  zipkin:
-#    # zipkin 开发阶段关闭
-#    enabled: true
-#    sender:
-#      type: kafka
+
 #  shardingsphere:
-#    # zipkin 开发阶段关闭
+
 #    enabled: false
 #    datasource:
 #      names: mysql-master-1,mysql-slave-1,mysql-master-2,mysql-slave-2

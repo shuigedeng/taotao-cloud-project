@@ -395,15 +395,44 @@ management:
     metrics:
       export:
         enabled: true
-  zipkin:
+  opentelemetry:
+    logging:
+      export:
+        otlp:
+          compression: none
+          endpoint: http://192.168.218.2:4318/v1/logs
+          timeout: 10s
+          headers:
+            version: 2026.02
     tracing:
-      connect-timeout: 60s
-      read-timeout: 60s
-      endpoint: http://192.168.218.2:9411/api/v2/spans
-  tracing:
-    enabled: true
-    sampling:
-      probability: 1.0
+      export:
+        otlp:
+          compression: none
+          endpoint: http://192.168.218.2:4318/v1/traces
+          timeout: 10s
+          headers:
+            version: 2026.02
+  otlp:
+    metrics:
+      export:
+        url: http://192.168.218.2:4318/v1/metrics
+        enabled: true
+        batch-size: 10000
+        connect-timeout: 10s
+        headers:
+          version: 2026.02
+  observations:
+    annotations:
+      enabled: true
+    http:
+      client:
+        requests:
+          name: "ttc-request-name"
+      server:
+        requests:
+          name: "ttc.server.name"
+    key-values:
+      application: ${spring.application.name}
 
 logging:
   file:

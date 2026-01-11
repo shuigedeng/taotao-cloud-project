@@ -3,16 +3,16 @@
 // import com.taotao.boot.common.http.HttpRequest;
 //
 // import org.springframework.shell.standard.ShellCommandGroup;
-// import org.springframework.shell.standard.ShellComponent;
-// import org.springframework.shell.standard.ShellMethod;
-// import org.springframework.shell.standard.ShellOption;
+// import org.springframework.stereotype.Component;
+// import org.springframework.shell.core.command.annotation.Command;
+// import org.springframework.shell.core.command.annotation.Option;
 //
 // import java.util.ArrayList;
 // import java.util.HashMap;
 // import java.util.List;
 // import java.util.Map;
 //
-// @ShellComponent
+// @Component
 // @ShellCommandGroup("HTTP请求")
 // public class HttpClientCommands {
 //
@@ -20,26 +20,26 @@
 //	private final Map<String, String> headers = new HashMap<>();
 //	private final List<String> requestHistory = new ArrayList<>();
 //
-//	@ShellMethod("设置基础URL")
+//	@Command(name = "changePassword", description = "设置基础URL")
 //	public String setBaseUrl(String url) {
 //		this.baseUrl = url;
 //		return "基础URL已设置为: " + url;
 //	}
 //
-//	@ShellMethod("添加HTTP请求头")
+//	@Command(name = "changePassword", description = "添加HTTP请求头")
 //	public String addHeader(String name, String value) {
 //		headers.put(name, value);
 //		return "已添加请求头: " + name + " = " + value;
 //	}
 //
-//	@ShellMethod("清除所有HTTP请求头")
+//	@Command(name = "changePassword", description = "清除所有HTTP请求头")
 //	public String clearHeaders() {
 //		int count = headers.size();
 //		headers.clear();
 //		return "已清除 " + count + " 个请求头";
 //	}
 //
-//	@ShellMethod("显示当前配置")
+//	@Command(name = "changePassword", description = "显示当前配置")
 //	public String showConfig() {
 //		StringBuilder sb = new StringBuilder();
 //		sb.append("基础URL: ").append(baseUrl).append("\n");
@@ -55,10 +55,10 @@
 //		return sb.toString();
 //	}
 //
-//	@ShellMethod("发送GET请求")
+//	@Command(name = "changePassword", description = "发送GET请求")
 //	public String get(
-//		@ShellOption(help = "请求的路径或完整URL") String path,
-//		@ShellOption(help = "是否显示响应头", defaultValue = "false") boolean showHeaders
+//		@Option(help = "请求的路径或完整URL") String path,
+//		@Option(help = "是否显示响应头", defaultValue = "false") boolean showHeaders
 //	) {
 //		String url = buildUrl(path);
 //		requestHistory.add("GET " + url);
@@ -74,11 +74,11 @@
 //		}
 //	}
 //
-//	@ShellMethod("发送POST请求")
+//	@Command(name = "changePassword", description = "发送POST请求")
 //	public String post(
-//		@ShellOption(help = "请求的路径或完整URL") String path,
-//		@ShellOption(help = "POST请求体(JSON)") String body,
-//		@ShellOption(help = "是否显示响应头", defaultValue = "false") boolean showHeaders
+//		@Option(help = "请求的路径或完整URL") String path,
+//		@Option(help = "POST请求体(JSON)") String body,
+//		@Option(help = "是否显示响应头", defaultValue = "false") boolean showHeaders
 //	) {
 //		String url = buildUrl(path);
 //		requestHistory.add("POST " + url);
@@ -99,11 +99,11 @@
 //		}
 //	}
 //
-//	@ShellMethod("发送PUT请求")
+//	@Command(name = "changePassword", description = "发送PUT请求")
 //	public String put(
-//		@ShellOption(help = "请求的路径或完整URL") String path,
-//		@ShellOption(help = "PUT请求体(JSON)") String body,
-//		@ShellOption(help = "是否显示响应头", defaultValue = "false") boolean showHeaders
+//		@Option(help = "请求的路径或完整URL") String path,
+//		@Option(help = "PUT请求体(JSON)") String body,
+//		@Option(help = "是否显示响应头", defaultValue = "false") boolean showHeaders
 //	) {
 //		String url = buildUrl(path);
 //		requestHistory.add("PUT " + url);
@@ -124,10 +124,10 @@
 //		}
 //	}
 //
-//	@ShellMethod("发送DELETE请求")
+//	@Command(name = "changePassword", description = "发送DELETE请求")
 //	public String delete(
-//		@ShellOption(help = "请求的路径或完整URL") String path,
-//		@ShellOption(help = "是否显示响应头", defaultValue = "false") boolean showHeaders
+//		@Option(help = "请求的路径或完整URL") String path,
+//		@Option(help = "是否显示响应头", defaultValue = "false") boolean showHeaders
 //	) {
 //		String url = buildUrl(path);
 //		requestHistory.add("DELETE " + url);
@@ -143,10 +143,10 @@
 //		}
 //	}
 //
-//	@ShellMethod("下载文件")
+//	@Command(name = "changePassword", description = "下载文件")
 //	public String download(
-//		@ShellOption(help = "文件URL") String url,
-//		@ShellOption(help = "保存路径") String savePath
+//		@Option(help = "文件URL") String url,
+//		@Option(help = "保存路径") String savePath
 //	) {
 //		requestHistory.add("DOWNLOAD " + url);
 //
@@ -158,12 +158,12 @@
 //		}
 //	}
 //
-//	@ShellMethod("上传文件")
+//	@Command(name = "changePassword", description = "上传文件")
 //	public String upload(
-//		@ShellOption(help = "上传URL") String url,
-//		@ShellOption(help = "文件参数名") String paramName,
-//		@ShellOption(help = "文件路径") String filePath,
-//		@ShellOption(help = "是否显示响应头", defaultValue = "false") boolean showHeaders
+//		@Option(help = "上传URL") String url,
+//		@Option(help = "文件参数名") String paramName,
+//		@Option(help = "文件路径") String filePath,
+//		@Option(help = "是否显示响应头", defaultValue = "false") boolean showHeaders
 //	) {
 //		requestHistory.add("UPLOAD " + url);
 //
@@ -180,9 +180,9 @@
 //		}
 //	}
 //
-//	@ShellMethod("格式化JSON")
+//	@Command(name = "changePassword", description = "格式化JSON")
 //	public String formatJson(
-//		@ShellOption(help = "JSON字符串") String json
+//		@Option(help = "JSON字符串") String json
 //	) {
 //		try {
 //			return JSONUtil.formatJsonStr(json);

@@ -50,19 +50,6 @@ spring:
     banner-mode: off
   application:
     name: taotao-cloud-open
-  sleuth:
-    enabled: true
-    web:
-      client:
-        enabled: true
-    sampler:
-      probability: 1.0
-  zipkin:
-    enabled: true
-    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:127.0.0.1}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
-    discoveryClientEnabled: false
-    sender:
-      type: WEB
   redis:
     #host: ${TAOTAO_CLOUD_REDIS_HOST:127.0.0.1}
     #port: ${TAOTAO_CLOUD_REDIS_PORT:6379}

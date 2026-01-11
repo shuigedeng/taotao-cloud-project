@@ -16,14 +16,14 @@
 
 package com.taotao.cloud.shell.commond;
 
-import org.springframework.shell.standard.ShellComponent;
-import org.springframework.shell.standard.ShellMethod;
-import org.springframework.shell.standard.ShellOption;
+import org.springframework.shell.core.command.annotation.Command;
+import org.springframework.shell.core.command.annotation.Option;
+import org.springframework.stereotype.Component;
 
 /**
  * 多参数命令
  */
-@ShellComponent
+@Component
 public class ArgCommands {
 
     /**
@@ -35,7 +35,7 @@ public class ArgCommands {
      * 输出：You said a=1, b=2, c=3
      * @return
      */
-    @ShellMethod("通过明明参数名称，来指定输入的数据对应的参数名称")
+    @Command(name = "echoInt", description = "通过明明参数名称，来指定输入的数据对应的参数名称")
     public String echoInt(int a, int b, int c) {
         return String.format("You said a=%d, b=%d, c=%d", a, b, c);
     }
@@ -49,8 +49,8 @@ public class ArgCommands {
      * 输出：You said a=3, b=2, c=4
      * @return
      */
-    @ShellMethod(value = "通过明明参数名称，强制的指定输入的数据对应的参数名称", prefix = "-")
-    public String echoInt2(int a, int b, @ShellOption("--third") int c) {
+    @Command(name = "echoInt2", description = "通过明明参数名称，强制的指定输入的数据对应的参数名称")
+    public String echoInt2(int a, int b, @Option(defaultValue = "--third") int c) {
         return String.format("You said a=%d, b=%d, c=%d", a, b, c);
     }
 
@@ -60,8 +60,8 @@ public class ArgCommands {
      * 输出：input: string is "name"
      * @return
      */
-    @ShellMethod("输入字符串")
-    public String echoString(@ShellOption(defaultValue = "World") String who) {
+    @Command(name = "echoString", description = "输入字符串")
+    public String echoString(@Option(defaultValue = "World") String who) {
         return "input:" + who;
     }
 
@@ -71,8 +71,8 @@ public class ArgCommands {
      * 输出：input:2.0,3.0,4.0
      * @return
      */
-    @ShellMethod("输入数组")
-    public String echoArray(@ShellOption(arity = 3) float[] numbers) {
+    @Command(name = "echoArray", description = "输入数组")
+    public String echoArray(@Option float[] numbers) {
         return "input:" + numbers[0] + "," + numbers[1] + "," + numbers[2];
     }
 
@@ -85,7 +85,7 @@ public class ArgCommands {
      * 输出：input:false
      * @return
      */
-    @ShellMethod("Terminate the system.")
+    @Command(name = "echoBoolean", description = "Terminate the system.")
     public String echoBoolean(boolean force) {
         return "input:" + force;
     }

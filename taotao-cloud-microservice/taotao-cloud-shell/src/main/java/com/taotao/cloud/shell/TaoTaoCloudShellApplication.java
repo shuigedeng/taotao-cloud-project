@@ -18,6 +18,7 @@ package com.taotao.cloud.shell;
 
 import com.taotao.boot.core.startup.StartupSpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.shell.core.command.annotation.EnableCommand;
 
 /**
  * pc端商城
@@ -30,6 +31,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2021/1/18 下午4:54
  * @version 2022.03
  */
+@EnableCommand(TaoTaoCloudShellApplication.class)
 @SpringBootApplication
 public class TaoTaoCloudShellApplication {
 

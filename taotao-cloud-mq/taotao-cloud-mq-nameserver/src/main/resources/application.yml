@@ -149,15 +149,36 @@ management:
       enabled: true
     rabbit:
       enabled: true
-  zipkin:
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  opentelemetry:
+    logging:
+      export:
+        otlp:
+          compression: none
+          endpoint: http://192.168.218.2:4318/v1/logs
+          timeout: 10s
+          headers:
+            version: 2026.02
     tracing:
-      connect-timeout: 1
-      read-timeout: 10
-      endpoint: http://127.0.0.1:9411/api/v2/spans
-  tracing:
-    enabled: true
-    sampling:
-      probability: 1.0
+      export:
+        otlp:
+          compression: none
+          endpoint: http://192.168.218.2:4318/v1/traces
+          timeout: 10s
+          headers:
+            version: 2026.02
+  otlp:
+    metrics:
+      export:
+        url: http://192.168.218.2:4318/v1/metrics
+        enabled: true
+        batch-size: 10000
+        connect-timeout: 10s
+        headers:
+          version: 2026.02
   observations:
     http:
       client:

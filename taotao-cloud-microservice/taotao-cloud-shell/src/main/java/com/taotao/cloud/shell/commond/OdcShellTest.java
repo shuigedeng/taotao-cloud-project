@@ -29,9 +29,9 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Ref;
 import org.springframework.shell.Availability;
 import org.springframework.shell.standard.ShellCommandGroup;
-import org.springframework.shell.standard.ShellComponent;
-import org.springframework.shell.standard.ShellMethod;
-import org.springframework.shell.standard.ShellOption;
+import org.springframework.stereotype.Component;
+import org.springframework.shell.core.command.annotation.Command;
+import org.springframework.shell.core.command.annotation.Option;
 
 /**
  * OdcShellTest Description
@@ -40,8 +40,7 @@ import org.springframework.shell.standard.ShellOption;
  * @version odc-manage 1.0.0.RELEASE
  * <b>Creation Time:</b> 2021/7/29 14:18
  */
-@ShellComponent
-@ShellCommandGroup("分组的命令")
+@Component
 public class OdcShellTest {
 
     //	@Autowired
@@ -52,8 +51,8 @@ public class OdcShellTest {
     //	 *
     //	 * @return
     //	 */
-    //	@ShellMethod(value = "输入两个整数，获取相加结果")
-    //	//    @ShellMethod("输入两个整数，获取相加结果")
+    //	@Command(value = "输入两个整数，获取相加结果")
+    //	//    @Command(name = "changePassword", description = "输入两个整数，获取相加结果")
     //	public List<Node> findAll() {
     //		return nodeService.findAll();
     //	}
@@ -67,8 +66,8 @@ public class OdcShellTest {
      * @return
      */
     // key 命令名称
-    @ShellMethod(value = "输入两个整数，获取相加结果", key = "sum")
-    //    @ShellMethod("输入两个整数，获取相加结果")
+    @Command(value = "输入两个整数，获取相加结果", key = "sum")
+    //    @Command(name = "changePassword", description = "输入两个整数，获取相加结果")
     public int add(int a, int b) {
         return a + b;
     }
@@ -83,7 +82,7 @@ public class OdcShellTest {
      *
      * @return
      */
-    @ShellMethod("通过明明参数名称，来指定输入的数据对应的参数名称")
+    @Command(name = "changePassword", description = "通过明明参数名称，来指定输入的数据对应的参数名称")
     public String echoInt(int a, int b, int c) {
         return String.format("You said a=%d, b=%d, c=%d", a, b, c);
     }
@@ -97,8 +96,8 @@ public class OdcShellTest {
      *
      * @return
      */
-    @ShellMethod(value = "通过明明参数名称，强制的指定输入的数据对应的参数名称", prefix = "-")
-    public String echoInt2(int a, int b, @ShellOption("--third") int c) {
+    @Command(value = "通过明明参数名称，强制的指定输入的数据对应的参数名称", prefix = "-")
+    public String echoInt2(int a, int b, @Option("--third") int c) {
         return String.format("You said a=%d, b=%d, c=%d", a, b, c);
     }
 
@@ -109,8 +108,8 @@ public class OdcShellTest {
      *
      * @return
      */
-    @ShellMethod("输入字符串")
-    public String echoString(@ShellOption(defaultValue = "World") String who) {
+    @Command(name = "changePassword", description = "输入字符串")
+    public String echoString(@Option(defaultValue = "World") String who) {
         return "input:" + who;
     }
 
@@ -121,8 +120,8 @@ public class OdcShellTest {
      *
      * @return
      */
-    @ShellMethod("输入数组")
-    public String echoArray(@ShellOption(arity = 3) float[] numbers) {
+    @Command(name = "changePassword", description = "输入数组")
+    public String echoArray(@Option(arity = 3) float[] numbers) {
         return "input:" + numbers[0] + "," + numbers[1] + "," + numbers[2];
     }
 
@@ -136,19 +135,19 @@ public class OdcShellTest {
      *
      * @return
      */
-    @ShellMethod("Terminate the system.")
+    @Command(name = "changePassword", description = "Terminate the system.")
     public String echoBoolean(boolean force) {
         return "input:" + force;
     }
 
-    @ShellMethod("只能输入长度为8至40的内容")
+    @Command(name = "changePassword", description = "只能输入长度为8至40的内容")
     public String changePassword(@Size(min = 8, max = 40) String password) {
         return "Password successfully set to " + password;
     }
 
     private boolean connected;
 
-    @ShellMethod("设置链接状态为true")
+    @Command(name = "changePassword", description = "设置链接状态为true")
     public void connect() {
         connected = true;
     }
@@ -163,7 +162,7 @@ public class OdcShellTest {
      * 输入:>connect
      * 输出:>download
      */
-    @ShellMethod(value = "必须链接后才能执行的方法", group = "其他组")
+    @Command(value = "必须链接后才能执行的方法", group = "其他组")
     public String download() {
         // LogUtils.info("123");
         return "123";
@@ -173,14 +172,14 @@ public class OdcShellTest {
         return connected ? Availability.available() : Availability.unavailable("没有进行链接");
     }
 
-    @ShellMethod("查询当前时间")
+    @Command(name = "changePassword", description = "查询当前时间")
     public String date() {
         LocalDateTime dateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return dateTime.format(formatter);
     }
 
-    @ShellMethod("获取指定仓库的分支")
+    @Command(name = "changePassword", description = "获取指定仓库的分支")
     public String getBranch(String url) {
         StringBuffer stringBuffer = new StringBuffer();
         try {
@@ -204,7 +203,7 @@ public class OdcShellTest {
         return stringBuffer.toString();
     }
 
-    @ShellMethod("读取指定文件夹内容")
+    @Command(name = "changePassword", description = "读取指定文件夹内容")
     public String cloneGit(String url) {
         // 克隆代码库命令
         CloneCommand cloneCommand = Git.cloneRepository();

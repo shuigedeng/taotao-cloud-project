@@ -96,7 +96,6 @@ import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import zipkin2.storage.Traces;
 
 /**
  * 子订单业务层实现

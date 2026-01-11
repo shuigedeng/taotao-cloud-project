@@ -17,15 +17,13 @@
 package com.taotao.cloud.shell.commond;
 
 import jakarta.validation.constraints.Size;
-import org.springframework.shell.Availability;
-import org.springframework.shell.standard.ShellComponent;
-import org.springframework.shell.standard.ShellMethod;
-import org.springframework.shell.standard.ShellMethodAvailability;
+import org.springframework.stereotype.Component;
+import org.springframework.shell.core.command.annotation.Command;
 
 /**
  * 对参数进行校验
  */
-@ShellComponent
+@Component
 public class AvailableCommand {
 
     /**
@@ -38,14 +36,14 @@ public class AvailableCommand {
      * 输出：Password successfully set to thispassword
      * @return
      */
-    @ShellMethod("只能输入长度为8至40的内容")
+    @Command(name = "changePassword", description = "只能输入长度为8至40的内容")
     public String changePassword(@Size(min = 8, max = 40) String password) {
         return "Password successfully set to " + password;
     }
 
     private boolean connected;
 
-    @ShellMethod("设置链接状态为true")
+    @Command(name = "connect", description = "设置链接状态为true")
     public void connect() {
         connected = true;
     }
@@ -60,16 +58,16 @@ public class AvailableCommand {
      * 输入:>connect
      * 输出:>download
      */
-    @ShellMethod("必须链接后才能执行的方法")
+    @Command(name = "download", description = "必须链接后才能执行的方法")
     public void download() {}
 
-    public Availability downloadAvailability() {
-        return connected ? Availability.available() : Availability.unavailable("没有进行链接");
-    }
+//    public Availability downloadAvailability() {
+//        return connected ? Availability.available() : Availability.unavailable("没有进行链接");
+//    }
 
     private boolean connected2;
 
-    @ShellMethod("设置链接状态2为true")
+    @Command(name = "connect2", description = "设置链接状态2为true")
     public void connect2() {
         connected2 = true;
     }
@@ -77,16 +75,16 @@ public class AvailableCommand {
     /**
      * 为命令指定校验方法
      */
-    @ShellMethod("必须链接2链接后才能执行的方法")
-    @ShellMethodAvailability("availabilityCheck")
+    @Command(name = "disconnect2", description = "必须链接2链接后才能执行的方法")
+//    @ShellMethodAvailability("availabilityCheck")
     public void disconnect2() {}
 
     /**
      * 为校验方法指定需要校验的命令
      * @return
      */
-    @ShellMethodAvailability({"download2", "disconnect2"})
-    public Availability availabilityCheck() {
-        return connected2 ? Availability.available() : Availability.unavailable("没有进行链接");
-    }
+//    @ShellMethodAvailability({"download2", "disconnect2"})
+//    public Availability availabilityCheck() {
+//        return connected2 ? Availability.available() : Availability.unavailable("没有进行链接");
+//    }
 }

@@ -107,16 +107,7 @@ spring:
     pretty-printing: true
     serialize-nulls: true
     long-serialization-policy: string
-  sleuth:
-    web:
-      client:
-        enabled: true
-    sampler:
-      probability: 1.0
-  zipkin:
-    enabled: true
-    sender:
-      type: kafka
+
   shardingsphere:
     enabled: true
     datasource:
