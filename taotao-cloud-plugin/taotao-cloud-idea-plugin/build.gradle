@@ -98,7 +98,7 @@ dependencies {
         bundledPlugin 'com.intellij.copyright'
         bundledPlugin 'com.intellij.spring'
         bundledPlugin 'com.intellij.spring.boot'
-        bundledPlugin 'org.intellij.intelliLang'
+        //bundledPlugin 'org.intellij.intelliLang'
         bundledPlugin 'com.intellij.modules.json'
         bundledPlugin 'org.jetbrains.plugins.yaml'
         bundledPlugin 'org.intellij.plugins.markdown'
