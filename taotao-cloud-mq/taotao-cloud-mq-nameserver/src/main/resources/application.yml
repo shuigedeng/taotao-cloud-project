@@ -189,10 +189,6 @@ management:
           name: taotao-server-name
     key-values:
       application: ${spring.application.name}
-  prometheus:
-    metrics:
-      export:
-        enabled: true
   appoptics:
     metrics:
       export:
