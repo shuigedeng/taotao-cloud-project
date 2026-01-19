@@ -56,6 +56,7 @@ configurations {
         resolutionStrategy {
             //force "org.codehaus.groovy:groovy:3.0.25"
             force 'org.antlr:antlr4:4.13.2'
+            force 'org.apache.logging.log4j:log4j-core:2.25.3'
         }
 
         //exclude group: "log4j", module: "log4j"

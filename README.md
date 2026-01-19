@@ -22,7 +22,7 @@
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-**taotao-cloud(taotao云平台)**  基于**gradle9.2.1** 、**jdk25**, 支持**graalvm25**, 采用最新的**spring 7.0.2**、**SpringBoot 4.0.1**、**SpringCloud 2025.1.0**、**SpringSecurity 7.0.2**、**Nacos 3.1.1**、**Mybatis-Plus 3.5.16**、**Redis 7.4.0**等框架，开发的一款企业级微服务架构的云服务平台， 
+**taotao-cloud(taotao云平台)**  基于**gradle9.3.0** 、**jdk25**, 支持**graalvm25**, 采用最新的**spring 7.0.2**、**SpringBoot 4.0.1**、**SpringCloud 2025.1.0**、**SpringSecurity 7.0.2**、**Nacos 3.1.1**、**Mybatis-Plus 3.5.16**、**Redis 7.4.0**等框架，开发的一款企业级微服务架构的云服务平台， 
 
 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循**SpringBoot**编程思想，高度模块化和可配置化。
 
@@ -86,7 +86,7 @@ Requires:
 
 ```
 JAVA_VERSION >= 25 (推荐使用graalvm-jdk-25)
-GRALE_VERSION >= 9.2.1
+GRALE_VERSION >= 9.3.0
 IDEA_VERSION >= 2025.3.1
 ```
 

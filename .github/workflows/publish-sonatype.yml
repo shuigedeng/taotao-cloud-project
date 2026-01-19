@@ -87,7 +87,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.5.0
         with:
-          gradle-version: "9.2.1"
+          gradle-version: "9.3.0"
 
       #https://github.com/marketplace/actions/gradle-build-action
       - name: Publish Maven Plugin To Sonatype Repository

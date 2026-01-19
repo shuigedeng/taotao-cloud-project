@@ -153,6 +153,7 @@ configurations {
             force 'net.minidev:json-smart:2.6.0'
             //todo 临时使用
             force "io.opentelemetry:opentelemetry-api-incubator:1.58.0-alpha"
+            force 'org.apache.logging.log4j:log4j-core:2.25.3'
         }
 
         //exclude group: "log4j", module: "log4j"
