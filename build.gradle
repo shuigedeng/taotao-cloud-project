@@ -216,6 +216,9 @@ plugins {
 // 定义库引用
 //var pLibs = projectLibs
 
+def excludeIdeaSubProjects = ['taotao-cloud-idea-plugin']
+def excludeSubProjects = ['taotao-cloud-maven-plugin', 'taotao-cloud-idea-plugin', 'taotao-cloud-gradle-plugin']
+
 allprojects {
     version = project.ttcVersion
     group = project.ttcGroup
@@ -266,6 +269,17 @@ allprojects {
     compileJava.options.compilerArgs.add '-parameters'
     compileTestJava.options.compilerArgs.add '-parameters'
 
+    repositories {
+        mavenLocal()
+        mavenCentral()
+
+        maven {
+            url = "https://repo1.maven.org/maven2"
+        }
+    }
+}
+
+configure(subprojects.findAll { (!excludeIdeaSubProjects.contains(it.name)) }) { project ->
     repositories {
         mavenLocal()
         mavenCentral()
@@ -324,7 +338,6 @@ allprojects {
     }
 }
 
-def excludeSubProjects = ['taotao-cloud-maven-plugin', 'taotao-cloud-idea-plugin', 'taotao-cloud-gradle-plugin']
 configure(subprojects.findAll { (!excludeSubProjects.contains(it.name)) }) { project ->
     apply plugin: 'java'
     apply plugin: 'java-library'
