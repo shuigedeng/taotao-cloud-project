@@ -75,14 +75,14 @@ apply plugin: "idea"
 //apply plugin: 'elasticsearch.yaml-rest-test'
 
 dependencies {
-    implementation 'org.elasticsearch:elasticsearch:9.2.3'
+    implementation 'org.elasticsearch:elasticsearch:9.2.4'
 
-    compileOnly "org.elasticsearch.plugin:elasticsearch-plugin-api:9.2.3"
-    compileOnly "org.elasticsearch.plugin:elasticsearch-plugin-analysis-api:9.2.3"
+    compileOnly "org.elasticsearch.plugin:elasticsearch-plugin-api:9.2.4"
+    compileOnly "org.elasticsearch.plugin:elasticsearch-plugin-analysis-api:9.2.4"
     compileOnly "org.apache.lucene:lucene-analysis-common:10.3.2"
 
-    testImplementation "org.elasticsearch.plugin:elasticsearch-plugin-api:9.2.3"
-    testImplementation "org.elasticsearch.plugin:elasticsearch-plugin-analysis-api:9.2.3"
+    testImplementation "org.elasticsearch.plugin:elasticsearch-plugin-api:9.2.4"
+    testImplementation "org.elasticsearch.plugin:elasticsearch-plugin-analysis-api:9.2.4"
     testImplementation "org.apache.lucene:lucene-analysis-common:10.3.2"
 
     testImplementation 'org.mockito:mockito-core:5.20.0'

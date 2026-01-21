@@ -85,7 +85,7 @@ plugins {
     //https://github.com/vanniktech/gradle-maven-publish-plugin
     //https://vanniktech.github.io/gradle-maven-publish-plugin/central/v
     //https://vanniktech.github.io/gradle-maven-publish-plugin/other/
-    id "com.vanniktech.maven.publish" version "0.35.0"
+    id "com.vanniktech.maven.publish" version "0.36.0"
 }
 
 apply plugin: "io.freefair.maven-plugin"
