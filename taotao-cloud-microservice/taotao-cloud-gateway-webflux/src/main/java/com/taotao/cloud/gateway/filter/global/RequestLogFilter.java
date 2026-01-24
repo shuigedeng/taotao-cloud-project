@@ -20,7 +20,7 @@ import static com.taotao.boot.common.constant.CommonConstants.TTC_TRACE_ID;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.boot.common.constant.CommonConstants;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.common.utils.servlet.TraceUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;
@@ -71,7 +71,7 @@ public class RequestLogFilter implements GlobalFilter, Ordered {
         beforeReqArgs.add(traceId);
 
         HttpHeaders headers = exchange.getRequest().getHeaders();
-        String header = JsonUtils.toJSONString(headers);
+        String header = JacksonUtils.toJSONString(headers);
         beforeReqLog.append("===> requestHeaders : {}\n");
         beforeReqArgs.add(header);
         beforeReqLog.append("================ TaoTao Cloud Request End =================\n");
@@ -102,7 +102,7 @@ public class RequestLogFilter implements GlobalFilter, Ordered {
                                     responseArgs.add(exchange.getAttribute(TTC_TRACE_ID));
                                     responseArgs.add(executeTime + "ms");
 
-                                    String httpHeader = JsonUtils.toJSONString(httpHeaders);
+                                    String httpHeader = JacksonUtils.toJSONString(httpHeaders);
                                     responseLog.append("===> responseHeaders : {}\n");
                                     responseArgs.add(httpHeader);
                                     responseLog.append(

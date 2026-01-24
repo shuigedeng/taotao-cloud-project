@@ -17,7 +17,7 @@
 package com.taotao.cloud.gateway.service.impl;
 
 import com.taotao.boot.cache.redis.repository.RedisRepository;
-import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.gateway.model.BlackList;
 import com.taotao.cloud.gateway.model.RuleConstant;
 import com.taotao.cloud.gateway.service.IRuleCacheService;
@@ -51,7 +51,7 @@ public class RuleCacheServiceImpl implements IRuleCacheService {
                 StringUtils.isNotBlank(blackList.getIp())
                         ? RuleConstant.getBlackListCacheKey(blackList.getIp())
                         : RuleConstant.getBlackListCacheKey();
-        repository.sSet(key, JsonUtils.toJSONString(blackList));
+        repository.sSet(key, JacksonUtils.toJSONString(blackList));
     }
 
     @Override
@@ -60,6 +60,6 @@ public class RuleCacheServiceImpl implements IRuleCacheService {
                 StringUtils.isNotBlank(blackList.getIp())
                         ? RuleConstant.getBlackListCacheKey(blackList.getIp())
                         : RuleConstant.getBlackListCacheKey();
-        repository.setRemove(key, JsonUtils.toJSONString(blackList));
+        repository.setRemove(key, JacksonUtils.toJSONString(blackList));
     }
 }

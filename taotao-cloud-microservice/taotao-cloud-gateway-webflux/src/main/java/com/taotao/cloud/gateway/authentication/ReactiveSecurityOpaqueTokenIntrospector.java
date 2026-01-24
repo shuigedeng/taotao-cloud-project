@@ -16,16 +16,18 @@
 
 package com.taotao.cloud.gateway.authentication;
 
+import com.alibaba.druid.support.logging.Log;
+import com.alibaba.druid.support.logging.LogFactory;
+import com.taotao.boot.security.spring.autoconfigure.properties.OAuth2EndpointProperties;
 import com.taotao.boot.security.spring.constants.BaseConstants;
 import com.taotao.boot.security.spring.core.authority.TtcGrantedAuthority;
-import com.taotao.boot.security.spring.properties.OAuth2EndpointProperties;
 import java.net.URI;
 import java.time.Instant;
 import java.util.*;
+
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
+import org.springframework.boot.security.oauth2.server.resource.autoconfigure.OAuth2ResourceServerProperties;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.*;
@@ -53,6 +55,7 @@ import reactor.core.publisher.Mono;
  * @version 2023.07
  * @since 2023-07-04 10:00:05
  */
+@Slf4j
 public class ReactiveSecurityOpaqueTokenIntrospector implements ReactiveOpaqueTokenIntrospector {
 
     /**
@@ -64,7 +67,6 @@ public class ReactiveSecurityOpaqueTokenIntrospector implements ReactiveOpaqueTo
     /**
      * 日志记录器
      */
-    private final Log logger = LogFactory.getLog(getClass());
 
     /**
      * 其他操作
@@ -274,7 +276,7 @@ public class ReactiveSecurityOpaqueTokenIntrospector implements ReactiveOpaqueTo
                                     return false;
                                 });
         if (!active) {
-            this.logger.trace("Did not validate token since it is inactive");
+            log.trace("Did not validate token since it is inactive");
             throw new BadOpaqueTokenException("Provided token isn't active");
         }
         return claims;

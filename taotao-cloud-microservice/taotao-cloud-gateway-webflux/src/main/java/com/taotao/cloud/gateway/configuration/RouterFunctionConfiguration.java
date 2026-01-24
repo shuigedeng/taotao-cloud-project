@@ -23,8 +23,8 @@ import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.boot.captcha.util.CaptchaUtils;
 import com.taotao.boot.common.constant.RedisConstants;
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.common.utils.context.ContextUtils;
+import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.monitor.collect.HealthCheckProvider;
 import com.taotao.boot.monitor.model.Report;
@@ -196,7 +196,7 @@ public class RouterFunctionConfiguration {
             Map<String, String> map = params.toSingleValueMap();
             if (!map.isEmpty()) {
                 message.append(" 请求参数: ");
-                String serialize = JsonUtils.toJSONString(message);
+                String serialize = JacksonUtils.toJSONString(message);
                 message.append(serialize);
             }
             Object requestBody =

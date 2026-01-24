@@ -77,11 +77,12 @@ public class GatewayServerAuthenticationSuccessHandler
                 CommonConstants.TTC_USER_ROLE_HEADER,
                 CollUtil.join(authentication.getAuthorities(), ","));
 
-        ServerWebExchange exchange = webFilterExchange.getExchange();
-        ServerHttpRequest serverHttpRequest =
-                exchange.getRequest().mutate().headers(h -> h.addAll(headerValues)).build();
-
-        ServerWebExchange build = exchange.mutate().request(serverHttpRequest).build();
-        return webFilterExchange.getChain().filter(build);
+//        ServerWebExchange exchange = webFilterExchange.getExchange();
+//        ServerHttpRequest serverHttpRequest =
+//                exchange.getRequest().mutate().headers(h -> h.addAll(headerValues)).build();
+//
+//        ServerWebExchange build = exchange.mutate().request(serverHttpRequest).build();
+//        return webFilterExchange.getChain().filter(build);
+		return null;
     }
 }

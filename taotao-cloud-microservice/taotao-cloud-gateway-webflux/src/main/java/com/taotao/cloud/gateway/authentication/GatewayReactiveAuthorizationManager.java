@@ -35,6 +35,7 @@ import org.apache.commons.collections4.MapUtils;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authorization.AuthorizationDecision;
+import org.springframework.security.authorization.AuthorizationResult;
 import org.springframework.security.authorization.ReactiveAuthorizationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -60,7 +61,7 @@ public class GatewayReactiveAuthorizationManager
     private final SecurityMatcherConfigurer securityMatcherConfigurer;
     private final SecurityMetadataSourceStorage securityMetadataSourceStorage;
 
-    @Override
+//    @Override
     public Mono<AuthorizationDecision> check(
             Mono<Authentication> authentication, AuthorizationContext authorizationContext) {
         return authentication
@@ -194,4 +195,9 @@ public class GatewayReactiveAuthorizationManager
 
         return null;
     }
+
+	@Override
+	public Mono<AuthorizationResult> authorize( Mono<Authentication> authentication, AuthorizationContext object ) {
+		return null;
+	}
 }

@@ -136,7 +136,8 @@ public class AntiReptileFilter implements WebFilter, ApplicationContextAware {
             String str3 = str2.replaceAll("realRequestUri_value", requestUrl);
 
             return ResponseUtils.writeResponseTextHtml(
-                    exchange, HttpStatus.BANDWIDTH_LIMIT_EXCEEDED, str3);
+                    exchange, HttpStatus
+					.BANDWIDTH_LIMIT_EXCEEDED, str3);
         }
         return chain.filter(exchange);
     }

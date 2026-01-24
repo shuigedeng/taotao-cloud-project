@@ -17,15 +17,15 @@
 package com.taotao.cloud.gateway.authentication;
 
 import com.taotao.boot.common.utils.log.LogUtils;
+import com.taotao.boot.security.spring.autoconfigure.properties.OAuth2AuthorizationProperties;
+import com.taotao.boot.security.spring.autoconfigure.properties.OAuth2EndpointProperties;
 import com.taotao.boot.security.spring.enums.Target;
-import com.taotao.boot.security.spring.properties.OAuth2AuthorizationProperties;
-import com.taotao.boot.security.spring.properties.OAuth2EndpointProperties;
 import com.taotao.cloud.gateway.properties.SecurityProperties;
 import java.util.List;
 import lombok.*;
-import org.springframework.boot.actuate.autoconfigure.security.reactive.EndpointRequest;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
+import org.springframework.boot.security.autoconfigure.actuate.web.reactive.EndpointRequest;
+import org.springframework.boot.security.oauth2.server.resource.autoconfigure.OAuth2ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -111,17 +111,17 @@ public class GatewayResourceServerConfiguration {
     public ServerHttpSecurity.OAuth2ResourceServerSpec from(
             ServerHttpSecurity.OAuth2ResourceServerSpec oAuth2ResourceServerSpec) {
         if (isRemoteValidate()) {
-            ReactiveSecurityOpaqueTokenIntrospector opaqueTokenIntrospector =
-                    new ReactiveSecurityOpaqueTokenIntrospector(
-                            endpointProperties, resourceServerProperties);
-
-            oAuth2ResourceServerSpec
-                    .opaqueToken(
-                            opaqueTokenCustomizer -> {
-                                opaqueTokenCustomizer.introspector(opaqueTokenIntrospector);
-                            })
-                    .accessDeniedHandler(new JsonServerAccessDeniedHandler())
-                    .authenticationEntryPoint(new JsonServerAuthenticationEntryPoint());
+//            ReactiveSecurityOpaqueTokenIntrospector opaqueTokenIntrospector =
+//                    new ReactiveSecurityOpaqueTokenIntrospector(
+//                            endpointProperties, resourceServerProperties);
+//
+//            oAuth2ResourceServerSpec
+//                    .opaqueToken(
+//                            opaqueTokenCustomizer -> {
+//                                opaqueTokenCustomizer.introspector(opaqueTokenIntrospector);
+//                            })
+//                    .accessDeniedHandler(new JsonServerAccessDeniedHandler())
+//                    .authenticationEntryPoint(new JsonServerAuthenticationEntryPoint());
         } else {
             oAuth2ResourceServerSpec
                     .jwt(
