@@ -38,7 +38,7 @@ dependencies {
     // 微信开放平台
     //https://search.maven.org/artifact/com.github.binarywang/wx-java-mp-spring-boot-starter
     implementation "com.github.binarywang:wx-java-open-spring-boot-starter:4.8.0"
-    implementation "com.github.binarywang:wx-java-open-multi-spring-boot-starter:4.8.0"
+    implementation "com.github.binarywang:wx-java-open-multi-spring-boot-starter:4.8.0-20260123.165534"
     // 微信企业号开发
     //https://search.maven.org/artifact/com.github.binarywang/wx-java-cp-spring-boot-starter
     implementation "com.github.binarywang:wx-java-cp-spring-boot-starter:4.8.0"
