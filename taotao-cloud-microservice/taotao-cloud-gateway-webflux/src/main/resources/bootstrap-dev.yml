@@ -1,0 +1,214 @@
+server:
+  port: 33305
+  shutdown: graceful
+  http2:
+    enabled: false
+  ssl:
+    enabled: false
+    key-store: classpath:cert/SHA256withRSA_taotaocloud.top.jks
+    key-store-type: JKS
+    key-store-password: 1234
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+  pid:
+    file: ${user.home}/logs/${spring.application.name}/${spring.application.name}.pid
+  main:
+    allow-bean-definition-overriding: true
+    web-application-type: reactive
+    banner-mode: off
+  application:
+    name: taotao-cloud-gateway
+  cloud:
+    loadbalancer:
+      enabled: true
+    nacos:
+      discovery:
+        server-addr: 192.168.218.2:8848
+        metadata:
+          version: ${ttcVersion}
+          user.name: "admin"
+          user.password: "123456"
+        group: TAOTAO_CLOUD_GROUP
+        namespace: 82f5c2ff-c0d5-478d-9987-7f082d1a55d7
+        username: nacos
+        password: nacos
+        cluster-name: CQ
+        naming-load-cache-at-start: false
+      config:
+        enabled: false
+        server-addr: 192.168.218.2:8848
+        namespace: 82f5c2ff-c0d5-478d-9987-7f082d1a55d7
+        file-extension: yml
+        cluster-name: CQ
+        group: TAOTAO_CLOUD_GROUP
+        username: nacos
+        password: nacos
+        refresh-enabled: true
+        import-check:
+          enabled: false #禁用spring的配置导入检查
+        ## 要在各应⽤之间共享⼀个配置，请使⽤上⾯的 shared-configs 用于共享的配置文件
+        #shared-configs:
+        #  - data-id: common-mysql.yaml
+        #    group: SPRING_CLOUD_EXAMPLE_GROUP
+        #  - data-id: common-redis.yaml
+        #    group: SPRING_CLOUD_EXAMPLE_GROUP
+        #  - data-id: common-base.yaml
+        #    group: SPRING_CLOUD_EXAMPLE_GROUP
+        ## 如果要在特定范围内（⽐如某个应⽤上）覆盖某个共享dataId上的特定属性，请使⽤ extension-config 常规配置文件
+        ## 优先级大于 shared-configs，在 shared-configs 之后加载
+        #extension-configs:
+        #  - data-id: nacos-config-advanced.yaml
+        #    group: SPRING_CLOUD_EXAMPLE_GROUP
+        #    refresh: true
+        #  - data-id: nacos-config-base.yaml
+        #    group: SPRING_CLOUD_EXAMPLE_GROUP
+        #    refresh: true
+    sentinel:
+      #Sentinel自动化配置是否生效
+      enabled: true
+      #是否提前触发 Sentinel 初始化
+      eager: true
+      datasource:
+        #流控 名称随意
+        flow:
+          nacos:
+            server-addr: 192.168.218.2:8848
+            dataId: ${spring.application.name}-flow-rules
+            namespace: taotao-cloud-sentinel
+            username: nacos
+            password: nacos
+            groupId: SENTINEL_GROUP
+            data-type: json
+            # 规则类型，取值见： org.springframework.cloud.alibaba.sentinel.datasource.RuleType
+            rule-type: flow
+        #熔断降级 名称随意
+        degrade:
+          nacos:
+            server-addr: 192.168.218.2:8848
+            dataId: ${spring.application.name}-degrade-rules
+            namespace: taotao-cloud-sentinel
+            username: nacos
+            password: nacos
+            groupId: SENTINEL_GROUP
+            data-type: json
+            rule-type: degrade
+        #系统规则 名称随意
+        system:
+          nacos:
+            server-addr: 192.168.218.2:8848
+            dataId: ${spring.application.name}-system-rules
+            namespace: taotao-cloud-sentinel
+            username: nacos
+            password: nacos
+            groupId: SENTINEL_GROUP
+            data-type: json
+            rule-type: system
+        #授权规则 名称随意
+        authority:
+          nacos:
+            server-addr: 192.168.218.2:8848
+            dataId: ${spring.application.name}-authority-rules
+            namespace: taotao-cloud-sentinel
+            username: nacos
+            password: nacos
+            groupId: SENTINEL_GROUP
+            data-type: json
+            rule-type: authority
+        #参数规则 名称随意
+        param-flow:
+          nacos:
+            server-addr: 192.168.218.2:8848
+            dataId: ${spring.application.name}-param-flow-rules
+            namespace: taotao-cloud-sentinel
+            username: nacos
+            password: nacos
+            groupId: SENTINEL_GROUP
+            data-type: json
+            rule-type: param-flow
+      transport:
+        #Sentinel 控制台地址（可以配置host:port,这样就不用单独配置port）
+        dashboard: 192.168.218.2:8858
+        #应用与Sentinel控制台交互的端口，应用本地会起一个该端口占用的HttpServer（可以不配置）
+        port: 8712
+        #应用与Sentinel控制台的心跳间隔时间
+        heartbeatIntervalMs: 5000
+        #此配置的客户端IP将被注册到 Sentinel Server 端
+        #clientIp:
+      metric:
+        #Sentinel metric 单个文件的大小
+        file-single-size: 1024 * 1024 * 50
+        #Sentinel metric 总文件数量
+        file-total-count: 10
+        #metric文件字符集
+        #charset: 	UTF-8
+      flow:
+        #github.com/alibaba/Sen… %E5%86%B7%E5%90%AF%E5%8A%A8[冷启动因子]
+        cold-factor: 3
+      log:
+        #Sentinel 日志文件所在的目录
+        dir: ${user.home}/logs/${spring.application.name}/sentinel
+        #Sentinel 日志文件名是否需要带上pid
+        switch-pid: false
+      scg:
+        fallback:
+          #Spring Cloud Gateway 熔断后的响应模式(选择 redirect or response)
+          mode: response
+          #Spring Cloud Gateway 响应模式为 'response' 模式对应的响应码
+          response-status: 200
+          #Spring Cloud Gateway 响应模式为 'response' 模式对应的响应内容
+          response-body: "{'data': null, 'code': 500,'message': '访问频繁,进入系统熔断'}"
+          #Spring Cloud Gateway 响应模式为 'response' 模式对应的 content-type
+          #content-type: application/json
+      #filter:
+        #Enable to instance CommonFilter
+        #enabled: true
+        #数据类型是数组。表示Servlet Filter的url pattern集合
+        #url-patterns: 	/*
+        #Servlet Filter的加载顺序。Starter内部会构造这个filter
+        #order: Integer.MIN_VALUE
+
+
+logging:
+  file:
+    name: ${user.home}/logs/${spring.application.name}/${spring.application.name}.all.log
+    path: ${user.home}/logs/${spring.application.name}/
+  logback:
+    rollingpolicy:
+      max-file-size: 10GB
+      max-history: 30
+      clean-history-on-start: true
+      total-size-cap: 20GB
+  level:
+    root: INFO
+    org.apache.zookeeper.ZooKeeper: info
+    com.taotao.cloud.sys.api.feign: debug
+    net.ttddyy.dsproxy.listener: debug
+    net.ttddyy.dsproxy.listener.logging.SLF4JQueryLoggingListener: debug
+    # hibernate log
+    #org.hibernate.SQL: debug
+    #org.hibernate.type: info
+    #org.hibernate.type.descriptor.sql.BasicBinder: trace
+    #org.hibernate.type.descriptor.sql.BasicExtractor: debug
+    #org.hibernate.engine.QueryParameters: debug
+    #org.hibernate.engine.query.HQLQueryPlan: debug
+    # mybatis log
+    #com.apache.ibatis: trace
+    #java.sql.Connection: debug
+    #java.sql.Statement: debug
+    #java.sql.PreparedStatement: debug
+    # kafka log
+    #kafka.server.KafkaConfig: info
+    #kafka.admin.AdminClient.AdminConfig: info
+    #org.apache.kafka: off
+    #org.I0Itec.zkclient: info
+    # springframework log
+    #org.springframework.cloud.openfeign: debug
+    #org.springframework.web: off
+    #org.springframework.security: off
+    #org.springframework.security.oauth2: off
+    #org.springframework.boot.autoconfigure: off
+    #org.elasticsearch.client: debug
+  config: classpath:logback-spring.xml

@@ -1,0 +1,26 @@
+[
+  {
+    "resource": "ttc-auth",
+    "grade": 1,
+    "count": 300,
+    "intervalSec": 1,
+    "burst": 1000,
+    "controlBehavior": 0
+  },
+  {
+    "resource": "ttc-admin",
+    "grade": 1,
+    "count": 300,
+    "intervalSec": 1,
+    "burst": 1000,
+    "controlBehavior": 0
+  },
+  {
+    "resource": "ttc-oss",
+    "grade": 1,
+    "count": 300,
+    "intervalSec": 1,
+    "burst": 1000,
+    "controlBehavior": 0
+  }
+]

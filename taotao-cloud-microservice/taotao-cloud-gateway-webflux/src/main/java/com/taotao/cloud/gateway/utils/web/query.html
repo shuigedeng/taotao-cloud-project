@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查询测试</title>
+</head>
+<body>
+
+
+id：<input id="id_txt" type="text"/>
+<input id="btn_search" type="button" value="查询"/>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jsencrypt.js"></script>
+<script src="js/md5.min.js"></script>
+<script type="text/javascript">
+    var encrypt = new JSEncrypt();
+    encrypt.setPublicKey("MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCFtTlL61IqIGd+fRLUhJ0MjsqFXFJswCohJ45m51WvbxDPRP3gllW0WChk74D5JEOpMDSWo4C7RfoGlBRNW7kQ6qYGukYZ5jgYpzoT0+gp3on96fQXEyQJysv9xiTPIdmSXXVVj1HAOJw29RbzxIVKUSzzPXvEtXRTtCC1+wkAJQIDAQAB");
+
+    $("#btn_search").click(function () {
+        const id = $("#id_txt").val();
+        const param = "id=" + id;
+
+        const form = {};
+        form.id = id;
+
+        const timestamp = Date.parse(new Date());
+        const requestId = getUuid();
+        const data = JSON.stringify(sort_ASCII(form));
+        const sign = MD5(data + requestId + timestamp);
+
+        encrypt.encrypt(param);
+        const url = "http://127.0.0.1:9000/api/user/detail?param=" + encrypt.encrypt(param);
+        $.ajax({
+            url: url,
+            beforeSend: function (XMLHttpRequest) {
+                XMLHttpRequest.setRequestHeader("token", "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzYzE1ODczYS1iMGUxLTQyNzctYTRjOS1kYTMwNjdiYmE0NWIiLCJpYXQiOjE2MzUzMDYwMDAsInN1YiI6IntcInBhc3N3b3JkXCI6XCIxMjM0NTZcIixcInVzZXJJZFwiOjEsXCJ1c2VybmFtZVwiOlwiYWRtaW5cIn0iLCJleHAiOjE2MzU1NjUyMDB9.fIQi_cV2ZMszBVFV4GoIpGhCSENQKrDi8DsbArk7mGk");
+                XMLHttpRequest.setRequestHeader("timestamp", timestamp);
+                XMLHttpRequest.setRequestHeader("requestId", requestId);
+                XMLHttpRequest.setRequestHeader("sign", sign);
+            },
+            type: "GET",
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    });
+
+
+    function getUuid() {
+        var s = [];
+        var hexDigits = "0123456789abcdef";
+        for (var i = 0; i < 32; i++) {
+            s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+        }
+        s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+        s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+        s[8] = s[13] = s[18] = s[23];
+        var uuid = s.join("");
+        return uuid;
+    }
+
+    function sort_ASCII(obj) {
+        var arr = new Array();
+        var num = 0;
+        for (var i in obj) {
+            arr[num] = i;
+            num++;
+        }
+        var sortArr = arr.sort();
+        var sortObj = {};
+        for (var i in sortArr) {
+            sortObj[sortArr[i]] = obj[sortArr[i]];
+        }
+        return sortObj;
+    }
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+#server:
+#  port: 33305
+#  shutdown: graceful
+#  http2:
+#    enabled: false
+#  ssl:
+#    enabled: false
+#    key-store: classpath:cert/SHA256withRSA_taotaocloud.top.jks
+#    key-store-type: JKS
+#    key-store-password: 1234
+#
+#spring:
+#  config:
+#    activate:
+#      on-profile: zookeeper
+#  pid:
+#    file: ${user.home}/logs/${spring.application.name}/${spring.application.name}.pid
+#  main:
+#    allow-bean-definition-overriding: true
+#    web-application-type: reactive
+#    banner-mode: off
+#  application:
+#    name: taotao-cloud-gateway
+#  cloud:
+#    loadbalancer:
+#      enabled: true
+#    zookeeper:
+#      connect-string: 192.168.218.2:2181
+#      discovery:
+#        instance-host: ${spring.cloud.client.ip-address}
+#        uri-spec: zookeeper://192.168.218.2:2181
+#

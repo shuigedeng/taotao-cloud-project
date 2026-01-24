@@ -169,7 +169,10 @@ dependencies {
         exclude group: "org.glassfish", module: "javax.el"
     }
     implementation 'redis.clients:jedis:7.2.1'
-    implementation 'com.clickhouse:clickhouse-jdbc:0.9.6'
+    implementation('com.clickhouse:clickhouse-jdbc:0.9.6') {
+        exclude group: 'at.yawk.lz4', module: 'lz4-java'
+    }
+
 
     implementation "com.janeluo:ikanalyzer:2012_u6"
 

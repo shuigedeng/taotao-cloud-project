@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>hello</title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://www.xcc.cn/static/favicon.ico">
+    <script>
+        function getXhr() {
+            var xhr = null;
+            try {
+                xhr = new XMLHttpRequest();
+            } catch (e) {
+                try {
+                    xhr = new ActiveXObject("Msxml2.XMLHTTP");
+                } catch (e) {
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+            }
+            return xhr;
+        }
+
+        function refresh() {
+            var xhr = getXhr();
+            var verifyId = document.getElementById("verifyId").value;
+            var baseUrl = document.getElementById("baseUrl").value;
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var verifyObj = JSON.parse(xhr.responseText);
+                    document.getElementById("verifyId").value = verifyObj.verifyId;
+                    document.getElementById("verifyImg").src = verifyObj.verifyImgStr;
+                }
+            }
+            xhr.open("POST", baseUrl + "/api/search/refresh?verifyId=" + verifyId, "true");
+            xhr.send();
+        }
+
+        function validate() {
+            var elements = document.getElementById("verifyFrom");
+            var formData = new FormData();
+            for (var i = 0; i < elements.length; i++) {
+                formData.append(elements[i].name, elements[i].value);
+            }
+            var baseUrl = document.getElementById("baseUrl").value;
+            var xhr = getXhr();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var obj = JSON.parse(xhr.responseText);
+                    if (obj.result == true) {
+                        window.top.postMessage({
+                            info: 1
+                        }, "*")
+                    } else {
+                        alert("验证码填写错误")
+                    }
+                }
+            }
+            xhr.open("POST", baseUrl + "/api/search/validate", "true");
+            xhr.send(formData);
+        }
+
+
+    </script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            width: 240px;
+            margin: 100px auto;
+            padding: 20px;
+        }
+
+        input[type="text"] {
+            margin: 10px 0;
+            padding: 0 4px;
+            width: 100%;
+            height: 32px;
+            border: 1px solid #c3c3c3;
+            border-radius: 4px;
+        }
+
+        input[type="button"] {
+            width: 100%;
+            height: 32px;
+            color: #fff;
+            background-color: #40a9ff;
+            border-color: #40a9ff;
+            border-radius: 4px;
+            outline: 0;
+            cursor: pointer;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+            border-style: none;
+        }
+
+        .img-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .img-wrapper img {
+            width: 130px;
+            height: 48px;
+        }
+
+        .img-wrapper a {
+            text-decoration: none;
+            color: #1890ff;
+        }
+    </style>
+</head>
+<body>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+<title>普通验证码</title>
+<form id="verifyFrom" method="post" action="">
+    <input type="hidden" id="baseUrl" name="baseUrl">
+    <input type="hidden" id="verifyId" name="verifyId" value="verifyId_value">
+    <input type="hidden" id="realRequestUri" name="realRequestUri" value="realRequestUri_value">
+    <span>操作频繁，请输入验证码</span>
+    <div class="img-wrapper">
+        <img id="verifyImg" src="verifyImg_value"> &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="javascript:void(0);" onclick="refresh()">刷新</a>
+    </div>
+    <input type="text" id="result" name="result">
+    <br/>
+    <input type="button" value="确认" onclick="validate()">
+</form>
+</body>
+</html>

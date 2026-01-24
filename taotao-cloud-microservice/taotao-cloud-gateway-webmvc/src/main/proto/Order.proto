@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package com.taotao.cloud.gateway.grpc.order;
+
+option java_multiple_files = true;
+option java_package = "com.taotao.cloud.gateway.grpc.order";
+
+service OrderService {
+  rpc order(OrderRequest) returns (OrderResponse);
+}
+
+message OrderRequest {
+  string firstName = 1;
+  string lastName = 2;
+}
+
+message OrderResponse {
+  string greeting = 1;
+}
