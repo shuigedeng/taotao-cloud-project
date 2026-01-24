@@ -183,7 +183,8 @@ configurations {
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
         resolutionStrategy {
-            force "org.glassfish:javax.el:3.0.0"
+            force 'org.glassfish:javax.el:3.0.0'
+            force 'org.glassfish.jaxb:jaxb-runtime:4.0.6'
         }
     }
 }

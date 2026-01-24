@@ -20,3 +20,15 @@ repositories {
         url = 'https://build.shibboleth.net/nexus/content/groups/public'
     }
 }
+
+configurations {
+    configureEach {
+        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
+
+        resolutionStrategy {
+            force 'org.glassfish:javax.el:3.0.0'
+            force 'org.glassfish.jaxb:jaxb-runtime:4.0.6'
+        }
+    }
+}
