@@ -43,8 +43,8 @@ dependencies {
     implementation 'org.springframework.session:spring-session-data-redis:4.0.1'
 
     //https://central.sonatype.com/artifact/com.github.binarywang/weixin-java-pay?smo=true
-    implementation 'com.github.binarywang:weixin-java-mp:4.7.9.B'
-    implementation 'com.github.binarywang:weixin-java-miniapp:4.7.9.B'
+    implementation 'com.github.binarywang:weixin-java-mp:4.8.0'
+    implementation 'com.github.binarywang:weixin-java-miniapp:4.8.0'
 
     //implementation 'top.dcenter:justAuth-spring-security-starter:1.1.25'
 
@@ -53,7 +53,7 @@ dependencies {
     //https://search.maven.org/artifact/org.webjars/bootstrap
     implementation "org.webjars:bootstrap:5.3.5"
     //https://search.maven.org/artifact/org.webjars/webjars-locator-lite
-    implementation "org.webjars:webjars-locator-lite:1.1.2"
+    implementation "org.webjars:webjars-locator-lite:1.1.3"
     implementation 'org.webjars:font-awesome:6.5.1'
     implementation 'org.webjars.bower:jquery-backstretch:2.1.17'
     implementation 'org.webjars:uniform:2.1.2-1'

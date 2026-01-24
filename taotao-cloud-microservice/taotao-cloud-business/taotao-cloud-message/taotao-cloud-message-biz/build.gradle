@@ -39,9 +39,9 @@ dependencies {
     }
     implementation 'com.alipay.sdk:alipay-sdk-java:4.40.607.ALL'
 
-    implementation "com.github.binarywang:weixin-java-cp:4.7.9.B"
-    implementation "com.github.binarywang:weixin-java-miniapp:4.7.9.B"
-    implementation "com.github.binarywang:weixin-java-mp:4.7.9.B"
+    implementation "com.github.binarywang:weixin-java-cp:4.8.0"
+    implementation "com.github.binarywang:weixin-java-miniapp:4.8.0"
+    implementation "com.github.binarywang:weixin-java-mp:4.8.0"
 
     implementation 'com.ctrip.framework.apollo:apollo-client-config-data:2.4.0'
     implementation 'org.dromara.dynamictp:dynamic-tp-spring-boot-starter-apollo:1.2.2-x'

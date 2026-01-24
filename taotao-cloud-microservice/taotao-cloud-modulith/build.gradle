@@ -24,21 +24,21 @@ dependencies {
 
     //https://github.com/spring-projects/spring-modulith
     //https://central.sonatype.com/artifact/org.springframework.modulith/spring-modulith-starter-core
-    implementation 'org.springframework.modulith:spring-modulith-starter-core:2.0.1'
-    implementation 'org.springframework.modulith:spring-modulith-starter-insight:2.0.1'
-    implementation 'org.springframework.modulith:spring-modulith-starter-jdbc:2.0.1'
-    implementation 'org.springframework.modulith:spring-modulith-starter-jpa:2.0.1'
-    //implementation 'org.springframework.modulith:spring-modulith-starter-mongodb:2.0.1'
-    implementation 'org.springframework.modulith:spring-modulith-events-kafka:2.0.1'
-    implementation 'org.springframework.modulith:spring-modulith-events-amqp:2.0.1'
-    implementation 'org.springframework.modulith:spring-modulith-events-jpa:2.0.1'
-    implementation 'org.springframework.modulith:spring-modulith-events-jdbc:2.0.1'
-    //implementation 'org.springframework.modulith:spring-modulith-events-mongodb:2.0.1'
-    implementation 'org.springframework.modulith:spring-modulith-moments:2.0.1'
-    implementation 'org.springframework.modulith:spring-modulith-observability:2.0.1'
-    implementation 'org.springframework.modulith:spring-modulith-docs:2.0.1'
-    implementation 'org.springframework.modulith:spring-modulith-actuator:2.0.1'
-    testImplementation 'org.springframework.modulith:spring-modulith-starter-test:2.0.1'
+    implementation 'org.springframework.modulith:spring-modulith-starter-core:2.0.2'
+    implementation 'org.springframework.modulith:spring-modulith-starter-insight:2.0.2'
+    implementation 'org.springframework.modulith:spring-modulith-starter-jdbc:2.0.2'
+    implementation 'org.springframework.modulith:spring-modulith-starter-jpa:2.0.2'
+    //implementation 'org.springframework.modulith:spring-modulith-starter-mongodb:2.0.2'
+    implementation 'org.springframework.modulith:spring-modulith-events-kafka:2.0.2'
+    implementation 'org.springframework.modulith:spring-modulith-events-amqp:2.0.2'
+    implementation 'org.springframework.modulith:spring-modulith-events-jpa:2.0.2'
+    implementation 'org.springframework.modulith:spring-modulith-events-jdbc:2.0.2'
+    //implementation 'org.springframework.modulith:spring-modulith-events-mongodb:2.0.2'
+    implementation 'org.springframework.modulith:spring-modulith-moments:2.0.2'
+    implementation 'org.springframework.modulith:spring-modulith-observability:2.0.2'
+    implementation 'org.springframework.modulith:spring-modulith-docs:2.0.2'
+    implementation 'org.springframework.modulith:spring-modulith-actuator:2.0.2'
+    testImplementation 'org.springframework.modulith:spring-modulith-starter-test:2.0.2'
 
     //https://github.com/xmolecules/jmolecules
     //https://central.sonatype.com/artifact/org.jmolecules/jmolecules-ddd
