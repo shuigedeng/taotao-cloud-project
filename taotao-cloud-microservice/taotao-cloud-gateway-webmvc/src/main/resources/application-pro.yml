@@ -285,9 +285,9 @@ spring:
               filters:
                 - RewritePath=/auth/(?<path>.*), /auth/$\{path}
                 - StripPrefix=2
-                - RequestTime=true
-                - PreserveHostHeader
-                - SwaggerHeader
+                #- RequestTime=true
+                #- PreserveHostHeader
+                #- SwaggerHeader
                 - name: RequestRateLimiter
                   args:
                     key-resolver: '#{@remoteAddrKeyResolver}'
@@ -307,9 +307,9 @@ spring:
               filters:
                 - RewritePath=/customer/(?<path>.*), /customer/$\{path}
                 - StripPrefix=2
-                - RequestTime=true
-                - PreserveHostHeader
-                - SwaggerHeader
+                #- RequestTime=true
+                #- PreserveHostHeader
+                #- SwaggerHeader
                 - name: RequestRateLimiter
                   args:
                     key-resolver: '#{@remoteAddrKeyResolver}'
@@ -328,9 +328,9 @@ spring:
               filters:
                 - RewritePath=/distribution/(?<path>.*), /distribution/$\{path}
                 - StripPrefix=2
-                - RequestTime=true
-                - PreserveHostHeader
-                - SwaggerHeader
+                #- RequestTime=true
+                #- PreserveHostHeader
+                #- SwaggerHeader
                 - name: RequestRateLimiter
                   args:
                     key-resolver: '#{@remoteAddrKeyResolver}'
@@ -350,9 +350,9 @@ spring:
               filters:
                 - RewritePath=/file/(?<path>.*), /file/$\{path}
                 - StripPrefix=2
-                - RequestTime=true
-                - PreserveHostHeader
-                - SwaggerHeader
+                #- RequestTime=true
+                #- PreserveHostHeader
+                #- SwaggerHeader
                 - name: RequestRateLimiter
                   args:
                     key-resolver: '#{@remoteAddrKeyResolver}'
@@ -372,9 +372,9 @@ spring:
               filters:
                 - RewritePath=/tenant/(?<path>.*), /tenant/$\{path}
                 - StripPrefix=2
-                - RequestTime=true
-                - PreserveHostHeader
-                - SwaggerHeader
+                #- RequestTime=true
+                #- PreserveHostHeader
+                #- SwaggerHeader
                 - name: RequestRateLimiter
                   args:
                     key-resolver: '#{@remoteAddrKeyResolver}'
@@ -393,9 +393,9 @@ spring:
               filters:
                 - RewritePath=/flowable/(?<path>.*), /flowable/$\{path}
                 - StripPrefix=2
-                - RequestTime=true
-                - PreserveHostHeader
-                - SwaggerHeader
+                #- RequestTime=true
+                #- PreserveHostHeader
+                #- SwaggerHeader
                 - name: RequestRateLimiter
                   args:
                     key-resolver: '#{@remoteAddrKeyResolver}'
@@ -414,9 +414,9 @@ spring:
               filters:
                 - RewritePath=/generator/(?<path>.*), /generator/$\{path}
                 - StripPrefix=2
-                - RequestTime=true
-                - PreserveHostHeader
-                - SwaggerHeader
+                #- RequestTime=true
+                #- PreserveHostHeader
+                #- SwaggerHeader
                 - name: RequestRateLimiter
                   args:
                     key-resolver: '#{@remoteAddrKeyResolver}'
@@ -436,9 +436,9 @@ spring:
               filters:
                 - RewritePath=/job/(?<path>.*), /job/$\{path}
                 - StripPrefix=2
-                - RequestTime=true
-                - PreserveHostHeader
-                - SwaggerHeader
+                #- RequestTime=true
+                #- PreserveHostHeader
+                #- SwaggerHeader
                 - name: RequestRateLimiter
                   args:
                     key-resolver: '#{@remoteAddrKeyResolver}'
@@ -459,9 +459,9 @@ spring:
               filters:
                 - RewritePath=/stock/(?<path>.*), /stock/$\{path}
                 - StripPrefix=2
-                - RequestTime=true
-                - PreserveHostHeader
-                - SwaggerHeader
+                #- RequestTime=true
+                #- PreserveHostHeader
+                #- SwaggerHeader
                 - name: RequestRateLimiter
                   args:
                     key-resolver: '#{@remoteAddrKeyResolver}'
@@ -482,9 +482,9 @@ spring:
               filters:
                 - RewritePath=/settlement/(?<path>.*), /settlement/$\{path}
                 - StripPrefix=2
-                - RequestTime=true
-                - PreserveHostHeader
-                - SwaggerHeader
+                #- RequestTime=true
+                #- PreserveHostHeader
+                #- SwaggerHeader
                 - name: RequestRateLimiter
                   args:
                     key-resolver: '#{@remoteAddrKeyResolver}'
@@ -503,9 +503,9 @@ spring:
               filters:
                 - RewritePath=/search/(?<path>.*), /search/$\{path}
                 - StripPrefix=2
-                - RequestTime=true
-                - PreserveHostHeader
-                - SwaggerHeader
+                #- RequestTime=true
+                #- PreserveHostHeader
+                #- SwaggerHeader
                 - name: RequestRateLimiter
                   args:
                     key-resolver: '#{@remoteAddrKeyResolver}'
@@ -524,9 +524,9 @@ spring:
               filters:
                 - RewritePath=/report/(?<path>.*), /report/$\{path}
                 - StripPrefix=2
-                - RequestTime=true
-                - PreserveHostHeader
-                - SwaggerHeader
+                #- RequestTime=true
+                #- PreserveHostHeader
+                #- SwaggerHeader
                 - name: RequestRateLimiter
                   args:
                     key-resolver: '#{@remoteAddrKeyResolver}'
@@ -545,9 +545,9 @@ spring:
               filters:
                 - RewritePath=/recommend/(?<path>.*), /recommend/$\{path}
                 - StripPrefix=2
-                - RequestTime=true
-                - PreserveHostHeader
-                - SwaggerHeader
+                #- RequestTime=true
+                #- PreserveHostHeader
+                #- SwaggerHeader
                 - name: RequestRateLimiter
                   args:
                     key-resolver: '#{@remoteAddrKeyResolver}'
@@ -566,9 +566,9 @@ spring:
               filters:
                 - RewritePath=/promotion/(?<path>.*), /promotion/$\{path}
                 - StripPrefix=2
-                - RequestTime=true
-                - PreserveHostHeader
-                - SwaggerHeader
+                #- RequestTime=true
+                #- PreserveHostHeader
+                #- SwaggerHeader
                 - name: RequestRateLimiter
                   args:
                     key-resolver: '#{@remoteAddrKeyResolver}'
@@ -587,9 +587,9 @@ spring:
               filters:
                 - RewritePath=/payment/(?<path>.*), /payment/$\{path}
                 - StripPrefix=2
-                - RequestTime=true
-                - PreserveHostHeader
-                - SwaggerHeader
+                #- RequestTime=true
+                #- PreserveHostHeader
+                #- SwaggerHeader
                 - name: RequestRateLimiter
                   args:
                     key-resolver: '#{@remoteAddrKeyResolver}'
@@ -608,9 +608,9 @@ spring:
               filters:
                 - RewritePath=/operation/(?<path>.*), /operation/$\{path}
                 - StripPrefix=2
-                - RequestTime=true
-                - PreserveHostHeader
-                - SwaggerHeader
+                #- RequestTime=true
+                #- PreserveHostHeader
+                #- SwaggerHeader
                 - name: RequestRateLimiter
                   args:
                     key-resolver: '#{@remoteAddrKeyResolver}'
@@ -645,9 +645,9 @@ spring:
               filters:
                 - RewritePath=/message/(?<path>.*), /message/$\{path}
                 - StripPrefix=2
-                - RequestTime=true
-                - PreserveHostHeader
-                - SwaggerHeader
+                #- RequestTime=true
+                #- PreserveHostHeader
+                #- SwaggerHeader
                 - name: RequestRateLimiter
                   args:
                     key-resolver: '#{@remoteAddrKeyResolver}'
@@ -666,9 +666,9 @@ spring:
               filters:
                 - RewritePath=/member/(?<path>.*), /member/$\{path}
                 - StripPrefix=2
-                - RequestTime=true
-                - PreserveHostHeader
-                - SwaggerHeader
+                #- RequestTime=true
+                #- PreserveHostHeader
+                #- SwaggerHeader
                 - name: RequestRateLimiter
                   args:
                     key-resolver: '#{@remoteAddrKeyResolver}'
@@ -688,9 +688,9 @@ spring:
               filters:
                 - RewritePath=/bulletin/(?<path>.*), /bulletin/$\{path}
                 - StripPrefix=2
-                - RequestTime=true
-                - PreserveHostHeader
-                - SwaggerHeader
+                #- RequestTime=true
+                #- PreserveHostHeader
+                #- SwaggerHeader
                 - name: RequestRateLimiter
                   args:
                     key-resolver: '#{@remoteAddrKeyResolver}'
@@ -714,9 +714,9 @@ spring:
               filters:
                 - RewritePath=/sys/(?<path>.*), /sys/$\{path}
                 - StripPrefix=2
-                - RequestTime=true
-                - PreserveHostHeader
-                - SwaggerHeader
+                #- RequestTime=true
+                #- PreserveHostHeader
+                #- SwaggerHeader
             - id: taotao-cloud-order
               uri: lb://taotao-cloud-order
               metadata:
@@ -727,8 +727,8 @@ spring:
               filters:
                 - RewritePath=/order/(?<path>.*), /order/$\{path}
                 - StripPrefix=2
-                - PreserveHostHeader
-                - SwaggerHeader
+                #- PreserveHostHeader
+                #- SwaggerHeader
                 - name: RequestTime
                   args:
                     enabled: true
@@ -751,24 +751,24 @@ spring:
                 - Path=/v3/api-docs/**
               filters:
                 - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
-                - SwaggerHeader
+                #- SwaggerHeader
           #        - id: auth-user-password-token
           #          uri: lb://taotao-cloud-auth
           #          predicates:
           #            - Path=${taotao.cloud.gateway.base-uri}/auth/oauth/token/user
           #          filters:
           #            - StripPrefix=3
-          #            - RequestTime=true
+          #            #- RequestTime=true
           #            - ImageCode
-          #            - PreserveHostHeader
+          #            #- PreserveHostHeader
           #            - id: auth-login-third-token
           #              uri: lb://taotao-cloud-auth
           #              predicates:
           #                - Path=http://${taotao.cloud.gateway.base-uri}/auth/oauth/token/third
           #              filters:
           #                - StripPrefix=3
-          #                - RequestTime=true
-          #                - PreserveHostHeader
+          #                #- RequestTime=true
+          #                #- PreserveHostHeader
           #        # 发送短信接口要做接口限制
           #        - id: auth-sms-code
           #          uri: lb://taotao-cloud-auth
@@ -776,8 +776,8 @@ spring:
           #            - Path=http://${taotao.cloud.gateway.base-uri}/auth/sms/code
           #          filters:
           #            - StripPrefix=3
-          #            - RequestTime=true
-          #            - PreserveHostHeader
+          #            #- RequestTime=true
+          #            #- PreserveHostHeader
           #        # 数据重复校验要做接口限制
           #        - id: uc-repeact-check
           #          uri: lb://taotao-cloud-sys
@@ -785,8 +785,8 @@ spring:
           #            - Path=http://${taotao.cloud.gateway.base-uri}/uc/repeat/check
           #          filters:
           #            - StripPrefix=3
-          #            - RequestTime=true
-          #            - PreserveHostHeader
+          #            #- RequestTime=true
+          #            #- PreserveHostHeader
           #        - id: openapi
           #          uri: http://127.0.0.1:${server.port}
           #          predicates:
@@ -800,7 +800,7 @@ spring:
           #          filters:
           #            - RewritePath=/user/(?<path>.*), /$\{path}
           #            - StripPrefix=3
-          #            - PreserveHostHeader
+          #            #- PreserveHostHeader
           #            - name: RequestRateLimiter
           #              args:
           #                key-resolver: '#{@remoteAddrKeyResolver}'
@@ -812,7 +812,7 @@ spring:
           #            - Path=${taotao.cloud.gateway.base-uri}/auth/**
           #          filters:
           #            - StripPrefix=3
-          #            - PreserveHostHeader
+          #            #- PreserveHostHeader
           #            - name: RequestRateLimiter
           #              args:
           #                key-resolver: '#{@remoteAddrKeyResolver}'
