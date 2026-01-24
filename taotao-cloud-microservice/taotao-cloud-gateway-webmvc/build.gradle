@@ -29,6 +29,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-security-spring"
     implementation "io.github.shuigedeng:taotao-boot-starter-tracer"
     implementation "io.github.shuigedeng:taotao-boot-starter-skywalking"
+    implementation "io.github.shuigedeng:taotao-boot-starter-springdoc"
     implementation "io.github.shuigedeng:taotao-boot-starter-cache-caffeine"
     implementation "io.github.shuigedeng:taotao-boot-starter-cache-redis"
 

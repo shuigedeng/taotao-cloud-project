@@ -733,14 +733,16 @@ spring:
 #                    redis-rate-limiter.burstCapacity: 20
 #                    redis-rate-limiter.requestedTokens: 1
 #                    custom-rate-limiter.requestedToken: 15
-            - id: openapi
-              uri: http://${spring.cloud.client.ip-address}:${server.port}
-              metadata:
-                - aa=hello
-              predicates:
-                - Path=/v3/api-docs/**
-              filters:
-                - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+          #http://192.168.218.1:33305/v3/api-docs/swagger-config
+          #http://192.168.218.1:33305/v3/api-docs/taotao-cloud-sys
+#            - id: openapi
+#              uri: http://${spring.cloud.client.ip-address}:${server.port}
+#              metadata:
+#                - aa=hello
+#              predicates:
+#                - Path=/v3/api-docs/**
+#              filters:
+#                - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
 
           default-filters:
             - AddRequestHeader=X-Request-taotao-cloud, ${ttcVersion}
@@ -748,6 +750,12 @@ spring:
 
 taotao:
   boot:
+    springdoc:
+      enabled: true
+      group: ${spring.application.name}
+      version: ${ttcVersion}
+      title: 网关模块
+      type: GATEWAY
     idgenerator:
       enabled: true
       type: redis
@@ -869,34 +877,34 @@ tlog:
   idGenerator: com.taotao.boot.logger.tlog.TlogIdGenerator
   mdcEnable: true
 
-knife4j:
-  gateway:
-    basic:
-      enable: true
-      username: admin
-      password: 123456
-    strategy: manual
-    discover: # 服务发现
-      enabled: true       # 开启服务发现 默认:true
-      version: openapi3
-      excluded-services: order-server,user-server       # 排除的服务名 默认:为空(建议排除网关服务)
-      swagger2:
-        url: '/v2/api-docs?group=default'       # 文档访问地址 默认：/v2/api-docs?group=default
-      oas3:
-        url: '/v3/api-docs'       # 文档访问地址 默认:/v3/api-docs
-        oauth2-redirect-url: ''       # oauth2 redirect url
-        validator-url: ''       # validator url
-      service-config:
-        aa:
-          order: 0
-          context-path: "asdf"
-          group-name: aaaa
-    routes:
-      - name: mall-server       # 分组名称
-        url: '/v3/api-docs'         # 文档地址
-        context-path: '/'         # context-path
-        service-name: mall-server         # 服务名
-        order: 1         # 排序
+#knife4j:
+#  gateway:
+#    basic:
+#      enable: true
+#      username: admin
+#      password: 123456
+#    strategy: manual
+#    discover: # 服务发现
+#      enabled: true       # 开启服务发现 默认:true
+#      version: openapi3
+#      excluded-services: order-server,user-server       # 排除的服务名 默认:为空(建议排除网关服务)
+#      swagger2:
+#        url: '/v2/api-docs?group=default'       # 文档访问地址 默认：/v2/api-docs?group=default
+#      oas3:
+#        url: '/v3/api-docs'       # 文档访问地址 默认:/v3/api-docs
+#        oauth2-redirect-url: ''       # oauth2 redirect url
+#        validator-url: ''       # validator url
+#      service-config:
+#        aa:
+#          order: 0
+#          context-path: "asdf"
+#          group-name: aaaa
+#    routes:
+#      - name: mall-server       # 分组名称
+#        url: '/v3/api-docs'         # 文档地址
+#        context-path: '/'         # context-path
+#        service-name: mall-server         # 服务名
+#        order: 1         # 排序
 
 # 配置断路器
 resilience4j:
@@ -1027,13 +1035,29 @@ resilience4j:
 #      context-path: /order
 
 springdoc:
-  api-docs:
-    enabled: true
-  swagger-ui:
-    enabled: true
-    config-url: /v3/api-docs/swagger-config
-#  webjars:
-#    prefix: /tt/webjars #此处重写springdoc的webjars目的是 knife4j-ui和swagger-ui的webjars冲突 后者会重写前者的webjars请求路径
+  showActuator: true
+  default-flat-param-object: true
+  packages-to-exclude:
+    - cn.afterturn.easypoi.wps.controller
+    - com.taotao.boot.captcha.controller
+  #swagger-ui:
+  #  path: /swagger-ui.html
+  #  tags-sorter: alpha
+  #  operations-sorter: alpha
+  #api-docs:
+  #  path: /v3/api-docs
+  #group-configs:
+  #  - group: 'default'
+  #    paths-to-match: '/**'
+  #    packages-to-scan: com.xiaominfo.knife4j.demo.web
+#springdoc:
+#  api-docs:
+#    enabled: true
+#  swagger-ui:
+#    enabled: true
+#    config-url: /v3/api-docs/swagger-config
+##  webjars:
+##    prefix: /tt/webjars #此处重写springdoc的webjars目的是 knife4j-ui和swagger-ui的webjars冲突 后者会重写前者的webjars请求路径
 
 logging:
   file:
