@@ -59,7 +59,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.google.protobuf:protobuf-gradle-plugin:0.9.5"
+        classpath "com.google.protobuf:protobuf-gradle-plugin:0.9.6"
     }
 }
 
@@ -69,8 +69,8 @@ apply plugin: "com.google.protobuf"
 
 dependencies {
     implementation "io.netty:netty-all:4.2.9.Final"
-    implementation "com.google.protobuf:protobuf-java:4.33.2"
-    implementation "com.google.protobuf:protobuf-java-util:4.33.2"
+    implementation "com.google.protobuf:protobuf-java:4.33.4"
+    implementation "com.google.protobuf:protobuf-java-util:4.33.4"
     implementation "org.apache.thrift:libthrift:0.21.0"
     implementation "io.grpc:grpc-api:1.78.0"
     implementation "io.grpc:grpc-context:1.78.0"
@@ -88,14 +88,14 @@ dependencies {
     api "jakarta.servlet:jakarta.servlet-api:6.1.0"
     api "jakarta.validation:jakarta.validation-api:3.1.1"
     api "jakarta.annotation:jakarta.annotation-api:3.0.0"
-    api "jakarta.activation:jakarta.activation-api:2.1.3"
+    api "jakarta.activation:jakarta.activation-api:2.1.4"
     api "jakarta.json:jakarta.json-api:2.1.3"
     api "jakarta.json.bind:jakarta.json.bind-api:3.0.1"
 
     implementation 'org.slf4j:slf4j-api:2.0.17'
-    implementation 'ch.qos.logback:logback-core:1.5.24'
-    implementation 'ch.qos.logback:logback-access:1.5.24'
-    implementation 'ch.qos.logback:logback-classic:1.5.24'
+    implementation 'ch.qos.logback:logback-core:1.5.25'
+    implementation 'ch.qos.logback:logback-access:1.5.25'
+    implementation 'ch.qos.logback:logback-classic:1.5.25'
 
     testImplementation 'org.junit.jupiter:junit-jupiter:6.0.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:6.0.2'
@@ -115,7 +115,7 @@ protobuf {
     protoc {
         //https://repo1.maven.org/maven2/com/google/protobuf/protoc/
         //直接使用Maven Central上已经编译好的protoc编译器，
-        artifact = "com.google.protobuf:protoc:4.33.2"
+        artifact = "com.google.protobuf:protoc:4.33.4"
         //指定本地已经安装的protoc编译器
         //path = '/usr/local/bin/protoc'
     }
@@ -145,7 +145,7 @@ protobuf {
 
 //protobuf {
 //    protoc {
-//        artifact = "com.google.protobuf:protoc:4.33.2"
+//        artifact = "com.google.protobuf:protoc:4.33.4"
 //    }
 //
 //    plugins {

@@ -161,7 +161,7 @@ dependencies {
     implementation "com.alibaba.fastjson2:fastjson2:2.0.60"
 
     implementation 'com.mysql:mysql-connector-j:9.5.0'
-    implementation 'redis.clients:jedis:7.2.0'
+    implementation 'redis.clients:jedis:7.2.1'
 
     implementation 'org.apache.commons:commons-compress:1.28.0'
     implementation 'org.slf4j:slf4j-api:2.0.17'

@@ -6,7 +6,7 @@ dependencies {
     //作为 包验证，防止修改
     api 'commons-codec:commons-codec:1.19.0'
     // redis 分布式锁
-    api 'redis.clients:jedis:7.2.0'
+    api 'redis.clients:jedis:7.2.1'
     //Lettuce Redis客户端
     api('io.lettuce:lettuce-core:6.8.1.RELEASE') {
         exclude group: 'io.netty', module: 'netty-handler'
@@ -14,14 +14,14 @@ dependencies {
         exclude group: 'io.netty', module: 'netty-transport'
     }
     //json 转换工具
-    api 'tools.jackson.core:jackson-databind:3.0.3'
-    api 'tools.jackson.core:jackson-core:3.0.3'
+    api 'tools.jackson.core:jackson-databind:3.0.4'
+    api 'tools.jackson.core:jackson-core:3.0.4'
     //kryo 序列化 工具
     api 'com.esotericsoftware:kryo:5.6.2'
     //hessian 序列化 工具
     api 'com.caucho:hessian:4.0.66'
     // 日志框架
-    api 'ch.qos.logback:logback-classic:1.5.24'
+    api 'ch.qos.logback:logback-classic:1.5.25'
     api "com.google.guava:guava:33.5.0-jre"
 
     api 'io.netty:netty-all:4.2.9.Final'

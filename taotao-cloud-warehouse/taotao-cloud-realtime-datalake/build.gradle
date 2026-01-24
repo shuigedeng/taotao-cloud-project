@@ -93,7 +93,7 @@ dependencies {
     //implementation 'com.ververica:flink-cdc-pipeline-connector-values:3.0.1'
 
     implementation 'com.mysql:mysql-connector-j:9.5.0'
-    implementation 'redis.clients:jedis:7.2.0'
+    implementation 'redis.clients:jedis:7.2.1'
     implementation 'org.apache.hive:hive-exec:4.2.0'
 
     implementation 'org.apache.hadoop:hadoop-common:3.4.2'
@@ -168,8 +168,8 @@ dependencies {
     implementation("org.apache.phoenix:phoenix-spark:5.0.0-HBase-2.0") {
         exclude group: "org.glassfish", module: "javax.el"
     }
-    implementation 'redis.clients:jedis:7.2.0'
-    implementation 'com.clickhouse:clickhouse-jdbc:0.9.5'
+    implementation 'redis.clients:jedis:7.2.1'
+    implementation 'com.clickhouse:clickhouse-jdbc:0.9.6'
 
     implementation "com.janeluo:ikanalyzer:2012_u6"
 
