@@ -8,6 +8,7 @@ dependencies {
 //    implementation 'org.apache.skywalking:apm-spring-cloud-gateway-4.x-plugin:9.5.0'
     implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
     implementation "org.springframework.cloud:spring-cloud-starter-gateway-server-webmvc"
+    implementation "org.springframework.cloud:spring-cloud-gateway-proxyexchange-webmvc"
 
     implementation "org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j"
     implementation "org.springframework.cloud:spring-cloud-starter-circuitbreaker-spring-retry"
