@@ -15,15 +15,6 @@ buildscript {
             allowInsecureProtocol = true
             url = 'https://maven.aliyun.com/repository/public'
         }
-        maven {
-            allowInsecureProtocol = true
-
-            credentials {
-                username = findProperty("mavenUsername") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
-                password = findProperty("mavenPassword") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
-            }
-            url = 'https://repo.rdc.aliyun.com/repository/136936-release-reey0l/'
-        }
         //阿里云新的仓库
         maven {
             credentials {

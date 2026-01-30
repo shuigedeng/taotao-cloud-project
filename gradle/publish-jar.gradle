@@ -162,22 +162,6 @@ tasks.register('javadocJar', Jar) {
 
 publishing {
     repositories {
-        maven {
-            //https://repomanage.rdc.aliyun.com/
-            name = "Aliyun"
-            if (project.version.endsWith('-SNAPSHOT')) {
-                url = "https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/"
-            } else {
-                url = "https://repo.rdc.aliyun.com/repository/136936-release-reey0l/"
-            }
-
-            allowInsecureProtocol = true
-            credentials {
-                username = findProperty("mavenUsername") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
-                password = findProperty("mavenPassword") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
-            }
-        }
-
         //新的仓库
         maven {
             name = "AliyunNew"
