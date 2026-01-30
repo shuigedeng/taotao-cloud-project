@@ -68,8 +68,8 @@ import org.jetbrains.intellij.platform.gradle.models.ProductRelease
 plugins {
     id "java"
     //https://plugins.gradle.org/plugin/org.jetbrains.intellij.platform
-    //https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin.html
-    id("org.jetbrains.intellij.platform") version "2.10.5"
+    //https://plugins.jetbrains.com/docs/intellij/tools-intel11lij-platform-gradle-plugin.html
+    id("org.jetbrains.intellij.platform") version "2.11.0"
 }
 
 repositories {

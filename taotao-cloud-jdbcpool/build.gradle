@@ -8,12 +8,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-aspectj'
     implementation 'io.netty:netty-all'
     implementation 'com.alibaba.fastjson2:fastjson2'
-    implementation "com.mysql:mysql-connector-j:9.5.0"
+    implementation "com.mysql:mysql-connector-j:9.6.0"
 
     implementation 'org.slf4j:slf4j-api:2.0.17'
-    implementation 'ch.qos.logback:logback-core:1.5.25'
-    implementation 'ch.qos.logback:logback-access:1.5.25'
-    implementation 'ch.qos.logback:logback-classic:1.5.25'
+    implementation 'ch.qos.logback:logback-core:1.5.26'
+    implementation 'ch.qos.logback:logback-access:1.5.26'
+    implementation 'ch.qos.logback:logback-classic:1.5.26'
 
     testImplementation 'org.junit.jupiter:junit-jupiter:6.0.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:6.0.2'

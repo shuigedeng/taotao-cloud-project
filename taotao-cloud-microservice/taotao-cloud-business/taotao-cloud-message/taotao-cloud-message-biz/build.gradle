@@ -37,11 +37,11 @@ dependencies {
     implementation("com.aliyun:alibaba-dingtalk-service-sdk:2.0.0") {
         exclude group: "com.sun.jmx", module: "jmxri"
     }
-    implementation 'com.alipay.sdk:alipay-sdk-java:4.40.607.ALL'
+    implementation 'com.alipay.sdk:alipay-sdk-java:4.40.645.ALL'
 
-    implementation "com.github.binarywang:weixin-java-cp:4.8.0"
-    implementation "com.github.binarywang:weixin-java-miniapp:4.8.0"
-    implementation "com.github.binarywang:weixin-java-mp:4.8.0"
+    implementation "com.github.binarywang:weixin-java-cp:4.8.1.B"
+    implementation "com.github.binarywang:weixin-java-miniapp:4.8.1.B"
+    implementation "com.github.binarywang:weixin-java-mp:4.8.1.B"
 
     implementation 'com.ctrip.framework.apollo:apollo-client-config-data:2.4.0'
     implementation 'org.dromara.dynamictp:dynamic-tp-spring-boot-starter-apollo:1.2.2-x'

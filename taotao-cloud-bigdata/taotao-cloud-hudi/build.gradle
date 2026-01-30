@@ -69,7 +69,7 @@ dependencies {
     }
 
     implementation "com.mysql:mysql-connector-j"
-    implementation "commons-codec:commons-codec:1.19.0"
+    implementation "commons-codec:commons-codec:1.21.0"
 
     implementation("com.github.scopt:scopt_2.13:4.1.0") {
         exclude group: "org.scala-lang", module: "scala-library"

@@ -1,7 +1,7 @@
 dependencies {
     implementation 'org.apache.hive:hive-exec:4.2.0'
 
-    implementation 'com.mysql:mysql-connector-j:9.5.0'
+    implementation 'com.mysql:mysql-connector-j:9.6.0'
 }
 
 configurations {

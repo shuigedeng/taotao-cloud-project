@@ -700,7 +700,9 @@ spring:
                 response-timeout: 5000
                 request_uri_prefix: sys
               predicates:
-                - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
+                - Path=${taotao.cloud.gateway.api.base-uri}/buyer/sys/**
+                - Path=${taotao.cloud.gateway.api.base-uri}/manager/sys/**
+                - Path=${taotao.cloud.gateway.api.base-uri}/seller/sys/**
               filters:
                 - RewritePath=/sys/(?<path>.*), /$\{path}
                 - StripPrefix=2

@@ -4,7 +4,7 @@ dependencies {
     }
 
     //作为 包验证，防止修改
-    api 'commons-codec:commons-codec:1.19.0'
+    api 'commons-codec:commons-codec:1.21.0'
     // redis 分布式锁
     api 'redis.clients:jedis:7.2.1'
     //Lettuce Redis客户端
@@ -21,7 +21,7 @@ dependencies {
     //hessian 序列化 工具
     api 'com.caucho:hessian:4.0.66'
     // 日志框架
-    api 'ch.qos.logback:logback-classic:1.5.25'
+    api 'ch.qos.logback:logback-classic:1.5.26'
     api "com.google.guava:guava:33.5.0-jre"
 
     api 'io.netty:netty-all:4.2.9.Final'

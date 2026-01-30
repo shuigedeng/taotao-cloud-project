@@ -16,7 +16,7 @@ dependencies {
     api "org.springframework.boot:spring-boot-starter-tomcat"
     api 'org.springframework.boot:spring-boot-starter-aspectj'
 
-    api "com.mysql:mysql-connector-j:9.5.0"
+    api "com.mysql:mysql-connector-j:9.6.0"
 }
 
 configurations {
