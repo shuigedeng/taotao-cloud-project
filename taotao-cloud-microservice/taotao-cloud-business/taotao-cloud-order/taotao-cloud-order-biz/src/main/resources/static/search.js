@@ -15,7 +15,7 @@ api[0].list.push({
 api[0].list[0].list.push({
     order: '1',
     deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2026.02/order/exists/id',
+    url: 'http://dev.taotaocloud.com/api/v2026.03/order/exists/id',
     desc: '根据用户id查询用户是否存在',
 });
 api[0].list.push({

@@ -53,7 +53,7 @@ public class DistributedArchitectureConfiguration {
      * DataAccessStrategyLocalConfiguration
      *
      * @author shuigedeng
-     * @version 2026.02
+     * @version 2026.03
      * @since 2025-12-19 09:30:45
      */
     @Configuration(proxyBeanMethods = false)
@@ -88,7 +88,7 @@ public class DistributedArchitectureConfiguration {
      * DataAccessStrategyRemoteConfiguration
      *
      * @author shuigedeng
-     * @version 2026.02
+     * @version 2026.03
      * @since 2025-12-19 09:30:45
      */
     @Configuration(proxyBeanMethods = false)

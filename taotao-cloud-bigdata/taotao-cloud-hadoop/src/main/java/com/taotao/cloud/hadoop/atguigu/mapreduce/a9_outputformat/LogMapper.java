@@ -27,7 +27,7 @@ import org.apache.hadoop.mapreduce.Mapper;
  * LogMapper
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 public class LogMapper extends Mapper<LongWritable, Text, Text, NullWritable> {

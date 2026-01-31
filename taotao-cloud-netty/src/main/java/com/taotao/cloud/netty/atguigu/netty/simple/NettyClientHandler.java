@@ -26,7 +26,7 @@ import io.netty.util.CharsetUtil;
  * NettyClientHandler
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 public class NettyClientHandler extends ChannelInboundHandlerAdapter {

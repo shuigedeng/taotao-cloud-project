@@ -4,7 +4,7 @@ metadata:
   name: taotao-cloud-monitor-configmap
 data:
   APPLICATION_NAME: "taotao-cloud-monitor"
-  APPLICATION_VERSION: '2026.02'
+  APPLICATION_VERSION: '2026.03'
 ---
 apiVersion: v1
 kind: Secret
@@ -87,7 +87,7 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor:2026.02
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor:2026.03
           imagePullPolicy: IfNotPresent
           ports:
             - name: admin-port

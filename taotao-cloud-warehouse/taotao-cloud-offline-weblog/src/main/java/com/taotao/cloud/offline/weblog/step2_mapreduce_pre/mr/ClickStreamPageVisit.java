@@ -47,7 +47,7 @@ public class ClickStreamPageVisit {
      * ClickStreamPageVisitMapper
      *
      * @author shuigedeng
-     * @version 2026.02
+     * @version 2026.03
      * @since 2025-12-19 09:30:45
      */
     static class ClickStreamPageVisitMapper extends Mapper<LongWritable, Text, Text, PageViewsBean> {
@@ -74,7 +74,7 @@ public class ClickStreamPageVisit {
      * ClickStreamPageVisitReducer
      *
      * @author shuigedeng
-     * @version 2026.02
+     * @version 2026.03
      * @since 2025-12-19 09:30:45
      */
     static class ClickStreamPageVisitReducer extends Reducer<Text, PageViewsBean, NullWritable, VisitBean> {

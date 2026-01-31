@@ -52,7 +52,7 @@ public class ClickStreamPageViews {
      * PageViewsStreamThreeMapper
      *
      * @author shuigedeng
-     * @version 2026.02
+     * @version 2026.03
      * @since 2025-12-19 09:30:45
      */
     static class PageViewsStreamThreeMapper extends Mapper<LongWritable, Text, Text, WebLogBean> {
@@ -92,7 +92,7 @@ public class ClickStreamPageViews {
      * PageViewsStreamThreeReducer
      *
      * @author shuigedeng
-     * @version 2026.02
+     * @version 2026.03
      * @since 2025-12-19 09:30:45
      */
     static class PageViewsStreamThreeReducer extends Reducer<Text, WebLogBean, NullWritable, Text> {

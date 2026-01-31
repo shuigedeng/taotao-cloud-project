@@ -28,7 +28,7 @@ import org.apache.flink.table.descriptors.Schema;
  * TableTest4_KafkaPipeLine
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 public class TableTest4_KafkaPipeLine {

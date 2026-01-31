@@ -28,7 +28,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  * LogOutputFormat
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 public class LogOutputFormat extends FileOutputFormat<Text, NullWritable> {

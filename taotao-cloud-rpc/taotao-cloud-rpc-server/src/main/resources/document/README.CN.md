@@ -245,7 +245,7 @@ cn.fyupeng.nacos.cluster.nodes=192.168.43.33:8847|192.168.43.33.1:8848;192.168.4
  * Client
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 public class Client {
@@ -343,7 +343,7 @@ public interface HelloService {
  * HelloServiceImpl
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 @Service
@@ -361,7 +361,7 @@ public class HelloServiceImpl implements HelloService {
  * MyServer
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 @ServiceScan
@@ -392,7 +392,7 @@ public class MyServer {
  * MyClient
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 public class MyClient {
@@ -545,7 +545,7 @@ cn.fyupeng.nacos.cluster.nodes=192.168.10.1:8847,192.168.10.1:8848,192.168.10.1:
  * README.CN.md
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 class private static RandomLoadBalancer randomLoadBalancer = new RandomLoadBalancer();
@@ -563,7 +563,7 @@ for( /**
  * README.CN.md
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 class int i = 0;i <=retries;i++){
@@ -713,7 +713,7 @@ LRedisHelper
  * NettyServerHandler
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 @Slf4j
@@ -932,7 +932,7 @@ cn.fyupeng.net.AbstractRpcServer [main] - mainClassName: jdk.internal.reflect.Di
  * README.CN.md
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 class /**
@@ -1008,7 +1008,7 @@ Output output =new Output( byteArrayOutputStream,100000 )){
  * ShutdownHook
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 public class ShutdownHook {
@@ -1051,7 +1051,7 @@ public class ShutdownHook {
  * NettyServer
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 public class NettyServer extends AbstractRpcServer {

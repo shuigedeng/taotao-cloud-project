@@ -1,3 +1,3 @@
-docker run -d -p 33333:33333 --name gateway registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2026.02
-docker run -d -p 33334:33334 --name monitor registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor:2026.02
-docker run -d -p 33337:33337 --name auth registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:2026.02
+docker run -d -p 33333:33333 --name gateway registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2026.03
+docker run -d -p 33334:33334 --name monitor registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor:2026.03
+docker run -d -p 33337:33337 --name auth registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:2026.03

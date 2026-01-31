@@ -29,7 +29,7 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
  * TestServerInitializer
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 public class TestServerInitializer extends ChannelInitializer<SocketChannel> {

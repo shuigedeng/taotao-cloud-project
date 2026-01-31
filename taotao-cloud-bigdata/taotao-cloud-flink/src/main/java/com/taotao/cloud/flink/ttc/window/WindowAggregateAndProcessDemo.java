@@ -77,7 +77,7 @@ public class WindowAggregateAndProcessDemo {
      * MyAgg
      *
      * @author shuigedeng
-     * @version 2026.02
+     * @version 2026.03
      * @since 2025-12-19 09:30:45
      */
     public static class MyAgg implements AggregateFunction<WaterSensor, Integer, String> {
@@ -112,7 +112,7 @@ public class WindowAggregateAndProcessDemo {
      * MyProcess
      *
      * @author shuigedeng
-     * @version 2026.02
+     * @version 2026.03
      * @since 2025-12-19 09:30:45
      */
     public static class MyProcess extends ProcessWindowFunction<String, String, String, TimeWindow> {

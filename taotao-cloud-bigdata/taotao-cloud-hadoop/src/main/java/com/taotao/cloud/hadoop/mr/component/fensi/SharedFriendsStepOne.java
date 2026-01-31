@@ -40,7 +40,7 @@ public class SharedFriendsStepOne {
      * SharedFriendsStepOneMapper
      *
      * @author shuigedeng
-     * @version 2026.02
+     * @version 2026.03
      * @since 2025-12-19 09:30:45
      */
     static class SharedFriendsStepOneMapper extends Mapper<LongWritable, Text, Text, Text> {
@@ -65,7 +65,7 @@ public class SharedFriendsStepOne {
      * SharedFriendsStepOneReducer
      *
      * @author shuigedeng
-     * @version 2026.02
+     * @version 2026.03
      * @since 2025-12-19 09:30:45
      */
     static class SharedFriendsStepOneReducer extends Reducer<Text, Text, Text, Text> {

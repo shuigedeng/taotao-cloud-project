@@ -22,7 +22,7 @@ import java.util.List;
  * DefaultPipeline
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 public class DefaultPipeline<T> implements Pipeline<T> {

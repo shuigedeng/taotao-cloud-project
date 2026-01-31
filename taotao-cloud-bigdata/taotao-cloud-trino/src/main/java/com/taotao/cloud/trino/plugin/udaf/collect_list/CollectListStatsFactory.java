@@ -54,7 +54,7 @@ public class CollectListStatsFactory
      * GroupState
      *
      * @author shuigedeng
-     * @version 2026.02
+     * @version 2026.03
      * @since 2025-12-19 09:30:45
      */
     public static class GroupState implements GroupedAccumulatorState, CollectListAggregationFunctions.CollectState {
@@ -98,7 +98,7 @@ public class CollectListStatsFactory
      * SingleState
      *
      * @author shuigedeng
-     * @version 2026.02
+     * @version 2026.03
      * @since 2025-12-19 09:30:45
      */
     public static class SingleState implements CollectListAggregationFunctions.CollectState {

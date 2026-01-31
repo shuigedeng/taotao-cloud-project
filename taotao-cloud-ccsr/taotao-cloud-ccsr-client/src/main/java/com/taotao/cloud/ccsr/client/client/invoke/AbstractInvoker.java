@@ -27,7 +27,7 @@ import com.taotao.cloud.ccsr.client.request.Payload;
  * AbstractInvoker
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 public abstract class AbstractInvoker<R, OPTION extends RequestOption> implements Closeable {

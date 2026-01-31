@@ -22,7 +22,7 @@ import com.taotao.cloud.rpc.registry.apiregistry.base.ApiRegistryException;
  * LoadBalanceFactory
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 public class LoadBalanceFactory {

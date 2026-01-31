@@ -84,7 +84,7 @@ public record CartSkuVO(
      * CartGoodsSkuVO
      *
      * @author shuigedeng
-     * @version 2026.02
+     * @version 2026.03
      * @since 2025-12-19 09:30:45
      */
     public static class CartGoodsSkuVO {
@@ -95,7 +95,7 @@ public record CartSkuVO(
      * DistributionGoodsVO
      *
      * @author shuigedeng
-     * @version 2026.02
+     * @version 2026.03
      * @since 2025-12-19 09:30:45
      */
     public static class DistributionGoodsVO {
@@ -106,7 +106,7 @@ public record CartSkuVO(
      * PromotionGoodsVO
      *
      * @author shuigedeng
-     * @version 2026.02
+     * @version 2026.03
      * @since 2025-12-19 09:30:45
      */
     public static class PromotionGoodsVO {

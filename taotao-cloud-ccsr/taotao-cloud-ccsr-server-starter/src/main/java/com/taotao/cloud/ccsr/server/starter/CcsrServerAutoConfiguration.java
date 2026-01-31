@@ -31,7 +31,7 @@ import org.springframework.core.io.ResourceLoader;
  * CcsrServerAutoConfiguration
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 @Configuration // 这里加不加这个注解都不影响，只是表示他是一个配置类

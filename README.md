@@ -4,7 +4,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/license-Apache%202-green" alt="License"/>
-  <img src="https://img.shields.io/badge/taotao--cloud--project-2026.02-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/taotao--cloud--project-2026.03-red" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring-7.0.2-red" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_boot-4.0.2-orange" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud-2025.1.1-yellowgree" alt="Downloads"/>
@@ -22,13 +22,13 @@
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-**taotao-cloud(taotao云平台)**  基于**gradle9.3.1** 、**jdk25**, 支持**graalvm25**, 采用最新的**spring 7.0.2**、**SpringBoot 4.0.2**、**SpringCloud 2025.1.1**、**SpringSecurity 7.0.2**、**Nacos 3.1.1**、**Mybatis-Plus 3.5.16**、**Redis 7.4.0**等框架，开发的一款企业级微服务架构的云服务平台， 
+**taotao-cloud(taotao云平台)**  基于**Gradle 9.3.1** 、**Jdk 25**, 支持**Graalvm 25**, 采用最新的**Spring 7.0.2**、**SpringBoot 4.0.2**、**SpringCloud 2025.1.1**、**SpringSecurity 7.0.2**、**Nacos 3.1.1**、**Mybatis-Plus 3.5.16**、**Redis 7.4.0**等框架，开发的一款企业级微服务架构的云服务平台， 
 
 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循**SpringBoot**编程思想，高度模块化和可配置化。
 
 具备服务注册&发现、配置中心、服务限流、熔断降级、监控报警、多数据源、工作流、高亮搜索、定时任务、分布式缓存、分布式事务、分布式存储等功能，用于快速构建微服务项目。
 
-目前支持**Shell**、**Docker**、**Docker-Compose**、**K8s**、**Github/Genkins CI/CD**等多种部署方式，实现**RBAC**权限。 
+目前支持**Shell**、**Docker**、**Docker Compose**、**K8s**、**Github/Genkins CI/CD**等多种部署方式，实现**RBAC**权限。 
 
 遵循阿里代码规范，采用**restful**设计风格及**DDD**(领域驱动设计)思想，代码简洁、架构清晰，非常适合作为基础框架使用。基于**DDD**（领域驱动设计）的轻量级快速开发框架，致力于企业技术架构的可沉淀和可传承，解决复杂业务场景的扩展问题
 
@@ -95,13 +95,13 @@ Gradle:
 ```groovy
 dependencyManagement{
   imports {
-    mavenBom "io.github.shuigedeng:taotao-boot-dependencies:2026.02"
+    mavenBom "io.github.shuigedeng:taotao-boot-dependencies:2026.03"
   }
 }
 
 dependencyManagement{
   imports {
-    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2026.02"
+    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2026.03"
   }
 }
 
@@ -116,7 +116,7 @@ Maven:
     <dependency>
       <groupId>io.github.shuigedeng</groupId>
       <artifactId>taotao-boot-dependencies</artifactId>
-      <version>2026.02</version>
+      <version>2026.03</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -128,7 +128,7 @@ Maven:
     <dependency>
       <groupId>io.github.shuigedeng</groupId>
       <artifactId>taotao-cloud-dependencies</artifactId>
-      <version>2026.02</version>
+      <version>2026.03</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -185,7 +185,7 @@ Maven:
 		<plugin>
 			<groupId>io.github.shuigedeng</groupId>
 			<artifactId>taotao-cloud-maven-plugin</artifactId>
-			<version>2026.02</version>
+			<version>2026.03</version>
 		</plugin>
 	</plugins>
 </build>
@@ -230,8 +230,8 @@ Maven:
 * **分布式任务**：集成`xxl-job、powerjob、quartz`分布式定时任务处理
 * **mvc封装**：通用的 `Controller`、`Service`、`Mapper`、全局异常、全局序列化、反序列化规则，请求头传递、调用日志、灰度、统一配置编码解码规则等，`AOP`方式优雅记录操作日志、优雅缓存解决方案、防缓存击穿
 * **业务熔断**：采用`spring cloud alibaba Sentinel`实现业务熔断处理，避免服务之间出现雪崩
-* **链路追踪**：自定义`traceId`的方式，实现简单的链路追踪功能、集成`skywalking、sleuth、zipkin`链路监控
-* **内部调用**：集成了`Feign`和`Dubbo`以及`grpc`等模式支持内部调用，并且可以实现无缝切换
+* **链路追踪**：自定义`traceId`的方式，实现简单的链路追踪功能、集成`skywalking、opentelemetry、zipkin`链路监控
+* **内部调用**：集成了`HttpExchange`和`Dubbo`以及`grpc`等模式支持内部调用，并且可以实现无缝切换
 * **身份注入**：通过注解的方式，实现用户登录信息的快速注入
 * **网关支持**：支持流量控制、拉黑名单、过滤请求、灰度发布方案、防重复提交、命中缓存降级访问、网关统一鉴权等
 * **在线文档**：通过接入`Knife4j`，实现在线`API`文档的查看与调试，对`swagger`、`knife4j`二次封装，实现配置即文档
@@ -245,8 +245,8 @@ Maven:
 * **前后端流水线支持**：包含基于`github、 GitLab Runner` 的 `kubernetes（k8s）、Docker、Shell` 等执行器执行 `CI/CD` 流水线进行自动构建、制作 `Docker` 镜像、发布
 * **工作流功能**：工作流使用 `Flowable`，支持动态表单、在线设计流程、会签 / 或签、多种任务分配方式
 * **短信和oss支持**：集成阿里云、腾讯云等短信渠道，集成 `MinIO`、阿里云、腾讯云、七牛云等云存储服务
-* **容器化支持**: 提供对常见容器化支持 `Docker、docker-compose、Kubernetes、Rancher2`支持 完善的微服务部署方案
-* **webflux支持**: `lambda、stream api、webflux` 的生产实践
+* **容器化支持**: 提供对常见容器化支持 `Docker、docker compose、Kubernetes、Rancher2`支持 完善的微服务部署方案
+* **webflux支持**: `lambda、stream api、webmvc` 的生产实践
 * **开放平台**: 提供应用管理，方便第三方系统接入，**支持多租户(应用隔离)**
 * **组件化**: 引入组件化的思想实现高内聚低耦合并且高度可配置化
 * **代码规范**: 注重代码规范，严格控制包依赖

@@ -68,7 +68,7 @@ public class MetadataConfigServiceImpl extends MetadataServiceGrpc.MetadataServi
      * MetadataChangeListener
      *
      * @author shuigedeng
-     * @version 2026.02
+     * @version 2026.03
      * @since 2025-12-19 09:30:45
      */
     public class MetadataChangeListener implements Listener<MetadataChangeEvent> {
@@ -88,7 +88,7 @@ public class MetadataConfigServiceImpl extends MetadataServiceGrpc.MetadataServi
      * SubscribeObserver
      *
      * @author shuigedeng
-     * @version 2026.02
+     * @version 2026.03
      * @since 2025-12-19 09:30:45
      */
     @Getter

@@ -20,7 +20,7 @@ package com.taotao.cloud.realtime.datalake.behavior.orderpay_detect.beans;
  * OrderResult
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 public class OrderResult {

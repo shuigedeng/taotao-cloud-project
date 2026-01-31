@@ -34,7 +34,7 @@ import org.apache.flink.streaming.api.functions.co.CoMapFunction;
  * TransformTest4_MultipleStreams
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 public class TransformTest4_MultipleStreams {

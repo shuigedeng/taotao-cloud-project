@@ -23,7 +23,7 @@ import org.apache.hadoop.mapreduce.Partitioner;
  * ProvincePartitioner2
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 public class ProvincePartitioner2 extends Partitioner<FlowBean, Text> {

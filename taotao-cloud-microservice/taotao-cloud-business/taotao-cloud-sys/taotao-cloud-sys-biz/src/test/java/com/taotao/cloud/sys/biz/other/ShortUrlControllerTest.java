@@ -37,7 +37,7 @@ import shorturl.server.server.application.dto.UrlRequest;
  * ShortUrlControllerTest
  *
  * @author shuigedeng
- * @version 2026.02
+ * @version 2026.03
  * @since 2025-12-19 09:30:45
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = ShortUrlServerApplication.class)

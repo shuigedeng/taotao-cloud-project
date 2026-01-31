@@ -40,7 +40,7 @@ public class InvertIndexStepTwo {
      * IndexStepTwoMapper
      *
      * @author shuigedeng
-     * @version 2026.02
+     * @version 2026.03
      * @since 2025-12-19 09:30:45
      */
     public static class IndexStepTwoMapper extends Mapper<LongWritable, Text, Text, Text> {
@@ -58,7 +58,7 @@ public class InvertIndexStepTwo {
      * IndexStepTwoReducer
      *
      * @author shuigedeng
-     * @version 2026.02
+     * @version 2026.03
      * @since 2025-12-19 09:30:45
      */
     public static class IndexStepTwoReducer extends Reducer<Text, Text, Text, Text> {
