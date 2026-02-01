@@ -18,6 +18,7 @@ package com.taotao.cloud.sa.just.biz.just.justauth.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.taotao.boot.common.model.result.EmptyResult;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.sa.just.biz.just.justauth.dto.CreateJustAuthConfigDTO;
 import com.taotao.cloud.sa.just.biz.just.justauth.dto.JustAuthConfigDTO;
@@ -239,7 +240,7 @@ public class JustAuthConfigController {
      */
     @PostMapping("/upload")
     @ApiOperation("批量上传数据")
-    public Result<?> upload(@RequestParam("uploadFile") MultipartFile file) throws IOException {
+    public Result<EmptyResult> upload(@RequestParam("uploadFile") MultipartFile file) throws IOException {
         List<JustAuthConfigImport> justAuthConfigImportList = EasyExcel.read(
                         file.getInputStream(), JustAuthConfigImport.class, null)
                 .sheet()

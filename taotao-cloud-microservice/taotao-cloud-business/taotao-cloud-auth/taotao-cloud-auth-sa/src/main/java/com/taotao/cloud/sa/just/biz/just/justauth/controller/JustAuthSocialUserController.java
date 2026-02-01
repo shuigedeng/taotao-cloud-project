@@ -17,6 +17,7 @@
 package com.taotao.cloud.sa.just.biz.just.justauth.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.taotao.boot.common.model.result.EmptyResult;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.sa.just.biz.just.justauth.dto.JustAuthSocialUserDTO;
 import com.taotao.cloud.sa.just.biz.just.justauth.service.JustAuthSocialUserService;
@@ -89,7 +90,7 @@ public class JustAuthSocialUserController {
      */
     @PostMapping("/create")
     @ApiOperation(value = "添加第三方用户绑定")
-    public Result<?> create(@RequestBody CreateJustAuthSocialUserDTO justAuthSocialUser) {
+    public Result<EmptyResult> create(@RequestBody CreateJustAuthSocialUserDTO justAuthSocialUser) {
         justAuthSocialUserService.createJustAuthSocialUser(justAuthSocialUser);
         return Result.success();
     }

@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.im.api.feign.fallback;
+package com.taotao.cloud.im.api.inner.fallback;
 
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.im.api.feign.IFeignMediaService;
+import com.taotao.cloud.im.api.inner.IFeignMediaService;
 import com.taotao.cloud.im.api.model.vo.FileVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 

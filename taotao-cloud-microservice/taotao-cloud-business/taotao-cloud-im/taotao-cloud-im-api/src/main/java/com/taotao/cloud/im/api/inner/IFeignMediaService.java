@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.im.api.feign;
+package com.taotao.cloud.im.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.cloud.im.api.feign.fallback.FeignMediaFallback;
+import com.taotao.cloud.im.api.inner.fallback.FeignMediaFallback;
 import com.taotao.cloud.im.api.model.vo.FileVO;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
