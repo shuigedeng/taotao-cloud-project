@@ -110,7 +110,7 @@ public class FlowTaskApiService implements FlowTaskApi {
      * @return
      */
     @ApiOperation("提交")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public ActionResult submit(@RequestBody FlowTaskForm flowTaskForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (FlowStatusEnum.save.getMessage().equals(flowTaskForm.getStatus())) {

@@ -84,7 +84,7 @@ public class MemberGradeController {
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
     @GetMapping
-    @PutMapping(value = "/{id}")
+    @PostMapping(value = "/{id}")
     public Result<Boolean> updateById(@PathVariable Long id, MemberGrade memberGrade) {
         return Result.success(memberGradeService.updateById(memberGrade));
     }
@@ -92,7 +92,7 @@ public class MemberGradeController {
     @Operation(summary = "删除会员等级", description = "删除会员等级")
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
-    @DeleteMapping(value = "/{id}")
+    @PostMapping(value = "/{id}")
     public Result<Boolean> removeById(@PathVariable Long id) {
         if (memberGradeService.getById(id).getDefaulted()) {
             throw new BusinessException(ResultEnum.USER_GRADE_IS_DEFAULT);

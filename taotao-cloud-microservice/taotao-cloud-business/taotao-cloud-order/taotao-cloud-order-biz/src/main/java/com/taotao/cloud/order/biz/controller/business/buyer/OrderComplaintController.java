@@ -117,7 +117,7 @@ public class OrderComplaintController {
     @Operation(summary = "取消售后", description = "取消售后")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/status/{id}")
+    @PostMapping(value = "/status/{id}")
     public Result<Boolean> cancel(@PathVariable Long id) {
         return Result.success(orderComplaintService.cancel(id));
     }

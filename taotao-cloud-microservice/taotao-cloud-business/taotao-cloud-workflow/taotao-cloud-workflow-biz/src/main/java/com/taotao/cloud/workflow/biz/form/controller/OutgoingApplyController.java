@@ -102,7 +102,7 @@ public class OutgoingApplyController {
      * @return
      */
     @Operation("修改外出申请单")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody OutgoingApplyForm outgoingApplyForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (outgoingApplyForm.getStartTime() > outgoingApplyForm.getEndTime()) {

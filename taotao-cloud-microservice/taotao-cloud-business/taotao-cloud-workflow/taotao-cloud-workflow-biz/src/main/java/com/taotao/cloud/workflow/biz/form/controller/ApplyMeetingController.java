@@ -112,7 +112,7 @@ public class ApplyMeetingController {
      * @return
      */
     @Operation("修改会议申请")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody @Valid ApplyMeetingForm applyMeetingForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (applyMeetingForm.getStartDate() > applyMeetingForm.getEndDate()) {

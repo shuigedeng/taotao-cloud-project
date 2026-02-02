@@ -79,7 +79,7 @@ package com.taotao.cloud.message.biz.controller.business.manager; // package
 // 	@Operation(summary = "编辑或更新数据", description = "编辑或更新数据")
 // 	@RequestLogger("编辑或更新数据")
 // 	@PreAuthorize("hasAuthority('dept:tree:data')")
-// 	@PutMapping
+// 	@PostMapping
 // 	public Result<MemberNoticeSenter> saveOrUpdate(MemberNoticeSenter memberNoticeSenter) {
 // 		memberNoticeSenterService.customSave(memberNoticeSenter);
 // 		return Result.successResult.success(memberNoticeSenter);
@@ -88,7 +88,7 @@ package com.taotao.cloud.message.biz.controller.business.manager; // package
 // 	@Operation(summary = "批量删除", description = "批量删除")
 // 	@RequestLogger
 // 	@PreAuthorize("hasAuthority('dept:tree:data')")
-// 	@DeleteMapping(value = "/{ids}")
+// 	@PostMapping(value = "/{ids}")
 // 	public Result<Object> delAllByIds(@PathVariable List ids) {
 // 		memberNoticeSenterService.removeByIds(ids);
 // 		return Result.success();

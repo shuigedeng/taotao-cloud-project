@@ -99,7 +99,7 @@ public class PostBatchTabController {
      * @return
      */
     @Operation("修改发文呈批表")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody PostBatchTabForm postBatchTabForm, @PathVariable("id") String id)
             throws WorkFlowException {
         PostBatchTabEntity entity = JacksonUtils.getJsonToBean(postBatchTabForm, PostBatchTabEntity.class);

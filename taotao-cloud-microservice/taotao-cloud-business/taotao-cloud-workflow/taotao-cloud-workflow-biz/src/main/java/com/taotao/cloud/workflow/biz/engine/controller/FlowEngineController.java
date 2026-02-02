@@ -245,7 +245,7 @@ public class FlowEngineController {
     }
 
     @Operation(summary = "更新流程引擎", description = "更新流程引擎")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<Boolean> update(@PathVariable("id") String id, @RequestBody @Valid FlowEngineUpForm flowEngineUpForm)
             throws WorkFlowException {
         FlowEngineEntity flowEngineEntity = JacksonUtils.toObject(flowEngineUpForm, FlowEngineEntity.class);
@@ -270,7 +270,7 @@ public class FlowEngineController {
     }
 
     @Operation(summary = "删除流程引擎", description = "删除流程引擎")
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<Boolean> delete(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity entity = flowEngineService.getInfo(id);
         List<FlowTaskEntity> taskNodeList = flowTaskService.getTaskList(entity.getId());
@@ -298,7 +298,7 @@ public class FlowEngineController {
     }
 
     @Operation(summary = "更新流程表单状态", description = "更新流程表单状态")
-    @PutMapping("/actions/state/{id}")
+    @PostMapping("/actions/state/{id}")
     public Result<Boolean> state(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity entity = flowEngineService.getInfo(id);
         Optional.ofNullable(entity)

@@ -118,7 +118,7 @@ public class CategoryManagerController {
     })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping
+    @PostMapping
     public Result<Boolean> updateCategory(@Valid @RequestBody CategoryTreeVO category) {
         Category catTemp = categoryService.getById(category.getId());
         if (catTemp == null) {
@@ -133,7 +133,7 @@ public class CategoryManagerController {
     })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @DeleteMapping(value = "/{id}")
+    @PostMapping(value = "/{id}")
     public Result<Boolean> delAllByIds(@NotBlank(message = "id不能为空") @PathVariable Long id) {
         Category category = new Category();
         category.setParentId(id);
@@ -156,7 +156,7 @@ public class CategoryManagerController {
     })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/disable/{id}")
+    @PostMapping(value = "/disable/{id}")
     public Result<Boolean> disable(@PathVariable Long id, @RequestParam Boolean enableOperations) {
         Category category = categoryService.getById(id);
         if (category == null) {

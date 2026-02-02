@@ -274,7 +274,7 @@ public class FlowEngineApiService implements FlowEngineApi {
      * @return
      */
     @ApiOperation("更新流程引擎")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public ActionResult update(@PathVariable("id") String id, @RequestBody @Valid FlowEngineUpForm flowEngineUpForm)
             throws WorkFlowException {
         FlowEngineEntity flowEngineEntity = JsonUtil.getJsonToBean(flowEngineUpForm, FlowEngineEntity.class);
@@ -298,7 +298,7 @@ public class FlowEngineApiService implements FlowEngineApi {
      * @return
      */
     @ApiOperation("删除流程引擎")
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}")
     public ActionResult<String> delete(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity entity = flowEngineService.getInfo(id);
         flowEngineService.delete(entity);
@@ -341,7 +341,7 @@ public class FlowEngineApiService implements FlowEngineApi {
      * @return
      */
     @ApiOperation("更新流程表单状态")
-    @PutMapping("/{id}/Actions/State")
+    @PostMapping("/{id}/Actions/State")
     public ActionResult state(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity entity = flowEngineService.getInfo(id);
         if (entity != null) {

@@ -112,7 +112,7 @@ public class MaterialRequisitionController {
      * @throws WorkFlowException
      */
     @Operation("修改领料单")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(
             @RequestBody @Valid MaterialRequisitionForm materialRequisitionForm, @PathVariable("id") String id)
             throws WorkFlowException {

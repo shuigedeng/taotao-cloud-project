@@ -85,7 +85,7 @@ public class BillManagerController {
     @Operation(summary = "支付结算单", description = "支付结算单")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/pay/{id}")
+    @PostMapping(value = "/pay/{id}")
     public Result<Boolean> pay(@Parameter(description = "结算单ID") @PathVariable String id) {
 
         return Result.success(billService.complete(id));

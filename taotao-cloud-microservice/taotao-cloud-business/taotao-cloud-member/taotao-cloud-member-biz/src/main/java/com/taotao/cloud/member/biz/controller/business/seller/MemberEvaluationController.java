@@ -76,7 +76,7 @@ public class MemberEvaluationController {
     @Operation(summary = "回复评价", description = "回复评价")
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
-    @PutMapping(value = "/reply/{id}")
+    @PostMapping(value = "/reply/{id}")
     public Result<Boolean> reply(@PathVariable Long id, @RequestParam String reply, @RequestParam String replyImage) {
         OperationalJudgment.judgment(memberEvaluationService.queryById(id));
         return Result.success(memberEvaluationService.reply(id, reply, replyImage));

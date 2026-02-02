@@ -99,7 +99,7 @@ public class StoreManagerController {
     @Operation(summary = "编辑店铺", description = "编辑店铺")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/edit/{id}")
+    @PostMapping(value = "/edit/{id}")
     public Result<Store> edit(@PathVariable String id, @Valid StoreEditDTO storeEditDTO) {
         storeEditDTO.setStoreId(id);
         return Result.success(storeService.edit(storeEditDTO));
@@ -108,7 +108,7 @@ public class StoreManagerController {
     @Operation(summary = "审核店铺申请", description = "审核店铺申请")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/audit/{id}/{passed}")
+    @PostMapping(value = "/audit/{id}/{passed}")
     public Result<Boolean> audit(
             @Parameter(description = "是否通过审核 0 通过 1 拒绝 编辑操作则不需传递") @PathVariable String id,
             @Parameter(description = "店铺id") @PathVariable Integer passed) {
@@ -118,7 +118,7 @@ public class StoreManagerController {
     @Operation(summary = "关闭店铺", description = "关闭店铺")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/disable/{id}")
+    @PostMapping(value = "/disable/{id}")
     public Result<Boolean> disable(@PathVariable String id) {
         return Result.success(storeService.disable(id));
     }
@@ -126,7 +126,7 @@ public class StoreManagerController {
     @Operation(summary = "开启店铺", description = "开启店铺")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/enable/{id}")
+    @PostMapping(value = "/enable/{id}")
     public Result<Boolean> enable(@PathVariable String id) {
         return Result.success(storeService.enable(id));
     }

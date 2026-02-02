@@ -100,7 +100,7 @@ public class ReceiptProcessingController {
      * @return
      */
     @Operation("修改收文处理表")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody ReceiptProcessingForm receiptProcessingForm, @PathVariable("id") String id)
             throws WorkFlowException {
         ReceiptProcessingEntity entity = JacksonUtils.getJsonToBean(receiptProcessingForm, ReceiptProcessingEntity.class);

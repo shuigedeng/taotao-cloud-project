@@ -110,7 +110,7 @@ public class ConBillingController {
      * @return
      */
     @Operation("修改合同开票流程")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody @Valid ConBillingForm conBillingForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (conBillingForm.getBillAmount() != null

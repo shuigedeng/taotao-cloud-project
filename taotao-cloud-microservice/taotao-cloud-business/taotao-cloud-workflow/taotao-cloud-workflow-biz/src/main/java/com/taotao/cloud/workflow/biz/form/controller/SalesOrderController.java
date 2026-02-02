@@ -102,7 +102,7 @@ public class SalesOrderController {
      * @throws WorkFlowException
      */
     @Operation("修改销售订单")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody SalesOrderForm salesOrderForm, @PathVariable("id") String id)
             throws WorkFlowException {
         SalesOrderEntity sales = JsonUtil.getJsonToBean(salesOrderForm, SalesOrderEntity.class);

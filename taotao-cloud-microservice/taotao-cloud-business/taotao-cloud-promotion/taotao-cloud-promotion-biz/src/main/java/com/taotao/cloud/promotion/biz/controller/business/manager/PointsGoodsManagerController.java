@@ -68,7 +68,7 @@ public class PointsGoodsManagerController {
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-    @PutMapping
+    @PostMapping
     @Operation(summary = "修改积分商品")
     public Result<Object> updatePointsGoods(@RequestBody PointsGoodsVO pointsGoods) {
         Objects.requireNonNull(SecurityUtils.getCurrentUser());
@@ -78,7 +78,7 @@ public class PointsGoodsManagerController {
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-    @PutMapping("/status/{ids}")
+    @PostMapping("/status/{ids}")
     @Operation(summary = "修改积分商品状态")
     public Result<Object> updatePointsGoodsStatus(@PathVariable String ids, Long startTime, Long endTime) {
         if (pointsGoodsService.updateStatus(Arrays.asList(ids.split(",")), startTime, endTime)) {
@@ -89,7 +89,7 @@ public class PointsGoodsManagerController {
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-    @DeleteMapping("/{ids}")
+    @PostMapping("/{ids}")
     @Operation(summary = "删除积分商品")
     public Result<Object> delete(@PathVariable String ids) {
         if (pointsGoodsService.removePromotions(Arrays.asList(ids.split(",")))) {

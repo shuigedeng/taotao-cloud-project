@@ -123,7 +123,7 @@ public class ManagerLogController {
 
 	@Operation(summary = "删除所有ERROR日志", description = "删除所有ERROR日志")
 	@RequestLogger("删除所有ERROR日志")
-	@DeleteMapping(value = "/error")
+	@PostMapping(value = "/error")
 	@PreAuthorize("@el.check('admin','logError:remove')")
 	public Result<Object> delAllByError() {
 		logService.delAllByError();
@@ -132,7 +132,7 @@ public class ManagerLogController {
 
 	@Operation(summary = "删除所有INFO日志", description = "删除所有INFO日志")
 	@RequestLogger("删除所有INFO日志")
-	@DeleteMapping(value = "/info")
+	@PostMapping(value = "/info")
 	@PreAuthorize("@el.check('admin','logInfo:remove')")
 	public Result<Boolean> delAllByInfo() {
 		logService.delAllByInfo();

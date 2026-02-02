@@ -100,7 +100,7 @@ public class QuotationApprovalController {
      * @return
      */
     @Operation("修改报价审批表")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody QuotationApprovalForm quotationApprovalForm, @PathVariable("id") String id)
             throws WorkFlowException {
         QuotationApprovalEntity entity = JacksonUtils.getJsonToBean(quotationApprovalForm, QuotationApprovalEntity.class);

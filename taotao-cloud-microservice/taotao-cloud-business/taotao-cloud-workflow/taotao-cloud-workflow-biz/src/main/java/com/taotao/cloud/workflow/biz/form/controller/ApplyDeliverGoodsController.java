@@ -111,7 +111,7 @@ public class ApplyDeliverGoodsController {
      * @throws WorkFlowException
      */
     @Operation("修改发货申请单")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody @Valid ApplyDeliverGoodsForm applyDeliverGoodsForm, @PathVariable("id") String id)
             throws WorkFlowException {
         ApplyDeliverGoodsEntity deliver = JacksonUtils.getJsonToBean(applyDeliverGoodsForm, ApplyDeliverGoodsEntity.class);

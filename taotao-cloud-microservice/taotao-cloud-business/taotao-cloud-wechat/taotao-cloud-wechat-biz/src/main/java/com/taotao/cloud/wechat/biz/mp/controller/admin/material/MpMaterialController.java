@@ -62,7 +62,7 @@ public class MpMaterialController {
     }
 
     @ApiOperation("删除素材")
-    @DeleteMapping("/delete-permanent")
+    @PostMapping("/delete-permanent")
     @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = Long.class)
     @PreAuthorize("@ss.hasPermission('mp:material:delete')")
     public CommonResult<Boolean> deleteMaterial(@RequestParam("id") Long id) {

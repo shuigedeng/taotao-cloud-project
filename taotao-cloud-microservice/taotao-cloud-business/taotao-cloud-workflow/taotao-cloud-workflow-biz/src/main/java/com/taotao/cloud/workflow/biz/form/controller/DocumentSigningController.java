@@ -101,7 +101,7 @@ public class DocumentSigningController {
      * @return
      */
     @Operation("修改文件签阅表")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody @Valid DocumentSigningForm documentSigningForm, @PathVariable("id") String id)
             throws WorkFlowException {
         DocumentSigningEntity entity = JacksonUtils.getJsonToBean(documentSigningForm, DocumentSigningEntity.class);

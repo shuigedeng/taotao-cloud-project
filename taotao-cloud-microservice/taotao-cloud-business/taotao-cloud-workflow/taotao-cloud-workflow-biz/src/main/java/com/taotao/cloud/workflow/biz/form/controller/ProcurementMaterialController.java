@@ -111,7 +111,7 @@ public class ProcurementMaterialController {
      * @throws WorkFlowException
      */
     @Operation("修改采购原材料")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody ProcurementMaterialForm procurementMaterialForm, @PathVariable("id") String id)
             throws WorkFlowException {
         ProcurementMaterialEntity procurement =

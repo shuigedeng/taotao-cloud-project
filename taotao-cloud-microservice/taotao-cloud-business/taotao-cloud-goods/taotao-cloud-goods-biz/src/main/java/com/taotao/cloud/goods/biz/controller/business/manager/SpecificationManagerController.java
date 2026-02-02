@@ -93,7 +93,7 @@ public class SpecificationManagerController {
     })
     @RequestLogger("更改规格")
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<Boolean> update(@Valid @RequestBody SpecificationDTO specificationDTO,
                                   @PathVariable Long id) {
         Specification specification = SpecificationConvert.INSTANCE.convert(specificationDTO);
@@ -108,7 +108,7 @@ public class SpecificationManagerController {
     })
     @RequestLogger("批量删除")
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @DeleteMapping("/batch")
+    @PostMapping("/batch")
     public Result<Boolean> delAllByIds(@Valid @NotNull(message = "id列表不能为空") @Size(min = 1, max = 3, message = "id个数只能在1至3个")
                                            @RequestParam List<Long> ids) {
         return Result.success(specificationService.deleteSpecification(ids));

@@ -65,7 +65,7 @@ public class BpmTaskController {
         return success(taskService.getTaskListByProcessInstanceId(processInstanceId));
     }
 
-    @PutMapping("/approve")
+    @PostMapping("/approve")
     @ApiOperation("通过任务")
     @PreAuthorize("@ss.hasPermission('bpm:task:update')")
     public CommonResult<Boolean> approveTask(@Valid @RequestBody BpmTaskApproveReqVO reqVO) {
@@ -73,7 +73,7 @@ public class BpmTaskController {
         return success(true);
     }
 
-    @PutMapping("/reject")
+    @PostMapping("/reject")
     @ApiOperation("不通过任务")
     @PreAuthorize("@ss.hasPermission('bpm:task:update')")
     public CommonResult<Boolean> rejectTask(@Valid @RequestBody BpmTaskRejectReqVO reqVO) {
@@ -81,7 +81,7 @@ public class BpmTaskController {
         return success(true);
     }
 
-    @PutMapping("/update-assignee")
+    @PostMapping("/update-assignee")
     @ApiOperation(value = "更新任务的负责人", notes = "用于【流程详情】的【转派】按钮")
     @PreAuthorize("@ss.hasPermission('bpm:task:update')")
     public CommonResult<Boolean> updateTaskAssignee(@Valid @RequestBody BpmTaskUpdateAssigneeReqVO reqVO) {

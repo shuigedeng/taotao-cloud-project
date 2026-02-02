@@ -70,7 +70,7 @@ public class ManagerAppController {
     }
 
     @Operation(summary = "删除")
-    @DeleteMapping(value = "/delete")
+    @PostMapping(value = "/delete")
     public Result<Boolean> delete(Long id) {
         return Result.success(appService.deleteApp(id));
     }

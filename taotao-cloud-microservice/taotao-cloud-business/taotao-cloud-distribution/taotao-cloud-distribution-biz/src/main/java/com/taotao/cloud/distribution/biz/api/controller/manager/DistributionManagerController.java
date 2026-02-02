@@ -61,7 +61,7 @@ public class DistributionManagerController {
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping("/tree")
     @PreventDuplicateSubmissions
-    @PutMapping(value = "/retreat/{id}")
+    @PostMapping(value = "/retreat/{id}")
     public Result<EmptyResult> retreat(@Parameter(description = "分销商id") @PathVariable String id) {
         if (distributionService.retreat(id)) {
             return Result.success();
@@ -75,7 +75,7 @@ public class DistributionManagerController {
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping("/tree")
     @PreventDuplicateSubmissions
-    @PutMapping(value = "/resume/{id}")
+    @PostMapping(value = "/resume/{id}")
     public Result<EmptyResult> resume(@PathVariable String id) {
         if (distributionService.resume(id)) {
             return Result.success();
@@ -88,7 +88,7 @@ public class DistributionManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PreventDuplicateSubmissions
-    @PutMapping(value = "/audit/{id}")
+    @PostMapping(value = "/audit/{id}")
     public Result<Object> audit(
             @NotNull @PathVariable String id,
             @Parameter(description = "审核结果，PASS 通过  REFUSE 拒绝") @NotNull String status) {

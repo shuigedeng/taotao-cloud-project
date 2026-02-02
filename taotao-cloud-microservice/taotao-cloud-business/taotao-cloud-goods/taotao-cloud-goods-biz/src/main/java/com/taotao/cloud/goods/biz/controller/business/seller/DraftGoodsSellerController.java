@@ -96,7 +96,7 @@ public class DraftGoodsSellerController {
     @Operation(summary = "删除草稿商品", description = "删除草稿商品")
     @RequestLogger("删除草稿商品")
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @DeleteMapping(value = "/{id}")
+    @PostMapping(value = "/{id}")
     public Result<Boolean> deleteDraftGoods(@PathVariable Long id) {
         draftGoodsService.getDraftGoods(id);
         return Result.success(draftGoodsService.deleteGoodsDraft(id));

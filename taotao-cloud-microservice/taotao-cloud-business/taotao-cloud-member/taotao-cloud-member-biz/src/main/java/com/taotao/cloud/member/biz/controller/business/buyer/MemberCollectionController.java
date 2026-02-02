@@ -92,7 +92,7 @@ public class MemberCollectionController {
     @Operation(summary = "删除会员收藏", description = "删除会员收藏")
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
-    @DeleteMapping(value = "/{type}/{id}")
+    @PostMapping(value = "/{type}/{id}")
     public Result<Object> deleteGoodsCollection(
             @Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
             @Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable Long id) {

@@ -101,7 +101,7 @@ public class OrderController {
     @Operation(summary = "修改收货人信息", description = "修改收货人信息")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/{orderSn}/consignee")
+    @PostMapping(value = "/{orderSn}/consignee")
     public Result<Order> consignee(
             @NotNull(message = "参数非法") @PathVariable String orderSn, @Valid MemberAddressDTO memberAddressDTO) {
         return Result.success(orderService.updateConsignee(orderSn, memberAddressDTO));
@@ -109,7 +109,7 @@ public class OrderController {
 
     @Operation(summary = "修改订单价格", description = "修改订单价格")
     @RequestLogger
-    @PutMapping(value = "/{orderSn}/price")
+    @PostMapping(value = "/{orderSn}/price")
     public Result<Boolean> updateOrderPrice(
             @PathVariable String orderSn, @NotNull(message = "订单价格不能为空") @RequestParam BigDecimal price) {
         return Result.success(orderPriceService.updatePrice(orderSn, price));

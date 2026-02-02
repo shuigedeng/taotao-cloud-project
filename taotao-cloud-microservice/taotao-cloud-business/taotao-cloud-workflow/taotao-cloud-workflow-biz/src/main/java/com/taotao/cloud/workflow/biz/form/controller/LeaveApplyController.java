@@ -109,7 +109,7 @@ public class LeaveApplyController {
      * @return
      */
     @Operation("修改请假申请")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody @Valid LeaveApplyForm leaveApplyForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (leaveApplyForm.getLeaveStartTime() > leaveApplyForm.getLeaveEndTime()) {

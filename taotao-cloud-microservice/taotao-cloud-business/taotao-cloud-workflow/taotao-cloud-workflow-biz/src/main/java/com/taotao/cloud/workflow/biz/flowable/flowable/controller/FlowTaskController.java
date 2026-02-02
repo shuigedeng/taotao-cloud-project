@@ -131,7 +131,7 @@ public class FlowTaskController {
     }
 
     @ApiOperation(value = "删除任务")
-    @DeleteMapping(value = "/delete")
+    @PostMapping(value = "/delete")
     public AjaxResult delete(@RequestBody FlowTaskVo flowTaskVo) {
         flowTaskService.deleteTask(flowTaskVo);
         return AjaxResult.success();

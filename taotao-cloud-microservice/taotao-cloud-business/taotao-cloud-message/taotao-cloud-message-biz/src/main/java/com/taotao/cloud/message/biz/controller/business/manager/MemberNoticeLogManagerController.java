@@ -85,7 +85,7 @@ package com.taotao.cloud.message.biz.controller.business.manager; // package
 // 	@Operation(summary = "批量删除", description = "批量删除")
 // 	@RequestLogger("批量删除")
 // 	@PreAuthorize("hasAuthority('dept:tree:data')")
-// 	@DeleteMapping(value = "/delByIds/{ids}")
+// 	@PostMapping(value = "/delByIds/{ids}")
 // 	public Result<Object> delAllByIds(@PathVariable List ids) {
 // 		memberNoticeLogService.removeByIds(ids);
 // 		return Result.success();

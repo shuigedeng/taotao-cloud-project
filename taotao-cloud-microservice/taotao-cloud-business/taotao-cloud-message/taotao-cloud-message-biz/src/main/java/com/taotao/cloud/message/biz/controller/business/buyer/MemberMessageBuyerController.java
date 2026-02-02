@@ -55,7 +55,7 @@ public class MemberMessageBuyerController {
     @Operation(summary = "消息已读", description = "消息已读")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping("/{message_id}")
+    @PostMapping("/{message_id}")
     public Result<Boolean> read(@PathVariable("message_id") String messageId) {
         return Result.success(memberMessageService.editStatus(MessageStatusEnum.ALREADY_READY.name(), messageId));
     }
@@ -63,7 +63,7 @@ public class MemberMessageBuyerController {
     @Operation(summary = "消息放入回收站", description = "消息放入回收站")
     @RequestLogger("消息放入回收站")
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @DeleteMapping("/{message_id}")
+    @PostMapping("/{message_id}")
     public Result<Boolean> deleteMessage(@PathVariable("message_id") String messageId) {
         return Result.success(memberMessageService.editStatus(MessageStatusEnum.ALREADY_REMOVE.name(), messageId));
     }

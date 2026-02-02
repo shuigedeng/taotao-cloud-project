@@ -67,7 +67,7 @@ public class SeckillManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "修改秒杀活动")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<Seckill> updateSeckill(@RequestBody SeckillVO seckillVO) {
         seckillService.updatePromotions(seckillVO);
         return Result.success(seckillVO);
@@ -94,7 +94,7 @@ public class SeckillManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "删除一个秒杀活动")
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<Object> deleteSeckill(@Parameter(description = "秒杀活动ID") @PathVariable String id) {
         seckillService.removePromotions(Collections.singletonList(id));
         return Result.success();
@@ -103,7 +103,7 @@ public class SeckillManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "操作秒杀活动状态")
-    @PutMapping("/status/{id}")
+    @PostMapping("/status/{id}")
     public Result<Object> updateSeckillStatus(
             @Parameter(description = "秒杀活动ID") @PathVariable String id, Long startTime, Long endTime) {
         seckillService.updateStatus(Collections.singletonList(id), startTime, endTime);
@@ -121,7 +121,7 @@ public class SeckillManagerController {
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-    @DeleteMapping("/apply/{seckillId}/{id}")
+    @PostMapping("/apply/{seckillId}/{id}")
     @Operation(summary = "删除秒杀活动申请")
     public Result<String> deleteSeckillApply(@PathVariable String seckillId, @PathVariable String id) {
         seckillApplyService.removeSeckillApply(seckillId, id);

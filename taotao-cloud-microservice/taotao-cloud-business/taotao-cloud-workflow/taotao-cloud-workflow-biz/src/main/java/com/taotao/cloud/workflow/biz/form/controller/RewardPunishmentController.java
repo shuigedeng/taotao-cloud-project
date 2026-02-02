@@ -102,7 +102,7 @@ public class RewardPunishmentController {
      * @return
      */
     @Operation("修改行政赏罚单")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody RewardPunishmentForm rewardPunishmentForm, @PathVariable("id") String id)
             throws WorkFlowException {
         RewardPunishmentEntity entity = JacksonUtils.getJsonToBean(rewardPunishmentForm, RewardPunishmentEntity.class);

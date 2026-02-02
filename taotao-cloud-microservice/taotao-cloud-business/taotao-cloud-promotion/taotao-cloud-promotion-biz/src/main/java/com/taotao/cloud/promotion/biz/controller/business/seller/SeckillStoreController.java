@@ -100,7 +100,7 @@ public class SeckillStoreController {
 
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@DeleteMapping("/apply/{seckillId}/{id}")
+	@PostMapping("/apply/{seckillId}/{id}")
 	@Operation(summary = "删除秒杀活动商品")
 	public Result<String> deleteSeckillApply(@PathVariable String seckillId, @PathVariable String id) {
 		OperationalJudgment.judgment(seckillApplyService.getById(id));

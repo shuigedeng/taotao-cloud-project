@@ -73,7 +73,7 @@ public class WecomRobotConfigController {
     }
 
     @Operation(summary = "删除")
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public ResResult<Void> delete(Long id) {
         robotConfigService.delete(id);
         return Res.ok();

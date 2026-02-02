@@ -101,7 +101,7 @@ public class IncomeRecognitionController {
      * @return
      */
     @Operation("修改收入确认分析表")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody @Valid IncomeRecognitionForm incomeRecognitionForm, @PathVariable("id") String id)
             throws WorkFlowException {
         IncomeRecognitionEntity entity = JacksonUtils.getJsonToBean(incomeRecognitionForm, IncomeRecognitionEntity.class);

@@ -67,7 +67,7 @@ public class ManagerMonitorController {
 //	@Operation(summary = "强退用户")
 //	@PreAuthorize("@permission.has('monitor:online:forceLogout')")
 //	//@AccessLog(title = "在线用户", businessType = BusinessTypeEnum.FORCE_LOGOUT)
-//	@DeleteMapping("/onlineUser/{tokenId}")
+//	@PostMapping("/onlineUser/{tokenId}")
 //	public Result<Void> forceLogout(@PathVariable String tokenId) {
 //		CacheCenter.loginUserCache.delete(tokenId);
 //		return ResponseDTO.ok();

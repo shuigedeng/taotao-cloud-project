@@ -41,7 +41,7 @@ public class LinkGroupController {
      * @param groupId
      * @return
      */
-    @DeleteMapping("/del/{group_id}")
+    @PostMapping("/del/{group_id}")
     public JsonData del(@PathVariable("group_id") Long groupId) {
         int rows = linkGroupService.del(groupId);
         return rows == 1 ? JsonData.buildSuccess() : JsonData.buildResult(BizCodeEnum.GROUP_NOT_EXIST);
@@ -75,7 +75,7 @@ public class LinkGroupController {
      * 更新短链分组
      * @return
      */
-    @PutMapping("update")
+    @PostMapping("update")
     public JsonData update(@RequestBody LinkGroupUpdateRequest request) {
 
         int rows = linkGroupService.updateById(request);

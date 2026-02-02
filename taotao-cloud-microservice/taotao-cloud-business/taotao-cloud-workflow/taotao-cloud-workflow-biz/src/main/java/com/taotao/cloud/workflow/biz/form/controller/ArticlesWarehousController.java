@@ -105,7 +105,7 @@ public class ArticlesWarehousController {
      * @return
      */
     @Operation("修改用品入库申请表")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody @Valid ArticlesWarehousForm articlesWarehousForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (articlesWarehousForm.getEstimatePeople() != null

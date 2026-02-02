@@ -106,7 +106,7 @@ public class PintuanStoreController {
 
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@PutMapping
+	@PostMapping
 	@Operation(summary = "修改拼团活动")
 	public Result<String> editPintuan(@RequestBody @Validated PintuanVO pintuan) {
 		OperationalJudgment.judgment(pintuanService.getById(pintuan.getId()));
@@ -121,7 +121,7 @@ public class PintuanStoreController {
 
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@PutMapping("/status/{pintuanId}")
+	@PostMapping("/status/{pintuanId}")
 	@Operation(summary = "操作拼团活动状态")
 	public Result<String> openPintuan(@PathVariable String pintuanId, Long startTime, Long endTime) {
 		OperationalJudgment.judgment(pintuanService.getById(pintuanId));
@@ -133,7 +133,7 @@ public class PintuanStoreController {
 
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@DeleteMapping("/{pintuanId}")
+	@PostMapping("/{pintuanId}")
 	@Operation(summary = "手动删除拼团活动")
 	public Result<String> deletePintuan(@PathVariable String pintuanId) {
 		OperationalJudgment.judgment(pintuanService.getById(pintuanId));

@@ -60,7 +60,7 @@ public class MpUserController {
         return success(MpUserConvert.INSTANCE.convert(mpUserService.getUser(id)));
     }
 
-    @PutMapping("/update")
+    @PostMapping("/update")
     @ApiOperation("更新公众号粉丝")
     @PreAuthorize("@ss.hasPermission('mp:user:update')")
     public CommonResult<Boolean> updateUser(@Valid @RequestBody MpUserUpdateReqVO updateReqVO) {

@@ -95,7 +95,7 @@ public class AppDataController {
      * @return
      */
     @ApiOperation("删除")
-    @DeleteMapping("/{objectId}")
+    @PostMapping("/{objectId}")
     public ActionResult create(@PathVariable("objectId") String objectId) {
         AppDataEntity entity = appDataService.getInfo(objectId);
         if (entity != null) {

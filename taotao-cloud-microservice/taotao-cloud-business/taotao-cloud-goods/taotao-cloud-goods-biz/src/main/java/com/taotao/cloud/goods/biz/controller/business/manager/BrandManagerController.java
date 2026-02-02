@@ -116,7 +116,7 @@ public class BrandManagerController {
     })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<Boolean> update(@PathVariable Long id, @Validated BrandDTO brand) {
         brand.setId(id);
         return Result.success(brandService.updateBrand(brand));
@@ -128,7 +128,7 @@ public class BrandManagerController {
     })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/disable/{brandId}")
+    @PostMapping(value = "/disable/{brandId}")
     public Result<Boolean> disable(@PathVariable Long brandId, @RequestParam Boolean disable) {
         return Result.success(brandService.brandDisable(brandId, disable));
     }
@@ -139,7 +139,7 @@ public class BrandManagerController {
     })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @DeleteMapping(value = "/{ids}")
+    @PostMapping(value = "/{ids}")
     public Result<Boolean> delAllByIds(@PathVariable List<Long> ids) {
         return Result.success(brandService.deleteBrands(ids));
     }

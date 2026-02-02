@@ -90,7 +90,7 @@ public class OrderComplaintController {
     @Operation(summary = "更新数据", description = "更新数据")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<Boolean> update(@PathVariable Long id, @Validated @RequestBody OrderComplaintDTO orderComplaintDTO) {
         OrderComplaint orderComplaint = OrderComplainConvert.INSTANCE.convert(orderComplaintDTO);
         orderComplaint.setId(id);
@@ -118,7 +118,7 @@ public class OrderComplaintController {
     @Operation(summary = "修改状态", description = "修改状态")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/status")
+    @PostMapping(value = "/status")
     public Result<Boolean> updateStatus(@Validated @RequestBody OrderComplaintOperationDTO orderComplaintOperationDTO) {
         return Result.success(orderComplaintService.updateOrderComplainByStatus(orderComplaintOperationDTO));
     }
@@ -126,7 +126,7 @@ public class OrderComplaintController {
     @Operation(summary = "仲裁", description = "仲裁")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/complete/{id}")
+    @PostMapping(value = "/complete/{id}")
     public Result<Boolean> complete(@PathVariable Long id, String arbitrationResult) {
         // 新建对象
         OrderComplaintOperationDTO orderComplaintOperationDTO = OrderComplaintOperationDTOBuilder.builder()

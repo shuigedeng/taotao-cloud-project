@@ -71,7 +71,7 @@ public class FullDiscountManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "修改满额活动状态")
-    @PutMapping("/status/{id}")
+    @PostMapping("/status/{id}")
     public Result<String> updateCouponStatus(@PathVariable String id, Long startTime, Long endTime) {
         if (fullDiscountService.updateStatus(Collections.singletonList(id), startTime, endTime)) {
             return Result.success(ResultEnum.SUCCESS);

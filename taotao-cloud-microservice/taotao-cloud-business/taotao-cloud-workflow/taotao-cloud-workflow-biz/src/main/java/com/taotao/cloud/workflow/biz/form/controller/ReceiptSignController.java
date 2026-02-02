@@ -99,7 +99,7 @@ public class ReceiptSignController {
      * @return
      */
     @Operation("修改收文签呈单")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody ReceiptSignForm receiptSignForm, @PathVariable("id") String id)
             throws WorkFlowException {
         ReceiptSignEntity entity = JacksonUtils.getJsonToBean(receiptSignForm, ReceiptSignEntity.class);

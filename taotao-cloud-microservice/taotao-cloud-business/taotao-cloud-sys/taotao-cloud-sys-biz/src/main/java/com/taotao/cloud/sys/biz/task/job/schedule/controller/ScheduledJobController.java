@@ -79,14 +79,14 @@ public class ScheduledJobController {
 		return Result.success(scheduledJobService.addTask(param));
 	}
 
-	@PutMapping("/job")
+	@PostMapping("/job")
 	@Operation(summary = "更新任务", description = "更新任务")
 	@RequestLogger
 	public Result<Boolean> updateTask(@Validated @RequestBody ScheduledJobDTO param) {
 		return Result.success(scheduledJobService.updateTask(param));
 	}
 
-	@DeleteMapping("job/{id}")
+	@PostMapping("job/{id}")
 	@Operation(summary = "删除任务", description = "删除任务")
 	@RequestLogger
 	public Result<Boolean> deleteTask(@PathVariable("id") String id) {

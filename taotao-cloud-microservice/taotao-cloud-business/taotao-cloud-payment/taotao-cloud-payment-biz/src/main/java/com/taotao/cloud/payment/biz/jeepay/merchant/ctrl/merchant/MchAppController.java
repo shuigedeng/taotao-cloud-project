@@ -140,7 +140,7 @@ public class MchAppController extends CommonCtrl {
     })
     @PreAuthorize("hasAuthority('ENT_MCH_APP_EDIT')")
     @MethodLog(remark = "更新应用信息")
-    @PutMapping("/{appId}")
+    @PostMapping("/{appId}")
     public ApiRes update(@PathVariable("appId") String appId) {
         MchApp mchApp = getObject(MchApp.class);
         mchApp.setAppId(appId);
@@ -171,7 +171,7 @@ public class MchAppController extends CommonCtrl {
     })
     @PreAuthorize("hasAuthority('ENT_MCH_APP_DEL')")
     @MethodLog(remark = "删除应用")
-    @DeleteMapping("/{appId}")
+    @PostMapping("/{appId}")
     public ApiRes delete(@PathVariable("appId") String appId) {
         MchApp mchApp = mchAppService.getById(appId);
 

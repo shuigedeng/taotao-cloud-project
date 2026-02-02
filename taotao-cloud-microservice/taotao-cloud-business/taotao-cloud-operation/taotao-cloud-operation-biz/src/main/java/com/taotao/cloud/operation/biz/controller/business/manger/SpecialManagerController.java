@@ -57,7 +57,7 @@ public class SpecialManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "修改专题活动")
-    @PutMapping("/updateSpecial")
+    @PostMapping("/updateSpecial")
     public Result<Special> updateSpecial(
             @Parameter(description = "专题ID") @PathVariable Long id, @Valid Special special) {
         special.setId(id);
@@ -68,7 +68,7 @@ public class SpecialManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "删除专题活动")
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<Boolean> deleteSpecial(@Parameter(description = "专题ID") @PathVariable String id) {
         specialService.removeSpecial(id);
         return Result.success(true);

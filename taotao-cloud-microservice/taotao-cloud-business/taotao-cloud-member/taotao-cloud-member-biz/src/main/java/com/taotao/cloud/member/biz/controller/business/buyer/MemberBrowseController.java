@@ -62,7 +62,7 @@ public class MemberBrowseController {
     @Operation(summary = "根据id删除浏览历史", description = "根据id删除浏览历史")
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
-    @DeleteMapping(value = "/{ids}")
+    @PostMapping(value = "/{ids}")
     public Result<Boolean> delAllByIds(
             @Parameter(description = "会员地址ID", required = true) @NotEmpty(message = "商品ID不能为空") @PathVariable("ids")
                     List<Long> ids) {
@@ -72,7 +72,7 @@ public class MemberBrowseController {
     @Operation(summary = "清空足迹", description = "清空足迹")
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
-    @DeleteMapping
+    @PostMapping
     public Result<Boolean> deleteAll() {
         return Result.success(memberBrowseService.clean());
     }

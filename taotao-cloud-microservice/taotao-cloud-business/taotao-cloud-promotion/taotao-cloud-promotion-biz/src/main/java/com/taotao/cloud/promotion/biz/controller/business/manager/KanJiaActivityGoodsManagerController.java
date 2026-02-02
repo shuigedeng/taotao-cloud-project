@@ -78,7 +78,7 @@ public class KanJiaActivityGoodsManagerController {
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-    @PutMapping
+    @PostMapping
     @Operation(summary = "修改砍价商品")
     public Result<Boolean> updatePointsGoods(@RequestBody KanjiaActivityGoodsDTO kanJiaActivityGoodsDTO) {
         kanJiaActivityGoodsService.updateKanjiaActivityGoods(kanJiaActivityGoodsDTO);
@@ -87,7 +87,7 @@ public class KanJiaActivityGoodsManagerController {
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-    @DeleteMapping("/{ids}")
+    @PostMapping("/{ids}")
     @Operation(summary = "删除砍价商品")
     public Result<Boolean> delete(@PathVariable String ids) {
         if (kanJiaActivityGoodsService.deleteKanJiaGoods(Arrays.asList(ids.split(",")))) {

@@ -73,7 +73,7 @@ public class FlowTaskController {
     }
 
     @Operation(summary = "更新动态表单", description = "更新动态表单")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<Boolean> submit(@RequestBody FlowTaskForm flowTaskForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (FlowStatusEnum.save.getMessage().equals(flowTaskForm.getStatus())) {

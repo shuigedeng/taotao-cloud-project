@@ -68,7 +68,7 @@ public class AnnouncementController {
 	 * @return R 通用返回体
 	 */
 	@UpdateOperationLogging(msg = "修改公告信息")
-	@PutMapping
+	@PostMapping
 	@PreAuthorize("@per.hasPermission('notify:announcement:edit')")
 	@Operation(summary = "修改公告信息", description = "修改公告信息")
 	public R<Void> updateById(@Valid @RequestBody AnnouncementDTO announcementDTO) {
@@ -83,7 +83,7 @@ public class AnnouncementController {
 	 * @return R 通用返回体
 	 */
 	@DeleteOperationLogging(msg = "通过id删除公告信息")
-	@DeleteMapping("/{id}")
+	@PostMapping("/{id}")
 	@PreAuthorize("@per.hasPermission('notify:announcement:del')")
 	@Operation(summary = "通过id删除公告信息", description = "通过id删除公告信息")
 	public R<Void> removeById(@PathVariable("id") Long id) {

@@ -69,7 +69,7 @@ public class MpAutoReplyController {
         return success(mpAutoReplyService.createAutoReply(createReqVO));
     }
 
-    @PutMapping("/update")
+    @PostMapping("/update")
     @ApiOperation("更新公众号自动回复")
     @PreAuthorize("@ss.hasPermission('mp:auto-reply:update')")
     public CommonResult<Boolean> updateAutoReply(@Valid @RequestBody MpAutoReplyUpdateReqVO updateReqVO) {
@@ -77,7 +77,7 @@ public class MpAutoReplyController {
         return success(true);
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     @ApiOperation("删除公众号自动回复")
     @ApiImplicitParam(name = "id", value = "编号", required = true, dataTypeClass = Long.class)
     @PreAuthorize("@ss.hasPermission('mp:auto-reply:delete')")

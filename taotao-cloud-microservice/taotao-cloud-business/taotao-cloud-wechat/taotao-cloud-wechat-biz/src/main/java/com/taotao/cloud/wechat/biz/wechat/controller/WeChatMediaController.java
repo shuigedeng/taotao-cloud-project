@@ -54,7 +54,7 @@ public class WeChatMediaController {
     }
 
     @Operation(summary = "删除素材")
-    @DeleteMapping("/deleteFile")
+    @PostMapping("/deleteFile")
     public ResResult<Void> deleteFile(String mediaId) {
         weChatMediaService.deleteFile(mediaId);
         return Res.ok();

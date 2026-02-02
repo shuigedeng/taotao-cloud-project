@@ -113,7 +113,7 @@ public class OrderController {
     @Operation(summary = "删除订单", description = "删除订单")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @DeleteMapping(value = "/{orderSn}")
+    @PostMapping(value = "/{orderSn}")
     public Result<Boolean> deleteOrder(@PathVariable String orderSn) {
         OperationalJudgment.judgment(orderService.getBySn(orderSn));
         orderService.deleteOrder(orderSn);

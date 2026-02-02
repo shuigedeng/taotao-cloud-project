@@ -109,7 +109,7 @@ public class BatchTableController {
      * @return
      */
     @Operation("修改行文呈批表")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody @Valid BatchTableForm batchTableForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (batchTableForm.getShareNum() != null

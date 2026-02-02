@@ -96,7 +96,7 @@ public class SysLogLoginController {
      * @return Response
      */
     // @SysLog("编辑")
-    @PutMapping
+    @PostMapping
     // @ApiOperation(value = "修改", notes = "修改")
     @PreAuthorize("@authorize.hasPermission('sys_editor_sysLogLogin')")
     public Result<Boolean> update( @RequestBody SysLogLogin sysLogLogin ) {
@@ -110,7 +110,7 @@ public class SysLogLoginController {
      * @return Response
      */
     // @SysLog("通过id删除")
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}")
     // @ApiOperation(value = "通过id删除", notes = "通过id删除")
     @PreAuthorize("@authorize.hasPermission('sys_delete_sysLogLogin')")
     public Result<Boolean> delete( @PathVariable Integer id ) {

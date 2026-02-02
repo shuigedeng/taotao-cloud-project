@@ -98,7 +98,7 @@ public class PayDistributionController {
      * @return
      */
     @Operation("修改薪酬发放")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody PayDistributionForm payDistributionForm, @PathVariable("id") String id)
             throws WorkFlowException {
         PayDistributionEntity entity = JacksonUtils.getJsonToBean(payDistributionForm, PayDistributionEntity.class);

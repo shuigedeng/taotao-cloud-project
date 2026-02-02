@@ -69,7 +69,7 @@ public class ParameterManagerController {
     })
     @RequestLogger("编辑参数")
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<Boolean> update(@Validated @RequestBody ParametersDTO parametersDTO,
                                   @PathVariable Long id) {
         Parameters parameters = ParametersConvert.INSTANCE.convert(parametersDTO);
@@ -83,7 +83,7 @@ public class ParameterManagerController {
     })
     @RequestLogger("根据id删除参数")
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @DeleteMapping(value = "/{id}")
+    @PostMapping(value = "/{id}")
     public Result<Boolean> delById(@PathVariable Long id) {
         return Result.success(parametersService.removeById(id));
     }

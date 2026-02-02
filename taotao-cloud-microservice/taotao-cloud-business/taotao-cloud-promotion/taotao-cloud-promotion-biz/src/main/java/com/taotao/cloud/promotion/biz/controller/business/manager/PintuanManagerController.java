@@ -87,7 +87,7 @@ public class PintuanManagerController {
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-    @PutMapping("/status/{pintuanIds}")
+    @PostMapping("/status/{pintuanIds}")
     @Operation(summary = "操作拼团活动状态")
     public Result<String> openPintuan(@PathVariable String pintuanIds, Long startTime, Long endTime) {
         if (pintuanService.updateStatus(Arrays.asList(pintuanIds.split(",")), startTime, endTime)) {

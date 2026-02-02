@@ -67,7 +67,7 @@ public class MemberAddressController {
     @Operation(summary = "删除会员收件地址", description = "删除会员收件地址")
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
-    @DeleteMapping(value = "/{id}")
+    @PostMapping(value = "/{id}")
     public Result<Boolean> delShippingAddressById(
             @Parameter(description = "会员地址ID", required = true) @PathVariable Long id) {
         return Result.success(memberAddressService.removeMemberAddress(id));
@@ -76,7 +76,7 @@ public class MemberAddressController {
     @Operation(summary = "修改会员收件地址", description = "修改会员收件地址")
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
-    @PutMapping
+    @PostMapping
     public Result<Boolean> updateMemberAddress(@Valid MemberAddress shippingAddress) {
         return Result.success(memberAddressService.updateMemberAddress(shippingAddress));
     }

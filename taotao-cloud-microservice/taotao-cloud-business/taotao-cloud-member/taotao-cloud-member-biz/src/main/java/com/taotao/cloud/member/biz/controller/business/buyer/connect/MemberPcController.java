@@ -137,7 +137,7 @@ package com.taotao.cloud.member.biz.controller.business.buyer.connect; // packag
 // 	@Operation(summary = "修改密码", description = "修改密码")
 // 	@RequestLogger("修改密码")
 // 	@PreAuthorize("@el.check('admin','timing:list')")
-// 	@PutMapping("/password")
+// 	@PostMapping("/password")
 // 	public Result<Object> resetByMobile(
 // 		@NotNull(message = "密码为空") @RequestParam String password, @RequestHeader String uuid) {
 // 		return Result.success(memberService.resetByMobile(uuid, password));
@@ -146,7 +146,7 @@ package com.taotao.cloud.member.biz.controller.business.buyer.connect; // packag
 // 	@Operation(summary = "修改用户自己资料", description = "修改用户自己资料")
 // 	@RequestLogger("修改用户自己资料")
 // 	@PreAuthorize("@el.check('admin','timing:list')")
-// 	@PutMapping("/own")
+// 	@PostMapping("/own")
 // 	public Result<Boolean> editOwn(MemberEditDTO memberEditDTO) {
 // 		return Result.success(memberService.editOwn(memberEditDTO));
 // 	}
@@ -154,7 +154,7 @@ package com.taotao.cloud.member.biz.controller.business.buyer.connect; // packag
 // 	@Operation(summary = "修改密码", description = "修改密码")
 // 	@RequestLogger("修改密码")
 // 	@PreAuthorize("@el.check('admin','timing:list')")
-// 	@PutMapping("/modifyPass")
+// 	@PostMapping("/modifyPass")
 // 	public Result<Boolean> modifyPass(
 // 		@NotNull(message = "旧密码不能为空") @RequestParam String password,
 // 		@NotNull(message = "新密码不能为空") @RequestParam String newPassword) {

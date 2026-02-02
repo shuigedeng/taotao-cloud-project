@@ -58,7 +58,7 @@ public class PointsGoodsCategoryManagerController {
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-    @PutMapping
+    @PostMapping
     @Operation(summary = "修改积分商品分类")
     public Result<Object> update(PointsGoodsCategoryVO pointsGoodsCategory) {
         pointsGoodsCategoryService.updateCategory(pointsGoodsCategory);
@@ -67,7 +67,7 @@ public class PointsGoodsCategoryManagerController {
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}")
     @Operation(summary = "删除积分商品分类")
     public Result<Object> delete(@PathVariable String id) {
         pointsGoodsCategoryService.deleteCategory(id);

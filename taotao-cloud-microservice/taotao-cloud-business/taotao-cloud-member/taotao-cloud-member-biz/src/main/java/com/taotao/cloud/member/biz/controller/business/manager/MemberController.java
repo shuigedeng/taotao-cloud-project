@@ -86,7 +86,7 @@ public class MemberController {
     @Operation(summary = "修改会员基本信息", description = "修改会员基本信息")
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
-    @PutMapping
+    @PostMapping
     public Result<Boolean> updateMember(@Valid ManagerMemberEditDTO managerMemberEditDTO) {
         return Result.success(memberService.updateMember(managerMemberEditDTO));
     }
@@ -94,7 +94,7 @@ public class MemberController {
     @Operation(summary = "修改会员状态,开启关闭会员", description = "修改会员状态,开启关闭会员")
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
-    @PutMapping("/status")
+    @PostMapping("/status")
     public Result<Boolean> updateMemberStatus(@RequestParam List<Long> memberIds, @RequestParam Boolean disabled) {
         return Result.success(memberService.updateMemberStatus(memberIds, disabled));
     }

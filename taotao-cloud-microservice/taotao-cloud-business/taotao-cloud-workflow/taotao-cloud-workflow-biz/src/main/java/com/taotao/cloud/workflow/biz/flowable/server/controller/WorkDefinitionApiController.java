@@ -59,19 +59,19 @@ public class WorkDefinitionApiController {
         return new HttpResult<String>().ok(workDefinitionService.diagramDefinition(definitionId));
     }
 
-    @DeleteMapping(value = "/delete")
+    @PostMapping(value = "/delete")
     @Operation(summary = "流程定义>删除流程", description = "流程定义>删除流程")
     public HttpResult<Boolean> delete(@RequestParam("deploymentId") String deploymentId) {
         return new HttpResult<Boolean>().ok(workDefinitionService.deleteDefinition(deploymentId));
     }
 
-    @PutMapping(value = "/suspend")
+    @PostMapping(value = "/suspend")
     @Operation(summary = "流程定义>挂起流程", description = "流程定义>挂起流程")
     public HttpResult<Boolean> suspend(@RequestParam("definitionId") String definitionId) {
         return new HttpResult<Boolean>().ok(workDefinitionService.suspendDefinition(definitionId));
     }
 
-    @PutMapping(value = "/activate")
+    @PostMapping(value = "/activate")
     @Operation(summary = "流程定义>激活流程", description = "流程定义>激活流程")
     public HttpResult<Boolean> activate(@RequestParam("definitionId") String definitionId) {
         return new HttpResult<Boolean>().ok(workDefinitionService.activateDefinition(definitionId));

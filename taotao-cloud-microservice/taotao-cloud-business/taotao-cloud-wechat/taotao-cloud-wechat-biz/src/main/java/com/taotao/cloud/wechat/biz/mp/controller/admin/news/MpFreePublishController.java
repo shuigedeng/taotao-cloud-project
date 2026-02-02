@@ -128,7 +128,7 @@ public class MpFreePublishController {
         }
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     @ApiOperation("删除草稿")
     @ApiImplicitParams({
         @ApiImplicitParam(

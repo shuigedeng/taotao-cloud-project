@@ -89,7 +89,7 @@ public class SysFormController extends BaseController {
     /** 修改流程表单 */
     @PreAuthorize("@ss.hasPermi('flowable:form:edit')")
     @Log(title = "流程表单", businessType = BusinessType.UPDATE)
-    @PutMapping
+    @PostMapping
     public AjaxResult edit(@RequestBody SysForm sysForm) {
         return toAjax(SysFormService.updateSysForm(sysForm));
     }
@@ -97,7 +97,7 @@ public class SysFormController extends BaseController {
     /** 删除流程表单 */
     @PreAuthorize("@ss.hasPermi('flowable:form:remove')")
     @Log(title = "流程表单", businessType = BusinessType.DELETE)
-    @DeleteMapping("/{formIds}")
+    @PostMapping("/{formIds}")
     public AjaxResult remove(@PathVariable Long[] formIds) {
         return toAjax(SysFormService.deleteSysFormByIds(formIds));
     }

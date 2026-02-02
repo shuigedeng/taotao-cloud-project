@@ -104,7 +104,7 @@ public class ArchivalBorrowController {
      * @return
      */
     @Operation("修改档案借阅申请")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody @Valid ArchivalBorrowForm archivalBorrowForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (archivalBorrowForm.getBorrowingDate() > archivalBorrowForm.getReturnDate()) {

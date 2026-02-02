@@ -83,7 +83,7 @@ public class MemberEvaluationController {
     @Operation(summary = "删除评论", description = "删除评论")
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
-    @DeleteMapping(value = "/{id}")
+    @PostMapping(value = "/{id}")
     public Result<Boolean> delete(@PathVariable Long id) {
         return Result.success(memberEvaluationService.delete(id));
     }

@@ -54,7 +54,7 @@ public class BpmUserGroupController {
         return success(userGroupService.createUserGroup(createReqVO));
     }
 
-    @PutMapping("/update")
+    @PostMapping("/update")
     @ApiOperation("更新用户组")
     @PreAuthorize("@ss.hasPermission('bpm:user-group:update')")
     public CommonResult<Boolean> updateUserGroup(@Valid @RequestBody BpmUserGroupUpdateReqVO updateReqVO) {
@@ -62,7 +62,7 @@ public class BpmUserGroupController {
         return success(true);
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     @ApiOperation("删除用户组")
     @ApiImplicitParam(name = "id", value = "编号", required = true, dataTypeClass = Long.class)
     @PreAuthorize("@ss.hasPermission('bpm:user-group:delete')")

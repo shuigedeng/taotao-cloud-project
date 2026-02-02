@@ -96,7 +96,7 @@ public class ContractApprovalController {
      * @return
      */
     @Operation("修改合同审批")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody @Valid ContractApprovalForm contractApprovalForm, @PathVariable("id") String id)
             throws WorkFlowException {
         ContractApprovalEntity entity = JsonUtil.getJsonToBean(contractApprovalForm, ContractApprovalEntity.class);

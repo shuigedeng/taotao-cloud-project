@@ -96,7 +96,7 @@ public class CouponStoreController {
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-    @PutMapping
+    @PostMapping
     @Operation(summary = "修改优惠券")
     public Result<Coupon> updateCoupon(@RequestBody CouponVO couponVO) {
         OperationalJudgment.judgment(couponService.getById(couponVO.getId()));
@@ -111,7 +111,7 @@ public class CouponStoreController {
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-    @DeleteMapping(value = "/{ids}")
+    @PostMapping(value = "/{ids}")
     @Operation(summary = "批量删除")
     public Result<Object> delAllByIds(@PathVariable List<String> ids) {
         String storeId = Objects.requireNonNull(SecurityUtils.getCurrentUser()).getStoreId();
@@ -131,7 +131,7 @@ public class CouponStoreController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "修改优惠券状态")
-    @PutMapping("/status")
+    @PostMapping("/status")
     public Result<Object> updateCouponStatus(String couponIds, Long startTime, Long endTime) {
 		SecurityUser currentUser = Objects.requireNonNull(SecurityUtils.getCurrentUser());
         String[] split = couponIds.split(",");

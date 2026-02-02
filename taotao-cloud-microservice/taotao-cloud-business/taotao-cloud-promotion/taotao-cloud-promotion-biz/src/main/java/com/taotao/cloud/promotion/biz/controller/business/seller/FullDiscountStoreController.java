@@ -93,7 +93,7 @@ public class FullDiscountStoreController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "修改满优惠活动")
-    @PutMapping
+    @PostMapping
     public Result<String> editFullDiscount(@RequestBody FullDiscountVO fullDiscountVO) {
         OperationalJudgment.judgment(fullDiscountService.getFullDiscount(fullDiscountVO.getId()));
 		SecurityUser currentUser = Objects.requireNonNull(SecurityUtils.getCurrentUser());
@@ -108,7 +108,7 @@ public class FullDiscountStoreController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "删除满优惠活动")
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<String> deleteFullDiscount(@PathVariable String id) {
         OperationalJudgment.judgment(fullDiscountService.getById(id));
         fullDiscountService.removePromotions(Collections.singletonList(id));
@@ -123,7 +123,7 @@ public class FullDiscountStoreController {
     //	@ApiImplicitParam(name = "promotionStatus", value = "满额活动状态", required = true, paramType =
     // "path")
     // })
-    @PutMapping("/status/{id}")
+    @PostMapping("/status/{id}")
     public Result<Object> updateCouponStatus(
             @Parameter(description = "满额活动ID") @PathVariable String id, Long startTime, Long endTime) {
         OperationalJudgment.judgment(fullDiscountService.getFullDiscount(id));

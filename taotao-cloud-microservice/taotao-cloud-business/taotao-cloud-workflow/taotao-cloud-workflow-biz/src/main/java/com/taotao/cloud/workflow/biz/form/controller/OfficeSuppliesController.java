@@ -100,7 +100,7 @@ public class OfficeSuppliesController {
      * @return
      */
     @Operation("修改领用办公用品申请表")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody OfficeSuppliesForm officeSuppliesForm, @PathVariable("id") String id)
             throws WorkFlowException {
         OfficeSuppliesEntity entity = JacksonUtils.getJsonToBean(officeSuppliesForm, OfficeSuppliesEntity.class);

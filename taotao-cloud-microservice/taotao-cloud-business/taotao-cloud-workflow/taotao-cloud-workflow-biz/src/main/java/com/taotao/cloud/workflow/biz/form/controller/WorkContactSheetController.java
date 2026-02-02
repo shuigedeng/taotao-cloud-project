@@ -100,7 +100,7 @@ public class WorkContactSheetController {
      * @return
      */
     @Operation("修改工作联系单")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody WorkContactSheetForm workContactSheetForm, @PathVariable("id") String id)
             throws WorkFlowException {
         WorkContactSheetEntity entity = JacksonUtils.getJsonToBean(workContactSheetForm, WorkContactSheetEntity.class);

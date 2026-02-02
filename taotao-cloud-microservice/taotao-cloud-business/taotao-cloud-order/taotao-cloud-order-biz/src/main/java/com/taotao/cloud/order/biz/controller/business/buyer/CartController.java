@@ -126,7 +126,7 @@ public class CartController {
 	@Operation(summary = "清空购物车", description = "清空购物车")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@DeleteMapping()
+	@PostMapping()
 	public Result<Boolean> clean() {
 		return Result.success(cartService.clean());
 	}
@@ -134,7 +134,7 @@ public class CartController {
 	@Operation(summary = "删除购物车中的一个或多个产品", description = "删除购物车中的一个或多个产品")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@DeleteMapping(value = "/sku/remove")
+	@PostMapping(value = "/sku/remove")
 	public Result<Boolean> delete(String[] skuIds) {
 		return Result.success(cartService.delete(skuIds));
 	}

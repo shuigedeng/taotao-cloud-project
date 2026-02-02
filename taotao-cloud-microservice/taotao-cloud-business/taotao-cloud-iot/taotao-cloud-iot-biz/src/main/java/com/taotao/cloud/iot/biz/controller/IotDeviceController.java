@@ -56,7 +56,7 @@ public class IotDeviceController {
         return Result.ok();
     }
 
-    @PutMapping
+    @PostMapping
     @Operation(summary = "修改")
     @PreAuthorize("hasAuthority('iot:device:update')")
     public Result<String> update(@RequestBody @Valid IotDeviceVO vo) {
@@ -65,7 +65,7 @@ public class IotDeviceController {
         return Result.ok();
     }
 
-    @DeleteMapping
+    @PostMapping
     @Operation(summary = "删除")
     @PreAuthorize("hasAuthority('iot:device:delete')")
     public Result<String> delete(@RequestBody List<Long> idList) {

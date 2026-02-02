@@ -51,7 +51,7 @@ public class OAuth2ApplicationController {
         @Parameter(name = "appKey", required = true, description = "appKey"),
         @Parameter(name = "scopes[]", required = true, description = "Scope对象组成的数组")
     })
-    @PutMapping
+    @PostMapping
     public Result<OAuth2Application> authorize(
             @RequestParam(name = "applicationId") String scopeId,
             @RequestParam(name = "scopes[]") String[] scopes) {

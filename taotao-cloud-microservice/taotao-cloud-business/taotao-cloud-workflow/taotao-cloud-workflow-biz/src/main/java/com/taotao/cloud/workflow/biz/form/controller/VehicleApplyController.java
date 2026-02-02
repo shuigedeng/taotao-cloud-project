@@ -101,7 +101,7 @@ public class VehicleApplyController {
      * @return
      */
     @Operation("修改车辆申请")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody VehicleApplyForm vehicleApplyForm, @PathVariable("id") String id)
             throws WorkFlowException {
         VehicleApplyEntity entity = JacksonUtils.getJsonToBean(vehicleApplyForm, VehicleApplyEntity.class);

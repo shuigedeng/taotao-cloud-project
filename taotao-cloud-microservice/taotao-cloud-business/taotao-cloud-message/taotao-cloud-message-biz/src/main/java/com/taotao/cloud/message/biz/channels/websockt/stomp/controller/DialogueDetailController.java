@@ -94,7 +94,7 @@ public class DialogueDetailController extends BaseWriteableRestController<Dialog
     @Parameters({
             @Parameter(name = "id", required = true, in = ParameterIn.PATH, description = "DialogueId 关联私信联系人和私信详情的ID")
     })
-    @DeleteMapping("/dialogue/{id}")
+    @PostMapping("/dialogue/{id}")
     public Result<String> deleteDialogueById(@PathVariable String id) {
         dialogueDetailService.deleteDialogueById(id);
         return Result.success("删除成功");

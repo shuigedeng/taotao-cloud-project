@@ -90,7 +90,7 @@ public class FlowLaunchController {
     }
 
     @Operation(summary = "删除流程发起", description = "删除流程发起")
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<String> delete(@PathVariable("id") String id) throws WorkFlowException {
         FlowTaskEntity entity = flowTaskService.getInfo(id);
         if (entity != null) {
@@ -117,7 +117,7 @@ public class FlowLaunchController {
     }
 
     @Operation(summary = "撤回流程发起", description = "注意：在撤销流程时要保证你的下一节点没有处理这条记录；如已处理则无法撤销流程。")
-    @PutMapping("/actions/withdraw/{id}")
+    @PostMapping("/actions/withdraw/{id}")
     public Result<String> revoke(@PathVariable("id") String id, @RequestBody FlowHandleModel flowHandleModel)
             throws WorkFlowException {
         FlowTaskEntity flowTaskEntity = flowTaskService.getInfo(id);

@@ -64,7 +64,7 @@ public class BpmProcessInstanceController {
         return success(processInstanceService.getProcessInstanceVO(id));
     }
 
-    @DeleteMapping("/cancel")
+    @PostMapping("/cancel")
     @ApiOperation(value = "取消流程实例", notes = "撤回发起的流程")
     @PreAuthorize("@ss.hasPermission('bpm:process-instance:cancel')")
     public CommonResult<Boolean> cancelProcessInstance(@Valid @RequestBody BpmProcessInstanceCancelReqVO cancelReqVO) {

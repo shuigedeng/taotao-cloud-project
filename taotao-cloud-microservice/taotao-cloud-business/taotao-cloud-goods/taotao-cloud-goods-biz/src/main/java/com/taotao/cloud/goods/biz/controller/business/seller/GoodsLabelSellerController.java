@@ -87,7 +87,7 @@ public class GoodsLabelSellerController {
     @Operation(summary = "修改店铺商品分类", description = "修改店铺商品分类")
     @RequestLogger("修改店铺商品分类")
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<Boolean> edit(@PathVariable Long id, @Validated @RequestBody StoreGoodsLabelDTO storeGoodsLabelDTO) {
         StoreGoodsLabel storeGoodsLabel = GoodsLabelStoreConvert.INSTANCE.convert(storeGoodsLabelDTO);
         storeGoodsLabel.setId(id);
@@ -97,7 +97,7 @@ public class GoodsLabelSellerController {
     @Operation(summary = "删除店铺商品分类", description = "删除店铺商品分类")
     @RequestLogger("删除店铺商品分类")
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<Boolean> delete(@PathVariable Long id) {
         return Result.success(storeGoodsLabelService.removeStoreGoodsLabel(id));
     }

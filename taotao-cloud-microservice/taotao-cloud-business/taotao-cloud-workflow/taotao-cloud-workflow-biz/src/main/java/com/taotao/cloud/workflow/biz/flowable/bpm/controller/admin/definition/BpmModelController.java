@@ -65,7 +65,7 @@ public class BpmModelController {
         return success(modelService.createModel(createRetVO, null));
     }
 
-    @PutMapping("/update")
+    @PostMapping("/update")
     @ApiOperation(value = "修改模型")
     @PreAuthorize("@ss.hasPermission('bpm:model:update')")
     public CommonResult<Boolean> updateModel(@Valid @RequestBody BpmModelUpdateReqVO modelVO) {
@@ -92,7 +92,7 @@ public class BpmModelController {
         return success(true);
     }
 
-    @PutMapping("/update-state")
+    @PostMapping("/update-state")
     @ApiOperation(value = "修改模型的状态", notes = "实际更新的部署的流程定义的状态")
     @PreAuthorize("@ss.hasPermission('bpm:model:update')")
     public CommonResult<Boolean> updateModelState(@Valid @RequestBody BpmModelUpdateStateReqVO reqVO) {
@@ -100,7 +100,7 @@ public class BpmModelController {
         return success(true);
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     @ApiOperation("删除模型")
     @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = String.class)
     @PreAuthorize("@ss.hasPermission('bpm:model:delete')")

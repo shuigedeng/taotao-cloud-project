@@ -82,7 +82,7 @@ package com.taotao.cloud.message.biz.controller.business.manager; // package
 // 	@Operation(summary = "更新服务订阅消息", description = "更新服务订阅消息")
 // 	@RequestLogger("更新服务订阅消息")
 // 	@PreAuthorize("hasAuthority('dept:tree:data')")
-// 	@PutMapping("/{id}")
+// 	@PostMapping("/{id}")
 // 	public Result<ServiceNotice> update(@PathVariable String id,
 // 		ServiceNotice serviceNotice) {
 // 		serviceNoticeService.saveOrUpdate(serviceNotice);
@@ -92,7 +92,7 @@ package com.taotao.cloud.message.biz.controller.business.manager; // package
 // 	@Operation(summary = "删除服务订阅消息", description = "删除服务订阅消息")
 // 	@RequestLogger("删除服务订阅消息")
 // 	@PreAuthorize("hasAuthority('dept:tree:data')")
-// 	@DeleteMapping(value = "/{ids}")
+// 	@PostMapping(value = "/{ids}")
 // 	public Result<Object> delAllByIds(@PathVariable List ids) {
 // 		serviceNoticeService.removeByIds(ids);
 // 		return Result.success();

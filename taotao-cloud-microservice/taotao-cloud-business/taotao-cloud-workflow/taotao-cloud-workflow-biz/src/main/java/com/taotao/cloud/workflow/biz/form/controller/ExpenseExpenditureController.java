@@ -93,7 +93,7 @@ public class ExpenseExpenditureController {
      * @return
      */
     @Operation("修改费用支出单")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(
             @RequestBody @Valid ExpenseExpenditureForm expenseExpenditureForm, @PathVariable("id") String id)
             throws WorkFlowException {

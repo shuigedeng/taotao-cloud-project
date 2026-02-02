@@ -66,14 +66,14 @@ public class FieldTypeController {
         return Result.ok();
     }
 
-    @PutMapping
+    @PostMapping
     public Result<String> update(@RequestBody FieldTypeEntity entity) {
         fieldTypeService.updateById(entity);
 
         return Result.ok();
     }
 
-    @DeleteMapping
+    @PostMapping
     public Result<String> delete(@RequestBody Long[] ids) {
         fieldTypeService.removeBatchByIds(Arrays.asList(ids));
 

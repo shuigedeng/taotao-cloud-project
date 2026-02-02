@@ -50,7 +50,7 @@ public class BpmFormController {
         return success(formService.createForm(createReqVO));
     }
 
-    @PutMapping("/update")
+    @PostMapping("/update")
     @ApiOperation("更新动态表单")
     @PreAuthorize("@ss.hasPermission('bpm:form:update')")
     public CommonResult<Boolean> updateForm(@Valid @RequestBody BpmFormUpdateReqVO updateReqVO) {
@@ -58,7 +58,7 @@ public class BpmFormController {
         return success(true);
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     @ApiOperation("删除动态表单")
     @ApiImplicitParam(name = "id", value = "编号", required = true, dataTypeClass = Long.class)
     @PreAuthorize("@ss.hasPermission('bpm:form:delete')")

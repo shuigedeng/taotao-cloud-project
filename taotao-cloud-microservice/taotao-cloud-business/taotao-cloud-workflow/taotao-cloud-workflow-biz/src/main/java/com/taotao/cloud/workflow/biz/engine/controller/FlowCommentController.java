@@ -102,7 +102,7 @@ public class FlowCommentController {
     }
 
     @Operation(summary = "更新流程评论", description = "更新流程评论")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<String> update(@PathVariable("id") String id, @RequestBody @Valid FlowCommentForm commentForm)
             throws DataException {
         FlowCommentEntity info = flowCommentService.getInfo(id);
@@ -115,7 +115,7 @@ public class FlowCommentController {
     }
 
     @Operation(summary = "删除流程评论", description = "删除流程评论")
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<String> delete(@PathVariable("id") String id) {
         FlowCommentEntity entity = flowCommentService.getInfo(id);
         if (entity.getCreatorUserId().equals(SecurityUtils.getUserId())) {

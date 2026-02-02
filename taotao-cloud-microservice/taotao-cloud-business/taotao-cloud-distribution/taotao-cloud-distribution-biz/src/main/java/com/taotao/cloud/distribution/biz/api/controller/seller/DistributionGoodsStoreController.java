@@ -71,7 +71,7 @@ public class DistributionGoodsStoreController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping("/tree")
-    @PutMapping(value = "/checked/{skuId}")
+    @PostMapping(value = "/checked/{skuId}")
     public Result<DistributionGoods> distributionCheckGoods(
             @NotNull(message = "规格ID不能为空") @PathVariable String skuId,
             @NotNull(message = "佣金金额不能为空") @RequestParam BigDecimal commission) {
@@ -83,7 +83,7 @@ public class DistributionGoodsStoreController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping("/tree")
-    @DeleteMapping(value = "/cancel/{id}")
+    @PostMapping(value = "/cancel/{id}")
     public Result<Object> cancel(@NotNull @PathVariable String id) {
         OperationalJudgment.judgment(distributionGoodsService.getById(id));
         // 清除分销商已选择分销商品

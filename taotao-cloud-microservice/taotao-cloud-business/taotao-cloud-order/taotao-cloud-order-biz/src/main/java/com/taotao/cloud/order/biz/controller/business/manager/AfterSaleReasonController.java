@@ -87,7 +87,7 @@ public class AfterSaleReasonController {
     @Operation(summary = "修改售后原因", description = "修改售后原因")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<Boolean> update(
             @Validated @RequestBody AfterSaleReasonDTO afterSaleReasonDTO, @PathVariable("id") Long id) {
         AfterSaleReason afterSaleReason = AfterSaleReasonConvert.INSTANCE.convert(afterSaleReasonDTO);
@@ -98,7 +98,7 @@ public class AfterSaleReasonController {
     @Operation(summary = "删除售后原因", description = "删除售后原因")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @DeleteMapping(value = "/{id}")
+    @PostMapping(value = "/{id}")
     public Result<Boolean> delAllByIds(@PathVariable String id) {
         return Result.success(afterSaleReasonService.removeById(id));
     }

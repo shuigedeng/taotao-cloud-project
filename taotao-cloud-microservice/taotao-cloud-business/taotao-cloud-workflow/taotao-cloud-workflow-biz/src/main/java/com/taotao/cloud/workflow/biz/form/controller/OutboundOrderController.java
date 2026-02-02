@@ -108,7 +108,7 @@ public class OutboundOrderController {
      * @throws WorkFlowException
      */
     @Operation("修改出库单")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody OutboundOrderForm outboundOrderForm, @PathVariable("id") String id)
             throws WorkFlowException {
         OutboundOrderEntity outbound = JacksonUtils.getJsonToBean(outboundOrderForm, OutboundOrderEntity.class);

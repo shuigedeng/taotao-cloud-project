@@ -92,7 +92,7 @@ public class FlowMonitorController {
     }
 
     @Operation(summary = "批量删除流程监控", description = "批量删除流程监控")
-    @DeleteMapping
+    @PostMapping
     public Result<Boolean> delete(@RequestBody FlowDeleteModel deleteModel) throws WorkFlowException {
         String[] taskId = deleteModel.getIds().split(",");
         flowTaskService.delete(taskId);

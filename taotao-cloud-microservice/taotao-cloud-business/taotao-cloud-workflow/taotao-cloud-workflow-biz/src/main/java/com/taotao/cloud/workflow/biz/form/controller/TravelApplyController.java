@@ -99,7 +99,7 @@ public class TravelApplyController {
      * @return
      */
     @Operation("修改出差预支申请单")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody TravelApplyForm travelApplyForm, @PathVariable("id") String id)
             throws WorkFlowException {
         TravelApplyEntity entity = JacksonUtils.getJsonToBean(travelApplyForm, TravelApplyEntity.class);

@@ -109,7 +109,7 @@ public class OrderComplaintController {
     @Operation(summary = "修改申诉信息", description = "修改申诉信息")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<Boolean> update(@PathVariable Long id, @Validated @RequestBody OrderComplaintDTO orderComplaintDTO) {
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
         OrderComplaint orderComplaint = OrderComplainConvert.INSTANCE.convert(orderComplaintDTO);
@@ -129,7 +129,7 @@ public class OrderComplaintController {
     @Operation(summary = "修改状态", description = "修改状态")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/status")
+    @PostMapping(value = "/status")
     public Result<Boolean> updateStatus(@Validated @RequestBody OrderComplaintOperationDTO orderComplaintOperationDTO) {
         return Result.success(orderComplaintService.updateOrderComplainByStatus(orderComplaintOperationDTO));
     }

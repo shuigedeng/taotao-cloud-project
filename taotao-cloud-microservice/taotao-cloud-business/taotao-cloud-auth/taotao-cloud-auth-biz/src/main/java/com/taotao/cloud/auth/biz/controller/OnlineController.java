@@ -74,7 +74,7 @@ package com.taotao.cloud.auth.biz.controller; // package com.taotao.cloud.auth.b
 //
 //    @ForbidSubmit
 //    @ApiOperation("踢出用户")
-//    @DeleteMapping
+//    @PostMapping
 //    @PreAuthorize("@el.check()")
 //    public ResponseEntity<Object> delete(@RequestBody Set<String> keys) throws Exception {
 //

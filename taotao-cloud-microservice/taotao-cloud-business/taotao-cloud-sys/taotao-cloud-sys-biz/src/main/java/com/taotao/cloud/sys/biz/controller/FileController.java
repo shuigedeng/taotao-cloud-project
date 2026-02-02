@@ -104,7 +104,7 @@ public class FileController {
     @Parameters({
             @Parameter(name = "ids", required = true, description = "id列表"),
     })
-    @DeleteMapping("/11111/batch")
+    @PostMapping("/11111/batch")
     public Result<Boolean> delAllByIds(
             @Valid @NotNull(message = "id列表不能为空") @Size(min = 1, max = 3, message = "id个数只能在1至3个")
             @RequestParam List<Long> ids ) {
@@ -116,7 +116,7 @@ public class FileController {
     @Parameters({
             @Parameter(name = "id", required = true, description = "id", in = ParameterIn.PATH),
     })
-    @PutMapping("/2222/{id}")
+    @PostMapping("/2222/{id}")
     public Result<Boolean> update( @Valid @RequestBody Student specificationDTO,
             @NotNull(message = "id不能为空") @PathVariable Long id ) {
         return Result.success(true);
@@ -124,7 +124,7 @@ public class FileController {
 
     @NotAuth
     @Operation(summary = "更改规格222", description = "更改规格222")
-    @PutMapping("/33334")
+    @PostMapping("/33334")
     public Result<Boolean> updateBatch( @Valid @RequestBody List<Student> specificationDTO ) {
         return Result.success(true);
     }
@@ -150,7 +150,7 @@ public class FileController {
     @Parameters({
             @Parameter(name = "attributeId", required = true, description = "attributeId"),
     })
-    @PutMapping("/xxxxxx")
+    @PostMapping("/xxxxxx")
     public Result<String> assign( @RequestParam(name = "attributeId") String attributeId,
             @Validated @NotEmpty(message = "权限不能为空") @RequestBody String[] permissions ) {
         return Result.success("sdfasdf");
@@ -160,7 +160,7 @@ public class FileController {
     @Parameters({
             @Parameter(name = "userId", description = "用户id", required = true, example = "123", in = ParameterIn.PATH),
     })
-    @PutMapping("/roles/{userId}")
+    @PostMapping("/roles/{userId}")
     @NotAuth
     public Result<Boolean> updateUserRoles(
             @NotNull(message = "用户id不能为空") @PathVariable(name = "userId") Long userId,
@@ -356,7 +356,7 @@ public class FileController {
     // }
     //
     // @ApiOperation(value = "文件删除")
-    // @DeleteMapping(value = "/delete/{ids}")
+    // @PostMapping(value = "/delete/{ids}")
     // public ResultMessage delete(@RequestHeader String accessToken, @PathVariable List<String>
     // ids) {
     //

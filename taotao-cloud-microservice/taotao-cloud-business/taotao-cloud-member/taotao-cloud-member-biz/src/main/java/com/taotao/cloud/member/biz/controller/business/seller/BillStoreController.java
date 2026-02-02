@@ -93,7 +93,7 @@ package com.taotao.cloud.member.biz.controller.business.seller;
 // 	@Operation(summary = "核对结算单", description = "核对结算单")
 // 	@RequestLogger
 // 	@PreAuthorize("@el.check('admin','timing:list')")
-// 	@PutMapping(value = "/check/{id}")
+// 	@PostMapping(value = "/check/{id}")
 // 	public Result<Object> examine(@PathVariable String id) {
 // 		OperationalJudgment.judgment(billService.getById(id));
 // 		billService.check(id);

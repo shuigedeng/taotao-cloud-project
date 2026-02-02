@@ -110,7 +110,7 @@ public class WarehouseReceiptController {
      * @throws WorkFlowException
      */
     @Operation("修改入库申请单")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody WarehouseReceiptForm warehouseReceiptForm, @PathVariable("id") String id)
             throws WorkFlowException {
         WarehouseReceiptEntity warehouse = JacksonUtils.getJsonToBean(warehouseReceiptForm, WarehouseReceiptEntity.class);

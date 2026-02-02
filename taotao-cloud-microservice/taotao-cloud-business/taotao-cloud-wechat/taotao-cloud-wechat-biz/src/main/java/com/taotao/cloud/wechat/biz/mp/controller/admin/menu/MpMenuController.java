@@ -51,7 +51,7 @@ public class MpMenuController {
         return success(true);
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     @ApiOperation("删除公众号菜单")
     @ApiImplicitParam(
             name = "accountId",

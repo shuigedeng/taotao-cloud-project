@@ -54,7 +54,7 @@ public class IotDeviceEventLogController {
         return Result.ok();
     }
 
-    @PutMapping
+    @PostMapping
     @Operation(summary = "修改")
     @PreAuthorize("hasAuthority('iot:device_event_log:update')")
     public Result<String> update(@RequestBody @Valid IotDeviceEventLogVO vo) {
@@ -63,7 +63,7 @@ public class IotDeviceEventLogController {
         return Result.ok();
     }
 
-    @DeleteMapping
+    @PostMapping
     @Operation(summary = "删除")
     @PreAuthorize("hasAuthority('iot:device_event_log:delete')")
     public Result<String> delete(@RequestBody List<Long> idList) {

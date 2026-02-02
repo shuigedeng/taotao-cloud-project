@@ -67,7 +67,7 @@ public class BpmTaskAssignRuleController {
         return success(taskAssignRuleService.createTaskAssignRule(reqVO));
     }
 
-    @PutMapping("/update")
+    @PostMapping("/update")
     @ApiOperation(value = "更新任务分配规则")
     @PreAuthorize("@ss.hasPermission('bpm:task-assign-rule:update')")
     public CommonResult<Boolean> updateTaskAssignRule(@Valid @RequestBody BpmTaskAssignRuleUpdateReqVO reqVO) {

@@ -74,7 +74,7 @@ public class FlowInstanceController {
     }
 
     @ApiOperation(value = "删除流程实例")
-    @DeleteMapping(value = "/delete/{instanceIds}")
+    @PostMapping(value = "/delete/{instanceIds}")
     public AjaxResult delete(
             @ApiParam(value = "流程实例ID", required = true) @PathVariable String[] instanceIds,
             @ApiParam(value = "删除原因") @RequestParam(required = false) String deleteReason) {

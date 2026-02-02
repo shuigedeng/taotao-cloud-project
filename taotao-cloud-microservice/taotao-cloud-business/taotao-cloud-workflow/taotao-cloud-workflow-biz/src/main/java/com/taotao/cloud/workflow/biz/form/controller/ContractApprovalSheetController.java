@@ -117,7 +117,7 @@ public class ContractApprovalSheetController {
      * @return
      */
     @Operation("修改合同申请单表")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(
             @RequestBody @Valid ContractApprovalSheetForm contractApprovalSheetForm, @PathVariable("id") String id)
             throws WorkFlowException {

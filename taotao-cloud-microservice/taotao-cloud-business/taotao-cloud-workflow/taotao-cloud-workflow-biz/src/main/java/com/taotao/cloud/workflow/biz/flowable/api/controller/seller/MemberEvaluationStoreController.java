@@ -70,7 +70,7 @@ public class MemberEvaluationStoreController {
     @Operation(summary = "回复评价", description = "回复评价")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/reply/{id}")
+    @PostMapping(value = "/reply/{id}")
     public Result<MemberEvaluationVO> reply(
             @Parameter(description = "评价ID") @PathVariable Long id,
             @Parameter(description = "回复内容") @RequestParam String reply,

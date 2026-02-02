@@ -105,7 +105,7 @@ public class LetterServiceController {
      * @return
      */
     @Operation("修改发文单")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody @Valid LetterServiceForm letterServiceForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (letterServiceForm.getShareNum() != null

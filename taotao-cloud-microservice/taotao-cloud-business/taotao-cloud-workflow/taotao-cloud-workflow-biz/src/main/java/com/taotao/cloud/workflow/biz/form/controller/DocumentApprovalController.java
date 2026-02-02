@@ -101,7 +101,7 @@ public class DocumentApprovalController {
      * @return
      */
     @Operation("修改文件签批意见表")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody @Valid DocumentApprovalForm documentApprovalForm, @PathVariable("id") String id)
             throws WorkFlowException {
         DocumentApprovalEntity entity = JacksonUtils.getJsonToBean(documentApprovalForm, DocumentApprovalEntity.class);

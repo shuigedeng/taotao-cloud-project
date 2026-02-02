@@ -96,7 +96,7 @@ public class StoreBuyerController {
     @Operation(summary = "申请店铺第一步-填写企业信息", description = "申请店铺第一步-填写企业信息")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/apply/first")
+    @PostMapping(value = "/apply/first")
     public Result<Boolean> applyFirstStep(@RequestBody StoreCompanyDTO storeCompanyDTO) {
         return Result.success(storeService.applyFirstStep(storeCompanyDTO));
     }
@@ -104,7 +104,7 @@ public class StoreBuyerController {
     @Operation(summary = "申请店铺第二步-填写银行信息", description = "申请店铺第二步-填写银行信息")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/apply/second")
+    @PostMapping(value = "/apply/second")
     public Result<Boolean> applyFirstStep(@RequestBody StoreBankDTO storeBankDTO) {
         return Result.success(storeService.applySecondStep(storeBankDTO));
     }
@@ -112,7 +112,7 @@ public class StoreBuyerController {
     @Operation(summary = "申请店铺第三步-填写其他信息", description = "申请店铺第三步-填写其他信息")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/apply/third")
+    @PostMapping(value = "/apply/third")
     public Result<Boolean> applyFirstStep(@RequestBody StoreOtherInfoDTO storeOtherInfoDTO) {
         return Result.success(storeService.applyThirdStep(storeOtherInfoDTO));
     }

@@ -84,7 +84,7 @@ public class StoreMessageController {
     @Operation(summary = "已读操作", description = "已读操作")
     @RequestLogger("已读操作")
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping("/{id}/read")
+    @PostMapping("/{id}/read")
     public Result<Boolean> readMessage(@PathVariable String id) {
         OperationalJudgment.judgment(storeMessageService.getById(id));
         Boolean result = storeMessageService.editStatus(MessageStatusEnum.ALREADY_READY.name(), id);
@@ -94,7 +94,7 @@ public class StoreMessageController {
     @Operation(summary = "回收站还原消息", description = "回收站还原消息")
     @RequestLogger("回收站还原消息")
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping("/{id}/reduction")
+    @PostMapping("/{id}/reduction")
     public Result<Boolean> reductionMessage(@PathVariable String id) {
         OperationalJudgment.judgment(storeMessageService.getById(id));
         Boolean result = storeMessageService.editStatus(MessageStatusEnum.ALREADY_READY.name(), id);
@@ -104,7 +104,7 @@ public class StoreMessageController {
     @Operation(summary = "删除操作", description = "删除操作")
     @RequestLogger("删除操作")
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<Boolean> deleteMessage(@PathVariable String id) {
         OperationalJudgment.judgment(storeMessageService.getById(id));
         Boolean result = storeMessageService.editStatus(MessageStatusEnum.ALREADY_REMOVE.name(), id);
@@ -114,7 +114,7 @@ public class StoreMessageController {
     @Operation(summary = "彻底删除操作", description = "彻底删除操作")
     @RequestLogger("彻底删除操作")
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @DeleteMapping("/{id}/thorough")
+    @PostMapping("/{id}/thorough")
     public Result<Boolean> disabled(@PathVariable String id) {
         OperationalJudgment.judgment(storeMessageService.getById(id));
         Boolean result = storeMessageService.deleteByMessageId(id);

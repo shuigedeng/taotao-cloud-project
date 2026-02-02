@@ -99,7 +99,7 @@ public class PaymentApplyController {
      * @return
      */
     @Operation("修改付款申请单")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody PaymentApplyForm paymentApplyForm, @PathVariable("id") String id)
             throws WorkFlowException {
         PaymentApplyEntity entity = JacksonUtils.getJsonToBean(paymentApplyForm, PaymentApplyEntity.class);

@@ -93,7 +93,7 @@ public class AppApiService implements AppApi {
      * @return
      */
     @ApiOperation("删除")
-    @DeleteMapping("/{objectId}")
+    @PostMapping("/{objectId}")
     public ActionResult create(@PathVariable("objectId") String objectId) {
         AppDataEntity entity = appDataService.getInfo(objectId);
         if (entity != null) {

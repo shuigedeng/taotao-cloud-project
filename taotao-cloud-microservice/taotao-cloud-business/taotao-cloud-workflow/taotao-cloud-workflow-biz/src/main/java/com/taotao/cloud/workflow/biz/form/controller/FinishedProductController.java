@@ -111,7 +111,7 @@ public class FinishedProductController {
      * @throws WorkFlowException
      */
     @Operation("修改成品入库单")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody @Valid FinishedProductForm finishedProductForm, @PathVariable("id") String id)
             throws WorkFlowException {
         FinishedProductEntity finished = JacksonUtils.getJsonToBean(finishedProductForm, FinishedProductEntity.class);

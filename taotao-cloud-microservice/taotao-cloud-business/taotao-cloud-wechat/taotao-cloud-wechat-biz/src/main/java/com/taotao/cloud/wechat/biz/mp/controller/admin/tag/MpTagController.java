@@ -50,7 +50,7 @@ public class MpTagController {
         return success(mpTagService.createTag(createReqVO));
     }
 
-    @PutMapping("/update")
+    @PostMapping("/update")
     @ApiOperation("更新公众号标签")
     @PreAuthorize("@ss.hasPermission('mp:tag:update')")
     public CommonResult<Boolean> updateTag(@Valid @RequestBody MpTagUpdateReqVO updateReqVO) {
@@ -58,7 +58,7 @@ public class MpTagController {
         return success(true);
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     @ApiOperation("删除公众号标签")
     @ApiImplicitParam(name = "id", value = "编号", required = true, dataTypeClass = Long.class)
     @PreAuthorize("@ss.hasPermission('mp:tag:delete')")

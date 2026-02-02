@@ -158,7 +158,7 @@ public class PayInterfaceDefineController extends CommonCtrl {
             @ApiImplicitParam(name = "wayCodes", value = "接口类型代码列表")
     })
     @PreAuthorize("hasAuthority('ENT_PC_IF_DEFINE_EDIT')")
-    @PutMapping("/{ifCode}")
+    @PostMapping("/{ifCode}")
     @MethodLog(remark = "更新支付接口")
     public ApiRes update(@PathVariable("ifCode") String ifCode) {
         PayInterfaceDefine payInterfaceDefine = getObject(PayInterfaceDefine.class);
@@ -191,7 +191,7 @@ public class PayInterfaceDefineController extends CommonCtrl {
             @ApiImplicitParam(name = "ifCode", value = "接口类型代码", required = true)
     })
     @PreAuthorize("hasAuthority('ENT_PC_IF_DEFINE_DEL')")
-    @DeleteMapping("/{ifCode}")
+    @PostMapping("/{ifCode}")
     @MethodLog(remark = "删除支付接口")
     public ApiRes delete(@PathVariable("ifCode") String ifCode) {
 

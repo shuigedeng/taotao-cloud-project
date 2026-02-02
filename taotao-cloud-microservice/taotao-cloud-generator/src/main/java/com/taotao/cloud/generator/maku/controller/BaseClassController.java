@@ -66,14 +66,14 @@ public class BaseClassController {
         return Result.ok();
     }
 
-    @PutMapping
+    @PostMapping
     public Result<String> update(@RequestBody BaseClassEntity entity) {
         baseClassService.updateById(entity);
 
         return Result.ok();
     }
 
-    @DeleteMapping
+    @PostMapping
     public Result<String> delete(@RequestBody Long[] ids) {
         baseClassService.removeBatchByIds(Arrays.asList(ids));
 

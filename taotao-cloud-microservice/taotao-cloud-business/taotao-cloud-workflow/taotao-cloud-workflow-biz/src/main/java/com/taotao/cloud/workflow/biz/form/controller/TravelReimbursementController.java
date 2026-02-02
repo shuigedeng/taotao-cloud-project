@@ -104,7 +104,7 @@ public class TravelReimbursementController {
      * @return
      */
     @Operation("修改差旅报销申请表")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody TravelReimbursementForm travelReimbursementForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (travelReimbursementForm.getSetOutDate() > travelReimbursementForm.getReturnDate()) {

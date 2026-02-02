@@ -145,7 +145,7 @@ public class PayWayController extends CommonCtrl {
 			@ApiImplicitParam(name = "wayName", value = "支付方式名称", required = true)
 	})
 	@PreAuthorize("hasAuthority('ENT_PC_WAY_EDIT')")
-	@PutMapping("/{wayCode}")
+	@PostMapping("/{wayCode}")
 	@MethodLog(remark = "更新支付方式")
 	public ApiRes update(@PathVariable("wayCode") String wayCode) {
 		PayWay payWay = getObject(PayWay.class);
@@ -168,7 +168,7 @@ public class PayWayController extends CommonCtrl {
 			@ApiImplicitParam(name = "wayCode", value = "支付方式代码", required = true)
 	})
 	@PreAuthorize("hasAuthority('ENT_PC_WAY_DEL')")
-	@DeleteMapping("/{wayCode}")
+	@PostMapping("/{wayCode}")
 	@MethodLog(remark = "删除支付方式")
 	public ApiRes delete(@PathVariable("wayCode") String wayCode) {
 

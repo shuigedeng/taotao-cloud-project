@@ -87,7 +87,7 @@ public class CategoryParameterGroupManagerController {
     })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping
+    @PostMapping
     public Result<Boolean> update(@Validated CategoryParameterGroup categoryParameterGroup) {
         return Result.success(categoryParameterGroupService.updateById(categoryParameterGroup));
     }
@@ -98,7 +98,7 @@ public class CategoryParameterGroupManagerController {
     })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @DeleteMapping(value = "/{id}")
+    @PostMapping(value = "/{id}")
     public Result<Boolean> delAllByIds(@PathVariable Long id) {
         // 删除参数
         parametersService.remove(new QueryWrapper<Parameters>().eq("group_id", id));

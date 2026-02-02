@@ -102,7 +102,7 @@ public class NotificationController extends BaseWriteableRestController<Notifica
     @Parameters({
             @Parameter(name = "userId", description = "用户ID")
     })
-    @PutMapping("/all-read")
+    @PostMapping("/all-read")
     public Result<Integer> setAllRead(@RequestParam("userId") String userId) {
         Integer result = notificationService.setAllRead(userId);
         return Result.success("操作成功", result);

@@ -68,7 +68,7 @@ public class TenantController {
 	}
 
 	@Operation(summary = "删除租户信息")
-	@DeleteMapping(value = "/delete")
+	@PostMapping(value = "/delete")
 	public Result<Boolean> delete(Long id) {
 		return Result.success(tenantService.deleteSysTenant(id));
 	}

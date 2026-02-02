@@ -75,7 +75,7 @@ public class QuartzJobController {
 		return Result.success(true);
 	}
 
-	@PutMapping("/job")
+	@PostMapping("/job")
 	@Operation(summary = "更新任务", description = "更新任务")
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
@@ -123,7 +123,7 @@ public class QuartzJobController {
 		return Result.success(true);
 	}
 
-	@DeleteMapping("/job/{id}")
+	@PostMapping("/job/{id}")
 	@Operation(summary = "删除任务", description = "删除任务")
 	@RequestLogger
 	public Result<Boolean> delete(@PathVariable Long id) {

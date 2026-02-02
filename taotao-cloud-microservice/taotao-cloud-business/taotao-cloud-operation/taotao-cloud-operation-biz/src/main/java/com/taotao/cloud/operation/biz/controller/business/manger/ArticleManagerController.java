@@ -77,7 +77,7 @@ public class ArticleManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "修改文章")
-    @PutMapping(value = "update/{id}", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "update/{id}", consumes = "application/json", produces = "application/json")
     public Result<Article> update(
             @RequestBody Article article, @Parameter(description = "文章ID") @PathVariable("id") String id) {
         article.setId(id);
@@ -87,7 +87,7 @@ public class ArticleManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "修改文章状态")
-    @PutMapping("update/status/{id}")
+    @PostMapping("update/status/{id}")
     public Result<Article> updateStatus(
             @Parameter(description = "文章ID") @PathVariable("id") String id,
             @Parameter(description = "操作状态") boolean status) {
@@ -98,7 +98,7 @@ public class ArticleManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "批量删除")
-    @DeleteMapping(value = "/delByIds/{id}")
+    @PostMapping(value = "/delByIds/{id}")
     public Result<Object> delAllByIds(@Parameter(description = "文章ID") @PathVariable String id) {
         articleService.customRemove(id);
         return Result.success();

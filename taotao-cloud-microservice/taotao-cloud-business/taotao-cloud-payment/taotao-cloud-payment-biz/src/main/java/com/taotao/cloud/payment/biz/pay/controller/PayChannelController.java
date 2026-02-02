@@ -71,7 +71,7 @@ public class PayChannelController {
      * @return
      */
     @SysLog("编辑商户渠道")
-    @PutMapping
+    @PostMapping
     @PreAuthorize("@authorize.hasPermission('sys_editor_user')")
     public Response<Boolean> update(@RequestBody PayChannel payChannel) {
         return Response.success(payChannelService.updateById(payChannel));

@@ -99,7 +99,7 @@ public class SalesSupportController {
      * @return
      */
     @Operation("修改销售支持表")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody SalesSupportForm salesSupportForm, @PathVariable("id") String id)
             throws WorkFlowException {
         SalesSupportEntity entity = JacksonUtils.getJsonToBean(salesSupportForm, SalesSupportEntity.class);

@@ -50,7 +50,7 @@ public class MpAccountController {
         return success(mpAccountService.createAccount(createReqVO));
     }
 
-    @PutMapping("/update")
+    @PostMapping("/update")
     @ApiOperation("更新公众号账号")
     @PreAuthorize("@ss.hasPermission('mp:account:update')")
     public CommonResult<Boolean> updateAccount(@Valid @RequestBody MpAccountUpdateReqVO updateReqVO) {
@@ -58,7 +58,7 @@ public class MpAccountController {
         return success(true);
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     @ApiOperation("删除公众号账号")
     @ApiImplicitParam(name = "id", value = "编号", required = true, dataTypeClass = Long.class)
     @PreAuthorize("@ss.hasPermission('mp:account:delete')")
@@ -92,7 +92,7 @@ public class MpAccountController {
         return success(MpAccountConvert.INSTANCE.convertList02(list));
     }
 
-    @PutMapping("/generate-qr-code")
+    @PostMapping("/generate-qr-code")
     @ApiOperation("生成公众号二维码")
     @ApiImplicitParam(name = "id", value = "编号", required = true, dataTypeClass = Long.class)
     @PreAuthorize("@ss.hasPermission('mp:account:qr-code')")
@@ -101,7 +101,7 @@ public class MpAccountController {
         return success(true);
     }
 
-    @PutMapping("/clear-quota")
+    @PostMapping("/clear-quota")
     @ApiOperation("清空公众号 API 配额")
     @ApiImplicitParam(name = "id", value = "编号", required = true, dataTypeClass = Long.class)
     @PreAuthorize("@ss.hasPermission('mp:account:clear-quota')")

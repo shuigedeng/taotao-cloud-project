@@ -85,7 +85,7 @@ public class ArticleCategoryManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "修改文章分类")
-    @PutMapping("/update/{id}")
+    @PostMapping("/update/{id}")
     public Result<ArticleCategory> update(
             @Valid ArticleCategory articleCategory, @Parameter(description = "文章分类ID") @PathVariable("id") String id) {
 
@@ -103,7 +103,7 @@ public class ArticleCategoryManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "删除文章分类")
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<ArticleCategory> deleteById(@Parameter(description = "文章分类ID") @PathVariable String id) {
         articleCategoryService.deleteById(id);
         return Result.success();

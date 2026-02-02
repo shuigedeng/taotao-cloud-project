@@ -73,7 +73,7 @@ public class TableController {
      *
      * @param table 表信息
      */
-    @PutMapping
+    @PostMapping
     public Result<String> update(@RequestBody TableEntity table) {
         tableService.updateById(table);
 
@@ -85,7 +85,7 @@ public class TableController {
      *
      * @param ids 表id数组
      */
-    @DeleteMapping
+    @PostMapping
     public Result<String> delete(@RequestBody Long[] ids) {
         tableService.deleteBatchIds(ids);
 
@@ -127,7 +127,7 @@ public class TableController {
      * @param tableId        表ID
      * @param tableFieldList 字段列表
      */
-    @PutMapping("field/{tableId}")
+    @PostMapping("field/{tableId}")
     public Result<String> updateTableField(
             @PathVariable("tableId") Long tableId,
             @RequestBody List<TableFieldEntity> tableFieldList) {

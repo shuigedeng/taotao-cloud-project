@@ -97,7 +97,7 @@ public class AfterSaleController {
     @Operation(summary = "售后线下退款", description = "售后线下退款")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/refund/{afterSaleSn}")
+    @PostMapping(value = "/refund/{afterSaleSn}")
     public Result<Boolean> refund(
             @NotNull(message = "请选择售后单") @PathVariable String afterSaleSn, @RequestParam String remark) {
         return Result.success(afterSaleService.refund(afterSaleSn, remark));
@@ -106,7 +106,7 @@ public class AfterSaleController {
     @Operation(summary = "审核售后申请", description = "审核售后申请")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/review/{afterSaleSn}")
+    @PostMapping(value = "/review/{afterSaleSn}")
     public Result<Boolean> review(
             @NotNull(message = "请选择售后单") @PathVariable String afterSaleSn,
             @NotNull(message = "请审核") String serviceStatus,

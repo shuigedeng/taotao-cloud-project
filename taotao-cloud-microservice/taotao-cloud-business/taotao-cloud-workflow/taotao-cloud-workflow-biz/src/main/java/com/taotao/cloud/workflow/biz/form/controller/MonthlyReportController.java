@@ -99,7 +99,7 @@ public class MonthlyReportController {
      * @return
      */
     @Operation("修改月工作总结")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody MonthlyReportForm monthlyReportForm, @PathVariable("id") String id)
             throws WorkFlowException {
         MonthlyReportEntity entity = JacksonUtils.getJsonToBean(monthlyReportForm, MonthlyReportEntity.class);

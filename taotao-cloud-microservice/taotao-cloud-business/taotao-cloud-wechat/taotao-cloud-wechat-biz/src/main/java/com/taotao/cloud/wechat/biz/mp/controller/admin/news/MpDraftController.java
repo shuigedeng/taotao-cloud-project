@@ -116,7 +116,7 @@ public class MpDraftController {
         }
     }
 
-    @PutMapping("/update")
+    @PostMapping("/update")
     @ApiOperation("更新草稿")
     @ApiImplicitParams({
         @ApiImplicitParam(
@@ -149,7 +149,7 @@ public class MpDraftController {
         }
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     @ApiOperation("删除草稿")
     @ApiImplicitParams({
         @ApiImplicitParam(

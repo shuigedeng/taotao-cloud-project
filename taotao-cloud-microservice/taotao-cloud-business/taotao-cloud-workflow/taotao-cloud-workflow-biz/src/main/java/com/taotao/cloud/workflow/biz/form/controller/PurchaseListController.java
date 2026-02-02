@@ -109,7 +109,7 @@ public class PurchaseListController {
      * @throws WorkFlowException
      */
     @Operation("修改日常物品采购清单")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody PurchaseListForm purchaseListForm, @PathVariable("id") String id)
             throws WorkFlowException {
         PurchaseListEntity procurement = JacksonUtils.getJsonToBean(purchaseListForm, PurchaseListEntity.class);

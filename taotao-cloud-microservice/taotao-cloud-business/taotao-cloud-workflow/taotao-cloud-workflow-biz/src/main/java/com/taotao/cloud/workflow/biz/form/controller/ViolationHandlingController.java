@@ -101,7 +101,7 @@ public class ViolationHandlingController {
      * @return
      */
     @Operation("修改违章处理申请表")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody ViolationHandlingForm violationHandlingForm, @PathVariable("id") String id)
             throws WorkFlowException {
         ViolationHandlingEntity entity = JacksonUtils.getJsonToBean(violationHandlingForm, ViolationHandlingEntity.class);

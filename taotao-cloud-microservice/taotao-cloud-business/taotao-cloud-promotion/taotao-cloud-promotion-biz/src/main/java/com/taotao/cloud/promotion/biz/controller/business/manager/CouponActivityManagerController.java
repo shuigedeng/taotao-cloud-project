@@ -74,7 +74,7 @@ public class CouponActivityManagerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "添加优惠券活动")
     @PostMapping
-    @PutMapping
+    @PostMapping
     public Result<CouponActivity> addCouponActivity(
             @RequestBody(required = false) CouponActivityDTO couponActivityDTO) {
         if (couponActivityService.savePromotions(couponActivityDTO)) {
@@ -86,7 +86,7 @@ public class CouponActivityManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "关闭优惠券活动")
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<CouponActivity> updateStatus(@PathVariable String id) {
         if (couponActivityService.updateStatus(Collections.singletonList(id), null, null)) {
             return Result.success(ResultEnum.SUCCESS);

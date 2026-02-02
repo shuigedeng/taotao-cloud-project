@@ -85,7 +85,7 @@ public class FlowDelegateController {
     }
 
     @Operation(summary = "更新流程委托", description = "更新流程委托")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<Boolean> update(
             @PathVariable("id") String id, @RequestBody @Valid FlowDelegateUpForm flowDelegateUpForm) {
         FlowDelegateEntity entity = FlowTaskConvert.INSTANCE.convert(flowDelegateUpForm);
@@ -102,7 +102,7 @@ public class FlowDelegateController {
     }
 
     @Operation(summary = "删除流程委托", description = "删除流程委托")
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}")
     public Result<Boolean> delete(@PathVariable("id") String id) {
         FlowDelegateEntity entity = flowDelegateService.getInfo(id);
         if (entity != null) {

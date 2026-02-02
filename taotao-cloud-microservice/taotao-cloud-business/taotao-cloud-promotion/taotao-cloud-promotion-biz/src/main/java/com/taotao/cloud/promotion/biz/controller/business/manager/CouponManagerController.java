@@ -93,7 +93,7 @@ public class CouponManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "修改优惠券")
-    @PutMapping
+    @PostMapping
     public Result<Coupon> updateCoupon(@RequestBody CouponVO couponVO) {
         this.setStoreInfo(couponVO);
         Coupon coupon = couponService.getById(couponVO.getId());
@@ -104,7 +104,7 @@ public class CouponManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "修改优惠券状态")
-    @PutMapping("/status")
+    @PostMapping("/status")
     public Result<Object> updateCouponStatus(String couponIds, Long startTime, Long endTime) {
         String[] split = couponIds.split(",");
         if (couponService.updateStatus(Arrays.asList(split), startTime, endTime)) {
@@ -116,7 +116,7 @@ public class CouponManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "批量删除")
-    @DeleteMapping(value = "/{ids}")
+    @PostMapping(value = "/{ids}")
     public Result<Object> delAllByIds(@PathVariable List<String> ids) {
         couponService.removePromotions(ids);
         return Result.success();
@@ -125,7 +125,7 @@ public class CouponManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "会员优惠券作废")
-    @PutMapping(value = "/member/cancellation/{id}")
+    @PostMapping(value = "/member/cancellation/{id}")
     public Result<Object> cancellation(@PathVariable String id) {
         memberCouponService.cancellation(id);
         return Result.success(ResultEnum.COUPON_CANCELLATION_SUCCESS);

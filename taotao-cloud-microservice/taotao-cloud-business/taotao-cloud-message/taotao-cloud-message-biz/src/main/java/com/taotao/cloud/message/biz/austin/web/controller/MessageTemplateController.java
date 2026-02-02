@@ -121,7 +121,7 @@ public class MessageTemplateController {
      * 根据Id删除
      * id多个用逗号分隔开
      */
-    @DeleteMapping("delete/{id}")
+    @PostMapping("delete/{id}")
     @ApiOperation("/根据Ids删除")
     public void deleteByIds(@PathVariable("id") String id) {
         if (CharSequenceUtil.isNotBlank(id)) {

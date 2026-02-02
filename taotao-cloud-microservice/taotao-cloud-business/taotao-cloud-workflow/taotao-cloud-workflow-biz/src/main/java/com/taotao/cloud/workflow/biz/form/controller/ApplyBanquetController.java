@@ -114,7 +114,7 @@ public class ApplyBanquetController {
      * @return
      */
     @Operation("修改宴请申请")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody @Valid ApplyBanquetForm applyBanquetForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (applyBanquetForm.getBanquetNum() != null

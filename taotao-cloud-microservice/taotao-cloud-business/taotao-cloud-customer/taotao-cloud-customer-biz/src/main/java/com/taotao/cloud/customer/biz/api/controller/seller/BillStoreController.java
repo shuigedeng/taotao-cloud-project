@@ -102,7 +102,7 @@ public class BillStoreController {
     @Operation(summary = "核对结算单", description = "核对结算单")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/check/{id}")
+    @PostMapping(value = "/check/{id}")
     public Result<Boolean> examine(@PathVariable String id) {
         OperationalJudgment.judgment(billService.getById(id));
         billService.check(id);

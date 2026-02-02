@@ -56,7 +56,7 @@ public class TenantPackageController {
 	}
 
 	@Operation(summary = "删除租户套餐信息")
-	@DeleteMapping(value = "/delete")
+	@PostMapping(value = "/delete")
 	public Result<Boolean> delete(Long id) {
 		return Result.success(tenantPackageService.deleteTenantPackage(id));
 	}

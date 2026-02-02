@@ -39,7 +39,7 @@ public interface OrderItemApi {
     @PostMapping(value = "/order/item")
     Boolean saveOrderItem(@RequestBody OrderItemSaveApiRequest orderItemSaveDTO);
 
-    @PutMapping(value = "/order/item")
+    @PostMapping(value = "/order/item")
     Boolean updateById(@RequestBody OrderItemSaveApiRequest orderItem);
 
     @GetMapping(value = "/order/item")
@@ -48,6 +48,6 @@ public interface OrderItemApi {
     @GetMapping(value = "/order/item")
 	OrderItemApiResponse getBySn(String orderItemSn);
 
-    @PutMapping(value = "/order/item")
+    @PostMapping(value = "/order/item")
     Boolean updateCommentStatus(String sn, CommentStatusEnum finished);
 }

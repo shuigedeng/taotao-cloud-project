@@ -57,7 +57,7 @@ public class WeChatMenuController {
     }
 
     @Operation(summary = "删除")
-    @DeleteMapping(value = "/delete")
+    @PostMapping(value = "/delete")
     public ResResult<Void> delete(Long id) {
         weChatMenuService.delete(id);
         return Res.ok();

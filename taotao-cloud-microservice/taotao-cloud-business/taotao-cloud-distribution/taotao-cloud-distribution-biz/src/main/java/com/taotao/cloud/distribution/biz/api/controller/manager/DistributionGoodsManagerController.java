@@ -56,7 +56,7 @@ public class DistributionGoodsManagerController {
     @Operation(summary = "批量删除", description = "批量删除")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @DeleteMapping(value = "/delByIds/{ids}")
+    @PostMapping(value = "/delByIds/{ids}")
     public Result<EmptyResult> delAllByIds(@PathVariable List ids) {
         distributionGoodsService.removeByIds(ids);
         return Result.success();

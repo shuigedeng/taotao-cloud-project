@@ -103,7 +103,7 @@ public class SupplementCardController {
      * @return
      */
     @Operation("修改补卡申请")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody SupplementCardForm supplementCardForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (supplementCardForm.getStartTime() > supplementCardForm.getEndTime()) {

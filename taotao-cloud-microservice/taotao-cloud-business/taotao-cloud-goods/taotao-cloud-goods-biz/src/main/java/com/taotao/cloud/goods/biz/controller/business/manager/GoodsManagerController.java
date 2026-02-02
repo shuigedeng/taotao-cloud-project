@@ -110,7 +110,7 @@ public class GoodsManagerController {
     })
     @RequestLogger("管理员下架商品")
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/{goodsId}/under")
+    @PostMapping(value = "/{goodsId}/under")
     public Result<Boolean> underGoods(
             @PathVariable Long goodsId, @NotEmpty(message = "下架原因不能为空") @RequestParam String reason) {
         List<Long> goodsIds = List.of(goodsId);
@@ -123,7 +123,7 @@ public class GoodsManagerController {
     })
     @RequestLogger("管理员审核商品")
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "{goodsIds}/auth")
+    @PostMapping(value = "{goodsIds}/auth")
     public Result<Boolean> auth(@PathVariable List<Long> goodsIds, @RequestParam String authFlag) {
         // 校验商品是否存在
         return Result.success(goodsService.auditGoods(goodsIds, GoodsAuthEnum.valueOf(authFlag)));
@@ -135,7 +135,7 @@ public class GoodsManagerController {
     })
     @RequestLogger("管理员上架商品")
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/{goodsId}/up")
+    @PostMapping(value = "/{goodsId}/up")
     public Result<Boolean> unpGoods(@PathVariable List<Long> goodsId) {
         return Result.success(goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.UPPER, ""));
     }

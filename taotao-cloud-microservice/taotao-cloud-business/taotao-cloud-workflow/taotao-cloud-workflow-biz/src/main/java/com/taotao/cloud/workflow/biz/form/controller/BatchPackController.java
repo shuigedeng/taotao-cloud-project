@@ -105,7 +105,7 @@ public class BatchPackController {
      * @return
      */
     @Operation("修改批包装指令")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody @Valid BatchPackForm batchPackForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (batchPackForm.getProductionQuty() != null

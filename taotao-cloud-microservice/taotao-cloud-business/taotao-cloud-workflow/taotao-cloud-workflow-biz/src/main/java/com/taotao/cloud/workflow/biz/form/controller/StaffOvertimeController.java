@@ -102,7 +102,7 @@ public class StaffOvertimeController {
      * @return
      */
     @Operation("修改员工加班申请表")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody StaffOvertimeForm staffOvertimeForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (staffOvertimeForm.getStartTime() > staffOvertimeForm.getEndTime()) {

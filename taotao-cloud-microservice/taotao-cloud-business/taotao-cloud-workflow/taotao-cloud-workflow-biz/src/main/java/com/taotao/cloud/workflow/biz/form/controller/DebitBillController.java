@@ -105,7 +105,7 @@ public class DebitBillController {
      * @return
      */
     @Operation("修改借支单")
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public Result update(@RequestBody @Valid DebitBillForm debitBillForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (debitBillForm.getAmountDebit() != null

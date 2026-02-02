@@ -174,7 +174,7 @@ public class FlowDefinitionController extends BaseController {
     }
 
     @ApiOperation(value = "激活或挂起流程定义")
-    @PutMapping(value = "/updateState")
+    @PostMapping(value = "/updateState")
     public AjaxResult updateState(
             @ApiParam(value = "1:激活,2:挂起", required = true) @RequestParam Integer state,
             @ApiParam(value = "流程部署ID", required = true) @RequestParam String deployId) {
@@ -183,7 +183,7 @@ public class FlowDefinitionController extends BaseController {
     }
 
     @ApiOperation(value = "删除流程")
-    @DeleteMapping(value = "/{deployIds}")
+    @PostMapping(value = "/{deployIds}")
     public AjaxResult delete(@PathVariable String[] deployIds) {
         for (String deployId : deployIds) {
             flowDefinitionService.delete(deployId);
