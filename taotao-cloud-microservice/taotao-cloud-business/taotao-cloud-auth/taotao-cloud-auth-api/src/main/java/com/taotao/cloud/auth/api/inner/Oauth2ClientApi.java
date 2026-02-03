@@ -16,7 +16,6 @@
 
  package com.taotao.cloud.auth.api.inner;
 
- import com.taotao.cloud.auth.api.inner.fallback.Oauth2ClientApiFallback;
  import com.taotao.cloud.auth.api.inner.request.FeignClientQueryApiRequest;
  import com.taotao.cloud.auth.api.inner.response.ClientApiResponse;
  import com.taotao.boot.common.constant.ServiceNameConstants;
@@ -29,10 +28,7 @@
   * @version 2022.03
   * @since 2020/5/2 16:42
   */
- @HttpExchange(
-	 contextId = "remoteUserService",
-	 value = ServiceNameConstants.TAOTAO_CLOUD_AUTH,
-	 fallbackFactory = Oauth2ClientApiFallback.class)
+ @HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_AUTH)
  public interface Oauth2ClientApi {
 
 	 ClientApiResponse query(FeignClientQueryApiRequest feignClientQueryApiRequest);
