@@ -21,7 +21,7 @@ import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.security.spring.model.SecurityUser;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
-import com.taotao.cloud.member.api.feign.MemberApi;
+import com.taotao.cloud.member.api.inner.MemberApi;
 import com.taotao.cloud.member.api.vo.MemberVO;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;

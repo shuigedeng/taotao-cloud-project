@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.member.biz.controller.feign;
 
-import com.taotao.cloud.member.api.feign.MemberApi;
-import com.taotao.cloud.member.api.feign.response.MemberApiResponse;
+import com.taotao.cloud.member.api.inner.MemberApi;
+import com.taotao.cloud.member.api.inner.response.MemberApiResponse;
 import com.taotao.cloud.member.biz.service.business.IMemberService;
 import com.taotao.boot.security.spring.model.SecurityUser;
 import io.swagger.v3.oas.annotations.tags.Tag;

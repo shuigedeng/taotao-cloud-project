@@ -19,7 +19,7 @@ package com.taotao.cloud.store.biz.api.controller.manager;
 import com.taotao.boot.common.model.request.PageQuery;
 import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.cloud.message.api.feign.StoreMessageApi;
+import com.taotao.cloud.message.api.inner.StoreMessageApi;
 import com.taotao.cloud.message.api.model.vo.StoreMessageQueryVO;
 import com.taotao.cloud.message.api.model.vo.StoreMessageVO;
 import com.taotao.boot.web.request.annotation.RequestLogger;

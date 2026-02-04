@@ -21,7 +21,7 @@ import com.taotao.boot.common.enums.PromotionTypeEnum;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
-import com.taotao.cloud.member.api.feign.MemberApi;
+import com.taotao.cloud.member.api.inner.MemberApi;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.feign.OrderApi;

@@ -21,7 +21,7 @@ import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
-import com.taotao.cloud.member.api.feign.MemberWalletApi;
+import com.taotao.cloud.member.api.inner.MemberWalletApi;
 import com.taotao.cloud.member.api.model.dto.MemberWalletUpdateDTO;
 import com.taotao.cloud.payment.api.enums.CashierEnum;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;

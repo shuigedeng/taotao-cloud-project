@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.member.biz.controller.feign;
 
-import com.taotao.cloud.member.api.feign.MemberWalletApi;
-import com.taotao.cloud.member.api.feign.request.MemberWalletUpdateApiRequest;
+import com.taotao.cloud.member.api.inner.MemberWalletApi;
+import com.taotao.cloud.member.api.inner.request.MemberWalletUpdateApiRequest;
 import com.taotao.cloud.member.biz.service.business.IMemberService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.*;

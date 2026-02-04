@@ -20,7 +20,7 @@ import com.taotao.boot.common.enums.PromotionTypeEnum;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.utils.bean.BeanUtils;
-import com.taotao.cloud.member.api.feign.MemberApi;
+import com.taotao.cloud.member.api.inner.MemberApi;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
 import com.taotao.cloud.promotion.api.enums.CouponActivitySendTypeEnum;
 import com.taotao.cloud.promotion.api.enums.CouponActivityTypeEnum;

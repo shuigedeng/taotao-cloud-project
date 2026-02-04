@@ -27,7 +27,7 @@ import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.cloud.goods.api.feign.GoodsApi;
-import com.taotao.cloud.member.api.feign.MemberApi;
+import com.taotao.cloud.member.api.inner.MemberApi;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 import com.taotao.cloud.store.api.model.dto.*;

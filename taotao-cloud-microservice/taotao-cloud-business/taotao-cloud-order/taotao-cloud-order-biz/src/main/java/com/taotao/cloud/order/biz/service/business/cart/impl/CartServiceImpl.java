@@ -31,7 +31,7 @@ import com.taotao.cloud.goods.api.feign.GoodsEsSearchApi;
 import com.taotao.cloud.goods.api.feign.GoodsApi;
 import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
-import com.taotao.cloud.member.api.feign.MemberAddressApi;
+import com.taotao.cloud.member.api.inner.MemberAddressApi;
 import com.taotao.cloud.member.api.model.vo.MemberAddressVO;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;

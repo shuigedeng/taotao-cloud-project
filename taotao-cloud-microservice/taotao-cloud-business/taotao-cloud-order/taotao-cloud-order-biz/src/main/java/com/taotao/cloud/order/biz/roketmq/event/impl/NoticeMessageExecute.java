@@ -18,7 +18,7 @@ package com.taotao.cloud.order.biz.roketmq.event.impl;
 
 import com.taotao.cloud.message.api.enums.NoticeMessageNodeEnum;
 import com.taotao.cloud.message.api.enums.NoticeMessageParameterEnum;
-import com.taotao.cloud.message.api.feign.NoticeMessageApi;
+import com.taotao.cloud.message.api.inner.NoticeMessageApi;
 import com.taotao.cloud.message.api.model.dto.NoticeMessageDTO;
 import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;

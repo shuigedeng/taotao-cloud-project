@@ -19,7 +19,7 @@ package com.taotao.cloud.payment.biz.kit.params.impl;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.member.api.feign.MemberRechargeApi;
+import com.taotao.cloud.member.api.inner.MemberRechargeApi;
 import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.payment.api.enums.CashierEnum;

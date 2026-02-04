@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.member.biz.controller.feign;
 
-import com.taotao.cloud.member.api.feign.MemberAddressApi;
-import com.taotao.cloud.member.api.feign.response.MemberAddressApiResponse;
+import com.taotao.cloud.member.api.inner.MemberAddressApi;
+import com.taotao.cloud.member.api.inner.response.MemberAddressApiResponse;
 import com.taotao.cloud.member.biz.service.business.IMemberService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.*;

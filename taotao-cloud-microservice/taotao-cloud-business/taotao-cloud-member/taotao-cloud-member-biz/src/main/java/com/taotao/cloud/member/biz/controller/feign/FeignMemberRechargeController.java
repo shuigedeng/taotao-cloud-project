@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.member.biz.controller.feign;
 
-import com.taotao.cloud.member.api.feign.MemberRechargeApi;
-import com.taotao.cloud.member.api.feign.response.MemberRechargeApiResponse;
+import com.taotao.cloud.member.api.inner.MemberRechargeApi;
+import com.taotao.cloud.member.api.inner.response.MemberRechargeApiResponse;
 import com.taotao.cloud.member.sys.model.vo.MemberRechargeVO;
 import com.taotao.cloud.member.biz.service.business.IMemberService;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.model.request.PageQuery;
 import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.cloud.message.api.feign.IFeignStoreMessageService;
+import com.taotao.cloud.message.api.inner.IFeignStoreMessageService;
 import com.taotao.cloud.message.api.vo.StoreMessageQueryVO;
 import com.taotao.cloud.message.api.vo.StoreMessageVO;
 import com.taotao.boot.web.request.annotation.RequestLogger;

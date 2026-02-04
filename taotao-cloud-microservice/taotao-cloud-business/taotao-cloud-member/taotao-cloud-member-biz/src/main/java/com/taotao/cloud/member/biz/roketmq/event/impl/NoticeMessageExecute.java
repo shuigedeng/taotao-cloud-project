@@ -23,7 +23,7 @@ import com.taotao.cloud.member.sys.model.dto.MemberPointMessageDTO;
 import com.taotao.cloud.member.biz.roketmq.event.MemberPointChangeEvent;
 import com.taotao.cloud.member.biz.roketmq.event.MemberWithdrawalEvent;
 import com.taotao.cloud.message.api.enums.NoticeMessageNodeEnum;
-import com.taotao.cloud.message.api.feign.NoticeMessageApi;
+import com.taotao.cloud.message.api.inner.NoticeMessageApi;
 import com.taotao.cloud.message.api.model.dto.NoticeMessageDTO;
 import com.taotao.cloud.stream.message.MemberWithdrawalMessage;
 import java.util.HashMap;

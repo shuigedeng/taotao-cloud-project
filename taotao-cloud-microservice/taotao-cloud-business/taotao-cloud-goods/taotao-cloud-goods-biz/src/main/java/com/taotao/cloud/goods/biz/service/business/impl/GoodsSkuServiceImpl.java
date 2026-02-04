@@ -52,7 +52,7 @@ import com.taotao.cloud.goods.biz.service.business.GoodsService;
 import com.taotao.cloud.goods.biz.service.business.GoodsSkuService;
 import com.taotao.cloud.goods.biz.util.EsIndexUtil;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
-import com.taotao.cloud.member.api.feign.MemberEvaluationApi;
+import com.taotao.cloud.member.api.inner.MemberEvaluationApi;
 import com.taotao.cloud.member.api.model.page.EvaluationPageQuery;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;

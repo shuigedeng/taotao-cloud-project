@@ -49,21 +49,55 @@ dependencies {
     //implementation 'top.dcenter:justAuth-spring-security-starter:1.1.25'
 
     //https://search.maven.org/artifact/org.webjars/jquery
-    implementation "org.webjars:jquery:3.7.1"
+    api "org.webjars:jquery:3.7.1"
     //https://search.maven.org/artifact/org.webjars/bootstrap
-    implementation "org.webjars:bootstrap:5.3.5"
+    api "org.webjars:bootstrap:5.3.8"
     //https://search.maven.org/artifact/org.webjars/webjars-locator-lite
-    implementation "org.webjars:webjars-locator-lite:1.1.3"
-    implementation 'org.webjars:font-awesome:6.5.1'
-    implementation 'org.webjars.bower:jquery-backstretch:2.1.17'
-    implementation 'org.webjars:uniform:2.1.2-1'
-    implementation 'org.webjars.npm:animate.css:4.1.1'
-    implementation "org.webjars.npm:mdi__font:7.4.47"
-    implementation 'org.webjars.npm:quasar:2.15.1'
-    implementation("org.webjars.npm:vue:3.4.21") {
-        exclude group: "org.webjars.npm", module: "babel__parser"
+    api "org.webjars:webjars-locator-lite:1.1.3"
+    api 'org.webjars:font-awesome:7.1.0'
+    api("org.webjars.bower:jquery-backstretch:2.1.17") {
+        exclude group: "org.webjars.bower", module: "jquery"
     }
-    implementation 'org.webjars.npm:babel__parser:7.24.0'
+    api 'org.webjars.bower:jquery:3.7.1'
+    api 'org.webjars:uniform:2.1.2-1'
+    api 'org.webjars.npm:animate.css:4.1.1'
+    api "org.webjars.npm:mdi__font:7.4.47"
+    api 'org.webjars.npm:quasar:2.18.6'
+    api("org.webjars.npm:vue:3.5.27") {
+        exclude group: "org.webjars.npm", module: "babel__parser"
+        exclude group: "org.webjars.npm", module: "source-map-js"
+        exclude group: "org.webjars.npm", module: "magic-string"
+        exclude group: "org.webjars.npm", module: "estree-walker"
+        exclude group: "org.webjars.npm", module: "postcss"
+        exclude group: "org.webjars.npm", module: "csstype"
+        exclude group: "org.webjars.npm", module: "entities"
+    }
+    api("org.webjars.npm:babel__parser:7.28.6") {
+        exclude group: "org.webjars.npm", module: "babel__types"
+    }
+    api("org.webjars.npm:babel__types:7.28.6") {
+        exclude group: "org.webjars.npm", module: "babel__helper-validator-identifier"
+        exclude group: "org.webjars.npm", module: "babel__helper-string-parser"
+    }
+    api 'org.webjars.npm:babel__helper-validator-identifier:7.28.5'
+    api 'org.webjars.npm:babel__helper-string-parser:7.27.1'
+    api 'org.webjars.npm:source-map-js:1.2.1'
+    api("org.webjars.npm:magic-string:0.30.21") {
+        exclude group: "org.webjars.npm", module: "jridgewell__sourcemap-codec"
+    }
+    api 'org.webjars.npm:jridgewell__sourcemap-codec:1.5.5'
+    api("org.webjars.npm:estree-walker:3.0.3") {
+        exclude group: "org.webjars.npm", module: "types__estree"
+    }
+    api 'org.webjars.npm:types__estree:1.0.8'
+    api("org.webjars.npm:postcss:8.5.6") {
+        exclude group: "org.webjars.npm", module: "nanoid"
+        exclude group: "org.webjars.npm", module: "picocolors"
+    }
+    api 'org.webjars.npm:nanoid:5.1.6'
+    api 'org.webjars.npm:picocolors:1.1.1'
+    api 'org.webjars.npm:csstype:3.2.3'
+    api 'org.webjars.npm:entities:7.0.1'
 
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.3.RELEASE'
     implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
@@ -129,26 +163,36 @@ configurations {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
+
+        //implementation('com.alibaba:fastjson'){
+        //    version{
+        //        strictly("1.2.12")
+        //    }
+        //}
+        //或者简写为 force 的优先级会比较高，会覆盖 strictly 策略
+        //implementation 'com.alibaba:fastjson:2.0.52!!'
+
         resolutionStrategy {
             force "org.codehaus.groovy:groovy:3.0.25"
             force 'org.antlr:antlr4:4.13.2'
             force 'net.minidev:json-smart:2.6.0'
-            force 'org.bouncycastle:bcprov-jdk18on:1.83'
-            force 'org.bouncycastle:bcpkix-jdk18on:1.83'
-            force 'org.bouncycastle:bcutil-jdk18on:1.83'
+            //todo 临时使用
+            force "io.opentelemetry:opentelemetry-api-incubator:1.58.0-alpha"
+            force 'org.bouncycastle:bcprov-jdk18on:1.82'
+            force 'org.bouncycastle:bcpkix-jdk18on:1.82'
+            force 'org.bouncycastle:bcutil-jdk18on:1.82'
             force 'org.webjars.npm:csstype:3.1.3'
-            force 'org.webjars.npm:postcss:8.4.39'
-            force 'org.webjars.npm:nanoid:4.0.2'
+            force 'org.webjars.npm:postcss:8.5.6'
+            force 'org.webjars.npm:nanoid:5.1.6'
 
             force 'org.webjars.bower:jquery:3.7.1'
-            force 'org.webjars.npm:magic-string:0.30.19'
+            force 'org.webjars.npm:magic-string:0.30.21'
             force 'org.webjars.npm:estree-walker:3.0.3'
             force 'org.webjars.npm:source-map-js:1.2.1'
-            force 'org.webjars.npm:entities:6.0.1'
+            force 'org.webjars.npm:entities:7.0.1'
             force 'org.webjars.npm:picocolors:1.1.1'
             force 'org.webjars.npm:jridgewell__sourcemap-codec:1.5.5'
             force 'org.webjars.npm:types__estree:1.0.8'
-
         }
 
         //exclude group: "log4j", module: "log4j"
@@ -159,7 +203,7 @@ configurations {
         //exclude group: "org.apache.logging.log4j", module: "log4j-api"
         //exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-undertow"
-        //exclude group: "commons-logging", module: "commons-logging"
+        exclude group: "commons-logging", module: "commons-logging"
         exclude group: "org.bouncycastle", module: "bcprov-jdk15on"
         exclude group: "org.bouncycastle", module: "bcpkix-jdk15on"
         exclude group: "org.bouncycastle", module: "bcutil-jdk15on"

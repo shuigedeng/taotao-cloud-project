@@ -1,5 +1,0 @@
-com.taotao.cloud.member.api.feign.fallback.MemberAddressApiFallback
-com.taotao.cloud.member.api.feign.fallback.MemberApiFallback
-com.taotao.cloud.member.api.feign.fallback.MemberEvaluationApiFallback
-com.taotao.cloud.member.api.feign.fallback.MemberRechargeApiFallback
-com.taotao.cloud.member.api.feign.fallback.MemberWalletApiFallback

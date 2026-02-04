@@ -20,8 +20,6 @@ package com.taotao.cloud.sys.api.feign;
 import com.taotao.boot.common.support.info.ApiInfo;
 import com.taotao.boot.common.support.info.Create;
 import com.taotao.boot.common.support.info.Update;
-import com.taotao.cloud.openfeign.annotation.FeignInner;
-import com.taotao.cloud.openfeign.annotation.FeignRetry;
 import com.taotao.cloud.sys.api.feign.fallback.DictApiFallback;
 import com.taotao.cloud.sys.api.feign.response.DictApiResponse;
 import org.springframework.web.service.annotation.HttpExchange;
@@ -39,8 +37,7 @@ import static com.taotao.boot.common.support.info.ApiVersionEnum.V2022_08;
  * @since 2020/5/2 16:42
  */
 @HttpExchange(
-	name = ServiceNameConstants.TAOTAO_CLOUD_SYS,
-	fallbackFactory = DictApiFallback.class)
+	value = ServiceNameConstants.TAOTAO_CLOUD_SYS)
 public interface DictApi {
 
 	/**
@@ -56,8 +53,6 @@ public interface DictApi {
 			@Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
 			@Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		})
-	@FeignRetry(maxAttempt=  6, backoff = @FeignRetry.Backoff(delay = 500L, maxDelay = 20000L, multiplier = 4))
-	@FeignInner
 	@GetMapping("/sys/feign/dict/code")
 	DictApiResponse findByCode(@RequestParam(value = "code") String code);
 
