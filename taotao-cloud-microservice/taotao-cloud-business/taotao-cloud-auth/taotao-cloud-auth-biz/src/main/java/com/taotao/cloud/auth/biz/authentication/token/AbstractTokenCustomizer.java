@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.authentication.token;
 
-import com.taotao.boot.security.spring.constants.BaseConstants;
-import com.taotao.boot.security.spring.core.userdetails.TtcUser;
+import com.taotao.boot.security.spring.support.constants.BaseConstants;
+import com.taotao.boot.security.spring.support.core.userdetails.TtcUser;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;

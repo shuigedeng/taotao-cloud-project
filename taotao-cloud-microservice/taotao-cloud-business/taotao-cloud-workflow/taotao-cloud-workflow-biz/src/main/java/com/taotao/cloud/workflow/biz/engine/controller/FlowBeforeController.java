@@ -21,7 +21,7 @@ import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.json.JacksonUtils;
-import com.taotao.boot.security.spring.utils.SecurityUtils;
+import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.boot.common.utils.lang.StringUtils;
 import com.taotao.cloud.workflow.api.vo.UserEntity;
 import com.taotao.cloud.workflow.biz.common.base.vo.PaginationVO;

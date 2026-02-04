@@ -22,7 +22,7 @@ import com.taotao.boot.common.enums.PromotionTypeEnum;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.security.spring.model.SecurityUser;
-import com.taotao.boot.security.spring.utils.SecurityUtils;
+import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;

@@ -19,7 +19,7 @@ package com.taotao.cloud.store.biz.api.controller.buyer;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.boot.security.spring.utils.SecurityUtils;
+import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.cloud.goods.api.feign.StoreGoodsLabelApi;
 import com.taotao.cloud.goods.api.model.vo.StoreGoodsLabelVO;
 import com.taotao.cloud.store.api.model.dto.StoreBankDTO;
@@ -43,7 +43,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

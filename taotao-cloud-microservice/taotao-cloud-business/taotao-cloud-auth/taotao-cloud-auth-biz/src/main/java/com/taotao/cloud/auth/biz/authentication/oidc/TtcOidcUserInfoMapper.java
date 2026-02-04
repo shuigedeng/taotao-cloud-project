@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.oidc;
 
-import com.taotao.boot.security.spring.constants.BaseConstants;
+import com.taotao.boot.security.spring.support.constants.BaseConstants;
 import java.util.*;
 import java.util.function.Function;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;

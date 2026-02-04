@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.management.compliance.listener;
 
-import com.taotao.boot.security.spring.constants.OAuth2Constants;
-import com.taotao.boot.security.spring.constants.SymbolConstants;
+import com.taotao.boot.security.spring.support.constants.OAuth2Constants;
+import com.taotao.boot.security.spring.support.constants.SymbolConstants;
 import com.taotao.cloud.auth.biz.management.compliance.OAuth2AccountStatusManager;
 import java.nio.charset.StandardCharsets;
 import com.taotao.boot.common.utils.lang.StringUtils;

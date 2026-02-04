@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.management.controller;
 
-import com.taotao.boot.security.spring.utils.SymmetricUtils;
-import com.taotao.boot.security.spring.utils.WebUtils;
+import com.taotao.boot.security.spring.support.utils.SymmetricUtils;
+import com.taotao.boot.security.spring.support.utils.WebUtils;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.management.converter;
 
-import com.taotao.boot.security.spring.enums.Signature;
-import com.taotao.boot.security.spring.enums.TokenFormat;
+import com.taotao.boot.security.spring.support.enums.Signature;
+import com.taotao.boot.security.spring.support.enums.TokenFormat;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Device;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Scope;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ScopeService;

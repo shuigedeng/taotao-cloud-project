@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.auth.biz.authentication.event;
 
-import com.taotao.boot.security.spring.constants.OAuth2ErrorKeys;
-import com.taotao.boot.security.spring.exception.AccountEndpointLimitedException;
-import com.taotao.boot.security.spring.exception.SessionExpiredException;
+import com.taotao.boot.security.spring.support.constants.OAuth2ErrorKeys;
+import com.taotao.boot.security.spring.support.exception.AccountEndpointLimitedException;
+import com.taotao.boot.security.spring.support.exception.SessionExpiredException;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.BadCredentialsException;

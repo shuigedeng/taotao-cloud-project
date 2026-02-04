@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.metadata.listener;
 
 import com.taotao.boot.common.enums.DataItemStatus;
-import com.taotao.boot.security.spring.event.LocalChangeUserStatusEvent;
+import com.taotao.boot.security.spring.support.event.LocalChangeUserStatusEvent;
 import com.taotao.boot.security.spring.event.domain.UserStatus;
 import com.taotao.cloud.auth.biz.strategy.local.SysUserService;
 import org.apache.commons.lang3.ObjectUtils;

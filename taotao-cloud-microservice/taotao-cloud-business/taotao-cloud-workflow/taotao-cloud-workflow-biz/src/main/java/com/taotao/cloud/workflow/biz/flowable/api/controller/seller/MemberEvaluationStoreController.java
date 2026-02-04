@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.web.utils.OperationalJudgment;
-import com.taotao.boot.security.spring.utils.SecurityUtils;
+import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.cloud.member.api.inner.IFeignMemberEvaluationApi;
 import com.taotao.cloud.member.api.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.vo.MemberEvaluationListVO;

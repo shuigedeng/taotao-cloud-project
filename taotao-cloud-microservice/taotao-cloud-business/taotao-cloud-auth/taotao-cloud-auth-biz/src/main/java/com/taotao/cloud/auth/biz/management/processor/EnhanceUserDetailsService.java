@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.management.processor;
 
-import com.taotao.boot.security.spring.core.AccessPrincipal;
-import com.taotao.boot.security.spring.core.userdetails.TtcUser;
+import com.taotao.boot.security.spring.support.core.AccessPrincipal;
+import com.taotao.boot.security.spring.support.core.userdetails.TtcUser;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

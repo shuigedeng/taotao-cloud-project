@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.management.converter;
 
-import com.taotao.boot.security.spring.utils.OAuth2AuthorizationUtils;
+import com.taotao.boot.security.spring.support.utils.OAuth2AuthorizationUtils;
 import com.taotao.cloud.auth.biz.jpa.entity.RegisteredClientDetails;
 import java.util.Set;
 

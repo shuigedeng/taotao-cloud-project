@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.management.service;
 
-import com.taotao.boot.security.spring.utils.SecurityUtils;
+import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.cloud.auth.biz.authentication.processor.HttpCryptoProcessor;
 import com.taotao.cloud.auth.biz.management.entity.SecretKey;
 import org.apache.commons.lang3.ObjectUtils;

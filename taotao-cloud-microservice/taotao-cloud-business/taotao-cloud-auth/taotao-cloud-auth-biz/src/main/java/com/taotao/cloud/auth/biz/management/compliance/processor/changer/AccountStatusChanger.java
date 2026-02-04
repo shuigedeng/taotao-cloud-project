@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.management.compliance.processor.changer;
 
-import com.taotao.boot.security.spring.event.ApplicationStrategyEvent;
+import com.taotao.boot.security.spring.support.event.ApplicationStrategyEvent;
 import com.taotao.boot.security.spring.event.domain.UserStatus;
 
 /**

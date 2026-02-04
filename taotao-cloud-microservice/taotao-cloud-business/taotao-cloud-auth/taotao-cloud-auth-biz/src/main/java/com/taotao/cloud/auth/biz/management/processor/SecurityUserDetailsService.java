@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.management.processor;
 
-import com.taotao.boot.security.spring.core.AccessPrincipal;
-import com.taotao.boot.security.spring.core.userdetails.TtcUser;
+import com.taotao.boot.security.spring.support.core.AccessPrincipal;
+import com.taotao.boot.security.spring.support.core.userdetails.TtcUser;
 import com.taotao.cloud.auth.biz.strategy.StrategyUserDetailsService;
 import com.taotao.boot.common.utils.lang.StringUtils;
 import org.slf4j.Logger;

@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.controller;
 
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.boot.security.spring.annotation.NotAuth;
+import com.taotao.boot.security.spring.support.annotation.NotAuth;
 import com.taotao.cloud.sys.api.model.vo.FileVO;
 import com.taotao.cloud.sys.biz.service.IFileService;
 import io.swagger.v3.oas.annotations.Operation;

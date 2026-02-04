@@ -20,9 +20,9 @@ import static com.taotao.cloud.auth.biz.utils.JsonNodeUtils.STRING_OBJECT_MAP;
 
 import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.boot.common.utils.servlet.ResponseUtils;
-import com.taotao.boot.security.spring.constants.BaseConstants;
-import com.taotao.boot.security.spring.constants.HttpHeaders;
-import com.taotao.boot.security.spring.core.PrincipalDetails;
+import com.taotao.boot.security.spring.support.constants.BaseConstants;
+import com.taotao.boot.security.spring.support.constants.HttpHeaders;
+import com.taotao.boot.security.spring.support.core.PrincipalDetails;
 import com.taotao.cloud.auth.biz.authentication.processor.HttpCryptoProcessor;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

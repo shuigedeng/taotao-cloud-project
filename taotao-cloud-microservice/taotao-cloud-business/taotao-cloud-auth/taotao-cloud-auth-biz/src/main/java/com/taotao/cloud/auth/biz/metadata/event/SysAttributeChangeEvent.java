@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.metadata.event;
 
-import com.taotao.boot.security.spring.event.LocalApplicationEvent;
+import com.taotao.boot.security.spring.support.event.LocalApplicationEvent;
 import com.taotao.cloud.auth.biz.strategy.user.SysAttribute;
 import java.time.Clock;
 

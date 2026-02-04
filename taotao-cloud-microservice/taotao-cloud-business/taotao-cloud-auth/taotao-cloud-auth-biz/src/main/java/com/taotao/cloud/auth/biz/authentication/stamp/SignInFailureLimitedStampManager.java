@@ -20,7 +20,7 @@ import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.boot.captcha.support.core.definition.domain.Metadata;
 import com.taotao.boot.captcha.support.core.dto.Captcha;
 import com.taotao.boot.captcha.support.core.dto.Verification;
-import com.taotao.boot.security.spring.constants.OAuth2Constants;
+import com.taotao.boot.security.spring.support.constants.OAuth2Constants;
 import com.taotao.cloud.auth.api.model.dto.SignInErrorStatus;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
 import java.time.Duration;

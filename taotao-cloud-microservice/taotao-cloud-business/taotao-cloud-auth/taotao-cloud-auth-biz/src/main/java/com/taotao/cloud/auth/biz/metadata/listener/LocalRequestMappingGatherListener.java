@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.metadata.listener;
 
-import com.taotao.boot.security.spring.event.LocalRequestMappingGatherEvent;
-import com.taotao.boot.security.spring.event.domain.RequestMapping;
+import com.taotao.boot.security.spring.support.event.LocalRequestMappingGatherEvent;
+import com.taotao.boot.security.spring.support.event.domain.RequestMapping;
 import com.taotao.cloud.auth.biz.metadata.processor.RequestMappingStoreProcessor;
 import java.util.List;
 import org.apache.commons.collections4.CollectionUtils;

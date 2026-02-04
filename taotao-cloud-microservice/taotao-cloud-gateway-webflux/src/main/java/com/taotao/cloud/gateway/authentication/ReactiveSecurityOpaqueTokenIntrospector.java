@@ -16,11 +16,9 @@
 
 package com.taotao.cloud.gateway.authentication;
 
-import com.alibaba.druid.support.logging.Log;
-import com.alibaba.druid.support.logging.LogFactory;
 import com.taotao.boot.security.spring.autoconfigure.properties.OAuth2EndpointProperties;
-import com.taotao.boot.security.spring.constants.BaseConstants;
-import com.taotao.boot.security.spring.core.authority.TtcGrantedAuthority;
+import com.taotao.boot.security.spring.support.constants.BaseConstants;
+import com.taotao.boot.security.spring.support.core.authority.TtcGrantedAuthority;
 import java.net.URI;
 import java.time.Instant;
 import java.util.*;

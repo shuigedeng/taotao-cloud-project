@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.controller.business.seller;
 
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.boot.security.spring.utils.SecurityUtils;
+import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.cloud.goods.biz.model.vo.CategoryBrandVO;
 import com.taotao.cloud.goods.biz.model.vo.CategoryTreeVO;
 import com.taotao.cloud.goods.biz.service.business.CategoryBrandService;

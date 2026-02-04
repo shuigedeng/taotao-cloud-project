@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.controller.business.seller;
 
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.boot.security.spring.utils.SecurityUtils;
+import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.cloud.goods.biz.model.dto.StoreGoodsLabelDTO;
 import com.taotao.cloud.goods.biz.model.vo.StoreGoodsLabelInfoVO;
 import com.taotao.cloud.goods.biz.model.vo.StoreGoodsLabelVO;
@@ -31,11 +31,9 @@ import java.util.List;
 import lombok.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

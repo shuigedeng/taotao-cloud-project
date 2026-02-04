@@ -24,7 +24,7 @@ import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.security.spring.model.SecurityUser;
-import com.taotao.boot.security.spring.utils.SecurityUtils;
+import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.cloud.goods.biz.model.vo.StoreGoodsLabelVO;
 import com.taotao.cloud.goods.biz.mapper.StoreGoodsLabelMapper;
 import com.taotao.cloud.goods.biz.model.entity.StoreGoodsLabel;

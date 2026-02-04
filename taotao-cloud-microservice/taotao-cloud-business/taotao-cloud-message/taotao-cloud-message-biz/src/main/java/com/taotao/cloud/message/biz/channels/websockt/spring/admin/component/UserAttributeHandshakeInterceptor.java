@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.channels.websockt.spring.admin.component;
 
-import com.taotao.boot.security.spring.utils.SecurityUtils;
+import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.boot.websocket.spring.admin.constant.AdminWebSocketConstants;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;

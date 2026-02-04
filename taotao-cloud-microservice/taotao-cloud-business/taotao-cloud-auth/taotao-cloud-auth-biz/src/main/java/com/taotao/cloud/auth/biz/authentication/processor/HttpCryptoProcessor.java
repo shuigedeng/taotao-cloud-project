@@ -21,6 +21,7 @@ import com.taotao.boot.captcha.support.core.definition.AbstractRenderer;
 import com.taotao.boot.captcha.support.core.definition.domain.Metadata;
 import com.taotao.boot.captcha.support.core.dto.Captcha;
 import com.taotao.boot.captcha.support.core.dto.Verification;
+import com.taotao.boot.security.spring.support.constants.RestConstants;
 import com.taotao.cloud.auth.biz.exception.SessionInvalidException;
 import com.taotao.cloud.auth.biz.exception.StampHasExpiredException;
 import com.taotao.cloud.auth.biz.management.entity.SecretKey;

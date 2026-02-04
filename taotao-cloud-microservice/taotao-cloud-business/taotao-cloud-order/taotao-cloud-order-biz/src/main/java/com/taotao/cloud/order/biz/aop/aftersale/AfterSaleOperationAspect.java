@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.taotao.boot.security.spring.model.SecurityUser;
-import com.taotao.boot.security.spring.utils.SecurityUtils;
+import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;

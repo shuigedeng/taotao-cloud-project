@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.biz.jpa.entity;
 
 import com.google.common.base.MoreObjects;
 import com.taotao.boot.data.jpa.tenant.AbstractEntity;
-import com.taotao.boot.security.spring.constants.OAuth2Constants;
+import com.taotao.boot.security.spring.support.constants.OAuth2Constants;
 import com.taotao.cloud.auth.biz.jpa.generator.TtcAuthorizationUuidGenerator;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;

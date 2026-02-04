@@ -26,7 +26,7 @@ import com.taotao.boot.common.enums.PromotionTypeEnum;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.enums.UserEnum;
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.boot.security.spring.utils.SecurityUtils;
+import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.biz.model.dto.GoodsSkuStockDTO;

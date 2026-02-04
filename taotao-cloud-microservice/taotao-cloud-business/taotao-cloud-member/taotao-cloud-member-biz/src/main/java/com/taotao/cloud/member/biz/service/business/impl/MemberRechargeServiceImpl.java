@@ -23,7 +23,7 @@ import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.security.spring.model.SecurityUser;
 import com.taotao.boot.common.utils.id.IdGeneratorUtils;
-import com.taotao.boot.security.spring.utils.SecurityUtils;
+import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
 import com.taotao.cloud.member.api.inner.MemberWalletApi;
 import com.taotao.cloud.member.sys.model.dto.MemberWalletUpdateDTO;

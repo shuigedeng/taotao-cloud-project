@@ -31,7 +31,7 @@ import com.taotao.boot.security.spring.authentication.login.extension.wechatmp.s
 import com.taotao.boot.security.spring.authentication.login.social.oauth2client.SocialDelegateClientRegistrationRepository;
 import com.taotao.boot.security.spring.authorization.SecurityAuthorizationManager;
 import com.taotao.boot.security.spring.authorization.SecurityMatcherConfigurer;
-import com.taotao.boot.security.spring.oauth2.token1.SecurityTokenStrategyConfigurer;
+import com.taotao.boot.security.spring.support.token.SecurityTokenStrategyConfigurer;
 import com.taotao.cloud.auth.biz.authentication.event.DefaultOAuth2AuthenticationEventPublisher;
 import com.taotao.cloud.auth.biz.authentication.filter.ExtensionAndOauth2LoginRefreshTokenFilter;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;

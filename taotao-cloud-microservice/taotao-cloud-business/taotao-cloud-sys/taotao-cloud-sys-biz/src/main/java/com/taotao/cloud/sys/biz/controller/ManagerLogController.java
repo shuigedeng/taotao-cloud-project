@@ -18,8 +18,8 @@ package com.taotao.cloud.sys.biz.controller;
 
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.data.mybatis.interceptor.easylog.common.audit.DataAuditLogging;
-import com.taotao.boot.security.spring.annotation.NotAuth;
-import com.taotao.boot.security.spring.utils.SecurityUtils;
+import com.taotao.boot.security.spring.support.annotation.NotAuth;
+import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.model.dto.LogQueryCriteria;
 import com.taotao.cloud.sys.biz.model.entity.Log;
@@ -32,7 +32,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

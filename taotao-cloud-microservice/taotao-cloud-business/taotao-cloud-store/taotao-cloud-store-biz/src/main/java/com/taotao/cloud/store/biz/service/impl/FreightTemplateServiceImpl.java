@@ -27,7 +27,7 @@ import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.model.request.PageQuery;
 import com.taotao.boot.security.spring.model.SecurityUser;
 import com.taotao.boot.common.utils.bean.BeanUtils;
-import com.taotao.boot.security.spring.utils.SecurityUtils;
+import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.cloud.store.api.model.vo.FreightTemplateChildVO;
 import com.taotao.cloud.store.api.model.vo.FreightTemplateInfoVO;
 import com.taotao.cloud.store.biz.mapper.FreightTemplateMapper;

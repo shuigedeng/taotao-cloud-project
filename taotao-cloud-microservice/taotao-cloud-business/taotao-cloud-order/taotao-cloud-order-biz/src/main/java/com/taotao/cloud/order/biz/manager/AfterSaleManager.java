@@ -2,7 +2,7 @@ package com.taotao.cloud.order.biz.manager;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.boot.common.enums.UserEnum;
-import com.taotao.boot.security.spring.utils.SecurityUtils;
+import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.boot.common.utils.lang.StringUtils;
 import com.taotao.cloud.order.sys.model.page.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.biz.mapper.aftersale.AfterSaleMapper;

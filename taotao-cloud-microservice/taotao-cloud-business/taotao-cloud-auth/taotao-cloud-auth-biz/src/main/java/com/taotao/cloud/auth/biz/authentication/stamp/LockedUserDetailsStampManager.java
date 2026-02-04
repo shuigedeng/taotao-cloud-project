@@ -21,7 +21,7 @@ import com.taotao.boot.captcha.support.core.definition.AbstractRenderer;
 import com.taotao.boot.captcha.support.core.definition.domain.Metadata;
 import com.taotao.boot.captcha.support.core.dto.Captcha;
 import com.taotao.boot.captcha.support.core.dto.Verification;
-import com.taotao.boot.security.spring.constants.OAuth2Constants;
+import com.taotao.boot.security.spring.support.constants.OAuth2Constants;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
 import java.time.Duration;
 import org.springframework.beans.factory.InitializingBean;
