@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.biz;
 
 import com.taotao.boot.core.startup.StartupSpringApplication;
 import com.taotao.boot.data.jpa.extend.JpaExtendRepositoryFactoryBean;
-import com.taotao.boot.security.spring.support.annotation.EnableSecurityConfiguration;
+import com.taotao.boot.security.spring.support.annotation.EnableSecurity;
 //import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
@@ -84,7 +84,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 //@EnableEncryptableProperties
 @EnableDiscoveryClient
 @ConfigurationPropertiesScan
-@EnableSecurityConfiguration
+@EnableSecurity
 @EnableRedisIndexedHttpSession
 @SpringBootApplication
 public class TaoTaoCloudAuthApplication {

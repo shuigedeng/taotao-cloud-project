@@ -18,7 +18,7 @@ package com.taotao.cloud.gateway;
 
 import com.taotao.boot.core.startup.StartupSpringApplication;
 import com.taotao.boot.security.spring.support.annotation.EnableOauth2ResourceServer;
-import com.taotao.boot.security.spring.support.annotation.EnableSecurityConfiguration;
+import com.taotao.boot.security.spring.support.annotation.EnableSecurity;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import reactor.netty.ReactorNetty;
@@ -37,7 +37,7 @@ import reactor.netty.ReactorNetty;
  * @since 2020/10/10 09:06
  */
 @EnableOauth2ResourceServer
-@EnableSecurityConfiguration
+@EnableSecurity
 @SpringBootApplication
 @EnableDiscoveryClient
 public class TaoTaoCloudGatewayWebmvcApplication {
