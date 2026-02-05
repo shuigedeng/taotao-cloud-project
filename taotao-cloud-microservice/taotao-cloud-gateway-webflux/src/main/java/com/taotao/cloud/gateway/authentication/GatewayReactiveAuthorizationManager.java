@@ -91,7 +91,7 @@ public class GatewayReactiveAuthorizationManager
                                 LogUtils.info("NO PRIVILEGES : [{}].", url);
 
                                 if (!securityMatcherConfigurer
-                                        .getAuthorizationProperties()
+                                        .getSecurityAuthorizationProperties()
                                         .getStrict()) {
                                     if (auth
                                             instanceof
