@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.biz.metadata.processor;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.google.common.collect.ImmutableList;
-import com.taotao.boot.security.spring.support.access.security.SecurityAttribute;
+import com.taotao.boot.security.spring.authorization.access.security.SecurityAttribute;
 import com.taotao.boot.security.spring.authorization.SecurityMetadataSourceAnalyzer;
 import com.taotao.boot.security.spring.support.event.ApplicationStrategyEvent;
 import com.taotao.boot.security.spring.support.event.domain.RequestMapping;

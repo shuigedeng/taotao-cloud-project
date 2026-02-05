@@ -17,8 +17,8 @@
 package com.taotao.cloud.gateway.authentication;
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.boot.security.spring.autoconfigure.properties.OAuth2AuthorizationProperties;
-import com.taotao.boot.security.spring.autoconfigure.properties.OAuth2EndpointProperties;
+import com.taotao.boot.security.spring.autoconfigure.properties.SecurityAuthorizationProperties;
+import com.taotao.boot.security.spring.autoconfigure.properties.SecurityOAuth2EndpointProperties;
 import com.taotao.boot.security.spring.support.enums.Target;
 import com.taotao.cloud.gateway.properties.SecurityProperties;
 import java.util.List;
@@ -55,10 +55,10 @@ public class GatewayResourceServerConfiguration {
 
     private final GatewayReactiveAuthorizationManager gatewayReactiveAuthorizationManager;
     private final SecurityProperties securityProperties;
-    private final OAuth2EndpointProperties endpointProperties;
+    private final SecurityOAuth2EndpointProperties endpointProperties;
     private final OAuth2ResourceServerProperties resourceServerProperties;
     private final ReactiveJwtDecoder jwtDecoder;
-    private final OAuth2AuthorizationProperties authorizationProperties;
+    private final SecurityAuthorizationProperties authorizationProperties;
 
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(

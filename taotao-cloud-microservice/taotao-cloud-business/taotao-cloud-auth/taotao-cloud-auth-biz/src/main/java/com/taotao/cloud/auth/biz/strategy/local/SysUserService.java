@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.strategy.local;
 
 import com.taotao.boot.common.enums.DataItemStatus;
-import com.taotao.boot.security.spring.support.core.userdetails.TtcUser;
+import com.taotao.boot.security.spring.support.core.details.TtcUser;
 import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.cloud.auth.biz.strategy.user.SysUser;
 import org.apache.commons.lang3.ObjectUtils;

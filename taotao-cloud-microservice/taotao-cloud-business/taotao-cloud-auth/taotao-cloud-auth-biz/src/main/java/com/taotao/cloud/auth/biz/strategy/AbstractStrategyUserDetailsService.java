@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.strategy;
 
-import com.taotao.boot.security.spring.support.core.userdetails.TtcUser;
+import com.taotao.boot.security.spring.support.core.details.TtcUser;
 import com.taotao.cloud.auth.biz.strategy.user.SysUser;
 import com.taotao.cloud.auth.biz.strategy.user.UpmsHelper;
 import org.apache.commons.lang3.ObjectUtils;

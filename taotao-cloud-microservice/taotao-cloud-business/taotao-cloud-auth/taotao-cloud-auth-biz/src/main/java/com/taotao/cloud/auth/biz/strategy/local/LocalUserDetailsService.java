@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.strategy.local;
 
 import com.taotao.boot.security.spring.support.core.AccessPrincipal;
-import com.taotao.boot.security.spring.support.core.userdetails.TtcUser;
+import com.taotao.boot.security.spring.support.core.details.TtcUser;
 import com.taotao.cloud.auth.biz.strategy.AbstractStrategyUserDetailsService;
 import com.taotao.cloud.auth.biz.strategy.user.SysUser;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

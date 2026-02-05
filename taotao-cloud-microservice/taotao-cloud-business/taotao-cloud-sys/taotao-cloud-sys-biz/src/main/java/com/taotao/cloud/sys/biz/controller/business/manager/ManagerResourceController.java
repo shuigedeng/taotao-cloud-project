@@ -21,7 +21,7 @@ import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.taotao.boot.common.model.request.BaseQuery;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.boot.security.spring.support.annotation.NotAuth;
+import com.taotao.boot.security.spring.annotation.NotAuth;
 import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRpcRequest;
 import com.taotao.cloud.sys.biz.model.dto.resource.ResourceSaveDTO;

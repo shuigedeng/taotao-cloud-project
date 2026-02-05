@@ -27,8 +27,8 @@ import com.taotao.boot.common.utils.servlet.ResponseUtils;
 import com.taotao.boot.security.spring.support.constants.DefaultConstants;
 import com.taotao.boot.security.spring.support.enums.Certificate;
 import com.taotao.boot.security.spring.support.token.SecurityTokenStrategyConfigurer;
-import com.taotao.boot.security.spring.autoconfigure.properties.OAuth2AuthorizationProperties;
-import com.taotao.boot.security.spring.autoconfigure.properties.OAuth2EndpointProperties;
+import com.taotao.boot.security.spring.autoconfigure.properties.SecurityAuthorizationProperties;
+import com.taotao.boot.security.spring.autoconfigure.properties.SecurityOAuth2EndpointProperties;
 import com.taotao.cloud.auth.biz.authentication.device.DeviceClientAuthenticationConverter;
 import com.taotao.cloud.auth.biz.authentication.device.DeviceClientAuthenticationProvider;
 import com.taotao.cloud.auth.biz.authentication.event.DefaultOAuth2AuthenticationEventPublisher;
@@ -144,7 +144,7 @@ public class AuthorizationServerConfiguration {
             OAuth2AuthenticationProperties authenticationProperties,
             OAuth2DeviceVerificationResponseHandler deviceVerificationResponseHandler,
             OidcClientRegistrationResponseHandler clientRegistrationResponseHandler,
-            OAuth2EndpointProperties auth2EndpointProperties,
+            SecurityOAuth2EndpointProperties auth2EndpointProperties,
             RegisteredClientRepository registeredClientRepository)
             throws Exception {
 
@@ -419,9 +419,9 @@ public class AuthorizationServerConfiguration {
 
     @Bean
     public JWKSource<SecurityContext> jwkSource(
-            OAuth2AuthorizationProperties authorizationProperties, RedisRepository redisRepository)
+            SecurityAuthorizationProperties authorizationProperties, RedisRepository redisRepository)
             throws NoSuchAlgorithmException, ParseException {
-        OAuth2AuthorizationProperties.Jwk jwk = authorizationProperties.getJwk();
+        SecurityAuthorizationProperties.Jwk jwk = authorizationProperties.getJwk();
         KeyPair keyPair = null;
 
         // 持久化JWKSource，解决重启后无法解析AccessToken问题
@@ -503,7 +503,7 @@ public class AuthorizationServerConfiguration {
 
     @Bean
     public AuthorizationServerSettings authorizationServerSettings(
-            OAuth2EndpointProperties auth2EndpointProperties) {
+            SecurityOAuth2EndpointProperties auth2EndpointProperties) {
         return AuthorizationServerSettings.builder()
                 .issuer(auth2EndpointProperties.getIssuerUri())
                 .authorizationEndpoint(auth2EndpointProperties.getAuthorizationEndpoint())
