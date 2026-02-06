@@ -19,7 +19,7 @@ package com.taotao.cloud.gateway.authentication;
 import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson.JSON;
 import com.taotao.boot.common.constant.CommonConstants;
-import com.taotao.boot.security.spring.support.core.userdetails.TtcUser;
+import com.taotao.boot.security.spring.support.core.details.TtcUser;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.server.WebFilterExchange;

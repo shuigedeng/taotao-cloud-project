@@ -21,7 +21,7 @@ import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.support.info.ApiInfo;
 import com.taotao.boot.common.support.info.Create;
 import com.taotao.boot.common.support.info.Update;
-import com.taotao.boot.security.spring.support.annotation.NotAuth;
+import com.taotao.boot.security.spring.annotation.NotAuth;
 import com.taotao.cloud.sys.biz.model.dto.email.EmailDTO;
 import com.taotao.cloud.sys.biz.model.vo.alipay.EmailVO;
 import com.taotao.cloud.sys.biz.model.convert.EmailConvert;

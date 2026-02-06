@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.gateway.authentication;
 
-import com.taotao.boot.security.spring.autoconfigure.properties.OAuth2EndpointProperties;
+import com.taotao.boot.security.spring.autoconfigure.properties.SecurityOAuth2EndpointProperties;
 import com.taotao.boot.security.spring.support.constants.BaseConstants;
 import com.taotao.boot.security.spring.support.core.authority.TtcGrantedAuthority;
 import java.net.URI;
@@ -84,7 +84,7 @@ public class ReactiveSecurityOpaqueTokenIntrospector implements ReactiveOpaqueTo
      * @since 2023-07-04 10:00:05
      */
     public ReactiveSecurityOpaqueTokenIntrospector(
-            OAuth2EndpointProperties endpointProperties,
+            SecurityOAuth2EndpointProperties endpointProperties,
             OAuth2ResourceServerProperties resourceServerProperties) {
         this(
                 getIntrospectionUri(endpointProperties, resourceServerProperties),
@@ -142,7 +142,7 @@ public class ReactiveSecurityOpaqueTokenIntrospector implements ReactiveOpaqueTo
      * @since 2023-07-04 10:00:05
      */
     private static String getIntrospectionUri(
-            OAuth2EndpointProperties endpointProperties,
+            SecurityOAuth2EndpointProperties endpointProperties,
             OAuth2ResourceServerProperties resourceServerProperties) {
         String introspectionUri = endpointProperties.getTokenIntrospectionUri();
         String configIntrospectionUri =

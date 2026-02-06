@@ -17,7 +17,7 @@
 package com.taotao.cloud.gateway;
 
 import com.taotao.boot.core.startup.StartupSpringApplication;
-import com.taotao.boot.security.spring.support.annotation.EnableSecurity;
+import com.taotao.boot.security.spring.annotation.EnableSecurity;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import reactor.netty.ReactorNetty;

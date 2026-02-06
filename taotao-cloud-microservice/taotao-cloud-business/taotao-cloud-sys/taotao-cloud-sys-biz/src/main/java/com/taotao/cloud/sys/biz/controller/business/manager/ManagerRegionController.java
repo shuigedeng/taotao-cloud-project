@@ -19,7 +19,7 @@ package com.taotao.cloud.sys.biz.controller.business.manager;
 import com.taotao.boot.common.model.request.BaseQuery;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.tree.ForestNodeMerger;
-import com.taotao.boot.security.spring.support.annotation.NotAuth;
+import com.taotao.boot.security.spring.annotation.NotAuth;
 import com.taotao.cloud.sys.biz.model.dto.region.RegionSaveDTO;
 import com.taotao.cloud.sys.biz.model.dto.region.RegionUpdateDTO;
 import com.taotao.cloud.sys.biz.model.vo.region.RegionParentVO;
