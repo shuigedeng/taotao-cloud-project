@@ -4,8 +4,8 @@ import com.taotao.cloud.xxljob.constant.TriggerStatus;
 import com.taotao.cloud.xxljob.model.XxlJobInfo;
 import com.taotao.cloud.xxljob.scheduler.config.XxlJobAdminBootstrap;
 import com.taotao.cloud.xxljob.scheduler.misfire.MisfireStrategyEnum;
-import com.taotao.cloud.xxljob.scheduler.type.ScheduleTypeEnum;
 import com.taotao.cloud.xxljob.scheduler.trigger.TriggerTypeEnum;
+import com.taotao.cloud.xxljob.scheduler.type.ScheduleTypeEnum;
 import com.xxl.tool.core.CollectionTool;
 import com.xxl.tool.core.MapTool;
 import org.slf4j.Logger;
@@ -24,7 +24,14 @@ public class JobScheduleHelper {
     private static final Logger logger = LoggerFactory.getLogger(JobScheduleHelper.class);
 
 
-    public static final long PRE_READ_MS = 5000;    // pre read
+    /**
+     * pre-read time for scheduler, increase efficiency
+     */
+    public static final long PRE_READ_MS = 5000;
+    /*
+    * elegant shutdown wait seconds
+     */
+    private static final long ELEGANT_SHUTDOWN_WAITING_SECONDS = 10;
 
     private Thread scheduleThread;
     private Thread ringThread;
@@ -145,7 +152,13 @@ public class JobScheduleHelper {
                         }
                     } finally {
                         // transaction commit
-                        XxlJobAdminBootstrap.getInstance().getTransactionManager().commit(transactionStatus);   // avlid schedule repeat
+                        try {
+                            if (transactionStatus != null) {
+                                XxlJobAdminBootstrap.getInstance().getTransactionManager().commit(transactionStatus);   // avlid schedule repeat
+                            }
+                        } catch (Throwable e) {
+                            logger.error(">>>>>>>>>>> xxl-job, JobScheduleHelper#scheduleThread transaction commit error:{}", e.getMessage(), e);
+                        }
                     }
                     // transaction end
                     long cost = System.currentTimeMillis()-start;
@@ -310,7 +323,7 @@ public class JobScheduleHelper {
             }
         }
 
-        // if has ring data
+        // if has ring data, wait for elegent shutdown
         boolean hasRingData = false;
         if (MapTool.isNotEmpty(ringData)) {
             for (int second : ringData.keySet()) {
@@ -323,7 +336,7 @@ public class JobScheduleHelper {
         }
         if (hasRingData) {
             try {
-                TimeUnit.SECONDS.sleep(8);
+                TimeUnit.SECONDS.sleep(ELEGANT_SHUTDOWN_WAITING_SECONDS);
             } catch (Throwable e) {
                 logger.error(e.getMessage(), e);
             }

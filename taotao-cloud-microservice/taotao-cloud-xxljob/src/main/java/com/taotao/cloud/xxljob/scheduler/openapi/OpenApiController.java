@@ -7,7 +7,7 @@ import com.xxl.job.core.openapi.model.CallbackRequest;
 import com.xxl.job.core.openapi.model.RegistryRequest;
 import com.xxl.sso.core.annotation.XxlSso;
 import com.xxl.tool.core.StringTool;
-import com.xxl.tool.gson.GsonTool;
+import com.xxl.tool.json.GsonTool;
 import com.xxl.tool.response.Response;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,7 +33,7 @@ public class OpenApiController {
     @XxlSso(login = false)
     public Object api(HttpServletRequest request,
                                @PathVariable("uri") String uri,
-                               @RequestHeader(Const.XXL_JOB_ACCESS_TOKEN) String accesstoken,
+                               @RequestHeader(value = Const.XXL_JOB_ACCESS_TOKEN, required = false) String accesstoken,
                                @RequestBody(required = false) String requestBody) {
 
         // valid

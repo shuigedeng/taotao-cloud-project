@@ -112,6 +112,11 @@ spring:
       - org.springdoc.webflux.core.configuration.SpringDocWebFluxConfiguration
       - org.springdoc.webflux.core.configuration.MultipleOpenApiSupportConfiguration
   config:
+    import:
+      # 使用 optional: 前缀，即使nacos不可用也能启动
+      - optional:nacos:${spring.application.name}.yaml
+      #- optional:nacos:${spring.application.name}.${spring.cloud.nacos.config.file-extension}
+      #- optional:nacos:shared-config.yaml
     activate:
       on-profile: dev
   main:
@@ -222,8 +227,43 @@ spring:
       properties:
         linger.ms: 500
   cloud:
+    function:
+      web:
+        export:
+          enabled: false
+    circuitbreaker:
+      sentinel:
+        enabled: true
     compatibility-verifier:
       enabled: false
+    nacos:
+      discovery:
+        server-addr: 192.168.218.2:8848
+        metadata:
+          version: ${ttcVersion}
+          user.name: "admin"
+          user.password: "123456"
+        group: TAOTAO_CLOUD_GROUP
+        namespace: 82f5c2ff-c0d5-478d-9987-7f082d1a55d7
+        username: nacos
+        password: nacos
+        cluster-name: CQ
+        naming-load-cache-at-start: false
+      config:
+        enabled: true
+        server-addr: 192.168.218.2:8848
+        namespace: 82f5c2ff-c0d5-478d-9987-7f082d1a55d7
+        username: nacos
+        password: nacos
+        group: TAOTAO_CLOUD_GROUP
+        file-extension: yml
+        cluster-name: CQ
+        refresh-enabled: true
+        #使用nacos配置中心配置 dynamic-tp-nacos-cloud-demo-dtp-dev.yml
+        #extension-configs:
+        #  - dataId: ${spring.application.name}-dtp-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+        #    group: DEFAULT_GROUP
+        #    refresh: true  # 必须配置，负责自动刷新不生效
     loadbalancer:
       eager-load:
         clients:
@@ -243,13 +283,21 @@ spring:
       service-discovery:
         timeout: 10s
     sentinel:
-      app:
-        type: 1
       enabled: true
       eager: true
       transport:
         dashboard: 192.168.218.2:8858
         port: 8712
+      metric:
+        file-single-size: 1024 * 1024 * 50
+        file-total-count: 10
+      flow:
+        cold-factor: 3
+      log:
+        dir: ${user.home}/logs/${spring.application.name}/sentinel
+        switch-pid: false
+      app:
+        type: 1
       scg:
         fallback:
           mode: response

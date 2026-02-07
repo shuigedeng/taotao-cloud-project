@@ -86,14 +86,14 @@ public class DataSourceController {
         return Result.ok();
     }
 
-    @PostMapping
+    @PutMapping
     public Result<String> update(@RequestBody DataSourceEntity entity) {
         datasourceService.updateById(entity);
 
         return Result.ok();
     }
 
-    @PostMapping
+    @DeleteMapping
     public Result<String> delete(@RequestBody Long[] ids) {
         datasourceService.removeBatchByIds(Arrays.asList(ids));
 

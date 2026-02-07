@@ -61,14 +61,14 @@ public class ProjectModifyController {
         return Result.ok();
     }
 
-    @PostMapping
+    @PutMapping
     public Result<String> update(@RequestBody @Valid ProjectModifyEntity entity) {
         projectModifyService.updateById(entity);
 
         return Result.ok();
     }
 
-    @PostMapping
+    @DeleteMapping
     public Result<String> delete(@RequestBody List<Long> idList) {
         projectModifyService.removeByIds(idList);
 

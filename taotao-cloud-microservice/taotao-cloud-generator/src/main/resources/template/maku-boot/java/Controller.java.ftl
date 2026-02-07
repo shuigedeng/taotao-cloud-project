@@ -57,7 +57,7 @@ public class ${ClassName}Controller {
         return Result.ok();
     }
 
-    @PostMapping
+    @PutMapping
     @Operation(summary = "修改")
     @PreAuthorize("hasAuthority('${moduleName}:${functionName}:update')")
     public Result<String> update(@RequestBody @Valid ${ClassName}VO vo){
@@ -66,7 +66,7 @@ public class ${ClassName}Controller {
         return Result.ok();
     }
 
-    @PostMapping
+    @DeleteMapping
     @Operation(summary = "删除")
     @PreAuthorize("hasAuthority('${moduleName}:${functionName}:delete')")
     public Result<String> delete(@RequestBody List<Long> idList){

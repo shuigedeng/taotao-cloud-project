@@ -32,7 +32,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 
 @Component
-public class XxlJobAdminBootstrap implements InitializingBean, DisposableBean , ApplicationEventPublisherAware {
+public class XxlJobAdminBootstrap implements InitializingBean, DisposableBean, ApplicationEventPublisherAware {
     private static final Logger logger = LoggerFactory.getLogger(XxlJobAdminBootstrap.class);
 
     // ---------------------- instance ----------------------

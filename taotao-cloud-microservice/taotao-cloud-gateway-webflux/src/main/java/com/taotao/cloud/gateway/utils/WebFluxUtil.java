@@ -17,6 +17,7 @@
 package com.taotao.cloud.gateway.utils;
 
 import com.alibaba.fastjson.JSON;
+import com.taotao.boot.common.model.result.EmptyResult;
 import com.taotao.boot.common.model.result.Result;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -93,7 +94,7 @@ public class WebFluxUtil {
         return false;
     }
 
-    public static Mono<Void> writeJsonResponse(ServerHttpResponse response, Result<String> result) {
+    public static Mono<Void> writeJsonResponse(ServerHttpResponse response, Result<EmptyResult> result) {
         response.getHeaders().add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         response.setStatusCode(HttpStatus.valueOf(result.getCode()));
 
