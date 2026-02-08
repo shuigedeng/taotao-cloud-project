@@ -326,15 +326,15 @@ spring:
                 #- RequestTime=true
                 #- PreserveHostHeader
                 #- SwaggerHeader
-#                - name: RequestRateLimiter
-#                  args:
-#                    key-resolver: '#{@remoteAddrKeyResolver}'
-#                    redis-rate-limiter.replenishRate: 1
-#                    redis-rate-limiter.burstCapacity: 3
-#                - name: CircuitBreaker
-#                  args:
-#                    name: myCircuitBreaker
-#                    fallbackUri: forward:/fallback
+            #                - name: RequestRateLimiter
+            #                  args:
+            #                    key-resolver: '#{@remoteAddrKeyResolver}'
+            #                    redis-rate-limiter.replenishRate: 1
+            #                    redis-rate-limiter.burstCapacity: 3
+            #                - name: CircuitBreaker
+            #                  args:
+            #                    name: myCircuitBreaker
+            #                    fallbackUri: forward:/fallback
             - id: taotao-cloud-customer
               uri: lb://taotao-cloud-customer
               metadata:
@@ -348,15 +348,15 @@ spring:
                 #- RequestTime=true
                 #- PreserveHostHeader
                 #- SwaggerHeader
-#                - name: RequestRateLimiter
-#                  args:
-#                    key-resolver: '#{@remoteAddrKeyResolver}'
-#                    redis-rate-limiter.replenishRate: 10
-#                    redis-rate-limiter.burstCapacity: 20
-#                - name: CircuitBreaker
-#                  args:
-#                    name: myCircuitBreaker
-#                    fallbackUri: forward:/myfallback
+            #                - name: RequestRateLimiter
+            #                  args:
+            #                    key-resolver: '#{@remoteAddrKeyResolver}'
+            #                    redis-rate-limiter.replenishRate: 10
+            #                    redis-rate-limiter.burstCapacity: 20
+            #                - name: CircuitBreaker
+            #                  args:
+            #                    name: myCircuitBreaker
+            #                    fallbackUri: forward:/myfallback
             - id: taotao-cloud-distribution
               uri: lb://taotao-cloud-distribution
               metadata:
@@ -369,15 +369,15 @@ spring:
                 #- RequestTime=true
                 #- PreserveHostHeader
                 #- SwaggerHeader
-#                - name: RequestRateLimiter
-#                  args:
-#                    key-resolver: '#{@remoteAddrKeyResolver}'
-#                    redis-rate-limiter.replenishRate: 10
-#                    redis-rate-limiter.burstCapacity: 20
-#                - name: CircuitBreaker
-#                  args:
-#                    name: myCircuitBreaker
-#                    fallbackUri: forward:/myfallback
+            #                - name: RequestRateLimiter
+            #                  args:
+            #                    key-resolver: '#{@remoteAddrKeyResolver}'
+            #                    redis-rate-limiter.replenishRate: 10
+            #                    redis-rate-limiter.burstCapacity: 20
+            #                - name: CircuitBreaker
+            #                  args:
+            #                    name: myCircuitBreaker
+            #                    fallbackUri: forward:/myfallback
             - id: taotao-cloud-file
               uri: lb://taotao-cloud-file
               metadata:
@@ -391,15 +391,15 @@ spring:
                 #- RequestTime=true
                 #- PreserveHostHeader
                 #- SwaggerHeader
-#                - name: RequestRateLimiter
-#                  args:
-#                    key-resolver: '#{@remoteAddrKeyResolver}'
-#                    redis-rate-limiter.replenishRate: 10
-#                    redis-rate-limiter.burstCapacity: 20
-#                - name: CircuitBreaker
-#                  args:
-#                    name: myCircuitBreaker
-#                    fallbackUri: forward:/myfallback
+            #                - name: RequestRateLimiter
+            #                  args:
+            #                    key-resolver: '#{@remoteAddrKeyResolver}'
+            #                    redis-rate-limiter.replenishRate: 10
+            #                    redis-rate-limiter.burstCapacity: 20
+            #                - name: CircuitBreaker
+            #                  args:
+            #                    name: myCircuitBreaker
+            #                    fallbackUri: forward:/myfallback
             - id: taotao-cloud-tenant
               uri: lb://taotao-cloud-tenant
               metadata:
@@ -413,15 +413,15 @@ spring:
                 #- RequestTime=true
                 #- PreserveHostHeader
                 #- SwaggerHeader
-#                - name: RequestRateLimiter
-#                  args:
-#                    key-resolver: '#{@remoteAddrKeyResolver}'
-#                    redis-rate-limiter.replenishRate: 10
-#                    redis-rate-limiter.burstCapacity: 20
-#                - name: CircuitBreaker
-#                  args:
-#                    name: myCircuitBreaker
-#                    fallbackUri: forward:/myfallback
+            #                - name: RequestRateLimiter
+            #                  args:
+            #                    key-resolver: '#{@remoteAddrKeyResolver}'
+            #                    redis-rate-limiter.replenishRate: 10
+            #                    redis-rate-limiter.burstCapacity: 20
+            #                - name: CircuitBreaker
+            #                  args:
+            #                    name: myCircuitBreaker
+            #                    fallbackUri: forward:/myfallback
             - id: taotao-cloud-flowable
               uri: lb://taotao-cloud-flowable
               metadata:
@@ -434,15 +434,15 @@ spring:
                 #- RequestTime=true
                 #- PreserveHostHeader
                 #- SwaggerHeader
-#                - name: RequestRateLimiter
-#                  args:
-#                    key-resolver: '#{@remoteAddrKeyResolver}'
-#                    redis-rate-limiter.replenishRate: 10
-#                    redis-rate-limiter.burstCapacity: 20
-#                - name: CircuitBreaker
-#                  args:
-#                    name: myCircuitBreaker
-#                    fallbackUri: forward:/myfallback
+            #                - name: RequestRateLimiter
+            #                  args:
+            #                    key-resolver: '#{@remoteAddrKeyResolver}'
+            #                    redis-rate-limiter.replenishRate: 10
+            #                    redis-rate-limiter.burstCapacity: 20
+            #                - name: CircuitBreaker
+            #                  args:
+            #                    name: myCircuitBreaker
+            #                    fallbackUri: forward:/myfallback
             - id: taotao-cloud-generator
               uri: lb://taotao-cloud-generator
               metadata:
@@ -455,15 +455,15 @@ spring:
                 #- RequestTime=true
                 #- PreserveHostHeader
                 #- SwaggerHeader
-#                - name: RequestRateLimiter
-#                  args:
-#                    key-resolver: '#{@remoteAddrKeyResolver}'
-#                    redis-rate-limiter.replenishRate: 10
-#                    redis-rate-limiter.burstCapacity: 20
-#                - name: CircuitBreaker
-#                  args:
-#                    name: myCircuitBreaker
-#                    fallbackUri: forward:/myfallback
+            #                - name: RequestRateLimiter
+            #                  args:
+            #                    key-resolver: '#{@remoteAddrKeyResolver}'
+            #                    redis-rate-limiter.replenishRate: 10
+            #                    redis-rate-limiter.burstCapacity: 20
+            #                - name: CircuitBreaker
+            #                  args:
+            #                    name: myCircuitBreaker
+            #                    fallbackUri: forward:/myfallback
             - id: taotao-cloud-job
               uri: lb://taotao-cloud-job
               metadata:
@@ -477,17 +477,17 @@ spring:
                 #- RequestTime=true
                 #- PreserveHostHeader
                 #- SwaggerHeader
-#                - name: RequestRateLimiter
-#                  args:
-#                    key-resolver: '#{@remoteAddrKeyResolver}'
-#                    # 令牌桶每秒填充速率 允许每秒用户处理多少个请求
-#                    redis-rate-limiter.replenishRate: 10
-#                    # 令牌桶的容量 允许1s内完成的最大请求数量
-#                    redis-rate-limiter.burstCapacity: 20
-#                - name: CircuitBreaker
-#                  args:
-#                    name: myCircuitBreaker
-#                    fallbackUri: forward:/myfallback
+            #                - name: RequestRateLimiter
+            #                  args:
+            #                    key-resolver: '#{@remoteAddrKeyResolver}'
+            #                    # 令牌桶每秒填充速率 允许每秒用户处理多少个请求
+            #                    redis-rate-limiter.replenishRate: 10
+            #                    # 令牌桶的容量 允许1s内完成的最大请求数量
+            #                    redis-rate-limiter.burstCapacity: 20
+            #                - name: CircuitBreaker
+            #                  args:
+            #                    name: myCircuitBreaker
+            #                    fallbackUri: forward:/myfallback
             - id: taotao-cloud-stock
               uri: lb://taotao-cloud-stock
               metadata:
@@ -500,17 +500,17 @@ spring:
                 #- RequestTime=true
                 #- PreserveHostHeader
                 #- SwaggerHeader
-#                - name: RequestRateLimiter
-#                  args:
-#                    key-resolver: '#{@remoteAddrKeyResolver}'
-#                    # 令牌桶每秒填充速率 允许每秒用户处理多少个请求
-#                    redis-rate-limiter.replenishRate: 10
-#                    # 令牌桶的容量 允许1s内完成的最大请求数量
-#                    redis-rate-limiter.burstCapacity: 20
-#                - name: CircuitBreaker
-#                  args:
-#                    name: myCircuitBreaker
-#                    fallbackUri: forward:/myfallback
+            #                - name: RequestRateLimiter
+            #                  args:
+            #                    key-resolver: '#{@remoteAddrKeyResolver}'
+            #                    # 令牌桶每秒填充速率 允许每秒用户处理多少个请求
+            #                    redis-rate-limiter.replenishRate: 10
+            #                    # 令牌桶的容量 允许1s内完成的最大请求数量
+            #                    redis-rate-limiter.burstCapacity: 20
+            #                - name: CircuitBreaker
+            #                  args:
+            #                    name: myCircuitBreaker
+            #                    fallbackUri: forward:/myfallback
             - id: taotao-cloud-settlement
               uri: lb://taotao-cloud-settlement
               metadata:
@@ -523,15 +523,15 @@ spring:
                 #- RequestTime=true
                 #- PreserveHostHeader
                 #- SwaggerHeader
-#                - name: RequestRateLimiter
-#                  args:
-#                    key-resolver: '#{@remoteAddrKeyResolver}'
-#                    redis-rate-limiter.replenishRate: 10
-#                    redis-rate-limiter.burstCapacity: 20
-#                - name: CircuitBreaker
-#                  args:
-#                    name: myCircuitBreaker
-#                    fallbackUri: forward:/myfallback
+            #                - name: RequestRateLimiter
+            #                  args:
+            #                    key-resolver: '#{@remoteAddrKeyResolver}'
+            #                    redis-rate-limiter.replenishRate: 10
+            #                    redis-rate-limiter.burstCapacity: 20
+            #                - name: CircuitBreaker
+            #                  args:
+            #                    name: myCircuitBreaker
+            #                    fallbackUri: forward:/myfallback
             - id: taotao-cloud-search
               uri: lb://taotao-cloud-search
               metadata:
@@ -544,15 +544,15 @@ spring:
                 #- RequestTime=true
                 #- PreserveHostHeader
                 #- SwaggerHeader
-#                - name: RequestRateLimiter
-#                  args:
-#                    key-resolver: '#{@remoteAddrKeyResolver}'
-#                    redis-rate-limiter.replenishRate: 10
-#                    redis-rate-limiter.burstCapacity: 20
-#                - name: CircuitBreaker
-#                  args:
-#                    name: myCircuitBreaker
-#                    fallbackUri: forward:/myfallback
+            #                - name: RequestRateLimiter
+            #                  args:
+            #                    key-resolver: '#{@remoteAddrKeyResolver}'
+            #                    redis-rate-limiter.replenishRate: 10
+            #                    redis-rate-limiter.burstCapacity: 20
+            #                - name: CircuitBreaker
+            #                  args:
+            #                    name: myCircuitBreaker
+            #                    fallbackUri: forward:/myfallback
             - id: taotao-cloud-report
               uri: lb://taotao-cloud-report
               metadata:
@@ -565,15 +565,15 @@ spring:
                 #- RequestTime=true
                 #- PreserveHostHeader
                 #- SwaggerHeader
-#                - name: RequestRateLimiter
-#                  args:
-#                    key-resolver: '#{@remoteAddrKeyResolver}'
-#                    redis-rate-limiter.replenishRate: 10
-#                    redis-rate-limiter.burstCapacity: 20
-#                - name: CircuitBreaker
-#                  args:
-#                    name: myCircuitBreaker
-#                    fallbackUri: forward:/myfallback
+            #                - name: RequestRateLimiter
+            #                  args:
+            #                    key-resolver: '#{@remoteAddrKeyResolver}'
+            #                    redis-rate-limiter.replenishRate: 10
+            #                    redis-rate-limiter.burstCapacity: 20
+            #                - name: CircuitBreaker
+            #                  args:
+            #                    name: myCircuitBreaker
+            #                    fallbackUri: forward:/myfallback
             - id: taotao-cloud-recommend
               uri: lb://taotao-cloud-recommend
               metadata:
@@ -586,15 +586,15 @@ spring:
                 #- RequestTime=true
                 #- PreserveHostHeader
                 #- SwaggerHeader
-#                - name: RequestRateLimiter
-#                  args:
-#                    key-resolver: '#{@remoteAddrKeyResolver}'
-#                    redis-rate-limiter.replenishRate: 10
-#                    redis-rate-limiter.burstCapacity: 20
-#                - name: CircuitBreaker
-#                  args:
-#                    name: myCircuitBreaker
-#                    fallbackUri: forward:/myfallback
+            #                - name: RequestRateLimiter
+            #                  args:
+            #                    key-resolver: '#{@remoteAddrKeyResolver}'
+            #                    redis-rate-limiter.replenishRate: 10
+            #                    redis-rate-limiter.burstCapacity: 20
+            #                - name: CircuitBreaker
+            #                  args:
+            #                    name: myCircuitBreaker
+            #                    fallbackUri: forward:/myfallback
             - id: taotao-cloud-promotion
               uri: lb://taotao-cloud-promotion
               metadata:
@@ -607,15 +607,15 @@ spring:
                 #- RequestTime=true
                 #- PreserveHostHeader
                 #- SwaggerHeader
-#                - name: RequestRateLimiter
-#                  args:
-#                    key-resolver: '#{@remoteAddrKeyResolver}'
-#                    redis-rate-limiter.replenishRate: 10
-#                    redis-rate-limiter.burstCapacity: 20
-#                - name: CircuitBreaker
-#                  args:
-#                    name: myCircuitBreaker
-#                    fallbackUri: forward:/myfallback
+            #                - name: RequestRateLimiter
+            #                  args:
+            #                    key-resolver: '#{@remoteAddrKeyResolver}'
+            #                    redis-rate-limiter.replenishRate: 10
+            #                    redis-rate-limiter.burstCapacity: 20
+            #                - name: CircuitBreaker
+            #                  args:
+            #                    name: myCircuitBreaker
+            #                    fallbackUri: forward:/myfallback
             - id: taotao-cloud-payment
               uri: lb://taotao-cloud-payment
               metadata:
@@ -628,15 +628,15 @@ spring:
                 #- RequestTime=true
                 #- PreserveHostHeader
                 #- SwaggerHeader
-#                - name: RequestRateLimiter
-#                  args:
-#                    key-resolver: '#{@remoteAddrKeyResolver}'
-#                    redis-rate-limiter.replenishRate: 10
-#                    redis-rate-limiter.burstCapacity: 20
-#                - name: CircuitBreaker
-#                  args:
-#                    name: myCircuitBreaker
-#                    fallbackUri: forward:/myfallback
+            #                - name: RequestRateLimiter
+            #                  args:
+            #                    key-resolver: '#{@remoteAddrKeyResolver}'
+            #                    redis-rate-limiter.replenishRate: 10
+            #                    redis-rate-limiter.burstCapacity: 20
+            #                - name: CircuitBreaker
+            #                  args:
+            #                    name: myCircuitBreaker
+            #                    fallbackUri: forward:/myfallback
             - id: taotao-cloud-operation
               uri: lb://taotao-cloud-operation
               metadata:
@@ -649,15 +649,15 @@ spring:
                 #- RequestTime=true
                 #- PreserveHostHeader
                 #- SwaggerHeader
-#                - name: RequestRateLimiter
-#                  args:
-#                    key-resolver: '#{@remoteAddrKeyResolver}'
-#                    redis-rate-limiter.replenishRate: 10
-#                    redis-rate-limiter.burstCapacity: 20
-#                - name: CircuitBreaker
-#                  args:
-#                    name: myCircuitBreaker
-#                    fallbackUri: forward:/myfallback
+            #                - name: RequestRateLimiter
+            #                  args:
+            #                    key-resolver: '#{@remoteAddrKeyResolver}'
+            #                    redis-rate-limiter.replenishRate: 10
+            #                    redis-rate-limiter.burstCapacity: 20
+            #                - name: CircuitBreaker
+            #                  args:
+            #                    name: myCircuitBreaker
+            #                    fallbackUri: forward:/myfallback
             #- id: json-grpc
             #  uri: https://127.0.0.1:6565
             #  #curl -XPOST 'https://127.0.0.1:8091/json/hello' -d '{"firstName":"Duff","lastName":"McKagan"}' -k -H"Content-Type: application/json" -v
@@ -686,15 +686,15 @@ spring:
                 #- RequestTime=true
                 #- PreserveHostHeader
                 #- SwaggerHeader
-#                - name: RequestRateLimiter
-#                  args:
-#                    key-resolver: '#{@remoteAddrKeyResolver}'
-#                    redis-rate-limiter.replenishRate: 10
-#                    redis-rate-limiter.burstCapacity: 20
-#                - name: CircuitBreaker
-#                  args:
-#                    name: myCircuitBreaker
-#                    fallbackUri: forward:/myfallback
+            #                - name: RequestRateLimiter
+            #                  args:
+            #                    key-resolver: '#{@remoteAddrKeyResolver}'
+            #                    redis-rate-limiter.replenishRate: 10
+            #                    redis-rate-limiter.burstCapacity: 20
+            #                - name: CircuitBreaker
+            #                  args:
+            #                    name: myCircuitBreaker
+            #                    fallbackUri: forward:/myfallback
             - id: taotao-cloud-member
               uri: lb://taotao-cloud-member
               metadata:
@@ -707,15 +707,15 @@ spring:
                 #- RequestTime=true
                 #- PreserveHostHeader
                 #- SwaggerHeader
-#                - name: RequestRateLimiter
-#                  args:
-#                    key-resolver: '#{@remoteAddrKeyResolver}'
-#                    redis-rate-limiter.replenishRate: 10
-#                    redis-rate-limiter.burstCapacity: 20
-#                - name: CircuitBreaker
-#                  args:
-#                    name: myCircuitBreaker
-#                    fallbackUri: forward:/myfallback
+            #                - name: RequestRateLimiter
+            #                  args:
+            #                    key-resolver: '#{@remoteAddrKeyResolver}'
+            #                    redis-rate-limiter.replenishRate: 10
+            #                    redis-rate-limiter.burstCapacity: 20
+            #                - name: CircuitBreaker
+            #                  args:
+            #                    name: myCircuitBreaker
+            #                    fallbackUri: forward:/myfallback
 
             - id: taotao-cloud-bulletin
               uri: lb://taotao-cloud-bulletin
@@ -729,15 +729,15 @@ spring:
                 #- RequestTime=true
                 #- PreserveHostHeader
                 #- SwaggerHeader
-#                - name: RequestRateLimiter
-#                  args:
-#                    key-resolver: '#{@remoteAddrKeyResolver}'
-#                    redis-rate-limiter.replenishRate: 10
-#                    redis-rate-limiter.burstCapacity: 20
-#                - name: CircuitBreaker
-#                  args:
-#                    name: myCircuitBreaker
-#                    fallbackUri: forward:/myfallback
+            #                - name: RequestRateLimiter
+            #                  args:
+            #                    key-resolver: '#{@remoteAddrKeyResolver}'
+            #                    redis-rate-limiter.replenishRate: 10
+            #                    redis-rate-limiter.burstCapacity: 20
+            #                - name: CircuitBreaker
+            #                  args:
+            #                    name: myCircuitBreaker
+            #                    fallbackUri: forward:/myfallback
 
             - id: taotao-cloud-sys
               uri: lb://taotao-cloud-sys
@@ -748,15 +748,18 @@ spring:
                 response-timeout: 5000
                 request_uri_prefix: sys
               predicates:
-                - Path=${taotao.cloud.gateway.api.base-uri}/buyer/sys/**
-                - Path=${taotao.cloud.gateway.api.base-uri}/manager/sys/**
-                - Path=${taotao.cloud.gateway.api.base-uri}/seller/sys/**
+                - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
+                #- Path=${taotao.cloud.gateway.api.base-uri}/buyer/sys/**,${taotao.cloud.gateway.api.base-uri}/sys/mall/**
+                #- Path=${taotao.cloud.gateway.api.base-uri}/manager/sys/**
+                #- Path=${taotao.cloud.gateway.api.base-uri}/seller/sys/**
+                #- Path=${taotao.cloud.gateway.api.base-uri}/sys/mall/**
               filters:
                 - RewritePath=/sys/(?<path>.*), /$\{path}
                 - StripPrefix=2
                 #- RequestTime=true
                 #- PreserveHostHeader
                 #- SwaggerHeader
+
             - id: taotao-cloud-order
               uri: lb://taotao-cloud-order
               metadata:
@@ -769,30 +772,30 @@ spring:
                 - StripPrefix=2
                 #- PreserveHostHeader
                 #- SwaggerHeader
-#                - name: RequestTime
-#                  args:
-#                    enabled: true
-#                - name: RequestRateLimiter
-#                  args:
-#                    key-resolver: '#{@remoteAddrKeyResolver}'
-#                    rate-limiter: "#{#customRateLimiter}"
-#                    # key返回空的话 则不进行限流 @see RequestRateLimiterGatewayFilterFactory
-#                    deny-empty-key: true
-#                    empty-key-status-code: TOO_MANY_REQUESTS
-#                    redis-rate-limiter.replenishRate: 10
-#                    redis-rate-limiter.burstCapacity: 20
-#                    redis-rate-limiter.requestedTokens: 1
-#                    custom-rate-limiter.requestedToken: 15
+          #                - name: RequestTime
+          #                  args:
+          #                    enabled: true
+          #                - name: RequestRateLimiter
+          #                  args:
+          #                    key-resolver: '#{@remoteAddrKeyResolver}'
+          #                    rate-limiter: "#{#customRateLimiter}"
+          #                    # key返回空的话 则不进行限流 @see RequestRateLimiterGatewayFilterFactory
+          #                    deny-empty-key: true
+          #                    empty-key-status-code: TOO_MANY_REQUESTS
+          #                    redis-rate-limiter.replenishRate: 10
+          #                    redis-rate-limiter.burstCapacity: 20
+          #                    redis-rate-limiter.requestedTokens: 1
+          #                    custom-rate-limiter.requestedToken: 15
           #http://192.168.218.1:33305/v3/api-docs/swagger-config
           #http://192.168.218.1:33305/v3/api-docs/taotao-cloud-sys
-#            - id: openapi
-#              uri: http://${spring.cloud.client.ip-address}:${server.port}
-#              metadata:
-#                - aa=hello
-#              predicates:
-#                - Path=/v3/api-docs/**
-#              filters:
-#                - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+          #            - id: openapi
+          #              uri: http://${spring.cloud.client.ip-address}:${server.port}
+          #              metadata:
+          #                - aa=hello
+          #              predicates:
+          #                - Path=/v3/api-docs/**
+          #              filters:
+          #                - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
 
           default-filters:
             - AddRequestHeader=X-Request-taotao-cloud, ${ttcVersion}
@@ -845,20 +848,21 @@ taotao:
           oidc-client-registration-uri: http://192.168.218.2:33401/connect/register
           oidc-user-info-uri: http://192.168.218.2:33401/userinfo
       enabled: true
-      ignore-url:
-        - /auth/captcha/code
-        - /auth/qrcode/code
-        - /auth/sms/phone
-        - /auth/oauth2/token
-        - /auth/oauth2/authorize
-        - /*/health/**
-        - /*/request/gateway/test
-        - /health/**
-        - /sys/**
-        - /file/**
-        - /job/**
-        - /sys/**
-        - /api/v2026.03/sys/**
+      authorization:
+        ignore-url:
+          - /auth/captcha/code
+          - /auth/qrcode/code
+          - /auth/sms/phone
+          - /auth/oauth2/token
+          - /auth/oauth2/authorize
+          - /*/health/**
+          - /*/request/gateway/test
+          - /health/**
+          - /sys/**
+          - /file/**
+          - /job/**
+          - /sys/**
+          - /api/v2026.03/sys/**
     core:
       async:
         enabled: false
@@ -905,21 +909,6 @@ taotao:
         prefix: /api
         version: v${ttcVersion}
         base-uri: ${taotao.cloud.gateway.api.prefix}/${taotao.cloud.gateway.api.version}
-      security:
-        enabled: true
-        ignore-url:
-          - /auth/captcha/code
-          - /auth/qrcode/code
-          - /auth/sms/phone
-          - /auth/oauth2/token
-          - /auth/oauth2/authorize
-          - /*/health/**
-          - /*/request/gateway/test
-          - /health/**
-          - /sys/**
-          - /file/**
-          - /job/**
-          - /sys/**
 
 tlog:
   pattern: "$preApp:$preIp:$spanId:$traceId"
@@ -1122,13 +1111,13 @@ logging:
   level:
     root: INFO
     #如上配置后，当你访问任何路由时都将输出非常详细的信息。
-#    web: debug
-#    '[org.springframework.cloud.gateway]': debug
-#    '[org.springframework.http.server.reactive]': debug
-#    '[org.springframework.web.reactive]': debug
-#    '[org.springframework.boot.autoconfigure.web]': debug
-#    '[reactor.netty]': debug
-#    '[redisratelimiter]': debug
+    #web: debug
+    '[org.springframework.cloud.gateway]': debug
+    #'[org.springframework.http.server.reactive]': debug
+    #'[org.springframework.web.reactive]': debug
+    #'[org.springframework.boot.autoconfigure.web]': debug
+    #'[reactor.netty]': debug
+    #'[redisratelimiter]': debug
     org.apache.zookeeper.ZooKeeper: info
     com.taotao.cloud.sys.api.feign: debug
     net.ttddyy.dsproxy.listener: debug
@@ -1225,7 +1214,7 @@ management:
           endpoint: http://192.168.218.2:4318/v1/logs
           timeout: 10s
           headers:
-            version: 2026.03
+            version: ${ttcVersion}
     tracing:
       export:
         otlp:
@@ -1233,7 +1222,7 @@ management:
           endpoint: http://192.168.218.2:4318/v1/traces
           timeout: 10s
           headers:
-            version: 2026.03
+            version: ${ttcVersion}
   otlp:
     metrics:
       export:
@@ -1242,7 +1231,7 @@ management:
         batch-size: 10000
         connect-timeout: 10s
         headers:
-          version: 2026.03
+          version: ${ttcVersion}
   observations:
     annotations:
       enabled: true
