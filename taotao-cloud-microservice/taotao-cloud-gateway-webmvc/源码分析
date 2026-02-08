@@ -1,0 +1,12 @@
+1.依赖于springmvc的function
+  WebMvcConfigurationSupport 定义了
+  	@Bean
+  	public RouterFunctionMapping routerFunctionMapping() 这个bean 继承AbstractHandlerMapping
+    在afterPropertiesSet方法中initRouterFunctions
+    通过ApplicationContext获取所有的RouterFunction<?> bean对象
+
+2.spring cloud gateway
+  在GatewayServerMvcAutoConfiguration中会import(GatewayMvcPropertiesBeanDefinitionRegistrar.class)
+  会注入一个DelegatingRouterFunction AbstractBeanDefinition
+  然后这个类实现了 RouterFunction<ServerResponse>  持有final RouterFunctionHolder provider对象
+   这个对象就包含了所有定义的路由配置  委托到DelegatingRouterFunction来执行
