@@ -23,7 +23,7 @@ import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
 
 @TaoTaoBootApplication
-@TaoTaoCloudApplication
+
 public class TaoTaoCloudReportApplication {
 
 

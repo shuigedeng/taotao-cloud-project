@@ -36,7 +36,7 @@ import org.springframework.context.annotation.Bean;
  */
 // @EnableBinding({TaoTaoCloudSink.class, TaoTaoCloudSource.class})
 @TaoTaoBootApplication
-@TaoTaoCloudApplication
+
 public class TaoTaoCloudOrderApplication {
 
     public static void main(String[] args) {

@@ -34,7 +34,7 @@ import org.springframework.boot.SpringApplication;
  * @since 2023-05-11 17:46:59
  */
 @TaoTaoBootApplication
-@TaoTaoCloudApplication
+
 public class TaoTaoCloudRecommendApplication {
 
     public static void main(String[] args) {

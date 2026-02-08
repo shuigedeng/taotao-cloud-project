@@ -28,7 +28,7 @@ import org.springframework.boot.SpringApplication;
  * @since 2020/11/20 上午10:43
  */
 @TaoTaoBootApplication
-@TaoTaoCloudApplication
+
 public class TaoTaoCloudCustomerApplication {
 
 	public static void main(String[] args) {

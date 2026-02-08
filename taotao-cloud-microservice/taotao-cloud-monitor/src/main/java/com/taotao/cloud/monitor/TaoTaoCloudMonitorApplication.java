@@ -28,7 +28,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @version 2022.03
  * @since 2020/11/26 下午7:55
  */
-@EnableDiscoveryClient
 @EnableAdminServer
 @SpringBootApplication
 public class TaoTaoCloudMonitorApplication {

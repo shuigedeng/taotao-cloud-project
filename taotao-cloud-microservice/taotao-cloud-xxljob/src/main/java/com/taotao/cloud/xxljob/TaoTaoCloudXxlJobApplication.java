@@ -33,7 +33,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @MapperScan("com.taotao.cloud.xxljob.mapper")
 @EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)
 //@EnableEncryptableProperties
-@EnableDiscoveryClient
 @SpringBootApplication
 public class TaoTaoCloudXxlJobApplication {
 

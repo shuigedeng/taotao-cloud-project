@@ -32,7 +32,7 @@ import org.springframework.boot.SpringApplication;
  * @since 2022-03-15 20:59:38
  */
 @TaoTaoBootApplication
-@TaoTaoCloudApplication
+
 public class TaoTaoCloudGoodsApplication {
 
 	public static void main(String[] args) {

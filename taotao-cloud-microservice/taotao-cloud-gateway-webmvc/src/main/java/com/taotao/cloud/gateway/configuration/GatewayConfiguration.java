@@ -16,11 +16,13 @@
 
 package com.taotao.cloud.gateway.configuration;
 
+import com.taotao.cloud.gateway.filter.RequestTimeFilterFunctions;
+import com.taotao.cloud.gateway.filter.SwaggerHeaderFilterFunctions;
+import com.taotao.cloud.gateway.predicates.TtcRequestPredicates;
 import com.taotao.cloud.gateway.properties.ApiProperties;
 import com.taotao.cloud.gateway.properties.DynamicRouteProperties;
 import com.taotao.cloud.gateway.properties.FilterProperties;
 import com.taotao.cloud.gateway.properties.HttpsProperties;
-import com.taotao.cloud.gateway.properties.SecurityProperties;
 import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -44,25 +46,31 @@ import reactor.core.publisher.Mono;
     DynamicRouteProperties.class,
     ApiProperties.class,
     FilterProperties.class,
-    SecurityProperties.class,
     HttpsProperties.class,
     // NacosConfigProperties.class
 })
-public class GatewayWebMvcConfiguration {
+public class GatewayConfiguration {
 
-    @Bean
-    public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
-        return new HiddenHttpMethodFilter() {
-            @Override
-            public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
-                return chain.filter(exchange);
-            }
-        };
-    }
 
     @Bean
 	MeterRegistryCustomizer<MeterRegistry> configurer(
             @Value("${spring.application.name}") String applicationName) {
         return (registry) -> registry.config().commonTags("application", applicationName);
     }
+
+	@Bean
+	public TtcRequestPredicates.TtcPredicateSupplier customPredicateSupplier() {
+		return new TtcRequestPredicates.TtcPredicateSupplier();
+	}
+
+	@Bean
+	public RequestTimeFilterFunctions.RequestTimeFilterSupplier requestTimeFilterSupplier(){
+		return new RequestTimeFilterFunctions.RequestTimeFilterSupplier();
+	}
+
+
+	@Bean
+	public SwaggerHeaderFilterFunctions.SwaggerHeaderFilterSupplier swaggerHeaderFilterSupplier(){
+		return new SwaggerHeaderFilterFunctions.SwaggerHeaderFilterSupplier();
+	}
 }

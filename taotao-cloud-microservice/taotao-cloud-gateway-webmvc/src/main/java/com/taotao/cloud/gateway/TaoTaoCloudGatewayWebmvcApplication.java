@@ -39,7 +39,6 @@ import reactor.netty.ReactorNetty;
 @EnableOauth2ResourceServer
 @EnableSecurity
 @SpringBootApplication
-@EnableDiscoveryClient
 public class TaoTaoCloudGatewayWebmvcApplication {
 
     public static void main(String[] args) {

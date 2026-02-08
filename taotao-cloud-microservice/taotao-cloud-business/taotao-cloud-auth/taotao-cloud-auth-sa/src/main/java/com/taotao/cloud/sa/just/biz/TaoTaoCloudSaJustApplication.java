@@ -62,7 +62,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 // @EnableJpaRepositories(basePackages = {"com.taotao.cloud.auth.biz.repository"})
 // @EnableFeignClients(basePackages = {"com.taotao.cloud.*.api.feign"})
 //@EnableEncryptableProperties
-@EnableDiscoveryClient
 @SpringBootApplication
 public class TaoTaoCloudSaJustApplication {
 

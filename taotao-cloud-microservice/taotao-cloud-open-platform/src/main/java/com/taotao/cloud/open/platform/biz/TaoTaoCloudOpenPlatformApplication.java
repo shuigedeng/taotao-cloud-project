@@ -30,7 +30,7 @@ import org.springframework.boot.SpringApplication;
  * @since 2023-05-11 17:46:26
  */
 @TaoTaoBootApplication
-@TaoTaoCloudApplication
+
 public class TaoTaoCloudOpenPlatformApplication {
 
     public static void main(String[] args) {

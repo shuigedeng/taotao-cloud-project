@@ -37,7 +37,6 @@ import reactor.netty.ReactorNetty;
  */
 @EnableSecurity
 @SpringBootApplication
-@EnableDiscoveryClient
 public class TaoTaoCloudGatewayWebfluxApplication {
 
     public static void main(String[] args) {

@@ -28,9 +28,8 @@ import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 // @EnableTaoTaoCloudSentinel
 // //@EnableEncryptableProperties
 // @EnableTransactionManagement(proxyTargetClass = true)
-// @EnableDiscoveryClient
 @TaoTaoBootApplication
-@TaoTaoCloudApplication
+
 public class TaoTaoCloudBffApplication {
 
     public static void main(String[] args) {

@@ -24,7 +24,7 @@ import org.springframework.boot.SpringApplication;
 
 /** https://gitee.com/lakaola/im-platform */
 @TaoTaoBootApplication
-@TaoTaoCloudApplication
+
 public class TaoTaoCloudImApplication {
 
 	public static void main(String[] args) {

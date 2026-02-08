@@ -82,7 +82,6 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
         repositoryFactoryBeanClass = JpaExtendRepositoryFactoryBean.class)
 //@EnableFeignClients(basePackages = {"com.taotao.cloud.*.api.feign"})
 //@EnableEncryptableProperties
-@EnableDiscoveryClient
 @ConfigurationPropertiesScan
 @EnableSecurity
 @EnableRedisIndexedHttpSession

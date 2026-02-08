@@ -32,7 +32,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 //@MapperScan(basePackages = "com.taotao.cloud.sys.biz.mapper")
 //@EnableJpaRepositories(basePackages = "com.taotao.cloud.member.biz.repository")
 @TaoTaoBootApplication
-@TaoTaoCloudApplication
+
 public class TaoTaoCloudMemberApplication {
 
 	public static void main(String[] args) {

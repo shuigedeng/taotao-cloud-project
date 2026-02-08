@@ -66,18 +66,6 @@ public class TomcatAutoConfiguration {
 
 		@Override
 		public void customize( TomcatServletWebServerFactory factory ) {
-			/**
-			 * 配置Tomcat识别代理头
-			 */
-//			return factory -> factory.addConnectorCustomizers(connector -> {
-//				connector.setProperty("relaxedQueryChars", "|{}[]");
-//				connector.setProperty("relaxedPathChars", "|{}[]");
-//				connector.setProperty("remoteIpHeader", "x-forwarded-for");
-//				connector.setProperty("protocolHeader", "x-forwarded-proto");
-//				// 信任的内网代理（根据实际情况调整）
-//				connector.setProperty("internalProxies",
-//					"192\\.168\\.\\d{1,3}\\.\\d{1,3}|10\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}|172\\.(1[6-9]|2[0-9]|3[0-1])\\.\\d{1,3}\\.\\d{1,3}");
-//			});
 
 			//是否开启虚拟线程
 			factory.addProtocolHandlerCustomizers(protocolHandler -> {
@@ -87,34 +75,6 @@ public class TomcatAutoConfiguration {
 					.factory();
 				protocolHandler.setExecutor(Executors.newThreadPerTaskExecutor(factory1));
 			});
-
-			// 2. 配置连接器参数（可选）
-//			factory.addConnectorCustomizers(connector -> {
-//				// 连接超时
-//				connector.setProperty("connectionTimeout", "2000");
-//
-//				// 最大连接数
-//				connector.setProperty("maxConnections", "10000");
-//
-//				// 对于虚拟线程，传统线程池参数不再重要
-//				connector.setProperty("maxThreads", "0"); // 0 表示使用执行器
-//				connector.setProperty("minSpareThreads", "0");
-//
-//				// 启用 Keep-Alive
-//				connector.setProperty("keepAliveTimeout", "15000");
-//				connector.setProperty("maxKeepAliveRequests", "100");
-//
-//				log.info("Tomcat connector configured for virtual threads: {}",
-//					connector.getProtocol());
-//			});
-
-			// 3. 设置其他工厂属性
-//			factory.setSessionTimeout(Duration.ofMinutes(30));
-//			factory.addContextCustomizers(context -> {
-//				// 可以在这里配置 Context
-//				context.setSessionTimeout(30);
-//			});
 		}
-
 	}
 }

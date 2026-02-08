@@ -30,7 +30,7 @@ import org.springframework.boot.SpringApplication;
  * @since 2020/11/26 下午7:55
  */
 @TaoTaoBootApplication
-@TaoTaoCloudApplication
+
 public class TaoTaoCloudMessageApplication {
 
 
