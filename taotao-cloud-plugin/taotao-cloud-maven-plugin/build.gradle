@@ -61,7 +61,7 @@ plugins {
     //https://github.com/freefair/gradle-plugins
     //https://github.com/freefair/gradle-plugins/tree/master/examples/test-maven-plugin
     //https://plugins.gradle.org/plugin/io.freefair.maven-plugin
-    id "io.freefair.maven-plugin" version "9.1.0"
+    id "io.freefair.maven-plugin" version "9.2.0"
 
     //https://gradlex.org/maven-plugin-development/
     ////https://github.com/gradlex-org/maven-plugin-development
@@ -93,11 +93,11 @@ dependencies {
 
     implementation 'org.apache.maven.plugin-tools:maven-plugin-annotations:3.15.2'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter:6.0.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:6.0.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:6.0.2'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:6.0.2'
-    testImplementation "org.assertj:assertj-core:3.27.6"
+    testImplementation 'org.junit.jupiter:junit-jupiter:6.0.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:6.0.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:6.0.3'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:6.0.3'
+    testImplementation "org.assertj:assertj-core:3.27.7"
 }
 
 
@@ -291,7 +291,7 @@ mavenPublishing {
                 "maven.compiler.target": JavaVersion.VERSION_25.toString(),
                 "project.build.sourceEncoding": "UTF-8",
                 "project.reporting.outputEncoding": "UTF-8",
-                "spring-boot-dependencies.version"   : "4.0.2",
+                "spring-boot-dependencies.version"   : "4.0.3",
                 "taotao-cloud-dependencies.version"   : rootProject.version,
                 "taotao-boot-dependencies.version"   : rootProject.version
         ]

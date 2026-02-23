@@ -8,7 +8,7 @@ dependencies {
     implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel") {
         exclude group: "com.fasterxml.jackson.dataformat", module: "jackson-dataformat-xml"
     }
-    implementation 'org.apache.skywalking:apm-spring-cloud-gateway-4.x-plugin:9.5.0'
+    implementation 'org.apache.skywalking:apm-spring-cloud-gateway-4.x-plugin:9.6.0'
     implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
     //implementation 'org.springframework.cloud:spring-cloud-starter-function-webflux'
     implementation("org.springframework.cloud:spring-cloud-starter-gateway-server-webflux") {
@@ -73,8 +73,8 @@ dependencies {
     ////https://search.maven.org/artifact/cn.dev33/sa-token-reactor-spring-boot-starter
     //implementation 'cn.dev33:sa-token-reactor-spring-boot3-starter:1.44.0'
 
-    implementation "com.google.protobuf:protobuf-java:4.33.4"
-    implementation "com.google.protobuf:protobuf-java-util:4.33.4"
+    implementation "com.google.protobuf:protobuf-java:4.33.5"
+    implementation "com.google.protobuf:protobuf-java-util:4.33.5"
 }
 
 configurations {
@@ -84,10 +84,10 @@ configurations {
             force 'org.antlr:antlr4:4.13.2'
             force 'net.minidev:json-smart:2.6.0'
             //todo 临时使用
-            force "io.opentelemetry:opentelemetry-api-incubator:1.58.0-alpha"
+            force "io.opentelemetry:opentelemetry-api-incubator:1.59.0-alpha"
 
-            force "com.google.protobuf:protobuf-java:4.33.4"
-            force "com.google.protobuf:protobuf-java-util:4.33.4"
+            force "com.google.protobuf:protobuf-java:4.33.5"
+            force "com.google.protobuf:protobuf-java-util:4.33.5"
         }
 
         exclude group: "org.springframework", module: "spring-webmvc"

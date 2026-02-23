@@ -21,8 +21,8 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
 
     //https://search.maven.org/artifact/org.springframework.integration/spring-integration-core
-    implementation 'org.springframework.integration:spring-integration-core:7.0.2'
-    implementation 'org.springframework.integration:spring-integration-jdbc:7.0.2'
+    implementation 'org.springframework.integration:spring-integration-core:7.0.3'
+    implementation 'org.springframework.integration:spring-integration-jdbc:7.0.3'
 
     implementation 'org.springframework.boot:spring-boot-starter-batch'
     implementation 'org.springframework.boot:spring-boot-starter-batch-jdbc'
@@ -193,7 +193,7 @@ dependencies {
     //implementation(project(":taotao-cloud-bigdata:taotao-cloud-flink-cep"))
     implementation 'com.googlecode.aviator:aviator:5.4.3'
 
-    implementation "com.alibaba.fastjson2:fastjson2:2.0.60"
+    implementation "com.alibaba.fastjson2:fastjson2:2.0.61"
 }
 
 application {
@@ -215,14 +215,14 @@ configurations {
         //    }
         //}
         //或者简写为 force 的优先级会比较高，会覆盖 strictly 策略
-        //implementation 'com.alibaba:fastjson:2.0.60!!'
+        //implementation 'com.alibaba:fastjson:2.0.61!!'
 
         resolutionStrategy {
             force "org.codehaus.groovy:groovy:3.0.25"
             force 'org.antlr:antlr4:4.13.2'
             force 'net.minidev:json-smart:2.6.0'
             //todo 临时使用
-            force "io.opentelemetry:opentelemetry-api-incubator:1.58.0-alpha"
+            force "io.opentelemetry:opentelemetry-api-incubator:1.59.0-alpha"
             force "org.glassfish:javax.el:3.0.0"
             force 'org.glassfish.jaxb:jaxb-runtime:4.0.6'
         }

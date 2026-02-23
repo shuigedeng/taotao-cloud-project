@@ -45,7 +45,7 @@ repositories {
 
 dependencies {
     implementation platform("org.springframework.ai:spring-ai-bom:2.0.0-M2")
-    implementation platform("com.alibaba.cloud.ai:spring-ai-alibaba-bom:1.1.0.0")
+    implementation platform("com.alibaba.cloud.ai:spring-ai-alibaba-bom:1.1.2.0")
 
     //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
@@ -216,9 +216,9 @@ dependencies {
     implementation "com.googlecode.aviator:aviator:5.4.3"
 
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
-    implementation "com.google.protobuf:protobuf-java:4.33.4"
+    implementation "com.google.protobuf:protobuf-java:4.33.5"
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java-util
-    implementation "com.google.protobuf:protobuf-java-util:4.33.4"
+    implementation "com.google.protobuf:protobuf-java-util:4.33.5"
     //https://search.maven.org/artifact/com.googlecode.protobuf-java-format/protobuf-java-format
     //implementation "com.googlecode.protobuf-java-format:protobuf-java-format:1.4"
 
