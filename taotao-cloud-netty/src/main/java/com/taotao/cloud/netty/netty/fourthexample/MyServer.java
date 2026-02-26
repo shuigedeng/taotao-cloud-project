@@ -18,8 +18,8 @@ package com.taotao.cloud.netty.netty.fourthexample;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.MultiThreadIoEventLoopGroup;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
@@ -34,8 +34,15 @@ import io.netty.handler.logging.LoggingHandler;
 public class MyServer {
 
     public static void main( String[] args ) throws Exception {
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
+		// NIO事件循环组
+		// BossGroup：专门处理连接请求，线程数通常为1（足够应对万级连接）
+		MultiThreadIoEventLoopGroup bossGroup =
+			new MultiThreadIoEventLoopGroup(1, NioIoHandler.newFactory());
+
+		// WorkerGroup：处理IO读写，线程数 = CPU核心数 * 2
+		int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+		MultiThreadIoEventLoopGroup workerGroup =
+			new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
 
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();

@@ -18,8 +18,8 @@ package com.taotao.cloud.netty.netty.thirdexample;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.MultiThreadIoEventLoopGroup;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 import java.io.BufferedReader;
@@ -35,12 +35,14 @@ import java.io.InputStreamReader;
 public class MyChatClient {
 
     public static void main( String[] args ) throws Exception {
-        EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
+		int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+		MultiThreadIoEventLoopGroup clientGroup =
+			new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
 
         try {
             Bootstrap bootstrap = new Bootstrap();
             bootstrap
-                    .group(eventLoopGroup)
+                    .group(clientGroup)
                     .channel(NioSocketChannel.class)
                     .handler(new MyChatClientInitializer());
 
@@ -53,7 +55,7 @@ public class MyChatClient {
             }
 
         } finally {
-            eventLoopGroup.shutdownGracefully();
+			clientGroup.shutdownGracefully();
         }
     }
 }

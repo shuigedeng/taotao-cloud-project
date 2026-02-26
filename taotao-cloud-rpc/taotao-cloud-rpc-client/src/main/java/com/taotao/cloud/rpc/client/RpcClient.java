@@ -21,6 +21,7 @@ import com.taotao.cloud.rpc.common.common.support.invoke.impl.DefaultInvokeManag
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
@@ -53,7 +54,9 @@ public class RpcClient extends Thread {
         LOG.info("RPC 服务开始启动客户端");
 
         EventLoopGroup workerGroup = new NioEventLoopGroup();
-
+		int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+		MultiThreadIoEventLoopGroup clientGroup =
+			new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
         try {
             Bootstrap bootstrap = new Bootstrap();
             ChannelFuture channelFuture =

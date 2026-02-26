@@ -25,7 +25,8 @@ import com.taotao.cloud.netty.itcast.server.service.HelloService;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.MultiThreadIoEventLoopGroup;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
@@ -117,7 +118,10 @@ public class RpcClientManager {
 
     // 初始化 channel 方法
     private static void initChannel() {
-        NioEventLoopGroup group = new NioEventLoopGroup();
+		int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+		MultiThreadIoEventLoopGroup group =
+			new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
+
         LoggingHandler LOGGING_HANDLER = new LoggingHandler(LogLevel.DEBUG);
         MessageCodecSharable MESSAGE_CODEC = new MessageCodecSharable();
         RpcResponseMessageHandler RPC_HANDLER = new RpcResponseMessageHandler();

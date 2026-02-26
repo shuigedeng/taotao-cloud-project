@@ -29,12 +29,8 @@ import com.taotao.cloud.rpc.core.provider.ServiceProvider;
 import com.taotao.cloud.rpc.core.registry.ServiceRegistry;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.ChannelPipeline;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.*;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
@@ -66,9 +62,15 @@ public class NettyServer extends AbstractRpcServer {
      * Netty 服务端 连接监听 和 业务 事件循环组 考虑到 一个进程中 只创建一个 NettyServer 为了共享 EventLoopGroup 和 优雅 善后处理 使用 static
      * final 修饰 final 只是 引用 对象的地址 不可变，内容 成员还是可以变的
      */
-    private static final EventLoopGroup bossGroup = new NioEventLoopGroup();
+	// NIO事件循环组
+	// BossGroup：专门处理连接请求，线程数通常为1（足够应对万级连接）
+	static MultiThreadIoEventLoopGroup bossGroup =
+		new MultiThreadIoEventLoopGroup(1, NioIoHandler.newFactory());
 
-    private static final EventLoopGroup workerGroup = new NioEventLoopGroup();
+	// WorkerGroup：处理IO读写，线程数 = CPU核心数 * 2
+	static int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+	static MultiThreadIoEventLoopGroup workerGroup =
+		new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
 
     private static String redisServerWay = "";
 

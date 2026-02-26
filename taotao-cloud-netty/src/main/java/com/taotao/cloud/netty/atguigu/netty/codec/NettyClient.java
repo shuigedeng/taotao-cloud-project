@@ -17,11 +17,8 @@
 package com.taotao.cloud.netty.atguigu.netty.codec;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelPipeline;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.*;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.protobuf.ProtobufEncoder;
@@ -38,8 +35,9 @@ public class NettyClient {
     public static void main( String[] args ) throws Exception {
 
         // 客户端需要一个事件循环组
-        EventLoopGroup group = new NioEventLoopGroup();
-
+		int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+		MultiThreadIoEventLoopGroup group =
+			new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
         try {
             // 创建客户端启动对象
             // 注意客户端使用的不是 ServerBootstrap 而是 Bootstrap

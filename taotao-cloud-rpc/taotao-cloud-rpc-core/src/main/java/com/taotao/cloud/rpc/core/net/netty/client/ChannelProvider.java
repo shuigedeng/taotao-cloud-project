@@ -22,14 +22,8 @@ import com.taotao.cloud.rpc.common.serializer.CommonSerializer;
 import com.taotao.cloud.rpc.core.codec.CommonDecoder;
 import com.taotao.cloud.rpc.core.codec.CommonEncoder;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.ChannelPipeline;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.*;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.timeout.IdleStateHandler;
@@ -138,7 +132,9 @@ public class ChannelProvider {
     }
 
     private static Bootstrap initBootstrap() {
-        group = new NioEventLoopGroup();
+		int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+		 group =
+			new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
         Bootstrap bootstrap = new Bootstrap();
         bootstrap
                 .group(group)

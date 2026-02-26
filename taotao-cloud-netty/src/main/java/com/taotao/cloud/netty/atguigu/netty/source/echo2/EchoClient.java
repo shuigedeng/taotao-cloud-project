@@ -18,7 +18,7 @@ package com.taotao.cloud.netty.atguigu.netty.source.echo2;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.ssl.SslContext;
@@ -51,7 +51,9 @@ public final class EchoClient {
         }
 
         // Configure the client.
-        EventLoopGroup group = new NioEventLoopGroup();
+		int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+		MultiThreadIoEventLoopGroup group =
+			new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
         try {
             Bootstrap b = new Bootstrap();
             b.group(group)

@@ -19,8 +19,8 @@ package com.taotao.cloud.tx.rm.netty;
 import com.alibaba.fastjson2.JSONObject;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.MultiThreadIoEventLoopGroup;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 import java.util.concurrent.ExecutorService;
@@ -52,9 +52,13 @@ public class NettyClient implements InitializingBean {
     public void start( String host, int port ) {
         client = new NettyClientHandler();
         Bootstrap bootstrap = new Bootstrap();
-        EventLoopGroup group = new NioEventLoopGroup();
+
+		// WorkerGroup：处理IO读写，线程数 = CPU核心数 * 2
+		int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+		MultiThreadIoEventLoopGroup workerGroup =
+			new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
         bootstrap
-                .group(group)
+                .group(workerGroup)
                 .channel(NioSocketChannel.class)
                 .option(ChannelOption.TCP_NODELAY, true)
                 .handler(new ClientInitializer(client));

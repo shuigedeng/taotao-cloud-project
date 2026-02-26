@@ -21,7 +21,7 @@ import com.taotao.cloud.netty.itcast.protocol.MessageCodecSharable;
 import com.taotao.cloud.netty.itcast.protocol.ProcotolFrameDecoder;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
@@ -50,7 +50,10 @@ import lombok.extern.slf4j.Slf4j;
 public class ChatClient {
 
     public static void main( String[] args ) {
-        NioEventLoopGroup group = new NioEventLoopGroup();
+		int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+		MultiThreadIoEventLoopGroup group =
+			new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
+
         LoggingHandler LOGGING_HANDLER = new LoggingHandler(LogLevel.DEBUG);
         MessageCodecSharable MESSAGE_CODEC = new MessageCodecSharable();
         CountDownLatch WAIT_FOR_LOGIN = new CountDownLatch(1);

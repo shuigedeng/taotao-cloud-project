@@ -20,7 +20,7 @@ import com.taotao.cloud.rpc.common.common.exception.RpcRuntimeException;
 import com.taotao.cloud.rpc.common.common.remote.netty.NettyServer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
@@ -50,13 +50,13 @@ public class DefaultNettyServer extends AbstractNettyServer {
      * boss 线程池
      * @since 2024.06
      */
-    private EventLoopGroup bossGroup;
+    private MultiThreadIoEventLoopGroup bossGroup;
 
     /**
      * worker 线程池
      * @since 2024.06
      */
-    private EventLoopGroup workerGroup;
+    private MultiThreadIoEventLoopGroup workerGroup;
 
     private DefaultNettyServer(int port, ChannelHandler channelHandler) {
         super(port, channelHandler);
@@ -71,8 +71,15 @@ public class DefaultNettyServer extends AbstractNettyServer {
         //        LOG.info("[Netty Server] start with port: {} and channelHandler: {} ",
         //                port, channelHandler.getClass().getSimpleName());
 
-        bossGroup = new NioEventLoopGroup();
-        workerGroup = new NioEventLoopGroup();
+		// NIO事件循环组
+		// BossGroup：专门处理连接请求，线程数通常为1（足够应对万级连接）
+		 bossGroup =
+			new MultiThreadIoEventLoopGroup(1, NioIoHandler.newFactory());
+
+		// WorkerGroup：处理IO读写，线程数 = CPU核心数 * 2
+		int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+		 workerGroup =
+			new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
 
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();

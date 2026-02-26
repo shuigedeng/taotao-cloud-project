@@ -18,8 +18,8 @@ package com.taotao.cloud.netty.atguigu.netty.tcp;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.MultiThreadIoEventLoopGroup;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 /**
@@ -33,8 +33,9 @@ public class MyClient {
 
     public static void main( String[] args ) throws Exception {
 
-        EventLoopGroup group = new NioEventLoopGroup();
-
+		int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+		MultiThreadIoEventLoopGroup group =
+			new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
         try {
 
             Bootstrap bootstrap = new Bootstrap();

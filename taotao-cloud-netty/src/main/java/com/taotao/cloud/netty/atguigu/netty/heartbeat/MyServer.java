@@ -17,11 +17,8 @@
 package com.taotao.cloud.netty.atguigu.netty.heartbeat;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelPipeline;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.*;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
@@ -42,8 +39,17 @@ public class MyServer {
     public static void main( String[] args ) throws Exception {
 
         // 创建两个线程组
-        EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-        EventLoopGroup workerGroup = new NioEventLoopGroup(); // 8个NioEventLoop
+//        EventLoopGroup bossGroup = new NioEventLoopGroup(1);
+//        EventLoopGroup workerGroup = new NioEventLoopGroup(); // 8个NioEventLoop
+		// NIO事件循环组
+		// BossGroup：专门处理连接请求，线程数通常为1（足够应对万级连接）
+		MultiThreadIoEventLoopGroup bossGroup =
+			new MultiThreadIoEventLoopGroup(1, NioIoHandler.newFactory());
+
+		// WorkerGroup：处理IO读写，线程数 = CPU核心数 * 2
+		int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+		MultiThreadIoEventLoopGroup workerGroup =
+			new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
         try {
 
             ServerBootstrap serverBootstrap = new ServerBootstrap();

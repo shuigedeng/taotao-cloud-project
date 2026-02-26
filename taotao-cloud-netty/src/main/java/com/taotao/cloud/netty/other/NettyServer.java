@@ -19,8 +19,8 @@ package com.taotao.cloud.netty.other;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.MultiThreadIoEventLoopGroup;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 /**
@@ -37,13 +37,23 @@ public class NettyServer {
     }
 
     private void bing( int port ) {
-        // 配置服务端NIO线程组
-        EventLoopGroup parentGroup =
-                new NioEventLoopGroup(); // NioEventLoopGroup extends MultithreadEventLoopGroup
-        // Math.max(1,
-        // SystemPropertyUtil.getInt("io.netty.eventLoopThreads",
-        // NettyRuntime.availableProcessors() * 2));
-        EventLoopGroup childGroup = new NioEventLoopGroup();
+//        // 配置服务端NIO线程组
+//        EventLoopGroup parentGroup =
+//                new NioEventLoopGroup(); // NioEventLoopGroup extends MultithreadEventLoopGroup
+//        // Math.max(1,
+//        // SystemPropertyUtil.getInt("io.netty.eventLoopThreads",
+//        // NettyRuntime.availableProcessors() * 2));
+//        EventLoopGroup childGroup = new NioEventLoopGroup();
+
+		// NIO事件循环组
+		// BossGroup：专门处理连接请求，线程数通常为1（足够应对万级连接）
+		MultiThreadIoEventLoopGroup parentGroup =
+			new MultiThreadIoEventLoopGroup(1, NioIoHandler.newFactory());
+
+		// WorkerGroup：处理IO读写，线程数 = CPU核心数 * 2
+		int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+		MultiThreadIoEventLoopGroup childGroup =
+			new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
         try {
             ServerBootstrap b = new ServerBootstrap();
             b.group(parentGroup, childGroup)

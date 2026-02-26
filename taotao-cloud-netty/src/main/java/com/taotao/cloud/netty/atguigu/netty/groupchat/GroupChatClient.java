@@ -18,7 +18,7 @@ package com.taotao.cloud.netty.atguigu.netty.groupchat;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
@@ -45,8 +45,9 @@ public class GroupChatClient {
     }
 
     public void run() throws Exception {
-        EventLoopGroup group = new NioEventLoopGroup();
-
+		int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+		MultiThreadIoEventLoopGroup group =
+			new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
         try {
 
             Bootstrap bootstrap =

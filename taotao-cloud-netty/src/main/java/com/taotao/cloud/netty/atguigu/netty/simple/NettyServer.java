@@ -18,7 +18,7 @@ package com.taotao.cloud.netty.atguigu.netty.simple;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
@@ -40,8 +40,17 @@ public class NettyServer {
         // 3. 两个都是无限循环
         // 4. bossGroup 和 workerGroup 含有的子线程(NioEventLoop)的个数
         //   默认实际 cpu核数 * 2
-        EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-        EventLoopGroup workerGroup = new NioEventLoopGroup(); // 8
+//        EventLoopGroup bossGroup = new NioEventLoopGroup(1);
+//        EventLoopGroup workerGroup = new NioEventLoopGroup(); // 8
+		// NIO事件循环组
+		// BossGroup：专门处理连接请求，线程数通常为1（足够应对万级连接）
+		MultiThreadIoEventLoopGroup bossGroup =
+			new MultiThreadIoEventLoopGroup(1, NioIoHandler.newFactory());
+
+		// WorkerGroup：处理IO读写，线程数 = CPU核心数 * 2
+		int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+		MultiThreadIoEventLoopGroup workerGroup =
+			new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
 
         try {
             // 创建服务器端的启动对象，配置参数

@@ -2,11 +2,8 @@ package com.taotao.cloud.iot.biz.communication.tcp.config;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.*;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
@@ -42,8 +39,12 @@ public class DeviceEmulatorConfig {
 
     @Bean
     public Bootstrap nettyClient() {
+		int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+		MultiThreadIoEventLoopGroup clientGroup =
+			new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
+
         Bootstrap nettyClient = new Bootstrap();
-        nettyClient.group(new NioEventLoopGroup())
+        nettyClient.group(clientGroup)
                 .channel(NioSocketChannel.class)
                 .option(ChannelOption.SO_KEEPALIVE, true)  // 设置为长连接
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 60*1000);  // 设置连接超时时间

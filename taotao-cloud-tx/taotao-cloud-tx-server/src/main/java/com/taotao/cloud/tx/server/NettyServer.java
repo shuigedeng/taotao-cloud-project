@@ -17,7 +17,8 @@
 package com.taotao.cloud.tx.server;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.MultiThreadIoEventLoopGroup;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 // Netty服务端 - 事务管理者
@@ -31,9 +32,16 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 public class NettyServer {
 
     // 启动类
-    private ServerBootstrap bootstrap = new ServerBootstrap();
+    private final ServerBootstrap bootstrap = new ServerBootstrap();
     // NIO事件循环组
-    private NioEventLoopGroup nioEventLoopGroup = new NioEventLoopGroup();
+	// BossGroup：专门处理连接请求，线程数通常为1（足够应对万级连接）
+	MultiThreadIoEventLoopGroup bossGroup =
+		new MultiThreadIoEventLoopGroup(1, NioIoHandler.newFactory());
+
+	// WorkerGroup：处理IO读写，线程数 = CPU核心数 * 2
+	int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+	MultiThreadIoEventLoopGroup workerGroup =
+		new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
 
     // 启动方法
     public void start( String host, int port ) {
@@ -50,7 +58,7 @@ public class NettyServer {
     // 初始化方法
     private void init() {
         bootstrap
-                .group(nioEventLoopGroup)
+                .group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
                 // 添加一个自定义的处理器
                 .childHandler(new ServerInitializer());
@@ -58,7 +66,8 @@ public class NettyServer {
 
     // 关闭方法
     public void close() {
-        nioEventLoopGroup.shutdownGracefully();
+		bossGroup.shutdownGracefully();
+		workerGroup.shutdownGracefully();
         bootstrap.clone();
     }
 }

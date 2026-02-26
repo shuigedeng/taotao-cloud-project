@@ -20,11 +20,8 @@ import com.taotao.cloud.netty.itcast.protocol.MessageCodecSharable;
 import com.taotao.cloud.netty.itcast.protocol.ProcotolFrameDecoder;
 import com.taotao.cloud.netty.itcast.server.handler.*;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelDuplexHandler;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.*;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
@@ -45,8 +42,15 @@ import lombok.extern.slf4j.Slf4j;
 public class ChatServer {
 
     public static void main( String[] args ) {
-        NioEventLoopGroup boss = new NioEventLoopGroup();
-        NioEventLoopGroup worker = new NioEventLoopGroup();
+		// NIO事件循环组
+		// BossGroup：专门处理连接请求，线程数通常为1（足够应对万级连接）
+		MultiThreadIoEventLoopGroup bossGroup =
+			new MultiThreadIoEventLoopGroup(1, NioIoHandler.newFactory());
+
+		// WorkerGroup：处理IO读写，线程数 = CPU核心数 * 2
+		int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+		MultiThreadIoEventLoopGroup workerGroup =
+			new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
         LoggingHandler LOGGING_HANDLER = new LoggingHandler(LogLevel.DEBUG);
         MessageCodecSharable MESSAGE_CODEC = new MessageCodecSharable();
         LoginRequestMessageHandler LOGIN_HANDLER = new LoginRequestMessageHandler();
@@ -62,7 +66,7 @@ public class ChatServer {
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.channel(NioServerSocketChannel.class);
-            serverBootstrap.group(boss, worker);
+            serverBootstrap.group(bossGroup, workerGroup);
             serverBootstrap.childHandler(
                     new ChannelInitializer<SocketChannel>() {
                         @Override
@@ -105,8 +109,8 @@ public class ChatServer {
         } catch (InterruptedException e) {
             log.error("server error", e);
         } finally {
-            boss.shutdownGracefully();
-            worker.shutdownGracefully();
+			bossGroup.shutdownGracefully();
+			workerGroup.shutdownGracefully();
         }
     }
 }

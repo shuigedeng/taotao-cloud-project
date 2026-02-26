@@ -21,13 +21,8 @@ import com.taotao.cloud.rpc.common.common.RpcEncoder;
 import com.taotao.cloud.rpc.common.common.RpcReponse;
 import com.taotao.cloud.rpc.common.common.RpcRequest;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.*;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
@@ -58,12 +53,14 @@ public class RpcClient extends SimpleChannelInboundHandler<RpcReponse> {
      * @since 2024.06
      */
     public RpcReponse send(RpcRequest request) throws Exception {
-        EventLoopGroup group = new NioEventLoopGroup();
+		int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+		MultiThreadIoEventLoopGroup clientGroup =
+			new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
 
         try {
             Bootstrap bootstrap = new Bootstrap();
             bootstrap
-                    .group(group)
+                    .group(clientGroup)
                     .channel(NioSocketChannel.class)
                     .handler(
                             new ChannelInitializer<SocketChannel>() {
@@ -92,7 +89,7 @@ public class RpcClient extends SimpleChannelInboundHandler<RpcReponse> {
 
             return response;
         } finally {
-            group.shutdownGracefully();
+			clientGroup.shutdownGracefully();
         }
     }
 

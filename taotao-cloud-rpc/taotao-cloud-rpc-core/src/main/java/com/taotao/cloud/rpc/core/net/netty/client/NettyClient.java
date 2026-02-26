@@ -25,11 +25,8 @@ import com.taotao.cloud.rpc.common.serializer.CommonSerializer;
 import com.taotao.cloud.rpc.core.discovery.ServiceDiscovery;
 import com.taotao.cloud.rpc.core.net.RpcClient;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.*;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import java.net.InetSocketAddress;
 import java.util.ServiceLoader;
@@ -94,7 +91,9 @@ public class NettyClient implements RpcClient {
      * 让 客户端 保持 连接，启动器（Bootstrap） 不中断，实际上的 处理操作 是在 ChannelProvider 中的 启动器（Bootstrap）
      */
     static {
-        group = new NioEventLoopGroup();
+		int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+		 group =
+			new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
         bootstrap = new Bootstrap();
         bootstrap.group(group).channel(NioSocketChannel.class);
     }

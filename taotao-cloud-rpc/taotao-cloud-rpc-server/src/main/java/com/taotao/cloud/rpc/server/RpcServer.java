@@ -21,7 +21,7 @@ import com.taotao.cloud.rpc.common.common.support.status.service.impl.DefaultSta
 import com.taotao.cloud.rpc.server.handler.RpcServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,9 +50,15 @@ public class RpcServer extends Thread {
     public void run() {
         // 启动服务端
         LOG.info("RPC 服务开始启动服务端");
+		// NIO事件循环组
+		// BossGroup：专门处理连接请求，线程数通常为1（足够应对万级连接）
+		MultiThreadIoEventLoopGroup bossGroup =
+			new MultiThreadIoEventLoopGroup(1, NioIoHandler.newFactory());
 
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
+		// WorkerGroup：处理IO读写，线程数 = CPU核心数 * 2
+		int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+		MultiThreadIoEventLoopGroup workerGroup =
+			new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
 
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();

@@ -22,13 +22,8 @@ import com.taotao.cloud.mq.common.rpc.RpcAddress;
 import com.taotao.cloud.mq.common.rpc.RpcChannelFuture;
 import com.xkzhangsan.time.utils.CollectionUtil;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.*;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
@@ -64,7 +59,11 @@ public class ChannelFutureUtils {
                 final String address = rpcAddress.getAddress();
                 final int port = rpcAddress.getPort();
 
-                EventLoopGroup workerGroup = new NioEventLoopGroup();
+				// WorkerGroup：处理IO读写，线程数 = CPU核心数 * 2
+				int workerThreads = Runtime.getRuntime().availableProcessors() * 2;
+				MultiThreadIoEventLoopGroup workerGroup =
+					new MultiThreadIoEventLoopGroup(workerThreads, NioIoHandler.newFactory());
+
                 Bootstrap bootstrap = new Bootstrap();
                 ChannelFuture channelFuture =
                         bootstrap
