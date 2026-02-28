@@ -22,7 +22,7 @@ mybatisGenerator {
         mybatisGenerator 'org.mybatis.dynamic-sql:mybatis-dynamic-sql:1.5.2'
         mybatisGenerator 'io.github.shuigedeng:taotao-boot-starter-data-mybatis:2026.03'
         mybatisGenerator 'com.mysql:mysql-connector-j:9.6.0'
-        //mybatisGenerator 'org.postgresql:postgresql:42.7.9'
+        //mybatisGenerator 'org.postgresql:postgresql:42.7.10'
         //mybatisGenerator  // Here add your mariadb dependencies or else
     }
 }
