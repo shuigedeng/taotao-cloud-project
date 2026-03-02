@@ -87,7 +87,7 @@ buildscript {
         classpath "io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.47"
 
         //代码混淆工具
-        //https://github.com/Guardsquare/prog   uard
+        //https://github.com/Guardsquare/proguard
         //https://www.guardsquare.com/manual/quickstart
         classpath "com.guardsquare:proguard-gradle:7.8.2"
     }
@@ -129,7 +129,7 @@ plugins {
     // *******************************************第三方插件************************************************************
     //google出品的一个插件，可以直接将SpringBoot构建推送到Docker仓库
     //https://plugins.gradle.org/plugin/com.google.cloud.tools.jib
-    id "com.google.cloud.tools.jib" version "3.5.2"
+    id "com.google.cloud.tools.jib" version "3.5.3"
 
     //用于创建和管理外部进程的 Gradle 插件。
     //https://plugins.gradle.org/plugin/com.github.johnrengelman.processes
@@ -178,7 +178,7 @@ plugins {
     id "com.diffplug.spotless" version "8.2.1"
 
     //https://plugins.gradle.org/plugin/com.gorylenko.gradle-git-properties
-    id "com.gorylenko.gradle-git-properties" version "2.5.4"
+    id "com.gorylenko.gradle-git-properties" version "2.5.7"
 
     //https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html
     id 'org.graalvm.buildtools.native' version '0.11.4'
