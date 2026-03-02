@@ -24,7 +24,7 @@ import org.apache.seatunnel.core.starter.seatunnel.args.ServerCommandArgs;
  * SeaTunnelEngineServerExample
  *
  * @author shuigedeng
- * @version 2026.03
+ * @version 2026.04
  * @since 2025-12-19 09:30:45
  */
 public class SeaTunnelEngineServerExample {

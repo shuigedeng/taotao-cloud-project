@@ -26,7 +26,7 @@ import org.apache.hadoop.mapreduce.Mapper;
  * FlowMapper
  *
  * @author shuigedeng
- * @version 2026.03
+ * @version 2026.04
  * @since 2025-12-19 09:30:45
  */
 public class FlowMapper extends Mapper<LongWritable, Text, Text, FlowBean> {

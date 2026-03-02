@@ -25,7 +25,7 @@ import java.lang.reflect.Type;
  * ProtostuffCode
  *
  * @author shuigedeng
- * @version 2026.03
+ * @version 2026.04
  * @since 2025-12-19 09:30:45
  */
 public class ProtostuffCode implements Code {

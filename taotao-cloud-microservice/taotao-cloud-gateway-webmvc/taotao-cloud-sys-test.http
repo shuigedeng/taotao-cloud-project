@@ -2,7 +2,7 @@
 GET http://192.168.218.1:33331/buyer/sys/dict/query/type?type=333
 
 ### 网关接口
-GET http://192.168.218.1:33305/api/v2026.03/sys/buyer/sys/dict/query/type?type=333
+GET http://192.168.218.1:33305/api/v2026.04/sys/buyer/sys/dict/query/type?type=333
 
 
 
@@ -10,4 +10,4 @@ GET http://192.168.218.1:33305/api/v2026.03/sys/buyer/sys/dict/query/type?type=3
 GET http://192.168.218.1:33331/sys/mall/dict/testMybatisQueryStructure
 
 ### 网关接口
-GET http://192.168.218.1:33305/api/v2026.03/sys/mall/dict/testMybatisQueryStructure
+GET http://192.168.218.1:33305/api/v2026.04/sys/mall/dict/testMybatisQueryStructure

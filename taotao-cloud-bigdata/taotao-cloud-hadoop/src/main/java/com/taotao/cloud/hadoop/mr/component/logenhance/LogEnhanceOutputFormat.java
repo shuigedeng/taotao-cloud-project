@@ -53,7 +53,7 @@ public class LogEnhanceOutputFormat extends FileOutputFormat<Text, NullWritable>
      * EnhanceRecordWriter
      *
      * @author shuigedeng
-     * @version 2026.03
+     * @version 2026.04
      * @since 2025-12-19 09:30:45
      */
     static class EnhanceRecordWriter extends RecordWriter<Text, NullWritable> {

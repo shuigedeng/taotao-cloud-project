@@ -28,7 +28,7 @@ import com.taotao.cloud.realtime.warehouse.datageneration.userlog_code.model.*;
  * UserLogGenerator
  *
  * @author shuigedeng
- * @version 2026.03
+ * @version 2026.04
  * @since 2025-12-19 09:30:45
  */
 public class UserLogGenerator {

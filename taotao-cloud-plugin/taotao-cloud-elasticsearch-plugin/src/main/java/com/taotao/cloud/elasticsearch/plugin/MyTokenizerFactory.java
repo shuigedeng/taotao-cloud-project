@@ -25,7 +25,7 @@ import org.elasticsearch.index.analysis.AbstractTokenizerFactory;
  * MyTokenizerFactory
  *
  * @author shuigedeng
- * @version 2026.03
+ * @version 2026.04
  * @since 2025-12-19 09:30:45
  */
 public class MyTokenizerFactory extends AbstractTokenizerFactory {
