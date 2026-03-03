@@ -22,7 +22,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.boot.common.model.request.PageQuery;
+import com.taotao.boot.common.model.ddd.query.PageQuery;
 import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.boot.common.utils.common.OrikaUtils;
 import com.taotao.boot.security.spring.support.utils.SecurityUtils;

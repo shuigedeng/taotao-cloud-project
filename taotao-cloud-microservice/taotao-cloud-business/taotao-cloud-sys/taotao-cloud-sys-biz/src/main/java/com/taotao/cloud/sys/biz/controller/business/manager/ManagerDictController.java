@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.taotao.boot.common.model.request.BaseQuery;
+import com.taotao.boot.common.model.ddd.query.BaseQuery;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.sys.biz.model.dto.dict.DictSaveDTO;
 import com.taotao.cloud.sys.biz.model.dto.dict.DictUpdateDTO;

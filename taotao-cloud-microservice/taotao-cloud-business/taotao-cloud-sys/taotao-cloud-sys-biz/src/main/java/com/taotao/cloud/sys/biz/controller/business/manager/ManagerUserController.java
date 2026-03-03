@@ -19,7 +19,7 @@ package com.taotao.cloud.sys.biz.controller.business.manager;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.boot.common.model.request.BaseQuery;
+import com.taotao.boot.common.model.ddd.query.BaseQuery;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.boot.common.utils.log.LogUtils;

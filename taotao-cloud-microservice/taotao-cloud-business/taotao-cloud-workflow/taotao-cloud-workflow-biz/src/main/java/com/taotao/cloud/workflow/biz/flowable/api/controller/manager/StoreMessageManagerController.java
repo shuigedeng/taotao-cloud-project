@@ -17,7 +17,7 @@
 package com.taotao.cloud.workflow.biz.flowable.api.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.boot.common.model.request.PageQuery;
+import com.taotao.boot.common.model.ddd.query.PageQuery;
 import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.message.api.inner.IFeignStoreMessageService;

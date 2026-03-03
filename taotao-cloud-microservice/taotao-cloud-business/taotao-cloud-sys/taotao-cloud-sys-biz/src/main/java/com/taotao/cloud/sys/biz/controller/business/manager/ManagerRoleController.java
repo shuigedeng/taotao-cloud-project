@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
-import com.taotao.boot.common.model.request.BaseQuery;
+import com.taotao.boot.common.model.ddd.query.BaseQuery;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.sys.biz.model.dto.role.RoleSaveDTO;
 import com.taotao.cloud.sys.biz.model.dto.role.RoleUpdateDTO;

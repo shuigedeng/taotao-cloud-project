@@ -17,7 +17,7 @@
 package com.taotao.cloud.message.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
-import com.taotao.boot.common.model.request.PageQuery;
+import com.taotao.boot.common.model.ddd.query.PageQuery;
 import com.taotao.boot.common.model.result.PageResult;
  import com.taotao.cloud.message.api.inner.response.StoreMessageApiResponse;
  import org.springframework.web.service.annotation.HttpExchange;

@@ -3,7 +3,7 @@ package com.taotao.cloud.sys.biz.service.business.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
-import com.taotao.boot.common.model.request.PageQuery;
+import com.taotao.boot.common.model.ddd.query.PageQuery;
 import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.sys.api.constant.I18nRedisKeyConstants;
 import com.taotao.cloud.sys.biz.model.dto.I18nDataDTO;

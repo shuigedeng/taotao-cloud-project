@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.api.feign.fallback;
 
-import com.taotao.boot.common.model.request.PageQuery;
+import com.taotao.boot.common.model.ddd.query.PageQuery;
 import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.cloud.order.api.feign.StoreFlowApi;
 import com.taotao.cloud.order.api.feign.response.TradeApiResponse;

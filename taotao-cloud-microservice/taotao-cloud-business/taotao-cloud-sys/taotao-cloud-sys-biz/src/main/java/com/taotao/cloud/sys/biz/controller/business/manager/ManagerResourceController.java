@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
-import com.taotao.boot.common.model.request.BaseQuery;
+import com.taotao.boot.common.model.ddd.query.BaseQuery;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.security.spring.annotation.NotAuth;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
-import com.taotao.boot.common.model.request.BaseQuery;
+import com.taotao.boot.common.model.ddd.query.BaseQuery;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.tree.ForestNodeMerger;
 import com.taotao.boot.security.spring.annotation.NotAuth;
