@@ -34,7 +34,7 @@ public class ClientDTO implements Serializable {
 	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
 
-	@Schema(description = "应用标识", requiredMode = Schema.RequiredMode.REQUIRED)
+	@Schema(description = "应用标识")
 	@NotBlank(message = "应用标识不能为空")
 	private String clientId;
 

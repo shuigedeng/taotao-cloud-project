@@ -53,11 +53,11 @@ public class BasePromotionsVO implements Serializable {
 	@Schema(description = "商家id，如果是平台，这个值为 0")
 	private String storeId;
 	@NotEmpty(message = "活动名称不能为空")
-	@Schema(description = "活动名称", requiredMode = Schema.RequiredMode.REQUIRED)
+	@Schema(description = "活动名称")
 	private String promotionName;
-	@Schema(description = "活动开始时间", requiredMode = Schema.RequiredMode.REQUIRED)
+	@Schema(description = "活动开始时间")
 	private LocalDateTime startTime;
-	@Schema(description = "活动结束时间", requiredMode = Schema.RequiredMode.REQUIRED)
+	@Schema(description = "活动结束时间")
 	private LocalDateTime endTime;
 
 	/**

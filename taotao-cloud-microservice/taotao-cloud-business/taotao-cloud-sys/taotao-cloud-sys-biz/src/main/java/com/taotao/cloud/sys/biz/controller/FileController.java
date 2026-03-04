@@ -271,10 +271,10 @@ public class FileController {
     @Schema(description = "Page参数")
     public static class Page {
 
-        @Schema(name = "pageSize", type = "integer", description = "当前页", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(name = "pageSize", type = "integer", description = "当前页")
         private Integer pageSize;
 
-        @Schema(name = "size", type = "integer", description = "每页数量", requiredMode = Schema.RequiredMode.REQUIRED)
+        @Schema(name = "size", type = "integer", description = "每页数量")
         private Integer size;
     }
 

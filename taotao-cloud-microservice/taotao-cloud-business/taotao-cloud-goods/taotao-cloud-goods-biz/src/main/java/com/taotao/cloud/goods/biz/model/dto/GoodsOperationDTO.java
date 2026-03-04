@@ -52,14 +52,14 @@ public class GoodsOperationDTO implements Serializable {
     @NotNull(message = "商品价格不能为空")
     @Min(value = 0, message = "商品价格不能为负数")
     @Max(value = 99999999, message = "商品价格不能超过99999999")
-    @Schema(description = "商品价格", requiredMode =  Schema.RequiredMode.REQUIRED)
+    @Schema(description = "商品价格")
     private BigDecimal price;
 
     @Schema(description = "分类path")
     private String categoryPath;
 
     @Size(max = 200, message = "选择了太多店铺分类")
-    @Schema(description = "店铺分类id", requiredMode =  Schema.RequiredMode.REQUIRED)
+    @Schema(description = "店铺分类id")
     private String storeCategoryPath;
 
     @Min(value = 0, message = "品牌值不正确")
@@ -68,7 +68,7 @@ public class GoodsOperationDTO implements Serializable {
 
     @NotEmpty(message = "商品名称不能为空")
     @Length(max = 50, message = "商品名称不能超过50个字符")
-    @Schema(description = "商品名称", requiredMode =  Schema.RequiredMode.REQUIRED)
+    @Schema(description = "商品名称")
     private String goodsName;
 
     @Schema(description = "详情")
@@ -96,7 +96,7 @@ public class GoodsOperationDTO implements Serializable {
 
     @NotNull(message = "运费模板不能为空，没有运费模板时，传值0")
     @Min(value = 0, message = "运费模板值不正确")
-    @Schema(description = "运费模板id,不需要运费模板时值是0", requiredMode =  Schema.RequiredMode.REQUIRED)
+    @Schema(description = "运费模板id,不需要运费模板时值是0")
     private Long templateId;
 
     @Valid
@@ -106,13 +106,13 @@ public class GoodsOperationDTO implements Serializable {
     @Schema(description = "卖点")
     private String sellingPoint;
 
-    @Schema(description = "销售模式", requiredMode =  Schema.RequiredMode.REQUIRED)
+    @Schema(description = "销售模式")
     private String salesModel;
 
     @Schema(description = "是否有规格", hidden = true)
     private String haveSpec;
 
-    @Schema(description = "销售模式", requiredMode =  Schema.RequiredMode.REQUIRED)
+    @Schema(description = "销售模式")
     private String goodsUnit;
 
     @Schema(description = "商品描述")

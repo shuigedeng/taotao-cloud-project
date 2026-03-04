@@ -43,7 +43,7 @@ public class PintuanBaseVO implements Serializable {
     @Schema(description = "限购数量")
     private Integer limitNum;
 
-    @Schema(description = "虚拟成团", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "虚拟成团")
     private Boolean fictitious;
 
     @Schema(description = "拼团规则")
