@@ -432,7 +432,6 @@ taotao-cloud-project -- 父项目
 +--- Project ':taotao-boot-starter-zookeeper'
 +--- Project ':taotao-cloud-demo'
 +--- Project ':taotao-cloud-dependencies'
-+--- Project ':taotao-cloud-starter-bootstrap'
 +--- Project ':taotao-cloud-starter-alibaba'
 +--- Project ':taotao-cloud-starter-huawei'
 +--- Project ':taotao-cloud-starter-tencent'
