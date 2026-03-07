@@ -18,7 +18,7 @@
 #  main:
 #    allow-bean-definition-overriding: true
 #    web-application-type: reactive
-#    banner-mode: off
+#    banner-mode: console
 #  application:
 #    name: taotao-cloud-gateway
 #  cloud:

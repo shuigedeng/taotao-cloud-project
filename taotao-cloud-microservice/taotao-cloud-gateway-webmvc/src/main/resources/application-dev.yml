@@ -123,7 +123,7 @@ spring:
   main:
     allow-bean-definition-overriding: false
     web-application-type: servlet
-    banner-mode: off
+    banner-mode: console
   application:
     name: taotao-cloud-gateway
   #security:

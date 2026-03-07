@@ -112,7 +112,7 @@ spring:
   main:
     allow-bean-definition-overriding: false
     web-application-type: reactive
-    banner-mode: off
+    banner-mode: console
   application:
     name: taotao-cloud-gateway
   #security:

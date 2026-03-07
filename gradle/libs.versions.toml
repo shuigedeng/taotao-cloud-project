@@ -58,7 +58,7 @@
 #aliyun-oss = "3.17.2"
 #aviator = "5.4.1"
 #protobuf-java = "3.25.1"
-#grpc-java = "1.59.0"
+#grpc-java = "1.60.0"
 #protobuf-plugins = "0.9.4"
 #jexl3 = "3.3"
 #mvel2 = "2.5.0.Final"

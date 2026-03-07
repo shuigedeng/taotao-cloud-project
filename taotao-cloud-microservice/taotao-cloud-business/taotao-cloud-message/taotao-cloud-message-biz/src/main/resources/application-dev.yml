@@ -98,7 +98,7 @@ spring:
     name: taotao-cloud-news
   main:
     allow-bean-definition-overriding: false
-    banner-mode: off
+    banner-mode: console
   mvc:
     servlet:
       load-on-startup: 1

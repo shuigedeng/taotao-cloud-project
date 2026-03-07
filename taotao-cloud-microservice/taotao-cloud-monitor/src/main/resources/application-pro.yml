@@ -116,7 +116,7 @@ spring:
     timeout-per-shutdown-phase: 30s
   main:
     allow-bean-definition-overriding: false
-    banner-mode: off
+    banner-mode: console
   application:
     name: taotao-cloud-monitor
   boot:

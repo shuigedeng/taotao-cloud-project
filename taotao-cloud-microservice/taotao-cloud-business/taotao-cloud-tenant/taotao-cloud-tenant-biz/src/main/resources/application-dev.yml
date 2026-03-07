@@ -325,7 +325,7 @@ spring:
   main:
     allow-circular-references: false
     allow-bean-definition-overriding: false
-    banner-mode: off
+    banner-mode: console
     register-shutdown-hook: true
     cloud-platform: kubernetes
     web-application-type: servlet
