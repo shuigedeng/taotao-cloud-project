@@ -51,7 +51,7 @@ public class PooledDataSourceTest {
     public void notWaitTest() throws SQLException, InterruptedException {
         PooledDataSource source = new PooledDataSource();
         source.setJdbcUrl(
-                "jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true");
+                "jdbc:mysql://127.0.0.1:3306/taotao-cloud-sys?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true");
         source.setUser("root");
         source.setPassword("123456");
         source.setMinSize(1);

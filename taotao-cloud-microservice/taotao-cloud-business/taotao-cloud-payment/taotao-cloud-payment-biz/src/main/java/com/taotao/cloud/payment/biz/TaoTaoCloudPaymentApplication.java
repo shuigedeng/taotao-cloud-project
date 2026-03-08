@@ -35,7 +35,7 @@ public class TaoTaoCloudPaymentApplication {
 			.setTtcBanner()
 			.setTtcProfileIfNotExists("dev")
 			.setTtcApplicationProperty("taotao-cloud-payment")
-			//.setTtcAllowBeanDefinitionOverriding(true)
+			
 			.run(args);
 	}
 }

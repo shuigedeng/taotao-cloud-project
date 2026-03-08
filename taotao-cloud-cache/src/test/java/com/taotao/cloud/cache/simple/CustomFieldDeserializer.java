@@ -22,7 +22,7 @@ public class CustomFieldDeserializer<T> extends StdScalarDeserializer<T> {
     }
 
     @Override
-    public T deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public T deserialize(JsonParser p, DeserializationContext ctxt) {
         // 1. 使用原始反序列化器进行基础反序列化
         T value = originalDeserializer.deserialize(p, ctxt);
         
@@ -36,7 +36,7 @@ public class CustomFieldDeserializer<T> extends StdScalarDeserializer<T> {
 
     // 修复类型反序列化方法（关键修复点）
     @Override
-    public Object deserializeWithType(JsonParser p, DeserializationContext ctxt, TypeDeserializer typeDeserializer) throws IOException {
+    public Object deserializeWithType(JsonParser p, DeserializationContext ctxt, TypeDeserializer typeDeserializer) {
         return originalDeserializer.deserializeWithType(p, ctxt, typeDeserializer);
     }
 

@@ -38,7 +38,7 @@ public class TaoTaoCloudBffApplication {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-bff")
-                //.setTtcAllowBeanDefinitionOverriding(true)
+                
                 .run(args);
     }
 }

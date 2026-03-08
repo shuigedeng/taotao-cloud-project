@@ -38,7 +38,7 @@ public class TaoTaoCloudWorkflowApplication {
 			.setTtcBanner()
 			.setTtcProfileIfNotExists("dev")
 			.setTtcApplicationProperty("taotao-cloud-workflow")
-			//.setTtcAllowBeanDefinitionOverriding(true)
+			
 			.run(args);
 	}
 }

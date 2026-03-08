@@ -39,7 +39,7 @@ public class TaoTaoCloudShortLinkApplication {
 			.setTtcBanner()
 			.setTtcProfileIfNotExists("dev")
 			.setTtcApplicationProperty("taotao-cloud-short-link")
-			//.setTtcAllowBeanDefinitionOverriding(true)
+			
 			.run(args);
 	}
 }

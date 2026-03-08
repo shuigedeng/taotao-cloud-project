@@ -55,7 +55,7 @@ public class TaoTaoCloudGatewayWebmvcApplication {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-gateway")
-                //.setTtcAllowBeanDefinitionOverriding(true)
+                
                 .run(args);
 
         // 获取本地 ip 地址

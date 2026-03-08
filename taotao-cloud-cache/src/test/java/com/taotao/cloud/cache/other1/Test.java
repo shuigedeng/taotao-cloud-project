@@ -10,9 +10,9 @@ public class Test {
 	public static void main(String[] args) throws JacksonException {
 		JsonMapper mapper = JsonMapper.builder().build();
 		SimpleModule module = new SimpleModule();
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		module.setDeserializerModifier(new CustomBeanDeserializerModifier());
-		mapper.registerModule(module);
+//		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//		module.setDeserializerModifier(new CustomBeanDeserializerModifier());
+//		mapper.registerModule(module);
 
 		 String json = "{" +
 			"\"name\":\"John Doe\"," +

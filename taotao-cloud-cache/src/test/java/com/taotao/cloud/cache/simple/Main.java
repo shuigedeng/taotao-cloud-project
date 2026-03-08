@@ -1,10 +1,9 @@
 package com.taotao.cloud.cache.simple;
 
+import com.google.gson.JsonDeserializer;
 import tools.jackson.databind.BeanDescription;
 import tools.jackson.databind.DeserializationConfig;
-import tools.jackson.databind.JsonDeserializer;
 import tools.jackson.databind.json.JsonMapper;
-import tools.jackson.databind.deser.BeanDeserializerModifier;
 import tools.jackson.databind.module.SimpleModule;
 
 public class Main {
@@ -14,16 +13,16 @@ public class Main {
         // 注册自定义模块
 //        SimpleModule module = new SimpleModule();
 //        module.setDeserializerModifier(new CustomBeanDeserializerModifier());
-        jsonMapper.registerModule(new SimpleModule(){{
-			setDeserializerModifier(new BeanDeserializerModifier() {
-				@Override
-				public JsonDeserializer<?> modifyDeserializer(DeserializationConfig config, BeanDescription beanDesc,
-					JsonDeserializer<?> deserializer) {
-
-					return super.modifyDeserializer(config, beanDesc, deserializer);
-				}
-			});
-		}});
+//        jsonMapper.registerModule(new SimpleModule(){{
+//			setDeserializerModifier(new BeanDeserializerModifier() {
+//				@Override
+//				public JsonDeserializer<?> modifyDeserializer(DeserializationConfig config, BeanDescription beanDesc,
+//					JsonDeserializer<?> deserializer) {
+//
+//					return super.modifyDeserializer(config, beanDesc, deserializer);
+//				}
+//			});
+//		}});
 
         // 测试JSON
         String json = "{" +

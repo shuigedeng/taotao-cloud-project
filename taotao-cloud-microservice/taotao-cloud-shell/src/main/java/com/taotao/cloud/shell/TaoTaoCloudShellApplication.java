@@ -40,7 +40,7 @@ public class TaoTaoCloudShellApplication {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-shell")
-                //.setTtcAllowBeanDefinitionOverriding(true)
+                
                 .run(args);
     }
     // @Bean

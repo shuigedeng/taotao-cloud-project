@@ -44,7 +44,7 @@ public class TaoTaoCloudXxlJobApplication {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-xxljob")
-                //.setTtcAllowBeanDefinitionOverriding(true)
+                
                 .run(args);
     }
 }
