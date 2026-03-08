@@ -8,17 +8,47 @@ test {
         outputs.upToDateWhen { false }
     }
 
-    afterTest { desc, result ->
-        logger.quiet "Execution test ${desc.name} [${desc.className}] with result; ${result.resultType}"
-    }
+    addTestListener(new TestListener() {
+        @Override
+        void beforeSuite(TestDescriptor suite) {
+            logger.quiet "🚀 [SUITE START] 开始执行测试套件: ${suite.name}"
+        }
 
-    afterSuite { desc, result ->
-        println "Execution test ${result} ${desc}"
-        //if(!desc.parent)
-        //    println("${result.resultType}" +
-        //            "${result.testCount} tests" +
-        //            "${result.successful}")
-    }
+        @Override
+        void afterSuite(TestDescriptor desc, TestResult result) {
+            println "Execution test ${result} ${desc}"
+            // 套件结束后：打印聚合统计信息
+            def status = result.resultType
+            def total = result.testCount
+            def success = result.successfulTestCount
+            def failed = result.failedTestCount
+            def skipped = result.skippedTestCount
+
+            logger.quiet "🏁 [SUITE END]   套件: ${suite.name} | 结果: ${status} | 总数: ${total} (成功: ${success}, 失败: ${failed}, 跳过: ${skipped})"
+        }
+
+        @Override
+        void beforeTest(TestDescriptor testDescriptor) {
+            logger.quiet "▶️  [TEST START] 正在运行: ${testDescriptor.className}.${testDescriptor.name}"
+        }
+
+        @Override
+        void afterTest(TestDescriptor desc, TestResult result) {
+            //logger.quiet "Execution test ${desc.name} [${desc.className}] with result; ${result.resultType}"
+
+            // 单个测试结束后：打印具体结果状态和执行时间(如果可用)
+            def testName = "${testDescriptor.className}.${testDescriptor.name}"
+            def status = result.resultType
+
+            // 简单的耗时计算 (可选，result 对象本身可能不直接暴露毫秒数，视具体 Gradle 版本而定，这里主要打印状态)
+            logger.quiet "✅  [TEST END]   测试: ${testName} | 结果: ${status}"
+
+            // 如果测试失败，可以额外打印异常信息（可选）
+            if (status == TestResult.ResultType.FAILURE && result.exception) {
+                logger.quiet "   ❌ 失败原因: ${result.exception.message}"
+            }
+        }
+    })
 
     jvmArgs = [
             '-Xshare:off',
@@ -28,7 +58,7 @@ test {
             '--add-exports=java.base/sun.net.www.protocol.ftp=ALL-UNNAMED',
             '--add-exports=java.desktop/sun.awt=ALL-UNNAMED',
             '--add-exports=java.desktop/sun.font=ALL-UNNAMED',
-            '--add-exports=java.base/sun.security.action=ALL-UNNAMED',
+
             '--add-opens=java.base/java.lang=ALL-UNNAMED',
             '--add-opens=java.base/java.lang.reflect=ALL-UNNAMED',
             '--add-opens=java.base/java.lang.invoke=ALL-UNNAMED',
@@ -40,7 +70,6 @@ test {
             '--add-opens=java.desktop/sun.awt=ALL-UNNAMED',
             '--add-opens=java.desktop/sun.font=ALL-UNNAMED',
             '--add-opens=jdk.management/com.sun.management.internal=ALL-UNNAMED',
-            '--add-opens=java.base/sun.security.action=ALL-UNNAMED',
             '--add-opens=java.base/java.lang=ALL-UNNAMED',
             '--add-opens=java.base/java.math=ALL-UNNAMED',
             '--add-opens=java.base/java.util=ALL-UNNAMED',
@@ -55,7 +84,6 @@ test {
             '--add-opens=java.management/java.lang.management=ALL-UNNAMED',
             '--add-opens=jdk.management/com.sun.management.internal=ALL-UNNAMED',
             '--add-opens=java.management/sun.management=ALL-UNNAMED',
-            '--add-opens=java.base/sun.security.action=ALL-UNNAMED',
             '--add-opens=java.management/java.lang.management=ALL-UNNAMED',
             '--add-opens=jdk.management/com.sun.management.internal=ALL-UNNAMED',
             '--add-opens=java.management/sun.management=ALL-UNNAMED',
