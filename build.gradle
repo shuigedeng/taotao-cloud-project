@@ -227,7 +227,7 @@ allprojects {
     //dependencies {
     //    // bom 管理着一组依赖的版本，各模块按需引入其中的依赖即可，由bom统一约束着版本，
     //    // spring boot bom
-    //    implementation(platform(pLibs.spring.boot))
+        //implementation(platform(pLibs.spring.boot))
     //}
 
     java {

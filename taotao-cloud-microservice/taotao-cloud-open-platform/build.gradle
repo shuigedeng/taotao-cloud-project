@@ -2,7 +2,7 @@
 //        .findAll {it -> it.name.endsWith("-api")}
 
 dependencies {
-//    implementation apiProjects
+    //implementation apiProjects
 
     //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"

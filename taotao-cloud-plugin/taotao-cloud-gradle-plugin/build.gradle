@@ -140,7 +140,7 @@ gradlePlugin {
         }
         //deployedPlugin {
         //    id = "io.github.shuigedeng.plugin.deployed"
-        //    implementationClass = "com.taotao.cloud.gradle.springboot.plugin.DeployedPlugin"
+            //implementationClass = "com.taotao.cloud.gradle.springboot.plugin.DeployedPlugin"
         //    displayName = 'springboot deployed plugin'
         //    description = 'springboot deployed plugin'
         //    tags = ['taotao', 'cloud', 'plugin', 'deployed']

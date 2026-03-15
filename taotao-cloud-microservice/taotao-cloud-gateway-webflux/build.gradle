@@ -111,10 +111,10 @@ description = "网关模块"
 
 //apache-shenyu网关模块配置
 //dependencies {
-//    implementation "io.github.shuigedeng:taotao-boot-starter-core"
-//    implementation "io.github.shuigedeng:taotao-boot-starter-monitor"
-//    implementation "io.github.shuigedeng:taotao-boot-starter-captcha"
-//    implementation "io.github.shuigedeng:taotao-boot-starter-logger"
+    //implementation "io.github.shuigedeng:taotao-boot-starter-core"
+    //implementation "io.github.shuigedeng:taotao-boot-starter-monitor"
+    //implementation "io.github.shuigedeng:taotao-boot-starter-captcha"
+    //implementation "io.github.shuigedeng:taotao-boot-starter-logger"
 //
 //    api "org.springframework.boot:spring-boot-starter-webflux"
 //    api "org.springframework.boot:spring-boot-starter-actuator"
