@@ -17,7 +17,7 @@
 package com.taotao.cloud.tenant.biz.controller;
 
 import com.taotao.boot.web.annotation.InnerApi;
-import com.taotao.cloud.tenant.api.feign.TenantServiceApi;
+import com.taotao.cloud.tenant.api.inner.TenantServiceApi;
 import com.taotao.cloud.tenant.api.model.dto.TenantDTO;
 import com.taotao.cloud.tenant.biz.service.TenantService;
 import lombok.*;

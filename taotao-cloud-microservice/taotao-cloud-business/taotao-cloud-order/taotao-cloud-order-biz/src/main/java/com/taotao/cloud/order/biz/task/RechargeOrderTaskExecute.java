@@ -20,7 +20,7 @@ import com.taotao.boot.job.xxl.timetask.EveryMinuteExecute;
 import com.taotao.cloud.member.api.inner.MemberRechargeApi;
 import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.SettingApi;
+import com.taotao.cloud.sys.api.inner.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.OrderSettingVO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

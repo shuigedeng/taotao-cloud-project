@@ -18,7 +18,7 @@ package com.taotao.cloud.member.biz.roketmq.event.impl;
 
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.roketmq.event.MemberRegisterEvent;
-import com.taotao.cloud.promotion.api.feign.IFeignCouponActivityApi;
+import com.taotao.cloud.promotion.api.inner.IFeignCouponActivityApi;
 import com.taotao.cloud.promotion.api.model.dto.MemberDTO;
 import com.taotao.cloud.promotion.api.model.vo.CouponActivityVO;
 import java.util.ArrayList;

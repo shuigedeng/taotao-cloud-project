@@ -30,7 +30,7 @@ import com.taotao.cloud.order.sys.model.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.service.business.order.OrderPriceService;
 import com.taotao.cloud.order.biz.service.business.order.OrderService;
-import com.taotao.cloud.store.api.feign.IFeignStoreLogisticsApi;
+import com.taotao.cloud.store.api.inner.IFeignStoreLogisticsApi;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

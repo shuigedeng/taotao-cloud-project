@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.model.convert;
 
-import com.taotao.cloud.sys.api.feign.response.DictApiResponse;
+import com.taotao.cloud.sys.api.inner.response.DictApiResponse;
 import com.taotao.cloud.sys.biz.model.dto.dict.DictSaveDTO;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import org.mapstruct.Mapper;

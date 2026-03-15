@@ -24,7 +24,7 @@ import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.model.ddd.query.PageQuery;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
-import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
+import com.taotao.cloud.goods.api.inner.GoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsDTO;

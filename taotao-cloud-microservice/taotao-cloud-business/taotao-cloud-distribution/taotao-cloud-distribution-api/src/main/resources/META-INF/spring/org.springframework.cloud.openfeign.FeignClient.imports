@@ -1,5 +1,0 @@
-com.taotao.cloud.goods.api.feign.fallback.CategoryApiFallback
-com.taotao.cloud.goods.api.feign.fallback.GoodsEsIndexApiFallback
-com.taotao.cloud.goods.api.feign.fallback.GoodsEsSearchApiFallback
-com.taotao.cloud.goods.api.feign.fallback.GoodsApiFallback
-com.taotao.cloud.goods.api.feign.fallback.GoodsSkuApiFallback

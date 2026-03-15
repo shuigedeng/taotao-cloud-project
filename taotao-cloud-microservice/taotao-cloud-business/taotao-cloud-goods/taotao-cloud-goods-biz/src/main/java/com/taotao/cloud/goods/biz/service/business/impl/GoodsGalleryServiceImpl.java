@@ -25,7 +25,7 @@ import com.taotao.cloud.goods.biz.model.entity.GoodsGallery;
 import com.taotao.cloud.goods.biz.repository.GoodsGalleryRepository;
 import com.taotao.cloud.goods.biz.service.business.GoodsGalleryService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.SettingApi;
+import com.taotao.cloud.sys.api.inner.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.GoodsSettingVO;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.util.List;

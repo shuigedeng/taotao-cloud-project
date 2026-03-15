@@ -27,7 +27,7 @@ import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.boot.common.utils.id.IdGeneratorUtils;
 import com.taotao.boot.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.order.api.enums.order.FlowTypeEnum;
-import com.taotao.cloud.order.api.feign.StoreFlowApi;
+import com.taotao.cloud.order.api.inner.StoreFlowApi;
 import com.taotao.cloud.order.api.model.page.order.StoreFlowQuery;
 import com.taotao.cloud.store.api.enums.BillStatusEnum;
 import com.taotao.cloud.store.api.model.query.BillPageQuery;

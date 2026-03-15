@@ -57,7 +57,7 @@ import com.taotao.cloud.member.api.model.page.EvaluationPageQuery;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
-import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsApi;
+import com.taotao.cloud.promotion.api.inner.IFeignPromotionGoodsApi;
 import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.PromotionGoodsVO;
 import com.taotao.cloud.store.api.model.vo.StoreVO;

@@ -31,7 +31,7 @@ import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.MemberTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.SettingApi;
+import com.taotao.cloud.sys.api.inner.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.PointSettingItemVO;
 import com.taotao.cloud.sys.api.model.vo.setting.PointSettingVO;
 import java.util.List;

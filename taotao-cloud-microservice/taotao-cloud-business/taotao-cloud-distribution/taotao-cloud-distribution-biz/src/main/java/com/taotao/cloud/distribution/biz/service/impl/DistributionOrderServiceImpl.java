@@ -30,7 +30,7 @@ import com.taotao.cloud.distribution.biz.model.entity.DistributionOrder;
 import com.taotao.cloud.distribution.biz.service.DistributionOrderService;
 import com.taotao.cloud.distribution.biz.service.DistributionService;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
-import com.taotao.cloud.order.api.feign.OrderApi;
+import com.taotao.cloud.order.api.inner.OrderApi;
 import com.taotao.cloud.order.api.model.page.order.StoreFlowPageQuery;
 import com.taotao.cloud.sys.api.dto.DistributionSetting;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;

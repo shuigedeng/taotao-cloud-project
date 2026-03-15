@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.payment.biz.kit;
 
-import com.taotao.cloud.order.api.feign.OrderApi;
-import com.taotao.cloud.order.api.feign.OrderItemApi;
-import com.taotao.cloud.order.api.feign.StoreFlowApi;
+import com.taotao.cloud.order.api.inner.OrderApi;
+import com.taotao.cloud.order.api.inner.OrderItemApi;
+import com.taotao.cloud.order.api.inner.StoreFlowApi;
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderItemVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderVO;

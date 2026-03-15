@@ -28,7 +28,7 @@ import com.taotao.cloud.payment.biz.kit.dto.PayParam;
 import com.taotao.cloud.payment.biz.kit.params.CashierExecute;
 import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.SettingApi;
+import com.taotao.cloud.sys.api.inner.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.OrderSettingVO;
 import com.taotao.cloud.sys.api.model.vo.setting.SettingVO;
 import com.taotao.cloud.sys.api.model.vo.setting.payment.PaymentSupportSetting;

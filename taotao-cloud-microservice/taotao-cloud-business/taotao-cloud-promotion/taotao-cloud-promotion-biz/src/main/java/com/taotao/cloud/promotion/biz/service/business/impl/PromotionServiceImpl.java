@@ -17,7 +17,7 @@
 package com.taotao.cloud.promotion.biz.service.business.impl;
 
 import com.taotao.boot.common.enums.PromotionTypeEnum;
-import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
+import com.taotao.cloud.goods.api.inner.GoodsSkuApi;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.model.page.CouponPageQuery;

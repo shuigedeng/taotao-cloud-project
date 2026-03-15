@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.security.spring.support.utils.SecurityUtils;
-import com.taotao.cloud.goods.api.feign.StoreGoodsLabelApi;
+import com.taotao.cloud.goods.api.inner.StoreGoodsLabelApi;
 import com.taotao.cloud.goods.api.model.vo.StoreGoodsLabelVO;
 import com.taotao.cloud.store.api.model.dto.StoreBankDTO;
 import com.taotao.cloud.store.api.model.dto.StoreCompanyDTO;

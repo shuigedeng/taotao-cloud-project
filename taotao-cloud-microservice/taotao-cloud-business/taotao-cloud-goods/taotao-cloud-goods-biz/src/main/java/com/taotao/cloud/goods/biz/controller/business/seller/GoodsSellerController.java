@@ -34,7 +34,7 @@ import com.taotao.cloud.goods.biz.model.entity.Goods;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
 import com.taotao.cloud.goods.biz.service.business.GoodsService;
 import com.taotao.cloud.goods.biz.service.business.GoodsSkuService;
-import com.taotao.cloud.store.api.feign.IFeignStoreDetailApi;
+import com.taotao.cloud.store.api.inner.IFeignStoreDetailApi;
 import com.taotao.cloud.store.api.model.vo.StoreDetailVO;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;

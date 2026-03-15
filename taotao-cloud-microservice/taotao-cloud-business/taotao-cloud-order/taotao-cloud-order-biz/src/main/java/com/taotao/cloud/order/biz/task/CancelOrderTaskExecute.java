@@ -23,7 +23,7 @@ import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.service.business.order.OrderService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.SettingApi;
+import com.taotao.cloud.sys.api.inner.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.OrderSettingVO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -24,7 +24,7 @@ import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.boot.common.enums.PromotionTypeEnum;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
+import com.taotao.cloud.goods.api.inner.GoodsSkuApi;
 import com.taotao.cloud.promotion.api.enums.PromotionsApplyStatusEnum;
 import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.page.SeckillPageQuery;

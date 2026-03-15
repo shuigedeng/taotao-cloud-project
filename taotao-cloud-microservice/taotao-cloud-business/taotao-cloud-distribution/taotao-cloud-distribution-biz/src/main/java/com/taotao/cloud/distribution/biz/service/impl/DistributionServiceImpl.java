@@ -35,7 +35,7 @@ import com.taotao.cloud.distribution.biz.model.entity.Distribution;
 import com.taotao.cloud.distribution.biz.service.DistributionService;
 import com.taotao.cloud.sys.api.dto.DistributionSetting;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.IFeignSettingService;
+import com.taotao.cloud.sys.api.inner.IFeignSettingService;
 import com.taotao.cloud.sys.api.model.vo.setting.SettingVO;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;

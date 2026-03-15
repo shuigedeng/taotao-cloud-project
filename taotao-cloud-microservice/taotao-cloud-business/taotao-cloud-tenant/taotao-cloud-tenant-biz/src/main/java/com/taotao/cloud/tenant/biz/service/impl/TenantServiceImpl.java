@@ -18,8 +18,8 @@ package com.taotao.cloud.tenant.biz.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.enums.GlobalStatusEnum;
-import com.taotao.cloud.sys.api.feign.RoleApi;
-import com.taotao.cloud.sys.api.feign.UserApi;
+import com.taotao.cloud.sys.api.inner.RoleApi;
+import com.taotao.cloud.sys.api.inner.UserApi;
 import com.taotao.cloud.tenant.api.model.dto.TenantDTO;
 import com.taotao.cloud.tenant.api.model.dto.TenantPageDTO;
 import com.taotao.cloud.tenant.biz.convert.TenantConvert;

@@ -23,7 +23,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.utils.number.CurrencyUtils;
-import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
+import com.taotao.cloud.goods.api.inner.GoodsSkuApi;
 import com.taotao.cloud.member.api.inner.MemberApi;
 import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;

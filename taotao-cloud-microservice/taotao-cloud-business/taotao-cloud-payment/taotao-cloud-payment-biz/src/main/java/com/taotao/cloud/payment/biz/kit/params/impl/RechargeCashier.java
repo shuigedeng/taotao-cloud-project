@@ -28,7 +28,7 @@ import com.taotao.cloud.payment.biz.kit.dto.PaymentSuccessParams;
 import com.taotao.cloud.payment.biz.kit.params.CashierExecute;
 import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.SettingApi;
+import com.taotao.cloud.sys.api.inner.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.BaseSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

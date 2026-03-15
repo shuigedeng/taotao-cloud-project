@@ -21,7 +21,7 @@ import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.repository.DictRepository;
 import com.taotao.cloud.sys.biz.repository.IDictRepository;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
-import com.taotao.cloud.sys.biz.service.feign.IFeignDictService;
+import com.taotao.cloud.sys.biz.service.inner.IFeignDictService;
 import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;

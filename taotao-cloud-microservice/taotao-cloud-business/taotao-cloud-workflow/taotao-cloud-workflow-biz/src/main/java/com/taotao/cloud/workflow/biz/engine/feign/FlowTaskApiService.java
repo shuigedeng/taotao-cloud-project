@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.engine.feign;
 
-import com.taotao.cloud.workflow.api.feign.flow.FlowTaskApi;
+import com.taotao.cloud.workflow.api.inner.flow.FlowTaskApi;
 import com.taotao.cloud.workflow.biz.common.base.ActionResult;
 import com.taotao.cloud.workflow.biz.common.constant.MsgCode;
 import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.FlowModel;
@@ -46,7 +46,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /** 流程引擎 */

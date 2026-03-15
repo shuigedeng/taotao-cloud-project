@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.controller;
 
 import com.taotao.boot.web.annotation.InnerApi;
-import com.taotao.cloud.sys.api.feign.QuartzJobApi;
+import com.taotao.cloud.sys.api.inner.QuartzJobApi;
 import com.taotao.cloud.sys.api.model.dto.QuartzJobDTO;
 import com.taotao.cloud.sys.biz.task.job.quartz.service.QuartzJobService;
 import lombok.*;

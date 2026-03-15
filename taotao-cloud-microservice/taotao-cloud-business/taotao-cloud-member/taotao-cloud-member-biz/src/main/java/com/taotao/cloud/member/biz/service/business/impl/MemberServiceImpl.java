@@ -58,7 +58,7 @@ import com.taotao.cloud.stream.framework.rocketmq.tags.MemberTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import com.taotao.boot.sensitive.word.SensitiveWordsFilter;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
-import com.taotao.cloud.store.api.feign.IFeignStoreApi;
+import com.taotao.cloud.store.api.inner.IFeignStoreApi;
 import com.taotao.cloud.store.api.model.vo.StoreVO;
 import java.util.List;
 import java.util.Map;

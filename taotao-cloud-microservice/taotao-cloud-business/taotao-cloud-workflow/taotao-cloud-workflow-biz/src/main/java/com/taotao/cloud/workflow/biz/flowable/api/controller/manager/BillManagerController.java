@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.model.ddd.query.PageQuery;
 import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.cloud.order.api.feign.IFeignStoreFlowApi;
+import com.taotao.cloud.order.api.inner.IFeignStoreFlowApi;
 import com.taotao.cloud.order.api.model.vo.order.StoreFlowVO;
 import com.taotao.cloud.store.api.model.query.BillPageQuery;
 import com.taotao.cloud.store.api.model.vo.BillListVO;

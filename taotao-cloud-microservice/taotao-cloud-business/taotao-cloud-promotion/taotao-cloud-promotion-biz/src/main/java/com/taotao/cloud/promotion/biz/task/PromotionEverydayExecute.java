@@ -16,11 +16,11 @@
 
 package com.taotao.cloud.promotion.biz.task;
 
-import com.taotao.cloud.goods.api.feign.GoodsEsIndexApi;
+import com.taotao.cloud.goods.api.inner.GoodsEsIndexApi;
 import com.taotao.cloud.promotion.biz.model.entity.Seckill;
 import com.taotao.cloud.promotion.biz.service.business.ISeckillService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.SettingApi;
+import com.taotao.cloud.sys.api.inner.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.SeckillSetting;
 import com.taotao.boot.web.timetask.EveryDayExecute;
 import org.springframework.beans.factory.annotation.Autowired;

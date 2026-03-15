@@ -30,7 +30,7 @@ import com.taotao.cloud.distribution.biz.model.entity.Distribution;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionGoods;
 import com.taotao.cloud.distribution.biz.service.DistributionGoodsService;
 import com.taotao.cloud.distribution.biz.service.DistributionService;
-import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
+import com.taotao.cloud.goods.api.inner.GoodsSkuApi;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;

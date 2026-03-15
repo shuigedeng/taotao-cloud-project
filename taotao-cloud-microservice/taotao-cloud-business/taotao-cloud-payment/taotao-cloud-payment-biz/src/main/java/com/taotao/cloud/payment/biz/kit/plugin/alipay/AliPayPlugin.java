@@ -43,7 +43,7 @@ import com.taotao.cloud.payment.biz.properties.ApiProperties;
 import com.taotao.cloud.payment.biz.service.PaymentService;
 import com.taotao.cloud.payment.biz.service.RefundLogService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.SettingApi;
+import com.taotao.cloud.sys.api.inner.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.payment.AlipayPaymentSetting;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

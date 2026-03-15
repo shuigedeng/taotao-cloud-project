@@ -23,7 +23,7 @@ import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.member.api.constant.MemberCollectionQueryConstants;
 import com.taotao.cloud.member.sys.model.vo.GoodsCollectionVO;
 import com.taotao.cloud.member.biz.service.business.IMemberGoodsCollectionService;
-import com.taotao.cloud.store.api.feign.IFeignStoreCollectionApi;
+import com.taotao.cloud.store.api.inner.IFeignStoreCollectionApi;
 import com.taotao.cloud.store.api.model.vo.StoreCollectionVO;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;

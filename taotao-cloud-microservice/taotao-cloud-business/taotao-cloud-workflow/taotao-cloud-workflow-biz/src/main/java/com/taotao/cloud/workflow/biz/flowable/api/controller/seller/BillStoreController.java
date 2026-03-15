@@ -23,7 +23,7 @@ import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.web.utils.OperationalJudgment;
 import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.boot.common.utils.servlet.RequestUtils;
-import com.taotao.cloud.order.api.feign.IFeignStoreFlowApi;
+import com.taotao.cloud.order.api.inner.IFeignStoreFlowApi;
 import com.taotao.cloud.order.api.web.vo.order.StoreFlowVO;
 import com.taotao.cloud.store.api.model.query.BillPageQuery;
 import com.taotao.cloud.store.api.model.vo.BillListVO;

@@ -25,7 +25,7 @@ import com.taotao.boot.common.enums.PromotionTypeEnum;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.utils.date.DateUtils;
-import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
+import com.taotao.cloud.goods.api.inner.GoodsSkuApi;
 import com.taotao.cloud.order.api.model.vo.cart.CartSkuVO;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;

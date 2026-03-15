@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.biz.controller.feign;
 
-import com.taotao.cloud.order.api.feign.OrderApi;
+import com.taotao.cloud.order.api.inner.OrderApi;
 import com.taotao.cloud.order.sys.model.dto.order_info.OrderSaveDTO;
 import com.taotao.cloud.order.sys.model.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.sys.model.vo.order.OrderVO;
