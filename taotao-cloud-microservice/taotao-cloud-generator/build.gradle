@@ -1,9 +1,4 @@
 dependencies {
-    //cloud
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
-    //
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
-
     //boot
     implementation "io.github.shuigedeng:taotao-boot-starter-eventbus"
     //implementation "io.github.shuigedeng:taotao-boot-starter-mq-rocketmq"
@@ -53,7 +48,7 @@ configurations {
             force 'org.antlr:antlr4:4.13.2'
             force 'net.minidev:json-smart:2.6.0'
             //todo 临时使用
-            force "io.opentelemetry:opentelemetry-api-incubator:1.60.0-alpha"
+            force "io.opentelemetry:opentelemetry-api-incubator:1.60.1-alpha"
         }
 
         //exclude group: "log4j", module: "log4j"

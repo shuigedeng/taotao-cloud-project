@@ -45,7 +45,7 @@ repositories {
 
 dependencies {
     implementation platform("org.springframework.ai:spring-ai-bom:2.0.0-M2")
-    implementation platform("com.alibaba.cloud.ai:spring-ai-alibaba-bom:1.1.2.0")
+    implementation platform("com.alibaba.cloud.ai:spring-ai-alibaba-bom:1.1.2.2")
 
     //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"

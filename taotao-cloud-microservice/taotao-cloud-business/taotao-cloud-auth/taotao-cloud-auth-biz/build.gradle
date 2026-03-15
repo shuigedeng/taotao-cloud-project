@@ -177,7 +177,7 @@ configurations {
             force 'org.antlr:antlr4:4.13.2'
             force 'net.minidev:json-smart:2.6.0'
             //todo 临时使用
-            force "io.opentelemetry:opentelemetry-api-incubator:1.60.0-alpha"
+            force "io.opentelemetry:opentelemetry-api-incubator:1.60.1-alpha"
             force 'org.bouncycastle:bcprov-jdk18on:1.82'
             force 'org.bouncycastle:bcpkix-jdk18on:1.82'
             force 'org.bouncycastle:bcutil-jdk18on:1.82'
