@@ -17,7 +17,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "通道收银台配置")
 public class ChannelCashierConfigResult extends MchAppResult {
 

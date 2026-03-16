@@ -30,7 +30,7 @@ import lombok.experimental.*;
  */
 @Data
 @Schema(title = "微信自定义菜单")
-@Accessors(chain = true)
+
 public class WeChatMenuParam {
 
     @Schema(description = "主键")

@@ -13,7 +13,7 @@ import java.util.Map;
  * 支付宝小程序订阅消息内容
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class AlipayMiniProgramContentModel extends ContentModel {

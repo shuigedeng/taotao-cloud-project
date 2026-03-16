@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 
 /** 会员接收消息查询vo */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "会员接收消息查询vo")

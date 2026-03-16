@@ -36,7 +36,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Data
 @FieldNameConstants
-@Accessors(chain = true)
+
 @Document("tt_data_version_log")
 public class DataVersionLogMongo {
 

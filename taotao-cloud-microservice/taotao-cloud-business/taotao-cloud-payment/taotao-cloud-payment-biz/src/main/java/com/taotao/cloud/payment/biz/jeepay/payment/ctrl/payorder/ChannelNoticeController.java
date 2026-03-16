@@ -43,7 +43,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /*
-* 渠道侧的通知入口Controller 【分为同步跳转（doReturn）和异步回调(doNotify) 】
+* 渠道侧的通知入口Controller [分为同步跳转（doReturn）和异步回调(doNotify) ]
 *
 * @author terrfly
 * @site https://www.jeequan.com
@@ -225,7 +225,7 @@ public class ChannelNoticeController extends AbstractCtrl {
             }
 
             boolean updateOrderSuccess = true; //默认更新成功
-            // 订单是 【支付中状态】
+            // 订单是 [支付中状态]
             if(payOrder.getState() == PayOrder.STATE_ING) {
 
                 //明确成功

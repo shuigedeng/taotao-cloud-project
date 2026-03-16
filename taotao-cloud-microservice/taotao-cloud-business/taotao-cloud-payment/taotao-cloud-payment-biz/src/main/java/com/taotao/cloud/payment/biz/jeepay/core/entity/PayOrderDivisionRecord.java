@@ -26,7 +26,7 @@ import java.util.Date;
 @ApiModel(value = "分账记录表", description = "")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+
 @TableName("t_pay_order_division_record")
 public class PayOrderDivisionRecord implements Serializable {
 

@@ -29,7 +29,7 @@ import com.jeequan.jeepay.pay.service.ConfigContextQueryService;
 import com.taotao.boot.common.utils.lang.StringUtils;
 
 /*
-* 【支付宝】支付通道工具包
+* [支付宝]支付通道工具包
 *
 * @author terrfly
 * @site https://www.jeequan.com
@@ -112,7 +112,7 @@ public class AlipayKit {
 
         String result = null;
         if(StringUtils.isNotEmpty(msg) && StringUtils.isNotEmpty(subMsg) ){
-            result = msg + "【" + subMsg + "】";
+            result = msg + "[" + subMsg + "]";
         }else{
             result = StringUtils.defaultIfEmpty(subMsg, msg);
         }

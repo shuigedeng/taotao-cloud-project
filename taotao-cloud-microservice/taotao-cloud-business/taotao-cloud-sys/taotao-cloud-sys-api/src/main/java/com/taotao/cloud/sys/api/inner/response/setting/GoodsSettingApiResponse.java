@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 
 /** 商品配置 */
 @Data
-@Accessors(chain=true)
+
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor

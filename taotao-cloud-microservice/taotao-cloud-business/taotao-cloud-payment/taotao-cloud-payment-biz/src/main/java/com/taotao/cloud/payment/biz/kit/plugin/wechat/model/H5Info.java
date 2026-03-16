@@ -22,7 +22,7 @@ import lombok.experimental.*;
 
 /** 统一下单-H5 场景信息 */
 @Data
-@Accessors(chain = true)
+
 public class H5Info {
     /** 场景类型 */
     private String type;

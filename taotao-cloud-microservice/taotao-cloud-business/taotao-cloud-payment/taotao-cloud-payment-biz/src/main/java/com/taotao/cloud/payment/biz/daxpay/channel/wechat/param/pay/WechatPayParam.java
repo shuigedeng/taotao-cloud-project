@@ -11,7 +11,7 @@ import lombok.experimental.*;
  * @since 2021/6/21
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "微信支付参数")
 public class WechatPayParam {
 

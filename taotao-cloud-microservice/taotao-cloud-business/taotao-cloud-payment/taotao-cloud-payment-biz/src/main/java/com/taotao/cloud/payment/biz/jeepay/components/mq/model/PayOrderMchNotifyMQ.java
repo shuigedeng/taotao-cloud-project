@@ -37,13 +37,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PayOrderMchNotifyMQ extends AbstractMQ {
 
-    /** 【！重要配置项！】 定义MQ名称 **/
+    /** [！重要配置项！] 定义MQ名称 **/
     public static final String MQ_NAME = "QUEUE_PAY_ORDER_MCH_NOTIFY";
 
     /** 内置msg 消息体定义 **/
     private MsgPayload payload;
 
-    /**  【！重要配置项！】 定义Msg消息载体 **/
+    /**  [！重要配置项！] 定义Msg消息载体 **/
     @Data
     @AllArgsConstructor
     public static class MsgPayload {
@@ -58,7 +58,7 @@ public class PayOrderMchNotifyMQ extends AbstractMQ {
         return MQ_NAME;
     }
 
-    /**  【！重要配置项！】 **/
+    /**  [！重要配置项！] **/
     @Override
     public MQSendTypeEnum getMQType(){
         return MQSendTypeEnum.QUEUE;  // QUEUE - 点对点 、 BROADCAST - 广播模式
@@ -69,7 +69,7 @@ public class PayOrderMchNotifyMQ extends AbstractMQ {
         return JSONObject.toJSONString(payload);
     }
 
-    /**  【！重要配置项！】 构造MQModel , 一般用于发送MQ时 **/
+    /**  [！重要配置项！] 构造MQModel , 一般用于发送MQ时 **/
     public static PayOrderMchNotifyMQ build(Long notifyId){
         return new PayOrderMchNotifyMQ(new MsgPayload(notifyId));
     }

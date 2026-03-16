@@ -155,7 +155,7 @@ public class AsyncController {
 
 				asyncContext.getResponse().setCharacterEncoding("UTF-8");
 				asyncContext.getResponse().setContentType("text/html;charset=UTF-8");
-				asyncContext.getResponse().getWriter().println("这是【异步】的请求返回: ");
+				asyncContext.getResponse().getWriter().println("这是[异步]的请求返回: ");
 			}
 			catch (Exception e) {
 				LogUtils.info("异步处理发生异常：" + e.getMessage());

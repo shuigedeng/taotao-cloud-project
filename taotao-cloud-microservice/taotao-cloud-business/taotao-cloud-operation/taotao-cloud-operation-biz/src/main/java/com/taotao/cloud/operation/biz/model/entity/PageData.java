@@ -39,7 +39,7 @@ import org.hibernate.Hibernate;
 @Setter
 @ToString(callSuper = true)
 @RequiredArgsConstructor
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

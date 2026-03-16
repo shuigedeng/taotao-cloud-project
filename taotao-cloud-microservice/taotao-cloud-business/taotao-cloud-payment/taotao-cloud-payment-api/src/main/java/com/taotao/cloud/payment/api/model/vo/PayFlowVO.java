@@ -35,7 +35,7 @@ import lombok.NoArgsConstructor;
  * @since 2020/11/20 上午9:42
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "支付流水信息VO")

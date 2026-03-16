@@ -27,7 +27,7 @@ import lombok.experimental.*;
 /** 群组实体类 q3z3 */
 @Data
 @TableName("chat_group")
-@Accessors(chain = true) // 链式调用
+ // 链式调用
 public class ChatGroup extends BaseEntity {
 
     private static final long serialVersionUID = 1L;

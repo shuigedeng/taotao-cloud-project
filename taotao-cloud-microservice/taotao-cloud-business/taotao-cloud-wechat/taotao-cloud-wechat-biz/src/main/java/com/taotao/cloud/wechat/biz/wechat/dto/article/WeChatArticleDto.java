@@ -32,7 +32,7 @@ import me.chanjar.weixin.mp.bean.freepublish.WxMpFreePublishItem;
  * @since 2022/8/12
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "微信文章")
 public class WeChatArticleDto {
 

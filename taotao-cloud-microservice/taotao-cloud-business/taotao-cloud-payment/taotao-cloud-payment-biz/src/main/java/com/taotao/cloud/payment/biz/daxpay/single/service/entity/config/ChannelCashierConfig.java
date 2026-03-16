@@ -21,7 +21,7 @@ import com.taotao.cloud.payment.biz.daxpay.service.result.config.ChannelCashierC
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName("pay_channel_cashier_config")
 public class ChannelCashierConfig extends MchAppBaseEntity implements ToResult<ChannelCashierConfigResult> {
 

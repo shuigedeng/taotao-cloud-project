@@ -20,7 +20,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName("pay_trade_callback_record")
 public class TradeCallbackRecord extends MchAppRecordEntity implements ToResult<TradeCallbackRecordResult> {
 

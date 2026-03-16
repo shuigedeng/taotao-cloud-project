@@ -20,7 +20,7 @@ import java.util.Map;
  * @since 2024/1/24
  */
 @Data
-@Accessors(chain = true)
+
 public class CallbackLocal {
 
 

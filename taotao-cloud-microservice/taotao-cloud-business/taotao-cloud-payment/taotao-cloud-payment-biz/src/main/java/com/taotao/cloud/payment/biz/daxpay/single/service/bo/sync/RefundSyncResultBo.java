@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  * @since 2024/1/25
  */
 @Data
-@Accessors(chain = true)
+
 public class RefundSyncResultBo {
 
     /** 同步是否成功 */

@@ -16,7 +16,7 @@ import java.math.BigDecimal;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName("pay_alloc_config")
 public class AllocConfig extends MchAppBaseEntity {
 

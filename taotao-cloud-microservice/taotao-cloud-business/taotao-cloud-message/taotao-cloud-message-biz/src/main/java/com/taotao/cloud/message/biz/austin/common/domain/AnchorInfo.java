@@ -14,7 +14,7 @@ import java.util.Set;
  * @author shuigedeng
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class AnchorInfo {

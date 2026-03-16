@@ -18,8 +18,8 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors(chain=true)
-@Accessors(chain = true)
+
+
 public class ProcessContext<T extends ProcessModel> implements Serializable {
     /**
      * 标识责任链的code

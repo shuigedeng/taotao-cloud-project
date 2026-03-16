@@ -63,8 +63,8 @@ import lombok.experimental.*;
 //        List<String> uvKeys = new ArrayList<>();
 //        List<String> storeUvKeys = new ArrayList<>();
 //
-//        log.debug("开始统计平台数据，PV共计【{}】条", pvKeys.size());
-//        log.debug("开始统计店铺数据，PV共计【{}】条", storePvValues.size());
+//        log.debug("开始统计平台数据，PV共计[{}]条", pvKeys.size());
+//        log.debug("开始统计店铺数据，PV共计[{}]条", storePvValues.size());
 //
 //        //定义要统计的数据
 //        List<PlatformViewData> platformViewDataList = new ArrayList<>();
@@ -131,7 +131,7 @@ import lombok.experimental.*;
 //    @Transactional(rollbackFor = Exception.class)
 //    void batchSave(List<String> pvKeys, List<String> uvKeys, List<PlatformViewData>
 // platformViewData) {
-//        log.debug("批量保存流量数据，共计【{}】条", platformViewData.size());
+//        log.debug("批量保存流量数据，共计[{}]条", platformViewData.size());
 //        platformViewService.saveBatch(platformViewData);
 //        //批量删除缓存key
 //        cache.multiDel(pvKeys);

@@ -29,7 +29,7 @@ import java.math.BigDecimal;
  * 砍价商品视图对象
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class KanjiaActivityGoodsBO implements Serializable {

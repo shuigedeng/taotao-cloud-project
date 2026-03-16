@@ -11,7 +11,7 @@ import lombok.experimental.*;
  * @since 2024/6/15
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "授权链接和查询标识返回类")
 public class AuthUrlResult {
 

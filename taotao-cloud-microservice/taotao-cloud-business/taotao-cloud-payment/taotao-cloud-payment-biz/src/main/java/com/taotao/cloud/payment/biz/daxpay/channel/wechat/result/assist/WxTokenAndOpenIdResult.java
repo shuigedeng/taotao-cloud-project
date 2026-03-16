@@ -11,7 +11,7 @@ import lombok.experimental.*;
  * @since 2024/2/10
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "微信AccessToken和OpenId")
 public class WxTokenAndOpenIdResult {
 

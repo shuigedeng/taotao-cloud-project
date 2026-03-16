@@ -39,7 +39,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName(value = "starter_wx_menu", autoResultMap = true)
 public class WeChatMenu extends MpBaseEntity implements EntityBaseFunction<WeChatMenuDto> {
 

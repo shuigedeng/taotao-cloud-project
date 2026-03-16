@@ -33,7 +33,7 @@ import lombok.experimental.*;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Schema(title = "企业微信机器人配置")
-@Accessors(chain = true)
+
 public class WecomRobotConfigDto extends BaseDto {
 
     @Schema(description = "名称")

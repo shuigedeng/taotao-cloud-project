@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jakarta.servlet.http.HttpServletRequest;
 
 /*
-* 渠道侧的退款通知入口Controller 【异步回调(doNotify) 】
+* 渠道侧的退款通知入口Controller [异步回调(doNotify) ]
 *
 * @author jmdhappy
 * @site https://www.jeequan.com

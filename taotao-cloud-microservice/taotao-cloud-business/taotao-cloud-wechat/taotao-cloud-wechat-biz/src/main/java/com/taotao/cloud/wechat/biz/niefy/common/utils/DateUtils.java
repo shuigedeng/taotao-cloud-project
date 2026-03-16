@@ -56,7 +56,7 @@ public class DateUtils {
     }
 
     /**
-     * 对日期的【秒】进行加/减
+     * 对日期的[秒]进行加/减
      *
      * @param date 日期
      * @param seconds 秒数，负数为减
@@ -67,7 +67,7 @@ public class DateUtils {
     }
 
     /**
-     * 对日期的【分钟】进行加/减
+     * 对日期的[分钟]进行加/减
      *
      * @param date 日期
      * @param minutes 分钟数，负数为减
@@ -78,7 +78,7 @@ public class DateUtils {
     }
 
     /**
-     * 对日期的【小时】进行加/减
+     * 对日期的[小时]进行加/减
      *
      * @param date 日期
      * @param hours 小时数，负数为减
@@ -89,7 +89,7 @@ public class DateUtils {
     }
 
     /**
-     * 对日期的【天】进行加/减
+     * 对日期的[天]进行加/减
      *
      * @param date 日期
      * @param days 天数，负数为减
@@ -100,7 +100,7 @@ public class DateUtils {
     }
 
     /**
-     * 对日期的【周】进行加/减
+     * 对日期的[周]进行加/减
      *
      * @param date 日期
      * @param weeks 周数，负数为减

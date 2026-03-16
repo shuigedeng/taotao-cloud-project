@@ -11,7 +11,7 @@ import lombok.experimental.*;
  * @since 2024/4/1
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "分账组参数")
 public class AllocGroupParam {
 

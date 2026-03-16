@@ -34,7 +34,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "发票搜索参数")

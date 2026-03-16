@@ -10,7 +10,7 @@ import lombok.experimental.*;
  * @since 2023/12/25
  */
 @Data
-@Accessors(chain = true)
+
 public class ClientLocal {
 
     /** 客户端ip */

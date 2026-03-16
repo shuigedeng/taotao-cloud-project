@@ -16,7 +16,7 @@ import lombok.experimental.*;
  * @see com.taotao.cloud.message.biz.austin.handler.domain.sms austin
  */
 @Data
-@Accessors(chain=true)
+
 public class LinTongSendMessage {
     String phone;
     String content;

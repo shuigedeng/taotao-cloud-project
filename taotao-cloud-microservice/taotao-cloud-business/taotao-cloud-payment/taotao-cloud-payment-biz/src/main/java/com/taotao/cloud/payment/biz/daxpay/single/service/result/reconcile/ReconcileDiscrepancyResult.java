@@ -26,7 +26,7 @@ import java.time.LocalDateTime;
 @FieldNameConstants
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "对账差异记录")
 public class ReconcileDiscrepancyResult extends MchAppResult implements TransPojo {
 

@@ -32,7 +32,7 @@ package com.taotao.cloud.goods.biz.model.entity; // package com.taotao.cloud.goo
 // */
 // @Setter
 // @Getter
-// @Accessors(chain=true)
+// 
 // @AllArgsConstructor
 // @NoArgsConstructor
 //// @Entity

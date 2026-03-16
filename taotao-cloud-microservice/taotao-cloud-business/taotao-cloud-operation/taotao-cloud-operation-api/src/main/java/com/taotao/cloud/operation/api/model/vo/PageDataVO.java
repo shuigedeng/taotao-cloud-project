@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 
 /** 楼层装修数据VO */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class PageDataVO {

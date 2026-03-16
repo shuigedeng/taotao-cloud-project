@@ -11,7 +11,7 @@ import lombok.experimental.*;
  * @since 2024/4/7
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "分账订单查询参数")
 public class AllocOrderQuery {
 

@@ -28,7 +28,7 @@ import lombok.experimental.*;
 import lombok.NoArgsConstructor;
 
 @Data
-@Accessors(chain=true)
+
 @NoArgsConstructor
 @AllArgsConstructor
 public class DataModel {

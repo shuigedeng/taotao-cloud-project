@@ -16,10 +16,10 @@ import java.util.List;
  * @author shuigedeng
  */
 @Data
-@Accessors(chain = true)
+
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors(chain=true)
+
 public class BatchSendRequest {
 
 

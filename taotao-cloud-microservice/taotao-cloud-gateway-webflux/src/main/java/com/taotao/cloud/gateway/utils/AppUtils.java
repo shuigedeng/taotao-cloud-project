@@ -105,7 +105,7 @@ public class AppUtils {
         //        }
         //
         //        LogUtils.info();
-        //        LogUtils.info("【提供方】验证通过！");
+        //        LogUtils.info("[提供方]验证通过！");
 
     }
 
@@ -140,13 +140,13 @@ public class AppUtils {
         //        }
         //        sb.append("appSecret=").append(appSecret);
         //
-        //        LogUtils.info("【请求方】拼接后的参数：" + sb.toString());
+        //        LogUtils.info("[请求方]拼接后的参数：" + sb.toString());
         //        LogUtils.info();
         //
         //        // 使用sha256withRSA的方式对header中的内容加签
         //        String appSign = sha256withRSASignature(appKeyPair.get(appId).get("privateKey"),
         // sb.toString());
-        //        LogUtils.info("【请求方】appSign：" + appSign);
+        //        LogUtils.info("[请求方]appSign：" + appSign);
         //        LogUtils.info();
         //
         //        // 请求参数组装
@@ -162,7 +162,7 @@ public class AppUtils {
         //        apiRequestEntity.setBody(userEntity);
         //
         //        String requestParam = JSONObject.toJSONString(apiRequestEntity);
-        //        LogUtils.info("【请求方】接口请求参数: " + requestParam);
+        //        LogUtils.info("[请求方]接口请求参数: " + requestParam);
 
         return null;
     }

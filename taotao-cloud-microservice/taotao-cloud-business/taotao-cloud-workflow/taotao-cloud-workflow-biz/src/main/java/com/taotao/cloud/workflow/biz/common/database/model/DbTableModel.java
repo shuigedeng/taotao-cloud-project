@@ -25,7 +25,7 @@ import lombok.experimental.*;
 
 /** */
 @Data
-@Accessors(chain = true)
+
 public class DbTableModel extends JdbcGetMod {
 
     /** 标识 */

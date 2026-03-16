@@ -29,7 +29,7 @@ import lombok.experimental.*;
 /** 实体类 q3z3 */
 @Data
 @TableName("chat_group_info")
-@Accessors(chain = true) // 链式调用
+ // 链式调用
 @NoArgsConstructor
 public class ChatGroupInfo extends BaseEntity {
 

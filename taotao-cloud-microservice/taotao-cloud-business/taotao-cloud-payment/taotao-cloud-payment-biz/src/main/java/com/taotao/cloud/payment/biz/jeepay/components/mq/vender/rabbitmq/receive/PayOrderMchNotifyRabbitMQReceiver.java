@@ -42,7 +42,7 @@ public class PayOrderMchNotifyRabbitMQReceiver implements IMQMsgReceiver {
     @Autowired
     private PayOrderMchNotifyMQ.IMQReceiver mqReceiver;
 
-    /** 接收 【 queue 】 类型的消息 **/
+    /** 接收 [ queue ] 类型的消息 **/
     @Override
     @Async(MqThreadExecutor.EXECUTOR_PAYORDER_MCH_NOTIFY)
     @RabbitListener(queues = PayOrderMchNotifyMQ.MQ_NAME)

@@ -35,7 +35,7 @@ import lombok.experimental.Accessors;
  */
 @Setter
 @Getter
-@Accessors(chain = true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

@@ -16,7 +16,7 @@ import lombok.experimental.*;
  * @since 2024/9/28
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "通道收银台配置")
 public class ChannelCashierConfigParam {
 

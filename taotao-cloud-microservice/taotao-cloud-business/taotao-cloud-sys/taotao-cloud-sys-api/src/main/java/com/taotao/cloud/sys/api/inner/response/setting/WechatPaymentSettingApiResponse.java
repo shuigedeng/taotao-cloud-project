@@ -21,7 +21,7 @@ import lombok.experimental.*;
 
 /** 微信支付设置 */
 @Data
-@Accessors(chain = true)
+
 public class WechatPaymentSettingApiResponse {
 
     /** APP应用id */

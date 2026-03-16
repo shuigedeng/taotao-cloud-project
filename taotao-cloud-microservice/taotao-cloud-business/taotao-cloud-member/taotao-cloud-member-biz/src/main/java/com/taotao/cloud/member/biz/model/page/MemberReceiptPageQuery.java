@@ -34,7 +34,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "会员发票查询DTO")

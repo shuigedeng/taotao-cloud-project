@@ -39,7 +39,7 @@ import java.util.Date;
 @ApiModel(value = "转账订单表", description = "")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+
 @TableName("t_transfer_order")
 public class TransferOrder implements Serializable {
 

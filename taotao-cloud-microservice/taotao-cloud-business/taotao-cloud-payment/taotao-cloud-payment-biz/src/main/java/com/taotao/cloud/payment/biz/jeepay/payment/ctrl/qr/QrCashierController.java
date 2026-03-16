@@ -54,7 +54,7 @@ public class QrCashierController extends AbstractPayOrderController {
     @Autowired private PayMchNotifyService payMchNotifyService;
 
     /**
-     * 返回 oauth2【获取uerId跳转地址】
+     * 返回 oauth2[获取uerId跳转地址]
      * **/
     @PostMapping("/redirectUrl")
     public ApiRes redirectUrl(){

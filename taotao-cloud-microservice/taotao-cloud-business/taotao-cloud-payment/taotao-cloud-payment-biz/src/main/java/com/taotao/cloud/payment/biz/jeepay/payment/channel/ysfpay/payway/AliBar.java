@@ -52,7 +52,7 @@ public class AliBar extends YsfpayPaymentService {
 
     @Override
     public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) throws Exception {
-        String logPrefix = "【云闪付条码(alipay)支付】";
+        String logPrefix = "[云闪付条码(alipay)支付]";
         AliBarOrderRQ bizRQ = (AliBarOrderRQ) rq;
         AliBarOrderRS res = ApiResBuilder.buildSuccess(AliBarOrderRS.class);
         ChannelRetMsg channelRetMsg = new ChannelRetMsg();

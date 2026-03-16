@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 /**
- * 拉取 钉钉工作消息的回执 内容 【未完成】
+ * 拉取 钉钉工作消息的回执 内容 [未完成]
  *
  * @author shuigedeng
  */

@@ -18,7 +18,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName("pay_method_const")
 public class MethodConst extends MpIdEntity implements ToResult<MethodConstResult> {
 

@@ -31,7 +31,7 @@ import lombok.experimental.*;
  * @version v1.0 2021-01-26 15:52
  */
 @Data
-@Accessors(chain = true)
+
 public class PaymentSupportForm {
 
     /**

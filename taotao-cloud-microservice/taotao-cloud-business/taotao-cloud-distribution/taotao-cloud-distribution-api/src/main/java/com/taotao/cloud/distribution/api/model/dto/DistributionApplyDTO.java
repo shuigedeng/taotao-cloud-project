@@ -28,7 +28,7 @@ import org.hibernate.validator.constraints.Length;
 
 /** 分销员申请DTO */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "分销员申请DTO")

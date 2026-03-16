@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
  * https://docs.getui.com/getui/start/devcenter/
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class GeTuiAccount {

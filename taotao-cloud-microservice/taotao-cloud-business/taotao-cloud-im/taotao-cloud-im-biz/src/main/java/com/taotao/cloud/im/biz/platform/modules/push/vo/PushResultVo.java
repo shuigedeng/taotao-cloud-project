@@ -22,7 +22,7 @@ import lombok.experimental.*;
 
 /** 弹窗消息 */
 @Data
-@Accessors(chain = true) // 链式调用
+ // 链式调用
 public class PushResultVo {
 
     /** 推送结果 */

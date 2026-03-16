@@ -17,7 +17,7 @@ import java.util.List;
  * @author shuigedeng
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class DingDingRobotParam {
@@ -55,7 +55,7 @@ public class DingDingRobotParam {
      */
     @NoArgsConstructor
     @Data
-    @Accessors(chain=true)
+    
     @AllArgsConstructor
     public static class AtVO {
         /**
@@ -77,7 +77,7 @@ public class DingDingRobotParam {
      */
     @NoArgsConstructor
     @Data
-    @Accessors(chain=true)
+    
     @AllArgsConstructor
     public static class TextVO {
         /**
@@ -92,7 +92,7 @@ public class DingDingRobotParam {
     @NoArgsConstructor
     @Data
     @AllArgsConstructor
-    @Accessors(chain=true)
+    
     public static class LinkVO {
         /**
          * text
@@ -118,7 +118,7 @@ public class DingDingRobotParam {
     @NoArgsConstructor
     @Data
     @AllArgsConstructor
-    @Accessors(chain=true)
+    
     public static class MarkdownVO {
         /**
          * title
@@ -136,7 +136,7 @@ public class DingDingRobotParam {
     @NoArgsConstructor
     @Data
     @AllArgsConstructor
-    @Accessors(chain=true)
+    
     public static class ActionCardVO {
         /**
          * title
@@ -161,7 +161,7 @@ public class DingDingRobotParam {
         @NoArgsConstructor
         @Data
         @AllArgsConstructor
-        @Accessors(chain=true)
+        
         public static class BtnsVO {
             /**
              * title
@@ -181,7 +181,7 @@ public class DingDingRobotParam {
     @NoArgsConstructor
     @Data
     @AllArgsConstructor
-    @Accessors(chain=true)
+    
     public static class FeedCardVO {
         /**
          * links
@@ -194,7 +194,7 @@ public class DingDingRobotParam {
         @NoArgsConstructor
         @Data
         @AllArgsConstructor
-        @Accessors(chain=true)
+        
         public static class LinksVO {
             /**
              * title

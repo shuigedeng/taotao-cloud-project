@@ -31,7 +31,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors(chain=true)
+
 public class PageVO<T> implements Serializable {
 
     @Serial

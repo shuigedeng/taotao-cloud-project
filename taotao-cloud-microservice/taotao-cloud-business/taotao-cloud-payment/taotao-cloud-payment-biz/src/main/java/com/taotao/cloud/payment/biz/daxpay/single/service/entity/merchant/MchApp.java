@@ -24,7 +24,7 @@ import java.math.BigDecimal;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName("pay_mch_app")
 public class MchApp extends MpBaseEntity implements ToResult<MchAppResult> {
 

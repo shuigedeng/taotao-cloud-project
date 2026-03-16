@@ -46,7 +46,7 @@ public class YsfJsapi extends YsfpayPaymentService {
 
     @Override
     public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) throws Exception {
-        String logPrefix = "【云闪付(unionpay)jsapi支付】";
+        String logPrefix = "[云闪付(unionpay)jsapi支付]";
         JSONObject reqParams = new JSONObject();
         YsfJsapiOrderRS res = ApiResBuilder.buildSuccess(YsfJsapiOrderRS.class);
         ChannelRetMsg channelRetMsg = new ChannelRetMsg();

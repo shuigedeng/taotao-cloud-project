@@ -62,7 +62,7 @@ public abstract class AbstractDemoJob implements PipelineJob<DemoPipelineProduct
     public void defaultLogPrint(String tradeId, DemoPipelineProduct product) {
         if (!DemoPipelineProduct.DemoSignalEnum.NORMAL.equals(product.getSignal())) {
             log.info(
-                    "流水线任务处理异常：流程Id=【{}】,信号量=【{}】,任务=【{}】,参数=【{}】",
+                    "流水线任务处理异常：流程Id=[{}],信号量=[{}],任务=[{}],参数=[{}]",
                     tradeId,
                     product.getSignal(),
                     ClassUtil.getClassName(this, true),

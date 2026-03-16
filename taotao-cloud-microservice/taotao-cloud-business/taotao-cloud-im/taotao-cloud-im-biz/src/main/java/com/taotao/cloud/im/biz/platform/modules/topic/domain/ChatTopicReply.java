@@ -29,7 +29,7 @@ import lombok.experimental.*;
 /** 帖子回复表实体类 q3z3 */
 @Data
 @TableName("chat_topic_reply")
-@Accessors(chain = true) // 链式调用
+ // 链式调用
 public class ChatTopicReply extends BaseEntity {
 
     private static final long serialVersionUID = 1L;

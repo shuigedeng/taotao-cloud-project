@@ -36,7 +36,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName("starter_wx_fans")
 public class WechatFans extends MpIdEntity implements EntityBaseFunction<WechatFansDto> {
 

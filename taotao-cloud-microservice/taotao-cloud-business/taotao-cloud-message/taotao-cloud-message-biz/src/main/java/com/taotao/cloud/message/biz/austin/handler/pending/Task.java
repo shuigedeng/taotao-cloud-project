@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
  * @author shuigedeng
  */
 @Data
-@Accessors(chain = true)
+
 @Slf4j
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)

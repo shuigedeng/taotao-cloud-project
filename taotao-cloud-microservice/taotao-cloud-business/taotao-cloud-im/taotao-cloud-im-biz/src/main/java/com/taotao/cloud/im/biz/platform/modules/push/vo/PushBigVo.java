@@ -23,7 +23,7 @@ import lombok.experimental.*;
 
 /** 大消息 */
 @Data
-@Accessors(chain = true) // 链式调用
+ // 链式调用
 @NoArgsConstructor
 public class PushBigVo {
 

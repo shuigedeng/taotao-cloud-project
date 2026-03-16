@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * @since 2024/3/1
  */
 @Data
-@Accessors(chain = true)
+
 public class PlatformReconcileTradeBo {
 
     /**

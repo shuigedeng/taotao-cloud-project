@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "退款订单数据")
 public class RefundOrderVo extends MchAppResult {
 

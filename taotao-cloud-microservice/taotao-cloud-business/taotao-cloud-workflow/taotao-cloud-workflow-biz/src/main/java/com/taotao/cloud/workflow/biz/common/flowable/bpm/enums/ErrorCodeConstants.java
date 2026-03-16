@@ -38,12 +38,12 @@ public interface ErrorCodeConstants {
     ErrorCode OA_DAY_LEAVE_ERROR = new ErrorCode(1009001007, "请假天数必须>=1");
 
     // ========== 流程模型 1-009-002-000 ==========
-    ErrorCode MODEL_KEY_EXISTS = new ErrorCode(1009002000, "已经存在流程标识为【{}】的流程");
+    ErrorCode MODEL_KEY_EXISTS = new ErrorCode(1009002000, "已经存在流程标识为[{}]的流程");
     ErrorCode MODEL_NOT_EXISTS = new ErrorCode(1009002001, "流程模型不存在");
     ErrorCode MODEL_KEY_VALID = new ErrorCode(1009002002, "流程标识格式不正确，需要以字母或下划线开头，后接任意字母、数字、中划线、下划线、句点！");
-    ErrorCode MODEL_DEPLOY_FAIL_FORM_NOT_CONFIG = new ErrorCode(1009002003, "部署流程失败，原因：流程表单未配置，请点击【修改流程】按钮进行配置");
+    ErrorCode MODEL_DEPLOY_FAIL_FORM_NOT_CONFIG = new ErrorCode(1009002003, "部署流程失败，原因：流程表单未配置，请点击[修改流程]按钮进行配置");
     ErrorCode MODEL_DEPLOY_FAIL_TASK_ASSIGN_RULE_NOT_CONFIG =
-            new ErrorCode(1009002004, "部署流程失败，" + "原因：用户任务({})未配置分配规则，请点击【修改流程】按钮进行配置");
+            new ErrorCode(1009002004, "部署流程失败，" + "原因：用户任务({})未配置分配规则，请点击[修改流程]按钮进行配置");
     ErrorCode MODEL_DEPLOY_FAIL_TASK_INFO_EQUALS = new ErrorCode(1009003005, "流程定义部署失败，原因：信息未发生变化");
 
     // ========== 流程定义 1-009-003-000 ==========
@@ -75,5 +75,5 @@ public interface ErrorCodeConstants {
 
     // ========== 用户组模块 1-009-011-000 ==========
     ErrorCode USER_GROUP_NOT_EXISTS = new ErrorCode(1009011000, "用户组不存在");
-    ErrorCode USER_GROUP_IS_DISABLE = new ErrorCode(1009011001, "名字为【{}】的用户组已被禁用");
+    ErrorCode USER_GROUP_IS_DISABLE = new ErrorCode(1009011001, "名字为[{}]的用户组已被禁用");
 }

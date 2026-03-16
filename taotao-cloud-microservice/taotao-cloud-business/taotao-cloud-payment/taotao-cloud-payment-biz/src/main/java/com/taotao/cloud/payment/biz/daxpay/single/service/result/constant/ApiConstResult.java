@@ -11,7 +11,7 @@ import lombok.experimental.*;
  * @since 2024/7/14
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "支付接口")
 public class ApiConstResult {
     /** 接口编码 */

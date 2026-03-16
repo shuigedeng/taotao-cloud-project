@@ -14,7 +14,7 @@ import com.taotao.cloud.payment.biz.daxpay.service.common.param.MchAppQuery;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "分账组参数")
 public class AllocGroupQuery extends MchAppQuery {
 

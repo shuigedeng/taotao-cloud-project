@@ -203,7 +203,7 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
 		searchParams.setCouponId(promotions.getId());
 		List<FullDiscount> fullDiscounts = fullDiscountService.listFindAll(searchParams);
 		if (fullDiscounts != null && !fullDiscounts.isEmpty()) {
-			throw new BusinessException("当前优惠券参与了促销活动【" + fullDiscounts.get(0).getPromotionName() + "】不能进行编辑删除操作");
+			throw new BusinessException("当前优惠券参与了促销活动[" + fullDiscounts.get(0).getPromotionName() + "]不能进行编辑删除操作");
 		}
 	}
 

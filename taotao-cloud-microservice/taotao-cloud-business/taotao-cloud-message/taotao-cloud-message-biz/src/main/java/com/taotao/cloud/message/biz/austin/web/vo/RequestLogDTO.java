@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
  * @date 2023/2/23 9:20
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestLogDTO {

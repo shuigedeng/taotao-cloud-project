@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName("pay_alloc_order_detail")
 public class AllocOrderDetail extends MchAppBaseEntity {
 

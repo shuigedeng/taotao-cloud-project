@@ -28,7 +28,7 @@ import lombok.experimental.*;
 /** 结算单 */
 @Setter
 @Getter
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class BillVO {

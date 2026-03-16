@@ -38,7 +38,7 @@ public class DeleteRequestHandler extends AbstractConfigRequestHandler<MetadataD
     @Override
     public Response handle(Message request) {
 
-        Log.print("===DeleteRequestHandler【开始】===> request: %s", request);
+        Log.print("===DeleteRequestHandler[开始]===> request: %s", request);
 
         MetadataDeleteRequest delete = (MetadataDeleteRequest) request;
 
@@ -59,7 +59,7 @@ public class DeleteRequestHandler extends AbstractConfigRequestHandler<MetadataD
                 GlobalEventBus.post(new MetadataChangeEvent(removed, EventType.DELETE));
             }
         }
-        Log.print("===DeleteRequestHandler【完成】===> request: %s", request);
+        Log.print("===DeleteRequestHandler[完成]===> request: %s", request);
 
         return ResponseHelper.success();
     }

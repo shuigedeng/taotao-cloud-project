@@ -64,7 +64,7 @@ public class RaftClosure implements Closure {
     @Override
     public void run( Status status ) {
         if (status == null) {
-            Log.print("RaftClosure#run方法的【status】是空值");
+            Log.print("RaftClosure#run方法的[status]是空值");
         }
         _status.setStatus(status);
         closure.run(_status);

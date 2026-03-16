@@ -41,7 +41,7 @@ import java.util.Date;
 @ApiModel(value = "商户信息表", description = "")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+
 @TableName("t_mch_info")
 public class MchInfo extends BaseModel implements Serializable {
 

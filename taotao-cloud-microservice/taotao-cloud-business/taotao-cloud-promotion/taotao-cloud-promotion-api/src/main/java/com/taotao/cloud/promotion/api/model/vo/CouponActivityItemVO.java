@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 
 /** 优惠券活动的优惠券VO */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class CouponActivityItemVO implements Serializable {

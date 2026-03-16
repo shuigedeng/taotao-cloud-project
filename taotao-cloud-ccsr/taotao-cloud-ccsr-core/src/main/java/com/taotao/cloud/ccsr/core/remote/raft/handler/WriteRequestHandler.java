@@ -40,7 +40,7 @@ public class WriteRequestHandler extends AbstractConfigRequestHandler<MetadataWr
     @Override
     public Response handle(Message request) {
 
-        Log.print("===WriteRequestHandler执行【开始】===> request: %s", request);
+        Log.print("===WriteRequestHandler执行[开始]===> request: %s", request);
 
         MetadataWriteRequest write = (MetadataWriteRequest) request;
         Metadata newData = write.getMetadata();
@@ -57,7 +57,7 @@ public class WriteRequestHandler extends AbstractConfigRequestHandler<MetadataWr
             }
         }
 
-        Log.print("===WriteRequestHandler【完成】===> request: %s", request);
+        Log.print("===WriteRequestHandler[完成]===> request: %s", request);
 
         return ResponseHelper.success(Any.pack(newData));
     }

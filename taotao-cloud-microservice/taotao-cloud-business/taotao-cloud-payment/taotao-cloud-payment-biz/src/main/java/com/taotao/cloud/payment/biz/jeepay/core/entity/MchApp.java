@@ -25,7 +25,7 @@ import java.util.Date;
 @ApiModel(value = "商户应用表", description = "")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+
 @TableName("t_mch_app")
 public class MchApp extends BaseModel {
 

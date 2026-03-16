@@ -80,7 +80,7 @@ public class PayOrderMchNotifyMQReceiver implements PayOrderMchNotifyMQ.IMQRecei
                 res = HttpUtil.post(StrUtil.subPre(notifyUrl, pathEndPos), StrUtil.subSuf(notifyUrl, pathEndPos + 1), 20000);
             } catch (Exception e) {
                 log.error("http error", e);
-                res = "连接["+ UrlBuilder.of(notifyUrl).getHost() +"]异常:【" + e.getMessage() + "】";
+                res = "连接["+ UrlBuilder.of(notifyUrl).getHost() +"]异常:[" + e.getMessage() + "]";
             }
 
             //支付订单 & 第一次通知: 更新为已通知

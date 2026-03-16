@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
-@Accessors(chain=true)
+
 public class EnterpriseWeChatRootResult {
 
 

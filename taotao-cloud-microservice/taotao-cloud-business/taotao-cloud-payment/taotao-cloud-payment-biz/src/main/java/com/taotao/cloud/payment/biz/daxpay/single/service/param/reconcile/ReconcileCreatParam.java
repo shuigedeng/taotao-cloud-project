@@ -15,7 +15,7 @@ import java.time.LocalDate;
  * @since 2024/8/5
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "对账任务创建参数")
 public class ReconcileCreatParam {
 

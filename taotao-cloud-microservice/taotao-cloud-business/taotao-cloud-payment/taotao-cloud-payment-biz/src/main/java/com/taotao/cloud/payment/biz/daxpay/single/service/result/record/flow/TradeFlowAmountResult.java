@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  * @since 2024/8/19
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "各类型流水汇总金额")
 public class TradeFlowAmountResult {
     @Schema(description = "收入金额")

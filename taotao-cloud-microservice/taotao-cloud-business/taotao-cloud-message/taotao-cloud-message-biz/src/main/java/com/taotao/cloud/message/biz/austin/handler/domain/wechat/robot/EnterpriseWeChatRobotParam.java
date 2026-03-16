@@ -16,7 +16,7 @@ import java.util.List;
  * @author shuigedeng
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class EnterpriseWeChatRobotParam {
@@ -63,7 +63,7 @@ public class EnterpriseWeChatRobotParam {
      */
     @NoArgsConstructor
     @Data
-    @Accessors(chain=true)
+    
     @AllArgsConstructor
     public static class TextDTO {
         /**
@@ -88,7 +88,7 @@ public class EnterpriseWeChatRobotParam {
      */
     @NoArgsConstructor
     @Data
-    @Accessors(chain=true)
+    
     @AllArgsConstructor
     public static class MarkdownDTO {
         /**
@@ -103,7 +103,7 @@ public class EnterpriseWeChatRobotParam {
      */
     @NoArgsConstructor
     @Data
-    @Accessors(chain=true)
+    
     @AllArgsConstructor
     public static class ImageDTO {
         /**
@@ -121,7 +121,7 @@ public class EnterpriseWeChatRobotParam {
      */
     @NoArgsConstructor
     @Data
-    @Accessors(chain=true)
+    
     @AllArgsConstructor
     public static class NewsDTO {
         /**
@@ -135,7 +135,7 @@ public class EnterpriseWeChatRobotParam {
          */
         @NoArgsConstructor
         @Data
-        @Accessors(chain=true)
+        
         @AllArgsConstructor
         public static class ArticlesDTO {
             /**
@@ -166,7 +166,7 @@ public class EnterpriseWeChatRobotParam {
      */
     @NoArgsConstructor
     @Data
-    @Accessors(chain=true)
+    
     @AllArgsConstructor
     public static class FileDTO {
         /**
@@ -181,7 +181,7 @@ public class EnterpriseWeChatRobotParam {
      */
     @NoArgsConstructor
     @Data
-    @Accessors(chain=true)
+    
     @AllArgsConstructor
     public static class TemplateCardDTO {
         /**
@@ -235,7 +235,7 @@ public class EnterpriseWeChatRobotParam {
          */
         @NoArgsConstructor
         @Data
-        @Accessors(chain=true)
+        
         @AllArgsConstructor
         public static class SourceDTO {
             /**
@@ -260,7 +260,7 @@ public class EnterpriseWeChatRobotParam {
          */
         @NoArgsConstructor
         @Data
-        @Accessors(chain=true)
+        
         @AllArgsConstructor
         public static class MainTitleDTO {
             /**
@@ -280,7 +280,7 @@ public class EnterpriseWeChatRobotParam {
          */
         @NoArgsConstructor
         @Data
-        @Accessors(chain=true)
+        
         @AllArgsConstructor
         public static class EmphasisContentDTO {
             /**
@@ -300,7 +300,7 @@ public class EnterpriseWeChatRobotParam {
          */
         @NoArgsConstructor
         @Data
-        @Accessors(chain=true)
+        
         @AllArgsConstructor
         public static class QuoteAreaDTO {
             /**
@@ -340,7 +340,7 @@ public class EnterpriseWeChatRobotParam {
          */
         @NoArgsConstructor
         @Data
-        @Accessors(chain=true)
+        
         @AllArgsConstructor
         public static class CardActionDTO {
             /**
@@ -370,7 +370,7 @@ public class EnterpriseWeChatRobotParam {
          */
         @NoArgsConstructor
         @Data
-        @Accessors(chain=true)
+        
         @AllArgsConstructor
         public static class HorizontalContentListDTO {
             /**
@@ -405,7 +405,7 @@ public class EnterpriseWeChatRobotParam {
          */
         @NoArgsConstructor
         @Data
-        @Accessors(chain=true)
+        
         @AllArgsConstructor
         public static class JumpListDTO {
             /**

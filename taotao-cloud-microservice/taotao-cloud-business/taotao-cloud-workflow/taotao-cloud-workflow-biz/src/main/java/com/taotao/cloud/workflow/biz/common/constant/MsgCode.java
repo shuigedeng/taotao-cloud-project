@@ -136,9 +136,9 @@ public interface MsgCode {
     /*========0-状态、短提示==========*/
     MCode WF001 = WF("必填值");
 
-    MCode WF002 = WF("【审核通过】");
-    MCode WF003 = WF("【审核同意】");
-    MCode WF004 = WF("【审核拒绝】");
+    MCode WF002 = WF("[审核通过]");
+    MCode WF003 = WF("[审核同意]");
+    MCode WF004 = WF("[审核拒绝]");
     MCode WF005 = WF("审批已完成");
     MCode WF006 = WF("开始");
     MCode WF007 = WF("结束");

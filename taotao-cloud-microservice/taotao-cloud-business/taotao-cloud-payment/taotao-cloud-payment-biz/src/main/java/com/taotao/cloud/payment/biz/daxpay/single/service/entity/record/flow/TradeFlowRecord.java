@@ -21,7 +21,7 @@ import java.math.BigDecimal;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName("pay_trade_flow_record")
 public class TradeFlowRecord extends MchAppRecordEntity implements ToResult<TradeFlowRecordResult> {
 

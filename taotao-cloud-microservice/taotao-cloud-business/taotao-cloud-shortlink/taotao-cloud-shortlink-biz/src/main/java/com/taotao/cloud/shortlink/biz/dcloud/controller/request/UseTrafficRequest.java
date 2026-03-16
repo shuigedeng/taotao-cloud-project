@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 
 
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class UseTrafficRequest {

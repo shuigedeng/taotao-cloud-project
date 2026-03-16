@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
  * https://open.dingtalk.com/document/orgapp-server/asynchronous-sending-of-enterprise-session-messages
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class DingDingWorkContentModel extends ContentModel {
@@ -24,29 +24,29 @@ public class DingDingWorkContentModel extends ContentModel {
     private String sendType;
 
     /**
-     * 【文本消息】内容，【markdown消息】内容，【ActionCard消息】内容
+     * [文本消息]内容，[markdown消息]内容，[ActionCard消息]内容
      */
     private String content;
 
     /**
-     * 【markdown消息】标题，【ActionCard消息】标题
+     * [markdown消息]标题，[ActionCard消息]标题
      */
     private String title;
 
     /**
-     * 【ActionCard消息】按钮布局
+     * [ActionCard消息]按钮布局
      */
     private String btnOrientation;
 
     /**
-     * 【ActionCard消息】按钮的文案和跳转链接的json
+     * [ActionCard消息]按钮的文案和跳转链接的json
      * [{"title":"一个按钮","action_url":"https://www.taobao.com"},{"title":"两个按钮","action_url":"https://www.tmall.com"}]
      */
     private String btns;
 
 
     /**
-     * 【链接消息】点击消息跳转的URL，
+     * [链接消息]点击消息跳转的URL，
      */
     private String url;
 

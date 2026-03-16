@@ -26,7 +26,7 @@ import java.time.LocalDate;
 @FieldNameConstants
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName(value = "pay_reconcile_statement")
 public class ReconcileStatement extends MchAppBaseEntity implements ToResult<ReconcileStatementResult> {
 

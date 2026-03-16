@@ -11,7 +11,7 @@ import lombok.experimental.*;
  * @since 2024/6/15
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "微信OpenId查询结果")
 public class OpenIdResult {
 

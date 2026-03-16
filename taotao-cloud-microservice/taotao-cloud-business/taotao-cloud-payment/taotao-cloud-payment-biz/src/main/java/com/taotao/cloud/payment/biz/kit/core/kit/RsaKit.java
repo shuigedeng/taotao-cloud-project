@@ -76,8 +76,8 @@ public class RsaKit {
     }
 
     /**
-     * 使用模和指数生成RSA公钥 注意：【此代码用了默认补位方式，为RSA/None/PKCS1Padding，不同JDK默认的补位方式可能不同，如Android默认是RSA
-     * /None/NoPadding】
+     * 使用模和指数生成RSA公钥 注意：[此代码用了默认补位方式，为RSA/None/PKCS1Padding，不同JDK默认的补位方式可能不同，如Android默认是RSA
+     * /None/NoPadding]
      *
      * @param modulus 模
      * @param exponent 公钥指数

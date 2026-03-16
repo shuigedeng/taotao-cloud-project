@@ -18,7 +18,7 @@ import java.math.BigDecimal;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "资金流水记录")
 public class TradeFlowRecordResult extends MchAppResult {
 

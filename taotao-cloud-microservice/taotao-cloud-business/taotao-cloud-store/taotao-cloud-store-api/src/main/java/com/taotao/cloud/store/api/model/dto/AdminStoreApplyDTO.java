@@ -36,7 +36,7 @@ import org.hibernate.validator.constraints.Length;
  * @since 2020/12/12 11:35
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "后台添加店铺信息DTO")

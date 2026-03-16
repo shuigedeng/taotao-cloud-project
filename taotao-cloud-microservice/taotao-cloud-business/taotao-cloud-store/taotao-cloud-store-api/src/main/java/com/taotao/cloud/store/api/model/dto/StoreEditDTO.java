@@ -34,7 +34,7 @@ import org.hibernate.validator.constraints.Length;
  * @since 2020-08-22 15:10:51
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "店铺修改DTO")

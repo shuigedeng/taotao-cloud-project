@@ -29,7 +29,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 /** 订单统计数据VO */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderStatisticsDataVO {

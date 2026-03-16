@@ -24,7 +24,7 @@ import lombok.experimental.*;
 
 /** 消息发送人 */
 @Data
-@Accessors(chain = true) // 链式调用
+ // 链式调用
 public class PushParamVo {
 
     /** 用户id */

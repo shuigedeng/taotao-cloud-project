@@ -24,7 +24,7 @@ import lombok.experimental.*;
 
 /** 支持的支付方式 */
 @Data
-@Accessors(chain = true)
+
 public class PaymentSupportSetting {
 
     private List<PaymentSupportItem> paymentSupportItems;

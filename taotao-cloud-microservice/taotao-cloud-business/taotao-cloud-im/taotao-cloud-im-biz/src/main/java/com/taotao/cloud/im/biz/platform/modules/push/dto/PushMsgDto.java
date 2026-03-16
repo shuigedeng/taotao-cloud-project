@@ -23,7 +23,7 @@ import lombok.experimental.*;
 
 /** 推送消息对象 */
 @Data
-@Accessors(chain = true) // 链式调用
+ // 链式调用
 public class PushMsgDto {
 
     /** [必填]通知标题，长度50 */

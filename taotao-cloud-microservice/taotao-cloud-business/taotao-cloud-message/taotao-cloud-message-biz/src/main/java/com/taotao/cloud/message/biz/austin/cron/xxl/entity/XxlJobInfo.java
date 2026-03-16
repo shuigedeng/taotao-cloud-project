@@ -17,10 +17,10 @@ import java.util.Date;
  * @author shuigedeng
  */
 @Data
-@Accessors(chain = true)
+
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors(chain=true)
+
 public class XxlJobInfo implements Serializable {
 
     /**

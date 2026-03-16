@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  * @since 2024/7/25
  */
 @Data
-@Accessors(chain = true)
+
 public class PaySyncResultBo {
 
 

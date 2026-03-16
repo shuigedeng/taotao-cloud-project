@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "支付订单")
 public class PayOrderVo extends MchAppResult {
 

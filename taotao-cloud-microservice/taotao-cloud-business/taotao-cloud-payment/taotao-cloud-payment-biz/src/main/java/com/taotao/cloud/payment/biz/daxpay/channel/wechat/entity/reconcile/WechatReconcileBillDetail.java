@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Data
-@Accessors(chain = true)
+
 public class WechatReconcileBillDetail {
 
     // 交易时间

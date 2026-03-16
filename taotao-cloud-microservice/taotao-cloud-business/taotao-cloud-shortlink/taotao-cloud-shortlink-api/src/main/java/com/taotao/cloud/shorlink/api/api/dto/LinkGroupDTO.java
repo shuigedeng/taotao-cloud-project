@@ -30,7 +30,7 @@ import java.io.Serializable;
  * @since 2022/05/03
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class LinkGroupDTO implements Serializable {

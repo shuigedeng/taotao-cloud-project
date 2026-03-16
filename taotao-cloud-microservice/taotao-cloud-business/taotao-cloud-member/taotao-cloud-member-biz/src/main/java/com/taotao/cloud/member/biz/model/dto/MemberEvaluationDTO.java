@@ -29,7 +29,7 @@ import org.hibernate.validator.constraints.Length;
 
 /** 会员评价DTO */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "租户id")

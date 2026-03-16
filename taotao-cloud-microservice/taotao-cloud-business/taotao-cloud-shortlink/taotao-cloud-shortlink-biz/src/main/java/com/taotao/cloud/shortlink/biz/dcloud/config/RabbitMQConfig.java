@@ -48,7 +48,7 @@ public class RabbitMQConfig {
     private String shortLinkAddMappingQueue="short_link.add.mapping.queue";
 
     /**
-     * 新增短链具体的routingKey,【发送消息使用】
+     * 新增短链具体的routingKey,[发送消息使用]
      */
     private String shortLinkAddRoutingKey="short_link.add.link.mapping.routing.key";
 
@@ -122,7 +122,7 @@ public class RabbitMQConfig {
     private String shortLinkDelMappingQueue="short_link.del.mapping.queue";
 
     /**
-     * 删除短链具体的routingKey,【发送消息使用】
+     * 删除短链具体的routingKey,[发送消息使用]
      */
     private String shortLinkDelRoutingKey="short_link.del.link.mapping.routing.key";
 
@@ -189,7 +189,7 @@ public class RabbitMQConfig {
     private String shortLinkUpdateMappingQueue="short_link.update.mapping.queue";
 
     /**
-     * 更新 短链具体的routingKey,【发送消息使用】
+     * 更新 短链具体的routingKey,[发送消息使用]
      */
     private String shortLinkUpdateRoutingKey="short_link.update.link.mapping.routing.key";
 

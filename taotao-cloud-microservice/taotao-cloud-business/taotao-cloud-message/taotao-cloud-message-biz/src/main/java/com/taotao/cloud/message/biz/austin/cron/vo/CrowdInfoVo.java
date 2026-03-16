@@ -17,10 +17,10 @@ import java.util.Map;
  * @date 2022/2/9
  */
 @Data
-@Accessors(chain = true)
+
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors(chain=true)
+
 public class CrowdInfoVo implements Serializable {
 
     /**

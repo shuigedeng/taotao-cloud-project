@@ -27,7 +27,7 @@ import org.flowable.engine.impl.bpmn.behavior.AbstractBpmnActivityBehavior;
 import org.flowable.engine.impl.bpmn.behavior.ParallelMultiInstanceBehavior;
 
 /**
- * 自定义的【并行】的【多个】流程任务的 assignee 负责人的分配 第一步，基于分配规则，计算出分配任务的【多个】候选人们。 第二步，将【多个】任务候选人们，设置到
+ * 自定义的[并行]的[多个]流程任务的 assignee 负责人的分配 第一步，基于分配规则，计算出分配任务的[多个]候选人们。 第二步，将[多个]任务候选人们，设置到
  * DelegateExecution 的 collectionVariable 变量中，以便 BpmUserTaskActivityBehavior 使用它
  *
  * @author kemengkai

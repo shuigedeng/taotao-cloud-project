@@ -20,7 +20,7 @@ import java.math.BigDecimal;
  * @since 2021/3/1
  */
 @Data
-@Accessors(chain = true)
+
 public class WechatPayConfig implements ToResult<WechatPayConfigResult> {
 
     /** 主键 */

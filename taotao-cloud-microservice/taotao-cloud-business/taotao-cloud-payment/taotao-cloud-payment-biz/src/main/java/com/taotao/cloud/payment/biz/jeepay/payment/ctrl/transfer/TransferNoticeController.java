@@ -111,7 +111,7 @@ public class TransferNoticeController extends AbstractCtrl {
                 throw new BizException("处理回调事件异常！"); //需要实现类自行抛出ResponseException, 不应该在这抛此异常。
             }
 
-            // 转账单是 【转账中状态】
+            // 转账单是 [转账中状态]
             if(transferOrder.getState() == TransferOrder.STATE_ING) {
                 if(notifyResult.getChannelState() == ChannelRetMsg.ChannelState.CONFIRM_SUCCESS) {
                     // 转账成功

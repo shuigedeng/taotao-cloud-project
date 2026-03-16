@@ -38,7 +38,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain=true)
+
 public class EsGoodsIndexApiResponse implements Serializable {
 
     @Serial

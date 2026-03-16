@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "商户订阅通知任务")
 public class MerchantNotifyTaskResult extends MchAppResult {
 

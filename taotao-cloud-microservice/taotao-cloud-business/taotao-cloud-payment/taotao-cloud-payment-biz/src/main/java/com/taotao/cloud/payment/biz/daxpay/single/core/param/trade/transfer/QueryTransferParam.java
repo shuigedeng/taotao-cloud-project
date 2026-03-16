@@ -16,7 +16,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "转账订单查询参数")
 public class QueryTransferParam extends PaymentCommonParam {
 

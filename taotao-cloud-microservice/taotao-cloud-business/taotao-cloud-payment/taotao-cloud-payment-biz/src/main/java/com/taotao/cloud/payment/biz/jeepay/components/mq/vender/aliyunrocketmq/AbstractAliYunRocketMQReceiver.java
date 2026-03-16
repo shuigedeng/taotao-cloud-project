@@ -48,10 +48,10 @@ public abstract class AbstractAliYunRocketMQReceiver implements IMQMsgReceiver, 
             public Action consume(Message message, ConsumeContext context) {
                 try {
                     receiveMsg(new String(message.getBody()));
-                    log.debug("【{}】MQ消息消费成功topic:{}, messageId:{}", getConsumerName(), message.getTopic(), message.getMsgID());
+                    log.debug("[{}]MQ消息消费成功topic:{}, messageId:{}", getConsumerName(), message.getTopic(), message.getMsgID());
                     return Action.CommitMessage;
                 } catch (Exception e) {
-                    log.error("【{}】MQ消息消费失败topic:{}, messageId:{}", getConsumerName(), message.getTopic(), message.getMsgID(), e);
+                    log.error("[{}]MQ消息消费失败topic:{}, messageId:{}", getConsumerName(), message.getTopic(), message.getMsgID(), e);
                 }
                 return Action.ReconsumeLater;
             }

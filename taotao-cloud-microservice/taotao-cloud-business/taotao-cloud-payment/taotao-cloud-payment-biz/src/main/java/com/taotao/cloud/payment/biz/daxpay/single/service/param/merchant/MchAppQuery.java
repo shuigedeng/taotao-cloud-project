@@ -14,7 +14,7 @@ import lombok.experimental.*;
  */
 @Data
 @QueryParam(type = QueryParam.CompareTypeEnum.LIKE)
-@Accessors(chain = true)
+
 @Schema(title = "商户应用查询参数")
 public final class MchAppQuery {
 

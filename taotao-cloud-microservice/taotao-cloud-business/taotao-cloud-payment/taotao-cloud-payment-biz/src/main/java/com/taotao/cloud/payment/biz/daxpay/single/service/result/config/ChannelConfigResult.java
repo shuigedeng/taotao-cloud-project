@@ -12,7 +12,7 @@ import lombok.experimental.*;
  * @since 2024/6/25
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "通道配置")
 public class ChannelConfigResult{
 

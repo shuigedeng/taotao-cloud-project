@@ -36,7 +36,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
+
 public class OrderLogVO {
 
     /**

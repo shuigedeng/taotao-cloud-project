@@ -19,7 +19,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName("pay_channel_config" )
 public class ChannelConfig extends MchAppBaseEntity implements ToResult<ChannelConfigResult> {
 

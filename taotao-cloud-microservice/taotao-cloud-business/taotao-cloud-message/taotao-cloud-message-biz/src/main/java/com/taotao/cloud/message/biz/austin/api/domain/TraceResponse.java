@@ -16,7 +16,7 @@ import java.util.List;
  * @Version 1.0.0
  */
 @Data
-@Accessors(chain = true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class TraceResponse {

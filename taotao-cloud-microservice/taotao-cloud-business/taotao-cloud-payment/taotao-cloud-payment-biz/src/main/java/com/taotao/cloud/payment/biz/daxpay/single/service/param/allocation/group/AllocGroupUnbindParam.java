@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2024/4/1
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "分账组取消接收者绑定")
 public class AllocGroupUnbindParam {
 

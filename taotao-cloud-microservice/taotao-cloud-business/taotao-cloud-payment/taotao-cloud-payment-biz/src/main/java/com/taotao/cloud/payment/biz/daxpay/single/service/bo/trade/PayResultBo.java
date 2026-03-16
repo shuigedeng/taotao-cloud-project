@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * @since 2024/7/23
  */
 @Data
-@Accessors(chain = true)
+
 public class PayResultBo {
 
     /**

@@ -205,7 +205,7 @@ public class YsfSignUtils {
     }
 
 
-    /**  进件回调  将JSON中的数据转换成key1=value1&key2=value2的形式，忽略null内容【空串也参与签名】 和 signature字段* */
+    /**  进件回调  将JSON中的数据转换成key1=value1&key2=value2的形式，忽略null内容[空串也参与签名] 和 signature字段* */
     private static String convertSignStringIncludeEmpty(JSONObject params) {
         TreeMap<String, Object> tree = new TreeMap<>();
 

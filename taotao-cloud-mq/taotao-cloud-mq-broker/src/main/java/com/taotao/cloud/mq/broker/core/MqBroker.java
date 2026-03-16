@@ -234,7 +234,7 @@ public class MqBroker extends Thread implements com.taotao.cloud.mq.broker.api.M
 
 			// 绑定端口，开始接收进来的链接
 			ChannelFuture channelFuture = serverBootstrap.bind(port).syncUninterruptibly();
-			log.info("MQ 中间人启动完成，监听【" + port + "】端口");
+			log.info("MQ 中间人启动完成，监听[" + port + "]端口");
 
 			channelFuture.channel().closeFuture().syncUninterruptibly();
 			log.info("MQ 中间人关闭完成");

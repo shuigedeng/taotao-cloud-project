@@ -16,7 +16,7 @@ import java.math.BigDecimal;
  * @since 2024/8/16
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "退款创建参数")
 public class RefundCreateParam {
 

@@ -37,7 +37,7 @@ import java.time.LocalDateTime;
 
 /** link_group */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "short_link.link_group")

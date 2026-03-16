@@ -25,7 +25,7 @@ import lombok.experimental.*;
 
 /** 地区VO */
 @Data
-@Accessors(chain=true)
+
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor

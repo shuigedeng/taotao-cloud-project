@@ -18,7 +18,7 @@ import lombok.experimental.*;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @QueryParam(type = QueryParam.CompareTypeEnum.LIKE)
-@Accessors(chain = true)
+
 @Schema(title = "流水记录查询类")
 public class TradeFlowRecordQuery extends MchAppQuery {
 

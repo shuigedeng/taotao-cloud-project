@@ -68,16 +68,16 @@ public class MediaHandler extends SimpleChannelInboundHandler<Object> {
 			FullHttpRequest req = (FullHttpRequest) msg;
 			// 请求解析
 			QueryStringDecoder decoder = new QueryStringDecoder(req.uri());
-			log.info("【HttpRequest-PATH:" + decoder.path() + "】");
-			log.info("【HttpRequest-URI:" + decoder.uri() + "】");
-			log.info("【HttpRequest-Parameters:" + decoder.parameters() + "】");
-			log.info("【HttpRequest-Method:" + req.method().name() + "】");
+			log.info("[HttpRequest-PATH:" + decoder.path() + "]");
+			log.info("[HttpRequest-URI:" + decoder.uri() + "]");
+			log.info("[HttpRequest-Parameters:" + decoder.parameters() + "]");
+			log.info("[HttpRequest-Method:" + req.method().name() + "]");
 
 			Iterator<Map.Entry<String, String>> iterator = req.headers().iteratorAsString();
 			while (iterator.hasNext()) {
 				Map.Entry<String, String> entry = iterator.next();
 				log.info(
-					"【Header-Key:" + entry.getKey() + ";Header-Value:" + entry.getValue() + "】");
+					"[Header-Key:" + entry.getKey() + ";Header-Value:" + entry.getValue() + "]");
 			}
 			// http请求及非转换升级为ws请求
 			if (!req.decoderResult().isSuccess() || (!"websocket".equals(

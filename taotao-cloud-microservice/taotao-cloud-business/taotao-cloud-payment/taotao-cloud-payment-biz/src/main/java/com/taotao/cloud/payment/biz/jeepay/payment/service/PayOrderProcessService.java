@@ -66,7 +66,7 @@ public class PayOrderProcessService {
 
         try {
 
-            //默认不分账  || 其他非【自动分账】逻辑时， 不处理
+            //默认不分账  || 其他非[自动分账]逻辑时， 不处理
             if(payOrder == null || payOrder.getDivisionMode() == null || payOrder.getDivisionMode() != PayOrder.DIVISION_MODE_AUTO){
                 return ;
             }

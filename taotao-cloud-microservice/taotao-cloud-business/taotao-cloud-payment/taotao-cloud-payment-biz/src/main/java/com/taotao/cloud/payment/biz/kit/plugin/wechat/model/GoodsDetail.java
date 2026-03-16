@@ -22,7 +22,7 @@ import lombok.experimental.*;
 
 /** 统一下单-单品列表 */
 @Data
-@Accessors(chain = true)
+
 public class GoodsDetail {
     /** 商户侧商品编码 */
     private String merchant_goods_id;

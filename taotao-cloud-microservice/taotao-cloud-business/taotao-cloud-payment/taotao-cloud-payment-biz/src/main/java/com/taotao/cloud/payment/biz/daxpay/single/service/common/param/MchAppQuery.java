@@ -14,7 +14,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "商户查询参数")
 public class MchAppQuery extends SortParam {
 

@@ -39,7 +39,7 @@ import java.io.Serializable;
 @ApiModel(value = "系统用户认证表", description = "")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+
 @TableName("t_sys_user_auth")
 public class SysUserAuth implements Serializable {
 

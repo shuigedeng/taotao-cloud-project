@@ -39,7 +39,7 @@ public interface Cache<K, V> extends Map<K, V> {
      * {@link Cache#values()} 获取所有值
      * {@link Cache#entrySet()} 获取所有明细
      *
-     * 【数据的不一致性】
+     * [数据的不一致性]
      * 调用其他方法，可能得到的不是使用者的预期结果，因为此时的 expire 信息可能没有被及时更新。
      * 比如
      * {@link Cache#isEmpty()} 是否为空

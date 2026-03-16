@@ -54,7 +54,7 @@ public class PayOrderService extends ServiceImpl<PayOrderMapper, PayOrder> {
     @Autowired private PayWayMapper payWayMapper;
     @Autowired private PayOrderDivisionRecordMapper payOrderDivisionRecordMapper;
 
-    /** 更新订单状态  【订单生成】 --》 【支付中】 **/
+    /** 更新订单状态  [订单生成] --》 [支付中] **/
     public boolean updateInit2Ing(String payOrderId, PayOrder payOrder){
 
         PayOrder updateRecord = new PayOrder();
@@ -72,7 +72,7 @@ public class PayOrderService extends ServiceImpl<PayOrderMapper, PayOrder> {
                 .eq(PayOrder::getPayOrderId, payOrderId).eq(PayOrder::getState, PayOrder.STATE_INIT));
     }
 
-    /** 更新订单状态  【支付中】 --》 【支付成功】 **/
+    /** 更新订单状态  [支付中] --》 [支付成功] **/
     public boolean updateIng2Success(String payOrderId, String channelOrderNo, String channelUserId){
 
         PayOrder updateRecord = new PayOrder();
@@ -85,7 +85,7 @@ public class PayOrderService extends ServiceImpl<PayOrderMapper, PayOrder> {
                 .eq(PayOrder::getPayOrderId, payOrderId).eq(PayOrder::getState, PayOrder.STATE_ING));
     }
 
-    /** 更新订单状态  【支付中】 --》 【订单关闭】 **/
+    /** 更新订单状态  [支付中] --》 [订单关闭] **/
     public boolean updateIng2Close(String payOrderId){
 
         PayOrder updateRecord = new PayOrder();
@@ -95,7 +95,7 @@ public class PayOrderService extends ServiceImpl<PayOrderMapper, PayOrder> {
                 .eq(PayOrder::getPayOrderId, payOrderId).eq(PayOrder::getState, PayOrder.STATE_ING));
     }
 
-    /** 更新订单状态  【订单生成】 --》 【订单关闭】 **/
+    /** 更新订单状态  [订单生成] --》 [订单关闭] **/
     public boolean updateInit2Close(String payOrderId){
 
         PayOrder updateRecord = new PayOrder();
@@ -106,7 +106,7 @@ public class PayOrderService extends ServiceImpl<PayOrderMapper, PayOrder> {
     }
 
 
-    /** 更新订单状态  【支付中】 --》 【支付失败】 **/
+    /** 更新订单状态  [支付中] --》 [支付失败] **/
     public boolean updateIng2Fail(String payOrderId, String channelOrderNo, String channelUserId, String channelErrCode, String channelErrMsg){
 
         PayOrder updateRecord = new PayOrder();
@@ -121,7 +121,7 @@ public class PayOrderService extends ServiceImpl<PayOrderMapper, PayOrder> {
     }
 
 
-    /** 更新订单状态  【支付中】 --》 【支付成功/支付失败】 **/
+    /** 更新订单状态  [支付中] --》 [支付成功/支付失败] **/
     public boolean updateIng2SuccessOrFail(String payOrderId, Byte updateState, String channelOrderNo, String channelUserId, String channelErrCode, String channelErrMsg){
 
         if(updateState == PayOrder.STATE_ING){
@@ -346,7 +346,7 @@ public class PayOrderService extends ServiceImpl<PayOrderMapper, PayOrder> {
         List<Map> payListMap = new ArrayList<>(); // 收款的列
         List<Map> refundListMap = new ArrayList<>(); // 退款的列
         for (Map dayMap:dayList) {
-            // 为收款列和退款列赋值默认参数【payAmount字段切记不可为string，否则前端图表解析不出来】
+            // 为收款列和退款列赋值默认参数[payAmount字段切记不可为string，否则前端图表解析不出来]
             Map<String, Object> payMap = new HashMap<>();
             payMap.put("date", dayMap.get("date").toString());
             payMap.put("type", "收款");

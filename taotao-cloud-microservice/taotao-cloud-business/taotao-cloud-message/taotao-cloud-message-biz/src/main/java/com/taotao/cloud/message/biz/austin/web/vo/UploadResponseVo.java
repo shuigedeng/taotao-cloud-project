@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
  *
  * @author shuigedeng
  */
-@Accessors(chain=true)
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

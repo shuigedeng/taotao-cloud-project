@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName("pay_reconcile_discrepancy")
 public class ReconcileDiscrepancy extends MchAppRecordEntity implements ToResult<ReconcileDiscrepancyResult> {
 

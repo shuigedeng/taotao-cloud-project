@@ -18,7 +18,7 @@ import java.io.Serializable;
  */
 @Data
 @NoArgsConstructor
-@Accessors(chain = true)
+
 public class WxPayOrderReverseV3Request implements Serializable {
   @Serial
   private static final long serialVersionUID = 1L;

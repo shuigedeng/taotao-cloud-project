@@ -11,7 +11,7 @@ import lombok.experimental.*;
  * @since 2024/7/24
  */
 @Data
-@Accessors(chain = true)
+
 public class WxPayOrderReverseV3Result {
     /**
      * <pre>

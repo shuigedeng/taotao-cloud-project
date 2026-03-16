@@ -27,6 +27,6 @@ public class MyRemoveListener<K, V> implements CacheRemoveListener<K, V> {
 
     @Override
     public void listen( CacheRemoveListenerContext<K, V> context) {
-        System.out.println("【删除提示】可恶，我竟然被删除了！" + context.key());
+        System.out.println("[删除提示]可恶，我竟然被删除了！" + context.key());
     }
 }

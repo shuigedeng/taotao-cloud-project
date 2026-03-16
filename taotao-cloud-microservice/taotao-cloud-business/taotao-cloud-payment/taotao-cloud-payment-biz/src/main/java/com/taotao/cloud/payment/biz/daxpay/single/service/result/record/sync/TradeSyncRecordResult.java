@@ -15,7 +15,7 @@ import com.taotao.cloud.payment.biz.daxpay.core.result.MchAppResult;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "支付同步订单")
 public class TradeSyncRecordResult extends MchAppResult {
 

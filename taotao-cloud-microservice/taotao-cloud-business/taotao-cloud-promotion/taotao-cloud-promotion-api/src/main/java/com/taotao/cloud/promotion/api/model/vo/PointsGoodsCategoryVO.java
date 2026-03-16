@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 
 /** 积分商品分类视图对象 */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class PointsGoodsCategoryVO implements Serializable {

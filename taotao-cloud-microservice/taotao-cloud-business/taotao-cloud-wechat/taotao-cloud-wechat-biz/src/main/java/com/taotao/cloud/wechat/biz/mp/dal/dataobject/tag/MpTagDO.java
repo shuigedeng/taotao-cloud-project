@@ -33,7 +33,7 @@ import me.chanjar.weixin.mp.bean.tag.WxUserTag;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-@Accessors(chain=true)
+
 @NoArgsConstructor
 @AllArgsConstructor
 public class MpTagDO extends BaseDO {
@@ -48,7 +48,7 @@ public class MpTagDO extends BaseDO {
     /**
      * 此标签下粉丝数
      *
-     * <p>冗余：{@link WxUserTag#getCount()} 字段，需要管理员点击【同步】后，更新该字段
+     * <p>冗余：{@link WxUserTag#getCount()} 字段，需要管理员点击[同步]后，更新该字段
      */
     private Integer count;
 

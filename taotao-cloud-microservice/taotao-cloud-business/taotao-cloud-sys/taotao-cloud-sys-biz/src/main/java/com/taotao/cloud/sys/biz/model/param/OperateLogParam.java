@@ -30,7 +30,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(description = "操作日志")
 public class OperateLogParam extends PageQuery {
 

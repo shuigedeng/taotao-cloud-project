@@ -21,7 +21,7 @@ import lombok.experimental.*;
 
 /** 支付宝支付设置 */
 @Data
-@Accessors(chain = true)
+
 public class AlipayPaymentSettingApiResponse {
 
     /** 应用id */

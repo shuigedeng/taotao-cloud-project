@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
  * <p>
  * 流量控制所需要的参数
  */
-@Accessors(chain=true)
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

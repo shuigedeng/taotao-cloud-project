@@ -18,7 +18,7 @@ import lombok.experimental.*;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @QueryParam(type = QueryParam.CompareTypeEnum.LIKE)
-@Accessors(chain = true)
+
 @Schema(title = "支付退款查询参数")
 public class RefundOrderQuery extends MchAppQuery {
 

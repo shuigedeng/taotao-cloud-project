@@ -17,7 +17,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 public class AllocReceiverRemoveParam extends DaxPayRequest<AllocReceiverRemoveModel> {
 
     /** 接收者编号 */

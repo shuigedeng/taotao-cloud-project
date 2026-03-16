@@ -45,7 +45,7 @@ import lombok.experimental.*;
  * @since 2022-04-28 09:17:07
  */
 @Data
-@Accessors(chain = true)
+
 @AllArgsConstructor
 @Schema(description = "购物车视图")
 public class TradeDTO implements Serializable {

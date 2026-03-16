@@ -24,7 +24,7 @@ public class AllocReceiverModel {
      * 分账接收方
      */
     @Data
-    @Accessors(chain = true)
+    
     public static class Receiver{
         /** 分账接收方编号, 需要保证唯一 */
         private String receiverNo;

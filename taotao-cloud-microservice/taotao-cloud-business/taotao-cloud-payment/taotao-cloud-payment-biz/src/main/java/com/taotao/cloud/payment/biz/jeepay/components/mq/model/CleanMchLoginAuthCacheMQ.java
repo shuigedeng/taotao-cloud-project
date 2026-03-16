@@ -39,13 +39,13 @@ import java.util.List;
 @AllArgsConstructor
 public class CleanMchLoginAuthCacheMQ extends AbstractMQ {
 
-    /** 【！重要配置项！】 定义MQ名称 **/
+    /** [！重要配置项！] 定义MQ名称 **/
     public static final String MQ_NAME = "QUEUE_CLEAN_MCH_LOGIN_AUTH_CACHE";
 
     /** 内置msg 消息体定义 **/
     private MsgPayload payload;
 
-    /**  【！重要配置项！】 定义Msg消息载体 **/
+    /**  [！重要配置项！] 定义Msg消息载体 **/
     @Data
     @AllArgsConstructor
     public static class MsgPayload {
@@ -60,7 +60,7 @@ public class CleanMchLoginAuthCacheMQ extends AbstractMQ {
         return MQ_NAME;
     }
 
-    /**  【！重要配置项！】 **/
+    /**  [！重要配置项！] **/
     @Override
     public MQSendTypeEnum getMQType(){
         return MQSendTypeEnum.QUEUE;  // QUEUE - 点对点 、 BROADCAST - 广播模式
@@ -71,7 +71,7 @@ public class CleanMchLoginAuthCacheMQ extends AbstractMQ {
         return JSONObject.toJSONString(payload);
     }
 
-    /**  【！重要配置项！】 构造MQModel , 一般用于发送MQ时 **/
+    /**  [！重要配置项！] 构造MQModel , 一般用于发送MQ时 **/
     public static CleanMchLoginAuthCacheMQ build(List<Long> userIdList){
         return new CleanMchLoginAuthCacheMQ(new MsgPayload(userIdList));
     }

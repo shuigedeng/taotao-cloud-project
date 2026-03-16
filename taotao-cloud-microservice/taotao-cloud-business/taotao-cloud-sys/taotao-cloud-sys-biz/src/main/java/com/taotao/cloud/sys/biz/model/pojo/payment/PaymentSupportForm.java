@@ -26,7 +26,7 @@ import lombok.experimental.*;
 
 /** 支持的支付方式表单 */
 @Data
-@Accessors(chain = true)
+
 public class PaymentSupportForm {
 
     /**

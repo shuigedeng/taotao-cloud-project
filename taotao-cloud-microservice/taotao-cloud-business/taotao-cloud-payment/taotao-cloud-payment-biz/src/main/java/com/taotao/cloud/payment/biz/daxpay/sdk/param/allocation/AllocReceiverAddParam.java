@@ -20,7 +20,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 public class AllocReceiverAddParam extends DaxPayRequest<AllocReceiverAddModel> {
 
     /** 接收者编号 */

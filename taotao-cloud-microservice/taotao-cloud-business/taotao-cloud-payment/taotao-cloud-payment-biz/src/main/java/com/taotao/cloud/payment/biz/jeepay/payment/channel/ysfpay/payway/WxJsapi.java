@@ -53,7 +53,7 @@ public class WxJsapi extends YsfpayPaymentService {
 
     @Override
     public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) throws Exception {
-        String logPrefix = "【云闪付(wechatJs)jsapi支付】";
+        String logPrefix = "[云闪付(wechatJs)jsapi支付]";
         JSONObject reqParams = new JSONObject();
         WxJsapiOrderRS res = ApiResBuilder.buildSuccess(WxJsapiOrderRS.class);
         ChannelRetMsg channelRetMsg = new ChannelRetMsg();

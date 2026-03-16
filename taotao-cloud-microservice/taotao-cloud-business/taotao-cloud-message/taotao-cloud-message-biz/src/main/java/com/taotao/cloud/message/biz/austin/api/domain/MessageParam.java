@@ -16,10 +16,10 @@ import java.util.Map;
  * @author shuigedeng
  */
 @Data
-@Accessors(chain = true)
+
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors(chain=true)
+
 public class MessageParam {
 
     /**
@@ -30,7 +30,7 @@ public class MessageParam {
     /**
      * @Description: 接收者
      * 多个用,逗号号分隔开
-     * 【不能大于100个】
+     * [不能大于100个]
      * 必传
      */
     private String receiver;

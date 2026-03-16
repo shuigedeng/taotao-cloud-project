@@ -18,7 +18,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName("pay_platform_config")
 public class PlatformConfig extends MpBaseEntity implements ToResult<PlatformConfigResult> {
 

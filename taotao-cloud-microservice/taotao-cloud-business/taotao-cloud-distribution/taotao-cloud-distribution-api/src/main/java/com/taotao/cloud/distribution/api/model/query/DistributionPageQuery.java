@@ -27,7 +27,7 @@ import lombok.experimental.*;
 /** 分销查询参数 */
 @Getter
 @Setter
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "分销查询参数")

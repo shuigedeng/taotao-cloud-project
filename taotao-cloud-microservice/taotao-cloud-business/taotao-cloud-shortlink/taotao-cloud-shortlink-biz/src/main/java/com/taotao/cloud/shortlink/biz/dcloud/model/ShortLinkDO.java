@@ -14,7 +14,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("short_link")
-@Accessors(chain=true)
+
 @NoArgsConstructor
 @AllArgsConstructor
 public class ShortLinkDO implements Serializable {

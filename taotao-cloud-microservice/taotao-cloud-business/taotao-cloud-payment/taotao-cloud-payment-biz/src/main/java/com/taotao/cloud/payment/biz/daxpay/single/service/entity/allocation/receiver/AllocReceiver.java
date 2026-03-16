@@ -22,7 +22,7 @@ import com.taotao.cloud.payment.biz.daxpay.service.bo.allocation.AllocReceiverRe
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName("pay_alloc_receiver")
 public class AllocReceiver extends MchAppBaseEntity implements ToResult<AllocReceiverResultBo> {
 

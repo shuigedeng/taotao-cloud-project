@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 
 /** 搜索热词 */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class HotWordsDTO {

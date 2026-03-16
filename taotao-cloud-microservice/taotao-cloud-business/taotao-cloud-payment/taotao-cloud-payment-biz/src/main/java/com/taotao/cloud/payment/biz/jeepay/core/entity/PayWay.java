@@ -40,7 +40,7 @@ import java.util.Date;
 @ApiModel(value = "支付方式表", description = "")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+
 @TableName("t_pay_way")
 public class PayWay extends BaseModel implements Serializable {
 

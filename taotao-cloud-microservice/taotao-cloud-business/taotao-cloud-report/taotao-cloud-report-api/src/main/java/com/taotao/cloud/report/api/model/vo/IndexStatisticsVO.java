@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 
 /** 首页统计内容 */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class IndexStatisticsVO {

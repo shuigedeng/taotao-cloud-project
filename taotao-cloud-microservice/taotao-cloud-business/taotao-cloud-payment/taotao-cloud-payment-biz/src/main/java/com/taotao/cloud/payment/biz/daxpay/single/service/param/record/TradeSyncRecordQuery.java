@@ -18,7 +18,7 @@ import lombok.experimental.*;
 @EqualsAndHashCode(callSuper = true)
 @QueryParam(type = QueryParam.CompareTypeEnum.LIKE)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "交易同步记录查询参数")
 public class TradeSyncRecordQuery extends MchAppQuery {
 

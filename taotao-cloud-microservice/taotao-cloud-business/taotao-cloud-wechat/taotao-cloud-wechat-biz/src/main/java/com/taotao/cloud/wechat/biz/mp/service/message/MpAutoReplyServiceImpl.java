@@ -216,7 +216,7 @@ public class MpAutoReplyServiceImpl implements MpAutoReplyService {
     private MpAutoReplyDO buildDefaultSubscribeAutoReply(String appId) {
         MpAccountDO account = mpAccountService.getAccountFromCache(appId);
         Assert.notNull(account, "公众号账号({}) 不存在", appId);
-        // 构建默认的【关注】自动回复
+        // 构建默认的[关注]自动回复
         return new MpAutoReplyDO()
                 .setAppId(appId)
                 .setAccountId(account.getId())

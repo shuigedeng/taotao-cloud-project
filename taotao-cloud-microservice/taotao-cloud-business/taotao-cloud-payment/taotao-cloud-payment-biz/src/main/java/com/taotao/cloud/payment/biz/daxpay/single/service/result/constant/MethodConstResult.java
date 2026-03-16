@@ -11,7 +11,7 @@ import lombok.experimental.*;
  * @since 2024/7/14
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "支付方式")
 public class MethodConstResult {
     /** 通道编码 */

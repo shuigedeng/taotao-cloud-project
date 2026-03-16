@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName("pay_transfer_order")
 public class TransferOrder extends MchAppBaseEntity implements ToResult<TransferOrderVo> {
     /** 商户转账号 */

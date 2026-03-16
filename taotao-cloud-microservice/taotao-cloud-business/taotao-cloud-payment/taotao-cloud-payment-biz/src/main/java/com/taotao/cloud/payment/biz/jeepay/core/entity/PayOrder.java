@@ -41,7 +41,7 @@ import java.util.Date;
 @ApiModel(value = "支付订单表", description = "")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+
 @TableName("t_pay_order")
 public class PayOrder extends BaseModel implements Serializable {
 

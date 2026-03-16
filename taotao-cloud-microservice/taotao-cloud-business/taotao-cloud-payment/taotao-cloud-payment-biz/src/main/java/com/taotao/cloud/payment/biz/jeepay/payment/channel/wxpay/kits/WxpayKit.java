@@ -28,7 +28,7 @@ import com.jeequan.jeepay.pay.service.ConfigContextQueryService;
 import com.taotao.boot.common.utils.lang.StringUtils;
 
 /*
-* 【微信支付】支付通道工具包
+* [微信支付]支付通道工具包
 *
 * @author terrfly
 * @site https://www.jeequan.com
@@ -65,7 +65,7 @@ public class WxpayKit {
     public static String appendErrMsg(String msg, String subMsg){
 
         if(StringUtils.isNotEmpty(msg) && StringUtils.isNotEmpty(subMsg) ){
-            return msg + "【" + subMsg + "】";
+            return msg + "[" + subMsg + "]";
         }
         return StringUtils.defaultIfEmpty(subMsg, msg);
     }

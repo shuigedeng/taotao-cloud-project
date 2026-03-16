@@ -109,7 +109,7 @@ public class DataServiceImpl implements DataService {
     }
 
     /**
-     * 如果传入的是模板ID，则生成【当天】的businessId进行查询
+     * 如果传入的是模板ID，则生成[当天]的businessId进行查询
      * 如果传入的是businessId，则按默认的businessId进行查询
      * 判断是否为businessId则判断长度是否为16位（businessId长度固定16)
      */

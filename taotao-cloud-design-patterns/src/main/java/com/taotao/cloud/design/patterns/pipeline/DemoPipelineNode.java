@@ -99,7 +99,7 @@ public class DemoPipelineNode
             return next == null ? product : next.execute(product);
         } catch (Exception e) {
             log.error(
-                    "流水线处理异常：流程Id=【{}】,任务=【{}】,参数=【{}】",
+                    "流水线处理异常：流程Id=[{}],任务=[{}],参数=[{}]",
                     product.getTradeId(),
                     ClassUtil.getClassName(job, true),
                     JSONUtil.toJsonStr(product.getProductData()),

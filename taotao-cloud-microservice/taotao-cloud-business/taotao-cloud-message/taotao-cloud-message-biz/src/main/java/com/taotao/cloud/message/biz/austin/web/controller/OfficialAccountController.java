@@ -208,7 +208,7 @@ public class OfficialAccountController {
      * <p>
      * 临时 删除测试号的用户，避免正常有问题
      * <p>
-     * 【正常消息推送平台不会有这个接口】
+     * [正常消息推送平台不会有这个接口]
      *
      * @return
      */

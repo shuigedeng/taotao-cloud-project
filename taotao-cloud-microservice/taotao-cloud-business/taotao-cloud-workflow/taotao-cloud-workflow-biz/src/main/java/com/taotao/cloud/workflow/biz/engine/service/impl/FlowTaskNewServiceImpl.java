@@ -479,7 +479,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         flowMsgModel.setTaskNodeEntity(taskNode);
         flowMsgModel.setTaskEntity(flowTask);
         flowMsgModel.setEngine(engine);
-        flowMsgModel.setTitle(StrUtil.isNotEmpty(flowModel.getFreeApproverUserId()) ? "已被【指派】" : "");
+        flowMsgModel.setTitle(StrUtil.isNotEmpty(flowModel.getFreeApproverUserId()) ? "已被[指派]" : "");
         flowMsgUtil.message(flowMsgModel);
     }
 
@@ -928,7 +928,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             FlowEngineEntity engine = flowEngineService.getInfo(flowTask.getFlowId());
             FlowMsgModel flowMsgModel = new FlowMsgModel();
             flowMsgModel.setCirculateList(new ArrayList<>());
-            flowMsgModel.setTitle("已被【指派】");
+            flowMsgModel.setTitle("已被[指派]");
             flowMsgModel.setData(JacksonUtils.toMap(flowTask.getFlowFormContentJson()));
             flowMsgModel.setNodeList(taskNodeList);
             flowMsgModel.setOperatorList(operatorList);
@@ -988,7 +988,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         };
         FlowMsgModel flowMsgModel = new FlowMsgModel();
         flowMsgModel.setCirculateList(new ArrayList<>());
-        flowMsgModel.setTitle("已被【转办】");
+        flowMsgModel.setTitle("已被[转办]");
         flowMsgModel.setNodeList(taskNodeList);
         flowMsgModel.setOperatorList(operatorList);
         flowMsgModel.setData(JacksonUtils.toMap(flowTask.getFlowFormContentJson()));
@@ -1283,7 +1283,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         flowMsgModel.setTaskEntity(flowTaskEntity);
         flowMsgModel.setData(data);
         flowMsgModel.setEngine(engine);
-        flowMsgModel.setTitle("已被【催办】");
+        flowMsgModel.setTitle("已被[催办]");
         flowMsgUtil.message(flowMsgModel);
         return flag;
     }
@@ -1913,7 +1913,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         taskOperatoUser.setChildNode(childNode);
         boolean isStatus = StrUtil.isNotEmpty(freeApproverUserId);
         taskOperatoUser.setId(FlowNature.ParentId);
-        // 【加签】
+        // [加签]
         if (isStatus) {
             taskOperatoUser.setHandLeId(freeApproverUserId);
             taskOperatoUser.setId(taskOperator.getId());
@@ -1939,7 +1939,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 flowTaskOperatorRecordService.create(operatorRecord);
             }
         } else {
-            // 发起者【发起者主管】
+            // 发起者[发起者主管]
             if (FlowTaskOperatorEnum.LaunchCharge.getCode().equals(type)) {
                 // 时时查用户主管
                 UserEntity info = serviceUtil.getUserInfo(createUserId);
@@ -1948,7 +1948,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                     userIdAll.add(userId);
                 }
             }
-            // 发起者【部门主管】
+            // 发起者[部门主管]
             if (FlowTaskOperatorEnum.DepartmentCharge.getCode().equals(type)) {
                 UserEntity userEntity = serviceUtil.getUserInfo(createUserId);
                 if (userEntity != null) {
@@ -1959,11 +1959,11 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                     }
                 }
             }
-            // 发起者【发起本人】
+            // 发起者[发起本人]
             if (FlowTaskOperatorEnum.InitiatorMe.getCode().equals(type)) {
                 userIdAll.add(createUserId);
             }
-            // 【环节】
+            // [环节]
             if (FlowTaskOperatorEnum.Tache.getCode().equals(type)) {
                 List<FlowTaskOperatorRecordEntity> operatorUserList =
                         flowTaskOperatorRecordService.getList(taskEntity.getId()).stream()
@@ -1976,7 +1976,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                         .toList();
                 userIdAll.addAll(handleId);
             }
-            // 【变量】
+            // [变量]
             if (FlowTaskOperatorEnum.Variate.getCode().equals(type)) {
                 Map<String, Object> dataAll = JacksonUtils.toMap(taskEntity.getFlowFormContentJson());
                 Object data = dataAll.get(properties.getFormField());
@@ -1995,7 +1995,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                     userIdAll.addAll(handleIdAll);
                 }
             }
-            // 【服务】
+            // [服务]
             if (FlowTaskOperatorEnum.Serve.getCode().equals(type)) {
                 String url = properties.getGetUserUrl()
                         + "?"
@@ -2018,7 +2018,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                     }
                 }
             }
-            // 【候选人】
+            // [候选人]
             if (FlowTaskOperatorEnum.FreeApprover.getCode().equals(type)) {
                 String nodeId = childNode.getTaskNodeId();
                 List<FlowCandidatesEntity> candidatesList = flowCandidatesService.getlist(nodeId);
@@ -2029,11 +2029,11 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                     userIdAll.addAll(candidates);
                 });
             } else {
-                // 发起者【指定用户】
+                // 发起者[指定用户]
                 userIdAll.addAll(properties.getApprovers());
-                // 发起者【指定岗位】
+                // 发起者[指定岗位]
                 List<String> positionList = properties.getApproverPos();
-                // 发起者【指定角色】
+                // 发起者[指定角色]
                 List<String> roleList = properties.getApproverRole();
                 List<String> list = new ArrayList<>();
                 list.addAll(positionList);
@@ -2315,9 +2315,9 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             ChildNodeList nodeModel, List<FlowTaskCirculateEntity> circulateList, FlowModel flowModel) {
         Properties circleproperties = nodeModel.getProperties();
         List<String> userIdAll = new ArrayList<>(circleproperties.getCirculateUser());
-        // 传阅者【指定角色】
+        // 传阅者[指定角色]
         List<String> roleList = circleproperties.getCirculateRole();
-        // 传阅者【指定岗位】
+        // 传阅者[指定岗位]
         List<String> posList = circleproperties.getCirculatePosition();
         List<String> userAll = new ArrayList<>();
         userAll.addAll(roleList);
@@ -2608,7 +2608,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         TaskOperatoUser taskOperatoUser = new TaskOperatoUser();
         taskOperatoUser.setDate(date);
         taskOperatoUser.setChildNode(childNode);
-        // 发起者【部门主管】
+        // 发起者[部门主管]
         if (FlowTaskOperatorEnum.DepartmentCharge.getCode().equals(type)) {
             UserEntity userEntity = serviceUtil.getUserInfo(createUserId);
             if (userEntity != null) {
@@ -2619,7 +2619,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 }
             }
         }
-        // 发起者【发起者主管】
+        // 发起者[发起者主管]
         if (FlowTaskOperatorEnum.LaunchCharge.getCode().equals(type)) {
             // 时时查用户主管
             UserEntity info = serviceUtil.getUserInfo(createUserId);
@@ -2628,11 +2628,11 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 userIdAll.add(userId);
             }
         }
-        // 发起者【发起本人】
+        // 发起者[发起本人]
         if (FlowTaskOperatorEnum.InitiatorMe.getCode().equals(type)) {
             userIdAll.add(createUserId);
         }
-        // 【变量】
+        // [变量]
         if (FlowTaskOperatorEnum.Variate.getCode().equals(type)) {
             Map<String, Object> dataAll = JacksonUtils.toMap(taskEntity.getFlowFormContentJson());
             Object data = dataAll.get(properties.getFormField());
@@ -2650,7 +2650,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 userIdAll.addAll(handleIdAll);
             }
         }
-        // 【环节】
+        // [环节]
         if (FlowTaskOperatorEnum.Tache.getCode().equals(type)) {
             List<FlowTaskOperatorRecordEntity> operatorUserList =
                     flowTaskOperatorRecordService.getList(taskEntity.getId()).stream()
@@ -2663,7 +2663,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                     .toList();
             userIdAll.addAll(handleId);
         }
-        // 【服务】
+        // [服务]
         if (FlowTaskOperatorEnum.Serve.getCode().equals(type)) {
             String url = properties.getGetUserUrl()
                     + "?"
@@ -2686,11 +2686,11 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 }
             }
         }
-        // 发起者【指定用户】
+        // 发起者[指定用户]
         userIdAll.addAll(properties.getInitiator());
-        // 发起者【指定岗位】
+        // 发起者[指定岗位]
         List<String> positionList = properties.getInitiatePos();
-        // 发起者【指定角色】
+        // 发起者[指定角色]
         List<String> roleList = properties.getInitiateRole();
         List<String> list = new ArrayList<>();
         list.addAll(positionList);

@@ -23,7 +23,7 @@ import lombok.experimental.*;
 
 /** 普通消息 */
 @Data
-@Accessors(chain = true) // 链式调用
+ // 链式调用
 public class PushMsgVo {
 
     /** 是否置顶 */

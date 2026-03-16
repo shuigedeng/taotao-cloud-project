@@ -32,7 +32,7 @@ import lombok.NoArgsConstructor;
  * @since 2022-03-25 14:07:32
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class RedisVO implements Serializable {

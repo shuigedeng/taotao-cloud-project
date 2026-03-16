@@ -10,7 +10,7 @@ import lombok.experimental.*;
  * @since 2024/3/24
  */
 @Data
-@Accessors(chain = true)
+
 public class UnionReconcileBillDetail {
 
     /** 关联对账订单ID */

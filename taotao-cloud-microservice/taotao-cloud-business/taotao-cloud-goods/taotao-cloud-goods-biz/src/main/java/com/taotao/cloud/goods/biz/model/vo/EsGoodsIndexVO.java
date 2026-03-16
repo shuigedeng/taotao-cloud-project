@@ -40,8 +40,8 @@ import lombok.experimental.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain=true)
-@Accessors(chain = true)
+
+
 public class EsGoodsIndexVO implements Serializable {
 
     @Serial

@@ -31,7 +31,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @since 2021/12/2
  */
 @Data
-@Accessors(chain = true)
+
 @Document(collection = "tt_login_log")
 public class LoginLogMongo {
 

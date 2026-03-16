@@ -27,7 +27,7 @@ public class MySlowListener implements CacheSlowListener {
 
     @Override
     public void listen( CacheSlowListenerContext context) {
-        System.out.println("【慢日志】name: " + context.methodName());
+        System.out.println("[慢日志]name: " + context.methodName());
     }
 
     @Override

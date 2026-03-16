@@ -19,7 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Accessors(chain=true)
+
 public class BatchSendPushParam {
 
     /**
@@ -43,7 +43,7 @@ public class BatchSendPushParam {
      */
     @NoArgsConstructor
     @Data
-    @Accessors(chain=true)
+    
     @AllArgsConstructor
     public static class AudienceVO {
         /**

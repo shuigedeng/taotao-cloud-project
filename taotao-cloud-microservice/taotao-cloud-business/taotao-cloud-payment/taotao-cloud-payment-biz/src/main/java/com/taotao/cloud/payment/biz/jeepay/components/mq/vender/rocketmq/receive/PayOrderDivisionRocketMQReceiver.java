@@ -42,7 +42,7 @@ public class PayOrderDivisionRocketMQReceiver implements IMQMsgReceiver, RocketM
     @Autowired
     private PayOrderDivisionMQ.IMQReceiver mqReceiver;
 
-    /** 接收 【 queue 】 类型的消息 **/
+    /** 接收 [ queue ] 类型的消息 **/
     @Override
     public void receiveMsg(String msg){
         mqReceiver.receive(PayOrderDivisionMQ.parse(msg));

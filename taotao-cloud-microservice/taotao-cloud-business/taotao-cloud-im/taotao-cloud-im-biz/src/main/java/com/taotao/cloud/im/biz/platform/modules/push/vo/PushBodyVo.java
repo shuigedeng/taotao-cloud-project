@@ -24,7 +24,7 @@ import lombok.experimental.*;
 
 /** 推送消息体 */
 @Data
-@Accessors(chain = true) // 链式调用
+ // 链式调用
 @NoArgsConstructor
 public class PushBodyVo {
 

@@ -11,7 +11,7 @@ import lombok.Getter;
  * @since 2024/2/2
  */
 @Getter
-@Accessors(chain=true)
+
 public class DaxPayConfig {
 
     /** 服务地址 */

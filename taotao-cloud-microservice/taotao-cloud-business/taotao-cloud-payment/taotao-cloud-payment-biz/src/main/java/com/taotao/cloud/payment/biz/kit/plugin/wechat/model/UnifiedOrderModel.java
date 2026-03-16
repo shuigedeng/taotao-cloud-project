@@ -22,7 +22,7 @@ import lombok.experimental.*;
 
 /** 统一下单-商户门店信息 */
 @Data
-@Accessors(chain = true)
+
 public class UnifiedOrderModel {
     /** 公众号ID */
     private String appid;

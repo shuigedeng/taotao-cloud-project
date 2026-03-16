@@ -15,7 +15,7 @@ import java.math.BigDecimal;
  * @since 2024/6/25
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "支付宝配置")
 public class AlipayConfigResult {
 

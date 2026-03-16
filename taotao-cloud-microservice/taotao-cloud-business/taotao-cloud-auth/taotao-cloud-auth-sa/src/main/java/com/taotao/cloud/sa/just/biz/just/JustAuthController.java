@@ -65,7 +65,7 @@ public class JustAuthController {
     public AuthResponse login( @PathVariable String type, AuthCallback callback ) {
         AuthRequest authRequest = factory.get(type);
         AuthResponse response = authRequest.login(callback);
-        log.info("【response】= {}", JSONUtil.toJsonStr(response));
+        log.info("[response]= {}", JSONUtil.toJsonStr(response));
 
         StpUtil.login(10001);
 

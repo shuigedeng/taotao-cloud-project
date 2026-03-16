@@ -16,7 +16,7 @@ import java.util.List;
  * @since 2024/4/1
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "分账组绑定参数")
 public class AllocGroupBindParam {
 

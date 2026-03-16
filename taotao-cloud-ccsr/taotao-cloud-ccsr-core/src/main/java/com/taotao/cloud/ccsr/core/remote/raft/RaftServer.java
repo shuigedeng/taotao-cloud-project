@@ -233,11 +233,11 @@ public class RaftServer extends AbstractRpcServer {
                                     }
                                     try {
                                         Log.print(
-                                                ">>>>>>>>>>>>>>触发 leader 刷新【开始】 for group: %s, leader: %s",
+                                                ">>>>>>>>>>>>>>触发 leader 刷新[开始] for group: %s, leader: %s",
                                                 groupId, getLeader(groupId));
                                         refreshRouteTable(groupId);
                                         Log.print(
-                                                ">>>>>>>>>>>>>>触发 leader 刷新【成功】 for group: %s, leader: %s",
+                                                ">>>>>>>>>>>>>>触发 leader 刷新[成功] for group: %s, leader: %s",
                                                 groupId, getLeader(groupId));
 
                                     } catch (Exception e) {
@@ -267,13 +267,13 @@ public class RaftServer extends AbstractRpcServer {
             Status status = instance.refreshLeader(this.cliClientService, group, rpcRequestTimeout);
             if (!status.isOk()) {
                 Log.print(
-                        "不能去刷新【Leader】for group: %s, status is: %s, errorMsg: ",
+                        "不能去刷新[Leader]for group: %s, status is: %s, errorMsg: ",
                         group, status, status.getErrorMsg());
             }
             status = instance.refreshConfiguration(this.cliClientService, group, rpcRequestTimeout);
             if (!status.isOk()) {
                 System.out.println(
-                        "不能去刷新【Route Configuration】 for group : "
+                        "不能去刷新[Route Configuration] for group : "
                                 + group
                                 + ", status is : "
                                 + status

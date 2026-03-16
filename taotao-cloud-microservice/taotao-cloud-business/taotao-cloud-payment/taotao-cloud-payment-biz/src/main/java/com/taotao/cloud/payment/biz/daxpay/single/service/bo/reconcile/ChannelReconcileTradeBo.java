@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * @since 2024/8/6
  */
 @Data
-@Accessors(chain = true)
+
 public class ChannelReconcileTradeBo {
 
     /**

@@ -19,7 +19,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors(chain=true)
+
 public class SendTaskModel implements ProcessModel {
 
     /**

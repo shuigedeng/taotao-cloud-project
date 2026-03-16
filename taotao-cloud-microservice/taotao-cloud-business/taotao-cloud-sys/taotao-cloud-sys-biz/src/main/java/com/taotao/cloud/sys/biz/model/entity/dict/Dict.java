@@ -134,7 +134,7 @@ public class Dict extends BaseSuperEntity<Dict, Long> {
     @Column(name = "remark", columnDefinition = "varchar(255) comment '备注信息'")
     private String remark;
 
-    @Accessors(chain = true)
+    
     public Dict(
             Long id,
             LocalDateTime createTime,

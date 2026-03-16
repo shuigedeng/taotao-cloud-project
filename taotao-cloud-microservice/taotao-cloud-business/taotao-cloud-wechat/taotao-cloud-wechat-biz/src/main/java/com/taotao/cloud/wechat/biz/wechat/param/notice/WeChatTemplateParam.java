@@ -29,7 +29,7 @@ import lombok.experimental.*;
  */
 @Data
 @Schema(title = "微信消息模板")
-@Accessors(chain = true)
+
 public class WeChatTemplateParam {
 
     @Schema(description = "主键")

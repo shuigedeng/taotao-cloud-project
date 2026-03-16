@@ -16,10 +16,10 @@ import java.util.List;
  * @author shuigedeng
  */
 @Data
-@Accessors(chain = true)
+
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors(chain=true)
+
 public class SendRequest {
 
     /**
@@ -33,7 +33,7 @@ public class SendRequest {
 
     /**
      * 消息模板Id
-     * 【必填】
+     * [必填]
      */
     private Long messageTemplateId;
 
@@ -46,7 +46,7 @@ public class SendRequest {
 
     /**
      * 需要撤回的消息messageIds (可根据发送接口返回的消息messageId进行撤回)
-     * 【可选】
+     * [可选]
      */
     private List<String> recallMessageIds;
 

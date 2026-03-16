@@ -30,7 +30,7 @@ import lombok.experimental.*;
 /** 砍价活动商品查询通用类 */
 @Getter
 @Setter
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class KanjiaActivityGoodsPageQuery extends PageQuery implements Serializable {

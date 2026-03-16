@@ -13,7 +13,7 @@ import lombok.experimental.*;
  */
 @QueryParam(type = QueryParam.CompareTypeEnum.LIKE)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "支付通道")
 public class ChannelConstQuery {
     /** 通道编码 */

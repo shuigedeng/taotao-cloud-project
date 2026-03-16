@@ -65,7 +65,7 @@ public class PlspayChannelNoticeService extends AbstractChannelNoticeService {
     @Override
     public ChannelRetMsg doNotice(HttpServletRequest request, Object params, PayOrder payOrder, MchAppConfigContext mchAppConfigContext, NoticeTypeEnum noticeTypeEnum) {
         try {
-            String logPrefix = "【处理计全付回调】";
+            String logPrefix = "[处理计全付回调]";
             // 获取请求参数
             JSONObject paramsJson = (JSONObject) params;
             log.info("{} 回调参数, jsonParams：{}", logPrefix, paramsJson);

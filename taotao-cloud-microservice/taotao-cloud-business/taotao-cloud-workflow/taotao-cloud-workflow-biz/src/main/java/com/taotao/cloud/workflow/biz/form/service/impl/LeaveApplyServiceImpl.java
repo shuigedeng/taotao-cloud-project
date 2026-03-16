@@ -30,7 +30,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/** 流程表单【请假申请】 */
+/** 流程表单[请假申请] */
 @Service
 public class LeaveApplyServiceImpl extends ServiceImpl<LeaveApplyMapper, LeaveApplyEntity>
         implements LeaveApplyService {

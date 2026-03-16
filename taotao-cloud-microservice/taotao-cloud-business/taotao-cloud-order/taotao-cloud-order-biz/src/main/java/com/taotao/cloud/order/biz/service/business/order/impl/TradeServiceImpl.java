@@ -191,7 +191,7 @@ public class TradeServiceImpl extends ServiceImpl<TradeMapper, Trade> implements
                     tradeDTO.getPriceDetailDTO().getPayPoint(),
                     PointTypeEnum.REDUCE.name(),
                     tradeDTO.getMemberId(),
-                    "订单【" + orderSns + "】创建，积分扣减");
+                    "订单[" + orderSns + "]创建，积分扣减");
 
             if (!result) {
                 throw new BusinessException(ResultEnum.PAY_POINT_ENOUGH);

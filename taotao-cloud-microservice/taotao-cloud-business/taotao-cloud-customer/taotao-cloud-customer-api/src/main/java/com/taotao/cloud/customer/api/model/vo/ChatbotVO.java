@@ -31,7 +31,7 @@ import lombok.NoArgsConstructor;
  * @since 2020/11/20 上午9:42
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(name = "机器人客服VO", description = "机器人客服VO")

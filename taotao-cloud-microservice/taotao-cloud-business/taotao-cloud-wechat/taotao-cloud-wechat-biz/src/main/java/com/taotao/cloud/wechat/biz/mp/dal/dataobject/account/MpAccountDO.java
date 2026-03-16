@@ -33,7 +33,7 @@ import lombok.experimental.*;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-@Accessors(chain=true)
+
 @NoArgsConstructor
 @AllArgsConstructor
 public class MpAccountDO extends TenantBaseDO {

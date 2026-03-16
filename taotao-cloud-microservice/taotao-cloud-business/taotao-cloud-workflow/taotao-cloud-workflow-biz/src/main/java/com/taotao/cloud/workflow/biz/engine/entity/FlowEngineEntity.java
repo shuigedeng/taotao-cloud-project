@@ -30,7 +30,7 @@ import lombok.experimental.*;
 /** 流程引擎 */
 @Data
 @TableName("flow_engine")
-@Accessors(chain=true)
+
 public class FlowEngineEntity extends SuperEntity<FlowEngineEntity, String> {
 
     /** 流程主键 */

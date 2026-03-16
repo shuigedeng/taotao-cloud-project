@@ -26,7 +26,7 @@ import java.util.Date;
 @ApiModel(value = "商户分账接收者账号绑定关系表", description = "")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+
 @TableName("t_mch_division_receiver")
 public class MchDivisionReceiver implements Serializable {
 

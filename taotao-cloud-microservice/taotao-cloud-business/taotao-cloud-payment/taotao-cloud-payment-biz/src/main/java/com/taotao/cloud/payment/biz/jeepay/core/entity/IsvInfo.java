@@ -41,7 +41,7 @@ import java.util.Date;
 @ApiModel(value = "服务商信息表", description = "")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+
 @TableName("t_isv_info")
 public class IsvInfo extends BaseModel implements Serializable {
 

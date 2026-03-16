@@ -34,7 +34,7 @@ import lombok.experimental.*;
 /** 会员优惠券查询通用类 */
 @Setter
 @Getter
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberCouponSearchPageQuery extends BasePromotionsSearchQuery implements Serializable {

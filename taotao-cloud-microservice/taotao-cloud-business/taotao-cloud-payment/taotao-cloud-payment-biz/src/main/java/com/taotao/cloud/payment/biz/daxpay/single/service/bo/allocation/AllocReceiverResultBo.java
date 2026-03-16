@@ -16,7 +16,7 @@ import com.taotao.cloud.payment.biz.daxpay.core.result.MchAppResult;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "分账接收方")
 public class AllocReceiverResultBo extends MchAppResult {
 

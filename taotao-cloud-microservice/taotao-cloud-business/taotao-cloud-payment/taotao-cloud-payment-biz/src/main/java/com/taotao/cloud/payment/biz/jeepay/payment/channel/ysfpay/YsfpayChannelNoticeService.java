@@ -70,7 +70,7 @@ public class YsfpayChannelNoticeService extends AbstractChannelNoticeService {
 
             ChannelRetMsg result = ChannelRetMsg.confirmSuccess(null);
 
-            String logPrefix = "【处理云闪付支付回调】";
+            String logPrefix = "[处理云闪付支付回调]";
 
             // 获取请求参数
             JSONObject jsonParams = (JSONObject) params;
@@ -120,7 +120,7 @@ public class YsfpayChannelNoticeService extends AbstractChannelNoticeService {
 
         //验签失败
         if(!YsfSignUtils.validate((JSONObject) JSONObject.toJSON(jsonParams), ysfpayPublicKey)) {
-            log.info("【云闪付回调】 验签失败！ 回调参数：parameter = {}, ysfpayPublicKey={} ", jsonParams, ysfpayPublicKey);
+            log.info("[云闪付回调] 验签失败！ 回调参数：parameter = {}, ysfpayPublicKey={} ", jsonParams, ysfpayPublicKey);
             return false;
         }
 

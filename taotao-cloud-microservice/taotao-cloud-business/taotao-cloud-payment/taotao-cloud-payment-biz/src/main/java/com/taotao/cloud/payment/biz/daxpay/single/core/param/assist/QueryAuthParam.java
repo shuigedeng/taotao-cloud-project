@@ -14,7 +14,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "查询OpenId参数")
 public class QueryAuthParam extends PaymentCommonParam {
 

@@ -82,7 +82,7 @@ public class BpmTaskController {
     }
 
     @PostMapping("/update-assignee")
-    @ApiOperation(value = "更新任务的负责人", notes = "用于【流程详情】的【转派】按钮")
+    @ApiOperation(value = "更新任务的负责人", notes = "用于[流程详情]的[转派]按钮")
     @PreAuthorize("@ss.hasPermission('bpm:task:update')")
     public CommonResult<Boolean> updateTaskAssignee(@Valid @RequestBody BpmTaskUpdateAssigneeReqVO reqVO) {
         taskService.updateTaskAssignee(getLoginUserId(), reqVO);

@@ -34,13 +34,13 @@ import me.chanjar.weixin.mp.bean.menu.WxMpMenu;
  * @since 2022/8/8
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "微信自定义菜单")
 public class WeChatMenuInfo {
     private List<Button> buttons = new ArrayList<>();
 
     @Data
-    @Accessors(chain = true)
+    
     @Schema(title = "菜单按钮")
     public static class Button {
 

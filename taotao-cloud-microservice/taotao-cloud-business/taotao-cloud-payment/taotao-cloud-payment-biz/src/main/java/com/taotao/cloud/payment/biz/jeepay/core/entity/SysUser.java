@@ -40,7 +40,7 @@ import java.util.Date;
 @ApiModel(value = "系统用户表", description = "")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+
 @TableName("t_sys_user")
 public class SysUser extends BaseModel {
 

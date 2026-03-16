@@ -11,7 +11,7 @@ import lombok.experimental.*;
  * @since 2024/7/30
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "商户通知类型")
 public class MerchantNotifyConstResult {
     /** 通道编码 */

@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
  * @since 2020-03-19 10:44 上午
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class CouponActivityItemDTO implements Serializable {

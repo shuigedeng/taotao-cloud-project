@@ -52,7 +52,7 @@ public class YsfBar extends YsfpayPaymentService {
 
     @Override
     public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) throws Exception {
-        String logPrefix = "【云闪付条码(unionpay)支付】";
+        String logPrefix = "[云闪付条码(unionpay)支付]";
 
         YsfBarOrderRQ bizRQ = (YsfBarOrderRQ) rq;
         YsfBarOrderRS res = ApiResBuilder.buildSuccess(YsfBarOrderRS.class);

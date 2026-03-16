@@ -16,5 +16,5 @@
 
 package com.taotao.cloud.workflow.biz.form.mapper;
 
-/** 流程表单【请假申请】 */
+/** 流程表单[请假申请] */
 public interface LeaveApplyMapper extends MpSuperMapper<LeaveApplyEntity> {}

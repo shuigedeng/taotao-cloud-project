@@ -28,7 +28,7 @@ import java.util.List;
  *  解决： 将数据库查询到的多行List， 转换为层级关系的树状结构。
  *  使用方式：
  *      1. 先将查询的到对象List转换为JSONObject List，
- *         在转换过程中JSONObject中必须包含 [id, pid](字段名称可自定义) 【！！必须是String类型！！】 ；
+ *         在转换过程中JSONObject中必须包含 [id, pid](字段名称可自定义) [！！必须是String类型！！] ；
  *      2. 使用构造函数创建对象，参数为转换好的对象， 如果自定义字段key 则将字段名称一并传入；
  *      3. 使用buildTreeString() 或者 buildTreeObject() 生成所需对象；
  *

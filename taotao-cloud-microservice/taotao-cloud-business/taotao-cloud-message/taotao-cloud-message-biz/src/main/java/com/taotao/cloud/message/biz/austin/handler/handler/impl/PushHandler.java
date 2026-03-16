@@ -158,7 +158,7 @@ public class PushHandler extends BaseHandler{
 
     /**
      * 对正处于推送状态 未接收的消息停止下发（只支持批量推和群推任务）
-     * 【未实现】
+     * [未实现]
      * https://docs.getui.com/getui/server/rest_v2/push/
      * @param recallTaskInfo
      */

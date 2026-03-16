@@ -27,7 +27,7 @@ import lombok.experimental.*;
 /** 分销佣金查询信息 */
 @Getter
 @Setter
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "分销佣金查询信息")

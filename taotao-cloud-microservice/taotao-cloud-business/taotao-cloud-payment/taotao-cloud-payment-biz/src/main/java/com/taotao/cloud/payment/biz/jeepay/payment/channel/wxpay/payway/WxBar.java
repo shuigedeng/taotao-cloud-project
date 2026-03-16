@@ -97,7 +97,7 @@ public class WxBar extends WxpayPaymentService {
             channelRetMsg.setChannelState(ChannelRetMsg.ChannelState.CONFIRM_SUCCESS);
 
         } catch (WxPayException e) {
-            //微信返回支付状态为【支付结果未知】, 需进行查单操作
+            //微信返回支付状态为[支付结果未知], 需进行查单操作
             if("SYSTEMERROR".equals(e.getErrCode()) || "USERPAYING".equals(e.getErrCode()) ||  "BANKERROR".equals(e.getErrCode())){
 
                 //轮询查询订单

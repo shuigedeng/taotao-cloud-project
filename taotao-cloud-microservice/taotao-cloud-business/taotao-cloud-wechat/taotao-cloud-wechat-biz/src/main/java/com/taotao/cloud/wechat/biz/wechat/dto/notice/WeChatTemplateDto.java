@@ -32,7 +32,7 @@ import lombok.experimental.*;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Schema(title = "微信消息模板")
-@Accessors(chain = true)
+
 public class WeChatTemplateDto extends BaseDto {
 
     @Schema(description = "名称")

@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 
 /** 商品操作允许的范围 */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class GoodsOperateAllowableVO implements Serializable {

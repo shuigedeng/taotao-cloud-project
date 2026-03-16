@@ -14,7 +14,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 public class TransferCreateV3Request extends TransferCreateRequest {
 
     /** 通知地址 说明：通知地址 */

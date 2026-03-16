@@ -15,7 +15,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "客户订阅通知发送记录")
 public class MerchantNotifyRecordResult extends MchAppResult {
 

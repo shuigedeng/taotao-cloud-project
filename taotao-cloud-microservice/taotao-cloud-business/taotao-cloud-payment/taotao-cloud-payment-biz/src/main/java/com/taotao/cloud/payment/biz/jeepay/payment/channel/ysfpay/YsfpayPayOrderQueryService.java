@@ -50,7 +50,7 @@ public class YsfpayPayOrderQueryService implements IPayOrderQueryService {
     public ChannelRetMsg query(PayOrder payOrder, MchAppConfigContext mchAppConfigContext) throws Exception {
         JSONObject reqParams = new JSONObject();
         String orderType = YsfHttpUtil.getOrderTypeByCommon(payOrder.getWayCode());
-        String logPrefix = "【云闪付("+orderType+")查单】";
+        String logPrefix = "[云闪付("+orderType+")查单]";
 
         try {
             reqParams.put("orderNo", payOrder.getPayOrderId()); //订单号

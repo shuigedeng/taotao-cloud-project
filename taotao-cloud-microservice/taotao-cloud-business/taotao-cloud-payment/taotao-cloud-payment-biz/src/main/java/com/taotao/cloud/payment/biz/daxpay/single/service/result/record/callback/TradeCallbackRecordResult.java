@@ -17,7 +17,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "回调记录")
 public class TradeCallbackRecordResult extends MchAppResult {
 

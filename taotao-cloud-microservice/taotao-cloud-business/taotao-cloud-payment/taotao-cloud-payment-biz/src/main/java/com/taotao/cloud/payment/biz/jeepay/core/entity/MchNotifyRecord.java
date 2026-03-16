@@ -41,7 +41,7 @@ import java.util.Date;
 @ApiModel(value = "商户通知记录表", description = "")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+
 @TableName("t_mch_notify_record")
 public class MchNotifyRecord extends BaseModel implements Serializable {
 

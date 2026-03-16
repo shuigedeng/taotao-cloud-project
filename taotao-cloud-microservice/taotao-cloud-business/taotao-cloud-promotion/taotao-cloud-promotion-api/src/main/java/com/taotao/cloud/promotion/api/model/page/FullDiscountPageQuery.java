@@ -30,7 +30,7 @@ import lombok.experimental.*;
 /** 满优惠查询通用类 */
 @Setter
 @Getter
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class FullDiscountPageQuery extends BasePromotionsSearchQuery implements Serializable {

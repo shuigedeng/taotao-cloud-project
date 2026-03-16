@@ -19,7 +19,7 @@ import lombok.experimental.*;
 @EqualsAndHashCode(callSuper = true)
 @QueryParam(type = QueryParam.CompareTypeEnum.LIKE)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "支付回调信息记录")
 public class TradeCallbackRecordQuery extends MchAppQuery {
 

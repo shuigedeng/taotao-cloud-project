@@ -20,7 +20,7 @@ import com.taotao.cloud.payment.biz.daxpay.core.param.PaymentCommonParam;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "分账接收者添加参数")
 public class AllocReceiverAddParam extends PaymentCommonParam {
 

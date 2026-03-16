@@ -22,7 +22,7 @@ import lombok.experimental.*;
 
 /** 统一下单-订单金额 */
 @Data
-@Accessors(chain = true)
+
 public class Amount {
 
     /** 总金额 */

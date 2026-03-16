@@ -19,7 +19,7 @@ import java.math.BigDecimal;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "商户应用")
 public final class MchAppResult extends BaseResult {
 

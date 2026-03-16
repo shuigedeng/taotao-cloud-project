@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
  */
 @NoArgsConstructor
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 public class QueryTokenParamDTO {
     /**

@@ -22,7 +22,7 @@ import lombok.experimental.*;
 
 /** 统一下单-支付者 */
 @Data
-@Accessors(chain = true)
+
 public class Payer {
     /** 用户标识 */
     private String openid;

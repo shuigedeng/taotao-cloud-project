@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Data
 @NoArgsConstructor
-@Accessors(chain = true)
+
 public class WxPayCodepayRequest implements Serializable {
 
     @Serial

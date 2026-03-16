@@ -29,7 +29,7 @@ import lombok.experimental.*;
  * @since 2022/7/24
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "企微文件上传")
 public class UploadMedia {
 

@@ -42,7 +42,7 @@ import java.util.Date;
 @ApiModel(value = "商户支付通道表", description = "")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+
 @TableName("t_mch_pay_passage")
 public class MchPayPassage extends BaseModel implements Serializable {
 

@@ -34,7 +34,7 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors(chain=true)
+
 public class ShortLinkTimePageRequest extends PageRequest {
 
     /** 时间范围 */

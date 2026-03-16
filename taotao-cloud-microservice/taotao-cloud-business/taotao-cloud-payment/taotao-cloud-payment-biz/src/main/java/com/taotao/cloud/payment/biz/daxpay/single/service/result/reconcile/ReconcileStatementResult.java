@@ -19,7 +19,7 @@ import java.time.LocalDate;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "对账报告")
 public class ReconcileStatementResult extends MchAppResult {
 

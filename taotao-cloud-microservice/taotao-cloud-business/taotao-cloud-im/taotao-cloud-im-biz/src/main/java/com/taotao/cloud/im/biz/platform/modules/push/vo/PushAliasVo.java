@@ -22,7 +22,7 @@ import lombok.experimental.*;
 
 /** 推送别名 */
 @Data
-@Accessors(chain = true) // 链式调用
+ // 链式调用
 public class PushAliasVo {
 
     /** 客户id */

@@ -86,24 +86,24 @@ public class OrderStateMachineConfig extends
     public void configure( StateMachineTransitionConfigurer<OrderStatusEnum, OrderEvent> transitions )
             throws Exception {
         transitions
-                //当执行 【开始审核】操作时，将订单状态由待审核 -> 审核中
+                //当执行 [开始审核]操作时，将订单状态由待审核 -> 审核中
                 .withExternal().source(OrderStatusEnum.APPROVE_PENDING)
                 .target(OrderStatusEnum.APPROVE_ING).event(OrderEvent.APPROVE_START)
                 .and()
-                //当执行 【审核失败】操作时，将订单状态由审核中 -> 审核失败
+                //当执行 [审核失败]操作时，将订单状态由审核中 -> 审核失败
                 .withExternal().source(OrderStatusEnum.APPROVE_ING)
                 .target(OrderStatusEnum.APPROVE_FAILED).event(OrderEvent.APPROVE_FAILED)
                 .and()
-                //当执行 【审核成功】操作时，将订单状态由审核中 -> 审核成功
+                //当执行 [审核成功]操作时，将订单状态由审核中 -> 审核成功
                 .withExternal().source(OrderStatusEnum.APPROVE_ING)
                 .target(OrderStatusEnum.APPROVE_SUCCESS).event(OrderEvent.APPROVE_SUCCESS)
                 .and()
-                //当执行 【放款】操作时，将订单状态由审核成功 -> 放款成功
+                //当执行 [放款]操作时，将订单状态由审核成功 -> 放款成功
                 .withExternal().source(OrderStatusEnum.APPROVE_SUCCESS)
                 .target(OrderStatusEnum.LOAN_SUCCESS).event(OrderEvent.LOAN)
                 .guard(guardForLoanSuccessByLoan())
                 .and()
-                //当执行 【放款】操作时，将订单状态由审核成功 -> 部分放款成功
+                //当执行 [放款]操作时，将订单状态由审核成功 -> 部分放款成功
                 .withExternal().source(OrderStatusEnum.APPROVE_SUCCESS)
                 .target(OrderStatusEnum.PARTIALLY_LOAN_SUCCESS).event(OrderEvent.LOAN)
                 .guard(guardForPartiallyLoanSuccessByLoan());

@@ -17,7 +17,7 @@ import com.taotao.cloud.payment.biz.daxpay.core.param.PaymentCommonParam;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "分账接收者删除参数")
 public class AllocReceiverRemoveParam extends PaymentCommonParam {
 

@@ -247,7 +247,7 @@ public abstract class AbstractRpcProcessor<T extends Message> implements RpcProc
         Log.print("===sendNoLeaderError方法执行===> ctx=%s", ctx);
         ctx.sendResponse(
                 ResponseHelper.error(
-                        ResponseCode.NO_LEADER.getCode(), "【Cluster has no leader currently】"));
+                        ResponseCode.NO_LEADER.getCode(), "[Cluster has no leader currently]"));
     }
 
     private void redirect( RpcContext ctx, PeerId leaderId ) {

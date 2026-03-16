@@ -16,7 +16,7 @@ import java.util.Map;
  * @author shuigedeng
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class MessageTemplateVo {

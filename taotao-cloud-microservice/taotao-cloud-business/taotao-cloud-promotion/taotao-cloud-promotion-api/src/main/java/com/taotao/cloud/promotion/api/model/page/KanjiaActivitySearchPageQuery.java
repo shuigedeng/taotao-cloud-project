@@ -27,7 +27,7 @@ import lombok.experimental.*;
 /** 砍价活动搜索参数 */
 @Getter
 @Setter
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class KanjiaActivitySearchPageQuery extends BasePromotionsSearchQuery {

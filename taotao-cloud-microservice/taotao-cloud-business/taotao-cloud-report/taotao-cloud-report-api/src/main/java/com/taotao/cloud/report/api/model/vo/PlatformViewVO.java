@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 
 /** 流量数据展示VO */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class PlatformViewVO {

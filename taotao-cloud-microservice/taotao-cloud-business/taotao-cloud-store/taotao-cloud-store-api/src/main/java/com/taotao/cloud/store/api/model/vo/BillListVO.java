@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 
 /** 结算单VO */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "结算单VO")

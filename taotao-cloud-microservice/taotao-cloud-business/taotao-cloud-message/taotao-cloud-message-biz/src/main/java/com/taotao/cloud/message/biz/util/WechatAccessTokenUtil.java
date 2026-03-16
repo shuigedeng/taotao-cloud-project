@@ -82,7 +82,7 @@ package com.taotao.cloud.message.biz.util; // package com.taotao.cloud.message.b
 //                     "&appid=" + item.getAppId() + "&secret=" + item.getAppSecret());
 //
 //             JSONObject object = new JSONObject(content);
-//             log.info("token获取【" + clientTypeEnum.name() + "】返回" + object.toString());
+//             log.info("token获取[" + clientTypeEnum.name() + "]返回" + object.toString());
 //             String accessToken = object.get("access_token").toString();
 //             cache.put(CachePrefix.WECHAT_CGI_ACCESS_TOKEN.getPrefix() + clientTypeEnum.name(),
 //                     object.getStr("access_token"), object.getLong("expires_in"));

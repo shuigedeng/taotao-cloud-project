@@ -29,7 +29,7 @@ import lombok.experimental.*;
  * @since 2022-04-25 16:47:58
  */
 @Data
-@Accessors(chain=true)
+
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor

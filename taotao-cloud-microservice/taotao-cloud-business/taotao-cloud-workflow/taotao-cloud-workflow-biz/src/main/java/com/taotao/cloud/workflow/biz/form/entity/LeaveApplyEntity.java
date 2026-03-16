@@ -23,7 +23,7 @@ import java.util.Date;
 import lombok.Data;
 import lombok.experimental.*;
 
-/** 流程表单【请假申请】 */
+/** 流程表单[请假申请] */
 @Data
 @TableName("wform_leaveapply")
 public class LeaveApplyEntity {

@@ -13,7 +13,7 @@ import jakarta.persistence.Id;
  * 渠道账号信息
  */
 @Data
-@Accessors(chain=true)
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

@@ -37,7 +37,7 @@ import java.io.Serializable;
 @ApiModel(value = "系统角色权限关联表", description = "")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+
 @TableName("t_sys_role_ent_rela")
 public class SysRoleEntRela implements Serializable {
 

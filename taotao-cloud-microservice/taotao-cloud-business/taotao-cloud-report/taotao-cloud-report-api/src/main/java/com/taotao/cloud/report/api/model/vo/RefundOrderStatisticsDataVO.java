@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 
 /** 退款统计VO */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class RefundOrderStatisticsDataVO {

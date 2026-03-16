@@ -34,7 +34,7 @@ import lombok.NoArgsConstructor;
  * @since 2023-05-10 14:04:24
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class SeckillTimelineVO implements Serializable {

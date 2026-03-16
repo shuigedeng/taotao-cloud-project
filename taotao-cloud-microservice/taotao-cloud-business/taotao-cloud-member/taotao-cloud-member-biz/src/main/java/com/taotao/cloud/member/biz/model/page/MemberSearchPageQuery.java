@@ -33,7 +33,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "会员搜索DTO")

@@ -10,7 +10,7 @@ import lombok.experimental.*;
  * @since 2024/8/13
  */
 @Data
-@Accessors(chain = true)
+
 public class ReconcileTotalExcel {
 
     /** 对账日期 */

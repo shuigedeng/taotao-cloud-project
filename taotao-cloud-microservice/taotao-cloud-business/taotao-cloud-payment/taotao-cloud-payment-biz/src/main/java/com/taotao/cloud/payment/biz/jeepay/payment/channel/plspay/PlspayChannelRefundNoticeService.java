@@ -66,7 +66,7 @@ public class PlspayChannelRefundNoticeService extends AbstractChannelRefundNotic
     @Override
     public ChannelRetMsg doNotice(HttpServletRequest request, Object params, RefundOrder refundOrder, MchAppConfigContext mchAppConfigContext, NoticeTypeEnum noticeTypeEnum) {
         try {
-            String logPrefix = "【处理计全付退款回调】";
+            String logPrefix = "[处理计全付退款回调]";
             // 获取请求参数
             JSONObject jsonParams = (JSONObject) params;
             log.info("{} 回调参数, jsonParams：{}", logPrefix, jsonParams);

@@ -16,7 +16,7 @@ import java.util.List;
  * @author shuigedeng
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommonAmisVo {
@@ -77,7 +77,7 @@ public class CommonAmisVo {
     @NoArgsConstructor
     @Data
     @AllArgsConstructor
-    @Accessors(chain=true)
+    
     public static class ColumnsDTO {
         /**
          * nameX
@@ -118,7 +118,7 @@ public class CommonAmisVo {
     @NoArgsConstructor
     @Data
     @AllArgsConstructor
-    @Accessors(chain=true)
+    
     public static class ApiDTO {
         /**
          * adaptor

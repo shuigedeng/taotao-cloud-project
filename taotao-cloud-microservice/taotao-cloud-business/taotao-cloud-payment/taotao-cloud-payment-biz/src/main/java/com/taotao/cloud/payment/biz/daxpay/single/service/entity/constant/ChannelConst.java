@@ -17,7 +17,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName("pay_channel_const")
 public class ChannelConst extends MpIdEntity implements ToResult<ChannelConstResult> {
 

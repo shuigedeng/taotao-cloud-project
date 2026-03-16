@@ -39,7 +39,7 @@ import lombok.NoArgsConstructor;
  * @since 2025-12-19 09:30:45
  */
 @Data
-@Accessors(chain = true)
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(title = "系统应用")

@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 
 /** 秒杀活动申请视图对象 */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class SeckillApplyVO implements Serializable {

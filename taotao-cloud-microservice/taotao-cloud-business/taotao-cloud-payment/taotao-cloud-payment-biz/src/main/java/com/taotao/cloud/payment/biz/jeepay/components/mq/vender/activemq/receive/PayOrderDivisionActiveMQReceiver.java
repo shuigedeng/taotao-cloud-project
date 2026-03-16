@@ -40,7 +40,7 @@ public class PayOrderDivisionActiveMQReceiver implements IMQMsgReceiver {
     @Autowired
     private PayOrderDivisionMQ.IMQReceiver mqReceiver;
 
-    /** 接收 【 queue 】 类型的消息 **/
+    /** 接收 [ queue ] 类型的消息 **/
     @Override
     @JmsListener(destination = PayOrderDivisionMQ.MQ_NAME)
     public void receiveMsg(String msg){

@@ -61,7 +61,7 @@ public interface MpMessageService {
     WxMpXmlOutMessage sendOutMessage(@Valid MpMessageSendOutReqBO sendReqBO);
 
     /**
-     * 使用公众号，给粉丝发送【客服】消息
+     * 使用公众号，给粉丝发送[客服]消息
      *
      * <p>注意，该方法会真实发送消息
      *

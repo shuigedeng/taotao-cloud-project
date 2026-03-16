@@ -30,7 +30,7 @@ import lombok.experimental.*;
  */
 @Data
 @Schema(title = "微信公众号粉丝")
-@Accessors(chain = true)
+
 public class WechatFansParam {
 
     @Schema(description = "主键")

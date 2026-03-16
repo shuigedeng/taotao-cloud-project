@@ -38,7 +38,7 @@ import lombok.experimental.*;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @TableName("starter_wecom_robot_config")
-@Accessors(chain = true)
+
 public class WecomRobotConfig extends MpBaseEntity implements EntityBaseFunction<WecomRobotConfigDto> {
 
     /** 名称 */

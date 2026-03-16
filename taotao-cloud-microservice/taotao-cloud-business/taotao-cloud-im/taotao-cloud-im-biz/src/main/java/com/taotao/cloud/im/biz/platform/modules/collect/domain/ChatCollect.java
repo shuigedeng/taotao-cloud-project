@@ -28,7 +28,7 @@ import lombok.experimental.*;
 /** 收藏表实体类 q3z3 */
 @Data
 @TableName("chat_collect")
-@Accessors(chain = true) // 链式调用
+ // 链式调用
 public class ChatCollect extends BaseEntity {
 
     private static final long serialVersionUID = 1L;

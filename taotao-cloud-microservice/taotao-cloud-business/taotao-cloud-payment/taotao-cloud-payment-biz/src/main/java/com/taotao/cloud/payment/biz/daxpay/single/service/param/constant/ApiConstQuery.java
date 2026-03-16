@@ -13,7 +13,7 @@ import lombok.experimental.*;
  */
 @QueryParam(type = QueryParam.CompareTypeEnum.LIKE)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "支付接口")
 public class ApiConstQuery {
     /** 接口编码 */

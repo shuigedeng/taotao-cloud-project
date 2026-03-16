@@ -16,7 +16,7 @@ import java.util.List;
  * https://www.runoob.com/echarts/echarts-setup.html
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class EchartsVo {
@@ -57,7 +57,7 @@ public class EchartsVo {
      * TitleVO
      */
     @Data
-    @Accessors(chain=true)
+    
     public static class TitleVO {
         /**
          * text
@@ -69,7 +69,7 @@ public class EchartsVo {
      * TooltipVO
      */
     @Data
-    @Accessors(chain=true)
+    
     public static class TooltipVO {
         private String color;
     }
@@ -78,7 +78,7 @@ public class EchartsVo {
      * LegendVO
      */
     @Data
-    @Accessors(chain=true)
+    
     public static class LegendVO {
         /**
          * data
@@ -90,7 +90,7 @@ public class EchartsVo {
      * XAxisVO
      */
     @Data
-    @Accessors(chain=true)
+    
 
     public static class XaxisVO {
         /**
@@ -103,7 +103,7 @@ public class EchartsVo {
      * YAxisVO
      */
     @Data
-    @Accessors(chain=true)
+    
     public static class YaxisVO {
         private String type;
     }
@@ -112,7 +112,7 @@ public class EchartsVo {
      * SeriesVO
      */
     @Data
-    @Accessors(chain=true)
+    
     public static class SeriesVO {
         /**
          * name

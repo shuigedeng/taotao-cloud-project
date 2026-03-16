@@ -28,7 +28,7 @@ import lombok.experimental.*;
 /** 砍价活动参与实体类 */
 @Getter
 @Setter
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "砍价活动参与记录查询对象")

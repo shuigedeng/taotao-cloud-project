@@ -14,7 +14,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "商户应用消息通知配置")
 public class MerchantNotifyConfigResult extends MchAppResult {
 

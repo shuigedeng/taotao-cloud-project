@@ -263,7 +263,7 @@ public class CardController extends BaseController {
         }
         String resultValue = "最终结果：试题编号-答案<br> ";
         for (Integer key : listenAnswer.keySet()) {
-            resultValue += "【" + (key + 1) + ":" + listenAnswer.get(key) + "】";
+            resultValue += "[" + (key + 1) + ":" + listenAnswer.get(key) + "]";
             if ((key + 1) % 5 == 0) {
                 resultValue += "<br>";
             }

@@ -23,7 +23,7 @@ import lombok.experimental.*;
 
 /** 统一下单-优惠功能 */
 @Data
-@Accessors(chain = true)
+
 public class Detail {
     /** 订单原价 */
     private int cost_price;

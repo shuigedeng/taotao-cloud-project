@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 
 /** 店铺基本信息DTO */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "店铺基本信息DTO")

@@ -12,7 +12,7 @@ import lombok.experimental.*;
  * @since 2023/12/27
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "支付同步结果")
 public class PaySyncResult  {
 

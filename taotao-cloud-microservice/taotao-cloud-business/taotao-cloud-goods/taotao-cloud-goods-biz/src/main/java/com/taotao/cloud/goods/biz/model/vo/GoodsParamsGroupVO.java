@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 
 /** 商品参数vo */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class GoodsParamsGroupVO implements Serializable {

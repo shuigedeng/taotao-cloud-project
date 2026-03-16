@@ -24,7 +24,7 @@ import lombok.experimental.*;
 
 /** 表字段模型 */
 @Data
-@Accessors(chain = true)
+
 public class DbTableFieldModel extends JdbcGetMod {
 
     /** 字段名 */

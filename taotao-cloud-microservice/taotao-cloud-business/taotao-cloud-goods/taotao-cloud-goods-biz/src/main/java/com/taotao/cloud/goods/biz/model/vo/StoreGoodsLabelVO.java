@@ -34,7 +34,7 @@ import lombok.NoArgsConstructor;
  * @since 2022-04-14 21:52:23
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class StoreGoodsLabelVO implements Serializable {

@@ -19,7 +19,7 @@ package com.taotao.cloud.rpc.common.common.support.inteceptor;
 /**
  * rpc 拦截器
  *
- * 【调用示意流程】
+ * [调用示意流程]
  *
  * <pre>
  *
@@ -38,7 +38,7 @@ package com.taotao.cloud.rpc.common.common.support.inteceptor;
  * }
  * </pre>
  *
- * 【拦截器 chain】
+ * [拦截器 chain]
  * 将多个拦截器视为一个拦截器。
  * 保证接口的纯粹与统一。
  *

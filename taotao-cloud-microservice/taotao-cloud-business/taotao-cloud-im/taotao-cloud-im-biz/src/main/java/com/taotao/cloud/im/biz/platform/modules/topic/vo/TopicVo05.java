@@ -21,7 +21,7 @@ import lombok.experimental.*;
 import lombok.experimental.*;
 
 @Data
-@Accessors(chain = true) // 链式调用
+ // 链式调用
 public class TopicVo05 {
 
     /** 用户id */

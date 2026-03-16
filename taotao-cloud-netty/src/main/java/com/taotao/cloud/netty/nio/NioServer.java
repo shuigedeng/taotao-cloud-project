@@ -68,7 +68,7 @@ public class NioServer {
                                     client.configureBlocking(false);
                                     client.register(selector, SelectionKey.OP_READ);
 
-                                    String key = "【" + UUID.randomUUID().toString() + "】";
+                                    String key = "[" + UUID.randomUUID().toString() + "]";
 
                                     clientMap.put(key, client);
                                 } else if (selectionKey.isReadable()) {

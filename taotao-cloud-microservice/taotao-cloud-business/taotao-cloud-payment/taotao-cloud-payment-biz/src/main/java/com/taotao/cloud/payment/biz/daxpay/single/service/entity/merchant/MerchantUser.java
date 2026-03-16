@@ -16,7 +16,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @AllArgsConstructor
 @RequiredArgsConstructor
 @TableName("pay_merchant_user")

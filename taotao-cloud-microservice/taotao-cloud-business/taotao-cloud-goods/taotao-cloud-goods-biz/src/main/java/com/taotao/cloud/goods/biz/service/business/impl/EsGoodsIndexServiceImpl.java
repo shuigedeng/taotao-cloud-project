@@ -641,7 +641,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 					bulkRequest.add(updateRequest);
 				}
 			} else {
-				LogUtils.error("更新索引商品促销信息失败！skuId 为 【{}】的索引不存在！", skuId);
+				LogUtils.error("更新索引商品促销信息失败！skuId 为 [{}]的索引不存在！", skuId);
 			}
 		}
 		this.executeBulkUpdateRequest(bulkRequest);

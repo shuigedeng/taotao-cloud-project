@@ -16,7 +16,7 @@ import java.math.BigDecimal;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "云闪付配置")
 public class UnionPayConfigResult extends MchAppResult {
 

@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 
 /** 会员店铺收藏VO */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "租会员店铺收藏VO户id")

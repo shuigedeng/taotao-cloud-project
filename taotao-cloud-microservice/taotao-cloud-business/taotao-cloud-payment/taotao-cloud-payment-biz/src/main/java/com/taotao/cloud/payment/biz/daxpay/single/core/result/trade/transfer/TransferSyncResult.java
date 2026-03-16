@@ -11,7 +11,7 @@ import lombok.experimental.*;
  * @since 2024/6/17
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "转账同步结果")
 public class TransferSyncResult {
 

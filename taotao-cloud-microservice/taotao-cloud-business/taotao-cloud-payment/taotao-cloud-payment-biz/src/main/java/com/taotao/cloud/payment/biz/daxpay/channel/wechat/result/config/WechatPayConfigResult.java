@@ -15,7 +15,7 @@ import java.math.BigDecimal;
  * @since 2024/7/17
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "微信支付配置")
 public class WechatPayConfigResult {
     /** 主键 */

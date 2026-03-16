@@ -58,7 +58,7 @@ public class YsfpayRefundService extends AbstractRefundService {
         ChannelRetMsg channelRetMsg = new ChannelRetMsg();
         JSONObject reqParams = new JSONObject();
         String orderType = YsfHttpUtil.getOrderTypeByCommon(payOrder.getWayCode());
-        String logPrefix = "【云闪付("+orderType+")退款】";
+        String logPrefix = "[云闪付("+orderType+")退款]";
         try {
             reqParams.put("origOrderNo", payOrder.getPayOrderId()); // 原交易订单号
             reqParams.put("origTxnAmt", payOrder.getAmount()); // 原交易金额
@@ -96,7 +96,7 @@ public class YsfpayRefundService extends AbstractRefundService {
         ChannelRetMsg channelRetMsg = new ChannelRetMsg();
         JSONObject reqParams = new JSONObject();
         String orderType = YsfHttpUtil.getOrderTypeByCommon(refundOrder.getWayCode());
-        String logPrefix = "【云闪付("+orderType+")退款查询】";
+        String logPrefix = "[云闪付("+orderType+")退款查询]";
         try {
             reqParams.put("orderNo", refundOrder.getRefundOrderId()); // 退款订单号
             reqParams.put("origOrderNo", refundOrder.getPayOrderId()); // 原交易订单号

@@ -39,7 +39,7 @@ import java.util.Date;
 @ApiModel(value = "系统权限表", description = "")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+
 @TableName("t_sys_entitlement")
 public class SysEntitlement extends BaseModel {
 

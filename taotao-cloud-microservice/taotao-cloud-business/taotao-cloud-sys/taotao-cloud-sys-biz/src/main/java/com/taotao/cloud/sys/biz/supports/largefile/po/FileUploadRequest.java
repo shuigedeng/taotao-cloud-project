@@ -35,8 +35,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors(chain = true)
-@Accessors(chain = true)
+
+
 public class FileUploadRequest {
 
     // 上传文件到指定目录

@@ -21,7 +21,7 @@ import java.math.BigDecimal;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName("pay_alloc_group")
 public class AllocGroup extends MchAppBaseEntity implements ToResult<AllocGroupResultBo> {
 

@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 
 /** 消息提示 */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class IndexNoticeVO {

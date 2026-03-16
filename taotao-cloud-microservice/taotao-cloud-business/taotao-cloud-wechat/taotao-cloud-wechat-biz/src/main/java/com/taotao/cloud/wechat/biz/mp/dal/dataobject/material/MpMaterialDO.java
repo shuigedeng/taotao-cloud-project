@@ -40,7 +40,7 @@ import me.chanjar.weixin.common.api.WxConsts;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-@Accessors(chain=true)
+
 @NoArgsConstructor
 @AllArgsConstructor
 public class MpMaterialDO extends BaseDO {
@@ -88,20 +88,20 @@ public class MpMaterialDO extends BaseDO {
     /**
      * 公众号文件 URL
      *
-     * <p>只有【永久素材】使用
+     * <p>只有[永久素材]使用
      */
     private String mpUrl;
 
     /**
      * 视频素材的标题
      *
-     * <p>只有【永久素材】使用
+     * <p>只有[永久素材]使用
      */
     private String title;
     /**
      * 视频素材的描述
      *
-     * <p>只有【永久素材】使用
+     * <p>只有[永久素材]使用
      */
     private String introduction;
 }

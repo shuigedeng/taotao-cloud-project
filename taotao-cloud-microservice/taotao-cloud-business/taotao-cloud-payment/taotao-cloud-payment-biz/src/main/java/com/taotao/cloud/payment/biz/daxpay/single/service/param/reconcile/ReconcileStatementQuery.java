@@ -20,7 +20,7 @@ import java.time.LocalDate;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @QueryParam(type = QueryParam.CompareTypeEnum.LIKE)
-@Accessors(chain = true)
+
 @Schema(title = "对账单查询参数")
 public class ReconcileStatementQuery extends MchAppQuery {
 

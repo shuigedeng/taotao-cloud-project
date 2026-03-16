@@ -31,7 +31,7 @@ import lombok.experimental.*;
 /** 用户表实体类 q3z3 */
 @Data
 @TableName("chat_user")
-@Accessors(chain = true)
+
 public class ChatUser extends BaseEntity {
 
     private static final long serialVersionUID = 1L;

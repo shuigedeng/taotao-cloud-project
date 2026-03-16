@@ -27,7 +27,7 @@ import lombok.experimental.Accessors;
  * @author xiangmeng
  */
 @Data
-@Accessors(chain = true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class PreviewVO {

@@ -39,7 +39,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Data
 @TableName("tt_refund_log")
-@Accessors(chain=true)
+
 @NoArgsConstructor
 @AllArgsConstructor
 @ApiModel(value = "退款日志")

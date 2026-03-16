@@ -11,7 +11,7 @@ import lombok.experimental.*;
  * @since 2023/12/18
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "退款响应参数")
 public class RefundResult {
 

@@ -18,7 +18,7 @@ import java.math.BigDecimal;
  * @since 2024/4/1
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "分账组接收者参数")
 public class AllocGroupReceiverParam {
 

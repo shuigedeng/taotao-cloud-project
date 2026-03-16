@@ -22,7 +22,7 @@ import lombok.experimental.*;
 
 /** 推送Token对象 */
 @Data
-@Accessors(chain = true) // 链式调用
+ // 链式调用
 public class PushTokenDto {
 
     /** 过期时间 */

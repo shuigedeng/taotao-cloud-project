@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
  * 规格值
  */
 @Data
-@Accessors(chain = true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class SpecValueApiRequest implements Serializable {

@@ -28,7 +28,7 @@ import java.util.Objects;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName("pay_order")
 public class PayOrder extends MchAppBaseEntity implements ToResult<PayOrderVo> {
 

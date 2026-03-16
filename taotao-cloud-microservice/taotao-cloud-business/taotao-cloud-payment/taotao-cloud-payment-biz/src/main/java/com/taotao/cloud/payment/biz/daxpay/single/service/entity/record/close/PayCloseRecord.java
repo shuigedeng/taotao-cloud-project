@@ -19,7 +19,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName("pay_close_record")
 public class PayCloseRecord extends MchAppRecordEntity implements ToResult<PayCloseRecordResult> {
 

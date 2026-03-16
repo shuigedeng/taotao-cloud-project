@@ -14,7 +14,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "商户应用基础返回结果")
 public class MchAppResult extends BaseResult {
 

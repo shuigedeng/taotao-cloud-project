@@ -22,7 +22,7 @@ import lombok.experimental.*;
 
 /** 推送对象 */
 @Data
-@Accessors(chain = true) // 链式调用
+ // 链式调用
 public class PushNoticeVo {
 
     /** 帖子_小红点 */

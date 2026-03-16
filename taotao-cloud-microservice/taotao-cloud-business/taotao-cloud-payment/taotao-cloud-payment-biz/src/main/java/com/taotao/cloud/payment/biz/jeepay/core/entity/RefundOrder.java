@@ -39,7 +39,7 @@ import java.util.Date;
 @ApiModel(value = "退款订单表", description = "")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+
 @TableName("t_refund_order")
 public class RefundOrder extends BaseModel {
 

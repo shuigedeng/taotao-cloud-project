@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "商户回调消息发送记录")
 public class MerchantCallbackTaskResult extends MchAppResult {
 

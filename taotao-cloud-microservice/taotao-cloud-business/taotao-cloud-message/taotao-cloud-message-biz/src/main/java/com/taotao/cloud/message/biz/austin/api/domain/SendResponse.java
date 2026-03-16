@@ -16,7 +16,7 @@ import java.util.List;
  * @author shuigedeng
  */
 @Data
-@Accessors(chain = true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class SendResponse {

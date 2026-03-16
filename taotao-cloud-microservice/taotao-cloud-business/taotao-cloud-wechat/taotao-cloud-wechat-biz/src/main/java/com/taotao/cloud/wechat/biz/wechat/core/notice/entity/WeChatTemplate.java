@@ -40,7 +40,7 @@ import me.chanjar.weixin.mp.bean.template.WxMpTemplate;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @TableName("starter_wx_template")
-@Accessors(chain = true)
+
 public class WeChatTemplate extends MpDelEntity implements EntityBaseFunction<WeChatTemplateDto> {
 
     /** 名称 */

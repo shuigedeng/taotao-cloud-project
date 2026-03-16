@@ -13,7 +13,7 @@ import lombok.experimental.*;
  * @since 2024/3/9
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "云闪付支付配置参数")
 public class UnionPayConfigParam {
 

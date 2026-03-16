@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 
 /** 秒杀活动商品视图对象 */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class SeckillGoodsVO implements Serializable {

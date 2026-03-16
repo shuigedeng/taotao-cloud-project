@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 
 /** 参数组vo */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class ParameterGroupVO implements Serializable {

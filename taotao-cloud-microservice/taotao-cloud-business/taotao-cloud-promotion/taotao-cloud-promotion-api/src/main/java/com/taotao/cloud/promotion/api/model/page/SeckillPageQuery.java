@@ -31,7 +31,7 @@ import lombok.experimental.*;
 /** 秒杀活动查询通用类 */
 @Setter
 @Getter
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class SeckillPageQuery extends BasePromotionsSearchQuery implements Serializable {

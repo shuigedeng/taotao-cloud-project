@@ -28,7 +28,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "数据版本日志")
 public class DataVersionLogParam extends PageQuery {
 

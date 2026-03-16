@@ -161,7 +161,7 @@ public class AlipayBizController extends AbstractCtrl {
     }
 
     /**
-     * 接收  支付宝 应用 配置中： 【应用网关地址 ： 用于接收支付宝异步通知消息（例如 From蚂蚁消息等），需要传入http(s)公网可访问的网页地址。选填，若不设置，则无法接收相应的异步通知消息。】
+     * 接收  支付宝 应用 配置中： [应用网关地址 ： 用于接收支付宝异步通知消息（例如 From蚂蚁消息等），需要传入http(s)公网可访问的网页地址。选填，若不设置，则无法接收相应的异步通知消息。]
      *
      * **/
     @RequestMapping("/appGatewayMsgReceive")

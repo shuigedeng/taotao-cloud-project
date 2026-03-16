@@ -20,7 +20,7 @@ import java.time.LocalDate;
 @QueryParam(type = QueryParam.CompareTypeEnum.LIKE)
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "对账差异记录查询参数")
 public class ReconcileDiscrepancyQuery extends MchAppQuery {
     /** 对账号 */

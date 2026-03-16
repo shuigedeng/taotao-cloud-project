@@ -13,7 +13,7 @@ import lombok.experimental.*;
  * @since 2024/8/23
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "商户管理员参数")
 public class MerchantAdminParam {
 

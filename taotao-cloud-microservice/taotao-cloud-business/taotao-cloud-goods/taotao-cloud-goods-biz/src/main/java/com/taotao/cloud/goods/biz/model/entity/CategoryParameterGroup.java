@@ -36,7 +36,7 @@ import org.hibernate.Hibernate;
 @ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors(chain=true)
+
 @Entity
 @Table(name = CategoryParameterGroup.TABLE_NAME)
 @TableName(CategoryParameterGroup.TABLE_NAME)

@@ -30,7 +30,7 @@ import lombok.experimental.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors(chain = true)
+
 @Schema(title = "登录二维码")
 public class WeChatLoginQrCode {
 

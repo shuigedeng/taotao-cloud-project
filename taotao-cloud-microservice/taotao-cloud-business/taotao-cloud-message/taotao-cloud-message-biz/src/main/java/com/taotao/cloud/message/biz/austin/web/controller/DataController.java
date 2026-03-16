@@ -37,7 +37,7 @@ public class DataController {
     private DataService dataService;
 
     @PostMapping("/message")
-    @ApiOperation("/获取【72小时】发送消息的全链路数据")
+    @ApiOperation("/获取[72小时]发送消息的全链路数据")
     public UserTimeLineVo getMessageData(@RequestBody DataParam dataParam) {
         if (Objects.isNull(dataParam) || CharSequenceUtil.isBlank(dataParam.getMessageId())) {
             return UserTimeLineVo.builder().items(new ArrayList<>()).build();
@@ -46,7 +46,7 @@ public class DataController {
     }
 
     @PostMapping("/user")
-    @ApiOperation("/获取【当天】用户接收消息的全链路数据")
+    @ApiOperation("/获取[当天]用户接收消息的全链路数据")
     public UserTimeLineVo getUserData(@RequestBody DataParam dataParam) {
         if (Objects.isNull(dataParam) || CharSequenceUtil.isBlank(dataParam.getReceiver())) {
             return UserTimeLineVo.builder().items(new ArrayList<>()).build();

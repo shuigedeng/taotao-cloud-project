@@ -16,7 +16,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "通道认证参数")
 public class AuthCodeParam extends PaymentCommonParam {
 

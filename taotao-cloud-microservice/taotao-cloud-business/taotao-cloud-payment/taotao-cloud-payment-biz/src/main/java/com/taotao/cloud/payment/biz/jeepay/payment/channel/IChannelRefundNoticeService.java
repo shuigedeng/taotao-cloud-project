@@ -25,7 +25,7 @@ import org.springframework.http.ResponseEntity;
 import jakarta.servlet.http.HttpServletRequest;
 
 /*
-* 渠道侧的退款订单通知解析实现 【分为同步跳转（doReturn）和异步回调(doNotify) 】
+* 渠道侧的退款订单通知解析实现 [分为同步跳转（doReturn）和异步回调(doNotify) ]
 *
 * @author jmdhappy
 * @site https://www.jeequan.com

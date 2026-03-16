@@ -17,7 +17,7 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "分账接收方")
 public class AllocReceiverResult extends MchAppResult {
 
@@ -25,7 +25,7 @@ public class AllocReceiverResult extends MchAppResult {
     private List<Receiver> receivers;
 
     @Data
-    @Accessors(chain = true)
+    
     public static class Receiver{
         @Schema(description = "接收方编号")
         private String receiverNo;

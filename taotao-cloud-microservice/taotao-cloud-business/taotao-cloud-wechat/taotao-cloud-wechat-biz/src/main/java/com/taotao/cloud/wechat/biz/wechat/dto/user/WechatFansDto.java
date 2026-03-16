@@ -33,7 +33,7 @@ import lombok.experimental.*;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Schema(title = "微信公众号粉丝")
-@Accessors(chain = true)
+
 public class WechatFansDto extends BaseDto {
 
     @Schema(description = "关联OpenId")

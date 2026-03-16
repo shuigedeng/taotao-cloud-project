@@ -20,7 +20,7 @@ import java.math.BigDecimal;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "转账参数")
 public class TransferParam extends PaymentCommonParam {
 

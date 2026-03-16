@@ -33,7 +33,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors(chain=true)
+
 public class ShortLinkDTO implements Serializable {
 
     /** ID */

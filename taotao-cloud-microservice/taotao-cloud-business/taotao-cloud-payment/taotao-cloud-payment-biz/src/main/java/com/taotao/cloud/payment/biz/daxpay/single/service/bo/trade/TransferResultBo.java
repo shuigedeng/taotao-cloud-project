@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * @since 2024/7/23
  */
 @Data
-@Accessors(chain = true)
+
 public class TransferResultBo {
     /** 通道转账订单号 */
     private String outTransferNo;

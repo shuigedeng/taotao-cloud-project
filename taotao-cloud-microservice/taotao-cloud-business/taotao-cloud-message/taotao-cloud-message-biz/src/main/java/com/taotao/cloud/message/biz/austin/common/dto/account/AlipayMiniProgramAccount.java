@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  * 支付宝小程序订阅消息账号配置
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class AlipayMiniProgramAccount {

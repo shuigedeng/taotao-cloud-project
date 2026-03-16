@@ -22,7 +22,7 @@ import lombok.experimental.*;
 
 /** 统一下单-商户门店信息 */
 @Data
-@Accessors(chain = true)
+
 public class StoreInfo {
     /** 门店编号 */
     private String id;

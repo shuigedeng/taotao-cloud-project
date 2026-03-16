@@ -28,7 +28,7 @@ import lombok.experimental.*;
 /** 积分商品查询通用类 */
 @Getter
 @Setter
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class PointsGoodsPageQuery extends BasePromotionsSearchQuery {

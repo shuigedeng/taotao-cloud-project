@@ -18,7 +18,7 @@ import lombok.experimental.*;
 @QueryParam(type = QueryParam.CompareTypeEnum.LIKE)
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "转账订单查询参数")
 public class TransferOrderQuery extends MchAppQuery {
 

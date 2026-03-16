@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  * @since 2024/9/28
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "通道收银支付参数")
 public class CashierPayParam {
 

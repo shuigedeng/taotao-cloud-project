@@ -18,7 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Accessors(chain=true)
+
 public class SendPushParam {
 
     /**
@@ -61,7 +61,7 @@ public class SendPushParam {
     @NoArgsConstructor
     @Data
     @AllArgsConstructor
-    @Accessors(chain=true)
+    
     public static class AudienceVO {
         /**
          * cid
@@ -76,7 +76,7 @@ public class SendPushParam {
     @NoArgsConstructor
     @Data
     @AllArgsConstructor
-    @Accessors(chain=true)
+    
     public static class PushMessageVO {
         /**
          * notification
@@ -90,7 +90,7 @@ public class SendPushParam {
         @NoArgsConstructor
         @Data
         @AllArgsConstructor
-        @Accessors(chain=true)
+        
         public static class NotificationVO {
             /**
              * title

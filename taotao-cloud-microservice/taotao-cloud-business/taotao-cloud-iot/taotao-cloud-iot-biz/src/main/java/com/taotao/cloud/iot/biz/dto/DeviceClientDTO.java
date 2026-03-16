@@ -16,7 +16,7 @@ import java.util.List;
  * @author 
  */
 @Data
-@Accessors(chain=true)
+
 public class DeviceClientDTO {
     /**
      * 格式 ： deviceType_tenantId_deviceId_uid

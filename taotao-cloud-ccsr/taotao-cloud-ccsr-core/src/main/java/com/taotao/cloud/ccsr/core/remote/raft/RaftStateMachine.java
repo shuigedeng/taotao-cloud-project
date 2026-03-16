@@ -132,7 +132,7 @@ public class RaftStateMachine extends StateMachineAdapter {
                 it.next();
             }
         } catch (Throwable e) {
-            Log.print("状态机【Critical】异常: %s", ExceptionUtils.getStackTrace(e));
+            Log.print("状态机[Critical]异常: %s", ExceptionUtils.getStackTrace(e));
             it.setErrorAndRollback(
                     index - completed,
                     new Status(RaftError.ESTATEMACHINE, "Critical error: %s", e.getMessage()));
@@ -142,13 +142,13 @@ public class RaftStateMachine extends StateMachineAdapter {
     @Override
     public void onLeaderStart(long term) {
         this.isLeader.set(true);
-        Log.print("【新Leader】产生：%s，node=%s", term, node.getNodeId());
+        Log.print("[新Leader]产生：%s，node=%s", term, node.getNodeId());
     }
 
     @Override
     public void onLeaderStop(Status status) {
         this.isLeader.set(false);
-        Log.print("【Leader失效】, status：%s，node=%s", status, node.getNodeId());
+        Log.print("[Leader失效], status：%s，node=%s", status, node.getNodeId());
     }
 
     @Override
@@ -165,12 +165,12 @@ public class RaftStateMachine extends StateMachineAdapter {
     public void onSnapshotSave(SnapshotWriter writer, Closure done) {
         try {
             Log.print(
-                    "快照保存【开始】Saving snapshot to %s, node: %s", writer.getPath(), node.getNodeId());
+                    "快照保存[开始]Saving snapshot to %s, node: %s", writer.getPath(), node.getNodeId());
 
             // 将快照信息持久化到磁盘
             saveMetadataSnapshot(writer, done);
             // 实际保存逻辑
-            Log.print("快照保存【成功】Saving snapshot to %s, node=%s", writer.getPath(), node.getNodeId());
+            Log.print("快照保存[成功]Saving snapshot to %s, node=%s", writer.getPath(), node.getNodeId());
 
         } catch (Exception e) {
             Log.error("快照保存失败", e);

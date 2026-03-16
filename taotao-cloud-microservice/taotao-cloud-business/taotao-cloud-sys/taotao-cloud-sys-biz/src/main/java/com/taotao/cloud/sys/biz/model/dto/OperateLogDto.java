@@ -32,7 +32,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = false)
 @Data
-@Accessors(chain = true)
+
 public class OperateLogDto {
 
     @Schema(description = "操作模块")

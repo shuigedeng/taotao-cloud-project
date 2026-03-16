@@ -28,7 +28,7 @@ import lombok.Setter;
 /** 预存款充值记录查询条件 */
 @Setter
 @Getter
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "预存款充值记录查询条件")

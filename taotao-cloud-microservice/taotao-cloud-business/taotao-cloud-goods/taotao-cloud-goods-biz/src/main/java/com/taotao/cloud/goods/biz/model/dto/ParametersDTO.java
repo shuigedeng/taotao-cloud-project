@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 
 /** 商品参数 */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class ParametersDTO implements Serializable {

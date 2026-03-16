@@ -29,7 +29,7 @@ import lombok.experimental.*;
 /** 分销员对象 */
 @Setter
 @Getter
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "分销订单查询对象")

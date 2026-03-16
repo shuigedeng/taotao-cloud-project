@@ -9,7 +9,7 @@ import lombok.experimental.*;
  * @since 2023/12/22
  */
 @Getter
-@Accessors(chain = true)
+
 public class PaymentContext {
 
     /**

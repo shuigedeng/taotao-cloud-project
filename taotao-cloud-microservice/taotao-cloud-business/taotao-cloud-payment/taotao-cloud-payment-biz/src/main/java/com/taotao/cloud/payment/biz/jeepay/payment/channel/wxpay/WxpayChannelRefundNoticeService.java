@@ -182,7 +182,7 @@ public class WxpayChannelRefundNoticeService extends AbstractChannelRefundNotice
         // 获取加密信息
         String params = getReqParamFromBody();
 
-        log.info("\n【请求头信息】：{}\n【加密数据】：{}", header.toString(), params);
+        log.info("\n[请求头信息]：{}\n[加密数据]：{}", header.toString(), params);
 
         WxPayService wxPayService = configContextQueryService.getWxServiceWrapper(mchAppConfigContext).getWxPayService();
         WxPayConfig wxPayConfig = wxPayService.getConfig();

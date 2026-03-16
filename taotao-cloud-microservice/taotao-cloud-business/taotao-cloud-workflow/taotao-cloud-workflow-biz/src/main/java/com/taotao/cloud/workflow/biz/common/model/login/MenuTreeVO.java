@@ -50,7 +50,7 @@ public class MenuTreeVO {
     @Schema(description = "下级菜单列表")
     private List<MenuTreeVO> children;
 
-    @Schema(description = "菜单分类【1-类别、2-页面】")
+    @Schema(description = "菜单分类[1-类别、2-页面]")
     private Integer type;
 
     private String propertyJson;

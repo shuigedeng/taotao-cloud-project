@@ -26,7 +26,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Accessors(chain = true)
+
 /**
  *
  * 消息模板DO

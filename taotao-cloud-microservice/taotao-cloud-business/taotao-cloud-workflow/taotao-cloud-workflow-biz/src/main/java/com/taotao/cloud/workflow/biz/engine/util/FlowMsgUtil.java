@@ -125,7 +125,7 @@ public class FlowMsgUtil {
             List<SentMessageForm> messageList = new ArrayList<>();
             FlowMessageModel messageModel = new FlowMessageModel();
             messageModel.setData(data);
-            messageModel.setTitle("已【结束】");
+            messageModel.setTitle("已[结束]");
             messageModel.setMsgConfig(msgConfig);
             messageModel.setType(FlowMessageEnum.me.getCode());
             messageModel.setRecordEntity(recordEntity);
@@ -169,7 +169,7 @@ public class FlowMsgUtil {
                 List<FlowTaskOperatorEntity> taskOperatorList = operatorMap.get(key);
                 FlowMessageModel messageModel = new FlowMessageModel();
                 messageModel.setData(data);
-                messageModel.setTitle("已被【同意】");
+                messageModel.setTitle("已被[同意]");
                 messageModel.setMsgConfig(taskMsgConfig);
                 messageModel.setRecordEntity(recordEntity);
                 messageModel.setStatus(taskEntity.getStatus());
@@ -204,7 +204,7 @@ public class FlowMsgUtil {
                 List<FlowTaskOperatorEntity> taskOperatorList = operatorMap.get(key);
                 FlowMessageModel messageModel = new FlowMessageModel();
                 messageModel.setData(data);
-                messageModel.setTitle("已被【拒绝】");
+                messageModel.setTitle("已被[拒绝]");
                 messageModel.setMsgConfig(taskMsgConfig);
                 messageModel.setRecordEntity(recordEntity);
                 messageModel.setStatus(taskEntity.getStatus());
@@ -245,7 +245,7 @@ public class FlowMsgUtil {
                 }
                 FlowMessageModel messageModel = new FlowMessageModel();
                 messageModel.setData(data);
-                messageModel.setTitle("已被【抄送】");
+                messageModel.setTitle("已被[抄送]");
                 messageModel.setMsgConfig(taskMsgConfig);
                 messageModel.setRecordEntity(recordEntity);
                 messageModel.setStatus(taskEntity.getStatus());
@@ -281,7 +281,7 @@ public class FlowMsgUtil {
                 List<FlowTaskOperatorEntity> taskOperatorList = operatorMap.get(key);
                 FlowMessageModel messageModel = new FlowMessageModel();
                 messageModel.setData(data);
-                messageModel.setTitle("请发起【子流程】");
+                messageModel.setTitle("请发起[子流程]");
                 messageModel.setMsgConfig(taskMsgConfig);
                 messageModel.setRecordEntity(recordEntity);
                 messageModel.setType(FlowMessageEnum.me.getCode());
@@ -297,7 +297,7 @@ public class FlowMsgUtil {
             List<SentMessageForm> messageList = new ArrayList<>();
             FlowMessageModel meModel = new FlowMessageModel();
             meModel.setData(data);
-            meModel.setTitle("已被【拒绝】");
+            meModel.setTitle("已被[拒绝]");
             meModel.setRecordEntity(recordEntity);
             meModel.setStatus(taskEntity.getStatus());
             meModel.setType(FlowMessageEnum.me.getCode());

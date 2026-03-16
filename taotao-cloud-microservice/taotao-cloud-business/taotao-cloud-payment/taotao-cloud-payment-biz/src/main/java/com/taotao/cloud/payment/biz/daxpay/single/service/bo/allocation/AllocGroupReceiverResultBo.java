@@ -18,7 +18,7 @@ import java.math.BigDecimal;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "分账组接收方信息")
 public class AllocGroupReceiverResultBo extends MchAppResult {
 

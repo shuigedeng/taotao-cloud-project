@@ -29,7 +29,7 @@ import lombok.experimental.*;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain=true)
+
 public class StoreLogisticsVO {
 
     private String storeId;

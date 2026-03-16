@@ -37,7 +37,7 @@ import java.time.LocalDateTime;
 
 /** domain */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "short_link.`domain`")

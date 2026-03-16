@@ -28,7 +28,7 @@ import lombok.experimental.*;
 * @since 2022/4/25 11:52
 */
 @Data
-@Accessors(chain = true)
+
 public class WxpayV3OrderRequestModel {
 
     /** 服务商应用ID */
@@ -93,7 +93,7 @@ public class WxpayV3OrderRequestModel {
 
     /**  场景信息 **/
     @Data
-    @Accessors(chain = true)
+    
     public static class SceneInfo{
 
         /** 用户终端IP */
@@ -110,7 +110,7 @@ public class WxpayV3OrderRequestModel {
 
         /** H5场景信息 */
         @Data
-        @Accessors(chain = true)
+        
         public static class H5Info{
 
             /** 场景类型 */
@@ -124,7 +124,7 @@ public class WxpayV3OrderRequestModel {
 
     /** 结算信息 **/
     @Data
-    @Accessors(chain = true)
+    
     public static class SettleInfo{
 
         /** 用户服务标识 */
@@ -136,7 +136,7 @@ public class WxpayV3OrderRequestModel {
 
     /** 支付者 **/
     @Data
-    @Accessors(chain = true)
+    
     public static class Payer{
 
         /** 普通商户的： 用户服务标识 */
@@ -154,7 +154,7 @@ public class WxpayV3OrderRequestModel {
 
     /** 订单金额 **/
     @Data
-    @Accessors(chain = true)
+    
     public static class Amount{
 
         /** 总金额 */

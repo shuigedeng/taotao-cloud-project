@@ -73,7 +73,7 @@ public class PayOrderReissueMQReceiver implements PayOrderReissueMQ.IMQReceiver 
                     mqSender.send(PayOrderReissueMQ.build(payOrderId, currentCount), 5); //延迟5s再次查询
                 }else{
 
-                    //TODO 调用【撤销订单】接口
+                    //TODO 调用[撤销订单]接口
 
                 }
 

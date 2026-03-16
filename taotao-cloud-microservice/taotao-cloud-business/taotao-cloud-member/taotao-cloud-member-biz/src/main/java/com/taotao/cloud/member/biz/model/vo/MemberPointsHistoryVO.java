@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 
 /** 会员积分VO */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "会员积分VO")

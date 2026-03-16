@@ -21,7 +21,7 @@ import com.taotao.cloud.workflow.biz.form.entity.LeaveApplyEntity;
 import java.util.List;
 import java.util.Map;
 
-/** 流程表单【请假申请】 */
+/** 流程表单[请假申请] */
 public interface LeaveApplyService extends IService<LeaveApplyEntity> {
 
     /**

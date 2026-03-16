@@ -16,7 +16,7 @@ import java.util.List;
  * @since 2024/7/24
  */
 @Data
-@Accessors(chain = true)
+
 public class WxPayCodepayResult implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;

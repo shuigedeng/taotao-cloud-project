@@ -19,8 +19,8 @@ public class AlipayParam implements ChannelParam {
     private String authCode;
 
     /**
-     * 【描述】小程序支付中，商户实际经营主体的小程序应用的appid，也即最终唤起收银台支付所在的小程序的应用id
-     * 【注意事项】商户需要先在产品管理中心绑定该小程序appid，否则下单会失败
+     * [描述]小程序支付中，商户实际经营主体的小程序应用的appid，也即最终唤起收银台支付所在的小程序的应用id
+     * [注意事项]商户需要先在产品管理中心绑定该小程序appid，否则下单会失败
      */
     private String opAppId;
 

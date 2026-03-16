@@ -28,8 +28,8 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 /**
- * 【该类的逻辑不用看，没有什么意义】
- * for Amis!!! amis框架在【表单】回显的时候，不支持嵌套动态语法!!
+ * [该类的逻辑不用看，没有什么意义]
+ * for Amis!!! amis框架在[表单]回显的时候，不支持嵌套动态语法!!
  * 编写工具类将 List/Object 铺平成 Map 以及相关的格式
  * https://baidu.gitee.io/amis/zh-CN/components/form/index#%E8%A1%A8%E5%8D%95%E9%A1%B9%E6%95%B0%E6%8D%AE%E5%88%9D%E5%A7%8B%E5%8C%96
  *
@@ -149,7 +149,7 @@ public class Convert4Amis {
     }
 
     /**
-     * 【这个方法不用看】，纯粹为了适配amis前端
+     * [这个方法不用看]，纯粹为了适配amis前端
      * <p>
      * 得到模板的参数 组装好 返回给前端展示
      *
@@ -193,7 +193,7 @@ public class Convert4Amis {
 
 
     /**
-     * 【这个方法不用看】，纯粹为了适配amis前端
+     * [这个方法不用看]，纯粹为了适配amis前端
      * <p>
      * 获取占位符的参数
      *
@@ -284,7 +284,7 @@ public class Convert4Amis {
     }
 
     /**
-     * 【这个方法不用看】，纯粹为了适配amis前端
+     * [这个方法不用看]，纯粹为了适配amis前端
      * <p>
      * 得到模板的参数 组装好 返回给前端展示
      *
@@ -321,7 +321,7 @@ public class Convert4Amis {
     }
 
     /**
-     * 【这个方法不用看】，纯粹为了适配amis前端
+     * [这个方法不用看]，纯粹为了适配amis前端
      * <p>
      * 得到模板的参数 组装好 返回给前端展示
      *
@@ -360,9 +360,9 @@ public class Convert4Amis {
     }
 
     /**
-     * 【这个方法不用看】，纯粹为了适配amis前端
+     * [这个方法不用看]，纯粹为了适配amis前端
      * <p>
-     * 1、得到微信服务号的【带参数】二维码返回给前端
+     * 1、得到微信服务号的[带参数]二维码返回给前端
      * 2、让前端轮询请求 接口看是否已登录
      *
      * @return
@@ -394,7 +394,7 @@ public class Convert4Amis {
     }
 
     /**
-     * 【这个方法不用看】，纯粹为了适配amis前端
+     * [这个方法不用看]，纯粹为了适配amis前端
      * <p>
      * 得到渠道账号信息，返回给前端做展示
      *
@@ -414,7 +414,7 @@ public class Convert4Amis {
     }
 
     /**
-     * 【这个方法不用看】，纯粹为了适配amis前端
+     * [这个方法不用看]，纯粹为了适配amis前端
      * 获取 EchartsVo
      *
      * @param anchorResult
@@ -433,7 +433,7 @@ public class Convert4Amis {
             }
         }
 
-        String title = "【" + messageTemplate.getName() + "】在" + DateUtil.format(DateUtil.parse(String.valueOf(TaskInfoUtils.getDateFromBusinessId(Long.valueOf(businessId)))), DatePattern.CHINESE_DATE_FORMATTER) + "的下发情况：";
+        String title = "[" + messageTemplate.getName() + "]在" + DateUtil.format(DateUtil.parse(String.valueOf(TaskInfoUtils.getDateFromBusinessId(Long.valueOf(businessId)))), DatePattern.CHINESE_DATE_FORMATTER) + "的下发情况：";
 
         return EchartsVo.builder()
                 .title(EchartsVo.TitleVO.builder().text(title).build())
@@ -447,7 +447,7 @@ public class Convert4Amis {
     }
 
     /**
-     * 【这个方法不用看】，纯粹为了适配amis前端
+     * [这个方法不用看]，纯粹为了适配amis前端
      * 获取 SmsTimeLineVo
      *
      * @return

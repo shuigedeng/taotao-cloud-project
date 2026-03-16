@@ -22,7 +22,7 @@ import lombok.experimental.*;
 
 /** 统一下单-结算信息 */
 @Data
-@Accessors(chain = true)
+
 public class SettleInfo {
     /** 是否指定分账 */
     private boolean profit_sharing;

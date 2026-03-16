@@ -22,7 +22,7 @@ import lombok.experimental.*;
 
 /** 国内退款-退款申请 */
 @Data
-@Accessors(chain = true)
+
 public class RefundModel {
 
     /** 原支付交易对应的微信订单号 */

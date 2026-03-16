@@ -13,7 +13,7 @@ import lombok.experimental.*;
  */
 @Data
 @QueryParam(type = QueryParam.CompareTypeEnum.LIKE)
-@Accessors(chain = true)
+
 @Schema(title = "商户参数")
 public class MerchantQuery {
 

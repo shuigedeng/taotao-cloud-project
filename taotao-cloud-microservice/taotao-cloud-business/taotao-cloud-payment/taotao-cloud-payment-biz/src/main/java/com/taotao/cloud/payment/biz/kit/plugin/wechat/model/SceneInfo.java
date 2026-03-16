@@ -22,7 +22,7 @@ import lombok.experimental.*;
 
 /** 统一下单-场景信息 */
 @Data
-@Accessors(chain = true)
+
 public class SceneInfo {
     /** 用户终端IP */
     private String payer_client_ip;

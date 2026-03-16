@@ -41,7 +41,7 @@ import java.util.Date;
 @ApiModel(value = "系统配置表", description = "")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+
 @TableName("t_sys_config")
 public class SysConfig extends BaseModel implements Serializable {
 

@@ -22,7 +22,7 @@ import java.util.Objects;
  * @since 2022/3/11
  */
 @Data
-@Accessors(chain = true)
+
 public class UnionPayConfig implements ToResult<UnionPayConfigResult> {
 
     /** 主键 */

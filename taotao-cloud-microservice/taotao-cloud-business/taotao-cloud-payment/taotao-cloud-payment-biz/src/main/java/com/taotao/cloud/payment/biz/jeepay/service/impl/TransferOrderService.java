@@ -40,7 +40,7 @@ import java.util.Date;
 public class TransferOrderService extends ServiceImpl<TransferOrderMapper, TransferOrder> {
 
 
-    /** 更新转账订单状态  【转账订单生成】 --》 【转账中】 **/
+    /** 更新转账订单状态  [转账订单生成] --》 [转账中] **/
     public boolean updateInit2Ing(String transferId){
 
         TransferOrder updateRecord = new TransferOrder();
@@ -51,7 +51,7 @@ public class TransferOrderService extends ServiceImpl<TransferOrderMapper, Trans
     }
 
 
-    /** 更新转账订单状态  【转账中】 --》 【转账成功】 **/
+    /** 更新转账订单状态  [转账中] --》 [转账成功] **/
     @Transactional
     public boolean updateIng2Success(String transferId, String channelOrderNo){
 
@@ -71,7 +71,7 @@ public class TransferOrderService extends ServiceImpl<TransferOrderMapper, Trans
     }
 
 
-    /** 更新转账订单状态  【转账中】 --》 【转账失败】 **/
+    /** 更新转账订单状态  [转账中] --》 [转账失败] **/
     @Transactional
     public boolean updateIng2Fail(String transferId, String channelOrderNo, String channelErrCode, String channelErrMsg){
 
@@ -86,7 +86,7 @@ public class TransferOrderService extends ServiceImpl<TransferOrderMapper, Trans
     }
 
 
-    /** 更新转账订单状态  【转账中】 --》 【转账成功/转账失败】 **/
+    /** 更新转账订单状态  [转账中] --》 [转账成功/转账失败] **/
     @Transactional
     public boolean updateIng2SuccessOrFail(String transferId, Byte updateState, String channelOrderNo, String channelErrCode, String channelErrMsg){
 

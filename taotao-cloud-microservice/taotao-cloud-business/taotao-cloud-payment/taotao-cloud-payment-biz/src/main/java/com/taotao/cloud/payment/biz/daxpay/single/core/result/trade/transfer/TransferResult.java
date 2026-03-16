@@ -12,7 +12,7 @@ import lombok.experimental.*;
  * @since 2024/6/6
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "转账结果")
 public class TransferResult {
 

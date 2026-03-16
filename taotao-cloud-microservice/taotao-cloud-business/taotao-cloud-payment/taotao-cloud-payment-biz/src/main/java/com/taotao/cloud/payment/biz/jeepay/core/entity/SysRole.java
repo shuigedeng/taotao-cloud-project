@@ -39,7 +39,7 @@ import java.util.Date;
 @ApiModel(value = "系统角色表", description = "")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+
 @TableName("t_sys_role")
 public class SysRole implements Serializable {
 

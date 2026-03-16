@@ -17,7 +17,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName("pay_api_const")
 public class ApiConst extends MpIdEntity implements ToResult<ApiConstResult> {
 

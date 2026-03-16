@@ -37,7 +37,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ResetIsvMchAppInfoConfigMQ extends AbstractMQ {
 
-    /** 【！重要配置项！】 定义MQ名称 **/
+    /** [！重要配置项！] 定义MQ名称 **/
     public static final String MQ_NAME = "BROADCAST_RESET_ISV_MCH_APP_INFO_CONFIG";
 
     /** 内置msg 消息体定义 **/
@@ -48,7 +48,7 @@ public class ResetIsvMchAppInfoConfigMQ extends AbstractMQ {
     public static final byte RESET_TYPE_MCH_INFO = 2;
     public static final byte RESET_TYPE_MCH_APP = 3;
 
-    /**  【！重要配置项！】 定义Msg消息载体 **/
+    /**  [！重要配置项！] 定义Msg消息载体 **/
     @Data
     @AllArgsConstructor
     public static class MsgPayload {
@@ -73,7 +73,7 @@ public class ResetIsvMchAppInfoConfigMQ extends AbstractMQ {
         return MQ_NAME;
     }
 
-    /**  【！重要配置项！】 **/
+    /**  [！重要配置项！] **/
     @Override
     public MQSendTypeEnum getMQType(){
         return MQSendTypeEnum.BROADCAST;  // QUEUE - 点对点 、 BROADCAST - 广播模式
@@ -84,7 +84,7 @@ public class ResetIsvMchAppInfoConfigMQ extends AbstractMQ {
         return JSONObject.toJSONString(payload);
     }
 
-    /**  【！重要配置项！】 构造MQModel , 一般用于发送MQ时 **/
+    /**  [！重要配置项！] 构造MQModel , 一般用于发送MQ时 **/
     public static ResetIsvMchAppInfoConfigMQ build(Byte resetType, String isvNo, String mchNo, String appId){
         return new ResetIsvMchAppInfoConfigMQ(new MsgPayload(resetType, isvNo, mchNo, appId));
     }

@@ -17,7 +17,7 @@ import lombok.experimental.*;
 @QueryParam(type = QueryParam.CompareTypeEnum.LIKE)
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "支付关闭记录")
 public class PayCloseRecordQuery extends MchAppQuery {
 

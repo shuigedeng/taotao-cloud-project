@@ -29,7 +29,7 @@ import lombok.experimental.*;
 /** 促销商品查询通用类 */
 @Setter
 @Getter
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class PromotionGoodsPageQuery extends BasePromotionsSearchQuery {

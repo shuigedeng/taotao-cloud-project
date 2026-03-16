@@ -183,7 +183,7 @@ public class MetadataConfigServiceImpl extends MetadataServiceGrpc.MetadataServi
                     MetadataSubscribeResponse response =
                             buildSubscribeResponse(metadata, eventType);
                     // TODO 采集广播日志
-                    Log.print("broadcast【执行广播】: eventType=%s, response=%s", eventType, response);
+                    Log.print("broadcast[执行广播]: eventType=%s, response=%s", eventType, response);
                     subscribe.getResponseObserver().onNext(response);
                 }
             } catch (StatusRuntimeException e) {

@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
  * * @author sunql
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class WeChatMiniProgramAccount {

@@ -18,7 +18,7 @@ import java.math.BigDecimal;
  * @since 2024/6/24
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "商户应用")
 public class MchAppParam {
 

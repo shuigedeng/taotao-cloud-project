@@ -23,7 +23,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Data
-@Accessors(chain=true)
+
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor

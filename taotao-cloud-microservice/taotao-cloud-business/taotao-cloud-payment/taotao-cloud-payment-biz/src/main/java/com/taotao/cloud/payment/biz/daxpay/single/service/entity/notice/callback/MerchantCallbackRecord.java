@@ -18,7 +18,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName("pay_merchant_callback_record")
 public class MerchantCallbackRecord extends MchAppRecordEntity implements ToResult<MerchantCallbackRecordResult> {
 

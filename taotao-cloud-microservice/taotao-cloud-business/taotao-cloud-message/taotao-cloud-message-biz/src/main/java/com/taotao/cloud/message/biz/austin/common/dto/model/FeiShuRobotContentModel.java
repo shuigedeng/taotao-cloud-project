@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
  * https://open.feishu.cn/document/ukTMukTMukTM/ucTM5YjL3ETO24yNxkjN#756b882f
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class FeiShuRobotContentModel extends ContentModel {

@@ -96,7 +96,7 @@ public class DefaultNettyServer extends AbstractNettyServer {
 
             // 绑定端口，开始接收进来的链接
             channelFuture = serverBootstrap.bind(port).syncUninterruptibly();
-            LOG.info("[Netty Server] 启动完成，监听【" + port + "】端口");
+            LOG.info("[Netty Server] 启动完成，监听[" + port + "]端口");
 
         } catch (Exception e) {
             LOG.error("[Netty Server] 服务启动异常", e);

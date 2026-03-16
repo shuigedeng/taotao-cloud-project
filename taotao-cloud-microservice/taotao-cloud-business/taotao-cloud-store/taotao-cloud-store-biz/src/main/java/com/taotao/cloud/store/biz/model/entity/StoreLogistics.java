@@ -38,7 +38,7 @@ import org.hibernate.Hibernate;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain=true)
+
 @Entity
 @Table(name = StoreLogistics.TABLE_NAME)
 @TableName(StoreLogistics.TABLE_NAME)

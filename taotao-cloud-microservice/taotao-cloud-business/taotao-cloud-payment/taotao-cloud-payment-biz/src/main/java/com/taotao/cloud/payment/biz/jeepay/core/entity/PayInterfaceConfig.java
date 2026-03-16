@@ -42,7 +42,7 @@ import java.util.Date;
 @ApiModel(value = "支付接口配置参数表", description = "")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
+
 @TableName("t_pay_interface_config")
 public class PayInterfaceConfig extends BaseModel implements Serializable {
 

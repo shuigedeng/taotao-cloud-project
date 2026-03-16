@@ -29,7 +29,7 @@ import me.chanjar.weixin.mp.bean.material.WxMpMaterialFileBatchGetResult.WxMater
  * @since 2022/8/12
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "微信素材")
 public class WeChatMediaDto {
     @Schema(description = "媒体id")

@@ -12,7 +12,7 @@ import java.util.List;
  * @since 2024/8/6
  */
 @Data
-@Accessors(chain = true)
+
 public class ReconcileResolveResultBo {
 
     /**

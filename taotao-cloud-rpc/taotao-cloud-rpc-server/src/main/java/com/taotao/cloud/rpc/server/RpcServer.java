@@ -83,7 +83,7 @@ public class RpcServer extends Thread {
 
             // 绑定端口，开始接收进来的链接
             ChannelFuture channelFuture = serverBootstrap.bind(port).syncUninterruptibly();
-            LOG.info("RPC 服务端启动完成，监听【" + port + "】端口");
+            LOG.info("RPC 服务端启动完成，监听[" + port + "]端口");
 
             channelFuture.channel().closeFuture().syncUninterruptibly();
             LOG.info("RPC 服务端关闭完成");

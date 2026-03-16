@@ -25,7 +25,7 @@ import lombok.experimental.*;
 
 /** 表格分页数据对象 */
 @Data
-@Accessors(chain = true) // 链式调用
+ // 链式调用
 public class TableDataInfo implements Serializable {
     private static final long serialVersionUID = 1L;
 

@@ -14,7 +14,7 @@ import java.math.BigDecimal;
  * @since 2024/6/27
  */
 @Data
-@Accessors(chain = true)
+
 public class MchAppLocal {
 
     /** 应用号 */

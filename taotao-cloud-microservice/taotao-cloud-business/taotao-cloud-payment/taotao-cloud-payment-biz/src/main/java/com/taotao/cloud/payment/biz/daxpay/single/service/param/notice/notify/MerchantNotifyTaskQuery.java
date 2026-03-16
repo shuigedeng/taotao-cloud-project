@@ -17,7 +17,7 @@ import lombok.experimental.*;
 @EqualsAndHashCode(callSuper = true)
 @QueryParam
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "客户订阅通知任务查询参数")
 public class MerchantNotifyTaskQuery extends MchAppQuery {
 

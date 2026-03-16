@@ -35,7 +35,7 @@ import lombok.NoArgsConstructor;
  * @since 2020/9/30 08:49
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(name = "MemberQuery", description = "会员query")

@@ -56,7 +56,7 @@ public class AliJsapi extends YsfpayPaymentService {
 
     @Override
     public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) throws Exception {
-        String logPrefix = "【云闪付(alipayJs)jsapi支付】";
+        String logPrefix = "[云闪付(alipayJs)jsapi支付]";
         JSONObject reqParams = new JSONObject();
         AliJsapiOrderRS res = ApiResBuilder.buildSuccess(AliJsapiOrderRS.class);
         ChannelRetMsg channelRetMsg = new ChannelRetMsg();

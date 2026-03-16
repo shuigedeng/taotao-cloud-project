@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 
 /** 商品统计VO */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class StoreStatisticsDataVO {

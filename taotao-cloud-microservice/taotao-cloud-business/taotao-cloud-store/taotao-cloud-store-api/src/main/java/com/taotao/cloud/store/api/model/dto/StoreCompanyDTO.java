@@ -36,7 +36,7 @@ import org.hibernate.validator.constraints.Length;
  * @since 2020/12/7 15:50
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "店铺-公司信息")

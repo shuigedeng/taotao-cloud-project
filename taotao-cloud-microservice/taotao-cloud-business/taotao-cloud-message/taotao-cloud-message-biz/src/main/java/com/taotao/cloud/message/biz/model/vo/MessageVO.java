@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 
 /** 消息 */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "消息")

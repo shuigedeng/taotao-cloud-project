@@ -36,7 +36,7 @@ import java.time.LocalDateTime;
  * @since 2022/05/03
  */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "short_link.short_link")

@@ -30,7 +30,7 @@ import lombok.experimental.*;
  * @since 2021/8/12
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "登录日志")
 public class LoginLogDto implements Serializable {
     private static final long serialVersionUID = 2985633896134425505L;

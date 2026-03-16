@@ -50,13 +50,13 @@ public class MpMaterialRespVO {
     @ApiModelProperty(value = "名字", example = "yunai.png")
     private String name;
 
-    @ApiModelProperty(value = "公众号文件 URL", example = "https://mmbiz.qpic.cn/xxx.mp3", notes = "只有【永久素材】使用")
+    @ApiModelProperty(value = "公众号文件 URL", example = "https://mmbiz.qpic.cn/xxx.mp3", notes = "只有[永久素材]使用")
     private String mpUrl;
 
-    @ApiModelProperty(value = "视频素材的标题", example = "我是标题", notes = "只有【永久素材】使用")
+    @ApiModelProperty(value = "视频素材的标题", example = "我是标题", notes = "只有[永久素材]使用")
     private String title;
 
-    @ApiModelProperty(value = "视频素材的描述", example = "我是介绍", notes = "只有【永久素材】使用")
+    @ApiModelProperty(value = "视频素材的描述", example = "我是介绍", notes = "只有[永久素材]使用")
     private String introduction;
 
     @ApiModelProperty(value = "创建时间", required = true)

@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 
 /** 分类品牌VO */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "分类品牌VO")

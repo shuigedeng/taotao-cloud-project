@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 
 /** 促销skuVO */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class PromotionSkuVO implements Serializable {

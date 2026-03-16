@@ -185,13 +185,13 @@ public class WxUserServiceImpl extends ServiceImpl<WxUserMapper, WxUser> impleme
             final List<String> subOpenids = openids.subList(finalStart, finalEnd);
             TaskExcutor.submit(
                     () -> { // 使用线程池同步数据，否则大量粉丝数据需同步时会很慢
-                        logger.info("同步批次:【{}--{}-{}】，数量：{}", batch, finalStart, finalEnd, subOpenids.size());
+                        logger.info("同步批次:[{}--{}-{}]，数量：{}", batch, finalStart, finalEnd, subOpenids.size());
                         wxMpService.switchover(appid);
                         List<WxMpUser> wxMpUsers = null; // 批量获取用户信息，每次最多100个
                         try {
                             wxMpUsers = wxMpUserService.userInfoList(subOpenids);
                         } catch (WxErrorException e) {
-                            logger.error("同步出错，批次：【{}--{}-{}】，错误信息：{}", batch, finalStart, finalEnd, e);
+                            logger.error("同步出错，批次：[{}--{}-{}]，错误信息：{}", batch, finalStart, finalEnd, e);
                         }
                         if (wxMpUsers != null && !wxMpUsers.isEmpty()) {
                             List<WxUser> wxUsers = wxMpUsers.parallelStream()

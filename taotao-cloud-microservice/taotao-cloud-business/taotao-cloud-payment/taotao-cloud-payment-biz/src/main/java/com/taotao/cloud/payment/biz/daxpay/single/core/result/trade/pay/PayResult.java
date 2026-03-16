@@ -11,7 +11,7 @@ import lombok.experimental.*;
  * @since 2024/6/27
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "统一支付响应参数")
 public class PayResult {
 

@@ -56,7 +56,7 @@ public class AlipayTransferNoticeService extends AbstractTransferNoticeService {
         try {
 
             JSONObject params = getReqParamJSON();
-            log.info("【支付宝转账】回调通知参数：{}", params.toJSONString());
+            log.info("[支付宝转账]回调通知参数：{}", params.toJSONString());
 
             JSONObject bizContent = JSONObject.parseObject(params.getString("biz_content"));
 
@@ -73,7 +73,7 @@ public class AlipayTransferNoticeService extends AbstractTransferNoticeService {
     @Override
     public ChannelRetMsg doNotice(HttpServletRequest request, Object params, TransferOrder transferOrder, MchAppConfigContext mchAppConfigContext) {
 
-        String logPrefix = "【支付宝转账通知】";
+        String logPrefix = "[支付宝转账通知]";
 
         try {
             //配置参数获取

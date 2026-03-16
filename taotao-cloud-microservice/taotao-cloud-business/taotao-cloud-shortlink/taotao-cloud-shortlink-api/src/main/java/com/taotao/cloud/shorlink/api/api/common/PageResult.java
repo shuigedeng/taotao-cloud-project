@@ -33,7 +33,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
-@Accessors(chain=true)
+
 public class PageResult<T> implements Serializable {
 
     private int page;

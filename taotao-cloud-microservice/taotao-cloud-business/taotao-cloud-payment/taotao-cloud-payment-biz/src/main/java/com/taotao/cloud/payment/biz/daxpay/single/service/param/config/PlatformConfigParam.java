@@ -11,7 +11,7 @@ import lombok.experimental.*;
  * @since 2024/9/19
  */
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "平台配置")
 public class PlatformConfigParam {
 

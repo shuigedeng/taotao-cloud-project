@@ -24,7 +24,7 @@ import lombok.experimental.*;
 
 /** 好友对象 */
 @Data
-@Accessors(chain = true) // 链式调用
+ // 链式调用
 public class FriendVo06 {
 
     /** 用户id */

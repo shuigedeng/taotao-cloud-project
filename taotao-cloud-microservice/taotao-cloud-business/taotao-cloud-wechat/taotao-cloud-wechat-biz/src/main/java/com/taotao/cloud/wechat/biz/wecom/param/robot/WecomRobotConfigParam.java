@@ -29,7 +29,7 @@ import lombok.experimental.*;
  */
 @Data
 @Schema(title = "企业微信机器人配置")
-@Accessors(chain = true)
+
 public class WecomRobotConfigParam {
 
     @Schema(description = "主键")

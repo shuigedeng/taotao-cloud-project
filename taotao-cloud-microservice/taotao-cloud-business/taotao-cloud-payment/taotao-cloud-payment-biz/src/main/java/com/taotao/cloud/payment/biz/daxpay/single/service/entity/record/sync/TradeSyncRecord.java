@@ -19,7 +19,7 @@ import lombok.experimental.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @TableName("pay_trade_sync_record")
 public class TradeSyncRecord extends MchAppRecordEntity implements ToResult<TradeSyncRecordResult> {
 

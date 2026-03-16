@@ -19,7 +19,7 @@ import java.math.BigDecimal;
  * @since 2024/6/25
  */
 @Data
-@Accessors(chain = true)
+
 public class AliPayConfig implements ToResult<AlipayConfigResult> {
 
     /** 主键 */

@@ -58,7 +58,7 @@ public class RefundOrderService extends ServiceImpl<RefundOrderMapper, RefundOrd
     }
 
 
-    /** 更新退款单状态  【退款单生成】 --》 【退款中】 **/
+    /** 更新退款单状态  [退款单生成] --》 [退款中] **/
     public boolean updateInit2Ing(String refundOrderId, String channelOrderNo){
 
         RefundOrder updateRecord = new RefundOrder();
@@ -69,7 +69,7 @@ public class RefundOrderService extends ServiceImpl<RefundOrderMapper, RefundOrd
                 .eq(RefundOrder::getRefundOrderId, refundOrderId).eq(RefundOrder::getState, RefundOrder.STATE_INIT));
     }
 
-    /** 更新退款单状态  【退款中】 --》 【退款成功】 **/
+    /** 更新退款单状态  [退款中] --》 [退款成功] **/
     @Transactional
     public boolean updateIng2Success(String refundOrderId, String channelOrderNo){
 
@@ -96,7 +96,7 @@ public class RefundOrderService extends ServiceImpl<RefundOrderMapper, RefundOrd
     }
 
 
-    /** 更新退款单状态  【退款中】 --》 【退款失败】 **/
+    /** 更新退款单状态  [退款中] --》 [退款失败] **/
     @Transactional
     public boolean updateIng2Fail(String refundOrderId, String channelOrderNo, String channelErrCode, String channelErrMsg){
 
@@ -111,7 +111,7 @@ public class RefundOrderService extends ServiceImpl<RefundOrderMapper, RefundOrd
     }
 
 
-    /** 更新退款单状态  【退款中】 --》 【退款成功/退款失败】 **/
+    /** 更新退款单状态  [退款中] --》 [退款成功/退款失败] **/
     @Transactional
     public boolean updateIng2SuccessOrFail(String refundOrderId, Byte updateState, String channelOrderNo, String channelErrCode, String channelErrMsg){
 

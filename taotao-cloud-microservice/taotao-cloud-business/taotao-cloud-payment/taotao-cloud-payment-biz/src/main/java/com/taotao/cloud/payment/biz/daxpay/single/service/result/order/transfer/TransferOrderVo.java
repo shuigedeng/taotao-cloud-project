@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Accessors(chain = true)
+
 @Schema(title = "转账订单")
 public class TransferOrderVo extends MchAppResult {
 

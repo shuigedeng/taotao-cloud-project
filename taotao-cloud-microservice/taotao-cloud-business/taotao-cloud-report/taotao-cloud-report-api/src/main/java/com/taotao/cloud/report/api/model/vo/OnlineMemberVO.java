@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 
 /** 在线会员 */
 @Data
-@Accessors(chain=true)
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class OnlineMemberVO {
