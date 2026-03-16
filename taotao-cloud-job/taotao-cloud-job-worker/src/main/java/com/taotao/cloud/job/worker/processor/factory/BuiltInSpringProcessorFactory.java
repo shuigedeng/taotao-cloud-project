@@ -52,9 +52,12 @@ public class BuiltInSpringProcessorFactory extends AbstractBuildInSpringProcesso
                 return null;
             }
             BasicProcessor basicProcessor = getBean(processorInfo, applicationContext);
-            return new ProcessorBean()
-                    .setProcessor(basicProcessor)
-                    .setClassLoader(basicProcessor.getClass().getClassLoader());
+
+
+			ProcessorBean processorBean = new ProcessorBean();
+			processorBean.setProcessor(basicProcessor);
+			processorBean.setClassLoader(basicProcessor.getClass().getClassLoader());
+            return processorBean;
         } catch (NoSuchBeanDefinitionException ignore) {
             log.warn("[ProcessorFactory] can't find the processor in SPRING");
         } catch (Throwable t) {

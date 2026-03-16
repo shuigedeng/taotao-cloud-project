@@ -100,13 +100,13 @@ public class LightTaskTracker extends TaskTracker {
             taskContext = constructTaskContext(req);
             // 等待处理
             status = TaskStatus.WORKER_RECEIVED;
-            // 加载 Processor
+			ProcessorDefinition processorDefinition = new ProcessorDefinition();
+			processorDefinition.setProcessorType(req.getProcessorType());
+			processorDefinition.setProcessorInfo(req.getProcessorInfo());
+			// 加载 Processor
             processorBean =
                     TtcJobWorkerConfig.getProcessorLoader()
-                            .load(
-                                    new ProcessorDefinition()
-                                            .setProcessorType(req.getProcessorType())
-                                            .setProcessorInfo(req.getProcessorInfo()));
+                            .load(processorDefinition);
             executeThread = new AtomicReference<>();
             //            long delay =
             // Integer.parseInt(System.getProperty(PowerJobDKey.WORKER_STATUS_CHECK_PERIOD, "15")) *

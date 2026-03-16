@@ -47,9 +47,11 @@ public class BuiltInDefaultProcessorFactory implements ProcessorFactory {
             Class<?> clz = Class.forName(className);
             BasicProcessor basicProcessor =
                     (BasicProcessor) clz.getDeclaredConstructor().newInstance();
-            return new ProcessorBean()
-                    .setProcessor(basicProcessor)
-                    .setClassLoader(basicProcessor.getClass().getClassLoader());
+
+			ProcessorBean processorBean = new ProcessorBean();
+			processorBean.setProcessor(basicProcessor);
+			processorBean.setClassLoader(basicProcessor.getClass().getClassLoader());
+			return processorBean;
         } catch (Exception e) {
             log.warn(
                     "[ProcessorFactory] load local Processor(className = {}) failed.",

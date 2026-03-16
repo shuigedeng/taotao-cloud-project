@@ -19,6 +19,7 @@ package com.taotao.cloud.ccsr.client.client.invoke;
 import com.google.protobuf.Message;
 import com.google.protobuf.Timestamp;
 import com.taotao.cloud.ccsr.api.event.EventType;
+import com.taotao.cloud.ccsr.api.grpc.auto.*;
 import com.taotao.cloud.ccsr.client.client.CcsrClient;
 import com.taotao.cloud.ccsr.client.context.CcsrContext;
 import com.taotao.cloud.ccsr.client.option.GrpcOption;

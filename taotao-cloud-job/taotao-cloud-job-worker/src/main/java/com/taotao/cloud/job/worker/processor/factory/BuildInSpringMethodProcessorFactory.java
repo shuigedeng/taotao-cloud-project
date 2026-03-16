@@ -96,9 +96,10 @@ public class BuildInSpringMethodProcessorFactory extends AbstractBuildInSpringPr
                 registerJobHandler(methodName);
 
                 MethodBasicProcessor processor = new MethodBasicProcessor(bean, method);
-                return new ProcessorBean()
-                        .setProcessor(processor)
-                        .setClassLoader(processor.getClass().getClassLoader());
+				ProcessorBean processorBean = new ProcessorBean();
+				processorBean.setProcessor(processor);
+				processorBean.setClassLoader(processor.getClass().getClassLoader());
+				return processorBean;
             }
         } catch (NoSuchBeanDefinitionException ignore) {
             log.warn("[ProcessorFactory] can't find the processor in SPRING");
