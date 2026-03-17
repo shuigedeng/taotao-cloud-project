@@ -38,7 +38,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-job-snail"
     implementation "io.github.shuigedeng:taotao-boot-starter-statemachine"
     implementation "io.github.shuigedeng:taotao-boot-starter-flowengine"
-
+    implementation "io.github.shuigedeng:taotao-boot-starter-ddd"
     //https://central.sonatype.com/artifact/org.springframework.session/spring-session-data-redis
     implementation 'org.springframework.session:spring-session-data-redis:4.0.1'
 
