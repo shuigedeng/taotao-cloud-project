@@ -1,0 +1,34 @@
+package com.taotao.cloud.message.biz.infrastructure.austin.api.domain;
+
+import com.taotao.cloud.message.biz.infrastructure.austin.common.domain.SimpleAnchorInfo;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+/**
+ * @Author: sky
+ * @Date: 2023/7/13 13:38
+ * @Description: TraceResponse
+ * @Version 1.0.0
+ */
+@Data
+
+@AllArgsConstructor
+@NoArgsConstructor
+public class TraceResponse {
+    /**
+     * 响应状态
+     */
+    private String code;
+    /**
+     * 响应编码
+     */
+    private String msg;
+
+    /**
+     * 埋点信息
+     */
+    private List<SimpleAnchorInfo> data;
+}

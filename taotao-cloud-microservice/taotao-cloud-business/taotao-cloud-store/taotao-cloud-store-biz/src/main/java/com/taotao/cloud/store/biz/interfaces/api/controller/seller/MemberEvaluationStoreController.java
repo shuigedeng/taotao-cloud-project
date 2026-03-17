@@ -1,0 +1,76 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.taotao.cloud.store.biz.interfaces.api.controller.seller;
+
+import com.taotao.boot.common.model.result.PageResult;
+import com.taotao.boot.common.model.result.Result;
+import com.taotao.boot.security.spring.support.utils.SecurityUtils;
+import com.taotao.boot.web.request.annotation.RequestLogger;
+import com.taotao.boot.web.utils.OperationalJudgment;
+import com.taotao.cloud.member.api.inner.MemberEvaluationApi;
+import com.taotao.cloud.member.api.model.page.EvaluationPageQuery;
+import com.taotao.cloud.member.api.model.vo.MemberEvaluationListVO;
+import com.taotao.cloud.member.api.model.vo.MemberEvaluationVO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+/** 店铺端,商品评价管理接口 */
+@Validated
+@RestController
+@Tag(name = "店铺端-商品评价管理接口", description = "店铺端-商品评价管理接口")
+@RequestMapping("/store/memberEvaluation")
+public class MemberEvaluationStoreController {
+
+    @Autowired
+    private MemberEvaluationApi memberEvaluationApi;
+
+    @Operation(summary = "分页获取会员评论列表", description = "分页获取会员评论列表")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @GetMapping
+    public Result<PageResult<MemberEvaluationListVO>> getByPage(EvaluationPageQuery evaluationPageQuery) {
+        evaluationPageQuery.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
+		PageResult<MemberEvaluationListVO> memberEvaluationListVOIPage = memberEvaluationApi.queryPage(evaluationPageQuery);
+        return Result.success(memberEvaluationListVOIPage);
+    }
+
+    @Operation(summary = "通过id获取", description = "通过id获取")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @GetMapping(value = "/get/{id}")
+    public Result<MemberEvaluationVO> get(@PathVariable Long id) {
+        return Result.success(OperationalJudgment.judgment(memberEvaluationApi.queryById(id)));
+    }
+
+    @Operation(summary = "回复评价", description = "回复评价")
+    @RequestLogger
+    @PreAuthorize("hasAuthority('dept:tree:data')")
+    @PostMapping(value = "/reply/{id}")
+    public Result<MemberEvaluationVO> reply(
+            @Parameter(description = "评价ID") @PathVariable Long id,
+            @Parameter(description = "回复内容") @RequestParam String reply,
+            @Parameter(description = "回复图片") @RequestParam String replyImage) {
+        MemberEvaluationVO memberEvaluationVO = OperationalJudgment.judgment(memberEvaluationApi.queryById(id));
+        memberEvaluationApi.reply(id, reply, replyImage);
+        return Result.success(memberEvaluationVO);
+    }
+}

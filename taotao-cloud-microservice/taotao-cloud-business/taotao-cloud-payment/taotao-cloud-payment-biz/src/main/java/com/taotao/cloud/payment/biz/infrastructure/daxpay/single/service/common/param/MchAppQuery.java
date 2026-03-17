@@ -1,0 +1,22 @@
+package com.taotao.cloud.payment.biz.infrastructure.daxpay.single.service.common.param;
+
+import cn.bootx.platform.common.mybatisplus.query.entity.SortParam;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * 商户查询参数
+ * @author xxm
+ * @since 2024/8/27
+ */
+@EqualsAndHashCode(callSuper = true)
+@Data
+
+@Schema(title = "商户查询参数")
+public class MchAppQuery extends SortParam {
+
+    /** 应用号 */
+    @Schema(description = "应用号")
+    private String appId;
+}
