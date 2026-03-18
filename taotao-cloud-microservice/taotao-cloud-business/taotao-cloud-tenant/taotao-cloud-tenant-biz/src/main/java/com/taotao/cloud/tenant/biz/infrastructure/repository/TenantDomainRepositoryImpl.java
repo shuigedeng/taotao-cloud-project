@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.tenant.biz.infrastructure.persistent.repository;
+package com.taotao.cloud.tenant.biz.infrastructure.repository;
 
 import com.taotao.boot.ddd.model.domain.repository.light.BaseLightDomainRepository;
 import com.taotao.cloud.tenant.biz.domain.aggregate.TenantAgg;
