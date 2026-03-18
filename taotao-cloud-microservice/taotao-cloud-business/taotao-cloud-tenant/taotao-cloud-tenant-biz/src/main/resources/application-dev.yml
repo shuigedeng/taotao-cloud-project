@@ -537,14 +537,14 @@ spring:
     database-platform: mysql
     show-sql: false # 生产环境不显示SQL
     open-in-view: false
-    generate-ddl: false # 关闭DDL生成
+    generate-ddl: true # 关闭DDL生成
     hibernate:
       #create：每次运行程序时，都会重新创建表，故而数据会丢失
       #create-drop：每次运行程序时会先创建表结构，然后程序结束时清空表
       #update：每次运行程序，没有表时会创建表，如果对象发生改变会更新表结构，原有数据不会清空，只会更新（推荐使用）
       #validate：运行程序会校验数据于数据库的字段类型是否相同，字段不同会报错
       #none：禁用DDL处理
-      ddl-auto: none # 不执行DDL
+      ddl-auto: update # 不执行DDL
       naming:
         implicit-strategy: org.springframework.boot.hibernate.SpringImplicitNamingStrategy
         physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
@@ -559,7 +559,7 @@ spring:
             mode: ENABLE_SELECTIVE
       hibernate:
         eclipselink.logging.level.sql: FINE
-        hbm2ddl.auto: none
+        hbm2ddl.auto: update
         use_sql_comments: true
         dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true #输出sql语句 此种方式是直接通过System.out方式进行输出，并且还不会记录预处理语句的参数；不推荐此做法。

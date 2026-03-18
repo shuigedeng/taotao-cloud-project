@@ -19,6 +19,7 @@ package com.taotao.cloud.tenant.biz.domain.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.boot.common.enums.GlobalStatusEnum;
 import com.taotao.boot.webagg.entity.BaseLightSuperEntity;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;
@@ -35,25 +36,16 @@ import lombok.*;
 public class TenantPackageEntity extends BaseLightSuperEntity<TenantPackageEntity> {
 
 	public static final String TABLE_NAME = "tt_tenant_package";
-	/**
-	 * 套餐名
-	 */
+
+	@Column(name = "`name`", columnDefinition = "varchar(255) null comment '套餐名'")
 	private String name;
 
-	/**
-	 * 套餐状态
-	 *
-	 * <p>枚举 {@link GlobalStatusEnum}
-	 */
-	private Integer status;
+	@Column(name = "`status`", columnDefinition = "varchar(255) null comment '套餐状态'")
+	private GlobalStatusEnum status;
 
-	/**
-	 * 备注
-	 */
+	@Column(name = "`remark`", columnDefinition = "varchar(255) null comment '备注'")
 	private String remark;
 
-	/**
-	 * 套餐关联的菜单编号
-	 */
+	@Column(name = "`menu_ids`", columnDefinition = "varchar(255) null comment '套餐关联的菜单编号'")
 	private String menuIds;
 }

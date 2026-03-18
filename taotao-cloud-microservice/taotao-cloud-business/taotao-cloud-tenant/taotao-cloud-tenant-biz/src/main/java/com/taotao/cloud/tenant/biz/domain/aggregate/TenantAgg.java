@@ -19,8 +19,8 @@ package com.taotao.cloud.tenant.biz.domain.aggregate;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.boot.common.enums.GlobalStatusEnum;
 import com.taotao.boot.ddd.model.domain.repository.light.LightAggregateRoot;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.taotao.cloud.tenant.biz.domain.valobj.CodeVal;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -31,44 +31,48 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = TenantAgg.TABLE_NAME)
+@Table(name = TenantAgg.TABLE_NAME,
+	uniqueConstraints = {
+		@UniqueConstraint(name = "uniq_apply_no", columnNames = "apply_no"),
+	},
+	indexes = {
+		@Index(name = "idx_create_date", columnList = "`create_date`"),
+	})
 @TableName(TenantAgg.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = TenantAgg.TABLE_NAME)
 public class TenantAgg extends LightAggregateRoot<TenantAgg> {
 	public static final String TABLE_NAME = "tt_tenant";
-    /** 租户名 */
+
+	@Embedded
+	private CodeVal codeVal;
+
+	@Column(name = "`name`", columnDefinition = "varchar(255) null comment '租户名'")
     private String name;
 
-    /** 当前租户管理员id */
+	@Column(name = "`tenant_admin_id`", columnDefinition = "bigint not null comment '当前租户管理员id'")
     private Long tenantAdminId;
 
-    /** 当前租户管理员姓名 */
+	@Column(name = "`tenant_admin_name`", columnDefinition = "varchar(255) null comment '当前租户管理员姓名'")
     private String tenantAdminName;
 
-    /** 当前租户管理员手机号 */
+	@Column(name = "`tenant_admin_mobile`", columnDefinition = "varchar(255) null comment '当前租户管理员手机号'")
     private String tenantAdminMobile;
 
-    /**
-     * 租户状态
-     *
-     * <p>枚举 {@link GlobalStatusEnum}
-     */
-    private Integer status;
+	@Column(name = "`status`", columnDefinition = "varchar(255) null comment '租户状态'")
+    private GlobalStatusEnum status;
 
-    /** 租户套餐id */
+	@Column(name = "`package_id`", columnDefinition = "bigint  null comment '租户套餐id'")
     private Long packageId;
 
-    /** 租户过期时间 */
+	@Column(name = "`expire_time`", columnDefinition = "DATETIME  null comment '租户过期时间'")
     private LocalDateTime expireTime;
 
-    /** 账号数量 */
+	@Column(name = "`account_count`", columnDefinition = "int  null comment '账号数量'")
     private Integer accountCount;
 
-    /** 系统套餐id */
-    public static final Long PACKAGE_ID_SYSTEM = 0L;
 
 	@Override
 	public String identifier() {
-		return "";
+		return codeVal.getApplyNo();
 	}
 }
