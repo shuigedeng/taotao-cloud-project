@@ -13,11 +13,13 @@ configure(subprojects.findAll { (it.name.endsWith("-api")) }) { project ->
     apply plugin: "com.google.protobuf"
 
     dependencies {
-        //api "io.github.shuigedeng:taotao-cloud-starter-openfeign"
-
-        compileOnly "io.github.shuigedeng:taotao-boot-starter-seata"
-        compileOnly "io.github.shuigedeng:taotao-boot-starter-grpc"
-        compileOnly "io.github.shuigedeng:taotao-boot-starter-office"
+        api "jakarta.validation:jakarta.validation-api"
+        api "jakarta.annotation:jakarta.annotation-api"
+        api "com.fasterxml.jackson.core:jackson-annotations"
+        api "io.swagger.core.v3:swagger-annotations"
+        api "io.swagger.core.v3:swagger-models-jakarta"
+        api "io.swagger.core.v3:swagger-annotations-jakarta"
+        api "org.jspecify:jspecify"
 
         //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
         api "com.google.protobuf:protobuf-java:4.34.0"
@@ -29,6 +31,8 @@ configure(subprojects.findAll { (it.name.endsWith("-api")) }) { project ->
         // protobuf生成的代码带有javax.annotation.Generated 此注解只有在1.3.5中有  在2版本之后换成了jakarta.annotation.Generated
         // 等之后支持了jakarta就可以用2版本了
         //api 'jakarta.annotation:jakarta.annotation-api:1.3.5'
+
+        compileOnly "io.github.shuigedeng:taotao-boot-starter-grpc"
     }
 
     protobuf {
@@ -66,10 +70,14 @@ configure(subprojects.findAll { (it.name.endsWith("-api")) }) { project ->
 
     configurations {
         configureEach {
-            //resolutionStrategy {
-            //    //force "org.codehaus.groovy:groovy:3.0.25"
-            //    force 'jakarta.annotation:jakarta.annotation-api:3.0.0'
-            //}
+            resolutionStrategy {
+                force 'net.minidev:json-smart:2.6.0'
+                //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
+                force "com.google.protobuf:protobuf-java:4.34.0"
+                //https://search.maven.org/artifact/com.google.protobuf/protobuf-java-util
+                force "com.google.protobuf:protobuf-java-util:4.34.0"
+                force "com.google.protobuf:protobuf-javalite:4.34.0"
+            }
 
             //exclude group: "javax.annotation", module: "javax.annotation-api"
             //exclude group: "javax.activation", module: "javax.activation-api"

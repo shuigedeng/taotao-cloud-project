@@ -15,14 +15,7 @@ def getProperty(String key, String defaultValue) {
 }
 
 configure(subprojects){ project ->
-    if(!(project.name.endsWith("-ui")  ||
-            project.name.endsWith("-api")  ||
-            project.name.endsWith("-application")  ||
-            project.name.endsWith("-common")  ||
-            project.name.endsWith("-domain")  ||
-            project.name.endsWith("-facade")  ||
-            project.name.endsWith("-infrastructure")  ||
-            project.name.endsWith("-integration"))){
+    if(!(project.name.endsWith("-ui")  || project.name.endsWith("-api") )){
         //apply from: rootProject.file('gradle/sonar.gradle')
         //apply from: rootProject.file('gradle/shadow.gradle')
         //apply from: rootProject.file('gradle/graalvm.gradle')
@@ -78,9 +71,9 @@ configure(subprojects){ project ->
             }
         }
 
-        classes {
-            dependsOn 'createProperties'
-        }
+        //classes {
+        //    dependsOn 'createProperties'
+        //}
 
         tasks.register('bootJarTest') {
             dependsOn 'clean'

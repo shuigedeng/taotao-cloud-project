@@ -21,7 +21,7 @@ import com.taotao.boot.common.constant.StarterName;
 import com.taotao.boot.common.utils.common.PropertyUtils;
 import com.taotao.boot.core.startup.StartupSpringApplication;
 import com.taotao.boot.web.annotation.TaoTaoBootApplication;
-import com.taotao.cloud.ttc.bootstrap.annotation.TaoTaoCloudApplication;
+
 import org.springframework.boot.SpringApplication;
 
 /**
