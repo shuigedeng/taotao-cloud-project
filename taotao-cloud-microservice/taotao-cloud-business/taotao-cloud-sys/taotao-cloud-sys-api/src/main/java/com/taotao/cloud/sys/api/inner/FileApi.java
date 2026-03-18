@@ -24,7 +24,6 @@ import static com.taotao.boot.common.support.info.ApiVersionEnum.V2022_08;
 import com.taotao.boot.common.support.info.ApiInfo;
 import com.taotao.boot.common.support.info.Create;
 import com.taotao.boot.common.support.info.Update;
-import com.taotao.cloud.sys.api.inner.fallback.FileApiFallback;
 import com.taotao.cloud.sys.api.inner.response.FileApiResponse;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;

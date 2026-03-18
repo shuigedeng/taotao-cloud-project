@@ -18,6 +18,7 @@ package com.taotao.cloud.sys.biz.domain.agg;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.boot.common.enums.SexEnum;
+import com.taotao.boot.ddd.model.domain.repository.light.LightAggregateRoot;
 import com.taotao.boot.webagg.entity.BaseSuperEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -44,7 +45,7 @@ import java.util.Objects;
 @Table(name = UserAgg.TABLE_NAME)
 @TableName(UserAgg.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = UserAgg.TABLE_NAME)
-public class UserAgg extends BaseSuperEntity<UserAgg, Long> {
+public class UserAgg extends LightAggregateRoot<UserAgg> {
 
     public static final String TABLE_NAME = "tt_user";
 
@@ -101,4 +102,8 @@ public class UserAgg extends BaseSuperEntity<UserAgg, Long> {
     private String tenantId;
 
 
+	@Override
+	public String identifier() {
+		return "";
+	}
 }

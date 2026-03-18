@@ -20,7 +20,6 @@ package com.taotao.cloud.sys.api.inner;
 import com.taotao.boot.common.support.info.ApiInfo;
 import com.taotao.boot.common.support.info.Create;
 import com.taotao.boot.common.support.info.Update;
-import com.taotao.cloud.sys.api.inner.fallback.DictApiFallback;
 import com.taotao.cloud.sys.api.inner.response.DictApiResponse;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
