@@ -16,9 +16,10 @@ configure(subprojects.findAll { (it.name.endsWith("-api")) }) { project ->
         api "jakarta.validation:jakarta.validation-api"
         api "jakarta.annotation:jakarta.annotation-api"
         api "com.fasterxml.jackson.core:jackson-annotations"
-        api "io.swagger.core.v3:swagger-annotations"
-        api "io.swagger.core.v3:swagger-models-jakarta"
-        api "io.swagger.core.v3:swagger-annotations-jakarta"
+        api "io.swagger.core.v3:swagger-models:2.2.45"
+        api "io.swagger.core.v3:swagger-models-jakarta:2.2.45"
+        api "io.swagger.core.v3:swagger-annotations:2.2.45"
+        api "io.swagger.core.v3:swagger-annotations-jakarta:2.2.45"
         api "org.jspecify:jspecify"
 
         //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
