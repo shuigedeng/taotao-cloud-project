@@ -58,6 +58,7 @@ public class TenantAgg extends LightAggregateRoot<TenantAgg> {
 	@Column(name = "`tenant_admin_mobile`", columnDefinition = "varchar(255) null comment '当前租户管理员手机号'")
     private String tenantAdminMobile;
 
+	@Enumerated(EnumType.STRING)
 	@Column(name = "`status`", columnDefinition = "varchar(255) null comment '租户状态'")
     private GlobalStatusEnum status;
 

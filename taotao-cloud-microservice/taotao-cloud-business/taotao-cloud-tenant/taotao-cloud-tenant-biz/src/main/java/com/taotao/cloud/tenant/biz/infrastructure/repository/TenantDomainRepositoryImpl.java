@@ -52,13 +52,14 @@ public class TenantDomainRepositoryImpl extends BaseLightDomainRepository<Tenant
 		TenantAgg tenantAgg1 = new TenantAgg();
 		CodeVal codeVal = new CodeVal();
 		codeVal.setApplyNo(IdGeneratorUtils.getIdStr());
+		tenantAgg1.setTenantAdminId( 1L);
 		tenantAgg1.setCodeVal( codeVal);
 		tenantAgg1.setName("xxx");
 		tenantAgg1.setStatus(GlobalStatusEnum.ENABLE);
 		tenantAgg1.setExpireTime(LocalDateTime.now());
 		tenantAgg1.setAccountCount(1);
 
-		selfMapper.insert(tenantAgg1);
+//		selfMapper.insert(tenantAgg1);
 
 		codeVal.setApplyNo(IdGeneratorUtils.getIdStr());
 		tenantAgg1.setCodeVal(codeVal);
@@ -67,8 +68,8 @@ public class TenantDomainRepositoryImpl extends BaseLightDomainRepository<Tenant
 
 	@Override
 	public void select() {
-		TenantAgg tenantAgg = selfMapper.selectById(1L);
-		Optional<TenantAgg> byId = tenantRepository.findById(1L);
+//		TenantAgg tenantAgg = selfMapper.selectById(1L);
+		Optional<TenantAgg> byId = tenantRepository.findById(2L);
 		System.out.println("=============");
 	}
 
