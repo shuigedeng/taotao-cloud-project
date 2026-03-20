@@ -35,7 +35,10 @@ dependencies {
     //flink连接器
     implementation 'org.apache.flink:flink-connector-datagen:2.2.0'
     implementation 'org.apache.flink:flink-connector-files:2.2.0'
-    implementation "org.apache.flink:flink-connector-kafka:4.0.1-2.0"
+    implementation('org.apache.flink:flink-connector-kafka:4.0.1-2.0') {
+        exclude group: "at.yawk.lz4", module: "lz4-java"
+        exclude group: "org.lz4", module: "lz4-java"
+    }
     //implementation 'org.apache.flink:flink-connector-hbase-2.2:3.0.0-1.17'
     implementation 'org.apache.flink:flink-connector-jdbc-core:4.0.0-2.0'
     implementation 'org.apache.flink:flink-connector-jdbc-mysql:4.0.0-2.0'
@@ -109,7 +112,10 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.flink/flink-shaded-hadoop-3-uber
     //implementation group: 'org.apache.flink', name: 'flink-shaded-hadoop-3-uber', version: '3.1.1.7.2.9.0-173-9.0'
 
-    implementation("org.apache.paimon:paimon-bundle:1.3.1")
+    implementation('org.apache.paimon:paimon-bundle:1.3.1') {
+        exclude group: "at.yawk.lz4", module: "lz4-java"
+        exclude group: "org.lz4", module: "lz4-java"
+    }
     implementation("org.apache.paimon:paimon-format:1.3.1")
     implementation("org.apache.paimon:paimon-codegen:1.3.1")
     implementation("org.apache.paimon:paimon-codegen-loader:1.3.1")
@@ -150,8 +156,11 @@ configurations {
 
         resolutionStrategy {
             force 'org.glassfish:javax.el:3.0.0'
-            force 'org.glassfish.jaxb:jaxb-runtime:4.0.6'
+            force 'org.glassfish.jaxb:jaxb-runtime:4.0.7'
+            force 'org.lz4:lz4-java:1.8.1'
         }
+
+        exclude group: "at.yawk.lz4", module: "lz4-java"
     }
 }
 

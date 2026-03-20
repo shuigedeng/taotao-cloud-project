@@ -40,7 +40,10 @@ dependencies {
     //flink连接器
     implementation 'org.apache.flink:flink-connector-datagen:2.2.0'
     implementation 'org.apache.flink:flink-connector-files:2.2.0'
-    implementation "org.apache.flink:flink-connector-kafka:4.0.1-2.0"
+    implementation('org.apache.flink:flink-connector-kafka:4.0.1-2.0') {
+        exclude group: "at.yawk.lz4", module: "lz4-java"
+        exclude group: "org.lz4", module: "lz4-java"
+    }
     //implementation 'org.apache.flink:flink-connector-hbase-2.2:3.0.0-1.17'
     implementation 'org.apache.flink:flink-connector-jdbc-core:4.0.0-2.0'
     implementation 'org.apache.flink:flink-connector-jdbc-mysql:4.0.0-2.0'
@@ -177,7 +180,10 @@ configurations {
         resolutionStrategy {
             force 'org.glassfish:javax.el:3.0.0'
             force 'org.glassfish.jaxb:jaxb-runtime:4.0.6'
+            force 'org.lz4:lz4-java:1.8.1'
         }
+
+        exclude group: "at.yawk.lz4", module: "lz4-java"
     }
 }
 
