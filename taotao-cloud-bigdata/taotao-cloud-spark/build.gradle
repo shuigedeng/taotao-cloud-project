@@ -90,5 +90,8 @@ configurations {
         resolutionStrategy {
             force "org.glassfish:javax.el:3.0.0"
         }
+
+        exclude group: "at.yawk.lz4", module: "lz4-java"
+
     }
 }

@@ -171,5 +171,8 @@ configurations {
             force 'org.glassfish.jaxb:jaxb-runtime:4.0.7'
             force 'org.lz4:lz4-java:1.8.1'
         }
+
+        exclude group: "at.yawk.lz4", module: "lz4-java"
+
     }
 }
