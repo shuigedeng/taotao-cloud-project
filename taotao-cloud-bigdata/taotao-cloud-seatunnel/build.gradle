@@ -78,5 +78,7 @@ configurations {
             force "org.glassfish:javax.el:3.0.0"
             force 'org.lz4:lz4-java:1.8.1'
         }
+
+        exclude group: "at.yawk.lz4", module: "lz4-java"
     }
 }
