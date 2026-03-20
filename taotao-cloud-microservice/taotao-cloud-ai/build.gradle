@@ -50,8 +50,6 @@ dependencies {
     //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
-    
-    
 
     //boot
     implementation "io.github.shuigedeng:taotao-boot-starter-eventbus"

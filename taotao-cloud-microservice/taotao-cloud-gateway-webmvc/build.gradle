@@ -1,7 +1,6 @@
 dependencies {
     //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
-    
 
     implementation "com.alibaba.csp:sentinel-datasource-nacos"
     //implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"

@@ -2,7 +2,6 @@ dependencies {
     //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
     
-
     //boot
     implementation "io.github.shuigedeng:taotao-boot-starter-core"
     implementation "io.github.shuigedeng:taotao-boot-starter-logger"
