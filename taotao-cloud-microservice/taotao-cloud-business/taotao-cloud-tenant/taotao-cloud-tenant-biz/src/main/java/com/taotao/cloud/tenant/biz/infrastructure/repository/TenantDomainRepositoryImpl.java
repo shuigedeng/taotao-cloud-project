@@ -16,13 +16,21 @@
 
 package com.taotao.cloud.tenant.biz.infrastructure.repository;
 
+import com.taotao.boot.common.enums.GlobalStatusEnum;
+import com.taotao.boot.common.utils.id.IdGeneratorUtils;
 import com.taotao.boot.ddd.model.domain.repository.light.BaseLightDomainRepository;
+import com.taotao.cloud.tenant.biz.application.dto.command.TenantAddCommand;
 import com.taotao.cloud.tenant.biz.domain.aggregate.TenantAgg;
 import com.taotao.cloud.tenant.biz.domain.repository.TenantDomainRepository;
+import com.taotao.cloud.tenant.biz.domain.valobj.CodeVal;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.TenantMapper;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.TenantPackageMapper;
+import com.taotao.cloud.tenant.biz.infrastructure.persistent.repository.TenantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 /**
  * DeptDomainRepositoryImpl
@@ -37,4 +45,31 @@ public class TenantDomainRepositoryImpl extends BaseLightDomainRepository<Tenant
 	TenantDomainRepository {
 
 	private final TenantPackageMapper tenantPackageMapper;
+	private final TenantRepository tenantRepository;
+
+	@Override
+	public void insert( TenantAddCommand tenantAddCommand ) {
+		TenantAgg tenantAgg1 = new TenantAgg();
+		CodeVal codeVal = new CodeVal();
+		codeVal.setApplyNo(IdGeneratorUtils.getIdStr());
+		tenantAgg1.setCodeVal( codeVal);
+		tenantAgg1.setName("xxx");
+		tenantAgg1.setStatus(GlobalStatusEnum.ENABLE);
+		tenantAgg1.setExpireTime(LocalDateTime.now());
+		tenantAgg1.setAccountCount(1);
+
+		selfMapper.insert(tenantAgg1);
+
+		codeVal.setApplyNo(IdGeneratorUtils.getIdStr());
+		tenantAgg1.setCodeVal(codeVal);
+		tenantRepository.save(tenantAgg1);
+	}
+
+	@Override
+	public void select() {
+		TenantAgg tenantAgg = selfMapper.selectById(1L);
+		Optional<TenantAgg> byId = tenantRepository.findById(1L);
+		System.out.println("=============");
+	}
+
 }

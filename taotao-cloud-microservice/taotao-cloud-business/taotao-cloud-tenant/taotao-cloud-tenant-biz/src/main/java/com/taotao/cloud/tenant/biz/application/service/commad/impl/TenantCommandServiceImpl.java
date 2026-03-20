@@ -16,7 +16,9 @@
 
 package com.taotao.cloud.tenant.biz.application.service.commad.impl;
 
+import com.taotao.cloud.tenant.biz.application.dto.command.TenantAddCommand;
 import com.taotao.cloud.tenant.biz.application.service.commad.TenantCommandService;
+import com.taotao.cloud.tenant.biz.domain.repository.TenantDomainRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,18 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class TenantCommandServiceImpl implements TenantCommandService {
+
+	private final TenantDomainRepository tenantDomainRepository;
+
+	@Override
+	public void insert( TenantAddCommand tenantAddCommand ) {
+		tenantDomainRepository.insert(tenantAddCommand);
+	}
+
+	@Override
+	public void select() {
+		tenantDomainRepository.select();
+	}
 
 //    @Resource
 //    private TenantPackageService tenantPackageService;

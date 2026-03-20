@@ -16,10 +16,19 @@
 
 package com.taotao.cloud.tenant.biz.interfaces.controller;
 
+import com.taotao.boot.common.model.result.Result;
+import com.taotao.boot.security.spring.annotation.NotAuth;
+import com.taotao.boot.webagg.controller.BusinessController;
+import com.taotao.cloud.tenant.biz.application.dto.command.TenantAddCommand;
 import com.taotao.cloud.tenant.biz.application.service.commad.TenantCommandService;
 import com.taotao.cloud.tenant.biz.application.service.query.TenantQueryService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,15 +39,34 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2023.04
  * @since 2023-05-10 10:58:13
  */
-@Tag(name = "租户管理")
-@RestController
-@RequestMapping("/tenant")
 @AllArgsConstructor
-public class TenantController {
+@Validated
+@RestController
+@RequestMapping("/manager/sys/user")
+@Tag(name = "平台管理端-用户API", description = "平台管理端-用户API")
+public class TenantController extends BusinessController {
 
 	private final TenantQueryService tenantQueryService;
 	private final TenantCommandService tenantCommandService;
 
+
+	@Operation(summary = "插入数据", description = "插入数据")
+	@PostMapping("/insert")
+	@NotAuth
+	public Result<Void> insert( @Valid @RequestBody TenantAddCommand tenantAddCommand ) {
+		tenantCommandService.insert(tenantAddCommand);
+
+		return Result.success((Void) null);
+	}
+
+	@Operation(summary = "查询数据", description = "查询数据")
+	@PostMapping("/select")
+	@NotAuth
+	public Result<Void> select( @Valid @RequestBody TenantAddCommand tenantAddCommand ) {
+		tenantCommandService.select();
+
+		return Result.success((Void) null);
+	}
 //	@Operation(summary = "获取所有租户id集合")
 //	@GetMapping(value = "/getTenantIds")
 //	public List<Long> getTenantIds() {

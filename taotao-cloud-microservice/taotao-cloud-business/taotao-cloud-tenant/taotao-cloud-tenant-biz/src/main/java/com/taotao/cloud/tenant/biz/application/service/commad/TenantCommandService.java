@@ -17,6 +17,8 @@
 package com.taotao.cloud.tenant.biz.application.service.commad;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.tenant.biz.application.dto.command.TenantAddCommand;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -25,6 +27,12 @@ import java.util.List;
  *
  */
 public interface TenantCommandService {
+
+	void insert( TenantAddCommand tenantAddCommand );
+
+	void select();
+
+
 //
 //    /**
 //     * 校验租户信息是否合法
