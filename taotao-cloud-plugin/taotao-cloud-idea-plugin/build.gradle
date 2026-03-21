@@ -60,7 +60,7 @@ plugins {
     id "java"
     //https://plugins.gradle.org/plugin/org.jetbrains.intellij.platform
     //https://plugins.jetbrains.com/docs/intellij/tools-intel11lij-platform-gradle-plugin.html
-    id("org.jetbrains.intellij.platform") version "2.11.0"
+    id("org.jetbrains.intellij.platform") version "2.13.1"
 }
 
 repositories {

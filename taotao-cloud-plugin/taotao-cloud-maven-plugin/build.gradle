@@ -85,9 +85,9 @@ apply plugin: 'com.vanniktech.maven.publish'
 description = "Maven插件模块"
 
 dependencies {
-    implementation 'org.apache.maven:maven-core:3.9.12'
-    implementation 'org.apache.maven:maven-model:3.9.12'
-    implementation 'org.apache.maven:maven-plugin-api:3.9.12'
+    implementation 'org.apache.maven:maven-core:3.9.14'
+    implementation 'org.apache.maven:maven-model:3.9.14'
+    implementation 'org.apache.maven:maven-plugin-api:3.9.14'
 
     implementation "com.google.guava:guava:33.5.0-jre"
 
