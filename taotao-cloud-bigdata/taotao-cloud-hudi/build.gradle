@@ -138,8 +138,3 @@ jar {
 //    //    exclude(dependency{ it.moduleGroup == "xml-apis" })
 //    //}
 //}
-
-repositories {
-    mavenLocal()
-    mavenCentral()
-}

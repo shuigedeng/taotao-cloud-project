@@ -3,11 +3,6 @@ apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: "idea"
 
-repositories {
-    mavenLocal()
-    mavenCentral()
-}
-
 //https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/dev/configuration/overview/
 dependencies {
     // flinksql本地运行需要的依赖
