@@ -5,19 +5,19 @@
 <p align="center">
   <img src="https://img.shields.io/badge/license-Apache%202-green" alt="License"/>
   <img src="https://img.shields.io/badge/taotao--cloud--project-2026.04-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring-7.0.2-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_boot-4.0.2-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring-7.0.6-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_boot-4.0.4-orange" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud-2025.1.1-yellowgree" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_cloud_alibaba-2025.0.0.0--preview-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_cloud_tencent-2.1.0.3--2024.0.2-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/netty-4.2.9.Final-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_security-7.0.2-brightgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_cloud_alibaba-2025.1.0.0--preview-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_cloud_tencent-2.1.0.3--2024.0.4-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/netty-4.2.10.Final-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_security-7.0.4-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/elasticsearch-9.2.3-green" alt="Downloads"/>
   <img src="https://img.shields.io/badge/mybatis_plus-3.5.16-yellow" alt="Downloads"/>
   <img src="https://img.shields.io/badge/knife4j-4.5.0-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/swagger-3.0.0-red" alt="Downloads"/>
   <img src="https://img.shields.io/badge/redisson-4.0.0-lightgrey" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/hutool-5.8.43-gree" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/hutool-5.8.44-gree" alt="Downloads"/>
 </p>
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
@@ -87,7 +87,7 @@ Requires:
 ```
 JAVA_VERSION >= 25 (推荐使用graalvm-jdk-25)
 GRALE_VERSION >= 9.4.1
-IDEA_VERSION >= 2025.3.2
+IDEA_VERSION >= 2025.3.4
 ```
 
 Gradle:
@@ -221,7 +221,7 @@ Maven:
 ## 8. 功能特点
 
 * **微服务技术架构**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的 **非功能性需求** 简化开发工作、提高生产率、解决通用问题
-* **主体框架**：采用最新的`Spring Boot 4.0.2`、`Spring Cloud 2025.1.1`、`Spring Cloud Alibaba 2025.0.0.0` 版本进行设计
+* **主体框架**：采用最新的`Spring Boot 4.0.4`、`Spring Cloud 2025.1.1`、`Spring Cloud Alibaba 2025.1.0.0` 版本进行设计
 * **统一注册**：支持`spring cloud alibaba Nacos`作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * **统一认证**：统一`Oauth2`认证协议，采用`jwt`的方式，实现统一认证，完备的`RBAC`权限管理、数据权限处理、网关统一鉴权、灰度发布。 支持多种登录方式，如`账号密码`，`验证码登陆`、`支付宝`、`钉钉`、`码云`、`GitHub`、`GitLab`、`QQ`、`微信`、`企业微信`、`微博`等第三方登录，`微信小程序登录`，`指纹登录`，`手势登录`，`手机号码登录`，`人脸识别登录`等 优化`Spring Security`内部实现 ,实现`API`调用的统一出口和权限认证授权中心
 * **业务监控**：利用`Spring Boot admin`监控各个独立服务的运行状态
@@ -255,17 +255,17 @@ Maven:
 
 | 依赖                   | 版本            |
 |----------------------|---------------|
-| Spring               | 7.0.2         |
-| Spring Boot          | 4.0.2         |
+| Spring               | 7.0.6         |
+| Spring Boot          | 4.0.4         |
 | Spring Cloud         | 2025.1.1      |
-| Spring Cloud Alibaba | 2025.0.0.0    |
-| Seata                | 2.5.0         |
+| Spring Cloud Alibaba | 2025.1.0.0    |
+| Seata                | 2.6.0         |
 | Sentinel             | 1.8.9         |
 | Spring-kafka         | 4.1.1         |
 | Roketmq              | 5.2.4         |
-| Spring Security      | 7.0.2         |
+| Spring Security      | 7.0.4         |
 | Mybatis Plus         | 3.5.16        |
-| Hutool               | 5.8.43        |
+| Hutool               | 5.8.44        |
 | Mysql                | 9.6.0         |
 | Querydsl             | 5.1.0         |
 | Swagger              | 3.0.0         |
@@ -277,7 +277,7 @@ Maven:
 | Guava                | 33.5.8-jre    |
 | Grpc                 | 1.78.0        |
 | Arthas               | 4.0.3         |
-| Netty                | 4.2.9.Final   |
+| Netty                | 4.2.10.Final  |
 
 
 ## 10. 模块说明
