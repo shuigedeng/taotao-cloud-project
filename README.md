@@ -22,7 +22,7 @@
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-**taotao-cloud(taotao云平台)**  基于**Gradle 9.4.1** 、**Jdk 25**, 支持**Graalvm 25**, 采用最新的**Spring 7.0.2**、**SpringBoot 4.0.2**、**SpringCloud 2025.1.1**、**SpringSecurity 7.0.2**、**Nacos 3.1.1**、**Mybatis-Plus 3.5.16**、**Redis 7.4.0**等框架，开发的一款企业级微服务架构的云服务平台， 
+**taotao-cloud(taotao云平台)**  是一个企业级单体架构和微服务架构的快速开发脚手架。提供多种便捷**starter**进行功能扩展，采用**DDD(领域驱动设计)**思想，快速搭建企业级系统。基于**gradle9.4.0**、**jdk25**, **spring7.0.6**、**SpringBoot4.0.3**、**SpringCloud2025.1.1**、**SpringCloudAlibaba2025.1.0.0**、**SpringSecurity7.0.3**、**Mybatis-Plus3.5.16**等开发的微服务开发脚手架，包括中间件模块、大数据模块、微服务业务模块、前端模块提供技术框架的基础能力的封装，减少开发工作，只关注业务,包含了工作以来的工作总结和技术沉淀
 
 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循**SpringBoot**编程思想，高度模块化和可配置化。
 
