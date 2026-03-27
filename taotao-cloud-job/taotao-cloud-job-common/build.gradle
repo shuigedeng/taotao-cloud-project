@@ -6,7 +6,7 @@ dependencies {
 
     api "net.devh:grpc-client-spring-boot-starter:3.1.0.RELEASE"
 
-    api "io.netty:netty-all:4.2.10.Final"
+    api "io.netty:netty-all:4.2.12.Final"
     api "com.google.protobuf:protobuf-java:3.25.5"
     api "com.google.protobuf:protobuf-java-util:3.25.5"
     api "org.apache.thrift:libthrift:0.22.0"
