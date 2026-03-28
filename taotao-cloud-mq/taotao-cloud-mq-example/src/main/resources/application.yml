@@ -161,7 +161,7 @@ management:
           endpoint: http://192.168.218.2:4318/v1/logs
           timeout: 10s
           headers:
-            version: 2026.04
+            version: 2026.05
     tracing:
       export:
         otlp:
@@ -169,7 +169,7 @@ management:
           endpoint: http://192.168.218.2:4318/v1/traces
           timeout: 10s
           headers:
-            version: 2026.04
+            version: 2026.05
   otlp:
     metrics:
       export:
@@ -178,7 +178,7 @@ management:
         batch-size: 10000
         connect-timeout: 10s
         headers:
-          version: 2026.04
+          version: 2026.05
   observations:
     http:
       client:

@@ -862,7 +862,7 @@ taotao:
           - /file/**
           - /job/**
           - /sys/**
-          - /api/v2026.04/sys/**
+          - /api/v2026.05/sys/**
     core:
       async:
         enabled: false
