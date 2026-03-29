@@ -41,7 +41,7 @@ jobs:
 
       #https://github.com/marketplace/actions/ssh-deploy
       - name: Deploy To Server
-        uses: easingthemes/ssh-deploy@5.1.0
+        uses: easingthemes/ssh-deploy@v5.1.1
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"
