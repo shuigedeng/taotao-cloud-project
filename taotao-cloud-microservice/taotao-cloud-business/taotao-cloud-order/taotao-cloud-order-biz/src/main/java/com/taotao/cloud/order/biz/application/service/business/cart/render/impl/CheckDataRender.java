@@ -33,7 +33,7 @@ import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.sys.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.sys.model.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.sys.model.vo.cart.CartVO;
-import com.taotao.cloud.promotion.api.inner.IFeignPintuanApi;
+import com.taotao.cloud.promotion.api.inner.PintuanInnerApi;
 import com.taotao.cloud.promotion.api.model.vo.PointsGoodsVO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -59,7 +59,7 @@ public class CheckDataRender implements ICartRenderStep {
 
     private final OrderService orderService;
 
-    private final IFeignPintuanApi pintuanApi;
+    private final PintuanInnerApi pintuanApi;
 
     private final MemberApi memberApi;
 

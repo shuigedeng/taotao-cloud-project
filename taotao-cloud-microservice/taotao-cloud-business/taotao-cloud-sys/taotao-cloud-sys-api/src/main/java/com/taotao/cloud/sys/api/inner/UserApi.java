@@ -22,7 +22,6 @@ import com.taotao.boot.common.model.BaseSecurityUser;
 import com.taotao.boot.common.support.info.ApiInfo;
 import com.taotao.boot.common.support.info.Create;
 import com.taotao.boot.common.support.info.Update;
-import com.taotao.cloud.sys.api.inner.fallback.UserApiFallback;
 import com.taotao.cloud.sys.api.inner.response.UserQueryApiResponse;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,7 +53,7 @@ public interface UserApi {
 			@Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
 			@Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		})
-	@GetMapping(value = "/sys/feign/user/info/username")
+	@GetMapping(value = "/sys/inner/user/info/username")
 	UserQueryApiResponse findUserInfoByUsername(@RequestParam(value = "username") String username);
 
 	/**
@@ -72,7 +71,7 @@ public interface UserApi {
 			@Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		})
 	@GetMapping(
-		value = "/sys/feign/user/info/social/{social}",
+		value = "/sys/inner/user/info/social/{social}",
 		headers = {"from=in"})
 	BaseSecurityUser getUserInfoBySocial(
 		@RequestParam("providerId") String providerId, @RequestParam("providerUserId") int providerUserId);
@@ -90,6 +89,6 @@ public interface UserApi {
 			@Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
 			@Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		})
-	@GetMapping(value = "/sys/feign/info/security")
+	@GetMapping(value = "/sys/inner/info/security")
 	BaseSecurityUser getSysSecurityUser(String nicknameOrUserNameOrPhoneOrEmail);
 }

@@ -17,8 +17,6 @@
 package com.taotao.cloud.goods.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
-import com.taotao.cloud.goods.api.inner.fallback.CategoryApiFallback;
-import com.taotao.cloud.goods.api.inner.fallback.GoodsSkuApiFallback;
 import com.taotao.cloud.goods.api.inner.request.GoodsSkuSpecGalleryApiRequest;
 import com.taotao.cloud.goods.api.inner.response.GoodsSkuSpecGalleryApiResponse;
 import java.util.List;
@@ -35,9 +33,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @since 2020/5/2 16:42
  */
 @HttpExchange(
-	contextId = "GoodsSkuApi",
-	value = ServiceNameConstants.TAOTAO_CLOUD_GOODS,
-	fallbackFactory = GoodsSkuApiFallback.class)
+	value = ServiceNameConstants.TAOTAO_CLOUD_GOODS)
 public interface GoodsSkuApi {
 
 	@PostMapping(value = "/product/updateGoodsStuck")

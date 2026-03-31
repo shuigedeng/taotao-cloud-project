@@ -17,8 +17,6 @@
 package com.taotao.cloud.goods.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
-import com.taotao.cloud.goods.api.inner.fallback.CategoryApiFallback;
-import com.taotao.cloud.goods.api.inner.fallback.StoreGoodsLabelApiFallback;
 import com.taotao.cloud.goods.api.inner.response.StoreGoodsLabelApiResponse;
 import java.util.List;
 import org.springframework.web.service.annotation.HttpExchange;
@@ -26,9 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @HttpExchange(
-	contextId = "StoreGoodsLabelApi",
-	value = ServiceNameConstants.TAOTAO_CLOUD_GOODS,
-	fallbackFactory = StoreGoodsLabelApiFallback.class)
+	value = ServiceNameConstants.TAOTAO_CLOUD_GOODS)
 public interface StoreGoodsLabelApi {
 
 	@GetMapping(value = "/store/{id}")

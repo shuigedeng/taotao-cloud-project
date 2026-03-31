@@ -18,7 +18,6 @@ package com.taotao.cloud.im.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.cloud.im.api.inner.fallback.FeignMediaFallback;
 import com.taotao.cloud.im.api.model.vo.FileVO;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,9 +30,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @since 2020/5/2 16:42
  */
 @HttpExchange(
-	contextId = "remoteChatbotService",
-	value = ServiceNameConstants.TAOTAO_CLOUD_FILE,
-	fallbackFactory = FeignMediaFallback.class)
+	value = ServiceNameConstants.TAOTAO_CLOUD_FILE)
 public interface IFeignMediaService {
 
 	/**

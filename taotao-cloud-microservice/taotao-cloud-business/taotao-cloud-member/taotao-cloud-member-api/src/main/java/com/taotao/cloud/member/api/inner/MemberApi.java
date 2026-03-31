@@ -44,7 +44,7 @@ public interface MemberApi {
      * @return 用户信息
      * @since 2020/4/29 17:48
      */
-    @GetMapping(value = "/member/feign/info/security")
+    @GetMapping(value = "/member/inner/info/security")
 	BaseSecurityUser getMemberSecurityUser(String nicknameOrUserNameOrPhoneOrEmail);
 
     /**
@@ -54,7 +54,7 @@ public interface MemberApi {
      * @return 会员信息
      * @since 2020/11/20 下午4:10
      */
-    @GetMapping("/member/feign/info/id/{id:[0-9]*}")
+    @GetMapping("/member/inner/info/id/{id:[0-9]*}")
 	MemberApiResponse findMemberById(@PathVariable(value = "id") Long id);
 
     /**
@@ -67,29 +67,29 @@ public interface MemberApi {
      * @return {@link Result }<{@link Boolean }>
      * @since 2022-04-25 16:41:42
      */
-    @GetMapping(value = "/member/feign/updateMemberPoint")
+    @GetMapping(value = "/member/inner/updateMemberPoint")
     Boolean updateMemberPoint(
             @RequestParam Long payPoint,
             @RequestParam String name,
             @RequestParam Long memberId,
             @RequestParam String s);
 
-    @GetMapping(value = "/member/feign/username")
+    @GetMapping(value = "/member/inner/username")
 	MemberApiResponse findByUsername(@RequestParam String username);
 
-    @GetMapping(value = "/member/feign/memberId")
+    @GetMapping(value = "/member/inner/memberId")
 	MemberApiResponse getById(@RequestParam Long memberId);
 
     /**
      * new LambdaUpdateWrapper<Member>() .eq(Member::getId, member.getId())
      * .set(Member::getHaveStore, true) .set(Member::getStoreId, store.getId())
      */
-    @GetMapping(value = "/member/feign/memberId/storeId")
+    @GetMapping(value = "/member/inner/memberId/storeId")
     Boolean update(@RequestParam Long memberId, @RequestParam Long storeId);
 
-    @GetMapping(value = "/member/feign/updateById")
+    @GetMapping(value = "/member/inner/updateById")
     Boolean updateById(@RequestParam MemberApiResponse member);
 
-    @GetMapping(value = "/member/feign/listFieldsByMemberIds")
+    @GetMapping(value = "/member/inner/listFieldsByMemberIds")
     List<Map<String, Object>> listFieldsByMemberIds(@RequestParam String s, @RequestParam List<String> ids);
 }

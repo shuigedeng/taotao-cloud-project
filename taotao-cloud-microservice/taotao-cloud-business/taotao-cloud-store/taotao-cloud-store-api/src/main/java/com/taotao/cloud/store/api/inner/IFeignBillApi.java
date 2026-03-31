@@ -17,7 +17,6 @@
 package com.taotao.cloud.store.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
-import com.taotao.cloud.store.api.inner.fallback.FeignStoreApiFallback;
 import com.taotao.cloud.store.api.model.vo.BillVO;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,9 +28,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @since 2020/5/2 16:42
  */
 @HttpExchange(
-        contextId = "IFeignBillService",
-        value = ServiceNameConstants.TAOTAO_CLOUD_GOODS,
-        fallbackFactory = FeignStoreApiFallback.class)
+        value = ServiceNameConstants.TAOTAO_CLOUD_GOODS)
 public interface IFeignBillApi {
 
     @GetMapping(value = "/getById")

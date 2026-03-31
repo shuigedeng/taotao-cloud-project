@@ -17,7 +17,6 @@
 package com.taotao.cloud.payment.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
-import com.taotao.cloud.payment.api.inner.fallback.PayFlowApiFallback;
 import com.taotao.cloud.payment.api.model.vo.PayFlowVO;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +28,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_PAYMENT, fallbackFactory = PayFlowApiFallback.class)
+@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_PAYMENT)
 public interface PayFlowApi {
 
     /**

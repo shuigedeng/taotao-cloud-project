@@ -17,8 +17,6 @@
 package com.taotao.cloud.goods.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
-import com.taotao.cloud.goods.api.inner.fallback.CategoryApiFallback;
-import com.taotao.cloud.goods.api.inner.fallback.GoodsApiFallback;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,9 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @since 2020/5/2 16:42
  */
 @HttpExchange(
-	contextId = "GoodsApi",
-        value = ServiceNameConstants.TAOTAO_CLOUD_GOODS,
-        fallbackFactory = GoodsApiFallback.class)
+        value = ServiceNameConstants.TAOTAO_CLOUD_GOODS)
 public interface GoodsApi {
 
     @PostMapping(value = "/product/strore/detail/{id:[0-9]*}")

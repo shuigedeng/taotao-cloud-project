@@ -59,7 +59,7 @@ import com.taotao.cloud.order.sys.model.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.sys.model.vo.order.OrderVO;
 import com.taotao.cloud.order.sys.model.vo.order.PaymentLogVO;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
-import com.taotao.cloud.promotion.api.inner.IFeignPintuanApi;
+import com.taotao.cloud.promotion.api.inner.PintuanInnerApi;
 import com.taotao.cloud.promotion.api.model.vo.PintuanVO;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
@@ -122,7 +122,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     /** 订单流水 */
     private final StoreFlowService storeFlowService;
     /** 拼团 */
-    private final IFeignPintuanApi feignPintuanApi;
+    private final PintuanInnerApi feignPintuanApi;
     /** 交易服务 */
     private final TradeService tradeService;
 

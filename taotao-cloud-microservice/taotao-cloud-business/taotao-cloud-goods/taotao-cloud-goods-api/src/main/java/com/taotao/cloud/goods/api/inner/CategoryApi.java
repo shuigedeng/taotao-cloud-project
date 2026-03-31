@@ -17,7 +17,6 @@
 package com.taotao.cloud.goods.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
-import com.taotao.cloud.goods.api.inner.fallback.CategoryApiFallback;
 import com.taotao.cloud.goods.api.inner.response.CategoryTreeApiResponse;
 import java.util.List;
 import org.springframework.web.service.annotation.HttpExchange;
@@ -31,9 +30,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @since 2020/5/2 16:42
  */
 @HttpExchange(
-	contextId = "CategoryApi",
-	value = ServiceNameConstants.TAOTAO_CLOUD_GOODS,
-	fallbackFactory = CategoryApiFallback.class)
+	value = ServiceNameConstants.TAOTAO_CLOUD_GOODS)
 public interface CategoryApi {
 
 	@GetMapping(value = "/category/first/id/{id:[0-9]*}")

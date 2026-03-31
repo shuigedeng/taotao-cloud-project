@@ -17,7 +17,6 @@
 package com.taotao.cloud.sys.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
-import com.taotao.cloud.sys.api.inner.fallback.QuartzJobApiFallback;
 import com.taotao.cloud.sys.api.model.dto.QuartzJobDTO;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.validation.annotation.Validated;
@@ -30,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_JOB, fallbackFactory = QuartzJobApiFallback.class)
+@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_JOB)
 public interface QuartzJobApi {
 
     @PostMapping("/job/addQuartzJobDTOTestSeata")

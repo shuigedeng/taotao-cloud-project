@@ -17,25 +17,15 @@
 package com.taotao.cloud.promotion.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
-import com.taotao.cloud.promotion.api.inner.fallback.FeignKanjiaActivityApiFallback;
-import com.taotao.cloud.promotion.api.model.vo.PointsGoodsVO;
+import com.taotao.cloud.promotion.api.model.dto.MemberDTO;
+import com.taotao.cloud.promotion.api.model.vo.CouponActivityVO;
+import java.util.List;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
-/**
- * IFeignKanjiaActivityService
- *
- * @author shuigedeng
- * @version 2022.04
- * @since 2022-04-07 22:09
- */
-@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_PROMOTION, fallbackFactory = FeignKanjiaActivityApiFallback.class)
-public interface IFeignPointsGoodsApi {
+@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_PROMOTION)
+public interface CouponActivityInnerApi {
 
-    @PostMapping(value = "/updateById")
-    void updateById(PointsGoodsVO pointsGoodsVO);
-
-    @GetMapping(value = "/getPointsGoodsDetail")
-    PointsGoodsVO getPointsGoodsDetail(Long promotionId);
+    @GetMapping(value = "/registered")
+    void registered(List<CouponActivityVO> couponActivityVOS, MemberDTO memberDTO);
 }

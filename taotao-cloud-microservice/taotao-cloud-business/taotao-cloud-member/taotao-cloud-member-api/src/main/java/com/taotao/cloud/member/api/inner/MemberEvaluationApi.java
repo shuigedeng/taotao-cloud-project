@@ -50,7 +50,7 @@ public interface MemberEvaluationApi {
 	 * @return {@link Result }<{@link Long }>
 	 * @since 2022-04-25 16:39:41
 	 */
-	@GetMapping(value = "/member/feign/evaluation")
+	@GetMapping(value = "/member/inner/evaluation")
 	Long count(@RequestParam Long goodsId, @RequestParam String name);
 
 	/**
@@ -60,7 +60,7 @@ public interface MemberEvaluationApi {
 	 * @return {@link Result }<{@link Long }>
 	 * @since 2022-04-25 16:39:46
 	 */
-	@GetMapping(value = "/member/feign/evaluationPageQuery")
+	@GetMapping(value = "/member/inner/evaluationPageQuery")
 	Long getEvaluationCount(@RequestParam EvaluationPageQueryApiRequest queryParams);
 
 	/**
@@ -70,10 +70,10 @@ public interface MemberEvaluationApi {
 	 * @return {@link Result }<{@link List }<{@link Map }<{@link String }, {@link Object }>>>
 	 * @since 2022-04-25 16:39:49
 	 */
-	@GetMapping(value = "/member/feign/memberEvaluationNum")
+	@GetMapping(value = "/member/inner/memberEvaluationNum")
 	List<Map<String, Object>> memberEvaluationNum();
 
-	@GetMapping(value = "/member/feign/memberEvaluationDTO")
+	@GetMapping(value = "/member/inner/memberEvaluationDTO")
 	Boolean addMemberEvaluation(@RequestParam MemberEvaluationApiRequest memberEvaluationDTO,
 		@RequestParam boolean b);
 
@@ -86,17 +86,17 @@ public interface MemberEvaluationApi {
 	 * @param name
 	 * @return
 	 */
-	@GetMapping(value = "/member/feign/evaluation/getStoreRatingVO")
+	@GetMapping(value = "/member/inner/evaluation/getStoreRatingVO")
 	StoreRatingApiResponse getStoreRatingVO(@RequestParam Long id, @RequestParam String name);
 
-	@GetMapping(value = "/member/feign/evaluation/queryById")
+	@GetMapping(value = "/member/inner/evaluation/queryById")
 	MemberEvaluationApiResponse queryById(@RequestParam Long id);
 
-	@GetMapping(value = "/member/feign/evaluation/reply")
+	@GetMapping(value = "/member/inner/evaluation/reply")
 	boolean reply(@RequestParam Long id, @RequestParam String reply,
 		@RequestParam String replyImage);
 
-	@GetMapping(value = "/member/feign/evaluation/queryPage")
+	@GetMapping(value = "/member/inner/evaluation/queryPage")
 	PageResult<MemberEvaluationListApiResponse> queryPage(
 		@RequestParam EvaluationPageQueryApiRequest evaluationPageQuery);
 }

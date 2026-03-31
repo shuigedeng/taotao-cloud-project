@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_MEMBER)
 public interface MemberWalletApi {
 
-    @GetMapping(value = "/member/feign/wallet/increase")
+    @GetMapping(value = "/member/inner/wallet/increase")
     boolean increase(@RequestParam MemberWalletUpdateApiRequest memberWalletUpdateDTO);
 
-    @GetMapping(value = "/member/feign/recharge/save")
+    @GetMapping(value = "/member/inner/recharge/save")
     boolean save(@RequestParam Long id, @RequestParam String username);
 }

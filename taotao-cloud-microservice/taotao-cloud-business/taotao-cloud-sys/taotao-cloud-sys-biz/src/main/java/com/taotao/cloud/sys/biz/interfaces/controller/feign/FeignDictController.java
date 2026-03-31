@@ -49,7 +49,7 @@ package com.taotao.cloud.sys.biz.interfaces.controller.feign; ///*
 // */
 //@Validated
 //@RestController
-//@RequestMapping("/sys/feign/dict")
+//@RequestMapping("/sys/inner/dict")
 //public class FeignDictController extends BaseFeignController<IDictService, Dict, Long> implements IFeignDictApi {
 //
 //    @Override

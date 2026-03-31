@@ -36,9 +36,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @since 2020/5/2 16:42
  */
 @HttpExchange(
-        name = ServiceNameConstants.TAOTAO_CLOUD_FILE,
-        contextId = "feignDictApi",
-        fallbackFactory = FileApiFallback.class)
+        name = ServiceNameConstants.TAOTAO_CLOUD_FILE)
 public interface FileApi {
 
     /**
@@ -54,6 +52,6 @@ public interface FileApi {
                 @Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
                 @Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
             })
-    @GetMapping("/file/feign/file/code")
+    @GetMapping("/file/inner/file/code")
 		FileApiResponse findByCode(@RequestParam(value = "code") String code);
 }

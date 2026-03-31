@@ -42,7 +42,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2025-12-19 09:30:45
  */
 @RestController
-@RequestMapping(value = "/feign/justauth")
+@RequestMapping(value = "/inner/justauth")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 @Api(value = "JustAuthFeign|提供微服务调用接口")
 @RefreshScope

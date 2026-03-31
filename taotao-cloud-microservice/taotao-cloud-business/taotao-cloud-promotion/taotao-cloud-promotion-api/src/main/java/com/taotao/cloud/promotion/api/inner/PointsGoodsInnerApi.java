@@ -17,37 +17,24 @@
 package com.taotao.cloud.promotion.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
-import com.taotao.cloud.promotion.api.inner.fallback.FeignPromotionApiFallback;
-
-import java.util.List;
-import java.util.Map;
-
-import com.taotao.cloud.promotion.api.model.vo.PromotionGoodsVO;
+import com.taotao.cloud.promotion.api.model.vo.PointsGoodsVO;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
- * 远程调用售后模块
+ * IFeignKanjiaActivityService
  *
  * @author shuigedeng
- * @since 2020/5/2 16:42
+ * @version 2022.04
+ * @since 2022-04-07 22:09
  */
-@HttpExchange(
-        contextId = "IFeignPromotionService",
-        value = ServiceNameConstants.TAOTAO_CLOUD_PROMOTION,
-        fallbackFactory = FeignPromotionApiFallback.class)
-public interface IFeignPromotionApi {
+@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_PROMOTION)
+public interface PointsGoodsInnerApi {
 
-    @GetMapping(value = "/withdraw/info/}")
-    Map<String, Object> getGoodsSkuPromotionMap(Long storeId, Long goodsIndexId);
+    @PostMapping(value = "/updateById")
+    void updateById(PointsGoodsVO pointsGoodsVO);
 
-    List<PromotionGoodsVO> findSkuValidPromotions(List<String> categories, List<String> skuIds);
-
-	/**
-	 * 根据促销商品信息包装促销信息
-	 *
-	 * @param promotionGoodsList 促销商品信息
-	 * @return 促销信息
-	 */
-	Map<String, Object> wrapperPromotionMapList(List<PromotionGoodsVO> promotionGoodsList);
+    @GetMapping(value = "/getPointsGoodsDetail")
+    PointsGoodsVO getPointsGoodsDetail(Long promotionId);
 }

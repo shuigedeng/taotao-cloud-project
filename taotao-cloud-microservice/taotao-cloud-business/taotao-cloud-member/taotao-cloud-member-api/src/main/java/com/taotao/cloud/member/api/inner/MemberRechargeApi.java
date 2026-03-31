@@ -37,13 +37,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_MEMBER)
 public interface MemberRechargeApi {
 
-    @GetMapping(value = "/member/feign/recharge/paySuccess")
+    @GetMapping(value = "/member/inner/recharge/paySuccess")
     Boolean paySuccess(@RequestParam String sn, @RequestParam String receivableNo, @RequestParam String paymentMethod);
 
-    @GetMapping(value = "/member/feign/recharge/getRecharge")
+    @GetMapping(value = "/member/inner/recharge/getRecharge")
 	MemberRechargeApiResponse getRecharge(@RequestParam String sn);
 
-    @GetMapping(value = "/member/feign/recharge/recharge")
+    @GetMapping(value = "/member/inner/recharge/recharge")
 	MemberRechargeApiResponse recharge(@RequestParam BigDecimal price);
 
     /**
@@ -53,9 +53,9 @@ public interface MemberRechargeApi {
      *
      * @return
      */
-    @GetMapping(value = "/member/feign/recharge/list")
+    @GetMapping(value = "/member/inner/recharge/list")
     List<MemberRechargeApiResponse> list(@RequestParam DateTime dateTime);
 
-    @GetMapping(value = "/member/feign/recharge/rechargeOrderCancel")
+    @GetMapping(value = "/member/inner/recharge/rechargeOrderCancel")
     Boolean rechargeOrderCancel(@RequestParam String sn);
 }

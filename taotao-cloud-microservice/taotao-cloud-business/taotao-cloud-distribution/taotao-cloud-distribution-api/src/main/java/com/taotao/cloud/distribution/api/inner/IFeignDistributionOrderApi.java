@@ -17,7 +17,6 @@
 package com.taotao.cloud.distribution.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
-import com.taotao.cloud.distribution.api.inner.fallback.FeignDistributionOrderServiceFallback;
 import org.springframework.web.service.annotation.HttpExchange;
 
 import java.time.LocalDateTime;
@@ -29,9 +28,7 @@ import java.time.LocalDateTime;
  * @since 2020/5/2 16:42
  */
 @HttpExchange(
-        contextId = "IFeignDistributionOrderService",
-        value = ServiceNameConstants.TAOTAO_CLOUD_GOODS,
-        fallbackFactory = FeignDistributionOrderServiceFallback.class)
+        value = ServiceNameConstants.TAOTAO_CLOUD_GOODS)
 public interface IFeignDistributionOrderApi {
 
     // 记录分销订单

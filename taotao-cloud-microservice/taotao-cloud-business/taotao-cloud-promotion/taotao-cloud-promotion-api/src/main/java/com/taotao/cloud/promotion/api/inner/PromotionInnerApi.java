@@ -17,14 +17,13 @@
 package com.taotao.cloud.promotion.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
-import com.taotao.cloud.promotion.api.inner.fallback.FeignPromotionGoodsApiFallback;
-import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
-import com.taotao.cloud.promotion.api.model.vo.PromotionGoodsVO;
-import java.math.BigDecimal;
+
 import java.util.List;
+import java.util.Map;
+
+import com.taotao.cloud.promotion.api.model.vo.PromotionGoodsVO;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * 远程调用售后模块
@@ -33,19 +32,19 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @since 2020/5/2 16:42
  */
 @HttpExchange(
-        contextId = "IFeignPromotionGoodsService",
-        value = ServiceNameConstants.TAOTAO_CLOUD_PROMOTION,
-        fallbackFactory = FeignPromotionGoodsApiFallback.class)
-public interface IFeignPromotionGoodsApi {
+        value = ServiceNameConstants.TAOTAO_CLOUD_PROMOTION)
+public interface PromotionInnerApi {
 
-    @GetMapping(value = "/withdraw/info")
-    PromotionGoodsVO getPromotionsGoods(PromotionGoodsPageQuery searchParams);
-
-    @PostMapping(value = "/updateBatchById")
-    Boolean updateBatchById(List<PromotionGoodsVO> promotionGoods);
-
-    @GetMapping(value = "/getValidPromotionsGoodsPrice")
-    BigDecimal getValidPromotionsGoodsPrice(Long skuId, List<String> singletonList);
+    @GetMapping(value = "/withdraw/info/}")
+    Map<String, Object> getGoodsSkuPromotionMap(Long storeId, Long goodsIndexId);
 
     List<PromotionGoodsVO> findSkuValidPromotions(List<String> categories, List<String> skuIds);
+
+	/**
+	 * 根据促销商品信息包装促销信息
+	 *
+	 * @param promotionGoodsList 促销商品信息
+	 * @return 促销信息
+	 */
+	Map<String, Object> wrapperPromotionMapList(List<PromotionGoodsVO> promotionGoodsList);
 }

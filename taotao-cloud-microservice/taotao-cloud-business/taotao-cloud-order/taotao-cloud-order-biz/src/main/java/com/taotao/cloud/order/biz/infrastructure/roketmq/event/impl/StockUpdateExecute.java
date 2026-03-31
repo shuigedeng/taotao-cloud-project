@@ -29,10 +29,10 @@ import com.taotao.cloud.order.biz.service.business.order.OrderService;
 import com.taotao.cloud.order.sys.model.message.OrderMessage;
 import com.taotao.cloud.order.sys.model.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.sys.model.vo.order.OrderItemVO;
-import com.taotao.cloud.promotion.api.inner.IFeignKanjiaActivityApi;
-import com.taotao.cloud.promotion.api.inner.IFeignKanjiaActivityGoodsApi;
-import com.taotao.cloud.promotion.api.inner.IFeignPointsGoodsApi;
-import com.taotao.cloud.promotion.api.inner.IFeignPromotionGoodsApi;
+import com.taotao.cloud.promotion.api.inner.KanjiaActivityInnerApi;
+import com.taotao.cloud.promotion.api.inner.KanjiaActivityGoodsInnerApi;
+import com.taotao.cloud.promotion.api.inner.PointsGoodsInnerApi;
+import com.taotao.cloud.promotion.api.inner.PromotionGoodsInnerApi;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsDTO;
 import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.KanjiaActivityVO;
@@ -72,19 +72,19 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
     private GoodsSkuApi goodsSkuApi;
     /** 促销商品 */
     @Autowired
-    private IFeignPromotionGoodsApi promotionGoodsApi;
+    private PromotionGoodsInnerApi promotionGoodsApi;
     /** 缓存 */
     @Autowired
     private RedisRepository redisRepository;
 
     @Autowired
-    private IFeignKanjiaActivityApi kanjiaActivityApi;
+    private KanjiaActivityInnerApi kanjiaActivityApi;
 
     @Autowired
-    private IFeignKanjiaActivityGoodsApi kanjiaActivityGoodsApi;
+    private KanjiaActivityGoodsInnerApi kanjiaActivityGoodsApi;
 
     @Autowired
-    private IFeignPointsGoodsApi pointsGoodsApi;
+    private PointsGoodsInnerApi pointsGoodsApi;
 
     @Override
     public void orderChange(OrderMessage orderMessage) {

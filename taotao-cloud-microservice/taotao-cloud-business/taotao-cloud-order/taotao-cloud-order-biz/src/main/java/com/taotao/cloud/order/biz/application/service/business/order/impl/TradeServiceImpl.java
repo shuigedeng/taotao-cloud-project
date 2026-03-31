@@ -36,9 +36,9 @@ import com.taotao.cloud.order.sys.model.dto.cart.MemberCouponDTO;
 import com.taotao.cloud.order.sys.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.sys.model.vo.cart.CartVO;
 import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
-import com.taotao.cloud.promotion.api.inner.IFeignCouponApi;
-import com.taotao.cloud.promotion.api.inner.IFeignKanjiaActivityApi;
-import com.taotao.cloud.promotion.api.inner.IFeignMemberCouponApi;
+import com.taotao.cloud.promotion.api.inner.CouponInnerApi;
+import com.taotao.cloud.promotion.api.inner.KanjiaActivityInnerApi;
+import com.taotao.cloud.promotion.api.inner.MemberCouponInnerApi;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.OrderTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
@@ -70,11 +70,11 @@ public class TradeServiceImpl extends ServiceImpl<TradeMapper, Trade> implements
     /** 会员 */
     private final MemberApi memberApi;
     /** 优惠券 */
-    private final IFeignCouponApi couponApi;
+    private final CouponInnerApi couponApi;
     /** 会员优惠券 */
-    private final IFeignMemberCouponApi memberCouponApi;
+    private final MemberCouponInnerApi memberCouponApi;
     /** 砍价 */
-    private final IFeignKanjiaActivityApi kanjiaActivityApi;
+    private final KanjiaActivityInnerApi kanjiaActivityApi;
     /** RocketMQ */
     private final RocketMQTemplate rocketMQTemplate;
     /** RocketMQ 配置 */

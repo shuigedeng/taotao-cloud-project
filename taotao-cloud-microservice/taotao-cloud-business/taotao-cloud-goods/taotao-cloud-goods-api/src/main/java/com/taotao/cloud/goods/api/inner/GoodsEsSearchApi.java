@@ -17,8 +17,6 @@
 package com.taotao.cloud.goods.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
-import com.taotao.cloud.goods.api.inner.fallback.CategoryApiFallback;
-import com.taotao.cloud.goods.api.inner.fallback.GoodsEsSearchApiFallback;
 import org.springframework.web.service.annotation.HttpExchange;
 
 /**
@@ -28,7 +26,5 @@ import org.springframework.web.service.annotation.HttpExchange;
  * @since 2020/5/2 16:42
  */
 @HttpExchange(
-	contextId = "GoodsEsSearchApi",
-        value = ServiceNameConstants.TAOTAO_CLOUD_GOODS,
-        fallbackFactory = GoodsEsSearchApiFallback.class)
+        value = ServiceNameConstants.TAOTAO_CLOUD_GOODS)
 public interface GoodsEsSearchApi {}

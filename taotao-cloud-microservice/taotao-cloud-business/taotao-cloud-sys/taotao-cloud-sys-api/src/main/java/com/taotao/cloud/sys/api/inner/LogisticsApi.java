@@ -18,7 +18,6 @@ package com.taotao.cloud.sys.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.cloud.sys.api.inner.fallback.LogisticsApiFallback;
 import com.taotao.cloud.sys.api.inner.response.LogisticsApiResponse;
 import com.taotao.cloud.sys.api.inner.response.TracesApiResponse;
 import java.util.List;
@@ -34,9 +33,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @since 2022-03-25 14:09:10
  */
 @HttpExchange(
-	name = ServiceNameConstants.TAOTAO_CLOUD_SYS,
-	contextId = "IFeignLogisticsApi",
-	fallbackFactory = LogisticsApiFallback.class)
+	name = ServiceNameConstants.TAOTAO_CLOUD_SYS)
 public interface LogisticsApi {
 
 	/**
@@ -46,7 +43,7 @@ public interface LogisticsApi {
 	 * @return {@link Result }<{@link LogisticsApiResponse }>
 	 * @since 2022-04-25 16:47:29
 	 */
-	@GetMapping("/sys/feign/logistic/codes")
+	@GetMapping("/sys/inner/logistic/codes")
 	LogisticsApiResponse getById(@RequestParam Long logisticsId);
 
 	/**
@@ -57,10 +54,10 @@ public interface LogisticsApi {
 	 * @return {@link Result }<{@link TracesApiResponse }>
 	 * @since 2022-04-25 16:47:32
 	 */
-	@GetMapping("/sys/feign/logistic/info")
+	@GetMapping("/sys/inner/logistic/info")
 	TracesApiResponse getLogistic(@RequestParam Long logisticsId,
 		@RequestParam String logisticsNo);
 
-	@GetMapping("/sys/feign/logistic/list")
+	@GetMapping("/sys/inner/logistic/list")
 	List<LogisticsApiResponse> list();
 }

@@ -18,7 +18,6 @@ package com.taotao.cloud.store.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.boot.common.model.result.PageResult;
-import com.taotao.cloud.store.api.inner.fallback.FeignStoreApiFallback;
 import com.taotao.cloud.store.api.model.dto.CollectionDTO;
 import com.taotao.cloud.store.api.model.dto.StoreBankDTO;
 import com.taotao.cloud.store.api.model.dto.StoreCompanyDTO;
@@ -36,9 +35,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @since 2020/5/2 16:42
  */
 @HttpExchange(
-        contextId = "IFeignStoreService",
-        value = ServiceNameConstants.TAOTAO_CLOUD_GOODS,
-        fallbackFactory = FeignStoreApiFallback.class)
+        value = ServiceNameConstants.TAOTAO_CLOUD_GOODS)
 public interface IFeignStoreApi {
 
     @GetMapping(value = "/sotre/info/findSotreById")

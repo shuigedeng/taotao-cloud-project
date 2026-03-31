@@ -17,8 +17,6 @@
 package com.taotao.cloud.goods.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
-import com.taotao.cloud.goods.api.inner.fallback.CategoryApiFallback;
-import com.taotao.cloud.goods.api.inner.fallback.GoodsEsIndexApiFallback;
 import com.taotao.cloud.goods.api.inner.response.EsGoodsIndexApiResponse;
 import java.util.List;
 import org.springframework.web.service.annotation.HttpExchange;
@@ -33,9 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @since 2020/5/2 16:42
  */
 @HttpExchange(
-	contextId = "GoodsEsIndexApi",
-	value = ServiceNameConstants.TAOTAO_CLOUD_GOODS,
-	fallbackFactory = GoodsEsIndexApiFallback.class)
+	value = ServiceNameConstants.TAOTAO_CLOUD_GOODS)
 public interface GoodsEsIndexApi {
 
 	@GetMapping(value = "/es/goods/sku/ids")

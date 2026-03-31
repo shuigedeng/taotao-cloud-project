@@ -17,7 +17,6 @@
 package com.taotao.cloud.sys.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
-import com.taotao.cloud.sys.api.inner.fallback.RoleApiFallback;
 import com.taotao.cloud.sys.api.inner.response.RoleQueryApiResponse;
 import java.util.List;
 import org.springframework.web.service.annotation.HttpExchange;
@@ -32,9 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @since 2022-03-25 14:09:31
  */
 @HttpExchange(
-        name = ServiceNameConstants.TAOTAO_CLOUD_SYS,
-        contextId = "IFeignRoleApi",
-        fallbackFactory = RoleApiFallback.class)
+        name = ServiceNameConstants.TAOTAO_CLOUD_SYS)
 public interface RoleApi {
 
     /**
@@ -44,6 +41,6 @@ public interface RoleApi {
      * @return 角色列表
      * @since 2020/10/21 15:13
      */
-    @GetMapping("/sys/feign/role/info/userId")
+    @GetMapping("/sys/inner/role/info/userId")
     List<RoleQueryApiResponse> findRoleByUserId(@RequestParam(value = "userId") Long userId);
 }

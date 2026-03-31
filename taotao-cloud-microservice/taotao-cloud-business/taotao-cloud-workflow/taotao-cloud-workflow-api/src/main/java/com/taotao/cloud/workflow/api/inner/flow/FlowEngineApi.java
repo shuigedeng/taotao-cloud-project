@@ -24,8 +24,7 @@ package com.taotao.cloud.workflow.api.inner.flow;
  * 
  * @since 2021/3/15 11:55
  */
-// @HttpExchange(name = FeignName.WORKFLOW_SERVER_NAME , fallback = FlowEngineApiFallback.class, path
-// = "/Engine/FlowEngine")
+// @HttpExchange(name = FeignName.WORKFLOW_SERVER_NAME)
 public interface FlowEngineApi {
 
 //    @PostMapping(value = "/tableCre")

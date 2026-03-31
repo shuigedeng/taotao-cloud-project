@@ -14,28 +14,25 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.payment.api.inner.fallback;
+package com.taotao.cloud.promotion.api.inner;
 
-import com.taotao.cloud.payment.api.inner.PayFlowApi;
-import com.taotao.cloud.payment.api.model.vo.PayFlowVO;
-import org.springframework.cloud.openfeign.FallbackFactory;
+ import com.taotao.boot.common.constant.ServiceNameConstants;
+import java.util.List;
+import org.springframework.web.service.annotation.HttpExchange;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * RemoteLogFallbackImpl
+ * 远程调用会员用户模块
  *
  * @author shuigedeng
- * @since 2020/4/29 21:43
+ * @since 2020/5/2 16:42
  */
-public class PayFlowApiFallback implements FallbackFactory<PayFlowApi> {
+@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_PROMOTION)
+public interface MemberCouponInnerApi {
 
-    @Override
-    public PayFlowApi create(Throwable throwable) {
-        return new PayFlowApi() {
+    @GetMapping(value = "/used")
+    void used(List<String> ids);
 
-            @Override
-            public PayFlowVO findPayFlowById(Long id) {
-                return null;
-            }
-        };
-    }
+    @GetMapping(value = "/receiveCoupon")
+    void receiveCoupon(String couponId, Long memberId, String memberName);
 }

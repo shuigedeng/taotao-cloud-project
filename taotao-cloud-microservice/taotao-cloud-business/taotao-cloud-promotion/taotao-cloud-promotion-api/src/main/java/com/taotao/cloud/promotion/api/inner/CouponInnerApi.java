@@ -17,10 +17,7 @@
 package com.taotao.cloud.promotion.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
-import com.taotao.cloud.promotion.api.inner.fallback.FeignPintuanApiFallback;
-import com.taotao.cloud.promotion.api.model.vo.PintuanVO;
 import org.springframework.web.service.annotation.HttpExchange;
-import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * 远程调用售后模块
@@ -29,11 +26,5 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @since 2020/5/2 16:42
  */
 @HttpExchange(
-        contextId = "IFeignPintuanService",
-        value = ServiceNameConstants.TAOTAO_CLOUD_PROMOTION,
-        fallbackFactory = FeignPintuanApiFallback.class)
-public interface IFeignPintuanApi {
-
-    @GetMapping(value = "/getById")
-    PintuanVO getById(Long pintuanId);
-}
+        value = ServiceNameConstants.TAOTAO_CLOUD_PROMOTION)
+public interface CouponInnerApi {}

@@ -24,7 +24,6 @@ import static com.taotao.boot.common.support.info.ApiVersionEnum.V2022_08;
 import com.taotao.boot.common.support.info.ApiInfo;
 import com.taotao.boot.common.support.info.Create;
 import com.taotao.boot.common.support.info.Update;
-import com.taotao.cloud.order.api.inner.fallback.FeignOrderApiFallback;
 import com.taotao.cloud.order.api.inner.request.OrderSaveApiRequest;
 import com.taotao.cloud.order.api.inner.response.OrderDetailApiResponse;
 import com.taotao.cloud.order.api.inner.response.OrderApiResponse;
@@ -41,7 +40,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_ORDER, fallbackFactory = FeignOrderApiFallback.class)
+@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_ORDER)
 public interface OrderApi {
 
 	@ApiInfo(
@@ -50,7 +49,7 @@ public interface OrderApi {
 			@Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
 			@Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		})
-	@GetMapping(value = "/order/feign/info/{code}")
+	@GetMapping(value = "/order/inner/info/{code}")
 	OrderApiResponse findOrderInfoByCode(@PathVariable("code") String code);
 
 	@ApiInfo(
@@ -59,7 +58,7 @@ public interface OrderApi {
 			@Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
 			@Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		})
-	@PostMapping(value = "/order/feign/saveOrder")
+	@PostMapping(value = "/order/inner/saveOrder")
 	OrderApiResponse saveOrder(@RequestBody OrderSaveApiRequest orderDTO);
 
 	@ApiInfo(
@@ -68,7 +67,7 @@ public interface OrderApi {
 			@Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
 			@Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		})
-	@GetMapping(value = "/order/feign/queryDetail")
+	@GetMapping(value = "/order/inner/queryDetail")
 	OrderDetailApiResponse queryDetail(String sn);
 
 	@ApiInfo(
@@ -77,7 +76,7 @@ public interface OrderApi {
 			@Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
 			@Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		})
-	@PostMapping(value = "/order/feign/payOrder")
+	@PostMapping(value = "/order/inner/payOrder")
 	Boolean payOrder(String sn, String paymentMethod, String receivableNo);
 
 	@ApiInfo(
@@ -86,7 +85,7 @@ public interface OrderApi {
 			@Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
 			@Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		})
-	@GetMapping(value = "/order/feign/getBySn")
+	@GetMapping(value = "/order/inner/getBySn")
 	OrderApiResponse getBySn(String sn);
 
 	@ApiInfo(
@@ -95,6 +94,6 @@ public interface OrderApi {
 			@Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
 			@Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		})
-	@GetMapping(value = "/order/feign/getByTradeSn")
+	@GetMapping(value = "/order/inner/getByTradeSn")
 	List<OrderApiResponse> getByTradeSn(String sn);
 }

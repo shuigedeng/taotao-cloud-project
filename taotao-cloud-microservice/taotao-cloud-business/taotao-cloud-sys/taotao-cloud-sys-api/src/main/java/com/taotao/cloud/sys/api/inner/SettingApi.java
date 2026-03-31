@@ -18,7 +18,6 @@ package com.taotao.cloud.sys.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.cloud.sys.api.inner.fallback.SettingApiFallback;
 import com.taotao.cloud.sys.api.inner.response.setting.AlipayPaymentSettingApiResponse;
 import com.taotao.cloud.sys.api.inner.response.setting.BaseSettingApiResponse;
 import com.taotao.cloud.sys.api.inner.response.setting.ExperienceSettingApiResponse;
@@ -42,9 +41,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @since 2022-03-25 14:09:48
  */
 @HttpExchange(
-        name = ServiceNameConstants.TAOTAO_CLOUD_SYS,
-        contextId = "IFeignSettingApi",
-        fallbackFactory = SettingApiFallback.class)
+        name = ServiceNameConstants.TAOTAO_CLOUD_SYS)
 public interface SettingApi {
 
     /**
@@ -54,10 +51,10 @@ public interface SettingApi {
      * @return 配置信息
      * @since 2022-03-25 14:10:22
      */
-    @GetMapping("/sys/feign/tools/setting")
+    @GetMapping("/sys/inner/tools/setting")
 	SettingApiResponse get(@RequestParam(value = "key") String key);
 
-    @GetMapping("/sys/feign/tools/setting/base")
+    @GetMapping("/sys/inner/tools/setting/base")
 	BaseSettingApiResponse getBaseSetting(String name);
 
     /**
@@ -67,30 +64,30 @@ public interface SettingApi {
      * @return {@link Result }<{@link GoodsSettingApiResponse }>
      * @since 2022-04-25 16:47:40
      */
-    @GetMapping("/sys/feign/tools/setting/goods")
+    @GetMapping("/sys/inner/tools/setting/goods")
 	GoodsSettingApiResponse getGoodsSetting(String name);
 
-    @GetMapping("/sys/feign/tools/setting/order")
+    @GetMapping("/sys/inner/tools/setting/order")
 	OrderSettingApiResponse getOrderSetting(String name);
 
-    @GetMapping("/sys/feign/tools/setting/experience")
+    @GetMapping("/sys/inner/tools/setting/experience")
 	ExperienceSettingApiResponse getExperienceSetting(String name);
 
-    @GetMapping("/sys/feign/tools/setting/point")
+    @GetMapping("/sys/inner/tools/setting/point")
 	PointSettingApiResponse getPointSetting(String name);
 
-    @GetMapping("/sys/feign/tools/setting/qq/connect")
+    @GetMapping("/sys/inner/tools/setting/qq/connect")
 	QQConnectSettingApiResponse getQQConnectSetting(String name);
 
-    @GetMapping("/sys/feign/tools/setting/wechat/connect")
+    @GetMapping("/sys/inner/tools/setting/wechat/connect")
 	WechatConnectSettingApiResponse getWechatConnectSetting(String name);
 
-    @GetMapping("/sys/feign/tools/setting/seckill")
+    @GetMapping("/sys/inner/tools/setting/seckill")
 	SeckillSettingApiResponse getSeckillSetting(String name);
 
-    @GetMapping("/sys/feign/tools/setting/ali")
+    @GetMapping("/sys/inner/tools/setting/ali")
 		AlipayPaymentSettingApiResponse getAlipayPaymentSetting(String name);
 
-    @GetMapping("/sys/feign/tools/setting/wechat")
+    @GetMapping("/sys/inner/tools/setting/wechat")
 	WechatPaymentSettingApiResponse getWechatPaymentSetting(String name);
 }

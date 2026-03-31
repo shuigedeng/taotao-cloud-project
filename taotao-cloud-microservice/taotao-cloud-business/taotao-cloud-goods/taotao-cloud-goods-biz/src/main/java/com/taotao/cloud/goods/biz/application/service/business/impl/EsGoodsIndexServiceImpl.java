@@ -44,8 +44,8 @@ import com.taotao.cloud.goods.biz.model.entity.CustomWords;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.inner.IFeignPromotionApi;
-import com.taotao.cloud.promotion.api.inner.IFeignPromotionGoodsApi;
+import com.taotao.cloud.promotion.api.inner.PromotionInnerApi;
+import com.taotao.cloud.promotion.api.inner.PromotionGoodsInnerApi;
 import com.taotao.cloud.promotion.api.model.vo.BasePromotionsVO;
 import com.taotao.cloud.promotion.api.model.vo.PromotionGoodsVO;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
@@ -103,9 +103,9 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	@Autowired
 	private EsGoodsSearchService goodsSearchService;
 	@Autowired
-	private IFeignPromotionApi promotionApi;
+	private PromotionInnerApi promotionApi;
 	@Autowired
-	private IFeignPromotionGoodsApi promotionGoodsApi;
+	private PromotionGoodsInnerApi promotionGoodsApi;
 	@Autowired
 	private CustomWordsService customWordsService;
 	@Autowired

@@ -73,13 +73,13 @@ public class CartServiceImpl implements CartService {
     /** 缓存 */
     private final RedisRepository redisRepository;
     /** 会员优惠券 */
-    private final IFeignMemberCouponApi memberCouponApi;
+    private final MemberCouponInnerApi memberCouponApi;
     /** 规格商品 */
     private final GoodsSkuApi goodsSkuApi;
     /** 促销商品 */
-    private final IFeignPromotionGoodsApi promotionGoodsApi;
+    private final PromotionGoodsInnerApi promotionGoodsApi;
     /** 促销商品 */
-    private final IFeignPointsGoodsApi pointsGoodsApi;
+    private final PointsGoodsInnerApi pointsGoodsApi;
     /** 会员地址 */
     private final MemberAddressApi memberAddressApi;
     /** ES商品 */
@@ -87,11 +87,11 @@ public class CartServiceImpl implements CartService {
     /** ES商品 */
     private final GoodsApi goodsApi;
     /** 拼团 */
-    private final IFeignPintuanApi pintuanApi;
+    private final PintuanInnerApi pintuanApi;
     /** 砍价活动 */
-    private final IFeignKanjiaActivityApi kanjiaActivityApi;
+    private final KanjiaActivityInnerApi kanjiaActivityApi;
     /** 砍价商品 */
-    private final IFeignKanjiaActivityGoodsApi kanjiaActivityGoodsApi;
+    private final KanjiaActivityGoodsInnerApi kanjiaActivityGoodsApi;
     /** 交易 */
     @Autowired
     private TradeBuilder tradeBuilder;

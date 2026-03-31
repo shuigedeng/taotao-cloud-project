@@ -18,7 +18,7 @@ package com.taotao.cloud.member.biz.infrastructure.roketmq.event.impl;
 
 import com.taotao.cloud.member.biz.infrastructure.roketmq.event.MemberRegisterEvent;
 import com.taotao.cloud.member.biz.model.entity.Member;
-import com.taotao.cloud.promotion.api.inner.IFeignCouponActivityApi;
+import com.taotao.cloud.promotion.api.inner.CouponActivityInnerApi;
 import com.taotao.cloud.promotion.api.model.dto.MemberDTO;
 import com.taotao.cloud.promotion.api.model.vo.CouponActivityVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ import java.util.List;
 public class RegisteredCouponActivityExecute implements MemberRegisterEvent {
 
     @Autowired
-    private IFeignCouponActivityApi couponActivityService;
+    private CouponActivityInnerApi couponActivityService;
 
     /**
      * 获取进行中的注册赠券的优惠券活动 发送注册赠券

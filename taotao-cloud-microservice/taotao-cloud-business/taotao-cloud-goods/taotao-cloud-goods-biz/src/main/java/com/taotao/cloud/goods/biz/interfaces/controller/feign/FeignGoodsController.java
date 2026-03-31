@@ -33,6 +33,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@RequestMapping("/feign/goods")
+@RequestMapping("/inner/goods")
 @Tag(name = "内部服务-商品API", description = "内部服务-商品API")
 public class FeignGoodsController extends BaseBusinessController<GoodsService, Goods, Long> {}

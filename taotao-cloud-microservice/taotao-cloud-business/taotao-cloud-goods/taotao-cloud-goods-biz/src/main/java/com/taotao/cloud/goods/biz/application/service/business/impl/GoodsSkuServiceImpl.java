@@ -56,7 +56,7 @@ import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
 import com.taotao.cloud.member.api.inner.MemberEvaluationApi;
 import com.taotao.cloud.member.api.model.page.EvaluationPageQuery;
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
-import com.taotao.cloud.promotion.api.inner.IFeignPromotionGoodsApi;
+import com.taotao.cloud.promotion.api.inner.PromotionGoodsInnerApi;
 import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.PromotionGoodsVO;
 import com.taotao.cloud.store.api.model.vo.StoreVO;
@@ -103,7 +103,7 @@ public class GoodsSkuServiceImpl
     /** 会员评价服务 */
     private final MemberEvaluationApi memberEvaluationApi;
     /** 促销活动商品服务 */
-    private final IFeignPromotionGoodsApi promotionGoodsApi;
+    private final PromotionGoodsInnerApi promotionGoodsApi;
 
     /** 缓存服务 */
     private final RedisRepository redisRepository;

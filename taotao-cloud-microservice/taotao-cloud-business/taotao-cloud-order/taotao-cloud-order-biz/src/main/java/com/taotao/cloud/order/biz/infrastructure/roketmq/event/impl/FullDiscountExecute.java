@@ -41,7 +41,7 @@ import com.taotao.cloud.order.sys.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.sys.model.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.sys.model.message.OrderMessage;
 import com.taotao.cloud.order.sys.model.vo.cart.CartVO;
-import com.taotao.cloud.promotion.api.inner.IFeignMemberCouponApi;
+import com.taotao.cloud.promotion.api.inner.MemberCouponInnerApi;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.OrderTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
@@ -78,7 +78,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
     private OrderLogService orderLogService;
 
     @Autowired
-    private IFeignMemberCouponApi memberCouponApi;
+    private MemberCouponInnerApi memberCouponApi;
 
     @Autowired
     private GoodsSkuApi goodsSkuApi;

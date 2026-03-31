@@ -17,23 +17,23 @@
 package com.taotao.cloud.promotion.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
-import com.taotao.cloud.promotion.api.inner.fallback.FeignMemberCouponApiFallback;
-import java.util.List;
+import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsDTO;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * 远程调用会员用户模块
+ * IFeignKanjiaActivityService
  *
  * @author shuigedeng
- * @since 2020/5/2 16:42
+ * @version 2022.04
+ * @since 2022-04-07 22:09
  */
-@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_PROMOTION, fallbackFactory = FeignMemberCouponApiFallback.class)
-public interface IFeignMemberCouponApi {
+@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_PROMOTION)
+public interface KanjiaActivityGoodsInnerApi {
 
-    @GetMapping(value = "/used")
-    void used(List<String> ids);
+    @GetMapping(value = "/updateById")
+    void updateById(KanjiaActivityGoodsDTO kanjiaActivityGoodsDTO);
 
-    @GetMapping(value = "/receiveCoupon")
-    void receiveCoupon(String couponId, Long memberId, String memberName);
+    @GetMapping(value = "/getKanjiaGoodsDetail")
+    KanjiaActivityGoodsDTO getKanjiaGoodsDetail(Long kanjiaActivityGoodsId);
 }

@@ -19,7 +19,6 @@ package com.taotao.cloud.order.api.inner;
  import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.boot.common.model.ddd.query.PageQuery;
 import com.taotao.boot.common.model.result.PageResult;
-import com.taotao.cloud.order.api.inner.fallback.FeignStoreFlowFallback;
 import com.taotao.cloud.order.api.inner.response.TradeApiResponse;
 import com.taotao.cloud.order.api.inner.response.StoreFlowApiResponse;
 import org.springframework.web.service.annotation.HttpExchange;
@@ -31,7 +30,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_ORDER, fallbackFactory = FeignStoreFlowFallback.class)
+@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_ORDER)
 public interface StoreFlowApi {
 
     @GetMapping(value = "/trade")

@@ -17,7 +17,6 @@
 package com.taotao.cloud.sys.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
-import com.taotao.cloud.sys.api.inner.fallback.MenuApiFallback;
 import com.taotao.cloud.sys.api.inner.response.MenuQueryApiResponse;
 import java.util.List;
 import java.util.Set;
@@ -33,9 +32,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @since 2022-03-25 14:09:10
  */
 @HttpExchange(
-        name = ServiceNameConstants.TAOTAO_CLOUD_SYS,
-        contextId = "IFeignMenuApi",
-        fallbackFactory = MenuApiFallback.class)
+        name = ServiceNameConstants.TAOTAO_CLOUD_SYS)
 public interface MenuApi {
 
     /**
@@ -45,6 +42,6 @@ public interface MenuApi {
      * @return 角色列表
      * @since 2020/10/21 15:24
      */
-    @GetMapping("/sys/feign/menu/info/codes")
+    @GetMapping("/sys/inner/menu/info/codes")
     List<MenuQueryApiResponse> findResourceByCodes(@RequestParam(value = "codes") Set<String> codes);
 }

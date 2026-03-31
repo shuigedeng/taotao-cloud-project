@@ -17,8 +17,7 @@
 package com.taotao.cloud.workflow.api.inner.flow;
 
 /** api接口 */
-// @HttpExchange(name = FeignName.WORKFLOW_SERVER_NAME, fallback = FlowTaskApiFallback.class, path =
-// "/Engine/FlowTask")
+// @HttpExchange(name = FeignName.WORKFLOW_SERVER_NAME)
 public interface FlowTaskApi {
 //    /**
 //     * 列表（待我审批）

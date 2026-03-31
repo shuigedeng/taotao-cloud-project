@@ -14,27 +14,23 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.promotion.api.inner.fallback;
+package com.taotao.cloud.promotion.api.inner;
 
-import com.taotao.cloud.promotion.api.inner.IFeignCouponApi;
-import org.springframework.cloud.openfeign.FallbackFactory;
+ import com.taotao.boot.common.constant.ServiceNameConstants;
+import com.taotao.cloud.promotion.api.model.vo.PintuanVO;
+import org.springframework.web.service.annotation.HttpExchange;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * RemoteLogFallbackImpl
+ * 远程调用售后模块
  *
  * @author shuigedeng
- * @since 2020/4/29 21:43
+ * @since 2020/5/2 16:42
  */
-public class FeignCouponApiFallback implements FallbackFactory<IFeignCouponApi> {
+@HttpExchange(
+        value = ServiceNameConstants.TAOTAO_CLOUD_PROMOTION)
+public interface PintuanInnerApi {
 
-    @Override
-    public IFeignCouponApi create(Throwable throwable) {
-        return new IFeignCouponApi() {
-            // @Override
-            // public Result<CouponVO> getMemberSecurityUser(Long id) {
-            //	LogUtil.error("调用getMemberSecurityUser异常：{}", throwable, id);
-            //	return Result.fail(null, 500);
-            // }
-        };
-    }
+    @GetMapping(value = "/getById")
+    PintuanVO getById(Long pintuanId);
 }

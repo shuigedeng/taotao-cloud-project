@@ -14,26 +14,24 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.operation.api.inner.fallback;
+package com.taotao.cloud.promotion.api.inner;
 
-import com.taotao.cloud.operation.api.inner.IFeignArticleApi;
-import com.taotao.cloud.operation.api.model.vo.ArticleVO;
-import org.springframework.cloud.openfeign.FallbackFactory;
+ import com.taotao.boot.common.constant.ServiceNameConstants;
+import com.taotao.cloud.promotion.api.model.vo.KanjiaActivityVO;
+import org.springframework.web.service.annotation.HttpExchange;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * FeignArticleServiceFallback
+ * IFeignKanjiaActivityService
  *
  * @author shuigedeng
- * @since 2020/4/29 21:43
+ * @version 2022.04
+ * @since 2022-04-07 22:09
  */
-public class FeignArticleApiFallback implements FallbackFactory<IFeignArticleApi> {
-    @Override
-    public IFeignArticleApi create(Throwable throwable) {
-        return new IFeignArticleApi() {
-            @Override
-            public ArticleVO getMemberSecurityUser(Long id) {
-                return null;
-            }
-        };
-    }
+@HttpExchange(
+        value = ServiceNameConstants.TAOTAO_CLOUD_PROMOTION)
+public interface KanjiaActivityInnerApi {
+
+    @GetMapping(value = "/getById")
+    KanjiaActivityVO getById(Long promotionId);
 }

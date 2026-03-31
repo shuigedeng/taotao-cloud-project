@@ -25,6 +25,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_MEMBER)
 public interface MemberAddressApi {
 
-	@GetMapping(value = "/member/feign/address/shippingAddressId")
+	@GetMapping(value = "/member/inner/address/shippingAddressId")
 	MemberAddressApiResponse getById(@RequestParam String shippingAddressId);
 }

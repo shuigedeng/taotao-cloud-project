@@ -19,15 +19,12 @@ package com.taotao.cloud.store.api.inner;
  import com.taotao.boot.common.constant.ServiceNameConstants;
 import com.taotao.boot.common.model.ddd.query.PageQuery;
 import com.taotao.boot.common.model.result.PageResult;
-import com.taotao.cloud.store.api.inner.fallback.FeignStoreApiFallback;
 import com.taotao.cloud.store.api.model.vo.StoreCollectionVO;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @HttpExchange(
-        contextId = "IFeignFreightTemplateService",
-        value = ServiceNameConstants.TAOTAO_CLOUD_GOODS,
-        fallbackFactory = FeignStoreApiFallback.class)
+        value = ServiceNameConstants.TAOTAO_CLOUD_GOODS)
 public interface IFeignStoreCollectionApi {
 
     @GetMapping(value = "/storeCollection")
