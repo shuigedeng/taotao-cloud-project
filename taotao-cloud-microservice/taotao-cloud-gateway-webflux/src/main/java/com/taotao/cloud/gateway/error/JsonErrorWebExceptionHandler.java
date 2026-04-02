@@ -19,7 +19,7 @@ package com.taotao.cloud.gateway.error;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.model.Code;
-import com.taotao.boot.common.model.result.EmptyResult;
+
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.log.LogUtils;
 import java.util.HashMap;
@@ -156,7 +156,7 @@ public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandle
 	 * @param message 异常信息
 	 */
 	public static Map<String, Object> responseError(String message, Code code) {
-		Result<EmptyResult> result = Result.fail(code, message);
+		Result<Void> result = Result.fail(code, message);
 		Map<String, Object> res = new HashMap<>();
 		res.put("status", result.getStatus());
 		res.put("code", result.getCode());

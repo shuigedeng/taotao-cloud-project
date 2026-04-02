@@ -21,7 +21,7 @@ import com.alibaba.druid.sql.SQLUtils;
 import com.alibaba.druid.sql.ast.SQLStatement;
 import com.alibaba.druid.sql.dialect.mysql.ast.statement.MySqlCreateTableStatement;
 import com.alibaba.fastjson2.JSON;
-import com.taotao.boot.common.model.result.EmptyResult;
+
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.generator.entity.GenTable;
@@ -129,7 +129,7 @@ public class GenController {
      */
     @PostMapping("/importTable")
     @ResponseBody
-    public Result<EmptyResult> importTableSave(String tables) {
+    public Result<Void> importTableSave(String tables) {
         String[] tableNames = toStrArray(tables);
         // 查询表信息
         List<GenTable> tableList = genTableService.selectDbTableListByNames(tableNames);
@@ -175,7 +175,7 @@ public class GenController {
      */
     @PostMapping("/edit")
     @ResponseBody
-    public Result<EmptyResult> editSave(@Validated GenTable genTable) {
+    public Result<Void> editSave(@Validated GenTable genTable) {
         genTableService.validateEdit(genTable);
         genTableService.updateGenTable(genTable);
         return Result.success();
@@ -183,14 +183,14 @@ public class GenController {
 
     @PostMapping("/remove")
     @ResponseBody
-    public Result<EmptyResult> remove(String ids) {
+    public Result<Void> remove(String ids) {
         genTableService.deleteGenTableByIds(ids);
         return Result.success();
     }
 
     @PostMapping("/createTable")
     @ResponseBody
-    public Result<EmptyResult> create(String sql) {
+    public Result<Void> create(String sql) {
         try {
             //			SqlUtil.filterKeyword(sql);
             List<SQLStatement> sqlStatements = SQLUtils.parseStatements(sql, DbType.mysql);
@@ -242,7 +242,7 @@ public class GenController {
      */
     @GetMapping("/genCode/{tableName}")
     @ResponseBody
-    public Result<EmptyResult> genCode(@PathVariable("tableName") String tableName) {
+    public Result<Void> genCode(@PathVariable("tableName") String tableName) {
         genTableService.generatorCode(tableName);
         return Result.success();
     }
@@ -252,7 +252,7 @@ public class GenController {
      */
     @GetMapping("/synchDb/{tableName}")
     @ResponseBody
-    public Result<EmptyResult> synchDb(@PathVariable("tableName") String tableName) {
+    public Result<Void> synchDb(@PathVariable("tableName") String tableName) {
         genTableService.synchDb(tableName);
         return Result.success();
     }

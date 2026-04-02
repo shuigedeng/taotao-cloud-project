@@ -17,7 +17,7 @@
 package com.taotao.cloud.distribution.biz.interfaces.api.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.boot.common.model.result.EmptyResult;
+
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import com.taotao.cloud.distribution.api.model.query.DistributionGoodsPageQuery;
@@ -54,7 +54,7 @@ public class DistributionGoodsManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PostMapping(value = "/delByIds/{ids}")
-    public Result<EmptyResult> delAllByIds(@PathVariable List ids) {
+    public Result<Void> delAllByIds(@PathVariable List ids) {
         distributionGoodsService.removeByIds(ids);
         return Result.success();
     }

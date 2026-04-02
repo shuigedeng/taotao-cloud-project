@@ -238,7 +238,7 @@ public class JustAuthSourceController {
      */
     @PostMapping("/upload")
     @ApiOperation("批量上传数据")
-    public Result<EmptyResult> upload(@RequestParam("uploadFile") MultipartFile file) throws IOException {
+    public Result<Void> upload(@RequestParam("uploadFile") MultipartFile file) throws IOException {
         List<JustAuthSourceImport> justAuthSourceImportList = EasyExcel.read(
                         file.getInputStream(), JustAuthSourceImport.class, null)
                 .sheet()

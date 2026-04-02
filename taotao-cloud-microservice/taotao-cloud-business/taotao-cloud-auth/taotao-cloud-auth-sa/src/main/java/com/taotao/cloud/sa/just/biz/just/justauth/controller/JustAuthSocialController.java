@@ -97,7 +97,7 @@ public class JustAuthSocialController {
      */
     @PostMapping("/create")
     @ApiOperation(value = "添加租户第三方登录功能配置表")
-    public Result<EmptyResult> create(@RequestBody CreateJustAuthSocialDTO justAuthSocial) {
+    public Result<Void> create(@RequestBody CreateJustAuthSocialDTO justAuthSocial) {
         justAuthSocialService.createJustAuthSocial(justAuthSocial);
         return Result.success();
     }

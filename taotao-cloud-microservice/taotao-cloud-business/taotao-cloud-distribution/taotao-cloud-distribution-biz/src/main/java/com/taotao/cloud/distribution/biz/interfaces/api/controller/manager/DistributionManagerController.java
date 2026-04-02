@@ -19,7 +19,7 @@ package com.taotao.cloud.distribution.biz.interfaces.api.controller.manager;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.boot.common.model.result.EmptyResult;
+
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import com.taotao.cloud.distribution.api.model.query.DistributionPageQuery;
@@ -58,7 +58,7 @@ public class DistributionManagerController {
     @GetMapping("/tree")
     @PreventDuplicateSubmissions
     @PostMapping(value = "/retreat/{id}")
-    public Result<EmptyResult> retreat(@Parameter(description = "分销商id") @PathVariable String id) {
+    public Result<Void> retreat(@Parameter(description = "分销商id") @PathVariable String id) {
         if (distributionService.retreat(id)) {
             return Result.success();
         } else {
@@ -72,7 +72,7 @@ public class DistributionManagerController {
     @GetMapping("/tree")
     @PreventDuplicateSubmissions
     @PostMapping(value = "/resume/{id}")
-    public Result<EmptyResult> resume(@PathVariable String id) {
+    public Result<Void> resume(@PathVariable String id) {
         if (distributionService.resume(id)) {
             return Result.success();
         } else {
