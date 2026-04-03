@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mdframe.forge.plugin.system.mapper.SysUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mdframe.forge.plugin.system.entity.SysUser">
+        <id column="id" property="id" />
+        <result column="tenant_id" property="tenantId" />
+        <result column="username" property="username" />
+        <result column="real_name" property="realName" />
+        <result column="user_type" property="userType" />
+        <result column="user_client" property="userClient" />
+        <result column="email" property="email" />
+        <result column="phone" property="phone" />
+        <result column="id_card" property="idCard" />
+        <result column="gender" property="gender" />
+        <result column="password" property="password" />
+        <result column="salt" property="salt" />
+        <result column="user_status" property="userStatus" />
+        <result column="avatar" property="avatar" />
+        <result column="last_login_time" property="lastLoginTime" />
+        <result column="last_login_ip" property="lastLoginIp" />
+        <result column="login_count" property="loginCount" />
+        <result column="remark" property="remark" />
+        <result column="create_dept" property="createDept" />
+        <result column="create_by" property="createBy" />
+        <result column="create_time" property="createTime" />
+        <result column="update_by" property="updateBy" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, tenant_id, username, real_name, user_type, user_client, email, phone,
+        id_card, gender, password, salt, user_status, avatar, last_login_time,
+        last_login_ip, login_count, remark, create_dept, create_by, create_time,
+        update_by, update_time
+    </sql>
+
+</mapper>

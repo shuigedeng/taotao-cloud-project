@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mdframe.forge.plugin.system.mapper.SysNoticeReadRecordMapper">
+
+    <!-- 查询指定公告的已读用户列表 -->
+    <select id="selectReadUserList" resultType="com.mdframe.forge.plugin.system.vo.NoticeReadUserVO">
+        SELECT
+            r.user_id,
+            r.user_name,
+            u.real_name nick_name,
+            r.org_id,
+            r.org_name,
+            r.read_time,
+            u.phone,
+            u.email
+        FROM sys_notice_read_record r
+        LEFT JOIN sys_user u ON r.user_id = u.id
+        WHERE r.notice_id = #{noticeId}
+        ORDER BY r.read_time DESC
+    </select>
+
+    <!-- 查询指定公告的未读用户列表 -->
+    <select id="selectUnreadUserList" resultType="com.mdframe.forge.plugin.system.vo.NoticeReadUserVO">
+        SELECT DISTINCT
+            u.id as user_id,
+            u.username,
+            u.real_name nick_name,
+            uo.org_id,
+            o.org_name,
+            u.phone,
+            u.email
+        FROM sys_user u
+        INNER JOIN sys_user_org uo ON u.id = uo.user_id
+        INNER JOIN sys_org o ON uo.org_id = o.id
+        WHERE u.user_status = 1
+        AND EXISTS (
+            SELECT 1 FROM sys_notice n
+            WHERE n.notice_id = #{noticeId}
+            AND (
+                n.publish_scope = 0
+                OR EXISTS (
+                    SELECT 1 FROM sys_notice_org no
+                    WHERE no.notice_id = n.notice_id
+                    AND no.org_id = uo.org_id
+                )
+            )
+        )
+        AND NOT EXISTS (
+            SELECT 1 FROM sys_notice_read_record r
+            WHERE r.notice_id = #{noticeId}
+            AND r.user_id = u.id
+        )
+        ORDER BY o.org_name, u.username
+    </select>
+
+</mapper>
