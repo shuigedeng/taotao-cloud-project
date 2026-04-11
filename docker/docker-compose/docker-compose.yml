@@ -95,11 +95,11 @@ services:
     environment:
       - TZ=Asia/Shanghai
       # nacos config, add parameters to url like username=nacos&password=nacos
-      - admin.registry.address=nacos://192.168.218.2:8848?namespace=213336af-bf44-45ce-850d-6ae563173799&username=nacos&password=nacos
+      - admin.registry.address=nacos://127.0.0.1:8848?namespace=213336af-bf44-45ce-850d-6ae563173799&username=nacos&password=nacos
       - admin.registry.group=DUBBO_REGISTRY_GROUP
-      - admin.config-center=nacos://192.168.218.2:8848?namespace=213336af-bf44-45ce-850d-6ae563173799&username=nacos&password=nacos
+      - admin.config-center=nacos://127.0.0.1:8848?namespace=213336af-bf44-45ce-850d-6ae563173799&username=nacos&password=nacos
       - admin.config-center.group=DUBBO_REGISTRY_GROUP
-      - admin.metadata-report.address=nacos://192.168.218.2:8848?namespace=213336af-bf44-45ce-850d-6ae563173799&username=nacos&password=nacos
+      - admin.metadata-report.address=nacos://127.0.0.1:8848?namespace=213336af-bf44-45ce-850d-6ae563173799&username=nacos&password=nacos
       - admin.metadata-report.group=DUBBO_REGISTRY_GROUP
       - admin.root.user.name=admin
       - admin.root.user.password=123456
@@ -173,7 +173,7 @@ services:
     #  depends_on:
     #    - 'rocketmq-nameserv'
     #  environment:
-    #    NAMESRV_ADDR: 192.168.218.2:9876
+    #    NAMESRV_ADDR: 127.0.0.1:9876
     #  volumes:
     #    - ./rocketmq/broker.conf:/home/rocketmq/rocketmq-4.9.6/conf/broker.conf       
     #  command: [ "sh","mqbroker","-c","/home/rocketmq/rocketmq-4.9.6/conf/broker.conf", "autoCreateTopicEnable=true" ]        
@@ -191,7 +191,7 @@ services:
     #    - 'rocketmq-nameserv'
     #    - 'rocketmq-broker'
     #  environment:
-    #    JAVA_OPTS: '-Drocketmq.namesrv.addr=192.168.218.2:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false'
+    #    JAVA_OPTS: '-Drocketmq.namesrv.addr=127.0.0.1:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false'
     #  networks:
     #    taotao-cluster-network:
     #      ipv4_address: 172.11.0.21
@@ -223,7 +223,7 @@ services:
     #  depends_on:
     #    - 'rocketmq-nameserv'
     #  environment:
-    #    NAMESRV_ADDR: 192.168.218.2:9876
+    #    NAMESRV_ADDR: 127.0.0.1:9876
     #    MAX_HEAP_SIZE: 512M
     #    HEAP_NEWSIZE: 256M	  
     #  volumes:
@@ -247,7 +247,7 @@ services:
     #    - 'rocketmq-nameserv'
     #    - 'rocketmq-broker'
     #  environment:
-    #    JAVA_OPTS: '-Xmx256M -Xms256M -Xmn128M -Drocketmq.namesrv.addr=192.168.218.2:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false -Drocketmq.config.loginRequired=true -Drocketmq.config.accessKey=console -Drocketmq.config.secretKey=12345678'
+    #    JAVA_OPTS: '-Xmx256M -Xms256M -Xmn128M -Drocketmq.namesrv.addr=127.0.0.1:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false -Drocketmq.config.loginRequired=true -Drocketmq.config.accessKey=console -Drocketmq.config.secretKey=12345678'
     #  networks:
     #    taotao-cluster-network:
     #      ipv4_address: 172.11.0.21
@@ -279,7 +279,7 @@ services:
     depends_on:
       - 'rocketmq-nameserv'
     environment:
-      NAMESRV_ADDR: 192.168.218.2:9876
+      NAMESRV_ADDR: 127.0.0.1:9876
       MAX_HEAP_SIZE: 512M
       HEAP_NEWSIZE: 256M
     volumes:
@@ -322,7 +322,7 @@ services:
       - 'rocketmq-nameserv'
       - 'rocketmq-broker'
     environment:
-      JAVA_OPTS: '-Xmx256M -Xms256M -Xmn128M -Drocketmq.namesrv.addr=192.168.218.2:9876 -Drocketmq.config.proxyAddrs=192.168.218.2:18680 -Dcom.rocketmq.sendMessageWithVIPChannel=false -Drocketmq.config.loginRequired=true -Drocketmq.config.accessKey=taotaocloud -Drocketmq.config.secretKey=taotaocloud'
+      JAVA_OPTS: '-Xmx256M -Xms256M -Xmn128M -Drocketmq.namesrv.addr=127.0.0.1:9876 -Drocketmq.config.proxyAddrs=127.0.0.1:18680 -Dcom.rocketmq.sendMessageWithVIPChannel=false -Drocketmq.config.loginRequired=true -Drocketmq.config.accessKey=taotaocloud -Drocketmq.config.secretKey=taotaocloud'
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.21
@@ -364,7 +364,7 @@ services:
       - KAFKA_CFG_NODE_ID=1
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@172.11.0.24:9093
       - KAFKA_CFG_LISTENERS=PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://192.168.218.2:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
@@ -388,7 +388,7 @@ services:
       # 集群名称
       - KAFKA_CLUSTERS_0_NAME=kafkaCluster
       # 集群地址
-      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=192.168.218.2:9092
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=127.0.0.1:9092
       - DYNAMIC_CONFIG_ENABLED=true
       - AUTH_TYPE=LOGIN_FORM
       - SPRING_SECURITY_USER_NAME=admin
@@ -438,7 +438,7 @@ services:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--web.console.libraries=/usr/share/prometheus/console_libraries'
       - '--web.console.templates=/usr/share/prometheus/consoles'
-      - '--web.external-url=http://192.168.218.2:9090/'
+      - '--web.external-url=http://127.0.0.1:9090/'
       - '--web.enable-lifecycle'
     ports:
       - "9090:9090"

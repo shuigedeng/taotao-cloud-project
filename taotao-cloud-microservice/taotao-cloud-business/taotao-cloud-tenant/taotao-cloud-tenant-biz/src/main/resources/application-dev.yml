@@ -135,7 +135,7 @@ dubbo:
       nacos.retry: 1
       nacos.retry-wait: 1000
       nacos.check: false
-      register-ip: 192.168.218.1
+      register-ip: 127.0.0.1
     timeout: 15000
     username: nacos
     password: nacos
@@ -147,7 +147,7 @@ dubbo:
     use-as-config-center: false
     use-as-metadata-center: false
   protocol:
-    host: 192.168.218.1
+    host: 127.0.0.1
     name: tri
     port: 50053
     ssl-enabled: false
@@ -161,7 +161,7 @@ dubbo:
     threads: 20
     queues: 200
   provider:
-    host: 192.168.218.1
+    host: 127.0.0.1
     timeout: 3000
     version: ${ttcVersion}
     threads: 500
@@ -959,7 +959,6 @@ taotao:
           password: 123456
         executor:
           access-token: 123456
-          ip: 192.168.1.4
           appname: ttc-tenant
           title: ttc-tenant
     zookeeper:

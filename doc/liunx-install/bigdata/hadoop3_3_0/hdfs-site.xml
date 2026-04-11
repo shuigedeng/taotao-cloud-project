@@ -28,7 +28,7 @@
 
 	<property>
 		<name>dfs.namenode.http.address</name>
-		<value>192.168.10.200:9870</value>
+		<value>127.0.0.1:9870</value>
 	</property>
 
 <!--	<property>-->

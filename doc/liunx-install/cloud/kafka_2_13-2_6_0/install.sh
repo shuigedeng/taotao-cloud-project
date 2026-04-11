@@ -51,7 +51,7 @@ bin/kafka-consumer-groups.sh --zookeeper host:2181 --list
 bin/kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list host:9092 --topic topic
 
 kafka-console-producer.sh --broker-list 127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094  --topic destination-test-kafka-topic
-kafka-console-consumer.sh --bootstrap-server 192.168.10.200:9092,192.168.10.200:9093,192.168.10.200:9094 --topic destination-test-kafka-topic --from-beginning
+kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094 --topic destination-test-kafka-topic --from-beginning
 
  kafka-server-stop.sh
  PIDS=$(ps ax | grep -i 'kafka\.Kafka' | grep java | grep -v grep | awk '{print $1}')

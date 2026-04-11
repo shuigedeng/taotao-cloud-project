@@ -78,7 +78,7 @@
 
 	<property>
 		<name>javax.jdo.option.ConnectionURL</name>
-		<value>jdbc:mysql://192.168.10.200:3306/taotao-cloud-hive?createDatabaseIfNotExist=TRUE</value>
+		<value>jdbc:mysql://127.0.0.1:3306/taotao-cloud-hive?createDatabaseIfNotExist=TRUE</value>
 	</property>
 
 	<property>

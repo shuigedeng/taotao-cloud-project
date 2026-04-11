@@ -40,7 +40,7 @@ JAVA_OPTS="
 -Dskywalking.logging.file_name=skywalking.log
 -Dskywalking.logging.level=INFO
 -Dskywalking.logging.dir=${JAR_PATH}
--Dskywalking.collector.backend_service=192.168.10.200:11800
+-Dskywalking.collector.backend_service=127.0.0.1:11800
 -DTAOTAO_CLOUD_MAIL_PASSWORD=vwdrmsvmevosbeed
 "
 

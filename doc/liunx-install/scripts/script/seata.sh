@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function start_seata() {
-     nohup sh /opt/cloud/seata/bin/seata-server.sh -p 8091 -h 192.168.10.200  \
+     nohup sh /opt/cloud/seata/bin/seata-server.sh -p 8091 -h 127.0.0.1  \
      >/opt/cloud/seata/logs/seata.out 2>&1 &
      sleep 10
      echo "seata started"

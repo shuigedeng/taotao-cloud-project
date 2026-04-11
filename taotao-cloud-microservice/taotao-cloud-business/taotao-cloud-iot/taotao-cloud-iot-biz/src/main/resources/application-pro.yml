@@ -770,7 +770,7 @@ management:
       export:
         otlp:
           compression: none
-          endpoint: http://192.168.218.2:4318/v1/logs
+          endpoint: http://127.0.0.1:4318/v1/logs
           timeout: 10s
           headers:
             version: ${ttcVersion}
@@ -778,14 +778,14 @@ management:
       export:
         otlp:
           compression: none
-          endpoint: http://192.168.218.2:4318/v1/traces
+          endpoint: http://127.0.0.1:4318/v1/traces
           timeout: 10s
           headers:
             version: ${ttcVersion}
   otlp:
     metrics:
       export:
-        url: http://192.168.218.2:4318/v1/metrics
+        url: http://127.0.0.1:4318/v1/metrics
         enabled: true
         batch-size: 10000
         connect-timeout: 10s

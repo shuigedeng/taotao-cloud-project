@@ -46,4 +46,4 @@ case $1 in
 esac
 
 
-./presto --server 192.168.10.200:28081 --catalog hive  --schema taotao_cloud_log
+./presto --server 127.0.0.1:28081 --catalog hive  --schema taotao_cloud_log

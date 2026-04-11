@@ -29,7 +29,7 @@ transport.compressor=none
 service.vgroupMapping.taotao_cloud_tx_group=SC
   #If you use a registry, you can ignore it
   # 这里仅注册中心为file时使用 此时无用 我们注册中心是nacos
-service.SC.grouplist=192.168.10.200:8000
+service.SC.grouplist=127.0.0.1:8000
 service.enableDegrade=false
 service.disableGlobalTransaction=false
   
@@ -90,7 +90,7 @@ store.file.sessionReloadReadSize=100
 store.db.datasource=druid
 store.db.dbType=mysql
 store.db.driverClassName=com.mysql.cj.jdbc.Driver
-store.db.url=jdbc:mysql://192.168.10.200:3306/taotao-cloud-seata-1.5.1?useUnicode=true&rewriteBatchedStatements=true
+store.db.url=jdbc:mysql://127.0.0.1:3306/taotao-cloud-seata-1.5.1?useUnicode=true&rewriteBatchedStatements=true
 store.db.user=root
 store.db.password=123456
 store.db.minConn=5
@@ -133,7 +133,7 @@ metrics.registryType=compact
 metrics.exporterList=prometheus
 metrics.exporterPrometheusPort=9898
 
-sh nacos-config.sh -h 192.168.10.200 -p 8848 -g SEATA_GROUP -t 7c67c02a-747b-40fd-ba79-57d6e92de1cd
+sh nacos-config.sh -h 127.0.0.1 -p 8848 -g SEATA_GROUP -t 7c67c02a-747b-40fd-ba79-57d6e92de1cd
 
 
 registry {
@@ -143,7 +143,7 @@ registry {
 
   nacos {
     application = "taotao-cloud-seata"
-    serverAddr = "192.168.10.200:8000"
+    serverAddr = "127.0.0.1:8000"
     group = "SEATA_GROUP"
     namespace = "7c67c02a-747b-40fd-ba79-57d6e92de1cd"
     cluster = "taotao-cloud-seata-cluster"
@@ -197,7 +197,7 @@ config {
   type = "nacos"
 
   nacos {
-    serverAddr = "192.168.10.200:8000"
+    serverAddr = "127.0.0.1:8000"
     group = "SEATA_GROUP"
     namespace = "7c67c02a-747b-40fd-ba79-57d6e92de1cd"
     username = "nacos"
@@ -241,7 +241,7 @@ services:
       - /root/seata/registry.conf:/seata-server/resources/registry.conf
     environment:
       SEATA_PORT: 8091
-      SEATA_IP: 192.168.10.200
+      SEATA_IP: 127.0.0.1
   seata2:
     container_name: seata2
     image: seataio/seata-server:1.4.2
@@ -253,7 +253,7 @@ services:
       - /root/seata/registry.conf:/seata-server/resources/registry.conf
     environment:
       SEATA_PORT: 8092
-      SEATA_IP: 192.168.10.200
+      SEATA_IP: 127.0.0.1
   seata3:
     container_name: seata3
     image: seataio/seata-server:1.4.2
@@ -265,4 +265,4 @@ services:
       - /root/seata/registry.conf:/seata-server/resources/registry.conf
     environment:
       SEATA_PORT: 8093
-      SEATA_IP: 192.168.10.200
+      SEATA_IP: 127.0.0.1

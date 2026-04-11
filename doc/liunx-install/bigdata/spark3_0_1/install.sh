@@ -31,24 +31,24 @@ spark.eventLog.compress true
 # 该目录需要事先在hdfs上创建好
 spark.eventLog.dir hdfs://127.0.0.1:8020/spark/historylog
 
-cp slaves.template slaves && vim slaves && 192.168.10.200
+cp slaves.template slaves && vim slaves && 127.0.0.1
 # 日志配置
 cp log4j.properties.template log4j.properties
 
 # 测试
-spark-shell --master spark://192.168.10.200:7077
+spark-shell --master spark://127.0.0.1:7077
 spark-shell \
   --jars /opt/github/hudi-release-0.8.0/packaging/hudi-spark-bundle/target/hudi-spark3-bundle_2.12-0.8.0.jar \
   --conf 'spark.serializer=org.apache.spark.serializer.KryoSerializer'
 
-192.168.10.200.:8080
-192.168.10.200.:18080
-192.168.10.200.:8088
-192.168.10.200.:4040
+127.0.0.1.:8080
+127.0.0.1.:18080
+127.0.0.1.:8088
+127.0.0.1.:4040
 
 #########  测试
 -- master local[2]
--- master spark://192.168.10.200:7077
+-- master spark://127.0.0.1:7077
 -- master yarn
 
 --deploy-mode client
@@ -56,7 +56,7 @@ spark-shell \
 
 ./bin/spark-submit \
     --class org.apache.spark.examples.SparkPi \
-    --master spark://192.168.10.200:7077 \
+    --master spark://127.0.0.1:7077 \
     --deploy-mode client \
     --driver-memory 4g \
     --executor-memory 2g \

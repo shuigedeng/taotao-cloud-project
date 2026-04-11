@@ -33,7 +33,7 @@ import org.apache.hadoop.io.Text;
  * 5.在select中使用lower_udf()；
  * <p>
  * Hive中永久注册UDF create function hive.zodiac as 'mastercom.hive.udf.ZodiacUDF' using jar
- * 'hdfs://192.168.10.2001:8020/script/HiveUDF.jar';
+ * 'hdfs://127.0.0.11:8020/script/HiveUDF.jar';
  *
  * @author shuigedeng
  * @version 2022.04
