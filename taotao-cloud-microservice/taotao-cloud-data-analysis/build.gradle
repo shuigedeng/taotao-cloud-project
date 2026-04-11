@@ -15,7 +15,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-web"
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
     //https://search.maven.org/artifact/com.clickhouse/clichouse-jdbc
-    implementation('com.clickhouse:clickhouse-jdbc:0.9.6') {
+    implementation('com.clickhouse:clickhouse-jdbc:0.9.8') {
         exclude group: 'at.yawk.lz4', module: 'lz4-java'
     }
 
@@ -30,7 +30,7 @@ dependencies {
     //https://search.maven.org/artifact/com.google.guava/guava
     implementation "com.google.guava:guava:33.5.0-jre"
     //https://search.maven.org/artifact/tools.jackson.core/jackson-annotations
-    implementation "com.fasterxml.jackson.core:jackson-annotations:2.20"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:2.21"
 
     //https://search.maven.org/artifact/org.apache.hbase/hbase-client
     //implementation 'org.apache.hbase:hbase-client:2.5.9-hadoop3'
@@ -73,7 +73,7 @@ configurations {
             force 'org.antlr:antlr4:4.13.2'
             force 'net.minidev:json-smart:2.6.0'
             //todo 临时使用
-            force "io.opentelemetry:opentelemetry-api-incubator:1.60.1-alpha"
+            force "io.opentelemetry:opentelemetry-api-incubator:1.61.0-alpha"
         }
 
         //exclude group: "log4j", module: "log4j"

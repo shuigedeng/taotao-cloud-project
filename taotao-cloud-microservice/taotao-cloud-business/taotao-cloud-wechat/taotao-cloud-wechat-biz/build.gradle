@@ -26,7 +26,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
     implementation "io.github.shuigedeng:taotao-boot-starter-ddd"
     // 小程序开发
-    //https://search.maven.org/artifact/com.github.binarywang/wx-java-miniapp-spring-boot-starter
+    //https://search.maven.org/artifact/com.github.binarywnang/wx-java-miniapp-spring-boot-starter
     implementation "com.github.binarywang:wx-java-miniapp-spring-boot-starter:4.8.2.B"
     implementation "com.github.binarywang:wx-java-miniapp-multi-spring-boot-starter:4.8.2.B"
     // 公众号开发

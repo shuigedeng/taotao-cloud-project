@@ -16,8 +16,6 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
     
-    
-
     //boot
     implementation "io.github.shuigedeng:taotao-boot-starter-seata"
     implementation "io.github.shuigedeng:taotao-boot-starter-sentinel"
@@ -29,7 +27,6 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-grpc"
     implementation "io.github.shuigedeng:taotao-boot-starter-lock"
     implementation "io.github.shuigedeng:taotao-boot-starter-dingtalk"
-    //implementation "io.github.shuigedeng:taotao-boot-starter-rxjava"
     implementation "io.github.shuigedeng:taotao-boot-starter-oss-minio"
     implementation "io.github.shuigedeng:taotao-boot-starter-elk"
     implementation "io.github.shuigedeng:taotao-boot-starter-job-elastic"
@@ -82,10 +79,10 @@ dependencies {
     //https://search.maven.org/artifact/org.freemarker/freemarker
     implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 
-    implementation 'org.zalando:logbook-spring-boot-starter:4.0.2'
-    implementation 'org.zalando:logbook-httpclient5:4.0.2'
-    implementation 'org.zalando:logbook-netty:4.0.2'
-    //implementation 'org.zalando:logbook-spring-webflux:4.0.2'
+    implementation 'org.zalando:logbook-spring-boot-starter:4.0.3'
+    implementation 'org.zalando:logbook-httpclient5:4.0.3'
+    implementation 'org.zalando:logbook-netty:4.0.3'
+    //implementation 'org.zalando:logbook-spring-webflux:4.0.3'
 
     //implementation "io.github.shuigedeng:taotao-boot-starter-processor")
     //annotationProcessor "io.github.shuigedeng:taotao-boot-starter-processor")
@@ -107,7 +104,7 @@ dependencies {
     //implementation "com.github.javaparser:javaparser-symbol-solver-core:3.15.21"
     //implementation "com.esotericsoftware:kryo:4.0.0"
     //implementation "com.caucho:hessian:4.0.38"
-    //implementation "redis.clients:jedis:7.3.0"
+    //implementation "redis.clients:jedis:7.4.1"
     //implementation "com.jianggujin:IKAnalyzer-lucene:8.0.0"
     //implementation "org.lionsoul:jcseg-core:1.9.9"
     //implementation "org.apache.lucene:lucene-analyzers-common:4.2.0"
@@ -121,7 +118,7 @@ dependencies {
     //implementation "org.apache.lucene:lucene-analyzers-common:4.2.0"
     //implementation "commons-dbutils:commons-dbutils:1.5"
     //implementation "com.github.jsqlparser:jsqlparser:4.9"
-    //implementation "com.alibaba:druid:1.2.27"
+    //implementation "com.alibaba:druid:1.2.28"
     //implementation("org.springframework.boot:spring-boot-starter-freemarker") {
     //    exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
     //}
@@ -153,7 +150,7 @@ configurations {
             force 'org.antlr:antlr4:4.13.2'
             force 'net.minidev:json-smart:2.6.0'
             //todo 临时使用
-            force "io.opentelemetry:opentelemetry-api-incubator:1.60.1-alpha"
+            force "io.opentelemetry:opentelemetry-api-incubator:1.61.0-alpha"
             force 'org.apache.logging.log4j:log4j-core:2.25.3'
         }
 

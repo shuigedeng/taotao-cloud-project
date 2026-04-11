@@ -28,7 +28,7 @@ dependencies {
     implementation "org.mybatis:mybatis-spring:4.0.0"
     implementation "com.mysql:mysql-connector-j"
     implementation "com.xuxueli:xxl-job-core"
-    implementation "com.xuxueli:xxl-sso-core:2.3.2"
+    implementation "com.xuxueli:xxl-sso-core:2.4.0"
 
     implementation "com.google.protobuf:protobuf-java:4.34.0"
     implementation "com.google.protobuf:protobuf-java-util:4.34.0"
@@ -49,7 +49,7 @@ configurations {
 
         resolutionStrategy {
             //force "org.codehaus.groovy:groovy:3.0.25"
-            //force "com.alibaba.nacos:nacos-client:3.2.0"
+            //force "com.alibaba.nacos:nacos-client:3.2.1-2026.04.03"
             force "com.google.protobuf:protobuf-java:4.34.0"
             force "com.google.protobuf:protobuf-java-util:4.34.0"
         }

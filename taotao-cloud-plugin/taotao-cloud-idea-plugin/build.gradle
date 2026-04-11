@@ -60,7 +60,7 @@ plugins {
     id "java"
     //https://plugins.gradle.org/plugin/org.jetbrains.intellij.platform
     //https://plugins.jetbrains.com/docs/intellij/tools-intel11lij-platform-gradle-plugin.html
-    id("org.jetbrains.intellij.platform") version "2.13.1"
+    id("org.jetbrains.intellij.platform") version "2.14.0"
 }
 
 repositories {
@@ -75,6 +75,16 @@ repositories {
 }
 
 apply plugin: "java"
+
+java {
+    /* 指定jdk版本 */
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
+
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
 
 dependencies {
     intellijPlatform {
