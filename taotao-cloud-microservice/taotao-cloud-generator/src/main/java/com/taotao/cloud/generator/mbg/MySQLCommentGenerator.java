@@ -19,10 +19,12 @@ package com.taotao.cloud.generator.mbg;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
+import java.util.Set;
 
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.Field;
+import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.internal.DefaultCommentGenerator;
@@ -58,7 +60,7 @@ public class MySQLCommentGenerator extends DefaultCommentGenerator {
 		String dateFormat = properties.getProperty("dateFormat", "yyyy-MM-dd");
 		SimpleDateFormat dateFormatter = new SimpleDateFormat(dateFormat);
 		// 获取表注释
-		String remarks = introspectedTable.getRemarks();
+		String remarks = introspectedTable.getRemarks().get();
 		topLevelClass.addJavaDocLine("/**");
 		topLevelClass.addJavaDocLine(" * " + remarks);
 		topLevelClass.addJavaDocLine(" *");
@@ -71,12 +73,10 @@ public class MySQLCommentGenerator extends DefaultCommentGenerator {
 	 * 重写给实体类字段加的注释
 	 */
 	@Override
-	public void addFieldComment(
-		Field field,
-		IntrospectedTable introspectedTable,
-		IntrospectedColumn introspectedColumn ) {
+	public void addFieldAnnotation(Field field, IntrospectedTable introspectedTable,
+		IntrospectedColumn introspectedColumn, Set<FullyQualifiedJavaType> imports ) {
 		// 获取列注释
-		String remarks = introspectedColumn.getRemarks();
+		String remarks = introspectedColumn.getRemarks().get();
 		field.addJavaDocLine("/**");
 		field.addJavaDocLine(" * " + remarks);
 		field.addJavaDocLine(" */");
@@ -86,12 +86,10 @@ public class MySQLCommentGenerator extends DefaultCommentGenerator {
 	 * 重写给实体类get方法加的注释
 	 */
 	@Override
-	public void addGetterComment(
-		Method method,
-		IntrospectedTable introspectedTable,
-		IntrospectedColumn introspectedColumn ) {
+	public void addGeneralMethodAnnotation(Method method, IntrospectedTable introspectedTable,
+		IntrospectedColumn introspectedColumn, Set<FullyQualifiedJavaType> imports ) {
 		// 获取表注释
-		String remarks = introspectedColumn.getRemarks();
+		String remarks = introspectedColumn.getRemarks().get();
 		method.addJavaDocLine("/**");
 		method.addJavaDocLine(" * " + method.getName());
 		method.addJavaDocLine(" */");

@@ -50,34 +50,6 @@ public class CommentGenerator extends DefaultCommentGenerator {
     }
 
     /**
-     * 给字段添加注释
-     */
-    @Override
-    public void addFieldComment(
-            Field field,
-            IntrospectedTable introspectedTable,
-            IntrospectedColumn introspectedColumn) {
-        String remarks = introspectedColumn.getRemarks();
-        // 根据参数和备注信息判断是否添加swagger注解信息
-        if (addRemarkComments && StringUtility.stringHasValue(remarks)) {
-            // addFieldJavaDoc(field, remarks);
-            // 数据库中特殊字符需要转义
-            if (remarks.contains("\"")) {
-                remarks = remarks.replace("\"", "'");
-            }
-            // A 给model的字段添加swagger注解
-            field.addJavaDocLine("@ApiModelProperty(value = \"" + remarks + "\")");
-            LogUtils.info(String.valueOf(field.getType()));
-        }
-
-        // B 给时间字段规定格式
-        if (field.getType().equals(FullyQualifiedJavaType.getDateInstance())) {
-            field.addJavaDocLine(
-                    "@JsonFormat(pattern = \"yyyy-MM-dd HH:mm:ss\",timezone = \"GMT+8\")");
-        }
-    }
-
-    /**
      * 给model的字段添加注释
      */
     private void addFieldJavaDoc(Field field, String remarks) {
@@ -88,7 +60,7 @@ public class CommentGenerator extends DefaultCommentGenerator {
         for (String remarkLine : remarkLines) {
             field.addJavaDocLine(" * " + remarkLine);
         }
-        addJavadocTag(field, false);
+        //addJavadocTag(field, false);
         field.addJavaDocLine(" */");
     }
 
@@ -121,7 +93,7 @@ public class CommentGenerator extends DefaultCommentGenerator {
         if (count <= 0L) {
             return;
         }
-        String remarks = introspectedColumn.getRemarks();
+        String remarks = introspectedColumn.getRemarks().get();
         // 根据参数和备注信息判断是否添加备注信息
         if (StringUtility.stringHasValue(remarks)) {
             // 数据库中特殊字符需要转义
@@ -131,5 +103,24 @@ public class CommentGenerator extends DefaultCommentGenerator {
             // 给model的字段添加swagger注解
             field.addJavaDocLine("@ApiModelProperty(value = \"" + remarks + "\")");
         }
+
+
+		// 根据参数和备注信息判断是否添加swagger注解信息
+		if (addRemarkComments && StringUtility.stringHasValue(remarks)) {
+			// addFieldJavaDoc(field, remarks);
+			// 数据库中特殊字符需要转义
+			if (remarks.contains("\"")) {
+				remarks = remarks.replace("\"", "'");
+			}
+			// A 给model的字段添加swagger注解
+			field.addJavaDocLine("@ApiModelProperty(value = \"" + remarks + "\")");
+			LogUtils.info(String.valueOf(field.getType()));
+		}
+
+		// B 给时间字段规定格式
+		if (field.getType().equals(FullyQualifiedJavaType.getDateInstance())) {
+			field.addJavaDocLine(
+				"@JsonFormat(pattern = \"yyyy-MM-dd HH:mm:ss\",timezone = \"GMT+8\")");
+		}
     }
 }

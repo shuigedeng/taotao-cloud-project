@@ -46,22 +46,19 @@ public class MybatisGenerator {
             InvalidConfigurationException,
             SQLException,
             InterruptedException {
-        // MBG 执行过程中的警告信息
-        List<String> warnings = new ArrayList<>();
         // 读取我们的 MBG 配置文件
         InputStream is =
                 MybatisGenerator.class.getResourceAsStream(
                         "src/main/resources/mybatisGenerator/generatorConfiguration.xml");
-        ConfigurationParser cp = new ConfigurationParser(warnings);
+        ConfigurationParser cp = new ConfigurationParser();
         Configuration config = cp.parseConfiguration(is);
         is.close();
         // 当生成的代码重复时，覆盖原代码
-        DefaultShellCallback callback = new DefaultShellCallback(true);
-        // 创建 MBG
-        MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
+        DefaultShellCallback callback = new DefaultShellCallback();
+		MyBatisGenerator myBatisGenerator = new MyBatisGenerator.Builder().withShellCallback(callback).withConfiguration(config).build();
         // 执行生成代码
-        myBatisGenerator.generate(null);
-        // 输出警告信息
+		List<String> warnings = myBatisGenerator.generateAndWrite();
+		// 输出警告信息
         for (String warning : warnings) {
             LogUtils.info(warning);
         }
