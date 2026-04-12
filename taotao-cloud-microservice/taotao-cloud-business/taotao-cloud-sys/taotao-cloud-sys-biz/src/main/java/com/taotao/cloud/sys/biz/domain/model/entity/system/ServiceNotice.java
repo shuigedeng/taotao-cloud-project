@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.domain.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -37,7 +37,7 @@ import java.util.Objects;
 @Table(name = ServiceNotice.TABLE_NAME)
 @TableName(ServiceNotice.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = ServiceNotice.TABLE_NAME, comment = "服务订阅消息表")
-public class ServiceNotice extends BaseSuperEntity<ServiceNotice, Long> {
+public class ServiceNotice extends BasePO<ServiceNotice> {
 
     public static final String TABLE_NAME = "tt_service_notice";
 

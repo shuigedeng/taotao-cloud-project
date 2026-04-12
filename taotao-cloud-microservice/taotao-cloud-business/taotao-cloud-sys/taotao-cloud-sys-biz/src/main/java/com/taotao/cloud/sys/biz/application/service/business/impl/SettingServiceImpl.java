@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.application.service.business.impl;
 
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.sys.biz.application.service.business.ISettingService;
 import com.taotao.cloud.sys.biz.mapper.ISettingMapper;
 import com.taotao.cloud.sys.biz.model.entity.setting.Setting;
@@ -37,7 +37,7 @@ import org.springframework.stereotype.Service;
 @Service
 @CacheConfig(cacheNames = "{setting}")
 public class SettingServiceImpl
-        extends BaseSuperServiceImpl< Setting, Long, ISettingMapper,SettingRepository, ISettingRepository>
+        extends BaseServiceImpl< Setting, Long, ISettingMapper,SettingRepository, ISettingRepository>
         implements ISettingService {
 
     @Override

@@ -23,7 +23,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.sys.biz.application.service.business.IUserRelationService;
 import com.taotao.cloud.sys.biz.application.service.business.IUserService;
 import com.taotao.cloud.sys.biz.manager.UserManager;
@@ -49,7 +49,7 @@ import java.util.*;
  */
 @Service
 @AllArgsConstructor
-public class UserServiceImpl extends BaseSuperServiceImpl< User, Long,IUserMapper, UserRepository, IUserRepository>
+public class UserServiceImpl extends BaseServiceImpl< User, Long,IUserMapper, UserRepository, IUserRepository>
 	implements IUserService {
 
 	private static final QUser USER = QUser.user;

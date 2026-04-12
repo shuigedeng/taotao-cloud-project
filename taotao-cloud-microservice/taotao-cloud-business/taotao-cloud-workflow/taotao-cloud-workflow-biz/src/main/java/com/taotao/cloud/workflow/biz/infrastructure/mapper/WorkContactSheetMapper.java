@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.workflow.biz.infrastructure.entity.WorkContactSheetEntity;
 
 /** 工作联系单 */
-public interface WorkContactSheetMapper extends MpSuperMapper<WorkContactSheetEntity> {}
+public interface WorkContactSheetMapper extends BaseMapper<WorkContactSheetEntity> {}

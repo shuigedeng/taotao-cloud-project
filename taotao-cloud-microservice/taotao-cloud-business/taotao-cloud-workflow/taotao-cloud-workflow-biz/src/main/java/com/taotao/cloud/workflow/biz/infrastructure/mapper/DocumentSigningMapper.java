@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.workflow.biz.infrastructure.entity.DocumentSigningEntity;
 
 /** 文件签阅表 */
-public interface DocumentSigningMapper extends MpSuperMapper<DocumentSigningEntity> {}
+public interface DocumentSigningMapper extends BaseMapper<DocumentSigningEntity> {}

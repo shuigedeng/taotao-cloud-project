@@ -17,7 +17,7 @@
 package com.taotao.cloud.promotion.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -43,7 +43,7 @@ import java.util.Objects;
 @Table(name = CouponActivityItem.TABLE_NAME)
 @TableName(CouponActivityItem.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = CouponActivityItem.TABLE_NAME, comment = "优惠券活动-优惠券关联实体类")
-public class CouponActivityItem extends BaseSuperEntity<CouponActivityItem, Long> {
+public class CouponActivityItem extends BasePO<CouponActivityItem> {
 
     public static final String TABLE_NAME = "tt_coupon_activity_item";
     /** 优惠券活动ID */

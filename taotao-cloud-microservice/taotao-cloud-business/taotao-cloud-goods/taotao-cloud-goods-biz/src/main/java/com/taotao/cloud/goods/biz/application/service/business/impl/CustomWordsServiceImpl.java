@@ -23,7 +23,7 @@ import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.model.ddd.query.PageQuery;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.common.utils.servlet.RequestUtils;
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.goods.biz.application.service.business.CustomWordsService;
 import com.taotao.cloud.goods.biz.mapper.CustomWordsMapper;
 import com.taotao.cloud.goods.biz.model.convert.CustomWordsConvert;
@@ -46,7 +46,7 @@ import java.util.List;
  */
 @Service
 public class CustomWordsServiceImpl
-        extends BaseSuperServiceImpl<CustomWords, Long, CustomWordsMapper, CustomWordsRepository, CustomWordsRepository>
+        extends BaseServiceImpl<CustomWords, Long, CustomWordsMapper, CustomWordsRepository, CustomWordsRepository>
         implements CustomWordsService {
 
     @Override

@@ -19,7 +19,7 @@ package com.taotao.cloud.operation.biz.infrastructure.mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.operation.api.model.vo.PageDataListVO;
 import com.taotao.cloud.operation.api.model.vo.PageDataVO;
 import com.taotao.cloud.operation.biz.model.entity.PageData;
@@ -27,7 +27,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /** 楼层装修设置数据处理层 */
-public interface PageDataMapper extends MpSuperMapper<PageData, Long> {
+public interface PageDataMapper extends BaseMapper<PageData> {
 
     /**
      * 获取页面数据VO

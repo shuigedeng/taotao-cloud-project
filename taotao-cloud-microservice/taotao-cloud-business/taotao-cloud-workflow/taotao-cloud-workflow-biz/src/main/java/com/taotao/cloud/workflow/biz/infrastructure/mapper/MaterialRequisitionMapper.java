@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.workflow.biz.infrastructure.entity.MaterialRequisitionEntity;
 
 /** 领料单 */
-public interface MaterialRequisitionMapper extends MpSuperMapper<MaterialRequisitionEntity> {}
+public interface MaterialRequisitionMapper extends BaseMapper<MaterialRequisitionEntity> {}

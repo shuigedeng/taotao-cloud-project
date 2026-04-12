@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.application.service.business.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.sys.biz.application.service.business.IRoleResourceService;
 import com.taotao.cloud.sys.biz.mapper.IRoleResourceMapper;
 import com.taotao.cloud.sys.biz.model.entity.system.QRoleResource;
@@ -38,8 +38,8 @@ import java.util.Set;
 @Service
 @AllArgsConstructor
 public class RoleResourceServiceImpl
-        extends BaseSuperServiceImpl<
-                 RoleResource, Long,IRoleResourceMapper, RoleResourceRepository, IRoleResourceRepository>
+        extends BaseServiceImpl<
+                         RoleResource, Long,IRoleResourceMapper, RoleResourceRepository, IRoleResourceRepository>
         implements IRoleResourceService {
 
     private static final QRoleResource ROLE_RESOURCE = QRoleResource.roleResource;

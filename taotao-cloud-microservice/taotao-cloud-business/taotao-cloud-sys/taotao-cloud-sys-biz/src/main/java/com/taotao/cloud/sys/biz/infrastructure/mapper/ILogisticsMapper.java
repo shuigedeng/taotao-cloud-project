@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.sys.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
-import com.taotao.cloud.sys.biz.model.entity.config.LogisticsConfig;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
+import com.taotao.cloud.sys.biz.domain.model.entity.config.LogisticsConfig;
 
 /**
  * ILogisticsMapper
@@ -26,4 +26,4 @@ import com.taotao.cloud.sys.biz.model.entity.config.LogisticsConfig;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface ILogisticsMapper extends MpSuperMapper<LogisticsConfig, Long> {}
+public interface ILogisticsMapper extends BaseMapper<LogisticsConfig> {}

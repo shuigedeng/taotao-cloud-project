@@ -17,7 +17,7 @@
 package com.taotao.cloud.store.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.boot.webagg.entity.JpaEntityListener;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -47,7 +47,7 @@ import java.util.Objects;
 @TableName(FreightTemplateChild.TABLE_NAME)
 @EntityListeners({JpaEntityListener.class})
 @org.springframework.data.relational.core.mapping.Table(name = FreightTemplateChild.TABLE_NAME, comment = "运费模板子配置表")
-public class FreightTemplateChild extends BaseSuperEntity<FreightTemplateChild, String> {
+public class FreightTemplateChild extends BasePO<FreightTemplateChild, String> {
 
     public static final String TABLE_NAME = "tt_freight_template_child";
 

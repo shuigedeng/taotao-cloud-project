@@ -31,7 +31,7 @@ import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.enums.UserEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.security.spring.support.utils.SecurityUtils;
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.biz.application.service.business.*;
@@ -85,7 +85,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Service
 public class GoodsSkuServiceImpl
-        extends BaseSuperServiceImpl<GoodsSku, Long, GoodsSkuMapper, GoodsSkuRepository, GoodsSkuRepository>
+        extends BaseServiceImpl<GoodsSku, Long, GoodsSkuMapper, GoodsSkuRepository, GoodsSkuRepository>
         implements GoodsSkuService {
 
     private final GoodsSkuManager goodsSkuManager;

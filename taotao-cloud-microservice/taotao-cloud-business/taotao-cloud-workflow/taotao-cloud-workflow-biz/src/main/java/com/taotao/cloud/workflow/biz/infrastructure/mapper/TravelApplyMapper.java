@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.workflow.biz.infrastructure.entity.TravelApplyEntity;
 
 /** 出差预支申请单 */
-public interface TravelApplyMapper extends MpSuperMapper<TravelApplyEntity> {}
+public interface TravelApplyMapper extends BaseMapper<TravelApplyEntity> {}

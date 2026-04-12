@@ -17,7 +17,7 @@
 package com.taotao.cloud.wechat.biz.infrastructure.niefy.modules.sys.dao;
 
 import com.github.niefy.modules.sys.entity.SysRoleMenuEntity;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -30,7 +30,7 @@ import java.util.List;
  */
 @Mapper
 @CacheNamespace(flushInterval = 300000L) // 缓存五分钟过期
-public interface SysRoleMenuDao extends MpSuperMapper<SysRoleMenuEntity> {
+public interface SysRoleMenuDao extends BaseMapper<SysRoleMenuEntity> {
 
     /** 根据角色ID，获取菜单ID列表 */
     List<Long> queryMenuIdList(Long roleId);

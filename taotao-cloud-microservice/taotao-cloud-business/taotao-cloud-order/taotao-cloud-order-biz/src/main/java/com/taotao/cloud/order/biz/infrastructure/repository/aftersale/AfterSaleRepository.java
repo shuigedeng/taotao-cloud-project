@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.biz.infrastructure.repository.aftersale;
 
-import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.BaseRepository;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
 
 /**
@@ -24,4 +24,4 @@ import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
  *
  * @author shuigedeng
  */
-public interface AfterSaleRepository extends JpaSuperRepository<AfterSale, Long> {}
+public interface AfterSaleRepository extends BaseRepository<AfterSale> {}

@@ -29,7 +29,7 @@ import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.security.spring.model.SecurityUser;
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.biz.application.service.business.CategoryService;
@@ -77,7 +77,7 @@ import java.util.Objects;
  */
 @Service
 @AllArgsConstructor
-public class GoodsServiceImpl extends BaseSuperServiceImpl< Goods, Long, GoodsMapper, GoodsRepository, GoodsRepository>
+public class GoodsServiceImpl extends BaseServiceImpl< Goods, Long, GoodsMapper, GoodsRepository, GoodsRepository>
         implements GoodsService {
     private final GoodsManager goodsManager;
 

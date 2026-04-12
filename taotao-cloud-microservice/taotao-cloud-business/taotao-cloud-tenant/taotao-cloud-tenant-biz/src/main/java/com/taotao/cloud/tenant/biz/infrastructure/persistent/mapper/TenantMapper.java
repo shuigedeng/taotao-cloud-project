@@ -16,10 +16,9 @@
 
 package com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.tenant.biz.domain.aggregate.TenantAgg;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface TenantMapper extends MpSuperMapper<TenantAgg, Long> {}
+public interface TenantMapper extends BaseMapper<TenantAgg> {}

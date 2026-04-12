@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.application.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.goods.biz.model.entity.CustomWords;
 import com.taotao.cloud.goods.biz.model.vo.CustomWordsVO;
 
@@ -30,7 +30,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:59:50
  */
-public interface CustomWordsService extends BaseSuperService<CustomWords, Long> {
+public interface CustomWordsService extends BaseService<CustomWords, Long> {
 
 	/**
 	 * 自定义分词部署替换

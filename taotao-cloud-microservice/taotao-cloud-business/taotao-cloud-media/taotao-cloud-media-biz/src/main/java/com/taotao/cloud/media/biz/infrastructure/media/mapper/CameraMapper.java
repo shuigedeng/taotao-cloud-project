@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.media.biz.infrastructure.media.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.media.biz.infrastructure.media.entity.Camera;
 
-public interface CameraMapper extends MpSuperMapper<Camera> {
+public interface CameraMapper extends BaseMapper<Camera> {
 
     //	@Select("select id from camera")
     //	List<Camera> listCamera();

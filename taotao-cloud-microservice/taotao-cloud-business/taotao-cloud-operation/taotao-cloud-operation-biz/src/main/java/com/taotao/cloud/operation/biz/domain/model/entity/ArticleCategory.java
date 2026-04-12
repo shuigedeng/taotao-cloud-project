@@ -17,7 +17,7 @@
 package com.taotao.cloud.operation.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.operation.api.enums.ArticleCategoryEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,7 +45,7 @@ import java.util.Objects;
 @Table(name = ArticleCategory.TABLE_NAME)
 @TableName(ArticleCategory.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = ArticleCategory.TABLE_NAME, comment = "文章分类表")
-public class ArticleCategory extends BaseSuperEntity<ArticleCategory, Long> {
+public class ArticleCategory extends BasePO<ArticleCategory> {
 
     public static final String TABLE_NAME = "tt_article_category";
     /** 分类名称 */

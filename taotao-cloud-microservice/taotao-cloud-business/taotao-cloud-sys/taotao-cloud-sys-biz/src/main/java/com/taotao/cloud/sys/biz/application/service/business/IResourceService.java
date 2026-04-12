@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.application.service.business;
 
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRpcRequest;
 import com.taotao.cloud.sys.biz.model.bo.MenuBO;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
@@ -33,7 +33,7 @@ import java.util.Set;
  * @version 2021.10
  * @since 2021-10-09 20:38:19
  */
-public interface IResourceService extends BaseSuperService<Resource, Long> {
+public interface IResourceService extends BaseService<Resource, Long> {
 
     /**
      * 查询所有菜单列表

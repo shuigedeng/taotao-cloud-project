@@ -17,7 +17,7 @@
 package com.taotao.cloud.promotion.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,7 +45,7 @@ import java.util.Objects;
 @Table(name = KanjiaActivity.TABLE_NAME)
 @TableName(KanjiaActivity.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = KanjiaActivity.TABLE_NAME, comment = "砍价活动参与实体类")
-public class KanjiaActivity extends BaseSuperEntity<KanjiaActivity, Long> {
+public class KanjiaActivity extends BasePO<KanjiaActivity> {
 
     public static final String TABLE_NAME = "tt_kanjia_activity";
     /** 砍价商品id */

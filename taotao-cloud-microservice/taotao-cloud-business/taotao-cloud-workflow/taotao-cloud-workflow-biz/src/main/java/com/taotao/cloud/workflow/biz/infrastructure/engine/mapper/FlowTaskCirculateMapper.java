@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.engine.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.workflow.biz.infrastructure.engine.entity.FlowTaskCirculateEntity;
 
 /** 流程传阅 */
-public interface FlowTaskCirculateMapper extends MpSuperMapper<FlowTaskCirculateEntity, String> {}
+public interface FlowTaskCirculateMapper extends BaseMapper<FlowTaskCirculateEntity, String> {}

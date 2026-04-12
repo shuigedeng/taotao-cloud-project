@@ -16,11 +16,11 @@
 
 package com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.tenant.biz.domain.entity.TenantPackageEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface TenantPackageMapper extends MpSuperMapper<TenantPackageEntity, Long> {
+public interface TenantPackageMapper extends BaseMapper<TenantPackageEntity> {
 
 }

@@ -19,7 +19,7 @@ package com.taotao.cloud.goods.biz.infrastructure.mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.goods.biz.model.entity.Commodity;
 import com.taotao.cloud.goods.biz.model.vo.CommoditySkuVO;
 import org.apache.ibatis.annotations.Param;
@@ -34,7 +34,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:55:41
  */
-public interface CommodityMapper extends MpSuperMapper<Commodity, Long> {
+public interface CommodityMapper extends BaseMapper<Commodity> {
 
     /**
      * 获取直播商品ID列表

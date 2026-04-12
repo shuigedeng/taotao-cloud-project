@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.distribution.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionCash;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.distribution.biz.model.entity.DistributionCash;
  * @version 2022.04
  * @since 2022-04-22 11:28:24
  */
-public interface DistributionCashMapper extends MpSuperMapper<DistributionCash, Long> {}
+public interface DistributionCashMapper extends BaseMapper<DistributionCash> {}

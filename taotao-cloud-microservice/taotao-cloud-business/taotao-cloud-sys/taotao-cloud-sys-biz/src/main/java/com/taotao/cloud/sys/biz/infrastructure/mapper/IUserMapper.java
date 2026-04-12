@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -33,7 +33,7 @@ import java.util.List;
  * @since 2021/10/13 22:50
  */
 @Repository
-public interface IUserMapper extends MpSuperMapper<User, Long> {
+public interface IUserMapper extends BaseMapper<User> {
 
 
     /**

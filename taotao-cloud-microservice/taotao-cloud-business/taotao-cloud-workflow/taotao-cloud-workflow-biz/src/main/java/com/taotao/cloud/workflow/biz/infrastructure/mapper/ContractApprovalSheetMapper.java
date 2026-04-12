@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.workflow.biz.infrastructure.entity.ContractApprovalSheetEntity;
 
 /** 合同申请单表 */
-public interface ContractApprovalSheetMapper extends MpSuperMapper<ContractApprovalSheetEntity> {}
+public interface ContractApprovalSheetMapper extends BaseMapper<ContractApprovalSheetEntity> {}

@@ -26,7 +26,7 @@ import com.taotao.boot.common.enums.PromotionTypeEnum;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.model.ddd.query.PageQuery;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.model.page.BasePromotionsSearchQuery;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
@@ -51,7 +51,7 @@ import java.util.*;
  * @version 2022.04
  * @since 2022-04-27 16:44:46
  */
-public class AbstractPromotionsServiceImpl<M extends MpSuperMapper<T>, T extends BasePromotions<T, Long>>
+public class AbstractPromotionsServiceImpl<M extends BaseMapper<T>, T extends BasePromotions<T, Long>>
         extends ServiceImpl<M, T> implements AbstractPromotionsService<T> {
 
     /** 推广产品服务 促销商品 */

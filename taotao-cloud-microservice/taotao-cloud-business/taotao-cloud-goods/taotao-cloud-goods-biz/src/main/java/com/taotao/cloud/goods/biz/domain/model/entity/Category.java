@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -44,7 +44,7 @@ import java.util.Objects;
 @Table(name = Category.TABLE_NAME)
 @TableName(Category.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = Category.TABLE_NAME)
-public class Category extends BaseSuperEntity<Category, Long> {
+public class Category extends BasePO<Category> {
 
     public static final String TABLE_NAME = "tt_category";
 

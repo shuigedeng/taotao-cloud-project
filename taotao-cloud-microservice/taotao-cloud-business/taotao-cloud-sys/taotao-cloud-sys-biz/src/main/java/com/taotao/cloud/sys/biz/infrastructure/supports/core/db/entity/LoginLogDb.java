@@ -17,14 +17,13 @@
 package com.taotao.cloud.sys.biz.infrastructure.supports.core.db.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.log.biz.log.core.db.convert.LogConvert;
 import com.taotao.cloud.log.biz.log.dto.LoginLogDto;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -44,7 +43,7 @@ import lombok.Setter;
 @Table(name = LoginLogDb.TABLE_NAME)
 @TableName(LoginLogDb.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = LoginLogDb.TABLE_NAME, comment = "app配置表")
-public class LoginLogDb extends BaseSuperEntity<LoginLogDb, Long> {
+public class LoginLogDb extends BasePO<LoginLogDb> {
 
     public static final String TABLE_NAME = "tt_login_log";
 

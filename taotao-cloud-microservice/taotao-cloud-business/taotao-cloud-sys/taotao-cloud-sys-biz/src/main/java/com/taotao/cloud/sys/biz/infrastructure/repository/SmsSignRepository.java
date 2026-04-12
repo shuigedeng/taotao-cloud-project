@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.infrastructure.repository;
 
-import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.BaseRepository;
 import com.taotao.cloud.sys.biz.model.entity.sms.SmsSign;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.sys.biz.model.entity.sms.SmsSign;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface SmsSignRepository extends JpaSuperRepository<SmsSign, Long> {}
+public interface SmsSignRepository extends BaseRepository<SmsSign> {}

@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.domain.model.entity.order;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.order.api.enums.order.FlowTypeEnum;
 import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import jakarta.persistence.Column;
@@ -47,7 +47,7 @@ import java.util.Objects;
 @Table(name = StoreFlow.TABLE_NAME)
 @TableName(StoreFlow.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = StoreFlow.TABLE_NAME, comment = "商家订单流水表")
-public class StoreFlow extends BaseSuperEntity<StoreFlow, Long> {
+public class StoreFlow extends BasePO<StoreFlow> {
 
     public static final String TABLE_NAME = "tt_store_flow";
 

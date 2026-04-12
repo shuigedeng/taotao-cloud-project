@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.workflow.biz.infrastructure.entity.DebitBillEntity;
 
 /** 借支单 */
-public interface DebitBillMapper extends MpSuperMapper<DebitBillEntity> {}
+public interface DebitBillMapper extends BaseMapper<DebitBillEntity> {}

@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.domain.domain.model.entity.order;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -44,7 +44,7 @@ import java.util.Objects;
 @TableName(OrderRefundReqRecord.TABLE_NAME)
 @Table(name = OrderRefundReqRecord.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = OrderRefundReqRecord.TABLE_NAME, comment = "售后退款操作记录表")
-public class OrderRefundReqRecord extends BaseSuperEntity<OrderRefundReqRecord, Long> {
+public class OrderRefundReqRecord extends BasePO<OrderRefundReqRecord> {
 
     public static final String TABLE_NAME = "order_refund_req_record";
 

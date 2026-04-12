@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.application.service.business.impl;
 
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.sys.biz.application.service.business.ILogisticsService;
 import com.taotao.cloud.sys.biz.mapper.ILogisticsMapper;
 import com.taotao.cloud.sys.biz.model.entity.config.LogisticsConfig;
@@ -37,7 +37,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class LogisticsServiceImpl
-        extends BaseSuperServiceImpl<LogisticsConfig, Long, ILogisticsMapper, LogisticsRepository, ILogisticsRepository>
+        extends BaseServiceImpl<LogisticsConfig, Long, ILogisticsMapper, LogisticsRepository, ILogisticsRepository>
         implements ILogisticsService {
 
     @Override

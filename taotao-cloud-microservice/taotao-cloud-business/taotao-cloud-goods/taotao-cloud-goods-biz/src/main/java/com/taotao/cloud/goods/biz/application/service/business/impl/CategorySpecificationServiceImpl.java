@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.application.service.business.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.goods.biz.application.service.business.CategorySpecificationService;
 import com.taotao.cloud.goods.biz.mapper.CategorySpecificationMapper;
 import com.taotao.cloud.goods.biz.model.entity.CategorySpecification;
@@ -38,12 +38,12 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class CategorySpecificationServiceImpl
-	extends BaseSuperServiceImpl<
-	CategorySpecification,
-	Long,
-        CategorySpecificationMapper,
-	CategorySpecificationRepository,
-	CategorySpecificationRepository>
+	extends BaseServiceImpl<
+        CategorySpecification,
+        Long,
+            CategorySpecificationMapper,
+        CategorySpecificationRepository,
+        CategorySpecificationRepository>
 	implements CategorySpecificationService {
 
 	@Override

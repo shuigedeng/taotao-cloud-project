@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,7 +46,7 @@ import java.time.LocalDateTime;
 @Table(name = MemberWalletRecharge.TABLE_NAME)
 @TableName(MemberWalletRecharge.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = MemberWalletRecharge.TABLE_NAME, comment = "预存款充值记录表")
-public class MemberWalletRecharge extends BaseSuperEntity<MemberWalletRecharge, Long> {
+public class MemberWalletRecharge extends BasePO<MemberWalletRecharge> {
 
     public static final String TABLE_NAME = "tt_member_wallet_recharge";
 

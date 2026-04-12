@@ -19,7 +19,7 @@ package com.taotao.cloud.order.biz.infrastructure.mapper.aftersale;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.sys.model.vo.aftersale.AfterSaleVO;
 import org.apache.ibatis.annotations.Param;
@@ -30,7 +30,7 @@ import org.apache.ibatis.annotations.Select;
  *
  * @author shuigedeng
  */
-public interface AfterSaleMapper extends MpSuperMapper<AfterSale, Long> {
+public interface AfterSaleMapper extends BaseMapper<AfterSale> {
 
     /**
      * 获取售后VO分页

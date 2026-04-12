@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.application.service.business;
 
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.goods.biz.model.entity.Category;
 import com.taotao.cloud.goods.biz.model.vo.CategoryTreeVO;
 
@@ -30,7 +30,7 @@ import java.util.Map;
  * @version 2022.04
  * @since 2022-04-27 16:59:28
  */
-public interface CategoryService extends BaseSuperService<Category, Long> {
+public interface CategoryService extends BaseService<Category, Long> {
 
 	List<Category> childrenList(Long parentId);
 

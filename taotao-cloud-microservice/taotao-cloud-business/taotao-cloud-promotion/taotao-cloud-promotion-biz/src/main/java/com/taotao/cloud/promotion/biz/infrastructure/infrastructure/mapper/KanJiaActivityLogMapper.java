@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.promotion.biz.infrastructure.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityLog;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityLog;
  * @version 2022.04
  * @since 2022-04-27 16:36:55
  */
-public interface KanJiaActivityLogMapper extends MpSuperMapper<KanjiaActivityLog> {}
+public interface KanJiaActivityLogMapper extends BaseMapper<KanjiaActivityLog> {}

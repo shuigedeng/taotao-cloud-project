@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.domain.model.entity.order;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.order.api.enums.aftersale.ComplaintStatusEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -47,7 +47,7 @@ import java.util.Objects;
 @Table(name = OrderComplaint.TABLE_NAME)
 @TableName(OrderComplaint.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = OrderComplaint.TABLE_NAME, comment = "订单交易投诉表")
-public class OrderComplaint extends BaseSuperEntity<OrderComplaint, Long> {
+public class OrderComplaint extends BasePO<OrderComplaint> {
 
     public static final String TABLE_NAME = "tt_order_complaint";
 

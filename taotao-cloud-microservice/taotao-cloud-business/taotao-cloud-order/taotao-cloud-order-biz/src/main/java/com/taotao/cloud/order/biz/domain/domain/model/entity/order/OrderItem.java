@@ -20,7 +20,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.boot.common.utils.bean.BeanUtils;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
@@ -55,7 +55,7 @@ import java.util.Objects;
 @Table(name = OrderItem.TABLE_NAME)
 @TableName(OrderItem.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = OrderItem.TABLE_NAME, comment = "子订单表")
-public class OrderItem extends BaseSuperEntity<OrderItem, Long> {
+public class OrderItem extends BasePO<OrderItem> {
 
     public static final String TABLE_NAME = "tt_order_item";
 

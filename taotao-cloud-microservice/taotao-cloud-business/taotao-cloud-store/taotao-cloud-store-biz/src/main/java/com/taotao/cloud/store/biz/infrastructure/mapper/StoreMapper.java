@@ -19,7 +19,7 @@ package com.taotao.cloud.store.biz.infrastructure.mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.store.api.model.vo.StoreVO;
 import com.taotao.cloud.store.biz.model.entity.Store;
 import org.apache.ibatis.annotations.Param;
@@ -29,7 +29,7 @@ import org.apache.ibatis.annotations.Update;
 /**
  * 店铺数据处理层
  */
-public interface StoreMapper extends MpSuperMapper<Store, String> {
+public interface StoreMapper extends BaseMapper<Store, String> {
 
 	/**
 	 * 获取店铺详细

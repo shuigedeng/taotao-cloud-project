@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.workflow.biz.infrastructure.entity.ApplyMeetingEntity;
 
 /** 会议申请 */
-public interface ApplyMeetingMapper extends MpSuperMapper<ApplyMeetingEntity> {}
+public interface ApplyMeetingMapper extends BaseMapper<ApplyMeetingEntity> {}

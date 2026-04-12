@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.store.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.store.api.model.dto.StoreAfterSaleAddressDTO;
 import com.taotao.cloud.store.api.model.dto.StoreSettlementDay;
 import com.taotao.cloud.store.api.model.vo.StoreBasicInfoVO;
@@ -30,7 +30,7 @@ import org.apache.ibatis.annotations.Update;
 import java.util.List;
 
 /** 店铺详细数据处理层 */
-public interface StoreDetailMapper extends MpSuperMapper<StoreDetail, String> {
+public interface StoreDetailMapper extends BaseMapper<StoreDetail, String> {
 
     /**
      * 获取店铺详情VO

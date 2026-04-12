@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.application.service.business;
 
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.sys.biz.model.entity.region.Region;
 import com.taotao.cloud.sys.biz.model.vo.region.RegionParentVO;
 import com.taotao.cloud.sys.biz.model.vo.region.RegionTreeVO;
@@ -32,7 +32,7 @@ import java.util.Map;
  * @version 2022.08
  * @since 2022-08-10 10:24:46
  */
-public interface IRegionService extends BaseSuperService<Region, Long> {
+public interface IRegionService extends BaseService<Region, Long> {
 
     /**
      * queryRegionByParentId

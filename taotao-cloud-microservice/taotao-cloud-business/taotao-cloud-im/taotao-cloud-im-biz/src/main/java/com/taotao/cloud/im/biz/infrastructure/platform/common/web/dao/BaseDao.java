@@ -17,14 +17,14 @@
 package com.taotao.cloud.im.biz.infrastructure.platform.common.web.dao;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Collection;
 import java.util.List;
 
 /** Dao基类 */
-public interface BaseDao<T> extends MpSuperMapper<T> {
+public interface BaseDao<T> extends BaseMapper<T> {
 
     /**
      * 批量插入 仅适用于mysql

@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.domain.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.SuperEntity;
+import com.taotao.boot.webagg.entity.SuperPO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -42,7 +42,7 @@ import java.util.Objects;
 @Table(name = RoleResource.TABLE_NAME)
 @TableName(RoleResource.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = RoleResource.TABLE_NAME, comment = "角色-资源第三方表")
-public class RoleResource extends SuperEntity<RoleResource, Long> {
+public class RoleResource extends SuperPO<RoleResource, Long> {
 
     public static final String TABLE_NAME = "tt_role_resource";
 

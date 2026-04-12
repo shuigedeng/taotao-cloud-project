@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.operation.biz.application.service.dubbo;
 
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.sys.api.dubbo.IDubboDictItemService;
 import com.taotao.cloud.sys.biz.mapper.IDictItemMapper;
 import com.taotao.cloud.sys.biz.model.entity.dict.DictItem;
@@ -35,5 +35,5 @@ import org.springframework.stereotype.Service;
 @Service
 @DubboService(interfaceClass = IDubboDictItemService.class, validation = "true")
 public class DubboDictItemServiceImpl
-        extends BaseSuperServiceImpl<DictItem, Long, IDictItemMapper, DictItemRepository, IDictItemRepository>
+        extends BaseServiceImpl<DictItem, Long, IDictItemMapper, DictItemRepository, IDictItemRepository>
         implements IDubboDictItemService {}

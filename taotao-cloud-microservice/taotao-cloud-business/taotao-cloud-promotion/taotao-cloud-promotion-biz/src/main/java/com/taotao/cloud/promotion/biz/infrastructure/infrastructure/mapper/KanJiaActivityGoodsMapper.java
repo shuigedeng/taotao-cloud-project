@@ -19,7 +19,7 @@ package com.taotao.cloud.promotion.biz.infrastructure.infrastructure.mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.promotion.biz.model.bo.KanjiaActivityGoodsBO;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityGoods;
 import org.apache.ibatis.annotations.Param;
@@ -32,7 +32,7 @@ import org.apache.ibatis.annotations.Select;
  * @version 2022.04
  * @since 2022-04-27 16:36:49
  */
-public interface KanJiaActivityGoodsMapper extends MpSuperMapper<KanjiaActivityGoods, Long> {
+public interface KanJiaActivityGoodsMapper extends BaseMapper<KanjiaActivityGoods> {
 
     /**
      * 获取砍价商品VO分页

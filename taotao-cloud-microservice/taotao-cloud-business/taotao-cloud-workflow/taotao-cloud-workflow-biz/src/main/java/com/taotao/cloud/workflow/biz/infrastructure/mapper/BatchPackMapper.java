@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.workflow.biz.infrastructure.entity.BatchPackEntity;
 
 /** 批包装指令 */
-public interface BatchPackMapper extends MpSuperMapper<BatchPackEntity> {}
+public interface BatchPackMapper extends BaseMapper<BatchPackEntity> {}

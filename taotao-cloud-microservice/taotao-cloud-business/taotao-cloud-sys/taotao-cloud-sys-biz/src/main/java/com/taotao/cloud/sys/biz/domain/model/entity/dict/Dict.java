@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.domain.model.entity.dict;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.annotation.PreDestroy;
 import jakarta.persistence.*;
 import lombok.*;
@@ -85,7 +85,7 @@ import java.util.Objects;
 //@NamedQuery(name = "User.findByEmailAddress",
 //	query = "select u from User u where u.emailAddress = ?1")
 @org.springframework.data.relational.core.mapping.Table(name = Dict.TABLE_NAME, comment = "字典表")
-public class Dict extends BaseSuperEntity<Dict, Long> {
+public class Dict extends BasePO<Dict> {
 
     public static final String TABLE_NAME = "tt_dict";
 

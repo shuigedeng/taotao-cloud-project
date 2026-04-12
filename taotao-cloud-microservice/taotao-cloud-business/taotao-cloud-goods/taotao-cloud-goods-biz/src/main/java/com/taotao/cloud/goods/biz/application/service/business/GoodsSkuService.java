@@ -19,7 +19,7 @@ package com.taotao.cloud.goods.biz.application.service.business;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.goods.biz.model.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.biz.model.dto.GoodsSkuDTO;
 import com.taotao.cloud.goods.biz.model.dto.GoodsSkuStockDTO;
@@ -36,10 +36,10 @@ import java.util.Map;
  *
  * @author shuigedeng
  * @version 2023.07
- * @see BaseSuperService
+ * @see BaseService
  * @since 2023-08-18 16:00:58
  */
-public interface GoodsSkuService extends BaseSuperService<GoodsSku, Long> {
+public interface GoodsSkuService extends BaseService<GoodsSku, Long> {
 	/**
 	 * 获取商品SKU缓存ID
 	 *

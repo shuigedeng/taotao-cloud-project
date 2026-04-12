@@ -20,10 +20,9 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.data.mybatis.mybatisplus.base.entity.MpSuperEntity;
+import com.taotao.boot.data.mybatis.mybatisplus.base.entity.MpBaseEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.experimental.*;
 import lombok.EqualsAndHashCode;
 
 /**
@@ -35,7 +34,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @TableName("t_just_auth_config")
 @Schema(description = "租户第三方登录功能配置表")
-public class JustAuthConfig extends MpSuperEntity<Long> {
+public class JustAuthConfig extends MpBaseEntity<Long> {
 
     private static final long serialVersionUID = 1L;
 

@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.application.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.goods.biz.model.dto.DraftGoodsSkuParamsDTO;
 import com.taotao.cloud.goods.biz.model.entity.DraftGoods;
 import com.taotao.cloud.goods.biz.model.page.DraftGoodsPageQuery;
@@ -30,7 +30,7 @@ import com.taotao.cloud.goods.biz.model.vo.DraftGoodsSkuParamsVO;
  * @version 2022.04
  * @since 2022-04-27 16:59:56
  */
-public interface DraftGoodsService extends BaseSuperService<DraftGoods, Long> {
+public interface DraftGoodsService extends BaseService<DraftGoods, Long> {
 
     /**
      * 添加草稿商品

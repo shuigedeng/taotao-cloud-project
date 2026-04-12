@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.customer.biz.domain.model.entity;
 
-import com.taotao.boot.data.jpa.base.entity.JpaSuperEntity;
+import com.taotao.boot.data.jpa.base.entity.JpaBaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -40,7 +40,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "tt_chatbot")
 @org.springframework.data.relational.core.mapping.Table(name = "tt_chatbot", comment = "机器人客服表")
-public class Chatbot extends JpaSuperEntity {
+public class Chatbot extends JpaBaseEntity {
 
 	private static final long serialVersionUID = 6887296988458221221L;
 

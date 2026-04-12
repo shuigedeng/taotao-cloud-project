@@ -17,7 +17,7 @@
 package com.taotao.cloud.distribution.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.member.api.enums.WithdrawStatusEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,7 +46,7 @@ import java.util.Objects;
 @Table(name = DistributionCash.TABLE_NAME)
 @TableName(DistributionCash.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = DistributionCash.TABLE_NAME, comment = "分销佣金表")
-public class DistributionCash extends BaseSuperEntity<DistributionCash, Long> {
+public class DistributionCash extends BasePO<DistributionCash> {
 
     public static final String TABLE_NAME = "tt_distribution_cash";
 

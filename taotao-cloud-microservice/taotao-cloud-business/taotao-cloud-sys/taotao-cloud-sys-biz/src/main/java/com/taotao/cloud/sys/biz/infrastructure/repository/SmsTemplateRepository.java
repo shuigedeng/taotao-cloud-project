@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.infrastructure.repository;
 
-import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.BaseRepository;
 import com.taotao.cloud.sys.biz.model.entity.sms.SmsTemplate;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.sys.biz.model.entity.sms.SmsTemplate;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface SmsTemplateRepository extends JpaSuperRepository<SmsTemplate, Long> {}
+public interface SmsTemplateRepository extends BaseRepository<SmsTemplate> {}

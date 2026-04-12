@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.workflow.biz.infrastructure.entity.StaffOvertimeEntity;
 
 /** 员工加班申请表 */
-public interface StaffOvertimeMapper extends MpSuperMapper<StaffOvertimeEntity> {}
+public interface StaffOvertimeMapper extends BaseMapper<StaffOvertimeEntity> {}

@@ -17,7 +17,7 @@
 package com.taotao.cloud.operation.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -44,7 +44,7 @@ import java.util.Objects;
 @Table(name = Special.TABLE_NAME)
 @TableName(Special.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = Special.TABLE_NAME, comment = "专题活动表")
-public class Special extends BaseSuperEntity<Special, Long> {
+public class Special extends BasePO<Special> {
 
     public static final String TABLE_NAME = "tt_special";
     /** 专题活动名称 */

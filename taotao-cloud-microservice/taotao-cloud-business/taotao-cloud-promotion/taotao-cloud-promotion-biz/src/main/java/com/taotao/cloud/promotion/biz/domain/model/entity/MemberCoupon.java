@@ -19,7 +19,7 @@ package com.taotao.cloud.promotion.biz.domain.model.entity;
 import cn.hutool.core.date.DateField;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.promotion.api.enums.*;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -49,7 +49,7 @@ import java.util.Objects;
 @Table(name = MemberCoupon.TABLE_NAME)
 @TableName(MemberCoupon.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = MemberCoupon.TABLE_NAME, comment = "会员优惠券")
-public class MemberCoupon extends BaseSuperEntity<MemberCoupon, Long> {
+public class MemberCoupon extends BasePO<MemberCoupon> {
 
     public static final String TABLE_NAME = "tt_member_coupon";
     /** 从哪个模版领取的优惠券 */

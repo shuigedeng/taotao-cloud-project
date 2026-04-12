@@ -17,12 +17,11 @@
 package com.taotao.cloud.sys.biz.infrastructure.supports.core.db.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -42,7 +41,7 @@ import lombok.Setter;
 @Table(name = DataVersionLogDb.TABLE_NAME)
 @TableName(DataVersionLogDb.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = DataVersionLogDb.TABLE_NAME, comment = "app配置表")
-public class DataVersionLogDb extends BaseSuperEntity<DataVersionLogDb, Long> {
+public class DataVersionLogDb extends BasePO<DataVersionLogDb> {
 
     public static final String TABLE_NAME = "tt_data_version_log";
 

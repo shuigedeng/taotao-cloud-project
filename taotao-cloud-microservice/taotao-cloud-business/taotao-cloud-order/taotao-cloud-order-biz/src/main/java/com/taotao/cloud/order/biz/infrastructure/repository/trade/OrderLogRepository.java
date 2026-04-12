@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.order.biz.infrastructure.repository.trade;
 
-import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.BaseRepository;
 import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
 
 /** 订单日志数据处理层 */
-public interface OrderLogRepository extends JpaSuperRepository<OrderLog, Long> {}
+public interface OrderLogRepository extends BaseRepository<OrderLog> {}

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.sys.biz.model.entity.File;
 import org.apache.ibatis.annotations.Select;
 
@@ -29,7 +29,7 @@ import java.util.List;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IFileMapper extends MpSuperMapper<File, Long> {
+public interface IFileMapper extends BaseMapper<File> {
 	@Select("""
 		select url
 		from tt_file

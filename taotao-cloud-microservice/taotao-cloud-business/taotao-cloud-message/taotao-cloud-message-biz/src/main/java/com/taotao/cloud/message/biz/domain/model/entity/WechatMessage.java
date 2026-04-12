@@ -17,7 +17,7 @@
 package com.taotao.cloud.message.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.boot.webagg.entity.JpaEntityListener;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,7 +36,7 @@ import lombok.*;
 @TableName(WechatMessage.TABLE_NAME)
 @EntityListeners({JpaEntityListener.class})
 @org.springframework.data.relational.core.mapping.Table(name = WechatMessage.TABLE_NAME, comment = "微信消息表")
-public class WechatMessage extends BaseSuperEntity<WechatMessage, Long> {
+public class WechatMessage extends BasePO<WechatMessage> {
 
     public static final String TABLE_NAME = "tt_wechat_message";
 

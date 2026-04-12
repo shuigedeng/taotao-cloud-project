@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.workflow.biz.infrastructure.entity.FinishedProductEntity;
 
 /** 成品入库单 */
-public interface FinishedProductMapper extends MpSuperMapper<FinishedProductEntity> {}
+public interface FinishedProductMapper extends BaseMapper<FinishedProductEntity> {}

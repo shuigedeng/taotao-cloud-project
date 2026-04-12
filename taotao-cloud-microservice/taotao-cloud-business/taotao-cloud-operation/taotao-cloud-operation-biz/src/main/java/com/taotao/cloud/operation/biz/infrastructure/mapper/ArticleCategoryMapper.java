@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.operation.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.operation.biz.model.entity.ArticleCategory;
 
 /** 文章分类数据处理层 */
-public interface ArticleCategoryMapper extends MpSuperMapper<ArticleCategory, Long> {}
+public interface ArticleCategoryMapper extends BaseMapper<ArticleCategory> {}

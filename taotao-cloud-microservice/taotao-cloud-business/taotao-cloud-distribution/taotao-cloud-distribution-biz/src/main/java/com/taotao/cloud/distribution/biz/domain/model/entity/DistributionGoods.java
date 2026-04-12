@@ -18,7 +18,7 @@ package com.taotao.cloud.distribution.biz.domain.model.entity;
 
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -46,7 +46,7 @@ import java.util.Objects;
 @Table(name = DistributionGoods.TABLE_NAME)
 @TableName(DistributionGoods.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = DistributionGoods.TABLE_NAME, comment = "分销商品表")
-public class DistributionGoods extends BaseSuperEntity<DistributionGoods, Long> {
+public class DistributionGoods extends BasePO<DistributionGoods> {
 
     public static final String TABLE_NAME = "tt_distribution_goods";
 

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.application.service.business;
 
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.goods.biz.model.entity.Parameters;
 
 import java.util.List;
@@ -28,7 +28,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 17:00:58
  */
-public interface ParametersService extends BaseSuperService<Parameters, Long> {
+public interface ParametersService extends BaseService<Parameters, Long> {
 
     /**
      * 更新参数组信息

@@ -19,7 +19,7 @@ package com.taotao.cloud.order.biz.infrastructure.mapper.order;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.sys.model.vo.cart.OrderExportVO;
 import com.taotao.cloud.order.sys.model.vo.order.OrderSimpleVO;
@@ -31,7 +31,7 @@ import org.apache.ibatis.annotations.Update;
 import java.util.List;
 
 /** 订单数据处理层 */
-public interface OrderMapper extends MpSuperMapper<Order, Long> {
+public interface OrderMapper extends BaseMapper<Order> {
 
     /**
      * 修改订单状态

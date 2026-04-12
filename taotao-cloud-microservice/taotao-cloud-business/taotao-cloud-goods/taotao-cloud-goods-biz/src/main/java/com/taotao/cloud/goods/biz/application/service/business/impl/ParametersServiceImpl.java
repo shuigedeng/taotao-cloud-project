@@ -23,7 +23,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.goods.biz.application.service.business.GoodsService;
 import com.taotao.cloud.goods.biz.application.service.business.ParametersService;
 import com.taotao.cloud.goods.biz.mapper.ParametersMapper;
@@ -54,7 +54,7 @@ import java.util.Map;
 @AllArgsConstructor
 @Service
 public class ParametersServiceImpl
-        extends BaseSuperServiceImpl<Parameters, Long, ParametersMapper,  ParametersRepository, ParametersRepository>
+        extends BaseServiceImpl<Parameters, Long, ParametersMapper,  ParametersRepository, ParametersRepository>
         implements ParametersService {
 
     /** 商品服务 */

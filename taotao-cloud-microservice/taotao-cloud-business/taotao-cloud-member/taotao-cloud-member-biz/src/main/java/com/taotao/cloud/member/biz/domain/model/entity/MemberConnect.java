@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -41,7 +41,7 @@ import lombok.Setter;
 @Table(name = MemberConnect.TABLE_NAME)
 @TableName(MemberConnect.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = MemberConnect.TABLE_NAME, comment = "联合登陆表表")
-public class MemberConnect extends BaseSuperEntity<MemberConnect, Long> {
+public class MemberConnect extends BasePO<MemberConnect> {
 
     public static final String TABLE_NAME = "tt_member_connect";
 

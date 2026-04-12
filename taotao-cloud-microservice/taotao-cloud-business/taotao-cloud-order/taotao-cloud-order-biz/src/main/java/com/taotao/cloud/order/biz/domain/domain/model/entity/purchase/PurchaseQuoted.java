@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.domain.domain.model.entity.purchase;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -43,7 +43,7 @@ import java.util.Objects;
 @Table(name = PurchaseQuoted.TABLE_NAME)
 @TableName(PurchaseQuoted.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = PurchaseQuoted.TABLE_NAME, comment = "供求单报价表")
-public class PurchaseQuoted extends BaseSuperEntity<PurchaseQuoted, Long> {
+public class PurchaseQuoted extends BasePO<PurchaseQuoted> {
 
     public static final String TABLE_NAME = "tt_purchase_quoted";
 

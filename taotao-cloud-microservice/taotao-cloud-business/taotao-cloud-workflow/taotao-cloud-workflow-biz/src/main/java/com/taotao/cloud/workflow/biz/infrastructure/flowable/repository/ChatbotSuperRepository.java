@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.flowable.repository;
 
-import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.BaseRepository;
 import com.taotao.cloud.flowable.biz.model.entity.Chatbot;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
@@ -27,7 +27,7 @@ import org.springframework.stereotype.Repository;
  * @since 2020/11/13 10:01
  */
 @Repository
-public class ChatbotSuperRepository extends JpaSuperRepository<Chatbot, Long> {
+public class ChatbotSuperRepository extends BaseRepository<Chatbot> {
 
     public ChatbotSuperRepository(EntityManager em) {
         super(Chatbot.class, em);

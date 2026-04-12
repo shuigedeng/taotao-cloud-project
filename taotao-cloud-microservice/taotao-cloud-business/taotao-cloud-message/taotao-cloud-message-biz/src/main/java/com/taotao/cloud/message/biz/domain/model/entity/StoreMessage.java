@@ -17,7 +17,7 @@
 package com.taotao.cloud.message.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.boot.webagg.entity.JpaEntityListener;
 import com.taotao.cloud.message.api.enums.MessageStatusEnum;
 import jakarta.persistence.Column;
@@ -37,7 +37,7 @@ import lombok.*;
 @TableName(StoreMessage.TABLE_NAME)
 @EntityListeners({JpaEntityListener.class})
 @org.springframework.data.relational.core.mapping.Table(name = StoreMessage.TABLE_NAME, comment = "店铺消息表")
-public class StoreMessage extends BaseSuperEntity<StoreMessage, Long> {
+public class StoreMessage extends BasePO<StoreMessage> {
 
     public static final String TABLE_NAME = "tt_store_message";
 

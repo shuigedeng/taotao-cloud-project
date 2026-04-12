@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -37,7 +37,7 @@ import java.util.Objects;
 @Table(name = CustomWords.TABLE_NAME)
 @TableName(CustomWords.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = CustomWords.TABLE_NAME)
-public class CustomWords extends BaseSuperEntity<CustomWords, Long> {
+public class CustomWords extends BasePO<CustomWords> {
 
     public static final String TABLE_NAME = "tt_custom_words";
 

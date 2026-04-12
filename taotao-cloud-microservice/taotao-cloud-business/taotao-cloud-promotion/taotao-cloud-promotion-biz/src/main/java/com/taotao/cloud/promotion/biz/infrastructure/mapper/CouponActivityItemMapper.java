@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.promotion.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.promotion.api.model.vo.CouponActivityItemVO;
 import com.taotao.cloud.promotion.biz.model.entity.CouponActivityItem;
 import org.apache.ibatis.annotations.Select;
@@ -30,7 +30,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:36:29
  */
-public interface CouponActivityItemMapper extends MpSuperMapper<CouponActivityItem> {
+public interface CouponActivityItemMapper extends BaseMapper<CouponActivityItem> {
 
     /**
      * 获取优惠券活动关联优惠券列表VO

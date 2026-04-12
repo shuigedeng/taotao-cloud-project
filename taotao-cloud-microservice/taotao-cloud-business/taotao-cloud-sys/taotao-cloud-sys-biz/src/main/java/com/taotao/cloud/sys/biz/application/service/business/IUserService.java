@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.application.service.business;
 
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.sys.biz.model.dto.user.RestPasswordUserDTO;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
 
@@ -30,7 +30,7 @@ import java.util.Set;
  * @version 2023.01
  * @since 2023-02-15 14:43:45
  */
-public interface IUserService extends BaseSuperService<User, Long> {
+public interface IUserService extends BaseService<User, Long> {
 
     /**
      * 保存用户

@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -42,7 +42,7 @@ import lombok.Setter;
 @Table(name = MemberNotice.TABLE_NAME)
 @TableName(MemberNotice.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = MemberNotice.TABLE_NAME, comment = "会员站内信表")
-public class MemberNotice extends BaseSuperEntity<MemberNotice, Long> {
+public class MemberNotice extends BasePO<MemberNotice> {
 
     public static final String TABLE_NAME = "tt_member_notice";
 

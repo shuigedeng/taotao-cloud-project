@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.promotion.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.promotion.biz.model.entity.PointsGoods;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.promotion.biz.model.entity.PointsGoods;
  * @version 2022.04
  * @since 2022-04-27 16:37:08
  */
-public interface PointsGoodsMapper extends MpSuperMapper<PointsGoods> {}
+public interface PointsGoodsMapper extends BaseMapper<PointsGoods> {}

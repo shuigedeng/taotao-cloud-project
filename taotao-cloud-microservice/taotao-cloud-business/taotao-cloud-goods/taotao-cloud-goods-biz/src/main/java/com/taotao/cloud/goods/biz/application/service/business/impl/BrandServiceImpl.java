@@ -26,7 +26,7 @@ import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.boot.common.utils.lang.StringUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.data.mybatis.mybatisplus.utils.MpUtils;
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.goods.biz.application.service.business.BrandService;
 import com.taotao.cloud.goods.biz.application.service.business.CategoryBrandService;
 import com.taotao.cloud.goods.biz.application.service.business.CategoryService;
@@ -55,7 +55,7 @@ import java.util.Map;
  */
 @Service
 @AllArgsConstructor
-public class BrandServiceImpl extends BaseSuperServiceImpl<Brand, Long, BrandMapper, BrandRepository, BrandRepository>
+public class BrandServiceImpl extends BaseServiceImpl<Brand, Long, BrandMapper, BrandRepository, BrandRepository>
         implements BrandService {
 
     /** 分类品牌绑定服务 */

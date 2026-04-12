@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.distribution.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionSelectedGoods;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.distribution.biz.model.entity.DistributionSelectedGoods;
  * @version 2022.04
  * @since 2022-04-22 16:24:53
  */
-public interface DistributionSelectedGoodsMapper extends MpSuperMapper<DistributionSelectedGoods, Long> {}
+public interface DistributionSelectedGoodsMapper extends BaseMapper<DistributionSelectedGoods> {}

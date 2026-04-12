@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.promotion.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.promotion.biz.model.entity.FullDiscount;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.promotion.biz.model.entity.FullDiscount;
  * @version 2022.04
  * @since 2022-04-27 16:36:46
  */
-public interface FullDiscountMapper extends MpSuperMapper<FullDiscount> {}
+public interface FullDiscountMapper extends BaseMapper<FullDiscount> {}

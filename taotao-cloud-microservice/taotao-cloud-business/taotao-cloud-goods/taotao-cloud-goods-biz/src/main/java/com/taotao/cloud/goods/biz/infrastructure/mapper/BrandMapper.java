@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.goods.biz.model.entity.Brand;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.goods.biz.model.entity.Brand;
  * @version 2022.04
  * @since 2022-04-20 16:59:38
  */
-public interface BrandMapper extends MpSuperMapper<Brand, Long> {}
+public interface BrandMapper extends BaseMapper<Brand> {}

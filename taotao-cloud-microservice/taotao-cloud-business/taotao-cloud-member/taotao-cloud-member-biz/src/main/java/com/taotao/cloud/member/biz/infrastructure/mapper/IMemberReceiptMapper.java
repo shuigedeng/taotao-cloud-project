@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.member.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberReceipt;
 
 /** 会员发票数据层 */
-public interface IMemberReceiptMapper extends MpSuperMapper<MemberReceipt, Long> {}
+public interface IMemberReceiptMapper extends BaseMapper<MemberReceipt> {}

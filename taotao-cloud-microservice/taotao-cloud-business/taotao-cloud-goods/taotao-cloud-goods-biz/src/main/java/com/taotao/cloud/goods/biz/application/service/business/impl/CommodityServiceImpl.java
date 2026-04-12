@@ -28,7 +28,7 @@ import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.model.ddd.query.PageQuery;
 import com.taotao.boot.security.spring.model.SecurityUser;
 import com.taotao.boot.security.spring.support.utils.SecurityUtils;
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.biz.application.service.business.CommodityService;
 import com.taotao.cloud.goods.biz.application.service.business.GoodsSkuService;
@@ -55,7 +55,7 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class CommodityServiceImpl
-        extends BaseSuperServiceImpl<Commodity, Long, CommodityMapper, CommodityRepository, CommodityRepository>
+        extends BaseServiceImpl<Commodity, Long, CommodityMapper, CommodityRepository, CommodityRepository>
         implements CommodityService {
 
     private final WechatLivePlayerUtil wechatLivePlayerUtil;

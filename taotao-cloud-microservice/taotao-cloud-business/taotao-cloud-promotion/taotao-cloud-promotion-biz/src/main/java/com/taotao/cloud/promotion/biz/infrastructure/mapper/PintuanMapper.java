@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.promotion.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.promotion.biz.model.entity.Pintuan;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.promotion.biz.model.entity.Pintuan;
  * @version 2022.04
  * @since 2022-04-27 16:37:03
  */
-public interface PintuanMapper extends MpSuperMapper<Pintuan> {}
+public interface PintuanMapper extends BaseMapper<Pintuan> {}

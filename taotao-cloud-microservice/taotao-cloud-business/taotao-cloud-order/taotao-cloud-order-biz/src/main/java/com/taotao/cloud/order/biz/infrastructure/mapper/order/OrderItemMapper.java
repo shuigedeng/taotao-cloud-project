@@ -18,7 +18,7 @@ package com.taotao.cloud.order.biz.infrastructure.mapper.order;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
 import com.taotao.cloud.order.sys.model.vo.order.OrderSimpleVO;
 import org.apache.ibatis.annotations.Param;
@@ -27,7 +27,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 /** 子订单数据处理层 */
-public interface OrderItemMapper extends MpSuperMapper<OrderItem, Long> {
+public interface OrderItemMapper extends BaseMapper<OrderItem> {
 
     /**
      * 获取等待操作订单子项目

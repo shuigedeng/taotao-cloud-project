@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.sys.biz.model.entity.region.Region;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.sys.biz.model.entity.region.Region;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IRegionMapper extends MpSuperMapper<Region, Long> {}
+public interface IRegionMapper extends BaseMapper<Region> {}

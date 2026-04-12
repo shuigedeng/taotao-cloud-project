@@ -19,7 +19,7 @@ package com.taotao.cloud.order.biz.infrastructure.mapper.order;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.order.biz.model.entity.order.Receipt;
 import com.taotao.cloud.order.sys.model.dto.order.OrderReceiptDTO;
 import com.taotao.cloud.order.sys.model.page.order.ReceiptPageQuery;
@@ -28,7 +28,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /** 发票数据处理层 */
-public interface ReceiptMapper extends MpSuperMapper<Receipt, Long> {
+public interface ReceiptMapper extends BaseMapper<Receipt> {
 
     /**
      * 查询发票信息

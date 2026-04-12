@@ -18,7 +18,7 @@ package com.taotao.cloud.promotion.biz.infrastructure.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -33,7 +33,7 @@ import java.util.Date;
  * @version 2022.04
  * @since 2022-04-27 16:37:11
  */
-public interface PromotionGoodsMapper extends MpSuperMapper<PromotionGoods> {
+public interface PromotionGoodsMapper extends BaseMapper<PromotionGoods> {
 
     /**
      * 查询参加活动促销商品是否同时参加指定类型的活动

@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.domain.model.entity.sms;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -37,7 +37,7 @@ import java.util.Objects;
 @Table(name = SmsSign.TABLE_NAME)
 @TableName(SmsSign.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = SmsSign.TABLE_NAME, comment = "短信签名表")
-public class SmsSign extends BaseSuperEntity<SmsSign, Long> {
+public class SmsSign extends BasePO<SmsSign> {
 
     public static final String TABLE_NAME = "tt_tt_sms_sign";
 

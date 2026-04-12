@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.application.service.inner;
 
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 
 /**
@@ -26,7 +26,7 @@ import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
  * @version 2021.10
  * @since 2021-10-09 20:32:36
  */
-public interface IFeignDictService extends BaseSuperService<Dict, Long> {
+public interface IFeignDictService extends BaseService<Dict, Long> {
 
     <T> T test123(T t);
 }

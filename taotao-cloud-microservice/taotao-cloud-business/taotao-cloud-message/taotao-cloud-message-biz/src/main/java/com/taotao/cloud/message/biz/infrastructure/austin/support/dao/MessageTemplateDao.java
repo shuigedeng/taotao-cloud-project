@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.infrastructure.austin.support.dao;
 
-import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.BaseRepository;
 import com.taotao.cloud.message.biz.infrastructure.austin.support.domain.MessageTemplate;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author shuigedeng
  */
-public interface MessageTemplateDao extends JpaSuperRepository<MessageTemplate, Long>, JpaSpecificationExecutor<MessageTemplate> {
+public interface MessageTemplateDao extends BaseRepository<MessageTemplate>, JpaSpecificationExecutor<MessageTemplate> {
 
 
     /**

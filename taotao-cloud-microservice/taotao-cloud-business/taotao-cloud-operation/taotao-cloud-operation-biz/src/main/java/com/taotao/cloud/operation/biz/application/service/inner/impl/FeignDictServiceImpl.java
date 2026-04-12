@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.operation.biz.application.service.inner.impl;
 
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.sys.biz.mapper.IDictMapper;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.repository.DictRepository;
@@ -36,7 +36,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @AllArgsConstructor
-public class FeignDictServiceImpl extends BaseSuperServiceImpl<Dict, Long, IDictMapper, DictRepository, IDictRepository>
+public class FeignDictServiceImpl extends BaseServiceImpl<Dict, Long, IDictMapper, DictRepository, IDictRepository>
         implements IFeignDictService {
     @Autowired
     private IDictService dictService;

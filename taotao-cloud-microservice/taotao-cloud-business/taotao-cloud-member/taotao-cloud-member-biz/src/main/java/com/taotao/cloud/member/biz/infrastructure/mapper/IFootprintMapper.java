@@ -19,7 +19,7 @@ package com.taotao.cloud.member.biz.infrastructure.mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberBrowse;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
@@ -28,7 +28,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 /** 浏览历史数据处理层 */
-public interface IFootprintMapper extends MpSuperMapper<MemberBrowse, Long> {
+public interface IFootprintMapper extends BaseMapper<MemberBrowse> {
 
     /**
      * 获取用户足迹的SkuId分页

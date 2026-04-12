@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.application.service.business;
 
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.goods.biz.model.entity.GoodsUnit;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.goods.biz.model.entity.GoodsUnit;
  * @version 2022.04
  * @since 2022-04-27 17:00:52
  */
-public interface GoodsUnitService extends BaseSuperService<GoodsUnit, Long> {}
+public interface GoodsUnitService extends BaseService<GoodsUnit, Long> {}

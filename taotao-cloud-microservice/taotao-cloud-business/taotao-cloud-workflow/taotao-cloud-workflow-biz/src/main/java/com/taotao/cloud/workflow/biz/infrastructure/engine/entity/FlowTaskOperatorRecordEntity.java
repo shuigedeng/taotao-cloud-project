@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.SuperEntity;
+import com.taotao.boot.webagg.entity.SuperPO;
 import lombok.Data;
 
 import java.util.Date;
@@ -28,7 +28,7 @@ import java.util.Date;
 /** 流程经办记录 */
 @Data
 @TableName("flow_taskoperatorrecord")
-public class FlowTaskOperatorRecordEntity extends SuperEntity<FlowTaskOperatorRecordEntity, String> {
+public class FlowTaskOperatorRecordEntity extends SuperPO<FlowTaskOperatorRecordEntity, String> {
     /** 节点流转主键 */
     @TableId("id")
     private String id;

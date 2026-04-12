@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.domain.domain.model.entity.aftersale;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleRefundWayEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
@@ -49,7 +49,7 @@ import java.util.Objects;
 @Table(name = AfterSale.TABLE_NAME)
 @TableName(AfterSale.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = AfterSale.TABLE_NAME, comment = "售后表")
-public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
+public class AfterSale extends BasePO<AfterSale> {
 
     public static final String TABLE_NAME = "tt_after_sale";
 

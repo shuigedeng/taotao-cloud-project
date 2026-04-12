@@ -17,7 +17,7 @@
 package com.taotao.cloud.promotion.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.promotion.api.enums.PromotionsApplyStatusEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,7 +45,7 @@ import java.util.Objects;
 @Table(name = SeckillApply.TABLE_NAME)
 @TableName(SeckillApply.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = SeckillApply.TABLE_NAME, comment = "秒杀活动申请实体类")
-public class SeckillApply extends BaseSuperEntity<SeckillApply, Long> {
+public class SeckillApply extends BasePO<SeckillApply> {
 
     public static final String TABLE_NAME = "tt_seckill_apply";
     /** 活动id */

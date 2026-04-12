@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.application.service.business;
 
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.goods.biz.model.entity.StudioCommodity;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.goods.biz.model.entity.StudioCommodity;
  * @version 2022.04
  * @since 2022-04-27 17:01:08
  */
-public interface StudioCommodityService extends BaseSuperService<StudioCommodity, Long> {}
+public interface StudioCommodityService extends BaseService<StudioCommodity, Long> {}

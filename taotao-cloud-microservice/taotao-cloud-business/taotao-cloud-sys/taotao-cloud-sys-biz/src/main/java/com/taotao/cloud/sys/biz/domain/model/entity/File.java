@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -43,7 +43,7 @@ import java.util.Objects;
 @Table(name = File.TABLE_NAME)
 @TableName(File.TABLE_NAME)
 //@jakarta.persistence.Table(appliesTo = File.TABLE_NAME, comment = "文件表")
-public class File extends BaseSuperEntity<File, Long> {
+public class File extends BasePO<File> {
 
     public static final String TABLE_NAME = "tt_file";
 

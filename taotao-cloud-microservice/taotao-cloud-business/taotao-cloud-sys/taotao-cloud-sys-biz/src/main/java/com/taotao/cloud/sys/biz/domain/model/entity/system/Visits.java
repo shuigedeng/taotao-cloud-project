@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.domain.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -43,7 +43,7 @@ import java.util.Objects;
 @Table(name = Visits.TABLE_NAME)
 @TableName(Visits.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = Visits.TABLE_NAME, comment = "pv与ip统计")
-public class Visits extends BaseSuperEntity<Visits, Long> {
+public class Visits extends BasePO<Visits> {
 
     public static final String TABLE_NAME = "tt_visits";
 

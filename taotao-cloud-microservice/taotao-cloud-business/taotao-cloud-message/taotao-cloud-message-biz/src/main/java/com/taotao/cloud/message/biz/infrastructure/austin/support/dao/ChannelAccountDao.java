@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.infrastructure.austin.support.dao;
 
 
-import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.BaseRepository;
 import com.taotao.cloud.message.biz.infrastructure.austin.support.domain.ChannelAccount;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author shuigedeng
  */
-public interface ChannelAccountDao extends JpaSuperRepository<ChannelAccount, Long> {
+public interface ChannelAccountDao extends BaseRepository<ChannelAccount> {
 
 
     /**

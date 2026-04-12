@@ -17,7 +17,7 @@
 package com.taotao.cloud.store.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.boot.webagg.entity.JpaEntityListener;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -40,7 +40,7 @@ import java.util.Objects;
 @TableName(StoreLogistics.TABLE_NAME)
 @EntityListeners({JpaEntityListener.class})
 @org.springframework.data.relational.core.mapping.Table(name = StoreLogistics.TABLE_NAME, comment = "店铺-物流公司设置表")
-public class StoreLogistics extends BaseSuperEntity<StoreLogistics, String> {
+public class StoreLogistics extends BasePO<StoreLogistics, String> {
 
     public static final String TABLE_NAME = "tt_store_logistics";
 

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.application.service.business;
 
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.sys.biz.model.entity.setting.Setting;
 
 /**
@@ -26,7 +26,7 @@ import com.taotao.cloud.sys.biz.model.entity.setting.Setting;
  * @version v1.0
  * @since 2022/03/10 10:31
  */
-public interface ISettingService extends BaseSuperService<Setting, Long> {
+public interface ISettingService extends BaseService<Setting, Long> {
 
     /**
      * 通过key获取

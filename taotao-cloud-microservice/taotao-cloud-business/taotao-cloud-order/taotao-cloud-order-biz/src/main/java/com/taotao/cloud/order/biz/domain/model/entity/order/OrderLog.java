@@ -18,7 +18,7 @@ package com.taotao.cloud.order.biz.domain.model.entity.order;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.boot.common.enums.UserEnum;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -44,7 +44,7 @@ import java.util.Objects;
 @Table(name = OrderLog.TABLE_NAME)
 @TableName(OrderLog.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = OrderLog.TABLE_NAME, comment = "订单日志")
-public class OrderLog extends BaseSuperEntity<OrderLog, Long> {
+public class OrderLog extends BasePO<OrderLog> {
 
     public static final String TABLE_NAME = "tt_order_log";
 

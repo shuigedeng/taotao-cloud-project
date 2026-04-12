@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.application.service.business.impl;
 
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.goods.biz.application.service.business.GoodsWordsService;
 import com.taotao.cloud.goods.biz.mapper.GoodsWordsMapper;
 import com.taotao.cloud.goods.biz.model.entity.GoodsWords;
@@ -32,5 +32,5 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class GoodsWordsServiceImpl
-        extends BaseSuperServiceImpl< GoodsWords, Long, GoodsWordsMapper,GoodsWordsRepository, GoodsWordsRepository>
+        extends BaseServiceImpl< GoodsWords, Long, GoodsWordsMapper,GoodsWordsRepository, GoodsWordsRepository>
         implements GoodsWordsService {}

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.domain.entity;
 
-import com.taotao.boot.data.jpa.base.entity.JpaSuperEntity;
+import com.taotao.boot.data.jpa.base.entity.JpaBaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -34,7 +34,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "tt_pay_flow")
 @org.springframework.data.relational.core.mapping.Table(name = "tt_pay_flow", comment = "支付流水表")
-public class PayFlow extends JpaSuperEntity {
+public class PayFlow extends JpaBaseEntity {
 
     private static final long serialVersionUID = 6887296988458221221L;
 

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.promotion.biz.infrastructure.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.promotion.biz.model.entity.Seckill;
 import org.apache.ibatis.annotations.Update;
 
@@ -27,7 +27,7 @@ import org.apache.ibatis.annotations.Update;
  * @version 2022.04
  * @since 2022-04-27 16:37:18
  */
-public interface SeckillMapper extends MpSuperMapper<Seckill> {
+public interface SeckillMapper extends BaseMapper<Seckill> {
 
     /**
      * 修改秒杀活动数量

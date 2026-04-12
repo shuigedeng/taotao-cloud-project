@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.application.service.business;
 
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.goods.biz.model.entity.CategorySpecification;
 import com.taotao.cloud.goods.biz.model.entity.Specification;
 
@@ -29,7 +29,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:59:40
  */
-public interface CategorySpecificationService extends BaseSuperService<CategorySpecification, Long> {
+public interface CategorySpecificationService extends BaseService<CategorySpecification, Long> {
 
     /**
      * 根据分类id查询规格信息

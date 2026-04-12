@@ -17,7 +17,7 @@
 package com.taotao.cloud.wechat.biz.infrastructure.niefy.modules.sys.dao;
 
 import com.github.niefy.modules.sys.entity.SysUserTokenEntity;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -28,7 +28,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 @CacheNamespace(flushInterval = 300000L) // 缓存五分钟过期
-public interface SysUserTokenDao extends MpSuperMapper<SysUserTokenEntity> {
+public interface SysUserTokenDao extends BaseMapper<SysUserTokenEntity> {
 
     SysUserTokenEntity queryByToken(String token);
 }

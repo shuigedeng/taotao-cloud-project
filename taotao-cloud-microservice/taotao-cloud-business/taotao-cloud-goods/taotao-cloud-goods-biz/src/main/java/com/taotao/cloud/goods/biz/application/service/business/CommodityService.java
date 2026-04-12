@@ -18,7 +18,7 @@ package com.taotao.cloud.goods.biz.application.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.model.ddd.query.PageQuery;
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.goods.biz.model.entity.Commodity;
 import com.taotao.cloud.goods.biz.model.vo.CommoditySkuVO;
 
@@ -31,7 +31,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:59:47
  */
-public interface CommodityService extends BaseSuperService<Commodity, Long> {
+public interface CommodityService extends BaseService<Commodity, Long> {
 
     /**
      * 添加直播商品

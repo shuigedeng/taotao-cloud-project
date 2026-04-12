@@ -21,7 +21,7 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.SuperEntity;
+import com.taotao.boot.webagg.entity.SuperPO;
 import lombok.Data;
 
 import java.util.Date;
@@ -29,7 +29,7 @@ import java.util.Date;
 /** 流程评论 */
 @Data
 @TableName("flow_comment")
-public class FlowCommentEntity extends SuperEntity<FlowCommentEntity, String> {
+public class FlowCommentEntity extends SuperPO<FlowCommentEntity, String> {
 
     /** 主键 */
     @TableId("id")

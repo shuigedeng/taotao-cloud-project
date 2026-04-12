@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.infrastructure.repository;
 
-import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.BaseRepository;
 import com.taotao.cloud.goods.biz.model.entity.StudioCommodity;
 
-public interface StudioCommodityRepository extends JpaSuperRepository<StudioCommodity, Long> {}
+public interface StudioCommodityRepository extends BaseRepository<StudioCommodity> {}

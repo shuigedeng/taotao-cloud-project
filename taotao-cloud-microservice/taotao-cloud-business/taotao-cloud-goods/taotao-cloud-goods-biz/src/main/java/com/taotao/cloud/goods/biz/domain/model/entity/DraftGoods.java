@@ -18,7 +18,7 @@ package com.taotao.cloud.goods.biz.domain.model.entity;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.goods.api.enums.DraftGoodsSaveTypeEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
@@ -42,7 +42,7 @@ import java.util.Objects;
 @Table(name = DraftGoods.TABLE_NAME)
 @TableName(DraftGoods.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = DraftGoods.TABLE_NAME)
-public class DraftGoods extends BaseSuperEntity<DraftGoods, Long> {
+public class DraftGoods extends BasePO<DraftGoods> {
 
     public static final String TABLE_NAME = "tt_draft_goods";
 

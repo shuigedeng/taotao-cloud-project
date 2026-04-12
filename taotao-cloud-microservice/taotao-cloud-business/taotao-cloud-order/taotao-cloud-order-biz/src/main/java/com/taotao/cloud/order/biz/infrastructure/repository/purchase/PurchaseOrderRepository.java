@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.order.biz.infrastructure.repository.purchase;
 
-import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.BaseRepository;
 import com.taotao.cloud.order.biz.model.entity.purchase.PurchaseOrder;
 
 /** 采购单数据处理层 */
-public interface PurchaseOrderRepository extends JpaSuperRepository<PurchaseOrder, Long> {}
+public interface PurchaseOrderRepository extends BaseRepository<PurchaseOrder> {}

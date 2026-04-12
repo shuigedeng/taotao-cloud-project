@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.sys.biz.infrastructure.repository;
 
-import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
-import com.taotao.cloud.sys.biz.model.entity.dict.DictItem;
+import com.taotao.boot.data.jpa.base.repository.BaseRepository;
+import com.taotao.cloud.sys.biz.domain.model.entity.dict.DictItem;
 
 
 /**
@@ -27,4 +27,4 @@ import com.taotao.cloud.sys.biz.model.entity.dict.DictItem;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface DictItemRepository extends JpaSuperRepository<DictItem, Long> {}
+public interface DictItemRepository extends BaseRepository<DictItem> {}

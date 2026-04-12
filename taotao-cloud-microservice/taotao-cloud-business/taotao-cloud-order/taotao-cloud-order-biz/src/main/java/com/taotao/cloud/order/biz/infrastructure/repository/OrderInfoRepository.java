@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.biz.infrastructure.repository;
 
-import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.BaseRepository;
 import com.taotao.cloud.order.biz.model.entity.order.OrderInfo;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -29,7 +29,7 @@ import java.util.List;
  * @since 2020/10/22 12:46
  */
 @Repository
-public interface OrderInfoRepository extends JpaSuperRepository<OrderInfo, Long> {
+public interface OrderInfoRepository extends BaseRepository<OrderInfo> {
 
     @Query(value = """
 			select u from OrderInfo u where u.id = ?#{[0]}

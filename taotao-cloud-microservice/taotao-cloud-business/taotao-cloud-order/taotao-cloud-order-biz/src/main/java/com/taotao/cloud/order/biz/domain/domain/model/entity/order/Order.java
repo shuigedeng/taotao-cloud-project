@@ -22,7 +22,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.boot.common.enums.ClientTypeEnum;
 import com.taotao.boot.common.enums.PromotionTypeEnum;
 import com.taotao.boot.common.utils.bean.BeanUtils;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
@@ -58,7 +58,7 @@ import java.util.Optional;
 @Table(name = Order.TABLE_NAME)
 @TableName(Order.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = Order.TABLE_NAME, comment = "订单表")
-public class Order extends BaseSuperEntity<Order, Long> {
+public class Order extends BasePO<Order> {
 
     public static final String TABLE_NAME = "tt_order";
 

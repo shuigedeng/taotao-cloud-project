@@ -26,7 +26,7 @@ import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.utils.bean.BeanUtils;
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.goods.biz.application.service.business.*;
 import com.taotao.cloud.goods.biz.mapper.CategoryMapper;
 import com.taotao.cloud.goods.biz.model.convert.CategoryConvert;
@@ -57,7 +57,7 @@ import static com.taotao.boot.common.enums.CachePrefixEnum.CATEGORY_ARRAY;
 @AllArgsConstructor
 @Service
 @CacheConfig(cacheNames = "{category}")
-public class CategoryServiceImpl extends BaseSuperServiceImpl<Category, Long, CategoryMapper, CategorytRepository, CategoryRepository>
+public class CategoryServiceImpl extends BaseServiceImpl<Category, Long, CategoryMapper, CategorytRepository, CategoryRepository>
 	implements CategoryService {
 
 	private static final String DELETE_FLAG_COLUMN = "delete_flag";

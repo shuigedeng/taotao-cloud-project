@@ -17,7 +17,7 @@
 package com.taotao.cloud.wechat.biz.infrastructure.niefy.modules.sys.dao;
 
 import com.github.niefy.modules.sys.entity.SysLogEntity;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -26,4 +26,4 @@ import org.apache.ibatis.annotations.Mapper;
  * @author Mark sunlightcs@gmail.com
  */
 @Mapper
-public interface SysLogDao extends MpSuperMapper<SysLogEntity> {}
+public interface SysLogDao extends BaseMapper<SysLogEntity> {}

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.sys.biz.model.entity.FileLog;
 import org.apache.ibatis.annotations.Select;
 
@@ -29,7 +29,7 @@ import java.util.List;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IFileLogMapper extends MpSuperMapper<FileLog, Long> {
+public interface IFileLogMapper extends BaseMapper<FileLog> {
 	@Select("""
 		select biz_type
 		from tt_file_log

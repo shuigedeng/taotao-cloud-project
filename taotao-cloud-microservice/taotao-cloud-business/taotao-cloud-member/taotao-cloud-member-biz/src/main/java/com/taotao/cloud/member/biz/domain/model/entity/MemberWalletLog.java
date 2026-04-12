@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
 import com.taotao.cloud.member.sys.model.dto.MemberWalletUpdateDTO;
 import jakarta.persistence.Column;
@@ -46,7 +46,7 @@ import java.math.BigDecimal;
 @Table(name = MemberWalletLog.TABLE_NAME)
 @TableName(MemberWalletLog.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = MemberWalletLog.TABLE_NAME, comment = "钱包变动日志表")
-public class MemberWalletLog extends BaseSuperEntity<MemberWalletLog, Long> {
+public class MemberWalletLog extends BasePO<MemberWalletLog> {
 
     public static final String TABLE_NAME = "tt_wallet_log";
     /** 会员id */

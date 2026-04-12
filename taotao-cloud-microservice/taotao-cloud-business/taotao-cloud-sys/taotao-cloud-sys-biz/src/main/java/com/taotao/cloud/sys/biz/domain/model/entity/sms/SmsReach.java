@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.domain.model.entity.sms;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -37,7 +37,7 @@ import java.util.Objects;
 @Table(name = SmsReach.TABLE_NAME)
 @TableName(SmsReach.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = SmsReach.TABLE_NAME)
-public class SmsReach extends BaseSuperEntity<SmsReach, Long> {
+public class SmsReach extends BasePO<SmsReach> {
 
     public static final String TABLE_NAME = "tt_tt_sms_reach";
 

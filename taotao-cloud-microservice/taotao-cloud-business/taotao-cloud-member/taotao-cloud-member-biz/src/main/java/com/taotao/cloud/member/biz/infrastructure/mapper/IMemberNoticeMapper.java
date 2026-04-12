@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.member.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberNotice;
 
 /** 会员站内信数据处理层 */
-public interface IMemberNoticeMapper extends MpSuperMapper<MemberNotice, Long> {}
+public interface IMemberNoticeMapper extends BaseMapper<MemberNotice> {}

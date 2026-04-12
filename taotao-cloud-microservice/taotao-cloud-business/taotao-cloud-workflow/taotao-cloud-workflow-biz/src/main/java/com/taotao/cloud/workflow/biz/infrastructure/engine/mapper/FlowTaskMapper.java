@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.engine.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.FlowTaskListModel;
 import com.taotao.cloud.workflow.biz.infrastructure.engine.entity.FlowTaskEntity;
 import org.apache.ibatis.annotations.Param;
@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 /** 流程任务 */
-public interface FlowTaskMapper extends MpSuperMapper<FlowTaskEntity, String> {
+public interface FlowTaskMapper extends BaseMapper<FlowTaskEntity, String> {
 
     /** 已办事宜 */
     @Select(

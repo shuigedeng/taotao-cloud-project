@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.infrastructure.task.job.schedule.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -35,7 +35,7 @@ import lombok.*;
 @Table(name = ScheduledJobLog.TABLE_NAME)
 @TableName(ScheduledJobLog.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = ScheduledJobLog.TABLE_NAME)
-public class ScheduledJobLog extends BaseSuperEntity<ScheduledJobLog, String> {
+public class ScheduledJobLog extends BasePO<ScheduledJobLog, String> {
 
     public static final String TABLE_NAME = "tt_scheduled_job_log";
 

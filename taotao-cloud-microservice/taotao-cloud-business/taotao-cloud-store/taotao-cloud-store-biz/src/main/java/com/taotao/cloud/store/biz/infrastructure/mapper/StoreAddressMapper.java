@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.store.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.store.biz.model.entity.StoreAddress;
 
 /** 店铺地址(自提点）数据处理层 */
-public interface StoreAddressMapper extends MpSuperMapper<StoreAddress, String> {}
+public interface StoreAddressMapper extends BaseMapper<StoreAddress, String> {}

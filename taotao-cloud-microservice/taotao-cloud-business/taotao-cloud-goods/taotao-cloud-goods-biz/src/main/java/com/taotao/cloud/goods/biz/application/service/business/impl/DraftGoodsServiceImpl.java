@@ -20,7 +20,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.goods.biz.application.service.business.CategoryService;
 import com.taotao.cloud.goods.biz.application.service.business.DraftGoodsService;
 import com.taotao.cloud.goods.biz.application.service.business.GoodsGalleryService;
@@ -52,7 +52,7 @@ import java.util.*;
 @AllArgsConstructor
 @Service
 public class DraftGoodsServiceImpl
-        extends BaseSuperServiceImpl<DraftGoods, Long, DraftGoodsMapper,  DraftGoodsRepository, DraftGoodsRepository>
+        extends BaseServiceImpl<DraftGoods, Long, DraftGoodsMapper,  DraftGoodsRepository, DraftGoodsRepository>
         implements DraftGoodsService {
 
     /** 分类 */

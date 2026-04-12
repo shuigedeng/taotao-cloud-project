@@ -19,14 +19,14 @@ package com.taotao.cloud.member.biz.infrastructure.mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberGoodsCollection;
 import com.taotao.cloud.member.sys.model.vo.GoodsCollectionVO;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /** 会员收藏数据处理层 */
-public interface IGoodsCollectionMapper extends MpSuperMapper<MemberGoodsCollection, Long> {
+public interface IGoodsCollectionMapper extends BaseMapper<MemberGoodsCollection> {
 
     /**
      * 商品收藏VO分页

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.sys.biz.model.entity.system.Visits;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -30,7 +30,7 @@ import java.util.List;
  * @version 2022.03
  * @since 2022-03-29 08:57:49
  */
-public interface IVisitsMapper extends MpSuperMapper<Visits, Long> {
+public interface IVisitsMapper extends BaseMapper<Visits> {
 
     @Select("select * FROM visits where create_time between #{time1} and #{time2}")
     List<Visits> findAllVisits(@Param("time1") String time1, @Param("time2") String time2);

@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.workflow.biz.infrastructure.entity.OfficeSuppliesEntity;
 
 /** 领用办公用品申请表 */
-public interface OfficeSuppliesMapper extends MpSuperMapper<OfficeSuppliesEntity> {}
+public interface OfficeSuppliesMapper extends BaseMapper<OfficeSuppliesEntity> {}

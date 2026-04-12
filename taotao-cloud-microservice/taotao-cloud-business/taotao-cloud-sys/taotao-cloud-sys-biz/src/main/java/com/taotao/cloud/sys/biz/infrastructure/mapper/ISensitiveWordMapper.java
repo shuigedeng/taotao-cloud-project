@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.sys.biz.model.entity.sensitive.SensitiveWord;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.sys.biz.model.entity.sensitive.SensitiveWord;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface ISensitiveWordMapper extends MpSuperMapper<SensitiveWord, Long> {}
+public interface ISensitiveWordMapper extends BaseMapper<SensitiveWord> {}

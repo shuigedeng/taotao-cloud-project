@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.payment.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.payment.biz.entity.RefundLog;
 
 /** 退款日志数据层 */
-public interface RefundLogMapper extends MpSuperMapper<RefundLog> {}
+public interface RefundLogMapper extends BaseMapper<RefundLog> {}

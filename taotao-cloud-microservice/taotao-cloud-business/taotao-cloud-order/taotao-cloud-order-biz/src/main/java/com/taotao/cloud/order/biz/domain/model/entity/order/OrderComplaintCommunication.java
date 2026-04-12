@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.domain.model.entity.order;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -44,7 +44,7 @@ import java.util.Objects;
 @Table(name = OrderComplaintCommunication.TABLE_NAME)
 @TableName(OrderComplaintCommunication.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = OrderComplaintCommunication.TABLE_NAME, comment = "订单交易投诉通信表")
-public class OrderComplaintCommunication extends BaseSuperEntity<OrderComplaintCommunication, Long> {
+public class OrderComplaintCommunication extends BasePO<OrderComplaintCommunication> {
 
     public static final String TABLE_NAME = "tt_order_complaint_communication";
 

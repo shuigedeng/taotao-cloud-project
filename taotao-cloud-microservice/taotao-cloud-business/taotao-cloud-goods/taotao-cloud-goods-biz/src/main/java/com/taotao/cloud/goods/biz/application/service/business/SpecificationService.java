@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.application.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.goods.biz.model.entity.Specification;
 import com.taotao.cloud.goods.biz.model.page.SpecificationPageQuery;
 
@@ -30,7 +30,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 17:01:01
  */
-public interface SpecificationService extends BaseSuperService<Specification, Long> {
+public interface SpecificationService extends BaseService<Specification, Long> {
 
     /**
      * 删除规格

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.application.service.business;
 
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.sys.biz.model.entity.system.Dept;
 import com.taotao.cloud.sys.biz.model.vo.dept.DeptTreeVO;
 
@@ -29,7 +29,7 @@ import java.util.List;
  * @version 2022.03
  * @since 2022-03-25 14:24:48
  */
-public interface IDeptService extends BaseSuperService<Dept, Long> {
+public interface IDeptService extends BaseService<Dept, Long> {
 
     /**
      * 获取部门树

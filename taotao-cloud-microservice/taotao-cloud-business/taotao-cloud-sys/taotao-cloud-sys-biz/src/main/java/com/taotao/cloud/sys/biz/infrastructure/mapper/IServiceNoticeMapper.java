@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.sys.biz.model.entity.system.ServiceNotice;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.sys.biz.model.entity.system.ServiceNotice;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IServiceNoticeMapper extends MpSuperMapper<ServiceNotice, Long> {}
+public interface IServiceNoticeMapper extends BaseMapper<ServiceNotice> {}

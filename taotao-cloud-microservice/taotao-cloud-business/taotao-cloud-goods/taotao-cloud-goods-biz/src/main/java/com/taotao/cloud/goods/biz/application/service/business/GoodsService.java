@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.application.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.biz.model.dto.GoodsOperationDTO;
@@ -34,7 +34,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 17:00:15
  */
-public interface GoodsService extends BaseSuperService<Goods, Long> {
+public interface GoodsService extends BaseService<Goods, Long> {
 
     /**
      * 根据品牌获取商品

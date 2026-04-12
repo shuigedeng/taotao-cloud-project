@@ -22,7 +22,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.goods.biz.application.service.business.CategoryParameterGroupService;
 import com.taotao.cloud.goods.biz.application.service.business.GoodsService;
 import com.taotao.cloud.goods.biz.application.service.business.ParametersService;
@@ -52,7 +52,7 @@ import java.util.Map;
  */
 @AllArgsConstructor
 @Service
-public class CategoryParameterGroupServiceImpl extends BaseSuperServiceImpl<
+public class CategoryParameterGroupServiceImpl extends BaseServiceImpl<
 	CategoryParameterGroup,
 	Long,
         CategoryParameterGroupMapper,

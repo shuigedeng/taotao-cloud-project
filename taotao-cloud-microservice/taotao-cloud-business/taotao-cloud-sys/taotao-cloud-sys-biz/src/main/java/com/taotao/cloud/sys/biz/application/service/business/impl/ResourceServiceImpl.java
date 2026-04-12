@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.application.service.business.impl;
 
 import com.taotao.boot.common.constant.CommonConstants;
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRpcRequest;
 import com.taotao.cloud.sys.biz.application.service.business.IResourceService;
 import com.taotao.cloud.sys.biz.application.service.business.IRoleService;
@@ -47,7 +47,7 @@ import java.util.*;
 @Service
 @AllArgsConstructor
 public class ResourceServiceImpl
-	extends BaseSuperServiceImpl< Resource, Long,IResourceMapper, ResourceRepository, IResourceRepository>
+	extends BaseServiceImpl< Resource, Long,IResourceMapper, ResourceRepository, IResourceRepository>
 	implements IResourceService {
 
 	private final IRoleService roleService;

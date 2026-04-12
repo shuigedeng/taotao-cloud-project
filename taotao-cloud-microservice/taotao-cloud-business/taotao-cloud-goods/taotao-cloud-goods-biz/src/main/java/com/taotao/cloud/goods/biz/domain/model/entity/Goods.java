@@ -23,7 +23,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.utils.lang.StringUtils;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
@@ -55,7 +55,7 @@ import java.util.Objects;
 @Table(name = Goods.TABLE_NAME)
 @TableName(Goods.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = Goods.TABLE_NAME)
-public class Goods extends BaseSuperEntity<Goods, Long> {
+public class Goods extends BasePO<Goods> {
 
     public static final String TABLE_NAME = "tt_goods";
 

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.distribution.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionOrder;
 import org.apache.ibatis.annotations.Update;
 
@@ -27,7 +27,7 @@ import org.apache.ibatis.annotations.Update;
  * @version 2022.04
  * @since 2022-04-22 11:27:46
  */
-public interface DistributionOrderMapper extends MpSuperMapper<DistributionOrder, Long> {
+public interface DistributionOrderMapper extends BaseMapper<DistributionOrder> {
 
     /**
      * 修改分销员提现金额

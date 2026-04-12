@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.application.service.business;
 
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.goods.biz.model.entity.GoodsGallery;
 
 import java.util.List;
@@ -28,7 +28,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 17:00:12
  */
-public interface GoodsGalleryService extends BaseSuperService<GoodsGallery, Long> {
+public interface GoodsGalleryService extends BaseService<GoodsGallery, Long> {
 
     /**
      * 添加商品相册

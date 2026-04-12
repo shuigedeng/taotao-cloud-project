@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.application.service.inner;
 
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
 
 /**
@@ -26,7 +26,7 @@ import com.taotao.cloud.sys.biz.model.entity.system.User;
  * @version 2021.10
  * @since 2021-10-09 20:32:36
  */
-public interface IFeignUserService extends BaseSuperService<User, Long> {
+public interface IFeignUserService extends BaseService<User, Long> {
 
     <T> T test123(T t);
 }

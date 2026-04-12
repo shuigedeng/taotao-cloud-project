@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.biz.application.service.feign;
 
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 
 /**
@@ -26,7 +26,7 @@ import com.taotao.cloud.order.biz.model.entity.order.Order;
  * @version 2021.10
  * @since 2021-10-09 20:32:36
  */
-public interface FeignOrderService extends BaseSuperService<Order, Long> {
+public interface FeignOrderService extends BaseService<Order, Long> {
 
     <T> T test123(T t);
 }

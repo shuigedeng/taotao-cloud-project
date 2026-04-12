@@ -24,7 +24,7 @@ import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.security.spring.model.SecurityUser;
 import com.taotao.boot.security.spring.support.utils.SecurityUtils;
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.goods.biz.application.service.business.StoreGoodsLabelService;
 import com.taotao.cloud.goods.biz.mapper.StoreGoodsLabelMapper;
 import com.taotao.cloud.goods.biz.model.entity.StoreGoodsLabel;
@@ -48,8 +48,8 @@ import java.util.Objects;
  */
 @Service
 public class StoreGoodsLabelServiceImpl
-        extends BaseSuperServiceImpl<
-                StoreGoodsLabel, Long, StoreGoodsLabelMapper, StoreGoodsLabelRepository, StoreGoodsLabelRepository>
+        extends BaseServiceImpl<
+                        StoreGoodsLabel, Long, StoreGoodsLabelMapper, StoreGoodsLabelRepository, StoreGoodsLabelRepository>
         implements StoreGoodsLabelService {
 
     /** 缓存 */

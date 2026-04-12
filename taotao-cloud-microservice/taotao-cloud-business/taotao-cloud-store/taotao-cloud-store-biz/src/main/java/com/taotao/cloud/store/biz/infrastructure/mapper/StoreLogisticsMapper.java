@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.store.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.store.api.model.vo.StoreLogisticsVO;
 import com.taotao.cloud.store.biz.model.entity.StoreLogistics;
 import org.apache.ibatis.annotations.Select;
@@ -24,7 +24,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 /** 物流公司数据处理层 */
-public interface StoreLogisticsMapper extends MpSuperMapper<StoreLogistics, String> {
+public interface StoreLogisticsMapper extends BaseMapper<StoreLogistics, String> {
 
     /**
      * 获取店铺选择的物流公司

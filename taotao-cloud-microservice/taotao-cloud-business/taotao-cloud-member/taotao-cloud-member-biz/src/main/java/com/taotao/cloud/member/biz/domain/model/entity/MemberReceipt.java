@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.member.api.enums.MemberReceiptEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -43,7 +43,7 @@ import lombok.Setter;
 @Table(name = MemberReceipt.TABLE_NAME)
 @TableName(MemberReceipt.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = MemberReceipt.TABLE_NAME, comment = "会员发票表")
-public class MemberReceipt extends BaseSuperEntity<MemberReceipt, Long> {
+public class MemberReceipt extends BasePO<MemberReceipt> {
 
     public static final String TABLE_NAME = "tt_member_receipt";
 

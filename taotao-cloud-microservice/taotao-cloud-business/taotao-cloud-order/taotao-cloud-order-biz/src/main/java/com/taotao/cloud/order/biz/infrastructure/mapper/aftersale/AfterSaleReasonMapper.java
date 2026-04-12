@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.order.biz.infrastructure.mapper.aftersale;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleReason;
 
 /** 售后原因数据处理层 */
-public interface AfterSaleReasonMapper extends MpSuperMapper<AfterSaleReason, Long> {}
+public interface AfterSaleReasonMapper extends BaseMapper<AfterSaleReason> {}

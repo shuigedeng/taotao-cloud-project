@@ -18,7 +18,7 @@ package com.taotao.cloud.store.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.boot.common.utils.bean.BeanUtils;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.boot.webagg.entity.JpaEntityListener;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
@@ -46,7 +46,7 @@ import java.util.Objects;
 @TableName(Store.TABLE_NAME)
 @EntityListeners({JpaEntityListener.class})
 @org.springframework.data.relational.core.mapping.Table(name = Store.TABLE_NAME, comment = "店铺表")
-public class Store extends BaseSuperEntity<Store, String> {
+public class Store extends BasePO<Store, String> {
 
     public static final String TABLE_NAME = "tt_store";
 

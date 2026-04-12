@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.biz.infrastructure.repository;
 
-import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.BaseRepository;
 import com.taotao.cloud.order.biz.model.entity.order.OrderItemBack;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
@@ -28,4 +28,4 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface OrderItemRepository
-        extends JpaSuperRepository<OrderItemBack, Long>, JpaSpecificationExecutor<OrderItemBack> {}
+        extends BaseRepository<OrderItemBack>, JpaSpecificationExecutor<OrderItemBack> {}

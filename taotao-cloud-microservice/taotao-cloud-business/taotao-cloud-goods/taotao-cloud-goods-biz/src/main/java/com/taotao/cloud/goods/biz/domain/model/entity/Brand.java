@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -41,7 +41,7 @@ import java.util.Objects;
 @Entity
 @Table(name = Brand.TABLE_NAME)
 @TableName(Brand.TABLE_NAME)
-public class Brand extends BaseSuperEntity<Brand, Long> {
+public class Brand extends BasePO<Brand> {
 
     public static final String TABLE_NAME = "tt_brand";
 

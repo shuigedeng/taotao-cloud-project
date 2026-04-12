@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.infrastructure.repository;
 
-import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.BaseRepository;
 import com.taotao.cloud.payment.biz.entity.PayFlow;
 import org.springframework.stereotype.Repository;
 
@@ -26,6 +26,6 @@ import org.springframework.stereotype.Repository;
  * @since 2020/11/13 10:01
  */
 @Repository
-public interface PayFlowSuperRepository extends JpaSuperRepository<PayFlow, Long> {
+public interface PayFlowSuperRepository extends BaseRepository<PayFlow> {
 
 }

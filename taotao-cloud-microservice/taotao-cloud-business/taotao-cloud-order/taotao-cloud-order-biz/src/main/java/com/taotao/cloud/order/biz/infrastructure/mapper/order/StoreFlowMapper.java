@@ -18,7 +18,7 @@ package com.taotao.cloud.order.biz.infrastructure.mapper.order;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.order.biz.model.entity.order.StoreFlow;
 import com.taotao.cloud.store.api.model.vo.StoreFlowPayDownloadVO;
 import com.taotao.cloud.store.api.model.vo.StoreFlowRefundDownloadVO;
@@ -28,7 +28,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 /** 商家订单流水数据处理层 */
-public interface StoreFlowMapper extends MpSuperMapper<StoreFlow, Long> {
+public interface StoreFlowMapper extends BaseMapper<StoreFlow> {
 
     /**
      * 获取结算单的入账流水

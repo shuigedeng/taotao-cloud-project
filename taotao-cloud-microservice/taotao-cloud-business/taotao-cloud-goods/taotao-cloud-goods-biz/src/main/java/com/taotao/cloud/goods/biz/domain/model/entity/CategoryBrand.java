@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.SuperEntity;
+import com.taotao.boot.webagg.entity.SuperPO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -43,7 +43,7 @@ import java.util.Objects;
 @Table(name = CategoryBrand.TABLE_NAME)
 @TableName(CategoryBrand.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = CategoryBrand.TABLE_NAME)
-public class CategoryBrand extends SuperEntity<CategoryBrand, Long> {
+public class CategoryBrand extends SuperPO<CategoryBrand, Long> {
 
     public static final String TABLE_NAME = "tt_category_brand";
 

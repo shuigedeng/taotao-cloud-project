@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.application.service.business;
 
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.goods.biz.model.entity.CategoryParameterGroup;
 import com.taotao.cloud.goods.biz.model.vo.ParameterGroupVO;
 
@@ -29,7 +29,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:59:23
  */
-public interface CategoryParameterGroupService extends BaseSuperService<CategoryParameterGroup, Long> {
+public interface CategoryParameterGroupService extends BaseService<CategoryParameterGroup, Long> {
 
     /**
      * 查询分类绑定参数集合

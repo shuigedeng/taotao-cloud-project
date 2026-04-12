@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.promotion.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.promotion.biz.model.entity.SeckillApply;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.promotion.biz.model.entity.SeckillApply;
  * @version 2022.04
  * @since 2022-04-27 16:37:15
  */
-public interface SeckillApplyMapper extends MpSuperMapper<SeckillApply> {}
+public interface SeckillApplyMapper extends BaseMapper<SeckillApply> {}

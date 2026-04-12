@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.goods.biz.model.entity.StoreGoodsLabel;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.goods.biz.model.entity.StoreGoodsLabel;
  * @version 2022.04
  * @since 2022-04-27 16:57:42
  */
-public interface StoreGoodsLabelMapper extends MpSuperMapper<StoreGoodsLabel, Long> {}
+public interface StoreGoodsLabelMapper extends BaseMapper<StoreGoodsLabel> {}

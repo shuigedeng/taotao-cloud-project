@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.store.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.store.biz.model.entity.FreightTemplateChild;
 
 /** 店铺配送子模板数据处理层 */
-public interface FreightTemplateChildMapper extends MpSuperMapper<FreightTemplateChild, String> {}
+public interface FreightTemplateChildMapper extends BaseMapper<FreightTemplateChild, String> {}

@@ -28,7 +28,7 @@ import com.taotao.boot.common.utils.id.IdGeneratorUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.common.utils.secure.SignUtils;
 import com.taotao.boot.core.autoconfigure.OkhttpAutoConfiguration.OkHttpService;
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.sys.biz.application.service.business.IRegionService;
 import com.taotao.cloud.sys.biz.mapper.IRegionMapper;
 import com.taotao.cloud.sys.biz.model.convert.RegionConvert;
@@ -54,7 +54,7 @@ import java.util.*;
 @Service
 @AllArgsConstructor
 public class RegionServiceImpl
-	extends BaseSuperServiceImpl< Region, Long, IRegionMapper,RegionRepository, IRegionRepository>
+	extends BaseServiceImpl< Region, Long, IRegionMapper,RegionRepository, IRegionRepository>
 	implements IRegionService {
 
 	private final OkHttpService okHttpService;

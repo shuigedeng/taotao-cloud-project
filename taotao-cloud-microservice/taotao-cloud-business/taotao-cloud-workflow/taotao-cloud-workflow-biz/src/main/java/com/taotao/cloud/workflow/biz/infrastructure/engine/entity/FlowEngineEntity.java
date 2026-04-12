@@ -21,7 +21,7 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.SuperEntity;
+import com.taotao.boot.webagg.entity.SuperPO;
 import lombok.Data;
 
 import java.util.Date;
@@ -30,7 +30,7 @@ import java.util.Date;
 @Data
 @TableName("flow_engine")
 
-public class FlowEngineEntity extends SuperEntity<FlowEngineEntity, String> {
+public class FlowEngineEntity extends SuperPO<FlowEngineEntity, String> {
 
     /** 流程主键 */
     @TableId("id")

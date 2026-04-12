@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.application.service.business.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.goods.biz.application.service.business.CategoryBrandService;
 import com.taotao.cloud.goods.biz.mapper.CategoryBrandMapper;
 import com.taotao.cloud.goods.biz.model.entity.CategoryBrand;
@@ -37,7 +37,7 @@ import java.util.List;
  * @since 2022-04-27 17:01:32
  */
 @Service
-public class CategoryBrandServiceImpl extends BaseSuperServiceImpl<
+public class CategoryBrandServiceImpl extends BaseServiceImpl<
 	CategoryBrand,
 	Long,
         CategoryBrandMapper,

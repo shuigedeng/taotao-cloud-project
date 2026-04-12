@@ -23,7 +23,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.utils.lang.StringUtils;
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.goods.biz.application.service.business.CategoryService;
 import com.taotao.cloud.goods.biz.application.service.business.CategorySpecificationService;
 import com.taotao.cloud.goods.biz.application.service.business.SpecificationService;
@@ -49,8 +49,8 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class SpecificationServiceImpl
-        extends BaseSuperServiceImpl<
-                 Specification, Long, SpecificationMapper, SpecificationRepository, SpecificationRepository>
+        extends BaseServiceImpl<
+                         Specification, Long, SpecificationMapper, SpecificationRepository, SpecificationRepository>
         implements SpecificationService {
 
     /** 分类-规格绑定服务 */

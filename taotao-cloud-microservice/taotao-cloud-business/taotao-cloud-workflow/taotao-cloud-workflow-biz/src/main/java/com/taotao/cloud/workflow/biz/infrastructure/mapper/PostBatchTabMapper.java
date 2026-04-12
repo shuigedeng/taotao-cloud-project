@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.workflow.biz.infrastructure.entity.PostBatchTabEntity;
 
 /** 发文呈批表 */
-public interface PostBatchTabMapper extends MpSuperMapper<PostBatchTabEntity> {}
+public interface PostBatchTabMapper extends BaseMapper<PostBatchTabEntity> {}

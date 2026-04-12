@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.application.service.business;
 
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.model.page.DictPageQuery;
 import com.taotao.cloud.sys.biz.model.query.DictQuery;
@@ -34,7 +34,7 @@ import java.util.concurrent.Future;
  * @version 2021.10
  * @since 2021-10-09 20:32:36
  */
-public interface IDictService extends BaseSuperService<Dict, Long> {
+public interface IDictService extends BaseService<Dict, Long> {
 
     /**
      * 添加字典

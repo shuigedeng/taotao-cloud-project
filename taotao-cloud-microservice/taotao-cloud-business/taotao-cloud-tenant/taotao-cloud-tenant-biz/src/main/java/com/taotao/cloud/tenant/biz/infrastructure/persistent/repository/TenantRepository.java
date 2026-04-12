@@ -16,14 +16,8 @@
 
 package com.taotao.cloud.tenant.biz.infrastructure.persistent.repository;
 
-import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
-import com.taotao.boot.ddd.model.domain.repository.light.BaseLightDomainRepository;
+import com.taotao.boot.data.jpa.base.repository.BaseRepository;
 import com.taotao.cloud.tenant.biz.domain.aggregate.TenantAgg;
-import com.taotao.cloud.tenant.biz.domain.repository.TenantDomainRepository;
-import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.TenantMapper;
-import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.TenantPackageMapper;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 /**
  * DeptDomainRepositoryImpl
@@ -32,6 +26,6 @@ import org.springframework.stereotype.Service;
  * @version 2026.04
  * @since 2025-12-19 09:30:45
  */
-public interface TenantRepository extends JpaSuperRepository<TenantAgg,Long> {
+public interface TenantRepository extends BaseRepository<TenantAgg> {
 
 }

@@ -19,15 +19,10 @@ package com.taotao.cloud.sys.biz.domain.agg;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.boot.common.enums.SexEnum;
 import com.taotao.boot.ddd.model.domain.repository.light.LightAggregateRoot;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;
-import org.hibernate.Hibernate;
-
-import java.time.LocalDateTime;
-import java.util.Objects;
 
 /**
  * 系统用户表

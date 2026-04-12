@@ -17,7 +17,7 @@
 package com.taotao.cloud.store.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.boot.webagg.entity.JpaEntityListener;
 import com.taotao.cloud.store.api.enums.BillStatusEnum;
 import jakarta.persistence.Column;
@@ -43,7 +43,7 @@ import java.util.Objects;
 @TableName(Bill.TABLE_NAME)
 @EntityListeners({JpaEntityListener.class})
 @org.springframework.data.relational.core.mapping.Table(name = Bill.TABLE_NAME, comment = "结算清单表")
-public class Bill extends BaseSuperEntity<Bill, String> {
+public class Bill extends BasePO<Bill, String> {
 
     public static final String TABLE_NAME = "tt_bill";
 

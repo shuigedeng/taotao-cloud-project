@@ -19,7 +19,7 @@ package com.taotao.cloud.operation.biz.domain.model.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.boot.common.enums.ClientTypeEnum;
 import com.taotao.boot.common.utils.lang.StringUtils;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.operation.api.enums.PageEnum;
 import com.taotao.cloud.operation.api.enums.SwitchEnum;
 import jakarta.persistence.Column;
@@ -42,7 +42,7 @@ import java.util.Objects;
 @Table(name = PageData.TABLE_NAME)
 @TableName(PageData.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = PageData.TABLE_NAME, comment = "页面数据表")
-public class PageData extends BaseSuperEntity<PageData, Long> {
+public class PageData extends BasePO<PageData> {
 
     public static final String TABLE_NAME = "tt_page_data";
     /** 页面名称 */

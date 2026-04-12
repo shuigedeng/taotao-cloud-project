@@ -20,7 +20,7 @@ import com.alibaba.cloud.commons.lang.StringUtils;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.boot.common.enums.SwitchEnum;
 import com.taotao.boot.common.utils.bean.BeanUtils;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.member.sys.model.dto.MemberEvaluationDTO;
 import com.taotao.cloud.order.api.model.vo.order.OrderVO;
@@ -48,7 +48,7 @@ import lombok.Setter;
 @Table(name = MemberEvaluation.TABLE_NAME)
 @TableName(MemberEvaluation.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = MemberEvaluation.TABLE_NAME, comment = "会员商品评价表")
-public class MemberEvaluation extends BaseSuperEntity<MemberEvaluation, Long> {
+public class MemberEvaluation extends BasePO<MemberEvaluation> {
 
     public static final String TABLE_NAME = "tt_member_evaluation";
 

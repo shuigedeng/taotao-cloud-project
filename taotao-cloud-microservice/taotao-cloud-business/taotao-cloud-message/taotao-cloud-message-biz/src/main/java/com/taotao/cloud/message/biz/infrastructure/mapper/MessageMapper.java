@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.message.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.message.biz.model.entity.Message;
 
 /** 管理端发送消息内容数据处理层 */
-public interface MessageMapper extends MpSuperMapper<Message, Long> {}
+public interface MessageMapper extends BaseMapper<Message> {}

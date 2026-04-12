@@ -18,7 +18,7 @@ package com.taotao.cloud.operation.biz.domain.model.entity;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.operation.api.enums.ArticleEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -47,7 +47,7 @@ import java.util.Objects;
 @Table(name = Article.TABLE_NAME)
 @TableName(Article.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = Article.TABLE_NAME, comment = "文章表")
-public class Article extends BaseSuperEntity<Article, Long> {
+public class Article extends BasePO<Article> {
 
     public static final String TABLE_NAME = "tt_article";
 

@@ -29,7 +29,7 @@ import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.boot.common.utils.common.OrikaUtils;
 import com.taotao.boot.common.utils.date.DateUtils;
 import com.taotao.boot.security.spring.support.utils.SecurityUtils;
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.goods.api.enums.StudioStatusEnum;
 import com.taotao.cloud.goods.biz.application.service.business.GoodsService;
 import com.taotao.cloud.goods.biz.application.service.business.StudioCommodityService;
@@ -68,7 +68,7 @@ import java.util.Map;
  */
 @Service
 public class StudioServiceImpl
-        extends BaseSuperServiceImpl< Studio, Long, StudioMapper,StudioRepository, StudioRepository>
+        extends BaseServiceImpl< Studio, Long, StudioMapper,StudioRepository, StudioRepository>
         implements StudioService {
 
     @Autowired

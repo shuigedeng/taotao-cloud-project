@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.infrastructure.task.job.quartz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.boot.job.quartz.enums.QuartzJobCode;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -40,7 +40,7 @@ import lombok.*;
 @Table(name = QuartzJob.TABLE_NAME)
 @TableName(QuartzJob.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = QuartzJob.TABLE_NAME, comment = "Quartz任务表")
-public class QuartzJob extends BaseSuperEntity<QuartzJob, Long> {
+public class QuartzJob extends BasePO<QuartzJob> {
 
     public static final String TABLE_NAME = "tt_quartz_job";
 

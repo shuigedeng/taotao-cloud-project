@@ -19,14 +19,14 @@ package com.taotao.cloud.operation.biz.infrastructure.mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.operation.api.model.vo.ArticleVO;
 import com.taotao.cloud.operation.biz.model.entity.Article;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /** 文章数据处理层 */
-public interface ArticleMapper extends MpSuperMapper<Article, Long> {
+public interface ArticleMapper extends BaseMapper<Article> {
 
     /**
      * 获取文章VO分页

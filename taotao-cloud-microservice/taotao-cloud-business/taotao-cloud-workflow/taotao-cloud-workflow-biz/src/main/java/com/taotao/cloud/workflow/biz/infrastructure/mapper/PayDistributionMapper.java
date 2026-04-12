@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.workflow.biz.infrastructure.entity.PayDistributionEntity;
 
 /** 薪酬发放 */
-public interface PayDistributionMapper extends MpSuperMapper<PayDistributionEntity> {}
+public interface PayDistributionMapper extends BaseMapper<PayDistributionEntity> {}

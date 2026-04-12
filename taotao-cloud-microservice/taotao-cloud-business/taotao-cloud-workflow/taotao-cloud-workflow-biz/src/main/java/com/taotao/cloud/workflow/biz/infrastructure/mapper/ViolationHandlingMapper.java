@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.workflow.biz.infrastructure.entity.ViolationHandlingEntity;
 
 /** 违章处理申请表 */
-public interface ViolationHandlingMapper extends MpSuperMapper<ViolationHandlingEntity> {}
+public interface ViolationHandlingMapper extends BaseMapper<ViolationHandlingEntity> {}

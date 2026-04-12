@@ -18,7 +18,7 @@ package com.taotao.cloud.member.biz.infrastructure.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberSign;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -26,7 +26,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 /** 会员签到数据处理层 */
-public interface IMemberSignMapper extends MpSuperMapper<MemberSign, Long> {
+public interface IMemberSignMapper extends BaseMapper<MemberSign> {
 
     /**
      * 获取会员之前签到信息

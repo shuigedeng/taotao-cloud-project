@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.promotion.biz.domain.model.entity;
 
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
-import com.taotao.boot.webagg.entity.SuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
+import com.taotao.boot.webagg.entity.SuperPO;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import jakarta.persistence.Column;
@@ -43,7 +43,7 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BasePromotions<T extends SuperEntity<T, I>, I extends Serializable> extends BaseSuperEntity<T, I> {
+public class BasePromotions<T extends SuperPO<T, I>, I extends Serializable> extends BasePO<T, I> {
 
     @Serial
     private static final long serialVersionUID = 7814832369110695758L;

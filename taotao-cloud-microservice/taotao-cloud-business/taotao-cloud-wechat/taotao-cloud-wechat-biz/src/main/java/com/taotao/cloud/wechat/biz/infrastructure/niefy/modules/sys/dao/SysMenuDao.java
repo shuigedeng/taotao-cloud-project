@@ -17,7 +17,7 @@
 package com.taotao.cloud.wechat.biz.infrastructure.niefy.modules.sys.dao;
 
 import com.github.niefy.modules.sys.entity.SysMenuEntity;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -30,7 +30,7 @@ import java.util.List;
  */
 @Mapper
 @CacheNamespace(flushInterval = 300000L) // 缓存五分钟过期
-public interface SysMenuDao extends MpSuperMapper<SysMenuEntity> {
+public interface SysMenuDao extends BaseMapper<SysMenuEntity> {
 
     /**
      * 根据父菜单，查询子菜单

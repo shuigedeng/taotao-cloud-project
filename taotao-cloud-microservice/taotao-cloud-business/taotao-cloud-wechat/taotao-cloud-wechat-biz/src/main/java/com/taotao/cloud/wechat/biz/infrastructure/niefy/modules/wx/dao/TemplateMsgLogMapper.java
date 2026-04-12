@@ -17,8 +17,8 @@
 package com.taotao.cloud.wechat.biz.infrastructure.niefy.modules.wx.dao;
 
 import com.github.niefy.modules.wx.entity.TemplateMsgLog;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface TemplateMsgLogMapper extends MpSuperMapper<TemplateMsgLog> {}
+public interface TemplateMsgLogMapper extends BaseMapper<TemplateMsgLog> {}

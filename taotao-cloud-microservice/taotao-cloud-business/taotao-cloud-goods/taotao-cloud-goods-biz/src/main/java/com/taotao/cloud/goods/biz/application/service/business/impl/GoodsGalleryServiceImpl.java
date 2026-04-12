@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.taotao.boot.common.utils.io.FileUtils;
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.goods.biz.application.service.business.GoodsGalleryService;
 import com.taotao.cloud.goods.biz.mapper.GoodsGalleryMapper;
 import com.taotao.cloud.goods.biz.model.entity.GoodsGallery;
@@ -45,7 +45,7 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class GoodsGalleryServiceImpl
-        extends BaseSuperServiceImpl<GoodsGallery, Long, GoodsGalleryMapper, GoodsGalleryRepository, GoodsGalleryRepository>
+        extends BaseServiceImpl<GoodsGallery, Long, GoodsGalleryMapper, GoodsGalleryRepository, GoodsGalleryRepository>
         implements GoodsGalleryService {
 
     /** 设置 */

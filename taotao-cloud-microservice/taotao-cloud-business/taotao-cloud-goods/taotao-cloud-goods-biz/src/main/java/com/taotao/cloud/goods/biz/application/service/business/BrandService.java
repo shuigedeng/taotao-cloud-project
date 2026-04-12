@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.application.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.goods.biz.model.dto.BrandDTO;
 import com.taotao.cloud.goods.biz.model.entity.Brand;
 import com.taotao.cloud.goods.biz.model.page.BrandPageQuery;
@@ -32,7 +32,7 @@ import java.util.Map;
  * @version 2022.04
  * @since 2022-04-27 16:59:15
  */
-public interface BrandService extends BaseSuperService<Brand, Long> {
+public interface BrandService extends BaseService<Brand, Long> {
 
 	IPage<Brand> brandsQueryPage(BrandPageQuery page);
 	/**

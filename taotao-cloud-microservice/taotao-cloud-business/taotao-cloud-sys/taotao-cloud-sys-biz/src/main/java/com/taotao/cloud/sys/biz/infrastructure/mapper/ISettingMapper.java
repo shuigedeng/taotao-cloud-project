@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.sys.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
-import com.taotao.cloud.sys.biz.model.entity.setting.Setting;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
+import com.taotao.cloud.sys.biz.domain.model.entity.setting.Setting;
 
 /**
  * ISettingMapper
@@ -26,4 +26,4 @@ import com.taotao.cloud.sys.biz.model.entity.setting.Setting;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface ISettingMapper extends MpSuperMapper<Setting, Long> {}
+public interface ISettingMapper extends BaseMapper<Setting> {}

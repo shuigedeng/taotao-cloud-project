@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.workflow.biz.infrastructure.entity.ReceiptSignEntity;
 
 /** 收文签呈单 */
-public interface ReceiptSignMapper extends MpSuperMapper<ReceiptSignEntity> {}
+public interface ReceiptSignMapper extends BaseMapper<ReceiptSignEntity> {}

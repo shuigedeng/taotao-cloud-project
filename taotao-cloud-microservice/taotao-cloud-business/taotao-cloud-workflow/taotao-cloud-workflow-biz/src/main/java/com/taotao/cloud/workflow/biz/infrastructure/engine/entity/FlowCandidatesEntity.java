@@ -19,13 +19,13 @@ package com.taotao.cloud.workflow.biz.infrastructure.engine.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.SuperEntity;
+import com.taotao.boot.webagg.entity.SuperPO;
 import lombok.Data;
 
 /** 流程候选人 */
 @Data
 @TableName("flow_candidates")
-public class FlowCandidatesEntity extends SuperEntity<FlowCandidatesEntity, String> {
+public class FlowCandidatesEntity extends SuperPO<FlowCandidatesEntity, String> {
     /** 主键 */
     @TableId("id")
     private String id;

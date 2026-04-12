@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -43,7 +43,7 @@ import lombok.Setter;
 @Table(name = MemberPointsHistory.TABLE_NAME)
 @TableName(MemberPointsHistory.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = MemberPointsHistory.TABLE_NAME, comment = "会员积分历史表")
-public class MemberPointsHistory extends BaseSuperEntity<MemberPointsHistory, Long> {
+public class MemberPointsHistory extends BasePO<MemberPointsHistory> {
 
     public static final String TABLE_NAME = "tt_member_points_history";
 

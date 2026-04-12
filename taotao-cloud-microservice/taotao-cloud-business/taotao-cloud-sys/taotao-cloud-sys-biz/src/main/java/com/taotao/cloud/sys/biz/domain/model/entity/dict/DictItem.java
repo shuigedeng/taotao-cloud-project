@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.domain.model.entity.dict;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -44,7 +44,7 @@ import java.util.Objects;
 @Table(name = DictItem.TABLE_NAME)
 @TableName(DictItem.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = DictItem.TABLE_NAME, comment = "字典项表")
-public class DictItem extends BaseSuperEntity<DictItem, Long> {
+public class DictItem extends BasePO<DictItem> {
 
     public static final String TABLE_NAME = "tt_dict_item";
 

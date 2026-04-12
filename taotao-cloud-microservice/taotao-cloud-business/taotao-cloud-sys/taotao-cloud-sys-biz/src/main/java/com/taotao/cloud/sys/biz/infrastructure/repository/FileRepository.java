@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.infrastructure.repository;
 
 
-import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.BaseRepository;
 import com.taotao.cloud.sys.biz.model.entity.File;
 
 /**
@@ -27,4 +27,4 @@ import com.taotao.cloud.sys.biz.model.entity.File;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface FileRepository extends JpaSuperRepository<File, Long> {}
+public interface FileRepository extends BaseRepository<File> {}

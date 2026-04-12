@@ -19,13 +19,13 @@ package com.taotao.cloud.message.biz.infrastructure.mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.message.biz.model.entity.StoreMessage;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /** 店铺接收到消息发送数据处理层 */
-public interface StoreMessageMapper extends MpSuperMapper<StoreMessage, Long> {
+public interface StoreMessageMapper extends BaseMapper<StoreMessage> {
 
     /**
      * 店铺消息分页

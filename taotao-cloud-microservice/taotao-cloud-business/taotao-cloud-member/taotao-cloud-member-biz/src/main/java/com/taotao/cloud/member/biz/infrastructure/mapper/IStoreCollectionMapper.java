@@ -19,7 +19,7 @@ package com.taotao.cloud.member.biz.infrastructure.mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberStoreCollection;
 import com.taotao.cloud.store.api.model.vo.StoreCollectionVO;
 import org.apache.ibatis.annotations.Param;
@@ -28,7 +28,7 @@ import org.apache.ibatis.annotations.Select;
 /**
  * 会员收藏数据处理层
  */
-public interface IStoreCollectionMapper extends MpSuperMapper<MemberStoreCollection, Long> {
+public interface IStoreCollectionMapper extends BaseMapper<MemberStoreCollection> {
 
     /**
      * 会员店铺收藏分页

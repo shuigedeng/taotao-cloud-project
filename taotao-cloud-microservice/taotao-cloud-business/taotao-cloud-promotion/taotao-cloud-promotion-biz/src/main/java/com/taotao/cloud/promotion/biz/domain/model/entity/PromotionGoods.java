@@ -19,7 +19,7 @@ package com.taotao.cloud.promotion.biz.domain.model.entity;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.boot.common.enums.PromotionTypeEnum;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsDTO;
@@ -50,7 +50,7 @@ import java.util.Objects;
 @Table(name = PromotionGoods.TABLE_NAME)
 @TableName(PromotionGoods.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = PromotionGoods.TABLE_NAME, comment = "促销商品")
-public class PromotionGoods extends BaseSuperEntity<PromotionGoods, Long> {
+public class PromotionGoods extends BasePO<PromotionGoods> {
 
     public static final String TABLE_NAME = "tt_promotion_goods";
     /** 商家ID */

@@ -19,7 +19,7 @@ package com.taotao.cloud.operation.biz.domain.model.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.boot.web.enums.SensitiveStrategy;
 import com.taotao.boot.web.sensitive.desensitize.Sensitive;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.operation.api.enums.FeedbackTypeEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -47,7 +47,7 @@ import java.util.Objects;
 @Table(name = Feedback.TABLE_NAME)
 @TableName(Feedback.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = Feedback.TABLE_NAME, comment = "意见反馈表")
-public class Feedback extends BaseSuperEntity<Feedback, Long> {
+public class Feedback extends BasePO<Feedback> {
 
     public static final String TABLE_NAME = "tt_feedback";
 

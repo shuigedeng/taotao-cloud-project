@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
-import com.taotao.cloud.workflow.biz.infrastructure.entity.ApplyDeliverGoodsEntryEntity;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
+import com.taotao.cloud.workflow.biz.domain.entity.ApplyDeliverGoodsEntryEntity;
 
 /** 发货申请单明细 */
-public interface ApplyDeliverGoodsEntryMapper extends MpSuperMapper<ApplyDeliverGoodsEntryEntity> {}
+public interface ApplyDeliverGoodsEntryMapper extends BaseMapper<ApplyDeliverGoodsEntryEntity> {}

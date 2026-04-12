@@ -16,14 +16,14 @@
 
 package com.taotao.cloud.distribution.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.distribution.biz.model.entity.Distribution;
 import org.apache.ibatis.annotations.Update;
 
 import java.math.BigDecimal;
 
 /** 分销员数据处理层 */
-public interface DistributionMapper extends MpSuperMapper<Distribution, Long> {
+public interface DistributionMapper extends BaseMapper<Distribution> {
 
     /**
      * 修改分销员可提现金额

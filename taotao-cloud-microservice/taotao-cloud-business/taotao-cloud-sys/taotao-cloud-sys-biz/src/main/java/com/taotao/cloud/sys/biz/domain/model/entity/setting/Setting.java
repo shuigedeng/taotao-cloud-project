@@ -19,7 +19,7 @@ package com.taotao.cloud.sys.biz.domain.model.entity.setting;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
 import lombok.*;
@@ -45,7 +45,7 @@ import java.util.Objects;
 @Table(name = Setting.TABLE_NAME)
 @TableName(value = Setting.TABLE_NAME, autoResultMap = true)
 @org.springframework.data.relational.core.mapping.Table(name = Setting.TABLE_NAME, comment = "配置表")
-public class Setting extends BaseSuperEntity<Setting, Long> {
+public class Setting extends BasePO<Setting> {
 
     public static final String TABLE_NAME = "tt_setting";
 

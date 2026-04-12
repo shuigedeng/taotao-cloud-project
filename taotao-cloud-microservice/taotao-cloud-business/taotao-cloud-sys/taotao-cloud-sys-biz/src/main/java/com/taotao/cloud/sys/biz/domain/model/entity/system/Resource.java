@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.domain.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import com.taotao.cloud.sys.api.enums.ResourceTypeEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -44,7 +44,7 @@ import java.util.Objects;
 @Table(name = Resource.TABLE_NAME)
 @TableName(Resource.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = Resource.TABLE_NAME, comment = "资源表")
-public class Resource extends BaseSuperEntity<Resource, Long> {
+public class Resource extends BasePO<Resource> {
 
     public static final String TABLE_NAME = "tt_resource";
 

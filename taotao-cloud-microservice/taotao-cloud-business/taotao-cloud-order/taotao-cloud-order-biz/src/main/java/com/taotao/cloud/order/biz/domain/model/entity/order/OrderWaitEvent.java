@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.domain.model.entity.order;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -44,7 +44,7 @@ import java.util.Objects;
 @TableName(OrderWaitEvent.TABLE_NAME)
 @Table(name = OrderWaitEvent.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = OrderWaitEvent.TABLE_NAME, comment = "订单定时任务处理表")
-public class OrderWaitEvent extends BaseSuperEntity<OrderWaitEvent, Long> {
+public class OrderWaitEvent extends BasePO<OrderWaitEvent> {
 
     public static final String TABLE_NAME = "order_wait_event";
 

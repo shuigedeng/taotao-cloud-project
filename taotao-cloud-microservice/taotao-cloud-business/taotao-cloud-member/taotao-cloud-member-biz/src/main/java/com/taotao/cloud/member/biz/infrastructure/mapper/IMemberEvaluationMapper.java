@@ -19,7 +19,7 @@ package com.taotao.cloud.member.biz.infrastructure.mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberEvaluation;
 import com.taotao.cloud.member.sys.model.vo.StoreRatingVO;
 import org.apache.ibatis.annotations.Param;
@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 /** 会员商品评价数据处理层 */
-public interface IMemberEvaluationMapper extends MpSuperMapper<MemberEvaluation, Long> {
+public interface IMemberEvaluationMapper extends BaseMapper<MemberEvaluation> {
 
     /**
      * 会员评价分页

@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.infrastructure.mapper;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.model.ddd.query.PageQuery;
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.boot.data.mybatis.mybatisplus.query.LambdaQueryWrapperX;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import org.apache.ibatis.annotations.Select;
@@ -33,7 +33,7 @@ import java.util.Set;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IResourceMapper extends MpSuperMapper<Resource, Long> {
+public interface IResourceMapper extends BaseMapper<Resource> {
 
     @Select("""
 		select * from tt_resource where id in #{roleIds}

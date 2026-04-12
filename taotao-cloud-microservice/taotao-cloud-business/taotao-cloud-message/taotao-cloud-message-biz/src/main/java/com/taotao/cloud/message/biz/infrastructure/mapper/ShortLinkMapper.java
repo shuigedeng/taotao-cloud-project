@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.message.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.message.biz.model.entity.ShortLink;
 
 /** 短链接 Dao层 */
-public interface ShortLinkMapper extends MpSuperMapper<ShortLink, Long> {}
+public interface ShortLinkMapper extends BaseMapper<ShortLink> {}

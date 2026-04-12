@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.domain.model.entity.sensitive;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -42,7 +42,7 @@ import java.util.Objects;
 @Table(name = SensitiveWord.TABLE_NAME)
 @TableName(SensitiveWord.TABLE_NAME)
 @org.springframework.data.relational.core.mapping.Table(name = SensitiveWord.TABLE_NAME, comment = "敏感词表")
-public class SensitiveWord extends BaseSuperEntity<SensitiveWord, Long> {
+public class SensitiveWord extends BasePO<SensitiveWord> {
 
     public static final String TABLE_NAME = "tt_sensitive_words";
 

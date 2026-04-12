@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.workflow.biz.infrastructure.entity.ArchivalBorrowEntity;
 
 /** 档案借阅申请 */
-public interface ArchivalBorrowMapper extends MpSuperMapper<ArchivalBorrowEntity> {}
+public interface ArchivalBorrowMapper extends BaseMapper<ArchivalBorrowEntity> {}

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.biz.application.service.feign.impl;
 
-import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.order.biz.application.service.business.order.OrderService;
 import com.taotao.cloud.order.biz.application.service.feign.FeignOrderService;
 import com.taotao.cloud.order.biz.mapper.order.OrderMapper;
@@ -36,7 +36,7 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class FeignOrderServiceImpl
-        extends BaseSuperServiceImpl<Order, Long, OrderMapper,  OrderRepository, OrderRepository>
+        extends BaseServiceImpl<Order, Long, OrderMapper,  OrderRepository, OrderRepository>
         implements FeignOrderService {
 
     @Autowired

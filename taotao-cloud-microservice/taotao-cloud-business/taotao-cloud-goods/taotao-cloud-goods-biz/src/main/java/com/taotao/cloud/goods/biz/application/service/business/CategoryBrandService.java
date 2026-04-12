@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.application.service.business;
 
-import com.taotao.boot.webagg.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.goods.biz.model.entity.CategoryBrand;
 import com.taotao.cloud.goods.biz.model.vo.CategoryBrandVO;
 
@@ -29,7 +29,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:59:19
  */
-public interface CategoryBrandService extends BaseSuperService<CategoryBrand, Long> {
+public interface CategoryBrandService extends BaseService<CategoryBrand, Long> {
 
     /**
      * 根据分类id查询品牌信息
