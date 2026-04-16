@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "read": ["/Users/username/.m2/settings.xml"],
+    "write": ["/tmp/claude-output"],
+    "network": ["localhost:9090"]
+  },
+  "model": {
+    "temperature": 0.5
+  },
+  "custom": {
+    "theme": "dark",
+    "notifications": true,
+    "autoSave": true
+  }
+}

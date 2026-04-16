@@ -1,0 +1,4 @@
+- 单元测试覆盖率 ≥ 80%（Jacoco）
+- 领域层测试：纯 POJO，无 Spring 上下文
+- 应用层测试：使用 `@SpringBootTest` + Testcontainers
+- 禁止在测试中使用 `@DirtiesContext`

@@ -1,0 +1,41 @@
+
+## 3. 团队配置
+
+**`.claude/settings.json`** - 团队共享配置
+```json
+{
+"version": "1.0",
+"permissions": {
+"read": ["src/**/*.java", "src/**/*.yml", "pom.xml"],
+"write": ["src/**/*.java", "src/**/*.xml"],
+"execute": ["./mvnw", "git", "docker"],
+"network": ["localhost:8080", "localhost:3306", "api.github.com"]
+},
+"model": {
+"default": "claude-3.5-sonnet-20240620",
+"fallback": "claude-3-opus-20240229",
+"temperature": 0.3,
+"maxTokens": 4096
+},
+"git": {
+"autoCommit": false,
+"requireTests": true,
+"commitMessageTemplate": "type(scope): description\n\nCloses #{{issue}}"
+},
+"java": {
+"buildTool": "maven",
+"testCommand": "./mvnw test",
+"compileCommand": "./mvnw compile",
+"packageCommand": "./mvnw clean package -DskipTests=false"
+},
+"integrations": {
+"jira": {
+"enabled": false,
+"project": "SPRING"
+},
+"sonarqube": {
+"enabled": true,
+"url": "http://localhost:9000"
+}
+}
+}

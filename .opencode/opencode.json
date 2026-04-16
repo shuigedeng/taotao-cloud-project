@@ -1,0 +1,31 @@
+{
+  "$schema": "https://opencode.ai/schema/opencode.json",
+  "name": "springboot-project",
+  "version": "1.0.0",
+  "settings": {
+    "theme": "system",
+    "model": {
+      "default": "claude-3.5-sonnet",
+      "fallback": "gpt-4"
+    },
+    "temperature": 0.3
+  },
+  "plugins": [
+    "@opencode/plugin-test-runner",
+    "@opencode/plugin-git",
+    "@mingeon/opencode-blueprint"
+  ],
+  "server": {
+    "port": 3000,
+    "host": "localhost"
+  },
+  "git": {
+    "autoCommit": false,
+    "requireTests": true
+  },
+  "java": {
+    "version": "17",
+    "buildTool": "maven",
+    "testFramework": "junit5"
+  }
+}
