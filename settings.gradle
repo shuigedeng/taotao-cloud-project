@@ -106,7 +106,7 @@ dependencyResolutionManagement {
     }
 }
 
-def oneLayerProjects = ['scala', 'python', 'design-patterns', 'cache', 'jdbcpool', 'netty']
+def oneLayerProjects = ['scala', 'python', 'design-patterns', 'cache', 'jdbcpool', 'netty', 'ai']
 for (project in oneLayerProjects) {
     include "taotao-cloud-${project}"
 }
@@ -136,7 +136,7 @@ def excludedName(file) {
             && file.name != ".frontend-gradle-plugin"
 }
 
-def threeLayerProjects = ['microservice', 'warehouse']
+def threeLayerProjects = ['microservice', 'warehouse', 'agent']
 for (project in threeLayerProjects) {
     def dir = "taotao-cloud-${project}"
     file("${rootDir}/${dir}").eachDir { directory ->
