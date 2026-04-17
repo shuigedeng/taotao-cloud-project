@@ -74,7 +74,7 @@ dependencies {
     implementation "io.grpc:grpc-services:1.80.0"
     testImplementation("io.grpc:grpc-testing:1.80.0")
     implementation 'com.google.code.gson:gson:2.13.2'
-    implementation 'com.google.guava:guava:33.5.0-jre'
+    implementation 'com.google.guava:guava:33.6.0-jre'
 
     api "jakarta.servlet:jakarta.servlet-api:6.1.0"
     api "jakarta.validation:jakarta.validation-api:3.1.1"
