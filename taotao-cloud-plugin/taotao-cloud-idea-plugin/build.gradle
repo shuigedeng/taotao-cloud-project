@@ -64,7 +64,12 @@ plugins {
 }
 
 repositories {
-    mavenCentral()
+    mavenLocal()
+    //mavenCentral()
+
+    maven {
+        url = "https://repo1.maven.org/maven2"
+    }
 
     intellijPlatform {
         defaultRepositories()

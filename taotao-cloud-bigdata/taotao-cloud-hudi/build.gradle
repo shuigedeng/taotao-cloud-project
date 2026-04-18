@@ -4,7 +4,10 @@ apply plugin: "scala"
 
 repositories {
     mavenLocal()
-    mavenCentral()
+    //mavenCentral()
+    maven {
+        url = "https://repo1.maven.org/maven2"
+    }
     maven {
         allowInsecureProtocol = true
         url = 'https://build.shibboleth.net/nexus/content/groups/public'

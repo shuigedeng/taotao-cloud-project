@@ -37,7 +37,11 @@ buildscript {
 
     repositories {
         mavenLocal()
-        maven { url = "https://plugins.gradle.org/m2/" }
+        //maven { url = "https://plugins.gradle.org/m2/" }
+
+        maven {
+            url = "https://repo1.maven.org/maven2"
+        }
 
         maven {
             allowInsecureProtocol = true
@@ -62,7 +66,7 @@ buildscript {
             url = "https://mirrors.huaweicloud.com/repository/maven/"
         }
 
-        mavenCentral()
+        //mavenCentral()
         gradlePluginPortal()
         maven { url ="https://repo.spring.io/snapshot" }
         maven { url ="https://repo.spring.io/milestone" }
@@ -262,7 +266,7 @@ allprojects {
 
     repositories {
         mavenLocal()
-        mavenCentral()
+        //mavenCentral()
 
         maven {
             url = "https://repo1.maven.org/maven2"
@@ -273,7 +277,7 @@ allprojects {
 configure(subprojects.findAll { (!excludeIdeaSubProjects.contains(it.name)) }) { project ->
     repositories {
         mavenLocal()
-        mavenCentral()
+        //mavenCentral()
 
         maven {
             url = "https://repo1.maven.org/maven2"
