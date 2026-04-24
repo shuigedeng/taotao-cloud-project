@@ -14,9 +14,9 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:6.0.3'
     testImplementation "org.assertj:assertj-core:3.27.7"
 
-    compileOnly "org.projectlombok:lombok:1.18.44"
-    annotationProcessor "org.projectlombok:lombok:1.18.44"
-    testCompileOnly "org.projectlombok:lombok:1.18.44"
-    testAnnotationProcessor  "org.projectlombok:lombok:1.18.44"
+    compileOnly "org.projectlombok:lombok:1.18.46"
+    annotationProcessor "org.projectlombok:lombok:1.18.46"
+    testCompileOnly "org.projectlombok:lombok:1.18.46"
+    testAnnotationProcessor  "org.projectlombok:lombok:1.18.46"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
 }
