@@ -428,7 +428,7 @@ taotao-cloud-project -- 父项目
 +--- Project ':taotao-boot-starter-web'
 +--- Project ':taotao-boot-starter-websocket'
 +--- Project ':taotao-boot-starter-websocket-netty'
-+--- Project ':taotao-boot-starter-xss'
++--- Project ':taotao-boot-starter-webguard-xss'
 +--- Project ':taotao-boot-starter-zookeeper'
 +--- Project ':taotao-cloud-demo'
 +--- Project ':taotao-cloud-dependencies'
