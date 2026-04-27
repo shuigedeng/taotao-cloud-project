@@ -23,10 +23,10 @@ dependencies {
     //boot
     implementation "io.github.shuigedeng:taotao-boot-starter-core"
     implementation "io.github.shuigedeng:taotao-boot-starter-monitor"
-    implementation "io.github.shuigedeng:taotao-boot-starter-captcha"
+    implementation "io.github.shuigedeng:taotao-boot-starter-webguard-captcha"
     implementation "io.github.shuigedeng:taotao-boot-starter-logger"
-    implementation "io.github.shuigedeng:taotao-boot-starter-captcha"
-    implementation "io.github.shuigedeng:taotao-boot-starter-useragent"
+    implementation "io.github.shuigedeng:taotao-boot-starter-webguard-captcha"
+    implementation "io.github.shuigedeng:taotao-boot-starter-webguard-useragent"
     implementation "io.github.shuigedeng:taotao-boot-starter-idgenerator"
     implementation "io.github.shuigedeng:taotao-boot-starter-lock"
     implementation "io.github.shuigedeng:taotao-boot-starter-prometheus"
@@ -113,7 +113,7 @@ description = "网关模块"
 //dependencies {
     //implementation "io.github.shuigedeng:taotao-boot-starter-core"
     //implementation "io.github.shuigedeng:taotao-boot-starter-monitor"
-    //implementation "io.github.shuigedeng:taotao-boot-starter-captcha"
+    //implementation "io.github.shuigedeng:taotao-boot-starter-webguard-captcha"
     //implementation "io.github.shuigedeng:taotao-boot-starter-logger"
 //
 //    api "org.springframework.boot:spring-boot-starter-webflux"
