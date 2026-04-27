@@ -96,7 +96,7 @@ dependencies {
     //implementation 'com.ververica:flink-cdc-pipeline-connector-values:3.0.1'
 
     implementation 'com.mysql:mysql-connector-j:9.6.0'
-    implementation 'redis.clients:jedis:7.4.1'
+    implementation 'redis.clients:jedis:7.5.0'
     implementation 'org.apache.hive:hive-exec:4.2.0'
 
     implementation 'org.apache.hadoop:hadoop-common:3.5.0'
@@ -106,20 +106,20 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.flink/flink-shaded-hadoop-3-uber
     //implementation group: 'org.apache.flink', name: 'flink-shaded-hadoop-3-uber', version: '3.1.1.7.2.9.0-173-9.0'
 
-    implementation("org.apache.paimon:paimon-bundle:1.3.1")
-    implementation("org.apache.paimon:paimon-format:1.3.1")
-    implementation("org.apache.paimon:paimon-codegen:1.3.1")
-    implementation("org.apache.paimon:paimon-codegen-loader:1.3.1")
-    implementation("org.apache.paimon:paimon-filesystems:1.3.1")
-    implementation("org.apache.paimon:paimon-service-client:1.3.1")
-    implementation("org.apache.paimon:paimon-service-runtime:1.3.1")
-    implementation("org.apache.paimon:paimon-oss:1.3.1")
-    implementation("org.apache.paimon:paimon-oss-impl:1.3.1")
-    implementation("org.apache.paimon:paimon-flink-2.0:1.3.1")
-    implementation("org.apache.paimon:paimon-flink-cdc:1.3.1")
-    implementation('org.apache.paimon:paimon-flink-action:1.3.1')
-    implementation("org.apache.paimon:paimon-hive-catalog:1.3.1")
-    implementation("org.apache.paimon:paimon-hive-connector-3.1:1.3.1")
+    implementation("org.apache.paimon:paimon-bundle:1.4.1")
+    implementation("org.apache.paimon:paimon-format:1.4.1")
+    implementation("org.apache.paimon:paimon-codegen:1.4.1")
+    implementation("org.apache.paimon:paimon-codegen-loader:1.4.1")
+    implementation("org.apache.paimon:paimon-filesystems:1.4.1")
+    implementation("org.apache.paimon:paimon-service-client:1.4.1")
+    implementation("org.apache.paimon:paimon-service-runtime:1.4.1")
+    implementation("org.apache.paimon:paimon-oss:1.4.1")
+    implementation("org.apache.paimon:paimon-oss-impl:1.4.1")
+    implementation("org.apache.paimon:paimon-flink-2.2:1.4.1")
+    implementation("org.apache.paimon:paimon-flink-cdc:1.4.1")
+    implementation('org.apache.paimon:paimon-flink-action:1.4.1')
+    implementation("org.apache.paimon:paimon-hive-catalog:1.4.1")
+    implementation("org.apache.paimon:paimon-hive-connector-3.1:1.4.1")
     //implementation('org.apache.paimon:paimon-shade-guava-30:30.1.1-jre-0.8.0')
     //implementation('org.apache.paimon:paimon-shade-jackson-2:2.14.2-0.8.0')
     //implementation('org.apache.paimon:paimon-shade-caffeine-2:2.9.3-0.8.0')
@@ -149,7 +149,7 @@ dependencies {
     implementation("org.apache.phoenix:phoenix-spark:5.0.0-HBase-2.0") {
         exclude group: "org.glassfish", module: "javax.el"
     }
-    implementation 'redis.clients:jedis:7.4.1'
+    implementation 'redis.clients:jedis:7.5.0'
     implementation('com.clickhouse:clickhouse-jdbc:0.9.8') {
         exclude group: 'at.yawk.lz4', module: 'lz4-java'
     }
