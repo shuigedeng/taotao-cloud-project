@@ -13,7 +13,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-metrics"
     implementation "io.github.shuigedeng:taotao-boot-starter-actuator"
     implementation "io.github.shuigedeng:taotao-boot-starter-skywalking"
-    implementation "io.github.shuigedeng:taotao-boot-starter-tracer"
+    implementation "io.github.shuigedeng:taotao-boot-starter-opentelemetry"
 
     implementation("org.springframework.boot:spring-boot-starter-webmvc") {
         //exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"

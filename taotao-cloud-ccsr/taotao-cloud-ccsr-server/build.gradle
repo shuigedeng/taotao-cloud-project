@@ -4,7 +4,7 @@ dependencies {
     api "io.github.shuigedeng:taotao-boot-starter-core"
     //api "io.github.shuigedeng:taotao-boot-starter-logger"
     //api "io.github.shuigedeng:taotao-boot-starter-metrics"
-    //api "io.github.shuigedeng:taotao-boot-starter-tracer"
+    //api "io.github.shuigedeng:taotao-boot-starter-opentelemetry"
 
     api project(":taotao-cloud-ccsr:taotao-cloud-ccsr-server-starter")
 
