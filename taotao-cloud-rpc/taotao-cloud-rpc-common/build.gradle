@@ -4,7 +4,7 @@ dependencies {
     }
 
     //作为 包验证，防止修改
-    api 'commons-codec:commons-codec:1.21.0'
+    api 'commons-codec:commons-codec:1.22.0'
     // redis 分布式锁
     api 'redis.clients:jedis:7.5.0'
     //Lettuce Redis客户端

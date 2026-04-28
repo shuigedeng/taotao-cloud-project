@@ -253,7 +253,7 @@ configurations {
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
         resolutionStrategy {
-            force "org.bouncycastle:bcprov-jdk15on:1.70"
+            force "org.bouncycastle:bcprov-jdk18on:1.84"
         }
 
         exclude group: "org.springframework.boot", module: "spring-boot-starter-data-jpa"

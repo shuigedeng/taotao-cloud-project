@@ -178,9 +178,9 @@ configurations {
             force 'net.minidev:json-smart:2.6.0'
             //todo 临时使用
             force "io.opentelemetry:opentelemetry-api-incubator:1.61.0-alpha"
-            force 'org.bouncycastle:bcprov-jdk18on:1.83'
-            force 'org.bouncycastle:bcpkix-jdk18on:1.83'
-            force 'org.bouncycastle:bcutil-jdk18on:1.83'
+            force 'org.bouncycastle:bcprov-jdk18on:1.84'
+            force 'org.bouncycastle:bcpkix-jdk18on:1.84'
+            force 'org.bouncycastle:bcutil-jdk18on:1.84'
             force 'org.webjars.npm:csstype:3.1.3'
             force 'org.webjars.npm:postcss:8.5.6'
             force 'org.webjars.npm:nanoid:5.1.6'
