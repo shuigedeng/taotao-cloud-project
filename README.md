@@ -86,7 +86,7 @@ Requires:
 
 ```
 JAVA_VERSION >= 25 (推荐使用graalvm-jdk-25)
-GRALE_VERSION >= 9.4.1
+GRALE_VERSION >= 9.5.0
 IDEA_VERSION >= 2026.1
 ```
 
