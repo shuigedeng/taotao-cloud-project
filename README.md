@@ -5,24 +5,24 @@
 <p align="center">
   <img src="https://img.shields.io/badge/license-Apache%202-green" alt="License"/>
   <img src="https://img.shields.io/badge/taotao--cloud--project-2026.05-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring-7.0.6-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_boot-4.0.5-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring-7.0.7-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_boot-4.0.6-orange" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud-2025.1.1-yellowgree" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud_alibaba-2025.1.0.0--preview-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud_tencent-2.1.0.3--2024.0.4-orange" alt="Downloads"/>
   <img src="https://img.shields.io/badge/netty-4.2.12.Final-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_security-7.0.4-brightgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_security-7.0.5-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/elasticsearch-9.2.3-green" alt="Downloads"/>
   <img src="https://img.shields.io/badge/mybatis_plus-3.5.16-yellow" alt="Downloads"/>
   <img src="https://img.shields.io/badge/knife4j-4.5.0-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/swagger-3.0.0-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/redisson-4.3.0-lightgrey" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/redisson-4.3.1-lightgrey" alt="Downloads"/>
   <img src="https://img.shields.io/badge/hutool-5.8.44-gree" alt="Downloads"/>
 </p>
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-**taotao-cloud(taotao云平台)**  是一个企业级单体架构和微服务架构的快速开发脚手架。提供多种便捷**starter**进行功能扩展，采用**DDD(领域驱动设计)**思想，快速搭建企业级系统。基于**gradle9.4.0**、**jdk25**, **spring7.0.6**、**SpringBoot4.0.3**、**SpringCloud2025.1.1**、**SpringCloudAlibaba2025.1.0.0**、**SpringSecurity7.0.3**、**Mybatis-Plus3.5.16**等开发的微服务开发脚手架，包括中间件模块、大数据模块、微服务业务模块、前端模块提供技术框架的基础能力的封装，减少开发工作，只关注业务,包含了工作以来的工作总结和技术沉淀
+**taotao-cloud(taotao云平台)**  是一个企业级单体架构和微服务架构的快速开发脚手架。提供多种便捷**starter**进行功能扩展，采用**DDD(领域驱动设计)**思想，快速搭建企业级系统。基于**gradle9.5.0**、**jdk25**, **spring7.0.7**、**SpringBoot4.0.6**、**SpringCloud2025.1.1**、**SpringCloudAlibaba2025.1.0.0**、**SpringSecurity7.0.5**、**Mybatis-Plus3.5.16**等开发的微服务开发脚手架，包括中间件模块、大数据模块、微服务业务模块、前端模块提供技术框架的基础能力的封装，减少开发工作，只关注业务,包含了工作以来的工作总结和技术沉淀
 
 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循**SpringBoot**编程思想，高度模块化和可配置化。
 
@@ -221,7 +221,7 @@ Maven:
 ## 8. 功能特点
 
 * **微服务技术架构**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的 **非功能性需求** 简化开发工作、提高生产率、解决通用问题
-* **主体框架**：采用最新的`Spring Boot 4.0.5`、`Spring Cloud 2025.1.1`、`Spring Cloud Alibaba 2025.1.0.0` 版本进行设计
+* **主体框架**：采用最新的`Spring Boot 4.0.6`、`Spring Cloud 2025.1.1`、`Spring Cloud Alibaba 2025.1.0.0` 版本进行设计
 * **统一注册**：支持`spring cloud alibaba Nacos`作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * **统一认证**：统一`Oauth2`认证协议，采用`jwt`的方式，实现统一认证，完备的`RBAC`权限管理、数据权限处理、网关统一鉴权、灰度发布。 支持多种登录方式，如`账号密码`，`验证码登陆`、`支付宝`、`钉钉`、`码云`、`GitHub`、`GitLab`、`QQ`、`微信`、`企业微信`、`微博`等第三方登录，`微信小程序登录`，`指纹登录`，`手势登录`，`手机号码登录`，`人脸识别登录`等 优化`Spring Security`内部实现 ,实现`API`调用的统一出口和权限认证授权中心
 * **业务监控**：利用`Spring Boot admin`监控各个独立服务的运行状态
@@ -255,26 +255,26 @@ Maven:
 
 | 依赖                   | 版本            |
 |----------------------|---------------|
-| Spring               | 7.0.6         |
-| Spring Boot          | 4.0.5         |
+| Spring               | 7.0.7         |
+| Spring Boot          | 4.0.6         |
 | Spring Cloud         | 2025.1.1      |
 | Spring Cloud Alibaba | 2025.1.0.0    |
 | Seata                | 2.6.0         |
 | Sentinel             | 1.8.9         |
-| Spring-kafka         | 4.0.4         |
+| Spring-kafka         | 4.0.5         |
 | Roketmq              | 5.2.4         |
-| Spring Security      | 7.0.4         |
+| Spring Security      | 7.0.7         |
 | Mybatis Plus         | 3.5.16        |
 | Hutool               | 5.8.44        |
 | Mysql                | 9.6.0         |
 | Querydsl             | 5.1.0         |
 | Swagger              | 3.0.0         |
 | Knife4j              | 4.5.0         |
-| Redisson             | 4.3.0         |
+| Redisson             | 4.3.1         |
 | Lettuce              | 7.5.0.RELEASE |
 | Elasticsearch        | 9.2.2         |
-| Xxl-job              | 3.3.2         |
-| Guava                | 33.5.8-jre    |
+| Xxl-job              | 3.4.0         |
+| Guava                | 33.6.0-jre    |
 | Grpc                 | 1.80.0        |
 | Arthas               | 4.1.8         |
 | Netty                | 4.2.12.Final  |
@@ -284,12 +284,13 @@ Maven:
 
 ```
 taotao-cloud-project -- 父项目
+│  ├─taotao-cloud-agent -- agent模块
+│  ├─taotao-cloud-ai -- ai模块
 │  ├─taotao-cloud-bigdata -- 大数据模块
 │  ├─taotao-cloud-cache -- 本地缓存中间件
 │  ├─taotao-cloud-design-partterns  -- 设计模式
-│  ├─taotao-cloud-jdbcpool  -- jdbcpool模块
+│  ├─taotao-cloud-jdbcpool  -- jdbcpool中间件
 │  ├─taotao-cloud-microservice -- 微服务模块
-│  │  ├─taotao-cloud-ai  -- ai模块
 │  │  ├─taotao-cloud-bff  -- bff模块
 │  │  ├─taotao-cloud-business  -- 业务模块
 │  │  ├─taotao-cloud-data-sync  -- 数据同步模块
@@ -308,7 +309,7 @@ taotao-cloud-project -- 父项目
 │  ├─taotao-cloud-job -- 分布式任务调度中间件
 │  ├─taotao-cloud-rpc -- 分布式rpc中间件
 │  ├─taotao-cloud-tx -- 分布式事务中间件
-│  ├─taotao-cloud-ccsr -- 配置中心&服务注册中心 Configuration Center & Service Registry
+│  ├─taotao-cloud-ccsr -- 配置中心&服务注册中心中间件 Configuration Center & Service Registry
 │  ├─taotao-cloud-warehouse -- 数仓模块
 │  │  ├─taotao-cloud-offline-warehouse  -- 离线仓库模块
 │  │  ├─taotao-cloud-offline-weblog -- 离线日志分析模块
