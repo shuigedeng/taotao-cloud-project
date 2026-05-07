@@ -1,7 +1,7 @@
 dependencies {
     implementation 'org.apache.hive:hive-exec:4.2.0'
 
-    implementation 'com.mysql:mysql-connector-j:9.6.0'
+    implementation 'com.mysql:mysql-connector-j:9.7.0'
 }
 
 configurations {
@@ -11,7 +11,7 @@ configurations {
 
         resolutionStrategy {
             force 'org.glassfish:javax.el:3.0.0'
-            force 'org.glassfish.jaxb:jaxb-runtime:4.0.7'
+            force 'org.glassfish.jaxb:jaxb-runtime:4.0.8'
         }
     }
 }

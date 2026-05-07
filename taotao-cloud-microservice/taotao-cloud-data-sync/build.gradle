@@ -131,7 +131,7 @@ dependencies {
     //implementation 'com.ververica:flink-cdc-pipeline-connector-mysql:3.0.1'
     //implementation 'com.ververica:flink-cdc-pipeline-connector-values:3.0.1'
 
-    implementation 'com.mysql:mysql-connector-j:9.6.0'
+    implementation 'com.mysql:mysql-connector-j:9.7.0'
     implementation 'redis.clients:jedis:7.5.0'
     implementation 'org.apache.hive:hive-exec:4.2.0'
 
@@ -194,7 +194,7 @@ dependencies {
     //implementation(project(":taotao-cloud-bigdata:taotao-cloud-flink-cep"))
     implementation 'com.googlecode.aviator:aviator:5.4.3'
 
-    implementation "com.alibaba.fastjson2:fastjson2:2.0.61"
+    implementation "com.alibaba.fastjson2:fastjson2:2.0.62"
 }
 
 application {
@@ -216,7 +216,7 @@ configurations {
         //    }
         //}
         //或者简写为 force 的优先级会比较高，会覆盖 strictly 策略
-        //implementation 'com.alibaba:fastjson:2.0.61!!'
+        //implementation 'com.alibaba:fastjson:2.0.62!!'
 
         resolutionStrategy {
             force "org.codehaus.groovy:groovy:3.0.25"
@@ -225,7 +225,7 @@ configurations {
             //todo 临时使用
             force "io.opentelemetry:opentelemetry-api-incubator:1.61.0-alpha"
             force "org.glassfish:javax.el:3.0.0"
-            force 'org.glassfish.jaxb:jaxb-runtime:4.0.7'
+            force 'org.glassfish.jaxb:jaxb-runtime:4.0.8'
             force 'org.lz4:lz4-java:1.8.1'
         }
 

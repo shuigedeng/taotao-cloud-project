@@ -16,10 +16,10 @@ configure(subprojects.findAll { (it.name.endsWith("-api")) }) { project ->
         api "jakarta.validation:jakarta.validation-api"
         api "jakarta.annotation:jakarta.annotation-api"
         api "com.fasterxml.jackson.core:jackson-annotations"
-        api "io.swagger.core.v3:swagger-models:2.2.48"
-        api "io.swagger.core.v3:swagger-models-jakarta:2.2.48"
-        api "io.swagger.core.v3:swagger-annotations:2.2.48"
-        api "io.swagger.core.v3:swagger-annotations-jakarta:2.2.48"
+        api "io.swagger.core.v3:swagger-models:2.2.49"
+        api "io.swagger.core.v3:swagger-models-jakarta:2.2.49"
+        api "io.swagger.core.v3:swagger-annotations:2.2.49"
+        api "io.swagger.core.v3:swagger-annotations-jakarta:2.2.49"
         api "org.jspecify:jspecify"
 
         //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
@@ -52,7 +52,7 @@ configure(subprojects.findAll { (it.name.endsWith("-api")) }) { project ->
         //指定protoc运行插件
         plugins {
             grpc {
-                artifact = "io.grpc:protoc-gen-grpc-java:1.80.0"
+                artifact = "io.grpc:protoc-gen-grpc-java:1.81.0"
             }
             //javalite {
             //    // The codegen for lite comes as a separate artifact

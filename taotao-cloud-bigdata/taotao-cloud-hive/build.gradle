@@ -10,7 +10,7 @@ dependencies {
         exclude group: "org.eclipse.jetty.aggregate", module: "*"
     }
 
-    implementation "com.alibaba.fastjson2:fastjson2:2.0.61"
+    implementation "com.alibaba.fastjson2:fastjson2:2.0.62"
 
 }
 
@@ -28,7 +28,7 @@ configurations {
 
         resolutionStrategy {
             force 'org.glassfish:javax.el:3.0.0'
-            force 'org.glassfish.jaxb:jaxb-runtime:4.0.7'
+            force 'org.glassfish.jaxb:jaxb-runtime:4.0.8'
         }
     }
 }

@@ -1,6 +1,6 @@
 dependencies {
     implementation 'io.netty:netty-all'
-    implementation 'com.alibaba.fastjson2:fastjson2:2.0.61'
+    implementation 'com.alibaba.fastjson2:fastjson2:2.0.62'
     implementation "cn.hutool:hutool-all"
 
     implementation 'org.slf4j:slf4j-api:2.0.17'
