@@ -1,6 +1,6 @@
 test {
     // 如需要打印日志 添加 --info
-    //:taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-biz:test --tests "com.taotao.cloud.sys.biz.RegionTests.synchronizationData" --info
+    //:taotao-cloud-microservice:taotao-cloud-goods:taotao-cloud-goods-biz:test --tests "com.taotao.cloud.goods.biz.RegionTests.synchronizationData" --info
     useJUnitPlatform()
     ignoreFailures = true
 
@@ -10,13 +10,13 @@ test {
 
     addTestListener(new TestListener() {
         @Override
-        void beforeSuite(TestDescriptor suite) {
-            logger.quiet "🚀 [SUITE START] 开始执行测试套件: ${suite.name}"
+        void beforeSuite(TestDescriptor testDescriptor) {
+            logger.quiet "🚀 [SUITE START] 开始执行测试套件: ${testDescriptor.name}"
         }
 
         @Override
-        void afterSuite(TestDescriptor desc, TestResult result) {
-            println "Execution test ${result} ${desc}"
+        void afterSuite(TestDescriptor testDescriptor, TestResult result) {
+            println "Execution test ${result} ${testDescriptor}"
             // 套件结束后：打印聚合统计信息
             def status = result.resultType
             def total = result.testCount
@@ -24,7 +24,8 @@ test {
             def failed = result.failedTestCount
             def skipped = result.skippedTestCount
 
-            logger.quiet "🏁 [SUITE END]   套件: ${suite.name} | 结果: ${status} | 总数: ${total} (成功: ${success}, 失败: ${failed}, 跳过: ${skipped})"
+            logger.quiet "🏁 [SUITE END]   套件: ${testDescriptor.name} | 结果: ${status} | 总数: ${total}" +
+                    " (成功: ${success}, 失败: ${failed}, 跳过: ${skipped})"
         }
 
         @Override
@@ -33,8 +34,8 @@ test {
         }
 
         @Override
-        void afterTest(TestDescriptor desc, TestResult result) {
-            //logger.quiet "Execution test ${desc.name} [${desc.className}] with result; ${result.resultType}"
+        void afterTest(TestDescriptor testDescriptor, TestResult result) {
+            //logger.quiet "Execution test ${testDescriptor.name} [${testDescriptor.className}] with result; ${result.resultType}"
 
             // 单个测试结束后：打印具体结果状态和执行时间(如果可用)
             def testName = "${testDescriptor.className}.${testDescriptor.name}"
@@ -70,6 +71,7 @@ test {
             '--add-opens=java.desktop/sun.awt=ALL-UNNAMED',
             '--add-opens=java.desktop/sun.font=ALL-UNNAMED',
             '--add-opens=jdk.management/com.sun.management.internal=ALL-UNNAMED',
+
             '--add-opens=java.base/java.lang=ALL-UNNAMED',
             '--add-opens=java.base/java.math=ALL-UNNAMED',
             '--add-opens=java.base/java.util=ALL-UNNAMED',
@@ -84,6 +86,7 @@ test {
             '--add-opens=java.management/java.lang.management=ALL-UNNAMED',
             '--add-opens=jdk.management/com.sun.management.internal=ALL-UNNAMED',
             '--add-opens=java.management/sun.management=ALL-UNNAMED',
+
             '--add-opens=java.management/java.lang.management=ALL-UNNAMED',
             '--add-opens=jdk.management/com.sun.management.internal=ALL-UNNAMED',
             '--add-opens=java.management/sun.management=ALL-UNNAMED',
