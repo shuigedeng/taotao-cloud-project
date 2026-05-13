@@ -73,4 +73,8 @@ public class TenantDomainRepositoryImpl extends BaseLightDomainRepository<Tenant
 		System.out.println("=============");
 	}
 
+	@Override
+	public TenantAgg find( String identifier, boolean withLock ) {
+		return null;
+	}
 }
