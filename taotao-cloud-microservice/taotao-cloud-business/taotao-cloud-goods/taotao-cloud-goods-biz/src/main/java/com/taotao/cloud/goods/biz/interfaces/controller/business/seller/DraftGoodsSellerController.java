@@ -62,7 +62,7 @@ public class DraftGoodsSellerController {
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
         draftGoodsPageQuery.setStoreId(storeId);
         IPage<DraftGoods> draftGoods = draftGoodsService.draftGoodsQueryPage(draftGoodsPageQuery);
-        return Result.success(MpUtils.convertMybatisPage(draftGoods, DraftGoodsVO.class));
+        return Result.success(MpUtils.convertMpPage(draftGoods, DraftGoodsVO.class));
     }
 
     @Operation(summary = "获取草稿商品", description = "获取草稿商品")

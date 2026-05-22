@@ -89,7 +89,7 @@ public class KanjiaGoodsActivityBuyerController {
 		pageQuery.setStartTime(System.currentTimeMillis());
 		pageQuery.setEndTime(System.currentTimeMillis());
 		IPage<KanjiaActivityGoodsBO> kanjiaGoodsPage = kanJiaActivityGoodsService.kanjiaGoodsPage(pageQuery, pageQuery.getPageParm());
-		return Result.success(MpUtils.convertMybatisPage(kanjiaGoodsPage, KanjiaActivityGoodsListVO.class));
+		return Result.success(MpUtils.convertMpPage(kanjiaGoodsPage, KanjiaActivityGoodsListVO.class));
 	}
 
 	@RequestLogger
@@ -117,7 +117,7 @@ public class KanjiaGoodsActivityBuyerController {
 	public Result<PageResult<KanjiaActivityLogVO>> getKanjiaActivityLog(
 		KanJiaActivityLogPageQuery pageQuery) {
 		IPage<KanjiaActivityLog> page = kanJiaActivityLogService.getForPage(pageQuery, pageQuery.getPageParm());
-		return Result.success(MpUtils.convertMybatisPage(page, KanjiaActivityLogVO.class));
+		return Result.success(MpUtils.convertMpPage(page, KanjiaActivityLogVO.class));
 	}
 
 	@RequestLogger

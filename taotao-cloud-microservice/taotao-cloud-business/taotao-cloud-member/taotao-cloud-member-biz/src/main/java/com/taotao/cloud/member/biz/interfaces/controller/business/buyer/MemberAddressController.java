@@ -59,7 +59,7 @@ public class MemberAddressController {
     @GetMapping
     public Result<PageResult<MemberAddressVO>> page(@Validated PageQuery page) {
         IPage<MemberAddress> memberAddressPage = memberAddressService.queryPage(page, SecurityUtils.getUserId());
-        return Result.success(MpUtils.convertMybatisPage(memberAddressPage, MemberAddressConvert.INSTANCE::convert));
+        return Result.success(MpUtils.convertMpPage(memberAddressPage, MemberAddressConvert.INSTANCE::convert));
     }
 
     @Operation(summary = "根据ID获取会员收件地址", description = "根据ID获取会员收件地址")

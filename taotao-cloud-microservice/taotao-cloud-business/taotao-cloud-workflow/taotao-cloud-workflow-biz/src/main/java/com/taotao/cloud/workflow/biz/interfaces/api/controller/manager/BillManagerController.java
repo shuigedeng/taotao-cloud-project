@@ -62,7 +62,7 @@ public class BillManagerController {
     @GetMapping(value = "/getByPage")
     public Result<PageResult<BillListVO>> getByPage(BillPageQuery billSearchParams) {
         IPage<BillListVO> billListVOIPage = billService.billPage(billSearchParams);
-        return Result.success(MpUtils.convertMybatisPage(billListVOIPage, BillListVO.class));
+        return Result.success(MpUtils.convertMpPage(billListVOIPage, BillListVO.class));
     }
 
     @Operation(summary = "获取商家结算单流水分页", description = "获取商家结算单流水分页")
@@ -74,7 +74,7 @@ public class BillManagerController {
             @Parameter(description = "流水类型:PAY、REFUND") String flowType,
             PageQuery PageQuery) {
         IPage<StoreFlowVO> storeFlow = storeFlowApi.getStoreFlow(id, flowType, PageQuery);
-        return Result.success(MpUtils.convertMybatisPage(storeFlow, StoreFlowVO.class));
+        return Result.success(MpUtils.convertMpPage(storeFlow, StoreFlowVO.class));
     }
 
     @Operation(summary = "支付结算单", description = "支付结算单")

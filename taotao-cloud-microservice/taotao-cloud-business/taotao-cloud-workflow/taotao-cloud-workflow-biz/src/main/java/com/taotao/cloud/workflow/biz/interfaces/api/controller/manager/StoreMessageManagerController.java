@@ -51,6 +51,6 @@ public class StoreMessageManagerController {
     public Result<PageResult<StoreMessageVO>> getByCondition(
             StoreMessageQueryVO storeMessageQueryVO, PageQuery PageQuery) {
         IPage<StoreMessageVO> page = storeMessageService.getPage(storeMessageQueryVO, PageQuery);
-        return Result.success(MpUtils.convertMybatisPage(page, StoreMessageVO.class));
+        return Result.success(MpUtils.convertMpPage(page, StoreMessageVO.class));
     }
 }

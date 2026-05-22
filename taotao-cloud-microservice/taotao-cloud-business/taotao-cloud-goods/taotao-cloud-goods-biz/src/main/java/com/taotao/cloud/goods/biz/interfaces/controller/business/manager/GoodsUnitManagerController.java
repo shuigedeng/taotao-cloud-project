@@ -65,7 +65,7 @@ public class GoodsUnitManagerController {
     @GetMapping(value = "/page")
     public Result<PageResult<GoodsUnit>> getByPage(PageQuery pageQuery) {
         IPage<GoodsUnit> page = goodsUnitService.page(pageQuery.buildMpPage());
-        return Result.success(MpUtils.convertMybatisPage(page, GoodsUnit.class));
+        return Result.success(MpUtils.convertMpPage(page, GoodsUnit.class));
     }
 
     @Operation(summary = "获取商品计量单位", description = "获取商品计量单位")

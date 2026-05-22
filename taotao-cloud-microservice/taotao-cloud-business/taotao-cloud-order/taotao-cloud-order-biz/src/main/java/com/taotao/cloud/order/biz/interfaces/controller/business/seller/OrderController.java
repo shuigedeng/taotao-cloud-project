@@ -75,7 +75,7 @@ public class OrderController {
     @GetMapping("/page")
     public Result<PageResult<OrderSimpleVO>> queryMineOrder(OrderPageQuery orderPageQuery) {
         IPage<OrderSimpleVO> page = orderService.pageQuery(orderPageQuery);
-        return Result.success(MpUtils.convertMybatisPage(page, OrderSimpleVO.class));
+        return Result.success(MpUtils.convertMpPage(page, OrderSimpleVO.class));
     }
 
     @Operation(summary = "订单明细", description = "订单明细")

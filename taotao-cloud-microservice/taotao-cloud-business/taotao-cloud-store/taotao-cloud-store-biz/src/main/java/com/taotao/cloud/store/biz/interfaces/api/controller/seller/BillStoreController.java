@@ -64,7 +64,7 @@ public class BillStoreController {
     public Result<PageResult<BillListVO>> getByPage(BillPageQuery billPageQuery) {
         billPageQuery.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
         IPage<BillListVO> billListVOIPage = billService.billPage(billPageQuery);
-        return Result.success(MpUtils.convertMybatisPage(billListVOIPage, BillListVO.class));
+        return Result.success(MpUtils.convertMpPage(billListVOIPage, BillListVO.class));
     }
 
     @Operation(summary = "通过id获取结算单", description = "通过id获取结算单")

@@ -58,6 +58,6 @@ public class GoodsUnitSellerController {
     @GetMapping("/page")
     public Result<PageResult<GoodsUnitVO>> getByPage(@Validated PageQuery pageQuery) {
         IPage<GoodsUnit> page = goodsUnitService.page(pageQuery.buildMpPage());
-        return Result.success(MpUtils.convertMybatisPage(page, GoodsUnitConvert.INSTANCE::convert));
+        return Result.success(MpUtils.convertMpPage(page, GoodsUnitConvert.INSTANCE::convert));
     }
 }

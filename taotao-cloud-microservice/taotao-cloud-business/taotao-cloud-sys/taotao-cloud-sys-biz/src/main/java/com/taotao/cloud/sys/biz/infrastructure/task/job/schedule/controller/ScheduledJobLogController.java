@@ -55,7 +55,7 @@ public class ScheduledJobLogController {
 	@RequestLogger
 	public Result<PageResult<ScheduledJobLogVO>> page( ScheduledJobLogPageQuery pageQuery) {
 		IPage<ScheduledJobLog> page = scheduledJobLogService.page(pageQuery);
-		return Result.success(MpUtils.convertMybatisPage(page, ScheduledJobLogVO.class));
+		return Result.success(MpUtils.convertMpPage(page, ScheduledJobLogVO.class));
 	}
 
 	@GetMapping("/addTest")

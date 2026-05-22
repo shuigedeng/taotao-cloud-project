@@ -60,7 +60,7 @@ public class ReceiptController {
     public Result<PageResult<OrderReceiptDTO>> getByPage(ReceiptPageQuery receiptPageQuery) {
         receiptPageQuery.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
         IPage<OrderReceiptDTO> page = receiptService.pageQuery(receiptPageQuery);
-        return Result.success(MpUtils.convertMybatisPage(page, OrderReceiptDTO.class));
+        return Result.success(MpUtils.convertMpPage(page, OrderReceiptDTO.class));
     }
 
     @Operation(summary = "通过id获取", description = "通过id获取")

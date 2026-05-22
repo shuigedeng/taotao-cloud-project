@@ -52,7 +52,7 @@ public class MemberEvaluationStoreController {
     public Result<PageResult<MemberEvaluationListVO>> getByPage(EvaluationPageQuery evaluationPageQuery) {
         evaluationPageQuery.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
         IPage<MemberEvaluationListVO> memberEvaluationListVOIPage = memberEvaluationApi.queryPage(evaluationPageQuery);
-        return Result.success(MpUtils.convertMybatisPage(memberEvaluationListVOIPage, MemberEvaluationListVO.class));
+        return Result.success(MpUtils.convertMpPage(memberEvaluationListVOIPage, MemberEvaluationListVO.class));
     }
 
     @Operation(summary = "通过id获取", description = "通过id获取")

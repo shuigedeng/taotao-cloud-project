@@ -141,7 +141,7 @@ public class FlowBeforeController {
                 listVO.add(vo);
             }
         }
-        return Result.success(MpUtils.convertMybatisPage(data, FlowBeforeListVO.class));
+        return Result.success(MpUtils.convertMpPage(data, FlowBeforeListVO.class));
     }
 
     @Operation(summary = "获取待我审批信息", description = "获取待我审批信息")

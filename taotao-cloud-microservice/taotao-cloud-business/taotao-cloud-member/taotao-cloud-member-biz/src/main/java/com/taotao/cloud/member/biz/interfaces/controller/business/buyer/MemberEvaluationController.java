@@ -86,7 +86,7 @@ public class MemberEvaluationController {
         // 设置当前登录会员
         evaluationPageQuery.setMemberId(SecurityUtils.getUserId());
         IPage<MemberEvaluation> memberEvaluationPage = memberEvaluationService.managerQuery(evaluationPageQuery);
-        return Result.success(MpUtils.convertMybatisPage(memberEvaluationPage, MemberEvaluationVO.class));
+        return Result.success(MpUtils.convertMpPage(memberEvaluationPage, MemberEvaluationVO.class));
     }
 
     @Operation(summary = "查看某一个商品的评价列表", description = "查看某一个商品的评价列表")
@@ -101,7 +101,7 @@ public class MemberEvaluationController {
         evaluationPageQuery.setGoodsId(goodsId);
         evaluationPageQuery.setStatus(SwitchEnum.OPEN.name());
         IPage<MemberEvaluation> memberEvaluationPage = memberEvaluationService.managerQuery(evaluationPageQuery);
-        return Result.success(MpUtils.convertMybatisPage(memberEvaluationPage, MemberEvaluationVO.class));
+        return Result.success(MpUtils.convertMpPage(memberEvaluationPage, MemberEvaluationVO.class));
     }
 
     @Operation(summary = "查看某一个商品的评价数量", description = "查看某一个商品的评价数量")

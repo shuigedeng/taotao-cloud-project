@@ -90,7 +90,7 @@ public class BrandManagerController {
     @GetMapping(value = "/page")
     public Result<PageResult<BrandVO>> brandsQueryPage(@Validated BrandPageQuery page) {
         IPage<Brand> brandPage = brandService.brandsQueryPage(page);
-        return Result.success(MpUtils.convertMybatisPage(brandPage, BrandVO.class));
+        return Result.success(MpUtils.convertMpPage(brandPage, BrandVO.class));
     }
 
     @Operation(summary = "新增品牌", description = "新增品牌")

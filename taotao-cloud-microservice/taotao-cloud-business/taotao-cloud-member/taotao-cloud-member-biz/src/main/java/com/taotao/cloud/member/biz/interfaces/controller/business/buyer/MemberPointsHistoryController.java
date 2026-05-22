@@ -52,7 +52,7 @@ public class MemberPointsHistoryController {
     @GetMapping(value = "/page")
     public Result<PageResult<MemberPointsHistoryPageVO>> getByPage(PageQuery page) {
         IPage<MemberPointsHistory> memberPointsHistoryPage = memberPointsHistoryService.pageQuery(page);
-        return Result.success(MpUtils.convertMybatisPage(memberPointsHistoryPage, MemberPointsHistoryPageVO.class));
+        return Result.success(MpUtils.convertMpPage(memberPointsHistoryPage, MemberPointsHistoryPageVO.class));
     }
 
     @Operation(summary = "获取当前会员积分", description = "获取当前会员积分")

@@ -64,7 +64,7 @@ public class MemberCollectionController {
                                                                @Validated PageQuery page) {
         if (MemberCollectionQueryConstants.GOODS.equals(type)) {
             IPage<GoodsCollectionVO> goodsCollectionPage = memberGoodsCollectionService.goodsCollection(page);
-            return Result.success(MpUtils.convertMybatisPage(goodsCollectionPage, StoreCollectionVO.class));
+            return Result.success(MpUtils.convertMpPage(goodsCollectionPage, StoreCollectionVO.class));
         }
 
         return Result.success(feignStoreCollectionApi.storeCollection(page));

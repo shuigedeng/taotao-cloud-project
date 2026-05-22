@@ -74,7 +74,7 @@ public class CouponBuyerController {
 		queryParam.setGetType(CouponGetEnum.FREE.name());
 
 		IPage<CouponVO> couponVOIPage = couponService.pageVOFindAll(queryParam, queryParam.getPageParm());
-		return Result.success(MpUtils.convertMybatisPage(couponVOIPage, CouponVO.class));
+		return Result.success(MpUtils.convertMpPage(couponVOIPage, CouponVO.class));
 	}
 
 	@RequestLogger
@@ -85,7 +85,7 @@ public class CouponBuyerController {
 		SecurityUser currentUser = Objects.requireNonNull(SecurityUtils.getCurrentUser());
 		// param.setMemberId(currentUser.getId());
 		IPage<MemberCoupon> memberCoupons = memberCouponService.getMemberCoupons(param, param.getPageParm());
-		return Result.success(MpUtils.convertMybatisPage(memberCoupons, MemberCouponVO.class));
+		return Result.success(MpUtils.convertMpPage(memberCoupons, MemberCouponVO.class));
 	}
 
 	@RequestLogger
@@ -96,7 +96,7 @@ public class CouponBuyerController {
 		SecurityUser currentUser = Objects.requireNonNull(SecurityUtils.getCurrentUser());
 		// param.setMemberId(currentUser.getId());
 		IPage<MemberCoupon> memberCoupons = memberCouponService.getMemberCouponsByCanUse(param, totalPrice, param.getPageParm());
-		return Result.success(MpUtils.convertMybatisPage(memberCoupons, MemberCouponVO.class));
+		return Result.success(MpUtils.convertMpPage(memberCoupons, MemberCouponVO.class));
 	}
 
 	@RequestLogger
