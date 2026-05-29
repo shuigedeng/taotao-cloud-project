@@ -156,7 +156,7 @@ configurations {
 
         resolutionStrategy {
             force 'org.glassfish:javax.el:3.0.0'
-            force 'org.glassfish.jaxb:jaxb-runtime:4.0.8'
+            force 'org.glassfish.jaxb:jaxb-runtime:4.0.9'
             force 'org.lz4:lz4-java:1.8.1'
         }
 
