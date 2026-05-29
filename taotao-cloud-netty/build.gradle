@@ -50,7 +50,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.google.protobuf:protobuf-gradle-plugin:0.9.6"
+        classpath "com.google.protobuf:protobuf-gradle-plugin:0.10.0"
     }
 }
 
@@ -60,9 +60,9 @@ apply plugin: "com.google.protobuf"
 
 dependencies {
     implementation "io.netty:netty-all:4.2.14.Final"
-    implementation "com.google.protobuf:protobuf-java:4.34.0"
-    implementation "com.google.protobuf:protobuf-java-util:4.34.0"
-    implementation "org.apache.thrift:libthrift:0.22.0"
+    implementation "com.google.protobuf:protobuf-java:4.35.0"
+    implementation "com.google.protobuf:protobuf-java-util:4.35.0"
+    implementation "org.apache.thrift:libthrift:0.23.0"
     implementation "io.grpc:grpc-api:1.81.0"
     implementation "io.grpc:grpc-context:1.81.0"
     implementation "io.grpc:grpc-core:1.81.0"
@@ -88,10 +88,10 @@ dependencies {
     implementation 'ch.qos.logback:logback-access:1.5.33'
     implementation 'ch.qos.logback:logback-classic:1.5.33'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter:6.0.3'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:6.0.3'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:6.0.3'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:6.0.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter:6.1.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:6.1.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:6.1.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:6.1.0'
     testImplementation "org.assertj:assertj-core:3.27.7"
 
     compileOnly "org.projectlombok:lombok:1.18.46"
@@ -106,7 +106,7 @@ protobuf {
     protoc {
         //https://repo1.maven.org/maven2/com/google/protobuf/protoc/
         //直接使用Maven Central上已经编译好的protoc编译器，
-        artifact = "com.google.protobuf:protoc:4.34.0"
+        artifact = "com.google.protobuf:protoc:4.35.0"
         //指定本地已经安装的protoc编译器
         //path = '/usr/local/bin/protoc'
     }
@@ -136,7 +136,7 @@ protobuf {
 
 //protobuf {
 //    protoc {
-//        artifact = "com.google.protobuf:protoc:4.34.0"
+//        artifact = "com.google.protobuf:protoc:4.35.0"
 //    }
 //
 //    plugins {

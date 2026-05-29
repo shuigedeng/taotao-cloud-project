@@ -44,7 +44,7 @@ repositories {
 }
 
 dependencies {
-    implementation platform("org.springframework.ai:spring-ai-bom:2.0.0-M6")
+    implementation platform("org.springframework.ai:spring-ai-bom:2.0.0-M8")
     implementation platform("com.alibaba.cloud.ai:spring-ai-alibaba-bom:1.1.2.3")
 
     //cloud
@@ -156,12 +156,12 @@ dependencies {
     //implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-yuque"
 
     //langchain4j
-    implementation 'dev.langchain4j:langchain4j-open-ai:1.14.1'
-    implementation 'dev.langchain4j:langchain4j-ollama:1.14.1'
-    implementation 'dev.langchain4j:langchain4j-spring-boot-starter:1.14.1-beta24'
-    implementation 'dev.langchain4j:langchain4j-anthropic-spring-boot-starter:1.14.1-beta24'
-    implementation 'dev.langchain4j:langchain4j-ollama-spring-boot-starter:1.14.1-beta24'
-    implementation 'dev.langchain4j:langchain4j-open-ai-spring-boot-starter:1.14.1-beta24'
+    implementation 'dev.langchain4j:langchain4j-open-ai:1.15.1'
+    implementation 'dev.langchain4j:langchain4j-ollama:1.15.1'
+    implementation 'dev.langchain4j:langchain4j-spring-boot-starter:1.15.1-beta25'
+    implementation 'dev.langchain4j:langchain4j-anthropic-spring-boot-starter:1.15.1-beta25'
+    implementation 'dev.langchain4j:langchain4j-ollama-spring-boot-starter:1.15.1-beta25'
+    implementation 'dev.langchain4j:langchain4j-open-ai-spring-boot-starter:1.15.1-beta25'
 
     //spring ai
     // https://repo.spring.io/milestone
@@ -214,9 +214,9 @@ dependencies {
     implementation "com.googlecode.aviator:aviator:5.4.3"
 
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
-    implementation "com.google.protobuf:protobuf-java:4.34.0"
+    implementation "com.google.protobuf:protobuf-java:4.35.0"
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java-util
-    implementation "com.google.protobuf:protobuf-java-util:4.34.0"
+    implementation "com.google.protobuf:protobuf-java-util:4.35.0"
     //https://search.maven.org/artifact/com.googlecode.protobuf-java-format/protobuf-java-format
     //implementation "com.googlecode.protobuf-java-format:protobuf-java-format:1.4"
 

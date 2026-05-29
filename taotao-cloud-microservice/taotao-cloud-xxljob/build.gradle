@@ -30,8 +30,8 @@ dependencies {
     implementation "com.xuxueli:xxl-job-core"
     implementation "com.xuxueli:xxl-sso-core:2.4.0"
 
-    implementation "com.google.protobuf:protobuf-java:4.34.0"
-    implementation "com.google.protobuf:protobuf-java-util:4.34.0"
+    implementation "com.google.protobuf:protobuf-java:4.35.0"
+    implementation "com.google.protobuf:protobuf-java-util:4.35.0"
 }
 
 application {
@@ -49,9 +49,9 @@ configurations {
 
         resolutionStrategy {
             //force "org.codehaus.groovy:groovy:3.0.25"
-            //force "com.alibaba.nacos:nacos-client:3.2.1-2026.04.03"
-            force "com.google.protobuf:protobuf-java:4.34.0"
-            force "com.google.protobuf:protobuf-java-util:4.34.0"
+            //force "com.alibaba.nacos:nacos-client:3.2.2"
+            force "com.google.protobuf:protobuf-java:4.35.0"
+            force "com.google.protobuf:protobuf-java-util:4.35.0"
         }
 
 

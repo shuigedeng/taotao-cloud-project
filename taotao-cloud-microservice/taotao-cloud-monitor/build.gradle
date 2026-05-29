@@ -31,8 +31,8 @@ dependencies {
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    implementation "com.google.protobuf:protobuf-java:4.34.0"
-    implementation "com.google.protobuf:protobuf-java-util:4.34.0"
+    implementation "com.google.protobuf:protobuf-java:4.35.0"
+    implementation "com.google.protobuf:protobuf-java-util:4.35.0"
 }
 
 application {
@@ -52,8 +52,8 @@ configurations {
         //exclude group: "commons-logging", module: "commons-logging"
 
         resolutionStrategy {
-            force "com.google.protobuf:protobuf-java:4.34.0"
-            force "com.google.protobuf:protobuf-java-util:4.34.0"
+            force "com.google.protobuf:protobuf-java:4.35.0"
+            force "com.google.protobuf:protobuf-java-util:4.35.0"
         }
 
     }

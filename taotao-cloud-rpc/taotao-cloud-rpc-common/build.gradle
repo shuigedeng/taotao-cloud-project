@@ -1,5 +1,5 @@
 dependencies {
-    api('com.alibaba.nacos:nacos-client:3.2.1-2026.04.03') {
+    api('com.alibaba.nacos:nacos-client:3.2.2') {
         exclude group: 'org.slf4j', module: 'slf4j-api'
     }
 
