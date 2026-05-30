@@ -20,7 +20,7 @@ example.config-file=/path/to/your/logs
 
 
 
--javaagent:D:\project\taotao-cloud-starter\taotao-boot-starter-agent\build\libs\taotao-boot-starter-agent-2026.06.jar:C:\Users\57222\soft\apache-skywalking-java-agent-9.3.0\skywalking-agent\skywalking-agent.jar
+-javaagent:D:\project\taotao-cloud-starter\taotao-boot-starter-agent\build\libs\taotao-boot-starter-agent-2026.07.jar:C:\Users\57222\soft\apache-skywalking-java-agent-9.3.0\skywalking-agent\skywalking-agent.jar
 -DSW_AGENT_NAME=taotao-cloud-demo
 -DSW_AGENT_AUTHENTICATION=taotao-cloud
 -DSW_AGENT_TRACE_IGNORE_PATH="Redisson/PING,/actuator/**,/admin/**"
