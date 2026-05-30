@@ -262,7 +262,7 @@ intellijPlatform {
 //configurations {
 //    configureEach {
 //        resolutionStrategy {
-//            force 'org.apache.logging.log4j:log4j-core:2.25.3'
+//            force 'org.apache.logging.log4j:log4j-core:2.26.0'
 //        }
 //    }
 //}
