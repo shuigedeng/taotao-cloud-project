@@ -3,10 +3,10 @@ dependencies {
     implementation 'com.alibaba.fastjson2:fastjson2:2.0.62'
     implementation "cn.hutool:hutool-all"
 
-    implementation 'org.slf4j:slf4j-api:2.0.17'
-    implementation 'ch.qos.logback:logback-core:1.5.33'
-    implementation 'ch.qos.logback:logback-access:1.5.33'
-    implementation 'ch.qos.logback:logback-classic:1.5.33'
+    implementation 'org.slf4j:slf4j-api:2.0.18'
+    implementation 'ch.qos.logback:logback-core:1.5.34'
+    implementation 'ch.qos.logback:logback-access:1.5.34'
+    implementation 'ch.qos.logback:logback-classic:1.5.34'
 
     testImplementation 'org.junit.jupiter:junit-jupiter:6.1.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:6.1.0'

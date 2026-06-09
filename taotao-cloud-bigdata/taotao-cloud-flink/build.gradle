@@ -134,8 +134,8 @@ dependencies {
     //implementation('org.apache.paimon:paimon-shade-caffeine-2:2.9.3-0.8.0')
 
     implementation 'org.apache.commons:commons-compress:1.28.0'
-    implementation 'org.slf4j:slf4j-api:2.0.17'
-    //implementation 'org.slf4j:slf4j-reload4j:2.0.17'
+    implementation 'org.slf4j:slf4j-api:2.0.18'
+    //implementation 'org.slf4j:slf4j-reload4j:2.0.18'
 
     implementation "org.scala-lang:scala-library:2.13.18"
     implementation "org.scala-lang:scala-compiler:2.13.18"

@@ -142,8 +142,8 @@ dependencies {
     implementation 'redis.clients:jedis:7.5.0'
 
     implementation 'org.apache.commons:commons-compress:1.28.0'
-    implementation 'org.slf4j:slf4j-api:2.0.17'
-    //implementation 'org.slf4j:slf4j-reload4j:2.0.17'
+    implementation 'org.slf4j:slf4j-api:2.0.18'
+    //implementation 'org.slf4j:slf4j-reload4j:2.0.18'
 
     //boot
     implementation "io.github.shuigedeng:taotao-boot-starter-core"

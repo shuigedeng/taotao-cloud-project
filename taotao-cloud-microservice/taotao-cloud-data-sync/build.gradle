@@ -183,8 +183,8 @@ dependencies {
     //implementation('org.apache.paimon:paimon-shade-caffeine-2:2.9.3-0.8.0')
 
     implementation 'org.apache.commons:commons-compress:1.28.0'
-    implementation 'org.slf4j:slf4j-api:2.0.17'
-    //implementation 'org.slf4j:slf4j-reload4j:2.0.17'
+    implementation 'org.slf4j:slf4j-api:2.0.18'
+    //implementation 'org.slf4j:slf4j-reload4j:2.0.18'
 
     implementation "org.scala-lang:scala-library:2.13.18"
     implementation "org.scala-lang:scala-compiler:2.13.18"
@@ -223,7 +223,7 @@ configurations {
             force 'org.antlr:antlr4:4.13.2'
             force 'net.minidev:json-smart:2.6.0'
             //todo 临时使用
-            force "io.opentelemetry:opentelemetry-api-incubator:1.62.0-alpha"
+            force "io.opentelemetry:opentelemetry-api-incubator:1.63.0-alpha"
             force "org.glassfish:javax.el:3.0.0"
             force 'org.glassfish.jaxb:jaxb-runtime:4.0.9'
             force 'org.lz4:lz4-java:1.8.1'
