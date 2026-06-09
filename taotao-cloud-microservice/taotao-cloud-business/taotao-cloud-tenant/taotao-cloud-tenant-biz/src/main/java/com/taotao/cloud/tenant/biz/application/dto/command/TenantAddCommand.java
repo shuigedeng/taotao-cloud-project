@@ -16,15 +16,11 @@
 
 package com.taotao.cloud.tenant.biz.application.dto.command;
 
-import com.taotao.boot.common.model.ValidationGroups;
 import com.taotao.boot.common.model.ddd.types.Command;
 import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 import java.io.Serial;
-import java.time.LocalDateTime;
 
 /**
  * AppAddCommand

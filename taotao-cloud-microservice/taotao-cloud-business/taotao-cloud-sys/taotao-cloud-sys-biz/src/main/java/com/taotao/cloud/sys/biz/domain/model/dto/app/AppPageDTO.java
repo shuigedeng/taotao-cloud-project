@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.domain.model.dto.app;
 
-import com.taotao.boot.common.model.ValidationGroups;
+import com.taotao.boot.common.model.Groups;
 import com.taotao.boot.common.model.ddd.query.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
@@ -45,21 +45,21 @@ public class AppPageDTO extends PageQuery implements Serializable {
     private static final long serialVersionUID = -1L;
 
     @Schema(description = "主键")
-    @NotNull(message = "主键不能为空!", groups = ValidationGroups.Update.class)
+    @NotNull(message = "主键不能为空!", groups = Groups.Update.class)
     private Long id;
 
     @Schema(description = "应用名称")
-    @Size(min = 1, max = 10, message = "应用名称长度在1-10之间!", groups = ValidationGroups.Create.class)
-    @NotNull(message = "应用名称不能为空!", groups = ValidationGroups.Create.class)
+    @Size(min = 1, max = 10, message = "应用名称长度在1-10之间!", groups = Groups.Create.class)
+    @NotNull(message = "应用名称不能为空!", groups = Groups.Create.class)
     private String name;
 
     @Schema(description = "应用编码")
-    @Size(min = 1, max = 10, message = "应用编码长度在1-10之间!", groups = ValidationGroups.Create.class)
-    @NotNull(message = "应用编码不能为空!", groups = ValidationGroups.Create.class)
+    @Size(min = 1, max = 10, message = "应用编码长度在1-10之间!", groups = Groups.Create.class)
+    @NotNull(message = "应用编码不能为空!", groups = Groups.Create.class)
     private String code;
 
     @Schema(description = "图标")
-    @NotNull(message = "图标不能为空!", groups = ValidationGroups.Create.class)
+    @NotNull(message = "图标不能为空!", groups = Groups.Create.class)
     private String icon;
 
 }
