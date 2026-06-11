@@ -19,14 +19,14 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
 
     //https://search.maven.org/artifact/org.springframework.integration/spring-integration-core
-    implementation 'org.springframework.integration:spring-integration-core:7.0.4'
-    implementation 'org.springframework.integration:spring-integration-jdbc:7.0.4'
+    implementation 'org.springframework.integration:spring-integration-core:7.1.0'
+    implementation 'org.springframework.integration:spring-integration-jdbc:7.1.0'
 
     implementation 'org.springframework.boot:spring-boot-starter-batch'
     implementation 'org.springframework.boot:spring-boot-starter-batch-jdbc'
-    implementation 'org.springframework.batch:spring-batch-infrastructure:6.0.3'
-    implementation 'org.springframework.batch:spring-batch-integration:6.0.3'
-    testImplementation 'org.springframework.batch:spring-batch-test:6.0.3'
+    implementation 'org.springframework.batch:spring-batch-infrastructure:6.0.4'
+    implementation 'org.springframework.batch:spring-batch-integration:6.0.4'
+    testImplementation 'org.springframework.batch:spring-batch-test:6.0.4'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"
@@ -132,7 +132,7 @@ dependencies {
     //implementation 'com.ververica:flink-cdc-pipeline-connector-values:3.0.1'
 
     implementation 'com.mysql:mysql-connector-j:9.7.0'
-    implementation 'redis.clients:jedis:7.5.0'
+    implementation 'redis.clients:jedis:7.5.2'
     implementation 'org.apache.hive:hive-exec:4.2.0'
 
     implementation 'org.apache.hadoop:hadoop-common:3.5.0'

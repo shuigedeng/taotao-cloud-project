@@ -7,7 +7,7 @@ dependencies {
     }
     api project(":taotao-cloud-ccsr:taotao-cloud-ccsr-common")
 
-    api "com.caucho:hessian:4.0.63"
+    api "com.caucho:hessian:4.0.66"
     api "com.google.api.grpc:proto-google-common-protos:2.17.0"
     api "io.netty:netty-all:4.2.15.Final"
     api "com.google.protobuf:protobuf-java:3.25.5"
