@@ -38,7 +38,7 @@ buildscript {
     repositories {
         mavenLocal()
 
-        maven { url = "https://plugins.gradle.org/m2/" }
+       // maven { url = "https://plugins.gradle.org/m2/" }
 
         maven {
             url = "https://repo1.maven.org/maven2"
@@ -86,7 +86,7 @@ buildscript {
         /* 添加插件依赖路径（通过jar方式） */
 
         //https://plugins.gradle.org/m2/com/github/spotbugs/snom/spotbugs-gradle-plugin/
-        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:6.5.4"
+        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:6.5.6"
 
         //https://github.com/spring-io/spring-javaformat/
         classpath "io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.47"
@@ -183,10 +183,10 @@ plugins {
     id "com.diffplug.spotless" version "8.6.0"
 
     //https://plugins.gradle.org/plugin/com.gorylenko.gradle-git-properties
-    id "com.gorylenko.gradle-git-properties" version "3.0.3"
+    id "com.gorylenko.gradle-git-properties" version "4.0.1"
 
     //https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html
-    id 'org.graalvm.buildtools.native' version '1.1.1'
+    id 'org.graalvm.buildtools.native' version '1.1.2'
 
     //https://github.com/kimichen13/mybatis-generator-plugin
     //https://plugins.gradle.org/plugin/com.qqviaja.gradle.MybatisGenerator
