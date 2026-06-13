@@ -36,6 +36,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class HiveServiceImpl implements HiveService {
 
+	static void main() {
+
+	}
     public static final Logger logger = LoggerFactory.getLogger(HiveServiceImpl.class);
 
     @Autowired

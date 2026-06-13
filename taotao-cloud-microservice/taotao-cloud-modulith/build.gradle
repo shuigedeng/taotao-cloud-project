@@ -48,7 +48,9 @@ dependencies {
 
     //https://github.com/xmolecules/jmolecules-integrations
     //https://central.sonatype.com/artifact/org.jmolecules.integrations/jmolecules-spring
-    implementation 'org.jmolecules.integrations:jmolecules-bytebuddy:0.33.0'
+    implementation("org.jmolecules.integrations:jmolecules-bytebuddy:0.33.0") {
+        exclude group: "org.hibernate", module: "hibernate-core"
+    }
     implementation 'org.jmolecules.integrations:jmolecules-jackson:0.33.0'
     implementation 'org.jmolecules.integrations:jmolecules-jpa:0.33.0'
     implementation 'org.jmolecules.integrations:jmolecules-spring:0.33.0'
