@@ -44,7 +44,7 @@ repositories {
 }
 
 dependencies {
-    implementation platform("org.springframework.ai:spring-ai-bom:2.0.0-RC2")
+    implementation platform("org.springframework.ai:spring-ai-bom:2.0.0")
     implementation platform("com.alibaba.cloud.ai:spring-ai-alibaba-bom:1.1.2.3")
 
     //cloud
@@ -156,12 +156,12 @@ dependencies {
     //implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-yuque"
 
     //langchain4j
-    implementation 'dev.langchain4j:langchain4j-open-ai:1.15.1'
-    implementation 'dev.langchain4j:langchain4j-ollama:1.15.1'
-    implementation 'dev.langchain4j:langchain4j-spring-boot-starter:1.15.1-beta25'
-    implementation 'dev.langchain4j:langchain4j-anthropic-spring-boot-starter:1.15.1-beta25'
-    implementation 'dev.langchain4j:langchain4j-ollama-spring-boot-starter:1.15.1-beta25'
-    implementation 'dev.langchain4j:langchain4j-open-ai-spring-boot-starter:1.15.1-beta25'
+    implementation 'dev.langchain4j:langchain4j-open-ai:1.16.2'
+    implementation 'dev.langchain4j:langchain4j-ollama:1.16.2'
+    implementation 'dev.langchain4j:langchain4j-spring-boot-starter:1.16.2-beta26'
+    implementation 'dev.langchain4j:langchain4j-anthropic-spring-boot-starter:1.16.2-beta26'
+    implementation 'dev.langchain4j:langchain4j-ollama-spring-boot-starter:1.16.2-beta26'
+    implementation 'dev.langchain4j:langchain4j-open-ai-spring-boot-starter:1.16.2-beta26'
 
     //spring ai
     // https://repo.spring.io/milestone
