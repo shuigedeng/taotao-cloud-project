@@ -1,31 +1,31 @@
 {
-  "$schema": "https://opencode.ai/schema/opencode.json",
-  "name": "springboot-project",
-  "version": "1.0.0",
-  "settings": {
-    "theme": "system",
-    "model": {
-      "default": "claude-3.5-sonnet",
-      "fallback": "gpt-4"
-    },
-    "temperature": 0.3
+  "$schema": "https://opencode.ai/config.json",
+  "model": "anthropic/claude-sonnet-4-20250514",
+  "default_agent": "build",
+  "agent": {
+    "build": {
+      "description": "默认构建代理 - 编译、测试、代码生成等开发任务"
+    }
   },
-  "plugins": [
-    "@opencode/plugin-test-runner",
-    "@opencode/plugin-git",
-    "@mingeon/opencode-blueprint"
-  ],
-  "server": {
-    "port": 3000,
-    "host": "localhost"
+  "lsp": {
+    "java": {
+      "command": ["java", "-jar", "C:/Users/Lenovo/AppData/Local/opencode/lsp/java-language-server.jar"],
+      "extensions": ["java"]
+    }
   },
-  "git": {
-    "autoCommit": false,
-    "requireTests": true
-  },
-  "java": {
-    "version": "17",
-    "buildTool": "maven",
-    "testFramework": "junit5"
+  "permission": {
+    "bash": "allow",
+    "read": "allow",
+    "edit": "allow",
+    "glob": "allow",
+    "grep": "allow",
+    "list": "allow",
+    "write": "ask",
+    "task": "allow",
+    "webfetch": "allow",
+    "websearch": "allow",
+    "question": "allow",
+    "lsp": "allow",
+    "skill": "allow"
   }
 }

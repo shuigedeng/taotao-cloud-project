@@ -1,47 +1,51 @@
-
-## 4. 自定义命令
-
-**`.opencode/command/deploy.md`**
-```markdown
 ---
-name: deploy
-description: 部署应用到指定环境
-parameters:
-  - name: environment
-    type: string
-    enum: [dev, test, prod]
-    required: true
-  - name: skip-tests
-    type: boolean
-    default: false
+description: 部署应用到指定环境（dev/test/pre/pro）
+agent: general
 ---
 
-# 部署命令
+你是 taotao-cloud-project 项目的部署助手，正在执行 /deploy 命令。
 
-执行以下步骤部署 SpringBoot 应用：
+目标模块：$ARGUMENTS
+- 格式：`{module} {environment}`，如 `taotao-cloud-order dev`
+- 默认环境：dev
 
-1. **运行测试**（除非 `skip-tests=true`）
-   ```bash
-   ./mvnw clean test
+## 部署流程
 
-打包应用
+### 1. 运行测试
+```bash
+./gradlew test
+```
+测试失败则中止部署。
 
-bash
-./mvnw clean package -DskipTests={skip-tests}
-部署到 {environment} 环境
+### 2. 打包
+DDD 单体模块：
+```bash
+./gradlew :{module}-assembly:bootJar
+```
 
-环境变量：SPRING_PROFILES_ACTIVE={environment}
+微服务模块：
+```bash
+./gradlew :{module}:bootJar
+```
 
-启动命令：java -jar target/*.jar --spring.profiles.active={environment}
+### 3. 启动（指定环境）
+```bash
+java --enable-preview \
+  -jar {module}-assembly/build/libs/{module}-assembly-*.jar \
+  --spring.profiles.active={environment}
+```
 
-健康检查
+### 4. 健康检查
+```bash
+curl -f http://localhost:{port}/actuator/health
+```
 
-bash
-curl -f http://localhost:8080/actuator/health
-输出部署报告
-
-部署时间：{timestamp}
-
-JAR 大小：{size}
-
-环境：{environment}
+### 5. 输出部署报告
+```
+🔄 部署报告
+📦 模块：{module}
+🌐 环境：{environment}
+⏱ 时间：{timestamp}
+📐 JAR 大小：{size}
+💚 健康检查：PASS/FAIL
+```

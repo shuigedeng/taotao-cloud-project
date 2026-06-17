@@ -1,73 +1,191 @@
-# SpringBoot 项目全局规范
+# PROJECT KNOWLEDGE BASE
 
-## 技术栈约束
-- **Java 17** + SpringBoot 3.x + Maven
-- 使用 **Lombok** 减少样板代码
-- **MapStruct** 用于对象转换（版本 >= 1.5.5）
-- **Spring Data JPA** 作为 ORM（避免原生 JDBC）
-- **Spring Security** + JWT 进行认证授权
+**Generated:** 2026-06-17
+**Commit:** `56589ba`
+**Branch:** (active branch)
 
-## 代码风格
-- 包结构必须遵循：
-- com.company.project/
-  ├── controller/ # REST API 层
-  ├── service/ # 业务逻辑层（接口+实现类）
-  ├── repository/ # 数据访问层
-  ├── entity/ # JPA 实体
-  ├── dto/ # 数据传输对象（request/response）
-  ├── mapper/ # MapStruct 映射器
-  ├── config/ # 配置类
-  ├── exception/ # 自定义异常
-  └── util/ # 工具类
+## OVERVIEW
 
+企业级微服务快速开发脚手架，基于 Spring Boot 4.1.0 / JDK 25 / Gradle 9.5。
+采用 DDD（领域驱动设计）思想，提供多种便捷 starter 进行功能扩展。
 
-- **命名规范**：
-- Controller: `XxxController`
-- Service 接口: `XxxService`
-- Service 实现: `XxxServiceImpl`
-- Repository: `XxxRepository`
-- DTO: `XxxRequest`, `XxxResponse`, `XxxDTO`
+包含六大模块组：**中间件模块**、**大数据模块**、**微服务业务模块**、**前端模块**、**基础设施模块**、**语言扩展模块**。
 
-## 编码规则
-1. **所有 Controller 方法必须明确返回 `ResponseEntity<T>`**
-2. **Service 层必须添加事务注解 `@Transactional`**
-3. **Entity 必须使用 `@DynamicUpdate` 优化更新性能**
-4. **禁止在 Controller 中编写业务逻辑**
-5. **所有 public 方法必须有 Javadoc 注释**
-6. **使用 `@Valid` 进行参数校验，配合 `@NotNull`, `@Size` 等注解**
+## STRUCTURE
 
-## 异常处理
-- 统一使用全局异常处理器 `@RestControllerAdvice`
-- 自定义业务异常继承 `RuntimeException`
-- 错误码规范：`1000-1999` 参数错误，`2000-2999` 业务错误，`3000-3999` 系统错误
+```
+taotao-cloud-project/
+├── .opencode/              # OpenCode 配置（命令、技能、指令）
+├── .github/                # GitHub CI/CD 配置
+├── .circleci/              # CircleCI 配置
+├── .gitee/                 # Gitee 配置
+│
+├── taotao-cloud-agent/     # Agent 模块
+├── taotao-cloud-ai/        # AI 模块
+├── taotao-cloud-bigdata/   # 大数据模块
+├── taotao-cloud-cache/     # 本地缓存中间件
+├── taotao-cloud-ccsr/      # 配置中心 & 服务注册中心
+├── taotao-cloud-design-patterns/  # 设计模式
+├── taotao-cloud-jdbcpool/  # JDBC 连接池中间件
+├── taotao-cloud-job/       # 分布式任务调度中间件
+├── taotao-cloud-microservice/  # ★ 微服务模块（核心）
+├── taotao-cloud-mq/        # 分布式消息中间件
+├── taotao-cloud-netty/     # Netty 组件
+├── taotao-cloud-plugin/    # 插件模块
+├── taotao-cloud-python/    # Python 模块
+├── taotao-cloud-rpc/       # 分布式 RPC 中间件
+├── taotao-cloud-scala/     # Scala 模块
+├── taotao-cloud-tx/        # 分布式事务中间件
+├── taotao-cloud-warehouse/ # 数仓模块
+│
+├── build.gradle            # 根构建脚本
+├── settings.gradle         # 项目设置
+├── gradle.properties       # Gradle 属性
+└── gradle/                 # Gradle 配置目录
+```
 
-## API 设计规范
-- RESTful 风格：GET（查询）、POST（创建）、PUT（全量更新）、PATCH（部分更新）、DELETE（删除）
-- 分页查询统一使用 `PageRequest` + `Page<T>` 返回
-- API 路径前缀：`/api/v1/`
+## MODULE DETAILS
 
-## 测试要求
-- 单元测试覆盖率 ≥ 80%
-- Controller 层使用 `@WebMvcTest`
-- Service 层使用 `@ExtendWith(MockitoExtension.class)`
-- Repository 层使用 `@DataJpaTest`
-- 使用 Testcontainers 进行集成测试
+### 中间件模块（自研中间件）
 
-## 性能约束
-- 所有数据库查询必须使用分页（单次最多 100 条）
-- N+1 查询问题必须使用 `@EntityGraph` 解决
-- 批量操作必须使用 `saveAll()` 而非循环调用
-- Redis 缓存命中率 > 80%（使用 `@Cacheable`）
+| Module | 描述 | 技术栈 |
+|--------|------|--------|
+| `taotao-cloud-cache` | 本地缓存中间件 | Caffeine / Redis / Hazelcast |
+| `taotao-cloud-mq` | 分布式消息中间件 | Kafka / RocketMQ / Pulsar |
+| `taotao-cloud-job` | 分布式任务调度中间件 | XXL-Job / PowerJob / Quartz |
+| `taotao-cloud-rpc` | 分布式 RPC 中间件 | Dubbo / gRPC / Netty |
+| `taotao-cloud-tx` | 分布式事务中间件 | Seata |
+| `taotao-cloud-ccsr` | 配置中心 & 服务注册 | Nacos / ZooKeeper |
+| `taotao-cloud-jdbcpool` | JDBC 连接池 | HikariCP |
 
-## 安全规范
-- 敏感数据（密码、身份证）必须加密存储（BCrypt）
-- SQL 注入防护：使用 JPA 参数绑定，禁止字符串拼接
-- XSS 防护：对输入进行 HTML 转义
-- 所有 API 必须进行权限验证（除登录/注册外）
+### 微服务模块 `taotao-cloud-microservice/`
 
-## 文档要求
-- 使用 SpringDoc OpenAPI 生成 API 文档
-- 每个 Controller 添加 `@Tag` 注解
-- 每个接口方法添加 `@Operation` 注解
-- 提供 `application-dev.yml`, `application-prod.yml` 环境配置
+```
+taotao-cloud-microservice/
+├── taotao-cloud-bff/           # BFF（Backend For Frontend）
+├── taotao-cloud-business/      # 核心业务模块
+│   ├── taotao-cloud-auth/      # 认证授权
+│   ├── taotao-cloud-member/    # 会员
+│   ├── taotao-cloud-goods/     # 商品
+│   ├── taotao-cloud-order/     # ★ 订单（DDD 参考实现）
+│   ├── taotao-cloud-sys/       # 系统管理
+│   ├── taotao-cloud-message/   # 消息通知
+│   └── ...
+├── taotao-cloud-gateway/       # 网关
+├── taotao-cloud-monitor/       # 监控
+├── taotao-cloud-open-platform/ # 开放平台
+├── taotao-cloud-shell/         # Shell 工具
+├── taotao-cloud-xxljob/        # XXL-Job 部署
+├── taotao-cloud-data-sync/     # 数据同步
+├── taotao-cloud-data-analysis/ # 数据分析
+├── taotao-cloud-recommend/     # 推荐
+└── taotao-cloud-generator/     # 代码生成
+```
 
+### DDD 单体服务结构（以 taotao-cloud-order 为参考）
+
+```
+taotao-cloud-order/
+├── api/               # RPC/gRPC 接口 + DTO
+├── application/       # 应用层：编排、事务、DTO 转换
+├── assembly/          # 启动器 + 环境配置
+├── common/            # 公共工具、枚举
+├── domain/            # ★ 领域层（零外部依赖）
+├── facade/            # 防腐层（ACL）
+├── infrastructure/    # 持久化、MQ、事件
+└── interfaces/        # REST / RPC / gRPC
+```
+
+### 大数据模块 `taotao-cloud-bigdata/`
+
+| 子模块 | 描述 |
+|--------|------|
+| Hadoop/Hive | 离线批量处理 |
+| Flink / Flink CDC / Flink CEP | 流式计算 |
+| Spark Streaming | 微批处理 |
+| Dolphinscheduler | 任务调度 |
+| Doris / TiDB | OLAP/HTAP |
+| Hudi / Paimon | 数据湖 |
+| SeaTunnel | 数据同步 |
+
+### 数仓模块 `taotao-cloud-warehouse/`
+
+| 子模块 | 描述 |
+|--------|------|
+| `offline-warehouse` | 离线数仓 |
+| `offline-weblog` | 离线日志分析 |
+| `realtime-datalake` | 实时数据湖 |
+| `realtime-warehouse` | 实时数仓 |
+
+架构：ODS → DWD/DIM → DWS → ADS 四级分层。
+
+## KEY TECHNOLOGIES
+
+| Category | Technology | Version |
+|----------|-----------|---------|
+| JVM | JDK | 25 (preview) |
+| Build | Gradle | 9.5 |
+| Framework | Spring Boot | 4.1.0 |
+| Cloud | Spring Cloud | 2025.1.1 |
+| Cloud | Spring Cloud Alibaba | 2025.1.0.0 |
+| Security | Spring Security | 7.1.0 |
+| ORM | MyBatis-Plus | 3.5.16 |
+| DB | MySQL | 9.6.0 |
+| Search | Elasticsearch | 9.2.2 |
+| Cache | Redis / Redisson | 4.3.1 |
+| MQ | Kafka / RocketMQ | / |
+| RPC | Dubbo / gRPC | / |
+| Doc | Knife4j / Swagger | 4.5.0 / 3.0.0 |
+| Monitor | Skywalking / Prometheus / ELK | / |
+| Transaction | Seata | 2.6.0 |
+
+## CONVENTIONS
+
+### DDD 架构（参考 taotao-cloud-order）
+- 分层依赖：`interfaces → application → domain ← infrastructure`
+- 跨聚合通过 ID 引用，非对象引用
+- 事务边界仅开在 `application/` 层
+- 命令/查询命名：`{动词}{名词}{Command|Query}`
+- 领域模型与持久化模型分离（domain entity ≠ PO）
+
+### 通用 Java 规范
+- JDK 25 预览特性：`--enable-preview`
+- 编码：UTF-8，所有文件
+- 遵循阿里代码规范 + Checkstyle + SpotBugs + PMD + Spotless
+- 使用 MapStruct + Record Builder + Lombok 减少样板代码
+
+### 代码质量门禁
+```bash
+./gradlew build                              # 全量编译
+./gradlew checkstyleMain spotlessCheck pmdMain spotbugsMain  # 质量检查
+./gradlew test                               # 测试
+./gradlew :{module}:assembly:bootRun --args='--spring.profiles.active=dev'  # 启动
+```
+
+## ANTI-PATTERNS
+- Controller 中写业务逻辑判断
+- 聚合根中注入 Repository 或 Domain Service
+- Application Service 中包含业务规则判断
+- 跨聚合直接操作其他聚合的内部状态
+- Domain 层依赖 Spring 或数据库
+- 明文敏感信息在配置文件中
+
+## WHERE TO LOOK
+
+| Task | Location |
+|------|----------|
+| 微服务业务开发 | `taotao-cloud-microservice/taotao-cloud-business/{module}/` |
+| 中间件开发 | `taotao-cloud-{middleware}/` |
+| DDD 参考实现 | `taotao-cloud-microservice/.../taotao-cloud-order/` |
+| 大数据/数仓 | `taotao-cloud-bigdata/` 或 `taotao-cloud-warehouse/` |
+| AI 模块 | `taotao-cloud-ai/` |
+| 网关配置 | `taotao-cloud-microservice/taotao-cloud-gateway/` |
+| CI/CD 配置 | `.github/` / `.circleci/` |
+| Gradle 构建 | `build.gradle` / `settings.gradle` / `gradle/` |
+
+## NOTES
+- JDK 25 预览特性，`--enable-preview` + 大量 `--add-exports`
+- `taotao-cloud-dependencies:2026.07` BOM 未开源，外部构建需要私有仓库凭据
+- 四个环境配置：dev / test / pre / pro
+- 代码质量门禁：Checkstyle + SpotBugs + PMD + Spotless + OWASP
+- 部署支持：Shell / Docker / Docker Compose / K8s / GitHub Actions

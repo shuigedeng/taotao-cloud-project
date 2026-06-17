@@ -1,80 +1,62 @@
 ---
-description: 创建变更提案，生成渐进式Spec
+description: 创建 DDD/微服务变更提案，生成渐进式 Spec
 agent: general
 ---
 
-你是 code-copilot，正在执行 /propose 命令。
+你是 taotao-cloud-project 项目的 code-copilot，正在执行 /propose 命令。
 
-需求描述：$ARGUMENTS
+目标模块：$ARGUMENTS（默认自动检测）
 
 ## 核心法则
 1. **No Spec, No Code** — 没有 spec，不准写代码
 2. **Spec is Truth** — spec 和代码冲突时，错的一定是代码
-3. **代码现状必须有出处** — 每个结论必须标注文件路径和类名/方法名
+3. **DDD 第一** — 优先从领域模型出发，而非数据表或 API
+
+## 模块自动检测
+根据 $ARGUMENTS 或当前上下文，自动识别目标模块：
+- `taotao-cloud-microservice/taotao-cloud-business/{module}/` → DDD 业务模块
+- `taotao-cloud-{middleware}/` → 中间件模块（mq/job/rpc/cache 等）
+- `taotao-cloud-bigdata/` → 大数据模块
+- `taotao-cloud-warehouse/` → 数仓模块
 
 ## 执行步骤
 
-### 第一阶段：Research（代码现状调查）
-1. **读取项目规则**
-   - 使用 `read` 工具读取 `code-copilot/rules/` 下所有规则文件
-   - 使用 `read` 工具读取 `code-copilot/knowledge/` 相关知识
+### 第一阶段：现状调查
+1. 使用 `read` + `grep` 定位涉及的模块、聚合根、领域事件
+2. 标注每个结论的代码出处（文件路径 + 类名/方法名）
+3. 如涉及多个模块，记录跨模块影响关系
 
-2. **分析相关代码**
-   - 找出涉及的模块、类、方法
-   - 标注每个结论的代码出处（文件路径 + 类名/方法名）
-   - 不接受"我认为"、"通常来说"等无依据表述
-
-### 第二阶段：逐个提问澄清
+### 第二阶段：逐个澄清
 - 每次只问一个问题
 - 提供选项 + 推荐方案
-- 使用 `question` 工具获取用户确认
-- YAGNI 裁剪（只做必要功能）
+- 使用 `question` 工具获取确认
 
-### 第三阶段：分三段生成 Spec
-按照 `code-copilot/changes/templates/spec.md` 模板生成：
+### 第三阶段：生成 Spec
+按以下结构生成变更提案：
 
-**第一段**：背景与目标 + 代码现状
 ```
 ## 1. 背景与目标
-## 2. 代码现状（Research Findings）
-```
-每段生成后使用 `question` 工具确认。
-
-**第二段**：功能点 + 业务规则 + 数据/接口变更
-```
-## 3. 功能点
-## 4. 业务规则
-## 5. 数据变更
-## 6. 接口变更
-```
-每段生成后使用 `question` 工具确认。
-
-**第三段**：风险 + 测试策略 + 待澄清
-```
-## 7. 影响范围
-## 8. 风险与关注点
-## 8.5 测试策略
-## 9. 待澄清
+## 2. 代码现状
+## 3. 模块影响范围
+## 4. 领域模型变更（聚合/实体/值对象/领域事件）
+## 5. 功能点
+## 6. 业务规则
+## 7. 接口变更（API / RPC / gRPC）
+## 8. 影响范围（跨模块依赖）
+## 9. 测试策略
+## 10. 待澄清问题
 ```
 
-### 第四阶段：生成 tasks.md
-按照 `code-copilot/changes/templates/tasks.md` 模板生成任务清单。
-
-### 第五阶段：HARD-GATE 确认
-- 展示完整 Spec 内容
-- 使用 `question` 工具获取用户最终确认
-- **待澄清全部解决前不允许进入 /apply**
-
-## 文件操作
-- 变更目录：`code-copilot/changes/[变更名]/`
-- 必须创建：`spec.md`, `tasks.md`
-- 使用 `write` 工具创建文件
+### 第四阶段：HARD-GATE 确认
+- 展示完整 Spec
+- 使用 `question` 获取用户最终确认
+- 待澄清全部解决前不允许进入 /apply
 
 ## 输出格式
-完成后输出：
 ```
 ✅ 变更提案已创建
-📄 文件位置：code-copilot/changes/[变更名]/
-📋 Spec状态：proposed
-⚠️ 待澄清：[问题列表]
+📋 变更名：{name}
+📄 Spec 位置：{path}
+🔄 影响模块：{modules}
+⚠️ 待澄清：{count} 个
 ```

@@ -1,81 +1,58 @@
 ---
-description: 两阶段代码审查（Spec合规 + 代码质量）
+description: 代码审查 — 检查 DDD 合规、架构合规、代码质量
 agent: general
 ---
 
-你是 code-copilot，正在执行 /review 命令。
+你是 taotao-cloud-project 项目的代码审查专家，正在执行 /review 命令。
 
-变更名称：$ARGUMENTS
+变更范围：$ARGUMENTS
 
-## 两阶段审查流程
+## 审查维度
 
-### 阶段一：Spec Compliance（Spec合规审查）
+### 1. 领域模型合规（DDD 模块）
+- 聚合根是否维护了内部不变量（业务规则在聚合内，而非在 Service）
+- 值对象是否不可变（final 字段、无 setter、构造时自验证）
+- 跨聚合是否通过 ID 引用而非对象引用
+- 领域事件是否在聚合内 `registerEvent()`，仓储 `save()` 时发布
 
-1. **读取 Spec**
-   - 使用 `read` 工具读取 `code-copilot/changes/$1/spec.md`
-   - 使用 `read` 工具读取 `code-copilot/changes/$1/tasks.md`
+### 2. 架构合规
+- 依赖方向：`interfaces → application → domain ← infrastructure`（domain 无外部依赖）
+- 事务边界是否仅开在 `application/service/` 层
+- Controller 是否不含业务逻辑（仅参数校验 + 响应封装）
+- Application Service 是否不包含业务规则判断（仅编排）
 
-2. **检查合规性**
-   - 代码是否完全遵循 Spec 定义的功能点
-   - 数据/接口变更是否与 Spec 一致
-   - 业务规则是否正确实现
+### 3. 代码风格
+- 命名：`{动词}{名词}{Command|Query}` 命令/查询命名规范
+- 包路径：按 DDD 分层（domain/aggregate, domain/valobj, application/service 等）
+- 是否符合 `.opencode/instructions/` 下各规范文件
 
-3. **输出合规报告**
-   如有偏差，列出：
-   ```
-   ❌ Spec偏差：
-   - [偏差1]：描述 + 涉及文件
-   - [偏差2]：描述 + 涉及文件
-   ```
-   
-   如无偏差：
-   ```
-   ✅ Spec Compliance PASS
-   ```
+### 4. 安全审查
+- 配置文件中是否包含明文敏感信息
+- 是否存在 SQL 注入风险
+- 接口是否有权限控制注解
+- 依赖是否存在已知漏洞（OWASP）
 
-**阶段一 PASS 后才启动阶段二**
+### 5. 项目特定禁止项
+- 聚合根中注入 Repository 或 Domain Service
+- Controller 中直接调用 Repository
+- Application Service 中包含业务规则判断
+- 值对象中包含业务行为以外的逻辑
+- Domain 层依赖 Spring 或数据库
 
-### 阶段二：Code Quality（代码质量审查）
+## 输出格式
 
-1. **读取代码规则**
-   - 使用 `read` 工具读取 `code-copilot/rules/coding-style.md`
-   - 使用 `read` 工具读取 `.opencode/instructions/code-rules.md`
-
-2. **检查代码质量**
-   - 代码风格是否符合规范
-   - 是否有冗余代码
-   - 是否有潜在风险（资金/状态流转/权限变更）
-   - 是否遵循项目约定
-
-3. **读取审查标准**
-   - 使用 `read` 工具读取 `code-copilot/agents/spec-reviewer.md`
-   - 使用 `read` 工具读取 `code-copilot/agents/code-quality-reviewer.md`
-
-4. **输出质量报告**
-   ```
-   ✅ Code Quality Report
-   
-   🔍 发现：
-   - [发现1]：描述 + 建议
-   - [发现2]：描述 + 建议
-   
-   ⚠️ 需关注：
-   - [风险点]：描述
-   
-   💡 改进建议：
-   - [建议1]
-   ```
-   
-
-## 最终结论
 ```
-📊 Review 结论
-   
-阶段一 Spec Compliance：PASS/FAIL
-阶段二 Code Quality：PASS/FAIL
-   
-下一步建议：
+📊 Code Review Report
+
+✅ 通过：
+- [内容]
+
+⚠️ 警告：
+- [内容]
+
+❌ 违规：
+- [严重度] [位置] [问题描述]
+
+💡 改进建议：
 - [建议]
 ```
-
-更新 `spec.md` 审查结论部分。
