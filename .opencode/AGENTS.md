@@ -185,7 +185,7 @@ taotao-cloud-order/
 
 ## NOTES
 - JDK 25 预览特性，`--enable-preview` + 大量 `--add-exports`
-- `taotao-cloud-dependencies:2026.07` BOM 未开源，外部构建需要私有仓库凭据
+- `taotao-cloud-dependencies:2026.08` BOM 未开源，外部构建需要私有仓库凭据
 - 四个环境配置：dev / test / pre / pro
 - 代码质量门禁：Checkstyle + SpotBugs + PMD + Spotless + OWASP
 - 部署支持：Shell / Docker / Docker Compose / K8s / GitHub Actions

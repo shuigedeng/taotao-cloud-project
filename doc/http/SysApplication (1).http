@@ -3,7 +3,7 @@ Accept: application/json
 
 ###
 
-GET http://127.0.0.1:33305/api/v2026.07/sys/v3/api-docs
+GET http://127.0.0.1:33305/api/v2026.08/sys/v3/api-docs
 Accept: application/json
 
 ###
