@@ -20,5 +20,5 @@ jobs:
     container:
       image: returntocorp/semgrep
     steps:
-      - uses: actions/checkout@v6.0.0
+      - uses: actions/checkout@v6.0.2
       - run: semgrep ci
