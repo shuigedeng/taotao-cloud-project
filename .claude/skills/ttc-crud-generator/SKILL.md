@@ -1,6 +1,6 @@
 ## 6. 自动化工作流
 
-**`.claude/skills/crud-generator/SKILL.md`**
+**`.claude/skills/ttc-crud-generator/SKILL.md`**
 ```markdown
 ---
 name: crud-generator

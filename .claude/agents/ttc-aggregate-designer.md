@@ -1,6 +1,6 @@
 ```markdown
 ---
-name: aggregate-designer
+name: ttc-aggregate-designer
 description: 聚合设计专家，负责设计DDD聚合根
 tools:
   - write_file
