@@ -33,7 +33,7 @@ jobs:
         run: lsb_release -a
 
       #https://github.com/marketplace/actions/github-action-for-graalvm
-      - uses: graalvm/setup-graalvm@v1.4.3
+      - uses: graalvm/setup-graalvm@v1.5.6
         with:
           java-version: '25'
           distribution: 'graalvm'
@@ -41,7 +41,7 @@ jobs:
           native-image-job-reports: 'true'
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v5
         with:
           gradle-version: "9.6.0"
 
@@ -80,7 +80,7 @@ jobs:
     #steps:
     #  - name: Checkout Project
     #    uses: actions/checkout@v7.0.0
-    #  - uses: graalvm/setup-graalvm@v1.4.3
+    #  - uses: graalvm/setup-graalvm@v1.5.6
     #    with:
     #      version: '22.3.2'
     #      java-version: '25'
@@ -88,7 +88,7 @@ jobs:
     #      github-token: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
     #      native-image-job-reports: 'true'
     #  - name: Gradle BootJar taotao-cloud-monitor
-    #    uses: gradle/actions/setup-gradle@v4
+    #    uses: gradle/actions/setup-gradle@v5
     #    with:
     #      gradle-version: 7.6
     #      arguments: nativeBuild

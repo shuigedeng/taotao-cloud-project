@@ -47,7 +47,7 @@ jobs:
       #    server-id: github
 
       #https://github.com/marketplace/actions/github-action-for-graalvm
-      - uses: graalvm/setup-graalvm@v1.4.3
+      - uses: graalvm/setup-graalvm@v1.5.6
         with:
           java-version: '25'
           distribution: 'graalvm'
@@ -63,7 +63,7 @@ jobs:
 
       #https://github.com/marketplace/actions/cache
       - name: Cache Gradle Packages
-        uses: actions/cache@v4.3.0
+        uses: actions/cache@v6.1.0
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
@@ -85,7 +85,7 @@ jobs:
           echo "mavenCentralPassword=${{ secrets.MAVEN_CENTRAL_PASSWORD }}" >> gradle.properties
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.5.0
+        uses: gradle/actions/setup-gradle@v5
         with:
           gradle-version: "9.6.0"
 

@@ -21,7 +21,7 @@ jobs:
 
       #https://github.com/marketplace/actions/qodana-scan
       - name: Qodana Scan
-        uses: JetBrains/qodana-action@v2025.2.2
+        uses: JetBrains/qodana-action@v2026.1.3
         with:
           #args: "--project-dir ${{ github.workflow }}/taotao-cloud-microservice"
           results-dir: ${{ github.workspace }}/qodana/results
@@ -33,7 +33,7 @@ jobs:
 
       #https://github.com/marketplace/actions/github-pages-action
       - name: Deploy To GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4.0.0
+        uses: peaceiris/actions-gh-pages@v4.1.0
         with:
           github_token: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
           publish_dir: ${{ github.workspace }}/qodana/results/report
@@ -41,7 +41,7 @@ jobs:
 
       #https://github.com/marketplace/actions/ssh-deploy
       - name: Deploy To Server
-        uses: easingthemes/ssh-deploy@5.1.0
+        uses: easingthemes/ssh-deploy@6.0.1
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"
