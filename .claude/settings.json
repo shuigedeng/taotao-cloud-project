@@ -1,41 +1,97 @@
-
-## 3. 团队配置
-
-**`.claude/settings.json`** - 团队共享配置
-```json
 {
-"version": "1.0",
-"permissions": {
-"read": ["src/**/*.java", "src/**/*.yml", "pom.xml"],
-"write": ["src/**/*.java", "src/**/*.xml"],
-"execute": ["./mvnw", "git", "docker"],
-"network": ["localhost:8080", "localhost:3306", "api.github.com"]
-},
-"model": {
-"default": "claude-3.5-sonnet-20240620",
-"fallback": "claude-3-opus-20240229",
-"temperature": 0.3,
-"maxTokens": 4096
-},
-"git": {
-"autoCommit": false,
-"requireTests": true,
-"commitMessageTemplate": "type(scope): description\n\nCloses #{{issue}}"
-},
-"java": {
-"buildTool": "maven",
-"testCommand": "./mvnw test",
-"compileCommand": "./mvnw compile",
-"packageCommand": "./mvnw clean package -DskipTests=false"
-},
-"integrations": {
-"jira": {
-"enabled": false,
-"project": "SPRING"
-},
-"sonarqube": {
-"enabled": true,
-"url": "http://localhost:9000"
-}
-}
+  "version": "1.0",
+
+  "permissions": {
+    "read": [
+      "src/**/*.java",
+      "src/**/*.yml",
+      "src/**/*.yaml",
+      "src/**/*.properties",
+      "src/**/*.xml",
+      "src/**/*.sql",
+      "src/**/*.gradle",
+      "*.gradle",
+      "gradle/**/*",
+      "gradle.properties",
+      "settings.gradle",
+      "README.md",
+      "**/README.md",
+      "doc/**/*",
+      ".opencode/**/*",
+      ".github/**/*"
+    ],
+    "write": [
+      "src/**/*.java",
+      "src/**/*.yml",
+      "src/**/*.yaml",
+      "src/**/*.properties",
+      "src/**/*.xml",
+      "src/**/*.sql",
+      "src/**/*.gradle",
+      "*.gradle",
+      "gradle/**/*",
+      "gradle.properties",
+      "settings.gradle"
+    ],
+    "execute": [
+      "./gradlew",
+      "git",
+      "docker",
+      "java",
+      "javac",
+      "python",
+      "bash"
+    ],
+    "network": [
+      "localhost:*",
+      "api.github.com",
+      "repo1.maven.org",
+      "maven.aliyun.com",
+      "packages.aliyun.com",
+      "plugins.gradle.org",
+      "repo.spring.io"
+    ]
+  },
+
+  "model": "claude-sonnet-4-20250514",
+
+  "git": {
+    "autoCommit": false,
+    "requireTests": false,
+    "commitMessageTemplate": "{{type}}({{scope}}): {{description}}"
+  },
+
+  "java": {
+    "buildTool": "gradle",
+    "testCommand": "./gradlew test",
+    "compileCommand": "./gradlew compileJava",
+    "packageCommand": "./gradlew build"
+  },
+
+  "integrations": {
+    "jira": {
+      "enabled": false
+    }
+  },
+
+"custom": {
+    "project": {
+      "name": "taotao-cloud-project",
+      "type": "monorepo",
+      "language": "java",
+      "jdkVersion": "25",
+      "gradleVersion": "9.5",
+      "springBootVersion": "4.1.0",
+      "buildCommand": "./gradlew build",
+      "qualityCommands": [
+        "./gradlew checkstyleMain",
+        "./gradlew spotlessCheck",
+        "./gradlew pmdMain",
+        "./gradlew spotbugsMain"
+      ],
+      "previewFlags": "--enable-preview"
+    },
+    "temperature": 0.3,
+    "maxTokens": 8192
+  }
 }

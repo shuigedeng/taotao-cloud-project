@@ -1,15 +1,51 @@
 {
+  "version": "1.0",
+
   "permissions": {
-    "read": ["/Users/username/.m2/settings.xml"],
-    "write": ["/tmp/claude-output"],
-    "network": ["localhost:9090"]
+    "read": [
+      "C:/Users/Lenovo/.m2/settings.xml",
+      "C:/Users/Lenovo/.gradle/gradle.properties"
+    ],
+    "write": [
+      "build/"
+    ],
+    "network": [
+      "localhost:3306",
+      "localhost:6379",
+      "localhost:8848",
+      "localhost:9090",
+      "localhost:9411",
+      "localhost:9200"
+    ]
   },
-  "model": {
-    "temperature": 0.5
+
+  "model": "claude-sonnet-4-20250514",
+
+  "git": {
+    "userName": "shuigedeng",
+    "userEmail": "981376577@qq.com"
   },
+
+  "java": {
+    "jdkHome": "C:/Program Files/GraalVM/graalvm-jdk-25",
+    "jvmArgs": ["--enable-preview", "--add-exports=java.base/java.lang=ALL-UNNAMED"]
+  },
+
   "custom": {
     "theme": "dark",
     "notifications": true,
-    "autoSave": true
+    "autoSave": true,
+    "editor": {
+      "tabSize": 4,
+      "insertSpaces": true,
+      "encoding": "UTF-8"
+    },
+    "local": {
+      "mavenUsername": "",
+      "mavenPassword": "",
+      "dockerRegistry": "registry.cn-hangzhou.aliyuncs.com",
+      "npmRegistry": "https://registry.npmmirror.com"
+    },
+    "temperature": 0.5
   }
 }
