@@ -18,7 +18,7 @@ package com.taotao.cloud.wechat.biz.infrastructure.niefy.modules.sys.service.imp
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.github.niefy.common.exception.RRException;
 import com.github.niefy.common.utils.Constant;
 import com.github.niefy.common.utils.PageUtils;

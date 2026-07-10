@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.biz.application.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.taotao.boot.common.enums.UserEnum;
 import com.taotao.cloud.member.biz.connect.entity.dto.ConnectAuthUser;
 import com.taotao.cloud.member.biz.connect.token.Token;

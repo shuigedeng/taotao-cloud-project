@@ -19,7 +19,7 @@ package com.taotao.cloud.order.biz.application.service.business.trade.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.order.biz.application.service.business.trade.OrderLogService;
 import com.taotao.cloud.order.biz.mapper.trade.OrderLogMapper;
 import com.taotao.cloud.order.biz.model.entity.order.OrderLog;

@@ -19,7 +19,7 @@ package com.taotao.cloud.sys.biz.infrastructure.task.job.quartz.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.boot.job.quartz.entity.QuartzTask;
 import com.taotao.boot.job.quartz.enums.QuartzJobCode;
 import com.taotao.boot.job.quartz.exception.QuartzExecutionException;

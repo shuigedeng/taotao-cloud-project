@@ -129,7 +129,7 @@ taotao-cloud-order/
 | Cloud | Spring Cloud | 2025.1.1 |
 | Cloud | Spring Cloud Alibaba | 2025.1.0.0 |
 | Security | Spring Security | 7.1.0 |
-| ORM | MyBatis-Plus | 3.5.16 |
+| ORM | MyBatis-Plus | 3.5.17 |
 | DB | MySQL | 9.6.0 |
 | Search | Elasticsearch | 9.2.2 |
 | Cache | Redis / Redisson | 4.3.1 |

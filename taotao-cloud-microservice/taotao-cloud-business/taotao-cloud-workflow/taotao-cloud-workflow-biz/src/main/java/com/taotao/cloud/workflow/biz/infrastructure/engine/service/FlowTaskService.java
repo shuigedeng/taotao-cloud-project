@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.biz.infrastructure.engine.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.taotao.cloud.workflow.biz.common.model.engine.flowbefore.FlowBatchModel;
 import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.FlowTaskListModel;
 import com.taotao.cloud.workflow.biz.common.model.engine.flowtask.PaginationFlowTask;

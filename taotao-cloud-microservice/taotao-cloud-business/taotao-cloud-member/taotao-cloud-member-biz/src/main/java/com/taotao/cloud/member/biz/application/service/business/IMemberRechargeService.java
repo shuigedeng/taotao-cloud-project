@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.biz.application.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.taotao.cloud.member.biz.model.entity.MemberRecharge;
 import com.taotao.cloud.order.api.model.page.recharge.RechargePageQuery;
 

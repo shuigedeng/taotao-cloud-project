@@ -1,7 +1,7 @@
 package com.taotao.cloud.tenant.biz.application.service.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysFileMetadata;
 import com.mdframe.forge.starter.core.domain.PageQuery;
 

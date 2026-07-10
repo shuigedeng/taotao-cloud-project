@@ -1,6 +1,6 @@
 package com.taotao.cloud.tenant.biz.application.service.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysNoticeReadRecord;
 import com.mdframe.forge.plugin.system.vo.NoticeReadStatisticsVO;
 import com.mdframe.forge.plugin.system.vo.NoticeReadUserVO;

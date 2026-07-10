@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.infrastructure.pay.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.xhuicloud.pay.dto.PayOrderDto;
 import com.xhuicloud.pay.entity.PayOrderAll;
 

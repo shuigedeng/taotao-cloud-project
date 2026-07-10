@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.application.service.business.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.boot.common.utils.date.DateUtils;
 import com.taotao.cloud.sys.biz.application.service.business.IVisitsService;
 import com.taotao.cloud.sys.biz.mapper.IVisitsMapper;

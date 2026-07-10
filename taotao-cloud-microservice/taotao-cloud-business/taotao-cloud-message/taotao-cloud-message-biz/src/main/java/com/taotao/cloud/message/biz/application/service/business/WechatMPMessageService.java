@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.application.service.business;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.taotao.cloud.message.biz.model.entity.WechatMPMessage;
 
 /** 微信小程序消息订阅 业务层 */

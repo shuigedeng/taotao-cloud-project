@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.infrastructure.channels.websockt.netty;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 
 import java.util.List;
 

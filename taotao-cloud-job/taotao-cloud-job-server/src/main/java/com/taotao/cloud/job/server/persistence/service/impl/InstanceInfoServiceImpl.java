@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.job.server.persistence.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.job.server.persistence.domain.InstanceInfo;
 import com.taotao.cloud.job.server.persistence.mapper.InstanceInfoMapper;
 import com.taotao.cloud.job.server.persistence.service.InstanceInfoService;

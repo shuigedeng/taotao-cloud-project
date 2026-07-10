@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.app.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import taotao.cloud.workflow.biz.engine.model.flowengine.FlowPagination;
 import taotao.cloud.workflow.biz.entity.AppDataEntity;
 import taotao.cloud.workflow.biz.model.AppDataListAllVO;

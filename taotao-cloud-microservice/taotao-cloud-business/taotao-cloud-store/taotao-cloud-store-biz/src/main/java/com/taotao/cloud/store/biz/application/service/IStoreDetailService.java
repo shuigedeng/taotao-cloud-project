@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.store.biz.application.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.taotao.cloud.store.api.model.dto.StoreAfterSaleAddressDTO;
 import com.taotao.cloud.store.api.model.dto.StoreSettingDTO;
 import com.taotao.cloud.store.api.model.dto.StoreSettlementDay;

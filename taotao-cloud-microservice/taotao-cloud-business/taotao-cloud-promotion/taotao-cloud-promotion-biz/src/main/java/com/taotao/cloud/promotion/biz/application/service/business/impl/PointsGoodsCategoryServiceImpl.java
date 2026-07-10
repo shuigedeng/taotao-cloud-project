@@ -19,7 +19,7 @@ package com.taotao.cloud.promotion.biz.application.service.business.impl;
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.promotion.biz.application.service.business.IPointsGoodsCategoryService;
 import com.taotao.cloud.promotion.biz.mapper.PointsGoodsCategoryMapper;

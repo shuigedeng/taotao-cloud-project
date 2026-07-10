@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.infrastructure.pay.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.xhuicloud.pay.entity.PayChannel;
 import com.xhuicloud.pay.mapper.PayChannelMapper;
 import com.xhuicloud.pay.service.PayChannelService;

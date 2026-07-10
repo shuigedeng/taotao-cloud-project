@@ -17,7 +17,7 @@
 package com.taotao.cloud.job.server.extension.lock.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.job.server.extension.lock.LockService;
 import com.taotao.cloud.job.server.persistence.domain.DistributedLock;
 import com.taotao.cloud.job.server.persistence.mapper.DistributedLockMapper;

@@ -17,7 +17,7 @@
 package com.taotao.cloud.wechat.biz.infrastructure.niefy.modules.oss.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.github.niefy.common.utils.PageUtils;
 import com.github.niefy.common.utils.Query;
 import com.github.niefy.modules.oss.dao.SysOssDao;

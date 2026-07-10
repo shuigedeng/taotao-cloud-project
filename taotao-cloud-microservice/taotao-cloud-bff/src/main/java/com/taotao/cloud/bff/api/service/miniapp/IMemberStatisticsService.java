@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.bff.api.service.miniapp;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.taotao.cloud.report.api.model.dto.StatisticsQueryParam;
 import com.taotao.cloud.report.biz.model.entity.MemberStatisticsData;
 import java.util.Date;

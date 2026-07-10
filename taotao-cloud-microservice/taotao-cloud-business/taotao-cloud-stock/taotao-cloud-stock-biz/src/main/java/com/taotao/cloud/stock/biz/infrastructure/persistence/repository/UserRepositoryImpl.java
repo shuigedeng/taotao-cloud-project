@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.stock.biz.infrastructure.persistence.repository;
 
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.IService;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

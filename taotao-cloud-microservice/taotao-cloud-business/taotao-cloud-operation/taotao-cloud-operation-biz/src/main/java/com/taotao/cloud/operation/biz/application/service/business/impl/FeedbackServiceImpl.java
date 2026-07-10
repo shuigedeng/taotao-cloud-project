@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.operation.biz.application.service.business.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.operation.biz.application.service.business.FeedbackService;
 import com.taotao.cloud.operation.biz.mapper.FeedbackMapper;
 import com.taotao.cloud.operation.biz.model.entity.Feedback;

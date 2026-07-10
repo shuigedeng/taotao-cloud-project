@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.biz.application.service.impl;
 
 import com.baomidou.dynamic.datasource.annotation.DSTransactional;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.workflow.biz.application.service.OfficeSuppliesService;
 import com.taotao.cloud.workflow.biz.common.model.form.officesupplies.OfficeSuppliesForm;
 import com.taotao.cloud.workflow.biz.common.util.JsonUtil;

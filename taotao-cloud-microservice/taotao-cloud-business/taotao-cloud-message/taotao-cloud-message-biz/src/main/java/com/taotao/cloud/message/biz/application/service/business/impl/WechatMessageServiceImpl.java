@@ -17,7 +17,7 @@
 package com.taotao.cloud.message.biz.application.service.business.impl; // package
                                                             // com.taotao.cloud.message.biz.service.impl;
 //
-// import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+// import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 // import com.taotao.boot.common.enums.ClientTypeEnum;
 // import com.taotao.boot.common.enums.ResultEnum;
 // import com.taotao.boot.common.exception.BusinessException;

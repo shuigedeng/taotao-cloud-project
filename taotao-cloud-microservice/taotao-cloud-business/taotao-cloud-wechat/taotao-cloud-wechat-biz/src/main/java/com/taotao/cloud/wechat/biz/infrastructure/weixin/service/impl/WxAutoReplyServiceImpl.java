@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.biz.infrastructure.weixin.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.joolun.weixin.entity.WxAutoReply;
 import com.joolun.weixin.mapper.WxAutoReplyMapper;
 import com.joolun.weixin.service.WxAutoReplyService;

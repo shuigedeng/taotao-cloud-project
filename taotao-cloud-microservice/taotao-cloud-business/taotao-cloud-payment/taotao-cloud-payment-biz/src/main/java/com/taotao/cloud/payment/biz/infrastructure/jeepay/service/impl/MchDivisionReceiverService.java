@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.infrastructure.jeepay.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.jeequan.jeepay.core.entity.MchDivisionReceiver;
 import com.jeequan.jeepay.service.mapper.MchDivisionReceiverMapper;
 import org.springframework.stereotype.Service;

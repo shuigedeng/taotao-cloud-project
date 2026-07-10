@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.biz.infrastructure.weixin.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.joolun.weixin.entity.WxOpenDataDTO;
 import com.joolun.weixin.entity.WxUser;
 import me.chanjar.weixin.common.error.WxErrorException;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.application.service.business.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.message.biz.application.service.business.ShortLinkService;
 import com.taotao.cloud.message.biz.mapper.ShortLinkMapper;
 import com.taotao.cloud.message.biz.model.entity.ShortLink;

@@ -18,7 +18,7 @@ package com.taotao.cloud.bff.api.service.backend.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.bff.api.util.StatisticsDateUtil;
 import com.taotao.cloud.report.api.enums.SearchTypeEnum;
 import com.taotao.cloud.report.api.model.dto.StatisticsQueryParam;

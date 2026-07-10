@@ -1,7 +1,7 @@
 package com.taotao.cloud.tenant.biz.application.service.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysFileGroup;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysFileGroupMapper;
 import com.taotao.cloud.tenant.biz.application.service.service.ISysFileGroupService;

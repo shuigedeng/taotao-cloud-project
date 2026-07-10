@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.biz.infrastructure.niefy.modules.sys.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.github.niefy.common.utils.R;
 import com.github.niefy.modules.sys.dao.SysUserTokenDao;
 import com.github.niefy.modules.sys.entity.SysUserTokenEntity;

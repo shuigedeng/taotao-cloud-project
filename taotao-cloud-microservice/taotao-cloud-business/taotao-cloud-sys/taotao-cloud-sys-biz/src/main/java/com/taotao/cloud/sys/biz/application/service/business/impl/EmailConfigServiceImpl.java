@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.application.service.business.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.sys.biz.application.service.business.IEmailConfigService;
 import com.taotao.cloud.sys.biz.mapper.IEmailConfigMapper;
 import com.taotao.cloud.sys.biz.model.entity.config.EmailConfig;

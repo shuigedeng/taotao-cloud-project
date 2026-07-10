@@ -17,7 +17,7 @@
 package com.taotao.cloud.distribution.biz.application.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.taotao.boot.common.model.ddd.query.PageQuery;
 import com.taotao.cloud.distribution.api.model.dto.DistributionApplyDTO;
 import com.taotao.cloud.distribution.api.model.query.DistributionPageQuery;

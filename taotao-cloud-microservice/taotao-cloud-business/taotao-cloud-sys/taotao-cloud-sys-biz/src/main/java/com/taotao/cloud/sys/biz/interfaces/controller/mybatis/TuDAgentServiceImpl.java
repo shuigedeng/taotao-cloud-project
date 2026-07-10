@@ -28,7 +28,7 @@ package com.taotao.cloud.sys.biz.interfaces.controller.mybatis;
 // import com.aegonthtf.fate.service.user.*;
 // import com.aegonthtf.fate.util.JodaTimeUtils;
 // import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-// import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+// import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 // import org.apache.commons.lang3.tuple.ImmutablePair;
 // import org.joda.time.LocalDateTime;
 // import org.springframework.beans.factory.InitializingBean;

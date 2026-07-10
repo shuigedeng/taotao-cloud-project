@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.distribution.biz.application.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionSelectedGoods;
 
 /** 分销选择商品业务层 */

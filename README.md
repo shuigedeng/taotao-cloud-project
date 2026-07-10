@@ -13,7 +13,7 @@
   <img src="https://img.shields.io/badge/netty-4.2.12.Final-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_security-7.1.0-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/elasticsearch-9.2.3-green" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/mybatis_plus-3.5.16-yellow" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/mybatis_plus-3.5.17-yellow" alt="Downloads"/>
   <img src="https://img.shields.io/badge/knife4j-4.5.0-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/swagger-3.0.0-red" alt="Downloads"/>
   <img src="https://img.shields.io/badge/redisson-4.3.1-lightgrey" alt="Downloads"/>
@@ -22,7 +22,7 @@
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-**taotao-cloud(taotao云平台)**  是一个企业级单体架构和微服务架构的快速开发脚手架。提供多种便捷**starter**进行功能扩展，采用**DDD(领域驱动设计)**思想，快速搭建企业级系统。基于**gradle9.6.0**、**jdk25**, **spring7.0.8**、**SpringBoot4.1.0**、**SpringCloud2025.1.1**、**SpringCloudAlibaba2025.1.0.0**、**SpringSecurity7.1.0**、**Mybatis-Plus3.5.16**等开发的微服务开发脚手架，包括中间件模块、大数据模块、微服务业务模块、前端模块提供技术框架的基础能力的封装，减少开发工作，只关注业务,包含了工作以来的工作总结和技术沉淀
+**taotao-cloud(taotao云平台)**  是一个企业级单体架构和微服务架构的快速开发脚手架。提供多种便捷**starter**进行功能扩展，采用**DDD(领域驱动设计)**思想，快速搭建企业级系统。基于**gradle9.6.0**、**jdk25**, **spring7.0.8**、**SpringBoot4.1.0**、**SpringCloud2025.1.1**、**SpringCloudAlibaba2025.1.0.0**、**SpringSecurity7.1.0**、**Mybatis-Plus3.5.17**等开发的微服务开发脚手架，包括中间件模块、大数据模块、微服务业务模块、前端模块提供技术框架的基础能力的封装，减少开发工作，只关注业务,包含了工作以来的工作总结和技术沉淀
 
 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循**SpringBoot**编程思想，高度模块化和可配置化。
 
@@ -265,7 +265,7 @@ Maven:
 | Spring-kafka         | 4.0.5         |
 | Roketmq              | 5.2.4         |
 | Spring Security      | 7.0.8         |
-| Mybatis Plus         | 3.5.16        |
+| Mybatis Plus         | 3.5.17        |
 | Hutool               | 5.8.44        |
 | Mysql                | 9.6.0         |
 | Querydsl             | 5.1.0         |

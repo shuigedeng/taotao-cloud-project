@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.biz.infrastructure.niefy.modules.sys.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.github.niefy.common.utils.Constant;
 import com.github.niefy.common.utils.MapUtils;
 import com.github.niefy.modules.sys.dao.SysMenuDao;

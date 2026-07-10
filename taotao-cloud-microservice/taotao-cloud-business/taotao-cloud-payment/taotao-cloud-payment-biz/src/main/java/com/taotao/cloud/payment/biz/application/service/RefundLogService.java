@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.application.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.taotao.cloud.payment.biz.entity.RefundLog;
 
 /**

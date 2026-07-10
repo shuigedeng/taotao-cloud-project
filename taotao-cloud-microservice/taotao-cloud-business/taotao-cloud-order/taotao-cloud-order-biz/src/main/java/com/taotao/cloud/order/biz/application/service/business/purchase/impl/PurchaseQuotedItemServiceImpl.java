@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.application.service.business.purchase.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.order.biz.application.service.business.purchase.PurchaseQuotedItemService;
 import com.taotao.cloud.order.biz.mapper.purchase.PurchaseQuotedItemMapper;
 import com.taotao.cloud.order.biz.model.entity.purchase.PurchaseQuotedItem;

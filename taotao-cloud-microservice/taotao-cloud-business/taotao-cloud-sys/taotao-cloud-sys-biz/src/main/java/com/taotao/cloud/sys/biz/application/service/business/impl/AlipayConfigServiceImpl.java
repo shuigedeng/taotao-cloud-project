@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.application.service.business.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.sys.biz.application.service.business.IAlipayConfigService;
 import com.taotao.cloud.sys.biz.mapper.IAlipayConfigMapper;
 import com.taotao.cloud.sys.biz.model.entity.config.AlipayConfig;

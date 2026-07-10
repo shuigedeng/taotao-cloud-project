@@ -19,7 +19,7 @@ package com.taotao.cloud.member.biz.application.service.business.impl; // packag
 //
 // import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 // import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-// import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+// import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 // import com.taotao.cloud.member.biz.mapper.StoreLogisticsMapper;
 // import com.taotao.cloud.member.biz.service.StoreLogisticsService;
 // import org.springframework.stereotype.Service;

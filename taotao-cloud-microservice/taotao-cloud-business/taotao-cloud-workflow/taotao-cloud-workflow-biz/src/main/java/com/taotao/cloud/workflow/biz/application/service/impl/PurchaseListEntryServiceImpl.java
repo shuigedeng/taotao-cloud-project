@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.application.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.workflow.biz.application.service.PurchaseListEntryService;
 import com.taotao.cloud.workflow.biz.form.mapper.PurchaseListEntryMapper;
 import com.taotao.cloud.workflow.biz.infrastructure.entity.PurchaseListEntryEntity;

@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.infrastructure.task.job.quartz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.taotao.cloud.sys.api.model.page.QuartzJobLogPageQuery;
 
 /** 定时任务日志 */

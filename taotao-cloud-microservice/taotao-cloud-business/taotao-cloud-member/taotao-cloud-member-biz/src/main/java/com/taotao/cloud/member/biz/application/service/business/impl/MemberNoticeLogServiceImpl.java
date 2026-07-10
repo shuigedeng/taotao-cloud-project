@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.biz.application.service.business.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.member.biz.application.service.business.IMemberNoticeLogService;
 import com.taotao.cloud.member.biz.mapper.IMemberNoticeLogMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberNoticeLog;

@@ -17,7 +17,7 @@
 package com.taotao.cloud.sa.just.biz.just.justauth.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.sa.just.biz.just.justauth.dto.CreateJustAuthConfigDTO;
 import com.taotao.cloud.sa.just.biz.just.justauth.dto.JustAuthConfigDTO;
 import com.taotao.cloud.sa.just.biz.just.justauth.dto.QueryJustAuthConfigDTO;

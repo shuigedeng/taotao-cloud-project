@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.application.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.taotao.cloud.workflow.biz.infrastructure.entity.ApplyDeliverGoodsEntryEntity;
 
 /** 发货申请单明细 */

@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.infrastructure.task.job.quartz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.sys.api.model.page.QuartzJobLogPageQuery;
 import com.taotao.cloud.sys.biz.infrastructure.task.job.quartz.mapper.QuartzJobLogMapper;
 import org.springframework.scheduling.annotation.Async;

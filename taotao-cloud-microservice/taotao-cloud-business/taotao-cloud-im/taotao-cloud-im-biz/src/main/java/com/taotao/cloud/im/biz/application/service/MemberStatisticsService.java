@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.im.biz.application.service; // package com.taotao.cloud.wechat.biz.service;
 //
-// import com.baomidou.mybatisplus.extension.service.IService;
+// import com.baomidou.mybatisplus.spring.service.IService;
 //
 // import com.taotao.cloud.wechat.biz.model.entity.MemberStatisticsData;
 // import java.util.Date;

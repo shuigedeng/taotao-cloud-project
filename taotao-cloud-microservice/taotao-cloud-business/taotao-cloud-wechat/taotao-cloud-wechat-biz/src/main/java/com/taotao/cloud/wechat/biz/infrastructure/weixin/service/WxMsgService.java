@@ -18,7 +18,7 @@ package com.taotao.cloud.wechat.biz.infrastructure.weixin.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.joolun.weixin.entity.WxMsg;
 import com.joolun.weixin.entity.WxMsgVO;
 import java.util.List;

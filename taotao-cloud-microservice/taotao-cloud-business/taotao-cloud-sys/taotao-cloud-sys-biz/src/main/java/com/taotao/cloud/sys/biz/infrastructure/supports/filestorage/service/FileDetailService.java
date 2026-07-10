@@ -4,7 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import tools.jackson.databind.json.JsonMapper;
 import com.taotao.cloud.file.biz.filestorage.mapper.FileDetailMapper;
 import com.taotao.cloud.file.biz.filestorage.model.FileDetail;

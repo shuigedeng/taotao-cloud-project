@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.biz.application.service.business;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.taotao.boot.common.model.ddd.query.PageQuery;
 import com.taotao.cloud.sys.biz.model.dto.I18nDataDTO;
 import com.taotao.cloud.sys.biz.model.entity.i18n.I18nData;

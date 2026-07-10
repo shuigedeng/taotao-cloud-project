@@ -3,7 +3,7 @@ package com.taotao.cloud.tenant.biz.application.service.service.impl;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysFileMetadata;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysFileStorageConfig;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysFileMetadataMapper;

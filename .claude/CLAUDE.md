@@ -13,7 +13,7 @@
 | Gradle | 9.6 Wrapper (`distributionUrl=gradle-9.6.0-bin.zip`) |
 | Spring Boot / Cloud | 4.1.0 / 2025.1.1 |
 | Spring Cloud Alibaba | 2025.1.0.0 (Nacos / Sentinel / Seata) |
-| ORM | MyBatis-Plus 3.5.16 + Querydsl 5.1.0 |
+| ORM | MyBatis-Plus 3.5.17 + Querydsl 5.1.0 |
 | BOM | `io.github.shuigedeng:taotao-cloud-dependencies:2026.08`（未开源，需私有仓库凭据） |
 | 分组 ID | `io.github.shuigedeng` |
 | 项目版本 | `2026.08` |

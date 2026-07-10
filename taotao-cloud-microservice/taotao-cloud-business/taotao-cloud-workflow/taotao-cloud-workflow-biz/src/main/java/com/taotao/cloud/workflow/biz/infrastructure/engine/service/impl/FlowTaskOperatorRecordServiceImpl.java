@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.biz.infrastructure.engine.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.workflow.biz.common.util.RandomUtil;
 import com.taotao.cloud.workflow.biz.infrastructure.engine.entity.FlowTaskOperatorRecordEntity;
 import com.taotao.cloud.workflow.biz.infrastructure.engine.enums.FlowNodeEnum;

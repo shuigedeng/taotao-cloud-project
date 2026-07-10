@@ -1,6 +1,6 @@
 package com.taotao.cloud.tenant.biz.application.service.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.taotao.cloud.tenant.biz.application.dto.SysRoleDTO;
 import com.taotao.cloud.tenant.biz.application.dto.SysRoleQuery;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysRole;

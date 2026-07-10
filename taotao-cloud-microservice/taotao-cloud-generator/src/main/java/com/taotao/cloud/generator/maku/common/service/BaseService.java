@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.generator.maku.common.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 
 /**
  * 基础服务接口，所有Service接口都要继承

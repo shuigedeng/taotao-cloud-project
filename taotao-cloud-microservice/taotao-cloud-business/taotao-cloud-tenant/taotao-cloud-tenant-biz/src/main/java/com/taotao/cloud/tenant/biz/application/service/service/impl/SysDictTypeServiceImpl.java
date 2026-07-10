@@ -3,7 +3,7 @@ package com.taotao.cloud.tenant.biz.application.service.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.tenant.biz.application.dto.SysDictTypeDTO;
 import com.taotao.cloud.tenant.biz.application.dto.SysDictTypeQuery;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysDictType;

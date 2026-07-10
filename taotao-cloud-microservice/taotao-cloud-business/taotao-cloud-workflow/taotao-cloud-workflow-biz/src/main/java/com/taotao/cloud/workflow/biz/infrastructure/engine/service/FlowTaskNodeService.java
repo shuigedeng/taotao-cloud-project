@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.infrastructure.engine.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.taotao.cloud.workflow.biz.infrastructure.engine.entity.FlowTaskNodeEntity;
 
 import java.util.List;

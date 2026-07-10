@@ -17,7 +17,7 @@
 package com.taotao.cloud.distribution.biz.application.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.distribution.biz.application.service.DistributionSelectedGoodsService;
 import com.taotao.cloud.distribution.biz.application.service.DistributionService;
 import com.taotao.cloud.distribution.biz.mapper.DistributionSelectedGoodsMapper;

@@ -19,7 +19,7 @@ package com.taotao.cloud.wechat.biz.infrastructure.niefy.modules.sys.service.imp
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.github.niefy.common.exception.RRException;
 import com.github.niefy.common.utils.PageUtils;
 import com.github.niefy.common.utils.Query;

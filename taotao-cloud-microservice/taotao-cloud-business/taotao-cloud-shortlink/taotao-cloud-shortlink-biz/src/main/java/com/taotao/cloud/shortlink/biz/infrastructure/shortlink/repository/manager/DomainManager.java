@@ -17,7 +17,7 @@
 package com.taotao.cloud.shortlink.biz.infrastructure.shortlink.repository.manager;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.log.api.api.dto.DomainDTO;
 import com.taotao.cloud.log.api.api.enums.BooleanEnum;
 import com.taotao.cloud.log.api.api.enums.ShortLinkDomainTypeEnum;

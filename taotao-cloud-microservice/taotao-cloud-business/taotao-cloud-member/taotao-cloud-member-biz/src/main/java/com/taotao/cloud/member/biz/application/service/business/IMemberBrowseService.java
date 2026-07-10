@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.biz.application.service.business;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.taotao.boot.common.model.ddd.query.PageQuery;
 import com.taotao.cloud.goods.api.model.vo.EsGoodsIndexVO;
 import com.taotao.cloud.member.biz.model.entity.MemberBrowse;

@@ -17,7 +17,7 @@
 package com.taotao.cloud.operation.biz.application.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.taotao.cloud.operation.api.model.dto.PageDataDTO;
 import com.taotao.cloud.operation.api.model.vo.PageDataListVO;
 import com.taotao.cloud.operation.api.model.vo.PageDataVO;

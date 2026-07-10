@@ -18,7 +18,7 @@ package com.taotao.cloud.order.biz.application.service.business.order;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.spring.service.IService;
 import com.taotao.cloud.member.api.model.dto.MemberAddressDTO;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.sys.model.dto.cart.TradeDTO;
