@@ -1,0 +1,3 @@
+# Local overrides — never commit personal config
+settings.local.json
+CLAUDE.local.md
