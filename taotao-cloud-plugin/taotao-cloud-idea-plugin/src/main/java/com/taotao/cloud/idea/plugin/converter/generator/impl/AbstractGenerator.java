@@ -25,18 +25,24 @@ public abstract class AbstractGenerator implements ConverterGenerator {
 
         PsiClass psiClass = (PsiClass) psiMethod.getParent();
 
-        new WriteCommandAction.Simple(psiClass.getProject(), psiClass.getContainingFile()) {
-
-            @Override
-            protected void run() {
-                try {
-                    generateCode(psiClass, psiMethod);
-                } catch (ConverterException e) {
-                    Messages.showErrorDialog(e.getMessage(), "Converter Plugin");
-                }
-            }
-
-        }.execute();
+		WriteCommandAction.runWriteCommandAction(psiClass.getProject(), new Runnable() {
+			@Override
+			public void run() {
+				try {
+					generateCode(psiClass, psiMethod);
+				} catch (ConverterException e) {
+					Messages.showErrorDialog(e.getMessage(), "Converter Plugin");
+				}
+			}
+		});
+//        new WriteCommandAction.Simple(psiClass.getProject(), psiClass.getContainingFile()) {
+//
+//            @Override
+//            protected void run() {
+//
+//            }
+//
+//        }.execute();
 
     }
 

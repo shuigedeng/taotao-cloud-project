@@ -22,20 +22,27 @@ public class ClassGenerator extends ListGenerator {
 
     public void generateCode( PsiClass psiClass, PsiClass fromPsiClass, PsiClass toPsiClass ) {
 
-        new WriteCommandAction.Simple(psiClass.getProject(), psiClass.getContainingFile()) {
+		WriteCommandAction.runWriteCommandAction(psiClass.getProject(), new Runnable() {
+			@Override
+			public void run() {
+				try {
+					createPrivateConstruct(psiClass);
 
-            @Override
-            protected void run() {
-                try {
-                    createPrivateConstruct(psiClass);
+					createConvertMethod(psiClass, fromPsiClass, toPsiClass);
+					createConvertMethod(psiClass, toPsiClass, fromPsiClass);
+				} catch (ConverterException e) {
+					Messages.showErrorDialog(e.getMessage(), "Converter Plugin");
+				}
+			}
+		});
 
-                    createConvertMethod(psiClass, fromPsiClass, toPsiClass);
-                    createConvertMethod(psiClass, toPsiClass, fromPsiClass);
-                } catch (ConverterException e) {
-                    Messages.showErrorDialog(e.getMessage(), "Converter Plugin");
-                }
-            }
-        }.execute();
+//        new WriteCommandAction.Simple(psiClass.getProject(), psiClass.getContainingFile()) {
+//
+//            @Override
+//            protected void run() {
+//
+//            }
+//        }.execute();
     }
 
     private void createConvertMethod( PsiClass psiClass, PsiClass fromPsiClass, PsiClass toPsiClass )
