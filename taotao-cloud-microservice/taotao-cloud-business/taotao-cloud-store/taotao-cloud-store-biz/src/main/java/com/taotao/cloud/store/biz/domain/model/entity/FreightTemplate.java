@@ -18,7 +18,7 @@ package com.taotao.cloud.store.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.boot.webagg.entity.BasePO;
-import com.taotao.boot.webagg.entity.JpaEntityListener;
+import com.taotao.boot.webagg.entity.listener.JpaEntityListener;
 import com.taotao.cloud.store.api.enums.FreightTemplateEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

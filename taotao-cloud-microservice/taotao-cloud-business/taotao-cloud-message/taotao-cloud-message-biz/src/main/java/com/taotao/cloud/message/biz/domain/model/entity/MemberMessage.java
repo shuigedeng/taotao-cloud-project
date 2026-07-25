@@ -18,7 +18,7 @@ package com.taotao.cloud.message.biz.domain.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.boot.webagg.entity.BasePO;
-import com.taotao.boot.webagg.entity.JpaEntityListener;
+import com.taotao.boot.webagg.entity.listener.JpaEntityListener;
 import com.taotao.cloud.message.api.enums.MessageStatusEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
