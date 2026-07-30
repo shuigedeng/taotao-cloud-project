@@ -75,13 +75,13 @@ configurations {
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
 
-        //implementation('com.alibaba:fastjson'){
+        //implementation('com.alibaba.fastjson2:fastjson2'){
         //    version{
         //        strictly("1.2.12")
         //    }
         //}
         //或者简写为 force 的优先级会比较高，会覆盖 strictly 策略
-        //implementation 'com.alibaba:fastjson:2.0.62!!'
+        //implementation 'com.alibaba.fastjson2:fastjson2:2.0.63!!'
 
         resolutionStrategy {
             force "org.codehaus.groovy:groovy:3.0.25"

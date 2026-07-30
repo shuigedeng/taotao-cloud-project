@@ -91,7 +91,7 @@
 #spring-redisson = { module = "org.redisson:redisson-spring-boot-starter", version.ref = "spring-redisson" }
 #aliyun-sms = { module = "com.aliyun:dysmsapi20170525", version.ref = "aliyun-sms" }
 #fastjosn-kotlin = { module = "com.alibaba.fastjson2:fastjson2-kotlin", version.ref = "fastjson" }
-#fastjson = { module = "com.alibaba:fastjson", version.ref = "fastjson" }
+#fastjson = { module = "com.alibaba.fastjson2:fastjson2", version.ref = "fastjson" }
 #dingtalk-service = { module = "com.aliyun:alibaba-dingtalk-service-sdk", version.ref = "dingtalk-service-sdk" }
 #dingtalk-sdk = { module = "com.aliyun:dingtalk", version.ref = "dingtalk-sdk" }
 #dingtalk-stream = { module = "com.dingtalk.open:app-stream-client", version.ref = "dingtalk-stream-client" }
