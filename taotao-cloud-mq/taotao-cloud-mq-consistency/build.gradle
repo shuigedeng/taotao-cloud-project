@@ -5,10 +5,10 @@ dependencies {
 
     api 'org.slf4j:slf4j-api:2.0.18'
     api 'org.slf4j:slf4j-api:2.0.18'
-    api "redis.clients:jedis:7.5.2"
+    api "redis.clients:jedis:7.5.3"
 
     api 'com.google.guava:guava:33.6.0-jre'
-    api 'com.alibaba.fastjson2:fastjson2:2.0.63'
+    api 'com.alibaba.fastjson2:fastjson2:2.0.64'
     api 'org.rocksdb:rocksdbjni:9.4.0'
     api ("com.alipay.sofa:rpc-grpc-impl:1.4.0")
     api 'com.alipay.sofa:hessian:3.5.5'
