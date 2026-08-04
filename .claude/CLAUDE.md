@@ -14,9 +14,9 @@
 | Spring Boot / Cloud | 4.1.0 / 2025.1.1 |
 | Spring Cloud Alibaba | 2025.1.0.0 (Nacos / Sentinel / Seata) |
 | ORM | MyBatis-Plus 3.5.17 + Querydsl 5.1.0 |
-| BOM | `io.github.shuigedeng:taotao-cloud-dependencies:2026.08`（未开源，需私有仓库凭据） |
+| BOM | `io.github.shuigedeng:taotao-cloud-dependencies:2026.09`（未开源，需私有仓库凭据） |
 | 分组 ID | `io.github.shuigedeng` |
-| 项目版本 | `2026.08` |
+| 项目版本 | `2026.09` |
 | 交流语言 | **中文** |
 
 ---
@@ -209,7 +209,7 @@ api  ←  interfaces  ←  application  →  facade  （防腐层）
 ## 注意事项
 
 - JDK 25 预览特性：所有编译/测试/执行必须带 `--enable-preview`
-- 私有 BOM `taotao-cloud-dependencies:2026.08` 需私有仓库凭据
+- 私有 BOM `taotao-cloud-dependencies:2026.09` 需私有仓库凭据
 - `taotao-cloud-starter/*` 是独立仓库（不在本 monorepo 内），只消费其发布件
 - 前端在独立仓库 `taotao-cloud-ui`，基于 Vue 3 + React + Taro
 - 部署支持 Shell / Docker / Docker Compose / K8s / GitHub Actions
