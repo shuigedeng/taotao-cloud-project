@@ -8,6 +8,14 @@ apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: "idea"
 
+// ============================================================
+// application 插件配置：用于本地 gradle run 调试
+// ============================================================
+application {
+    // 指定本地运行时的主类
+    mainClass = 'com.taotao.cloud.dolphinscheduler.DataGenToConsoleDemo'
+}
+
 configurations {
     flinkShadowJar {
         // 这些 Flink 集群已提供，排除掉防止冲突
@@ -178,13 +186,6 @@ dependencies {
 
 }
 
-// ============================================================
-// application 插件配置：用于本地 gradle run 调试
-// ============================================================
-application {
-    // 指定本地运行时的主类
-    mainClass = 'com.example.YourFlinkJob'
-}
 
 // ============================================================
 // 本地开发环境配置：让 flinkShadowJar 中的依赖在 IDE 中可用
