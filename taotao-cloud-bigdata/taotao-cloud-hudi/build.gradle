@@ -1,4 +1,7 @@
 apply plugin: "scala"
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: "idea"
 
 //import com.github.jengelman.gradle.plugins.shadow.transformers.Log4j2PluginsCacheFileTransformer
 
