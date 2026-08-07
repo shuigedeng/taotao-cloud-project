@@ -30,5 +30,8 @@ configurations {
             force 'org.glassfish:javax.el:3.0.0'
             force 'org.glassfish.jaxb:jaxb-runtime:4.0.9'
         }
+
+        exclude group: "at.yawk.lz4", module: "lz4-java"
+        exclude group: "org.lz4", module: "lz4-java"
     }
 }

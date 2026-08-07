@@ -1,3 +1,8 @@
+apply plugin: "scala"
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: "idea"
+
 dependencies {
     implementation "org.apache.hadoop:hadoop-hdfs:3.5.0"
     implementation "org.apache.hadoop:hadoop-client:3.5.0"

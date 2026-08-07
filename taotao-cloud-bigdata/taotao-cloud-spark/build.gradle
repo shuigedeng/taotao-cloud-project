@@ -1,5 +1,6 @@
 apply plugin: "scala"
-apply plugin: "java"
+apply plugin: 'java'
+apply plugin: 'application'
 apply plugin: "idea"
 
 //sourceSets {
@@ -15,6 +16,20 @@ apply plugin: "idea"
 //        }
 //    }
 //}
+
+configurations {
+    configureEach {
+        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
+
+        resolutionStrategy {
+            force "org.glassfish:javax.el:3.0.0"
+        }
+
+        exclude group: "at.yawk.lz4", module: "lz4-java"
+
+    }
+}
 
 dependencies {
     implementation("org.apache.spark:spark-core_2.13:4.2.0")
@@ -52,13 +67,13 @@ dependencies {
 
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': "com.example.Main"
-    }
-    from sourceSets.main.output
-    dependsOn configurations.runtimeClasspath
-}
+//jar {
+//    manifest {
+//        attributes 'Main-Class': "com.example.Main"
+//    }
+//    from sourceSets.main.output
+//    dependsOn configurations.runtimeClasspath
+//}
 
 //shadowJar {
 //    mergeServiceFiles()
@@ -82,16 +97,4 @@ jar {
 //}
 
 
-configurations {
-    configureEach {
-        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
-        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
-        resolutionStrategy {
-            force "org.glassfish:javax.el:3.0.0"
-        }
-
-        exclude group: "at.yawk.lz4", module: "lz4-java"
-
-    }
-}

@@ -1,4 +1,314 @@
+//dependencies {
+//    //implementation 'org.apache.dolphinscheduler:dolphinscheduler-api:3.3.2'
+//
+//}
+
+apply plugin: "scala"
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: "idea"
+
+configurations {
+    flinkShadowJar {
+        // 这些 Flink 集群已提供，排除掉防止冲突
+        exclude group: 'org.apache.flink', module: 'force-shading'
+        exclude group: 'com.google.code.findbugs', module: 'jsr305'
+        exclude group: 'org.slf4j'
+        exclude group: 'org.apache.logging.log4j'
+    }
+
+    configureEach {
+        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
+
+        resolutionStrategy {
+            force 'org.glassfish:javax.el:3.0.0'
+            force 'org.glassfish.jaxb:jaxb-runtime:4.0.9'
+            force 'org.lz4:lz4-java:1.8.1'
+        }
+
+        exclude group: "at.yawk.lz4", module: "lz4-java"
+    }
+}
+
+tasks.withType(ScalaCompile).configureEach {
+    scalaCompileOptions.additionalParameters = ['-unchecked', '-deprecation']
+}
+
 dependencies {
-    //implementation 'org.apache.dolphinscheduler:dolphinscheduler-api:3.3.2'
+    //Flink 核心依赖 使用 compileOnly (不会打入 ShadowJar) 这些由 Flink 集群在运行时提供
+    implementation "org.apache.flink:flink-core:2.3.0"
+    implementation "org.apache.flink:flink-clients:2.3.0"
+    implementation "org.apache.flink:flink-streaming-java:2.3.0"
+    //状态后端管理器
+    implementation "org.apache.flink:flink-statebackend-rocksdb:2.3.0"
+    //flink本地运行时 提供的web功能
+    implementation "org.apache.flink:flink-runtime-web:2.3.0"
+    //flink sql
+    implementation 'org.apache.flink:flink-table-api-java:2.3.0'
+    implementation 'org.apache.flink:flink-table-runtime:2.3.0'
+    implementation 'org.apache.flink:flink-table-api-java-bridge:2.3.0'
+    implementation "org.apache.flink:flink-table-planner_2.12:2.3.0"
+    implementation "org.apache.flink:flink-table-planner-loader:2.3.0"
+    implementation 'org.apache.flink:flink-sql-gateway-api:2.3.0'
+
+    // --- Format 相关 ---
+    flinkShadowJar 'org.apache.flink:flink-cep:2.3.0'
+    flinkShadowJar "org.apache.flink:flink-csv:2.3.0"
+    flinkShadowJar 'org.apache.flink:flink-parquet:2.3.0'
+    flinkShadowJar 'org.apache.parquet:parquet-avro:1.16.0'
+    flinkShadowJar 'org.apache.flink:flink-avro:2.3.0'
+    flinkShadowJar 'org.apache.flink:flink-json:2.3.0'
+    flinkShadowJar 'org.apache.flink:flink-format-common:2.3.0'
+    flinkShadowJar 'org.apache.flink:flink-compress:2.3.0'
+
+    // ---  flink连接器 ---
+    flinkShadowJar 'org.apache.flink:flink-connector-datagen:2.3.0'
+    flinkShadowJar 'org.apache.flink:flink-connector-files:2.3.0'
+    flinkShadowJar 'org.apache.flink:flink-connector-http:1.0.0-2.2'
+    flinkShadowJar ('org.apache.flink:flink-connector-kafka:5.0.0-2.2') {
+        exclude group: "at.yawk.lz4", module: "lz4-java"
+        exclude group: "org.lz4", module: "lz4-java"
+    }
+    flinkShadowJar 'org.apache.flink:flink-connector-jdbc-core:4.1.0-2.2'
+    flinkShadowJar 'org.apache.flink:flink-connector-jdbc-mysql:4.1.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-connector-hive_2.12:1.20.5'
+    //flinkShadowJar 'org.apache.flink:flink-connector-mongodb:2.0.0-1.20.0'
+    //flinkShadowJar 'org.apache.flink:flink-connector-pulsar:4.1.0-1.18'
+    //flinkShadowJar 'org.apache.flink:flink-connector-hbase-2.2:3.0.0-1.17'
+    //flinkShadowJar "org.apache.flink:flink-connector-elasticsearch7:3.0.0-1.16"
+    //flinkShadowJar "org.apache.flink:flink-connector-redis_2.11:1.1.5"
+
+    // --- Doris ---
+    flinkShadowJar 'org.apache.doris:flink-doris-connector-2.2:26.1.1'
+
+    // --- SQL Connectors ---
+    //flinkShadowJar 'org.apache.flink:flink-sql-connector-hive-3.1.3_2.12:1.20.5'
+    flinkShadowJar 'org.apache.flink:flink-sql-connector-kafka:5.0.0-2.2'
+    flinkShadowJar 'org.apache.flink:flink-sql-connector-http:1.0.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-sql-connector-mongodb:2.0.0-1.20.0'
+    //flinkShadowJar 'org.apache.flink:flink-sql-connector-hbase-2.2:3.0.0-1.17'
+    //flinkShadowJar 'org.apache.flink:flink-sql-connector-pulsar:4.1.0-1.18'
+
+    // --- Flink CDC ---
+    flinkShadowJar 'org.apache.flink:flink-cdc-base:3.6.0-2.2'
+    flinkShadowJar 'org.apache.flink:flink-cdc-cli:3.6.0-2.2'
+    flinkShadowJar 'org.apache.flink:flink-cdc-runtime:3.6.0-2.2'
+    flinkShadowJar 'org.apache.flink:flink-cdc-pipeline-connector-doris:3.6.0-2.2'
+    flinkShadowJar 'org.apache.flink:flink-cdc-pipeline-connector-kafka:3.6.0-2.2'
+    flinkShadowJar 'org.apache.flink:flink-cdc-pipeline-connector-mysql:3.6.0-2.2'
+    flinkShadowJar ("org.apache.flink:flink-cdc-pipeline-connector-paimon:3.6.0-2.2") {
+        exclude group: 'org.apache.curator', module: 'apache-curator'
+    }
+    //flinkShadowJar 'org.apache.flink:flink-cdc-pipeline-connectors:3.6.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-cdc-pipeline-connector-starrocks:3.6.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-cdc-pipeline-connector-values:3.6.0-2.2'
+
+    flinkShadowJar 'org.apache.flink:flink-connector-debezium:3.6.0-2.2'
+    flinkShadowJar 'org.apache.flink:flink-connector-mysql-cdc:3.6.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-connector-mongodb-cdc:3.6.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-connector-db2-cdc:3.6.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-connector-oceanbase-cdc:3.6.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-connector-oracle-cdc:3.6.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-connector-postgres-cdc:3.6.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-connector-sqlserver-cdc:3.6.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-connector-tidb-cdc:3.6.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-connector-vitess-cdc:3.6.0-2.2'
+
+    flinkShadowJar 'org.apache.flink:flink-sql-connector-mysql-cdc:3.6.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-sql-connector-mongodb-cdc:3.6.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-sql-connector-db2-cdc:3.6.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-sql-connector-oceanbase-cdc:3.6.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-sql-connector-oracle-cdc:3.6.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-sql-connector-postgres-cdc:3.6.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-sql-connector-sqlserver-cdc:3.6.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-sql-connector-tidb-cdc:3.6.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-sql-connector-vitess-cdc:3.6.0-2.2'
+
+    // --- Hadoop ---
+    flinkShadowJar 'org.apache.hadoop:hadoop-common:3.5.0'
+    flinkShadowJar 'org.apache.hadoop:hadoop-client:3.5.0'
+    flinkShadowJar 'org.apache.hadoop:hadoop-hdfs:3.5.0'
+    //flinkShadowJar 'org.apache.flink:flink-shaded-hadoop-2-uber:3.4.0'
+    // https://mvnrepository.com/artifact/org.apache.flink/flink-shaded-hadoop-3-uber
+    //flinkShadowJar group: 'org.apache.flink', name: 'flink-shaded-hadoop-3-uber', version: '3.1.1.7.2.9.0-173-9.0'
+
+    // --- Paimon ---
+    flinkShadowJar('org.apache.paimon:paimon-bundle:1.4.2') {
+        exclude group: "at.yawk.lz4", module: "lz4-java"
+        exclude group: "org.lz4", module: "lz4-java"
+    }
+    flinkShadowJar("org.apache.paimon:paimon-format:1.4.2")
+    flinkShadowJar("org.apache.paimon:paimon-codegen:1.4.2")
+    flinkShadowJar("org.apache.paimon:paimon-codegen-loader:1.4.2")
+    flinkShadowJar("org.apache.paimon:paimon-filesystems:1.4.2")
+    flinkShadowJar("org.apache.paimon:paimon-service-client:1.4.2")
+    flinkShadowJar("org.apache.paimon:paimon-service-runtime:1.4.2")
+    flinkShadowJar("org.apache.paimon:paimon-oss:1.4.2")
+    flinkShadowJar("org.apache.paimon:paimon-oss-impl:1.4.2")
+    flinkShadowJar("org.apache.paimon:paimon-flink-2.2:1.4.2")
+    flinkShadowJar("org.apache.paimon:paimon-flink-cdc:1.4.2")
+    flinkShadowJar('org.apache.paimon:paimon-flink-action:1.4.2')
+    flinkShadowJar("org.apache.paimon:paimon-hive-catalog:1.4.2")
+    flinkShadowJar("org.apache.paimon:paimon-hive-connector-3.1:1.4.2")
+    //flinkShadowJar('org.apache.paimon:paimon-shade-guava-30:30.1.1-jre-0.8.0')
+    //flinkShadowJar('org.apache.paimon:paimon-shade-jackson-2:2.14.2-0.8.0')
+    //flinkShadowJar('org.apache.paimon:paimon-shade-caffeine-2:2.9.3-0.8.0')
+
+    // --- 其他工具库 ---
+    flinkShadowJar 'com.mysql:mysql-connector-j:9.7.0'
+    flinkShadowJar 'redis.clients:jedis:7.5.3'
+    flinkShadowJar ("org.apache.hive:hive-exec:4.2.0") {
+        exclude group: 'org.apache.curator', module: 'apache-curator'
+    }
+
+    flinkShadowJar 'org.apache.commons:commons-compress:1.28.0'
+    flinkShadowJar 'org.slf4j:slf4j-api:2.0.18'
+    //implementation 'org.slf4j:slf4j-reload4j:2.0.18'
+
+    flinkShadowJar "org.scala-lang:scala-library:2.13.18"
+    flinkShadowJar "org.scala-lang:scala-compiler:2.13.18"
+    flinkShadowJar "org.scala-lang:scala-reflect:2.13.18"
+
+    //flinkShadowJar 'com.alibaba.ververica:flink-cep:1.17-vvr-8.0.8'
+    //flinkShadowJar (project(":taotao-cloud-bigdata:taotao-cloud-flink-cep"))
+    flinkShadowJar 'com.googlecode.aviator:aviator:5.4.4'
+
+    flinkShadowJar "com.alibaba.fastjson2:fastjson2:2.0.64"
 
 }
+
+// ============================================================
+// application 插件配置：用于本地 gradle run 调试
+// ============================================================
+application {
+    // 指定本地运行时的主类
+    mainClass = 'com.example.YourFlinkJob'
+}
+
+// ============================================================
+// 本地开发环境配置：让 flinkShadowJar 中的依赖在 IDE 中可用
+// ============================================================
+sourceSets {
+    main {
+        compileClasspath += configurations.flinkShadowJar
+        runtimeClasspath += configurations.flinkShadowJar
+    }
+    test {
+        compileClasspath += configurations.flinkShadowJar
+        runtimeClasspath += configurations.flinkShadowJar
+    }
+//    javadoc {
+//        classpath += configurations.flinkShadowJar
+//    }
+}
+// 让 gradle run 命令也能识别这些依赖
+run.classpath = sourceSets.main.runtimeClasspath
+
+shadowJar {
+    // 关键配置：只打包 flinkShadowJar 中的依赖
+    configurations = [project.configurations.flinkShadowJar]
+
+    zip64 true
+    archiveBaseName.set('my-flink-job')
+    archiveClassifier.set('')
+    archiveVersion.set('1.0.0')
+
+    // 3. 合并 SPI 服务文件（如 META-INF/services/）
+    duplicatesStrategy = DuplicatesStrategy.WARN
+    mergeServiceFiles()
+    filesNotMatching("META-INF/services/**") {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
+
+    // 4. 排除签名文件，避免安全冲突
+    exclude 'META-INF/*.SF'
+    exclude 'META-INF/*.DSA'
+    exclude 'META-INF/*.RSA'
+
+    // 5. 排除 POM 文件，精简 Jar 包
+    exclude '**/pom.properties'
+    exclude '**/pom.xml'
+
+    // 6. (可选) 如果在运行时出现类冲突，可以重定位包名
+    //    relocate 'org.apache.http', 'my.shadow.http'
+
+    // 7. (可选) 在 Manifest 中指定默认主类
+    //    仅在使用 java -jar 或 Web UI 默认选项时生效
+    manifest {
+        attributes 'Main-Class': application.mainClass.get()
+    }
+}
+
+//task fatJar(type: Jar, dependsOn: jar) {
+//    zip64=true
+//    manifest {
+//        attributes 'Main-Class': "com.taotao.cloud.flink.JStreamWordCount"
+//    }
+//    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+//
+////    from configurations.runtimeClasspath.filter { !it.path.endsWith('.pom') }.asFileTree.files.collect {
+////        zipTree(it)
+////    }
+//}
+//
+//task customFatJar(type: Jar) {
+//    manifest {
+//        attributes 'Main-Class': 'com.taotao.cloud.flink.JStreamWordCount'
+//    }
+//    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+//    from {
+//        configurations.runtimeClasspath.filter {
+//            it.name.endsWith('.jar')
+//        }
+//    }
+//    with jar
+//}
+
+//mainClassName = "com.taotao.cloud.flink.JStreamWordCount"
+//shadowJar {
+//    zip64 true
+//    mergeServiceFiles()
+//    archiveClassifier = ""
+//
+//    //transform(Log4j2PluginsCacheFileTransformer)
+//    //version = 1.0
+//    manifest {
+//        attributes(
+//                "Main-Class": "com.taotao.cloud.flink.JStreamWordCount"
+//        )
+//    }
+//
+//    //dependencies {
+//    //    exclude(dependency("org.apache.flink:force-shading:.*"))
+//    //    exclude(dependency("com.google.code.findbugs:jsr305:.*"))
+//    //    exclude(dependency("org.slf4j:slf4j-api:*"))
+//    //    exclude(dependency{ it.moduleGroup == "xml-apis" })
+//    //}
+//
+//    // creates the spring boot shaded jar
+//    //import com.github.jengelman.gradle.plugins.shadow.transformers.PropertiesFileTransformer
+//    //append 'META-INF/spring.handlers'
+//    //append 'META-INF/spring.schemas'
+//    //append 'META-INF/spring.tooling'
+//    //transform(PropertiesFileTransformer) {
+//    //    paths = ['META-INF/spring.factories' ]
+//    //    mergeStrategy = "append"
+//    //}
+//    //archiveFileName = "test-${version}.jar"
+//}
+//
+//task packageZip(type: Zip) {
+//    archiveFileName = "${project.name}-${project.version}.zip"
+//    destinationDirectory = file("${project.layout.buildDirectory.asFile.get()}/result")
+//
+//    from("${project.projectDir}/distribution") {
+//        into "distribution"
+//    }
+//
+//    from("${project.layout.buildDirectory.asFile.get()}/libs/${project.name}-${project.version}.jar") {
+//        into "target"
+//    }
+//
+//    dependsOn customFatJar
+//}

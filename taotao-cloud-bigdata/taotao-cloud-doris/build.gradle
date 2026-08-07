@@ -1,3 +1,7 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: "idea"
+
 dependencies {
     implementation 'org.apache.hive:hive-exec:4.2.0'
 
