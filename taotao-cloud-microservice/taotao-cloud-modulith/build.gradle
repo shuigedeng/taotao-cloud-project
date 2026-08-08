@@ -27,7 +27,9 @@ dependencies {
     implementation 'org.springframework.modulith:spring-modulith-starter-jdbc:2.1.0'
     implementation 'org.springframework.modulith:spring-modulith-starter-jpa:2.1.0'
     //implementation 'org.springframework.modulith:spring-modulith-starter-mongodb:2.1.0'
-    implementation 'org.springframework.modulith:spring-modulith-events-kafka:2.1.0'
+    api('org.springframework.modulith:spring-modulith-events-kafka:2.1.0') {
+        exclude group: "at.yawk.lz4", module: "lz4-java"
+    }
     implementation 'org.springframework.modulith:spring-modulith-events-amqp:2.1.0'
     implementation 'org.springframework.modulith:spring-modulith-events-jpa:2.1.0'
     implementation 'org.springframework.modulith:spring-modulith-events-jdbc:2.1.0'
