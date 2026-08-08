@@ -3,7 +3,6 @@ package com.taotao.cloud.xxljob.scheduler.thread;
 import com.taotao.cloud.xxljob.model.XxlJobGroup;
 import com.taotao.cloud.xxljob.model.XxlJobRegistry;
 import com.taotao.cloud.xxljob.scheduler.config.XxlJobAdminBootstrap;
-import com.xxl.job.core.constant.RegistType;
 import com.xxl.job.core.openapi.model.RegistryRequest;
 import com.xxl.job.core.constant.Const;
 import com.xxl.tool.core.StringTool;
@@ -13,6 +12,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.concurrent.*;
+
+import static com.xxl.job.core.constant.RegistTypeEnum.EXECUTOR;
 
 /**
  * job registry instance helper
@@ -75,7 +76,7 @@ public class JobRegistryHelper {
 							List<XxlJobRegistry> list = XxlJobAdminBootstrap.getInstance().getXxlJobRegistryMapper().findAll(Const.DEAD_TIMEOUT, new Date());
 							if (list != null) {
 								for (XxlJobRegistry item: list) {
-									if (RegistType.EXECUTOR.name().equals(item.getRegistryGroup())) {
+									if (EXECUTOR.name().equals(item.getRegistryGroup())) {
 										String appname = item.getRegistryKey();
 										List<String> registryList = appAddressMap.get(appname);
 										if (registryList == null) {

@@ -76,7 +76,7 @@ redisson:
   dataValidTime: 1800000
   single_server_config:
     #服务器地址,必填ip:port
-    address: "127.0.0.1:6379"
+    address: "${remote-ip}:6379"
     #用于发布和订阅连接的最小保持连接数（长连接）。Redisson内部经常通过发布和订阅来实现许多功能。长期保持一定数量的发布订阅连接是必须的。
     subscription_connection_minimum_idle_size: 1
     #用于发布和订阅连接的连接池最大容量。连接池的连接数量自动弹性伸缩。
@@ -96,11 +96,11 @@ arthas:
   # ~/logs/arthas/arthas.log (用户目录下面)里可以找到具体端口日志
   telnetPort: -1
   httpPort: -1
-  # 127.0.0.1只能本地访问，0.0.0.0则可网络访问，但是存在安全问题
+  # ${remote-ip}只能本地访问，0.0.0.0则可网络访问，但是存在安全问题
   ip: 0.0.0.0
   agent-id: ${spring.application.name}
   app-name: ${spring.application.name}
-  tunnel-server: ws://127.0.0.1:7777/ws
+  tunnel-server: ws://${remote-ip}:7777/ws
 
 spring:
   autoconfigure:
@@ -141,7 +141,7 @@ spring:
       enabled: true
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: ${remote-ip}:8848
         metadata:
           version: ${ttcVersion}
           user.name: "admin"
@@ -154,7 +154,7 @@ spring:
         naming-load-cache-at-start: false
       config:
         enabled: true
-        server-addr: 127.0.0.1:8848
+        server-addr: ${remote-ip}:8848
         namespace: 82f5c2ff-c0d5-478d-9987-7f082d1a55d7
         username: nacos
         password: nacos
@@ -174,7 +174,7 @@ spring:
       #        #流控 名称随意
       #        flow:
       #          nacos:
-      #            server-addr: 127.0.0.1:8848
+      #            server-addr: ${remote-ip}:8848
       #            dataId: ${spring.application.name}-flow-rules.json
       #            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
       #            username: nacos
@@ -186,7 +186,7 @@ spring:
       #        #熔断降级 名称随意
       #        degrade:
       #          nacos:
-      #            server-addr: 127.0.0.1:8848
+      #            server-addr: ${remote-ip}:8848
       #            dataId: ${spring.application.name}-degrade-rules.json
       #            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
       #            username: nacos
@@ -197,7 +197,7 @@ spring:
       #        #系统规则 名称随意
       #        system:
       #          nacos:
-      #            server-addr: 127.0.0.1:8848
+      #            server-addr: ${remote-ip}:8848
       #            dataId: ${spring.application.name}-goodstem-rules.json
       #            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
       #            username: nacos
@@ -208,7 +208,7 @@ spring:
       #        #授权规则 名称随意
       #        authority:
       #          nacos:
-      #            server-addr: 127.0.0.1:8848
+      #            server-addr: ${remote-ip}:8848
       #            dataId: ${spring.application.name}-authority-rules.json
       #            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
       #            username: nacos
@@ -219,7 +219,7 @@ spring:
       #        #参数规则 名称随意
       #        param-flow:
       #          nacos:
-      #            server-addr: 127.0.0.1:8848
+      #            server-addr: ${remote-ip}:8848
       #            dataId: ${spring.application.name}-param-flow-rules.json
       #            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
       #            username: nacos
@@ -228,7 +228,7 @@ spring:
       #            data-type: json
       #            rule-type: param-flow
       transport:
-        dashboard: 127.0.0.1:8858
+        dashboard: ${remote-ip}:8858
         port: 8712
       metric:
         file-single-size: 1024 * 1024 * 50
@@ -292,7 +292,7 @@ spring:
       password: 123456
   data:
     redis:
-      host: 127.0.0.1
+      host: ${remote-ip}
       port: 6379
       #sentinel:
       #  master:
@@ -301,7 +301,7 @@ spring:
       #password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
       connect-timeout: 60s
       #cluster:
-      #  nodes: 127.0.0.1:6381,127.0.0.1:6382,127.0.0.1:6383,127.0.0.1:6384,127.0.0.1:6385,127.0.0.1:6386
+      #  nodes: ${remote-ip}:6381,${remote-ip}:6382,${remote-ip}:6383,${remote-ip}:6384,${remote-ip}:6385,${remote-ip}:6386
       #  max-redirects: 3
       client-type: lettuce
       lettuce:
@@ -331,7 +331,7 @@ spring:
             # 客户端名称
             clientName: "taotao-cloud-redis-client"
             # 节点地址
-            address: "redis://127.0.0.1:6379"
+            address: "redis://${remote-ip}:6379"
             # 发布和订阅连接的最小空闲连接数
             subscriptionConnectionMinimumIdleSize: 1
             # 发布和订阅连接池大小
@@ -355,7 +355,7 @@ spring:
           # 配置看门狗的默认超时时间为30s，这里改为 10s
           lockWatchdogTimeout: 10000
   kafka:
-    bootstrap-servers: 127.0.0.1:9092
+    bootstrap-servers: ${remote-ip}:9092
     producer:
       retries: 1
       batch-size: 16384
@@ -417,7 +417,7 @@ management:
       #base-path: "/manage"
       cors:
         allowed-origins: "*"
-        allowed-methods: "GET,POST"
+        allowed-methods: "*"
       discovery:
         enabled: true
       exposure:
@@ -425,6 +425,8 @@ management:
     access:
       default: read_only
   endpoint:
+    startup:
+      access: unrestricted
     scheduledtasks:
       access: unrestricted
     logfile:
@@ -460,15 +462,12 @@ management:
         enabled: true
         #pushgateway:
         #  base-url:
-  wavefront:
-    api-token: xxxxxxxxxxxxxxxx
-    api-token-type: wavefront_api_token
   opentelemetry:
     logging:
       export:
         otlp:
           compression: none
-          endpoint: http://127.0.0.1:4318/v1/logs
+          endpoint: http://${remote-ip}:4318/v1/logs
           timeout: 10s
           headers:
             version: ${ttcVersion}
@@ -476,14 +475,14 @@ management:
       export:
         otlp:
           compression: none
-          endpoint: http://127.0.0.1:4318/v1/traces
+          endpoint: http://${remote-ip}:4318/v1/traces
           timeout: 10s
           headers:
             version: ${ttcVersion}
   otlp:
     metrics:
       export:
-        url: http://127.0.0.1:4318/v1/metrics
+        url: http://${remote-ip}:4318/v1/metrics
         enabled: true
         batch-size: 10000
         connect-timeout: 10s

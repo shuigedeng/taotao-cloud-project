@@ -39,8 +39,8 @@ dependencies {
 
     implementation "org.springframework.boot:spring-boot-starter-webflux"
 
-    implementation 'org.springdoc:springdoc-openapi-starter-webflux-api'
-    implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui'
+    implementation 'org.springdoc:springdoc-openapi-starter-webflux-api:3.1.0'
+    implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:3.1.0'
 
     implementation "com.github.xiaoymin:knife4j-openapi3-webflux-jakarta-spring-boot-starter"
     implementation "com.github.xiaoymin:knife4j-openapi3-webflux-spring-boot-starter"

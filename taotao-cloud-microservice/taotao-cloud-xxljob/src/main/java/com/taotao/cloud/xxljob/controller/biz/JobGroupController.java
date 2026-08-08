@@ -8,7 +8,7 @@ import com.taotao.cloud.xxljob.mapper.XxlJobGroupMapper;
 import com.taotao.cloud.xxljob.mapper.XxlJobInfoMapper;
 import com.taotao.cloud.xxljob.mapper.XxlJobRegistryMapper;
 import com.xxl.job.core.constant.Const;
-import com.xxl.job.core.constant.RegistType;
+import com.xxl.job.core.constant.RegistTypeEnum;
 import com.xxl.sso.core.annotation.XxlSso;
 import com.xxl.tool.core.CollectionTool;
 import com.xxl.tool.core.StringTool;
@@ -163,7 +163,7 @@ public class JobGroupController {
 		List<XxlJobRegistry> list = xxlJobRegistryMapper.findAll(Const.DEAD_TIMEOUT, new Date());
 		if (CollectionTool.isNotEmpty(list)) {
 			for (XxlJobRegistry item: list) {
-				if (!RegistType.EXECUTOR.name().equals(item.getRegistryGroup())) {
+				if (!RegistTypeEnum.EXECUTOR.name().equals(item.getRegistryGroup())) {
 					continue;
 				}
 
@@ -210,7 +210,7 @@ public class JobGroupController {
         // remove group
 		int ret = xxlJobGroupMapper.remove(id);
         // remove registry-data
-        xxlJobRegistryMapper.removeByRegistryGroupAndKey(RegistType.EXECUTOR.name(), xxlJobGroup.getAppname());
+        xxlJobRegistryMapper.removeByRegistryGroupAndKey(RegistTypeEnum.EXECUTOR.name(), xxlJobGroup.getAppname());
 		return (ret>0)?Response.ofSuccess():Response.ofFail();
 	}
 
