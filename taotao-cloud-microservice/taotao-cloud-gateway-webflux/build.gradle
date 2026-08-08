@@ -1,14 +1,14 @@
 dependencies {
     //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
-    
+    implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
 
     implementation "com.alibaba.csp:sentinel-datasource-nacos"
     implementation "com.alibaba.cloud:spring-cloud-alibaba-sentinel-gateway"
     implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel") {
         exclude group: "com.fasterxml.jackson.dataformat", module: "jackson-dataformat-xml"
     }
-    implementation 'org.apache.skywalking:apm-spring-cloud-gateway-4.x-plugin:9.6.0'
+    //implementation 'org.apache.skywalking:apm-spring-cloud-gateway-4.x-plugin:9.6.0'
     implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
     //implementation 'org.springframework.cloud:spring-cloud-starter-function-webflux'
     implementation("org.springframework.cloud:spring-cloud-starter-gateway-server-webflux") {
@@ -17,8 +17,11 @@ dependencies {
     }
     implementation "org.springframework.cloud:spring-cloud-gateway-proxyexchange-webflux"
 
-    implementation "org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j"
     implementation "io.github.resilience4j:resilience4j-ratelimiter:2.4.0"
+    implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j") {
+        exclude group: "io.github.resilience4j", module: "resilience4j-spring-boot3"
+    }
+    implementation "io.github.resilience4j:resilience4j-spring-boot4:2.4.0"
 
     //boot
     implementation "io.github.shuigedeng:taotao-boot-starter-core"
@@ -94,7 +97,6 @@ configurations {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-data-jpa"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
-        exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-v6x-adapter"
         exclude group: "com.querydsl", module: "querydsl-apt"
         //exclude group: "commons-logging", module: "commons-logging"
     }

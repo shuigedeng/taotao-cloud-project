@@ -16,10 +16,10 @@ arthas:
   # ~/logs/arthas/arthas.log (用户目录下面)里可以找到具体端口日志
   telnetPort: -1
   httpPort: -1
-  ip: 0.0.0.0   # 127.0.0.1只能本地访问，0.0.0.0则可网络访问，但是存在安全问题
+  ip: 0.0.0.0   # ${remote-ip}只能本地访问，0.0.0.0则可网络访问，但是存在安全问题
   agent-id: ${spring.application.name}
   app-name: ${spring.application.name}
-  tunnel-server: ws://127.0.0.1:7777/ws
+  tunnel-server: ws://${remote-ip}:7777/ws
 
 redisson:
   client-name: ${spring.application.name}   #在Redis节点里显示的客户端名称。
@@ -54,7 +54,7 @@ redisson:
   attemptTimeout: 10000   #等待获取锁超时时间,-1则是一直等待
   dataValidTime: 1800000
   single_server_config:
-    address: "127.0.0.1:6379"     #服务器地址,必填ip:port
+    address: "${remote-ip}:6379"     #服务器地址,必填ip:port
     subscription_connection_minimum_idle_size: 1     #用于发布和订阅连接的最小保持连接数（长连接）。Redisson内部经常通过发布和订阅来实现许多功能。长期保持一定数量的发布订阅连接是必须的。
     connection_minimum_idle_size: 24     #最小保持连接数（长连接）。长期保持一定数量的连接有利于提高瞬时写入反应速度。
     connection_pool_size: 64     #连接池最大容量。连接池的连接数量自动弹性伸缩。
@@ -86,16 +86,16 @@ redisson:
   #  #监测DNS的变化情况的时间间隔。
   #  dnsMonitoringInterval: 5000
   #  #服务器节点地址.必填
-  #  #redisson.multiple-server-config.node-addresses[0]=127.0.0.1:6379
-  #  #redisson.multiple-server-config.node-addresses[1]=127.0.0.1:6380
-  #  #redisson.multiple-server-config.node-addresses[2]=127.0.0.1:6381
+  #  #redisson.multiple-server-config.node-addresses[0]=${remote-ip}:6379
+  #  #redisson.multiple-server-config.node-addresses[1]=${remote-ip}:6380
+  #  #redisson.multiple-server-config.node-addresses[2]=${remote-ip}:6381
   #  nodeAddresses:
-  #    - "127.0.0.1:6381"
-  #    - "127.0.0.1:6382"
-  #    - "127.0.0.1:6383"
-  #    - "127.0.0.1:6384"
-  #    - "127.0.0.1:6385"
-  #    - "127.0.0.1:6386"
+  #    - "${remote-ip}:6381"
+  #    - "${remote-ip}:6382"
+  #    - "${remote-ip}:6383"
+  #    - "${remote-ip}:6384"
+  #    - "${remote-ip}:6385"
+  #    - "${remote-ip}:6386"
   #  #(哨兵模式,云托管,主从模式特有)尝试连接的数据库编号。
   #  database: 1
   #  #(哨兵模式特有)主服务器的名称是哨兵进程中用来监测主从服务切换情况的。
@@ -132,7 +132,7 @@ spring:
   #      jwt:
   #        #配置RSA的公钥访问地址
   #        #          jwk-set-uri: http://taotao-cloud-auth/oauth2/jwks
-  #        jwk-set-uri: http://127.0.0.1:9998/oauth2/jwks
+  #        jwk-set-uri: http://${remote-ip}:9998/oauth2/jwks
   security:
     oauth2:
       resourceserver:
@@ -142,20 +142,20 @@ spring:
         opaquetoken:
           client-id: 14a9cf797931430896ad13a6b1855611
           client-secret: 14a9cf797931430896ad13a6b1855611asdfasfd
-          introspection-uri: http://127.0.0.1/oauth2/introspect
-          #introspection-uri: http://127.0.0.1:8080/oauth/check_token
+          introspection-uri: http://${remote-ip}/oauth2/introspect
+          #introspection-uri: http://${remote-ip}:8080/oauth/check_token
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
   data:
     redis:
-      host: 127.0.0.1
+      host: ${remote-ip}
       port: 6379
       database: 1
       #password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
       connect-timeout: 60s
       #cluster:
-      #  nodes: 127.0.0.1:6381,127.0.0.1:6382,127.0.0.1:6383,127.0.0.1:6384,127.0.0.1:6385,127.0.0.1:6386
+      #  nodes: ${remote-ip}:6381,${remote-ip}:6382,${remote-ip}:6383,${remote-ip}:6384,${remote-ip}:6385,${remote-ip}:6386
       #  max-redirects: 3
       #sentinel:
       #  master:
@@ -188,7 +188,7 @@ spring:
             # 客户端名称
             clientName: "taotao-cloud-redis-client"
             # 节点地址
-            address: "redis://127.0.0.1:6379"
+            address: "redis://${remote-ip}:6379"
             # 发布和订阅连接的最小空闲连接数
             subscriptionConnectionMinimumIdleSize: 1
             # 发布和订阅连接池大小
@@ -223,7 +223,7 @@ spring:
       enabled: false
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: ${remote-ip}:8848
         metadata:
           version: ${ttcVersion}
           user.name: "admin"
@@ -236,7 +236,7 @@ spring:
         naming-load-cache-at-start: false
       config:
         enabled: true
-        server-addr: 127.0.0.1:8848
+        server-addr: ${remote-ip}:8848
         namespace: 82f5c2ff-c0d5-478d-9987-7f082d1a55d7
         username: nacos
         password: nacos
@@ -271,7 +271,7 @@ spring:
       enabled: true
       eager: true
       transport:
-        dashboard: 127.0.0.1:8858
+        dashboard: ${remote-ip}:8858
         port: 8712
       metric:
         file-single-size: 1024 * 1024 * 50
@@ -659,8 +659,8 @@ spring:
             #                    name: myCircuitBreaker
             #                    fallbackUri: forward:/myfallback
             #- id: json-grpc
-            #  uri: https://127.0.0.1:6565
-            #  #curl -XPOST 'https://127.0.0.1:8091/json/hello' -d '{"firstName":"Duff","lastName":"McKagan"}' -k -H"Content-Type: application/json" -v
+            #  uri: https://${remote-ip}:6565
+            #  #curl -XPOST 'https://${remote-ip}:8091/json/hello' -d '{"firstName":"Duff","lastName":"McKagan"}' -k -H"Content-Type: application/json" -v
             #  metadata:
             #    name: 测试grpc接口
             #  predicates:
@@ -668,7 +668,7 @@ spring:
             #  filters:
             #    - JSONToGRPCFilter
             - id: taotao-cloud-message-websocket
-              #uri: "ws://127.0.0.1:8081"
+              #uri: "ws://${remote-ip}:8081"
               uri: "lb:ws://taotao-cloud-message" #websocket配置，通过nacos注册中心调用serviceName使用方式2
               metadata:
                 name: 消息管理中心websocket
@@ -786,8 +786,8 @@ spring:
           #                    redis-rate-limiter.burstCapacity: 20
           #                    redis-rate-limiter.requestedTokens: 1
           #                    custom-rate-limiter.requestedToken: 15
-          #http://127.0.0.1:33305/v3/api-docs/swagger-config
-          #http://127.0.0.1:33305/v3/api-docs/taotao-cloud-sys
+          #http://${remote-ip}:33305/v3/api-docs/swagger-config
+          #http://${remote-ip}:33305/v3/api-docs/taotao-cloud-sys
           #            - id: openapi
           #              uri: http://${spring.cloud.client.ip-address}:${server.port}
           #              metadata:
@@ -836,17 +836,17 @@ taotao:
         endpoint:
           uaa-service-name: taotao-cloud-uaa
           upms-service-name: taotao-cloud-upms
-          gateway-service-uri: http://127.0.0.1:33401
-          uaa-service-uri: http://127.0.0.1:33401/
-          upms-service-uri: http://127.0.0.1:333401/${herodotus.endpoint.upms-service-name}
-          access-token-uri: http://127.0.0.1:33401/oauth2/token
-          authorization-uri: http://127.0.0.1:33401/oauth2/authorize
-          token-revocation-uri: http://127.0.0.1:33401/oauth2/revoke
-          token-introspection-uri: http://127.0.0.1:33401/oauth2/introspect
-          jwk-set-uri: http://127.0.0.1:33401/oauth2/jwks
+          gateway-service-uri: http://${remote-ip}:33401
+          uaa-service-uri: http://${remote-ip}:33401/
+          upms-service-uri: http://${remote-ip}:333401/${herodotus.endpoint.upms-service-name}
+          access-token-uri: http://${remote-ip}:33401/oauth2/token
+          authorization-uri: http://${remote-ip}:33401/oauth2/authorize
+          token-revocation-uri: http://${remote-ip}:33401/oauth2/revoke
+          token-introspection-uri: http://${remote-ip}:33401/oauth2/introspect
+          jwk-set-uri: http://${remote-ip}:33401/oauth2/jwks
           issuer-uri: ${herodotus.endpoint.uaa-service-uri}
-          oidc-client-registration-uri: http://127.0.0.1:33401/connect/register
-          oidc-user-info-uri: http://127.0.0.1:33401/userinfo
+          oidc-client-registration-uri: http://${remote-ip}:33401/connect/register
+          oidc-user-info-uri: http://${remote-ip}:33401/userinfo
       enabled: true
       authorization:
         ignore-url:
@@ -879,8 +879,8 @@ taotao:
             enabled: true
             expiration-time: 5000
             ignore-ip:
-              - 127.0.0.1
-              - 127.0.0.1
+              - ${remote-ip}
+              - ${remote-ip}
             lock-expire: 5000
             request-max-size: 20
           ua-rule:
@@ -1211,7 +1211,7 @@ management:
       export:
         otlp:
           compression: none
-          endpoint: http://127.0.0.1:4318/v1/logs
+          endpoint: http://${remote-ip}:4318/v1/logs
           timeout: 10s
           headers:
             version: ${ttcVersion}
@@ -1219,14 +1219,14 @@ management:
       export:
         otlp:
           compression: none
-          endpoint: http://127.0.0.1:4318/v1/traces
+          endpoint: http://${remote-ip}:4318/v1/traces
           timeout: 10s
           headers:
             version: ${ttcVersion}
   otlp:
     metrics:
       export:
-        url: http://127.0.0.1:4318/v1/metrics
+        url: http://${remote-ip}:4318/v1/metrics
         enabled: true
         batch-size: 10000
         connect-timeout: 10s
@@ -1249,17 +1249,17 @@ herodotus:
   endpoint:
     uaa-service-name: taotao-cloud-uaa
     upms-service-name: taotao-cloud-upms
-    gateway-service-uri: http://127.0.0.1:33401
-    uaa-service-uri: http://127.0.0.1:33401/
-    upms-service-uri: http://127.0.0.1:333401/${herodotus.endpoint.upms-service-name}
-    access-token-uri: http://127.0.0.1:33401/oauth2/token
-    authorization-uri: http://127.0.0.1:33401/oauth2/authorize
-    token-revocation-uri: http://127.0.0.1:33401/oauth2/revoke
-    token-introspection-uri: http://127.0.0.1:33401/oauth2/introspect
-    jwk-set-uri: http://127.0.0.1:33401/oauth2/jwks
+    gateway-service-uri: http://${remote-ip}:33401
+    uaa-service-uri: http://${remote-ip}:33401/
+    upms-service-uri: http://${remote-ip}:333401/${herodotus.endpoint.upms-service-name}
+    access-token-uri: http://${remote-ip}:33401/oauth2/token
+    authorization-uri: http://${remote-ip}:33401/oauth2/authorize
+    token-revocation-uri: http://${remote-ip}:33401/oauth2/revoke
+    token-introspection-uri: http://${remote-ip}:33401/oauth2/introspect
+    jwk-set-uri: http://${remote-ip}:33401/oauth2/jwks
     issuer-uri: ${herodotus.endpoint.uaa-service-uri}
-    oidc-client-registration-uri: http://127.0.0.1:33401/connect/register
-    oidc-user-info-uri: http://127.0.0.1:33401/userinfo
+    oidc-client-registration-uri: http://${remote-ip}:33401/connect/register
+    oidc-user-info-uri: http://${remote-ip}:33401/userinfo
   oauth2:
     authentication:
       form-login:

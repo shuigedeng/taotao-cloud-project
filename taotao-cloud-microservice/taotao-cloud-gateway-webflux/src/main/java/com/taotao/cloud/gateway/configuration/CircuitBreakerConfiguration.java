@@ -63,22 +63,22 @@ public class CircuitBreakerConfiguration {
                         .recordExceptions(Throwable.class)
                         .build();
 
-//        ReactiveResilience4JCircuitBreakerFactory factory =
-//                new ReactiveResilience4JCircuitBreakerFactory(
-//                        circuitBreakerRegistry,
-//                        timeLimiterRegistry,
-//                        resilience4JConfigurationProperties);
-//        factory.configureDefault(
-//                id ->
-//                        new Resilience4JConfigBuilder(id)
-//                                .timeLimiterConfig(
-//                                        TimeLimiterConfig.custom()
-//                                                .timeoutDuration(Duration.ofMillis(500))
-//                                                .build())
-//                                .circuitBreakerConfig(circuitBreakerConfig)
-//                                .build());
+        ReactiveResilience4JCircuitBreakerFactory factory =
+                new ReactiveResilience4JCircuitBreakerFactory(
+                        circuitBreakerRegistry,
+                        timeLimiterRegistry,
+						null,
+                        resilience4JConfigurationProperties);
+        factory.configureDefault(
+                id ->
+                        new Resilience4JConfigBuilder(id)
+                                .timeLimiterConfig(
+                                        TimeLimiterConfig.custom()
+                                                .timeoutDuration(Duration.ofMillis(500))
+                                                .build())
+                                .circuitBreakerConfig(circuitBreakerConfig)
+                                .build());
 
-//        return factory;
-		return null;
+        return factory;
     }
 }
