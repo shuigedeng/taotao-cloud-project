@@ -1,11 +1,11 @@
 FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:latest as builder
 
-WORKDIR /root
+WORKDIR /builder
 
-ADD ./build/libs/taotao-cloud-monitor-2026.09.jar ./
+COPY ./build/libs/taotao-cloud-monitor-2026.09.jar ./
 
-#RUN java -Djarmode=layertools -jar taotao-cloud-monitor-2026.09.jar extract
-RUN java -Djarmode=layertools -jar taotao-cloud-monitor-2026.09.jar extract
+#RUN java -Djarmode=tools -jar taotao-cloud-monitor-2026.09.jar extract
+RUN java -Djarmode=tools -jar taotao-cloud-monitor-2026.09.jar extract --layers --destination extracted
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:latest
@@ -18,7 +18,7 @@ ARG APP_NAME=taotao-cloud-monitor
 ARG APP_VERSION=2026.09
 ARG APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ARG APP_PORT=33308
-ARG APP_PRROFILES=docker
+ARG APP_PROFILES=docker
 ARG DINGDING_TOKEN_ID_ARG=xxxxxx
 ARG DINGDING_SECRET_ARG=xxxxxx
 ARG REQUEST_API_DOCS=1
@@ -33,7 +33,7 @@ ENV APP_NAME=${APP_NAME}
 ENV APP_PORT=${APP_PORT}
 ENV APP_VERSION=${APP_VERSION}
 ENV APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
-ENV APP_PRROFILES=${APP_PRROFILES}
+ENV APP_PROFILES=${APP_PROFILES}
 ENV REQUEST_API_DOCS=${REQUEST_API_DOCS}
 
 ENV DINGDING_TOKEN_ID=${DINGDING_TOKEN_ID_ARG}
@@ -103,7 +103,7 @@ ENV ZGC_OPTIONS = "-XX:+UnlockDiagnosticVMOptions  \
                   --add-opens java.base/java.math=ALL-UNNAMED \
                   --add-exports java.desktop/sun.awt=ALL-UNNAMED \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
-                  -Dspring.profiles.active=${APP_PRROFILES} \
+                  -Dspring.profiles.active=${APP_PROFILES} \
                   -javaagent:/skywalking/agent/skywalking-agent.jar \
                   -Dskywalking.agent.service_name=${APP_NAME} \
                   -Dskywalking.agent.authentication=${SKYWALKING_AGENT_AUTHENTICATION} \
@@ -167,7 +167,7 @@ ENV JAVA_OPTIONS="-Xms1g \
                   --add-opens java.base/java.math=ALL-UNNAMED \
                   --add-exports java.desktop/sun.awt=ALL-UNNAMED \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
-                  -Dspring.profiles.active=${APP_PRROFILES} \
+                  -Dspring.profiles.active=${APP_PROFILES} \
                   -javaagent:/skywalking/agent/skywalking-agent.jar"
 
 USER root
@@ -195,13 +195,13 @@ VOLUME /root/logs
 
 EXPOSE ${APP_PORT}
 
-COPY --from=builder /root/dependencies/ ./
+COPY --from=builder /builder/extracted/dependencies/ ./
 RUN true
-COPY --from=builder /root/spring-boot-loader/ ./
+COPY --from=builder /builder/extracted/spring-boot-loader/ ./
 RUN true
-COPY --from=builder /root/snapshot-dependencies/ ./
+COPY --from=builder /builder/extracted/snapshot-dependencies/ ./
 RUN true
-COPY --from=builder /root/application/ ./
+COPY --from=builder /builder/extracted/application/ ./
 RUN true
 
 #docker inspect --format='{{json .State.Health}}' file
@@ -217,7 +217,7 @@ RUN true
 
 #ENTRYPOINT ["java","${ZGC_OPTIONS}","-jar","taotao-cloud-monitor-2026.09.jar"]
 #ENTRYPOINT java ${ZGC_OPTIONS} -jar taotao-cloud-monitor-2026.09.jar
-ENTRYPOINT sleep 30; java ${JAVA_OPTIONS} org.springframework.boot.loader.launch.JarLauncher
+ENTRYPOINT ["sh", "-c", "exec java ${JAVA_OPTIONS} -jar taotao-cloud-sys-2026.09.jar"]
 
 #cds
 #https://docs.spring.io/spring-boot/reference/packaging/class-data-sharing.html

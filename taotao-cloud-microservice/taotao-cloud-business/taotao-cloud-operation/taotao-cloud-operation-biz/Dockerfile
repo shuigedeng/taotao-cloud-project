@@ -1,10 +1,10 @@
 FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:latest as builder
 
-WORKDIR /root
+WORKDIR /builder
 
-ADD ./build/libs/taotao-cloud-operation-2026.09.jar ./
+COPY ./build/libs/taotao-cloud-operation-2026.09.jar ./
 
-RUN java -Djarmode=layertools -jar taotao-cloud-operation-2026.09.jar extract
+RUN java -Djarmode=tools -jar taotao-cloud-operation-2026.09.jar extract --layers --destination extracted
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:skywalking9.1.0-pyroscope0.13.0-jre-font
 FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:latest
@@ -15,7 +15,7 @@ ARG APP_NAME=taotao-cloud-operation
 ARG APP_VERSION=2026.09
 ARG APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ARG APP_PORT=33411
-ARG APP_PRROFILES=dev
+ARG APP_PROFILES=dev
 ARG REQUEST_API_DOCS=1
 
 LABEL application_name=${APP_NAME}
@@ -28,7 +28,7 @@ ENV APP_NAME=${APP_NAME}
 ENV APP_PORT=${APP_PORT}
 ENV APP_VERSION=${APP_VERSION}
 ENV APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
-ENV APP_PRROFILES=${APP_PRROFILES}
+ENV APP_PROFILES=${APP_PROFILES}
 ENV REQUEST_API_DOCS=${REQUEST_API_DOCS}
 #****************************skywalking 从env中获取配置数据****************************
 ENV SW_AGENT_NAME=${APP_NAME}
@@ -113,7 +113,7 @@ ENV JAVA_OPTIONS="-Xms1g \
                   --add-opens java.base/java.math=ALL-UNNAMED \
                   --add-exports java.desktop/sun.awt=ALL-UNNAMED \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
-                  -Dspring.profiles.active=${APP_PRROFILES} \
+                  -Dspring.profiles.active=${APP_PROFILES} \
                   -javaagent:/skywalking/agent/skywalking-agent.jar"
 #在-Dspring.profiles.active上面加上开启远程debug  ${DEBUG_OPTIONS} \  不能同时使用Dskywalking
 
@@ -144,13 +144,13 @@ EXPOSE ${APP_PORT}
 
 EXPOSE 8889
 
-COPY --from=builder /root/dependencies/ ./
+COPY --from=builder /builder/extracted/dependencies/ ./
 RUN true
-COPY --from=builder /root/spring-boot-loader/ ./
+COPY --from=builder /builder/extracted/spring-boot-loader/ ./
 RUN true
-COPY --from=builder /root/snapshot-dependencies/ ./
+COPY --from=builder /builder/extracted/snapshot-dependencies/ ./
 RUN true
-COPY --from=builder /root/application/ ./
+COPY --from=builder /builder/extracted/application/ ./
 RUN true
 
 #docker inspect --format='{{json .State.Health}}' file
@@ -164,4 +164,4 @@ HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0
 
 #HEALTHCHECK --start-period=60s --interval=10s --timeout=3s --retries=50 CMD /bin/sh /healthcheck.sh
 
-ENTRYPOINT sleep 30; java ${JAVA_OPTIONS} org.springframework.boot.loader.launch.JarLauncher
+ENTRYPOINT ["sh", "-c", "exec java ${JAVA_OPTIONS} -jar taotao-cloud-sys-2026.09.jar"]
