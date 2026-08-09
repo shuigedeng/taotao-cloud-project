@@ -1,15 +1,15 @@
 FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:latest as builder
+#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-graalvm25:latest as builder
 
 WORKDIR /builder
 
 COPY ./build/libs/taotao-cloud-monitor-2026.09.jar ./
 
-#RUN java -Djarmode=tools -jar taotao-cloud-monitor-2026.09.jar extract
 RUN java -Djarmode=tools -jar taotao-cloud-monitor-2026.09.jar extract --layers --destination extracted
 
-#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
+# FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
+# FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:amd64
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:latest
-#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:skywalking9.1.0-pyroscope0.13.0-jre-font
 FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:latest
 
 ARG SKYWALKING_BACKEND_SERVICE=127.0.0.1:11800
@@ -18,13 +18,13 @@ ARG APP_NAME=taotao-cloud-monitor
 ARG APP_VERSION=2026.09
 ARG APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ARG APP_PORT=33308
-ARG APP_PROFILES=docker
+ARG APP_PROFILES=dev
 ARG DINGDING_TOKEN_ID_ARG=xxxxxx
 ARG DINGDING_SECRET_ARG=xxxxxx
 ARG REQUEST_API_DOCS=1
 
-LABEL application.name=${APP_NAME}
-LABEL application.version=${APP_VERSION}
+LABEL application_name=${APP_NAME}
+LABEL application_version=${APP_VERSION}
 LABEL org.opencontainers.image.authors=981376577@qq.com
 
 #****************************app****************************
@@ -63,62 +63,47 @@ ENV PYROSCOPE_UPLOAD_INTERVAL=10s
 ENV PYROSCOPE_LOG_LEVEL=info
 ENV PYROSCOPE_LABELS="APP=taotao-cloud-monitor"
 #ENV PYROSCOPE_AUTH_TOKEN=info
-
-ENV ZGC_OPTIONS = "-XX:+UnlockDiagnosticVMOptions  \
-                  -XX:+UnlockExperimentalVMOptions  \
-                  -XX:-OmitStackTraceInFastThrow  \
-                  -Xlog:gc*=debug:file=/root/logs/${APP_NAME}/gc.log:utctime,level,tags:filecount=50,filesize=100M \
-                  -Xlog:jit+compilation=debug:file=/root/logs/${APP_NAME}/jit.compile.log:utctime,level,tags:filecount=10,filesize=100M \
-                  -Xlog:safepoint=debug:file=/root/logs/${APP_NAME}/safepoint%t.log:utctime,level,tags:filecount=10,filesize=10M \
-                  -Dfile.encoding=UTF-8  \
-                  -Djava.security.egd=file:/dev/./urandom  \
-                  -Dnetworkaddress.cache.ttl=10  \
-                  -Xms2048m  \
-                  -Xmx2048m  \
-                  -Xmn1280m  \
-                  -Xss512k  \
-                  -XX:MaxDirectMemorySize=1024m  \
-                  -XX:MetaspaceSize=384m  \
-                  -XX:ReservedCodeCacheSize=256m  \
-                  -XX:+DisableExplicitGC  \
-                  -XX:+UseZGC  \
-                  -XX:GuaranteedSafepointInterval=0  \
-                  -XX:+UseCountedLoopSafepoints  \
-                  -XX:StartFlightRecording=disk=true,maxsize=4096m,maxage=3d  \
-                  -XX:FlightRecorderOptions=maxchunksize=128m  \
-                  --add-opens java.base/java.security=ALL-UNNAMED \
-                  --add-opens java.base/jdk.internal.misc=ALL-UNNAMED \
-                  --add-opens java.base/java.text=ALL-UNNAMED \
-                  --add-opens java.base/java.nio=ALL-UNNAMED \
-                  --add-opens java.base/jdk.internal.access=ALL-UNNAMED \
-                  --add-opens java.base/java.time=ALL-UNNAMED \
-                  --add-opens java.base/java.io=ALL-UNNAMED \
-                  --add-opens java.base/java.net=ALL-UNNAMED \
-                  --add-opens java.base/java.lang=ALL-UNNAMED \
-                  --add-opens java.base/java.lang.reflect=ALL-UNNAMED \
-                  --add-opens java.base/java.util=ALL-UNNAMED \
-                  --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED \
-                  --add-opens java.base/sun.reflect.annotation=ALL-UNNAMED \
-                  --add-opens java.base/sun.net=ALL-UNNAMED \
-                  --add-opens java.base/java.math=ALL-UNNAMED \
-                  --add-exports java.desktop/sun.awt=ALL-UNNAMED \
-                  --add-opens java.desktop/sun.awt=ALL-UNNAMED \
-                  -Dspring.profiles.active=${APP_PROFILES} \
-                  -javaagent:/skywalking/agent/skywalking-agent.jar \
-                  -Dskywalking.agent.service_name=${APP_NAME} \
-                  -Dskywalking.agent.authentication=${SKYWALKING_AGENT_AUTHENTICATION} \
-                  -Dskywalking.logging.file_name=skywalking.log \
-                  -Dskywalking.logging.level=INFO \
-                  -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
-                  -Dskywalking.collector.backend_service=${SKYWALKING_BACKEND_SERVICE} "
+#
+#ENV JAVA_OPTIONS_BACKUP="-Xms1g \
+#                  -Xmx2g \
+#                  -Xss256k \
+#                  -XX:MaxDirectMemorySize=1024m \
+#                  -XX:ReservedCodeCacheSize=2048m \
+#                  -XX:SoftRefLRUPolicyMSPerMB=50 \
+#                  -XX:CICompilerCount=2  \
+#                  -XX:SurvivorRatio=8 \
+#                  -XX:+UseZGC \
+#                  -XX:+SegmentedCodeCache \
+#                  -XX:+PrintCommandLineFlags \
+#                  -XX:+ExplicitGCInvokesConcurrent \
+#                  -XX:-OmitStackTraceInFastThrow\
+#                  -XX:+HeapDumpOnOutOfMemoryError \
+#                  -XX:+ShowCodeDetailsInExceptionMessages \
+#                  -XX:ParallelGCThreads=4 \
+#                  -Xlog:async \
+#                  -XX:AsyncLogBufferSize=409600 \
+#                  -Xlog:gc*=debug:file=/root/logs/${APP_NAME}/${APP_NAME}.gc.log:utctime,level,tags:filecount=50,filesize=100M \
+#                  -Xlog:jit+compilation=debug:file=/root/logs/${APP_NAME}/${APP_NAME}.jit.compile.log:utctime,level,tags:filecount=10,filesize=100M \
+#                  -verbose:gc \
+#                  -Djava.security.egd=file:/dev/./urandom \
+#                  -Dfile.encoding=utf-8 \
+#                  --add-opens java.base/java.lang=ALL-UNNAMED \
+#                  --add-opens java.base/java.lang.reflect=ALL-UNNAMED \
+#                  --add-opens java.base/java.util=ALL-UNNAMED \
+#                  --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED \
+#                  -Dspring.profiles.active=${PRROFILES} \
+#                  -javaagent:/skywalking/agent/skywalking-agent.jar \
+#                  -Dskywalking.agent.service_name=${APP_NAME} \
+#                  -Dskywalking.agent.authentication=${AGENT_AUTHENTICATION} \
+#                  -Dskywalking.logging.file_name=skywalking.log \
+#                  -Dskywalking.logging.level=INFO \
+#                  -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
+#                  -Dskywalking.collector.backend_service=${BACKEND_SERVICE} "
 
 ENV JAVA_OPTIONS="-Xms1g \
                   -Xmx2g \
                   -Xmn1280m \
                   -Xss512k \
-                  -Xlog:async \
-                  -XX:+UseContainerSupport \
-                  -XX:MaxRAMPercentage=75 \
                   -XX:MaxDirectMemorySize=1024m \
                   -XX:MetaspaceSize=256m \
                   -XX:MaxMetaspaceSize=512m \
@@ -141,7 +126,7 @@ ENV JAVA_OPTIONS="-Xms1g \
                   -XX:+ExplicitGCInvokesConcurrent \
                   -XX:+HeapDumpOnOutOfMemoryError \
                   -XX:+ShowCodeDetailsInExceptionMessages \
-                  -XX:ParallelGCThreads=4 \
+                  -XX:ConcGCThreads=4 \
                   -XX:AsyncLogBufferSize=409600 \
                   -Xlog:gc*=debug:file=/root/logs/${APP_NAME}/gc.log:utctime,level,tags:filecount=50,filesize=100M \
                   -Xlog:jit+compilation=debug:file=/root/logs/${APP_NAME}/jit.compile.log:utctime,level,tags:filecount=10,filesize=100M \
@@ -150,6 +135,148 @@ ENV JAVA_OPTIONS="-Xms1g \
                   -Dnetworkaddress.cache.ttl=10 \
                   -Djava.security.egd=file:/dev/./urandom \
                   -Dfile.encoding=utf-8 \
+                  -Dspring.profiles.active=${APP_PROFILES} \
+                  -Djava.net.preferIPv4Stack=true \
+                  --enable-preview \
+                  --add-opens java.base/sun.reflect.generics.reflectiveObjects=ALL-UNNAMED \
+                  --add-opens java.base/java.io=ALL-UNNAMED \
+                  --add-opens java.base/java.lang=ALL-UNNAMED \
+                  --add-opens java.base/java.math=ALL-UNNAMED \
+                  --add-opens java.base/java.net=ALL-UNNAMED \
+                  --add-opens java.base/java.net.spi=ALL-UNNAMED \
+                  --add-opens java.base/java.nio=ALL-UNNAMED \
+                  --add-opens java.base/java.security=ALL-UNNAMED \
+                  --add-opens java.base/java.text=ALL-UNNAMED \
+                  --add-opens java.base/java.text.spi=ALL-UNNAMED \
+                  --add-opens java.base/java.time=ALL-UNNAMED \
+                  --add-opens java.base/java.util=ALL-UNNAMED \
+                  --add-opens java.base/javax.crypto=ALL-UNNAMED \
+                  --add-opens java.base/javax.net=ALL-UNNAMED \
+                  --add-opens java.base/javax.net.ssl=ALL-UNNAMED \
+                  --add-opens java.base/sun.net.util=ALL-UNNAMED \
+                  --add-opens java.base/sun.reflect.annotation=ALL-UNNAMED \
+                  --add-opens java.base/jdk.internal.vm=ALL-UNNAMED \
+                  --add-opens java.compiler/javax.annotation.processing=ALL-UNNAMED \
+                  --add-opens java.desktop/java.applet=ALL-UNNAMED \
+                  --add-opens java.desktop/java.awt=ALL-UNNAMED \
+                  --add-opens java.datatransfer/java.awt.datatransfer=ALL-UNNAMED \
+                  --add-opens java.desktop/java.beans=ALL-UNNAMED \
+                  --add-opens java.desktop/java.beans.beancontext=ALL-UNNAMED \
+                  --add-opens java.desktop/javax.accessibility=ALL-UNNAMED \
+                  --add-opens java.desktop/javax.imageio=ALL-UNNAMED \
+                  --add-opens java.desktop/javax.print=ALL-UNNAMED \
+                  --add-opens java.desktop/javax.sound.midi=ALL-UNNAMED \
+                  --add-opens java.desktop/javax.swing=ALL-UNNAMED \
+                  --add-opens java.sql/java.sql=ALL-UNNAMED \
+                  --add-opens java.net.http/java.net.http=ALL-UNNAMED \
+                  --add-opens java.compiler/javax.lang.model=ALL-UNNAMED \
+                  --add-opens java.management/javax.management=ALL-UNNAMED \
+                  --add-opens java.management/java.lang.management=ALL-UNNAMED \
+                  --add-opens java.management/sun.management=ALL-UNNAMED \
+                  --add-opens java.management/com.sun.jmx.mbeanserver=ALL-UNNAMED \
+                  --add-opens java.management.rmi/javax.management.remote.rmi=ALL-UNNAMED \
+                  --add-opens java.naming/javax.naming=ALL-UNNAMED \
+                  --add-opens java.rmi/sun.rmi.transport=ALL-UNNAMED \
+                  --add-opens java.rmi/java.rmi=ALL-UNNAMED \
+                  --add-opens java.scripting/javax.script=ALL-UNNAMED \
+                  --add-opens java.security.jgss/org.ietf.jgss=ALL-UNNAMED \
+                  --add-opens java.security.jgss/javax.security.auth.kerberos=ALL-UNNAMED \
+                  --add-opens java.security.sasl/javax.security.sasl=ALL-UNNAMED \
+                  --add-opens java.smartcardio/javax.smartcardio=ALL-UNNAMED \
+                  --add-opens java.sql/javax.sql=ALL-UNNAMED \
+                  --add-opens java.sql.rowset/javax.sql.rowset=ALL-UNNAMED \
+                  --add-opens java.compiler/javax.tools=ALL-UNNAMED \
+                  --add-opens java.transaction.xa/javax.transaction.xa=ALL-UNNAMED \
+                  --add-opens java.instrument/java.lang.instrument=ALL-UNNAMED \
+                  --add-opens java.xml/javax.xml=ALL-UNNAMED \
+                  --add-opens java.xml/org.xml.sax=ALL-UNNAMED \
+                  --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED \
+                  --add-opens jdk.accessibility/com.sun.java.accessibility.util=ALL-UNNAMED \
+                  --add-opens jdk.jdi/com.sun.jdi=ALL-UNNAMED \
+                  --add-opens jdk.httpserver/com.sun.net.httpserver=ALL-UNNAMED \
+                  --add-opens jdk.httpserver/com.sun.net.httpserver.spi=ALL-UNNAMED \
+                  --add-opens jdk.sctp/com.sun.nio.sctp=ALL-UNNAMED \
+                  --add-opens jdk.security.auth/com.sun.security.auth=ALL-UNNAMED \
+                  --add-opens jdk.security.auth/com.sun.security.auth.callback=ALL-UNNAMED \
+                  --add-opens jdk.compiler/com.sun.source.doctree=ALL-UNNAMED \
+                  --add-opens jdk.compiler/com.sun.source.tree=ALL-UNNAMED \
+                  --add-opens jdk.compiler/com.sun.source.util=ALL-UNNAMED \
+                  --add-opens jdk.attach/com.sun.tools.attach=ALL-UNNAMED \
+                  --add-opens jdk.attach/com.sun.tools.attach.spi=ALL-UNNAMED \
+                  --add-opens jdk.compiler/com.sun.tools.javac=ALL-UNNAMED \
+                  --add-opens jdk.jconsole/com.sun.tools.jconsole=ALL-UNNAMED \
+                  --add-opens jdk.management/com.sun.management=ALL-UNNAMED \
+                  --add-opens jdk.management.jfr/jdk.management.jfr=ALL-UNNAMED \
+                  --add-opens jdk.dynalink/jdk.dynalink=ALL-UNNAMED \
+                  --add-opens jdk.javadoc/jdk.javadoc.doclet=ALL-UNNAMED \
+                  --add-opens jdk.jfr/jdk.jfr=ALL-UNNAMED \
+                  --add-opens jdk.jfr/jdk.jfr.consumer=ALL-UNNAMED \
+                  --add-opens jdk.jshell/jdk.jshell=ALL-UNNAMED \
+                  --add-opens jdk.net/jdk.net=ALL-UNNAMED \
+                  --add-opens jdk.net/jdk.nio=ALL-UNNAMED \
+                  --add-opens jdk.nio.mapmode/jdk.nio.mapmode=ALL-UNNAMED \
+                  --add-opens jdk.jartool/jdk.security.jarsigner=ALL-UNNAMED \
+                  --add-opens jdk.jsobject/netscape.javascript=ALL-UNNAMED \
+                  --add-opens java.base/java.lang=ALL-UNNAMED \
+                  --add-opens java.base/java.lang.reflect=ALL-UNNAMED \
+                  --add-opens java.base/java.lang.invoke=ALL-UNNAMED \
+                  --add-opens java.base/java.util=ALL-UNNAMED \
+                  --add-opens java.base/sun.net=ALL-UNNAMED \
+                  --add-opens java.base/java.math=ALL-UNNAMED \
+                  --add-opens java.base/sun.reflect.annotation=ALL-UNNAMED \
+                  --add-opens java.base/sun.net=ALL-UNNAMED \
+                  --add-opens java.desktop/sun.awt=ALL-UNNAMED \
+                  --add-opens java.desktop/sun.font=ALL-UNNAMED \
+                  --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED \
+                  --add-opens java.base/java.lang=ALL-UNNAMED \
+                  --add-opens java.base/java.math=ALL-UNNAMED \
+                  --add-opens java.base/java.util=ALL-UNNAMED \
+                  --add-opens java.base/sun.util.calendar=ALL-UNNAMED \
+                  --add-opens java.base/java.util.concurrent=ALL-UNNAMED \
+                  --add-opens java.base/java.util.concurrent.locks=ALL-UNNAMED \
+                  --add-opens java.base/java.security=ALL-UNNAMED \
+                  --add-opens java.base/jdk.internal.loader=ALL-UNNAMED \
+                  --add-opens java.management/com.sun.jmx.mbeanserver=ALL-UNNAMED \
+                  --add-opens java.base/java.net=ALL-UNNAMED \
+                  --add-opens java.base/sun.nio.ch=ALL-UNNAMED \
+                  --add-opens java.management/java.lang.management=ALL-UNNAMED \
+                  --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED \
+                  --add-opens java.management/sun.management=ALL-UNNAMED \
+                  --add-opens java.management/java.lang.management=ALL-UNNAMED \
+                  --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED \
+                  --add-opens java.management/sun.management=ALL-UNNAMED \
+                  --add-opens java.base/java.time=ALL-UNNAMED \
+                  --add-opens java.base/java.util.concurrent=ALL-UNNAMED \
+                  --add-opens java.base/java.util.concurrent.locks=ALL-UNNAMED \
+                  --add-opens java.base/java.security=ALL-UNNAMED \
+                  --add-opens java.base/jdk.internal.loader=ALL-UNNAMED \
+                  --add-opens java.management/com.sun.jmx.mbeanserver=ALL-UNNAMED \
+                  --add-opens java.base/java.net=ALL-UNNAMED \
+                  --add-opens java.base/sun.nio.ch=ALL-UNNAMED \
+                  --add-opens java.base/java.lang=ALL-UNNAMED \
+                  --add-opens java.base/java.math=ALL-UNNAMED \
+                  --add-opens java.base/java.util=ALL-UNNAMED \
+                  --add-opens java.base/sun.util.calendar=ALL-UNNAMED \
+                  --add-opens java.base/sun.net.util=ALL-UNNAMED \
+                  --add-opens java.base/sun.net.util=ALL-UNNAMED \
+                  --add-opens java.base/java.lang=ALL-UNNAMED \
+                  --add-opens java.base/java.math=ALL-UNNAMED \
+                  --add-opens java.base/java.util=ALL-UNNAMED \
+                  --add-opens java.base/sun.util.calendar=ALL-UNNAMED \
+                  --add-opens java.base/java.util.concurrent=ALL-UNNAMED \
+                  --add-opens java.base/java.util.concurrent.locks=ALL-UNNAMED \
+                  --add-opens java.base/java.security=ALL-UNNAMED \
+                  --add-opens java.base/jdk.internal.loader=ALL-UNNAMED \
+                  --add-opens java.management/com.sun.jmx.mbeanserver=ALL-UNNAMED \
+                  --add-opens java.base/java.net=ALL-UNNAMED \
+                  --add-opens java.base/sun.nio.ch=ALL-UNNAMED \
+                  --add-opens java.management/java.lang.management=ALL-UNNAMED \
+                  --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED \
+                  --add-opens java.management/sun.management=ALL-UNNAMED \
+                  --add-opens java.base/sun.net.util=ALL-UNNAMED \
+                  --add-opens java.base/java.time=ALL-UNNAMED \
+                  --add-opens java.base/java.lang.reflect=ALL-UNNAMED \
+                  --add-opens java.base/java.io=ALL-UNNAMED \
                   --add-opens java.base/java.security=ALL-UNNAMED \
                   --add-opens java.base/jdk.internal.misc=ALL-UNNAMED \
                   --add-opens java.base/java.text=ALL-UNNAMED \
@@ -165,31 +292,30 @@ ENV JAVA_OPTIONS="-Xms1g \
                   --add-opens java.base/sun.reflect.annotation=ALL-UNNAMED \
                   --add-opens java.base/sun.net=ALL-UNNAMED \
                   --add-opens java.base/java.math=ALL-UNNAMED \
-                  --add-exports java.desktop/sun.awt=ALL-UNNAMED \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
-                  -Dspring.profiles.active=${APP_PROFILES} \
-                  -javaagent:/skywalking/agent/skywalking-agent.jar"
+                  --add-exports java.desktop/sun.awt=ALL-UNNAMED \
+                  --add-exports=java.desktop/sun.font=ALL-UNNAMED \
+                  --add-exports=java.base/sun.reflect.generics.tree=ALL-UNNAMED \
+                  --add-exports=java.base/sun.net.www.protocol.ftp=ALL-UNNAMED \
+                  --add-exports=java.desktop/sun.awt=ALL-UNNAMED \
+                  --add-exports=java.desktop/sun.font=ALL-UNNAMED"
+                  #-javaagent:/skywalking/agent/skywalking-agent.jar"
 
 USER root
 
 WORKDIR /root
 
+#RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
+#    && echo $TZ > /etc/timezone \
+#    && mkdir -p /root/logs/${APP_NAME} \
+#    && touch /root/logs/${APP_NAME}/${APP_NAME}.jit.compile.log /root/logs/${APP_NAME}/${APP_NAME}.gc.log \
+#    && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
+#    && apk add curl
+
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
 	&& echo $TZ > /etc/timezone \
     && mkdir -p /root/logs/${APP_NAME} \
 	&& touch /root/logs/${APP_NAME}/jit.compile.log /root/logs/${APP_NAME}/gc.log
-
-#https://mirrors.aliyun.com/alpine/v3.14/main
-#https://mirrors.ustc.edu.cn/alpine/v3.14/main/
-#清华TUNA镜像源 https://mirror.tuna.tsinghua.edu.cn/alpine/v3.14/main
-#RUN echo 'http://mirrors.aliyun.com/alpine/v3.14/main' > /etc/apk/repositories \
-#    && echo 'http://mirrors.aliyun.com/alpine/v3.14/community' >>/etc/apk/repositories \
-#    && set -eux \
-#    && apk update --allow-untrusted \
-#    && apk add curl --allow-untrusted \
-#    && apk add libstdc++ --allow-untrusted \
-#    && apk add --no-cache --update fontconfig ttf-dejavu \
-#    && apk add --no-cache --update tzdata
 
 VOLUME /root/logs
 
@@ -204,24 +330,10 @@ RUN true
 COPY --from=builder /builder/extracted/application/ ./
 RUN true
 
-#docker inspect --format='{{json .State.Health}}' file
-#interval: 30s #运行间隔时间(ms|s|m|h)(缺省为0s)
-#timeout: 20s #一次检查运行的最大时间(ms|s|m|h)(默认为0s)
-#retries: 3   #连续失败次数后报告不健康
-#start_period: 10s #容器初始化的起始周期(ms|s|m|h)(默认0)
-#HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
-#使用healthcheck.sh
-#HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || /bin/sh -c 'kill -s 15 -1 && (sleep 30; kill -s 9 -1)'
+#HEALTHCHECK --interval=120s --timeout=60s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
 
-#HEALTHCHECK --start-period=60s --interval=10s --timeout=3s --retries=50 CMD /bin/sh /healthcheck.sh
+#ENTRYPOINT ["java", "-jar", "taotao-cloud-monitor-2026.09.jar"]
+ENTRYPOINT ["sh", "-c", "exec java ${JAVA_OPTIONS} -jar taotao-cloud-monitor-2026.09.jar"]
 
-#ENTRYPOINT ["java","${ZGC_OPTIONS}","-jar","taotao-cloud-monitor-2026.09.jar"]
-#ENTRYPOINT java ${ZGC_OPTIONS} -jar taotao-cloud-monitor-2026.09.jar
-ENTRYPOINT ["sh", "-c", "exec java ${JAVA_OPTIONS} -jar taotao-cloud-sys-2026.09.jar"]
 
-#cds
-#https://docs.spring.io/spring-boot/reference/packaging/class-data-sharing.html
-#https://docs.spring.io/spring-boot/reference/packaging/container-images/dockerfiles.html
-#RUN java -XX:ArchiveClassesAtExit=taotao-cloud-monitor.jsa -Dspring.context.exit=onRefresh -jar taotao-cloud-monitor-2026.09.jar
-#
-#ENTRYPOINT ["java", "-XX:SharedArchiveFile=taotao-cloud-monitor.jsa", "-jar", "taotao-cloud-monitor-2026.09.jar"]
+#ENTRYPOINT ["sh", "-c", "exec java ${JAVA_OPTIONS} -jar taotao-cloud-monitor-2026.09.jar"]

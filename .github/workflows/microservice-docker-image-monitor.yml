@@ -1,0 +1,159 @@
+# 构建docker image
+#### https://github.com/marketplace?type=actions
+#### https://github.com/sdras/awesome-actions
+name: Sys Docker Image
+
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  TAOTAO_CLOUD_OSSRH_USERNAME: ${{ secrets.TAOTAO_CLOUD_OSSRH_USERNAME }}
+  TAOTAO_CLOUD_OSSRH_PASSWORD: ${{ secrets.TAOTAO_CLOUD_OSSRH_PASSWORD }}
+  TAOTAO_CLOUD_MAVEN_USERNAME: ${{ secrets.TAOTAO_CLOUD_MAVEN_USERNAME }}
+  TAOTAO_CLOUD_MAVEN_USERNAME_NEW: ${{ secrets.TAOTAO_CLOUD_MAVEN_USERNAME_NEW }}
+  TAOTAO_CLOUD_MAVEN_PASSWORD: ${{ secrets.TAOTAO_CLOUD_MAVEN_PASSWORD }}
+  TAOTAO_CLOUD_MAVEN_PASSWORD_NEW: ${{ secrets.TAOTAO_CLOUD_MAVEN_PASSWORD_NEW }}
+  TAOTAO_CLOUD_GITHUB_USERNAME: ${{ secrets.TAOTAO_CLOUD_GITHUB_USERNAME }}
+  TAOTAO_CLOUD_GITHUB_TOKEN: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
+  TAOTAO_CLOUD_REGISTRY_USERNAME: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
+  TAOTAO_CLOUD_REGISTRY_PASSWORD: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
+  TAOTAO_CLOUD_VERSION: 2026.09
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      #https://github.com/marketplace/actions/checkout
+      - name: Checkout Project
+        uses: actions/checkout@v7.0.0
+
+      #- name: Set up JDK 25
+      #  uses: actions/setup-java@v5.0.0
+      #  with:
+      #    java-version: 25
+      #    distribution: 'temurin'
+
+      #https://github.com/marketplace/actions/github-action-for-graalvm
+      - uses: graalvm/setup-graalvm@v1.5.6
+        with:
+          java-version: '25'
+          distribution: 'graalvm'
+          github-token: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
+          native-image-job-reports: 'true'
+
+      - name: Example step
+        run: |
+          echo "GRAALVM_HOME: $GRAALVM_HOME"
+          echo "JAVA_HOME: $JAVA_HOME"
+          java --version
+          native-image --version
+
+      #https://github.com/marketplace/actions/cache
+      #- name: Cache Gradle Packages
+      #  uses: actions/cache@v6.1.0
+      #  with:
+      #    path: ~/.gradle/caches
+      #    key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+      #    restore-keys: ${{ runner.os }}-gradle
+
+      - name: Show Github
+        run: echo "$GITHUB_CONTEXT"
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+          MESSAGE_IS_TRUE: ${{ contains(github.event.head_commit.message, 'taotao-cloud-monitor') }}
+          MESSAGES: ${{ github.event.head_commit.message }}
+
+      # base64 secring.gpg > secring.gpg.b64  SIGNING_SECRET_KEY_RING_FILE -> secring.gpg.b64
+      - name: Decode Signing Secret Key Ring File
+        run: |
+          echo "${{ secrets.TAOTAO_CLOUD_SIGNING_SECRET_KEY_RING_FILE }}" > ~/secring.gpg.b64 && base64 -d ~/secring.gpg.b64 > ~/secring.gpg
+          echo "signing.keyId=${{ secrets.TAOTAO_CLOUD_SIGNING_KEY_ID }}" >> gradle.properties
+          echo "signing.password=${{ secrets.TAOTAO_CLOUD_SIGNING_PASSWORD }}" >> gradle.properties
+          echo "signing.secretKeyRingFile=$HOME/secring.gpg" >> gradle.properties
+
+      - name: write secrets maven username password
+        run: |
+          echo "mavenUsernameNew=${{ secrets.TAOTAO_CLOUD_MAVEN_USERNAME_NEW }}" >> gradle.properties
+          echo "mavenPasswordNew=${{ secrets.TAOTAO_CLOUD_MAVEN_PASSWORD_NEW }}" >> gradle.properties
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v5
+        with:
+          gradle-version: "9.7.0"
+
+      #https://github.com/marketplace/actions/gradle-build-action
+      - name: Gradle BootJar
+        run: gradle -p taotao-cloud-microservice/taotao-cloud-monitor clean bootJar -x test -Pprofile=dev
+
+      #https://github.com/marketplace/actions/publish-docker
+      - name: Publish Docker Image
+        uses: elgohr/Publish-Docker-Github-Action@v5
+        env:
+          DINGDING_TOKEN_ID_ARG: ${{ secrets.DING_TOKEN }}
+          DINGDING_SECRET_ARG: ${{ secrets.DING_SECRET }}
+        with:
+          name: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor
+          username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
+          password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
+          registry: registry.cn-hangzhou.aliyuncs.com
+          buildoptions: "--compress --force-rm"
+          buildargs: DINGDING_SECRET_ARG,DINGDING_TOKEN_ID_ARG
+          tags: "${{env.TAOTAO_CLOUD_VERSION}}"
+          workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-monitor
+
+      #https://github.com/marketplace/actions/dingding-notify-action
+      - name: build success
+        if: ${{ success() }}
+        uses: zcong1993/actions-ding@master
+        with:
+          dingToken: ${{ secrets.DING_TOKEN }}
+          secret: ${{ secrets.DING_SECRET }}
+          # body 内容 https://blog.csdn.net/lxw1844912514/article/details/125747327
+          body: |
+            {
+              "msgtype": "text",
+              "text": {
+                  "content": "taotao github action [taotao-cloud-monitor] publish docker image success"
+              }
+            }
+
+
+      - name: build failure
+        if: ${{ failure() }}
+        uses: zcong1993/actions-ding@master
+        with:
+          dingToken: ${{ secrets.DING_TOKEN }}
+          secret: ${{ secrets.DING_SECRET }}
+          # body 内容 https://blog.csdn.net/lxw1844912514/article/details/125747327
+          body: |
+            {
+              "msgtype": "text",
+              "text": {
+                  "content": "taotao github action [taotao-cloud-monitor] publish docker image failure"
+              }
+            }
+
+#      - name: build success
+#        if: ${{ success() }}
+#        uses: fifsky/dingtalk-action@master
+#        with:
+#          url: https://oapi.dingtalk.com/robot/send?access_token=${{ secrets.TAOTAO_CLOUD_DINGTAOK_TOKEN }}
+#          type: markdown
+#          content: |
+#            # 💯👨‍💻 Success 🎉🎉🎉
+#            > [Microservice Starters Publish Aliyun] Publish Docker success
+#            > ^_^ from github action message
+#
+#      - name: build error
+#        if: ${{ error() }}
+#        uses: fifsky/dingtalk-action@master
+#        with:
+#          url: https://oapi.dingtalk.com/robot/send?access_token=${{ secrets.TAOTAO_CLOUD_DINGTAOK_TOKEN }}
+#          type: markdown
+#          content: |
+#            # 💯👨‍💻 Error 🎉🎉🎉
+#            > [Microservice Starters Publish Aliyun] Publish Docker error
+#            > ^_^ from github action message
