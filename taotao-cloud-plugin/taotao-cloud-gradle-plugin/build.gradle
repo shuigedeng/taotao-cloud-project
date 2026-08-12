@@ -31,21 +31,21 @@ buildscript {
             url = "https://mirrors.huaweicloud.com/repository/maven/"
         }
 
-        maven { url ="https://repo.spring.io/snapshot" }
-        maven { url ="https://repo.spring.io/milestone" }
-        maven { url ='https://repo.spring.io/release' }
+        maven { url = "https://repo.spring.io/snapshot" }
+        maven { url = "https://repo.spring.io/milestone" }
+        maven { url = 'https://repo.spring.io/release' }
 
-        maven { url ="https://maven.aliyun.com/repository/central" }
-        maven { url ="https://maven.aliyun.com/repository/public" }
-        maven { url ="https://maven.aliyun.com/repository/google" }
-        maven { url ="https://maven.aliyun.com/repository/gradle-plugin" }
-        maven { url ="https://maven.aliyun.com/repository/spring" }
-        maven { url ="https://maven.aliyun.com/repository/spring-plugin" }
-        maven { url ="https://maven.aliyun.com/repository/grails-core" }
-        maven { url ="https://maven.aliyun.com/repository/apache-snapshots" }
+        maven { url = "https://maven.aliyun.com/repository/central" }
+        maven { url = "https://maven.aliyun.com/repository/public" }
+        maven { url = "https://maven.aliyun.com/repository/google" }
+        maven { url = "https://maven.aliyun.com/repository/gradle-plugin" }
+        maven { url = "https://maven.aliyun.com/repository/spring" }
+        maven { url = "https://maven.aliyun.com/repository/spring-plugin" }
+        maven { url = "https://maven.aliyun.com/repository/grails-core" }
+        maven { url = "https://maven.aliyun.com/repository/apache-snapshots" }
 
-        maven { url ="https://repository.aspose.com/repo/" }
-        maven { url ="https://repo.e-iceblue.cn/repository/maven-public/" }
+        maven { url = "https://repository.aspose.com/repo/" }
+        maven { url = "https://repo.e-iceblue.cn/repository/maven-public/" }
 
         maven { url = "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
     }
@@ -80,6 +80,8 @@ dependencies {
 
     implementation "org.springframework.boot:spring-boot-gradle-plugin:4.1.0"
 
+    implementation group: 'com.ly.smart-doc', name: 'smart-doc', version: '3.1.2'
+
     testImplementation 'org.junit.jupiter:junit-jupiter:6.1.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:6.1.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:6.1.2'
@@ -87,7 +89,28 @@ dependencies {
     testImplementation "org.assertj:assertj-core:3.27.7"
 }
 
-group = "com.taotao.cloud.gradle"
+group = "io.github.shuigedeng"
+
+javadoc {
+    failOnError false
+
+    options {
+        author true
+        version true
+        title project.name
+        links "https://docs.oracle.com/en/java/javase/25/docs/api"
+    }
+
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+    options.addBooleanOption('-enable-preview', true)
+    options.addStringOption('-release', '25')
+
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
 
 gradlePlugin {
     website = 'https://github.com/shuigedeng/taotao-cloud-project'
@@ -140,10 +163,18 @@ gradlePlugin {
         }
         //deployedPlugin {
         //    id = "io.github.shuigedeng.plugin.deployed"
-            //implementationClass = "com.taotao.cloud.gradle.springboot.plugin.DeployedPlugin"
+        //implementationClass = "com.taotao.cloud.gradle.springboot.plugin.DeployedPlugin"
         //    displayName = 'springboot deployed plugin'
         //    description = 'springboot deployed plugin'
         //    tags = ['taotao', 'cloud', 'plugin', 'deployed']
         //}
+
+        smartdocPlugin {
+            id = 'io.github.shuigedeng.plugin.smart-doc'
+            implementationClass = 'com.taotao.cloud.gradle.plugin.smartdoc.plugin.SmartDocPlugin'
+            displayName = 'smart-doc gradle plugin'
+            description = 'smart-doc gradle plugin'
+            tags.set(['smart-doc', 'gradle-plugin'])
+        }
     }
 }
