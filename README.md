@@ -7,17 +7,17 @@
   <img src="https://img.shields.io/badge/taotao--cloud--project-2026.09-red" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring-7.0.8-red" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_boot-4.1.0-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_cloud-2025.1.1-yellowgree" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_cloud-2025.1.2-yellowgree" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud_alibaba-2025.1.0.0--preview-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud_tencent-2.1.0.3--2024.0.4-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/netty-4.2.12.Final-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/netty-4.2.17.Final-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_security-7.1.0-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/elasticsearch-9.2.3-green" alt="Downloads"/>
   <img src="https://img.shields.io/badge/mybatis_plus-3.5.17-yellow" alt="Downloads"/>
   <img src="https://img.shields.io/badge/knife4j-4.5.0-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/swagger-3.0.0-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/redisson-4.3.1-lightgrey" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/hutool-5.8.44-gree" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/redisson-4.7.0-lightgrey" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/hutool-5.8.47-gree" alt="Downloads"/>
 </p>
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
@@ -88,7 +88,7 @@ Requires:
 ```
 JAVA_VERSION >= 25 (推荐使用graalvm-jdk-25)
 GRALE_VERSION >= 9.7.0
-IDEA_VERSION >= 2026.1
+IDEA_VERSION >= 2026.2
 ```
 
 Gradle:
@@ -167,16 +167,18 @@ Maven:
 
 ## 6.基于taotao-cloud-project构建的插件
 
-* **idea插件地址**: [TaoTaoToolKit](https://plugins.jetbrains.com/plugin/20538-taotaotoolkit)
+* **idea插件地址**: 
+
+- [TaoTaoToolKit](https://plugins.jetbrains.com/plugin/20538-taotaotoolkit)
 
 
 * **gradle插件地址**: 
 
-1. [https://plugins.gradle.org/plugin/io.github.shuigedeng.bom](https://plugins.gradle.org/plugin/io.github.shuigedeng.bom)
-2. [https://plugins.gradle.org/plugin/io.github.shuigedeng.module](https://plugins.gradle.org/plugin/io.github.shuigedeng.module)
-3. [https://plugins.gradle.org/plugin/io.github.shuigedeng.common](https://plugins.gradle.org/plugin/io.github.shuigedeng.common)
-4. [https://plugins.gradle.org/plugin/io.github.shuigedeng.root](https://plugins.gradle.org/plugin/io.github.shuigedeng.root)
-5. [https://plugins.gradle.org/plugin/io.github.shuigedeng.service](https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.service)
+- [https://plugins.gradle.org/plugin/io.github.shuigedeng.bom](https://plugins.gradle.org/plugin/io.github.shuigedeng.bom)
+- [https://plugins.gradle.org/plugin/io.github.shuigedeng.module](https://plugins.gradle.org/plugin/io.github.shuigedeng.module)
+- [https://plugins.gradle.org/plugin/io.github.shuigedeng.common](https://plugins.gradle.org/plugin/io.github.shuigedeng.common)
+- [https://plugins.gradle.org/plugin/io.github.shuigedeng.root](https://plugins.gradle.org/plugin/io.github.shuigedeng.root)
+- [https://plugins.gradle.org/plugin/io.github.shuigedeng.service](https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.service)
 
 
 * **maven插件地址**: 
@@ -254,31 +256,31 @@ Maven:
 
 ## 9. 核心依赖
 
-| 依赖                   | 版本            |
+| 依赖                   | 版本          |
 |----------------------|---------------|
 | Spring               | 7.0.8         |
 | Spring Boot          | 4.1.0         |
-| Spring Cloud         | 2025.1.1      |
+| Spring Cloud         | 2025.1.2      |
 | Spring Cloud Alibaba | 2025.1.0.0    |
 | Seata                | 2.6.0         |
-| Sentinel             | 1.8.9         |
-| Spring-kafka         | 4.0.5         |
+| Sentinel             | 1.8.10        |
+| Spring-kafka         | 4.1.0         |
 | Roketmq              | 5.2.4         |
-| Spring Security      | 7.0.8         |
+| Spring Security      | 7.1.0         |
 | Mybatis Plus         | 3.5.17        |
-| Hutool               | 5.8.44        |
+| Hutool               | 5.8.47        |
 | Mysql                | 9.7.0         |
 | Querydsl             | 5.1.0         |
 | Swagger              | 3.0.0         |
 | Knife4j              | 4.5.0         |
-| Redisson             | 4.3.1         |
+| Redisson             | 4.7.0         |
 | Lettuce              | 7.5.0.RELEASE |
 | Elasticsearch        | 9.2.2         |
 | Xxl-job              | 3.4.0         |
 | Guava                | 33.6.0-jre    |
 | Grpc                 | 1.80.0        |
 | Arthas               | 4.1.8         |
-| Netty                | 4.2.12.Final  |
+| Netty                | 4.2.17.Final  |
 
 
 ## 10. 模块说明
