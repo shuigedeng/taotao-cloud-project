@@ -1,13 +1,11 @@
 package com.taotao.cloud.tenant.biz.infrastructure.strategy;
 
-import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.mdframe.forge.plugin.system.constant.SystemConstants;
 import com.mdframe.forge.plugin.system.entity.SysUser;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysUserMapper;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysConfigService;
-import com.taotao.cloud.tenant.biz.application.service.service.IUserLoadService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysConfigService;
 import com.mdframe.forge.starter.auth.domain.LoginRequest;
 import com.mdframe.forge.starter.auth.enums.AuthType;
 import com.mdframe.forge.starter.auth.util.PasswordUtil;
@@ -36,7 +34,7 @@ public class SocialAuthStrategyImpl extends AbstractAuthStrategy {
     private SocialProperties socialProperties;
 
     @Autowired
-    private ISysConfigService sysConfigService;
+    private SysConfigService sysConfigService;
 
     @Autowired
     private SysUserMapper userMapper;

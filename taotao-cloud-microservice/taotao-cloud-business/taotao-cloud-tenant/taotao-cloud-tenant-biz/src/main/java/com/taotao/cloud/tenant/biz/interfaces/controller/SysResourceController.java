@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.tenant.biz.application.dto.SysResourceDTO;
 import com.taotao.cloud.tenant.biz.application.dto.SysResourceQuery;
 import com.mdframe.forge.plugin.system.entity.SysResource;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysResourceService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysResourceService;
 import com.mdframe.forge.plugin.system.vo.UserResourceTreeVO;
 import com.mdframe.forge.starter.core.annotation.api.ApiPermissionIgnore;
 
@@ -28,7 +28,7 @@ import java.util.List;
 //@ApiPermissionIgnore
 public class SysResourceController {
 
-    private final ISysResourceService resourceService;
+    private final SysResourceService resourceService;
 
     /**
      * 分页查询资源列表

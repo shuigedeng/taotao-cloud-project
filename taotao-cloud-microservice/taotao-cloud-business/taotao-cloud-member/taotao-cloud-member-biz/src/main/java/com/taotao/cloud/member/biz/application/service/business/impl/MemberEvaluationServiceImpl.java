@@ -35,8 +35,8 @@ import com.taotao.boot.sensitive.word.SensitiveWordsFilter;
 import com.taotao.cloud.goods.api.inner.GoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
-import com.taotao.cloud.member.biz.application.service.business.IMemberEvaluationService;
-import com.taotao.cloud.member.biz.application.service.business.IMemberService;
+import com.taotao.cloud.member.biz.application.service.business.MemberEvaluationService;
+import com.taotao.cloud.member.biz.application.service.business.MemberService;
 import com.taotao.cloud.member.biz.mapper.IMemberEvaluationMapper;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.model.entity.MemberEvaluation;
@@ -71,11 +71,11 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class MemberEvaluationServiceImpl extends ServiceImpl<IMemberEvaluationMapper, MemberEvaluation>
-        implements IMemberEvaluationService {
+        implements MemberEvaluationService {
 
     /** 会员 */
     @Autowired
-    private IMemberService memberService;
+    private MemberService memberService;
     /** 订单 */
     @Autowired
     private OrderApi orderApi;

@@ -21,7 +21,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.cloud.promotion.biz.application.service.business.IPointsGoodsCategoryService;
+import com.taotao.cloud.promotion.biz.application.service.business.PointsGoodsCategoryService;
 import com.taotao.cloud.promotion.biz.mapper.PointsGoodsCategoryMapper;
 import com.taotao.cloud.promotion.biz.model.entity.PointsGoodsCategory;
 import org.springframework.stereotype.Service;
@@ -37,7 +37,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PointsGoodsCategoryServiceImpl extends ServiceImpl<PointsGoodsCategoryMapper, PointsGoodsCategory>
-        implements IPointsGoodsCategoryService {
+        implements PointsGoodsCategoryService {
 
     /**
      * 添加积分商品分类

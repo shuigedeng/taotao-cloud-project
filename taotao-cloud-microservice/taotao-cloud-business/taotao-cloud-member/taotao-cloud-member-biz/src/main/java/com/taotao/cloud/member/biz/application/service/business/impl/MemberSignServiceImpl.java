@@ -22,8 +22,8 @@ import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
-import com.taotao.cloud.member.biz.application.service.business.IMemberService;
-import com.taotao.cloud.member.biz.application.service.business.IMemberSignService;
+import com.taotao.cloud.member.biz.application.service.business.MemberService;
+import com.taotao.cloud.member.biz.application.service.business.MemberSignService;
 import com.taotao.cloud.member.biz.mapper.IMemberSignMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberSign;
 import com.taotao.cloud.member.sys.model.vo.MemberSignVO;
@@ -44,7 +44,7 @@ import java.util.List;
 
 /** 会员签到业务层实现 */
 @Service
-public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, MemberSign> implements IMemberSignService {
+public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, MemberSign> implements MemberSignService {
 
     /** RocketMQ */
     @Autowired
@@ -57,7 +57,7 @@ public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, Member
     private SettingApi settingApi;
     /** 会员 */
     @Autowired
-    private IMemberService memberService;
+    private MemberService memberService;
 
     @Override
     public Boolean memberSign() {

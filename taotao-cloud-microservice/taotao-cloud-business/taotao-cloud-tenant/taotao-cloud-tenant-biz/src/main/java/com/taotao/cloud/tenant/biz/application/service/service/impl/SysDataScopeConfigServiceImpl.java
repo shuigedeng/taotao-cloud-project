@@ -1,9 +1,8 @@
 package com.taotao.cloud.tenant.biz.application.service.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysDataScopeConfigService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysDataScopeConfigService;
 import com.mdframe.forge.starter.core.domain.PageQuery;
 import com.mdframe.forge.starter.datascope.mapper.SysDataScopeConfigMapper;
 import com.mdframe.forge.starter.datascope.service.IDataScopeService;
@@ -21,7 +20,7 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
-public class SysDataScopeConfigServiceImpl implements ISysDataScopeConfigService {
+public class SysDataScopeConfigServiceImpl implements SysDataScopeConfigService {
 
     private final SysDataScopeConfigMapper dataScopeConfigMapper;
     private final IDataScopeService dataScopeService;

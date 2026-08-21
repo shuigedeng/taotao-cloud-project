@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.tenant.biz.application.dto.SysOrgDTO;
 import com.taotao.cloud.tenant.biz.application.dto.SysOrgQuery;
 import com.mdframe.forge.plugin.system.entity.SysOrg;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysOrgService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysOrgService;
 import com.mdframe.forge.starter.core.annotation.api.ApiPermissionIgnore;
 
 import com.mdframe.forge.starter.core.annotation.crypto.ApiDecrypt;
@@ -25,7 +25,7 @@ import java.util.List;
 //@ApiPermissionIgnore
 public class SysOrgController {
 
-    private final ISysOrgService orgService;
+    private final SysOrgService orgService;
 
     /**
      * 分页查询组织列表

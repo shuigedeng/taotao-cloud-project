@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.infrastructure.stream.producer.service.impl;
 
 import com.taotao.boot.mq.rocketmq.rocketmq.constant.MessageConstant;
-import com.taotao.cloud.order.biz.infrastructure.stream.producer.service.ITransactionOrderService;
+import com.taotao.cloud.order.biz.infrastructure.stream.producer.service.TransactionOrderService;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import lombok.AllArgsConstructor;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
@@ -41,7 +41,7 @@ import java.util.UUID;
  */
 @Service
 @AllArgsConstructor
-public class TransactionOrderServiceImpl implements ITransactionOrderService {
+public class TransactionOrderServiceImpl implements TransactionOrderService {
 
     private final RocketMQTemplate rocketMQTemplate;
 

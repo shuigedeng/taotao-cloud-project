@@ -22,8 +22,8 @@ import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import com.taotao.cloud.goods.api.inner.StoreGoodsLabelApi;
 import com.taotao.cloud.goods.api.model.vo.StoreGoodsLabelVO;
-import com.taotao.cloud.store.api.inner.IFeignStoreApi;
-import com.taotao.cloud.store.api.inner.IFeignStoreDetailApi;
+import com.taotao.cloud.store.api.inner.InnerStoreApi;
+import com.taotao.cloud.store.api.inner.InnerStoreDetailApi;
 import com.taotao.cloud.store.api.model.dto.StoreBankDTO;
 import com.taotao.cloud.store.api.model.dto.StoreCompanyDTO;
 import com.taotao.cloud.store.api.model.dto.StoreOtherInfoDTO;
@@ -52,13 +52,13 @@ public class StoreBuyerController {
 
     /** 店铺 */
     @Autowired
-    private IFeignStoreApi storeService;
+    private InnerStoreApi storeService;
     /** 店铺商品分类 */
     @Autowired
     private StoreGoodsLabelApi storeGoodsLabelApi;
     /** 店铺详情 */
     @Autowired
-    private IFeignStoreDetailApi storeDetailApi;
+    private InnerStoreDetailApi storeDetailApi;
 
     @Operation(summary = "获取店铺列表分页", description = "获取店铺列表分页")
     @RequestLogger

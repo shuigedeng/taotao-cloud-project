@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.taotao.cloud.tenant.biz.application.dto.SysDictTypeDTO;
 import com.taotao.cloud.tenant.biz.application.dto.SysDictTypeQuery;
 import com.mdframe.forge.plugin.system.entity.SysDictType;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysDictTypeService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysDictTypeService;
 import com.mdframe.forge.starter.core.annotation.api.ApiPermissionIgnore;
 import com.mdframe.forge.starter.core.domain.PageQuery;
 
@@ -26,7 +26,7 @@ import java.util.List;
 //@ApiPermissionIgnore
 public class SysDictTypeController {
 
-    private final ISysDictTypeService dictTypeService;
+    private final SysDictTypeService dictTypeService;
 
     /**
      * 分页查询字典类型列表

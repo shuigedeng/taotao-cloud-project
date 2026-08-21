@@ -30,8 +30,8 @@ import com.taotao.cloud.goods.api.inner.GoodsEsIndexApi;
 import com.taotao.cloud.promotion.api.enums.PromotionsApplyStatusEnum;
 import com.taotao.cloud.promotion.api.model.vo.SeckillVO;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
-import com.taotao.cloud.promotion.biz.application.service.business.ISeckillApplyService;
-import com.taotao.cloud.promotion.biz.application.service.business.ISeckillService;
+import com.taotao.cloud.promotion.biz.application.service.business.SeckillApplyService;
+import com.taotao.cloud.promotion.biz.application.service.business.SeckillService;
 import com.taotao.cloud.promotion.biz.mapper.SeckillMapper;
 import com.taotao.cloud.promotion.biz.model.entity.Seckill;
 import com.taotao.cloud.promotion.biz.model.entity.SeckillApply;
@@ -57,7 +57,7 @@ import java.util.List;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class SeckillServiceImpl extends AbstractPromotionsServiceImpl<SeckillMapper, Seckill>
-        implements ISeckillService {
+        implements SeckillService {
 
     /** 商品索引 */
     @Autowired
@@ -67,7 +67,7 @@ public class SeckillServiceImpl extends AbstractPromotionsServiceImpl<SeckillMap
     private SettingApi settingApi;
 
     @Autowired
-    private ISeckillApplyService seckillApplyService;
+    private SeckillApplyService seckillApplyService;
 
     @Override
     public SeckillVO getSeckillDetail(String id) {

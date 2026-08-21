@@ -1250,7 +1250,7 @@ logging:
     org.springframework.security: off
     org.springframework.security.oauth2: off
     org.springframework.boot.autoconfigure: off
-    org.springframework.cloud.openfeign: off
+    
     org.elasticsearch.client: debug
 
 springdoc:

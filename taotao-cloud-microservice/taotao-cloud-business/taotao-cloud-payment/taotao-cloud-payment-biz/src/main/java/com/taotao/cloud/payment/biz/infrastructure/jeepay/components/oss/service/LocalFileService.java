@@ -36,7 +36,7 @@ import java.io.File;
 @Service
 @Slf4j
 @ConditionalOnProperty(name = "isys.oss.service-type", havingValue = "local")
-public class LocalFileService implements IOssService {
+public class LocalFileService implements OssService {
 
     @Autowired private ISysConfigService sysConfigService;
     @Autowired private OssYmlConfig ossYmlConfig;

@@ -122,7 +122,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     /** 订单流水 */
     private final StoreFlowService storeFlowService;
     /** 拼团 */
-    private final PintuanInnerApi feignPintuanApi;
+    private final PintuanInnerApi pintuanApi;
     /** 交易服务 */
     private final TradeService tradeService;
 
@@ -536,7 +536,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Override
     public void agglomeratePintuanOrder(Long pintuanId, String parentOrderSn) {
         // 获取拼团配置
-        PintuanVO pintuan = feignPintuanApi.getById(pintuanId);
+        PintuanVO pintuan = pintuanApi.getById(pintuanId);
 
         List<Order> list = this.getPintuanOrder(pintuanId, parentOrderSn);
         if (Boolean.TRUE.equals(pintuan.getFictitious()) && pintuan.getRequiredNum() > list.size()) {
@@ -690,7 +690,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             return;
         }
         // 获取拼团配置
-        PintuanVO pintuan = feignPintuanApi.getById(pintuanId);
+        PintuanVO pintuan = pintuanApi.getById(pintuanId);
         List<Order> list = this.getPintuanOrder(pintuanId, parentOrderSn);
         int count = list.size();
         if (count == 1) {
@@ -788,7 +788,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     private void checkOrder(Order order) {
         // 订单类型为拼团订单，检测购买数量是否超过了限购数量
         if (OrderPromotionTypeEnum.PINTUAN.name().equals(order.getOrderType())) {
-            PintuanVO pintuan = feignPintuanApi.getById(order.getPromotionId());
+            PintuanVO pintuan = pintuanApi.getById(order.getPromotionId());
             Integer limitNum = pintuan.getLimitNum();
             if (limitNum != 0 && order.getGoodsNum() > limitNum) {
                 throw new BusinessException(ResultEnum.PINTUAN_LIMIT_NUM_ERROR);

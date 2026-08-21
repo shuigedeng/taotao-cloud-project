@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +20,7 @@ package com.taotao.cloud.store.biz.infrastructure.task;
 // import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 // import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 // import com.taotao.boot.common.enums.SwitchEnum;
-// import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationApi;
+// import com.taotao.cloud.member.api.inner.IFeignMemberEvaluationApi;
 // import com.taotao.cloud.member.api.model.vo.StoreRatingVO;
 // import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 // import com.taotao.cloud.store.biz.model.entity.Store;

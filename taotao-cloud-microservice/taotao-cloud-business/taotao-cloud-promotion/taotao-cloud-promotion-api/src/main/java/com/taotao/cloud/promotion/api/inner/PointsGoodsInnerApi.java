@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
- * IFeignKanjiaActivityService
+ * InnerKanjiaActivityService
  *
  * @author shuigedeng
  * @version 2022.04

@@ -41,29 +41,29 @@ import java.util.Map;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class PromotionServiceImpl implements IPromotionService {
+public class PromotionServiceImpl implements PromotionService {
 
     /** 秒杀 */
     @Autowired
-    private ISeckillService seckillService;
+    private SeckillService seckillService;
     /** 秒杀申请 */
     @Autowired
-    private ISeckillApplyService seckillApplyService;
+    private SeckillApplyService seckillApplyService;
     /** 满额活动 */
     @Autowired
-    private IFullDiscountService fullDiscountService;
+    private FullDiscountService fullDiscountService;
     /** 拼团 */
     @Autowired
-    private IPintuanService pintuanService;
+    private PintuanService pintuanService;
     /** 优惠券 */
     @Autowired
-    private ICouponService couponService;
+    private CouponService couponService;
     /** 促销商品 */
     @Autowired
-    private IPromotionGoodsService promotionGoodsService;
+    private PromotionGoodsService promotionGoodsService;
     /** 积分商品 */
     @Autowired
-    private IPointsGoodsService pointsGoodsService;
+    private PointsGoodsService pointsGoodsService;
 
     @Autowired
     private GoodsSkuApi goodsSkuApi;

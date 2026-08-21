@@ -1159,12 +1159,12 @@ management:
 logging:
   level:
     root: INFO
-    com.taotao.cloud.member.api.feign: debug
+
     org.springframework.web: off
     org.springframework.security: off
     org.springframework.security.oauth2: off
     org.springframework.boot.autoconfigure: off
-    org.springframework.cloud.openfeign: debug
+
     org.elasticsearch.client: debug
 
 springdoc:

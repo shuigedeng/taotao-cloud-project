@@ -9,7 +9,7 @@ import com.taotao.cloud.tenant.biz.application.dto.SysNoticeDTO;
 import com.taotao.cloud.tenant.biz.application.dto.SysNoticeQuery;
 import com.taotao.cloud.tenant.biz.domain.aggregate.*;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.*;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysNoticeService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysNoticeService;
 import com.mdframe.forge.plugin.system.vo.SysNoticeVO;
 import com.mdframe.forge.starter.core.session.SessionHelper;
 import com.mdframe.forge.starter.core.domain.PageQuery;
@@ -31,7 +31,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class SysNoticeServiceImpl extends ServiceImpl<SysNoticeMapper, SysNotice> implements ISysNoticeService {
+public class SysNoticeServiceImpl extends ServiceImpl<SysNoticeMapper, SysNotice> implements SysNoticeService {
 
     private final SysNoticeMapper noticeMapper;
     private final SysFileMetadataMapper fileMetadataMapper;

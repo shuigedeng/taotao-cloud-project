@@ -23,6 +23,7 @@ import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.data.mybatis.mybatisplus.MpUtils;
 import com.taotao.boot.web.annotation.BusinessApi;
 import com.taotao.boot.web.request.annotation.RequestLogger;
+import com.taotao.cloud.sys.api.inner.FileApi;
 import com.taotao.cloud.sys.api.model.dto.ScheduledJobDTO;
 import com.taotao.cloud.sys.api.model.page.ScheduledJobPageQuery;
 import com.taotao.cloud.sys.api.model.vo.ScheduledJobVO;
@@ -48,13 +49,13 @@ import org.springframework.web.bind.annotation.*;
 public class ScheduledJobController {
 
 	private final ScheduledJobService scheduledJobService;
-	private final IFeignFileApi fileApi;
+	private final FileApi fileApi;
 
-	@GetMapping("/testFeignFileApi")
-	@Operation(summary = "feign测试调用", description = "feign测试调用")
+	@GetMapping("/testFileApi")
+	@Operation(summary = "测试调用", description = "测试调用")
 	public Result<Boolean> jobList() {
 
-		FeignFileResponse sdfasdf = fileApi.findByCode("sdfasdf");
+		InnerDictResponse sdfasdf = fileApi.findByCode("sdfasdf");
 		LogUtils.info(String.valueOf(sdfasdf));
 
 		return Result.success(true);

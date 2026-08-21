@@ -34,10 +34,10 @@ import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.model.page.BasePromotionsSearchQuery;
 import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
-import com.taotao.cloud.promotion.biz.application.service.business.ICouponService;
-import com.taotao.cloud.promotion.biz.application.service.business.IFullDiscountService;
-import com.taotao.cloud.promotion.biz.application.service.business.IPromotionGoodsService;
-import com.taotao.cloud.promotion.biz.application.service.business.ISeckillApplyService;
+import com.taotao.cloud.promotion.biz.application.service.business.CouponService;
+import com.taotao.cloud.promotion.biz.application.service.business.FullDiscountService;
+import com.taotao.cloud.promotion.biz.application.service.business.PromotionGoodsService;
+import com.taotao.cloud.promotion.biz.application.service.business.SeckillApplyService;
 import com.taotao.cloud.promotion.biz.mapper.PromotionGoodsMapper;
 import com.taotao.cloud.promotion.biz.model.entity.Coupon;
 import com.taotao.cloud.promotion.biz.model.entity.FullDiscount;
@@ -63,23 +63,23 @@ import java.util.List;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper, PromotionGoods>
-        implements IPromotionGoodsService {
+        implements PromotionGoodsService {
 
     /** Redis */
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
     /** 秒杀活动申请 */
     @Autowired
-    private ISeckillApplyService seckillApplyService;
+    private SeckillApplyService seckillApplyService;
     /** 规格商品 */
     @Autowired
     private GoodsSkuApi goodsSkuApi;
 
     @Autowired
-    private IFullDiscountService fullDiscountService;
+    private FullDiscountService fullDiscountService;
 
     @Autowired
-    private ICouponService couponService;
+    private CouponService couponService;
 
     @Override
     public List<PromotionGoods> findNowSkuPromotion(String skuId) {
@@ -214,7 +214,7 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
      */
     @Override
     public Integer getPromotionGoodsStock(PromotionTypeEnum typeEnum, String promotionId, String skuId) {
-        String promotionStockKey = IPromotionGoodsService.getPromotionGoodsStockCacheKey(typeEnum, promotionId, skuId);
+        String promotionStockKey = PromotionGoodsService.getPromotionGoodsStockCacheKey(typeEnum, promotionId, skuId);
         String promotionGoodsStock = stringRedisTemplate.opsForValue().get(promotionStockKey);
 
         // 库存如果不为空，则直接返回
@@ -277,7 +277,7 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
     @Override
     public void updatePromotionGoodsStock(
             PromotionTypeEnum typeEnum, String promotionId, String skuId, Integer quantity) {
-        String promotionStockKey = IPromotionGoodsService.getPromotionGoodsStockCacheKey(typeEnum, promotionId, skuId);
+        String promotionStockKey = PromotionGoodsService.getPromotionGoodsStockCacheKey(typeEnum, promotionId, skuId);
         if (typeEnum.equals(PromotionTypeEnum.SECKILL)) {
             LambdaQueryWrapper<SeckillApply> queryWrapper = new LambdaQueryWrapper<>();
             queryWrapper.eq(SeckillApply::getSeckillId, promotionId).eq(SeckillApply::getSkuId, skuId);

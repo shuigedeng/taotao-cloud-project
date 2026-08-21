@@ -25,7 +25,7 @@ import com.taotao.boot.web.request.annotation.RequestLogger;
 import com.taotao.cloud.member.api.constant.MemberCollectionQueryConstants;
 import com.taotao.cloud.member.biz.service.business.IMemberGoodsCollectionService;
 import com.taotao.cloud.member.sys.model.vo.GoodsCollectionVO;
-import com.taotao.cloud.store.api.inner.IFeignStoreCollectionApi;
+import com.taotao.cloud.store.api.inner.InnerStoreCollectionApi;
 import com.taotao.cloud.store.api.model.vo.StoreCollectionVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -53,7 +53,7 @@ public class MemberCollectionController {
     /**
      * 会员店铺
      */
-    private final IFeignStoreCollectionApi feignStoreCollectionApi;
+    private final InnerStoreCollectionApi storeCollectionApi;
 
     @Operation(summary = "查询会员收藏列表", description = "查询会员收藏列表")
     @RequestLogger
@@ -67,7 +67,7 @@ public class MemberCollectionController {
             return Result.success(MpUtils.convertMpPage(goodsCollectionPage, StoreCollectionVO.class));
         }
 
-        return Result.success(feignStoreCollectionApi.storeCollection(page));
+        return Result.success(storeCollectionApi.storeCollection(page));
     }
 
     @Operation(summary = "添加会员收藏", description = "添加会员收藏")
@@ -82,7 +82,7 @@ public class MemberCollectionController {
         if (MemberCollectionQueryConstants.GOODS.equals(type)) {
             return Result.success(memberGoodsCollectionService.addGoodsCollection(id));
         }
-        return Result.success(feignStoreCollectionApi.addStoreCollection(id));
+        return Result.success(storeCollectionApi.addStoreCollection(id));
     }
 
     @Operation(summary = "删除会员收藏", description = "删除会员收藏")
@@ -95,7 +95,7 @@ public class MemberCollectionController {
         if (MemberCollectionQueryConstants.GOODS.equals(type)) {
             return Result.success(memberGoodsCollectionService.deleteGoodsCollection(id));
         }
-        return Result.success(feignStoreCollectionApi.deleteStoreCollection(id));
+        return Result.success(storeCollectionApi.deleteStoreCollection(id));
     }
 
     @Operation(summary = "查询会员是否收藏", description = "查询会员是否收藏")
@@ -108,6 +108,6 @@ public class MemberCollectionController {
         if (MemberCollectionQueryConstants.GOODS.equals(type)) {
             return Result.success(memberGoodsCollectionService.isCollection(id));
         }
-        return Result.success(this.feignStoreCollectionApi.isCollection(id));
+        return Result.success(this.storeCollectionApi.isCollection(id));
     }
 }

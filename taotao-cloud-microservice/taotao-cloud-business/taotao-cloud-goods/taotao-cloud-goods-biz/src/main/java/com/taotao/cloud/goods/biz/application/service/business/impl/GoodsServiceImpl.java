@@ -50,8 +50,8 @@ import com.taotao.cloud.goods.biz.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.goods.biz.repository.GoodsRepository;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
 import com.taotao.cloud.member.api.inner.MemberEvaluationApi;
-import com.taotao.cloud.store.api.inner.IFeignFreightTemplateApi;
-import com.taotao.cloud.store.api.inner.IFeignStoreApi;
+import com.taotao.cloud.store.api.inner.InnerFreightTemplateApi;
+import com.taotao.cloud.store.api.inner.InnerStoreApi;
 import com.taotao.cloud.store.api.model.vo.FreightTemplateVO;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
@@ -91,9 +91,9 @@ public class GoodsServiceImpl extends BaseServiceImpl< Goods, Long, GoodsMapper,
     /** 设置 */
     private final SettingApi settingApi;
     /** 店铺详情 */
-    private final IFeignStoreApi storeApi;
+    private final InnerStoreApi storeApi;
     /** 运费模板 */
-    private final IFeignFreightTemplateApi freightTemplateApi;
+    private final InnerFreightTemplateApi freightTemplateApi;
     /** 会员评价 */
     private final MemberEvaluationApi memberEvaluationApi;
     /** rocketMq */

@@ -33,9 +33,9 @@ import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityDTO;
 import com.taotao.cloud.promotion.api.model.page.KanjiaActivityPageQuery;
 import com.taotao.cloud.promotion.api.model.query.KanjiaActivitySearchQuery;
 import com.taotao.cloud.promotion.api.model.vo.KanjiaActivityVO;
-import com.taotao.cloud.promotion.biz.application.service.business.IKanjiaActivityGoodsService;
-import com.taotao.cloud.promotion.biz.application.service.business.IKanjiaActivityLogService;
-import com.taotao.cloud.promotion.biz.application.service.business.IKanjiaActivityService;
+import com.taotao.cloud.promotion.biz.application.service.business.KanjiaActivityGoodsService;
+import com.taotao.cloud.promotion.biz.application.service.business.KanjiaActivityLogService;
+import com.taotao.cloud.promotion.biz.application.service.business.KanjiaActivityService;
 import com.taotao.cloud.promotion.biz.mapper.KanJiaActivityMapper;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivity;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityGoods;
@@ -60,13 +60,13 @@ import java.util.Objects;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper, KanjiaActivity>
-        implements IKanjiaActivityService {
+        implements KanjiaActivityService {
 
     @Autowired
-    private IKanjiaActivityGoodsService kanjiaActivityGoodsService;
+    private KanjiaActivityGoodsService kanjiaActivityGoodsService;
 
     @Autowired
-    private IKanjiaActivityLogService kanjiaActivityLogService;
+    private KanjiaActivityLogService kanjiaActivityLogService;
 
     @Autowired
     private MemberApi memberApi;

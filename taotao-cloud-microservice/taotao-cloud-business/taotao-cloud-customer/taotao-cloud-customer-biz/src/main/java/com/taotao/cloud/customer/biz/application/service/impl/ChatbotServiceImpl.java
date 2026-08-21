@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.customer.biz.application.service.impl;
 
-import com.taotao.cloud.customer.biz.application.service.IChatbotService;
+import com.taotao.cloud.customer.biz.application.service.ChatbotService;
 import com.taotao.cloud.customer.biz.model.entity.Chatbot;
 import com.taotao.cloud.customer.biz.repository.ChatbotSuperRepository;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
  * @version 2022.03
  */
 @Service
-public class ChatbotServiceImpl implements IChatbotService {
+public class ChatbotServiceImpl implements ChatbotService {
 
     private final ChatbotSuperRepository chatbotRepository;
 

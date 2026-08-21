@@ -21,9 +21,9 @@ import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.utils.lang.StringUtils;
 import com.taotao.cloud.member.api.enums.SendTypeEnum;
-import com.taotao.cloud.member.biz.application.service.business.IMemberNoticeSenterService;
-import com.taotao.cloud.member.biz.application.service.business.IMemberNoticeService;
-import com.taotao.cloud.member.biz.application.service.business.IMemberService;
+import com.taotao.cloud.member.biz.application.service.business.MemberNoticeSenterService;
+import com.taotao.cloud.member.biz.application.service.business.MemberNoticeService;
+import com.taotao.cloud.member.biz.application.service.business.MemberService;
 import com.taotao.cloud.member.biz.mapper.IMemberNoticeSenterMapper;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.model.entity.MemberNotice;
@@ -40,14 +40,14 @@ import java.util.List;
 @Service
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class MemberNoticeSenterServiceImpl extends ServiceImpl<IMemberNoticeSenterMapper, MemberNoticeSenter>
-        implements IMemberNoticeSenterService {
+        implements MemberNoticeSenterService {
 
     /** 会员 */
     @Autowired
-    private IMemberService memberService;
+    private MemberService memberService;
     /** 会员站内信 */
     @Autowired
-    private IMemberNoticeService memberNoticeService;
+    private MemberNoticeService memberNoticeService;
 
     @Override
     public boolean customSave(MemberNoticeSenter memberNoticeSenter) {

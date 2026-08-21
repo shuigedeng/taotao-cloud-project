@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,7 +29,7 @@ package com.taotao.cloud.member.biz.application.service.business.impl; // packag
 // import com.taotao.cloud.member.biz.entity.MemberStoreCollection;
 // import com.taotao.cloud.member.biz.mapper.StoreCollectionMapper;
 // import com.taotao.cloud.store.api.dto.CollectionDTO;
-// import com.taotao.cloud.store.api.feign.IFeignStoreService;
+// import com.taotao.cloud.store.api.inner.IFeignStoreService;
 // import java.util.Optional;
 // import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.stereotype.Service;

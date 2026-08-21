@@ -22,7 +22,7 @@ import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * IFeignKanjiaActivityService
+ * InnerKanjiaActivityService
  *
  * @author shuigedeng
  * @version 2022.04

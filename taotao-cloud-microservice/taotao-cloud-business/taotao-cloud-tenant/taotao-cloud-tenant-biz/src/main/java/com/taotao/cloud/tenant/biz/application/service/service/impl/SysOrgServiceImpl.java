@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.tenant.biz.application.dto.SysOrgDTO;
 import com.taotao.cloud.tenant.biz.application.dto.SysOrgQuery;
-import import com.taotao.cloud.tenant.biz.application.service.service.ISysOrgService;
+import import com.taotao.cloud.tenant.biz.application.service.service.SysOrgService;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysOrg;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysOrgMapper;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
-public class SysOrgServiceImpl extends ServiceImpl<SysOrgMapper, SysOrg> implements ISysOrgService {
+public class SysOrgServiceImpl extends ServiceImpl<SysOrgMapper, SysOrg> implements SysOrgService {
 
     private final SysOrgMapper orgMapper;
 

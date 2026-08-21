@@ -32,7 +32,7 @@ import com.taotao.cloud.goods.biz.model.page.GoodsPageQuery;
 import com.taotao.cloud.goods.biz.model.vo.*;
 import com.taotao.cloud.goods.biz.service.business.GoodsService;
 import com.taotao.cloud.goods.biz.service.business.GoodsSkuService;
-import com.taotao.cloud.store.api.inner.IFeignStoreDetailApi;
+import com.taotao.cloud.store.api.inner.InnerStoreDetailApi;
 import com.taotao.cloud.store.api.model.vo.StoreDetailVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -66,7 +66,7 @@ public class GoodsSellerController {
     /** 商品sku */
     private final GoodsSkuService goodsSkuService;
     /** 店铺详情 */
-    private final IFeignStoreDetailApi storeDetailApi;
+    private final InnerStoreDetailApi storeDetailApi;
 
     @Operation(summary = "分页获取商品列表", description = "分页获取商品列表")
     @RequestLogger("分页获取商品列表")

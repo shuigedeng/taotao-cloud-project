@@ -2,8 +2,8 @@ package com.taotao.cloud.tenant.biz.interfaces.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mdframe.forge.plugin.system.entity.SysExcelExportConfig;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysExcelColumnConfigService;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysExcelExportConfigService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysExcelColumnConfigService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysExcelExportConfigService;
 import com.mdframe.forge.starter.core.annotation.api.ApiPermissionIgnore;
 import com.mdframe.forge.starter.core.domain.PageQuery;
 
@@ -28,8 +28,8 @@ import java.util.Map;
 //@ApiPermissionIgnore
 public class SysExcelExportConfigController {
     
-    private final ISysExcelExportConfigService exportConfigService;
-    private final ISysExcelColumnConfigService columnConfigService;
+    private final SysExcelExportConfigService exportConfigService;
+    private final SysExcelColumnConfigService columnConfigService;
     private final DynamicExportEngine dynamicExportEngine;
     
     /**

@@ -60,7 +60,7 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMapper, Coupon> implements ICouponService {
+public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMapper, Coupon> implements CouponService {
 
 	/**
 	 * 规格商品
@@ -71,22 +71,22 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
 	 * 促销商品
 	 */
 	@Autowired
-	private IPromotionGoodsService promotionGoodsService;
+	private PromotionGoodsService promotionGoodsService;
 	/**
 	 * 会员优惠券
 	 */
 	@Autowired
-	private IMemberCouponService memberCouponService;
+	private MemberCouponService memberCouponService;
 	/**
 	 * 满额活动
 	 */
 	@Autowired
-	private IFullDiscountService fullDiscountService;
+	private FullDiscountService fullDiscountService;
 	/**
 	 * 优惠券活动-优惠券关联
 	 */
 	@Autowired
-	private ICouponActivityItemService couponActivityItemService;
+	private CouponActivityItemService couponActivityItemService;
 
 	@Override
 	public void receiveCoupon(Long couponId, Integer receiveNum) {

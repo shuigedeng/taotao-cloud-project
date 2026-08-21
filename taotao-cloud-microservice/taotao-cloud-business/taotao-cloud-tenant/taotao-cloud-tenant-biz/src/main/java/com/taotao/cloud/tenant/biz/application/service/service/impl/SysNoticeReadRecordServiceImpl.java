@@ -2,7 +2,7 @@ package com.taotao.cloud.tenant.biz.application.service.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
-import import com.taotao.cloud.tenant.biz.application.service.service.ISysNoticeReadRecordService;
+import import com.taotao.cloud.tenant.biz.application.service.service.SysNoticeReadRecordService;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysNoticeReadRecord;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysOrg;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysUserOrg;
@@ -11,7 +11,6 @@ import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysNoticeRea
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysOrgMapper;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysUserMapper;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysUserOrgMapper;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysNoticeReadRecordService;
 import com.mdframe.forge.plugin.system.vo.NoticeReadStatisticsVO;
 import com.mdframe.forge.plugin.system.vo.NoticeReadUserVO;
 import com.mdframe.forge.starter.core.session.SessionHelper;
@@ -30,7 +29,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class SysNoticeReadRecordServiceImpl extends ServiceImpl<SysNoticeReadRecordMapper, SysNoticeReadRecord>
-        implements ISysNoticeReadRecordService {
+        implements SysNoticeReadRecordService {
 
     private final SysNoticeReadRecordMapper readRecordMapper;
     private final SysNoticeMapper noticeMapper;

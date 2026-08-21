@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.taotao.cloud.tenant.biz.application.dto.SysNoticeDTO;
 import com.taotao.cloud.tenant.biz.application.dto.SysNoticeQuery;
 import com.mdframe.forge.plugin.system.entity.SysNotice;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysNoticeReadRecordService;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysNoticeService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysNoticeReadRecordService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysNoticeService;
 import com.mdframe.forge.plugin.system.vo.NoticeReadStatisticsVO;
 import com.mdframe.forge.plugin.system.vo.NoticeReadUserVO;
 import com.mdframe.forge.plugin.system.vo.SysNoticeVO;
@@ -32,8 +32,8 @@ import java.util.List;
 //@ApiPermissionIgnore
 public class SysNoticeController {
 
-    private final ISysNoticeService noticeService;
-    private final ISysNoticeReadRecordService noticeReadRecordService;
+    private final SysNoticeService noticeService;
+    private final SysNoticeReadRecordService noticeReadRecordService;
 
     /**
      * 分页查询公告列表

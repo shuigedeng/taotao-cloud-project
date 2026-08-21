@@ -17,7 +17,7 @@
 package com.taotao.cloud.wechat.api.inner;
 
  import com.taotao.boot.common.constant.ServiceNameConstants;
-import com.taotao.cloud.wechat.api.inner.response.FeignDictResponse;
+import com.taotao.cloud.wechat.api.inner.response.InnerDictResponse;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,9 +36,9 @@ public interface WechatApi {
      * 字典列表code查询
      *
      * @param code 代码
-     * @return {@link FeignDictResponse }
+     * @return {@link InnerDictResponse }
      * @since 2022-06-29 21:40:21
      */
     @GetMapping("/sys/remote/dict/code")
-    FeignDictResponse findByCode(@RequestParam(value = "code") String code);
+    InnerDictResponse findByCode(@RequestParam(value = "code") String code);
 }

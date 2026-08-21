@@ -26,9 +26,9 @@ import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityDTO;
 import com.taotao.cloud.promotion.api.model.page.KanJiaActivityLogPageQuery;
-import com.taotao.cloud.promotion.biz.application.service.business.IKanjiaActivityGoodsService;
-import com.taotao.cloud.promotion.biz.application.service.business.IKanjiaActivityLogService;
-import com.taotao.cloud.promotion.biz.application.service.business.IKanjiaActivityService;
+import com.taotao.cloud.promotion.biz.application.service.business.KanjiaActivityGoodsService;
+import com.taotao.cloud.promotion.biz.application.service.business.KanjiaActivityLogService;
+import com.taotao.cloud.promotion.biz.application.service.business.KanjiaActivityService;
 import com.taotao.cloud.promotion.biz.mapper.KanJiaActivityLogMapper;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivity;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityGoods;
@@ -48,13 +48,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class KanjiaActivityLogServiceImpl extends ServiceImpl<KanJiaActivityLogMapper, KanjiaActivityLog>
-	implements IKanjiaActivityLogService {
+	implements KanjiaActivityLogService {
 
 	@Autowired
-	private IKanjiaActivityGoodsService kanJiaActivityGoodsService;
+	private KanjiaActivityGoodsService kanJiaActivityGoodsService;
 
 	@Autowired
-	private IKanjiaActivityService kanJiaActivityService;
+	private KanjiaActivityService kanJiaActivityService;
 
 	@Override
 	public IPage<KanjiaActivityLog> getForPage(KanJiaActivityLogPageQuery kanJiaActivityLogPageQuery, PageVO pageVO) {

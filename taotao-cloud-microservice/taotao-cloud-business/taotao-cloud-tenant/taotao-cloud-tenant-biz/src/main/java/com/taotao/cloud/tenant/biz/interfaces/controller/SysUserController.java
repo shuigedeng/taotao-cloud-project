@@ -5,7 +5,7 @@ import com.taotao.boot.common.model.result.Result;
 import com.taotao.cloud.tenant.biz.application.dto.SysUserDTO;
 import com.taotao.cloud.tenant.biz.application.dto.SysUserQuery;
 import com.taotao.cloud.tenant.biz.application.dto.UserOrgBindDTO;
-import import com.taotao.cloud.tenant.biz.application.service.service.ISysUserService;
+import import com.taotao.cloud.tenant.biz.application.service.service.SysUserService;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ import java.util.List;
 //@ApiPermissionIgnore
 public class SysUserController {
 
-    private final ISysUserService userService;
+    private final SysUserService userService;
 
     /**
      * 分页查询用户列表

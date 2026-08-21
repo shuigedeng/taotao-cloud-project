@@ -31,7 +31,7 @@ import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.model.page.BasePromotionsSearchQuery;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.biz.application.service.business.AbstractPromotionsService;
-import com.taotao.cloud.promotion.biz.application.service.business.IPromotionGoodsService;
+import com.taotao.cloud.promotion.biz.application.service.business.PromotionGoodsService;
 import com.taotao.cloud.promotion.biz.model.entity.BasePromotions;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.util.PageQueryUtils;
@@ -56,7 +56,7 @@ public class AbstractPromotionsServiceImpl<M extends BaseMapper<T>, T extends Ba
 
     /** 推广产品服务 促销商品 */
     @Autowired
-    private IPromotionGoodsService promotionGoodsService;
+    private PromotionGoodsService promotionGoodsService;
 
     /** rocketmq自定义属性 rocketMq配置 */
     @Autowired

@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.biz.application.service.business.impl;
 
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
-import com.taotao.cloud.member.biz.application.service.business.IMemberNoticeService;
+import com.taotao.cloud.member.biz.application.service.business.MemberNoticeService;
 import com.taotao.cloud.member.biz.mapper.IMemberNoticeMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberNotice;
 import org.springframework.stereotype.Service;
@@ -29,4 +29,4 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MemberNoticeServiceImpl extends ServiceImpl<IMemberNoticeMapper, MemberNotice>
-        implements IMemberNoticeService {}
+        implements MemberNoticeService {}

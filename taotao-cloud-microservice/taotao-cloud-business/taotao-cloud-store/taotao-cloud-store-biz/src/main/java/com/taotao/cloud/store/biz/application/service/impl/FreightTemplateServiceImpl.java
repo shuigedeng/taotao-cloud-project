@@ -29,8 +29,8 @@ import com.taotao.boot.security.spring.model.SecurityUser;
 import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.cloud.store.api.model.vo.FreightTemplateChildVO;
 import com.taotao.cloud.store.api.model.vo.FreightTemplateInfoVO;
-import com.taotao.cloud.store.biz.application.service.IFreightTemplateChildService;
-import com.taotao.cloud.store.biz.application.service.IFreightTemplateService;
+import com.taotao.cloud.store.biz.application.service.FreightTemplateChildService;
+import com.taotao.cloud.store.biz.application.service.FreightTemplateService;
 import com.taotao.cloud.store.biz.mapper.FreightTemplateMapper;
 import com.taotao.cloud.store.biz.mapstruct.IFreightTemplateChildMapStruct;
 import com.taotao.cloud.store.biz.model.entity.FreightTemplate;
@@ -52,10 +52,10 @@ import java.util.List;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMapper, FreightTemplate>
-        implements IFreightTemplateService {
+        implements FreightTemplateService {
     /** 配送子模板 */
     @Autowired
-    private IFreightTemplateChildService freightTemplateChildService;
+    private FreightTemplateChildService freightTemplateChildService;
     /** 缓存 */
     @Autowired
     private RedisRepository redisRepository;

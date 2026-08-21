@@ -1,7 +1,7 @@
 package com.taotao.cloud.tenant.biz.application.service.service.impl;
 
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysDictData;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysDictDataService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysDictDataService;
 import com.mdframe.forge.starter.trans.spi.DictValueProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class SytemDictValueProvider implements DictValueProvider {
     
     @Autowired
-    private ISysDictDataService sysDictDataService;
+    private SysDictDataService sysDictDataService;
     
     @Override
     public String getLabel(String dictType, String key) {

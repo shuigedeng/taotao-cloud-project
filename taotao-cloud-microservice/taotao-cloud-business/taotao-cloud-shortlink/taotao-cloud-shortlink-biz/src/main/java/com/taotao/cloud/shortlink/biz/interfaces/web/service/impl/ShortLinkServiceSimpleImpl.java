@@ -20,7 +20,7 @@ import com.alibaba.fastjson2.JSONObject;
 import com.taotao.boot.common.utils.lang.StringUtils;
 import com.taotao.cloud.log.api.api.dto.ShortLinkDTO;
 import com.taotao.cloud.shortlink.biz.interfaces.web.biz.ShortLinkBiz;
-import com.taotao.cloud.shortlink.biz.interfaces.web.service.IShortLinkService;
+import com.taotao.cloud.shortlink.biz.interfaces.web.service.ShortLinkService;
 import com.taotao.cloud.shortlink.biz.interfaces.web.web.request.ShortLinkUpdateRequest;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +41,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @Service
-public class ShortLinkServiceSimpleImpl implements IShortLinkService {
+public class ShortLinkServiceSimpleImpl implements ShortLinkService {
 
     @Resource
     private RedissonClient redissonClient;

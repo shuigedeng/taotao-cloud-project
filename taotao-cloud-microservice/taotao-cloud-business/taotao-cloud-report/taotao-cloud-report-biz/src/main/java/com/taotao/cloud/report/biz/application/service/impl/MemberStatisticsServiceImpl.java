@@ -17,7 +17,7 @@
 package com.taotao.cloud.report.biz.application.service.impl;
 
 import com.taotao.cloud.report.api.model.dto.StatisticsQueryParam;
-import com.taotao.cloud.report.biz.application.service.IMemberStatisticsService;
+import com.taotao.cloud.report.biz.application.service.MemberStatisticsService;
 import com.taotao.cloud.report.biz.model.entity.MemberStatisticsData;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +29,7 @@ import java.util.List;
  */
 @Service
 public class MemberStatisticsServiceImpl
-	implements IMemberStatisticsService {
+	implements MemberStatisticsService {
 
 	@Override
 	public long getMemberCount() {

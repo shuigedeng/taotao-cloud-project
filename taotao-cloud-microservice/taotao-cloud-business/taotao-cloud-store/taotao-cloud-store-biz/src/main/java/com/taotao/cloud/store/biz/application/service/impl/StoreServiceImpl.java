@@ -34,8 +34,8 @@ import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 import com.taotao.cloud.store.api.model.dto.*;
 import com.taotao.cloud.store.api.model.query.StorePageQuery;
 import com.taotao.cloud.store.api.model.vo.StoreVO;
-import com.taotao.cloud.store.biz.application.service.IStoreDetailService;
-import com.taotao.cloud.store.biz.application.service.IStoreService;
+import com.taotao.cloud.store.biz.application.service.StoreDetailService;
+import com.taotao.cloud.store.biz.application.service.StoreService;
 import com.taotao.cloud.store.biz.mapper.StoreMapper;
 import com.taotao.cloud.store.biz.model.entity.Store;
 import com.taotao.cloud.store.biz.model.entity.StoreDetail;
@@ -51,7 +51,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements IStoreService {
+public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements StoreService {
 
 	/**
 	 * 会员
@@ -67,7 +67,7 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
 	 * 店铺详情
 	 */
 	@Autowired
-	private IStoreDetailService storeDetailService;
+	private StoreDetailService storeDetailService;
 
 	@Override
 	public IPage<StoreVO> findByConditionPage(StorePageQuery storePageQuery) {

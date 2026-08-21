@@ -22,7 +22,7 @@ import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.data.mybatis.mybatisplus.MpUtils;
 import com.taotao.boot.web.request.annotation.RequestLogger;
-import com.taotao.cloud.message.api.inner.IFeignStoreMessageService;
+import com.taotao.cloud.message.api.inner.StoreMessageApi;
 import com.taotao.cloud.message.api.vo.StoreMessageQueryVO;
 import com.taotao.cloud.message.api.vo.StoreMessageVO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -42,7 +42,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class StoreMessageManagerController {
 
     @Autowired
-    private IFeignStoreMessageService storeMessageService;
+    private StoreMessageApi storeMessageService;
 
     @Operation(summary = "多条件分页获取", description = "多条件分页获取")
     @RequestLogger

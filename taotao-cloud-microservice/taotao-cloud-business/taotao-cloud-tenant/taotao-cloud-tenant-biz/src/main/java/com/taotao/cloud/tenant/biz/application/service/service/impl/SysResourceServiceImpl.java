@@ -14,7 +14,7 @@ import com.taotao.cloud.tenant.biz.domain.aggregate.SysRoleResource;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysResourceMapper;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysRoleResourceMapper;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysUserRoleMapper;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysResourceService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysResourceService;
 import com.mdframe.forge.plugin.system.vo.UserResourceTreeVO;
 import com.mdframe.forge.starter.core.session.LoginUser;
 import com.mdframe.forge.starter.core.session.SessionHelper;
@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @RequiredArgsConstructor
-public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysResource> implements ISysResourceService {
+public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysResource> implements SysResourceService {
 
     private final SysResourceMapper resourceMapper;
     private final SysUserRoleMapper userRoleMapper;

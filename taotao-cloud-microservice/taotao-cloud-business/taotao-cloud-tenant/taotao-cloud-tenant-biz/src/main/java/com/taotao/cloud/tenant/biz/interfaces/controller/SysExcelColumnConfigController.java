@@ -1,7 +1,7 @@
 package com.taotao.cloud.tenant.biz.interfaces.controller;
 
 import com.mdframe.forge.plugin.system.entity.SysExcelColumnConfig;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysExcelColumnConfigService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysExcelColumnConfigService;
 import com.mdframe.forge.starter.core.annotation.api.ApiPermissionIgnore;
 
 import com.mdframe.forge.starter.core.annotation.crypto.ApiDecrypt;
@@ -22,7 +22,7 @@ import java.util.List;
 //@ApiPermissionIgnore
 public class SysExcelColumnConfigController {
     
-    private final ISysExcelColumnConfigService columnConfigService;
+    private final SysExcelColumnConfigService columnConfigService;
     
     /**
      * 根据配置键查询列配置

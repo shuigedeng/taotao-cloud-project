@@ -1,4 +1,4 @@
-package com.taotao.cloud.shortlink.biz.infrastructure.dcloud.service.impl;
+﻿package com.taotao.cloud.shortlink.biz.infrastructure.dcloud.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import net.xdclass.component.ShortLinkComponent;
@@ -9,7 +9,7 @@ import net.xdclass.enums.BizCodeEnum;
 import net.xdclass.enums.DomainTypeEnum;
 import net.xdclass.enums.EventMessageType;
 import net.xdclass.enums.ShortLinkStateEnum;
-import net.xdclass.feign.TrafficFeignService;
+import net.xdclass.inner.TrafficFeignService;
 import net.xdclass.interceptor.LoginInterceptor;
 import net.xdclass.manager.DomainManager;
 import net.xdclass.manager.LinkGroupManager;
@@ -67,7 +67,7 @@ public class ShortLinkServiceImpl implements ShortLinkService{
     private RedisTemplate<Object, Object> redisTemplate;
 
     @Autowired
-    private TrafficFeignService trafficFeignService;
+    private TrafficFeignService trafficService;
 
     /**
      * 解析短链
@@ -239,7 +239,7 @@ public class ShortLinkServiceImpl implements ShortLinkService{
                 .accountNo(eventMessage.getAccountNo())
                 .bizId(shortLinkCode)
                 .build();
-        JsonData jsonData = trafficFeignService.useTraffic(request);
+        JsonData jsonData = trafficService.useTraffic(request);
         if(jsonData.getCode() != 0){
             log.error("流量包不足，扣减失败:{}",eventMessage);
             return false;

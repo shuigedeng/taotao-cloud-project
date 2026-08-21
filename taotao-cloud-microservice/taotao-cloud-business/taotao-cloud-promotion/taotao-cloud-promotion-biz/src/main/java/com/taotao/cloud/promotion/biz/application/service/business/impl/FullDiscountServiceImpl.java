@@ -25,9 +25,9 @@ import com.taotao.cloud.order.api.model.vo.cart.FullDiscountVO;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
-import com.taotao.cloud.promotion.biz.application.service.business.ICouponService;
-import com.taotao.cloud.promotion.biz.application.service.business.IFullDiscountService;
-import com.taotao.cloud.promotion.biz.application.service.business.IPromotionGoodsService;
+import com.taotao.cloud.promotion.biz.application.service.business.CouponService;
+import com.taotao.cloud.promotion.biz.application.service.business.FullDiscountService;
+import com.taotao.cloud.promotion.biz.application.service.business.PromotionGoodsService;
 import com.taotao.cloud.promotion.biz.mapper.FullDiscountMapper;
 import com.taotao.cloud.promotion.biz.model.entity.Coupon;
 import com.taotao.cloud.promotion.biz.model.entity.FullDiscount;
@@ -53,14 +53,14 @@ import java.util.List;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class FullDiscountServiceImpl extends AbstractPromotionsServiceImpl<FullDiscountMapper, FullDiscount>
-        implements IFullDiscountService {
+        implements FullDiscountService {
 
     /** 优惠券 */
     @Autowired
-    private ICouponService couponService;
+    private CouponService couponService;
     /** 促销商品 */
     @Autowired
-    private IPromotionGoodsService promotionGoodsService;
+    private PromotionGoodsService promotionGoodsService;
 
     @Override
     public List<FullDiscountVO> currentPromotion(List<String> storeId) {

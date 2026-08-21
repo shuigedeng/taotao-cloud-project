@@ -1,7 +1,7 @@
 package com.taotao.cloud.tenant.biz.interfaces.controller;
 
 import com.mdframe.forge.plugin.system.entity.SysFileGroup;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysFileGroupService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysFileGroupService;
 import com.mdframe.forge.starter.core.annotation.crypto.ApiDecrypt;
 import com.mdframe.forge.starter.core.annotation.crypto.ApiEncrypt;
 
@@ -23,7 +23,7 @@ import java.util.Map;
 @ApiEncrypt
 public class SysFileGroupController {
 
-    private final ISysFileGroupService fileGroupService;
+    private final SysFileGroupService fileGroupService;
 
     /**
      * 获取分组列表（带文件数量）

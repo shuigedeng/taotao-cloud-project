@@ -23,7 +23,7 @@ import com.taotao.boot.data.mybatis.mybatisplus.MpUtils;
 import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import com.taotao.boot.web.utils.OperationalJudgment;
-import com.taotao.cloud.member.api.inner.IFeignMemberEvaluationApi;
+import com.taotao.cloud.member.api.inner.MemberEvaluationApi;
 import com.taotao.cloud.member.api.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.vo.MemberEvaluationListVO;
 import com.taotao.cloud.member.api.vo.MemberEvaluationVO;
@@ -43,7 +43,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberEvaluationStoreController {
 
     @Autowired
-    private IFeignMemberEvaluationApi memberEvaluationApi;
+    private MemberEvaluationApi memberEvaluationApi;
 
     @Operation(summary = "分页获取会员评论列表", description = "分页获取会员评论列表")
     @RequestLogger

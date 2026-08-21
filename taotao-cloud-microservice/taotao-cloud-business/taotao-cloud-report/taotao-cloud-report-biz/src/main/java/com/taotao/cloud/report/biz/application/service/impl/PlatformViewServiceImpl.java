@@ -19,7 +19,7 @@ package com.taotao.cloud.report.biz.application.service.impl;
 import com.taotao.cloud.report.api.model.dto.StatisticsQueryParam;
 import com.taotao.cloud.report.api.model.vo.OnlineMemberVO;
 import com.taotao.cloud.report.api.model.vo.PlatformViewVO;
-import com.taotao.cloud.report.biz.application.service.IPlatformViewService;
+import com.taotao.cloud.report.biz.application.service.PlatformViewService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,7 +27,7 @@ import java.util.List;
 /** 流量统计 */
 @Service
 public class PlatformViewServiceImpl
-        implements IPlatformViewService {
+        implements PlatformViewService {
 
 	@Override
 	public Long online() {

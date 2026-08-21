@@ -5,7 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.tenant.biz.domain.aggregate.*;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.*;
-import com.taotao.cloud.tenant.biz.application.service.service.IUserLoadService;
+import com.taotao.cloud.tenant.biz.application.service.service.UserLoadService;
 import com.mdframe.forge.starter.core.session.LoginUser;
 import com.mdframe.forge.starter.auth.service.ICaptchaService;
 import com.mdframe.forge.starter.auth.util.PasswordUtil;
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class UserLoadServiceImpl implements IUserLoadService {
+public class UserLoadServiceImpl implements UserLoadService {
 
     private final SysUserMapper userMapper;
     private final SysUserRoleMapper userRoleMapper;

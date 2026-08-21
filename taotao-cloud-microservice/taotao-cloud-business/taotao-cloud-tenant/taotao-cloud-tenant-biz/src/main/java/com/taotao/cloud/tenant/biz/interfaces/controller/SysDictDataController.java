@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.taotao.cloud.tenant.biz.application.dto.SysDictDataDTO;
 import com.taotao.cloud.tenant.biz.application.dto.SysDictDataQuery;
 import com.mdframe.forge.plugin.system.entity.SysDictData;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysDictDataService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysDictDataService;
 import com.mdframe.forge.starter.core.annotation.api.ApiPermissionIgnore;
 import com.mdframe.forge.starter.core.domain.PageQuery;
 
@@ -26,7 +26,7 @@ import java.util.List;
 //@ApiPermissionIgnore
 public class SysDictDataController {
 
-    private final ISysDictDataService dictDataService;
+    private final SysDictDataService dictDataService;
 
     /**
      * 分页查询字典数据列表

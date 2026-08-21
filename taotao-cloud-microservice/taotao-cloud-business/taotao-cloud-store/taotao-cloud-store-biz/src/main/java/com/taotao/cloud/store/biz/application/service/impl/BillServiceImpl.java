@@ -36,8 +36,8 @@ import com.taotao.cloud.store.api.enums.BillStatusEnum;
 import com.taotao.cloud.store.api.model.query.BillPageQuery;
 import com.taotao.cloud.store.api.model.vo.BillListVO;
 import com.taotao.cloud.store.api.model.vo.StoreDetailInfoVO;
-import com.taotao.cloud.store.biz.application.service.IBillService;
-import com.taotao.cloud.store.biz.application.service.IStoreDetailService;
+import com.taotao.cloud.store.biz.application.service.BillService;
+import com.taotao.cloud.store.biz.application.service.StoreDetailService;
 import com.taotao.cloud.store.biz.mapper.BillMapper;
 import com.taotao.cloud.store.biz.model.entity.Bill;
 import jakarta.servlet.ServletOutputStream;
@@ -64,11 +64,11 @@ import java.util.Date;
 @Service
 @CacheConfig(cacheNames = "bill")
 @Transactional(rollbackFor = Exception.class)
-public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements IBillService {
+public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements BillService {
 
     /** 店铺详情 */
     @Autowired
-    private IStoreDetailService storeDetailService;
+    private StoreDetailService storeDetailService;
     /** 商家流水 */
     @Autowired
     private StoreFlowApi storeFlowApi;

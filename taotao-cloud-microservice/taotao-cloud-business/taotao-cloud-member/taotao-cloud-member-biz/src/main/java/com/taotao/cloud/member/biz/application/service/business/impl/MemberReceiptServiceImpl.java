@@ -25,8 +25,8 @@ import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.boot.common.utils.lang.StringUtils;
-import com.taotao.cloud.member.biz.application.service.business.IMemberReceiptService;
-import com.taotao.cloud.member.biz.application.service.business.IMemberService;
+import com.taotao.cloud.member.biz.application.service.business.MemberReceiptService;
+import com.taotao.cloud.member.biz.application.service.business.MemberService;
 import com.taotao.cloud.member.biz.mapper.IMemberReceiptMapper;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.model.entity.MemberReceipt;
@@ -46,10 +46,10 @@ import java.util.List;
  */
 @Service
 public class MemberReceiptServiceImpl extends ServiceImpl<IMemberReceiptMapper, MemberReceipt>
-        implements IMemberReceiptService {
+        implements MemberReceiptService {
 
     @Autowired
-    private IMemberService memberService;
+    private MemberService memberService;
 
     @Override
     public IPage<MemberReceipt> getPage(MemberReceiptPageQuery memberReceiptPageQuery) {

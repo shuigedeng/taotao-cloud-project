@@ -10,7 +10,7 @@ import
 import com.taotao.boot.web.annotation.LoginUser;
 import com.taotao.cloud.tenant.biz.application.dto.SysUserDTO;
 import com.taotao.cloud.tenant.biz.application.dto.SysUserQuery;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysUserService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysUserService;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysUser;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysUserOrg;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysUserRole;
@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @RequiredArgsConstructor
-public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements ISysUserService {
+public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
 
     private final SysUserMapper userMapper;
     private final SysUserRoleMapper userRoleMapper;

@@ -25,7 +25,7 @@ import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.model.ddd.query.PageQuery;
 import com.taotao.boot.security.spring.support.utils.SecurityUtils;
-import com.taotao.cloud.member.biz.application.service.business.IMemberGoodsCollectionService;
+import com.taotao.cloud.member.biz.application.service.business.MemberGoodsCollectionService;
 import com.taotao.cloud.member.biz.mapper.IGoodsCollectionMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberGoodsCollection;
 import com.taotao.cloud.member.sys.model.vo.GoodsCollectionVO;
@@ -43,7 +43,7 @@ import java.util.Optional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class MemberGoodsCollectionServiceImpl extends ServiceImpl<IGoodsCollectionMapper, MemberGoodsCollection>
-        implements IMemberGoodsCollectionService {
+        implements MemberGoodsCollectionService {
 
     @Override
     public IPage<GoodsCollectionVO> goodsCollection(PageQuery pageQuery) {

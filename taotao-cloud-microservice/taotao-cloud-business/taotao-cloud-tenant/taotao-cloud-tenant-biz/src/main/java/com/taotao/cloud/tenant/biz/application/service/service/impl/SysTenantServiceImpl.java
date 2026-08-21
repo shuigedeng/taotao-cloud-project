@@ -9,7 +9,7 @@ import com.taotao.cloud.tenant.biz.application.dto.SysTenantDTO;
 import com.taotao.cloud.tenant.biz.application.dto.SysTenantQuery;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysTenant;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysTenantMapper;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysTenantService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysTenantService;
 import com.mdframe.forge.starter.core.session.LoginUser;
 import com.mdframe.forge.starter.core.session.SessionHelper;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ import java.util.Arrays;
  */
 @Service
 @RequiredArgsConstructor
-public class SysTenantServiceImpl extends ServiceImpl<SysTenantMapper, SysTenant> implements ISysTenantService {
+public class SysTenantServiceImpl extends ServiceImpl<SysTenantMapper, SysTenant> implements SysTenantService {
 
     private final SysTenantMapper tenantMapper;
 

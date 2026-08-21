@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.taotao.cloud.tenant.biz.application.dto.SysConfigDTO;
 import com.taotao.cloud.tenant.biz.application.dto.SysConfigQuery;
 import com.mdframe.forge.plugin.system.entity.SysConfig;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysConfigService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysConfigService;
 import com.mdframe.forge.starter.core.annotation.api.ApiPermissionIgnore;
 import com.mdframe.forge.starter.core.domain.PageQuery;
 
@@ -28,7 +28,7 @@ import java.util.List;
 //@ApiPermissionIgnore
 public class SysConfigController {
 
-    private final ISysConfigService configService;
+    private final SysConfigService configService;
 
     /**
      * 分页查询配置列表

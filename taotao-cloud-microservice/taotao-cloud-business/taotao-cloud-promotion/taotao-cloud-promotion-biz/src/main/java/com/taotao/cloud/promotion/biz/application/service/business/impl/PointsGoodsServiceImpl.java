@@ -28,8 +28,8 @@ import com.taotao.cloud.goods.api.inner.GoodsSkuApi;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.model.vo.PointsGoodsVO;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
-import com.taotao.cloud.promotion.biz.application.service.business.IPointsGoodsService;
-import com.taotao.cloud.promotion.biz.application.service.business.IPromotionGoodsService;
+import com.taotao.cloud.promotion.biz.application.service.business.PointsGoodsService;
+import com.taotao.cloud.promotion.biz.application.service.business.PromotionGoodsService;
 import com.taotao.cloud.promotion.biz.mapper.PointsGoodsMapper;
 import com.taotao.cloud.promotion.biz.model.entity.PointsGoods;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
@@ -53,11 +53,11 @@ import java.util.Map;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<PointsGoodsMapper, PointsGoods>
-        implements IPointsGoodsService {
+        implements PointsGoodsService {
 
     /** 促销商品 */
     @Autowired
-    private IPromotionGoodsService promotionGoodsService;
+    private PromotionGoodsService promotionGoodsService;
     /** 规格商品 */
     @Autowired
     private GoodsSkuApi goodsSkuApi;

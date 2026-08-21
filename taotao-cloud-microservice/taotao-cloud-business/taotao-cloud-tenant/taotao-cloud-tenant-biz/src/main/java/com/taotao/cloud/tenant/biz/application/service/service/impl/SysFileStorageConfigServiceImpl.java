@@ -5,9 +5,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysFileStorageConfig;
-import com.taotao.cloud.tenant.biz.domain.aggregate.SysPost;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysFileStorageConfigMapper;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysFileStorageConfigService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysFileStorageConfigService;
 import com.mdframe.forge.starter.core.domain.PageQuery;
 import com.mdframe.forge.starter.file.model.StorageConfig;
 import com.mdframe.forge.starter.file.spi.StorageConfigProvider;
@@ -26,7 +25,7 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class SysFileStorageConfigServiceImpl extends ServiceImpl<SysFileStorageConfigMapper, SysFileStorageConfig>
-        implements ISysFileStorageConfigService {
+        implements SysFileStorageConfigService {
     
     private final StorageConfigProvider configProvider;
     private final Map<String, FileStorage> storageMap;

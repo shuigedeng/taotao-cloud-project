@@ -32,8 +32,8 @@ import com.taotao.cloud.store.api.model.vo.StoreBasicInfoVO;
 import com.taotao.cloud.store.api.model.vo.StoreDetailInfoVO;
 import com.taotao.cloud.store.api.model.vo.StoreManagementCategoryVO;
 import com.taotao.cloud.store.api.model.vo.StoreOtherVO;
-import com.taotao.cloud.store.biz.application.service.IStoreDetailService;
-import com.taotao.cloud.store.biz.application.service.IStoreService;
+import com.taotao.cloud.store.biz.application.service.StoreDetailService;
+import com.taotao.cloud.store.biz.application.service.StoreService;
 import com.taotao.cloud.store.biz.mapper.StoreDetailMapper;
 import com.taotao.cloud.store.biz.model.entity.Store;
 import com.taotao.cloud.store.biz.model.entity.StoreDetail;
@@ -52,11 +52,11 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, StoreDetail> implements IStoreDetailService {
+public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, StoreDetail> implements StoreDetailService {
 
     /** 店铺 */
     @Autowired
-    private IStoreService storeService;
+    private StoreService storeService;
     /** 分类 */
     @Autowired
     private CategoryApi categoryApi;

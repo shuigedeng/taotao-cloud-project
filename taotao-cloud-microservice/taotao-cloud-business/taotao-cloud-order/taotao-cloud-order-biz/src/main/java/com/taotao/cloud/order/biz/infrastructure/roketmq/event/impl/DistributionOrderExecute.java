@@ -18,7 +18,7 @@ package com.taotao.cloud.order.biz.infrastructure.roketmq.event.impl;
 
 import com.taotao.boot.web.timetask.EveryDayExecute;
 import com.taotao.cloud.distribution.api.enums.DistributionOrderStatusEnum;
-import com.taotao.cloud.distribution.api.inner.IFeignDistributionOrderApi;
+import com.taotao.cloud.distribution.api.inner.InnerDistributionOrderApi;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.biz.infrastructure.roketmq.event.AfterSaleStatusChangeEvent;
 import com.taotao.cloud.order.biz.infrastructure.roketmq.event.OrderStatusChangeEvent;
@@ -39,7 +39,7 @@ public class DistributionOrderExecute implements OrderStatusChangeEvent, EveryDa
 
     /** 分销订单 */
     @Autowired
-    private IFeignDistributionOrderApi distributionOrderService;
+    private InnerDistributionOrderApi distributionOrderService;
 
     @Override
     public void orderChange(OrderMessage orderMessage) {

@@ -27,7 +27,7 @@ import com.taotao.boot.security.spring.model.SecurityUser;
 import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
 import com.taotao.cloud.member.api.inner.MemberWalletApi;
-import com.taotao.cloud.member.biz.application.service.business.IMemberRechargeService;
+import com.taotao.cloud.member.biz.application.service.business.MemberRechargeService;
 import com.taotao.cloud.member.biz.mapper.IMemberRechargeMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberRecharge;
 import com.taotao.cloud.member.sys.model.dto.MemberWalletUpdateDTO;
@@ -49,11 +49,11 @@ import java.util.Date;
  */
 @Service
 public class MemberRechargeServiceImpl extends ServiceImpl<IMemberRechargeMapper, MemberRecharge>
-        implements IMemberRechargeService {
+        implements MemberRechargeService {
 
     /** 会员预存款 */
     @Autowired
-    private MemberWalletApi feignMemberWalletApi;
+    private MemberWalletApi memberWalletApi;
 
     @Override
     public MemberRecharge recharge(BigDecimal price) {
@@ -114,7 +114,7 @@ public class MemberRechargeServiceImpl extends ServiceImpl<IMemberRechargeMapper
             // 执行保存操作
             this.updateById(recharge);
             // 增加预存款余额
-            feignMemberWalletApi.increase(new MemberWalletUpdateDTO(
+            memberWalletApi.increase(new MemberWalletUpdateDTO(
                     recharge.getRechargeMoney(),
                     recharge.getMemberId(),
                     "会员余额充值，充值单号为：" + recharge.getRechargeSn(),

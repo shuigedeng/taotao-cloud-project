@@ -30,8 +30,8 @@ import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.model.page.CouponPageQuery;
-import com.taotao.cloud.promotion.biz.application.service.business.ICouponService;
-import com.taotao.cloud.promotion.biz.application.service.business.IMemberCouponService;
+import com.taotao.cloud.promotion.biz.application.service.business.CouponService;
+import com.taotao.cloud.promotion.biz.application.service.business.MemberCouponService;
 import com.taotao.cloud.promotion.biz.mapper.MemberCouponMapper;
 import com.taotao.cloud.promotion.biz.model.entity.Coupon;
 import com.taotao.cloud.promotion.biz.model.entity.MemberCoupon;
@@ -52,11 +52,11 @@ import java.util.*;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class MemberCouponServiceImpl extends ServiceImpl<MemberCouponMapper, MemberCoupon>
-        implements IMemberCouponService {
+        implements MemberCouponService {
 
     /** 优惠券 */
     @Autowired
-    private ICouponService couponService;
+    private CouponService couponService;
 
     @Override
     public void checkCouponLimit(String couponId, String memberId) {

@@ -2,7 +2,7 @@ package com.taotao.cloud.tenant.biz.interfaces.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mdframe.forge.plugin.system.entity.SysFileStorageConfig;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysFileStorageConfigService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysFileStorageConfigService;
 import com.mdframe.forge.starter.core.annotation.api.ApiPermissionIgnore;
 import com.mdframe.forge.starter.core.domain.PageQuery;
 
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 //@ApiPermissionIgnore
 public class SysFileStorageConfigController {
     
-    private final ISysFileStorageConfigService storageConfigService;
+    private final SysFileStorageConfigService storageConfigService;
     
     /**
      * 分页查询

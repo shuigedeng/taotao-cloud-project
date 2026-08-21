@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +17,7 @@
 package com.taotao.cloud.payment.biz.infrastructure.pay;
 
 import com.xhuicloud.common.authorization.resource.annotation.EnableResourceServer;
-import com.xhuicloud.common.feign.annotation.EnableXHuiFeignClients;
+import com.xhuicloud.common.inner.annotation.EnableXHuiFeignClients;
 import com.xhuicloud.common.swagger.annotation.EnableXHuiSwagger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

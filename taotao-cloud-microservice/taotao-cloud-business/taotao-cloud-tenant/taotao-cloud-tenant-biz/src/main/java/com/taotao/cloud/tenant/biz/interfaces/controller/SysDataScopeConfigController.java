@@ -7,7 +7,7 @@ import com.mdframe.forge.starter.core.domain.PageQuery;
 import com.mdframe.forge.starter.core.annotation.crypto.ApiDecrypt;
 import com.mdframe.forge.starter.core.annotation.crypto.ApiEncrypt;
 import com.mdframe.forge.starter.datascope.entity.SysDataScopeConfig;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysDataScopeConfigService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysDataScopeConfigService;
 import com.mdframe.forge.starter.core.annotation.log.OperationLog;
 import com.mdframe.forge.starter.core.domain.OperationType;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ import java.util.List;
 //@ApiPermissionIgnore
 public class SysDataScopeConfigController {
 
-    private final ISysDataScopeConfigService dataScopeConfigService;
+    private final SysDataScopeConfigService dataScopeConfigService;
 
     /**
      * 分页查询数据权限配置列表

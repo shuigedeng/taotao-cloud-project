@@ -8,7 +8,7 @@ import com.taotao.cloud.tenant.biz.domain.aggregate.SysExcelColumnConfig;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysExcelExportConfig;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysExcelColumnConfigMapper;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysExcelExportConfigMapper;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysExcelExportConfigService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysExcelExportConfigService;
 import com.mdframe.forge.starter.core.domain.PageQuery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class SysExcelExportConfigServiceImpl extends ServiceImpl<SysExcelExportConfigMapper, SysExcelExportConfig>
-        implements ISysExcelExportConfigService {
+        implements SysExcelExportConfigService {
     
     private final SysExcelColumnConfigMapper columnConfigMapper;
     

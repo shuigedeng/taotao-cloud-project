@@ -16,7 +16,7 @@
 
  package com.taotao.cloud.auth.api.inner;
 
- import com.taotao.cloud.auth.api.inner.request.FeignClientQueryApiRequest;
+ import com.taotao.cloud.auth.api.inner.request.InnerClientQueryApiRequest;
  import com.taotao.cloud.auth.api.inner.response.ClientApiResponse;
  import com.taotao.boot.common.constant.ServiceNameConstants;
  import org.springframework.web.service.annotation.HttpExchange;
@@ -31,5 +31,5 @@
  @HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_AUTH)
  public interface Oauth2ClientApi {
 
-	 ClientApiResponse query(FeignClientQueryApiRequest feignClientQueryApiRequest);
+	 ClientApiResponse query( InnerClientQueryApiRequest clientQueryApiRequest);
  }

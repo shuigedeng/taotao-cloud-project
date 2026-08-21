@@ -26,10 +26,10 @@ import com.taotao.cloud.member.api.model.vo.MemberVO;
 import com.taotao.cloud.promotion.api.enums.*;
 import com.taotao.cloud.promotion.api.model.dto.CouponActivityDTO;
 import com.taotao.cloud.promotion.api.model.vo.CouponActivityVO;
-import com.taotao.cloud.promotion.biz.application.service.business.ICouponActivityItemService;
-import com.taotao.cloud.promotion.biz.application.service.business.ICouponActivityService;
-import com.taotao.cloud.promotion.biz.application.service.business.ICouponService;
-import com.taotao.cloud.promotion.biz.application.service.business.IMemberCouponService;
+import com.taotao.cloud.promotion.biz.application.service.business.CouponActivityItemService;
+import com.taotao.cloud.promotion.biz.application.service.business.CouponActivityService;
+import com.taotao.cloud.promotion.biz.application.service.business.CouponService;
+import com.taotao.cloud.promotion.biz.application.service.business.MemberCouponService;
 import com.taotao.cloud.promotion.biz.mapper.CouponActivityMapper;
 import com.taotao.cloud.promotion.biz.model.entity.Coupon;
 import com.taotao.cloud.promotion.biz.model.entity.CouponActivity;
@@ -49,16 +49,16 @@ import java.util.*;
  */
 @Service
 public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<CouponActivityMapper, CouponActivity>
-        implements ICouponActivityService {
+        implements CouponActivityService {
 
     @Autowired
-    private ICouponService couponService;
+    private CouponService couponService;
 
     @Autowired
-    private IMemberCouponService memberCouponService;
+    private MemberCouponService memberCouponService;
 
     @Autowired
-    private ICouponActivityItemService couponActivityItemService;
+    private CouponActivityItemService couponActivityItemService;
 
     @Autowired
     private MemberApi memberApi;

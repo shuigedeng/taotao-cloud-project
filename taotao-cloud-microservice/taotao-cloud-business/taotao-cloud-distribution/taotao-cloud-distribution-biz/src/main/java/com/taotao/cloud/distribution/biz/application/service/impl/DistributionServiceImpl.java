@@ -33,9 +33,10 @@ import com.taotao.cloud.distribution.api.model.query.DistributionPageQuery;
 import com.taotao.cloud.distribution.biz.application.service.DistributionService;
 import com.taotao.cloud.distribution.biz.mapper.DistributionMapper;
 import com.taotao.cloud.distribution.biz.model.entity.Distribution;
+import com.taotao.cloud.member.biz.application.service.inner.InnerMemberService;
 import com.taotao.cloud.sys.api.dto.DistributionSetting;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.inner.IFeignSettingService;
+import com.taotao.cloud.sys.api.inner.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.SettingVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,13 +52,13 @@ public class DistributionServiceImpl extends ServiceImpl<DistributionMapper, Dis
 
     /** 会员 */
     @Autowired
-    private IFeignMemberService feignMemberService;
+    private InnerMemberService memberService;
     /** 缓存 */
     @Autowired
     private RedisRepository redisRepository;
     /** 设置 */
     @Autowired
-    private IFeignSettingService feignSettingService;
+    private SettingApi settingApi;
 
     @Override
     public IPage<Distribution> distributionPage(DistributionPageQuery distributionPageQuery, PageQuery page) {
@@ -94,7 +95,7 @@ public class DistributionServiceImpl extends ServiceImpl<DistributionMapper, Dis
 
         // 如果未申请分销员则新增进行申请
         // 获取当前登录用户
-        Member member = feignMemberService.getUserInfo();
+        Member member = memberService.getUserInfo();
         // 新建分销员
         distribution = new Distribution(member.getId(), member.getNickName(), distributionApplyDTO);
         // 添加分销员
@@ -162,7 +163,7 @@ public class DistributionServiceImpl extends ServiceImpl<DistributionMapper, Dis
         // 储存分销关系时间
         Distribution distribution = this.getById(distributionId);
         if (distribution != null) {
-            Result<SettingVO> settingResult = feignSettingService.get(SettingCategoryEnum.DISTRIBUTION_SETTING.name());
+            Result<SettingVO> settingResult = settingApi.get(SettingCategoryEnum.DISTRIBUTION_SETTING.name());
             DistributionSetting distributionSetting =
                     JSONUtil.toBean(settingResult.getSettingValue(), DistributionSetting.class);
 
@@ -178,7 +179,7 @@ public class DistributionServiceImpl extends ServiceImpl<DistributionMapper, Dis
     @Override
     public void checkDistributionSetting() {
         // 获取分销是否开启
-        Result<SettingVO> settingResult = feignSettingService.get(SettingCategoryEnum.DISTRIBUTION_SETTING.name());
+        Result<SettingVO> settingResult = settingApi.get(SettingCategoryEnum.DISTRIBUTION_SETTING.name());
         DistributionSetting distributionSetting =
                 JSONUtil.toBean(settingResult.getSettingValue(), DistributionSetting.class);
         if (Boolean.FALSE.equals(distributionSetting.getIsOpen())) {

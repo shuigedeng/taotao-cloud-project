@@ -13,8 +13,8 @@ import com.taotao.cloud.tenant.biz.domain.aggregate.SysRole;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysRoleResource;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysRoleMapper;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysRoleResourceMapper;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysResourceService;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysRoleService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysResourceService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysRoleService;
 import com.mdframe.forge.starter.core.session.LoginUser;
 import com.mdframe.forge.starter.core.session.SessionHelper;
 import lombok.RequiredArgsConstructor;
@@ -31,12 +31,12 @@ import java.util.stream.Collectors;
  */
 @Service
 @RequiredArgsConstructor
-public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> implements ISysRoleService {
+public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> implements SysRoleService {
 
     private final SysRoleMapper roleMapper;
     private final SysRoleResourceMapper roleResourceMapper;
     @Lazy
-    private final ISysResourceService resourceService;
+    private final SysResourceService resourceService;
 
     @Override
     public IPage<SysRole> selectRolePage(SysRoleQuery query) {

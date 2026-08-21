@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.tenant.biz.application.dto.SysTenantDTO;
 import com.taotao.cloud.tenant.biz.application.dto.SysTenantQuery;
 import com.mdframe.forge.plugin.system.entity.SysTenant;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysTenantService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysTenantService;
 import com.mdframe.forge.starter.core.annotation.api.ApiPermissionIgnore;
 
 import com.mdframe.forge.starter.core.annotation.crypto.ApiDecrypt;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 //@ApiPermissionIgnore
 public class SysTenantController {
 
-    private final ISysTenantService tenantService;
+    private final SysTenantService tenantService;
 
     /**
      * 分页查询租户列表

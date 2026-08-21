@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +26,7 @@ import com.xhuicloud.common.core.enums.pay.PayTypeEnum;
 import com.xhuicloud.common.data.ttl.XHuiCommonThreadLocalHolder;
 import com.xhuicloud.pay.entity.PayChannel;
 import com.xhuicloud.pay.service.PayChannelService;
-import com.xhuicloud.upms.feign.SysTenantServiceFeign;
+import com.xhuicloud.upms.inner.SysTenantServiceFeign;
 import com.xhuicloud.upms.vo.TenantVo;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -53,7 +53,7 @@ import static com.xhuicloud.common.core.constant.AuthorizationConstants.IS_COMMI
 @AllArgsConstructor
 public class PayConfigInit {
 
-    private final SysTenantServiceFeign sysTenantServiceFeign;
+    private final SysTenantServiceFeign sysTenantService;
 
     private final PayChannelService payChannelService;
 
@@ -69,7 +69,7 @@ public class PayConfigInit {
         List<PayChannel> payChannels = new ArrayList<>();
         List<TenantVo> data = null;
         while (CollectionUtil.isEmpty(data)) {
-            data = sysTenantServiceFeign.list(IS_COMMING_ANONYMOUS_YES).getData();
+            data = sysTenantService.list(IS_COMMING_ANONYMOUS_YES).getData();
         }
         data.forEach(tenant -> {
             XHuiCommonThreadLocalHolder.setTenant(tenant.getId());

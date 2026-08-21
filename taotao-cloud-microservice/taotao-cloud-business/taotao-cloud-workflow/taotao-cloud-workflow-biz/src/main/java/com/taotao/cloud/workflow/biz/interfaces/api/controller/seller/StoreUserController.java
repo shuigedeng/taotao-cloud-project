@@ -22,7 +22,7 @@ import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.security.spring.model.SecurityUser;
 import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.boot.web.request.annotation.RequestLogger;
-import com.taotao.cloud.member.api.inner.IFeignMemberApi;
+import com.taotao.cloud.member.api.inner.MemberApi;
 import com.taotao.cloud.member.api.vo.MemberVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -41,7 +41,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class StoreUserController {
 
     @Autowired
-    private IFeignMemberApi memberApi;
+    private MemberApi memberApi;
 
     @Operation(summary = "获取当前登录用户接口", description = "获取当前登录用户接口")
     @RequestLogger

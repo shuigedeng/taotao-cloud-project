@@ -6,12 +6,12 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.taotao.cloud.tenant.biz.domain.aggregate.*;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.*;
-import com.taotao.cloud.tenant.biz.application.service.service.IUserLoadService;
+import com.taotao.cloud.tenant.biz.application.service.service.UserLoadService;
 import com.mdframe.forge.starter.config.config.LoginConfig;
 import com.mdframe.forge.starter.config.service.ConfigManagerService;
 import com.mdframe.forge.starter.core.context.AuthProperties;
 import com.mdframe.forge.starter.auth.domain.*;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysOnlineUserService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysOnlineUserService;
 import com.mdframe.forge.starter.core.session.SessionHelper;
 import com.mdframe.forge.starter.auth.service.IAuthService;
 import com.mdframe.forge.starter.auth.service.ICaptchaService;
@@ -38,8 +38,8 @@ public class SystemAuthServiceImpl implements IAuthService {
     private final SysUserMapper userMapper;
     private final ICaptchaService captchaService;
     private final AuthStrategyFactory authStrategyFactory;
-    private final IUserLoadService userLoadService;  // 委托给用户加载服务
-    private final ISysOnlineUserService onlineUserService;
+    private final UserLoadService userLoadService;  // 委托给用户加载服务
+    private final SysOnlineUserService onlineUserService;
     private final AuthProperties authProperties;
     private final ConfigManagerService configManagerService;
 

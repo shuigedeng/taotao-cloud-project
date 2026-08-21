@@ -19,7 +19,7 @@ package com.taotao.cloud.store.biz.application.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
-import com.taotao.cloud.store.biz.application.service.IFreightTemplateChildService;
+import com.taotao.cloud.store.biz.application.service.FreightTemplateChildService;
 import com.taotao.cloud.store.biz.mapper.FreightTemplateChildMapper;
 import com.taotao.cloud.store.biz.model.entity.FreightTemplateChild;
 import org.springframework.stereotype.Service;
@@ -37,7 +37,7 @@ import java.util.List;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class FreightTemplateServiceChildImpl extends ServiceImpl<FreightTemplateChildMapper, FreightTemplateChild>
-        implements IFreightTemplateChildService {
+        implements FreightTemplateChildService {
 
     @Override
     public List<FreightTemplateChild> getFreightTemplateChild(String freightTemplateId) {

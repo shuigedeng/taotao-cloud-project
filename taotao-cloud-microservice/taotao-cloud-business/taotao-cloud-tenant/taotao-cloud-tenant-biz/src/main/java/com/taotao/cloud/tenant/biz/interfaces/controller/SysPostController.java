@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.tenant.biz.application.dto.SysPostDTO;
 import com.taotao.cloud.tenant.biz.application.dto.SysPostQuery;
 import com.mdframe.forge.plugin.system.entity.SysPost;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysPostService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysPostService;
 import com.mdframe.forge.starter.core.annotation.api.ApiPermissionIgnore;
 
 import com.mdframe.forge.starter.core.annotation.crypto.ApiDecrypt;
@@ -25,7 +25,7 @@ import java.util.List;
 //@ApiPermissionIgnore
 public class SysPostController {
 
-    private final ISysPostService postService;
+    private final SysPostService postService;
 
     /**
      * 分页查询岗位列表

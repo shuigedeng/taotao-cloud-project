@@ -23,7 +23,7 @@ import com.taotao.cloud.goods.biz.model.vo.CategoryBrandVO;
 import com.taotao.cloud.goods.biz.model.vo.CategoryTreeVO;
 import com.taotao.cloud.goods.biz.service.business.CategoryBrandService;
 import com.taotao.cloud.goods.biz.service.business.CategoryService;
-import com.taotao.cloud.store.api.inner.IFeignStoreDetailApi;
+import com.taotao.cloud.store.api.inner.InnerStoreDetailApi;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -55,7 +55,7 @@ public class CategorySellerController {
     /** 分类品牌服务 */
     private final CategoryBrandService categoryBrandService;
     /** 店铺详情服务 */
-    private final IFeignStoreDetailApi storeDetailApi;
+    private final InnerStoreDetailApi storeDetailApi;
 
     @Operation(summary = "获取店铺经营的分类", description = "获取店铺经营的分类")
     @RequestLogger("获取店铺经营的分类")

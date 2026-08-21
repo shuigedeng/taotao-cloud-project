@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.shortlink.biz.interfaces.web.web.controller;
 
-import com.taotao.cloud.shortlink.biz.interfaces.web.service.IShortLinkService;
+import com.taotao.cloud.shortlink.biz.interfaces.web.service.ShortLinkService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -42,7 +42,7 @@ public class ShortLinkController {
     //    private ShortLinkBiz shortLinkBiz;
 
     @Resource(name = "shortLinkServiceSimpleImpl")
-    private IShortLinkService shortLinkService;
+    private ShortLinkService shortLinkService;
 
     // TODO 临时使用该方法，方便测试
     @GetMapping(path = "/{shortLinkCode}")

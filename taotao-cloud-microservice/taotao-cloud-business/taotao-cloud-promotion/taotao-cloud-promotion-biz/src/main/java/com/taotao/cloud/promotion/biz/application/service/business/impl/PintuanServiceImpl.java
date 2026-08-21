@@ -36,8 +36,8 @@ import com.taotao.cloud.promotion.api.model.vo.PintuanMemberVO;
 import com.taotao.cloud.promotion.api.model.vo.PintuanShareVO;
 import com.taotao.cloud.promotion.api.model.vo.PintuanVO;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
-import com.taotao.cloud.promotion.biz.application.service.business.IPintuanService;
-import com.taotao.cloud.promotion.biz.application.service.business.IPromotionGoodsService;
+import com.taotao.cloud.promotion.biz.application.service.business.PintuanService;
+import com.taotao.cloud.promotion.biz.application.service.business.PromotionGoodsService;
 import com.taotao.cloud.promotion.biz.mapper.PintuanMapper;
 import com.taotao.cloud.promotion.biz.model.entity.Pintuan;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
@@ -61,11 +61,11 @@ import java.util.stream.Collectors;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMapper, Pintuan>
-        implements IPintuanService {
+        implements PintuanService {
 
     /** 促销商品 */
     @Autowired
-    private IPromotionGoodsService promotionGoodsService;
+    private PromotionGoodsService promotionGoodsService;
     /** 规格商品 */
     @Autowired
     private GoodsSkuApi goodsSkuApi;

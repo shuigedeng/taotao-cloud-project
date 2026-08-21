@@ -3,7 +3,7 @@ package com.taotao.cloud.tenant.biz.interfaces.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mdframe.forge.plugin.system.entity.SysFileMetadata;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysFileGroupMapper;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysFileMetadataService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysFileMetadataService;
 import com.mdframe.forge.starter.core.annotation.api.ApiPermissionIgnore;
 import com.mdframe.forge.starter.core.domain.PageQuery;
 
@@ -26,7 +26,7 @@ import java.util.Map;
 //@ApiPermissionIgnore
 public class SysFileMetadataController {
     
-    private final ISysFileMetadataService fileMetadataService;
+    private final SysFileMetadataService fileMetadataService;
     private final SysFileGroupMapper fileGroupMapper;
     
     /**

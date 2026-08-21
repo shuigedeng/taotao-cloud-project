@@ -8,7 +8,7 @@ import com.taotao.cloud.tenant.biz.application.dto.SysConfigDTO;
 import com.taotao.cloud.tenant.biz.application.dto.SysConfigQuery;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysConfig;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysConfigMapper;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysConfigService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysConfigService;
 import com.mdframe.forge.starter.core.domain.PageQuery;
 import com.mdframe.forge.starter.trans.annotation.DictTranslate;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig> implements ISysConfigService {
+public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig> implements SysConfigService {
 
     private final SysConfigMapper configMapper;
 

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.tenant.biz.application.dto.SysRoleDTO;
 import com.taotao.cloud.tenant.biz.application.dto.SysRoleQuery;
 import com.mdframe.forge.plugin.system.entity.SysRole;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysRoleService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysRoleService;
 import com.mdframe.forge.starter.core.annotation.api.ApiPermissionIgnore;
 
 import com.mdframe.forge.starter.core.annotation.crypto.ApiDecrypt;
@@ -25,7 +25,7 @@ import java.util.List;
 //@ApiPermissionIgnore
 public class SysRoleController {
 
-    private final ISysRoleService roleService;
+    private final SysRoleService roleService;
 
     /**
      * 分页查询角色列表

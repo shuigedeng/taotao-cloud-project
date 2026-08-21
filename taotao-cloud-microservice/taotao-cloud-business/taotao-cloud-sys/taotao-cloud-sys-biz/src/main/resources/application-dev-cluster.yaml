@@ -1543,11 +1543,11 @@ logging:
   level:
     root: INFO
     org.apache.zookeeper.ZooKeeper: info
-    com.taotao.cloud.sys.api.feign: debug
+    
     #kafka.server.KafkaConfig: info
     #org.I0Itec.zkclient: info
     #kafka.admin.AdminClient.AdminConfig: info
-    #org.springframework.cloud.openfeign: debug
+    
     #org.springframework.web: off
     #org.springframework.security: off
     #org.springframework.security.oauth2: off

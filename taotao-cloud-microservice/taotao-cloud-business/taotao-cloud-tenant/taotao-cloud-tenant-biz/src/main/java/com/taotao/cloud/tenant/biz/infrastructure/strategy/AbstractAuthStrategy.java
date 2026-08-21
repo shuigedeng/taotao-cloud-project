@@ -1,7 +1,7 @@
 package com.taotao.cloud.tenant.biz.infrastructure.strategy;
 
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.tenant.biz.application.service.service.IUserLoadService;
+import com.taotao.cloud.tenant.biz.application.service.service.UserLoadService;
 import com.mdframe.forge.starter.core.context.AuthProperties;
 import com.mdframe.forge.starter.auth.domain.LoginRequest;
 import com.mdframe.forge.starter.core.session.LoginUser;
@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class AbstractAuthStrategy implements IAuthStrategy {
 
     @Autowired
-    protected IUserLoadService userLoadService;
+    protected UserLoadService userLoadService;
 
     @Autowired(required = false)
     protected ILoginLockService loginLockService;

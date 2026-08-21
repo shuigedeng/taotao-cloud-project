@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysExcelColumnConfig;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysExcelColumnConfigMapper;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysExcelColumnConfigService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysExcelColumnConfigService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class SysExcelColumnConfigServiceImpl extends ServiceImpl<SysExcelColumnConfigMapper, SysExcelColumnConfig>
-        implements ISysExcelColumnConfigService {
+        implements SysExcelColumnConfigService {
     
     @Override
     public List<SysExcelColumnConfig> listByConfigKey(String configKey) {

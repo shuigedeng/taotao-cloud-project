@@ -34,9 +34,9 @@ import com.taotao.cloud.promotion.api.model.vo.SeckillApplyVO;
 import com.taotao.cloud.promotion.api.model.vo.SeckillGoodsVO;
 import com.taotao.cloud.promotion.api.model.vo.SeckillTimelineVO;
 import com.taotao.cloud.promotion.api.tools.PromotionCacheKeys;
-import com.taotao.cloud.promotion.biz.application.service.business.IPromotionGoodsService;
-import com.taotao.cloud.promotion.biz.application.service.business.ISeckillApplyService;
-import com.taotao.cloud.promotion.biz.application.service.business.ISeckillService;
+import com.taotao.cloud.promotion.biz.application.service.business.PromotionGoodsService;
+import com.taotao.cloud.promotion.biz.application.service.business.SeckillApplyService;
+import com.taotao.cloud.promotion.biz.application.service.business.SeckillService;
 import com.taotao.cloud.promotion.biz.mapper.SeckillApplyMapper;
 import com.taotao.cloud.promotion.biz.model.entity.BasePromotions;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
@@ -60,7 +60,7 @@ import java.util.*;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class SeckillApplyServiceImpl extends ServiceImpl<SeckillApplyMapper, SeckillApply>
-	implements ISeckillApplyService {
+	implements SeckillApplyService {
 
 	/**
 	 * 缓存
@@ -76,12 +76,12 @@ public class SeckillApplyServiceImpl extends ServiceImpl<SeckillApplyMapper, Sec
 	 * 促销商品
 	 */
 	@Autowired
-	private IPromotionGoodsService promotionGoodsService;
+	private PromotionGoodsService promotionGoodsService;
 	/**
 	 * 秒杀
 	 */
 	@Autowired
-	private ISeckillService seckillService;
+	private SeckillService seckillService;
 
 	@Override
 	public List<SeckillTimelineVO> getSeckillTimeline() {

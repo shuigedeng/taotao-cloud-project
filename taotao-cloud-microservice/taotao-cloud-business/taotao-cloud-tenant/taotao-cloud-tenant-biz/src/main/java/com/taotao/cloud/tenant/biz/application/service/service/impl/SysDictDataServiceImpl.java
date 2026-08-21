@@ -8,7 +8,7 @@ import com.taotao.cloud.tenant.biz.application.dto.SysDictDataDTO;
 import com.taotao.cloud.tenant.biz.application.dto.SysDictDataQuery;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysDictData;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysDictDataMapper;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysDictDataService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysDictDataService;
 import com.mdframe.forge.starter.core.domain.PageQuery;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
-public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDictData> implements ISysDictDataService {
+public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDictData> implements SysDictDataService {
 
     private final SysDictDataMapper dictDataMapper;
 

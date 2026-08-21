@@ -3,7 +3,7 @@ package com.taotao.cloud.tenant.biz.application.service.service.impl;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysUserOrg;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysUserOrgMapper;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysUserOrgService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysUserOrgService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +12,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Slf4j
-public class SysUserOrgServiceImpl extends ServiceImpl<SysUserOrgMapper, SysUserOrg> implements ISysUserOrgService {
+public class SysUserOrgServiceImpl extends ServiceImpl<SysUserOrgMapper, SysUserOrg> implements SysUserOrgService {
 
 }

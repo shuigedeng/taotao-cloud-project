@@ -16,16 +16,15 @@ import com.taotao.cloud.tenant.biz.domain.aggregate.SysOnlineUser;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysOrg;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysUser;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysOnlineUserMapper;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysOnlineUserService;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysOrgService;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysUserService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysOnlineUserService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysOrgService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysUserService;
 import com.mdframe.forge.starter.core.session.LoginUser;
 import com.mdframe.forge.starter.websocket.domain.WebSocketMessage;
 import com.mdframe.forge.starter.websocket.enums.MessageType;
 import com.mdframe.forge.starter.websocket.service.IMessagePushService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -41,12 +40,13 @@ import java.util.*;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class SysOnlineUserServiceImpl extends ServiceImpl<SysOnlineUserMapper,SysOnlineUser> implements ISysOnlineUserService {
+public class SysOnlineUserServiceImpl extends ServiceImpl<SysOnlineUserMapper,SysOnlineUser> implements
+	SysOnlineUserService {
 
     private final SysOnlineUserMapper sysOnlineUserMapper;
     private final IMessagePushService messagePushService;
-    private final ISysUserService sysUserService;
-    private final ISysOrgService sysOrgService;
+    private final SysUserService sysUserService;
+    private final SysOrgService sysOrgService;
 
     @Override
     public void addOnlineUser(String tokenValue, Object loginId) {

@@ -1,10 +1,9 @@
 package com.taotao.cloud.tenant.biz.application.service.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysFileGroup;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysFileGroupMapper;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysFileGroupService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysFileGroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +17,7 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class SysFileGroupServiceImpl extends ServiceImpl<SysFileGroupMapper, SysFileGroup>
-        implements ISysFileGroupService {
+        implements SysFileGroupService {
 
     @Override
     public List<SysFileGroup> listGroupWithFileCount() {

@@ -5,7 +5,7 @@ import cn.dev33.satoken.annotation.SaIgnore;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mdframe.forge.plugin.system.entity.SysOnlineUser;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysOnlineUserService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysOnlineUserService;
 
 import com.mdframe.forge.starter.core.annotation.crypto.ApiDecrypt;
 import com.mdframe.forge.starter.core.annotation.crypto.ApiEncrypt;
@@ -28,7 +28,7 @@ import java.util.List;
 @ApiEncrypt
 public class SysOnlineUserController {
 
-    private final ISysOnlineUserService onlineUserService;
+    private final SysOnlineUserService onlineUserService;
     
     
     private final IMessagePushService messagePushService;

@@ -9,7 +9,7 @@ import com.taotao.cloud.tenant.biz.application.dto.SysPostDTO;
 import com.taotao.cloud.tenant.biz.application.dto.SysPostQuery;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysPost;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysPostMapper;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysPostService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysPostService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
-public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> implements ISysPostService {
+public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> implements SysPostService {
 
     private final SysPostMapper postMapper;
 

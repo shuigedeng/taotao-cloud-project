@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.infrastructure.stream.producer.service.impl;
 
 import com.taotao.cloud.mq.pulsar.constant.MessageConstant;
-import com.taotao.cloud.order.biz.infrastructure.stream.producer.service.ISmsService;
+import com.taotao.cloud.order.biz.infrastructure.stream.producer.service.SmsService;
 import lombok.AllArgsConstructor;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 /** 发送短信实现类 */
 @Service
 @AllArgsConstructor
-public class SmsServiceImpl implements ISmsService {
+public class SmsServiceImpl implements SmsService {
 
     private final StreamBridge streamBridge;
 

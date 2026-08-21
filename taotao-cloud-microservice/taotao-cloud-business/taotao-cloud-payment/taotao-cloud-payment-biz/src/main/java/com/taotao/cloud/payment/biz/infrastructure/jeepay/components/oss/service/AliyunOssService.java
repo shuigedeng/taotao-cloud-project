@@ -39,7 +39,7 @@ import java.io.File;
 @Service
 @Slf4j
 @ConditionalOnProperty(name = "isys.oss.service-type", havingValue = "aliyun-oss")
-public class AliyunOssService implements IOssService {
+public class AliyunOssService implements OssService {
 
     @Autowired private AliyunOssYmlConfig aliyunOssYmlConfig;
 

@@ -32,7 +32,7 @@ import com.taotao.cloud.order.sys.model.page.order.OrderPageQuery;
 import com.taotao.cloud.order.sys.model.vo.cart.OrderExportVO;
 import com.taotao.cloud.order.sys.model.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.sys.model.vo.order.OrderSimpleVO;
-import com.taotao.cloud.store.api.inner.IFeignStoreLogisticsApi;
+import com.taotao.cloud.store.api.inner.InnerStoreLogisticsApi;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -67,7 +67,7 @@ public class OrderController {
     /** 订单价格 */
     private final OrderPriceService orderPriceService;
     /** 物流公司 */
-    private final IFeignStoreLogisticsApi storeLogisticsService;
+    private final InnerStoreLogisticsApi storeLogisticsService;
 
     @Operation(summary = "查询订单列表", description = "查询订单列表")
     @RequestLogger

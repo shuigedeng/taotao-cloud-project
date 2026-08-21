@@ -23,7 +23,7 @@ import com.taotao.boot.common.model.ddd.query.PageQuery;
 import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.cloud.goods.api.inner.GoodsEsIndexApi;
 import com.taotao.cloud.goods.api.model.vo.EsGoodsIndexVO;
-import com.taotao.cloud.member.biz.application.service.business.IMemberBrowseService;
+import com.taotao.cloud.member.biz.application.service.business.MemberBrowseService;
 import com.taotao.cloud.member.biz.mapper.IFootprintMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberBrowse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ import java.util.Objects;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class MemberBrowseServiceImpl extends ServiceImpl<IFootprintMapper, MemberBrowse>
-        implements IMemberBrowseService {
+        implements MemberBrowseService {
 
     /** es商品业务层 */
     @Autowired

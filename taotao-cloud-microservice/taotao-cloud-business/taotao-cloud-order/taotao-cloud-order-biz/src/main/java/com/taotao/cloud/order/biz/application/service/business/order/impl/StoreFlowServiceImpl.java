@@ -42,7 +42,7 @@ import com.taotao.cloud.order.sys.model.page.order.StoreFlowPageQuery;
 import com.taotao.cloud.order.sys.model.page.store.StorePageQuery;
 import com.taotao.cloud.payment.api.inner.RefundLogApi;
 import com.taotao.cloud.payment.api.model.vo.RefundLogVO;
-import com.taotao.cloud.store.api.inner.IFeignBillApi;
+import com.taotao.cloud.store.api.inner.InnerBillApi;
 import com.taotao.cloud.store.api.model.vo.BillVO;
 import com.taotao.cloud.store.api.model.vo.StoreFlowPayDownloadVO;
 import com.taotao.cloud.store.api.model.vo.StoreFlowRefundDownloadVO;
@@ -69,9 +69,9 @@ public class StoreFlowServiceImpl extends ServiceImpl<StoreFlowMapper, StoreFlow
     /** 订单货物 */
     private final OrderItemService orderItemService;
     /** 退款日志 */
-    private final RefundLogApi feignRefundLogApi;
+    private final RefundLogApi refundLogApi;
 
-    private final IFeignBillApi feignBillApi;
+    private final InnerBillApi billApi;
 
     @Override
     public void payOrder(String orderSn) {
@@ -173,7 +173,7 @@ public class StoreFlowServiceImpl extends ServiceImpl<StoreFlowMapper, StoreFlow
                 CurrencyUtils.add(storeFlow.getFinalPrice(), storeFlow.getDistributionRebate()),
                 storeFlow.getCommissionPrice()));
         // 获取第三方支付流水号
-        RefundLogVO refundLog = feignRefundLogApi.queryByAfterSaleSn(afterSale.getSn());
+        RefundLogVO refundLog = refundLogApi.queryByAfterSaleSn(afterSale.getSn());
         storeFlow.setTransactionId(refundLog.getReceivableNo());
         storeFlow.setPaymentName(refundLog.getPaymentName());
         this.save(storeFlow);
@@ -201,7 +201,7 @@ public class StoreFlowServiceImpl extends ServiceImpl<StoreFlowMapper, StoreFlow
 
     @Override
     public IPage<StoreFlow> getStoreFlow(StorePageQuery storePageQuery) {
-        BillVO bill = feignBillApi.getById(storePageQuery.getId());
+        BillVO bill = billApi.getById(storePageQuery.getId());
         return this.getStoreFlow(StoreFlowPageQuery.builder()
                 .type(type)
                 .pageVO(pageVO)
@@ -211,7 +211,7 @@ public class StoreFlowServiceImpl extends ServiceImpl<StoreFlowMapper, StoreFlow
 
     @Override
     public IPage<StoreFlow> getDistributionFlow(DistributionPageQuery distributionPageQuery) {
-        BillVO bill = feignBillApi.getById(distributionPageQuery.getId());
+        BillVO bill = billApi.getById(distributionPageQuery.getId());
         return this.getStoreFlow(
                 StoreFlowPageQuery.builder().pageVO(pageVO).bill(bill).build());
     }

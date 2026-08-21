@@ -39,7 +39,7 @@ import com.taotao.boot.security.spring.support.utils.SecurityUtils;
 import com.taotao.boot.sensitive.word.SensitiveWordsFilter;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.biz.aop.point.PointLogPoint;
-import com.taotao.cloud.member.biz.application.service.business.IMemberService;
+import com.taotao.cloud.member.biz.application.service.business.MemberService;
 import com.taotao.cloud.member.biz.connect.config.ConnectAuthEnum;
 import com.taotao.cloud.member.biz.connect.entity.Connect;
 import com.taotao.cloud.member.biz.connect.entity.dto.ConnectAuthUser;
@@ -57,7 +57,7 @@ import com.taotao.cloud.member.sys.model.page.MemberSearchPageQuery;
 import com.taotao.cloud.member.sys.model.query.ConnectQuery;
 import com.taotao.cloud.member.sys.model.vo.MemberSearchVO;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
-import com.taotao.cloud.store.api.inner.IFeignStoreApi;
+import com.taotao.cloud.store.api.inner.InnerStoreApi;
 import com.taotao.cloud.store.api.model.vo.StoreVO;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.MemberTagsEnum;
@@ -75,7 +75,7 @@ import java.util.Objects;
 /** 会员接口业务层实现 */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implements IMemberService {
+public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implements MemberService {
 
     /** 会员token */
     @Autowired
@@ -88,7 +88,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
     private ConnectService connectService;
     /** 店铺 */
     @Autowired
-    private IFeignStoreApi feignStoreApi;
+    private InnerStoreApi storeApi;
     /** RocketMQ 配置 */
     @Autowired
     private RocketmqCustomProperties rocketmqCustomProperties;
@@ -153,7 +153,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
         }
         // 对店铺状态的判定处理
         if (Boolean.TRUE.equals(member.getHaveStore())) {
-            StoreVO store = feignStoreApi.findSotreById(member.getStoreId());
+            StoreVO store = storeApi.findSotreById(member.getStoreId());
             if (!store.getStoreDisable().equals(StoreStatusEnum.OPEN.name())) {
                 throw new BusinessException(ResultEnum.STORE_CLOSE_ERROR);
             }

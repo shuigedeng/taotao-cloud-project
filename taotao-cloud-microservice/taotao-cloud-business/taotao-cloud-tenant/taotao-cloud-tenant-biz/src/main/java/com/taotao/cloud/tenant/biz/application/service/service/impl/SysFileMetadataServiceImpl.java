@@ -5,9 +5,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.tenant.biz.domain.aggregate.SysFileMetadata;
-import com.taotao.cloud.tenant.biz.domain.aggregate.SysFileStorageConfig;
 import com.taotao.cloud.tenant.biz.infrastructure.persistent.mapper.SysFileMetadataMapper;
-import com.taotao.cloud.tenant.biz.application.service.service.ISysFileMetadataService;
+import com.taotao.cloud.tenant.biz.application.service.service.SysFileMetadataService;
 import com.mdframe.forge.starter.core.domain.PageQuery;
 import com.mdframe.forge.starter.file.core.FileManager;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +23,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class SysFileMetadataServiceImpl extends ServiceImpl<SysFileMetadataMapper, SysFileMetadata>
-        implements ISysFileMetadataService {
+        implements SysFileMetadataService {
     
     private final FileManager fileManager;
     

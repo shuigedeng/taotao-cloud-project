@@ -22,7 +22,7 @@ import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.data.mybatis.mybatisplus.MpUtils;
 import com.taotao.boot.web.request.annotation.RequestLogger;
-import com.taotao.cloud.order.api.inner.IFeignStoreFlowApi;
+import com.taotao.cloud.order.api.inner.StoreFlowApi;
 import com.taotao.cloud.order.api.model.vo.order.StoreFlowVO;
 import com.taotao.cloud.store.api.model.query.BillPageQuery;
 import com.taotao.cloud.store.api.model.vo.BillListVO;
@@ -46,7 +46,7 @@ public class BillManagerController {
     private BillService billService;
 
     @Autowired
-    private IFeignStoreFlowApi storeFlowApi;
+    private StoreFlowApi storeFlowApi;
 
     @Operation(summary = "通过id获取结算单", description = "通过id获取结算单")
     @RequestLogger

@@ -33,8 +33,8 @@ import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsOperationDTO;
 import com.taotao.cloud.promotion.api.model.page.KanjiaActivityGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
-import com.taotao.cloud.promotion.biz.application.service.business.IKanjiaActivityGoodsService;
-import com.taotao.cloud.promotion.biz.application.service.business.IPromotionGoodsService;
+import com.taotao.cloud.promotion.biz.application.service.business.KanjiaActivityGoodsService;
+import com.taotao.cloud.promotion.biz.application.service.business.PromotionGoodsService;
 import com.taotao.cloud.promotion.biz.mapper.KanJiaActivityGoodsMapper;
 import com.taotao.cloud.promotion.biz.model.bo.KanjiaActivityGoodsBO;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityGoods;
@@ -58,14 +58,14 @@ import java.util.List;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGoodsMapper, KanjiaActivityGoods>
-        implements IKanjiaActivityGoodsService {
+        implements KanjiaActivityGoodsService {
 
     /** 规格商品 */
     @Autowired
     private GoodsSkuApi goodsSkuApi;
 
     @Autowired
-    private IPromotionGoodsService promotionGoodsService;
+    private PromotionGoodsService promotionGoodsService;
 
     @Override
     public Boolean add(KanjiaActivityGoodsOperationDTO kanJiaActivityGoodsOperationDTO) {

@@ -19,7 +19,7 @@ package com.taotao.cloud.promotion.biz.application.service.business.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.promotion.api.model.vo.CouponActivityItemVO;
-import com.taotao.cloud.promotion.biz.application.service.business.ICouponActivityItemService;
+import com.taotao.cloud.promotion.biz.application.service.business.CouponActivityItemService;
 import com.taotao.cloud.promotion.biz.mapper.CouponActivityItemMapper;
 import com.taotao.cloud.promotion.biz.model.entity.CouponActivityItem;
 import org.springframework.stereotype.Service;
@@ -35,7 +35,7 @@ import java.util.List;
  */
 @Service
 public class CouponActivityItemServiceImpl extends ServiceImpl<CouponActivityItemMapper, CouponActivityItem>
-        implements ICouponActivityItemService {
+        implements CouponActivityItemService {
 
     @Override
     public List<CouponActivityItem> getCouponActivityList(Long activityId) {
