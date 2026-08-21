@@ -5,13 +5,13 @@
 <p align="center">
   <img src="https://img.shields.io/badge/license-Apache%202-green" alt="License"/>
   <img src="https://img.shields.io/badge/taotao--cloud--project-2026.09-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring-7.0.8-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_boot-4.1.0-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_cloud-2025.1.2-yellowgree" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_cloud_alibaba-2025.1.0.0--preview-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_cloud_tencent-2.1.0.3--2024.0.4-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring-7.0.9-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_boot-4.1.1-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_cloud-2025.1.3-yellowgree" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_cloud_alibaba-2025.1.0.0-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_cloud_tencent-2.1.2.0--2025.0.2-orange" alt="Downloads"/>
   <img src="https://img.shields.io/badge/netty-4.2.17.Final-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_security-7.1.0-brightgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_security-7.1.1-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/elasticsearch-9.2.3-green" alt="Downloads"/>
   <img src="https://img.shields.io/badge/mybatis_plus-3.5.17-yellow" alt="Downloads"/>
   <img src="https://img.shields.io/badge/knife4j-4.5.0-brightgreen" alt="Downloads"/>
@@ -22,7 +22,7 @@
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-**taotao-cloud(taotao云平台)**  是一个企业级单体架构和微服务架构的快速开发脚手架。提供多种便捷**starter**进行功能扩展，采用**DDD(领域驱动设计)**思想，快速搭建企业级系统。基于**gradle9.7.0**、**jdk25**, **spring7.0.8**、**SpringBoot4.1.0**、**SpringCloud2025.1.1**、**SpringCloudAlibaba2025.1.0.0**、**SpringSecurity7.1.0**、**Mybatis-Plus3.5.17**等开发的微服务开发脚手架，包括中间件模块、大数据模块、微服务业务模块、前端模块提供技术框架的基础能力的封装，减少开发工作，只关注业务,包含了工作以来的工作总结和技术沉淀
+**taotao-cloud(taotao云平台)**  是一个企业级单体架构和微服务架构的快速开发脚手架。提供多种便捷**starter**进行功能扩展，采用**DDD(领域驱动设计)**思想，快速搭建企业级系统。基于**gradle9.7.0**、**jdk25**, **spring7.0.9**、**SpringBoot4.1.1**、**SpringCloud2025.1.3**、**SpringCloudAlibaba2025.1.0.0**、**SpringSecurity7.1.1**、**Mybatis-Plus3.5.17**等开发的微服务开发脚手架，包括中间件模块、大数据模块、微服务业务模块、前端模块提供技术框架的基础能力的封装，减少开发工作，只关注业务,包含了工作以来的工作总结和技术沉淀
 
 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循**SpringBoot**编程思想，高度模块化和可配置化。
 
@@ -146,23 +146,25 @@ Maven:
 
 ## 5. 基于taotao-cloud-starter构建的DDD单体项目
 
-
-* **taotao-cloud-message**: [https://github.com/shuigedeng/taotao-cloud-message](https://github.com/shuigedeng/taotao-cloud-message)
-
-
-* **taotao-cloud-goods**: [https://github.com/shuigedeng/taotao-cloud-goods](https://github.com/shuigedeng/taotao-cloud-goods)
+* **auth模块**: [https://github.com/shuigedeng/taotao-cloud-auth](https://github.com/shuigedeng/taotao-cloud-auth)
 
 
-* **taotao-cloud-order**: [https://github.com/shuigedeng/taotao-cloud-order](https://github.com/shuigedeng/taotao-cloud-order)
+* **message模块**: [https://github.com/shuigedeng/taotao-cloud-message](https://github.com/shuigedeng/taotao-cloud-message)
 
 
-* **taotao-cloud-member**: [https://github.com/shuigedeng/taotao-cloud-member](https://github.com/shuigedeng/taotao-cloud-member)
+* **goods模块**: [https://github.com/shuigedeng/taotao-cloud-goods](https://github.com/shuigedeng/taotao-cloud-goods)
 
 
-* **taotao-cloud-auth**: [https://github.com/shuigedeng/taotao-cloud-auth](https://github.com/shuigedeng/taotao-cloud-auth)
+* **order模块**: [https://github.com/shuigedeng/taotao-cloud-order](https://github.com/shuigedeng/taotao-cloud-order)
 
 
-* **taotao-cloud-sys**: [https://github.com/shuigedeng/taotao-cloud-sys](https://github.com/shuigedeng/taotao-cloud-sys)
+* **member模块**: [https://github.com/shuigedeng/taotao-cloud-member](https://github.com/shuigedeng/taotao-cloud-member)
+
+
+* **sys模块**: [https://github.com/shuigedeng/taotao-cloud-sys](https://github.com/shuigedeng/taotao-cloud-sys)
+
+
+* **ui模块**: [https://github.com/shuigedeng/taotao-cloud-ui](https://github.com/shuigedeng/taotao-cloud-ui)
 
 
 ## 6.基于taotao-cloud-project构建的插件
@@ -175,9 +177,13 @@ Maven:
 * **gradle插件地址**: 
 
 - [https://plugins.gradle.org/plugin/io.github.shuigedeng.bom](https://plugins.gradle.org/plugin/io.github.shuigedeng.bom)
+
 - [https://plugins.gradle.org/plugin/io.github.shuigedeng.module](https://plugins.gradle.org/plugin/io.github.shuigedeng.module)
+
 - [https://plugins.gradle.org/plugin/io.github.shuigedeng.common](https://plugins.gradle.org/plugin/io.github.shuigedeng.common)
+
 - [https://plugins.gradle.org/plugin/io.github.shuigedeng.root](https://plugins.gradle.org/plugin/io.github.shuigedeng.root)
+
 - [https://plugins.gradle.org/plugin/io.github.shuigedeng.service](https://plugins.gradle.org/plugin/com.taotao.cloud.gradle.service)
 
 
@@ -202,20 +208,11 @@ Maven:
 * 博客地址: [https://blog.taotaocloud.top](https://blog.taotaocloud.top)
 * 代码质量检测结果地址: [https://qodana.taotaocloud.top](https://qodana.taotaocloud.top) (带宽有限, 需多刷新几次)
 * 商城首页地址: [https://taotaocloud.top](https://taotaocloud.top)
-  源码地址: [taotao-cloud-front](https://github.com/shuigedeng/taotao-cloud-ui/tree/main/taotao-cloud-vue3-front)
 * 大屏展示地址: [https://datav.taotaocloud.top](https://datav.taotaocloud.top)
-  源码地址: [taotao-cloud-datav](https://github.com/shuigedeng/taotao-cloud-ui/tree/main/taotao-cloud-vue3-datav)
-* 平台管理地址(进度15%): [https://manager.taotaocloud.top](https://manager.taotaocloud.top) (
-  admin/123456)
-  源码地址: [taotao-cloud-manager](https://github.com/shuigedeng/taotao-cloud-ui/tree/main/taotao-cloud-vue3-manager)
-* 商户管理地址(进度5%): [https://merchant.taotaocloud.top](https://merchant.taotaocloud.top) (
-  taotao/123456)
-  源码地址: [taotao-cloud-merchant](https://github.com/shuigedeng/taotao-cloud-ui/tree/main/taotao-cloud-vue3-merchant)
-* 开放平台地址(进度15%): [https://open.taotaocloud.top](https://open.taotaocloud.top) (
-  taotao/123456)
-  源码地址: [taotao-cloud-open](https://github.com/shuigedeng/taotao-cloud-ui/tree/main/taotao-cloud-vue3-open)
+* 平台管理地址(进度15%): [https://admin.taotaocloud.top](https://manager.taotaocloud.top) (admin/123456)
+* 商户管理地址(进度5%): [https://seller.taotaocloud.top](https://merchant.taotaocloud.top) (taotao/123456)
+* 开放平台地址(进度15%): [https://open.taotaocloud.top](https://open.taotaocloud.top) (taotao/123456)
 * 移动端在线预览(进度5%)
-  源码地址: [taotao-cloud-mall](https://github.com/shuigedeng/taotao-cloud-ui/tree/main/taotao-cloud-taro-mall)
 
 | <center>移动端 ReactNative</center>                                                                                                                                                                                                                                                         | <center>小程序</center>     | <center>H5</center>                               |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------|---------------------------------------------------|
@@ -224,7 +221,7 @@ Maven:
 ## 8. 功能特点
 
 * **微服务技术架构**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的 **非功能性需求** 简化开发工作、提高生产率、解决通用问题
-* **主体框架**：采用最新的`Spring Boot 4.1.0`、`Spring Cloud 2025.1.1`、`Spring Cloud Alibaba 2025.1.0.0` 版本进行设计
+* **主体框架**：采用最新的`Spring Boot 4.1.1`、`Spring Cloud 2025.1.3`、`Spring Cloud Alibaba 2025.1.0.0` 版本进行设计
 * **统一注册**：支持`spring cloud alibaba Nacos`作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * **统一认证**：统一`Oauth2`认证协议，采用`jwt`的方式，实现统一认证，完备的`RBAC`权限管理、数据权限处理、网关统一鉴权、灰度发布。 支持多种登录方式，如`账号密码`，`验证码登陆`、`支付宝`、`钉钉`、`码云`、`GitHub`、`GitLab`、`QQ`、`微信`、`企业微信`、`微博`等第三方登录，`微信小程序登录`，`指纹登录`，`手势登录`，`手机号码登录`，`人脸识别登录`等 优化`Spring Security`内部实现 ,实现`API`调用的统一出口和权限认证授权中心
 * **业务监控**：利用`Spring Boot admin`监控各个独立服务的运行状态
@@ -258,15 +255,15 @@ Maven:
 
 | 依赖                   | 版本          |
 |----------------------|---------------|
-| Spring               | 7.0.8         |
-| Spring Boot          | 4.1.0         |
-| Spring Cloud         | 2025.1.2      |
+| Spring               | 7.0.9         |
+| Spring Boot          | 4.1.1         |
+| Spring Cloud         | 2025.1.3      |
 | Spring Cloud Alibaba | 2025.1.0.0    |
 | Seata                | 2.6.0         |
 | Sentinel             | 1.8.10        |
-| Spring-kafka         | 4.1.0         |
+| Spring-kafka         | 4.1.1         |
 | Roketmq              | 5.2.4         |
-| Spring Security      | 7.1.0         |
+| Spring Security      | 7.1.1         |
 | Mybatis Plus         | 3.5.17        |
 | Hutool               | 5.8.47        |
 | Mysql                | 9.7.0         |
@@ -276,10 +273,10 @@ Maven:
 | Redisson             | 4.7.0         |
 | Lettuce              | 7.5.0.RELEASE |
 | Elasticsearch        | 9.2.2         |
-| Xxl-job              | 3.4.0         |
+| Xxl-job              | 3.4.2         |
 | Guava                | 33.6.0-jre    |
 | Grpc                 | 1.80.0        |
-| Arthas               | 4.1.8         |
+| Arthas               | 4.3.4         |
 | Netty                | 4.2.17.Final  |
 
 

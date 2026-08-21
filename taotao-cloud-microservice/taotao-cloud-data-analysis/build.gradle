@@ -15,7 +15,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-web"
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
     //https://search.maven.org/artifact/com.clickhouse/clichouse-jdbc
-    implementation('com.clickhouse:clickhouse-jdbc:0.9.8') {
+    implementation('com.clickhouse:clickhouse-jdbc:0.10.0') {
         exclude group: 'at.yawk.lz4', module: 'lz4-java'
     }
 
@@ -24,9 +24,9 @@ dependencies {
     //implementation "org.antlr:antlr4-runtime:4.11.1"
 
     //https://search.maven.org/artifact/io.airlift/slice
-    implementation "io.airlift:slice:2.4"
+    implementation "io.airlift:slice:2.8"
     //https://search.maven.org/artifact/io.airlift/units
-    implementation "io.airlift:units:1.12"
+    implementation "io.airlift:units:1.13"
     //https://search.maven.org/artifact/com.google.guava/guava
     implementation "com.google.guava:guava:33.6.0-jre"
     //https://search.maven.org/artifact/tools.jackson.core/jackson-annotations

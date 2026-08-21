@@ -78,7 +78,7 @@ dependencies {
     implementation gradleApi()
     implementation localGroovy()
 
-    implementation "org.springframework.boot:spring-boot-gradle-plugin:4.1.0"
+    implementation "org.springframework.boot:spring-boot-gradle-plugin:4.1.1"
 
     implementation group: 'com.ly.smart-doc', name: 'smart-doc', version: '3.1.2'
 
