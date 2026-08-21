@@ -1306,7 +1306,7 @@ logging:
 #    '[reactor.netty]': debug
 #    '[redisratelimiter]': debug
     org.apache.zookeeper.ZooKeeper: info
-    com.taotao.cloud.sys.api.feign: debug
+    
     net.ttddyy.dsproxy.listener: debug
     net.ttddyy.dsproxy.listener.logging.SLF4JQueryLoggingListener: debug
     # hibernate log
@@ -1327,7 +1327,7 @@ logging:
     #org.apache.kafka: off
     #org.I0Itec.zkclient: info
     # springframework log
-    #org.springframework.cloud.openfeign: debug
+    
     #org.springframework.web: off
     #org.springframework.security: off
     #org.springframework.security.oauth2: off

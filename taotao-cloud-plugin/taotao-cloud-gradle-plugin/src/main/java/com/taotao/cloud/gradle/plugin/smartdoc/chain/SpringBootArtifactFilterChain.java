@@ -59,8 +59,6 @@ public class SpringBootArtifactFilterChain implements FilterChain {
             case "spring-boot-starter-quartz":
             case "spring-boot-starter-batch":
             case "spring-boot-starter-jdbc":
-            case "spring-cloud-starter-feign":
-            case "spring-cloud-starter-openfeign":
             case "spring-cloud-starter":
                 return true;
             default:

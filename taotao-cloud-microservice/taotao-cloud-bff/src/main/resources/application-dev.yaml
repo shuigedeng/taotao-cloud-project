@@ -574,7 +574,7 @@ logging:
   level:
     root: INFO
     org.apache.zookeeper.ZooKeeper: info
-    com.taotao.cloud.sys.api.feign: debug
+    
     org.springframework.web: off
     org.springframework.security: off
     org.springframework.security.oauth2: off
@@ -599,7 +599,7 @@ logging:
     #org.apache.kafka: off
     #org.I0Itec.zkclient: info
     # springframework log
-    #org.springframework.cloud.openfeign: debug
+    
     #org.springframework.web: off
     #org.springframework.security: off
     #org.springframework.security.oauth2: off
