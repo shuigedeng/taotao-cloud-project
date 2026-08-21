@@ -32,7 +32,7 @@ import java.util.List;
  * @version 2021.10
  * @since 2021-10-09 20:32:47
  */
-public interface IDictItemService {
+public interface DictItemService {
 
     /**
      * 根据字典id删除字典项

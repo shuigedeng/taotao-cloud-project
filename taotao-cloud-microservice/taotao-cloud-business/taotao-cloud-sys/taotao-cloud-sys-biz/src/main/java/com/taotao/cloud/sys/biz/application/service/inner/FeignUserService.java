@@ -14,24 +14,19 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.biz.application.service.business;
+package com.taotao.cloud.sys.biz.application.service.inner;
 
-import com.baomidou.mybatisplus.spring.service.IService;
-import com.taotao.cloud.sys.biz.model.entity.sensitive.SensitiveWord;
+import com.taotao.boot.webagg.service.BaseService;
+import com.taotao.cloud.sys.biz.model.entity.system.User;
 
 /**
- * 敏感词业务层
+ * ISysDictService
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2022-03-25 14:33:20
+ * @version 2021.10
+ * @since 2021-10-09 20:32:36
  */
-public interface ISensitiveWordService extends IService<SensitiveWord> {
+public interface FeignUserService extends BaseService<User, Long> {
 
-    /**
-     * 重新写入缓存
-     *
-     * @since 2022-03-25 14:33:25
-     */
-    void resetCache();
+    <T> T test123(T t);
 }

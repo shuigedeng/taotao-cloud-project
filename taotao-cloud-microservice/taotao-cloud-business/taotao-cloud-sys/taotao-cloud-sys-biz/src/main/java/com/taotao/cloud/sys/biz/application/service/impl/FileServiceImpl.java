@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.application.service.impl;
 
 import com.taotao.cloud.sys.api.model.vo.UploadFileVO;
-import com.taotao.cloud.sys.biz.application.service.IFileService;
+import com.taotao.cloud.sys.biz.application.service.FileService;
 import com.taotao.cloud.sys.biz.model.entity.File;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -35,7 +35,7 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class FileServiceImpl
-	implements IFileService {
+	implements FileService {
 
 	@Override
 	public File upload(MultipartFile uploadFile) {

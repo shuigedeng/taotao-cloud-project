@@ -14,19 +14,28 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.biz.application.service.inner;
+package com.taotao.cloud.sys.biz.application.service.business;
 
 import com.taotao.boot.webagg.service.BaseService;
-import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
+import com.taotao.cloud.sys.biz.model.entity.system.Dept;
+import com.taotao.cloud.sys.biz.model.vo.dept.DeptTreeVO;
+
+import java.util.List;
 
 /**
- * ISysDictService
+ * 后台部门表服务接口
  *
  * @author shuigedeng
- * @version 2021.10
- * @since 2021-10-09 20:32:36
+ * @version 2022.03
+ * @since 2022-03-25 14:24:48
  */
-public interface IFeignDictService extends BaseService<Dict, Long> {
+public interface DeptService extends BaseService<Dept, Long> {
 
-    <T> T test123(T t);
+    /**
+     * 获取部门树
+     *
+     * @return 部门树列表
+     * @since 2022-03-23 08:52:34
+     */
+    List<DeptTreeVO> tree();
 }

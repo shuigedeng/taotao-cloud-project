@@ -35,7 +35,7 @@ import org.apache.seata.rm.tcc.api.TwoPhaseBusinessAction;
  * @since 2020/11/12 21:26
  */
 @LocalTCC
-public interface ISeataTccService {
+public interface SeataTccService {
 	String test(Long fileId);
 
 	@TwoPhaseBusinessAction(name = "tryInsert", commitMethod = "commitTcc", rollbackMethod = "cancel", useTCCFence = true)

@@ -16,11 +16,22 @@
 
 package com.taotao.cloud.sys.biz.application.service.business;
 
+import com.baomidou.mybatisplus.spring.service.IService;
+import com.taotao.cloud.sys.biz.model.entity.sensitive.SensitiveWord;
+
 /**
- * ISystemService
+ * 敏感词业务层
  *
  * @author shuigedeng
- * @version 2021.10
- * @since 2022-03-03 14:34:17
+ * @version 2022.03
+ * @since 2022-03-25 14:33:20
  */
-public interface ISystemService {}
+public interface SensitiveWordService extends IService<SensitiveWord> {
+
+    /**
+     * 重新写入缓存
+     *
+     * @since 2022-03-25 14:33:25
+     */
+    void resetCache();
+}

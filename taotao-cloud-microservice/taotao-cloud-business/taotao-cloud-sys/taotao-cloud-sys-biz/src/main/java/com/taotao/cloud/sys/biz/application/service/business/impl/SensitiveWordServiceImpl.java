@@ -19,7 +19,7 @@ package com.taotao.cloud.sys.biz.application.service.business.impl;
 import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.boot.common.constant.RedisConstant;
 import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
-import com.taotao.cloud.sys.biz.application.service.business.ISensitiveWordService;
+import com.taotao.cloud.sys.biz.application.service.business.SensitiveWordService;
 import com.taotao.cloud.sys.biz.mapper.ISensitiveWordMapper;
 import com.taotao.cloud.sys.biz.model.entity.sensitive.SensitiveWord;
 import com.taotao.cloud.sys.biz.repository.ISensitiveWordRepository;
@@ -35,7 +35,7 @@ import java.util.List;
 public class SensitiveWordServiceImpl
         extends BaseServiceImpl<
                          SensitiveWord, Long, ISensitiveWordMapper,SensitiveWordRepository, ISensitiveWordRepository>
-        implements ISensitiveWordService {
+        implements SensitiveWordService {
 
     private final RedisRepository redisRepository;
 

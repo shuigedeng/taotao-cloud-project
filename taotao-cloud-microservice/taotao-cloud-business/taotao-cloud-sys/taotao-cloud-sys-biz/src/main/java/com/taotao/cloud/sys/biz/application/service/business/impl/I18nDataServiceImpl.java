@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.taotao.boot.common.model.ddd.query.PageQuery;
 import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.cloud.sys.api.constant.I18nRedisKeyConstants;
-import com.taotao.cloud.sys.biz.application.service.business.I18nDataService;
+import com.taotao.cloud.sys.biz.application.service.business.Data18nService;
 import com.taotao.cloud.sys.biz.mapper.I18nDataMapper;
 import com.taotao.cloud.sys.biz.model.convert.I18nDataConverter;
 import com.taotao.cloud.sys.biz.model.dto.I18nDataDTO;
@@ -31,7 +31,7 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
-public class I18nDataServiceImpl extends ServiceImpl<I18nDataMapper, I18nData> implements I18nDataService {
+public class I18nDataServiceImpl extends ServiceImpl<I18nDataMapper, I18nData> implements Data18nService {
 
     private final StringRedisTemplate stringRedisTemplate;
 

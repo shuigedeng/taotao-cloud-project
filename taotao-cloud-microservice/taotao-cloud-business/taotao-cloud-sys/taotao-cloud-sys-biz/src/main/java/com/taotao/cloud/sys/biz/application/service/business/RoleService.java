@@ -30,7 +30,7 @@ import java.util.Set;
  * @version 2021.10
  * @since 2021-10-09 20:42:57
  */
-public interface IRoleService extends BaseService<Role, Long> {
+public interface RoleService extends BaseService<Role, Long> {
 
     /**
      * 根据用户id列表获取角色列表

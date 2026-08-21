@@ -24,7 +24,7 @@ import com.taotao.boot.common.utils.lang.StringUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.model.dto.LogQueryCriteria;
-import com.taotao.cloud.sys.biz.application.service.ILogService;
+import com.taotao.cloud.sys.biz.application.service.LogService;
 import com.taotao.cloud.sys.biz.mapper.ILogMapper;
 import com.taotao.cloud.sys.biz.model.entity.Log;
 import jakarta.servlet.http.HttpServletResponse;
@@ -51,7 +51,7 @@ import java.util.Map;
  */
 @Service
 @AllArgsConstructor
-public class LogServiceImpl extends ServiceImpl<ILogMapper, Log> implements ILogService {
+public class LogServiceImpl extends ServiceImpl<ILogMapper, Log> implements LogService {
 
 	@Override
 	public Object findAllByPageable(String nickname, Pageable pageable) {

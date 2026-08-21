@@ -30,7 +30,7 @@ import java.util.Set;
  * @version 2023.01
  * @since 2023-02-15 14:43:45
  */
-public interface IUserService extends BaseService<User, Long> {
+public interface UserService extends BaseService<User, Long> {
 
     /**
      * 保存用户

@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.application.service.business.impl;
 
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
-import com.taotao.cloud.sys.biz.application.service.business.IAlipayConfigService;
+import com.taotao.cloud.sys.biz.application.service.business.AlipayConfigService;
 import com.taotao.cloud.sys.biz.mapper.IAlipayConfigMapper;
 import com.taotao.cloud.sys.biz.model.entity.config.AlipayConfig;
 import com.taotao.cloud.sys.biz.model.vo.alipay.TradeVO;
@@ -41,7 +41,7 @@ import org.springframework.transaction.annotation.Transactional;
 // @CacheConfig(cacheNames = "alipayConfig")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class AlipayConfigServiceImpl extends ServiceImpl<IAlipayConfigMapper, AlipayConfig> implements
-        IAlipayConfigService {
+        AlipayConfigService {
 
     @Override
     public String toPayAsPc( AlipayConfig alipay, TradeVO trade ) throws Exception {

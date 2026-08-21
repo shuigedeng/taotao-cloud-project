@@ -24,8 +24,8 @@ import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
-import com.taotao.cloud.sys.biz.application.service.business.IUserRelationService;
-import com.taotao.cloud.sys.biz.application.service.business.IUserService;
+import com.taotao.cloud.sys.biz.application.service.business.UserRelationService;
+import com.taotao.cloud.sys.biz.application.service.business.UserService;
 import com.taotao.cloud.sys.biz.manager.UserManager;
 import com.taotao.cloud.sys.biz.mapper.IUserMapper;
 import com.taotao.cloud.sys.biz.model.dto.user.RestPasswordUserDTO;
@@ -50,14 +50,14 @@ import java.util.*;
 @Service
 @AllArgsConstructor
 public class UserServiceImpl extends BaseServiceImpl< User, Long,IUserMapper, UserRepository, IUserRepository>
-	implements IUserService {
+	implements UserService {
 
 	private static final QUser USER = QUser.user;
 
 	private static final String DEFAULT_PASSWORD = "123456";
 	private static final String DEFAULT_USERNAME = "admin";
 
-	private final IUserRelationService userRelationService;
+	private final UserRelationService userRelationService;
 	private final UserManager userManager;
 
 	@Override

@@ -23,8 +23,8 @@ import com.querydsl.core.types.Predicate;
 import com.taotao.boot.cache.redis.model.CacheKey;
 import com.taotao.boot.lock.support.DistributedLock;
 import com.taotao.boot.webagg.repository.BaseClassSuperRepository;
-import com.taotao.cloud.sys.biz.application.service.business.IDictService;
-import com.taotao.cloud.sys.biz.application.service.inner.IFeignDictService;
+import com.taotao.cloud.sys.biz.application.service.business.DictService;
+import com.taotao.cloud.sys.biz.application.service.inner.FeignDictService;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -49,9 +49,9 @@ import java.util.function.Function;
 @Service
 @AllArgsConstructor
 public class FeignDictServiceImpl
-        implements IFeignDictService {
+        implements FeignDictService {
 
-    private final IDictService dictService;
+    private final DictService dictService;
 
     @Override
     public <T> T test123(T t) {

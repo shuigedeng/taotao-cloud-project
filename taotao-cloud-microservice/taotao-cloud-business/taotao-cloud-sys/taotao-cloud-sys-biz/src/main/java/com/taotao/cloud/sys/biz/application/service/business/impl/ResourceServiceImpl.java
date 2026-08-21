@@ -20,8 +20,8 @@ import com.taotao.boot.common.constant.CommonConstants;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRpcRequest;
-import com.taotao.cloud.sys.biz.application.service.business.IResourceService;
-import com.taotao.cloud.sys.biz.application.service.business.IRoleService;
+import com.taotao.cloud.sys.biz.application.service.business.ResourceService;
+import com.taotao.cloud.sys.biz.application.service.business.RoleService;
 import com.taotao.cloud.sys.biz.mapper.IResourceMapper;
 import com.taotao.cloud.sys.biz.model.bo.MenuBO;
 import com.taotao.cloud.sys.biz.model.bo.RoleBO;
@@ -48,9 +48,9 @@ import java.util.*;
 @AllArgsConstructor
 public class ResourceServiceImpl
 	extends BaseServiceImpl< Resource, Long,IResourceMapper, ResourceRepository, IResourceRepository>
-	implements IResourceService {
+	implements ResourceService {
 
-	private final IRoleService roleService;
+	private final RoleService roleService;
 
 	@Override
 	public List<MenuBO> findMenuByIdList(List<Long> idList) {

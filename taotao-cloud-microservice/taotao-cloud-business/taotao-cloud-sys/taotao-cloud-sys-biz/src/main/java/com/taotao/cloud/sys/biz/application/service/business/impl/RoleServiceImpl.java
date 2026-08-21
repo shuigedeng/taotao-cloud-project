@@ -18,8 +18,8 @@ package com.taotao.cloud.sys.biz.application.service.business.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
-import com.taotao.cloud.sys.biz.application.service.business.IRoleResourceService;
-import com.taotao.cloud.sys.biz.application.service.business.IRoleService;
+import com.taotao.cloud.sys.biz.application.service.business.RoleResourceService;
+import com.taotao.cloud.sys.biz.application.service.business.RoleService;
 import com.taotao.cloud.sys.biz.mapper.IRoleMapper;
 import com.taotao.cloud.sys.biz.model.bo.RoleBO;
 import com.taotao.cloud.sys.biz.model.convert.RoleConvert;
@@ -45,11 +45,11 @@ import java.util.Set;
 @Service
 @AllArgsConstructor
 public class RoleServiceImpl extends BaseServiceImpl<Role, Long,IRoleMapper,  RoleRepository, IRoleRepository>
-        implements IRoleService {
+        implements RoleService {
 
     private static final QRole SYS_ROLE = QRole.role;
 
-    private final IRoleResourceService roleResourceService;
+    private final RoleResourceService roleResourceService;
 
     @Override
     public Boolean existRoleByCode(String code) {

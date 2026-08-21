@@ -34,7 +34,7 @@ import java.util.concurrent.Future;
  * @version 2021.10
  * @since 2021-10-09 20:32:36
  */
-public interface IDictService extends BaseService<Dict, Long> {
+public interface DictService extends BaseService<Dict, Long> {
 
     /**
      * 添加字典

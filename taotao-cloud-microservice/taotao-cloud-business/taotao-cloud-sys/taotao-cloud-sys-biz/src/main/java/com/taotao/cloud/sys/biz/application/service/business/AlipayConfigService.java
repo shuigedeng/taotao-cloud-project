@@ -27,7 +27,7 @@ import com.taotao.cloud.sys.biz.model.vo.alipay.TradeVO;
  * @version 2022.03
  * @since 2022-03-25 14:24:04
  */
-public interface IAlipayConfigService extends IService<AlipayConfig> {
+public interface AlipayConfigService extends IService<AlipayConfig> {
 
     /**
      * 处理来自PC的交易请求

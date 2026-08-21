@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.application.service.business.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
-import com.taotao.cloud.sys.biz.application.service.business.IDeptService;
+import com.taotao.cloud.sys.biz.application.service.business.DeptService;
 import com.taotao.cloud.sys.biz.mapper.IDeptMapper;
 import com.taotao.cloud.sys.biz.model.convert.DeptConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.Dept;
@@ -39,7 +39,7 @@ import java.util.Objects;
  */
 @Service
 public class DeptServiceImpl extends BaseServiceImpl< Dept, Long,IDeptMapper, DeptRepository, IDeptRepository>
-	implements IDeptService {
+	implements DeptService {
 
 	@Override
 	public List<DeptTreeVO> tree() {

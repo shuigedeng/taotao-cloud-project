@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.application.service.impl;
 
-import com.taotao.cloud.sys.biz.application.service.IBussinessService;
+import com.taotao.cloud.sys.biz.application.service.BussinessService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.seata.core.context.RootContext;
 import org.apache.seata.spring.annotation.GlobalTransactional;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Slf4j
-public class BusinessServiceImpl implements IBussinessService {
+public class BusinessServiceImpl implements BussinessService {
 
     @Override
     @GlobalTransactional(name = "createOrder", rollbackFor = Exception.class)

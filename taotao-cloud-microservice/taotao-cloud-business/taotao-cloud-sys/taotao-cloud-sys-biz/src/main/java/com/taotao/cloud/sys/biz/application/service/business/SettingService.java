@@ -17,25 +17,28 @@
 package com.taotao.cloud.sys.biz.application.service.business;
 
 import com.taotao.boot.webagg.service.BaseService;
-import com.taotao.cloud.sys.biz.model.entity.system.UserRelation;
-
-import java.util.Set;
+import com.taotao.cloud.sys.biz.model.entity.setting.Setting;
 
 /**
- * 用户-角色服务类
+ * ISettingService
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2022-03-25 14:33:42
+ * @version v1.0
+ * @since 2022/03/10 10:31
  */
-public interface IUserRelationService extends BaseService<UserRelation, Long> {
+public interface SettingService extends BaseService<Setting, Long> {
 
     /**
-     * 添加用户-角色对应关系
+     * 通过key获取
      *
-     * @param userId 用户id
-     * @param roleIds 角色id列表
-     * @return 修改结果
+     * @param key
      */
-    Boolean saveUserRoles(Long userId, Set<Long> roleIds);
+    Setting get(String key);
+
+    /**
+     * 修改
+     *
+     * @param setting
+     */
+    boolean saveUpdate(Setting setting);
 }

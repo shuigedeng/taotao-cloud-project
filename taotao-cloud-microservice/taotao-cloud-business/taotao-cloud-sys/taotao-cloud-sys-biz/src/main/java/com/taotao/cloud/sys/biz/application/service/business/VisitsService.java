@@ -16,27 +16,42 @@
 
 package com.taotao.cloud.sys.biz.application.service.business;
 
-import com.taotao.boot.webagg.service.BaseService;
-import com.taotao.cloud.sys.biz.model.entity.system.RoleResource;
-
-import java.util.Set;
+import com.baomidou.mybatisplus.spring.service.IService;
+import com.taotao.cloud.sys.biz.model.entity.system.Visits;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.scheduling.annotation.Async;
 
 /**
- * 角色-菜单服务类
+ * VisitsService
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2022-03-25 15:01:39
+ * @version 2021.10
+ * @since 2022-02-11 16:22:47
  */
-public interface IRoleResourceService extends BaseService<RoleResource, Long> {
+public interface VisitsService extends IService<Visits> {
+
+    /** 提供给定时任务，每天0点执行 */
+    void save();
 
     /**
-     * 添加角色-菜单对应关系
+     * 新增记录
      *
-     * @param roleId 角色id
-     * @param menuIds 菜单id列表
-     * @return 是否成功
-     * @since 2020/10/21 09:20
+     * @param request /
      */
-    Boolean saveRoleMenu(Long roleId, Set<Long> menuIds);
+    @Async
+    void count(HttpServletRequest request);
+
+    /**
+     * 获取数据
+     *
+     * @return /
+     */
+    Object get();
+
+    /**
+     * getChartData
+     *
+     * @return /
+     */
+    Object getChartData();
 }

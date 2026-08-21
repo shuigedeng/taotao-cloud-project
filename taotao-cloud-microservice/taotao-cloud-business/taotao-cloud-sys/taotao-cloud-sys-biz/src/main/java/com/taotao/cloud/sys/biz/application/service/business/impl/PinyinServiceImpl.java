@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.application.service.business.impl;
 
 import com.taotao.cloud.sys.api.constant.PinyinException;
-import com.taotao.cloud.sys.biz.application.service.business.IPinYinService;
+import com.taotao.cloud.sys.biz.application.service.business.PinYinService;
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
@@ -33,7 +33,7 @@ import static com.taotao.cloud.sys.api.constant.PinyinConstants.CHINESE_WORDS_RE
 
 /** 拼音工具类的实现 */
 @Service
-public class PinyinServiceImpl implements IPinYinService {
+public class PinyinServiceImpl implements PinYinService {
 
     private final Properties properties = new Properties();
 

@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.application.service.business.impl;
 
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
-import com.taotao.cloud.sys.biz.application.service.business.IEmailConfigService;
+import com.taotao.cloud.sys.biz.application.service.business.EmailConfigService;
 import com.taotao.cloud.sys.biz.mapper.IEmailConfigMapper;
 import com.taotao.cloud.sys.biz.model.entity.config.EmailConfig;
 import com.taotao.cloud.sys.biz.model.vo.alipay.EmailVO;
@@ -42,7 +42,7 @@ import org.springframework.transaction.annotation.Transactional;
 // @CacheConfig(cacheNames = "emailConfig")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class EmailConfigServiceImpl extends ServiceImpl<IEmailConfigMapper, EmailConfig> implements
-        IEmailConfigService {
+        EmailConfigService {
 
     @Override
     //    @CachePut(key = "'1'")

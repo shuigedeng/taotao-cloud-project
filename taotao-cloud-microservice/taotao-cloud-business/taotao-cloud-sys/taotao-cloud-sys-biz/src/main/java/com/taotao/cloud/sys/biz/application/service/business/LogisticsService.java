@@ -16,26 +16,23 @@
 
 package com.taotao.cloud.sys.biz.application.service.business;
 
-import com.taotao.boot.webagg.service.BaseService;
-import com.taotao.cloud.sys.biz.model.entity.system.Dept;
-import com.taotao.cloud.sys.biz.model.vo.dept.DeptTreeVO;
-
-import java.util.List;
+import com.taotao.cloud.sys.biz.model.entity.config.LogisticsConfig;
 
 /**
- * 后台部门表服务接口
+ * ILogisticsService
  *
  * @author shuigedeng
  * @version 2022.03
- * @since 2022-03-25 14:24:48
+ * @since 2022-03-25 14:58:48
  */
-public interface IDeptService extends BaseService<Dept, Long> {
+public interface LogisticsService {
 
     /**
-     * 获取部门树
+     * 根据id查询物流公司信息
      *
-     * @return 部门树列表
-     * @since 2022-03-23 08:52:34
+     * @param id id
+     * @return 物流公司信息
+     * @since 2020/11/20 下午1:08
      */
-    List<DeptTreeVO> tree();
+    LogisticsConfig findLogisticsById(Long id);
 }

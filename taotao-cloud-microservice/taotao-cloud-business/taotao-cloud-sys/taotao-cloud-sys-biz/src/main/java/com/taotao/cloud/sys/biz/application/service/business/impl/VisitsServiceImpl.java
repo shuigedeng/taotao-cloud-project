@@ -19,7 +19,7 @@ package com.taotao.cloud.sys.biz.application.service.business.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.boot.common.utils.date.DateUtils;
-import com.taotao.cloud.sys.biz.application.service.business.IVisitsService;
+import com.taotao.cloud.sys.biz.application.service.business.VisitsService;
 import com.taotao.cloud.sys.biz.mapper.IVisitsMapper;
 import com.taotao.cloud.sys.biz.model.entity.system.Visits;
 import jakarta.servlet.http.HttpServletRequest;
@@ -41,7 +41,7 @@ import java.util.Map;
  */
 @Service
 @AllArgsConstructor
-public class VisitsServiceImpl extends ServiceImpl<IVisitsMapper, Visits> implements IVisitsService {
+public class VisitsServiceImpl extends ServiceImpl<IVisitsMapper, Visits> implements VisitsService {
 
     // private final ILogService logService;
 

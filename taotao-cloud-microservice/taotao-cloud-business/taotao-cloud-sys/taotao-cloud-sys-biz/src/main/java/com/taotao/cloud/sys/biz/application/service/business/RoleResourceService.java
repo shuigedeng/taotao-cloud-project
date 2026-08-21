@@ -17,28 +17,26 @@
 package com.taotao.cloud.sys.biz.application.service.business;
 
 import com.taotao.boot.webagg.service.BaseService;
-import com.taotao.cloud.sys.biz.model.entity.setting.Setting;
+import com.taotao.cloud.sys.biz.model.entity.system.RoleResource;
+
+import java.util.Set;
 
 /**
- * ISettingService
+ * 角色-菜单服务类
  *
  * @author shuigedeng
- * @version v1.0
- * @since 2022/03/10 10:31
+ * @version 2022.03
+ * @since 2022-03-25 15:01:39
  */
-public interface ISettingService extends BaseService<Setting, Long> {
+public interface RoleResourceService extends BaseService<RoleResource, Long> {
 
     /**
-     * 通过key获取
+     * 添加角色-菜单对应关系
      *
-     * @param key
+     * @param roleId 角色id
+     * @param menuIds 菜单id列表
+     * @return 是否成功
+     * @since 2020/10/21 09:20
      */
-    Setting get(String key);
-
-    /**
-     * 修改
-     *
-     * @param setting
-     */
-    boolean saveUpdate(Setting setting);
+    Boolean saveRoleMenu(Long roleId, Set<Long> menuIds);
 }

@@ -29,7 +29,7 @@ import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.common.utils.secure.SignUtils;
 import com.taotao.boot.core.autoconfigure.OkhttpAutoConfiguration.OkHttpService;
 import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
-import com.taotao.cloud.sys.biz.application.service.business.IRegionService;
+import com.taotao.cloud.sys.biz.application.service.business.RegionService;
 import com.taotao.cloud.sys.biz.mapper.IRegionMapper;
 import com.taotao.cloud.sys.biz.model.convert.RegionConvert;
 import com.taotao.cloud.sys.biz.model.entity.region.Region;
@@ -55,7 +55,7 @@ import java.util.*;
 @AllArgsConstructor
 public class RegionServiceImpl
 	extends BaseServiceImpl< Region, Long, IRegionMapper,RegionRepository, IRegionRepository>
-	implements IRegionService {
+	implements RegionService {
 
 	private final OkHttpService okHttpService;
 	private final RedisRepository redisRepository;

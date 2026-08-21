@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 国际化信息
  */
-public interface I18nDataService extends IService<I18nData> {
+public interface Data18nService extends IService<I18nData> {
 
 	/**
 	 * 根据QueryObeject查询分页数据

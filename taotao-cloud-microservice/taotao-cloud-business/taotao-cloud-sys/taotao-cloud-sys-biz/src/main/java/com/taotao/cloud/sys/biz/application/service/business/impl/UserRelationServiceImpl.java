@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.application.service.business.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
-import com.taotao.cloud.sys.biz.application.service.business.IUserRelationService;
+import com.taotao.cloud.sys.biz.application.service.business.UserRelationService;
 import com.taotao.cloud.sys.biz.mapper.IUserRelationMapper;
 import com.taotao.cloud.sys.biz.model.entity.system.QUserRelation;
 import com.taotao.cloud.sys.biz.model.entity.system.UserRelation;
@@ -39,7 +39,7 @@ import java.util.Set;
 public class UserRelationServiceImpl
 	extends BaseServiceImpl<
          UserRelation, Long, IUserRelationMapper,UserRelationRepository, IUserRelationRepository>
-	implements IUserRelationService {
+	implements UserRelationService {
 
 	private static final QUserRelation USER_RELATION = QUserRelation.userRelation;
 

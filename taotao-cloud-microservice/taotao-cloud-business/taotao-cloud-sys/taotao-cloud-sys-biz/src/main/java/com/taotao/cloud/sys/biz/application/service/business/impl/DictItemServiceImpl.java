@@ -20,7 +20,7 @@ import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.utils.bean.BeanUtils;
-import com.taotao.cloud.sys.biz.application.service.business.IDictItemService;
+import com.taotao.cloud.sys.biz.application.service.business.DictItemService;
 import com.taotao.cloud.sys.biz.model.dto.dictItem.DictItemDTO;
 import com.taotao.cloud.sys.biz.model.entity.dict.DictItem;
 import com.taotao.cloud.sys.biz.model.page.DictItemPageQuery;
@@ -43,7 +43,7 @@ import java.util.Optional;
  */
 @Service
 public class DictItemServiceImpl
-        implements IDictItemService {
+        implements DictItemService {
 
     private static final QDictItem DICT_ITEM = QDictItem.dictItem;
     private static final OrderSpecifier<LocalDateTime> CREATE_TIME_DESC = DICT_ITEM.createTime.desc();

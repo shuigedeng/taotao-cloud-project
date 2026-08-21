@@ -23,8 +23,8 @@ import com.querydsl.core.types.Predicate;
 import com.taotao.boot.cache.redis.model.CacheKey;
 import com.taotao.boot.lock.support.DistributedLock;
 import com.taotao.boot.webagg.repository.BaseClassSuperRepository;
-import com.taotao.cloud.sys.biz.application.service.business.IUserService;
-import com.taotao.cloud.sys.biz.application.service.inner.IFeignUserService;
+import com.taotao.cloud.sys.biz.application.service.business.UserService;
+import com.taotao.cloud.sys.biz.application.service.inner.FeignUserService;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -49,9 +49,9 @@ import java.util.function.Function;
 @Service
 @AllArgsConstructor
 public class FeignUserServiceImpl
-        implements IFeignUserService {
+        implements FeignUserService {
 
-    private final IUserService userService;
+    private final UserService userService;
 
     @Override
     public <T> T test123(T t) {

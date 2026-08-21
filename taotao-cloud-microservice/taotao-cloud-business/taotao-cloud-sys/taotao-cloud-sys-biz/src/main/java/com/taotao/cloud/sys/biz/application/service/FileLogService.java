@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.biz.application.service.business;
-
-import com.taotao.boot.webagg.service.BaseService;
-import com.taotao.cloud.sys.biz.model.entity.system.Position;
+package com.taotao.cloud.sys.biz.application.service;
 
 /**
- * 岗位表服务接口
+ * 文件服务信息
  *
  * @author shuigedeng
- * @since 2020-10-16 16:23:05
- * @since 1.0
+ * @version 2022.03
+ * @since 2020/11/12 21:26
  */
-public interface IPositionService extends BaseService<Position, Long> {}
+public interface FileLogService {
+
+
+}

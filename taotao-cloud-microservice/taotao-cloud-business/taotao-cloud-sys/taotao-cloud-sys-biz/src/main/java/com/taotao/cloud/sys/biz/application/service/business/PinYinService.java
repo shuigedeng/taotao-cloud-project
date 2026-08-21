@@ -23,7 +23,7 @@ package com.taotao.cloud.sys.biz.application.service.business;
  * @version 2022.03
  * @since 2022-03-23 08:59:36
  */
-public interface IPinYinService {
+public interface PinYinService {
 
     /**
      * 获取姓氏的首字母大写

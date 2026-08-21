@@ -28,7 +28,7 @@ import org.springframework.scheduling.annotation.Async;
  * @version 2022.03
  * @since 2022-03-25 14:25:28
  */
-public interface IEmailConfigService extends IService<EmailConfig> {
+public interface EmailConfigService extends IService<EmailConfig> {
 
     /**
      * 更新邮件配置

@@ -34,7 +34,7 @@ import java.util.List;
  * @version 2021.10
  * @since 2022-02-15 09:19:55
  */
-public interface ILogService extends IService<Log> {
+public interface LogService extends IService<Log> {
 
 	/**
 	 * 分页获取日志数据

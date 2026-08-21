@@ -32,7 +32,7 @@ import java.util.Map;
  * @version 2022.08
  * @since 2022-08-10 10:24:46
  */
-public interface IRegionService extends BaseService<Region, Long> {
+public interface RegionService extends BaseService<Region, Long> {
 
     /**
      * queryRegionByParentId

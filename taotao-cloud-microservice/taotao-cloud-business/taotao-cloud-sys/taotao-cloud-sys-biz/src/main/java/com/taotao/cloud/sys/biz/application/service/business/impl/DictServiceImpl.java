@@ -32,8 +32,8 @@ import com.taotao.boot.common.utils.servlet.MdcUtils;
 import com.taotao.boot.data.jpa.model.SelectBooleanBuilder;
 import com.taotao.boot.data.jpa.model.SelectBuilder;
 import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
-import com.taotao.cloud.sys.biz.application.service.business.IDictItemService;
-import com.taotao.cloud.sys.biz.application.service.business.IDictService;
+import com.taotao.cloud.sys.biz.application.service.business.DictItemService;
+import com.taotao.cloud.sys.biz.application.service.business.DictService;
 import com.taotao.cloud.sys.biz.mapper.IDictMapper;
 import com.taotao.cloud.sys.biz.model.bo.DictDeptBO;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
@@ -68,9 +68,9 @@ import java.util.concurrent.Future;
 @AllArgsConstructor
 @Service
 public class DictServiceImpl extends BaseServiceImpl< Dict, Long,IDictMapper, DictRepository, IDictRepository>
-	implements IDictService {
+	implements DictService {
 
-	private final IDictItemService dictItemService;
+	private final DictItemService dictItemService;
 	private final CriteriaBuilderFactory criteriaBuilderFactory;
 
 	private final QDict DICT = QDict.dict;

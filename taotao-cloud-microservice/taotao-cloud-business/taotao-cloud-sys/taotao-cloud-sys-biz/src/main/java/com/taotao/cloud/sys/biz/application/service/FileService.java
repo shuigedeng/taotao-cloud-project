@@ -29,7 +29,7 @@ import java.util.List;
  * @version 2022.03
  * @since 2020/11/12 21:26
  */
-public interface IFileService {
+public interface FileService {
 
 	/**
 	 * 上传文件

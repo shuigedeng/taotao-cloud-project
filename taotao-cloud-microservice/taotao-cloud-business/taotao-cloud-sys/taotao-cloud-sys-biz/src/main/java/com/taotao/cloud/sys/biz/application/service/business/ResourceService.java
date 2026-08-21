@@ -33,7 +33,7 @@ import java.util.Set;
  * @version 2021.10
  * @since 2021-10-09 20:38:19
  */
-public interface IResourceService extends BaseService<Resource, Long> {
+public interface ResourceService extends BaseService<Resource, Long> {
 
     /**
      * 查询所有菜单列表

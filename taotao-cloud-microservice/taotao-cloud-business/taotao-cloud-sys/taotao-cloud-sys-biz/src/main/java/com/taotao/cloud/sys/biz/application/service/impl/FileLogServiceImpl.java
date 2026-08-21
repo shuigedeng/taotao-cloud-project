@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.application.service.impl;
 
-import com.taotao.cloud.sys.biz.application.service.IFileLogService;
+import com.taotao.cloud.sys.biz.application.service.FileLogService;
 
 /**
  * 文件上传服务
@@ -27,6 +27,6 @@ import com.taotao.cloud.sys.biz.application.service.IFileLogService;
  */
 //@Service
 public class FileLogServiceImpl
-	implements IFileLogService {
+	implements FileLogService {
 
 }

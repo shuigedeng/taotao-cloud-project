@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.application.service.business.impl;
 
-import com.taotao.cloud.sys.biz.application.service.business.ISystemService;
+import com.taotao.cloud.sys.biz.application.service.business.SystemService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
  * @since 2022-03-03 14:34:51
  */
 @Service
-public class SystemServiceImpl implements ISystemService {
+public class SystemServiceImpl implements SystemService {
 
     //	private Version version;
     //

@@ -16,23 +16,11 @@
 
 package com.taotao.cloud.sys.biz.application.service.business;
 
-import com.taotao.cloud.sys.biz.model.entity.config.LogisticsConfig;
-
 /**
- * ILogisticsService
+ * ISystemService
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2022-03-25 14:58:48
+ * @version 2021.10
+ * @since 2022-03-03 14:34:17
  */
-public interface ILogisticsService {
-
-    /**
-     * 根据id查询物流公司信息
-     *
-     * @param id id
-     * @return 物流公司信息
-     * @since 2020/11/20 下午1:08
-     */
-    LogisticsConfig findLogisticsById(Long id);
-}
+public interface SystemService {}
