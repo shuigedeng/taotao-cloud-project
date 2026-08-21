@@ -76,8 +76,8 @@ dependencies {
     ////https://search.maven.org/artifact/cn.dev33/sa-token-reactor-spring-boot-starter
     //implementation 'cn.dev33:sa-token-reactor-spring-boot4-starter:1.45.0'
 
-    implementation "com.google.protobuf:protobuf-java:4.35.0"
-    implementation "com.google.protobuf:protobuf-java-util:4.35.0"
+    implementation "com.google.protobuf:protobuf-java:4.36.0"
+    implementation "com.google.protobuf:protobuf-java-util:4.36.0"
 }
 
 configurations {
@@ -89,8 +89,8 @@ configurations {
             //todo 临时使用
             force "io.opentelemetry:opentelemetry-api-incubator:1.65.0-alpha"
 
-            force "com.google.protobuf:protobuf-java:4.35.0"
-            force "com.google.protobuf:protobuf-java-util:4.35.0"
+            force "com.google.protobuf:protobuf-java:4.36.0"
+            force "com.google.protobuf:protobuf-java-util:4.36.0"
         }
 
         exclude group: "org.springframework", module: "spring-webmvc"
