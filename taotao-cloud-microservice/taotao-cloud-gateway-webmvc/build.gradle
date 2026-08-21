@@ -64,7 +64,7 @@ dependencies {
     //    exclude group: "cn.dev33", module: "sa-token-jakarta-servlet"
     //}
     ////https://search.maven.org/artifact/cn.dev33/sa-token-reactor-spring-boot-starter
-    //implementation 'cn.dev33:sa-token-reactor-spring-boot4-starter:1.45.0'
+    //implementation 'cn.dev33:sa-token-reactor-spring-boot4-starter:1.46.0'
 
     implementation "com.google.protobuf:protobuf-java:4.36.0"
     implementation "com.google.protobuf:protobuf-java-util:4.36.0"
