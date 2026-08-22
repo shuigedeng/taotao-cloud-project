@@ -27,7 +27,6 @@ dependencies {
     api 'io.netty:netty-all:4.2.17.Final'
 
     api("org.springframework.boot:spring-boot-starter-webmvc") {
-        //exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-undertow"
     }
     //api "org.springframework.boot:spring-boot-starter-undertow"

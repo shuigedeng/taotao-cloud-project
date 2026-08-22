@@ -19,14 +19,14 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
 
     //https://search.maven.org/artifact/org.springframework.integration/spring-integration-core
-    implementation 'org.springframework.integration:spring-integration-core:7.1.0'
-    implementation 'org.springframework.integration:spring-integration-jdbc:7.1.0'
+    implementation 'org.springframework.integration:spring-integration-core:7.1.1'
+    implementation 'org.springframework.integration:spring-integration-jdbc:7.1.1'
 
     implementation 'org.springframework.boot:spring-boot-starter-batch'
     implementation 'org.springframework.boot:spring-boot-starter-batch-jdbc'
-    implementation 'org.springframework.batch:spring-batch-infrastructure:6.0.4'
-    implementation 'org.springframework.batch:spring-batch-integration:6.0.4'
-    testImplementation 'org.springframework.batch:spring-batch-test:6.0.4'
+    implementation 'org.springframework.batch:spring-batch-infrastructure:6.0.5'
+    implementation 'org.springframework.batch:spring-batch-integration:6.0.5'
+    testImplementation 'org.springframework.batch:spring-batch-test:6.0.5'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"
@@ -235,7 +235,6 @@ configurations {
         //exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
         //exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
         //exclude group: "org.apache.logging.log4j", module: "log4j-api"
-        //exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-undertow"
         //Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
         //exclude group: "commons-logging", module: "commons-logging"

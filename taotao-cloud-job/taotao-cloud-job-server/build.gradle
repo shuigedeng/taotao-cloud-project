@@ -10,7 +10,6 @@ dependencies {
 
     api "com.baomidou:mybatis-plus-spring-boot4-starter:3.5.17"
     api("org.springframework.boot:spring-boot-starter-webmvc") {
-        //exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-undertow"
     }
     //api "org.springframework.boot:spring-boot-starter-undertow"

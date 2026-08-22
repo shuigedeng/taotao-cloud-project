@@ -2,7 +2,6 @@ dependencies {
     //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
     
-
     //boot
     implementation "io.github.shuigedeng:taotao-boot-starter-core"
     implementation "io.github.shuigedeng:taotao-boot-starter-logger"
@@ -16,10 +15,9 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-opentelemetry"
 
     implementation("org.springframework.boot:spring-boot-starter-webmvc") {
-        //exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-undertow"
     }
-    //implementation "org.springframework.boot:spring-boot-starter-undertow"
+
     implementation "org.springframework.boot:spring-boot-starter-tomcat"
     implementation "org.springframework.boot:spring-boot-starter-freemarker"
 
@@ -63,7 +61,6 @@ configurations {
         //exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
         //exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
         //exclude group: "org.apache.logging.log4j", module: "log4j-api"
-        //exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-undertow"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-data-jpa"
     }
