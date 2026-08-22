@@ -23,7 +23,7 @@ import com.taotao.cloud.report.api.model.vo.PlatformViewVO;
 import java.util.List;
 
 /** 平台PV统计 */
-public interface IPlatformViewService extends IService<PlatformViewData> {
+public interface PlatformViewService extends IService<PlatformViewData> {
 
     /**
      * 当前在线人数

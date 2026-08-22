@@ -18,7 +18,7 @@ package com.taotao.cloud.bff.api.controller.pc;
 
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.web.request.annotation.RequestLogger;
-import com.taotao.cloud.bff.api.service.app.ISeckillApplyService;
+import com.taotao.cloud.bff.api.service.app.SeckillApplyService;
 import com.taotao.cloud.promotion.api.model.vo.SeckillGoodsVO;
 import com.taotao.cloud.promotion.api.model.vo.SeckillTimelineVO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -42,7 +42,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SeckillBuyerController {
 
     /** 秒杀活动 */
-    @Autowired private ISeckillApplyService seckillApplyService;
+    @Autowired private SeckillApplyService seckillApplyService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")

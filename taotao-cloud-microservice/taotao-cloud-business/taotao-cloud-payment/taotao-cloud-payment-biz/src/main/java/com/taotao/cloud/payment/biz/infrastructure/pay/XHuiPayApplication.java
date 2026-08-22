@@ -29,7 +29,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @create: 2020-06-03 11:17
  */
 @SpringBootApplication
-@EnableXHuiFeignClients
 @EnableResourceServer
 @EnableXHuiSwagger
 public class XHuiPayApplication {

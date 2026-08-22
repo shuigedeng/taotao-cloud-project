@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 /** 会员统计业务层 */
-public interface IMemberStatisticsService extends IService<MemberStatisticsData> {
+public interface MemberStatisticsService extends IService<MemberStatisticsData> {
 
     /**
      * 获取会员数量

@@ -9,7 +9,6 @@ import net.xdclass.enums.BizCodeEnum;
 import net.xdclass.enums.DomainTypeEnum;
 import net.xdclass.enums.EventMessageType;
 import net.xdclass.enums.ShortLinkStateEnum;
-import net.xdclass.inner.TrafficFeignService;
 import net.xdclass.interceptor.LoginInterceptor;
 import net.xdclass.manager.DomainManager;
 import net.xdclass.manager.LinkGroupManager;
@@ -66,8 +65,8 @@ public class ShortLinkServiceImpl implements ShortLinkService{
     @Autowired
     private RedisTemplate<Object, Object> redisTemplate;
 
-    @Autowired
-    private TrafficFeignService trafficService;
+//    @Autowired
+//    private TrafficFeignService trafficService;
 
     /**
      * 解析短链

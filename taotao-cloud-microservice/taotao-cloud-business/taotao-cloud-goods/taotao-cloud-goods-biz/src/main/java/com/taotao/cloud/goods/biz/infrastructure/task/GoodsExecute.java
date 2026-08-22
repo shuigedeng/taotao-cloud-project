@@ -18,7 +18,6 @@ package com.taotao.cloud.goods.biz.infrastructure.task;
 //
 // import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 // import com.taotao.boot.job.xxl.timetask.EveryDayExecute;
-// import com.taotao.cloud.member.api.inner.IFeignMemberEvaluationApi;
 // import jakarta.annotation.Resource;
 // import java.util.List;
 // import java.util.Map;
