@@ -3,13 +3,13 @@ dependencies {
 
     api 'com.google.guava:guava:33.7.1-jre'
     api 'com.alibaba.fastjson2:fastjson2:2.0.64'
-    api 'org.rocksdb:rocksdbjni:9.4.0'
-    api ("com.alipay.sofa:rpc-grpc-impl:1.4.0")
-    api 'com.alipay.sofa:hessian:3.5.5'
+    api 'org.rocksdb:rocksdbjni:10.10.1.1'
+    api ("com.alipay.sofa:rpc-grpc-impl:1.4.1")
+    api 'com.alipay.sofa:hessian:3.5.6'
     api('com.alipay.sofa:bolt:1.6.12') {
         exclude group: 'org.slf4j', module: 'slf4j-api'
     }
-    api ("com.alipay.sofa:jraft-core:1.4.0") {
+    api ("com.alipay.sofa:jraft-core:1.4.1") {
         //exclude group: "org.apache.logging.log4j", module: "log4j-api"
         //exclude group: "org.apache.logging.log4j", module: "log4j-core"
         //exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
