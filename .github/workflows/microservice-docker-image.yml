@@ -123,7 +123,7 @@ jobs:
       #https://github.com/marketplace/actions/ssh-remote-commands
       - name: Ssh To server To execute taotao-cloud-monitor script
         #uses: fifsky/ssh-action@master
-        uses: appleboy/ssh-action@v1.2.0
+        uses: appleboy/ssh-action@v1.2.5
         with:
           #command: |
           #  cd /develop/work/education-back-server
