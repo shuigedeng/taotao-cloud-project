@@ -5,7 +5,7 @@ dependencies {
 
     api 'org.slf4j:slf4j-api:2.0.18'
     api 'org.slf4j:slf4j-api:2.0.18'
-    api "redis.clients:jedis:8.0.0"
+    api "redis.clients:jedis:8.0.1"
 
     api 'com.google.guava:guava:33.7.1-jre'
     api 'com.alibaba.fastjson2:fastjson2:2.0.64'

@@ -6,8 +6,6 @@ dependencies {
 
     //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
-    
-    
 
     //boot
     implementation "io.github.shuigedeng:taotao-boot-starter-sentinel"
@@ -43,8 +41,8 @@ dependencies {
     implementation 'org.springframework.session:spring-session-data-redis:4.1.1'
 
     //https://central.sonatype.com/artifact/com.github.binarywang/weixin-java-pay?smo=true
-    implementation 'com.github.binarywang:weixin-java-mp:4.8.5.B'
-    implementation 'com.github.binarywang:weixin-java-miniapp:4.8.5.B'
+    implementation 'com.github.binarywang:weixin-java-mp:4.8.6.B'
+    implementation 'com.github.binarywang:weixin-java-miniapp:4.8.6.B'
 
     //implementation 'top.dcenter:justAuth-spring-security-starter:1.1.25'
 
@@ -123,7 +121,7 @@ dependencies {
     implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter"
 
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
-    implementation "com.nimbusds:nimbus-jose-jwt:10.9"
+    implementation "com.nimbusds:nimbus-jose-jwt:10.9.1"
     //https://search.maven.org/artifact/com.nimbusds/oauth2-oidc-sdk
     implementation 'com.nimbusds:oauth2-oidc-sdk:11.38.2'
 
@@ -134,7 +132,7 @@ dependencies {
 
     //百度人脸识别以及登录
     //https://search.maven.org/artifact/com.baidu.aip/java-sdk
-    implementation('com.baidu.aip:java-sdk:4.16.25') {
+    implementation('com.baidu.aip:java-sdk:4.16.26') {
         //exclude group: "commons-logging", module: "commons-logging"
         exclude group: "org.slf4j", module: "slf4j-simple"
         exclude group: "org.slf4j", module: "slf4j-api"

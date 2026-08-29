@@ -165,7 +165,7 @@ dependencies {
 
     // --- 其他工具库 ---
     flinkShadowJar 'com.mysql:mysql-connector-j:9.7.0'
-    flinkShadowJar 'redis.clients:jedis:8.0.0'
+    flinkShadowJar 'redis.clients:jedis:8.0.1'
     flinkShadowJar ("org.apache.hive:hive-exec:4.2.0") {
         exclude group: 'org.apache.curator', module: 'apache-curator'
     }
