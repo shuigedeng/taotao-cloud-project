@@ -164,4 +164,4 @@ HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0
 
 #HEALTHCHECK --start-period=60s --interval=10s --timeout=3s --retries=50 CMD /bin/sh /healthcheck.sh
 
-ENTRYPOINT ["sh", "-c", "exec java ${JAVA_OPTIONS} -jar taotao-cloud-sys-2026.09.jar"]
+ENTRYPOINT ["sh", "-c", "exec java ${JAVA_OPTIONS} -jar taotao-cloud-sys-2026.10.jar"]

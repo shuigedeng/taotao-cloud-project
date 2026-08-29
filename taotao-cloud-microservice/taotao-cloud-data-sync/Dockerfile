@@ -37,9 +37,9 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 
 WORKDIR /builder
 
-COPY ./build/libs/taotao-cloud-data-sync-2026.09.jar ./
+COPY ./build/libs/taotao-cloud-data-sync-2026.10.jar ./
 
-RUN java -Djarmode=tools -jar taotao-cloud-data-sync-2026.09.jar extract --layers --destination extracted
+RUN java -Djarmode=tools -jar taotao-cloud-data-sync-2026.10.jar extract --layers --destination extracted
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk25:latest
@@ -49,7 +49,7 @@ ARG BACKEND_SERVICE=127.0.0.1:11800
 ARG AGENT_AUTHENTICATION=taotao-cloud
 ARG TAOTAO_CLOUD_MAIL_PASSWORD=xxxx
 ARG APP_NAME=taotao-cloud-data-sync
-ARG APP_VERSION=2026.09
+ARG APP_VERSION=2026.10
 ARG JAR=${APP_NAME}-${VERSION}
 ARG JAR_NAME=${JAR}.jar
 ARG APP_PORT=33334
@@ -129,4 +129,4 @@ RUN true
 
 HEALTHCHECK --interval=60s --timeout=60s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
 
-ENTRYPOINT ["sh", "-c", "exec java ${JAVA_OPTIONS} -jar taotao-cloud-sys-2026.09.jar"]
+ENTRYPOINT ["sh", "-c", "exec java ${JAVA_OPTIONS} -jar taotao-cloud-sys-2026.10.jar"]
