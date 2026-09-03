@@ -1,3 +1,20 @@
+apply plugin: "scala"
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: "idea"
+
+repositories {
+    mavenLocal()
+    //mavenCentral()
+    maven {
+        url = "https://repo1.maven.org/maven2"
+    }
+    maven {
+        allowInsecureProtocol = true
+        url = 'https://build.shibboleth.net/nexus/content/groups/public'
+    }
+}
+
 dependencies {
     implementation "org.apache.hadoop:hadoop-common:3.5.0"
     implementation "org.apache.hadoop:hadoop-mapreduce-client-core:3.5.0"
@@ -12,13 +29,6 @@ dependencies {
 
     implementation "com.alibaba.fastjson2:fastjson2:2.0.64"
 
-}
-
-repositories {
-    maven {
-        allowInsecureProtocol = true
-        url = 'https://build.shibboleth.net/nexus/content/groups/public'
-    }
 }
 
 configurations {
