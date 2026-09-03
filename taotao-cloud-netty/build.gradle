@@ -63,16 +63,16 @@ dependencies {
     implementation "com.google.protobuf:protobuf-java:4.36.0"
     implementation "com.google.protobuf:protobuf-java-util:4.36.0"
     implementation "org.apache.thrift:libthrift:0.23.0"
-    implementation "io.grpc:grpc-api:1.83.1"
-    implementation "io.grpc:grpc-context:1.83.1"
-    implementation "io.grpc:grpc-core:1.83.1"
-    implementation "io.grpc:grpc-netty:1.83.1"
-    implementation "io.grpc:grpc-netty-shaded:1.83.1"
-    implementation "io.grpc:grpc-protobuf:1.83.1"
-    implementation "io.grpc:grpc-protobuf-lite:1.83.1"
-    implementation "io.grpc:grpc-stub:1.83.1"
-    implementation "io.grpc:grpc-services:1.83.1"
-    testImplementation("io.grpc:grpc-testing:1.83.1")
+    implementation "io.grpc:grpc-api:1.84.0"
+    implementation "io.grpc:grpc-context:1.84.0"
+    implementation "io.grpc:grpc-core:1.84.0"
+    implementation "io.grpc:grpc-netty:1.84.0"
+    implementation "io.grpc:grpc-netty-shaded:1.84.0"
+    implementation "io.grpc:grpc-protobuf:1.84.0"
+    implementation "io.grpc:grpc-protobuf-lite:1.84.0"
+    implementation "io.grpc:grpc-stub:1.84.0"
+    implementation "io.grpc:grpc-services:1.84.0"
+    testImplementation("io.grpc:grpc-testing:1.84.0")
     implementation 'com.google.code.gson:gson:2.14.0'
     implementation 'com.google.guava:guava:33.7.1-jre'
 
@@ -94,10 +94,10 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:6.1.3'
     testImplementation "org.assertj:assertj-core:3.27.7"
 
-    compileOnly "org.projectlombok:lombok:1.18.46"
-    annotationProcessor "org.projectlombok:lombok:1.18.46"
-    testCompileOnly "org.projectlombok:lombok:1.18.46"
-    testAnnotationProcessor "org.projectlombok:lombok:1.18.46"
+    compileOnly "org.projectlombok:lombok:1.18.48"
+    annotationProcessor "org.projectlombok:lombok:1.18.48"
+    testCompileOnly "org.projectlombok:lombok:1.18.48"
+    testAnnotationProcessor "org.projectlombok:lombok:1.18.48"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
 }
 
@@ -117,7 +117,7 @@ protobuf {
     //指定protoc运行插件
     plugins {
         grpc {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.83.1"
+            artifact = "io.grpc:protoc-gen-grpc-java:1.84.0"
         }
         //javalite {
         //    // The codegen for lite comes as a separate artifact
@@ -141,7 +141,7 @@ protobuf {
 //
 //    plugins {
 //        grpc {
-//            artifact = "io.grpc:protoc-gen-grpc-java:1.83.1"
+//            artifact = "io.grpc:protoc-gen-grpc-java:1.84.0"
 //        }
 //    }
 //
