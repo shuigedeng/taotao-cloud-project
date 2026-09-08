@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.infrastructure.config.redis;
 
 import com.taotao.boot.common.constant.RedisConstants;
-import com.taotao.boot.common.support.thread.MDCThreadPoolExecutor;
+import com.taotao.boot.common.support.thread.MdcThreadPoolExecutor;
 import com.taotao.boot.common.support.thread.ThreadPoolFactory;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.biz.infrastructure.config.redis.delegate.DataVersionLogTopicMessageDelegate;
@@ -61,13 +61,13 @@ public class RedisListenerConfig {
         container.setConnectionFactory(redisConnectionFactory);
 
         // Runtime.getRuntime().availableProcessors() * 2
-        MDCThreadPoolExecutor executor = new MDCThreadPoolExecutor(
+        MdcThreadPoolExecutor executor = new MdcThreadPoolExecutor(
                 100,
                 1500,
                 2000,
                 TimeUnit.SECONDS,
                 new SynchronousQueue<>(),
-                new ThreadPoolFactory("taotao-cloud-redis-listener-executor"));
+                new ThreadPoolFactory("ttc-biz-sys-redis-listener-pool-thread-"));
         container.setTaskExecutor(executor);
 
         Map<MessageListenerAdapter, Collection<? extends Topic>> listeners = new HashMap<>();
