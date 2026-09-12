@@ -13,7 +13,7 @@ dependencies {
     }
 
     implementation "org.springframework.boot:spring-boot-starter-tomcat"
-    api "com.mysql:mysql-connector-j:9.7.0"
+    api "com.mysql:mysql-connector-j:26.7.0"
     api "net.devh:grpc-server-spring-boot-starter:3.1.0.RELEASE"
 }
 

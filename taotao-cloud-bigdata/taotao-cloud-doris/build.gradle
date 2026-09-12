@@ -5,7 +5,7 @@ apply plugin: "idea"
 dependencies {
     implementation 'org.apache.hive:hive-exec:4.2.0'
 
-    implementation 'com.mysql:mysql-connector-j:9.7.0'
+    implementation 'com.mysql:mysql-connector-j:26.7.0'
 }
 
 configurations {

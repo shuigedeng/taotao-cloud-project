@@ -151,7 +151,7 @@ dependencies {
     //flinkShadowJar('org.apache.paimon:paimon-shade-caffeine-2:2.9.3-0.8.0')
 
     // --- 其他工具库 ---
-    flinkShadowJar 'com.mysql:mysql-connector-j:9.7.0'
+    flinkShadowJar 'com.mysql:mysql-connector-j:26.7.0'
     flinkShadowJar 'redis.clients:jedis:8.0.1'
     flinkShadowJar ("org.apache.hive:hive-exec:4.2.0") {
         exclude group: 'org.apache.curator', module: 'apache-curator'
@@ -169,7 +169,7 @@ dependencies {
     //flinkShadowJar (project(":taotao-cloud-bigdata:taotao-cloud-flink-cep"))
     flinkShadowJar 'com.googlecode.aviator:aviator:5.4.4'
 
-    flinkShadowJar "com.alibaba.fastjson2:fastjson2:2.0.64"
+    flinkShadowJar "com.alibaba.fastjson2:fastjson2:2.0.65"
 
 }
 
