@@ -81,8 +81,8 @@ public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandle
 			request.method().name(),
 			error.getMessage());
 
-		String message = ResultEnum.FAILED.getDesc();
-		Code code = ResultEnum.FAILED.code();
+		String message = ResultEnum.FAILED.desc();
+		Code code = ResultEnum.FAILED.coder();
 
 		if (error instanceof NotFoundException notFoundException) {
 			String serverId =
@@ -126,14 +126,14 @@ public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandle
 
 			if (HttpStatus.NOT_FOUND == httpStatus) {
 				LogUtils.error(responseStatusException, "未找到该资源");
-				message = ResultEnum.REQUEST_NOT_FOUND.getDesc();
-				code = ResultEnum.REQUEST_NOT_FOUND.code();
+				message = ResultEnum.REQUEST_NOT_FOUND.desc();
+				code = ResultEnum.REQUEST_NOT_FOUND.coder();
 			}
 
 			if (HttpStatus.GATEWAY_TIMEOUT == httpStatus) {
 				LogUtils.error(responseStatusException, "调用后台服务超时了");
-				message = ResultEnum.TIMEOUT_ERROR.getDesc();
-				code = ResultEnum.TIMEOUT_ERROR.code();
+				message = ResultEnum.TIMEOUT_ERROR.desc();
+				code = ResultEnum.TIMEOUT_ERROR.coder();
 			}
 		}
 
