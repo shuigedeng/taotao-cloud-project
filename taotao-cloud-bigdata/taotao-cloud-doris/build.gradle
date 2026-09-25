@@ -3,7 +3,7 @@ apply plugin: 'application'
 apply plugin: "idea"
 
 dependencies {
-    implementation 'org.apache.hive:hive-exec:4.2.0'
+    implementation 'org.apache.hive:hive-exec:4.2.1'
 
     implementation 'com.mysql:mysql-connector-j:26.7.0'
 }

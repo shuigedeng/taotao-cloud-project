@@ -3,7 +3,6 @@ apply plugin: "com.google.protobuf"
 dependencies {
     api "io.github.shuigedeng:taotao-boot-starter-core"
 
-
     api "net.devh:grpc-client-spring-boot-starter:3.1.0.RELEASE"
 
     api "io.netty:netty-all:4.2.18.Final"

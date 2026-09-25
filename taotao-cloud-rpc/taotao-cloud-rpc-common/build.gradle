@@ -8,14 +8,14 @@ dependencies {
     // redis 分布式锁
     api 'redis.clients:jedis:8.0.1'
     //Lettuce Redis客户端
-    api('io.lettuce:lettuce-core:6.8.1.RELEASE') {
+    api('io.lettuce:lettuce-core:7.8.0.RELEASE') {
         exclude group: 'io.netty', module: 'netty-handler'
         exclude group: 'io.netty', module: 'netty-common'
         exclude group: 'io.netty', module: 'netty-transport'
     }
     //json 转换工具
-    api 'tools.jackson.core:jackson-databind:3.2.2'
-    api 'tools.jackson.core:jackson-core:3.2.2'
+    api 'tools.jackson.core:jackson-databind:3.2.3'
+    api 'tools.jackson.core:jackson-core:3.2.3'
     //kryo 序列化 工具
     api 'com.esotericsoftware:kryo:5.6.2'
     //hessian 序列化 工具

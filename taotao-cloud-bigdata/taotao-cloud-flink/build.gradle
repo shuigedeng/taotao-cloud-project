@@ -75,7 +75,7 @@ dependencies {
     //flinkShadowJar "org.apache.flink:flink-connector-redis_2.11:1.1.5"
 
     // --- Doris ---
-    flinkShadowJar 'org.apache.doris:flink-doris-connector-2.2:26.1.1'
+    flinkShadowJar 'org.apache.doris:flink-doris-connector-2.2:26.3.0'
 
     // --- SQL Connectors ---
     //flinkShadowJar 'org.apache.flink:flink-sql-connector-hive-3.1.3_2.12:1.20.5'
@@ -153,7 +153,7 @@ dependencies {
     // --- 其他工具库 ---
     flinkShadowJar 'com.mysql:mysql-connector-j:26.7.0'
     flinkShadowJar 'redis.clients:jedis:8.0.1'
-    flinkShadowJar ("org.apache.hive:hive-exec:4.2.0") {
+    flinkShadowJar ("org.apache.hive:hive-exec:4.2.1") {
         exclude group: 'org.apache.curator', module: 'apache-curator'
     }
 
