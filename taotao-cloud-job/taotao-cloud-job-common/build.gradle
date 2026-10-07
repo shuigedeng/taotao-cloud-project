@@ -5,7 +5,7 @@ dependencies {
 
     api "net.devh:grpc-client-spring-boot-starter:3.1.0.RELEASE"
 
-    api "io.netty:netty-all:4.2.18.Final"
+    api "io.netty:netty-all:4.2.19.Final"
     api "com.google.protobuf:protobuf-java:3.25.5"
     api "com.google.protobuf:protobuf-java-util:3.25.5"
     api "org.apache.thrift:libthrift:0.22.0"
@@ -20,7 +20,7 @@ dependencies {
     api "io.grpc:grpc-services:1.84.0"
     testImplementation("io.grpc:grpc-testing:1.84.0")
     api 'com.google.code.gson:gson:2.14.0'
-    api 'com.google.guava:guava:33.7.1-jre'
+    api 'com.google.guava:guava:33.7.2-jre'
     api 'org.reflections:reflections:0.10.2'
 
     api 'jakarta.xml.ws:jakarta.xml.ws-api:4.0.2'

@@ -65,6 +65,57 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-webmvc"
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
 
+    //langchain4j
+    implementation 'dev.langchain4j:langchain4j-open-ai:1.21.0'
+    implementation 'dev.langchain4j:langchain4j-ollama:1.21.0'
+    implementation 'dev.langchain4j:langchain4j-spring-boot-starter:1.21.0-beta31'
+    implementation 'dev.langchain4j:langchain4j-anthropic-spring-boot-starter:1.21.0-beta31'
+    implementation 'dev.langchain4j:langchain4j-ollama-spring-boot-starter:1.21.0-beta31'
+    implementation 'dev.langchain4j:langchain4j-open-ai-spring-boot-starter:1.21.0-beta31'
+
+    //spring ai
+    // https://repo.spring.io/milestone
+    // https://repo.spring.io/snapshot
+    implementation 'org.springframework.ai:spring-ai-starter-model-anthropic'
+    //使用OpenAI
+    implementation 'org.springframework.ai:spring-ai-starter-model-openai'
+    //使用transformers
+    implementation 'org.springframework.ai:spring-ai-starter-model-transformers'
+    //使用ollama
+    implementation 'org.springframework.ai:spring-ai-starter-model-ollama'
+    //redis
+    implementation 'org.springframework.ai:spring-ai-starter-vector-store-redis'
+    //使用PGVector作为向量数据库
+    implementation 'org.springframework.ai:spring-ai-starter-vector-store-pgvector'
+    //引入PDF解析器
+    implementation 'org.springframework.ai:spring-ai-pdf-document-reader'
+    //mcp
+    implementation 'org.springframework.ai:spring-ai-starter-mcp-server'
+    implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webmvc'
+    //implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webflux'
+    implementation 'org.springframework.ai:spring-ai-starter-mcp-client'
+    //implementation 'org.springframework.ai:spring-ai-starter-mcp-client-webflux'
+
+    implementation 'org.springframework.ai:spring-ai-spring-boot-testcontainers'
+
+    //implementation 'org.springframework.ai:spring-ai-azure-openai-spring-boot-starter'
+    //implementation 'org.springframework.ai:spring-ai-azure-vector-store-spring-boot-starter'
+    //implementation 'org.springframework.ai:spring-ai-bedrock-ai-spring-boot-starter'
+    //implementation 'org.springframework.ai:spring-ai-chroma-store-spring-boot-starter'
+    //implementation 'org.springframework.ai:spring-ai-milvus-store-spring-boot-starter'
+    //implementation 'org.springframework.ai:spring-ai-mistral-ai-spring-boot-starter'
+    //implementation 'org.springframework.ai:spring-ai-neo4j-store-spring-boot-starter'
+
+    //implementation 'org.springframework.ai:spring-ai-pinecone-store-spring-boot-starter'
+    //implementation 'org.springframework.ai:spring-ai-postgresml-spring-boot-starter'
+    //implementation 'org.springframework.ai:spring-ai-qdrant-store-spring-boot-starter'
+    //implementation 'org.springframework.ai:spring-ai-stability-ai-spring-boot-starter'
+    //implementation 'org.springframework.ai:spring-ai-vertex-ai-gemini-spring-boot-starter'
+    //implementation 'org.springframework.ai:spring-ai-vertex-ai-palm2-spring-boot-starter'
+    //implementation 'org.springframework.ai:spring-ai-weaviate-store-spring-boot-starter'
+
+
+
 	//alibaba ai
     //implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-dashscope"
     //implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-arms-observation"
@@ -153,57 +204,6 @@ dependencies {
     //implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-tencent-cos"
     //implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-youtube"
     //implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter-document-reader-yuque"
-
-    //langchain4j
-    implementation 'dev.langchain4j:langchain4j-open-ai:1.18.0'
-    implementation 'dev.langchain4j:langchain4j-ollama:1.18.0'
-    implementation 'dev.langchain4j:langchain4j-spring-boot-starter:1.18.0-beta28'
-    implementation 'dev.langchain4j:langchain4j-anthropic-spring-boot-starter:1.18.0-beta28'
-    implementation 'dev.langchain4j:langchain4j-ollama-spring-boot-starter:1.18.0-beta28'
-    implementation 'dev.langchain4j:langchain4j-open-ai-spring-boot-starter:1.18.0-beta28'
-
-    //spring ai
-    // https://repo.spring.io/milestone
-    // https://repo.spring.io/snapshot
-    implementation 'org.springframework.ai:spring-ai-starter-model-anthropic'
-    //使用OpenAI
-    implementation 'org.springframework.ai:spring-ai-starter-model-openai'
-    //使用transformers
-    implementation 'org.springframework.ai:spring-ai-starter-model-transformers'
-    //使用ollama
-    implementation 'org.springframework.ai:spring-ai-starter-model-ollama'
-    //redis
-    implementation 'org.springframework.ai:spring-ai-starter-vector-store-redis'
-    //使用PGVector作为向量数据库
-    implementation 'org.springframework.ai:spring-ai-starter-vector-store-pgvector'
-    //引入PDF解析器
-    implementation 'org.springframework.ai:spring-ai-pdf-document-reader'
-
-    //mcp
-    implementation 'org.springframework.ai:spring-ai-starter-mcp-server'
-    implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webmvc'
-    //implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webflux'
-    implementation 'org.springframework.ai:spring-ai-starter-mcp-client'
-    //implementation 'org.springframework.ai:spring-ai-starter-mcp-client-webflux'
-
-    implementation 'org.springframework.ai:spring-ai-spring-boot-testcontainers'
-
-    //implementation 'org.springframework.ai:spring-ai-azure-openai-spring-boot-starter'
-    //implementation 'org.springframework.ai:spring-ai-azure-vector-store-spring-boot-starter'
-    //implementation 'org.springframework.ai:spring-ai-bedrock-ai-spring-boot-starter'
-    //implementation 'org.springframework.ai:spring-ai-chroma-store-spring-boot-starter'
-    //implementation 'org.springframework.ai:spring-ai-milvus-store-spring-boot-starter'
-    //implementation 'org.springframework.ai:spring-ai-mistral-ai-spring-boot-starter'
-    //implementation 'org.springframework.ai:spring-ai-neo4j-store-spring-boot-starter'
-
-    //implementation 'org.springframework.ai:spring-ai-pinecone-store-spring-boot-starter'
-    //implementation 'org.springframework.ai:spring-ai-postgresml-spring-boot-starter'
-    //implementation 'org.springframework.ai:spring-ai-qdrant-store-spring-boot-starter'
-    //implementation 'org.springframework.ai:spring-ai-stability-ai-spring-boot-starter'
-    //implementation 'org.springframework.ai:spring-ai-vertex-ai-gemini-spring-boot-starter'
-    //implementation 'org.springframework.ai:spring-ai-vertex-ai-palm2-spring-boot-starter'
-    //implementation 'org.springframework.ai:spring-ai-weaviate-store-spring-boot-starter'
-
 
 
     //AVIATOR——轻量级JAVA表达式求值引擎 https://blog.csdn.net/ZhangQingmu/article/details/125087255

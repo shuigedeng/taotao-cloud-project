@@ -22,9 +22,9 @@ dependencies {
     api 'com.caucho:hessian:4.0.66'
     // 日志框架
     api 'ch.qos.logback:logback-classic:1.5.38'
-    api "com.google.guava:guava:33.7.1-jre"
+    api "com.google.guava:guava:33.7.2-jre"
 
-    api 'io.netty:netty-all:4.2.18.Final'
+    api 'io.netty:netty-all:4.2.19.Final'
 
     api("org.springframework.boot:spring-boot-starter-webmvc") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-undertow"
