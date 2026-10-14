@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.sys.biz.infrastructure.utils;
 
-import com.taotao.boot.job.quartz.utils.CronUtils;
-import com.taotao.boot.job.schedule.constant.CycleTypeConstant;
+import com.taotao.boot.job.quartz.standard.utils.CronUtils;
+import com.taotao.boot.job.schedule.standard.constant.CycleTypeConstant;
 import com.taotao.cloud.sys.api.model.dto.ScheduledJobDTO;
 
 import java.util.ArrayList;

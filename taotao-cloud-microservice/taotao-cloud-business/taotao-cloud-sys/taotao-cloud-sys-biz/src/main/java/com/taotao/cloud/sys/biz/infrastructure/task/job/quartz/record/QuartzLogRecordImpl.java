@@ -18,8 +18,8 @@ package com.taotao.cloud.sys.biz.infrastructure.task.job.quartz.record;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.boot.job.quartz.entity.QuartzTaskLog;
-import com.taotao.boot.job.quartz.utils.QuartzLogRecord;
+import com.taotao.boot.job.quartz.standard.entity.QuartzTaskLog;
+import com.taotao.boot.job.quartz.standard.utils.QuartzLogRecord;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -3,7 +3,7 @@ package com.taotao.cloud.sys.biz.interfaces.controller;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.boot.job.quartz.enums.QuartzJobCode;
+import com.taotao.boot.job.quartz.standard.enums.QuartzJobCode;
 import com.taotao.cloud.sys.api.model.dto.QuartzJobDTO;
 import com.taotao.cloud.sys.biz.task.job.quartz.entity.QuartzJob;
 import com.taotao.cloud.sys.biz.task.job.quartz.mapper.QuartzJobMapper;

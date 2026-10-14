@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.infrastructure.task.job.quartz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.job.quartz.enums.QuartzJobCode;
+import com.taotao.boot.job.quartz.standard.enums.QuartzJobCode;
 import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -17,8 +17,8 @@
 package com.taotao.cloud.sys.biz.infrastructure.task.job.schedule.task;
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.boot.job.schedule.model.ScheduledTask;
-import com.taotao.boot.job.schedule.task.TaskManager;
+import com.taotao.boot.job.schedule.standard.model.ScheduledTask;
+import com.taotao.boot.job.schedule.standard.task.TaskManager;
 import net.javacrumbs.shedlock.spring.annotation.SchedulerLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

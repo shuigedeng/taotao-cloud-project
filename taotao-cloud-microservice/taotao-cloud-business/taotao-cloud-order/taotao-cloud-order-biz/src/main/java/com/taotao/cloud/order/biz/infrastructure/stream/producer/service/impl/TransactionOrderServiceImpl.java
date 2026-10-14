@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.biz.infrastructure.stream.producer.service.impl;
 
-import com.taotao.boot.mq.rocketmq.rocketmq.constant.MessageConstant;
+import com.taotao.boot.mq.rocketmq.standard.constant.MessageConstant;
 import com.taotao.cloud.order.biz.infrastructure.stream.producer.service.TransactionOrderService;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import lombok.AllArgsConstructor;

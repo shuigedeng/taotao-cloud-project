@@ -19,26 +19,22 @@ package com.taotao.cloud.gateway.configuration;
 
 import cn.hutool.http.HttpStatus;
 import com.taotao.boot.cache.redis.repository.RedisRepository;
-import com.taotao.boot.captcha.util.CaptchaUtils;
+import com.taotao.boot.captcha.plus.util.CaptchaUtils;
 import com.taotao.boot.common.constant.RedisConstants;
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.boot.common.utils.context.ContextUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.monitor.collect.HealthCheckProvider;
 import com.taotao.boot.monitor.model.Report;
-import com.taotao.cloud.gateway.anti_reptile.constant.AntiReptileConsts;
 import com.taotao.cloud.gateway.anti_reptile.handler.RefreshFormHandler;
 import com.taotao.cloud.gateway.anti_reptile.handler.ValidateFormHandler;
 import com.taotao.cloud.gateway.properties.ApiProperties;
 import com.wf.captcha.ArithmeticCaptcha;
 import java.io.InputStream;
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
-import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
+
 import lombok.*;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.ObjectProvider;

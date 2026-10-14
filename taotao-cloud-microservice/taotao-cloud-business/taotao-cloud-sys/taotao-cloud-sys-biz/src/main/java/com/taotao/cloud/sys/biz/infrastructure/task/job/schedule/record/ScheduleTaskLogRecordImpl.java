@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.infrastructure.task.job.schedule.record;
 
-import com.taotao.boot.job.schedule.task.ScheduleTaskLogRecord;
+import com.taotao.boot.job.schedule.standard.task.ScheduleTaskLogRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
