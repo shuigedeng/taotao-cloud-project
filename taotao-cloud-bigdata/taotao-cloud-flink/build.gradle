@@ -86,39 +86,39 @@ dependencies {
     //flinkShadowJar 'org.apache.flink:flink-sql-connector-pulsar:4.1.0-1.18'
 
     // --- Flink CDC ---
-    flinkShadowJar 'org.apache.flink:flink-cdc-base:3.6.0-2.2'
-    flinkShadowJar 'org.apache.flink:flink-cdc-cli:3.6.0-2.2'
-    flinkShadowJar 'org.apache.flink:flink-cdc-runtime:3.6.0-2.2'
-    flinkShadowJar 'org.apache.flink:flink-cdc-pipeline-connector-doris:3.6.0-2.2'
-    flinkShadowJar 'org.apache.flink:flink-cdc-pipeline-connector-kafka:3.6.0-2.2'
-    flinkShadowJar 'org.apache.flink:flink-cdc-pipeline-connector-mysql:3.6.0-2.2'
-    flinkShadowJar ("org.apache.flink:flink-cdc-pipeline-connector-paimon:3.6.0-2.2") {
+    flinkShadowJar 'org.apache.flink:flink-cdc-base:3.7.0-2.2'
+    flinkShadowJar 'org.apache.flink:flink-cdc-cli:3.7.0-2.2'
+    flinkShadowJar 'org.apache.flink:flink-cdc-runtime:3.7.0-2.2'
+    flinkShadowJar 'org.apache.flink:flink-cdc-pipeline-connector-doris:3.7.0-2.2'
+    flinkShadowJar 'org.apache.flink:flink-cdc-pipeline-connector-kafka:3.7.0-2.2'
+    flinkShadowJar 'org.apache.flink:flink-cdc-pipeline-connector-mysql:3.7.0-2.2'
+    flinkShadowJar ("org.apache.flink:flink-cdc-pipeline-connector-paimon:3.7.0-2.2") {
         exclude group: 'org.apache.curator', module: 'apache-curator'
     }
-    //flinkShadowJar 'org.apache.flink:flink-cdc-pipeline-connectors:3.6.0-2.2'
-    //flinkShadowJar 'org.apache.flink:flink-cdc-pipeline-connector-starrocks:3.6.0-2.2'
-    //flinkShadowJar 'org.apache.flink:flink-cdc-pipeline-connector-values:3.6.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-cdc-pipeline-connectors:3.7.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-cdc-pipeline-connector-starrocks:3.7.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-cdc-pipeline-connector-values:3.7.0-2.2'
 
-    flinkShadowJar 'org.apache.flink:flink-connector-debezium:3.6.0-2.2'
-    flinkShadowJar 'org.apache.flink:flink-connector-mysql-cdc:3.6.0-2.2'
-    //flinkShadowJar 'org.apache.flink:flink-connector-mongodb-cdc:3.6.0-2.2'
-    //flinkShadowJar 'org.apache.flink:flink-connector-db2-cdc:3.6.0-2.2'
-    //flinkShadowJar 'org.apache.flink:flink-connector-oceanbase-cdc:3.6.0-2.2'
-    //flinkShadowJar 'org.apache.flink:flink-connector-oracle-cdc:3.6.0-2.2'
-    //flinkShadowJar 'org.apache.flink:flink-connector-postgres-cdc:3.6.0-2.2'
-    //flinkShadowJar 'org.apache.flink:flink-connector-sqlserver-cdc:3.6.0-2.2'
-    //flinkShadowJar 'org.apache.flink:flink-connector-tidb-cdc:3.6.0-2.2'
-    //flinkShadowJar 'org.apache.flink:flink-connector-vitess-cdc:3.6.0-2.2'
+    flinkShadowJar 'org.apache.flink:flink-connector-debezium:3.7.0-2.2'
+    flinkShadowJar 'org.apache.flink:flink-connector-mysql-cdc:3.7.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-connector-mongodb-cdc:3.7.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-connector-db2-cdc:3.7.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-connector-oceanbase-cdc:3.7.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-connector-oracle-cdc:3.7.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-connector-postgres-cdc:3.7.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-connector-sqlserver-cdc:3.7.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-connector-tidb-cdc:3.7.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-connector-vitess-cdc:3.7.0-2.2'
 
-    flinkShadowJar 'org.apache.flink:flink-sql-connector-mysql-cdc:3.6.0-2.2'
-    //flinkShadowJar 'org.apache.flink:flink-sql-connector-mongodb-cdc:3.6.0-2.2'
-    //flinkShadowJar 'org.apache.flink:flink-sql-connector-db2-cdc:3.6.0-2.2'
-    //flinkShadowJar 'org.apache.flink:flink-sql-connector-oceanbase-cdc:3.6.0-2.2'
-    //flinkShadowJar 'org.apache.flink:flink-sql-connector-oracle-cdc:3.6.0-2.2'
-    //flinkShadowJar 'org.apache.flink:flink-sql-connector-postgres-cdc:3.6.0-2.2'
-    //flinkShadowJar 'org.apache.flink:flink-sql-connector-sqlserver-cdc:3.6.0-2.2'
-    //flinkShadowJar 'org.apache.flink:flink-sql-connector-tidb-cdc:3.6.0-2.2'
-    //flinkShadowJar 'org.apache.flink:flink-sql-connector-vitess-cdc:3.6.0-2.2'
+    flinkShadowJar 'org.apache.flink:flink-sql-connector-mysql-cdc:3.7.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-sql-connector-mongodb-cdc:3.7.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-sql-connector-db2-cdc:3.7.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-sql-connector-oceanbase-cdc:3.7.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-sql-connector-oracle-cdc:3.7.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-sql-connector-postgres-cdc:3.7.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-sql-connector-sqlserver-cdc:3.7.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-sql-connector-tidb-cdc:3.7.0-2.2'
+    //flinkShadowJar 'org.apache.flink:flink-sql-connector-vitess-cdc:3.7.0-2.2'
 
     // --- Hadoop ---
     flinkShadowJar 'org.apache.hadoop:hadoop-common:3.5.0'
@@ -133,19 +133,19 @@ dependencies {
         exclude group: "at.yawk.lz4", module: "lz4-java"
         exclude group: "org.lz4", module: "lz4-java"
     }
-    flinkShadowJar("org.apache.paimon:paimon-format:2.0.0")
-    flinkShadowJar("org.apache.paimon:paimon-codegen:2.0.0")
-    flinkShadowJar("org.apache.paimon:paimon-codegen-loader:2.0.0")
-    flinkShadowJar("org.apache.paimon:paimon-filesystems:2.0.0")
-    flinkShadowJar("org.apache.paimon:paimon-service-client:2.0.0")
-    flinkShadowJar("org.apache.paimon:paimon-service-runtime:2.0.0")
-    flinkShadowJar("org.apache.paimon:paimon-oss:2.0.0")
-    flinkShadowJar("org.apache.paimon:paimon-oss-impl:2.0.0")
-    flinkShadowJar("org.apache.paimon:paimon-flink-2.2:2.0.0")
-    flinkShadowJar("org.apache.paimon:paimon-flink-cdc:2.0.0")
+    flinkShadowJar("org.apache.paimon:paimon-format:2.1.0")
+    flinkShadowJar("org.apache.paimon:paimon-codegen:2.1.0")
+    flinkShadowJar("org.apache.paimon:paimon-codegen-loader:2.1.0")
+    flinkShadowJar("org.apache.paimon:paimon-filesystems:2.1.0")
+    flinkShadowJar("org.apache.paimon:paimon-service-client:2.1.0")
+    flinkShadowJar("org.apache.paimon:paimon-service-runtime:2.1.0")
+    flinkShadowJar("org.apache.paimon:paimon-oss:2.1.0")
+    flinkShadowJar("org.apache.paimon:paimon-oss-impl:2.1.0")
+    flinkShadowJar("org.apache.paimon:paimon-flink-2.2:2.1.0")
+    flinkShadowJar("org.apache.paimon:paimon-flink-cdc:2.1.0")
     flinkShadowJar('org.apache.paimon:paimon-flink-action:2.0.0')
-    flinkShadowJar("org.apache.paimon:paimon-hive-catalog:2.0.0")
-    flinkShadowJar("org.apache.paimon:paimon-hive-connector-3.1:2.0.0")
+    flinkShadowJar("org.apache.paimon:paimon-hive-catalog:2.1.0")
+    flinkShadowJar("org.apache.paimon:paimon-hive-connector-3.1:2.1.0")
     //flinkShadowJar('org.apache.paimon:paimon-shade-guava-30:30.1.1-jre-0.8.0')
     //flinkShadowJar('org.apache.paimon:paimon-shade-jackson-2:2.14.2-0.8.0')
     //flinkShadowJar('org.apache.paimon:paimon-shade-caffeine-2:2.9.3-0.8.0')
