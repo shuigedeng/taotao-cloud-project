@@ -4,7 +4,7 @@ configure(subprojects){ project ->
     apply from: rootProject.file('gradle/google-tools-jib.gradle')
 
     dependencies {
-        implementation 'org.slf4j:slf4j-api:2.0.18'
+        implementation 'org.slf4j:slf4j-api:2.0.20'
         implementation 'ch.qos.logback:logback-core:1.5.38'
         implementation 'ch.qos.logback:logback-access:1.5.38'
         implementation 'ch.qos.logback:logback-classic:1.5.38'

@@ -95,7 +95,7 @@ dependencies {
     //implementation 'com.ververica:flink-cdc-pipeline-connector-mysql:3.0.1'
     //implementation 'com.ververica:flink-cdc-pipeline-connector-values:3.0.1'
 
-    implementation 'com.mysql:mysql-connector-j:26.7.0'
+    implementation 'com.mysql:mysql-connector-j:26.10.0'
     implementation 'redis.clients:jedis:8.0.1'
     implementation 'org.apache.hive:hive-exec:4.2.1'
 
@@ -134,12 +134,12 @@ dependencies {
     //implementation(project(":taotao-cloud-bigdata:taotao-cloud-flink-cep"))
     implementation 'com.googlecode.aviator:aviator:5.4.4'
 
-    implementation 'com.alibaba.fastjson2:fastjson2:2.0.65'
+    implementation 'com.alibaba.fastjson2:fastjson2:2.0.66'
 
     // 如果保存检查点到hdfs上，需要引入此依赖
     implementation "org.apache.hadoop:hadoop-client:3.5.0"
-    implementation 'org.slf4j:slf4j-api:2.0.18'
-    //implementation 'org.slf4j:slf4j-reload4j:2.0.18'
+    implementation 'org.slf4j:slf4j-api:2.0.20'
+    //implementation 'org.slf4j:slf4j-reload4j:2.0.20'
     //implementation "org.apache.logging.log4j:log4j-to-slf4j:2.23.1"
 
     implementation "commons-beanutils:commons-beanutils:1.11.0"
@@ -156,8 +156,8 @@ dependencies {
 
     implementation "com.janeluo:ikanalyzer:2012_u6"
 
-    //implementation 'org.slf4j:slf4j-api:2.0.18'
-    //implementation 'org.slf4j:slf4j-reload4j:2.0.18'
+    //implementation 'org.slf4j:slf4j-api:2.0.20'
+    //implementation 'org.slf4j:slf4j-reload4j:2.0.20'
 }
 
 configurations {

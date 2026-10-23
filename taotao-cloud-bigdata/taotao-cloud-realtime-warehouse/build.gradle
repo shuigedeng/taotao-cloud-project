@@ -136,14 +136,14 @@ dependencies {
     //implementation 'com.googlecode.aviator:aviator:5.4.4'
 
 
-    implementation "com.alibaba.fastjson2:fastjson2:2.0.65"
+    implementation "com.alibaba.fastjson2:fastjson2:2.0.66"
 
-    implementation 'com.mysql:mysql-connector-j:26.7.0'
+    implementation 'com.mysql:mysql-connector-j:26.10.0'
     implementation 'redis.clients:jedis:8.0.1'
 
     implementation 'org.apache.commons:commons-compress:1.28.0'
-    implementation 'org.slf4j:slf4j-api:2.0.18'
-    //implementation 'org.slf4j:slf4j-reload4j:2.0.18'
+    implementation 'org.slf4j:slf4j-api:2.0.20'
+    //implementation 'org.slf4j:slf4j-reload4j:2.0.20'
 
     //boot
     implementation "io.github.shuigedeng:taotao-boot-starter-core"
@@ -159,7 +159,7 @@ dependencies {
     //https://search.maven.org/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter
     implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:4.1.0"
     implementation "org.mybatis:mybatis-spring:4.1.0"
-    implementation 'org.apache.kafka:kafka-clients:4.1.1'
+    implementation 'org.apache.kafka:kafka-clients:4.4.0'
 }
 
 configurations {

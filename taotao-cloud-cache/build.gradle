@@ -10,7 +10,7 @@ dependencies {
     implementation "cglib:cglib:3.3.0"
     implementation "io.github.shuigedeng:taotao-boot-starter-common"
 
-    implementation 'org.slf4j:slf4j-api:2.0.18'
+    implementation 'org.slf4j:slf4j-api:2.0.20'
     implementation 'ch.qos.logback:logback-core:1.5.38'
     implementation 'ch.qos.logback:logback-access:1.5.38'
     implementation 'ch.qos.logback:logback-classic:1.5.38'
