@@ -19,8 +19,8 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
 
     //https://search.maven.org/artifact/org.springframework.integration/spring-integration-core
-    implementation 'org.springframework.integration:spring-integration-core:7.1.1'
-    implementation 'org.springframework.integration:spring-integration-jdbc:7.1.1'
+    implementation 'org.springframework.integration:spring-integration-core:7.1.2'
+    implementation 'org.springframework.integration:spring-integration-jdbc:7.1.2'
 
     implementation 'org.springframework.boot:spring-boot-starter-batch'
     implementation 'org.springframework.boot:spring-boot-starter-batch-jdbc'
@@ -132,7 +132,7 @@ dependencies {
     //implementation 'com.ververica:flink-cdc-pipeline-connector-values:3.0.1'
 
     implementation 'com.mysql:mysql-connector-j:26.10.0'
-    implementation 'redis.clients:jedis:8.0.1'
+    implementation 'redis.clients:jedis:8.0.2'
     implementation 'org.apache.hive:hive-exec:4.2.1'
 
     implementation 'org.apache.hadoop:hadoop-common:3.5.0'
@@ -175,7 +175,7 @@ dependencies {
     implementation("org.apache.paimon:paimon-oss-impl:2.1.0")
     implementation("org.apache.paimon:paimon-flink-2.2:2.1.0")
     implementation("org.apache.paimon:paimon-flink-cdc:2.1.0")
-    implementation('org.apache.paimon:paimon-flink-action:2.0.0')
+    implementation('org.apache.paimon:paimon-flink-action:2.1.0')
     implementation("org.apache.paimon:paimon-hive-catalog:2.1.0")
     implementation("org.apache.paimon:paimon-hive-connector-3.1:2.1.0")
     //implementation('org.apache.paimon:paimon-shade-guava-30:30.1.1-jre-0.8.0')

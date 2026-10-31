@@ -42,8 +42,8 @@ dependencies {
 
     implementation "org.springframework.boot:spring-boot-starter-webflux"
 
-    implementation 'org.springdoc:springdoc-openapi-starter-webflux-api:3.1.1'
-    implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:3.1.1'
+    implementation 'org.springdoc:springdoc-openapi-starter-webflux-api:3.2.0'
+    implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:3.2.0'
 
     implementation "com.github.xiaoymin:knife4j-openapi3-webflux-jakarta-spring-boot-starter"
     implementation "com.github.xiaoymin:knife4j-openapi3-webflux-spring-boot-starter"
@@ -56,15 +56,15 @@ dependencies {
 
     implementation "org.webjars:webjars-locator-lite:1.1.3"
 
-    implementation "io.grpc:grpc-api:1.85.0"
-    implementation "io.grpc:grpc-context:1.85.0"
-    implementation "io.grpc:grpc-core:1.85.0"
-    implementation "io.grpc:grpc-netty:1.85.0"
-    implementation "io.grpc:grpc-netty-shaded:1.85.0"
-    implementation "io.grpc:grpc-protobuf:1.85.0"
-    implementation "io.grpc:grpc-protobuf-lite:1.85.0"
-    implementation "io.grpc:grpc-stub:1.85.0"
-    implementation "io.grpc:grpc-services:1.85.0"
+    implementation "io.grpc:grpc-api:1.85.1"
+    implementation "io.grpc:grpc-context:1.85.1"
+    implementation "io.grpc:grpc-core:1.85.1"
+    implementation "io.grpc:grpc-netty:1.85.1"
+    implementation "io.grpc:grpc-netty-shaded:1.85.1"
+    implementation "io.grpc:grpc-protobuf:1.85.1"
+    implementation "io.grpc:grpc-protobuf-lite:1.85.1"
+    implementation "io.grpc:grpc-stub:1.85.1"
+    implementation "io.grpc:grpc-services:1.85.1"
 
     //网关限流 https://search.maven.org/artifact/com.eeeffff.limiter/ip-limiter-core-spring-gateway
     //implementation "com.eeeffff.limiter:ip-limiter-core-spring-gateway:1.1.3"

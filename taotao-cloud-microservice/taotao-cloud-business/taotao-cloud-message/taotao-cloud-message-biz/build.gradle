@@ -34,7 +34,7 @@ dependencies {
     implementation("com.aliyun:alibaba-dingtalk-service-sdk:2.0.0") {
         exclude group: "com.sun.jmx", module: "jmxri"
     }
-    implementation 'com.alipay.sdk:alipay-sdk-java:4.40.1014.ALL'
+    implementation 'com.alipay.sdk:alipay-sdk-java:4.40.1061.ALL'
 
     implementation "com.github.binarywang:weixin-java-cp:4.8.6.B"
     implementation "com.github.binarywang:weixin-java-miniapp:4.8.6.B"
