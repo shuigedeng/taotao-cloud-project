@@ -21,7 +21,9 @@ dependencies {
     implementation "org.apache.hadoop:hadoop-hdfs:3.5.0"
 
     implementation "org.apache.hive:hive-exec:4.2.1"
-    implementation "org.apache.hive:hive-service:4.2.1"
+    implementation("org.apache.hive:hive-service:4.2.1"){
+        exclude group: "net.shibboleth.tool", module: "xmlsectool"
+    }
     implementation("org.apache.hive:hive-jdbc:4.2.1") {
         exclude group: "org.eclipse.jetty.aggregate", module: "*"
     }
