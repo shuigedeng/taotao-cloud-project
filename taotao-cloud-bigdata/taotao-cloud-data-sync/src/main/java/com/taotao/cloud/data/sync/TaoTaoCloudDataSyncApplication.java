@@ -36,7 +36,6 @@ public class TaoTaoCloudDataSyncApplication {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-data-sync")
-                
                 .run(args);
     }
 }

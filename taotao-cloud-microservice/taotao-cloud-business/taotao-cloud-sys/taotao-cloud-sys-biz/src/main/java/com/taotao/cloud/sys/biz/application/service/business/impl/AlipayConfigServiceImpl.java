@@ -18,9 +18,9 @@ package com.taotao.cloud.sys.biz.application.service.business.impl;
 
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.sys.biz.application.service.business.AlipayConfigService;
-import com.taotao.cloud.sys.biz.mapper.IAlipayConfigMapper;
-import com.taotao.cloud.sys.biz.model.entity.config.AlipayConfig;
-import com.taotao.cloud.sys.biz.model.vo.alipay.TradeVO;
+import com.taotao.cloud.sys.biz.infrastructure.mapper.IAlipayConfigMapper;
+import com.taotao.cloud.sys.biz.domain.model.entity.config.AlipayConfig;
+import com.taotao.cloud.sys.biz.domain.model.vo.alipay.TradeVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;

@@ -28,8 +28,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@HttpExchange(
-        value = ServiceNameConstants.TAOTAO_CLOUD_OPERATION)
+@HttpExchange
 public interface InnerArticleApi {
 
     /**

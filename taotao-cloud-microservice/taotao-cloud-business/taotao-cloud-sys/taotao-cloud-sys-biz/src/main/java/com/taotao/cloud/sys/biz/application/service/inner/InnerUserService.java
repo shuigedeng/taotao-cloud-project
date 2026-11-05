@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.application.service.inner;
 
 import com.taotao.boot.webagg.service.BaseService;
-import com.taotao.cloud.sys.biz.model.entity.system.User;
+import com.taotao.cloud.sys.biz.domain.model.entity.system.User;
 
 /**
  * ISysDictService

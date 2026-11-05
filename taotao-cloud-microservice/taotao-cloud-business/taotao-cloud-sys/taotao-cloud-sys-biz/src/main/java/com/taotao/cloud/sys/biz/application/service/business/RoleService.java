@@ -17,8 +17,8 @@
 package com.taotao.cloud.sys.biz.application.service.business;
 
 import com.taotao.boot.webagg.service.BaseService;
-import com.taotao.cloud.sys.biz.model.bo.RoleBO;
-import com.taotao.cloud.sys.biz.model.entity.system.Role;
+import com.taotao.cloud.sys.biz.domain.model.bo.RoleBO;
+import com.taotao.cloud.sys.biz.domain.model.entity.system.Role;
 
 import java.util.List;
 import java.util.Set;

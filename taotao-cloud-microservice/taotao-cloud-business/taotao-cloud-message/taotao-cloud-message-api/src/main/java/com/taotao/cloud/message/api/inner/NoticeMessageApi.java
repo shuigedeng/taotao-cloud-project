@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_MESSAGE)
+@HttpExchange
 public interface NoticeMessageApi {
 
 	@GetMapping(value = "/noticeMessage/sms")

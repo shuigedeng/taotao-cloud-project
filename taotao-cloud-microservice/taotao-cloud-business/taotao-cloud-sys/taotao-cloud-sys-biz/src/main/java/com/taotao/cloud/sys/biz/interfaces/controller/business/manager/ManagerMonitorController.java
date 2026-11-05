@@ -1,10 +1,10 @@
 package com.taotao.cloud.sys.biz.interfaces.controller.business.manager;
 
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.cloud.sys.biz.model.vo.monitor.OnlineUserInfo;
-import com.taotao.cloud.sys.biz.model.vo.monitor.RedisCacheInfoDTO;
-import com.taotao.cloud.sys.biz.model.vo.monitor.ServerInfo;
-import com.taotao.cloud.sys.biz.model.vo.server.Server;
+import com.taotao.cloud.sys.biz.domain.model.vo.monitor.OnlineUserInfo;
+import com.taotao.cloud.sys.biz.domain.model.vo.monitor.RedisCacheInfoDTO;
+import com.taotao.cloud.sys.biz.domain.model.vo.monitor.ServerInfo;
+import com.taotao.cloud.sys.biz.domain.model.vo.server.Server;
 import com.taotao.cloud.sys.biz.service.business.MonitorApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

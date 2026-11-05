@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.model.ddd.query.PageQuery;
 import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.boot.data.mybatis.mybatisplus.query.LambdaQueryWrapperX;
-import com.taotao.cloud.sys.biz.model.entity.system.Resource;
+import com.taotao.cloud.sys.biz.domain.model.entity.system.Resource;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;

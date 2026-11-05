@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.infrastructure.repository;
 
 import com.taotao.boot.data.jpa.base.repository.BaseRepository;
-import com.taotao.cloud.sys.biz.model.entity.system.Dept;
+import com.taotao.cloud.sys.biz.domain.model.entity.system.Dept;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 

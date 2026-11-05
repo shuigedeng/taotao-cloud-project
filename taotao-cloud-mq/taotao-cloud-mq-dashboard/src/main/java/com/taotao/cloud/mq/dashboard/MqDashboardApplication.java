@@ -44,7 +44,6 @@ public class MqDashboardApplication extends SpringBootServletInitializer {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-mq-dashboard")
-                
                 .run(args);
 
         MqBrokerBootstrap.main(args);

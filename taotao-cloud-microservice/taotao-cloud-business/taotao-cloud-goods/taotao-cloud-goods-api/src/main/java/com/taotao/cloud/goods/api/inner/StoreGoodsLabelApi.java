@@ -23,8 +23,7 @@ import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@HttpExchange(
-	value = ServiceNameConstants.TAOTAO_CLOUD_GOODS)
+@HttpExchange
 public interface StoreGoodsLabelApi {
 
 	@GetMapping(value = "/store/{id}")

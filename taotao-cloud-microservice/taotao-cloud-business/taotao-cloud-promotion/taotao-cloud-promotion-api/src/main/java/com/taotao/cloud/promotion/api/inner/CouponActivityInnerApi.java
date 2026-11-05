@@ -23,7 +23,7 @@ import java.util.List;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_PROMOTION)
+@HttpExchange
 public interface CouponActivityInnerApi {
 
     @GetMapping(value = "/registered")

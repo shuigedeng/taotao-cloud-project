@@ -43,7 +43,6 @@ public class TxManagerApplication extends SpringBootServletInitializer {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-tx-server")
-                
                 .run(args);
 
         // 这个是自定义的一个服务端

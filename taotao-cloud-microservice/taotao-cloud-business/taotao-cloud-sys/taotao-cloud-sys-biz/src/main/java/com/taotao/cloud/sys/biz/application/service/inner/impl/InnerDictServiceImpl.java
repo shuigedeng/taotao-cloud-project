@@ -25,7 +25,7 @@ import com.taotao.boot.lock.support.DistributedLock;
 import com.taotao.boot.webagg.repository.BaseClassSuperRepository;
 import com.taotao.cloud.sys.biz.application.service.business.DictService;
 import com.taotao.cloud.sys.biz.application.service.inner.InnerDictService;
-import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
+import com.taotao.cloud.sys.biz.domain.model.entity.dict.Dict;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.jdbc.core.JdbcTemplate;

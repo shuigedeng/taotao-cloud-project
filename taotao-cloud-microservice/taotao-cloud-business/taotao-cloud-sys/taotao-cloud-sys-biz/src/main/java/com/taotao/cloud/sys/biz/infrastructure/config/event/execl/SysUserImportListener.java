@@ -22,7 +22,7 @@ import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.utils.context.ContextUtils;
 import com.taotao.boot.office.easyexcel.easyexcelconvert.core.ExcelListener;
 import com.taotao.boot.office.easyexcel.easyexcelconvert.core.ExcelResult;
-import com.taotao.cloud.sys.biz.model.excel.imports.UserImport;
+import com.taotao.cloud.sys.biz.domain.model.excel.imports.UserImport;
 import com.taotao.cloud.sys.biz.service.business.IUserService;
 import lombok.extern.slf4j.Slf4j;
 

@@ -17,9 +17,9 @@
 package com.taotao.cloud.sys.biz.infrastructure.mapper;
 
 import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
-import com.taotao.cloud.sys.biz.model.bo.DictDeptBO;
-import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
-import com.taotao.cloud.sys.biz.model.params.DictDeptParams;
+import com.taotao.cloud.sys.biz.domain.model.bo.DictDeptBO;
+import com.taotao.cloud.sys.biz.domain.model.entity.dict.Dict;
+import com.taotao.cloud.sys.biz.domain.model.params.DictDeptParams;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

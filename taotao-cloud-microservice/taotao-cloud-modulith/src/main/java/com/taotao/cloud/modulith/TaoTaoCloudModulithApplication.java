@@ -28,7 +28,6 @@ public class TaoTaoCloudModulithApplication {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-modulith")
-                
                 .run(args);
         verifyPackageConformity();
     }

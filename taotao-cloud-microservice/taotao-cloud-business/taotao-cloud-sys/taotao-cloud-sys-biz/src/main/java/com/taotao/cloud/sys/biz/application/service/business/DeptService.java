@@ -17,8 +17,8 @@
 package com.taotao.cloud.sys.biz.application.service.business;
 
 import com.taotao.boot.webagg.service.BaseService;
-import com.taotao.cloud.sys.biz.model.entity.system.Dept;
-import com.taotao.cloud.sys.biz.model.vo.dept.DeptTreeVO;
+import com.taotao.cloud.sys.biz.domain.model.entity.system.Dept;
+import com.taotao.cloud.sys.biz.domain.model.vo.dept.DeptTreeVO;
 
 import java.util.List;
 

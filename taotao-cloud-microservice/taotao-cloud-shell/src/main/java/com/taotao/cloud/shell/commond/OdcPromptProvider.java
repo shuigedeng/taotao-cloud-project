@@ -16,10 +16,9 @@
 
 package com.taotao.cloud.shell.commond;
 
-import org.jline.utils.AttributedString;
-import org.jline.utils.AttributedStyle;
-import org.springframework.shell.jline.PromptProvider;
 import org.springframework.stereotype.Component;
+
+import java.text.AttributedString;
 
 /**
  * OdcPromptProvider Description

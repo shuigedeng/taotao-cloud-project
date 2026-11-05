@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.application.service;
 
 import com.baomidou.mybatisplus.spring.service.IService;
-import com.taotao.cloud.sys.biz.model.entity.SysLogLogin;
+import com.taotao.cloud.sys.biz.domain.model.entity.SysLogLogin;
 
 /**
  * @program: logs

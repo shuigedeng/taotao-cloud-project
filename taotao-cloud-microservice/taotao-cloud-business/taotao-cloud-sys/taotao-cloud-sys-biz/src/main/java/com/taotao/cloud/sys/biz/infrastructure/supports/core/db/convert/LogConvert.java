@@ -16,11 +16,11 @@
 
 package com.taotao.cloud.sys.biz.infrastructure.supports.core.db.convert;
 
-import com.taotao.cloud.sys.biz.model.dto.DataVersionLogDto;
-import com.taotao.cloud.sys.biz.model.dto.LoginLogDto;
-import com.taotao.cloud.sys.biz.model.dto.OperateLogDto;
-import com.taotao.cloud.sys.biz.model.param.LoginLogParam;
-import com.taotao.cloud.sys.biz.model.param.OperateLogParam;
+import com.taotao.cloud.sys.biz.domain.model.dto.DataVersionLogDto;
+import com.taotao.cloud.sys.biz.domain.model.dto.LoginLogDto;
+import com.taotao.cloud.sys.biz.domain.model.dto.OperateLogDto;
+import com.taotao.cloud.sys.biz.domain.model.param.LoginLogParam;
+import com.taotao.cloud.sys.biz.domain.model.param.OperateLogParam;
 import com.taotao.cloud.sys.biz.supports.core.db.entity.DataVersionLogDb;
 import com.taotao.cloud.sys.biz.supports.core.db.entity.LoginLogDb;
 import com.taotao.cloud.sys.biz.supports.core.db.entity.OperateLogDb;

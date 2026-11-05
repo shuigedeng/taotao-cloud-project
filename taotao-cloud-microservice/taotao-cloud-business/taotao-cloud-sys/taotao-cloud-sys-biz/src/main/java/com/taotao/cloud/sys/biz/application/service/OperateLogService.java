@@ -17,8 +17,8 @@
 package com.taotao.cloud.sys.biz.application.service;
 
 import com.taotao.boot.common.model.result.PageResult;
-import com.taotao.cloud.sys.biz.model.dto.OperateLogDto;
-import com.taotao.cloud.sys.biz.model.param.OperateLogParam;
+import com.taotao.cloud.sys.biz.domain.model.dto.OperateLogDto;
+import com.taotao.cloud.sys.biz.domain.model.param.OperateLogParam;
 
 /**
  * 操作日志

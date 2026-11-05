@@ -18,9 +18,9 @@ package com.taotao.cloud.sys.biz.application.service.business.impl;
 
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.taotao.cloud.sys.biz.application.service.business.EmailConfigService;
-import com.taotao.cloud.sys.biz.mapper.IEmailConfigMapper;
-import com.taotao.cloud.sys.biz.model.entity.config.EmailConfig;
-import com.taotao.cloud.sys.biz.model.vo.alipay.EmailVO;
+import com.taotao.cloud.sys.biz.infrastructure.mapper.IEmailConfigMapper;
+import com.taotao.cloud.sys.biz.domain.model.entity.config.EmailConfig;
+import com.taotao.cloud.sys.biz.domain.model.vo.alipay.EmailVO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

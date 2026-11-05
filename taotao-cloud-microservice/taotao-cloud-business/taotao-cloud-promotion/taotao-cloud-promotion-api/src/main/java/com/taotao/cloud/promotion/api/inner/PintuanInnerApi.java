@@ -27,8 +27,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@HttpExchange(
-        value = ServiceNameConstants.TAOTAO_CLOUD_PROMOTION)
+@HttpExchange
 public interface PintuanInnerApi {
 
     @GetMapping(value = "/getById")

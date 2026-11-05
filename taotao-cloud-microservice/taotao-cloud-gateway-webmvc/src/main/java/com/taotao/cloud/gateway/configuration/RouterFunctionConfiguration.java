@@ -19,7 +19,7 @@ package com.taotao.cloud.gateway.configuration;
 
 import cn.hutool.http.HttpStatus;
 import com.taotao.boot.cache.redis.repository.RedisRepository;
-import com.taotao.boot.captcha.plus.util.CaptchaUtils;
+import com.taotao.boot.captcha.support.CaptchaUtils;
 import com.taotao.boot.common.constant.RedisConstants;
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.common.utils.context.ContextUtils;
@@ -276,7 +276,7 @@ public class RouterFunctionConfiguration {
         @Override
         public Mono<ServerResponse> handle( ServerRequest request ) {
             try {
-                ArithmeticCaptcha captcha = CaptchaUtils.getArithmeticCaptcha();
+                ArithmeticCaptcha captcha = CaptchaUtils.arithmetic();
                 String text = captcha.text();
                 LogUtils.info(text);
                 MultiValueMap<String, String> params = request.queryParams();

@@ -20,11 +20,11 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.sys.biz.application.service.business.RoleResourceService;
 import com.taotao.cloud.sys.biz.application.service.business.RoleService;
-import com.taotao.cloud.sys.biz.mapper.IRoleMapper;
-import com.taotao.cloud.sys.biz.model.bo.RoleBO;
-import com.taotao.cloud.sys.biz.model.convert.RoleConvert;
-import com.taotao.cloud.sys.biz.model.entity.system.QRole;
-import com.taotao.cloud.sys.biz.model.entity.system.Role;
+import com.taotao.cloud.sys.biz.domain.model.bo.RoleBO;
+import com.taotao.cloud.sys.biz.domain.model.convert.RoleConvert;
+import com.taotao.cloud.sys.biz.domain.model.entity.system.QRole;
+import com.taotao.cloud.sys.biz.domain.model.entity.system.Role;
+import com.taotao.cloud.sys.biz.infrastructure.mapper.IRoleMapper;
 import com.taotao.cloud.sys.biz.repository.IRoleRepository;
 import com.taotao.cloud.sys.biz.repository.RoleRepository;
 import lombok.AllArgsConstructor;
@@ -44,7 +44,7 @@ import java.util.Set;
  */
 @Service
 @AllArgsConstructor
-public class RoleServiceImpl extends BaseServiceImpl<Role, Long,IRoleMapper,  RoleRepository, IRoleRepository>
+public class RoleServiceImpl extends BaseServiceImpl<Role, Long, IRoleMapper,  RoleRepository, IRoleRepository>
         implements RoleService {
 
     private static final QRole SYS_ROLE = QRole.role;

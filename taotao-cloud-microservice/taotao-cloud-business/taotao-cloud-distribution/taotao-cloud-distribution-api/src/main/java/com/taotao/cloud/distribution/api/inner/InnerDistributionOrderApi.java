@@ -27,8 +27,7 @@ import java.time.LocalDateTime;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@HttpExchange(
-        value = ServiceNameConstants.TAOTAO_CLOUD_GOODS)
+@HttpExchange
 public interface InnerDistributionOrderApi {
 
     // 记录分销订单

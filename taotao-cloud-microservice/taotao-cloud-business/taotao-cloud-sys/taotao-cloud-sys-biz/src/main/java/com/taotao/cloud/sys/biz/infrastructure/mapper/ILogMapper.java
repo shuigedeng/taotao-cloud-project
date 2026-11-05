@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.infrastructure.mapper;
 
 import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
-import com.taotao.cloud.sys.biz.model.entity.Log;
+import com.taotao.cloud.sys.biz.domain.model.entity.Log;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

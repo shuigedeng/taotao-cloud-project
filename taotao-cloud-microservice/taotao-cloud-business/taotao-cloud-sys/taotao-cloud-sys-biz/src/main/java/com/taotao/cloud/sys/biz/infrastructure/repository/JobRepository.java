@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.infrastructure.repository;
 
 import com.taotao.boot.data.jpa.base.repository.BaseRepository;
-import com.taotao.cloud.sys.biz.model.entity.system.Position;
+import com.taotao.cloud.sys.biz.domain.model.entity.system.Position;
 
 /**
  * CompanyMapper

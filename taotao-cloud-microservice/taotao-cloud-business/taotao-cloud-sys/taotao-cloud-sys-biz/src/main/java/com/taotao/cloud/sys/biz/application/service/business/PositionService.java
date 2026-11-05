@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.application.service.business;
 
 import com.taotao.boot.webagg.service.BaseService;
-import com.taotao.cloud.sys.biz.model.entity.system.Position;
+import com.taotao.cloud.sys.biz.domain.model.entity.system.Position;
 
 /**
  * 岗位表服务接口

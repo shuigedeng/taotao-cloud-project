@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.infrastructure.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.sys.biz.model.entity.SysLogLogin;
+import com.taotao.cloud.sys.biz.domain.model.entity.SysLogLogin;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_ORDER)
+@HttpExchange
 public interface OrderApi {
 
 	@ApiInfo(

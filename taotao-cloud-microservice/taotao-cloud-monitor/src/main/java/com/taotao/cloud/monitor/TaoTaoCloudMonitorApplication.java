@@ -43,7 +43,6 @@ public class TaoTaoCloudMonitorApplication {
                 .setTtcBanner()
 //                .setTtcProfileIfNotExists("docker")
                 .setTtcApplicationProperty("taotao-cloud-monitor")
-                
                 .run(args);
     }
 

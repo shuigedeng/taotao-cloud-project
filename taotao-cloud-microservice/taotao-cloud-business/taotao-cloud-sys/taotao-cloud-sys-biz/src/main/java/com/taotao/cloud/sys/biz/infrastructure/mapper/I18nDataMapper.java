@@ -10,11 +10,11 @@ import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.taotao.boot.common.model.ddd.query.PageQuery;
 import com.taotao.boot.data.mybatis.mybatisplus.MpUtils;
 import com.taotao.boot.data.mybatis.mybatisplus.query.LambdaQueryWrapperX;
-import com.taotao.cloud.sys.biz.model.convert.I18nDataConverter;
-import com.taotao.cloud.sys.biz.model.dto.I18nDataDTO;
-import com.taotao.cloud.sys.biz.model.entity.i18n.I18nData;
-import com.taotao.cloud.sys.biz.model.query.I18nDataQO;
-import com.taotao.cloud.sys.biz.model.vo.I18nDataPageVO;
+import com.taotao.cloud.sys.biz.domain.model.convert.I18nDataConverter;
+import com.taotao.cloud.sys.biz.domain.model.dto.I18nDataDTO;
+import com.taotao.cloud.sys.biz.domain.model.entity.i18n.I18nData;
+import com.taotao.cloud.sys.biz.domain.model.query.I18nDataQO;
+import com.taotao.cloud.sys.biz.domain.model.vo.I18nDataPageVO;
 
 import java.util.List;
 

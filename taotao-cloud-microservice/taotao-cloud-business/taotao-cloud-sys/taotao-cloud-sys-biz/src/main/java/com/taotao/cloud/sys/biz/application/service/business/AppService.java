@@ -17,8 +17,8 @@
 package com.taotao.cloud.sys.biz.application.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.sys.biz.model.dto.app.AppDTO;
-import com.taotao.cloud.sys.biz.model.dto.app.AppPageDTO;
+import com.taotao.cloud.sys.biz.domain.model.dto.app.AppDTO;
+import com.taotao.cloud.sys.biz.domain.model.dto.app.AppPageDTO;
 
 import java.util.List;
 

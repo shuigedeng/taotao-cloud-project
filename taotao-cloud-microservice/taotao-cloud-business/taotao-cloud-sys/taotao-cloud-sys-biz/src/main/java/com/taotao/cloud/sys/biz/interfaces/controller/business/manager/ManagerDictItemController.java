@@ -18,10 +18,10 @@ package com.taotao.cloud.sys.biz.interfaces.controller.business.manager;
 
 import com.taotao.boot.common.model.ddd.query.BaseQuery;
 import com.taotao.boot.webagg.controller.BaseSuperController;
-import com.taotao.cloud.sys.biz.model.dto.dictItem.DictItemSaveDTO;
-import com.taotao.cloud.sys.biz.model.dto.dictItem.DictItemUpdateDTO;
-import com.taotao.cloud.sys.biz.model.entity.dict.DictItem;
-import com.taotao.cloud.sys.biz.model.vo.dict_item.DictItemQueryVO;
+import com.taotao.cloud.sys.biz.domain.model.dto.dictItem.DictItemSaveDTO;
+import com.taotao.cloud.sys.biz.domain.model.dto.dictItem.DictItemUpdateDTO;
+import com.taotao.cloud.sys.biz.domain.model.entity.dict.DictItem;
+import com.taotao.cloud.sys.biz.domain.model.vo.dict_item.DictItemQueryVO;
 import com.taotao.cloud.sys.biz.service.business.IDictItemService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;

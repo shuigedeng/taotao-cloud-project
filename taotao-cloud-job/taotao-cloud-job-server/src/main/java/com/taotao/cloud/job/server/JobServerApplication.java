@@ -44,7 +44,6 @@ public class JobServerApplication extends SpringBootServletInitializer {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-job-server")
-                
                 .run(args);
     }
 }

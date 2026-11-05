@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.application.service;
 
 import com.baomidou.mybatisplus.spring.service.IService;
-import com.taotao.cloud.sys.biz.model.entity.SysLog;
+import com.taotao.cloud.sys.biz.domain.model.entity.SysLog;
 
 public interface SysLogService extends IService<SysLog> {
 

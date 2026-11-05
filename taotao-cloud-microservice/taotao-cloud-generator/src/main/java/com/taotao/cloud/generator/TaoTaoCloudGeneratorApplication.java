@@ -43,7 +43,6 @@ public class TaoTaoCloudGeneratorApplication {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-generator")
-                
                 .run(args);
     }
 }

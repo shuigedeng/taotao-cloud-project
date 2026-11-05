@@ -20,7 +20,7 @@ package com.taotao.cloud.payment.api.inner;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_PAYMENT)
+@HttpExchange
 public interface RefundSupportApi {
 
     @PostMapping("/refund")

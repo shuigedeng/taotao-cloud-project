@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.infrastructure.mapper;
 
 import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
-import com.taotao.cloud.sys.biz.model.entity.system.UserRelation;
+import com.taotao.cloud.sys.biz.domain.model.entity.system.UserRelation;
 
 /**
  * IUserRoleMapper

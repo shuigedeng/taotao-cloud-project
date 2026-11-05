@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.application.service.business;
 
-import com.taotao.cloud.sys.biz.model.entity.config.LogisticsConfig;
+import com.taotao.cloud.sys.biz.domain.model.entity.config.LogisticsConfig;
 
 /**
  * ILogisticsService

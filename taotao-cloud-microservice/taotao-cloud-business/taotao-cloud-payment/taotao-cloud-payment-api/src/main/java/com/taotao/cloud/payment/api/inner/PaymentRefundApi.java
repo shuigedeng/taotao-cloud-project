@@ -25,5 +25,5 @@ import org.springframework.web.service.annotation.HttpExchange;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_PAYMENT)
+@HttpExchange
 public interface PaymentRefundApi {}

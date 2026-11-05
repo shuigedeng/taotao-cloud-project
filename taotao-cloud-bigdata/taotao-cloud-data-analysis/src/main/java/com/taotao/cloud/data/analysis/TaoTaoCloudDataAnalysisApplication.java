@@ -34,7 +34,6 @@ public class TaoTaoCloudDataAnalysisApplication {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-data-analysis")
-                
                 .run(args);
     }
 }

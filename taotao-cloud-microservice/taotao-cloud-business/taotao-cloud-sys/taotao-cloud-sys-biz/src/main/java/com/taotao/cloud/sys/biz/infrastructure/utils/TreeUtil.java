@@ -20,11 +20,11 @@ import com.taotao.boot.common.tree.TreeNode;
 import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.boot.common.utils.common.OrikaUtils;
 import com.taotao.cloud.sys.api.enums.ResourceTypeEnum;
-import com.taotao.cloud.sys.biz.model.bo.MenuBO;
-import com.taotao.cloud.sys.biz.model.entity.region.Region;
-import com.taotao.cloud.sys.biz.model.entity.system.Resource;
-import com.taotao.cloud.sys.biz.model.vo.menu.MenuMetaVO;
-import com.taotao.cloud.sys.biz.model.vo.menu.MenuTreeVO;
+import com.taotao.cloud.sys.biz.domain.model.bo.MenuBO;
+import com.taotao.cloud.sys.biz.domain.model.entity.region.Region;
+import com.taotao.cloud.sys.biz.domain.model.entity.system.Resource;
+import com.taotao.cloud.sys.biz.domain.model.vo.menu.MenuMetaVO;
+import com.taotao.cloud.sys.biz.domain.model.vo.menu.MenuTreeVO;
 
 import java.util.*;
 import java.util.stream.Collectors;

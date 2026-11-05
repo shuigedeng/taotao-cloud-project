@@ -31,8 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @version 2022.03
  * @since 2022-03-25 14:09:10
  */
-@HttpExchange(
-        name = ServiceNameConstants.TAOTAO_CLOUD_SYS)
+@HttpExchange
 public interface MenuApi {
 
     /**

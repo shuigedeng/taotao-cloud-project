@@ -18,9 +18,9 @@ package com.taotao.cloud.sys.biz.interfaces.controller.business.manager;
 
 import com.taotao.boot.common.model.result.Result;
 import com.taotao.boot.web.request.annotation.RequestLogger;
-import com.taotao.cloud.sys.biz.model.convert.LogisticsConvert;
-import com.taotao.cloud.sys.biz.model.entity.config.LogisticsConfig;
-import com.taotao.cloud.sys.biz.model.vo.logistics.LogisticsVO;
+import com.taotao.cloud.sys.biz.domain.model.convert.LogisticsConvert;
+import com.taotao.cloud.sys.biz.domain.model.entity.config.LogisticsConfig;
+import com.taotao.cloud.sys.biz.domain.model.vo.logistics.LogisticsVO;
 import com.taotao.cloud.sys.biz.service.business.ILogisticsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

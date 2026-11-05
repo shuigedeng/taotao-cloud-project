@@ -2,8 +2,8 @@ package com.taotao.cloud.sys.biz.infrastructure.config.i18n.listener;
 
 import com.taotao.boot.web.i18n.I18nMessage;
 import com.taotao.boot.web.i18n.I18nMessageCreateEvent;
-import com.taotao.cloud.sys.biz.model.convert.I18nDataConverter;
-import com.taotao.cloud.sys.biz.model.entity.i18n.I18nData;
+import com.taotao.cloud.sys.biz.domain.model.convert.I18nDataConverter;
+import com.taotao.cloud.sys.biz.domain.model.entity.i18n.I18nData;
 import com.taotao.cloud.sys.biz.service.business.I18nDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;

@@ -29,7 +29,6 @@ import com.taotao.boot.web.annotation.TaoTaoBootApplication;
 // //@EnableEncryptableProperties
 // @EnableTransactionManagement(proxyTargetClass = true)
 @TaoTaoBootApplication
-
 public class TaoTaoCloudBffApplication {
 
     public static void main(String[] args) {
@@ -38,7 +37,6 @@ public class TaoTaoCloudBffApplication {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-bff")
-                
                 .run(args);
     }
 }

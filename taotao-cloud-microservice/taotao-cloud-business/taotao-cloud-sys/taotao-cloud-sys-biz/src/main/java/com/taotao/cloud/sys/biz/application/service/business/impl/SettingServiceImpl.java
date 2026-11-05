@@ -18,8 +18,8 @@ package com.taotao.cloud.sys.biz.application.service.business.impl;
 
 import com.taotao.boot.webagg.service.impl.BaseServiceImpl;
 import com.taotao.cloud.sys.biz.application.service.business.SettingService;
-import com.taotao.cloud.sys.biz.mapper.ISettingMapper;
-import com.taotao.cloud.sys.biz.model.entity.setting.Setting;
+import com.taotao.cloud.sys.biz.infrastructure.mapper.ISettingMapper;
+import com.taotao.cloud.sys.biz.domain.model.entity.setting.Setting;
 import com.taotao.cloud.sys.biz.repository.ISettingRepository;
 import com.taotao.cloud.sys.biz.repository.SettingRepository;
 import org.springframework.cache.annotation.CacheConfig;

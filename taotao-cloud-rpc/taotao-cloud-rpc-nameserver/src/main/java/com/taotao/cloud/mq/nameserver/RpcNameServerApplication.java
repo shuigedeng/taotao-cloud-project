@@ -43,7 +43,6 @@ public class RpcNameServerApplication extends SpringBootServletInitializer {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-rpc-nameserver")
-                
                 .run(args);
     }
 }

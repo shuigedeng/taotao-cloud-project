@@ -17,8 +17,8 @@
 package com.taotao.cloud.sys.biz.application.service;
 
 import com.taotao.boot.common.model.result.PageResult;
-import com.taotao.cloud.sys.biz.model.dto.DataVersionLogDto;
-import com.taotao.cloud.sys.biz.model.param.DataVersionLogParam;
+import com.taotao.cloud.sys.biz.domain.model.dto.DataVersionLogDto;
+import com.taotao.cloud.sys.biz.domain.model.param.DataVersionLogParam;
 
 /**
  * 数据版本日志

@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.application.service.impl;
 
 import com.taotao.cloud.sys.api.model.vo.UploadFileVO;
 import com.taotao.cloud.sys.biz.application.service.FileService;
-import com.taotao.cloud.sys.biz.model.entity.File;
+import com.taotao.cloud.sys.biz.domain.model.entity.File;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

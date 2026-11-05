@@ -17,10 +17,10 @@
 package com.taotao.cloud.sys.biz.application.service.business;
 
 import com.taotao.boot.webagg.service.BaseService;
-import com.taotao.cloud.sys.biz.model.entity.region.Region;
-import com.taotao.cloud.sys.biz.model.vo.region.RegionParentVO;
-import com.taotao.cloud.sys.biz.model.vo.region.RegionTreeVO;
-import com.taotao.cloud.sys.biz.model.vo.region.RegionVO;
+import com.taotao.cloud.sys.biz.domain.model.entity.region.Region;
+import com.taotao.cloud.sys.biz.domain.model.vo.region.RegionParentVO;
+import com.taotao.cloud.sys.biz.domain.model.vo.region.RegionTreeVO;
+import com.taotao.cloud.sys.biz.domain.model.vo.region.RegionVO;
 
 import java.util.List;
 import java.util.Map;

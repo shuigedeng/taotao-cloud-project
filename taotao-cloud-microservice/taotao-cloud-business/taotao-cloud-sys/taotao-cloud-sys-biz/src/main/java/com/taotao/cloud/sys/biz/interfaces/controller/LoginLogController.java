@@ -18,8 +18,8 @@ package com.taotao.cloud.sys.biz.interfaces.controller;
 
 import com.taotao.boot.common.model.result.PageResult;
 import com.taotao.boot.common.model.result.Result;
-import com.taotao.cloud.sys.biz.model.dto.LoginLogDto;
-import com.taotao.cloud.sys.biz.model.param.LoginLogParam;
+import com.taotao.cloud.sys.biz.domain.model.dto.LoginLogDto;
+import com.taotao.cloud.sys.biz.domain.model.param.LoginLogParam;
 import com.taotao.cloud.sys.biz.service.LoginLogService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

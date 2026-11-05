@@ -23,8 +23,7 @@ import com.taotao.cloud.store.api.model.vo.StoreCollectionVO;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@HttpExchange(
-        value = ServiceNameConstants.TAOTAO_CLOUD_GOODS)
+@HttpExchange
 public interface InnerStoreCollectionApi {
 
     @GetMapping(value = "/storeCollection")

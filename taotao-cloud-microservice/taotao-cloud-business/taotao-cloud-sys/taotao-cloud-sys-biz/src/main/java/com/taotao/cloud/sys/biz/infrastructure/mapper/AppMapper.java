@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.infrastructure.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.sys.biz.model.entity.app.App;
+import com.taotao.cloud.sys.biz.domain.model.entity.app.App;
 import org.springframework.stereotype.Repository;
 
 /**

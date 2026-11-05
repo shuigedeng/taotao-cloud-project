@@ -35,7 +35,6 @@ public class TaoTaoCloudAiApplication {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-ai")
-                
                 .run(args);
 
         // try {

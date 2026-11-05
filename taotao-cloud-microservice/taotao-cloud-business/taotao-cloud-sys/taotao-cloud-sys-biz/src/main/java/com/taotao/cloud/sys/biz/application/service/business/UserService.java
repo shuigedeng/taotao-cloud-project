@@ -17,8 +17,8 @@
 package com.taotao.cloud.sys.biz.application.service.business;
 
 import com.taotao.boot.webagg.service.BaseService;
-import com.taotao.cloud.sys.biz.model.dto.user.RestPasswordUserDTO;
-import com.taotao.cloud.sys.biz.model.entity.system.User;
+import com.taotao.cloud.sys.biz.domain.model.dto.user.RestPasswordUserDTO;
+import com.taotao.cloud.sys.biz.domain.model.entity.system.User;
 
 import java.util.List;
 import java.util.Set;

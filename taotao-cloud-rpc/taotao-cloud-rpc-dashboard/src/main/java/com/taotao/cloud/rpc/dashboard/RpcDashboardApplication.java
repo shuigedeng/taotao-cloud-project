@@ -44,7 +44,6 @@ public class RpcDashboardApplication extends SpringBootServletInitializer {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-rpc-dashboard")
-                
                 .run(args);
 
         RpcServerBootstrap.main(args);

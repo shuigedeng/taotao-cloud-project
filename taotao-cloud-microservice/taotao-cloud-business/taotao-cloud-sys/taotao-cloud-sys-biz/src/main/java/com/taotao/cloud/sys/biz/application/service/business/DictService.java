@@ -17,9 +17,9 @@
 package com.taotao.cloud.sys.biz.application.service.business;
 
 import com.taotao.boot.webagg.service.BaseService;
-import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
-import com.taotao.cloud.sys.biz.model.page.DictPageQuery;
-import com.taotao.cloud.sys.biz.model.query.DictQuery;
+import com.taotao.cloud.sys.biz.domain.model.entity.dict.Dict;
+import com.taotao.cloud.sys.biz.domain.model.page.DictPageQuery;
+import com.taotao.cloud.sys.biz.domain.model.query.DictQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

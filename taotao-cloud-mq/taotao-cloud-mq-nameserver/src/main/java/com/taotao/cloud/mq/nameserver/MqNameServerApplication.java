@@ -43,7 +43,6 @@ public class MqNameServerApplication extends SpringBootServletInitializer {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-mq-nameserver")
-                
                 .run(args);
     }
 }

@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.sys.biz.application.service.business;
 
-import com.taotao.cloud.sys.biz.model.dto.dictItem.DictItemDTO;
-import com.taotao.cloud.sys.biz.model.entity.dict.DictItem;
-import com.taotao.cloud.sys.biz.model.page.DictItemPageQuery;
-import com.taotao.cloud.sys.biz.model.query.DictItemQuery;
+import com.taotao.cloud.sys.biz.domain.model.dto.dictItem.DictItemDTO;
+import com.taotao.cloud.sys.biz.domain.model.entity.dict.DictItem;
+import com.taotao.cloud.sys.biz.domain.model.page.DictItemPageQuery;
+import com.taotao.cloud.sys.biz.domain.model.query.DictItemQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

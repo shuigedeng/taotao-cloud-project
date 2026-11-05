@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.application.service;
 
 import com.baomidou.mybatisplus.spring.service.IService;
 import com.taotao.cloud.sys.api.model.dto.LogQueryCriteria;
-import com.taotao.cloud.sys.biz.model.entity.Log;
+import com.taotao.cloud.sys.biz.domain.model.entity.Log;
 import jakarta.servlet.http.HttpServletResponse;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.data.domain.Pageable;

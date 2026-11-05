@@ -17,8 +17,8 @@
 package com.taotao.cloud.sys.biz.infrastructure.supports.core.mongo.service;
 
 import com.taotao.boot.common.model.result.PageResult;
-import com.taotao.cloud.sys.biz.model.dto.LoginLogDto;
-import com.taotao.cloud.sys.biz.model.param.LoginLogParam;
+import com.taotao.cloud.sys.biz.domain.model.dto.LoginLogDto;
+import com.taotao.cloud.sys.biz.domain.model.param.LoginLogParam;
 import com.taotao.cloud.sys.biz.service.LoginLogService;
 import com.taotao.cloud.sys.biz.supports.core.mongo.dao.LoginLogMongoRepository;
 import lombok.RequiredArgsConstructor;

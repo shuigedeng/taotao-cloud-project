@@ -27,8 +27,7 @@ import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Ref;
-import org.springframework.shell.Availability;
-import org.springframework.shell.standard.ShellCommandGroup;
+import org.springframework.shell.core.command.availability.Availability;
 import org.springframework.stereotype.Component;
 import org.springframework.shell.core.command.annotation.Command;
 import org.springframework.shell.core.command.annotation.Option;
@@ -66,7 +65,7 @@ public class OdcShellTest {
      * @return
      */
     // key 命令名称
-    @Command(value = "输入两个整数，获取相加结果", key = "sum")
+    @Command(value = "输入两个整数，获取相加结果", name = "sum")
     //    @Command(name = "changePassword", description = "输入两个整数，获取相加结果")
     public int add(int a, int b) {
         return a + b;
@@ -96,8 +95,8 @@ public class OdcShellTest {
      *
      * @return
      */
-    @Command(value = "通过明明参数名称，强制的指定输入的数据对应的参数名称", prefix = "-")
-    public String echoInt2(int a, int b, @Option("--third") int c) {
+    @Command(value = "通过明明参数名称，强制的指定输入的数据对应的参数名称")
+    public String echoInt2(int a, int b, @Option(defaultValue = "--third") int c) {
         return String.format("You said a=%d, b=%d, c=%d", a, b, c);
     }
 
@@ -121,7 +120,7 @@ public class OdcShellTest {
      * @return
      */
     @Command(name = "changePassword", description = "输入数组")
-    public String echoArray(@Option(arity = 3) float[] numbers) {
+    public String echoArray(@Option float[] numbers) {
         return "input:" + numbers[0] + "," + numbers[1] + "," + numbers[2];
     }
 

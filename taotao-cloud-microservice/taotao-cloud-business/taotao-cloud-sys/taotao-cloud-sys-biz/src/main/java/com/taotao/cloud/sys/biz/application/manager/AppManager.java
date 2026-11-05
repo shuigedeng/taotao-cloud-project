@@ -21,11 +21,11 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.taotao.boot.web.annotation.Manager;
 import com.taotao.boot.webagg.manager.BaseManager;
-import com.taotao.cloud.sys.biz.mapper.AppMapper;
-import com.taotao.cloud.sys.biz.model.convert.AppConvert;
-import com.taotao.cloud.sys.biz.model.dto.app.AppDTO;
-import com.taotao.cloud.sys.biz.model.dto.app.AppPageDTO;
-import com.taotao.cloud.sys.biz.model.entity.app.App;
+import com.taotao.cloud.sys.biz.infrastructure.mapper.AppMapper;
+import com.taotao.cloud.sys.biz.domain.model.convert.AppConvert;
+import com.taotao.cloud.sys.biz.domain.model.dto.app.AppDTO;
+import com.taotao.cloud.sys.biz.domain.model.dto.app.AppPageDTO;
+import com.taotao.cloud.sys.biz.domain.model.entity.app.App;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;

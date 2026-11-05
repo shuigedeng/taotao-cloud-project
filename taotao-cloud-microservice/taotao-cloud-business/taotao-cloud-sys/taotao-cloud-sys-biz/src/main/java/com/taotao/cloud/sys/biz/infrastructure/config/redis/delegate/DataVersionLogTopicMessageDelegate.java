@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.infrastructure.config.redis.delegate;
 
 import com.taotao.boot.common.utils.json.JacksonUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.sys.biz.model.entity.Log;
+import com.taotao.cloud.sys.biz.domain.model.entity.Log;
 import com.taotao.cloud.sys.biz.service.ILogService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

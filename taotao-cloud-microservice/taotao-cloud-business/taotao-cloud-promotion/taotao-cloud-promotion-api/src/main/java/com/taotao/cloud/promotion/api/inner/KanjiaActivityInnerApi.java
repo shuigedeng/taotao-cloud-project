@@ -28,8 +28,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @version 2022.04
  * @since 2022-04-07 22:09
  */
-@HttpExchange(
-        value = ServiceNameConstants.TAOTAO_CLOUD_PROMOTION)
+@HttpExchange
 public interface KanjiaActivityInnerApi {
 
     @GetMapping(value = "/getById")

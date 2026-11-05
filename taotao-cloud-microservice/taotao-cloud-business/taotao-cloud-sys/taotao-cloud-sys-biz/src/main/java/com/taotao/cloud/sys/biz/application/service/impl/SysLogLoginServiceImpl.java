@@ -19,7 +19,7 @@ package com.taotao.cloud.sys.biz.application.service.impl;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taotao.cloud.sys.biz.application.service.SysLogLoginService;
-import com.taotao.cloud.sys.biz.model.entity.SysLogLogin;
+import com.taotao.cloud.sys.biz.domain.model.entity.SysLogLogin;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;

@@ -12,7 +12,7 @@ import org.springframework.web.service.annotation.HttpExchange;
  * @since 2023-02-09
  */
 
-@HttpExchange(name = "dcloud-account-service")
+@HttpExchange
 public interface TrafficInnerService {
 
     /**

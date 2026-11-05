@@ -25,7 +25,7 @@ import com.taotao.boot.lock.support.DistributedLock;
 import com.taotao.boot.webagg.repository.BaseClassSuperRepository;
 import com.taotao.cloud.sys.biz.application.service.business.UserService;
 import com.taotao.cloud.sys.biz.application.service.inner.InnerUserService;
-import com.taotao.cloud.sys.biz.model.entity.system.User;
+import com.taotao.cloud.sys.biz.domain.model.entity.system.User;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.jdbc.core.JdbcTemplate;

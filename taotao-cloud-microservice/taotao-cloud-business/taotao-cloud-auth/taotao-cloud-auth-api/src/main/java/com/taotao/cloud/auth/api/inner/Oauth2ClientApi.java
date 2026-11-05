@@ -28,7 +28,7 @@
   * @version 2022.03
   * @since 2020/5/2 16:42
   */
- @HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_AUTH)
+ @HttpExchange
  public interface Oauth2ClientApi {
 
 	 ClientApiResponse query( InnerClientQueryApiRequest clientQueryApiRequest);

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.infrastructure.utils;
 
-import com.taotao.cloud.sys.biz.model.entity.config.AlipayConfig;
+import com.taotao.cloud.sys.biz.domain.model.entity.config.AlipayConfig;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
 

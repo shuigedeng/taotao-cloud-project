@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @version 2023.04
  * @since 2023-05-10 11:20:18
  */
-@HttpExchange(value = ServiceNameConstants.TAOTAO_CLOUD_GOODS)
+@HttpExchange
 public interface InnerStoreLogisticsApi {
 
     @GetMapping(value = "/getStoreSelectedLogisticsName")

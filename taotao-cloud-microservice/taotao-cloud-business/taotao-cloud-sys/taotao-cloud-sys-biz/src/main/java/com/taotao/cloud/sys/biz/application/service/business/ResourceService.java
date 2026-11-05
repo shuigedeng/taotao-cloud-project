@@ -18,10 +18,10 @@ package com.taotao.cloud.sys.biz.application.service.business;
 
 import com.taotao.boot.webagg.service.BaseService;
 import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRpcRequest;
-import com.taotao.cloud.sys.biz.model.bo.MenuBO;
-import com.taotao.cloud.sys.biz.model.entity.system.Resource;
-import com.taotao.cloud.sys.biz.model.vo.menu.MenuQueryVO;
-import com.taotao.cloud.sys.biz.model.vo.menu.MenuTreeVO;
+import com.taotao.cloud.sys.biz.domain.model.bo.MenuBO;
+import com.taotao.cloud.sys.biz.domain.model.entity.system.Resource;
+import com.taotao.cloud.sys.biz.domain.model.vo.menu.MenuQueryVO;
+import com.taotao.cloud.sys.biz.domain.model.vo.menu.MenuTreeVO;
 
 import java.util.List;
 import java.util.Set;

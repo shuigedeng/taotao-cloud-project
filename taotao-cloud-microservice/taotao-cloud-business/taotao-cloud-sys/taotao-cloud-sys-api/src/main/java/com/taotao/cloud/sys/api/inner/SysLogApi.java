@@ -23,8 +23,7 @@ import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@HttpExchange(
-        name = ServiceNameConstants.TAOTAO_CLOUD_LOG)
+@HttpExchange
 public interface SysLogApi {
 
     @PostMapping("/save")

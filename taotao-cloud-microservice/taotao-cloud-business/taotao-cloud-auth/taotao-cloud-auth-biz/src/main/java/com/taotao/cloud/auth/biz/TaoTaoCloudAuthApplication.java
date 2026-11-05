@@ -93,7 +93,6 @@ public class TaoTaoCloudAuthApplication {
                 .setTtcBanner()
                 .setTtcProfileIfNotExists("dev")
                 .setTtcApplicationProperty("taotao-cloud-auth")
-                
                 .run(args);
     }
 }

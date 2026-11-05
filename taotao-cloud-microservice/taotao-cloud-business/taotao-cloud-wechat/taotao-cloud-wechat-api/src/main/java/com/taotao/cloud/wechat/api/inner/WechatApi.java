@@ -28,8 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@HttpExchange(
-        value = ServiceNameConstants.TAOTAO_CLOUD_SYS)
+@HttpExchange
 public interface WechatApi {
 
     /**

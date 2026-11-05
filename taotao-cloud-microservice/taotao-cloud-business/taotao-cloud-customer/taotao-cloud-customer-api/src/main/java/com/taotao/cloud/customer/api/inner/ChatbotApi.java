@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@HttpExchange()
+@HttpExchange
 public interface ChatbotApi {
 
     /**
