@@ -176,7 +176,7 @@ plugins {
 
     //Protobuf 插件为您的项目提供 protobuf 编译。
     //https://plugins.gradle.org/plugin/com.google.protobuf
-    id "com.google.protobuf" version "0.10.0"
+    id "com.google.protobuf" version "0.10.1"
 
     //https://github.com/diffplug/spotless/blob/main/plugin-gradle/README.md
     //https://plugins.gradle.org/plugin/com.diffplug.spotless
