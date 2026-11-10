@@ -1,0 +1,14 @@
+dependencies {
+    api project(":taotao-cloud-mq:taotao-cloud-mq-common")
+    api project(":taotao-cloud-mq:taotao-cloud-mq-metrics")
+    api project(":taotao-cloud-mq:taotao-cloud-mq-common")
+    api project(":taotao-cloud-mq:taotao-cloud-mq-remoting")
+    api project(":taotao-cloud-mq:taotao-cloud-mq-metrics")
+    api project(":taotao-cloud-mq:taotao-cloud-mq-plugin")
+    api project(":taotao-cloud-mq:taotao-cloud-mq-proxy")
+    api project(":taotao-cloud-mq:taotao-cloud-mq-client")
+
+    api "io.github.shuigedeng:taotao-boot-starter-core"
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}

@@ -1,4 +1,3 @@
 dependencies {
     api project(":taotao-cloud-mq:taotao-cloud-mq-common")
-    api project(":taotao-cloud-mq:taotao-cloud-mq-plugin")
 }

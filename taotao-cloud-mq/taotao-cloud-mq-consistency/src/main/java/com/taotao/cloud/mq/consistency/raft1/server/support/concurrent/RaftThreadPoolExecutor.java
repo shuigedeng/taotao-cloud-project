@@ -24,7 +24,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author 莫那·鲁道
  */
 public class RaftThreadPoolExecutor extends ThreadPoolExecutor {
 

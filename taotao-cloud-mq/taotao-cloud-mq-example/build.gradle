@@ -1,7 +1,7 @@
 dependencies {
     api project(":taotao-cloud-mq:taotao-cloud-mq-broker")
     api project(":taotao-cloud-mq:taotao-cloud-mq-client")
-    api project(":taotao-cloud-mq:taotao-cloud-mq-cluster")
+    api project(":taotao-cloud-mq:taotao-cloud-mq-remoting")
     api project(":taotao-cloud-mq:taotao-cloud-mq-common")
     api project(":taotao-cloud-mq:taotao-cloud-mq-consistency")
     api project(":taotao-cloud-mq:taotao-cloud-mq-dashboard")
@@ -13,7 +13,7 @@ dependencies {
 jar {
     from(project(":taotao-cloud-mq:taotao-cloud-mq-broker").jar) { into("lib/") }
     from(project(":taotao-cloud-mq:taotao-cloud-mq-client").jar) { into("lib/") }
-    from(project(":taotao-cloud-mq:taotao-cloud-mq-cluster").jar) { into("lib/") }
+    from(project(":taotao-cloud-mq:taotao-cloud-mq-remoting").jar) { into("lib/") }
     from(project(":taotao-cloud-mq:taotao-cloud-mq-common").jar) { into("lib/") }
     from(project(":taotao-cloud-mq:taotao-cloud-mq-consistency").jar) { into("lib/") }
     from(project(":taotao-cloud-mq:taotao-cloud-mq-metrics").jar) { into("lib/") }

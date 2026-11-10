@@ -24,7 +24,6 @@ import com.taotao.cloud.mq.common.retry.api.support.recover.Recover;
  * <pre> Created: 2019/5/28 10:47 PM  </pre>
  * <pre> Project: sisyphus  </pre>
  *
- * @author houbinbin
  * @since 0.0.6
  */
 public final class Recovers {

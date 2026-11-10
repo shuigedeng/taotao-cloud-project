@@ -23,7 +23,6 @@ import java.util.*;
 /**
  * Map 工具类
  *
- * @author bbhou
  * @since 0.0.1
  */
 public final class MapUtil {
