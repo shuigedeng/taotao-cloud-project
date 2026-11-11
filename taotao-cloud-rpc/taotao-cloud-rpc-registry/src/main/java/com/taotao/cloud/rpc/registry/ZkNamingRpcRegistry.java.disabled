@@ -1,0 +1,175 @@
+package com.taotao.cloud.rpc.registry;
+
+import com.taotao.cloud.config.client.naming.ZNamingService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.function.Consumer;
+
+/**
+ * ttc-config Naming 适配的 RpcRegistry (FEATURE — nacos 等价).
+ *
+ * <p>把 ttc-rpc 的 {@link RpcRegistry} 抽象落到 ttc-config 的 {@link ZNamingService} (nacos 等价能力):
+ * <ul>
+ *   <li>register/deregister → {@code registerInstance}/{@code deregisterInstance}</li>
+ *   <li>heartbeat          → Naming 默认每 5s 自动 push（Naming 内部续约）；这里再保一道主动 heartbeat 接口</li>
+ *   <li>discover           → {@code getAllInstances}</li>
+ *   <li>subscribe          → {@link ZNamingService#addListener} (Naming push 推送)</li>
+ * </ul>
+ *
+ * <p>模型翻译: ZNamingInstance ↔ ServiceInstance (字段名一致，仅 healthy 用 boolean → 实例额外加 healthy 表示).
+ *
+ * <p>注意: ttc-config 的 Naming 服务端需要 ttc-config-core 服务运行。本类做的是 client 侧。
+ * 当 ttc-config 服务不可达时调用降级（log warn 但不抛），让 ttc-rpc 能在主逻辑上工作.
+ */
+public class ZkNamingRpcRegistry implements RpcRegistry {
+
+    private static final Logger log = LogManager.getLogger(ZkNamingRpcRegistry.class);
+
+    private final ZNamingService namingService;
+    private final String namespace;
+    /** subscribers for unsubscribe (我们用 ZNamingListener 抽象，ID 由 listener 自身 hashCode) */
+    private final Map<String, List<Subscription>> subscribers = new java.util.concurrent.ConcurrentHashMap<>();
+
+    public ZkNamingRpcRegistry(ZNamingService namingService, String namespace) {
+        this.namingService = namingService;
+        this.namespace = namespace == null ? "public" : namespace;
+    }
+
+    @Override
+    public boolean register(ServiceInstance instance) {
+        try {
+            namingService.registerInstance(instance.getServiceName(),
+                    instance.getIp(), instance.getPort(), instance.getCluster());
+            // initialize listener manager (one-time) so subscribe() 后才能 push
+            namingService.addListener(instance.getServiceName(), new com.taotao.cloud.config.client.naming.listener.ZNamingListener() {
+                @Override public void onChange(String serviceName, List<com.taotao.cloud.config.common.model.ZNamingInstance> list) {}
+            });
+            return true;
+        } catch (Throwable t) {
+            log.warn("zk-naming register failed for {}@{}: {}", instance.getServiceName(),
+                    instance.endpoint(), t.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public void deregister(String serviceName, String instanceId) {
+        try {
+            String[] hp = instanceId.split(":");
+            if (hp.length == 2) {
+                namingService.deregisterInstance(serviceName, hp[0], Integer.parseInt(hp[1]));
+            }
+        } catch (Throwable t) {
+            log.warn("zk-naming deregister failed for {}/{}: {}", serviceName, instanceId, t.getMessage());
+        }
+    }
+
+    @Override
+    public long heartbeat(String serviceName, String instanceId) {
+        // ttc-config Naming 默认客户端 5s 自动续约，此接口对调用方返回下次建议时间
+        return 5L;
+    }
+
+    @Override
+    public List<ServiceInstance> discover(String serviceName) {
+        try {
+            List<com.taotao.cloud.config.common.model.ZNamingInstance> z = namingService.getAllInstances(serviceName);
+            return toServiceInstances(serviceName, z);
+        } catch (Throwable t) {
+            log.warn("zk-naming discover failed for {}: {}", serviceName, t.getMessage());
+            return java.util.Collections.emptyList();
+        }
+    }
+
+    @Override
+    public Subscription subscribe(String serviceName, Consumer<RegistryEvent> listener) {
+        com.taotao.cloud.config.client.naming.listener.ZNamingListener zkListener =
+                new com.taotao.cloud.config.client.naming.listener.ZNamingListener() {
+                    @Override
+                    public void onChange(String svc, List<com.taotao.cloud.config.common.model.ZNamingInstance> list) {
+                        try {
+                            listener.accept(new RegistryEvent(
+                                    RpcRegistry.Type.FULL_SNAPSHOT, svc,
+                                    toServiceInstances(svc, list)));
+                        } catch (Throwable t) {
+                            log.warn("publish to subscriber failed: {}", t.getMessage());
+                        }
+                    }
+                };
+        try {
+            namingService.addListener(serviceName, zkListener);
+        } catch (Throwable t) {
+            log.warn("addListener failed (init listener manager?): {}", t.getMessage());
+        }
+        ZkSub sub = new ZkSub() {
+            @Override public String serviceName() { return serviceName; }
+            @Override public Consumer<RegistryEvent> listener() { return listener; }
+            @Override public com.taotao.cloud.config.client.naming.listener.ZNamingListener toZkListener() {
+                return zkListener;
+            }
+        };
+        subscribers.computeIfAbsent(serviceName, k -> new CopyOnWriteArrayList<>()).add(sub);
+        return sub;
+    }
+
+    @Override
+    public void unsubscribe(String serviceName, Subscription subscription) {
+        if (subscription == null) {
+            return;
+        }
+        List<Subscription> list = subscribers.get(serviceName);
+        if (list != null) {
+            list.remove(subscription);
+        }
+        if (subscription instanceof ZkSub) {
+            try {
+                namingService.removeListener(serviceName, ((ZkSub) subscription).toZkListener());
+            } catch (Throwable t) {
+                log.warn("removeListener failed: {}", t.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public void close() {
+        // 没有外部资源需要释放；Naming 客户端由 ttc-config-client 生命周期管理
+        subscribers.clear();
+    }
+
+    // ========== helpers ==========
+
+    /** ZNamingInstance → ServiceInstance (过滤掉 enabled=false / healthy=false). */
+    private static List<ServiceInstance> toServiceInstances(String serviceName,
+                                                            List<com.taotao.cloud.config.common.model.ZNamingInstance> z) {
+        if (z == null || z.isEmpty()) {
+            return java.util.Collections.emptyList();
+        }
+        List<ServiceInstance> out = new ArrayList<>(z.size());
+        for (com.taotao.cloud.config.common.model.ZNamingInstance zi : z) {
+            if (zi == null || Boolean.FALSE.equals(zi.getEnabled())) {
+                continue;
+            }
+            ServiceInstance si = new ServiceInstance();
+            si.setServiceName(serviceName);
+            si.setInstanceId(zi.getInstanceId() == null ? (zi.getIp() + ":" + zi.getPort()) : zi.getInstanceId());
+            si.setIp(zi.getIp());
+            si.setPort(zi.getPort() == null ? 0 : zi.getPort());
+            si.setWeight(zi.getWeight() == null ? 1.0 : zi.getWeight());
+            si.setCluster(zi.getClusterName());
+            si.setMetadata(zi.getMetadata());
+            si.setEphemeral(Boolean.TRUE.equals(zi.getEphemeral()));
+            out.add(si);
+        }
+        return out;
+    }
+
+    /** Subscription 子接口，便于 unsubscribe 时拿到底层 ZNamingListener */
+    public interface ZkSub extends Subscription {
+        com.taotao.cloud.config.client.naming.listener.ZNamingListener toZkListener();
+    }
+}

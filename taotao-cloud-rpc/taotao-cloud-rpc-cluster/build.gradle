@@ -1,4 +1,5 @@
 dependencies {
     api project(":taotao-cloud-rpc:taotao-cloud-rpc-core")
-    api project(":taotao-cloud-rpc:taotao-cloud-rpc-plugin")
+    api project(":taotao-cloud-rpc:taotao-cloud-rpc-remoting")
+    api project(":taotao-cloud-rpc:taotao-cloud-rpc-registry")
 }

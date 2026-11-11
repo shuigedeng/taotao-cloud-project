@@ -1,0 +1,5 @@
+java=com.taotao.cloud.rpc.serialization.JavaSerialization
+json=com.taotao.cloud.rpc.serialization.JsonSerialization
+hessian2=com.taotao.cloud.rpc.serialization.Hessian2Serialization
+kryo=com.taotao.cloud.rpc.serialization.KryoSerialization
+protobuf=com.taotao.cloud.rpc.serialization.ProtobufSerialization

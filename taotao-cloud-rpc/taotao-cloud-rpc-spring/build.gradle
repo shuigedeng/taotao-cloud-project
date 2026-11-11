@@ -1,0 +1,10 @@
+dependencies {
+    api project(":taotao-cloud-rpc:taotao-cloud-rpc-core")
+    api project(":taotao-cloud-rpc:taotao-cloud-rpc-remoting")
+    api project(":taotao-cloud-rpc:taotao-cloud-rpc-cluster")
+
+    api "io.github.shuigedeng:taotao-boot-starter-core"
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+
+}

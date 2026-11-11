@@ -1,0 +1,317 @@
+package com.taotao.cloud.rpc.registry;
+
+import com.taotao.cloud.config.client.naming.ZNamingService;
+import com.taotao.cloud.config.client.naming.ZNamingServiceImpl;
+import com.taotao.cloud.config.client.naming.listener.ZNamingListener;
+import com.taotao.cloud.config.common.model.ZNamingInstance;
+import com.taotao.cloud.rpc.common.URL;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+/**
+ * 基于 ttc-Config 的注册中心实现
+ */
+public class ZConfigRegistry implements RegistryService {
+
+    private static final Logger log = LogManager.getLogger(ZConfigRegistry.class);
+
+    private final ZNamingService namingService;
+    private final String namespace;
+    private final String serverAddr;
+
+    // 缓存：服务名 -> 监听器列表
+    private final Map<String, List<NotifyListener>> listenerMap = new ConcurrentHashMap<>();
+
+    // 缓存：服务名 -> ZNamingListener
+    private final Map<String, ZNamingListenerWrapper> namingListenerMap = new ConcurrentHashMap<>();
+
+    // 当前注册的服务实例
+    private final List<RegisteredService> registeredServices = new CopyOnWriteArrayList<>();
+
+    public ZConfigRegistry(String serverAddr) {
+        this(serverAddr, "public");
+    }
+
+    public ZConfigRegistry(String serverAddr, String namespace) {
+        this.serverAddr = serverAddr;
+        this.namespace = namespace;
+        Properties properties = new Properties();
+        properties.setProperty("serverAddr", serverAddr);
+        properties.setProperty("namespace", namespace);
+        this.namingService = new ZNamingServiceImpl(properties);
+
+        log.info("ZConfigRegistry initialized, serverAddr={}, namespace={}", serverAddr, namespace);
+    }
+
+    @Override
+    public void register(URL url) {
+        try {
+            String serviceName = url.getServiceKey();
+            String ip = url.getHost();
+            int port = url.getPort();
+            String clusterName = url.getParameter("cluster", "DEFAULT");
+
+            namingService.registerInstance(serviceName, ip, port, clusterName);
+            registeredServices.add(new RegisteredService(serviceName, ip, port));
+
+            log.info("Service registered: {} at {}:{}, cluster={}", serviceName, ip, port, clusterName);
+        } catch (Exception e) {
+            log.error("Failed to register service: {}", url, e);
+            throw new RuntimeException("Failed to register service", e);
+        }
+    }
+
+    @Override
+    public void unregister(URL url) {
+        try {
+            String serviceName = url.getServiceKey();
+            String ip = url.getHost();
+            int port = url.getPort();
+            String clusterName = url.getParameter("cluster", "DEFAULT");
+
+            namingService.deregisterInstance(serviceName, ip, port, clusterName);
+            registeredServices.removeIf(s -> s.matches(serviceName, ip, port));
+
+            log.info("Service unregistered: {} at {}:{}", serviceName, ip, port);
+        } catch (Exception e) {
+            log.error("Failed to unregister service: {}", url, e);
+            throw new RuntimeException("Failed to unregister service", e);
+        }
+    }
+
+    @Override
+    public void subscribe(URL url, NotifyListener listener) {
+        String serviceName = url.getServiceKey();
+
+        // 添加监听器
+        listenerMap.computeIfAbsent(serviceName, k -> new CopyOnWriteArrayList<>()).add(listener);
+
+        // 初始化监听管理器（只执行一次）
+        initListenerManagerIfNeeded();
+
+        // 创建并注册 ZNamingListener
+        ZNamingListenerWrapper namingListener = namingListenerMap.computeIfAbsent(serviceName, k -> {
+            ZNamingListenerWrapper wrapper = new ZNamingListenerWrapper(serviceName);
+            namingService.addListener(serviceName, wrapper);
+            return wrapper;
+        });
+
+        // 添加新的 NotifyListener 到 wrapper
+        namingListener.addNotifyListener(listener);
+
+        // 立即通知当前已知的实例
+        List<ZNamingInstance> instances = namingService.getAllInstances(serviceName);
+        if (!instances.isEmpty()) {
+            List<URL> urls = convertToUrls(instances);
+            listener.notify(urls);
+        }
+
+        log.info("Subscribed to service: {}", serviceName);
+    }
+
+    @Override
+    public void unsubscribe(URL url, NotifyListener listener) {
+        String serviceName = url.getServiceKey();
+
+        List<NotifyListener> listeners = listenerMap.get(serviceName);
+        if (listeners != null) {
+            listeners.remove(listener);
+        }
+
+        ZNamingListenerWrapper namingListener = namingListenerMap.get(serviceName);
+        if (namingListener != null) {
+            namingListener.removeNotifyListener(listener);
+        }
+
+        log.info("Unsubscribed from service: {}", serviceName);
+    }
+
+    @Override
+    public List<URL> lookup(URL url) {
+        String serviceName = url.getServiceKey();
+        List<ZNamingInstance> instances = namingService.selectInstances(serviceName, true);
+        return convertToUrls(instances);
+    }
+
+    @Override
+    public void destroy() {
+        // 注销所有已注册的服务
+        for (RegisteredService service : registeredServices) {
+            try {
+                namingService.deregisterInstance(service.serviceName, service.ip, service.port);
+            } catch (Exception e) {
+                log.error("Failed to deregister service on destroy: {}", service, e);
+            }
+        }
+        registeredServices.clear();
+
+        // 清理监听器
+        listenerMap.clear();
+        namingListenerMap.clear();
+
+        log.info("ZConfigRegistry destroyed");
+    }
+
+    // ==================== 私有方法 ====================
+
+    private void initListenerManagerIfNeeded() {
+        try {
+            // 使用本地 IP 和默认端口
+            String consumerIp = getLocalIp();
+            int consumerPort = 0; // 消费者端口，通常不需要
+            String consumerServiceName = "ttc-rpc-consumer";
+
+            // 反射调用 initListenerManager 方法
+            java.lang.reflect.Method method = namingService.getClass().getMethod(
+                    "initListenerManager", String.class, int.class, String.class);
+            method.invoke(namingService, consumerIp, consumerPort, consumerServiceName);
+
+            log.info("Listener manager initialized");
+        } catch (Exception e) {
+            log.warn("Failed to init listener manager: {}", e.getMessage());
+        }
+    }
+
+    private String getLocalIp() {
+        try {
+            return java.net.InetAddress.getLocalHost().getHostAddress();
+        } catch (Exception e) {
+            return "127.0.0.1";
+        }
+    }
+
+    private List<URL> convertToUrls(List<ZNamingInstance> instances) {
+        List<URL> urls = new ArrayList<>();
+        for (ZNamingInstance instance : instances) {
+            URL url = new URL();
+            url.setProtocol("ttc-rpc");
+            url.setHost(instance.getIp());
+            url.setPort(instance.getPort());
+            url.setServiceInterface(instance.getServiceName());
+            url.setGroup(instance.getGroup());
+            int weightValue = 100;
+            if (instance.getWeight() != null) {
+                Number weightNum = (Number) instance.getWeight();
+                weightValue = weightNum.intValue();
+            }
+            url.setWeight(weightValue);
+
+            // 添加元数据到参数
+            if (instance.getMetadata() != null) {
+                url.getParameters().putAll(instance.getMetadata());
+            }
+
+            urls.add(url);
+        }
+        return urls;
+    }
+
+    // ==================== 内部类 ====================
+
+    private static class RegisteredService {
+        final String serviceName;
+        final String ip;
+        final int port;
+
+        RegisteredService(String serviceName, String ip, int port) {
+            this.serviceName = serviceName;
+            this.ip = ip;
+            this.port = port;
+        }
+
+        boolean matches(String serviceName, String ip, int port) {
+            return this.serviceName.equals(serviceName)
+                    && this.ip.equals(ip)
+                    && this.port == port;
+        }
+
+        @Override
+        public String toString() {
+            return "RegisteredService{" +
+                    "serviceName='" + serviceName + '\'' +
+                    ", ip='" + ip + '\'' +
+                    ", port=" + port +
+                    '}';
+        }
+    }
+
+    /**
+     * ZNamingListener 包装器
+     */
+    private class ZNamingListenerWrapper implements ZNamingListener {
+        private final String serviceName;
+        private final List<NotifyListener> notifyListeners = new CopyOnWriteArrayList<>();
+
+        ZNamingListenerWrapper(String serviceName) {
+            this.serviceName = serviceName;
+        }
+
+        void addNotifyListener(NotifyListener listener) {
+            notifyListeners.add(listener);
+        }
+
+        void removeNotifyListener(NotifyListener listener) {
+            notifyListeners.remove(listener);
+        }
+
+        @Override
+        public void onChange(String serviceName, List<ZNamingInstance> instances) {
+            List<URL> urls = convertToUrls(instances);
+            for (NotifyListener listener : notifyListeners) {
+                try {
+                    listener.notify(urls);
+                } catch (Exception e) {
+                    log.error("Failed to notify listener: {}", listener, e);
+                }
+            }
+        }
+
+        @Override
+        public void onInstanceAdded(String serviceName, ZNamingInstance instance) {
+            for (NotifyListener listener : notifyListeners) {
+                try {
+                    listener.onServiceAdded(convertToUrl(instance));
+                } catch (Exception e) {
+                    log.error("Failed to notify listener on add: {}", listener, e);
+                }
+            }
+        }
+
+        @Override
+        public void onInstanceRemoved(String serviceName, ZNamingInstance instance) {
+            for (NotifyListener listener : notifyListeners) {
+                try {
+                    listener.onServiceRemoved(convertToUrl(instance));
+                } catch (Exception e) {
+                    log.error("Failed to notify listener on remove: {}", listener, e);
+                }
+            }
+        }
+
+        private URL convertToUrl(ZNamingInstance instance) {
+            URL url = new URL();
+            url.setProtocol("ttc-rpc");
+            url.setHost(instance.getIp());
+            url.setPort(instance.getPort());
+            url.setServiceInterface(instance.getServiceName());
+            url.setGroup(instance.getGroup());
+            int weightValue = 100;
+            if (instance.getWeight() != null) {
+                Number weightNum = (Number) instance.getWeight();
+                weightValue = weightNum.intValue();
+            }
+            url.setWeight(weightValue);
+            if (instance.getMetadata() != null) {
+                url.getParameters().putAll(instance.getMetadata());
+            }
+            return url;
+        }
+    }
+}

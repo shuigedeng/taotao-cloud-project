@@ -1,0 +1,5 @@
+failover=com.taotao.cloud.rpc.cluster.FailoverCluster
+failfast=com.taotao.cloud.rpc.cluster.FailfastCluster
+failsafe=com.taotao.cloud.rpc.cluster.FailsafeCluster
+failback=com.taotao.cloud.rpc.cluster.FailbackCluster
+broadcast=com.taotao.cloud.rpc.cluster.BroadcastCluster

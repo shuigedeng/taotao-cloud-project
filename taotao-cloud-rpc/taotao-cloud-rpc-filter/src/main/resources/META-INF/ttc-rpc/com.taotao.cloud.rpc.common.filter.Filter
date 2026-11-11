@@ -1,0 +1,4 @@
+consumer-trace=com.taotao.cloud.rpc.filter.ConsumerTraceFilter
+monitor=com.taotao.cloud.rpc.filter.MonitorFilter
+provider-context=com.taotao.cloud.rpc.filter.ProviderContextFilter
+provider-monitor=com.taotao.cloud.rpc.filter.ProviderMonitorFilter

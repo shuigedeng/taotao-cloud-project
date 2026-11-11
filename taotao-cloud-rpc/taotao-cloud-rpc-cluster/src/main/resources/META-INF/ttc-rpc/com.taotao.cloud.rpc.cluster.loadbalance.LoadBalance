@@ -1,0 +1,3 @@
+random=com.taotao.cloud.rpc.cluster.loadbalance.RandomLoadBalance
+roundrobin=com.taotao.cloud.rpc.cluster.loadbalance.RoundRobinLoadBalance
+leastactive=com.taotao.cloud.rpc.cluster.loadbalance.LeastActiveLoadBalance
