@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class InMemoryRegistryServiceTest {
 
-    private static final String SVC = "com.zifang.demo.UserService";
+    private static final String SVC = "com.shuigedeng.demo.UserService";
 
     private static URL provider(String host, int port) {
         return new URL("ttc-rpc", host, port, SVC);
@@ -182,13 +182,13 @@ class InMemoryRegistryServiceTest {
     void servicesAreIsolated() {
         InMemoryRegistryService reg = new InMemoryRegistryService();
         reg.register(new URL("ttc-rpc", "10.0.0.1", 20880, SVC));
-        reg.register(new URL("ttc-rpc", "10.0.0.2", 20880, "com.zifang.demo.OrderService"));
+        reg.register(new URL("ttc-rpc", "10.0.0.2", 20880, "com.shuigedeng.demo.OrderService"));
 
         assertEquals(1, reg.lookup(consumer()).size());
-        List<URL> orders = reg.lookup(new URL("consumer", "127.0.0.1", 0, "com.zifang.demo.OrderService"));
+        List<URL> orders = reg.lookup(new URL("consumer", "127.0.0.1", 0, "com.shuigedeng.demo.OrderService"));
         assertEquals(1, orders.size());
         assertEquals("10.0.0.2:20880", orders.get(0).getAddress());
-        assertEquals(0, reg.lookup(new URL("consumer", "127.0.0.1", 0, "com.zifang.demo.Unknown")).size());
+        assertEquals(0, reg.lookup(new URL("consumer", "127.0.0.1", 0, "com.shuigedeng.demo.Unknown")).size());
     }
 
     @Test

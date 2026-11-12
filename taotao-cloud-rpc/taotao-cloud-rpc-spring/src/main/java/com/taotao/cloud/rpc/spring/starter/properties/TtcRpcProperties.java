@@ -75,7 +75,7 @@ public class TtcRpcProperties {
     public static class Application {
         private String name = "ttc-rpc-app";
         private String version = "1.0.0";
-        private String organization = "zifang";
+        private String organization = "shuigedeng";
 
         public String getName() { return name; }
         public void setName(String name) { this.name = name; }

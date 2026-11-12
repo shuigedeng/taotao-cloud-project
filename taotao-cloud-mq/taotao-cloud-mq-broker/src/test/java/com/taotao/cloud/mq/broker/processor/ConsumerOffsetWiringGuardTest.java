@@ -389,7 +389,7 @@ public class ConsumerOffsetWiringGuardTest {
     /** push 消费者的源文件：结构断言只认这一个真相文件. */
     private static File pushConsumerSource() {
         File file = new File(resolveRepoRoot(), "ttc-mq-client" + File.separator + "src" + File.separator
-                + "main" + File.separator + "java" + File.separator + "com" + File.separator + "zifang"
+                + "main" + File.separator + "java" + File.separator + "com" + File.separator + "shuigedeng"
                 + File.separator + "z" + File.separator + "mq" + File.separator + "client" + File.separator
                 + "consumer" + File.separator + "DefaultMQPushConsumer.java");
         assertTrue(file.isFile(), "找不到 push 消费者的源文件: " + file.getAbsolutePath());

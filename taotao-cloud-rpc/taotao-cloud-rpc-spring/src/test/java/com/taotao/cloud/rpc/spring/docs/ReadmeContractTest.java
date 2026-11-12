@@ -281,7 +281,7 @@ class ReadmeContractTest {
     // 对 group(3) 做 replaceAll("[^0-9]") 得到空串，Integer.parseInt 直接抛
     // NumberFormatException: For input string: ""，用例以 error 而不是 failure 结束。
     private static final Pattern SPI_ROW = Pattern.compile(
-            "^\\| `(com\\.zifang\\.z\\.rpc\\.[A-Za-z0-9_.]+)` \\|([^|]*)\\|([^|]*)\\|([^|]*)\\|([^|]*)\\|$");
+            "^\\| `(com\\.shuigedeng\\.z\\.rpc\\.[A-Za-z0-9_.]+)` \\|([^|]*)\\|([^|]*)\\|([^|]*)\\|([^|]*)\\|$");
 
     private static List<String[]> spiTableRows(String readme) {
         List<String[]> rows = new ArrayList<String[]>();
@@ -909,7 +909,7 @@ class ReadmeContractTest {
 
         int mine = 0;
         for (String f : files) {
-            if (f.endsWith("/src/test/java/com/zifang/z/rpc/starter/docs/ReadmeContractTest.java")) {
+            if (f.endsWith("/src/test/java/com/shuigedeng/ttc/rpc/starter/docs/ReadmeContractTest.java")) {
                 mine++;
             }
         }

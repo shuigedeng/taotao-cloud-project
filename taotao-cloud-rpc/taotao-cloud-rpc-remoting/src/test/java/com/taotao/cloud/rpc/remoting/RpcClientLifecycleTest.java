@@ -200,8 +200,8 @@ class RpcClientLifecycleTest {
             assertEquals("hi", good.getValue());
 
             // 服务端回了异常响应：invoke() 把它包成 error Result，异常不往外抛
-            Result bad = client.invoke(new RpcInvocation("com.zifang.nope.Nope", "hello",
-                    new Class<?>[0], new Object[0]), url("com.zifang.nope.Nope", port));
+            Result bad = client.invoke(new RpcInvocation("com.shuigedeng.nope.Nope", "hello",
+                    new Class<?>[0], new Object[0]), url("com.shuigedeng.nope.Nope", port));
             assertTrue(bad.hasException(), "实际值: " + bad.getValue());
             assertNotNull(bad.getException());
             assertTrue(bad.getException().getMessage().contains("Service not found"),

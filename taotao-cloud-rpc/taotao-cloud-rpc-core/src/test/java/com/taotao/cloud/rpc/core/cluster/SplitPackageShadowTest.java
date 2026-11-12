@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class SplitPackageShadowTest {
 
-    private static final String CLASS_DIR = "com/zifang/z/rpc/cluster/";
+    private static final String CLASS_DIR = "com/shuigedeng/ttc/rpc/cluster/";
 
     /** 两个模块里同名的 5 个类型（实测：全仓重复 FQCN 恰好只有这 5 个）。 */
     private static final String[] DUPLICATED = {
@@ -134,15 +134,15 @@ class SplitPackageShadowTest {
         assertNotNull(clusterSide, "没找到 ttc-rpc-cluster 那份: " + copies);
 
         // 把 cluster 那份所在的 classes 根目录单独做成一个 loader，绕开 core 的遮蔽
-        String root = clusterSide.toString().replace("com/zifang/z/rpc/cluster/Cluster.class", "");
+        String root = clusterSide.toString().replace("com/shuigedeng/ttc/rpc/cluster/Cluster.class", "");
         // 注解类必须一起给：解析不出注解类型时 getAnnotations() 会把整条丢掉；
         // 且跨 loader 的 Class 对象比对无效，只能按名字判（见下面那段循环）
         String spiMarker = SplitPackageShadowTest.class.getClassLoader()
-                .getResource("com/zifang/z/rpc/spi/SPI.class").toString();
-        URL spiRoot = new URL(spiMarker.replace("com/zifang/z/rpc/spi/SPI.class", ""));
+                .getResource("com/shuigedeng/ttc/rpc/spi/SPI.class").toString();
+        URL spiRoot = new URL(spiMarker.replace("com/shuigedeng/ttc/rpc/spi/SPI.class", ""));
         try (URLClassLoader only = new URLClassLoader(new URL[]{new URL(root), spiRoot},
                 SplitPackageShadowTest.class.getClassLoader().getParent())) {
-            assertNotNull(only.findResource("com/zifang/z/rpc/spi/SPI.class"),
+            assertNotNull(only.findResource("com/shuigedeng/ttc/rpc/spi/SPI.class"),
                     "量具自检：这个 loader 看不见 SPI 注解类的话，下面那条断言永远只会返回 false");
             Class<?> c = only.loadClass("com.taotao.cloud.rpc.cluster.Cluster");
             assertTrue(locationOf(c).contains("ttc-rpc-cluster"),

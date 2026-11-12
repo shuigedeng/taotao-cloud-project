@@ -97,7 +97,7 @@ class FailoverClusterTest {
 
         ListDirectory(String retriesParam) {
             url = new URL("consumer", "127.0.0.1", 0);
-            url.setServiceInterface("com.zifang.demo.Demo");
+            url.setServiceInterface("com.shuigedeng.demo.Demo");
             if (retriesParam != null) {
                 url.addParameter("retries", retriesParam);
             }
@@ -220,7 +220,7 @@ class FailoverClusterTest {
 //        Throwable e = assertThrows(Throwable.class, () -> cluster.invoke(call()));
 //        assertEquals(IllegalStateException.class, e.getClass(), "实际: " + e.getClass().getName());
 //        assertTrue(e.getMessage().contains("No provider available"), "实际: " + e.getMessage());
-//        assertTrue(e.getMessage().contains("com.zifang.demo.Demo"), "实际: " + e.getMessage());
+//        assertTrue(e.getMessage().contains("com.shuigedeng.demo.Demo"), "实际: " + e.getMessage());
 //        assertFalse(e instanceof com.taotao.cloud.rpc.common.RpcException,
 //                "消费方按 RpcException 兜底捕获的话接不到这条");
 //

@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
  * 标注在 Spring Boot 启动类上，激活 ttc-RPC 自动装配。
  * <pre>
  * &#64;SpringBootApplication
- * &#64;EnableTtcRpc(scanBasePackages = "com.zifang.demo")
+ * &#64;EnableTtcRpc(scanBasePackages = "com.shuigedeng.demo")
  * public class OrderServiceApplication { ... }
  * </pre>
  */

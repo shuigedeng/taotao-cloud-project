@@ -122,7 +122,7 @@ class ServiceConfigTest {
         assertTrue(assertThrows(IllegalStateException.class,
                 () -> {
                     ServiceConfig<Echo> missing = new ServiceConfig<>();
-                    missing.setInterfaceName("com.zifang.nope.Nope");
+                    missing.setInterfaceName("com.shuigedeng.nope.Nope");
                     missing.setRef(new EchoImpl());
                     missing.export();
                 }).getMessage().contains("Interface class not found"));

@@ -92,7 +92,7 @@ class ReferenceConfigTest {
         assertEquals(Greeter.class, a.getInterfaceClass());
 
         ReferenceConfig<Greeter> b = new ReferenceConfig<>();
-        b.setInterfaceName("com.zifang.nope.Missing");
+        b.setInterfaceName("com.shuigedeng.nope.Missing");
         IllegalStateException e = assertThrows(IllegalStateException.class, b::get);
         assertTrue(e.getMessage().contains("Interface class not found"), "实际: " + e.getMessage());
 
@@ -403,7 +403,7 @@ class ReferenceConfigTest {
 
         InMemoryRegistryService reg = (InMemoryRegistryService) one;
         URL provider = new URL("ttc-rpc", "127.0.0.1", 9);
-        provider.setServiceInterface("com.zifang.demo.Shared");
+        provider.setServiceInterface("com.shuigedeng.demo.Shared");
         reg.register(provider);
         assertEquals(1, reg.lookup(provider).size());
 

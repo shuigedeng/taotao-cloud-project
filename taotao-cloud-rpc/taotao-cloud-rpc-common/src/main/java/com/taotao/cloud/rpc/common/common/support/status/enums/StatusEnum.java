@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
  *
  * status=4 超时关闭完成
  *
- * @author Administrator
+ * @author shuigedeng
  * @since 0.1.3
  */
 public enum StatusEnum {

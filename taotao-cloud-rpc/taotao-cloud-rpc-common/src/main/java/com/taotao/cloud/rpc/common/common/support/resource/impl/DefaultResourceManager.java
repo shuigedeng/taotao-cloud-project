@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
  * <p> project: rpc-DefaultResourceManager </p>
  * <p> create on 2019/10/30 21:28 </p>
  *
- * @author Administrator
+ * @author shuigedeng
  * @since 0.1.3
  */
 @ThreadSafe

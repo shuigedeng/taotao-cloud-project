@@ -1,7 +1,7 @@
 # 只有 classpath 上真实存在（已编译）的实现才能出现在这张表里：
 # ExtensionLoader 是**一次性加载全部行**的，任何一行指向不存在的类都会让
 # 该接口的所有扩展名一起抛 IllegalStateException。
-# z-config / zknaming 的源码在仓库里以 .java.disabled 后缀存在（缺 com.zifang:z-config-client 依赖），
+# z-config / zknaming 的源码在仓库里以 .java.disabled 后缀存在（缺 com.shuigedeng:z-config-client 依赖），
 # 恢复编译后把下面两行的注释去掉即可。
 in-memory=com.taotao.cloud.rpc.registry.InMemoryRegistryService
 #z-config=com.taotao.cloud.rpc.registry.ZConfigRegistry

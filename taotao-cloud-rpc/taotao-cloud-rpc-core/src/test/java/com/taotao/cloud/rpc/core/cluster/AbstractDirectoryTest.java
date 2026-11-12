@@ -97,7 +97,7 @@ class AbstractDirectoryTest {
 
     static URL url() {
         URL u = new URL("consumer", "127.0.0.1", 0);
-        u.setServiceInterface("com.zifang.demo.Demo");
+        u.setServiceInterface("com.shuigedeng.demo.Demo");
         u.setVersion("9.9.9");
         return u;
     }

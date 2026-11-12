@@ -90,7 +90,7 @@ class BuiltInFilterBehaviorTest {
     }
 
     private static Invocation newInvocation() {
-        return new RpcInvocation(SVC, "greet", new Class<?>[]{String.class}, new Object[]{"zifang"});
+        return new RpcInvocation(SVC, "greet", new Class<?>[]{String.class}, new Object[]{"shuigedeng"});
     }
 
     private final MetricsCollector metrics = MetricsCollector.getInstance();

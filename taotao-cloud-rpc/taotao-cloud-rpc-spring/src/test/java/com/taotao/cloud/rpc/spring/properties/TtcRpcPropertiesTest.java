@@ -51,7 +51,7 @@ class TtcRpcPropertiesTest {
         TtcRpcProperties.Application a = new TtcRpcProperties().getApplication();
         assertEquals("ttc-rpc-app", a.getName());
         assertEquals("1.0.0", a.getVersion());
-        assertEquals("zifang", a.getOrganization());
+        assertEquals("shuigedeng", a.getOrganization());
     }
 
     @Test

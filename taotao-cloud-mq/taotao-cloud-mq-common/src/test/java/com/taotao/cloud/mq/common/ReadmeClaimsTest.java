@@ -152,7 +152,7 @@ class ReadmeClaimsTest {
     /** RequestCode.java 的仓内相对路径。 */
     private static Path requestCodeFile() {
         return repoRoot().resolve(
-                "ttc-mq-remoting/src/main/java/com/zifang/z/mq/remoting/protocol/RequestCode.java");
+                "ttc-mq-remoting/src/main/java/com/shuigedeng/ttc/mq/remoting/protocol/RequestCode.java");
     }
 
     /** RequestCode 里定义的命令字常量名（按源码顺序）。 */

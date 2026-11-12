@@ -22,7 +22,7 @@ package com.taotao.cloud.rpc.common.common.support.status.service;
  * <p> project: rpc-StatusManager </p>
  * <p> create on 2019/10/30 20:48 </p>
  *
- * @author Administrator
+ * @author shuigedeng
  * @since 0.1.3
  */
 public interface StatusManager {

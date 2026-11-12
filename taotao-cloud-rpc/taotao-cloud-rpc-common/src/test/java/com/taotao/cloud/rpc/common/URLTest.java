@@ -25,12 +25,12 @@ class URLTest {
 
     @Test
     void valueOf_fullUrl_populatesAllAddressParts() {
-        URL url = URL.valueOf("ttc-rpc://10.0.0.1:20880/com.zifang.demo.DemoService?timeout=3000&weight=100");
+        URL url = URL.valueOf("ttc-rpc://10.0.0.1:20880/com.shuigedeng.demo.DemoService?timeout=3000&weight=100");
 
         assertEquals("ttc-rpc", url.getProtocol());
         assertEquals("10.0.0.1", url.getHost());
         assertEquals(20880, url.getPort());
-        assertEquals("com.zifang.demo.DemoService", url.getServiceInterface());
+        assertEquals("com.shuigedeng.demo.DemoService", url.getServiceInterface());
         assertEquals("3000", url.getParameter("timeout"));
         assertEquals("100", url.getParameter("weight"));
         assertEquals(2, url.getParameters().size());

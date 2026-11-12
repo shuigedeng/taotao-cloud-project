@@ -217,7 +217,7 @@ public class TopicConfigWiringGuardTest {
     /** 在本文件里数这根针（用来量"注释算不算读者"）. */
     private static int countInSelf(String needle, boolean skipProse) throws IOException {
         File self = new File(resolveRepoRoot(),
-                "ttc-mq-broker/src/test/java/com/zifang/z/mq/broker/processor/TopicConfigWiringGuardTest.java");
+                "ttc-mq-broker/src/test/java/com/shuigedeng/ttc/mq/broker/processor/TopicConfigWiringGuardTest.java");
         assertTrue(self.isFile(), "尺自检要读自己: " + self.getAbsolutePath());
         Scan scan = new Scan(needle);
         walk(self, scan, skipProse);
