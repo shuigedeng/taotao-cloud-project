@@ -16,10 +16,10 @@ configure(subprojects.findAll { (it.name.endsWith("-api")) }) { project ->
         api "jakarta.validation:jakarta.validation-api"
         api "jakarta.annotation:jakarta.annotation-api"
         api "com.fasterxml.jackson.core:jackson-annotations"
-        api "io.swagger.core.v3:swagger-models:2.2.55"
-        api "io.swagger.core.v3:swagger-models-jakarta:2.2.55"
-        api "io.swagger.core.v3:swagger-annotations:2.2.55"
-        api "io.swagger.core.v3:swagger-annotations-jakarta:2.2.55"
+        api "io.swagger.core.v3:swagger-models:2.2.56"
+        api "io.swagger.core.v3:swagger-models-jakarta:2.2.56"
+        api "io.swagger.core.v3:swagger-annotations:2.2.56"
+        api "io.swagger.core.v3:swagger-annotations-jakarta:2.2.56"
         api "org.jspecify:jspecify"
 
         //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
@@ -72,7 +72,7 @@ configure(subprojects.findAll { (it.name.endsWith("-api")) }) { project ->
     configurations {
         configureEach {
             resolutionStrategy {
-                force 'net.minidev:json-smart:2.6.0'
+                force 'net.minidev:json-smart:2.6.1'
                 //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
                 force "com.google.protobuf:protobuf-java:4.36.2"
                 //https://search.maven.org/artifact/com.google.protobuf/protobuf-java-util

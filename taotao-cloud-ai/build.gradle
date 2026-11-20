@@ -44,7 +44,7 @@ repositories {
 }
 
 dependencies {
-    implementation platform("org.springframework.ai:spring-ai-bom:2.0.2")
+    implementation platform("org.springframework.ai:spring-ai-bom:2.1.0")
     //implementation platform("com.alibaba.cloud.ai:spring-ai-alibaba-bom:2.0.0-M1.1")
 
     //cloud
@@ -252,7 +252,7 @@ configurations {
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
         resolutionStrategy {
-            force "org.bouncycastle:bcprov-jdk18on:1.86"
+            force "org.bouncycastle:bcprov-jdk18on:1.87"
         }
 
         exclude group: "org.springframework.boot", module: "spring-boot-starter-data-jpa"

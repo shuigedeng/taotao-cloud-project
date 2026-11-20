@@ -32,18 +32,18 @@ configurations {
 }
 
 dependencies {
-    implementation("org.apache.spark:spark-core_2.13:4.2.0")
-    implementation("org.apache.spark:spark-catalyst_2.13:4.2.0")
-    implementation("org.apache.spark:spark-graphx_2.13:4.2.0")
-    implementation("org.apache.spark:spark-sql_2.13:4.2.0") {
+    implementation("org.apache.spark:spark-core_2.13:4.3.0")
+    implementation("org.apache.spark:spark-catalyst_2.13:4.3.0")
+    implementation("org.apache.spark:spark-graphx_2.13:4.3.0")
+    implementation("org.apache.spark:spark-sql_2.13:4.3.0") {
         exclude group: "org.codehaus.janino", module: "janino"
     }
-    implementation("org.apache.spark:spark-streaming_2.13:4.2.0")
-    implementation("org.apache.spark:spark-mllib_2.13:4.2.0")
-    implementation("org.apache.spark:spark-hive_2.13:4.2.0")
-    implementation("org.apache.spark:spark-avro_2.13:4.2.0")
-    implementation("org.apache.spark:spark-streaming-kafka-0-10_2.13:4.2.0")
-    implementation("org.apache.spark:spark-sql-kafka-0-10_2.13:4.2.0")
+    implementation("org.apache.spark:spark-streaming_2.13:4.3.0")
+    implementation("org.apache.spark:spark-mllib_2.13:4.3.0")
+    implementation("org.apache.spark:spark-hive_2.13:4.3.0")
+    implementation("org.apache.spark:spark-avro_2.13:4.3.0")
+    implementation("org.apache.spark:spark-streaming-kafka-0-10_2.13:4.3.0")
+    implementation("org.apache.spark:spark-sql-kafka-0-10_2.13:4.3.0")
 
     //implementation "org.apache.hudi:hudi-spark4.1.x_2.13:1.2.1"
 

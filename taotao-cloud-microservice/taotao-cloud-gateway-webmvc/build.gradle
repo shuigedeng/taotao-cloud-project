@@ -5,7 +5,7 @@ dependencies {
 
     implementation "com.alibaba.csp:sentinel-datasource-nacos"
     //implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"
-    //implementation 'org.apache.skywalking:apm-spring-cloud-gateway-4.x-plugin:9.7.0'
+    //implementation 'org.apache.skywalking:apm-spring-cloud-gateway-4.x-plugin:9.8.0'
     implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
     implementation "org.springframework.cloud:spring-cloud-starter-gateway-server-webmvc"
     implementation "org.springframework.cloud:spring-cloud-gateway-proxyexchange-webmvc"
@@ -75,9 +75,9 @@ configurations {
         resolutionStrategy {
             force "org.codehaus.groovy:groovy:3.0.25"
             force 'org.antlr:antlr4:4.13.2'
-            force 'net.minidev:json-smart:2.6.0'
+            force 'net.minidev:json-smart:2.6.1'
             //todo 临时使用
-            force "io.opentelemetry:opentelemetry-api-incubator:1.66.0-alpha"
+            force "io.opentelemetry:opentelemetry-api-incubator:1.68.0-alpha"
 
             force "com.google.protobuf:protobuf-java:4.36.2"
             force "com.google.protobuf:protobuf-java-util:4.36.2"

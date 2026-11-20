@@ -19,14 +19,14 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
 
     //https://search.maven.org/artifact/org.springframework.integration/spring-integration-core
-    implementation 'org.springframework.integration:spring-integration-core:7.1.2'
-    implementation 'org.springframework.integration:spring-integration-jdbc:7.1.2'
+    implementation 'org.springframework.integration:spring-integration-core:7.2.0'
+    implementation 'org.springframework.integration:spring-integration-jdbc:7.2.0'
 
     implementation 'org.springframework.boot:spring-boot-starter-batch'
     implementation 'org.springframework.boot:spring-boot-starter-batch-jdbc'
-    implementation 'org.springframework.batch:spring-batch-infrastructure:6.0.5'
-    implementation 'org.springframework.batch:spring-batch-integration:6.0.5'
-    testImplementation 'org.springframework.batch:spring-batch-test:6.0.5'
+    implementation 'org.springframework.batch:spring-batch-infrastructure:6.1.0'
+    implementation 'org.springframework.batch:spring-batch-integration:6.1.0'
+    testImplementation 'org.springframework.batch:spring-batch-test:6.1.0'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"
@@ -221,9 +221,9 @@ configurations {
         resolutionStrategy {
             force "org.codehaus.groovy:groovy:3.0.25"
             force 'org.antlr:antlr4:4.13.2'
-            force 'net.minidev:json-smart:2.6.0'
+            force 'net.minidev:json-smart:2.6.1'
             //todo 临时使用
-            force "io.opentelemetry:opentelemetry-api-incubator:1.66.0-alpha"
+            force "io.opentelemetry:opentelemetry-api-incubator:1.68.0-alpha"
             force "org.glassfish:javax.el:3.0.0"
             force 'org.glassfish.jaxb:jaxb-runtime:4.0.9'
             force 'org.lz4:lz4-java:1.8.1'

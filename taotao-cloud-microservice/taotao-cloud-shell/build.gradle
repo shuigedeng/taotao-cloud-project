@@ -26,7 +26,7 @@ dependencies {
     //}
 
     //https://central.sonatype.com/artifact/org.springframework.shell/spring-shell-starter
-    implementation 'org.springframework.shell:spring-shell-starter:4.0.3'
+    implementation 'org.springframework.shell:spring-shell-starter:4.0.4'
 
     //，jcommander 是一个只有几十 kb 的 Java 命令行参数解析工具，可以通过注解的方式快速实现命令行参数解析。
     //https://search.maven.org/artifact/com.beust/jcommander
@@ -36,8 +36,8 @@ dependencies {
     //implementation "com.github.whvcse:easy-captcha:1.6.2"
     implementation "jakarta.servlet:jakarta.servlet-api"
 
-    implementation "org.eclipse.jgit:org.eclipse.jgit:7.8.0.202609011348-r"
-    implementation "org.eclipse.jgit:org.eclipse.jgit.archive:7.8.0.202609011348-r"
+    implementation "org.eclipse.jgit:org.eclipse.jgit:7.8.1.202611041320-r"
+    implementation "org.eclipse.jgit:org.eclipse.jgit.archive:7.8.1.202611041320-r"
 
     implementation "org.springframework.boot:spring-boot-autoconfigure"
 
@@ -77,9 +77,9 @@ configurations {
         resolutionStrategy {
             force "org.codehaus.groovy:groovy:3.0.25"
             force 'org.antlr:antlr4:4.13.2'
-            force 'net.minidev:json-smart:2.6.0'
+            force 'net.minidev:json-smart:2.6.1'
             //todo 临时使用
-            force "io.opentelemetry:opentelemetry-api-incubator:1.66.0-alpha"
+            force "io.opentelemetry:opentelemetry-api-incubator:1.68.0-alpha"
         }
 
         //exclude group: "log4j", module: "log4j"
